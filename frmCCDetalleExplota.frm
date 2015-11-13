@@ -757,7 +757,7 @@ Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmCCo As frmBasico
 Attribute frmCCo.VB_VarHelpID = -1
 
-Private Sql As String
+Private SQL As String
 Dim Cad As String
 Dim RC As String
 Dim i As Integer
@@ -889,7 +889,7 @@ Private Sub frmF_Selec(vFecha As Date)
     txtFecha(IndCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgCCoste_Click(Index As Integer)
+Private Sub ImgCCoste_Click(Index As Integer)
 
     IndCodigo = Index
     
@@ -1004,7 +1004,7 @@ Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
     Case "imgFecha"
         imgFec_Click indice
     Case "imgCCoste"
-        imgCCoste_Click indice
+        ImgCCoste_Click indice
     End Select
     
 End Sub
@@ -1051,11 +1051,11 @@ Dim Hasta As Integer
             'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             
             RC = txtCuentas(Index).Text
-            If CuentaCorrectaUltimoNivelSIN(RC, Sql) Then
+            If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
                 txtCuentas(Index) = RC
-                txtNCuentas(Index).Text = Sql
+                txtNCuentas(Index).Text = SQL
             Else
-                MsgBox Sql, vbExclamation
+                MsgBox SQL, vbExclamation
                 txtCuentas(Index).Text = ""
                 txtNCuentas(Index).Text = ""
                 PonFoco txtCuentas(Index)
@@ -1124,19 +1124,19 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    Sql = "Select hlinapu.codccost CCoste, ccoste.nomccost Descripción, hlinapu.codmacta as Cuenta, cuentas.nommacta Título, hlinapu.fechaent Fecha,  "
-    Sql = Sql & " numdocum Documento, ctacontr Contrapartida, cuentas1.nommacta Descripción , hlinapu.ampconce Concepto, coalesce(timported,0) Debe, coalesce(timporteh,0) Haber, "
-    Sql = Sql & " if (@Cta <> hlinapu.codmacta,@Saldo:= coalesce(timported,0) - coalesce(timporteh,0), @Saldo:= @Saldo + coalesce(timported,0) - coalesce(timporteh,0) ) Saldo, "
-    Sql = Sql & " @Cta:= hlinapu.codmacta Cta"
+    SQL = "Select hlinapu.codccost CCoste, ccoste.nomccost Descripción, hlinapu.codmacta as Cuenta, cuentas.nommacta Título, hlinapu.fechaent Fecha,  "
+    SQL = SQL & " numdocum Documento, ctacontr Contrapartida, cuentas1.nommacta Descripción , hlinapu.ampconce Concepto, coalesce(timported,0) Debe, coalesce(timporteh,0) Haber, "
+    SQL = SQL & " if (@Cta <> hlinapu.codmacta,@Saldo:= coalesce(timported,0) - coalesce(timporteh,0), @Saldo:= @Saldo + coalesce(timported,0) - coalesce(timporteh,0) ) Saldo, "
+    SQL = SQL & " @Cta:= hlinapu.codmacta Cta"
 
-    Sql = Sql & " FROM ((hlinapu INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta)  "
-    Sql = Sql & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost) "
-    Sql = Sql & " INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta , (select @Saldo:= 0) aaa, (select @Cta:= '') bbb   "
-    Sql = Sql & " where " & cadselect
-    Sql = Sql & " ORDER BY 1,2,3,4,5 "
+    SQL = SQL & " FROM ((hlinapu INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta)  "
+    SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost) "
+    SQL = SQL & " INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta , (select @Saldo:= 0) aaa, (select @Cta:= '') bbb   "
+    SQL = SQL & " where " & cadselect
+    SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
     'LLamos a la funcion
-    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -1148,7 +1148,7 @@ Dim nomDocu As String
     vMostrarTree = False
     conSubRPT = False
         
-    indRPT = "1005-00" '"CC_X_CTA.rpt"
+    indRPT = "1006-00" '"CC_X_CTA.rpt"
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
@@ -1166,7 +1166,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -1182,25 +1182,25 @@ Dim RC2 As String
 End Function
 
 Private Function CargarTemporal() As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     On Error GoTo eCargarTemporal
     
     CargarTemporal = False
     
-    Sql = "delete from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N")
-    Conn.Execute Sql
+    SQL = "delete from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N")
+    Conn.Execute SQL
     
-    Sql = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
-    Sql = Sql & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
-    Sql = Sql & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
-    Sql = Sql & " FROM (hlinapu INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
-    Sql = Sql & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost "
-    Sql = Sql & " where " & cadselect
-    Sql = Sql & " ORDER BY 1,2,3,4,5 "
+    SQL = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
+    SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
+    SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
+    SQL = SQL & " FROM (hlinapu INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
+    SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost "
+    SQL = SQL & " where " & cadselect
+    SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     
     CargarTemporal = True
     Exit Function
