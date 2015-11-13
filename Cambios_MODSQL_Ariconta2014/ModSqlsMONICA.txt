@@ -1,0 +1,479 @@
+# tablas de menus y menus_usuarios
+
+CREATE TABLE `menus` (
+  `codigo` int(11) NOT NULL,
+  `aplicacion` varchar(30) NOT NULL,
+  `padre` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
+  `orden` int(11) NOT NULL,
+  `ocultar` tinyint(4) NOT NULL default '0',
+  `imagen` smallint(6) NOT NULL default '0' COMMENT 'Si hay asociado Imagelist, cargara una imagen',
+  PRIMARY KEY  (`codigo`,`aplicacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+;
+
+
+insert into `menus` (`codigo`,`aplicacion`,`padre`,`descripcion`,`orden`,`ocultar`,`imagen`) values (1,'ariconta',0,'Configuración',1,0,0),(2,'ariconta',0,'Datos generales',2,0,0),(3,'ariconta',0,'Asientos',3,0,0),(4,'ariconta',0,'Facturas',4,0,0),(5,'ariconta',0,'Inmovilizado',5,0,0),(6,'ariconta',0,'Cartera de Cobros',6,0,0),(7,'ariconta',0,'Gestión de Cobros',7,0,0),(8,'ariconta',0,'Cartera de Pagos',8,0,0),(9,'ariconta',0,'Informes Tesoreria ',9,0,0),(10,'ariconta',0,'Analítica',10,0,0),(11,'ariconta',0,'Presupuestaria',11,0,0),(12,'ariconta',0,'Consolidado',12,0,0),(13,'ariconta',0,'Cierre Ejercicio',13,0,0),(14,'ariconta',0,'Utilidades',14,0,0),(101,'ariconta',1,'Empresa',1,0,0),(102,'ariconta',1,'Parámetros Contabilidad',2,0,0),(103,'ariconta',1,'Parámetros Tesoreria',3,0,0),(104,'ariconta',1,'Contadores',4,0,0),(105,'ariconta',1,'Usuarios',5,0,0),(106,'ariconta',1,'Informes',6,0,0),(107,'ariconta',1,'Crear nueva empresa',7,0,0),(108,'ariconta',1,'Acerca de...',8,0,0),(201,'ariconta',2,'Plan Contable',1,0,0),(202,'ariconta',2,'Tipos de Diario',2,0,0),(203,'ariconta',2,'Conceptos',3,0,0),(204,'ariconta',2,'Tipos de I.V.A.',4,0,0),(205,'ariconta',2,'Tipos de Pago',5,0,0),(206,'ariconta',2,'Formas de Pago',6,0,0),(207,'ariconta',2,'Bancos',7,0,0),(208,'ariconta',2,'Bic - Swift',8,0,0),(209,'ariconta',2,'Agentes',9,0,0),(210,'ariconta',2,'Departamentos',10,0,0),(211,'ariconta',2,'Asientos Predefinidos',11,0,0),(212,'ariconta',2,'Cartas de Reclamación',12,0,0),(301,'ariconta',3,'Asientos',1,0,0),(302,'ariconta',3,'Histórico',2,0,0),(303,'ariconta',3,'Extractos',3,0,0),(304,'ariconta',3,'Punteo',4,0,0),(305,'ariconta',3,'Reemisión de Diarios',5,0,0),(306,'ariconta',3,'Sumas y Saldos',6,0,0),(307,'ariconta',3,'Cuante de Explotación',7,0,0),(308,'ariconta',3,'Balance de Situación',8,0,0),(309,'ariconta',3,'Pérdidas y Ganancias',9,0,0),(310,'ariconta',3,'Totales por concepto',10,0,0),(311,'ariconta',3,'Evolución de Saldos',11,0,0),(312,'ariconta',3,'Ratios y Gráficas',12,0,0),(313,'ariconta',3,'Importar N43',14,0,0),(314,'ariconta',3,'Punteo extracto bancario',15,0,0),(401,'ariconta',4,'Emitidas',1,0,0),(402,'ariconta',4,'Libro Emitidas',2,0,0),(403,'ariconta',4,'Relación Clientes por cuenta',3,0,0),(404,'ariconta',4,'Recibidas',4,0,0),(405,'ariconta',4,'Libro Recibidas',5,0,0),(406,'ariconta',4,'Relacion Proveedores por cuenta',6,0,0),(407,'ariconta',4,'Liquidación I.V.A.',7,0,0),(408,'ariconta',4,'Certificado I.V.A.',8,0,0),(409,'ariconta',4,'Modelo 340',9,0,0),(410,'ariconta',4,'Modelo 347',10,0,0),(411,'ariconta',4,'Modelo 349',11,0,0),(501,'ariconta',5,'Parámetros',1,0,0),(502,'ariconta',5,'Conceptos',2,0,0),(503,'ariconta',5,'Elementos',3,0,0),(504,'ariconta',5,'Ficha de Elementos',4,0,0),(505,'ariconta',5,'Estadística',5,0,0),(506,'ariconta',5,'Estadística entre Fechas',6,0,0),(507,'ariconta',5,'Histórico Inmovilizado',7,0,0),(508,'ariconta',5,'Simulación',8,0,0),(509,'ariconta',5,'Cálculo y Contabilización',9,0,0),(510,'ariconta',5,'Deshacer Amortización',10,0,0),(511,'ariconta',5,'Venta-Baja inmovilizado',11,0,0),(601,'ariconta',6,'Cartera de Cobros',1,0,0),(602,'ariconta',6,'Informe Cobros Pendientes',2,0,0),(603,'ariconta',6,'Impresion de Recibos',3,0,0),(604,'ariconta',6,'Realizar Cobro',4,0,0),(605,'ariconta',6,'Transferencia de abonos',5,0,0),(606,'ariconta',6,'Compensaciones',6,0,0),(607,'ariconta',6,'Compensar cliente',7,0,0),(608,'ariconta',6,'Reclamaciones',8,0,0),(701,'ariconta',7,'Remesas',1,0,0),(702,'ariconta',7,'Cancelación Cliente',2,0,0),(703,'ariconta',7,'Abono Remesa',3,0,0),(704,'ariconta',7,'Devoluciones',4,0,0),(705,'ariconta',7,'Eliminar riesgo',5,0,0),(706,'ariconta',7,'Informe Impagados',6,0,0),(707,'ariconta',7,'Recepción Talón-Pagaré',7,0,0),(708,'ariconta',7,'Remesas Talón-Pagaré',8,0,0),(709,'ariconta',7,'Abono remesa',9,0,0),(710,'ariconta',7,'Devoluciones',10,0,0),(711,'ariconta',7,'Eliminar riesgo',11,0,0),(801,'ariconta',8,'Cartera de Pagos',1,0,0),(802,'ariconta',8,'Informe Pagos pendientes',2,0,0),(803,'ariconta',8,'Informe Pagos bancos',3,0,0),(804,'ariconta',8,'Realizar Pago',4,0,0),(805,'ariconta',8,'Transferencias',5,0,0),(806,'ariconta',8,'Pagos domiciliados',6,0,0),(807,'ariconta',8,'Gastos Fijos',7,0,0),(808,'ariconta',8,'Mamoria Pagos proveedores',8,0,0),(901,'ariconta',9,'Informe por NIF',1,0,0),(902,'ariconta',9,'Informe por cuenta',2,0,0),(903,'ariconta',9,'Situación Tesoreria',3,0,0),(1001,'ariconta',10,'Centros de Coste',1,0,0),(1002,'ariconta',10,'Consulta de Saldos',2,0,0),(1003,'ariconta',10,'Cuenta de Explotación',3,0,0),(1004,'ariconta',10,'Centros de coste por cuenta',4,0,0),(1005,'ariconta',10,'Detalle de explotación',5,0,0),(1101,'ariconta',11,'Presupuestos',1,0,0),(1102,'ariconta',11,'Listado de Presupuestos',2,0,0),(1103,'ariconta',11,'Balance Presupuestario',3,0,0),(1201,'ariconta',12,'Sumas y Saldos',1,0,0),(1202,'ariconta',12,'Balance de Situación',2,0,0),(1203,'ariconta',12,'Pérdidas y Ganancias',3,0,0),(1204,'ariconta',12,'Cuenta de Explotación',4,0,0),(1205,'ariconta',12,'Facturas Clientes',5,0,0),(1206,'ariconta',12,'Facturas Proveedores',6,0,0),(1301,'ariconta',13,'Renumeración de asientos',1,0,0),(1302,'ariconta',13,'Simulación de cierre',2,0,0),(1303,'ariconta',13,'Cierre de Ejercicio',3,0,0),(1304,'ariconta',13,'Deshacer cierre',4,0,0),(1305,'ariconta',13,'Diario Oficial',5,0,0),(1306,'ariconta',13,'Diario Oficial Resumen',6,0,0),(1307,'ariconta',13,'Presentación cuentas anuales',7,0,0),(1308,'ariconta',13,'Presentación Telemática de Libros',8,0,0),(1401,'ariconta',14,'Comprobar cuadre',1,0,0),(1402,'ariconta',14,'Recalculo de Saldos',2,0,0),(1403,'ariconta',14,'Revisar caracteres especiales',3,0,0),(1404,'ariconta',14,'Agrupacion cuentas',4,0,0),(1405,'ariconta',14,'Buscar ...',5,0,0),(1406,'ariconta',14,'Configurar Balances',6,0,0),(1407,'ariconta',14,'Desbloquear asientos',7,0,0),(1408,'ariconta',14,'Mover cuentas',8,0,0),(1409,'ariconta',14,'Renumerar registros proveedor',9,0,0),(1410,'ariconta',14,'Aumentar dígitos contables',10,0,0),(1411,'ariconta',14,'Cambio de I.V.A.',11,0,0),(1412,'ariconta',14,'Log de acciones',12,0,0),(1413,'ariconta',14,'Usuarios activos',13,0,0)
+;
+
+CREATE TABLE `menus_usuarios` (
+  `codusu` smallint(4) NOT NULL,
+  `codigo` int(11) NOT NULL,
+  `ver` tinyint(1) NOT NULL default '1',
+  `creareliminar` tinyint(1) NOT NULL default '1',
+  `modificar` tinyint(1) NOT NULL default '1',
+  `imprimir` tinyint(1) NOT NULL default '1',
+  `especial` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`codusu`,`codigo`),
+  KEY `FK_menus_usuarios` (`codigo`),
+  CONSTRAINT `menus_usuarios_ibfk_1` FOREIGN KEY (`codigo`) REFERENCES `menus` (`codigo`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+;
+
+#
+# CARGAMOS LOS USUARIOS DE LA CONTABILIDAD CON TODOS LOS PERMISOS ?????
+#
+# insert into menus_usuarios (codusu, codigo,ver,creareliminar,modificar,imprimir,especial)
+# select codusu, menus.codigo, 1,1,1,1,1
+# from usuarios.usuarios, menus  
+# where nivelusu <> -1
+# order by 1,2
+
+
+# En usuarios tablas comunes
+
+##  ES PARA UNIFICAR EN USUARIOS LAS TABLAS QUE SON COMUNES A TODAS LAS CONTABILIDADES
+
+# HABRIA QUE ELIMINARLAS DE CONTAX Y MODIFICAR FUENTES
+
+CREATE TABLE `usuarios`.`wconce340` (
+  `codigo` varchar(3) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  PRIMARY KEY  (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+;
+
+insert into `usuarios`.`wconce340` (`codigo`,`descripcion`) values ('0','Operación habitual.'),('1','1.- IVA criterio de caja. Asiento resumen de facturas.'),('2','2.- IVA criterio de caja. Factura con varios asientos (varios tipos impositivos).'),('3','3.- IVA criterio de caja. Factura rectificativa.'),('4','4.- IVA criterio de caja. Adquisiciones realizadas por las agencias de viajes directamente en interés del viajero (Régimen especial de agencia de viajes).'),('5','5.- IVA criterio de caja. Factura simplificada.'),('6','6.- IVA criterio de caja. Rectificación de errores registrales.'),('7','7.- IVA criterio de caja. Facturación de las prestaciones de servicios de agencias de viaje que actúan como mediadoras en nombre y por cuenta ajena. (Disposición adicional 4.ª RD 1496/2003).'),('8','8.- IVA criterio de caja. Operación de arrendamiento de local de negocio.'),('A','A.- Asiento resumen de facturas.'),('B','B.- Asiento resumen de tique.'),('C','C.- Facturas con varios tipos impositivos.'),('D','D.- Factura rectificativa.'),('E','E.- IVA/IGIC devengado pendiente de emitir factura'),('F','F.- Adquisiciones realizadas por agencias de viajes.'),('G','G.- Régimen especial de grupo de entidades en IVA-IGIC.'),('H','H.- Régimen especial de oro de inversi?n.'),('I','I.- Inversión del sujeto pasivo.'),('J','J.- Tiques.'),('K','K.- Rectificación de errores registrales.'),('L','L.- Adquisiciones a comerciantes minoristas del IGIC.'),('M','M.- IVA/IGIC facturado pendiente de devengar (emitida factura).'),('N','N.- Facturacion de las prestaciones de servicios de agencias de viajes que actuan como mediadoras.'),('O','O.- Factura emitida en sustitución de tiques facturados.'),('P','P.- Adquisiciones intracomunitarias de bienes.'),('Q','Q.- Operaciones a las que se aplique el Régimen especial de bienes usados.'),('R','R.- Operación de arrendamiento de local de negocio.'),('S','S.- Subvenciones, auxilios o ayudas satisfechas o recibidas.'),('T','T.- Cobros por cuenta de terceros de honorarios profesionales.'),('U','U.- Operaciones de seguros.'),('V','V.- Compras de Agencias de Viajes.'),('W','W.- Operaciones sujetas al impuesto sobre la Producción.'),('X','X.- Operaciones por las que los empresarios que satisfagan compensaciones agricolas, ganaderas ? pesqueras hayan expedido recibo.'),('Z','Z.- Régimen especial del criterio de caja.')
+;
+
+CREATE TABLE `usuarios`.`wdevolucion` (
+  `codigo` varchar(10) NOT NULL,
+  `descripcion` varchar(256) NOT NULL,
+  PRIMARY KEY  (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+;
+
+CREATE TABLE `usuarios`.`wtiporemesa` (
+  `tipo` tinyint(3) unsigned NOT NULL default '0',
+  `Descripcion` varchar(30) NOT NULL default '0',
+  PRIMARY KEY  (`tipo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+;
+
+insert into `usuarios`.`wtiporemesa` (`tipo`,`Descripcion`) values (0,'Norma 19'),(1,'Norma 32'),(2,'Norma 58')
+;
+
+CREATE TABLE `usuarios`.`wtiporemesa2` (
+  `tipo` tinyint(3) unsigned NOT NULL default '0',
+  `DescripcionT` varchar(30) NOT NULL default '0',
+  PRIMARY KEY  (`tipo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+;
+
+insert into `usuarios`.`wtiporemesa2` (`tipo`,`DescripcionT`) values (1,'Efectos'),(2,'Pagarés'),(3,'Talones')
+;
+
+CREATE TABLE `usuarios`.`wtiporeten` (
+  `codigo` smallint(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `tipo` tinyint(4) NOT NULL COMMENT '0=B.Imp. 1=Total',
+  PRIMARY KEY  (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+;
+
+insert into `usuarios`.`wtiporeten` (`codigo`,`descripcion`,`tipo`) values (0,'Sin retencion',0),(1,'Actividad Profesional',0),(2,'Actividad Agricola',1),(3,'Arrendamiento',0)
+;
+
+CREATE TABLE `usuarios`.`wtiposituacion` (
+  `situacio` tinyint(4) NOT NULL default '0',
+  `descsituacion` char(10) NOT NULL default '',
+  PRIMARY KEY  (`situacio`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+;
+
+insert into `usuarios`.`wtiposituacion` (`situacio`,`descsituacion`) values (1,'Activo'),(2,'Vendido'),(3,'Baja'),(4,'Amortizado')
+;
+
+CREATE TABLE `usuarios`.`wtiposituacionrem` (
+  `situacio` char(1) NOT NULL default '',
+  `descsituacion` varchar(255) NOT NULL,
+  PRIMARY KEY  (`situacio`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+;
+
+insert into `usuarios`.`wtiposituacionrem` (`situacio`,`descsituacion`) values ('A','Abierta'),('B','Generado soporte'),('F','Cancelacion cliente'),('H','Confirmacion remesa'),('Q','Abonada'),('Y','Efectos parcialmente eliminados'),('Z','Efectos Eliminados')
+;
+
+# Me guardo cuando salimos si para ese usuario los menus se encuentran expandidos o no, tienen que ser padres de algun nodo
+alter table `menus_usuarios` add column `expandido` tinyint (1)  DEFAULT '1' NOT NULL  after `especial`
+; 
+
+# Me faltaba la aplicacion y que forme parte de la clave primaria
+alter table `menus_usuarios` add column `aplicacion` varchar (30)   NOT NULL  after `codigo`
+;
+alter table `menus_usuarios` drop PRIMARY key, add PRIMARY key ( `codusu`, `codigo`, `aplicacion` )
+;
+alter table `menus_usuarios` drop foreign key `menus_usuarios_ibfk_1` 
+;
+alter table `menus_usuarios` add foreign key `FK_menus_usuarios`(`codigo`,`aplicacion`) references `menus` (`codigo`,`aplicacion`) on delete restrict  on update cascade 
+;
+
+
+# Skin del formato por defecto 2
+alter table `usuarios`.`usuarios` add column `skin` tinyint (4)  DEFAULT '2' NULL  after `nivelaritaxi`
+;
+
+# Path ayuda de ariconta
+alter table `parametros` add column `pathayuda` varchar (100)   NULL  after `TraspasCtasBanco`;
+
+# Alter de la tabla de sforpa
+alter table `sforpa` 
+	add column `numerove` smallint (5) UNSIGNED  DEFAULT '0' NOT NULL  after `tipforpa`, 
+	add column `primerve` smallint (5) UNSIGNED  DEFAULT '0' NOT NULL  after `numerove`, 
+	add column `restoven` smallint (5) UNSIGNED  DEFAULT '0' NULL  after `primerve`
+;
+
+
+# Indicamos que programas son de conta y de tesoreria para ocultar cuando no haya contabilidad
+
+alter table `menus` change `ocultar` `tipo` tinyint (1)  DEFAULT '0' NOT NULL  COMMENT '0=contabilidad 1=tesoreria'
+;
+
+
+# indicamos en parametros si hay o no ariges
+
+alter table `parametros` add column `hayariges` tinyint (3) UNSIGNED  DEFAULT '0' NOT NULL  after `pathayuda`
+;
+
+
+# Ampliamos el dirdatos y despobla a 50
+alter table `cuentas` 
+	change `dirdatos` `dirdatos` varchar (50)   NULL  COLLATE latin1_swedish_ci , 
+	change `despobla` `despobla` varchar (50)   NULL  COLLATE latin1_swedish_ci 
+;
+
+# Modificaciones en el fichero de cartas
+alter table `scartas` 
+	add column `textoSMS` varchar (150)   NULL  after `desped`, 
+	add column `documrpt` varchar (100)   NULL  after `textoSMS`,
+	change `parrafo1` `parrafo1` text   NULL  COLLATE latin1_swedish_ci 
+;
+# No tienen sms ni documento rpt
+alter table `scartas` drop column `textoSMS`, drop column `documrpt`
+;
+
+# Modificaciones para el hco de asientos
+alter table `hcabapu` change `numasien` `numasien` int UNSIGNED  DEFAULT '0' NOT NULL 
+;
+
+alter table `hlinapu` 
+	change `numdocum` `numdocum` char (15)   NULL  COLLATE latin1_swedish_ci , 
+	change `ampconce` `ampconce` char (50)   NULL  COLLATE latin1_swedish_ci 
+;
+
+# Nueva tabla de ficheros asociados a un asiento
+CREATE TABLE `hcabapu_fichdocs` (                    
+             `codigo` int(11) NOT NULL,                  
+             `campo` longblob NOT NULL,                  
+             `numdiari` smallint(1) unsigned NOT NULL default '0',                                       
+             `fechaent` date NOT NULL default '0000-00-00',                                              
+             `numasien` int(10) unsigned NOT NULL default '0',                                           
+             `descripfich` varchar(40) NOT NULL,         
+             `orden` smallint(6) NOT NULL,               
+             `docum` varchar(250) NOT NULL default '0',  
+             PRIMARY KEY  (`codigo`),                    
+             KEY `numdiari` (`numdiari`,`fechaent`,`numasien`)                 
+           ) ENGINE=InnoDB DEFAULT CHARSET=latin1        
+;
+
+# cambiamos tambien la longitud de numdocum a 15
+alter table `tmpconext` change `nomdocum` `nomdocum` varchar (15)   NULL  COLLATE latin1_swedish_ci 
+;
+alter table `tmpconext` change `ampconce` `ampconce` varchar (50)   NULL  COLLATE latin1_swedish_ci 
+;
+
+# guardamos la fecha de creacion de un asiento
+alter table `hcabapu` add column `feccreacion` datetime   NULL  after `obsdiari`
+;
+
+# usuario de creacion y si es por integracion se rellenará el campo desdeaplicacion (aplicacion de la que viene)
+alter table `hcabapu` 
+	add column `usucreacion` varchar (20)   NULL  after `feccreacion`, 
+	add column `desdeaplicacion` varchar (50)   NULL  after `usucreacion`
+;
+
+# parámetro que me indica si se coge la fecha de ejercicio actual
+alter table `parametros` add column `fecejersig` tinyint (1)  DEFAULT '0' NULL  COMMENT 'Fechas Ejercicio Siguiente' after `hayariges`
+;
+alter table `parametros` change `fecejersig` `fecejeract` tinyint (1)  DEFAULT '0' NULL  COMMENT 'Fechas Ejercicio Actual'
+;
+
+# en la temporal debe coincidir con hlinapu
+alter table `tmpconext` 
+	change `timporteD` `timporteD` decimal (12,2)   NULL , 
+	change `timporteH` `timporteH` decimal (12,2)   NULL , 
+	change `saldo` `saldo` decimal (12,2)   NULL 
+;
+
+
+# nueva tabla para el balance de sumas y saldos
+CREATE TABLE `tmpbalancesumas` (                      
+                    `codusu` smallint(1) unsigned NOT NULL default '0',  
+                    `cta` varchar(10) NOT NULL default '',               
+                    `nomcta` varchar(30) NOT NULL default '0',           
+                    `aperturaD` decimal(14,2) default NULL,              
+                    `aperturaH` decimal(14,2) default NULL,              
+                    `acumAntD` decimal(14,2) default NULL,               
+                    `acumAntH` decimal(14,2) default NULL,               
+                    `acumPerD` decimal(14,2) default NULL,               
+                    `acumPerH` decimal(14,2) default NULL,               
+                    `TotalD` decimal(14,2) default NULL,                 
+                    `TotalH` decimal(14,2) default NULL                  
+                  ) ENGINE=MyISAM DEFAULT CHARSET=latin1                 
+;
+
+# Para la cuenta de explotacion utilizo la misma tabla de balances y sumas
+alter table `tmpbalancesumas` add column `Contador` int (11)  DEFAULT '0' NOT NULL  after `nomcta`
+;
+alter table `tmpbalancesumas` drop column `Contador`
+;
+
+# Insertamos la columna de bloqactu de cabapu en el hco¿???
+alter table `hcabapu` add column `bloqactu` tinyint (1)  DEFAULT '0' NOT NULL  after `desdeaplicacion`
+;
+alter table `hcabapu` drop column `bloqactu`
+;
+
+# Cta transferencia clientes
+alter table `ctabancaria` add column `ctatransfercli` tinyint (1)  DEFAULT '0' NULL  COMMENT 'Cta Transferencia Clientes' after `N1914GrabaNifDeudor`
+;
+# Iban transferencia de clientes
+alter table `sforpa` add column `ibantransfcli` varchar (24)   NULL  after `restoven`
+;
+alter table `sforpa` change `ibantransfcli` `iban` varchar (40)   NULL  COLLATE latin1_swedish_ci 
+;
+alter table `ctabancaria` change `iban` `iban` varchar (40)   NULL  COLLATE latin1_swedish_ci  COMMENT '4Digitos del iban ES00'
+;
+alter table `ctabancaria` 
+	change `entidad` `entidad` smallint (1) UNSIGNED   NULL , 
+	change `oficina` `oficina` smallint (1) UNSIGNED   NULL , 
+	change `ctabanco` `ctabanco` varchar (10)   NULL  COLLATE latin1_swedish_ci , 
+	change `iban` `iban` varchar (40)   NOT NULL  COLLATE latin1_swedish_ci  COMMENT '4Digitos del iban ES00'
+;
+alter table `cuentas` change `iban` `iban` varchar (40)   NULL  COLLATE latin1_swedish_ci 
+;
+# Iconos visibles en la parte del listview del menu
+alter table `menus_usuarios` 
+	add column `icono` smallint (6)  DEFAULT '0' NOT NULL  after `expandido`, 
+	add column `textovisible` varchar (100)   NULL  after `icono`
+;
+# el icono lo tengo en menus
+alter table `menus_usuarios` drop column `icono`
+;
+# Posicion donde está localizado el icono 
+alter table `menus_usuarios` 
+	add column `posX` decimal (10,4)   NULL  after `textovisible`, 
+	add column `posY` decimal (10,4)   NULL  after `posX`
+;
+alter table `menus_usuarios` add column `vericono` tinyint (1)  DEFAULT '0' NOT NULL  after `textovisible`
+;
+alter table `hcabapu_fichdocs` drop column `descripfich`
+;
+
+alter table `menus_usuarios` add column `filtro` varchar (100)   NULL  after `posY`
+;
+update menus_usuarios set filtro = "0" where codigo = 301
+;
+# Información de Base de Datos
+CREATE TABLE `tmpinfbbdd` (                 
+              `codusu` smallint(1) NOT NULL,            
+              `posicion` int(7) NOT NULL,               
+              `concepto` varchar(50) default NULL,      
+              `nactual` int(7) default NULL,            
+              `poractual` decimal(5,2) default NULL,    
+              `nsiguiente` int(7) default NULL,         
+              `porsiguiente` decimal(5,2) default NULL  
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1      
+;
+# Cada informe tendrá un registro en la scryst
+alter table `scryst` change `codigo` `codigo` varchar (7)  DEFAULT '0' NOT NULL 
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0502-00','Conceptos de Inmovilizado','ConceptosInmo.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0203-00','Conceptos','Conceptos.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0106-00','Informes','Scryst.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0201-00','Cuentas','colCuentas.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0201-01','Cuentas Datos Fiscales','colCuentas2.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0306-00','Balance de Sumas y Saldos','SumasySaldos.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0307-00','Cuenta de Explotacion','CtaExplotacion.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0307-01','Cuenta Explotacion Comparativa','CtaExplotacionComp.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0307-02','Cuenta Explotacion Comp','CtaExplotacionComp1.rpt')
+;
+update `scryst` set `codigo`='0307-02',`descripcion`='Cuenta Explotacion Comp.Porcen',`informe`='CtaExplotacionComp1.rpt' where `codigo`='0307-02'
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0301-00','Impresion de Diario','AsientosHco.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0303-00','Consulta de Extractos','ConsExtrac.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0303-01','Consulta de Extractos Extendido','ConsExtracExt.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0211-00','Asientos Predefinidos','AsiPre.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0206-00','Formas de Pago','Forpa.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0209-00','Agentes','Agentes.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0208-00','Bic-Swift','BicSwift.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0207-00','Bancos Propios','BancosProp.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0204-00','Tipos de Iva','TiposIVA.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0205-00','Tipos de Pago','TipoPago.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0202-00','Tipos de Diario','TiposDiario.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0310-00','Totales por Concepto','TotCtaConTotal.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0310-01','Totales por Concepto desglosado','TotCtaConTotalD.rpt')
+;
+
+# Tipo de situacion del inmovilizado
+rename table `usuarios`.`wtiposituacion` to `usuarios`.`ycontiposituinmo`
+;
+drop table `ariconta1`.`tiposituacion`
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0503-00','Elementos de Inmovilizado','ElementosInmo.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0503-01','Elementos Inmovilizado Resumido','ElementosInmo1.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0505-00','Estadisticas Inmovilizado','EstadisticasInmo.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0505-01','Estadisticas Inmovilizado Fec','EstadisticasInmoFec.rpt')
+;
+#Tabla temporal para la simulacion de amortizacion
+CREATE TABLE `tmpsimulainmo` (                            
+              `codusu` smallint(5) unsigned NOT NULL default '0',  
+              `codigo` smallint(6) NOT NULL default '0',           
+              `conconam` smallint(6) default NULL,                 
+              `nomconam` char(30) default NULL,                    
+              `codinmov` smallint(6) NOT NULL default '0',         
+              `nominmov` char(30) NOT NULL default '',             
+              `fechaadq` char(10) default NULL,                    
+              `valoradq` decimal(14,2) default NULL,               
+              `amortacu` decimal(14,2) default NULL,               
+              `totalamor` decimal(14,2) default NULL,              
+              PRIMARY KEY  (`codusu`,`codigo`)                     
+            ) ENGINE=MyISAM DEFAULT CHARSET=latin1                 
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0508-00','Simulacion Inmovilizado','SimulaInmo.rpt')
+;
+
+# Las tmps estarán en cada contabilidad
+CREATE TABLE `tmpnorma43` (                             
+            `codusu` smallint(4) NOT NULL default '0',          
+            `Orden` smallint(5) unsigned NOT NULL default '0',  
+            `codmacta` char(10) NOT NULL default '',            
+            `fecopera` date NOT NULL default '0000-00-00',      
+            `fecvalor` date NOT NULL default '0000-00-00',      
+            `importeD` decimal(12,2) default NULL,              
+            `importeH` decimal(14,2) default NULL,              
+            `concepto` char(30) default NULL,                   
+            `numdocum` char(10) NOT NULL default '',            
+            `saldo` decimal(14,2) default NULL,                 
+            PRIMARY KEY  (`codusu`,`Orden`,`codmacta`)          
+          ) ENGINE=MyISAM DEFAULT CHARSET=latin1                
+;
+drop table usuarios.wnorma43
+;
+
+CREATE TABLE `tmpimpbalan` (                          
+                `codusu` smallint(1) unsigned NOT NULL default '0',  
+                `Pasivo` char(1) NOT NULL default '',                
+                `codigo` smallint(6) NOT NULL default '0',           
+                `descripcion` varchar(60) default NULL,              
+                `linea` varchar(100) default NULL,                   
+                `importe1` decimal(14,2) default NULL,               
+                `importe2` decimal(14,2) default NULL,               
+                `negrita` tinyint(4) default NULL,                   
+                `LibroCD` varchar(6) default NULL,                   
+                `QueCuentas` varchar(255) default NULL,              
+                PRIMARY KEY  (`codigo`,`codusu`,`Pasivo`)            
+              ) ENGINE=MyISAM DEFAULT CHARSET=latin1       
+;
+drop table usuarios.ztmpimpbalan
+;
+CREATE TABLE `tmptesoreriacomun` (                       
+                   `codusu` smallint(1) unsigned NOT NULL default '0',  
+                   `codigo` int(1) unsigned NOT NULL default '0',       
+                   `texto1` varchar(35) default NULL,                   
+                   `texto2` varchar(35) default NULL,                   
+                   `texto3` varchar(35) default NULL,                   
+                   `texto4` varchar(35) default NULL,                   
+                   `texto5` varchar(35) default NULL,                   
+                   `texto6` varchar(35) default NULL,                   
+                   `importe1` decimal(14,2) default NULL,               
+                   `importe2` decimal(14,2) default NULL,               
+                   `fecha1` date default NULL,                          
+                   `fecha2` date default NULL,                          
+                   `fecha3` date default NULL,                          
+                   `observa1` varchar(255) default NULL,                
+                   `observa2` varchar(255) default NULL,                
+                   `opcion` tinyint(4) default '0',
+		   `Texto` text,   
+                   PRIMARY KEY  (`codusu`,`codigo`)                     
+                 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 
+;
+drop table usuarios.ztesoreriacomun
+; 
+CREATE TABLE `tmpsaldoscc` (                             
+             `codusu` smallint(1) unsigned NOT NULL default '0',  
+             `codccost` char(4) NOT NULL default '0',             
+             `nomccost` char(30) NOT NULL default '0',            
+             `ano` smallint(1) NOT NULL default '0',              
+             `mes` tinyint(1) NOT NULL default '0',               
+             `impmesde` decimal(12,2) NOT NULL default '0.00',    
+             `impmesha` decimal(12,2) NOT NULL default '0.00',    
+             PRIMARY KEY  (`ano`,`codusu`,`codccost`,`mes`)       
+           ) ENGINE=MyISAM DEFAULT CHARSET=latin1                 
+;
+drop table usuarios.zsaldoscc
+;
+
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0312-01','Informe Ratios y graficas(ratios)','ratios.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0312-02','Informe Ratios y graficas(graficas)','graficas.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0312-03','Informe Ratios y graficas(resumido)','GraficaR.rpt')
+;
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0311-00','Evolución de Saldos','evolsald.rpt')
+;
+CREATE TABLE `paises` (                                                                      
+          `codpais` char(2) character set latin1 collate latin1_spanish_ci NOT NULL default 'ES',    
+          `nompais` varchar(50) character set latin1 collate latin1_spanish_ci NOT NULL default '',  
+          `intracom` smallint(1) NOT NULL default '0',                                               
+          PRIMARY KEY  (`codpais`)                                                                   
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1                                                       
+;
+alter table `cuentas` add column `codpais` char (2)   NULL  after `iban`
+;
+alter table `cuentas` add column `codigiva` tinyint (1) UNSIGNED   NULL  after `codpais`
+;

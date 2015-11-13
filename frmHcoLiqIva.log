@@ -1,0 +1,6 @@
+Línea 21: la propiedad Icon de frmHcoLiq tenía una referencia a archivo no válida.
+Línea 123: la propiedad ItemData de Combo2 tenía una referencia a archivo no válida.
+Línea 125: la propiedad List de Combo2 tenía una referencia a archivo no válida.
+Línea 144: la propiedad ItemData de Combo1 tenía una referencia a archivo no válida.
+Línea 146: la propiedad List de Combo1 tenía una referencia a archivo no válida.
+Línea 237: la propiedad Bindings de DataGrid1 tenía una referencia a archivo no válida.

@@ -1,0 +1,16 @@
+Ariconta 2014
+
+- Modificacion para busquedas en campos texto sin asteriscos
+- Modificacion para tecla '+' emula prismaticos. Programas modificados:
+	frmIVA, frmparametros, frmAsientos, frmActualizar, frmConExtr, frmPuntear, frmListado, frmAsiPre, frmHcoApuntes, frmFacturas,...
+
+- Quitamos del menu Asientos con errores, Facturas cliente con errores y Facturas proveedor con errores.
+- Nuevo menu de David con la tabla de menus y menus_permisos (segun usuarios)
+
+- Nuevas librerias de iconos: icolistcon.dll, icolistcon_BN.dll e icolistcon_OM.dll para los iconos de los mantenimientos.
+- Modificacion de formularios que no salian en el centro de la pantalla.
+
+A REVISAR:
+- Buscar en la aplicacion cabapue y linapue (desaparecen las tablas de asientos con errores)
+- Buscar en la aplicacion cabfacte y linfacte (desaparecen las tablas de facturas con errores) 	
+- Buscar en la aplicacion cabfactprove y linfactprove (desaparecen las tablas de facturas con errores) 	

@@ -1,0 +1,65 @@
+Línea 27: la clase MSComctlLib.Toolbar del control Toolbar2 no era una clase de control cargada.
+Línea 75: la clase MSComctlLib.Toolbar del control Toolbar1 no era una clase de control cargada.
+Línea 233: la clase MSDataGridLib.DataGrid del control DataGrid1 no era una clase de control cargada.
+Línea 346: la clase MSAdodcLib.Adodc del control adodc1 no era una clase de control cargada.
+Línea 393: la clase MSComctlLib.Toolbar del control ToolbarAyuda no era una clase de control cargada.
+Línea 33: el nombre de la propiedad _ExtentX de Toolbar2 no es válido.
+Línea 34: el nombre de la propiedad _ExtentY de Toolbar2 no es válido.
+Línea 35: el nombre de la propiedad ButtonWidth de Toolbar2 no es válido.
+Línea 36: el nombre de la propiedad ButtonHeight de Toolbar2 no es válido.
+Línea 37: el nombre de la propiedad Style de Toolbar2 no es válido.
+Línea 38: el nombre de la propiedad _Version de Toolbar2 no es válido.
+Línea 57: el nombre de la propiedad Buttons de Toolbar2 no es válido.
+Línea 81: el nombre de la propiedad _ExtentX de Toolbar1 no es válido.
+Línea 82: el nombre de la propiedad _ExtentY de Toolbar1 no es válido.
+Línea 83: el nombre de la propiedad ButtonWidth de Toolbar1 no es válido.
+Línea 84: el nombre de la propiedad ButtonHeight de Toolbar1 no es válido.
+Línea 85: el nombre de la propiedad Style de Toolbar1 no es válido.
+Línea 86: el nombre de la propiedad _Version de Toolbar1 no es válido.
+Línea 128: el nombre de la propiedad Buttons de Toolbar1 no es válido.
+Línea 234: el nombre de la propiedad Bindings de DataGrid1 no es válido.
+Línea 240: el nombre de la propiedad _ExtentX de DataGrid1 no es válido.
+Línea 241: el nombre de la propiedad _ExtentY de DataGrid1 no es válido.
+Línea 242: el nombre de la propiedad _Version de DataGrid1 no es válido.
+Línea 243: el nombre de la propiedad AllowUpdate de DataGrid1 no es válido.
+Línea 245: el nombre de la propiedad HeadLines de DataGrid1 no es válido.
+Línea 246: el nombre de la propiedad RowHeight de DataGrid1 no es válido.
+Línea 255: el nombre de la propiedad HeadFont de DataGrid1 no es válido.
+Línea 265: el nombre de la propiedad ColumnCount de DataGrid1 no es válido.
+Línea 278: el nombre de la propiedad Column00 de DataGrid1 no es válido.
+Línea 291: el nombre de la propiedad Column01 de DataGrid1 no es válido.
+Línea 292: el nombre de la propiedad SplitCount de DataGrid1 no es válido.
+Línea 301: el nombre de la propiedad Split0 de DataGrid1 no es válido.
+Línea 352: el nombre de la propiedad _ExtentX de adodc1 no es válido.
+Línea 353: el nombre de la propiedad _ExtentY de adodc1 no es válido.
+Línea 354: el nombre de la propiedad ConnectMode de adodc1 no es válido.
+Línea 355: el nombre de la propiedad CursorLocation de adodc1 no es válido.
+Línea 356: el nombre de la propiedad IsolationLevel de adodc1 no es válido.
+Línea 357: el nombre de la propiedad ConnectionTimeout de adodc1 no es válido.
+Línea 358: el nombre de la propiedad CommandTimeout de adodc1 no es válido.
+Línea 359: el nombre de la propiedad CursorType de adodc1 no es válido.
+Línea 360: el nombre de la propiedad LockType de adodc1 no es válido.
+Línea 361: el nombre de la propiedad CommandType de adodc1 no es válido.
+Línea 362: el nombre de la propiedad CursorOptions de adodc1 no es válido.
+Línea 363: el nombre de la propiedad CacheSize de adodc1 no es válido.
+Línea 364: el nombre de la propiedad MaxRecords de adodc1 no es válido.
+Línea 365: el nombre de la propiedad BOFAction de adodc1 no es válido.
+Línea 366: el nombre de la propiedad EOFAction de adodc1 no es válido.
+Línea 367: el nombre de la propiedad ConnectStringType de adodc1 no es válido.
+Línea 371: el nombre de la propiedad Orientation de adodc1 no es válido.
+Línea 373: el nombre de la propiedad Connect de adodc1 no es válido.
+Línea 374: el nombre de la propiedad OLEDBString de adodc1 no es válido.
+Línea 375: el nombre de la propiedad OLEDBFile de adodc1 no es válido.
+Línea 376: el nombre de la propiedad DataSourceName de adodc1 no es válido.
+Línea 377: el nombre de la propiedad OtherAttributes de adodc1 no es válido.
+Línea 378: el nombre de la propiedad UserName de adodc1 no es válido.
+Línea 379: el nombre de la propiedad Password de adodc1 no es válido.
+Línea 380: el nombre de la propiedad RecordSource de adodc1 no es válido.
+Línea 381: el nombre de la propiedad Caption de adodc1 no es válido.
+Línea 391: el nombre de la propiedad _Version de adodc1 no es válido.
+Línea 399: el nombre de la propiedad _ExtentX de ToolbarAyuda no es válido.
+Línea 400: el nombre de la propiedad _ExtentY de ToolbarAyuda no es válido.
+Línea 401: el nombre de la propiedad ButtonWidth de ToolbarAyuda no es válido.
+Línea 402: el nombre de la propiedad ButtonHeight de ToolbarAyuda no es válido.
+Línea 403: el nombre de la propiedad _Version de ToolbarAyuda no es válido.
+Línea 409: el nombre de la propiedad Buttons de ToolbarAyuda no es válido.

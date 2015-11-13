@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281375</millis>
+  <sequence>0</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Sistema operativo: Windows XP</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>1</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Versión: 5.1</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>2</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Versión java: 1.5.0_11</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>3</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Propietario Java: Sun Microsystems Inc.</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>4</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Nombre Java VM: Java HotSpot(TM) Client VM</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>5</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Version de Runtime: 1.5.0_11-b03</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>6</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>Directorio de java: C:\Archivos de programa\Java\jre1.5.0_11</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>7</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>VM Initial Memory : 2031616 bytes</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>8</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>CONFIG</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ponEnLogConfig</method>
+  <thread>10</thread>
+  <message>VM Maximum Memory : 66650112 bytes</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281437</millis>
+  <sequence>9</sequence>
+  <logger>com.aeat.informativas.modulos.Validacion</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.modulos.Validacion</class>
+  <method>ejecutar</method>
+  <thread>10</thread>
+  <message>ModeloDBManagerFactory= ModeloDBCloudScapeManager</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281796</millis>
+  <sequence>10</sequence>
+  <logger>com.aeat.informativas.tareas.TareasnoDlg</logger>
+  <level>WARNING</level>
+  <class>com.aeat.informativas.tareas.TareasnoDlg</class>
+  <method>inicializa</method>
+  <thread>11</thread>
+  <message>Lanzo en Timer</message>
+  <param>false</param>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281796</millis>
+  <sequence>11</sequence>
+  <logger>com.aeat.informativas.tareas.TareasnoDlg</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.tareas.TareasnoDlg$1</class>
+  <method>run</method>
+  <thread>11</thread>
+  <message>Lanzando tarea =AbrirOrigenDatosValidacion</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281796</millis>
+  <sequence>12</sequence>
+  <logger>com.aeat.informativas.tareas.TareasnoDlg</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.tareas.TareasnoDlg$1</class>
+  <method>run</method>
+  <thread>11</thread>
+  <message>Lanzando tarea =CargarConfigPlugin</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281796</millis>
+  <sequence>13</sequence>
+  <logger>com.aeat.informativas.tareas.TareasnoDlg</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.tareas.TareasnoDlg$1</class>
+  <method>run</method>
+  <thread>11</thread>
+  <message>Lanzando tarea =CargarPreferencias</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:21</date>
+  <millis>1176892281796</millis>
+  <sequence>14</sequence>
+  <logger>com.aeat.informativas.tareas.TareasnoDlg</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.tareas.TareasnoDlg$1</class>
+  <method>run</method>
+  <thread>11</thread>
+  <message>Lanzando tarea =CrearMotorVisual</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:59</date>
+  <millis>1176892319671</millis>
+  <sequence>15</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN: inicio</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:59</date>
+  <millis>1176892319859</millis>
+  <sequence>16</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN: Fin validaPreviaFichero</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:59</date>
+  <millis>1176892319875</millis>
+  <sequence>17</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN: Fin validaEstructura</message>
+</record>
+<record>
+  <date>2007-04-18T12:31:59</date>
+  <millis>1176892319906</millis>
+  <sequence>18</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN: Fin validaCaracteres</message>
+</record>
+<record>
+  <date>2007-04-18T12:32:00</date>
+  <millis>1176892320390</millis>
+  <sequence>19</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN: Importados</message>
+</record>
+<record>
+  <date>2007-04-18T12:32:00</date>
+  <millis>1176892320390</millis>
+  <sequence>20</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN:{0}TIPO2 = 1</message>
+</record>
+<record>
+  <date>2007-04-18T12:32:00</date>
+  <millis>1176892320390</millis>
+  <sequence>21</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN:{0}TIPO1 = 1</message>
+</record>
+<record>
+  <date>2007-04-18T12:32:00</date>
+  <millis>1176892320390</millis>
+  <sequence>22</sequence>
+  <logger>com.aeat.informativas.ModeloPlataformaInformativas</logger>
+  <level>INFO</level>
+  <class>com.aeat.informativas.ModeloPlataformaInformativas</class>
+  <method>importacionFichero</method>
+  <thread>10</thread>
+  <message>IMPORTACIÓN: Fin</message>
+</record>
+</log>

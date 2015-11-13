@@ -1,0 +1,19 @@
+# SQL PARA USUARIOS
+
+
+# CARGAMOS LOS MENUS DE LOS USUARIOS DE ARICONTA4 CON TODOS LOS PERMISOS
+
+ insert into menus_usuarios (codusu, codigo,ver,creareliminar,modificar,imprimir,especial)
+ select codusu, menus.codigo, 1,1,1,1,1
+ from usuarios.usuarios, menus  
+ where nivelusu <> -1
+ order by 1,2
+
+
+# En usuarios tablas comunes (GENERAR ESTRUCTURA Y DATOS DE TODAS LAS W---------)
+# Creates e inserts de todas las tablas w--------
+
+
+# Skin del formato por defecto 2
+alter table `usuarios`.`usuarios` add column `skin` tinyint (4)  DEFAULT '2' NULL;
+

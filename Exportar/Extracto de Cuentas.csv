@@ -1,0 +1,4 @@
+"Código";"Denominación";"Fecha";"Asiento";"Documento";"Concepto";"Ampliación";"Contrapartida";"CC";"Debe";"Haber";"Saldo";"Punteada";""
+"5720000001";"LA CAIXA - CTA. 4908";"01/01/2013";"1";"";"970";"APERTURA";"";"";"1817,37";"";"1817,37";"";""
+"5720000001";"LA CAIXA - CTA. 4908";"01/01/2013";"49";"";"15";"VARIOS INTERESES";"7690000001";"";"0,03";"";"1817,4";"";""
+"5720000001";"LA CAIXA - CTA. 4908";"01/01/2013";"50";"";"15";"VARIOS RETENCIÓN FISCAL";"4730000001";"";"";"0,01";"1817,39";"";""

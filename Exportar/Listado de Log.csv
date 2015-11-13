@@ -1,0 +1,69 @@
+"Trabajador";"Fecha";"Accion";"Detalle"
+"root";"06/10/2015 10:56:25";"ControlCC";"Renumerar nºregistro (Verdadero)
+Ejercicio actual
+Updatear numdocum: 2
+Desde/Hasta: D numregis >= 1 AND numregis <= 1003
+Registros: 53
+
+NºFactur"
+"root";"06/10/2015 12:26:36";"ControlCC";"Renumerar nºregistro (Verdadero)
+Ejercicio actual
+Updatear numdocum: 1
+Desde/Hasta: D numregis >= 1 AND numregis <= 3
+Registros: 53
+
+NºFactura: "
+"root";"24/09/2015 12:06:44";"Punteo cta";"Cuentas punteadas: 400000011 "
+"root";"24/09/2015 12:31:17";"MOD FRACLI";"10000228 06/06/2015"
+"root";"24/09/2015 12:31:44";"MOD FRACLI";"10000228 06/06/2015"
+"root";"24/09/2015 12:50:13";"DEL ASIENTO";"Cabecera de apuntes.
+-----------------------------
+
+Va a eliminar el asiento:
+Nº Asiento   :   1593
+Fecha        :   24/09/2015
+Diario          "
+"root";"24/09/2015 12:50:17";"DEL ASIENTO";"Cabecera de apuntes.
+-----------------------------
+
+Va a eliminar el asiento:
+Nº Asiento   :   1595
+Fecha        :   24/09/2015
+Diario          "
+"root";"24/09/2015 13:21:15";"Punteo cta";"Cuentas punteadas: 430000001 "
+"root";"24/09/2015 13:22:12";"Punteo cta";"Cuentas punteadas: 430000001 "
+"root";"24/09/2015 13:23:13";"Punteo cta";"Cuentas punteadas: 430000001 "
+"root";"24/09/2015 13:35:36";"MOD FRACLI";"A3500283 22/09/2015"
+"root";"28/09/2015 11:26:02";"DEL ASIENTO";"Cabecera de apuntes.
+-----------------------------
+
+Va a eliminar el asiento:
+Nº Asiento   :   1598
+Fecha        :   31/12/2015
+Diario          "
+"root";"28/09/2015 11:42:29";"PROCESO CIERRE";"[CIERRE]"
+"root";"28/09/2015 12:07:05";"PROCESO CIERRE";"[DESHACER]"
+"root";"28/09/2015 12:12:13";"DEL ASIENTO";"Cabecera de apuntes.
+-----------------------------
+
+Va a eliminar el asiento:
+Nº Asiento   :   1
+Fecha        :   01/01/2016
+Diario           : "
+"root";"28/09/2015 12:31:27";"PROCESO CIERRE";"[DESHACER]"
+"root";"28/09/2015 12:32:13";"PROCESO CIERRE";"[CIERRE]"
+"root";"28/09/2015 12:34:13";"PROCESO CIERRE";"[CIERRE]"
+"root";"28/09/2015 12:34:42";"PROCESO CIERRE";"[DESHACER]"
+"root";"28/09/2015 12:39:45";"PROCESO CIERRE";"[CIERRE]"
+"root";"28/09/2015 12:40:15";"PROCESO CIERRE";"[DESHACER]"
+"root";"28/09/2015 12:42:11";"PROCESO CIERRE";"[CIERRE]"
+"root";"28/09/2015 12:44:36";"PROCESO CIERRE";"[DESHACER]"
+"root";"28/09/2015 12:44:52";"PROCESO CIERRE";"[CIERRE]"
+"root";"28/09/2015 12:52:24";"PROCESO CIERRE";"[DESHACER]"
+"root";"28/09/2015 13:47:28";"DEL ASIENTO";"Cabecera de apuntes.
+-----------------------------
+
+Va a eliminar el asiento:
+Nº Asiento   :   1596
+Fecha        :   25/09/2015
+Diario          "

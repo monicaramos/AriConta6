@@ -1,0 +1,4 @@
+Línea 12: la propiedad Icon de frmADVTratamientos tenía una referencia a archivo no válida.
+Línea 112: la propiedad Picture de imgFec tenía una referencia a archivo no válida.
+Línea 121: la propiedad Picture de imgFec tenía una referencia a archivo no válida.
+Línea 345: la propiedad Bindings de DataGridAux tenía una referencia a archivo no válida.
