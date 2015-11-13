@@ -1,6 +1,6 @@
 CTag = 0, 0, 0, 0, C
 ValoresxDefecto = 0, 0, 0, 0, C
-Usuario = 156, 156, 917, 690, Z
+Usuario = 156, 156, 917, 690, 
 ModCarpeta = 0, 0, 0, 0, C
 frmCal = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 Contadores = 0, 0, 0, 0, C
@@ -132,6 +132,6 @@ frmCCCentroCoste = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 frmCCCentroCosteList = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 frmVisReportN = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 frmCCConExtr = 0, 0, 0, 0, C, 0, 0, 0, 0, C
-frmCCConExtrList = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmCCConExtrList = 0, 0, 0, 0, C, 130, 130, 708, 664, C
 frmCCCtaExplo = 26, 26, 712, 560, , 0, 0, 0, 0, C
-frmCCDetalleExplota = 26, 26, 607, 560, , 0, 0, 686, 534, C
+frmCCDetalleExplota = 26, 26, 607, 560, Z, 0, 0, 686, 534, C

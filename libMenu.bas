@@ -49,6 +49,7 @@ Dim SQL As String
                 'imagen
                 N.Tag = DBLet(RN!imagen, "N") & "|"
         Else
+           If Not BloqueaPuntoMenu(RN!Codigo, "ariconta") Then
             If MenuVisibleUsuario(DBLet(RN!Codigo), aplicacion) Then
              If (MenuVisibleUsuario(DBLet(RN!Padre), aplicacion) And DBLet(RN!Padre) <> 0) Or DBLet(RN!Padre) = 0 Then
             
@@ -75,6 +76,7 @@ Dim SQL As String
                 End If
              End If
             End If
+           End If
         End If
         
         RN.MoveNext
@@ -502,6 +504,8 @@ Dim Valor As Currency
         SQL = "update menus_usuarios set posx = " & DBSet(Lv1.SelectedItem.Left, "N") & ", posy = " & DBSet(Lv1.SelectedItem.Top, "N") & " where codusu = " & Usuario & " and aplicacion = " & DBSet(aplicacion, "T") & " and "
         SQL = SQL & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.SelectedItem, "T") & ")"
     
+    
+    
         Conn.Execute SQL
 
     
@@ -523,19 +527,27 @@ Dim Excepcion As String
     SQL = SQL & " and codusu = " & DBSet(vUsu.Id, "N")
     
     If Not vEmpresa.TieneTesoreria Then
-        
         SQL = SQL & " and not codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and tipo = 1)"
-    
     End If
     
     If Not vEmpresa.TieneContabilidad Then
-    
         SQL = SQL & " and not codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and tipo = 0)"
-    
-    
     End If
     
     MenuVisibleUsuario = (DevuelveValor(SQL) = 1)
 
+End Function
+
+Public Function BloqueaPuntoMenu(IdProg As Long, aplicacion As String) As Boolean
+Dim EsdeAnalitica As Boolean
+
+    BloqueaPuntoMenu = False
+
+    If aplicacion = "ariconta" Then
+        ' programas de analitica
+        EsdeAnalitica = (IdProg = 10 Or IdProg = 1001 Or IdProg = 1002 Or IdProg = 1003 Or IdProg = 1004 Or IdProg = 1005)
+        BloqueaPuntoMenu = (Not vParam.autocoste And EsdeAnalitica)
+    End If
+    
 End Function
 

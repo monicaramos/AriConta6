@@ -1481,16 +1481,18 @@ Dim cadAux As String
     End If
     
     
-    
-    
     If Reorganizar Then Me.ListView1.Arrange = lvwAutoTop
     
     miRsAux.Open AUx, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     AnchoListview = 0
     ListView1.ListItems.Clear
     While Not miRsAux.EOF
-        AnchoListview = AnchoListview + 1
-        Me.ListView1.ListItems.Add , CStr("LW" & Format(miRsAux!Codigo, "000000")), DBLet(miRsAux!Descripcion, "T"), CInt(miRsAux!imagen)
+        
+        If Not BloqueaPuntoMenu(miRsAux!Codigo, "ariconta") Then
+            AnchoListview = AnchoListview + 1
+            
+            Me.ListView1.ListItems.Add , CStr("LW" & Format(miRsAux!Codigo, "000000")), DBLet(miRsAux!Descripcion, "T"), CInt(miRsAux!imagen)
+        End If
         miRsAux.MoveNext
     Wend
 
@@ -1519,6 +1521,7 @@ Dim cadAux As String
     
 
 End Sub
+
 
 Private Sub ListView1_ItemClick(ByVal Item As MSComctlLib.ListItem)
 '    If ListView1.SelectedItem Is Nothing Then Exit Sub

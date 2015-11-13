@@ -795,12 +795,11 @@ Private Sub cmdAccion_Click(Index As Integer)
         If Not EliminarDocum(optTipoSal(2).Value) Then Exit Sub
     End If
     
-    
     InicializarVbles True
     
     If Not MontaSQL Then Exit Sub
     
-    If Not HayRegParaInforme("hlinapu", cadselect) Then Exit Sub
+    If Not HayRegParaInforme("tmplinccexplo", "tmplinccexplo.codusu= " & vUsu.Codigo) Then Exit Sub
     
     If optTipoSal(1).Value Then
         'EXPORTAR A CSV
@@ -826,7 +825,6 @@ Private Sub cmdCancelar_Click()
     Unload Me
 End Sub
 
-
 Private Sub Form_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -838,8 +836,6 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-
-
 Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
         
@@ -849,20 +845,18 @@ Private Sub Form_Load()
         .Buttons(1).Image = 26
     End With
         
-        
     'Otras opciones
     Me.Caption = "Detalle de Explotación"
 
     For i = 0 To 1
         Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
-    For i = 0 To 0
+    For i = 0 To 1
         Me.imgCCoste(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
     
     PrimeraVez = True
      
-    
     txtFecha(0).Text = vParam.fechaini
     txtFecha(1).Text = vParam.fechafin
     If Not vParam.FecEjerAct Then
@@ -872,7 +866,6 @@ Private Sub Form_Load()
    
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
-    
 End Sub
 
 Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
@@ -880,7 +873,7 @@ Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
     txtNCuentas(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
-Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmCCo_DatoSeleccionado(CadenaSeleccion As String)
     txtCCoste(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNCCoste(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
@@ -894,8 +887,9 @@ Private Sub ImgCCoste_Click(Index As Integer)
     IndCodigo = Index
     
     Set frmCCo = New frmBasico
-    frmCCo.DatosADevolverBusqueda = "0|1|"
-    frmCCo.Show vbModal
+    
+    AyudaCC frmCCo, txtCCoste(Index)
+    
     Set frmCCo = Nothing
     
     PonFoco txtCCoste(Index)
@@ -1132,7 +1126,8 @@ Dim SQL2 As String
     SQL = SQL & " FROM ((hlinapu INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta)  "
     SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost) "
     SQL = SQL & " INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta , (select @Saldo:= 0) aaa, (select @Cta:= '') bbb   "
-    SQL = SQL & " where " & cadselect
+    SQL = SQL & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    If cadselect <> "" Then SQL = SQL & " and " & cadselect
     SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
     'LLamos a la funcion
@@ -1148,12 +1143,14 @@ Dim nomDocu As String
     vMostrarTree = False
     conSubRPT = False
         
-    indRPT = "1006-00" '"CC_X_CTA.rpt"
+    indRPT = "1005-00" '"CC_X_CTA.rpt"
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu
-
+    
+    cadFormula = "{tmplinccexplo.codusu}=" & vUsu.Codigo
+    
     ImprimeGeneral
     
     If optTipoSal(1).Value Then CopiarFicheroASalida True, txtTipoSalida(1).Text
@@ -1197,7 +1194,8 @@ Dim SQL As String
     SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
     SQL = SQL & " FROM (hlinapu INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
     SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost "
-    SQL = SQL & " where " & cadselect
+    SQL = SQL & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    If cadselect <> "" Then SQL = SQL & " and " & cadselect
     SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
     Conn.Execute SQL

@@ -1356,8 +1356,8 @@ Dim Anyo As String
     End If
     vFecha = Day(vParam.fechaini) & "/" & Month(vParam.fechaini) & "/" & Anyo
     
-    cadFormula = "{hlinapu.codconce}<>970 AND mid({hlinapu.codmacta},1,1) IN ['6','7']"
-    cadselect = "hlinapu.codconce<>970 AND mid(hlinapu.codmacta,1,1) IN ('6','7')"
+    cadFormula = "{hlinapu.codconce}<>970 AND mid({hlinapu.codmacta},1,1) IN [" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & "]" ''6','7']"
+    cadselect = "hlinapu.codconce<>970 AND mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")" ''6','7')"
     'Montamos la fecha de inicio del periodo solicitado
     cadFormula = cadFormula & " AND {hlinapu.fechaent} >= Date (" & Me.txtAno(4).Text & "," & Month(vParam.fechaini) & "," & Day(vParam.fechaini) & ") "
     cadselect = cadselect & " AND hlinapu.fechaent >= '" & Format(Me.txtAno(4).Text, "0000") & "-" & Format(Month(vParam.fechaini), "00") & "-" & Format(Day(vParam.fechaini), "00") & "'"
