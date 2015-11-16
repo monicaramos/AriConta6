@@ -114,12 +114,17 @@ Public ContinuarPago As Boolean
 
 Public NumConta As Integer
 
+Public XAnt As Currency
+Public YAnt As Currency
 
 
     'Para los asientos k vemos desde la consulta de extractos
     '  0.- NADA
     '  1.- SIIII
 Public Sub Main()
+
+
+
 
 Dim Cad As String
 Dim NF As Integer

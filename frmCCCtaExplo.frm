@@ -850,7 +850,7 @@ Private WithEvents frmCta As frmColCtas
 Attribute frmCta.VB_VarHelpID = -1
 
 
-Private SQL As String
+Private Sql As String
 Dim Cad As String
 Dim RC As String
 Dim i As Integer
@@ -939,7 +939,6 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     Else
         'Tanto a pdf,imprimiir, preevisualizar como email van COntral Crystal
-    
         If optTipoSal(2).Value Or optTipoSal(3).Value Then
             ExportarPDF = True 'generaremos el pdf
         Else
@@ -1004,6 +1003,9 @@ Private Sub Form_Load()
 
     For i = 6 To 7
         Me.imgCCoste(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    Next i
+    For i = 0 To 1
+        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
     
     PrimeraVez = True
@@ -1147,14 +1149,14 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 Dim Tipo As Byte
 
-    SQL = "select CCoste Cuenta , nomCCoste Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
-    SQL = SQL & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
-    SQL = SQL & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
-    SQL = SQL & " from tmpbalancesumas where codusu = " & vUsu.Codigo
-    SQL = SQL & " order by 1 "
+    Sql = "select CCoste Cuenta , nomCCoste Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
+    Sql = Sql & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
+    Sql = Sql & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
+    Sql = Sql & " from tmpbalancesumas where codusu = " & vUsu.Codigo
+    Sql = Sql & " order by 1 "
         
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -1166,9 +1168,6 @@ Dim indRPT As String
 Dim nomDocu As String
 
 
-    cadParam = cadParam & "pTipo=" & Tipo & "|"
-    numParam = numParam + 1
-    
     
     cadParam = cadParam & "pDHFecha=""" & cmbFecha(0).Text & " " & txtAno(0).Text & " a " & cmbFecha(1).Text & " " & txtAno(1).Text & """|"
     numParam = numParam + 1
@@ -1177,7 +1176,7 @@ Dim nomDocu As String
     vMostrarTree = False
     conSubRPT = False
         
-    indRPT = "1002-00"
+    indRPT = "1003-00"
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
@@ -1197,7 +1196,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -1212,8 +1211,8 @@ Private Function DatosOK() As Boolean
     
     DatosOK = False
     
-    If txtCCoste(2).Text <> "" And txtCCoste(3).Text <> "" Then
-        If txtCCoste(2).Text > txtCCoste(3).Text Then
+    If txtCCoste(6).Text <> "" And txtCCoste(7).Text <> "" Then
+        If txtCCoste(6).Text > txtCCoste(7).Text Then
             MsgBox "Centro de coste inicio mayor que centro de coste fin", vbExclamation
             Exit Function
         End If
@@ -1397,11 +1396,11 @@ Dim Hasta As Integer
             'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             
             RC = txtCuentas(Index).Text
-            If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
+            If CuentaCorrectaUltimoNivelSIN(RC, Sql) Then
                 txtCuentas(Index) = RC
-                txtNCuentas(Index).Text = SQL
+                txtNCuentas(Index).Text = Sql
             Else
-                MsgBox SQL, vbExclamation
+                MsgBox Sql, vbExclamation
                 txtCuentas(Index).Text = ""
                 txtNCuentas(Index).Text = ""
                 PonFoco txtCuentas(Index)
@@ -1429,346 +1428,82 @@ End Sub
 
 Private Function GeneraCtaExplotacionCC() As Boolean
 Dim RC As Byte
+Dim FIniP As Date
+Dim FFinP As Date
+Dim FIniPAnt As Date
+Dim FFinPAnt As Date
+Dim CadInsert As String
+
+    On Error GoTo EGeneraCtaExplotacionCC
+
 
     GeneraCtaExplotacionCC = False
     
     
     'Borramos datos
-    SQL = "Delete from tmpctaexpcc where codusu = " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "Delete from tmplinccexplo where codusu = " & vUsu.Codigo
+    Conn.Execute Sql
     
-    
-
-    If chkCtaExpCC(1).Value = 1 Then
-        'Hacemos primero el periodo anterior
-        RC = HacerCtaExploxCC(CInt(txtAno(7).Text) - 1, CInt(txtAno(8).Text) - 1)
-        If RC = 0 Then Exit Function  'ha habido algun error
-        
-        'Si ha Generado datos los paso un momento para que el seguiente proceso no los borre
-        If RC = 2 Then
-            If Not ProcesoCtaExplotacionCC(0) Then Exit Function
+    FIniP = "01/" & Format(cmbFecha(0).ListIndex + 1, "00") & "/" & txtAno(0).Text
+    FFinP = DateAdd("d", -1, DateAdd("m", 1, "01/" & Format(cmbFecha(1).ListIndex + 1, "00") & "/" & txtAno(1).Text))
+    FIniPAnt = "01/01/1900"
+    FFinPAnt = "01/01/1900"
+    If chkCtaExpCC(1).Value Then
+        FIniPAnt = DateAdd("yyyy", -1, FIniP)
+        FFinPAnt = DateAdd("yyyy", -1, FFinP)
+    Else
+        If FIniP <> vParam.fechaini Then
+            If cmbFecha(0).ListIndex + 1 < Month(vParam.fechaini) Then
+                FIniPAnt = "01/" & Format(Month(vParam.fechaini), "00") & "/" & Format(CLng(txtAno(0).Text) - 1, "0000")
+            Else
+                FIniPAnt = "01/" & Format(Month(vParam.fechaini), "00") & "/" & Format(CLng(txtAno(0).Text), "0000")
+            End If
+            FFinPAnt = DateAdd("d", -1, FIniP)
         End If
+    End If
+
+    Sql = "insert into tmplinccexplo (codusu,codccost,codmacta,perD,perH) "
+    Sql = Sql & " select " & vUsu.Codigo & ", codccost, codmacta, sum(coalesce(timported,0)), sum(coalesce(timporteh,0))  "
+    Sql = Sql & " FROM hlinapu  "
+    Sql = Sql & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    Sql = Sql & " and fechaent between " & DBSet(FIniP, "F") & " and " & DBSet(FFinP, "F")
+    If cadselect <> "" Then Sql = Sql & " and " & cadselect
+    Sql = Sql & " group by 1,2,3 "
+    Sql = Sql & " ORDER BY 1,2,3 "
+
+    Conn.Execute Sql
+
+    ' si el periodo no coincide con el inicio de ejercicio, grabamos el acumulado anterior
+    If FIniP <> vParam.fechaini Then
+        CadInsert = "insert into tmplinccexplo (codusu,codccost,codmacta,AntD,AntH) values ("
+        Sql = "select " & vUsu.Codigo & ", codccost, codmacta, sum(coalesce(timported,0)) impd, sum(coalesce(timporteh,0)) imph  "
+        Sql = Sql & " FROM hlinapu  "
+        Sql = Sql & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+        Sql = Sql & " and fechaent between " & DBSet(FIniPAnt, "F") & " and " & DBSet(FFinPAnt, "F")
+        If cadselect <> "" Then Sql = Sql & " and " & cadselect
+        Sql = Sql & " group by 1,2,3 "
+        Sql = Sql & " ORDER BY 1,2,3 "
         
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            Sql = "select count(*) from tmplinccexplo where codusu = " & vUsu.Codigo & " and codccost = " & DBSet(Rs!codccost, "T") & " and codmacta = " & DBSet(Rs!codmacta, "T")
+            If TotalRegistros(Sql) = 0 Then
+                Sql = CadInsert & DBSet(vUsu.Codigo, "N") & "," & DBSet(Rs!codccost, "T") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!ImpD, "N") & "," & DBSet(Rs!ImpH, "N") & ")"
+            Else
+                Sql = "update tmplinccexplo set antd = " & DBSet(Rs!ImpD, "N") & ", anth = " & DBSet(Rs!ImpH, "N")
+                Sql = Sql & " where codusu = " & vUsu.Codigo & " and codccost =  " & DBSet(Rs!codccost, "T") & " and codmacta = " & DBSet(Rs!codmacta, "T")
+            End If
+            
+            Conn.Execute Sql
+            
+            Rs.MoveNext
+        Wend
+        Set Rs = Nothing
     End If
-    
-    'Este bloque lo hace siempre
-    RC = HacerCtaExploxCC(CInt(txtAno(7).Text), CInt(txtAno(8).Text))
-    If RC > 0 Then
-        RC = 0
-        'Si era compartativo
-        'Mezclamos los datos de ahora con los de antes
-        If chkCtaExpCC(1).Value = 1 Then
-            If Not ProcesoCtaExplotacionCC(1) Then RC = 1
-        End If
-        If RC = 0 Then GeneraCtaExplotacionCC = True
-    End If
-    
 
-    
-    'Eliminamos datos temporales
-    If chkCtaExpCC(1).Value = 1 Then
-        ProcesoCtaExplotacionCC 2
-    End If
-    
-
-End Function
-
-'0: Error    1: No hay datos       2: OK
-Private Function HacerCtaExploxCC(Anyo1 As Integer, Anyo2 As Integer) As Byte
-Dim A1 As Integer, M1 As Integer
-Dim Post As Boolean
-
-'    On Error GoTo EGeneraCtaExplotacionCC
-'    HacerCtaExploxCC = 0
-'
-'    UltimoMesAnyoAnal1 M1, A1
-'
-'    'Si años consulta iguales
-'    If txtAno(0).Text = txtAno(1).Text Then
-'         Cad = " anoccost=" & Anyo1 & " AND mesccost>=" & Me.cmbFecha(0).ListIndex + 1
-'         Cad = Cad & " AND mesccost<=" & Me.cmbFecha(1).ListIndex + 1
-'
-'    Else
-'        'Años disitintos
-'        'Inicio
-'        Cad = "( anoccost=" & Anyo1 & " AND mesccost>=" & Me.cmbFecha(0).ListIndex + 1 & ")"
-'        Cad = Cad & " OR ( anoccost=" & Anyo2 & " AND mesccost<=" & Me.cmbFecha(1).ListIndex + 1 & ")"
-'        'Por si la diferencia es mas de un año
-'        If Val(txtAno(1).Text) - Val(txtAno(0).Text) > 1 Then
-'            Cad = Cad & " OR (anoccost >" & Anyo1 & " AND anoccost < " & Anyo2 & ")"
-'        End If
-'    End If
-'    Cad = " (" & Cad & ")"
-'
-'    RC = ""
-'    If txtCCoste(6).Text <> "" Then RC = " codccost >='" & txtCCoste(6).Text & "'"
-'    If txtCCoste(7).Text <> "" Then
-'        If RC <> "" Then RC = RC & " AND "
-'        RC = RC & " codccost <='" & txtCCoste(7).Text & "'"
-'    End If
-'
-'
-'    'Si han puesto desde hasta cuenta
-'    If txtCuentas(0).Text <> "" Then
-'        If RC <> "" Then RC = RC & " AND "
-'        RC = RC & " codmacta >='" & txtCuentas(0).Text & "'"
-'    End If
-'
-'    If txtCuentas(1).Text <> "" Then
-'        If RC <> "" Then RC = RC & " AND "
-'        RC = RC & " codmacta <='" & txtCuentas(1).Text & "'"
-'    End If
-'
-'
-'    'Cogemos prestada la tabla tmpCierre cargando las cuentas k
-'    'tengan en hpsaldanal y hpsaldana1 si asi lo recuieren las fechas
-'    SQL = "Delete  from tmpctaexpCC"
-'    Conn.Execute SQL
-'
-'
-'
-'    'Insertamos las cuentas desde hpsald1 si hicera o hiciese falta
-'    Tablas = ""
-'    If Anyo1 < A1 Then
-'        Tablas = "SI"
-'    Else
-'        If Anyo1 = A1 Then
-'            'Dependera del mes
-'            If M1 > (Me.cmbFecha(0).ListIndex + 1) Then Tablas = "OK"
-'        End If
-'    End If
-'
-'    If RC <> "" Then Cad = RC & " AND " & Cad
-'    SQL = "INSERT INTO tmpctaexpCC (codusu,cta,codccost) SELECT "
-'    SQL = SQL & vUsu.Codigo & ",codmacta,codccost from hsaldosanal"
-'    'Si es de hco
-'    If Tablas <> "" Then SQL = SQL & "1"
-'    SQL = SQL & " Where "
-'    SQL = SQL & Cad
-'    SQL = SQL & " GROUP BY codccost,codmacta"
-'    Conn.Execute SQL
-'
-'
-'
-'    'Diciembre 2012
-'    'Si ha marcado "solo" centros de reparto elimino aquellos eque n
-'    'Borro todos aquellos cc que no sean de reparto
-'    If chkCtaExpCC(2).Value = 1 Then
-'        SQL = "DELETE FROm tmpctaexpCC WHERE codusu = " & vUsu.Codigo & " AND "
-'        SQL = SQL & " NOT codccost IN (select distinct(subccost) from linccost) "
-'        Conn.Execute SQL
-'    End If
-'
-'
-'    'AHora en  tenemos todas las cuentas a tratar
-'    'Para ello cogeremos
-'    SQL = "Select count(*) from tmpctaexpCC where codusu = " & vUsu.Codigo
-'
-'    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    Cont = 0
-'    If Not Rs.EOF Then
-'        Cont = DBLet(Rs.Fields(0), "N")
-'    End If
-'    Rs.Close
-'
-'    If Cont = 0 Then
-'        HacerCtaExploxCC = 1
-'        'MsgBox "Ningun registro a mostrar", vbExclamation
-'    Else
-'        'mes ini, ano ini, mes pedido, ano pedido, mes fin, ano fin
-'        'Cad = cmbFecha(5).ListIndex + 1 & "|" & txtAno(7).Text & "|"
-'        'Cad = Cad & cmbFecha(7).ListIndex + 1 & "|"
-'        Cad = cmbFecha(5).ListIndex + 1 & "|" & Anyo1 & "|"
-'        Cad = Cad & cmbFecha(7).ListIndex + 1 & "|"
-'
-'
-'
-'        'El año del mes de calculo tiene k estar entre los años pedidos
-'        If cmbFecha(7).ListIndex >= cmbFecha(0).ListIndex Then
-'            Cad = Cad & Anyo1
-'        Else
-'            Cad = Cad & Anyo2
-'        End If
-'        Cad = Cad & "|"
-'        Cad = Cad & cmbFecha(1).ListIndex + 1 & "|" & Anyo2 & "|"
-'
-'        'Ajusta los valores en modulo
-'        AjustaValoresCtaExpCC Cad
-'
-'        'Si ha pediod los movimientos posteriores
-'        Post = (chkCtaExpCC(0).Value = 1)
-'
-'        SQL = "Select cta,tmpctaexpCC.codccost,nommacta,nomccost from tmpctaexpCC,cuentas,cabccost where cuentas.codmacta=tmpctaexpCC.cta and cabccost.codccost=tmpctaexpCC.codccost and codusu = " & vUsu.Codigo
-'        'Vemos hasta donde hay de fechas en hco
-'        FechaFinEjercicio = CDate("01/" & M1 & "/" & A1)
-'        Rs.Open SQL, Conn, adOpenStatic, adLockPessimistic, adCmdText
-'        While Not Rs.EOF
-'
-'            Tablas = Rs.Fields(0) & "|" & Rs.Fields(1) & "|" & DevNombreSQL(Rs.Fields(2))
-'            Tablas = Tablas & "|" & DevNombreSQL(Rs.Fields(3)) & "|"
-'
-'            'Tb ponemos la pb
-'            Label15.Caption = Rs.Fields(0)
-'            Label15.Refresh
-'
-'            CtaExploCentroCoste Tablas, Post, FechaFinEjercicio
-'
-'            'Siguiente
-'            Rs.MoveNext
-'        Wend
-'        Rs.Close
-'
-'
-'
-'
-'
-'        A1 = 0
-'        SQL = "Select count(*) from tmpctaexpcc where codusu =" & vUsu.Codigo
-'        Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        If Not Rs.EOF Then
-'            A1 = DBLet(Rs.Fields(0), "N")
-'        End If
-'        Rs.Close
-'        If A1 = 0 Then
-'            'MsgBox "Ningun registro a mostrar", vbExclamation
-'            'GeneraCtaExplotacionCC = False
-'            HacerCtaExploxCC = 1
-'        Else
-'            HacerCtaExploxCC = 2
-'            'GeneraCtaExplotacionCC = True
-'        End If
-'
-'    End If
-'
-    Exit Function
 EGeneraCtaExplotacionCC:
-    MuestraError Err.Number, "Genera Cta Explotacion CC"
-End Function
 
 
-Private Sub UltimoMesAnyoAnal1(ByRef Mes As Integer, ByRef Anyo As Integer)
-    Anyo = 1900
-    Mes = 13
-    Set miRsAux = New ADODB.Recordset
-    SQL = "select max(anoccost) from hsaldosanal1"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not miRsAux.EOF Then
-        Anyo = DBLet(miRsAux.Fields(0), "N")
-    End If
-    miRsAux.Close
-    
-    If Anyo > 1900 Then
-        SQL = "select max(mesccost) from hsaldosanal1 where anoccost =" & Anyo
-        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Mes = 1
-        If Not miRsAux.EOF Then
-            Mes = DBLet(miRsAux.Fields(0), "N")
-        End If
-        miRsAux.Close
-    End If
-    Set miRsAux = Nothing
-End Sub
-
-'Proceso:    1.- Updatear codusu para que no borre los datos
-'            2.- Mezclar los datos de otros actual /siguiente
-'            3.- Borramos
-Private Function ProcesoCtaExplotacionCC(Proceso As Byte) As Boolean
-
-'    ProcesoCtaExplotacionCC = False
-'    Select Case Proceso
-'    Case 0
-'        Cont = 0
-'        i = 0
-'        SQL = "Select min(codusu) from Usuarios.zctaexpcc"
-'        Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        If Not Rs.EOF Then
-'            If Not IsNull(Rs.Fields(0)) Then
-'                i = Rs.Fields(0)
-'                Cont = 1 'para indicar que no es null
-'            End If
-'        End If
-'        Rs.Close
-'        If i >= 10 Then
-'            i = 9
-'        Else
-'            If i = 0 Then
-'                'Si NO ERA NULL es que estan ocupados(cosa rara) desde el 0 al 9
-'                If Cont = 1 Then
-'                    MsgBox "Error inesperado. Descripcion: codusu entre 0..9", vbExclamation
-'                    Exit Function
-'                End If
-'                i = 9
-'            Else
-'                i = i - 1
-'            End If
-'        End If
-'        NumRegElim = i
-'        SQL = "UPDATE  Usuarios.zctaexpcc set codusu = " & NumRegElim & " WHERE codusu = " & vUsu.Codigo
-'        Conn.Execute SQL
-'
-'    Case 1
-'        'UPDATEO los valores de codusu=vusu
-'        SQL = "UPDATE Usuarios.zctaexpcc  SET acumd=0,acumh=0,postd=0,posth=0 where codusu = " & vUsu.Codigo
-'        Conn.Execute SQL
-'
-'        'Para los valores comarativos
-'        SQL = "UPDATE Usuarios.zctaexpcc  SET acumd=perid,acumh=perih,postd=saldod,posth=saldoh where codusu = " & NumRegElim
-'        Conn.Execute SQL
-'        SQL = "UPDATE Usuarios.zctaexpcc  SET perid=0,perih=0,saldod=0,saldoh=0 where codusu = " & NumRegElim
-'        Conn.Execute SQL
-'
-'        'En RS cargo todas las referencias de codusu= vusu
-'        SQL = "Select * from Usuarios.zctaexpcc WHERE codusu = "
-'        Rs.Open SQL & vUsu.Codigo, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-'
-'
-'        'Cojere Todas las referencias de la tabla zctaexpcc para numregelim
-'        Set miRsAux = New ADODB.Recordset
-'        miRsAux.Open SQL & NumRegElim, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-'        While Not miRsAux.EOF
-'            'Busco si tiene referncia en ACTUAL
-'            SQL = "codmacta = '" & miRsAux!codmacta & "' AND codccost ='" & DevNombreSQL(miRsAux!codccost) & "'"
-'
-'
-'            If Not EncontrarEn_zctaexpcc(miRsAux!codmacta, UCase(miRsAux!codccost)) Then
-'                'Updateo solo el codusu
-'                Cad = "UPDATE Usuarios.zctaexpcc  SET codusu = " & vUsu.Codigo & " WHERE codusu = " & NumRegElim & " AND " & SQL
-'            Else
-'                'UPDATEO
-'                Cad = "UPDATE Usuarios.zctaexpcc  SET acumd=" & TransformaComasPuntos(CStr(miRsAux!acumd))
-'                Cad = Cad & ", acumH=" & TransformaComasPuntos(CStr(miRsAux!acumh))
-'                Cad = Cad & ", postd=" & TransformaComasPuntos(CStr(miRsAux!postd))
-'                Cad = Cad & ", posth=" & TransformaComasPuntos(CStr(miRsAux!posth))
-'                Cad = Cad & " WHERE codusu = " & vUsu.Codigo & " AND " & SQL
-'            End If
-'            Conn.Execute Cad
-'            'Siguiente
-'            miRsAux.MoveNext
-'
-'        Wend
-'        miRsAux.Close
-'        Set miRsAux = Nothing
-'        Rs.Close
-'
-'    Case 2
-'            'Finalmente borramos los datos de codusu=numregeleim
-'            SQL = "DELETE FROM Usuarios.zctaexpcc WHERE codusu = " & NumRegElim
-'            Conn.Execute SQL
-'
-'            'Ahora, para que """SOLO""" aparezcan  los que tienen valor
-'            ' Los importes seran
-'            '                   MES                 SALDO
-'            '   actual      perid   perdih     saldod  saldoh
-'            '   anterior    acumd   acumh      postd   posth
-'
-'            If optCCComparativo(1).Value Then
-'                'QUiero ver movimientos del periodo con lo cual me cargare aquellos
-'                ' que mov periodo en actual y anterior sea 0
-'                Cad = "acumd =0 and acumh=0 and perid=0 and perih=0"
-'                SQL = "DELETE FROM Usuarios.zctaexpcc WHERE codusu = " & vUsu.Codigo & " AND " & Cad
-'                Conn.Execute SQL
-'            End If
-'    End Select
-'    ProcesoCtaExplotacionCC = True
 End Function
 
