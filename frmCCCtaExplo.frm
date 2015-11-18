@@ -1203,10 +1203,47 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 Dim Tipo As Byte
 
-    SQL = "select tt.codccost, "
-    SQL = SQL & " from tmplinccexplo tt where codusu = " & vUsu.Codigo
-    SQL = SQL & " order by 1 "
+    If chkCtaExpCC(1).Value Then 'comparativo
+        If optCCComparativo(0).Value Then 'saldo
+            If optVarios(0).Value Then
+                SQL = "select tt.codccost CC, cc.nomccost Nombre, tt.codmacta Cuenta, cu.nommacta Descripcion,tt.antD AntDebe,tt.antH AntHaber, tt.perD PeriodoDebe,tt.perH PeriodoHaber "
+                SQL = SQL & " from tmplinccexplo tt, ccoste cc, cuentas cu where tt.codusu = " & vUsu.Codigo
+                SQL = SQL & " and tt.codccost = cc.codccost and tt.codmacta = cu.codmacta "
+                SQL = SQL & " order by 1,2,3,4 "
+            Else
+                SQL = "select tt.codmacta Cuenta, cu.nommacta Descripcion, tt.codccost CC, cc.nomccost Nombre, tt.antD AntDebe,tt.antH AntHaber, tt.perD PeriodoDebe,tt.perH PeriodoHaber "
+                SQL = SQL & " from tmplinccexplo tt, ccoste cc, cuentas cu where tt.codusu = " & vUsu.Codigo
+                SQL = SQL & " and tt.codccost = cc.codccost and tt.codmacta = cu.codmacta "
+                SQL = SQL & " order by 1,2,3,4 "
+            End If
+        Else 'mes
+            If optVarios(0).Value Then
+                SQL = "select tt.codccost CC, cc.nomccost Nombre, tt.codmacta Cuenta, cu.nommacta Descripcion,tt.mes,tt.anyo, tt.antD AntDebe,tt.antH AntHaber, tt.perD PeriodoDebe,tt.perH PeriodoHaber "
+                SQL = SQL & " from tmplinccexplo tt, ccoste cc, cuentas cu where tt.codusu = " & vUsu.Codigo
+                SQL = SQL & " and tt.codccost = cc.codccost and tt.codmacta = cu.codmacta "
+                SQL = SQL & " order by 1,2,3,4,5,6 "
+            Else
+                SQL = "select tt.codmacta Cuenta, cu.nommacta Descripcion, tt.codccost CC, cc.nomccost Nombre,tt.mes,tt.anyo, tt.antD AntDebe,tt.antH AntHaber, tt.perD PeriodoDebe,tt.perH PeriodoHaber "
+                SQL = SQL & " from tmplinccexplo tt, ccoste cc, cuentas cu where tt.codusu = " & vUsu.Codigo
+                SQL = SQL & " and tt.codccost = cc.codccost and tt.codmacta = cu.codmacta "
+                SQL = SQL & " order by 1,2,3,4,5,6 "
+            End If
+        End If
+    Else
+        If optVarios(0).Value Then
+            SQL = "select tt.codccost CC, cc.nomccost Nombre, tt.codmacta Cuenta, cu.nommacta Descripcion, tt.perD PeriodoDebe,tt.perH PeriodoHaber, tt.antD AntDebe,tt.antH AntHaber,tt.mes,tt.anyo "
+            SQL = SQL & " from tmplinccexplo tt, ccoste cc, cuentas cu where tt.codusu = " & vUsu.Codigo
+            SQL = SQL & " and tt.codccost = cc.codccost and tt.codmacta = cu.codmacta "
+            SQL = SQL & " order by 1,2,3,4 "
+        Else
+            SQL = "select tt.codmacta Cuenta, cu.nommacta Descripcion, tt.codccost CC, cc.nomccost Nombre, tt.perD PeriodoDebe,tt.perH PeriodoHaber, tt.antD AntDebe,tt.antH AntHaber,tt.mes,tt.anyo "
+            SQL = SQL & " from tmplinccexplo tt, ccoste cc, cuentas cu where tt.codusu = " & vUsu.Codigo
+            SQL = SQL & " and tt.codccost = cc.codccost and tt.codmacta = cu.codmacta "
+            SQL = SQL & " order by 1,2,3,4 "
+        End If
+    End If
         
+            
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
