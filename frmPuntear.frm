@@ -902,7 +902,7 @@ End Sub
 
 Private Sub frmCta_DatoSeleccionado(CadenaSeleccion As String)
     Text3(2).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtDescta.Text = RecuperaValor(CadenaSeleccion, 2)
+    txtDesCta.Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
@@ -925,7 +925,7 @@ Private Sub Image2_Click()
 '    PonerTamaños False
 '    Me.framePregunta.Visible = True
     Me.Text3(2).Text = Text3(2).Text
-    Me.txtDescta.Text = txtDescta.Text
+    Me.txtDesCta.Text = txtDesCta.Text
     PrimeraSeleccion = True
     PonleFoco Text3(2)
 End Sub
@@ -1142,8 +1142,8 @@ Private Sub OtraCuenta(Mas As Boolean)
     
     Screen.MousePointer = vbHourglass
     
-    txtDescta.Text = "OBTENER CUENTA"
-    txtDescta.Refresh
+    txtDesCta.Text = "OBTENER CUENTA"
+    txtDesCta.Refresh
     If ObtenerCuenta(Mas) Then
         BloqueoManual False, "PUNTEO", Text3(2).Text
         'Ponemos en text1 y 2 los valores de la nueva cuenta
@@ -1160,7 +1160,7 @@ Private Sub OtraCuenta(Mas As Boolean)
         
         CargarDatos
     Else
-        txtDescta.Text = ""
+        txtDesCta.Text = ""
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -1189,7 +1189,7 @@ Private Sub Text3_LostFocus(Index As Integer)
                 lwD.ListItems.Clear
                 lwh.ListItems.Clear
                 DoEvents
-                txtDescta.Text = ""
+                txtDesCta.Text = ""
                 
                 MsgBox "Introduzca una cuenta", vbExclamation
                 PonleFoco Text3(2)
@@ -1198,7 +1198,7 @@ Private Sub Text3_LostFocus(Index As Integer)
             End If
             If CuentaCorrectaUltimoNivel(RC, SQL) Then
                 Text3(Index).Text = RC
-                txtDescta.Text = SQL
+                txtDesCta.Text = SQL
                 FrameBotonGnral.Enabled = True
                 ConfirmarDatos True
             Else
@@ -1209,7 +1209,7 @@ Private Sub Text3_LostFocus(Index As Integer)
                 lwh.ListItems.Clear
                 DoEvents
                 
-                txtDescta.Text = ""
+                txtDesCta.Text = ""
                 PonleFoco Text3(Index)
                 Exit Sub
             End If
@@ -1296,7 +1296,7 @@ On Error GoTo ECargarDatos
         ItmX.SubItems(1) = Rs!NumAsien
         'ItmX.SubItems(2) = RS!ampconce
         ItmX.SubItems(2) = DBLet(Rs!Numdocum, "T")
-        ItmX.SubItems(3) = Rs!ampconce
+        ItmX.SubItems(3) = Rs!Ampconce
         
 '        ItmX.SubItems(5) = Rs.Fields(8)
         
@@ -1341,13 +1341,13 @@ Private Sub BusquedaEnHaber()
             'Comprobamos k no esta chekeado
             If Not lwh.ListItems(i).Checked Then
                 'K tiene el mismo importe
-                If lwD.SelectedItem.SubItems(3) = lwh.ListItems(i).SubItems(3) Then
+                If lwD.SelectedItem.SubItems(4) = lwh.ListItems(i).SubItems(4) Then
                     'Comprobamos k tienen el mismo DOCUM
                     'Si no es el mismo, pero es la segunda busqueda, tb aceptamos
                     If ContadorBus > 1 Then
                         Checkear = True
                     Else
-                        Checkear = (lwD.SelectedItem.SubItems(4) = lwh.ListItems(i).SubItems(4))
+                        Checkear = (lwD.SelectedItem.SubItems(2) = lwh.ListItems(i).SubItems(2))
                     End If
                 
                     If Checkear Then
@@ -1374,7 +1374,7 @@ Private Sub BusquedaEnDebe()
     Do
         i = 1
         While i <= lwD.ListItems.Count
-            If lwh.SelectedItem.SubItems(3) = lwD.ListItems(i).SubItems(3) Then
+            If lwh.SelectedItem.SubItems(4) = lwD.ListItems(i).SubItems(4) Then
                 'Lo hemos encontrado. Comprobamos que no esta chequeado
                 If Not lwD.ListItems(i).Checked Then
                     'Tiene el mismo importe y no esta chequeado
@@ -1384,7 +1384,7 @@ Private Sub BusquedaEnDebe()
 
                         Checkear = True
                     Else
-                        Checkear = (lwh.SelectedItem.SubItems(4) = lwD.ListItems(i).SubItems(4))
+                        Checkear = (lwh.SelectedItem.SubItems(2) = lwD.ListItems(i).SubItems(2))
                     End If
                     If Checkear Then
                         Set lwD.SelectedItem = lwD.ListItems(i)
@@ -1500,7 +1500,7 @@ Private Function ObtenerCuenta(Siguiente As Boolean) As Boolean
         ObtenerCuenta = False
     Else
         Text3(2).Text = Rs!codmacta
-        txtDescta.Text = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Rs!codmacta, "T")
+        txtDesCta.Text = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Rs!codmacta, "T")
         ObtenerCuenta = True
     End If
     Rs.Close
@@ -1516,7 +1516,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             OtraCuenta True
         Case 4
             ' en historicoCalculamos saldo. Lleva ya el sql montado
-            SaldoHistorico Text3(2).Text, Text3(0).Tag, txtDescta.Text, False 'EjerciciosCerrados
+            SaldoHistorico Text3(2).Text, Text3(0).Tag, txtDesCta.Text, False 'EjerciciosCerrados
         Case 5
             Screen.MousePointer = vbHourglass
             HazSumas
@@ -1612,7 +1612,7 @@ End Sub
 Private Sub DesmarcaTodo()
 
     SQL = "Va a desmarcar todos los punteos para: " & vbCrLf & vbCrLf
-    SQL = SQL & "Cuenta: " & Text3(2).Text & " - " & txtDescta.Text & vbCrLf
+    SQL = SQL & "Cuenta: " & Text3(2).Text & " - " & txtDesCta.Text & vbCrLf
     SQL = SQL & "Fecha inicio: " & Text3(0).Text & vbCrLf
     SQL = SQL & "Fecha fin:     " & Text3(1).Text & vbCrLf & vbCrLf & vbCrLf
     SQL = SQL & "          ¿Desea continuar?"

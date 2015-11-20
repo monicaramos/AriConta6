@@ -155,7 +155,6 @@ Form=frmCCConExtr.frm
 Form=frmCCConExtrList.frm
 Form=frmCCCtaExplo.frm
 Form=frmCCDetalleExplota.frm
-Form=frmColCtasPrev.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

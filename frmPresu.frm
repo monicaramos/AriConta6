@@ -560,13 +560,13 @@ Dim B As Boolean
     B = (Modo = 0 Or Modo = 2)
     
     For jj = 0 To 4
-        txtAux(jj).Visible = Not B
+        txtaux(jj).Visible = Not B
     Next jj
     
     cmdAux(0).Visible = Not B
     
-    For i = 0 To txtAux.Count - 1
-        If i <> 1 Then txtAux(i).BackColor = vbWhite
+    For i = 0 To txtaux.Count - 1
+        If i <> 1 Then txtaux(i).BackColor = vbWhite
     Next i
     
     Toolbar1.Buttons(1).Enabled = B
@@ -575,10 +575,10 @@ Dim B As Boolean
     cmdCancelar.Visible = Not B
     'DataGrid1.Enabled = b
     
-    txtAux(0).Enabled = (Modo <> 2)
-    txtAux(2).Enabled = txtAux(0).Enabled
-    txtAux(2).BackColor = txtAux(0).BackColor
-    cmdAux(0).Enabled = txtAux(0).Enabled
+    txtaux(0).Enabled = (Modo <> 2)
+    txtaux(2).Enabled = txtaux(0).Enabled
+    txtaux(2).BackColor = txtaux(0).BackColor
+    cmdAux(0).Enabled = txtaux(0).Enabled
     
     PonerModoUsuarioGnral Modo, "ariconta"
     
@@ -591,7 +591,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -607,9 +607,9 @@ Private Sub BotonAnyadir()
 
          'Situamos el grid al final
          DataGrid1.AllowAddNew = True
-         If Not adodc1.Recordset.EOF Then
+         If Not Adodc1.Recordset.EOF Then
              DataGrid1.HoldFields
-             adodc1.Recordset.MoveLast
+             Adodc1.Recordset.MoveLast
              DataGrid1.Row = DataGrid1.Row + 1
          End If
         
@@ -618,20 +618,20 @@ Private Sub BotonAnyadir()
              Else
              anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
          End If
-         txtAux(0).Text = ""
+         txtaux(0).Text = ""
          For jj = 1 To 4
-             txtAux(jj).Text = ""
+             txtaux(jj).Text = ""
          Next jj
          LLamaLineas anc, 3
          
          'Ponemos el foco
-         PonFoco txtAux(0)
+         PonFoco txtaux(0)
          
          
      Else
         Dim Quitar As Boolean
         Quitar = False
-        If TieneEjercicio(adodc1.Recordset.Fields(0), False) And TieneEjercicio(adodc1.Recordset.Fields(0), True) Then
+        If TieneEjercicio(Adodc1.Recordset.Fields(0), False) And TieneEjercicio(Adodc1.Recordset.Fields(0), True) Then
             If MsgBox("Esta cuenta ya tiene presupuestos para ejercicio actual y el siguiente. ¿Desea continuar?.", vbQuestion + vbYesNo + vbDefault) = vbNo Then
                 Exit Sub
             End If
@@ -644,8 +644,8 @@ Private Sub BotonAnyadir()
         frmGen.opcion = 0
         frmGen.Caption = "Inserción de Presupuestos"
         If Not Quitar Then
-            frmGen.txtCta(0) = adodc1.Recordset(0).Value
-            frmGen.txtDesCta(0) = adodc1.Recordset(1).Value
+            frmGen.txtCta(0) = Adodc1.Recordset(0).Value
+            frmGen.txtDesCta(0) = Adodc1.Recordset(1).Value
         End If
         frmGen.Modo = 0 'insertar
         frmGen.Show vbModal
@@ -694,10 +694,10 @@ Private Sub BotonBuscar()
     DataGrid1.Enabled = True
     'Buscar
     For jj = 0 To 4
-        txtAux(jj).Text = ""
+        txtaux(jj).Text = ""
     Next jj
     LLamaLineas DataGrid1.Top + 250, 1
-    PonFoco txtAux(0)
+    PonFoco txtaux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -707,11 +707,11 @@ Private Sub BotonModificar()
     Dim Cad As String
     Dim anc As Single
     Dim i As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     'If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
     If Agrupado Then
-        If adodc1.Recordset.Fields(3) < Year(vParam.fechaini) Then
+        If Adodc1.Recordset.Fields(3) < Year(vParam.fechaini) Then
             MsgBox "No se permite modificar de ejercicios cerrados.", vbExclamation
             Exit Sub
         End If
@@ -744,13 +744,13 @@ Private Sub BotonModificar()
              Cad = Cad & DataGrid1.Columns(i).Text & "|"
          Next i
          'Llamamos al form
-         For i = 0 To txtAux.Count - 1
-             txtAux(i).Text = DataGrid1.Columns(i).Text
+         For i = 0 To txtaux.Count - 1
+             txtaux(i).Text = DataGrid1.Columns(i).Text
          Next i
          LLamaLineas anc, 4
         
         'Como es modificar
-        PonFoco txtAux(4)
+        PonFoco txtaux(4)
    
     Else
         Screen.MousePointer = vbDefault
@@ -759,9 +759,9 @@ Private Sub BotonModificar()
         frmGen.opcion = 0
         frmGen.Modo = 1 'modificar
         frmGen.Caption = "Modificacion de Presupuestos"
-        frmGen.txtCta(0) = adodc1.Recordset(0).Value
-        frmGen.txtDesCta(0) = adodc1.Recordset(1).Value
-        frmGen.Ejercicio = adodc1.Recordset.Fields(3).Value
+        frmGen.txtCta(0) = Adodc1.Recordset(0).Value
+        frmGen.txtDesCta(0) = Adodc1.Recordset(1).Value
+        frmGen.Ejercicio = Adodc1.Recordset.Fields(3).Value
         frmGen.Show vbModal
     
     End If
@@ -776,7 +776,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     'Fijamos el ancho
     For jj = 0 To 4
-        txtAux(jj).Top = alto
+        txtaux(jj).Top = alto
     Next jj
     cmdAux(0).Top = alto
 End Sub
@@ -791,29 +791,29 @@ Dim vFecFin As String
 
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
     SQL = "Seguro que desea eliminar la linea de presupuesto:" & vbCrLf
-    SQL = SQL & vbCrLf & "Cuenta: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Cuenta: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
     
     If Not Agrupado Then
-        SQL = SQL & vbCrLf & "Año       : " & adodc1.Recordset.Fields(2)
-        SQL = SQL & vbCrLf & "Mes  : " & adodc1.Recordset.Fields(3)
+        SQL = SQL & vbCrLf & "Año       : " & Adodc1.Recordset.Fields(2)
+        SQL = SQL & vbCrLf & "Mes  : " & Adodc1.Recordset.Fields(3)
     Else
-        SQL = SQL & vbCrLf & "Período   : " & adodc1.Recordset.Fields(2)
+        SQL = SQL & vbCrLf & "Período   : " & Adodc1.Recordset.Fields(2)
     End If
     
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from presupuestos where codmacta='" & Trim(adodc1.Recordset.Fields(0)) & "'"
+        SQL = "Delete from presupuestos where codmacta='" & Trim(Adodc1.Recordset.Fields(0)) & "'"
         If Not Agrupado Then
-            SQL = SQL & " and anopresu =" & adodc1.Recordset!anopresu
-            SQL = SQL & " and mespresu = " & adodc1.Recordset!mespresu & " ;"
+            SQL = SQL & " and anopresu =" & Adodc1.Recordset!anopresu
+            SQL = SQL & " and mespresu = " & Adodc1.Recordset!mespresu & " ;"
         Else
-            vFecIni = adodc1.Recordset.Fields(2) & "-" & Format(Month(vParam.fechaini), "00") & "-01"
+            vFecIni = Adodc1.Recordset.Fields(2) & "-" & Format(Month(vParam.fechaini), "00") & "-01"
             vFecFin = DateAdd("d", -1, DateAdd("yyyy", 1, vFecIni))
         
             SQL = SQL & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-01')) between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
@@ -821,7 +821,7 @@ Dim vFecFin As String
         Conn.Execute SQL
         CargarTemporal
         CargaGrid CadB
-        adodc1.Recordset.Cancel
+        Adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -830,7 +830,7 @@ Error2:
 End Sub
 
 Private Sub OpcionesCambiadas()
-    If txtAux(0).Visible Then Exit Sub
+    If txtaux(0).Visible Then Exit Sub
 
     Screen.MousePointer = vbHourglass
     CargarSqlFiltro
@@ -860,10 +860,10 @@ Select Case Modo
         
         'Para el texto
         TextoBusqueda = ""
-        If txtAux(0).Text <> "" Then TextoBusqueda = TextoBusqueda & "Cod. Inmov " & txtAux(0).Text
-        If txtAux(2).Text <> "" Then TextoBusqueda = TextoBusqueda & "Fecha " & txtAux(2).Text
-        If txtAux(3).Text <> "" Then TextoBusqueda = TextoBusqueda & "Porcentaje " & txtAux(3).Text
-        If txtAux(4).Text <> "" Then TextoBusqueda = TextoBusqueda & "Importe " & txtAux(4).Text
+        If txtaux(0).Text <> "" Then TextoBusqueda = TextoBusqueda & "Cod. Inmov " & txtaux(0).Text
+        If txtaux(2).Text <> "" Then TextoBusqueda = TextoBusqueda & "Fecha " & txtaux(2).Text
+        If txtaux(3).Text <> "" Then TextoBusqueda = TextoBusqueda & "Porcentaje " & txtaux(3).Text
+        If txtaux(4).Text <> "" Then TextoBusqueda = TextoBusqueda & "Importe " & txtaux(4).Text
         
         If CadB <> "" Then
             PonerModo 0
@@ -906,12 +906,12 @@ Private Sub PosicionarData()
 Dim Cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "codmacta = '" & adodc1.Recordset.Fields(0) & "' and anopresu = " & adodc1.Recordset.Fields(2) & " and mespresu = " & adodc1.Recordset.Fields(3)
+    Cad = "codmacta = '" & Adodc1.Recordset.Fields(0) & "' and anopresu = " & Adodc1.Recordset.Fields(2) & " and mespresu = " & Adodc1.Recordset.Fields(3)
     ' ***************************************
     CargaGrid CadB
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarDataMULTI(adodc1, Cad, Indicador, True) Then
+    If SituarDataMULTI(Adodc1, Cad, Indicador, True) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -935,7 +935,7 @@ Dim F As Date
             frmCtas.Show vbModal
             Set frmCtas = Nothing
             
-            PonFoco txtAux(0)
+            PonFoco txtaux(0)
         
 
     End Select
@@ -948,7 +948,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             If Not Agrupado Then DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
     End Select
     
     PonerModo 0
@@ -974,7 +974,7 @@ Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
     If PrimeraVez Then
         CadB = ""
-        cboFiltro.ListIndex = 0
+        cboFiltro.ListIndex = vUsu.FiltroPresup
         CargarElGrid
         PrimeraVez = False
     End If
@@ -1132,21 +1132,22 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     Set miTag = Nothing
+    vUsu.ActualizarFiltro "ariconta", IdPrograma, Me.cboFiltro.ListIndex
 End Sub
 
 
 Private Sub frmEI_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtAux(1).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtaux(0).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtaux(1).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtAux(1).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtaux(0).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtaux(1).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-    txtAux(2).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(2).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -1207,7 +1208,7 @@ Dim i As Integer
 Dim tots As String
     
     Text1.Text = ""
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     
     
     If Not Agrupado Then
@@ -1228,27 +1229,27 @@ Dim tots As String
     If Agrupado Then
         CargarTemporal
         
-        txtAux(0).Tag = "Cuenta|T|N|||tmppresu1|cta||S|"
-        txtAux(2).Tag = "Año|T|N|1900||tmppresu1|ejercicio||S|"
-        txtAux(3).Tag = "Mes|N|N|||tmppresu1|mes|00|S|"
-        txtAux(4).Tag = "Importe|N|N|||tmppresu1|importe|###,###,##0.00|N|"
+        txtaux(0).Tag = "Cuenta|T|N|||tmppresu1|cta||S|"
+        txtaux(2).Tag = "Año|T|N|1900||tmppresu1|ejercicio||S|"
+        txtaux(3).Tag = "Mes|N|N|||tmppresu1|mes|00|S|"
+        txtaux(4).Tag = "Importe|N|N|||tmppresu1|importe|###,###,##0.00|N|"
        
     
 '        Sql = Sql & " GROUP BY 1,2,3    "
         SQL = SQL & " ORDER BY 1,2,3 "
     Else
         
-        txtAux(0).Tag = "Cuenta|T|N|||presupuestos|codmacta||S|"
-        txtAux(2).Tag = "Año|N|N|1900||presupuestos|anopresu|0000|S|"
-        txtAux(3).Tag = "Mes|N|N|||presupuestos|mespresu|00|S|"
-        txtAux(4).Tag = "Importe|N|N|||presupuestos|imppresu|###,###,##0.00|N|"
+        txtaux(0).Tag = "Cuenta|T|N|||presupuestos|codmacta||S|"
+        txtaux(2).Tag = "Año|N|N|1900||presupuestos|anopresu|0000|S|"
+        txtaux(3).Tag = "Mes|N|N|||presupuestos|mespresu|00|S|"
+        txtaux(4).Tag = "Importe|N|N|||presupuestos|imppresu|###,###,##0.00|N|"
         
         SQL = SQL & " ORDER BY codmacta,anopresu,mespresu"
     End If
 
     
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, True 'PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, True 'PrimeraVez
     
     If Agrupado Then
         ' *******************canviar els noms i si fa falta la cantitat********************
@@ -1326,7 +1327,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1364,20 +1365,20 @@ Private Sub txtAux_LostFocus(Index As Integer)
 Dim RC As String
 Dim Valor As Currency
 
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
 
     Select Case Index
     Case 0
-        RC = txtAux(0).Text
+        RC = txtaux(0).Text
         If RC = "" And Modo = 1 Then Exit Sub
         If CuentaCorrectaUltimoNivel(RC, SQL) Then
-            txtAux(0).Text = RC
-            txtAux(1).Text = SQL
+            txtaux(0).Text = RC
+            txtaux(1).Text = SQL
         Else
             MsgBox SQL, vbExclamation
-            txtAux(0).Text = ""
-            txtAux(1).Text = ""
-            PonFoco txtAux(0)
+            txtaux(0).Text = ""
+            txtaux(1).Text = ""
+            PonFoco txtaux(0)
         End If
     
     Case 2, 3
@@ -1392,28 +1393,28 @@ Dim Valor As Currency
                 End If
             End If
             
-            If Not IsNumeric(txtAux(Index).Text) Then
+            If Not IsNumeric(txtaux(Index).Text) Then
                 MsgBox "El valor del " & RC & " debe de ser numérico.", vbExclamation
-                PonFoco txtAux(Index)
+                PonFoco txtaux(Index)
                 Exit Sub
             End If
             
             'Particularidades
             If Index = 2 Then
-                If Val(txtAux(2).Text) < 1000 Then
+                If Val(txtaux(2).Text) < 1000 Then
                     MsgBox "Año incorrecto", vbExclamation
-                    PonFoco txtAux(2)
+                    PonFoco txtaux(2)
                     Exit Sub
                 End If
             Else
-                If (Val(txtAux(3).Text) < 1) Or (Val(txtAux(3).Text) > 12) Then
+                If (Val(txtaux(3).Text) < 1) Or (Val(txtaux(3).Text) > 12) Then
                     MsgBox "Mes incorrecto", vbExclamation
-                    PonFoco txtAux(3)
+                    PonFoco txtaux(3)
                     Exit Sub
                 End If
             End If
     Case 4 ' importe
-        PonerFormatoDecimal txtAux(Index), 1
+        PonerFormatoDecimal txtaux(Index), 1
     End Select
 End Sub
 
