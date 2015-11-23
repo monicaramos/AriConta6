@@ -650,6 +650,8 @@ End Sub
 
 
 
+
+
 Private Sub cmdAccion_Click(Index As Integer)
     
     If Not DatosOK Then Exit Sub

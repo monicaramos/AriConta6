@@ -27,9 +27,85 @@ Begin VB.Form frmCCDetalleExplota
       EndProperty
       Height          =   4605
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   15
       Top             =   0
       Width           =   6915
+      Begin VB.ComboBox cmbFecha 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         ItemData        =   "frmCCDetalleExplota.frx":0000
+         Left            =   1230
+         List            =   "frmCCDetalleExplota.frx":0002
+         Style           =   2  'Dropdown List
+         TabIndex        =   35
+         Top             =   2220
+         Width           =   1935
+      End
+      Begin VB.TextBox txtAno 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   0
+         Left            =   3270
+         TabIndex        =   34
+         Text            =   "Text1"
+         Top             =   2220
+         Width           =   855
+      End
+      Begin VB.ComboBox cmbFecha 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         ItemData        =   "frmCCDetalleExplota.frx":0004
+         Left            =   1230
+         List            =   "frmCCDetalleExplota.frx":0006
+         Style           =   2  'Dropdown List
+         TabIndex        =   33
+         Top             =   2670
+         Width           =   1935
+      End
+      Begin VB.TextBox txtAno 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   1
+         Left            =   3270
+         TabIndex        =   32
+         Text            =   "Text1"
+         Top             =   2700
+         Width           =   855
+      End
       Begin VB.TextBox txtCCoste 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -45,8 +121,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   1200
          MaxLength       =   10
-         TabIndex        =   5
-         Tag             =   "imgConcepto"
+         TabIndex        =   3
          Top             =   3900
          Width           =   1305
       End
@@ -65,7 +140,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   35
+         TabIndex        =   30
          Top             =   3900
          Width           =   4185
       End
@@ -84,7 +159,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   32
+         TabIndex        =   27
          Top             =   3480
          Width           =   4185
       End
@@ -103,7 +178,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   31
+         TabIndex        =   26
          Top             =   1050
          Width           =   4185
       End
@@ -122,7 +197,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   30
+         TabIndex        =   25
          Top             =   1470
          Width           =   4185
       End
@@ -179,55 +254,14 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   1200
          MaxLength       =   10
-         TabIndex        =   4
-         Tag             =   "imgConcepto"
-         Top             =   3480
-         Width           =   1305
-      End
-      Begin VB.TextBox txtFecha 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   1230
-         MaxLength       =   10
-         TabIndex        =   3
-         Tag             =   "imgConcepto"
-         Top             =   2640
-         Width           =   1305
-      End
-      Begin VB.TextBox txtFecha 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   1230
-         MaxLength       =   10
          TabIndex        =   2
-         Tag             =   "imgConcepto"
-         Top             =   2220
+         Top             =   3480
          Width           =   1305
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   6360
-         TabIndex        =   33
+         TabIndex        =   28
          Top             =   240
          Width           =   405
          _ExtentX        =   714
@@ -243,6 +277,61 @@ Begin VB.Form frmCCDetalleExplota
          EndProperty
       End
       Begin VB.Label Label3 
+         Caption         =   "Mes / Año"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   195
+         Index           =   8
+         Left            =   240
+         TabIndex        =   38
+         Top             =   1920
+         Width           =   1410
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   5
+         Left            =   240
+         TabIndex        =   37
+         Top             =   2280
+         Width           =   690
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   4
+         Left            =   240
+         TabIndex        =   36
+         Top             =   2640
+         Width           =   615
+      End
+      Begin VB.Label Label3 
          Caption         =   "Hasta"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -256,7 +345,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   1
          Left            =   270
-         TabIndex        =   36
+         TabIndex        =   31
          Top             =   3930
          Width           =   600
       End
@@ -281,7 +370,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   0
          Left            =   270
-         TabIndex        =   34
+         TabIndex        =   29
          Top             =   3510
          Width           =   600
       End
@@ -321,25 +410,9 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   225
          Index           =   6
          Left            =   240
-         TabIndex        =   29
+         TabIndex        =   24
          Top             =   3120
          Width           =   2130
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   1
-         Left            =   930
-         Picture         =   "frmCCDetalleExplota.frx":0000
-         Top             =   2640
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   0
-         Left            =   930
-         Picture         =   "frmCCDetalleExplota.frx":008B
-         Top             =   2250
-         Width           =   240
       End
       Begin VB.Label lblAsiento 
          BeginProperty Font 
@@ -354,7 +427,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   0
          Left            =   2550
-         TabIndex        =   28
+         TabIndex        =   23
          Top             =   990
          Width           =   4095
       End
@@ -371,7 +444,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   1
          Left            =   2550
-         TabIndex        =   27
+         TabIndex        =   22
          Top             =   1440
          Width           =   4095
       End
@@ -389,7 +462,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   2
          Left            =   240
-         TabIndex        =   26
+         TabIndex        =   21
          Top             =   1440
          Width           =   615
       End
@@ -407,44 +480,8 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   3
          Left            =   240
-         TabIndex        =   25
+         TabIndex        =   20
          Top             =   1080
-         Width           =   690
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   4
-         Left            =   240
-         TabIndex        =   24
-         Top             =   2640
-         Width           =   615
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   5
-         Left            =   240
-         TabIndex        =   23
-         Top             =   2280
          Width           =   690
       End
       Begin VB.Label Label3 
@@ -462,27 +499,8 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   7
          Left            =   240
-         TabIndex        =   22
+         TabIndex        =   19
          Top             =   690
-         Width           =   960
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Fecha"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   195
-         Index           =   8
-         Left            =   240
-         TabIndex        =   21
-         Top             =   1920
          Width           =   960
       End
    End
@@ -500,7 +518,7 @@ Begin VB.Form frmCCDetalleExplota
       EndProperty
       Height          =   375
       Left            =   5820
-      TabIndex        =   8
+      TabIndex        =   6
       Top             =   7530
       Width           =   1215
    End
@@ -517,7 +535,7 @@ Begin VB.Form frmCCDetalleExplota
       Height          =   375
       Index           =   1
       Left            =   4260
-      TabIndex        =   6
+      TabIndex        =   4
       Top             =   7530
       Width           =   1455
    End
@@ -535,7 +553,7 @@ Begin VB.Form frmCCDetalleExplota
       Height          =   375
       Index           =   0
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   5
       Top             =   7470
       Width           =   1335
    End
@@ -552,7 +570,7 @@ Begin VB.Form frmCCDetalleExplota
       EndProperty
       Height          =   2655
       Left            =   120
-      TabIndex        =   9
+      TabIndex        =   7
       Top             =   4710
       Width           =   6915
       Begin VB.CommandButton PushButtonImpr 
@@ -568,7 +586,7 @@ Begin VB.Form frmCCDetalleExplota
          EndProperty
          Height          =   375
          Left            =   5190
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   720
          Width           =   1515
       End
@@ -577,7 +595,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   315
          Index           =   1
          Left            =   6450
-         TabIndex        =   19
+         TabIndex        =   17
          Top             =   1680
          Width           =   255
       End
@@ -586,7 +604,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   315
          Index           =   0
          Left            =   6450
-         TabIndex        =   18
+         TabIndex        =   16
          Top             =   1200
          Width           =   255
       End
@@ -604,7 +622,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   2
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   16
+         TabIndex        =   14
          Top             =   1680
          Width           =   4665
       End
@@ -622,7 +640,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   15
+         TabIndex        =   13
          Top             =   1200
          Width           =   4665
       End
@@ -640,7 +658,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   14
+         TabIndex        =   12
          Text            =   "Text1"
          Top             =   720
          Width           =   3345
@@ -659,7 +677,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   13
+         TabIndex        =   11
          Top             =   2160
          Width           =   975
       End
@@ -677,7 +695,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   12
+         TabIndex        =   10
          Top             =   1680
          Width           =   975
       End
@@ -695,7 +713,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   11
+         TabIndex        =   9
          Top             =   1200
          Width           =   1515
       End
@@ -713,7 +731,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   8
          Top             =   720
          Value           =   -1  'True
          Width           =   1335
@@ -750,8 +768,6 @@ Public FecDesde As String
 Public FecHasta As String
 
 
-Private WithEvents frmF As frmCal
-Attribute frmF.VB_VarHelpID = -1
 Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmCCo As frmBasico
@@ -763,6 +779,10 @@ Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
+
+Dim FechaInicio As String
+Dim fechafin As String
+
 
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
@@ -857,16 +877,62 @@ Private Sub Form_Load()
     
     PrimeraVez = True
      
-    txtFecha(0).Text = vParam.fechaini
-    txtFecha(1).Text = vParam.fechafin
-    If Not vParam.FecEjerAct Then
-        txtFecha(1).Text = Format(DateAdd("yyyy", 1, vParam.fechafin), "dd/mm/yyyy")
-    End If
      
+    CargarComboFecha
+     
+    cmbFecha(0).ListIndex = Month(vParam.fechaini) - 1
+    cmbFecha(1).ListIndex = Month(vParam.fechafin) - 1
+
+    txtAno(0).Text = Year(vParam.fechaini)
+    txtAno(1).Text = Year(vParam.fechafin)
+   
+    If FecDesde <> "" Then
+        txtAno(0).Text = Year(CDate(FecDesde))
+        cmbFecha(0).ListIndex = Month(CDate(FecDesde)) - 1
+    End If
+    
+    If FecHasta <> "" Then
+        txtAno(1).Text = Year(CDate(FecHasta))
+        cmbFecha(1).ListIndex = Month(CDate(FecHasta)) - 1
+    End If
    
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
 End Sub
+
+Private Sub CargarComboFecha()
+Dim J As Integer
+
+QueCombosFechaCargar "0|1|"
+
+End Sub
+
+
+
+
+Private Sub QueCombosFechaCargar(Lista As String)
+Dim L As Integer
+
+L = 1
+Do
+    Cad = RecuperaValor(Lista, L)
+    If Cad <> "" Then
+        i = Val(Cad)
+        With cmbFecha(i)
+            .Clear
+            For Cont = 1 To 12
+                RC = "25/" & Cont & "/2002"
+                RC = Format(RC, "mmmm") 'Devuelve el mes
+                .AddItem RC
+            Next Cont
+        End With
+    End If
+    L = L + 1
+Loop Until Cad = ""
+End Sub
+
+
+
 
 Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
     txtCuentas(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
@@ -876,10 +942,6 @@ End Sub
 Private Sub frmCCo_DatoSeleccionado(CadenaSeleccion As String)
     txtCCoste(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNCCoste(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
-End Sub
-
-Private Sub frmF_Selec(vFecha As Date)
-    txtFecha(IndCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub ImgCCoste_Click(Index As Integer)
@@ -912,36 +974,12 @@ Private Sub imgCuentas_Click(Index As Integer)
 End Sub
 
 
-Private Sub imgFec_Click(Index As Integer)
-    
-    Screen.MousePointer = vbHourglass
-    
-    Select Case Index
-    Case 0, 1, 2
-        IndCodigo = Index
-    
-        'FECHA
-        Set frmF = New frmCal
-        frmF.Fecha = Now
-        If txtFecha(Index).Text <> "" Then frmF.Fecha = CDate(txtFecha(Index).Text)
-        frmF.Show vbModal
-        Set frmF = Nothing
-        PonFoco txtFecha(Index)
-        
-    End Select
-    
-    Screen.MousePointer = vbDefault
-
-End Sub
 
 
 Private Sub optTipoSal_Click(Index As Integer)
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), Index
 End Sub
 
-Private Sub optVarios_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
 
 Private Sub PushButton2_Click(Index As Integer)
     'FILTROS
@@ -977,6 +1015,10 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
+Private Sub txtAno_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
 Private Sub txtCuentas_GotFocus(Index As Integer)
     ConseguirFoco txtCuentas(Index), 3
 End Sub
@@ -995,8 +1037,6 @@ Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
     Select Case Nombre
     Case "imgCCuentas"
         imgCuentas_Click indice
-    Case "imgFecha"
-        imgFec_Click indice
     Case "imgCCoste"
         ImgCCoste_Click indice
     End Select
@@ -1086,30 +1126,13 @@ Dim Hasta As Integer
 
     txtCCoste(Index).Text = Trim(txtCCoste(Index).Text)
     
-    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
-    'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-
-    txtCCoste(Index).Text = Trim(txtCCoste(Index).Text)
-    If txtCCoste(Index).Text = "" Then
-        txtNCCoste(Index).Text = ""
-        Exit Sub
-    End If
-    
-    If Not IsNumeric(txtCCoste(Index).Text) Then
-        If InStr(1, txtCCoste(Index).Text, "+") = 0 Then MsgBox "El Centro de Coste debe ser numérico: " & txtCCoste(Index).Text, vbExclamation
-        txtCCoste(Index).Text = ""
-        txtNCCoste(Index).Text = ""
-        Exit Sub
-    End If
-
-
-
     Select Case Index
         Case 0, 1 'Centros de Coste
-            txtNCCoste(Index).Text = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCCoste(Index), "N")
+            txtNCCoste(Index) = PonerNombreDeCod(txtCCoste(Index), "ccoste", "nomccost", "codccost", "T")
             
     End Select
+
+
 
 End Sub
 
@@ -1127,6 +1150,8 @@ Dim SQL2 As String
     SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost) "
     SQL = SQL & " INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta , (select @Saldo:= 0) aaa, (select @Cta:= '') bbb   "
     SQL = SQL & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
+    
     If cadselect <> "" Then SQL = SQL & " and " & cadselect
     SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
@@ -1170,9 +1195,11 @@ Dim RC2 As String
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("hlinapu.fechaent", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
+'    If Not PonerDesdeHasta("hlinapu.fechaent", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
     If Not PonerDesdeHasta("hlinapu.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
     If Not PonerDesdeHasta("hlinapu.codccost", "CCO", Me.txtCCoste(0), Me.txtNCCoste(0), Me.txtCCoste(1), Me.txtNCCoste(1), "pDHCCoste=""") Then Exit Function
+    
+       
     
     MontaSQL = CargarTemporal
            
@@ -1192,9 +1219,9 @@ Dim SQL As String
     SQL = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
     SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
     SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
-    SQL = SQL & " FROM (hlinapu INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
-    SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost "
+    SQL = SQL & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
     SQL = SQL & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
     If cadselect <> "" Then SQL = SQL & " and " & cadselect
     SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
@@ -1208,37 +1235,60 @@ eCargarTemporal:
 End Function
 
 
-Private Sub txtfecha_LostFocus(Index As Integer)
-    txtFecha(Index).Text = Trim(txtFecha(Index).Text)
-    
-    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
-    'mostrar mensajes ni hacer nada
-    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-
-
-    PonerFormatoFecha txtFecha(Index)
-End Sub
-
-Private Sub txtFecha_GotFocus(Index As Integer)
-    ConseguirFoco txtFecha(Index), 3
-End Sub
-
-Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If KeyCode = vbKeyAdd Then
-        KeyCode = 0
-        
-        LanzaFormAyuda "imgFecha", Index
-    End If
-End Sub
 
 Private Function DatosOK() As Boolean
     
     DatosOK = False
     
+    If txtAno(0).Text = "" Or txtAno(1).Text = "" Then
+        MsgBox "Introduce las fechas(años) de consulta", vbExclamation
+        Exit Function
+    End If
+    
+    If Not ComparaFechasCombos(0, 1, 0, 1) Then Exit Function
+    
+    If txtAno(0).Text = "" Then
+        FechaInicio = "01/01/1900"
+    Else
+        FechaInicio = "01/" & Format((Me.cmbFecha(0).ListIndex + 1), "00") & "/" & txtAno(0).Text
+    End If
+    If txtAno(1).Text = "" Then
+        fechafin = "31/12/2200"
+    Else
+        fechafin = "01/" & Format(Me.cmbFecha(1).ListIndex + 1) & "/" & txtAno(1).Text
+    End If
+    ' a la fecha hasta del listado le sumamos 1 mes y le restamos 1 dia ( para que me de el ultimo dia del mes )
+    fechafin = DateAdd("d", -1, DateAdd("m", 1, CDate(fechafin)))
+    
+    If FechaInicio > fechafin Then
+        MsgBox "Fecha inicio mayor que fecha fin", vbExclamation
+        Exit Function
+    End If
+    
 
     DatosOK = True
 
 End Function
+
+Private Function ComparaFechasCombos(Indice1 As Integer, Indice2 As Integer, InCombo1 As Integer, InCombo2 As Integer) As Boolean
+    ComparaFechasCombos = False
+    If txtAno(Indice1).Text <> "" And txtAno(Indice2).Text <> "" Then
+        If Val(txtAno(Indice1).Text) > Val(txtAno(Indice2).Text) Then
+            MsgBox "Fecha inicio mayor que fecha fin", vbExclamation
+            Exit Function
+        Else
+            If Val(txtAno(Indice1).Text) = Val(txtAno(Indice2).Text) Then
+                If Me.cmbFecha(InCombo1).ListIndex > Me.cmbFecha(InCombo2).ListIndex Then
+                    MsgBox "Fecha inicio mayor que fecha fin", vbExclamation
+                    Exit Function
+                End If
+            End If
+        End If
+    End If
+    ComparaFechasCombos = True
+End Function
+
+
 
 Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
