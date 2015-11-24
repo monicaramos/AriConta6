@@ -834,7 +834,7 @@ Dim CtaAnt As String
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
     On Error Resume Next
-    Label10.Caption = DBLet(Adodc1.Recordset!nommacta, "T")
+    Label10.Caption = DBLet(adodc1.Recordset!nommacta, "T")
     If Err.Number <> 0 Then
         Err.Clear
         Label10.Caption = ""
@@ -1160,7 +1160,7 @@ If Not VieneDeIntroduccion Then
         espera 0.1
         If AsientoConExtModificado = 1 Then
             QuedanLineasDespuesModificar = True
-            NumAsien = Adodc1.Recordset!NumAsien
+            NumAsien = adodc1.Recordset!NumAsien
             'Volvemos a recargar datos
             Screen.MousePointer = vbHourglass
             Me.Refresh
@@ -1168,7 +1168,7 @@ If Not VieneDeIntroduccion Then
             CargarDatos True
             If QuedanLineasDespuesModificar Then
                 'Intentamos buscar el asiento
-                Adodc1.Recordset.Find "numasien = " & NumAsien
+                adodc1.Recordset.Find "numasien = " & NumAsien
             Else
                 'NO QUEDAN LINEAS
                 HacerToolBar 1
@@ -1255,6 +1255,7 @@ Private Sub Text3_LostFocus(Index As Integer)
             End If
     
         Case 2 ' centros de coste
+            If Text3(2).Text <> "" Then Text3(2).Text = UCase(Text3(2).Text)
             Text5.Text = PonerNombreDeCod(Text3(Index), "ccoste", "nomccost", "codccost", "T")
             If Text5.Text = "" Then
                 MsgBox "El centro de coste no existe. Reintroduzca.", vbExclamation
@@ -1319,7 +1320,7 @@ End Function
 Private Sub CargaGrid()
 
 
-    Adodc1.ConnectionString = Conn
+    adodc1.ConnectionString = Conn
     SQL = " codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, contra, ampconce, timporteD, timporteH, saldo,ccost, Punteada"
     If Text3(2).Text <> "" Then
         SQL = SQL & ",nommacta"
@@ -1333,13 +1334,13 @@ Private Sub CargaGrid()
     
     'Si Text3(2).text=""
     
-    Adodc1.RecordSource = SQL
-    Adodc1.Refresh
+    adodc1.RecordSource = SQL
+    adodc1.Refresh
     
     
     
     Label101.Caption = "Total lineas:   "
-    Label101.Caption = Label101.Caption & Me.Adodc1.Recordset.RecordCount
+    Label101.Caption = Label101.Caption & Me.adodc1.Recordset.RecordCount
     
 End Sub
 

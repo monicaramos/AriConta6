@@ -891,6 +891,7 @@ Dim Hasta As Integer
     
     Select Case Index
         Case 6, 7 'Centros de Coste
+            If txtCCoste(Index).Text <> "" Then txtCCoste(Index).Text = UCase(txtCCoste(Index).Text)
             txtNCCoste(Index) = PonerNombreDeCod(txtCCoste(Index), "ccoste", "nomccost", "codccost", "T")
             
     End Select

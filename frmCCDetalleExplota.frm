@@ -27,7 +27,7 @@ Begin VB.Form frmCCDetalleExplota
       EndProperty
       Height          =   4605
       Left            =   120
-      TabIndex        =   15
+      TabIndex        =   19
       Top             =   0
       Width           =   6915
       Begin VB.ComboBox cmbFecha 
@@ -46,7 +46,7 @@ Begin VB.Form frmCCDetalleExplota
          Left            =   1230
          List            =   "frmCCDetalleExplota.frx":0002
          Style           =   2  'Dropdown List
-         TabIndex        =   35
+         TabIndex        =   2
          Top             =   2220
          Width           =   1935
       End
@@ -60,10 +60,10 @@ Begin VB.Form frmCCDetalleExplota
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   0
          Left            =   3270
-         TabIndex        =   34
+         TabIndex        =   3
          Text            =   "Text1"
          Top             =   2220
          Width           =   855
@@ -84,7 +84,7 @@ Begin VB.Form frmCCDetalleExplota
          Left            =   1230
          List            =   "frmCCDetalleExplota.frx":0006
          Style           =   2  'Dropdown List
-         TabIndex        =   33
+         TabIndex        =   4
          Top             =   2670
          Width           =   1935
       End
@@ -98,12 +98,12 @@ Begin VB.Form frmCCDetalleExplota
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   1
          Left            =   3270
-         TabIndex        =   32
+         TabIndex        =   5
          Text            =   "Text1"
-         Top             =   2700
+         Top             =   2670
          Width           =   855
       End
       Begin VB.TextBox txtCCoste 
@@ -121,7 +121,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   1200
          MaxLength       =   10
-         TabIndex        =   3
+         TabIndex        =   7
          Top             =   3900
          Width           =   1305
       End
@@ -140,7 +140,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   30
+         TabIndex        =   34
          Top             =   3900
          Width           =   4185
       End
@@ -159,7 +159,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   27
+         TabIndex        =   31
          Top             =   3480
          Width           =   4185
       End
@@ -178,7 +178,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   26
+         TabIndex        =   30
          Top             =   1050
          Width           =   4185
       End
@@ -197,7 +197,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   25
+         TabIndex        =   29
          Top             =   1470
          Width           =   4185
       End
@@ -254,14 +254,14 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   1200
          MaxLength       =   10
-         TabIndex        =   2
+         TabIndex        =   6
          Top             =   3480
          Width           =   1305
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   6360
-         TabIndex        =   28
+         TabIndex        =   32
          Top             =   240
          Width           =   405
          _ExtentX        =   714
@@ -345,7 +345,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   1
          Left            =   270
-         TabIndex        =   31
+         TabIndex        =   35
          Top             =   3930
          Width           =   600
       End
@@ -370,7 +370,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   0
          Left            =   270
-         TabIndex        =   29
+         TabIndex        =   33
          Top             =   3510
          Width           =   600
       End
@@ -410,7 +410,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   225
          Index           =   6
          Left            =   240
-         TabIndex        =   24
+         TabIndex        =   28
          Top             =   3120
          Width           =   2130
       End
@@ -427,7 +427,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   0
          Left            =   2550
-         TabIndex        =   23
+         TabIndex        =   27
          Top             =   990
          Width           =   4095
       End
@@ -444,7 +444,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   1
          Left            =   2550
-         TabIndex        =   22
+         TabIndex        =   26
          Top             =   1440
          Width           =   4095
       End
@@ -462,7 +462,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   2
          Left            =   240
-         TabIndex        =   21
+         TabIndex        =   25
          Top             =   1440
          Width           =   615
       End
@@ -480,7 +480,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   3
          Left            =   240
-         TabIndex        =   20
+         TabIndex        =   24
          Top             =   1080
          Width           =   690
       End
@@ -499,7 +499,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   195
          Index           =   7
          Left            =   240
-         TabIndex        =   19
+         TabIndex        =   23
          Top             =   690
          Width           =   960
       End
@@ -518,7 +518,7 @@ Begin VB.Form frmCCDetalleExplota
       EndProperty
       Height          =   375
       Left            =   5820
-      TabIndex        =   6
+      TabIndex        =   10
       Top             =   7530
       Width           =   1215
    End
@@ -535,7 +535,7 @@ Begin VB.Form frmCCDetalleExplota
       Height          =   375
       Index           =   1
       Left            =   4260
-      TabIndex        =   4
+      TabIndex        =   8
       Top             =   7530
       Width           =   1455
    End
@@ -553,7 +553,7 @@ Begin VB.Form frmCCDetalleExplota
       Height          =   375
       Index           =   0
       Left            =   120
-      TabIndex        =   5
+      TabIndex        =   9
       Top             =   7470
       Width           =   1335
    End
@@ -570,7 +570,7 @@ Begin VB.Form frmCCDetalleExplota
       EndProperty
       Height          =   2655
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   11
       Top             =   4710
       Width           =   6915
       Begin VB.CommandButton PushButtonImpr 
@@ -586,7 +586,7 @@ Begin VB.Form frmCCDetalleExplota
          EndProperty
          Height          =   375
          Left            =   5190
-         TabIndex        =   18
+         TabIndex        =   22
          Top             =   720
          Width           =   1515
       End
@@ -595,7 +595,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   315
          Index           =   1
          Left            =   6450
-         TabIndex        =   17
+         TabIndex        =   21
          Top             =   1680
          Width           =   255
       End
@@ -604,7 +604,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   315
          Index           =   0
          Left            =   6450
-         TabIndex        =   16
+         TabIndex        =   20
          Top             =   1200
          Width           =   255
       End
@@ -622,7 +622,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   2
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   14
+         TabIndex        =   18
          Top             =   1680
          Width           =   4665
       End
@@ -640,7 +640,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   1
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   13
+         TabIndex        =   17
          Top             =   1200
          Width           =   4665
       End
@@ -658,7 +658,7 @@ Begin VB.Form frmCCDetalleExplota
          Index           =   0
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   12
+         TabIndex        =   16
          Text            =   "Text1"
          Top             =   720
          Width           =   3345
@@ -677,7 +677,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   11
+         TabIndex        =   15
          Top             =   2160
          Width           =   975
       End
@@ -695,7 +695,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   14
          Top             =   1680
          Width           =   975
       End
@@ -713,7 +713,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   9
+         TabIndex        =   13
          Top             =   1200
          Width           =   1515
       End
@@ -731,7 +731,7 @@ Begin VB.Form frmCCDetalleExplota
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   8
+         TabIndex        =   12
          Top             =   720
          Value           =   -1  'True
          Width           =   1335
@@ -773,7 +773,7 @@ Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmCCo As frmBasico
 Attribute frmCCo.VB_VarHelpID = -1
 
-Private SQL As String
+Private Sql As String
 Dim Cad As String
 Dim RC As String
 Dim i As Integer
@@ -1085,11 +1085,11 @@ Dim Hasta As Integer
             'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             
             RC = txtCuentas(Index).Text
-            If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
+            If CuentaCorrectaUltimoNivelSIN(RC, Sql) Then
                 txtCuentas(Index) = RC
-                txtNCuentas(Index).Text = SQL
+                txtNCuentas(Index).Text = Sql
             Else
-                MsgBox SQL, vbExclamation
+                MsgBox Sql, vbExclamation
                 txtCuentas(Index).Text = ""
                 txtNCuentas(Index).Text = ""
                 PonFoco txtCuentas(Index)
@@ -1128,35 +1128,33 @@ Dim Hasta As Integer
     
     Select Case Index
         Case 0, 1 'Centros de Coste
+            If txtCCoste(Index).Text <> "" Then txtCCoste(Index).Text = UCase(txtCCoste(Index).Text)
             txtNCCoste(Index) = PonerNombreDeCod(txtCCoste(Index), "ccoste", "nomccost", "codccost", "T")
-            
     End Select
-
-
 
 End Sub
 
 
 Private Sub AccionesCSV()
-Dim SQL2 As String
+Dim Sql2 As String
 
     'Monto el SQL
-    SQL = "Select hlinapu.codccost CCoste, ccoste.nomccost Descripción, hlinapu.codmacta as Cuenta, cuentas.nommacta Título, hlinapu.fechaent Fecha,  "
-    SQL = SQL & " numdocum Documento, ctacontr Contrapartida, cuentas1.nommacta Descripción , hlinapu.ampconce Concepto, coalesce(timported,0) Debe, coalesce(timporteh,0) Haber, "
-    SQL = SQL & " if (@Cta <> hlinapu.codmacta,@Saldo:= coalesce(timported,0) - coalesce(timporteh,0), @Saldo:= @Saldo + coalesce(timported,0) - coalesce(timporteh,0) ) Saldo, "
-    SQL = SQL & " @Cta:= hlinapu.codmacta Cta"
+    Sql = "Select hlinapu.codccost CCoste, ccoste.nomccost Descripción, hlinapu.codmacta as Cuenta, cuentas.nommacta Título, hlinapu.fechaent Fecha,  "
+    Sql = Sql & " numdocum Documento, ctacontr Contrapartida, cuentas1.nommacta Descripción , hlinapu.ampconce Concepto, coalesce(timported,0) Debe, coalesce(timporteh,0) Haber, "
+    Sql = Sql & " if (@Cta <> hlinapu.codmacta,@Saldo:= coalesce(timported,0) - coalesce(timporteh,0), @Saldo:= @Saldo + coalesce(timported,0) - coalesce(timporteh,0) ) Saldo, "
+    Sql = Sql & " @Cta:= hlinapu.codmacta Cta"
 
-    SQL = SQL & " FROM ((hlinapu INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta)  "
-    SQL = SQL & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost) "
-    SQL = SQL & " INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta , (select @Saldo:= 0) aaa, (select @Cta:= '') bbb   "
-    SQL = SQL & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
-    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
+    Sql = Sql & " FROM ((hlinapu INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta)  "
+    Sql = Sql & " INNER JOIN ccoste ON hlinapu.codccost = ccoste.codccost) "
+    Sql = Sql & " INNER JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta , (select @Saldo:= 0) aaa, (select @Cta:= '') bbb   "
+    Sql = Sql & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    Sql = Sql & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
     
-    If cadselect <> "" Then SQL = SQL & " and " & cadselect
-    SQL = SQL & " ORDER BY 1,2,3,4,5 "
+    If cadselect <> "" Then Sql = Sql & " and " & cadselect
+    Sql = Sql & " ORDER BY 1,2,3,4,5 "
     
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -1188,8 +1186,8 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
-Dim SQL2 As String
+Dim Sql As String
+Dim Sql2 As String
 Dim RC As String
 Dim RC2 As String
 
@@ -1206,32 +1204,148 @@ Dim RC2 As String
 End Function
 
 Private Function CargarTemporal() As Boolean
-Dim SQL As String
-
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim ImporteTot As Currency
+Dim ImporteLinea As Currency
+Dim UltSubCC As String
+Dim B As Boolean
 
     On Error GoTo eCargarTemporal
     
     CargarTemporal = False
     
-    SQL = "delete from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N")
-    Conn.Execute SQL
+    Sql = "delete from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N")
+    Conn.Execute Sql
     
-    SQL = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
-    SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
-    SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
-    SQL = SQL & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
-    SQL = SQL & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
-    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
-    If cadselect <> "" Then SQL = SQL & " and " & cadselect
-    SQL = SQL & " ORDER BY 1,2,3,4,5 "
+    Sql = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
+    Sql = Sql & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
+    Sql = Sql & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
+    Sql = Sql & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
+    Sql = Sql & " where mid(hlinapu.codmacta,1,1) IN (" & DBSet(vParam.grupogto, "T") & "," & DBSet(vParam.grupovta, "T") & ")"
+    Sql = Sql & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
+    If cadselect <> "" Then Sql = Sql & " and " & cadselect
+    Sql = Sql & " ORDER BY 1,2,3,4,5 "
     
-    Conn.Execute SQL
+    Conn.Execute Sql
     
-    CargarTemporal = True
+    B = HacerRepartoSubcentrosCoste
+    
+    CargarTemporal = B
     Exit Function
     
 eCargarTemporal:
     MuestraError Err.Number, "Cargar Tabla Temporal", Err.Description
+End Function
+
+
+Private Function HacerRepartoSubcentrosCoste() As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim ImporteTot As Currency
+Dim ImporteLinea As Currency
+Dim UltSubCC As String
+
+    On Error GoTo eHacerRepartoSubcentrosCoste
+
+    HacerRepartoSubcentrosCoste = False
+    
+    ' hacemos el desdoble
+    Sql = "select * from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N") & " and codccost in (select ccoste.codccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost) "
+
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+    While Not Rs.EOF
+        Sql2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(Rs!codccost, "T")
+
+        ImporteTot = 0
+        UltSubCC = ""
+
+        Set Rs2 = New ADODB.Recordset
+
+        Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs2.EOF
+            Sql = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH,desdoblado) values ("
+            Sql = Sql & vUsu.Codigo & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!Linapu, "T") & ","
+            Sql = Sql & DBSet(Rs!docum, "T") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs!ctactra, "T") & ","
+            Sql = Sql & DBSet(Rs!desctra, "T") & ","
+
+            If DBLet(Rs!perd, "N") <> 0 Then
+                ImporteLinea = Round(DBLet(Rs!perd, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
+                Sql = Sql & DBSet(ImporteLinea, "N") & ",0,1)"
+            Else
+                ImporteLinea = Round(DBLet(Rs!perh, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
+                Sql = Sql & "0," & DBSet(ImporteLinea, "N") & ",1)"
+            End If
+
+            Conn.Execute Sql
+
+            ImporteTot = ImporteTot + ImporteLinea
+
+            UltSubCC = Rs2!subccost
+
+            Rs2.MoveNext
+        Wend
+
+        If DBLet(Rs!perd, "N") <> 0 Then
+            If ImporteTot <> DBLet(Rs!perd, "N") Then
+                Sql = "update tmplinccexplo set perd = perd + (" & DBSet(Round(DBLet(Rs!perd, "N") - ImporteTot, 2), "N") & ")"
+                Sql = Sql & " where codusu = " & vUsu.Codigo
+                Sql = Sql & " and codccost = " & DBSet(UltSubCC, "T")
+                Sql = Sql & " and codmacta = " & DBSet(Rs!codmacta, "T")
+                Sql = Sql & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                Sql = Sql & " and linapu = " & DBSet(Rs!Linapu, "N")
+                Sql = Sql & " and docum = " & DBSet(Rs!docum, "T")
+                Sql = Sql & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+                Sql = Sql & " and desdoblado = 1"
+
+                Conn.Execute Sql
+            End If
+        Else
+            If ImporteTot <> DBLet(Rs!perh, "N") Then
+                Sql = "update tmplinccexplo set perh = perh + (" & DBSet(Round(DBLet(Rs!perh, "N") - ImporteTot, 2), "N") & ")"
+                Sql = Sql & " where codusu = " & vUsu.Codigo
+                Sql = Sql & " and codccost = " & DBSet(UltSubCC, "T")
+                Sql = Sql & " and codmacta = " & DBSet(Rs!codmacta, "T")
+                Sql = Sql & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                Sql = Sql & " and linapu = " & DBSet(Rs!Linapu, "N")
+                Sql = Sql & " and docum = " & DBSet(Rs!docum, "T")
+                Sql = Sql & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+                Sql = Sql & " and desdoblado = 1"
+
+                Conn.Execute Sql
+            End If
+        End If
+
+        Sql = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
+        Sql = Sql & " and codccost = " & DBSet(Rs!codccost, "T")
+        Sql = Sql & " and codmacta = " & DBSet(Rs!codmacta, "T")
+        Sql = Sql & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+        Sql = Sql & " and linapu = " & DBSet(Rs!Linapu, "N")
+        Sql = Sql & " and docum = " & DBSet(Rs!docum, "T")
+        Sql = Sql & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+        Sql = Sql & " and desdoblado = 0"
+
+        Conn.Execute Sql
+
+        Set Rs2 = Nothing
+
+
+        Rs.MoveNext
+    Wend
+
+    Set Rs = Nothing
+
+    HacerRepartoSubcentrosCoste = True
+    Exit Function
+    
+eHacerRepartoSubcentrosCoste:
+    MuestraError Err.Number, "Reparto Subcentros de Coste", Err.Description
 End Function
 
 
