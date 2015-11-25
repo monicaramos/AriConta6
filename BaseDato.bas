@@ -603,15 +603,15 @@ Contador = 0
 Inserts = ""
 While Not RT.EOF
     Contador = Contador + 1
-    If Not IsNull(RT!timporteD) Then
-        AUx = DBLet(RT!timporteD, "N")
+    If Not IsNull(RT!timported) Then
+        AUx = DBLet(RT!timported, "N")
         ImpD = ImpD + AUx
-        ImporteD = TransformaComasPuntos(RT!timporteD)
+        ImporteD = TransformaComasPuntos(RT!timported)
         ImporteH = "Null"
     Else
-        AUx = DBLet(RT!timporteH, "N")
+        AUx = DBLet(RT!timporteh, "N")
         ImporteD = "Null"
-        ImporteH = TransformaComasPuntos(RT!timporteH)
+        ImporteH = TransformaComasPuntos(RT!timporteh)
         ImpH = ImpH + AUx
         AUx = -1 * AUx
     End If
@@ -675,12 +675,132 @@ End If
     
 'Cadenita = Cadenita & "Actualizar: " & Format(Timer - T1, "0.0000") & vbCrLf
 'MsgBox Cadenita
+
+If DesdeCCoste Then HacerRepartoSubcentrosCoste
+
+
+
 Exit Function
 Etmpconext:
     MuestraError Err.Number, "Generando datos saldos"
     Set RT = Nothing
 End Function
 
+Private Function HacerRepartoSubcentrosCoste() As Boolean
+Dim SQL As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim ImporteTot As Currency
+Dim ImporteLinea As Currency
+Dim UltSubCC As String
+Dim Nregs As Long
+
+    On Error GoTo eHacerRepartoSubcentrosCoste
+
+    HacerRepartoSubcentrosCoste = False
+    
+    ' hacemos el desdoble
+    SQL = "select * from tmpconext where codusu = " & DBSet(vUsu.Codigo, "N") & " and cta in (select ccoste.codccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost) "
+
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+'    Nregs = TotalRegistrosConsulta(SQL)
+'
+'    If Nregs <> 0 Then
+'        pb2.Visible = True
+'        CargarProgres pb2, Nregs
+'    End If
+
+
+    While Not Rs.EOF
+'        IncrementarProgres pb2, 1
+        
+        Sql2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(Rs!Cta, "T")
+
+        ImporteTot = 0
+        UltSubCC = ""
+
+        Set Rs2 = New ADODB.Recordset
+
+        Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs2.EOF
+            
+            SQL = "INSERT INTO tmpconext (codusu, POS,numdiari, fechaent, numasien, linliapu, timporteD, timporteH, saldo, Punteada, nomdocum, ampconce, cta, contra, ccost, desdoblado) VALUES ("
+            SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!Pos, "N") & "," & DBSet(Rs!NumDiari, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!NumAsien, "N") & "," & DBSet(Rs!Linliapu, "N") & ","
+            
+            
+            If DBLet(Rs!timported, "N") <> 0 Then
+                ImporteLinea = Round(DBLet(Rs!timported, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
+                SQL = SQL & DBSet(ImporteLinea, "N") & ",0,0,"
+            Else
+                ImporteLinea = Round(DBLet(Rs!timporteh, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
+                SQL = SQL & "0," & DBSet(ImporteLinea, "N") & ",0,"
+            End If
+
+            SQL = SQL & DBSet(Rs!punteada, "N") & "," & DBSet(Rs!Nomdocum, "T") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(Rs!contra, "T") & "," & DBSet(Rs!CCost, "T") & ",1)"
+
+            Conn.Execute SQL
+
+            ImporteTot = ImporteTot + ImporteLinea
+
+            UltSubCC = Rs2!subccost
+
+            Rs2.MoveNext
+        Wend
+
+        If DBLet(Rs!timported, "N") <> 0 Then
+            If ImporteTot <> DBLet(Rs!timported, "N") Then
+                SQL = "update tmpconext set timported = timported + (" & DBSet(Round(DBLet(Rs!timported, "N") - ImporteTot, 2), "N") & ")"
+                SQL = SQL & " where codusu = " & vUsu.Codigo
+                SQL = SQL & " and cta = " & DBSet(UltSubCC, "T")
+                SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = SQL & " and numdiari = " & DBSet(Rs!NumDiari, "N")
+                SQL = SQL & " and numasien = " & DBSet(Rs!NumAsien, "N")
+                SQL = SQL & " and desdoblado = 1"
+
+                Conn.Execute SQL
+            End If
+        Else
+            If ImporteTot <> DBLet(Rs!timporteh, "N") Then
+                SQL = "update tmpconext set timporteh = timporteh + (" & DBSet(Round(DBLet(Rs!timporteh, "N") - ImporteTot, 2), "N") & ")"
+                SQL = SQL & " where codusu = " & vUsu.Codigo
+                SQL = SQL & " and cta = " & DBSet(UltSubCC, "T")
+                SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = SQL & " and numdiari = " & DBSet(Rs!NumDiari, "N")
+                SQL = SQL & " and numasien = " & DBSet(Rs!NumAsien, "N")
+                SQL = SQL & " and desdoblado = 1"
+
+                Conn.Execute SQL
+            End If
+        End If
+
+        SQL = "delete from tmpconext where codusu = " & vUsu.Codigo
+        SQL = SQL & " and cta = " & DBSet(Rs!Cta, "T")
+        SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+        SQL = SQL & " and numdiari = " & DBSet(Rs!NumDiari, "N")
+        SQL = SQL & " and numasien = " & DBSet(Rs!NumAsien, "N")
+        SQL = SQL & " and desdoblado = 0"
+
+        Conn.Execute SQL
+
+        Set Rs2 = Nothing
+
+
+        Rs.MoveNext
+    Wend
+
+    Set Rs = Nothing
+
+    HacerRepartoSubcentrosCoste = True
+'    pb2.Visible = False
+    Exit Function
+    
+eHacerRepartoSubcentrosCoste:
+    MuestraError Err.Number, "Reparto Subcentros de Coste", Err.Description
+'    pb2.Visible = False
+End Function
 
 
 
@@ -3299,21 +3419,21 @@ Dim Cad As String
         A1 = A1 + 1
         Cad = A1 & ",'" & DevNombreSQL(DBLet(RT!Numdocum)) & "','"
         Cad = Cad & Format(RT!FechaEnt, FormatoFecha) & "','" & DevNombreSQL(DBLet(RT!Ampconce)) & "',"
-        If IsNull(RT!timporteD) Then
+        If IsNull(RT!timported) Then
             ImpD = 0
             d = "NULL"
         Else
-            ImpD = RT!timporteD
-            d = TransformaComasPuntos(CStr(RT!timporteD))
+            ImpD = RT!timported
+            d = TransformaComasPuntos(CStr(RT!timported))
         End If
             
         'importe HABER
-        If IsNull(RT!timporteH) Then
+        If IsNull(RT!timporteh) Then
             ImpH = 0
             H = "NULL"
         Else
-            ImpH = RT!timporteH
-            H = TransformaComasPuntos(CStr(RT!timporteH))
+            ImpH = RT!timporteh
+            H = TransformaComasPuntos(CStr(RT!timporteh))
         End If
         Cad = Cad & d & "," & H & ","
         
@@ -4851,13 +4971,13 @@ Dim vAux As Long
     Codigo = Codigo & TransformaComasPuntos(CStr(ImPerD)) & ")"
     Conn.Execute Codigo
     
-    Dim SQL2 As String
+    Dim Sql2 As String
     Dim Rs As ADODB.Recordset
     
-    SQL2 = "select mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10, mes11, mes12 from tmpevolsal where codusu = " & vUsu.Codigo
-    SQL2 = SQL2 & " and codmacta = " & DBSet(vCta, "T")
+    Sql2 = "select mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10, mes11, mes12 from tmpevolsal where codusu = " & vUsu.Codigo
+    Sql2 = Sql2 & " and codmacta = " & DBSet(vCta, "T")
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Select Case Tipo
         Case 0
@@ -4870,39 +4990,39 @@ Dim vAux As Long
     
     
     If Not Rs.EOF Then
-        SQL2 = "update tmpevolsal set "
+        Sql2 = "update tmpevolsal set "
         vAux = Format(Year(VFecha3), "0000") & Format(Month(VFecha3), "00")
         Select Case vAux
             Case DBLet(Rs!Mes1, "N")
-                SQL2 = SQL2 & " importemes1 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes1 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes2, "N")
-                SQL2 = SQL2 & " importemes2 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes2 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes3, "N")
-                SQL2 = SQL2 & " importemes3 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes3 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes4, "N")
-                SQL2 = SQL2 & " importemes4 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes4 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes5, "N")
-                SQL2 = SQL2 & " importemes5 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes5 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes6, "N")
-                SQL2 = SQL2 & " importemes6 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes6 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes7, "N")
-                SQL2 = SQL2 & " importemes7 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes7 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes8, "N")
-                SQL2 = SQL2 & " importemes8 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes8 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes9, "N")
-                SQL2 = SQL2 & " importemes9 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes9 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes10, "N")
-                SQL2 = SQL2 & " importemes10 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes10 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes11, "N")
-                SQL2 = SQL2 & " importemes11 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes11 = " & DBSet(Importe, "N")
             Case DBLet(Rs!Mes12, "N")
-                SQL2 = SQL2 & " importemes12 = " & DBSet(Importe, "N")
+                Sql2 = Sql2 & " importemes12 = " & DBSet(Importe, "N")
         End Select
 
-        SQL2 = SQL2 & " where codusu = " & vUsu.Codigo
-        SQL2 = SQL2 & " and codmacta = " & DBSet(vCta, "T")
+        Sql2 = Sql2 & " where codusu = " & vUsu.Codigo
+        Sql2 = Sql2 & " and codmacta = " & DBSet(vCta, "T")
 
-        Conn.Execute SQL2
+        Conn.Execute Sql2
     End If
     Set Rs = Nothing
     

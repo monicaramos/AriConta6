@@ -52,7 +52,7 @@ Public Function CompForm(ByRef formulario As Form) As Boolean
                     Control.BackColor = vbErrorColor
                     HayCamposIncorrectos = True
                     CampoIncorrecto = Control.Name
-                    If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.index & ")"
+                    If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
                 Else
                     Control.BackColor = vbWhite
                 End If
@@ -75,7 +75,7 @@ Public Function CompForm(ByRef formulario As Form) As Boolean
                         Control.BackColor = vbErrorColor
                         HayCamposIncorrectos = True
                         CampoIncorrecto = Control.Name
-                        If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.index & ")"
+                        If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
                     Else
                         Control.BackColor = vbWhite
                     End If
@@ -119,7 +119,7 @@ Dim Correcto As Boolean
                         Control.BackColor = vbErrorColor
                         HayCamposIncorrectos = True
                         CampoIncorrecto = Control.Name
-                        If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.index & ")"
+                        If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
                     Else
                         Control.BackColor = vbWhite
                     End If
@@ -147,7 +147,7 @@ Dim Correcto As Boolean
                                 Control.BackColor = vbErrorColor
                                 HayCamposIncorrectos = True
                                 CampoIncorrecto = Control.Name
-                                If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.index & ")"
+                                If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
                             End If
                         End If
                     End If
@@ -207,7 +207,7 @@ End Function
 Private Function ValorParaSQL(Valor, ByRef vTag As CTag) As String
 Dim Dev As String
 Dim d As Single
-Dim I As Integer
+Dim i As Integer
 Dim V
     Dev = ""
     If Valor <> "" Then
@@ -427,7 +427,7 @@ Dim Cad As String
                         If Control.Value Then
                             If Izda <> "" Then Izda = Izda & ","
                             Izda = Izda & "" & mTag.Columna & ""
-                            Cad = Control.index
+                            Cad = Control.Index
                             If Der <> "" Then Der = Der & ","
                             Der = Der & Cad
                         End If
@@ -465,7 +465,7 @@ Public Function PonerCamposForma(ByRef formulario As Form, ByRef vData As Adodc)
     Dim Cad As String
     Dim Valor As Variant
     Dim Campo As String  'Campo en la base de datos
-    Dim I As Integer
+    Dim i As Integer
 
     Set mTag = New CTag
     PonerCamposForma = False
@@ -529,14 +529,14 @@ Public Function PonerCamposForma(ByRef formulario As Form, ByRef vData As Adodc)
                 If mTag.Cargado Then
                     Campo = mTag.Columna
                     Valor = vData.Recordset.Fields(Campo)
-                    I = 0
-                    For I = 0 To Control.ListCount - 1
-                        If Control.ItemData(I) = Val(Valor) Then
-                            Control.ListIndex = I
+                    i = 0
+                    For i = 0 To Control.ListCount - 1
+                        If Control.ItemData(i) = Val(Valor) Then
+                            Control.ListIndex = i
                             Exit For
                         End If
-                    Next I
-                    If I = Control.ListCount Then Control.ListIndex = -1
+                    Next i
+                    If i = Control.ListCount Then Control.ListIndex = -1
                 End If 'de cargado
             End If 'de <>""
         End If
@@ -555,7 +555,7 @@ Dim mTag As CTag
 Dim Cad As String
 Dim Valor As Variant
 Dim Campo As String  'Campo en la base de datos
-Dim I As Integer
+Dim i As Integer
     On Error GoTo EPonerCamposForma2
     
     Set mTag = New CTag
@@ -621,14 +621,14 @@ Dim I As Integer
                     If mTag.Cargado Then
                         Campo = mTag.Columna
                         Valor = DBLet(vData.Recordset.Fields(Campo))
-                        I = 0
-                        For I = 0 To Control.ListCount - 1
-                            If Control.ItemData(I) = Val(Valor) Then
-                                Control.ListIndex = I
+                        i = 0
+                        For i = 0 To Control.ListCount - 1
+                            If Control.ItemData(i) = Val(Valor) Then
+                                Control.ListIndex = i
                                 Exit For
                             End If
-                        Next I
-                        If I = Control.ListCount Then Control.ListIndex = -1
+                        Next i
+                        If i = Control.ListCount Then Control.ListIndex = -1
                     End If 'de cargado
                 End If
             End If 'de <>""
@@ -642,7 +642,7 @@ Dim I As Integer
                         Campo = mTag.Columna
                         Valor = vData.Recordset.Fields(Campo)
                         If IsNull(Valor) Then Valor = 0
-                        If Control.index = Valor Then
+                        If Control.Index = Valor Then
                             Control.Value = True
                         Else
                             Control.Value = False
@@ -686,7 +686,7 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
     Dim mTag As CTag
     Dim AUx As String
     Dim Cad As String
-    Dim Sql As String
+    Dim SQL As String
     Dim tabla As String
     Dim RC As Byte
 
@@ -695,7 +695,7 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
     'Exit Function
     Set mTag = New CTag
     ObtenerBusqueda = ""
-    Sql = ""
+    SQL = ""
 
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
@@ -709,17 +709,17 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
                     Else
                         Cad = " MIN(" & mTag.Columna & ")"
                     End If
-                    Sql = "Select " & Cad & " from " & mTag.tabla
-                    Sql = ObtenerMaximoMinimo(Sql)
+                    SQL = "Select " & Cad & " from " & mTag.tabla
+                    SQL = ObtenerMaximoMinimo(SQL)
                     Select Case mTag.TipoDato
                     Case "N"
-                        Sql = mTag.tabla & "." & mTag.Columna & " = " & TransformaComasPuntos(Sql)
+                        SQL = mTag.tabla & "." & mTag.Columna & " = " & TransformaComasPuntos(SQL)
                     Case "F"
-                        Sql = mTag.tabla & "." & mTag.Columna & " = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                        SQL = mTag.tabla & "." & mTag.Columna & " = '" & Format(SQL, "yyyy-mm-dd") & "'"
                     Case Else
-                        Sql = mTag.tabla & "." & mTag.Columna & " = '" & Sql & "'"
+                        SQL = mTag.tabla & "." & mTag.Columna & " = '" & SQL & "'"
                     End Select
-                    Sql = "(" & Sql & ")"
+                    SQL = "(" & SQL & ")"
                 End If
             End If
         End If
@@ -736,8 +736,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
                 Carga = mTag.Cargar(Control)
                 If Carga Then
 
-                    Sql = mTag.tabla & "." & mTag.Columna & " is NULL"
-                    Sql = "(" & Sql & ")"
+                    SQL = mTag.tabla & "." & mTag.Columna & " is NULL"
+                    SQL = "(" & SQL & ")"
                     Control.Text = ""
                 End If
             End If
@@ -763,8 +763,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
                     End If
                     RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.Columna, AUx, Cad)
                     If RC = 0 Then
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & Cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & Cad & ")"
                     End If
                 End If
             Else
@@ -781,8 +781,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
                 If Control.ListIndex > -1 Then
                     Cad = Control.ItemData(Control.ListIndex)
                     Cad = mTag.tabla & "." & mTag.Columna & " = " & Cad
-                    If Sql <> "" Then Sql = Sql & " AND "
-                    Sql = Sql & "(" & Cad & ")"
+                    If SQL <> "" Then SQL = SQL & " AND "
+                    SQL = SQL & "(" & Cad & ")"
                 End If
             End If
         
@@ -794,8 +794,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
                 If mTag.Cargado Then
                     If Control.Value = 1 Then
                         Cad = mTag.tabla & "." & mTag.Columna & " = 1"
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & Cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & Cad & ")"
                     End If
                 End If
             End If
@@ -803,7 +803,7 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
 
         
     Next Control
-    ObtenerBusqueda = Sql
+    ObtenerBusqueda = SQL
 Exit Function
 EObtenerBusqueda:
     ObtenerBusqueda = ""
@@ -817,7 +817,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     Dim mTag As CTag
     Dim AUx As String
     Dim Cad As String
-    Dim Sql As String
+    Dim SQL As String
     Dim tabla As String
     Dim RC As Byte
 
@@ -826,7 +826,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     'Exit Function
     Set mTag = New CTag
     ObtenerBusqueda2 = ""
-    Sql = ""
+    SQL = ""
 
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
@@ -841,18 +841,18 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                         Else
                             Cad = " MIN(" & mTag.Columna & ")"
                         End If
-                        Sql = "Select " & Cad & " from " & mTag.tabla
-                        Sql = ObtenerMaximoMinimo(Sql)
+                        SQL = "Select " & Cad & " from " & mTag.tabla
+                        SQL = ObtenerMaximoMinimo(SQL)
                         Select Case mTag.TipoDato
                         Case "N"
-                            Sql = mTag.tabla & "." & mTag.Columna & " = " & TransformaComasPuntos(Sql)
+                            SQL = mTag.tabla & "." & mTag.Columna & " = " & TransformaComasPuntos(SQL)
                         Case "F"
-                            Sql = mTag.tabla & "." & mTag.Columna & " = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                            SQL = mTag.tabla & "." & mTag.Columna & " = '" & Format(SQL, "yyyy-mm-dd") & "'"
                         Case Else
                             '[Monica]04/03/2013: quito las comillas y pongo el dbset
-                            Sql = mTag.tabla & "." & mTag.Columna & " = " & DBSet(Sql, "T") ' & "'"
+                            SQL = mTag.tabla & "." & mTag.Columna & " = " & DBSet(SQL, "T") ' & "'"
                         End Select
-                        Sql = "(" & Sql & ")"
+                        SQL = "(" & SQL & ")"
                     End If
                 End If
             End If
@@ -868,8 +868,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                 Carga = mTag.Cargar(Control)
                 If Carga Then
 
-                    Sql = mTag.tabla & "." & mTag.Columna & " is NULL"
-                    Sql = "(" & Sql & ")"
+                    SQL = mTag.tabla & "." & mTag.Columna & " is NULL"
+                    SQL = "(" & SQL & ")"
                     Control.Text = ""
                 End If
             End If
@@ -893,8 +893,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                         End If
                         RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.Columna, AUx, Cad)
                         If RC = 0 Then
-                            If Sql <> "" Then Sql = Sql & " AND "
-                            Sql = Sql & "(" & Cad & ")"
+                            If SQL <> "" Then SQL = SQL & " AND "
+                            SQL = SQL & "(" & Cad & ")"
                         End If
                     End If
                 End If
@@ -914,8 +914,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                         If Control.ListIndex > -1 Then
                             Cad = Control.ItemData(Control.ListIndex)
                             Cad = mTag.tabla & "." & mTag.Columna & " = " & Cad
-                            If Sql <> "" Then Sql = Sql & " AND "
-                            Sql = Sql & "(" & Cad & ")"
+                            If SQL <> "" Then SQL = SQL & " AND "
+                            SQL = SQL & "(" & Cad & ")"
                         End If
                     End If
                 End If
@@ -929,7 +929,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                     ' añadido 12022007
                     AUx = ""
                     If CHECK <> "" Then
-                        tabla = DBLet(Control.index, "T")
+                        tabla = DBLet(Control.Index, "T")
                         If tabla <> "" Then tabla = "(" & tabla & ")"
                         tabla = Control.Name & tabla & "|"
                         If InStr(1, CHECK, tabla, vbTextCompare) > 0 Then AUx = Control.Value
@@ -940,15 +940,15 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
 '                    If Control.Value = 1 Then
                         Cad = Control.Value
                         Cad = mTag.tabla & "." & mTag.Columna & " = " & Cad
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & Cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & Cad & ")"
                     End If
                 End If
             End If
             '===================
         End If
     Next Control
-    ObtenerBusqueda2 = Sql
+    ObtenerBusqueda2 = SQL
 Exit Function
 EObtenerBusqueda:
     ObtenerBusqueda2 = ""
@@ -1143,7 +1143,7 @@ On Error GoTo EModificaDesdeFormulario
                     mTag.Cargar Control
                     If mTag.Cargado Then
                         If Control.Value Then
-                            AUx = Control.index
+                            AUx = Control.Index
                             'Si es campo clave NO se puede modificar y se utiliza como busqueda
                             'dentro del WHERE
                               If mTag.EsClave Then
@@ -1291,26 +1291,26 @@ End Sub
 'recupera valor desde una cadena con pipes(acabada en pipes)
 'Para ello le decimos el orden  y ya ta
 Public Function RecuperaValor(ByRef CADENA As String, Orden As Integer) As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Cont As Integer
 Dim Cad As String
 
-I = 0
+i = 0
 Cont = 1
 Cad = ""
 Do
-    J = I + 1
-    I = InStr(J, CADENA, "|")
-    If I > 0 Then
+    J = i + 1
+    i = InStr(J, CADENA, "|")
+    If i > 0 Then
         If Cont = Orden Then
-            Cad = Mid(CADENA, J, I - J)
-            I = Len(CADENA) 'Para salir del bucle
+            Cad = Mid(CADENA, J, i - J)
+            i = Len(CADENA) 'Para salir del bucle
             Else
                 Cont = Cont + 1
         End If
     End If
-Loop Until I = 0
+Loop Until i = 0
 RecuperaValor = Cad
 End Function
 
@@ -1318,29 +1318,29 @@ End Function
 'recupera valor desde una cadena con pipes(acabada en pipes)
 'Para ello le decimos el orden  y ya ta
 Public Function InsertaValor(ByRef CADENA As String, Orden As Integer, SubCadena As String) As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Cont As Integer
 Dim Cad As String
 Dim Cad2 As String
-I = 0
+i = 0
 Cont = 1
 Cad = ""
 Do
-    J = I + 1
-    I = InStr(J, CADENA, "|")
-    If I > 0 Then
+    J = i + 1
+    i = InStr(J, CADENA, "|")
+    If i > 0 Then
         If Cont = Orden Then
-            Cad = Mid(CADENA, J, I - J)
+            Cad = Mid(CADENA, J, i - J)
             
-            Cad2 = Mid(CADENA, 1, J - 1) & SubCadena & Mid(CADENA, I, Len(CADENA))
+            Cad2 = Mid(CADENA, 1, J - 1) & SubCadena & Mid(CADENA, i, Len(CADENA))
             
-            I = Len(CADENA) 'Para salir del bucle
+            i = Len(CADENA) 'Para salir del bucle
             Else
                 Cont = Cont + 1
         End If
     End If
-Loop Until I = 0
+Loop Until i = 0
 InsertaValor = Cad2
 End Function
 
@@ -1357,7 +1357,7 @@ End Function
 'Para ello en el tag del button tendremos k poner un numero k nos diara hasta k nivel esta permitido
 
 Public Sub PonerOpcionesMenuGeneral(ByRef formulario As Form)
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 
 
@@ -1368,14 +1368,14 @@ On Error GoTo EPonerOpcionesMenuGeneral
 With formulario
 
     'LA TOOLBAR  .--> Requisito, k se llame toolbar1
-    For I = 1 To .Toolbar1.Buttons.Count
-        If .Toolbar1.Buttons(I).Tag <> "" Then
-            J = Val(.Toolbar1.Buttons(I).Tag)
+    For i = 1 To .Toolbar1.Buttons.Count
+        If .Toolbar1.Buttons(i).Tag <> "" Then
+            J = Val(.Toolbar1.Buttons(i).Tag)
             If J < vUsu.Nivel Then
-                .Toolbar1.Buttons(I).Enabled = False
+                .Toolbar1.Buttons(i).Enabled = False
             End If
         End If
-    Next I
+    Next i
     
     'Esto es un poco salvaje. Por si acaso , no existe en este trozo pondremos los errores on resume next
     
@@ -1412,7 +1412,7 @@ Dim mTag As CTag
 Dim AUx As String
 Dim CadWhere As String
 Dim cadUPDATE As String
-Dim I As Integer
+Dim i As Integer
 
 On Error GoTo EModificaDesdeFormulario
     ModificaDesdeFormularioClaves = False
@@ -1671,15 +1671,15 @@ End Function
 
 Public Function DesBloqueaRegistroForm(ByRef TextBoxConTag As TextBox) As Boolean
 Dim mTag As CTag
-Dim Sql As String
+Dim SQL As String
 
 'Solo me interesa la tabla
 On Error Resume Next
     Set mTag = New CTag
     mTag.Cargar TextBoxConTag
     If mTag.Cargado Then
-        Sql = "DELETE from zBloqueos where codusu=" & vUsu.Codigo & " and tabla='" & mTag.tabla & "'"
-        Conn.Execute Sql
+        SQL = "DELETE from zBloqueos where codusu=" & vUsu.Codigo & " and tabla='" & mTag.tabla & "'"
+        Conn.Execute SQL
         If Err.Number <> 0 Then
             Err.Clear
         End If
@@ -1784,14 +1784,14 @@ End Sub
 'Devuelve la variable parafijar la altura donde empiezan los txtaux
 ' y cuadren con el datagrid
 Public Function FijarVariableAnc(ByRef DTGRD1 As DataGrid) As Single
-Dim I As Integer
+Dim i As Integer
 
     If DTGRD1.Row < 0 Then
-        I = 0
+        i = 0
         Else
-        I = DTGRD1.Row
+        i = DTGRD1.Row
     End If
-    FijarVariableAnc = DTGRD1.RowTop(I) + DTGRD1.Top + 15
+    FijarVariableAnc = DTGRD1.RowTop(i) + DTGRD1.Top + 15
     
 End Function
 
@@ -2015,16 +2015,16 @@ Error1:
 End Function
 
 Public Function ImporteFormateadoSingle(Importe As String) As Single
-Dim I As Integer
+Dim i As Integer
 
     If Importe = "" Then
         ImporteFormateadoSingle = 0
     Else
         'Primero quitamos los puntos
         Do
-            I = InStr(1, Importe, ".")
-            If I > 0 Then Importe = Mid(Importe, 1, I - 1) & Mid(Importe, I + 1)
-        Loop Until I = 0
+            i = InStr(1, Importe, ".")
+            If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
+        Loop Until i = 0
         ImporteFormateadoSingle = Importe
     End If
 End Function
@@ -2139,34 +2139,34 @@ End Function
 
 Public Sub SituarItemList(ByRef LView As ListView)
 'Subir el item seleccionado del listview una posicion
-Dim I As Byte, Item As Byte
+Dim i As Byte, Item As Byte
 Dim AUx As String
 On Error Resume Next
    
-    For I = 1 To LView.ListItems.Count
-        If LView.ListItems(I).ToolTipText = vUsu.CadenaConexion Then
-            LView.ListItems(I).Selected = True
-            LView.ListItems(I).Bold = True
-            LView.ListItems(I).ListSubItems(1).Bold = True
-            LView.ListItems(I).ListSubItems(2).Bold = True
-            LView.ListItems(I).EnsureVisible
+    For i = 1 To LView.ListItems.Count
+        If LView.ListItems(i).ToolTipText = vUsu.CadenaConexion Then
+            LView.ListItems(i).Selected = True
+            LView.ListItems(i).Bold = True
+            LView.ListItems(i).ListSubItems(1).Bold = True
+            LView.ListItems(i).ListSubItems(2).Bold = True
+            LView.ListItems(i).EnsureVisible
             Exit For
         End If
-    Next I
+    Next i
     LView.SetFocus
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
 Public Function QuitarCaracterNULL(vCad As String) As String
-Dim I As Integer
+Dim i As Integer
 
     Do
-        I = InStr(1, vCad, vbNullChar)
-        If I > 0 Then 'Hay null
-            vCad = Mid(vCad, 1, I - 1) & Mid(vCad, I + 2)
+        i = InStr(1, vCad, vbNullChar)
+        If i > 0 Then 'Hay null
+            vCad = Mid(vCad, 1, i - 1) & Mid(vCad, i + 2)
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     QuitarCaracterNULL = vCad
 End Function
 
@@ -2458,7 +2458,7 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, opcion A
 '(IN) formulario y Modo en que se encuentra el formulario
 '(IN) Opcion : 1 para los TEXT1, 3 para los txtAux
 
-    Dim I As Integer
+    Dim i As Integer
     
     On Error Resume Next
 
@@ -2466,46 +2466,46 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, opcion A
         If Modo = 1 Then 'BUSQUEDA
             Select Case opcion
                 Case 1 'Para los TEXT1
-                    For I = 0 To .Text1.Count - 1
-                        With .Text1(I)
+                    For i = 0 To .Text1.Count - 1
+                        With .Text1(i)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = 0 'tamaño infinito
                             End If
                         End With
-                    Next I
+                    Next i
                 
                 Case 3 'para los TXTAUX
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For i = 0 To .txtAux.Count - 1
+                        With .txtAux(i)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = 0 'tamaño infinito
                             End If
                         End With
-                    Next I
+                    Next i
             End Select
             
         Else 'resto de modos
             Select Case opcion
                 Case 1 'par los Text1
-                    For I = 0 To .Text1.Count - 1
-                        With .Text1(I)
+                    For i = 0 To .Text1.Count - 1
+                        With .Text1(i)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next I
+                    Next i
                 Case 3 'para los txtAux
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For i = 0 To .txtAux.Count - 1
+                        With .txtAux(i)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next I
+                    Next i
             End Select
         End If
     End With
@@ -2514,13 +2514,13 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, opcion A
 End Sub
 
 
-Public Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String, PrimeraVez As Boolean)
+Public Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String, PrimeraVez As Boolean)
     On Error GoTo ECargaGRid
 
     vDataGrid.Enabled = True
     '    vdata.Recordset.Cancel
     vData.ConnectionString = Conn
-    vData.RecordSource = Sql
+    vData.RecordSource = SQL
     vData.CursorType = adOpenDynamic
     vData.LockType = adLockPessimistic
     vDataGrid.ScrollBars = dbgNone
@@ -2544,34 +2544,34 @@ End Sub
 'Se puede comentar todo y asi no hace nada ni da error
 'El SQL es propio de cada tabla
 Public Function SugerirCodigoSiguienteStr(NomTabla As String, NomCodigo As String, Optional CondLineas As String) As String
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo ESugerirCodigo
 
     'SQL = "Select Max(codtipar) from stipar"
-    Sql = "Select Max(" & NomCodigo & ") from " & NomTabla
+    SQL = "Select Max(" & NomCodigo & ") from " & NomTabla
     If CondLineas <> "" Then
-        Sql = Sql & " WHERE " & CondLineas
+        SQL = SQL & " WHERE " & CondLineas
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, , , adCmdText
-    Sql = "1"
+    Rs.Open SQL, Conn, , , adCmdText
+    SQL = "1"
     If Not Rs.EOF Then
         If Not IsNull(Rs.Fields(0)) Then
             If IsNumeric(Rs.Fields(0)) Then
-                Sql = CStr(Rs.Fields(0) + 1)
+                SQL = CStr(Rs.Fields(0) + 1)
             Else
                 If Asc(Left(Rs.Fields(0), 1)) <> 122 Then 'Z
-                Sql = Left(Rs.Fields(0), 1) & CStr(Asc(Right(Rs.Fields(0), 1)) + 1)
+                SQL = Left(Rs.Fields(0), 1) & CStr(Asc(Right(Rs.Fields(0), 1)) + 1)
                 End If
             End If
         End If
     End If
     Rs.Close
     Set Rs = Nothing
-    SugerirCodigoSiguienteStr = Sql
+    SugerirCodigoSiguienteStr = SQL
 ESugerirCodigo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -2655,7 +2655,7 @@ Dim Cad As String
                         If Control.Value Then
                             If Izda <> "" Then Izda = Izda & " , "
                             Izda = Izda & "" & mTag.Columna & " = "
-                            Cad = Control.index
+                            Cad = Control.Index
                             Izda = Izda & Cad
                         End If
                     End If
@@ -2787,7 +2787,7 @@ Public Function PonerFormatoDecimal(ByRef T As TextBox, tipoF As Single) As Bool
 Dim Valor As Double
 Dim PEntera As Currency
 Dim NoOK As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim cadEnt As String
 'Dim mTas As CTag
 
@@ -2805,8 +2805,8 @@ Dim cadEnt As String
             Valor = ImporteFormateado(.Text)
         Else
             cadEnt = .Text
-            I = InStr(1, cadEnt, ".")
-            If I > 0 Then cadEnt = Mid(cadEnt, 1, I - 1)
+            i = InStr(1, cadEnt, ".")
+            If i > 0 Then cadEnt = Mid(cadEnt, 1, i - 1)
             If tipoF = 1 And Len(cadEnt) > 10 Then
                 MsgBox "El valor no puede ser mayor de 9999999999,99", vbExclamation
                 NoOK = True
@@ -2872,7 +2872,7 @@ End Function
 Public Function PonerNombreDeCod(ByRef Txt As TextBox, tabla As String, Campo As String, Optional Codigo As String, Optional Tipo As String, Optional cBD As Byte, Optional codigo2 As String, Optional Valor2 As String, Optional tipo2 As String) As String
 'Devuelve el nombre/Descripción asociado al Código correspondiente
 'Además pone formato al campo txt del código a partir del Tag
-Dim Sql As String
+Dim SQL As String
 Dim Devuelve As String
 Dim vTag As CTag
 Dim ValorCodigo As String
@@ -2886,13 +2886,13 @@ Dim ValorCodigo As String
             If Codigo = "" Then Codigo = vTag.Columna
             If Tipo = "" Then Tipo = vTag.TipoDato
             
-            Sql = DevuelveDesdeBDNew(cConta, tabla, Campo, Codigo, ValorCodigo, Tipo, , codigo2, Valor2, tipo2)
+            SQL = DevuelveDesdeBDNew(cConta, tabla, Campo, Codigo, ValorCodigo, Tipo, , codigo2, Valor2, tipo2)
             If vTag.TipoDato = "N" Then ValorCodigo = Format(ValorCodigo, vTag.Formato)
             Txt.Text = ValorCodigo 'Valor codigo formateado
-            If Sql = "" Then
+            If SQL = "" Then
             
             Else
-                PonerNombreDeCod = Sql 'Descripcion del codigo
+                PonerNombreDeCod = SQL 'Descripcion del codigo
             End If
         End If
         Set vTag = Nothing
@@ -2905,17 +2905,17 @@ EPonerNombresDeCod:
 End Function
 
 Public Sub MostrarObservaciones(Cuenta As String)
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Var As String
     On Error Resume Next
 
     If Cuenta = "" Then Exit Sub
 
-    Sql = "select obsdatos from cuentas where codmacta = " & DBSet(Cuenta, "T")
+    SQL = "select obsdatos from cuentas where codmacta = " & DBSet(Cuenta, "T")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Var = DBMemo(Rs.Fields(0).Value)
     If Trim(Var) <> "" Then
         If Asc(Var) <> 13 Then
@@ -2928,17 +2928,33 @@ Dim Var As String
 End Sub
 
 Public Function EsMultiseccion(vNombre As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select esmultiseccion from " & vNombre & ".parametros "
-    EsMultiseccion = (DevuelveValor(Sql) = 1)
+    SQL = "select esmultiseccion from " & vNombre & ".parametros "
+    EsMultiseccion = (DevuelveValor(SQL) = 1)
 
 End Function
 
 Public Function TieneInmovilizado() As Boolean
-Dim Sql As String
+Dim SQL As String
     
-    Sql = "select * from paramamort "
-    TieneInmovilizado = (TotalRegistrosConsulta(Sql) <> 0)
+    SQL = "select * from paramamort "
+    TieneInmovilizado = (TotalRegistrosConsulta(SQL) <> 0)
 
 End Function
+
+
+Public Sub CargarProgres(ByRef PBar As ProgressBar, Valor As Long)
+On Error Resume Next
+    PBar.Max = 100
+    PBar.Value = 0
+    PBar.Tag = Valor
+    If Err.Number <> 0 Then Err.Clear
+End Sub
+
+Public Sub IncrementarProgres(ByRef PBar As ProgressBar, Veces As Integer)
+On Error Resume Next
+    PBar.Value = PBar.Value + ((Veces * PBar.Max) / CInt(PBar.Tag))
+    If Err.Number <> 0 Then Err.Clear
+End Sub
+

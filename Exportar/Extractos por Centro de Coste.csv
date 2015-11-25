@@ -1,0 +1,3 @@
+"CCoste";"Descripcion";"Año";"Mes";"Debe";"Haber";"coalesce(tmpsaldoscc.impmesde,0) - coalesce(tmpsaldoscc.impmesha)"
+"22";"CREADOS";"2015";"10";"110,73";"411,15";"-300,42"
+"COME";"COMERCIAL";"2015";"10";"110,75";"411,16";"-300,41"

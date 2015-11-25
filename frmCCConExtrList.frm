@@ -573,6 +573,19 @@ Begin VB.Form frmCCConExtrList
       Top             =   6630
       Width           =   1215
    End
+   Begin MSComctlLib.ProgressBar pb2 
+      Height          =   285
+      Left            =   1530
+      TabIndex        =   31
+      Top             =   6630
+      Visible         =   0   'False
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   503
+      _Version        =   393216
+      Appearance      =   1
+      Max             =   1000
+   End
 End
 Attribute VB_Name = "frmCCConExtrList"
 Attribute VB_GlobalNameSpace = False
@@ -902,14 +915,20 @@ End Sub
 
 
 Private Sub AccionesCSV()
-Dim SQL2 As String
+Dim Sql2 As String
 Dim Tipo As Byte
 
-    SQL = "select CCoste Cuenta , nomCCoste Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
-    SQL = SQL & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
-    SQL = SQL & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
-    SQL = SQL & " from tmpbalancesumas where codusu = " & vUsu.Codigo
-    SQL = SQL & " order by 1 "
+'    SQL = "select CCoste Cuenta , nomCCoste Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
+'    SQL = SQL & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
+'    SQL = SQL & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
+'    SQL = SQL & " from tmpbalancesumas where codusu = " & vUsu.Codigo
+'    SQL = SQL & " order by 1 "
+        
+    SQL = "SELECT tmpsaldoscc.codccost CCoste, tmpsaldoscc.nomccost Descripcion, tmpsaldoscc.ano Año,tmpsaldoscc.mes Mes, tmpsaldoscc.impmesde Debe, tmpsaldoscc.impmesha Haber, coalesce(tmpsaldoscc.impmesde,0) - coalesce(tmpsaldoscc.impmesha) Saldo "
+    SQL = SQL & " FROM  tmpsaldoscc tmpsaldoscc "
+    SQL = SQL & " WHERE tmpsaldoscc.codusu = " & vUsu.Codigo
+    SQL = SQL & " ORDER BY tmpsaldoscc.codccost, tmpsaldoscc.ano, tmpsaldoscc.mes"
+        
         
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
@@ -956,29 +975,49 @@ End Sub
 
 Private Function MontaSQL() As Boolean
 Dim SQL As String
-Dim SQL2 As String
+Dim Sql2 As String
 Dim RC As String
 Dim RC2 As String
+Dim B As Boolean
 
     MontaSQL = False
     
-    Conn.Execute "delete from tmpsaldoscc where codusu = " & vUsu.Codigo
+    SQL = "delete from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N")
+    Conn.Execute SQL
     
-    
-    SQL = "insert into tmpsaldoscc (codusu,codccost,nomccost,ano,mes,impmesde,impmesha) "
-    SQL = SQL & " select " & vUsu.Codigo & ", hlinapu.codccost, ccoste.nomccost, year(fechaent), month(fechaent), sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) "
-    SQL = SQL & " from hlinapu, ccoste "
-    SQL = SQL & " where hlinapu.codccost = ccoste.codccost "
+    SQL = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
+    SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
+    SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
+    SQL = SQL & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) "
+    SQL = SQL & " where (1=1) "
+    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
     If cadselect <> "" Then SQL = SQL & " and " & cadselect
-    SQL = SQL & " and fechaent >= " & DBSet(FechaInicio, "F")
-    SQL = SQL & " and fechaent <= " & DBSet(fechafin, "F")
-    SQL = SQL & " group by 1,2,3"
-    SQL = SQL & " order by 1,2,3"
+    SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
     Conn.Execute SQL
     
-    MontaSQL = True
-           
+    B = HacerRepartoSubcentrosCoste
+    
+    
+    If B Then
+        
+        Conn.Execute "delete from tmpsaldoscc where codusu = " & vUsu.Codigo
+        
+        
+        SQL = "insert into tmpsaldoscc (codusu,codccost,nomccost,ano,mes,impmesde,impmesha) "
+        SQL = SQL & " select " & vUsu.Codigo & ", tmplinccexplo.codccost, ccoste.nomccost, year(fechaent), month(fechaent), sum(coalesce(perd,0)), sum(coalesce(perh,0)) "
+        SQL = SQL & " from tmplinccexplo, ccoste "
+        SQL = SQL & " where tmplinccexplo.codccost = ccoste.codccost "
+        SQL = SQL & " and codusu = " & DBSet(vUsu.Codigo, "N")
+        SQL = SQL & " group by 1,2,3"
+        SQL = SQL & " order by 1,2,3"
+        
+        Conn.Execute SQL
+        
+        MontaSQL = True
+    
+    End If
+    
 End Function
 
 Private Function DatosOK() As Boolean
@@ -1124,3 +1163,126 @@ End Sub
 Private Sub txtTitulo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
+
+
+Private Function HacerRepartoSubcentrosCoste() As Boolean
+Dim SQL As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim ImporteTot As Currency
+Dim ImporteLinea As Currency
+Dim UltSubCC As String
+Dim Nregs As Long
+
+    On Error GoTo eHacerRepartoSubcentrosCoste
+
+    HacerRepartoSubcentrosCoste = False
+    
+    ' hacemos el desdoble
+    SQL = "select * from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N") & " and codccost in (select ccoste.codccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost) "
+
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+    Nregs = TotalRegistrosConsulta(SQL)
+
+    If Nregs <> 0 Then
+        pb2.Visible = True
+        CargarProgres pb2, Nregs
+    End If
+
+
+    While Not Rs.EOF
+        IncrementarProgres pb2, 1
+        
+        Sql2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(Rs!codccost, "T")
+
+        ImporteTot = 0
+        UltSubCC = ""
+
+        Set Rs2 = New ADODB.Recordset
+
+        Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs2.EOF
+            SQL = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH,desdoblado) values ("
+            SQL = SQL & vUsu.Codigo & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!Linapu, "T") & ","
+            SQL = SQL & DBSet(Rs!docum, "T") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs!ctactra, "T") & ","
+            SQL = SQL & DBSet(Rs!desctra, "T") & ","
+
+            If DBLet(Rs!perd, "N") <> 0 Then
+                ImporteLinea = Round(DBLet(Rs!perd, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
+                SQL = SQL & DBSet(ImporteLinea, "N") & ",0,1)"
+            Else
+                ImporteLinea = Round(DBLet(Rs!perh, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
+                SQL = SQL & "0," & DBSet(ImporteLinea, "N") & ",1)"
+            End If
+
+            Conn.Execute SQL
+
+            ImporteTot = ImporteTot + ImporteLinea
+
+            UltSubCC = Rs2!subccost
+
+            Rs2.MoveNext
+        Wend
+
+        If DBLet(Rs!perd, "N") <> 0 Then
+            If ImporteTot <> DBLet(Rs!perd, "N") Then
+                SQL = "update tmplinccexplo set perd = perd + (" & DBSet(Round(DBLet(Rs!perd, "N") - ImporteTot, 2), "N") & ")"
+                SQL = SQL & " where codusu = " & vUsu.Codigo
+                SQL = SQL & " and codccost = " & DBSet(UltSubCC, "T")
+                SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
+                SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
+                SQL = SQL & " and docum = " & DBSet(Rs!docum, "T")
+                SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+                SQL = SQL & " and desdoblado = 1"
+
+                Conn.Execute SQL
+            End If
+        Else
+            If ImporteTot <> DBLet(Rs!perh, "N") Then
+                SQL = "update tmplinccexplo set perh = perh + (" & DBSet(Round(DBLet(Rs!perh, "N") - ImporteTot, 2), "N") & ")"
+                SQL = SQL & " where codusu = " & vUsu.Codigo
+                SQL = SQL & " and codccost = " & DBSet(UltSubCC, "T")
+                SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
+                SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
+                SQL = SQL & " and docum = " & DBSet(Rs!docum, "T")
+                SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+                SQL = SQL & " and desdoblado = 1"
+
+                Conn.Execute SQL
+            End If
+        End If
+
+        SQL = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
+        SQL = SQL & " and codccost = " & DBSet(Rs!codccost, "T")
+        SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
+        SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+        SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
+        SQL = SQL & " and docum = " & DBSet(Rs!docum, "T")
+        SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+        SQL = SQL & " and desdoblado = 0"
+
+        Conn.Execute SQL
+
+        Set Rs2 = Nothing
+
+
+        Rs.MoveNext
+    Wend
+
+    Set Rs = Nothing
+
+    HacerRepartoSubcentrosCoste = True
+    pb2.Visible = False
+    Exit Function
+    
+eHacerRepartoSubcentrosCoste:
+    MuestraError Err.Number, "Reparto Subcentros de Coste", Err.Description
+    pb2.Visible = False
+End Function
+
+
