@@ -915,7 +915,7 @@ End Sub
 
 
 Private Sub AccionesCSV()
-Dim Sql2 As String
+Dim SQL2 As String
 Dim Tipo As Byte
 
 '    SQL = "select CCoste Cuenta , nomCCoste Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
@@ -975,7 +975,7 @@ End Sub
 
 Private Function MontaSQL() As Boolean
 Dim SQL As String
-Dim Sql2 As String
+Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
 Dim B As Boolean
@@ -992,6 +992,16 @@ Dim B As Boolean
     SQL = SQL & " where (1=1) "
     SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
     If cadselect <> "" Then SQL = SQL & " and " & cadselect
+    
+    SQL = SQL & " union "
+    SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
+    SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
+    SQL = SQL & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) INNER JOIN ccoste_lineas ON hlinapu.codccost = ccoste_lineas.codccost "
+    SQL = SQL & " where (1=1) "
+    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(FechaInicio, "F") & " and hlinapu.fechaent <= " & DBSet(fechafin, "F")
+    If cadselect <> "" Then SQL = SQL & " and " & Replace(cadselect, "hlinapu.codccost", "ccoste_lineas.subccost")
+    
+    
     SQL = SQL & " ORDER BY 1,2,3,4,5 "
     
     Conn.Execute SQL
@@ -1167,7 +1177,7 @@ End Sub
 
 Private Function HacerRepartoSubcentrosCoste() As Boolean
 Dim SQL As String
-Dim Sql2 As String
+Dim SQL2 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim ImporteTot As Currency
@@ -1196,18 +1206,18 @@ Dim Nregs As Long
     While Not Rs.EOF
         IncrementarProgres pb2, 1
         
-        Sql2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(Rs!codccost, "T")
+        SQL2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(Rs!codccost, "T")
 
         ImporteTot = 0
         UltSubCC = ""
 
         Set Rs2 = New ADODB.Recordset
 
-        Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs2.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs2.EOF
             SQL = "insert into tmplinccexplo (codusu,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH,desdoblado) values ("
             SQL = SQL & vUsu.Codigo & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!Linapu, "T") & ","
-            SQL = SQL & DBSet(Rs!docum, "T") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs!ctactra, "T") & ","
+            SQL = SQL & DBSet(Rs!DOCUM, "T") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs!ctactra, "T") & ","
             SQL = SQL & DBSet(Rs!desctra, "T") & ","
 
             If DBLet(Rs!perd, "N") <> 0 Then
@@ -1235,7 +1245,7 @@ Dim Nregs As Long
                 SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
                 SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
                 SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
-                SQL = SQL & " and docum = " & DBSet(Rs!docum, "T")
+                SQL = SQL & " and docum = " & DBSet(Rs!DOCUM, "T")
                 SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
                 SQL = SQL & " and desdoblado = 1"
 
@@ -1249,7 +1259,7 @@ Dim Nregs As Long
                 SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
                 SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
                 SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
-                SQL = SQL & " and docum = " & DBSet(Rs!docum, "T")
+                SQL = SQL & " and docum = " & DBSet(Rs!DOCUM, "T")
                 SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
                 SQL = SQL & " and desdoblado = 1"
 
@@ -1262,7 +1272,7 @@ Dim Nregs As Long
         SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
         SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
         SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
-        SQL = SQL & " and docum = " & DBSet(Rs!docum, "T")
+        SQL = SQL & " and docum = " & DBSet(Rs!DOCUM, "T")
         SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
         SQL = SQL & " and desdoblado = 0"
 
@@ -1275,7 +1285,17 @@ Dim Nregs As Long
     Wend
 
     Set Rs = Nothing
-
+    
+    'falta el borrado de los que no tocan
+    If txtCCoste(6).Text <> "" Or txtCCoste(7).Text <> "" Then
+        SQL = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
+        SQL = SQL & " and not codccost in (select codccost from ccoste where (1=1) "
+        If txtCCoste(6).Text <> "" Then SQL = SQL & " and codccost >= " & DBSet(txtCCoste(6).Text, "T")
+        If txtCCoste(7).Text <> "" Then SQL = SQL & " and codccost <= " & DBSet(txtCCoste(7).Text, "T")
+        SQL = SQL & ")"
+        
+        Conn.Execute SQL
+    End If
     HacerRepartoSubcentrosCoste = True
     pb2.Visible = False
     Exit Function
