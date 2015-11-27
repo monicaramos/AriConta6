@@ -410,11 +410,12 @@ Option Explicit
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
 
-Private WithEvents frmCCos  As frmCCoste
+Private WithEvents frmCCos  As frmBasico
 Attribute frmCCos.VB_VarHelpID = -1
 
 Private SQL As String
 
+Dim IndCodigo As Integer
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -503,22 +504,18 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub frmCCos_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    txtCCoste(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtNCCoste(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub ImgCCoste_Click(Index As Integer)
-    SQL = ""
-    AbiertoOtroFormEnListado = True
-    Set frmCCos = New frmCCoste
-    frmCCos.DatosADevolverBusqueda = True
-    frmCCos.Show vbModal
+    IndCodigo = Index
+    
+    Set frmCCos = New frmBasico
+    
+    AyudaCC frmCCos
+    
     Set frmCCos = Nothing
-    If SQL <> "" Then
-        Me.txtCCoste(Index).Text = RecuperaValor(SQL, 1)
-        Me.txtNCCoste(Index).Text = RecuperaValor(SQL, 2)
-    Else
-        QuitarPulsacionMas Me.txtCCoste(Index)
-    End If
     
     PonFoco Me.txtCCoste(Index)
     AbiertoOtroFormEnListado = False
@@ -583,7 +580,7 @@ Private Sub txtCCoste_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCCoste_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtCCoste(Index).Text = Trim(txtCCoste(Index).Text)
     

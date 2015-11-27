@@ -21,7 +21,7 @@ Public SoloImprimir As Boolean
 
 
 Dim Rs As Recordset
-Dim Cad As String
+Dim cad As String
 Dim SQL As String
 Dim i As Integer
 
@@ -87,12 +87,12 @@ On Error GoTo EGI_Conceptos
     InformeConceptos = False
     'Borramos los anteriores
     Conn.Execute "Delete from Usuarios.zconceptos where codusu = " & vUsu.Codigo
-    Cad = "INSERT INTO Usuarios.zconceptos (codusu, codconce, nomconce,tipoconce) VALUES ("
-    Cad = Cad & vUsu.Codigo & ",'"
+    cad = "INSERT INTO Usuarios.zconceptos (codusu, codconce, nomconce,tipoconce) VALUES ("
+    cad = cad & vUsu.Codigo & ",'"
     Set Rs = New ADODB.Recordset
     Rs.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not Rs.EOF
-        SQL = Cad & Format(Rs.Fields(0), "000")
+        SQL = cad & Format(Rs.Fields(0), "000")
         SQL = SQL & "','" & Rs.Fields(1) & "','" & Rs.Fields(3) & "')"
         Conn.Execute SQL
         'Siguiente
@@ -116,9 +116,9 @@ On Error GoTo EListadoEstadisticas
     ListadoEstadisticas = False
     Conn.Execute "Delete from Usuarios.zestadinmo1 where codusu = " & vUsu.Codigo
     'Sentencia insert
-    Cad = "INSERT INTO Usuarios.zestadinmo1 (codusu, codigo, codconam, nomconam, codinmov, nominmov,"
-    Cad = Cad & "tipoamor, porcenta, codprove, fechaadq, valoradq, amortacu, fecventa, impventa) VALUES ("
-    Cad = Cad & vUsu.Codigo & ","
+    cad = "INSERT INTO Usuarios.zestadinmo1 (codusu, codigo, codconam, nomconam, codinmov, nominmov,"
+    cad = cad & "tipoamor, porcenta, codprove, fechaadq, valoradq, amortacu, fecventa, impventa) VALUES ("
+    cad = cad & vUsu.Codigo & ","
     
     'Empezamos
     Set Rs = New ADODB.Recordset
@@ -133,7 +133,7 @@ On Error GoTo EListadoEstadisticas
         SQL = SQL & ParaBD(Rs!fechaadq, 2) & ParaBD(Rs!valoradq, 1) & ParaBD(Rs!amortacu, 1)
         SQL = SQL & ParaBD(Rs!fecventa, 2) 'FECHA
         SQL = SQL & ParaBD(Rs!impventa, 1) & ")"
-        Conn.Execute Cad & SQL
+        Conn.Execute cad & SQL
         
         'Sig
         Rs.MoveNext
@@ -154,8 +154,8 @@ On Error GoTo Err1
     ListadoFichaInmo = False
     Conn.Execute "Delete from Usuarios.zfichainmo where codusu = " & vUsu.Codigo
     'Sentencia insert
-    Cad = "INSERT INTO Usuarios.zfichainmo (codusu, codigo, codinmov, nominmov, fechaadq, valoradq, Fechaamor,Importe, porcenta) VALUES ("
-    Cad = Cad & vUsu.Codigo & ","
+    cad = "INSERT INTO Usuarios.zfichainmo (codusu, codigo, codinmov, nominmov, fechaadq, valoradq, Fechaamor,Importe, porcenta) VALUES ("
+    cad = cad & vUsu.Codigo & ","
     
     'Empezamos
     Set Rs = New ADODB.Recordset
@@ -168,7 +168,7 @@ On Error GoTo Err1
         SQL = SQL & ParaBD(Rs!fechaadq, 2) & ParaBD(Rs!valoradq, 1) & ParaBD(Rs!fechainm, 2)
         SQL = SQL & ParaBD(Rs!imporinm, 1) & ParaBD(Rs!porcinm, 1)
         SQL = SQL & ")"
-        Conn.Execute Cad & SQL
+        Conn.Execute cad & SQL
         
         'Sig
         Rs.MoveNext
@@ -191,13 +191,13 @@ End Function
 Public Function GenerarDatosCuentas(ByRef vSQL As String) As Boolean
 On Error GoTo EGen
     GenerarDatosCuentas = False
-    Cad = "Delete FROM Usuarios.zCuentas where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
-    Cad = "INSERT INTO Usuarios.zcuentas (codusu, codmacta, nommacta, razosoci,nifdatos, dirdatos, codposta, despobla, apudirec,model347) "
-    Cad = Cad & " SELECT " & vUsu.Codigo & ",ctas.codmacta, ctas.nommacta, ctas.razosoci, ctas.nifdatos, ctas.dirdatos, ctas.codposta, ctas.despobla,ctas.apudirec,ctas.model347"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".cuentas as ctas "
-    If vSQL <> "" Then Cad = Cad & " WHERE " & vSQL
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.zCuentas where codusu =" & vUsu.Codigo
+    Conn.Execute cad
+    cad = "INSERT INTO Usuarios.zcuentas (codusu, codmacta, nommacta, razosoci,nifdatos, dirdatos, codposta, despobla, apudirec,model347) "
+    cad = cad & " SELECT " & vUsu.Codigo & ",ctas.codmacta, ctas.nommacta, ctas.razosoci, ctas.nifdatos, ctas.dirdatos, ctas.codposta, ctas.despobla,ctas.apudirec,ctas.model347"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas as ctas "
+    If vSQL <> "" Then cad = cad & " WHERE " & vSQL
+    Conn.Execute cad
     GenerarDatosCuentas = True
 EGen:
     If Err.Number <> 0 Then MuestraError Err.Number
@@ -209,12 +209,12 @@ End Function
 Public Function GenerarDiarios() As Boolean
 On Error GoTo EGen
     GenerarDiarios = False
-    Cad = "Delete FROM Usuarios.ztiposdiario where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
-    Cad = "INSERT INTO Usuarios.ztiposdiario (codusu, numdiari, desdiari)"
-    Cad = Cad & " SELECT " & vUsu.Codigo & ",d.numdiari,d.desdiari"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".tiposdiario as d;"
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.ztiposdiario where codusu =" & vUsu.Codigo
+    Conn.Execute cad
+    cad = "INSERT INTO Usuarios.ztiposdiario (codusu, numdiari, desdiari)"
+    cad = cad & " SELECT " & vUsu.Codigo & ",d.numdiari,d.desdiari"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".tiposdiario as d;"
+    Conn.Execute cad
     GenerarDiarios = True
 EGen:
     If Err.Number <> 0 Then MuestraError Err.Number
@@ -225,22 +225,22 @@ End Function
 Public Function GeneraraExtractos() As Boolean
 On Error GoTo EGen
     GeneraraExtractos = False
-    Cad = "Delete FROM Usuarios.ztmpconextcab where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
-    Cad = "Delete FROM Usuarios.ztmpconext where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
-    Cad = "INSERT INTO Usuarios.ztmpconextcab "
-    Cad = Cad & "(codusu, cuenta, fechini, fechfin, acumantD, acumantH, acumantT, acumperD, acumperH, acumperT, acumtotD, acumtotH, acumtotT, cta)"
-    Cad = Cad & " SELECT " & vUsu.Codigo & ",t.cuenta, t.fechini, t.fechfin, t.acumantD, t.acumantH, t.acumantT, t.acumperD, t.acumperH, t.acumperT, t.acumtotD, t.acumtotH, t.acumtotT, t.cta"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".tmpconextcab as t where t.codusu =" & vUsu.Codigo & ";"
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.ztmpconextcab where codusu =" & vUsu.Codigo
+    Conn.Execute cad
+    cad = "Delete FROM Usuarios.ztmpconext where codusu =" & vUsu.Codigo
+    Conn.Execute cad
+    cad = "INSERT INTO Usuarios.ztmpconextcab "
+    cad = cad & "(codusu, cuenta, fechini, fechfin, acumantD, acumantH, acumantT, acumperD, acumperH, acumperT, acumtotD, acumtotH, acumtotT, cta)"
+    cad = cad & " SELECT " & vUsu.Codigo & ",t.cuenta, t.fechini, t.fechfin, t.acumantD, t.acumantH, t.acumantT, t.acumperD, t.acumperH, t.acumperT, t.acumtotD, t.acumtotH, t.acumtotT, t.cta"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconextcab as t where t.codusu =" & vUsu.Codigo & ";"
+    Conn.Execute cad
     
     
     'Las lineas
-    Cad = "INSERT INTO Usuarios.ztmpconext (codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, ampconce, timporteD, timporteH, saldo, Punteada, contra, ccost)"
-    Cad = Cad & " SELECT " & vUsu.Codigo & ",t.cta, t.numdiari, t.Pos, t.fechaent, t.numasien, t.linliapu, t.nomdocum, t.ampconce, t.timporteD, t.timporteH, t.saldo, t.Punteada, t.contra, t.ccost"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".tmpconext as t where t.codusu =" & vUsu.Codigo & ";"
-    Conn.Execute Cad
+    cad = "INSERT INTO Usuarios.ztmpconext (codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, ampconce, timporteD, timporteH, saldo, Punteada, contra, ccost)"
+    cad = cad & " SELECT " & vUsu.Codigo & ",t.cta, t.numdiari, t.Pos, t.fechaent, t.numasien, t.linliapu, t.nomdocum, t.ampconce, t.timporteD, t.timporteH, t.saldo, t.Punteada, t.contra, t.ccost"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconext as t where t.codusu =" & vUsu.Codigo & ";"
+    Conn.Execute cad
     GeneraraExtractos = True
 EGen:
     If Err.Number <> 0 Then MuestraError Err.Number
@@ -252,17 +252,17 @@ End Function
 Public Function GeneraraExtractosListado(Cuenta As String) As Boolean
 On Error GoTo EGen
     GeneraraExtractosListado = False
-    Cad = "INSERT INTO Usuarios.ztmpconextcab "
-    Cad = Cad & "(codusu, cuenta, fechini, fechfin, acumantD, acumantH, acumantT, acumperD, acumperH, acumperT, acumtotD, acumtotH, acumtotT, cta)"
-    Cad = Cad & " SELECT " & vUsu.Codigo & ",t.cuenta, t.fechini, t.fechfin, t.acumantD, t.acumantH, t.acumantT, t.acumperD, t.acumperH, t.acumperT, t.acumtotD, t.acumtotH, t.acumtotT, t.cta"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".tmpconextcab as t where t.codusu =" & vUsu.Codigo & " AND cta ='" & Cuenta & "';"
-    Conn.Execute Cad
+    cad = "INSERT INTO Usuarios.ztmpconextcab "
+    cad = cad & "(codusu, cuenta, fechini, fechfin, acumantD, acumantH, acumantT, acumperD, acumperH, acumperT, acumtotD, acumtotH, acumtotT, cta)"
+    cad = cad & " SELECT " & vUsu.Codigo & ",t.cuenta, t.fechini, t.fechfin, t.acumantD, t.acumantH, t.acumantT, t.acumperD, t.acumperH, t.acumperT, t.acumtotD, t.acumtotH, t.acumtotT, t.cta"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconextcab as t where t.codusu =" & vUsu.Codigo & " AND cta ='" & Cuenta & "';"
+    Conn.Execute cad
     
     'Las lineas
-    Cad = "INSERT INTO Usuarios.ztmpconext (codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, ampconce, timporteD, timporteH, saldo, Punteada, contra, ccost)"
-    Cad = Cad & " SELECT " & vUsu.Codigo & ",t.cta, t.numdiari, t.Pos, t.fechaent, t.numasien, t.linliapu, t.nomdocum, t.ampconce, t.timporteD, t.timporteH, t.saldo, t.Punteada, t.contra, t.ccost"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".tmpconext as t where t.codusu =" & vUsu.Codigo & " AND cta ='" & Cuenta & "';"
-    Conn.Execute Cad
+    cad = "INSERT INTO Usuarios.ztmpconext (codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, ampconce, timporteD, timporteH, saldo, Punteada, contra, ccost)"
+    cad = cad & " SELECT " & vUsu.Codigo & ",t.cta, t.numdiari, t.Pos, t.fechaent, t.numasien, t.linliapu, t.nomdocum, t.ampconce, t.timporteD, t.timporteH, t.saldo, t.Punteada, t.contra, t.ccost"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconext as t where t.codusu =" & vUsu.Codigo & " AND cta ='" & Cuenta & "';"
+    Conn.Execute cad
     GeneraraExtractosListado = True
 EGen:
     If Err.Number <> 0 Then MuestraError Err.Number
@@ -273,32 +273,32 @@ End Function
 Public Function IAsientosErrores(ByRef vSQL As String) As Boolean
 On Error GoTo EGen
     IAsientosErrores = False
-    Cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
+    Conn.Execute cad
     
     'Las lineas
-    Cad = "INSERT INTO Usuarios.zdiapendact (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum,"
-    Cad = Cad & " ampconce, timporteD, timporteH, codccost)"
-    Cad = Cad & " SELECT " & vUsu.Codigo
-    Cad = Cad & ",linapue.numdiari, tiposdiario.desdiari, linapue.fechaent, linapue.numasien, linapue.linliapu, linapue.codmacta, cuentas.nommacta, linapue.numdocum, linapue.ampconce, linapue.timporteD, linapue.timporteH, linapue.codccost"
-    Cad = Cad & " FROM (linapue LEFT JOIN tiposdiario ON linapue.numdiari = tiposdiario.numdiari) LEFT JOIN cuentas ON linapue.codmacta = cuentas.codmacta"
-    If vSQL <> "" Then Cad = Cad & " WHERE " & vSQL
+    cad = "INSERT INTO Usuarios.zdiapendact (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum,"
+    cad = cad & " ampconce, timporteD, timporteH, codccost)"
+    cad = cad & " SELECT " & vUsu.Codigo
+    cad = cad & ",linapue.numdiari, tiposdiario.desdiari, linapue.fechaent, linapue.numasien, linapue.linliapu, linapue.codmacta, cuentas.nommacta, linapue.numdocum, linapue.ampconce, linapue.timporteD, linapue.timporteH, linapue.codccost"
+    cad = cad & " FROM (linapue LEFT JOIN tiposdiario ON linapue.numdiari = tiposdiario.numdiari) LEFT JOIN cuentas ON linapue.codmacta = cuentas.codmacta"
+    If vSQL <> "" Then cad = cad & " WHERE " & vSQL
     
     
     
     
-    Conn.Execute Cad
+    Conn.Execute cad
     
     Set Rs = New ADODB.Recordset
-    Cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
-        If DBLet(Rs.Fields(0), "N") > 0 Then Cad = ""
+        If DBLet(Rs.Fields(0), "N") > 0 Then cad = ""
     End If
     Rs.Close
     Set Rs = Nothing
     
-    If Cad <> "" Then
+    If cad <> "" Then
         MsgBox "Ningun registro por mostrar.", vbExclamation
         Exit Function
     End If
@@ -312,36 +312,36 @@ End Function
 Public Function IDiariosPendientes(ByRef vSQL As String) As Boolean
 On Error GoTo EGen
     IDiariosPendientes = False
-    Cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
+    Conn.Execute cad
     
     'Las lineas
-    Cad = "INSERT INTO Usuarios.zdiapendact (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum,"
-    Cad = Cad & " ampconce, timporteD, timporteH, codccost)"
-    Cad = Cad & " SELECT " & vUsu.Codigo
-    Cad = Cad & ",cabapu_0.numdiari, tiposdiario_0.desdiari, cabapu_0.fechaent, cabapu_0.numasien, linapu_0.linliapu,"
-    Cad = Cad & " linapu_0.codmacta, cuentas_0.nommacta, linapu_0.numdocum, linapu_0.ampconce, linapu_0.timporteD, "
-    Cad = Cad & " linapu_0.timporteH, linapu_0.codccost  FROM cabapu cabapu_0, cuentas cuentas_0, linapu linapu_0, tiposdiario "
-    Cad = Cad & " tiposdiario_0  WHERE linapu_0.fechaent = cabapu_0.fechaent AND linapu_0.numasien = cabapu_0.numasien AND "
-    Cad = Cad & " linapu_0.numdiari = cabapu_0.numdiari AND tiposdiario_0.numdiari = cabapu_0.numdiari AND"
-    Cad = Cad & " tiposdiario_0.numdiari = linapu_0.numdiari AND cuentas_0.codmacta = linapu_0.codmacta"
-    If vSQL <> "" Then Cad = Cad & " AND " & vSQL
+    cad = "INSERT INTO Usuarios.zdiapendact (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum,"
+    cad = cad & " ampconce, timporteD, timporteH, codccost)"
+    cad = cad & " SELECT " & vUsu.Codigo
+    cad = cad & ",cabapu_0.numdiari, tiposdiario_0.desdiari, cabapu_0.fechaent, cabapu_0.numasien, linapu_0.linliapu,"
+    cad = cad & " linapu_0.codmacta, cuentas_0.nommacta, linapu_0.numdocum, linapu_0.ampconce, linapu_0.timporteD, "
+    cad = cad & " linapu_0.timporteH, linapu_0.codccost  FROM cabapu cabapu_0, cuentas cuentas_0, linapu linapu_0, tiposdiario "
+    cad = cad & " tiposdiario_0  WHERE linapu_0.fechaent = cabapu_0.fechaent AND linapu_0.numasien = cabapu_0.numasien AND "
+    cad = cad & " linapu_0.numdiari = cabapu_0.numdiari AND tiposdiario_0.numdiari = cabapu_0.numdiari AND"
+    cad = cad & " tiposdiario_0.numdiari = linapu_0.numdiari AND cuentas_0.codmacta = linapu_0.codmacta"
+    If vSQL <> "" Then cad = cad & " AND " & vSQL
     
     
     
     
-    Conn.Execute Cad
+    Conn.Execute cad
     
     Set Rs = New ADODB.Recordset
-    Cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
-        If DBLet(Rs.Fields(0), "N") > 0 Then Cad = ""
+        If DBLet(Rs.Fields(0), "N") > 0 Then cad = ""
     End If
     Rs.Close
     Set Rs = Nothing
     
-    If Cad <> "" Then
+    If cad <> "" Then
         MsgBox "Ningun registro por mostrar.", vbExclamation
         Exit Function
     End If
@@ -357,35 +357,35 @@ End Function
 Public Function ITotalesCtaConcepto(ByRef vSQL As String, tabla As String) As Boolean
 On Error GoTo EGen
     ITotalesCtaConcepto = False
-    Cad = "Delete FROM Usuarios.ztotalctaconce  where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.ztotalctaconce  where codusu =" & vUsu.Codigo
+    Conn.Execute cad
     
     'Las lineas
-    Cad = "INSERT INTO Usuarios.ztotalctaconce (codusu, codmacta, nommacta, nifdatos, fechaent, timporteD, timporteH, codconce)"
-    Cad = Cad & " SELECT " & vUsu.Codigo
-    Cad = Cad & " ," & tabla & ".codmacta, nommacta, nifdatos, fechaent,"
-    Cad = Cad & " timporteD,timporteH, codconce"
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".cuentas ,"
-    Cad = Cad & vUsu.CadenaConexion & "." & tabla & " WHERE cuentas.codmacta = " & tabla & ".codmacta"
-    If vSQL <> "" Then Cad = Cad & " AND " & vSQL
+    cad = "INSERT INTO Usuarios.ztotalctaconce (codusu, codmacta, nommacta, nifdatos, fechaent, timporteD, timporteH, codconce)"
+    cad = cad & " SELECT " & vUsu.Codigo
+    cad = cad & " ," & tabla & ".codmacta, nommacta, nifdatos, fechaent,"
+    cad = cad & " timporteD,timporteH, codconce"
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas ,"
+    cad = cad & vUsu.CadenaConexion & "." & tabla & " WHERE cuentas.codmacta = " & tabla & ".codmacta"
+    If vSQL <> "" Then cad = cad & " AND " & vSQL
     
     
     
     
-    Conn.Execute Cad
+    Conn.Execute cad
     
     
     'Inserto en ztmpdiarios para los que sean TODOS los conceptos
-    Cad = "Delete FROM Usuarios.ztiposdiario  where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
-    Cad = "INSERT INTO Usuarios.ztiposdiario SELECT " & vUsu.Codigo & ",codconce,nomconce FROM conceptos"
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.ztiposdiario  where codusu =" & vUsu.Codigo
+    Conn.Execute cad
+    cad = "INSERT INTO Usuarios.ztiposdiario SELECT " & vUsu.Codigo & ",codconce,nomconce FROM conceptos"
+    Conn.Execute cad
     
     
     'Contamos para ver cuantos hay
-    Cad = "Select count(*) from Usuarios.ztotalctaconce WHERE codusu =" & vUsu.Codigo
+    cad = "Select count(*) from Usuarios.ztotalctaconce WHERE codusu =" & vUsu.Codigo
     Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 0
     If Not Rs.EOF Then
         If Not IsNull(Rs.Fields(0)) Then
@@ -408,23 +408,23 @@ End Function
 Public Function IAsientosPre(ByRef vSQL As String) As Boolean
 On Error GoTo EGen
     IAsientosPre = False
-    Cad = "Delete FROM Usuarios.zasipre  where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.zasipre  where codusu =" & vUsu.Codigo
+    Conn.Execute cad
     
-    Cad = "INSERT INTO Usuarios.zasipre (codusu, numaspre, nomaspre, linlapre, codmacta, nommacta"
-    Cad = Cad & ", ampconce, timporteD, timporteH, codccost)"
+    cad = "INSERT INTO Usuarios.zasipre (codusu, numaspre, nomaspre, linlapre, codmacta, nommacta"
+    cad = cad & ", ampconce, timporteD, timporteH, codccost)"
 
-    Cad = Cad & " SELECT " & vUsu.Codigo
-    Cad = Cad & ", t1.numaspre, t1.nomaspre, t2.linlapre,t2.codmacta, t3.nommacta,t2.ampconce,"
-    Cad = Cad & "t2.timported,t2.timporteh,t2.codccost FROM "
-    Cad = Cad & vUsu.CadenaConexion & ".asipre as t1,"
-    Cad = Cad & vUsu.CadenaConexion & ".asipre_lineas as t2,"
-    Cad = Cad & vUsu.CadenaConexion & ".cuentas as t3 WHERE "
-    Cad = Cad & " t1.numaspre=t2.numaspre AND t2.codmacta=t3.codmacta"
-    If vSQL <> "" Then Cad = Cad & " AND " & vSQL
+    cad = cad & " SELECT " & vUsu.Codigo
+    cad = cad & ", t1.numaspre, t1.nomaspre, t2.linlapre,t2.codmacta, t3.nommacta,t2.ampconce,"
+    cad = cad & "t2.timported,t2.timporteh,t2.codccost FROM "
+    cad = cad & vUsu.CadenaConexion & ".asipre as t1,"
+    cad = cad & vUsu.CadenaConexion & ".asipre_lineas as t2,"
+    cad = cad & vUsu.CadenaConexion & ".cuentas as t3 WHERE "
+    cad = cad & " t1.numaspre=t2.numaspre AND t2.codmacta=t3.codmacta"
+    If vSQL <> "" Then cad = cad & " AND " & vSQL
     
     
-    Conn.Execute Cad
+    Conn.Execute cad
     IAsientosPre = True
     
 EGen:
@@ -438,28 +438,28 @@ End Function
 Public Function IHcoApuntes(ByRef vSQL As String, NumeroTabla As String) As Boolean
 On Error GoTo EGen
     IHcoApuntes = False
-    Cad = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
+    Conn.Execute cad
     
     
-    Cad = " INSERT INTO Usuarios.zhistoapu (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum, ampconce,"
-    Cad = Cad & " timporteD, timporteH, codccost) "
-    Cad = Cad & "SELECT " & vUsu.Codigo & ",hcabapu" & NumeroTabla & ".numdiari, tiposdiario.desdiari, hcabapu" & NumeroTabla & ".fechaent, hcabapu" & NumeroTabla & ".numasien, hlinapu" & NumeroTabla & ".linliapu,"
-    Cad = Cad & " hlinapu" & NumeroTabla & ".codmacta, cuentas.nommacta, hlinapu" & NumeroTabla & ".numdocum, hlinapu" & NumeroTabla & ".ampconce, hlinapu" & NumeroTabla & ".timporteD,"
-    Cad = Cad & " hlinapu" & NumeroTabla & ".timporteH, hlinapu" & NumeroTabla & ".codccost  "
-    Cad = Cad & " FROM " & vUsu.CadenaConexion & ".cuentas , " & vUsu.CadenaConexion & ".hcabapu" & NumeroTabla & " , " & vUsu.CadenaConexion & ".hlinapu" & NumeroTabla & ", " & vUsu.CadenaConexion & ".tiposdiario"
-    Cad = Cad & " WHERE hlinapu" & NumeroTabla & ".fechaent = hcabapu" & NumeroTabla & ".fechaent AND hlinapu" & NumeroTabla & ".numasien = hcabapu" & NumeroTabla & ".numasien AND"
-    Cad = Cad & " hlinapu" & NumeroTabla & ".numdiari = hcabapu" & NumeroTabla & ".numdiari AND cuentas.codmacta = hlinapu" & NumeroTabla & ".codmacta AND tiposdiario.numdiari ="
-    Cad = Cad & " hcabapu" & NumeroTabla & ".numdiari AND tiposdiario.numdiari = hlinapu" & NumeroTabla & ".numdiari"
-    If vSQL <> "" Then Cad = Cad & " AND " & vSQL
+    cad = " INSERT INTO Usuarios.zhistoapu (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum, ampconce,"
+    cad = cad & " timporteD, timporteH, codccost) "
+    cad = cad & "SELECT " & vUsu.Codigo & ",hcabapu" & NumeroTabla & ".numdiari, tiposdiario.desdiari, hcabapu" & NumeroTabla & ".fechaent, hcabapu" & NumeroTabla & ".numasien, hlinapu" & NumeroTabla & ".linliapu,"
+    cad = cad & " hlinapu" & NumeroTabla & ".codmacta, cuentas.nommacta, hlinapu" & NumeroTabla & ".numdocum, hlinapu" & NumeroTabla & ".ampconce, hlinapu" & NumeroTabla & ".timporteD,"
+    cad = cad & " hlinapu" & NumeroTabla & ".timporteH, hlinapu" & NumeroTabla & ".codccost  "
+    cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas , " & vUsu.CadenaConexion & ".hcabapu" & NumeroTabla & " , " & vUsu.CadenaConexion & ".hlinapu" & NumeroTabla & ", " & vUsu.CadenaConexion & ".tiposdiario"
+    cad = cad & " WHERE hlinapu" & NumeroTabla & ".fechaent = hcabapu" & NumeroTabla & ".fechaent AND hlinapu" & NumeroTabla & ".numasien = hcabapu" & NumeroTabla & ".numasien AND"
+    cad = cad & " hlinapu" & NumeroTabla & ".numdiari = hcabapu" & NumeroTabla & ".numdiari AND cuentas.codmacta = hlinapu" & NumeroTabla & ".codmacta AND tiposdiario.numdiari ="
+    cad = cad & " hcabapu" & NumeroTabla & ".numdiari AND tiposdiario.numdiari = hlinapu" & NumeroTabla & ".numdiari"
+    If vSQL <> "" Then cad = cad & " AND " & vSQL
     
     
     
     
-    Conn.Execute Cad
+    Conn.Execute cad
     
-    Cad = DevuelveDesdeBD("count(*)", "Usuarios.zhistoapu", "codusu", vUsu.Codigo, "N")
-    If Val(Cad) = 0 Then
+    cad = DevuelveDesdeBD("count(*)", "Usuarios.zhistoapu", "codusu", vUsu.Codigo, "N")
+    If Val(cad) = 0 Then
         MsgBox "Ningun registro seleccionado", vbExclamation
     Else
         IHcoApuntes = True
@@ -479,20 +479,20 @@ On Error GoTo EGen
     'Conn.Execute Cad
     
     
-    Cad = " INSERT INTO Usuarios.zhistoapu (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum, ampconce,"
-    Cad = Cad & " timporteD, timporteH, codccost) "
-    Cad = Cad & "SELECT " & vUsu.Codigo & ",hcabapu.numdiari, tiposdiario.desdiari, hcabapu.fechaent, hcabapu.numasien, hlinapu.linliapu,"
-    Cad = Cad & " hlinapu.codmacta, cuentas.nommacta, hlinapu.numdocum, hlinapu.ampconce, hlinapu.timporteD,"
-    Cad = Cad & " hlinapu.timporteH, hlinapu.codccost  "
-    Cad = Cad & " FROM cuentas , hcabapu,hlinapu,tiposdiario"
-    Cad = Cad & " WHERE hlinapu.fechaent = hcabapu.fechaent AND hlinapu.numasien = hcabapu.numasien AND"
-    Cad = Cad & " hlinapu.numdiari = hcabapu.numdiari AND cuentas.codmacta = hlinapu.codmacta AND tiposdiario.numdiari ="
-    Cad = Cad & " hcabapu.numdiari AND tiposdiario.numdiari = hlinapu.numdiari"
-    Cad = Cad & " AND hcabapu.numasien  =" & RecuperaValor(Cadena1, 1)
-    Cad = Cad & " AND hcabapu.fechaent  ='" & RecuperaValor(Cadena1, 2)
-    Cad = Cad & "' AND hcabapu.numdiari =" & RecuperaValor(Cadena1, 3)
+    cad = " INSERT INTO Usuarios.zhistoapu (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum, ampconce,"
+    cad = cad & " timporteD, timporteH, codccost) "
+    cad = cad & "SELECT " & vUsu.Codigo & ",hcabapu.numdiari, tiposdiario.desdiari, hcabapu.fechaent, hcabapu.numasien, hlinapu.linliapu,"
+    cad = cad & " hlinapu.codmacta, cuentas.nommacta, hlinapu.numdocum, hlinapu.ampconce, hlinapu.timporteD,"
+    cad = cad & " hlinapu.timporteH, hlinapu.codccost  "
+    cad = cad & " FROM cuentas , hcabapu,hlinapu,tiposdiario"
+    cad = cad & " WHERE hlinapu.fechaent = hcabapu.fechaent AND hlinapu.numasien = hcabapu.numasien AND"
+    cad = cad & " hlinapu.numdiari = hcabapu.numdiari AND cuentas.codmacta = hlinapu.codmacta AND tiposdiario.numdiari ="
+    cad = cad & " hcabapu.numdiari AND tiposdiario.numdiari = hlinapu.numdiari"
+    cad = cad & " AND hcabapu.numasien  =" & RecuperaValor(Cadena1, 1)
+    cad = cad & " AND hcabapu.fechaent  ='" & RecuperaValor(Cadena1, 2)
+    cad = cad & "' AND hcabapu.numdiari =" & RecuperaValor(Cadena1, 3)
     
-    Conn.Execute Cad
+    Conn.Execute cad
     IHcoApuntesAlActualizarModificar = True
     
 EGen:
@@ -508,15 +508,15 @@ On Error GoTo EGeneraDatosHcoInmov
     GeneraDatosHcoInmov = False
         
     'Borramos tmp
-    Cad = "Delete from Usuarios.zfichainmo where codusu = " & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete from Usuarios.zfichainmo where codusu = " & vUsu.Codigo
+    Conn.Execute cad
     'Abrimos datos
     Set Rs = New ADODB.Recordset
     Rs.Open vSQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Rs.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
-        Cad = "INSERT INTO Usuarios.zfichainmo (codusu, codigo, codinmov, nominmov, fechaadq, valoradq, fechaamor, Importe, porcenta) VALUES (" & vUsu.Codigo & ","
+        cad = "INSERT INTO Usuarios.zfichainmo (codusu, codigo, codinmov, nominmov, fechaadq, valoradq, fechaamor, Importe, porcenta) VALUES (" & vUsu.Codigo & ","
         TotalReg = 0
         While Not Rs.EOF
            
@@ -524,7 +524,7 @@ On Error GoTo EGeneraDatosHcoInmov
             'Metemos los nuevos datos
             SQL = TotalReg & ParaBD(Rs!Codinmov, 1) & ",'" & DevNombreSQL(CStr(Rs!nominmov)) & "'" & ParaBD(Rs!fechainm, 2)
             SQL = SQL & ",NULL,NULL" & ParaBD(Rs!imporinm, 1) & ParaBD(Rs!porcinm, 1) & ")"
-            SQL = Cad & SQL
+            SQL = cad & SQL
             Conn.Execute SQL
             Rs.MoveNext
         Wend
@@ -548,8 +548,8 @@ On Error GoTo EGeneraDatosConceptosInmov
     GeneraDatosConceptosInmov = False
         
     'Borramos tmp
-    Cad = "Delete from Usuarios.ztmppresu1 where codusu = " & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete from Usuarios.ztmppresu1 where codusu = " & vUsu.Codigo
+    Conn.Execute cad
     'Abrimos datos
     SQL = "Select * from inmovcon"
     Set Rs = New ADODB.Recordset
@@ -557,12 +557,12 @@ On Error GoTo EGeneraDatosConceptosInmov
     If Rs.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
-        Cad = "INSERT INTO Usuarios.ztmppresu1 (codusu, codigo, cta, titulo, ano, mes, Importe) VALUES (" & vUsu.Codigo
+        cad = "INSERT INTO Usuarios.ztmppresu1 (codusu, codigo, cta, titulo, ano, mes, Importe) VALUES (" & vUsu.Codigo
         While Not Rs.EOF
             'Metemos los nuevos datos
             SQL = ParaBD(Rs!codconam, 1) & ",'" & Format(Rs!codconam, "0000") & "'" & ParaBD(Rs!nomconam)
             SQL = SQL & ",0" & ParaBD(Rs!perimaxi, 1) & ParaBD(Rs!coefimaxi, 1) & ")"
-            SQL = Cad & SQL
+            SQL = cad & SQL
             Conn.Execute SQL
             Rs.MoveNext
         Wend
@@ -628,7 +628,7 @@ End Sub
 
 Public Function PonerDesdeHasta(Campo As String, Tipo As String, ByRef Desde As TextBox, ByRef DesD As TextBox, ByRef Hasta As TextBox, ByRef DesH As TextBox, param As String) As Boolean
 Dim Devuelve As String
-Dim Cad As String
+Dim cad As String
 Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
 
 
@@ -680,10 +680,10 @@ Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
         If Not AnyadirAFormula(cadselect, Devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        Cad = CadenaDesdeHastaBD(Desde.Text, Hasta.Text, Campo, Subtipo)
-        Cad = Replace(Cad, "{", "")
-        Cad = Replace(Cad, "}", "")
-        If Not AnyadirAFormula(cadselect, Cad) Then Exit Function
+        cad = CadenaDesdeHastaBD(Desde.Text, Hasta.Text, Campo, Subtipo)
+        cad = Replace(cad, "{", "")
+        cad = Replace(cad, "}", "")
+        If Not AnyadirAFormula(cadselect, cad) Then Exit Function
     End If
     
     If Devuelve <> "" Then
@@ -714,24 +714,24 @@ End Function
 
 
 
-Private Function AnyadirParametroDH(Cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
+Private Function AnyadirParametroDH(cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
 On Error Resume Next
     
     
     If Not TextoDESDE Is Nothing Then
          If TextoDESDE.Text <> "" Then
-            Cad = Cad & "desde " & TextoDESDE.Text
+            cad = cad & "desde " & TextoDESDE.Text
 '            If TD.Caption <> "" Then Cad = Cad & " - " & TD.Caption
         End If
     End If
     If Not TextoHasta Is Nothing Then
         If TextoHasta.Text <> "" Then
-            Cad = Cad & "  hasta " & TextoHasta.Text
+            cad = cad & "  hasta " & TextoHasta.Text
 '            If TH.Caption <> "" Then Cad = Cad & " - " & TH.Caption
         End If
     End If
     
-    AnyadirParametroDH = Cad
+    AnyadirParametroDH = cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -818,7 +818,7 @@ Public Function ImprimeGeneral() As Boolean
 
     HaPulsadoImprimir = False
     cadPDFrpt = cadNomRPT
-    With frmVisReportN
+    With frmVisReport
         .Informe = App.Path & "\Informes\"
         If ExportarPDF Then
             'PDF
@@ -866,7 +866,7 @@ End Sub
 
 Public Sub LanzaProgramaAbrirOutlook(outTipoDocumento As Integer)
 Dim NombrePDF As String
-Dim AUx As String
+Dim Aux As String
 Dim Lanza As String
 
     On Error GoTo ELanzaProgramaAbrirOutlook
@@ -879,121 +879,121 @@ Dim Lanza As String
     Select Case outTipoDocumento
     Case 1
         'Conceptos
-        AUx = "Conceptos.pdf"
+        Aux = "Conceptos.pdf"
     Case 2
         'Cuentas contables
-        AUx = "Cuentas.pdf"
+        Aux = "Cuentas.pdf"
     Case 3
         'Asientos Predefinidos
-        AUx = "Asientos Predefinidos.pdf"
+        Aux = "Asientos Predefinidos.pdf"
     Case 4
-        AUx = "Tipos Diario.pdf"
+        Aux = "Tipos Diario.pdf"
     Case 5
-        AUx = "Asientos.pdf"
+        Aux = "Asientos.pdf"
     Case 6
-        AUx = "Tipos de Iva.pdf"
+        Aux = "Tipos de Iva.pdf"
     Case 7
-        AUx = "Tipos de Pago.pdf"
+        Aux = "Tipos de Pago.pdf"
     Case 8
-        AUx = "Formas de Pago.pdf"
+        Aux = "Formas de Pago.pdf"
     Case 9
-        AUx = "Bancos.pdf"
+        Aux = "Bancos.pdf"
     Case 10
-        AUx = "Bic/Swift.pdf"
+        Aux = "Bic/Swift.pdf"
     Case 11
-        AUx = "Agentes.pdf"
+        Aux = "Agentes.pdf"
     Case 12
-        AUx = "Informes.pdf"
+        Aux = "Informes.pdf"
     Case 13
-        AUx = "Bancos.pdf"
+        Aux = "Bancos.pdf"
     Case 14
-        AUx = "AsientosHco.pdf"
+        Aux = "AsientosHco.pdf"
     Case 15
-        AUx = "Listado de Facturas de Cliente.pdf"
+        Aux = "Listado de Facturas de Cliente.pdf"
     Case 16
-        AUx = "Relación de Clientes por Cta Ventas.pdf"
+        Aux = "Relación de Clientes por Cta Ventas.pdf"
     Case 17
-        AUx = "Listado de Facturas de Proveedores.pdf"
+        Aux = "Listado de Facturas de Proveedores.pdf"
     Case 18
-        AUx = "Relación de Proveedores por Cta Gastos.pdf"
+        Aux = "Relación de Proveedores por Cta Gastos.pdf"
     Case 19
-        AUx = "Modelo 303.pdf"
+        Aux = "Modelo 303.pdf"
     Case 20
-        AUx = "Modelo 340.pdf"
+        Aux = "Modelo 340.pdf"
     Case 21
-        AUx = "Modelo 347.pdf"
+        Aux = "Modelo 347.pdf"
     Case 51
         
     Case 100
         
     End Select
-    NombrePDF = App.Path & "\temp\" & AUx
+    NombrePDF = App.Path & "\temp\" & Aux
     If Dir(NombrePDF, vbArchive) <> "" Then Kill NombrePDF
     FileCopy App.Path & "\docum.pdf", NombrePDF
     
-    AUx = FijaDireccionEmail(outTipoDocumento)
-    Lanza = AUx & "|"
-    AUx = ""
+    Aux = FijaDireccionEmail(outTipoDocumento)
+    Lanza = Aux & "|"
+    Aux = ""
     Select Case outTipoDocumento
     Case 1
-        AUx = "Conceptos"
+        Aux = "Conceptos"
     Case 2
-        AUx = "Cuentas"
+        Aux = "Cuentas"
     Case 3
         'Asientos Predefinidos
-        AUx = "Asientos Predefinidos"
+        Aux = "Asientos Predefinidos"
     Case 4
-        AUx = "Tipos Diario"
+        Aux = "Tipos Diario"
     Case 5
-        AUx = "Asientos"
+        Aux = "Asientos"
     Case 6
-        AUx = "Tipos de Iva"
+        Aux = "Tipos de Iva"
     Case 7
-        AUx = "Tipos de Pago"
+        Aux = "Tipos de Pago"
     Case 8
-        AUx = "Formas de Pago"
+        Aux = "Formas de Pago"
     Case 9
-        AUx = "Bancos"
+        Aux = "Bancos"
     Case 10
-        AUx = "Bic/Swift"
+        Aux = "Bic/Swift"
     Case 11
-        AUx = "Agentes"
+        Aux = "Agentes"
     Case 12
-        AUx = "Informes"
+        Aux = "Informes"
     Case 13
-        AUx = "Bancos"
+        Aux = "Bancos"
     Case 14
-        AUx = "AsientosHco"
+        Aux = "AsientosHco"
     Case 15
-        AUx = "Listado de Facturas de Cliente"
+        Aux = "Listado de Facturas de Cliente"
     Case 16
-        AUx = "Relación de Clientes por Cta Ventas"
+        Aux = "Relación de Clientes por Cta Ventas"
     Case 17
-        AUx = "Listado de Facturas de Proveedores"
+        Aux = "Listado de Facturas de Proveedores"
     Case 18
-        AUx = "Relación de Proveedores por Cta Gastos"
+        Aux = "Relación de Proveedores por Cta Gastos"
     Case 19
-        AUx = "Modelo 303"
+        Aux = "Modelo 303"
     Case 20
-        AUx = "Modelo 340"
+        Aux = "Modelo 340"
     Case 21
-        AUx = "Modelo 347"
+        Aux = "Modelo 347"
         
         
     '--------------------------------------------------
     Case 51
-        AUx = "Pedido proveedor nº: " ' & outClaveNombreArchiv
+        Aux = "Pedido proveedor nº: " ' & outClaveNombreArchiv
         
     Case 100
-        AUx = "Factura nº" '& outClaveNombreArchiv
+        Aux = "Factura nº" '& outClaveNombreArchiv
         
     End Select
     
-    Lanza = Lanza & AUx & "|"
+    Lanza = Lanza & Aux & "|"
     
     'Aqui pondremos lo del texto del BODY
-    AUx = ""
-    Lanza = Lanza & AUx & "|"
+    Aux = ""
+    Lanza = Lanza & Aux & "|"
     
     
     'Envio o mostrar
@@ -1005,8 +1005,8 @@ Dim Lanza As String
     'El/los adjuntos
     Lanza = Lanza & NombrePDF & "|"
     
-    AUx = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
-    Shell AUx, vbNormalFocus
+    Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
+    Shell Aux, vbNormalFocus
     
     Exit Sub
 ELanzaProgramaAbrirOutlook:
@@ -1080,7 +1080,7 @@ End Function
 
 Public Function LanzaMailGnral(dirMail As String) As Boolean
 'LLama al Programa de Correo (Outlook,...)
-Dim AUx As String
+Dim Aux As String
 Dim Lanza As String
 
 On Error GoTo ELanzaHome
@@ -1095,12 +1095,12 @@ On Error GoTo ELanzaHome
         Exit Function
     End If
 
-    AUx = dirMail
-    Lanza = Lanza & AUx & "||"
+    Aux = dirMail
+    Lanza = Lanza & Aux & "||"
 
     'Aqui pondremos lo del texto del BODY
-    AUx = ""
-    Lanza = Lanza & AUx & "|"
+    Aux = ""
+    Lanza = Lanza & Aux & "|"
 
     'Envio o mostrar
     Lanza = Lanza & "0"   '0. Display   1.  send
@@ -1111,8 +1111,8 @@ On Error GoTo ELanzaHome
     'El/los adjuntos
     Lanza = Lanza & "|"
 
-    AUx = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
-    Shell AUx, vbNormalFocus
+    Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
+    Shell Aux, vbNormalFocus
 
     LanzaMailGnral = True
 
@@ -1153,17 +1153,17 @@ Dim SQL As String
 End Function
 
 Public Function PonerParamRPT(indice As String, nomDocu As String) As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Encontrado As Boolean
 
         nomDocu = ""
         Encontrado = False
         PonerParamRPT = False
         
-        Cad = "select informe from scryst where codigo = " & DBSet(indice, "T")
+        cad = "select informe from scryst where codigo = " & DBSet(indice, "T")
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not Rs.EOF Then
             nomDocu = DBLet(Rs!Informe, "T")
@@ -1171,8 +1171,8 @@ Dim Encontrado As Boolean
         End If
         
         If Encontrado = False Or nomDocu = "" Then
-            Cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
-            MsgBox Cad & "Debe configurar la aplicación.", vbExclamation
+            cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
+            MsgBox cad & "Debe configurar la aplicación.", vbExclamation
             PonerParamRPT = False
             Exit Function
         End If

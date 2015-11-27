@@ -133,7 +133,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public opcion As Integer
+Public Opcion As Integer
     'O .- Conceptos
     '1 .- Cuentas
     '2 .- Tipos diario
@@ -344,17 +344,17 @@ Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
-Dim Cad As String
+Dim cad As String
 
     Me.Icon = frmPpal.Icon
 
 PrimeraVez = True
 Lanzado = False
 CargaICO
-Cad = Dir(App.Path & "\impre.dat", vbArchive)
+cad = Dir(App.Path & "\impre.dat", vbArchive)
 
 'ReestableceSoloImprimir = False
-If Cad = "" Then
+If cad = "" Then
     chkSoloImprimir.Value = 0
     Else
     chkSoloImprimir.Value = 1
@@ -377,7 +377,7 @@ MostrarTree = False
 
     MIPATH = App.Path & "\Informes\"
 
-Select Case opcion
+Select Case Opcion
 Case 0
     Text1.Text = "Conceptos"
     Nombre = "Conceptos.rpt"
@@ -635,21 +635,21 @@ Case 58
 
 Case 59 To 62
     Text1.Text = "Cta explotación conosolidada. "
-    Select Case opcion
+    Select Case Opcion
     Case 59
-        Cad = "11"
+        cad = "11"
         Text1.Text = Text1.Text & "SIN Movimientos"
     Case 60
-        Cad = "12"
+        cad = "12"
         Text1.Text = Text1.Text & "SIN movi. Desglose"
     Case 61
-        Cad = "21"
+        cad = "21"
         Text1.Text = Text1.Text & "Con movimientos."
     Case Else
-        Cad = "22"
+        cad = "22"
         Text1.Text = Text1.Text & "Con movi. Desglose"
     End Select
-    Nombre = "ctaexplotC" & Cad & ".rpt"
+    Nombre = "ctaexplotC" & cad & ".rpt"
     
 Case 63
     Text1.Text = "Liquidación IVA Detallada"
@@ -677,14 +677,14 @@ Case 68
 
 Case 69, 70
     Text1.Text = "L. Facturas Proveedores Consolidado"
-    If opcion = 69 Then
+    If Opcion = 69 Then
         Nombre = "facpr_n.rpt"
     Else
         Nombre = "facpr_f.rpt"
     End If
 Case 71, 72
     Text1.Text = "L Facturas clientes Consolidado"
-    If opcion = 71 Then
+    If Opcion = 71 Then
         Nombre = "faccl_n.rpt"
     Else
         Nombre = "faccl_f.rpt"
@@ -712,10 +712,10 @@ Case 76
 Case 77, 78, 82
     Text1.Text = "Client/Proveed por cta ventas/compras"
     Nombre = "ctaxbase"
-    If opcion = 78 Then
+    If Opcion = 78 Then
         Text1.Text = Text1.Text & " DESGLOSE"
         Nombre = Nombre & "des"
-    ElseIf opcion = 82 Then
+    ElseIf Opcion = 82 Then
         Text1.Text = Text1.Text & " COMPARATIVO"
         Nombre = Nombre & "com"
     End If
@@ -760,7 +760,7 @@ Case 86
 Case 90, 91
     Text1.Text = "Analitica comparativo"
     Nombre = "ctaexpcc_c"
-    If opcion = 90 Then
+    If Opcion = 90 Then
         Text1.Text = Text1.Text & " mensual"
         Nombre = Nombre & "M"
     Else
@@ -802,7 +802,7 @@ Case 98
 Case 100, 101
     Text1.Text = "LOG"
     Nombre = "rListLogCon"
-    If opcion = 101 Then Nombre = Nombre & "Tr"
+    If Opcion = 101 Then Nombre = Nombre & "Tr"
     Nombre = Nombre & ".rpt"
     
 Case 102
@@ -811,7 +811,7 @@ Case 102
     
     
 Case Else
-    Text1.Text = "Opcion incorrecta (" & opcion & ")"
+    Text1.Text = "Opcion incorrecta (" & Opcion & ")"
     Me.cmdImprimir.Enabled = False
 End Select
 
@@ -909,7 +909,7 @@ Dim Seguir As Boolean
 
     Screen.MousePointer = vbHourglass
     CadenaDesdeOtroForm = ""
-    With frmVisReportN
+    With frmVisReport
         
         .FormulaSeleccion = Me.FormulaSeleccion
         .SoloImprimir = (Me.chkSoloImprimir.Value = 0)
