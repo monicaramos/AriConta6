@@ -41,15 +41,6 @@ Begin VB.Form frmZoom
       Width           =   1185
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   4845
       Index           =   0
       Left            =   240
@@ -105,5 +96,5 @@ Private Sub Form_Load()
     Text1(0).Enabled = Not (pModo <> 3 And pModo <> 4)
     Me.cmdActualizar.Visible = (pModo = 3 Or pModo = 4)
     
-    SendKeys "^{END}"
+'    SendKeys "^{END}"
 End Sub
