@@ -522,7 +522,7 @@ Private TextoBusqueda As String
 Dim CadAncho As Boolean  'Para cuando llamemos al al form de lineas
 Dim Modo As Byte
 Dim jj As Integer
-Dim SQL As String
+Dim sql As String
 Dim PrimeraVez As Boolean
 Dim cadFiltro As String
 
@@ -630,18 +630,18 @@ Private Sub BotonAnyadir()
          
      Else
         Dim Quitar As Boolean
-        Quitar = False
-        If TieneEjercicio(Adodc1.Recordset.Fields(0), False) And TieneEjercicio(Adodc1.Recordset.Fields(0), True) Then
-            If MsgBox("Esta cuenta ya tiene presupuestos para ejercicio actual y el siguiente. ¿Desea continuar?.", vbQuestion + vbYesNo + vbDefault) = vbNo Then
-                Exit Sub
-            End If
-            Quitar = True
-        End If
-     
+'        Quitar = False
+'        If TieneEjercicio(Adodc1.Recordset.Fields(0), False) And TieneEjercicio(Adodc1.Recordset.Fields(0), True) Then
+'            If MsgBox("Esta cuenta ya tiene presupuestos para ejercicio actual y el siguiente. ¿Desea continuar?.", vbQuestion + vbYesNo + vbDefault) = vbNo Then
+'                Exit Sub
+'            End If
+'            Quitar = True
+'        End If
+        Quitar = True
      
         Set frmGen = New frmPresuGenerar
         
-        frmGen.opcion = 0
+        frmGen.Opcion = 0
         frmGen.Caption = "Inserción de Presupuestos"
         If Not Quitar Then
             frmGen.txtCta(0) = Adodc1.Recordset(0).Value
@@ -659,16 +659,16 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Function TieneEjercicio(Cta As String, Actual As Boolean) As Boolean
-Dim SQL As String
+Dim sql As String
 
-    SQL = "select count(*) from presupuestos where codmacta = " & DBSet(Cta, "T") & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-1')) "
+    sql = "select count(*) from presupuestos where codmacta = " & DBSet(Cta, "T") & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-1')) "
     If Actual Then
-        SQL = SQL & " between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+        sql = sql & " between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     Else
-        SQL = SQL & " between " & DBSet(DateAdd("yyyy", 1, vParam.fechaini), "F") & " and " & DBSet(DateAdd("yyyy", 1, vParam.fechafin), "F")
+        sql = sql & " between " & DBSet(DateAdd("yyyy", 1, vParam.fechaini), "F") & " and " & DBSet(DateAdd("yyyy", 1, vParam.fechafin), "F")
     End If
 
-    TieneEjercicio = (TotalRegistros(SQL) <> 0)
+    TieneEjercicio = (TotalRegistros(sql) <> 0)
 
 
 
@@ -704,7 +704,7 @@ Private Sub BotonModificar()
     '---------
     'MODIFICAR
     '----------
-    Dim Cad As String
+    Dim cad As String
     Dim anc As Single
     Dim i As Integer
     If Adodc1.Recordset.EOF Then Exit Sub
@@ -739,9 +739,9 @@ Private Sub BotonModificar()
          anc = FijarVariableAnc(DataGrid1)
          
          
-         Cad = ""
+         cad = ""
          For i = 0 To 1
-             Cad = Cad & DataGrid1.Columns(i).Text & "|"
+             cad = cad & DataGrid1.Columns(i).Text & "|"
          Next i
          'Llamamos al form
          For i = 0 To txtaux.Count - 1
@@ -756,7 +756,7 @@ Private Sub BotonModificar()
         Screen.MousePointer = vbDefault
         
         Set frmGen = New frmPresuGenerar
-        frmGen.opcion = 0
+        frmGen.Opcion = 0
         frmGen.Modo = 1 'modificar
         frmGen.Caption = "Modificacion de Presupuestos"
         frmGen.txtCta(0) = Adodc1.Recordset(0).Value
@@ -785,7 +785,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim sql As String
 Dim vFecIni As String
 Dim vFecFin As String
 
@@ -795,30 +795,30 @@ Dim vFecFin As String
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
-    SQL = "Seguro que desea eliminar la linea de presupuesto:" & vbCrLf
-    SQL = SQL & vbCrLf & "Cuenta: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
+    sql = "Seguro que desea eliminar la linea de presupuesto:" & vbCrLf
+    sql = sql & vbCrLf & "Cuenta: " & Adodc1.Recordset.Fields(0)
+    sql = sql & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
     
     If Not Agrupado Then
-        SQL = SQL & vbCrLf & "Año       : " & Adodc1.Recordset.Fields(2)
-        SQL = SQL & vbCrLf & "Mes  : " & Adodc1.Recordset.Fields(3)
+        sql = sql & vbCrLf & "Año       : " & Adodc1.Recordset.Fields(2)
+        sql = sql & vbCrLf & "Mes  : " & Adodc1.Recordset.Fields(3)
     Else
-        SQL = SQL & vbCrLf & "Período   : " & Adodc1.Recordset.Fields(2)
+        sql = sql & vbCrLf & "Período   : " & Adodc1.Recordset.Fields(2)
     End If
     
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from presupuestos where codmacta='" & Trim(Adodc1.Recordset.Fields(0)) & "'"
+        sql = "Delete from presupuestos where codmacta='" & Trim(Adodc1.Recordset.Fields(0)) & "'"
         If Not Agrupado Then
-            SQL = SQL & " and anopresu =" & Adodc1.Recordset!anopresu
-            SQL = SQL & " and mespresu = " & Adodc1.Recordset!mespresu & " ;"
+            sql = sql & " and anopresu =" & Adodc1.Recordset!anopresu
+            sql = sql & " and mespresu = " & Adodc1.Recordset!mespresu & " ;"
         Else
             vFecIni = Adodc1.Recordset.Fields(2) & "-" & Format(Month(vParam.fechaini), "00") & "-01"
             vFecFin = DateAdd("d", -1, DateAdd("yyyy", 1, vFecIni))
         
-            SQL = SQL & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-01')) between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
+            sql = sql & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-01')) between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
         End If
-        Conn.Execute SQL
+        Conn.Execute sql
         CargarTemporal
         CargaGrid CadB
         Adodc1.Recordset.Cancel
@@ -903,15 +903,15 @@ Select Case Modo
 End Sub
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "codmacta = '" & Adodc1.Recordset.Fields(0) & "' and anopresu = " & Adodc1.Recordset.Fields(2) & " and mespresu = " & Adodc1.Recordset.Fields(3)
+    cad = "codmacta = '" & Adodc1.Recordset.Fields(0) & "' and anopresu = " & Adodc1.Recordset.Fields(2) & " and mespresu = " & Adodc1.Recordset.Fields(3)
     ' ***************************************
     CargaGrid CadB
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarDataMULTI(Adodc1, Cad, Indicador, True) Then
+    If SituarDataMULTI(Adodc1, cad, Indicador, True) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -1034,7 +1034,7 @@ End Sub
 
 
 Private Sub CargarTemporal()
-Dim SQL As String
+Dim sql As String
 Dim SQL2 As String
 Dim SqlInsert As String
 Dim CadValues As String
@@ -1050,25 +1050,25 @@ Dim Rs As ADODB.Recordset
 
 
 
-    SQL = "delete from tmppresu1 where codusu = " & DBSet(vUsu.Codigo, "N")
-    Conn.Execute SQL
+    sql = "delete from tmppresu1 where codusu = " & DBSet(vUsu.Codigo, "N")
+    Conn.Execute sql
 
     SqlInsert = "insert into tmppresu1 (codusu,codigo,cta,ejercicio,ano,Importe) values "
 
-    SQL = "select min(anopresu) from presupuestos"
-    AnyoMin = DevuelveValor(SQL)
+    sql = "select min(anopresu) from presupuestos"
+    AnyoMin = DevuelveValor(sql)
     
     
-    SQL = "select max(anopresu) from presupuestos"
-    AnyoMax = DevuelveValor(SQL)
+    sql = "select max(anopresu) from presupuestos"
+    AnyoMax = DevuelveValor(sql)
     
     MesI = Month(vParam.fechaini)
     MesF = Month(vParam.fechafin)
     
-    SQL = "select distinct codmacta from presupuestos order by 1"
+    sql = "select distinct codmacta from presupuestos order by 1"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     CadValues = ""
     J = 0
@@ -1082,26 +1082,26 @@ Dim Rs As ADODB.Recordset
                 SQL2 = SQL2 & "  (anopresu = " & DBSet(i + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
                 
                 
-                SQL = "select sum(coalesce(imppresu,0)) "
-                SQL = SQL & " from presupuestos "
-                SQL = SQL & " Where codmacta = " & DBSet(Rs!codmacta, "T")
-                SQL = SQL & " and ((anopresu = " & DBSet(i, "N") & " and mespresu >=" & DBSet(MesI, "N") & ") or "
-                SQL = SQL & " (anopresu = " & DBSet(i + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
+                sql = "select sum(coalesce(imppresu,0)) "
+                sql = sql & " from presupuestos "
+                sql = sql & " Where codmacta = " & DBSet(Rs!codmacta, "T")
+                sql = sql & " and ((anopresu = " & DBSet(i, "N") & " and mespresu >=" & DBSet(MesI, "N") & ") or "
+                sql = sql & " (anopresu = " & DBSet(i + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
             Else
                 SQL2 = "select count(*) "
                 SQL2 = SQL2 & " from presupuestos "
                 SQL2 = SQL2 & " Where codmacta = " & DBSet(Rs!codmacta, "T")
                 SQL2 = SQL2 & " and anopresu = " & DBSet(i, "N")
                 
-                SQL = "select sum(coalesce(imppresu,0)) "
-                SQL = SQL & " from presupuestos "
-                SQL = SQL & " Where codmacta = " & DBSet(Rs!codmacta, "T")
-                SQL = SQL & " and anopresu = " & DBSet(i, "N")
+                sql = "select sum(coalesce(imppresu,0)) "
+                sql = sql & " from presupuestos "
+                sql = sql & " Where codmacta = " & DBSet(Rs!codmacta, "T")
+                sql = sql & " and anopresu = " & DBSet(i, "N")
             End If
             
             If TotalRegistros(SQL2) <> 0 Then
                 J = J + 1
-                vImp = DevuelveValor(SQL)
+                vImp = DevuelveValor(sql)
                 
                 Dim Ejer As String
                 If EjerciciosPartidos Then
@@ -1223,8 +1223,8 @@ Dim tots As String
         vSQL = Replace(vSQL, "presupuestos.imppresu", "tmppresu1.importe")
     End If
     
-    SQL = CadenaConsulta & " and " & cadFiltro
-    If vSQL <> "" Then SQL = SQL & " and " & vSQL
+    sql = CadenaConsulta & " and " & cadFiltro
+    If vSQL <> "" Then sql = sql & " and " & vSQL
 
     If Agrupado Then
         CargarTemporal
@@ -1236,7 +1236,7 @@ Dim tots As String
        
     
 '        Sql = Sql & " GROUP BY 1,2,3    "
-        SQL = SQL & " ORDER BY 1,2,3 "
+        sql = sql & " ORDER BY 1,2,3 "
     Else
         
         txtaux(0).Tag = "Cuenta|T|N|||presupuestos|codmacta||S|"
@@ -1244,12 +1244,12 @@ Dim tots As String
         txtaux(3).Tag = "Mes|N|N|||presupuestos|mespresu|00|S|"
         txtaux(4).Tag = "Importe|N|N|||presupuestos|imppresu|###,###,##0.00|N|"
         
-        SQL = SQL & " ORDER BY codmacta,anopresu,mespresu"
+        sql = sql & " ORDER BY codmacta,anopresu,mespresu"
     End If
 
     
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, True 'PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, sql, True 'PrimeraVez
     
     If Agrupado Then
         ' *******************canviar els noms i si fa falta la cantitat********************
@@ -1267,7 +1267,7 @@ Dim tots As String
     DataGrid1.Columns(0).Alignment = dbgLeft
 
     'Habilitamos modificar y eliminar
-    CargarSumas SQL
+    CargarSumas sql
 End Sub
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
@@ -1277,7 +1277,7 @@ Dim C As String
     Select Case Button.Index
         Case 1 ' generar de manera masiva
             Set frmGen = New frmPresuGenerar
-            frmGen.opcion = 1
+            frmGen.Opcion = 1
             frmGen.Show vbModal
             Set frmGen = Nothing
         
@@ -1371,11 +1371,11 @@ Dim Valor As Currency
     Case 0
         RC = txtaux(0).Text
         If RC = "" And Modo = 1 Then Exit Sub
-        If CuentaCorrectaUltimoNivel(RC, SQL) Then
+        If CuentaCorrectaUltimoNivel(RC, sql) Then
             txtaux(0).Text = RC
-            txtaux(1).Text = SQL
+            txtaux(1).Text = sql
         Else
-            MsgBox SQL, vbExclamation
+            MsgBox sql, vbExclamation
             txtaux(0).Text = ""
             txtaux(1).Text = ""
             PonFoco txtaux(0)
@@ -1459,9 +1459,9 @@ Private Sub CargarSumas(ByRef vS As String)
 On Error GoTo ECargarSumas
 
     Set miRsAux = New ADODB.Recordset
-    SQL = "Select sum(imppresu) from (" & vS & ") aaaa"
+    sql = "Select sum(imppresu) from (" & vS & ") aaaa"
 '    If vS <> "" Then SQL = SQL & " WHERE  " & vS
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    miRsAux.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then _
             Text1.Text = Format(miRsAux.Fields(0), FormatoImporte)
@@ -1475,15 +1475,15 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
@@ -1503,7 +1503,7 @@ End Sub
 
 
 Private Sub CargaFiltros()
-Dim AUx As String
+Dim Aux As String
 
     cboFiltro.Clear
     

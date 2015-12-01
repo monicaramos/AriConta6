@@ -405,7 +405,7 @@ End Function
 Public Function PonerFormatoEntero(ByRef T As TextBox) As Boolean
 'Comprueba que el valor del textbox es un entero y le pone el formato
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 Dim Formato As String
 On Error GoTo EPonerFormato
 
@@ -416,14 +416,14 @@ On Error GoTo EPonerFormato
     Set mTag = New CTag
     mTag.Cargar T
     If mTag.Cargado Then
-       Cad = mTag.Nombre 'descripcion del campo
+       cad = mTag.Nombre 'descripcion del campo
        Formato = mTag.Formato
     End If
     Set mTag = Nothing
 
     If Not EsEntero(T.Text) Then
         PonerFormatoEntero = False
-        MsgBox "El campo " & Cad & " tiene que ser numérico.", vbExclamation
+        MsgBox "El campo " & cad & " tiene que ser numérico.", vbExclamation
         PonFoco T
     Else
          'T.Text = Format(T.Text, Formato)
@@ -496,7 +496,7 @@ End Function
 Public Function FormatoCampo2(ByRef objec As Object) As String
 'Devuelve el formato del campo en el TAg: "0000"
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EFormatoCampo2
 
@@ -513,7 +513,7 @@ End Function
 
 Public Function TipoCamp(ByRef objec As Object) As String
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo ETipoCamp
 
@@ -665,18 +665,18 @@ End Sub
 
 Public Sub AyudaBanco(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
 
-    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Descripción|4695|;S|txtAux(2)|T|Entidad|900|;"
-    frmBas.CadenaConsulta = "SELECT bancos.codmacta, bancos.descripcion, bancos.entidad "
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Descripción|2595|;S|txtAux(2)|T|IBAN|3000|;"
+    frmBas.CadenaConsulta = "SELECT bancos.codmacta, bancos.descripcion, bancos.iban "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM bancos "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
     If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
     frmBas.Tag1 = "Cta. contable|T|N|||bancos|codmacta||S|"
     frmBas.Tag2 = "Descripcion|T|S|||bancos|descripcion|||"
-    frmBas.Tag3 = "Entidad|T|N|||bancos|entidad|0000||"
+    frmBas.Tag3 = "IBAN|T|N|||bancos|iban|||"
     
     frmBas.Maxlen1 = 10
     frmBas.Maxlen2 = 40
-    frmBas.Maxlen3 = 4
+    frmBas.Maxlen3 = 40
     
     frmBas.tabla = "bancos"
     frmBas.CampoCP = "codmacta"

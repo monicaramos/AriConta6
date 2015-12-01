@@ -471,6 +471,7 @@ Public DeConsulta As Boolean
 
 
 Public CadenaConsulta As String
+Public cWhere As String
 
 
 Public CadenaTots As String
@@ -798,7 +799,8 @@ Private Sub Form_Load()
     End With
     
     
-    CadenaConsulta = "select numasien, fechaent, numdiari, sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu "
+    CadenaConsulta = "select numasien, fechaent, numdiari, sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu where (1=1) "
+    If cWhere <> "" Then CadenaConsulta = CadenaConsulta & " and " & cWhere
     CadB = ""
     CargaGrid
             
@@ -840,7 +842,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        sql = CadenaConsulta & " where " & vSQL
+        sql = CadenaConsulta & " and " & vSQL
     Else
         sql = CadenaConsulta
     End If
@@ -867,7 +869,9 @@ Private Sub CargaGrid(Optional vSQL As String)
     
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgRight
+    DataGrid1.Columns(3).NumberFormat = "###,###,###,##0.00"
     DataGrid1.Columns(4).Alignment = dbgRight
+    DataGrid1.Columns(4).NumberFormat = "###,###,###,##0.00"
     
     DataGrid1.RowHeight = 350
 
