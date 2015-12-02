@@ -920,7 +920,7 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 107 ' crear nueva empresa
             If vUsu.Nivel > 1 Then Exit Sub
             
-            frmCentroControl.opcion = 2
+            frmCentroControl.Opcion = 2
             frmCentroControl.Show vbModal
         Case 108 'Configurar Balances
             Screen.MousePointer = vbHourglass
@@ -967,7 +967,6 @@ Private Sub AbrirFormularios(Accion As Long)
             frmAsientosHco.ASIENTO = ""
             frmAsientosHco.DesdeNorma43 = 0
             frmAsientosHco.Show vbModal
-'            frmAsientos.Show vbModal
         Case 303 ' extractos
             Screen.MousePointer = vbHourglass
             frmConExtr.EjerciciosCerrados = False
@@ -978,27 +977,22 @@ Private Sub AbrirFormularios(Accion As Long)
             frmPuntear.EjerciciosCerrados = False
             frmPuntear.Show vbModal
         Case 305 ' reemision de diarios
-            AbrirListado 6, False
+'            AbrirListado 6, False
         Case 306 ' sumas y saldos
-'            AbrirListado 5, False
             frmInfBalSumSal.Show vbModal
             
         Case 307 ' cuenta de explotacion
-'            AbrirListado 7, False
             frmInfCtaExplo.Show vbModal
             
         Case 308 ' balance de situacion
-            'AbrirListado 26, False
-            frmInfBalances.opcion = 0
+            frmInfBalances.Opcion = 0
             frmInfBalances.Show vbModal
             
         Case 309 ' perdidas y ganancias
-'            AbrirListado 27, False
-            frmInfBalances.opcion = 1
+            frmInfBalances.Opcion = 1
             frmInfBalances.Show vbModal
 
         Case 310 ' totales por concepto
-'            Screen.MousePointer = vbHourglass
             frmInfTotCtaCon.Show vbModal
         Case 311 ' evolucion de saldos
             frmInfEvolSal.Show vbModal
@@ -1017,58 +1011,47 @@ Private Sub AbrirFormularios(Accion As Long)
             Screen.MousePointer = vbHourglass
             frmFacturasPro.Show vbModal
         Case 405 ' libro recibidas
-            'AbrirListado 13, False
             frmFacturasProListado.Show vbModal
         Case 406 ' relacion proveedores por cuenta
             frmFacturasProCtaGastos.Show vbModal
         Case 407 ' liquidacion iva
-            AbrirListado 12, False
+'            AbrirListado 12, False
         Case 408 ' certificado iva
             frmModelo303.OpcionListado = 0
             frmModelo303.Show vbModal
-'            AbrirListado 11, False
         Case 409 ' modelo 340
             frmModelo340.Show vbModal
         Case 410 ' modelo 347
-'            AbrirListado 20, False
             frmModelo347.Show vbModal
         Case 411 ' modelo 349
-'            AbrirListado 28, False
             frmModelo349.Show vbModal
         Case 412 ' liquidacion de iva
             frmHcoLiqIVA.Show vbModal
         
-        
-'        Case 501 ' parametros inmovilizado
-'            frmInmov.opcion = 0
-'            frmInmov.Show vbModal
         Case 502 ' conceptos
             Screen.MousePointer = vbHourglass
             frmInmoConceptos.Show vbModal
         Case 503 ' elementos
             frmInmoElto.DatosADevolverBusqueda = ""
             frmInmoElto.Show vbModal
-'        Case 504 ' ficha de elementos
-'            frmInmov.opcion = 5
-'            frmInmov.Show vbModal
         Case 505 ' estadistica
             frmInmoInfEst.Show vbModal
-'        Case 506 ' estadistica entre fechas
-'            frmInmov.opcion = 6
-'            frmInmov.Show vbModal
         Case 507 ' historico inmovilizado
             Screen.MousePointer = vbHourglass
             frmInmoHco.Show vbModal
         Case 508 ' simulacion
             frmInmoSimu.Show vbModal
         Case 509 ' calculo y contabilizacion
-            frmInmoGenerar.opcion = 2
+            frmInmoGenerar.Opcion = 2
             frmInmoGenerar.Show vbModal
         Case 510 ' deshacer amortizacion
             frmInmoDeshacer.Show
         Case 511 ' venta-baja inmmovilizado
-            frmInmoVenta.opcion = 3
+            frmInmoVenta.Opcion = 3
             frmInmoVenta.Show vbModal
+        
+        
+        
         Case 601 ' cartera de cobros
         Case 602 ' informe de cobros pendientes
         Case 603 ' impresion de recibos
@@ -1106,22 +1089,17 @@ Private Sub AbrirFormularios(Accion As Long)
         
         ' Analitica
         Case 1001 ' Centros de Coste
-'            frmCCoste.DatosADevolverBusqueda = ""
-'            frmCCoste.Show vbModal
             frmCCCentroCoste.Show vbModal
             
         Case 1002 ' Consulta de Saldos
-'            AbrirListado 15, False
             frmCCConExtr.Show vbModal
         
         Case 1003 ' Cuenta de Explotación
             frmCCCtaExplo.Show vbModal
-'            AbrirListado 16, False
         Case 1004 ' Centros de coste por cuenta
             AbrirListado 17, False
         Case 1005 ' Detalle de explotación
             frmCCDetalleExplota.Show vbModal
-'            AbrirListado 19, False
             
         ' Presupuestaria
         Case 1101 ' Presupuestos
@@ -1129,10 +1107,9 @@ Private Sub AbrirFormularios(Accion As Long)
             'frmColPresu.Show vbModal
             frmPresu.Show vbModal
         Case 1102 ' Listado de Presupuestos
-            AbrirListado 9, False
+'            AbrirListado 9, False
         Case 1103 ' Balance Presupuestario
             frmPresuBal.Show vbModal
-            'AbrirListado 10, False
             
         ' Consolidado
         Case 1201 ' Sumas y Saldos
@@ -1150,16 +1127,16 @@ Private Sub AbrirFormularios(Accion As Long)
         
         ' Cierre de Ejercicio
         Case 1301 ' Renumeración de asientos
-            frmCierre.opcion = 0
+            frmCierre.Opcion = 0
             frmCierre.Show vbModal
         Case 1302 ' Simulación de cierre
-            frmCierre.opcion = 4
+            frmCierre.Opcion = 4
             frmCierre.Show vbModal
         Case 1303 ' Cierre de Ejercicio
-            frmCierre.opcion = 1
+            frmCierre.Opcion = 1
             frmCierre.Show vbModal
         Case 1304 ' Deshacer cierre
-            frmCierre.opcion = 5
+            frmCierre.Opcion = 5
             frmCierre.Show vbModal
         Case 1305 ' Diario Oficial
 '            AbrirListado 14, False
@@ -1174,7 +1151,7 @@ Private Sub AbrirFormularios(Accion As Long)
         ' Utilidades
         Case 1401 ' Comprobar cuadre
             Screen.MousePointer = vbHourglass
-            frmMensajes.opcion = 2
+            frmMensajes.Opcion = 2
             frmMensajes.Show vbModal
         Case 1403 ' Revisar caracteres especiales
 '            Screen.MousePointer = vbHourglass
@@ -1222,14 +1199,14 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
             'licencia de usuario final
             LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & "/Licenciadeuso.html" ' "http://www.ariadnasw.com/clientes/"
         Case 8 ' documentos
-            frmVarios.opcion = Accion - 2
+            frmVarios.Opcion = Accion - 2
             frmVarios.Show vbModal
         Case 9 ' ayuda
             LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & "/Ariconta-6.html"  ' "http://www.ariadnasw.com/clientes/"
         
         Case 10 ' arimailges.exe
             Dim Lanza As String
-            Dim AUx As String
+            Dim Aux As String
             
             
             Lanza = vParam.MailSoporte & "||"
@@ -1245,14 +1222,14 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
             'El/los adjuntos
             Lanza = Lanza & "|"
             
-            AUx = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
-            Shell AUx, vbNormalFocus
+            Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
+            Shell Aux, vbNormalFocus
         
         Case 12 ' Informacion de la base de datos
             If CargarInformacionBBDD Then
                 Set frmMens = New frmMensajes
             
-                frmMens.opcion = 25
+                frmMens.Opcion = 25
                 frmMens.Show vbModal
             
                 Set frmMens = Nothing
@@ -1260,7 +1237,7 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
             
         Case 13
             ' Panel de control donde seleccionamos los iconos que vamos a mostrar
-            frmMensajes.opcion = 24
+            frmMensajes.Opcion = 24
             frmMensajes.Show vbModal
             
             If Reorganizar Then
@@ -1273,7 +1250,7 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
             'mnUsuariosActivos_Click
             Set frmMens = New frmMensajes
             
-            frmMens.opcion = 26
+            frmMens.Opcion = 26
             frmMens.Show vbModal
             
             Set frmMens = Nothing
@@ -1412,14 +1389,14 @@ Private Sub mnHerrAriadnaCC_Click(Index As Integer)
         ' y no se llma desde aqui, con lo cual no hay problemo
         'Para el restro cojo el valor del helpidi
         
-        frmCentroControl.opcion = Index
+        frmCentroControl.Opcion = Index
         frmCentroControl.Show vbModal
     
 End Sub
 
 Private Sub Telematica(Caso As Integer)
         Me.Enabled = False
-        frmTelematica.opcion = Caso
+        frmTelematica.Opcion = Caso
         frmTelematica.Show
 End Sub
     
@@ -1455,7 +1432,7 @@ Dim Sql As String
 End Sub
 
 Private Sub CargaShortCuts(Seleccionado As Long)
-Dim AUx As String
+Dim Aux As String
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim cadAux As String
@@ -1463,19 +1440,19 @@ Dim cadAux As String
  
     'Para cada usuario, y a partir del menu del que disponga
     Set miRsAux = New ADODB.Recordset
-    AUx = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
-    AUx = AUx & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
+    Aux = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
+    Aux = Aux & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
     
     
     If Not vEmpresa.TieneTesoreria Then
         
-        AUx = AUx & " and tipo = 0"
+        Aux = Aux & " and tipo = 0"
     
     End If
     
     If Not vEmpresa.TieneContabilidad Then
     
-        AUx = AUx & " and tipo = 2"
+        Aux = Aux & " and tipo = 2"
     
     
     End If
@@ -1483,7 +1460,7 @@ Dim cadAux As String
     
     If Reorganizar Then Me.ListView1.Arrange = lvwAutoTop
     
-    miRsAux.Open AUx, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     AnchoListview = 0
     ListView1.ListItems.Clear
     While Not miRsAux.EOF
@@ -1535,11 +1512,26 @@ Private Sub ListView1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
      If Button = 2 Then
         'PopupMenu mnPopUp
     Else
-        XAnt = X
-        YAnt = Y
+        If Not ListView1.SelectedItem Is Nothing Then
+            Sql = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
+            Sql = Sql & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
+            
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            
+            If Not Rs.EOF Then
+                XAnt = Rs.Fields(0)
+                YAnt = Rs.Fields(1)
+            End If
+            Set Rs = Nothing
+            
+        End If
     End If
 End Sub
 
@@ -1629,7 +1621,7 @@ End Sub
 
 
 Private Sub ListView2_Click()
-Dim Cad As String
+Dim cad As String
 
     CambiarEmpresa
     
@@ -1759,10 +1751,10 @@ End Sub
 
 
 Private Sub AbrirListado(numero As Byte, Cerrado As Boolean)
-    Screen.MousePointer = vbHourglass
-    frmListado.EjerciciosCerrados = Cerrado
-    frmListado.opcion = numero
-    frmListado.Show vbModal
+'    Screen.MousePointer = vbHourglass
+'    frmListado.EjerciciosCerrados = Cerrado
+'    frmListado.Opcion = numero
+'    frmListado.Show vbModal
 End Sub
 
 
@@ -1851,7 +1843,7 @@ End Sub
 
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim Cad As String
+Dim cad As String
 '
 '    On Error Resume Next
 '    For Each T In Me
@@ -1872,7 +1864,7 @@ Dim Cad As String
 End Sub
 
 Private Sub PonerDatosVisiblesForm()
-Dim Cad As String
+Dim cad As String
 '    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
 '    Cad = Cad & ", " & Format(Now, "d")
 '    Cad = Cad & " de " & Format(Now, "mmmm")
@@ -2001,7 +1993,7 @@ Private Sub BuscaEmpresas()
 Dim Prohibidas As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim ItmX As ListItem
 Dim Sql As String
 
@@ -2016,12 +2008,12 @@ Set Rs = New ADODB.Recordset
 Rs.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
 While Not Rs.EOF
-    Cad = "|" & Rs!codempre & "|"
-    If InStr(1, Prohibidas, Cad) = 0 Then
-        Cad = Rs!nomempre
+    cad = "|" & Rs!codempre & "|"
+    If InStr(1, Prohibidas, cad) = 0 Then
+        cad = Rs!nomempre
         Set ItmX = ListView2.ListItems.Add()
         
-        ItmX.Text = Cad
+        ItmX.Text = cad
         ItmX.SubItems(1) = Rs!nomresum
         
         ' sacamos las fechas de inicio y fin
@@ -2034,8 +2026,8 @@ While Not Rs.EOF
         Set Rs2 = Nothing
         
             
-        Cad = Rs!CONTA & "|" & Rs!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
-        ItmX.Tag = Cad
+        cad = Rs!CONTA & "|" & Rs!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        ItmX.Tag = cad
         ItmX.ToolTipText = Rs!CONTA
         
         
@@ -2060,21 +2052,21 @@ End Sub
 
 Private Function DevuelveProhibidas() As String
 Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim i As Integer
     On Error GoTo EDevuelveProhibidas
     DevuelveProhibidas = ""
     Set Rs = New ADODB.Recordset
     i = vUsu.Codigo Mod 1000
     Rs.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & i, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    Cad = ""
+    cad = ""
     While Not Rs.EOF
-        Cad = Cad & Rs.Fields(1) & "|"
+        cad = cad & Rs.Fields(1) & "|"
         Rs.MoveNext
     Wend
-    If Cad <> "" Then Cad = "|" & Cad
+    If cad <> "" Then cad = "|" & cad
     Rs.Close
-    DevuelveProhibidas = Cad
+    DevuelveProhibidas = cad
 EDevuelveProhibidas:
     Err.Clear
     Set Rs = Nothing
@@ -2085,7 +2077,7 @@ End Function
 Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
 Dim C1 As String
-Dim Cad As String
+Dim cad As String
 Dim Cad2 As String
 
 
@@ -2106,8 +2098,8 @@ On Error GoTo ENumeroEmpresaMemorizar
             End If
             
                 'El tercer pipe, si tiene es el ancho col1
-                Cad = AnchoLogin
-                C1 = RecuperaValor(Cad, 3)
+                cad = AnchoLogin
+                C1 = RecuperaValor(cad, 3)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2116,7 +2108,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 ListView2.ColumnHeaders(1).Width = NF
                 
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 4)
+                C1 = RecuperaValor(cad, 4)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2126,7 +2118,7 @@ On Error GoTo ENumeroEmpresaMemorizar
             
             
                 'El quinto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 5)
+                C1 = RecuperaValor(cad, 5)
                 
                 'DAVID
                 'LO hablamos con calma
@@ -2146,18 +2138,18 @@ On Error GoTo ENumeroEmpresaMemorizar
             Exit Sub
         End If
     End If
-    Cad = App.Path & "\control.dat"
+    cad = App.Path & "\control.dat"
     If Leer Then
-        If Dir(Cad) <> "" Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
-            If Cad <> "" Then
+            cad = Trim(cad)
+            If cad <> "" Then
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = RecuperaValor(Cad, 2)
+                C1 = RecuperaValor(cad, 2)
                 'el segundo es el
                 If C1 <> "" Then
                     For NF = 1 To Me.ListView2.ListItems.Count
@@ -2170,7 +2162,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = RecuperaValor(Cad, 3)
+                C1 = RecuperaValor(cad, 3)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2178,7 +2170,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 ListView2.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 4)
+                C1 = RecuperaValor(cad, 4)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2186,7 +2178,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 ListView2.ColumnHeaders(2).Width = NF
                 'El quinto pipe si tiene es el ancho de col3
-                C1 = RecuperaValor(Cad, 5)
+                C1 = RecuperaValor(cad, 5)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2202,7 +2194,7 @@ On Error GoTo ENumeroEmpresaMemorizar
         End If
     Else 'Escribir
         NF = FreeFile
-        Open Cad For Output As #NF
+        Open cad For Output As #NF
         
         Cad2 = CadenaControl
         
@@ -2213,9 +2205,9 @@ On Error GoTo ENumeroEmpresaMemorizar
         
         CadenaControl = Cad2
         
-        Cad = Cad2
+        cad = Cad2
         
-        AnchoLogin = Cad
+        AnchoLogin = cad
         Print #NF, Cad2
         Close #NF
     End If

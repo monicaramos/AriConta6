@@ -5,13 +5,13 @@ Begin VB.Form frmPresuGenerar
    ClientHeight    =   7215
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8325
+   ClientWidth     =   8250
    Icon            =   "frmPresuGenerar.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7215
-   ScaleWidth      =   8325
+   ScaleWidth      =   8250
    StartUpPosition =   2  'CenterScreen
    Begin VB.CheckBox chkMasiva 
       Caption         =   "Generacion masiva"
@@ -1740,8 +1740,8 @@ Private Sub Form_Load()
     PonerFrames
 '    chkMasiva.Visible = vUsu.Nivel < 2   'Solo administradores
     
-    For i = 0 To imgcta.Count - 1
-        imgcta(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    For i = 0 To imgCta.Count - 1
+        imgCta(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
     
     If Opcion = 1 Then
@@ -1813,7 +1813,7 @@ End Function
 
 Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
     txtCta(i).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtDesCta(i).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtDescta(i).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub imgcta_Click(Index As Integer)
@@ -1892,15 +1892,15 @@ Private Sub txtCta_LostFocus(Index As Integer)
     txtCta(Index).Text = Trim(txtCta(Index).Text)
     If txtCta(Index).Text = AntiguoText Then Exit Sub
     If txtCta(Index).Text = "" Then
-        txtDesCta(Index).Text = ""
+        txtDescta(Index).Text = ""
     Else
         CadenaDesdeOtroForm = (txtCta(Index).Text)
         If CuentaCorrectaUltimoNivel(CadenaDesdeOtroForm, cad) Then
                 txtCta(Index).Text = CadenaDesdeOtroForm
-                txtDesCta(Index).Text = cad
+                txtDescta(Index).Text = cad
         Else
             MsgBox cad, vbExclamation
-            txtDesCta(Index).Text = cad
+            txtDescta(Index).Text = cad
         End If
         CadenaDesdeOtroForm = ""
     End If
@@ -2008,8 +2008,8 @@ On Error GoTo EPonerValoresAnteriores
             Label3(1).Caption = Format(Ejercicio - 1, "0000") & "-" & Format(Ejercicio, "0000")
             Label3(2).Caption = Format(Ejercicio, "0000") & "-" & Format(Ejercicio + 1, "0000")
         Else
-            Label3(1).Caption = Format(Ejercicio, "0000") & "-" & Format(Ejercicio, "0000")
-            Label3(2).Caption = Format(Ejercicio + 1, "0000") & "-" & Format(Ejercicio + 1, "0000")
+            Label3(1).Caption = Format(Ejercicio - 1, "0000") '& "-" & Format(Ejercicio, "0000")
+            Label3(2).Caption = Format(Ejercicio, "0000")  '& "-" & Format(Ejercicio + 1, "0000")
         End If
     Else
         Label3(1).Caption = "ANTERIOR"
@@ -2139,7 +2139,7 @@ End Sub
 
 
 Private Function GeneracionMasiva() As Boolean
-Dim sql As String
+Dim SQL As String
 Dim Incremento As Currency
 
     On Error GoTo EGeneracionMasiva
@@ -2161,28 +2161,28 @@ Dim Incremento As Currency
     
     If ChkEliminar.Value = 1 Then
         FijarSQLTablaPresu False
-        sql = "DELETE FROM presupuestos WHERE " & cad
-        Conn.Execute sql
+        SQL = "DELETE FROM presupuestos WHERE " & cad
+        Conn.Execute SQL
     End If
     
     FijarSQLTablaPresu True
     If optIncre(1).Value Then
         'Cojera los datos del presupuesto anterior
-        sql = "Select codmacta, anopresu anyo , mespresu mes ,imppresu debe,0 haber FROM presupuestos WHERE " & cad
+        SQL = "Select codmacta, anopresu anyo , mespresu mes ,imppresu debe,0 haber FROM presupuestos WHERE " & cad
     
     Else
         cad = Replace(cad, "anopresu", "year(fechaEnt)")
         cad = Replace(cad, "mespresu", "month(FechaEnt)")
-        sql = "select codmacta,year(fechaent) anyo, month(fechaent) mes, sum(coalesce(timported,0)) debe, sum(coalesce(timporteh,0))  haber from hlinapu where " & cad
+        SQL = "select codmacta,year(fechaent) anyo, month(fechaent) mes, sum(coalesce(timported,0)) debe, sum(coalesce(timporteh,0))  haber from hlinapu where " & cad
         'Añado codmacta ultimo nivel
-        sql = sql & "   AND codmacta like '" & Mid("__________", 1, vEmpresa.DigitosUltimoNivel) & "'"
-        sql = sql & " group by 1,2,3"
+        SQL = SQL & "   AND codmacta like '" & Mid("__________", 1, vEmpresa.DigitosUltimoNivel) & "'"
+        SQL = SQL & " group by 1,2,3"
     End If
     
-    Rs.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CadenaDesdeOtroForm = "INSERT INTO presupuestos (codmacta, anopresu, mespresu, imppresu) VALUES "
     i = 0
-    sql = ""
+    SQL = ""
 
     While Not Rs.EOF
         i = i + 1
@@ -2193,18 +2193,18 @@ Dim Incremento As Currency
         Else
             cad = ",('" & Rs!codmacta & "'," & Rs!Anyo + 1 & "," & Rs!Mes & "," & TransformaComasPuntos(CStr(VV)) & ")"
         End If
-        sql = sql & cad
+        SQL = SQL & cad
         If (i Mod 25) = 0 Then
-             sql = CadenaDesdeOtroForm & Mid(sql, 2)  'QUITO la PRIMERa coma
-            Conn.Execute sql
-            sql = ""
+             SQL = CadenaDesdeOtroForm & Mid(SQL, 2)  'QUITO la PRIMERa coma
+            Conn.Execute SQL
+            SQL = ""
         End If
         Rs.MoveNext
     Wend
     Rs.Close
-    If sql <> "" Then
-        sql = CadenaDesdeOtroForm & Mid(sql, 2)  'QUITO la PRIMERa coma
-         Conn.Execute sql
+    If SQL <> "" Then
+        SQL = CadenaDesdeOtroForm & Mid(SQL, 2)  'QUITO la PRIMERa coma
+         Conn.Execute SQL
     End If
     MsgBox "Proceso finalizado", vbInformation
     GeneracionMasiva = True
@@ -2242,16 +2242,16 @@ End Sub
 
 
 Private Function TieneEjercicio(Cta As String, Actual As Boolean) As Boolean
-Dim sql As String
+Dim SQL As String
 
-    sql = "select count(*) from presupuestos where codmacta = " & DBSet(Cta, "T") & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-1')) "
+    SQL = "select count(*) from presupuestos where codmacta = " & DBSet(Cta, "T") & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-1')) "
     If Actual Then
-        sql = sql & " between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+        SQL = SQL & " between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     Else
-        sql = sql & " between " & DBSet(DateAdd("yyyy", 1, vParam.fechaini), "F") & " and " & DBSet(DateAdd("yyyy", 1, vParam.fechafin), "F")
+        SQL = SQL & " between " & DBSet(DateAdd("yyyy", 1, vParam.fechaini), "F") & " and " & DBSet(DateAdd("yyyy", 1, vParam.fechafin), "F")
     End If
 
-    TieneEjercicio = (TotalRegistros(sql) <> 0)
+    TieneEjercicio = (TotalRegistros(SQL) <> 0)
 
 
 

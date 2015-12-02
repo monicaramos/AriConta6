@@ -11,7 +11,7 @@ Private Const CoordY = "30,04725|1665,071|3300,095|4935,118|6570,142|"
   
   
 Public Sub CargaMenu(aplicacion As String, ByRef Tr1 As TreeView)
-Dim Cad As String
+Dim cad As String
 Dim RN As ADODB.Recordset
 Dim N As Node
 Dim NodoPadre As String
@@ -26,8 +26,8 @@ Dim Sql As String
     Tr1.Nodes.Clear
     
     
-    Cad = "Select * from menus where aplicacion = '" & aplicacion & "' ORDER BY padre,orden"
-    RN.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select * from menus where aplicacion = '" & aplicacion & "' ORDER BY padre,orden"
+    RN.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RN.EOF
     
         If aplicacion = "introcon" Then
@@ -96,7 +96,7 @@ Dim Col As Collection
 Dim poscion
 Dim N2 As Node
 Dim N3 As Node
-Dim AUx As String
+Dim Aux As String
 Dim J As Integer
 Dim EstabaDesplegado As Boolean
 Dim Clave As String
@@ -120,31 +120,31 @@ Dim Padre As String
     GuardarNodo True, False, Col, NBorrarCrear
     Tv1.Nodes.Remove NBorrarCrear.Index
     
-    AUx = Col.Item(1)
-    AUx = RecuperaValor(AUx, 1)  'key
+    Aux = Col.Item(1)
+    Aux = RecuperaValor(Aux, 1)  'key
     
     'Creamos el nodo
     
-    Set N2 = Tv1.Nodes.Add(NodoRelativo, poscion, AUx)
+    Set N2 = Tv1.Nodes.Add(NodoRelativo, poscion, Aux)
    
     
     'Asignamos los valores
-    AUx = Col.Item(1)
-    TextoANodo N2, AUx
+    Aux = Col.Item(1)
+    TextoANodo N2, Aux
     
     
     For J = 2 To Col.Count
         
     
-        AUx = Col.Item(J)
-        Clave = RecuperaValor(AUx, 1)
-        Padre = RecuperaValor(AUx, 2)
+        Aux = Col.Item(J)
+        Clave = RecuperaValor(Aux, 1)
+        Padre = RecuperaValor(Aux, 2)
         If Padre = "" Then Padre = N2.Key
             
         Set N3 = Tv1.Nodes.Add(Padre, tvwChild, Clave)
     
-        AUx = Col.Item(J)
-        TextoANodo N3, AUx
+        Aux = Col.Item(J)
+        TextoANodo N3, Aux
 
     Next
     
@@ -192,7 +192,7 @@ Dim EstabaDesplegado As Boolean
 Dim Col As Collection
 Dim N2 As Node
 Dim N3 As Node
-Dim AUx As String
+Dim Aux As String
 Dim Padre As String
 Dim J As Integer
 Dim Clave As String
@@ -226,40 +226,40 @@ Dim posicion
     GuardarNodo True, False, Col, NodoASubir
     Tv1.Nodes.Remove NodoASubir.Index
     
-    AUx = Col.Item(1)
-    AUx = RecuperaValor(AUx, 1)  'key
+    Aux = Col.Item(1)
+    Aux = RecuperaValor(Aux, 1)  'key
     
     
     
     If Subir Then
         If Padre = "" Then
-            Set N2 = Tv1.Nodes.Add(, , AUx)
+            Set N2 = Tv1.Nodes.Add(, , Aux)
         Else
-            Set N2 = Tv1.Nodes.Add(Padre, posicion, AUx)
+            Set N2 = Tv1.Nodes.Add(Padre, posicion, Aux)
         End If
     Else
         'Bajar al nodo de abajo
-        Set N2 = Tv1.Nodes.Add(Padre, posicion, AUx)
+        Set N2 = Tv1.Nodes.Add(Padre, posicion, Aux)
 
     End If
     
-    AUx = Col.Item(1)
-    TextoANodo N2, AUx
+    Aux = Col.Item(1)
+    TextoANodo N2, Aux
       
     
     
     For J = 2 To Col.Count
         
     
-        AUx = Col.Item(J)
-        Clave = RecuperaValor(AUx, 1)
-        Padre = RecuperaValor(AUx, 2)
+        Aux = Col.Item(J)
+        Clave = RecuperaValor(Aux, 1)
+        Padre = RecuperaValor(Aux, 2)
         If Padre = "" Then Padre = N2.Key
             
         Set N3 = Tv1.Nodes.Add(Padre, tvwChild, Clave)
     
-        AUx = Col.Item(J)
-        TextoANodo N3, AUx
+        Aux = Col.Item(J)
+        TextoANodo N3, Aux
 
     Next
     
@@ -502,20 +502,25 @@ Dim Valor As Currency
             Next
         End If
         
-'        Sql = "select count(*) from menus_usuarios where posx = " & DBSet(Lv1.SelectedItem.Left, "N") & " and posy = " & DBSet(Lv1.SelectedItem.Top, "N") & " and  codusu = " & vUsu.Codigo & " and aplicacion = 'ariconta'  and "
-'        Sql = Sql & " codigo in (select codigo from menus where aplicacion = 'ariconta')"
-'        If TotalRegistros(Sql) <> 0 Then
+        Sql = "select count(*) from menus_usuarios where posx = " & DBSet(Lv1.SelectedItem.Left, "N") & " and posy = " & DBSet(Lv1.SelectedItem.Top, "N") & " and  codusu = " & Usuario & " and aplicacion = 'ariconta'  and "
+        Sql = Sql & " codigo in (select codigo from menus where aplicacion = 'ariconta')"
+        If TotalRegistros(Sql) = 0 Then
             Sql = "update menus_usuarios set posx = " & DBSet(Lv1.SelectedItem.Left, "N") & ", posy = " & DBSet(Lv1.SelectedItem.Top, "N") & " where codusu = " & Usuario & " and aplicacion = " & DBSet(aplicacion, "T") & " and "
             Sql = Sql & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.SelectedItem, "T") & ")"
         
             Conn.Execute Sql
-'        Else
-'
-'            Sql = "update menus_usuarios set posx = " & DBSet(XAnt, "N") & ", posy = " & DBSet(YAnt, "N") & " where codusu = " & Usuario & " and aplicacion = " & DBSet(aplicacion, "T") & " and "
-'            Sql = Sql & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.SelectedItem, "T") & ")"
+        Else
+        
+' no hace falta actualizarlo es donde estaba
+'            Sql = "update menus_usuarios set posx = " & DBSet(XAnt, "N") & ", posy = " & DBSet(YAnt, "N") & " where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
+'            Sql = Sql & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(Lv1.SelectedItem, "T") & ")"
 '
 '            Conn.Execute Sql
-'        End If
+            
+            Lv1.SelectedItem.Top = YAnt
+            Lv1.SelectedItem.Left = XAnt
+            
+        End If
 
     
         

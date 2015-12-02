@@ -517,13 +517,13 @@ Public FechaEnt As String
 
 Private WithEvents frmCon As frmInmoConceptos
 Attribute frmCon.VB_VarHelpID = -1
-Private WithEvents frmCC As frmCCoste
+Private WithEvents frmCC As frmCCCentroCoste
 Attribute frmCC.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
 
-Private SQL As String
-Dim Cad As String
+Private Sql As String
+Dim cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
@@ -636,7 +636,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    Sql = CadenaSeleccion
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -645,15 +645,15 @@ End Sub
 
 Private Sub ImgConcepto_Click(Index As Integer)
     
-    SQL = ""
+    Sql = ""
     AbiertoOtroFormEnListado = True
     Set frmCon = New frmInmoConceptos
     frmCon.DatosADevolverBusqueda = True
     frmCon.Show vbModal
     Set frmCon = Nothing
-    If SQL <> "" Then
-        Me.txtConcepto(Index).Text = RecuperaValor(SQL, 1)
-        Me.lblConcepto(Index).Caption = RecuperaValor(SQL, 2)
+    If Sql <> "" Then
+        Me.txtConcepto(Index).Text = RecuperaValor(Sql, 1)
+        Me.lblConcepto(Index).Caption = RecuperaValor(Sql, 2)
     Else
         QuitarPulsacionMas Me.txtConcepto(Index)
     End If
@@ -664,7 +664,7 @@ Private Sub ImgConcepto_Click(Index As Integer)
 End Sub
 
 Private Sub frmCC_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    Sql = CadenaSeleccion
 End Sub
 
 
@@ -749,7 +749,7 @@ Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
 End Sub
 
 Private Sub txtConcepto_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
     
@@ -777,16 +777,16 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "Select conconam Concepto,nomconam Descripción,codinmov Elemento,nominmov Descripción,fechaadq FechaAdquisicion,valoradq ValorAdquisicion,amortacu AmortAcumulada,totalamor TotalAmortizacion, "
-    SQL = SQL & "valoradq - amortacu - totalamor Pendiente "
-    SQL = SQL & " FROM tmpsimulainmo "
+    Sql = "Select conconam Concepto,nomconam Descripción,codinmov Elemento,nominmov Descripción,fechaadq FechaAdquisicion,valoradq ValorAdquisicion,amortacu AmortAcumulada,totalamor TotalAmortizacion, "
+    Sql = Sql & "valoradq - amortacu - totalamor Pendiente "
+    Sql = Sql & " FROM tmpsimulainmo "
     
-    If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
+    If cadselect <> "" Then Sql = Sql & " WHERE " & cadselect
     
-    SQL = SQL & " ORDER BY 1,2,3"
+    Sql = Sql & " ORDER BY 1,2,3"
         
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -826,7 +826,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -893,10 +893,10 @@ End Sub
 Private Function SugerirFechaNuevo() As String
 Dim RC As String
     RC = "tipoamor"
-    Cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
+    cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
 
-    If Cad <> "" Then
-        Me.Tag = Cad   'Ultima actualizacion
+    If cad <> "" Then
+        Me.Tag = cad   'Ultima actualizacion
         Select Case Val(RC)
         Case 2
             'Semestral
@@ -914,7 +914,7 @@ Dim RC As String
         End Select
         RC = PonFecha
     Else
-        Cad = "01/01/1991"
+        cad = "01/01/1991"
         RC = Format(Now, "dd/mm/yyyy")
     End If
     SugerirFechaNuevo = Format(RC, "dd/mm/yyyy")
@@ -926,7 +926,7 @@ Private Function PonFecha() As Date
 Dim d As Date
 'Dada la fecha en Cad y los meses k tengo k sumar
 'Pongo la fecha
-d = DateAdd("m", i, CDate(Cad))
+d = DateAdd("m", i, CDate(cad))
 Select Case Month(d)
 Case 2
     If ((Year(d) - 2000) Mod 4) = 0 Then
@@ -941,8 +941,8 @@ Case Else
     '30
         i = 30
 End Select
-Cad = i & "/" & Month(d) & "/" & Year(d)
-PonFecha = CDate(Cad)
+cad = i & "/" & Month(d) & "/" & Year(d)
+PonFecha = CDate(cad)
 End Function
 
 Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)

@@ -330,91 +330,6 @@ Private Sub cboFiltro_Click()
     CargaGrid
 End Sub
 
-Private Sub Command1_Click(Index As Integer)
-Dim CodigoBalanceBuscar As Integer
-    If Index >= 1 And Index <= 5 Then
-        If adodc1.Recordset.EOF Then Exit Sub
-    End If
-    If Index > 2 And Index < 6 Then
-        CodigoBalanceBuscar = adodc1.Recordset!NumBalan
-    End If
-    
-    Select Case Index
-    Case 0, 1
-        Screen.MousePointer = vbHourglass
-        'Nuevo balance   y modificar
-        If Index = 0 Then
-            NumRegElim = ObtenerSiguiente
-            frmBalances.numBalance = 0
-        Else
-            NumRegElim = 0
-            frmBalances.numBalance = adodc1.Recordset!NumBalan
-        End If
-        frmBalances.Show vbModal
-        'Para luego hace la busqueda
-        If Index = 1 Then NumRegElim = adodc1.Recordset!NumBalan
-        CodigoBalanceBuscar = NumRegElim
-    Case 2
-    
-        EliminarBalance
-        
-    Case 3
-    
-    
-        Screen.MousePointer = vbHourglass
-        Label1.Tag = Label1.Caption
-        Label1.Caption = "Comprobaciones ....."
-        Label1.Refresh
-        ComprobarBalance adodc1.Recordset!NumBalan, adodc1.Recordset!perd = "SI"
-        Label1.Caption = Label1.Tag
-        Label1.Tag = ""
-        Screen.MousePointer = vbDefault
-        
-    
-    Case 4
-        
-        'Vamos a utilizar la temporal de balances donde dejara los valores
-        GeneraDatosBalanConfigImpresion adodc1.Recordset!NumBalan
-
-
-        CadenaDesdeOtroForm = "Titulo= """ & DevNombreSQL(adodc1.Recordset!NomBalan) & """|"
-
-
-        With frmImprimir
-            .OtrosParametros = CadenaDesdeOtroForm
-            .NumeroParametros = 3
-            .FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
-            .SoloImprimir = False
-            'Opcion dependera del combo
-            .opcion = 73
-            .Show vbModal
-        End With
-        
-        
-'        frmColBalanList.Show vbModal
-        
-    Case 5
-        CadenaDesdeOtroForm = adodc1.Recordset!NumBalan & "|" & adodc1.Recordset!NomBalan & "|"
-        frmListado.opcion = 57
-        frmListado.Show vbModal
-        CargaGrid
-        
-    Case Else
-        Unload Me
-        
-        
-    
-    End Select
-    If Index <> 6 Then
-        Screen.MousePointer = vbHourglass
-        CargaGrid
-        If Index <> 2 Then
-            adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
-        End If
-    End If
-    Screen.MousePointer = vbDefault
-End Sub
-
 '++
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     If Shift = 0 And KeyCode = vbKeyEscape Then Unload Me
@@ -475,7 +390,7 @@ End Sub
 
 
 Private Sub CargaCombo()
-Dim AUx As String
+Dim Aux As String
     
     cboFiltro.Clear
 
@@ -505,9 +420,9 @@ Dim Sql As String
     End If
     Sql = Sql & " ORDER BY Numbalan"
     Sql = "select numbalan,nombalan, if(perdidas=1,'SI','NO') as Perd ,if(predeterminado=1,'*','') as Pre  from balances " & Sql
-    adodc1.RecordSource = Sql
-    adodc1.ConnectionString = Conn
-    adodc1.Refresh
+    Adodc1.RecordSource = Sql
+    Adodc1.ConnectionString = Conn
+    Adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 320
@@ -544,19 +459,19 @@ End Function
 
 Private Sub EliminarBalance()
 Dim Sql As String
-    Sql = "Seguro que desea eliminar el balance: " & adodc1.Recordset!NomBalan & "?"
+    Sql = "Seguro que desea eliminar el balance: " & Adodc1.Recordset!NomBalan & "?"
     If MsgBox(Sql, vbExclamation + vbYesNo) <> vbYes Then Exit Sub
     
     'Eliminamos las cuentas
-    Sql = "DELETE FROM balances_ctas WHere numbalan=" & adodc1.Recordset!NumBalan
+    Sql = "DELETE FROM balances_ctas WHere numbalan=" & Adodc1.Recordset!NumBalan
     Conn.Execute Sql
     
     'Eliminamos las lineas del balance
-    Sql = "DELETE FROM balances_texto WHere numbalan=" & adodc1.Recordset!NumBalan
+    Sql = "DELETE FROM balances_texto WHere numbalan=" & Adodc1.Recordset!NumBalan
     Conn.Execute Sql
     
     'Eliminamos el balance
-    Sql = "DELETE FROM balances WHere numbalan=" & adodc1.Recordset!NumBalan
+    Sql = "DELETE FROM balances WHere numbalan=" & Adodc1.Recordset!NumBalan
     Conn.Execute Sql
     
 End Sub
@@ -564,21 +479,21 @@ End Sub
 
 
 Private Sub ComprobarBalance(NumBal, EsPerdidas As Boolean)
-Dim Cad As String
+Dim cad As String
     
     
     'UPDATEAMOS TIENE CUENTAS A 0
     Conn.Execute "UPDATE balances_texto SET tienenctas=0 where numbalan=" & NumBal
     
     Set miRsAux = New ADODB.Recordset
-    Cad = "select numbalan,pasivo,codigo from balances_ctas group by"
-    Cad = Cad & " numbalan,pasivo,codigo having numbalan=" & NumBal
+    cad = "select numbalan,pasivo,codigo from balances_ctas group by"
+    cad = cad & " numbalan,pasivo,codigo having numbalan=" & NumBal
     
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Cad = "UPDATE balances_texto set tienenctas=1 where numbalan=" & miRsAux!NumBalan
-        Cad = Cad & " and pasivo='" & miRsAux!Pasivo & "' AND codigo = " & miRsAux!Codigo
-        Conn.Execute Cad
+        cad = "UPDATE balances_texto set tienenctas=1 where numbalan=" & miRsAux!NumBalan
+        cad = cad & " and pasivo='" & miRsAux!Pasivo & "' AND codigo = " & miRsAux!Codigo
+        Conn.Execute cad
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -592,17 +507,17 @@ Dim Cad As String
     DoEvents
             
             Conn.Execute "DELETE FROM tmpcierre1 where codusu =" & vUsu.Codigo
-            Cad = "INSERT INTO tmpcierre1(codusu,cta) "
-            Cad = Cad & "Select " & vUsu.Codigo & ",codmacta from hlinapu where "
-            Cad = Cad & " fechaent>='" & Format(vParam.fechaini, FormatoFecha)
-            Cad = Cad & "' AND fechaent<='" & Format(vParam.fechafin, FormatoFecha) & "' AND "
+            cad = "INSERT INTO tmpcierre1(codusu,cta) "
+            cad = cad & "Select " & vUsu.Codigo & ",codmacta from hlinapu where "
+            cad = cad & " fechaent>='" & Format(vParam.fechaini, FormatoFecha)
+            cad = cad & "' AND fechaent<='" & Format(vParam.fechafin, FormatoFecha) & "' AND "
 
-            If Not EsPerdidas Then Cad = Cad & " NOT "
-            Cad = Cad & "(codmacta like '" & vParam.grupogto & "%' OR "
-            Cad = Cad & "codmacta like '" & vParam.grupovta & "%'"
-            If vParam.Subgrupo1 <> "" Then Cad = Cad & " OR " & "codmacta like '" & vParam.Subgrupo1 & "%'"
-            Cad = Cad & ") GROUP BY codmacta"
-            Conn.Execute Cad
+            If Not EsPerdidas Then cad = cad & " NOT "
+            cad = cad & "(codmacta like '" & vParam.grupogto & "%' OR "
+            cad = cad & "codmacta like '" & vParam.grupovta & "%'"
+            If vParam.Subgrupo1 <> "" Then cad = cad & " OR " & "codmacta like '" & vParam.Subgrupo1 & "%'"
+            cad = cad & ") GROUP BY codmacta"
+            Conn.Execute cad
             
             
             'Ya tengo todas las cuentas que entran en hlinapu
@@ -613,31 +528,31 @@ Dim Cad As String
             DoEvents
     
             
-            Cad = "Select * from balances_ctas where numbalan=" & NumBal
-            miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            Cad = "DELETE FROM tmpcierre1 where codusu =" & vUsu.Codigo & " AND cta like '"
+            cad = "Select * from balances_ctas where numbalan=" & NumBal
+            miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            cad = "DELETE FROM tmpcierre1 where codusu =" & vUsu.Codigo & " AND cta like '"
             While Not miRsAux.EOF
-                Conn.Execute Cad & miRsAux!codmacta & "%'"
+                Conn.Execute cad & miRsAux!codmacta & "%'"
                 miRsAux.MoveNext
             Wend
             miRsAux.Close
                 
             'Veremos las que queden
-            Cad = "SELECT * FROM tmpcierre1 where codusu =" & vUsu.Codigo
-            miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            cad = "SELECT * FROM tmpcierre1 where codusu =" & vUsu.Codigo
+            miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
-            Cad = ""
+            cad = ""
             While Not miRsAux.EOF
-                Cad = Cad & "      " & miRsAux!Cta
+                cad = cad & "      " & miRsAux!Cta
                 NumRegElim = NumRegElim + 1
-                If (NumRegElim Mod 11) = 0 Then Cad = Cad & vbCrLf
+                If (NumRegElim Mod 11) = 0 Then cad = cad & vbCrLf
                 miRsAux.MoveNext
             Wend
             miRsAux.Close
             
             If NumRegElim > 0 Then
-                Cad = "Hay cuentas(" & NumRegElim & ") que parecen no haber sido configuradas en el balance" & vbCrLf & vbCrLf & Cad
-                MsgBox Cad, vbInformation
+                cad = "Hay cuentas(" & NumRegElim & ") que parecen no haber sido configuradas en el balance" & vbCrLf & vbCrLf & cad
+                MsgBox cad, vbInformation
                 NumRegElim = 0
             Else
                 
@@ -646,21 +561,21 @@ Dim Cad As String
                 Me.Refresh
                 DoEvents
             
-                Cad = "select * from balances_texto where numbalan=1 and tienenctas=1 and (pasivo,codigo) in ("
-                Cad = Cad & " select pasivo,padre from balances_texto where numbalan=1 and padre>=0) order by pasivo,codigo"
-                miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                cad = "select * from balances_texto where numbalan=1 and tienenctas=1 and (pasivo,codigo) in ("
+                cad = cad & " select pasivo,padre from balances_texto where numbalan=1 and padre>=0) order by pasivo,codigo"
+                miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 NumRegElim = 0
-                Cad = ""
+                cad = ""
                 While Not miRsAux.EOF
-                    Cad = Cad & "      -" & miRsAux!Pasivo & miRsAux!Codigo & "     " & miRsAux!deslinea & vbCrLf
+                    cad = cad & "      -" & miRsAux!Pasivo & miRsAux!Codigo & "     " & miRsAux!deslinea & vbCrLf
                     NumRegElim = NumRegElim + 1
                     miRsAux.MoveNext
                 Wend
                 miRsAux.Close
                 
                 If NumRegElim > 0 Then
-                    Cad = "No es nodo de ultimo nivel y tienen cuentas configuradas" & vbCrLf & Cad
-                    MsgBox Cad, vbExclamation
+                    cad = "No es nodo de ultimo nivel y tienen cuentas configuradas" & vbCrLf & cad
+                    MsgBox cad, vbExclamation
                 Else
                     MsgBox "Comprobacion  finalizada", vbInformation
                 End If
@@ -731,13 +646,13 @@ Dim CodigoBalanceBuscar As Integer
 '    End With
     
     
-    frmColBalanList.NumBalan = adodc1.Recordset!NumBalan
-    frmColBalanList.NomBalan = adodc1.Recordset!NomBalan
+    frmColBalanList.NumBalan = Adodc1.Recordset!NumBalan
+    frmColBalanList.NomBalan = Adodc1.Recordset!NomBalan
     frmColBalanList.Show vbModal
     
     Screen.MousePointer = vbHourglass
     CargaGrid
-    adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
+    Adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -745,16 +660,16 @@ End Sub
 Private Sub BotonCopiar()
 Dim CodigoBalanceBuscar As Integer
     
-    If adodc1.Recordset.EOF Then Exit Sub
-    CodigoBalanceBuscar = adodc1.Recordset!NumBalan
-    CadenaDesdeOtroForm = adodc1.Recordset!NumBalan & "|" & adodc1.Recordset!NomBalan & "|"
-    frmBalancesCopy.opcion = 57
+    If Adodc1.Recordset.EOF Then Exit Sub
+    CodigoBalanceBuscar = Adodc1.Recordset!NumBalan
+    CadenaDesdeOtroForm = Adodc1.Recordset!NumBalan & "|" & Adodc1.Recordset!NomBalan & "|"
+    frmBalancesCopy.Opcion = 57
     frmBalancesCopy.Show vbModal
     CargaGrid
     
     Screen.MousePointer = vbHourglass
     CargaGrid
-    adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
+    Adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -762,15 +677,15 @@ End Sub
 Private Sub BotonComprobar()
 Dim CodigoBalanceBuscar As Integer
     
-    If adodc1.Recordset.EOF Then Exit Sub
-    CodigoBalanceBuscar = adodc1.Recordset!NumBalan
+    If Adodc1.Recordset.EOF Then Exit Sub
+    CodigoBalanceBuscar = Adodc1.Recordset!NumBalan
 
 
     Screen.MousePointer = vbHourglass
     Label1.Tag = Label1.Caption
     Label1.Caption = "Comprobaciones ....."
     Label1.Refresh
-    ComprobarBalance adodc1.Recordset!NumBalan, adodc1.Recordset!perd = "SI"
+    ComprobarBalance Adodc1.Recordset!NumBalan, Adodc1.Recordset!perd = "SI"
     Label1.Caption = Label1.Tag
     Label1.Tag = ""
     Screen.MousePointer = vbDefault
@@ -778,7 +693,7 @@ Dim CodigoBalanceBuscar As Integer
 
     Screen.MousePointer = vbHourglass
     CargaGrid
-    adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
+    Adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -796,7 +711,7 @@ Dim CodigoBalanceBuscar As Integer
 
     Screen.MousePointer = vbHourglass
     CargaGrid
-    adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
+    Adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
     
     Screen.MousePointer = vbDefault
 
@@ -814,19 +729,19 @@ End Sub
 Private Sub BotonModificar()
 Dim CodigoBalanceBuscar As Integer
     
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     'Nuevo balance   y modificar
     NumRegElim = 0
-    frmBalances.numBalance = adodc1.Recordset!NumBalan
+    frmBalances.numBalance = Adodc1.Recordset!NumBalan
     frmBalances.Show vbModal
     'Para luego hace la busqueda
-    NumRegElim = adodc1.Recordset!NumBalan
+    NumRegElim = Adodc1.Recordset!NumBalan
     CodigoBalanceBuscar = NumRegElim
     Screen.MousePointer = vbHourglass
     CargaGrid
-    adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
+    Adodc1.Recordset.Find "Numbalan = " & CodigoBalanceBuscar
     Screen.MousePointer = vbDefault
     
 End Sub
@@ -838,7 +753,7 @@ Dim Sql As String
     
     On Error GoTo Error2
     
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
     EliminarBalance
     
@@ -859,25 +774,25 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N")
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And Me.adodc1.Recordset.Fields(0) <> 0
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And Me.adodc1.Recordset.Fields(0) <> 0
+        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And Me.Adodc1.Recordset.Fields(0) <> 0
+        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And Me.Adodc1.Recordset.Fields(0) <> 0
         
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Modificar, "N") And Me.adodc1.Recordset.Fields(0) <> 0
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Modificar, "N") And Me.adodc1.Recordset.Fields(0) <> 0
+        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Modificar, "N") And Me.Adodc1.Recordset.Fields(0) <> 0
+        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Modificar, "N") And Me.Adodc1.Recordset.Fields(0) <> 0
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And Me.adodc1.Recordset.Fields(0) <> 0
+        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And Me.Adodc1.Recordset.Fields(0) <> 0
     End If
     
     Rs.Close
