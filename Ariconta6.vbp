@@ -154,6 +154,7 @@ Form=frmCCCtaExplo.frm
 Form=frmCCDetalleExplota.frm
 Form=frmAsientosHcoPrev.frm
 Form=frmVisReport.frm
+Form=frmTESCobros.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
