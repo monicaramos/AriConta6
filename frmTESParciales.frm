@@ -430,7 +430,7 @@ Private Sub cmdRecibo_Click()
         'Cad = "textoherecibido= """ & Cad & """|"
         'Imprimimos
         'Para que imprima el mismo que por el punto: generar cobros por...
-         CadenaDesdeOtroForm = DevuelveNombreInformeSCRYST(6, "Recibo")
+        CadenaDesdeOtroForm = DevuelveNombreInformeSCRYST(6, "Recibo")
         
         frmImprimir.Opcion = 8
         frmImprimir.NumeroParametros = 1
@@ -586,7 +586,7 @@ Dim Valor
         If Not IsNumeric(Text2(Index).Text) Then
             MsgBox "importe debe ser numérico", vbExclamation
             Text2(Index).Text = ""
-            Ponerfoco Text2(Index)
+            PonerFoco Text2(Index)
         Else
             If InStr(1, Text2(Index).Text, ",") > 0 Then
                 Valor = ImporteFormateado(Text2(Index).Text)
@@ -1193,7 +1193,7 @@ Private Sub txtCta_LostFocus(Index As Integer)
         txtCta(Index).Text = Cad
         txtDescCta(Index).Text = CadenaDesdeOtroForm
         If Cad = "" And impo <> 0 Then
-            Ponerfoco txtCta(Index)
+            PonerFoco txtCta(Index)
         End If
         CadenaDesdeOtroForm = ""
 End Sub
@@ -1272,7 +1272,7 @@ Dim QueDireccionMostrar As Byte
           Aux = Format(DBLet(miRsAux!codbanco, "N"), "0000")
           Aux = Aux & " " & Format(DBLet(miRsAux!codsucur, "N"), "0000") & " "
           Aux = Aux & Mid(DBLet(miRsAux!digcontr, "T") & "  ", 1, 2) & " "
-          Aux = Aux & Right(String(10, "0") & DBLet(miRsAux!cuentaba, "N"), 10)
+          Aux = Aux & Right(String(10, "0") & DBLet(miRsAux!Cuentaba, "N"), 10)
           Aux = "'" & Aux & "'"
       End If
       Cad = Cad & Aux & ","
@@ -1330,10 +1330,10 @@ Dim QueDireccionMostrar As Byte
               If Aux <> "" Then Aux = Aux & vbCrLf
               Aux = Aux & DevNombreSQL(DBLet(miRsAux!proclien, "T"))
           Else
-              Aux = DBLet(miRsAux!codposta, "T") & "      " & DevNombreSQL(DBLet(miRsAux!despobla, "T"))
+              Aux = DBLet(miRsAux!codposta, "T") & "      " & DevNombreSQL(DBLet(miRsAux!desPobla, "T"))
               Aux = Trim(Aux)
               If Aux <> "" Then Aux = Aux & vbCrLf
-              Aux = Aux & DevNombreSQL(DBLet(miRsAux!desprovi, "T"))
+              Aux = Aux & DevNombreSQL(DBLet(miRsAux!desProvi, "T"))
               
           End If
           Aux = "'" & Aux & "'"

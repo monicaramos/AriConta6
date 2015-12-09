@@ -129,26 +129,47 @@ Begin VB.Form frmCuentas
          TabPicture(1)   =   "frmCuentas2.frx":0028
          Tab(1).ControlEnabled=   0   'False
          Tab(1).Control(0)=   "Label1(21)"
+         Tab(1).Control(0).Enabled=   0   'False
          Tab(1).Control(1)=   "Label1(24)"
+         Tab(1).Control(1).Enabled=   0   'False
          Tab(1).Control(2)=   "Image1(1)"
+         Tab(1).Control(2).Enabled=   0   'False
          Tab(1).Control(3)=   "Image1(0)"
+         Tab(1).Control(3).Enabled=   0   'False
          Tab(1).Control(4)=   "Label1(12)"
+         Tab(1).Control(4).Enabled=   0   'False
          Tab(1).Control(5)=   "Label1(26)"
+         Tab(1).Control(5).Enabled=   0   'False
          Tab(1).Control(6)=   "Label1(27)"
+         Tab(1).Control(6).Enabled=   0   'False
          Tab(1).Control(7)=   "imgppal(4)"
+         Tab(1).Control(7).Enabled=   0   'False
          Tab(1).Control(8)=   "Label1(28)"
+         Tab(1).Control(8).Enabled=   0   'False
          Tab(1).Control(9)=   "Text1(25)"
+         Tab(1).Control(9).Enabled=   0   'False
          Tab(1).Control(10)=   "Text1(26)"
+         Tab(1).Control(10).Enabled=   0   'False
          Tab(1).Control(11)=   "Text2(0)"
+         Tab(1).Control(11).Enabled=   0   'False
          Tab(1).Control(12)=   "Text2(1)"
+         Tab(1).Control(12).Enabled=   0   'False
          Tab(1).Control(13)=   "Text1(29)"
+         Tab(1).Control(13).Enabled=   0   'False
          Tab(1).Control(14)=   "Text1(13)"
+         Tab(1).Control(14).Enabled=   0   'False
          Tab(1).Control(15)=   "Text1(14)"
+         Tab(1).Control(15).Enabled=   0   'False
          Tab(1).Control(16)=   "Text1(15)"
+         Tab(1).Control(16).Enabled=   0   'False
          Tab(1).Control(17)=   "Text1(16)"
+         Tab(1).Control(17).Enabled=   0   'False
          Tab(1).Control(18)=   "Frame4"
+         Tab(1).Control(18).Enabled=   0   'False
          Tab(1).Control(19)=   "Text1(31)"
+         Tab(1).Control(19).Enabled=   0   'False
          Tab(1).Control(20)=   "Text1(32)"
+         Tab(1).Control(20).Enabled=   0   'False
          Tab(1).ControlCount=   21
          TabCaption(2)   =   "Departamentos"
          TabPicture(2)   =   "frmCuentas2.frx":0044
@@ -2148,7 +2169,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
     Dim B As Boolean
     Dim V As Long
     
@@ -2500,9 +2521,9 @@ Private Sub Form_Load()
     cmdCopiarDatos(0).Visible = vModo = 1
     cmdCopiarDatos(1).Visible = vModo = 1 Or vModo = 2
     
-    For I = 0 To Me.imgppal.Count - 1
-        Me.imgppal(I).Visible = vModo > 0
-    Next I
+    For i = 0 To Me.imgppal.Count - 1
+        Me.imgppal(i).Visible = vModo > 0
+    Next i
     
     FrGranEmpresa.Visible = False
     
@@ -2521,9 +2542,9 @@ Private Sub Form_Load()
         .Buttons(3).Image = 5
     End With
     
-    For I = 0 To Image1.Count - 1
-        Image1(I).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    Next I
+    For i = 0 To Image1.Count - 1
+        Image1(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    Next i
     
     
 '    If vModo = 1 Or vModo = 2 Then CargarComboPais
@@ -2610,18 +2631,18 @@ Private Sub Form_Load()
     If vModo = 1 Or vModo = 0 Or (vModo = 2 And (Text1(11).Text = "S" Or chkUltimo.Value = 1)) Then
         Me.Text1(12).Enabled = True
         Me.Text1(30).Enabled = True
-        For I = 2 To 3
-            Me.Image1(I).Enabled = True
-            Me.Image1(I).Visible = True
-        Next I
+        For i = 2 To 3
+            Me.Image1(i).Enabled = True
+            Me.Image1(i).Visible = True
+        Next i
         
     Else
         Me.Text1(12).Enabled = False
         Me.Text1(30).Enabled = False
-        For I = 2 To 3
-            Me.Image1(I).Enabled = False
-            Me.Image1(I).Visible = False
-        Next I
+        For i = 2 To 3
+            Me.Image1(i).Enabled = False
+            Me.Image1(i).Visible = False
+        Next i
     End If
     
     If vModo = 2 Then
@@ -2658,7 +2679,7 @@ End Sub
 Private Sub PonerCampos(QueEmpresa As String)
 Dim Rs As ADODB.Recordset
 Dim mTag As CTag
-Dim I  As Integer
+Dim i  As Integer
 Dim T As Object
 Dim Valor
 
@@ -2671,8 +2692,8 @@ Dim Valor
     Else
         Set mTag = New CTag
         
-        For I = 0 To Text1.Count - 1
-            Set T = Text1(I)
+        For i = 0 To Text1.Count - 1
+            Set T = Text1(i)
             mTag.Cargar T
             If mTag.Cargado Then
                 'Columna en la BD
@@ -2684,11 +2705,11 @@ Dim Valor
                 End If
                 If mTag.Formato <> "" Then Valor = Format(Valor, mTag.Formato)
                 
-                Text1(I).Text = Valor
+                Text1(i).Text = Valor
             Else
-                Text1(I).Text = ""
+                Text1(i).Text = ""
             End If
-        Next I
+        Next i
         varBloqCta = ""
         If Rs.Fields!apudirec = "S" Then
             chkUltimo.Value = 1
@@ -2932,7 +2953,7 @@ End Sub
 '----------------------------------------------------------------
 '----------------------------------------------------------------
 Private Sub Text1_LostFocus(Index As Integer)
-    Dim I As Integer
+    Dim i As Integer
     Dim SQL2 As String, Sql3 As String
     Dim mTag As CTag
     Dim Im As Currency
@@ -2980,23 +3001,23 @@ Private Sub Text1_LostFocus(Index As Integer)
                     Exit Sub
                 End If
                 If Index = 15 Then
-                    I = 2
+                    i = 2
                 Else
                     If Index = 16 Then
-                        I = 10
+                        i = 10
                     Else
-                        I = 4
+                        i = 4
                     End If
                 End If
-                SQL = Mid("0000000000", 1, I)
+                SQL = Mid("0000000000", 1, i)
                 Text1(Index).Text = Format(Text1(Index).Text, SQL)
                 
                 
                 'IBAN
         
                 SQL = ""
-                For I = 13 To 16
-                    SQL = SQL & Text1(I).Text
+                For i = 13 To 16
+                    SQL = SQL & Text1(i).Text
                 Next
                 
                 Sql3 = SQL
@@ -3609,7 +3630,7 @@ On Error GoTo Ecargaempresas
                 kCampo = 0
                 While Not miRsAux.EOF
                     kCampo = 1
-                    C = C & "    " & miRsAux!codmacta & " - " & miRsAux!nommacta & vbCrLf
+                    C = C & "    " & miRsAux!codmacta & " - " & miRsAux!Nommacta & vbCrLf
                     miRsAux.MoveNext
                 Wend
                 miRsAux.Close
@@ -3650,7 +3671,7 @@ End Function
 
 Private Sub CargaGrid(Index As Integer, Enlaza As Boolean)
 Dim B As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim tots As String
 
     On Error GoTo ECarga
@@ -3722,14 +3743,14 @@ Dim tabla As String
 End Function
 
 Private Sub LimpiarCamposFrame(Index As Integer)
-Dim I As Integer
+Dim i As Integer
     On Error Resume Next
 
     Select Case Index
         Case 2 'departamentos
-            For I = 0 To txtaux3.Count - 1
-                txtaux3(I).Text = ""
-            Next I
+            For i = 0 To txtaux3.Count - 1
+                txtaux3(i).Text = ""
+            Next i
     End Select
     
     If Err.Number <> 0 Then Err.Clear
@@ -3828,7 +3849,7 @@ Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
 Dim vWhere As String, vTabla As String
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     ModoLineas = 1 'Posem Modo Afegir Llínia
     
@@ -3860,9 +3881,9 @@ Dim I As Integer
             
             LLamaLineas Index, ModoLineas, anc
         
-            For I = 0 To txtaux3.Count - 1
-                txtaux3(I).Text = ""
-            Next I
+            For i = 0 To txtaux3.Count - 1
+                txtaux3(i).Text = ""
+            Next i
             
             txtaux3(0).Text = Text1(0).Text 'cuenta
             txtaux3(1).Text = NumF 'departamento
@@ -3874,7 +3895,7 @@ End Sub
 
 Private Sub BotonModificarLinea(Index As Integer)
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     Dim J As Integer
     
     If AdoAux(Index).Recordset.EOF Then Exit Sub
@@ -3892,8 +3913,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         Case 0, 1, 2 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
             If DataGridAux(Index).Bookmark < DataGridAux(Index).FirstRow Or DataGridAux(Index).Bookmark > (DataGridAux(Index).FirstRow + DataGridAux(Index).VisibleRows - 1) Then
-                I = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
-                DataGridAux(Index).Scroll 0, I
+                i = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
+                DataGridAux(Index).Scroll 0, i
                 DataGridAux(Index).Refresh
             End If
               
@@ -3908,9 +3929,9 @@ Private Sub BotonModificarLinea(Index As Integer)
     
     Select Case Index
         Case 2 'departamentos
-            For I = 0 To 2
-                txtaux3(I).Text = DataGridAux(Index).Columns(I).Text
-            Next I
+            For i = 0 To 2
+                txtaux3(i).Text = DataGridAux(Index).Columns(i).Text
+            Next i
         
             CargarValoresAnteriores Me, 2, "FrameAux2"
         
@@ -3927,7 +3948,7 @@ Private Sub BotonModificarLinea(Index As Integer)
 End Sub
 
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim I As Integer, NumReg As Byte
+Dim i As Integer, NumReg As Byte
 Dim B As Boolean
 
     On Error GoTo EPonerModo
@@ -3941,9 +3962,9 @@ Dim B As Boolean
 '        Text1(i).Text = ""
 '    Next i
     
-    For I = 0 To Text1.Count - 1
-        Text1(I).BackColor = vbWhite
-    Next I
+    For i = 0 To Text1.Count - 1
+        Text1(i).BackColor = vbWhite
+    Next i
        
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
@@ -3960,9 +3981,9 @@ Dim B As Boolean
     
     'departamentos
     B = (Modo = 5 Or Modo = 1)
-    For I = 1 To 2
-        txtaux3(I).Enabled = B
-    Next I
+    For i = 1 To 2
+        txtaux3(i).Enabled = B
+    Next i
     B = (Modo = 5 Or Modo = 1) And ModoLineas = 1
     txtaux3(1).Enabled = B
     
