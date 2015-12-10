@@ -798,7 +798,7 @@ Select Case Modo
             DataGrid1.Enabled = True
         End If
     Case 3
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -809,7 +809,7 @@ Select Case Modo
         End If
     Case 4
         'Modificar
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
@@ -1144,7 +1144,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim Datos As String
 Dim B As Boolean
 B = CompForm(Me)
@@ -1180,7 +1180,7 @@ If Modo = 3 Then
         B = False
     End If
 End If
-DatosOK = B
+DatosOk = B
 End Function
 
 
@@ -1189,7 +1189,7 @@ Dim i As Long
 Dim F As Date
 Dim SQL As String
 Dim AUX2 As String
-Dim AUx As String
+Dim Aux As String
 Dim MaxA As Long
 Dim CadenaError As String
     Set miRsAux = New ADODB.Recordset
@@ -1215,22 +1215,6 @@ Dim CadenaError As String
     End If
     miRsAux.Close
     
-'    '     introduccion de asientos
-'    MaxA = 0
-'    F = vParam.fechaini
-'    SQL = "Select max(numasien) from hcabapu where fechaent>='" & Format(F, FormatoFecha) & "'"
-'    F = vParam.fechafin
-'    SQL = SQL & " AND fechaent<='" & Format(F, FormatoFecha) & "'"
-'    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    If Not miRsAux.EOF Then
-'        MaxA = DBLet(miRsAux.Fields(0), "N")
-'    End If
-'    miRsAux.Close
-'    AUx = " YA contabilizado"
-'    If MaxA > NumRegElim Then
-'        NumRegElim = MaxA
-'        AUx = " en introduccion de apuntes"
-'    End If
     
     '--------------------------------------
     'siguiente   --------------------------
@@ -1244,33 +1228,14 @@ Dim CadenaError As String
     End If
     miRsAux.Close
     
-'    ' en introduccion de asientos
-'    MaxA = 0
-'    F = DateAdd("yyyy", 1, vParam.fechaini)
-'    SQL = "Select max(numasien) from hcabapu where fechaent>='" & Format(F, FormatoFecha) & "'"
-'    F = DateAdd("yyyy", 1, vParam.fechafin)
-'    SQL = SQL & " AND fechaent<='" & Format(F, FormatoFecha) & "'"
-'    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    If Not miRsAux.EOF Then
-'        MaxA = DBLet(miRsAux.Fields(0), "N")
-'    End If
-'    miRsAux.Close
-'    AUX2 = " YA contabilizado"
-'    If MaxA > i Then
-'        i = MaxA
-'        AUX2 = " en introduccion de apuntes"
-'    End If
-    
     'Ahora vemos si son correctos los contadores
     CadenaDesdeOtroForm = "contado2"
     SQL = DevuelveDesdeBD("contado1", "contadores", "tiporegi", "0", "T", CadenaDesdeOtroForm)
     If SQL <> "" Then
         If Val(SQL) <> NumRegElim Then
-'            MsgBox "El numero asiento actual en contadores es distinto al mayor numero de asiento" & Aux & _
-                vbCrLf & " Contadores: " & SQL & "    --    Asiento: " & NumRegElim, vbExclamation
-            AUx = "          Actual.     " & AUx & " : " & _
+            Aux = "          Actual.     " & Aux & " : " & _
                  Format(NumRegElim, "000000") & "    --    Contadores: " & Format(SQL, "000000") & vbCrLf
-            CadenaError = CadenaError & AUx
+            CadenaError = CadenaError & Aux
         End If
         If Val(CadenaDesdeOtroForm) <> i Then
             'Si es distinto de uno, pq el Nos reservamos el 1 para el asiento de apertura
@@ -1367,8 +1332,8 @@ Dim CadenaError As String
         
         i = DBLet(Rs!Contado1, "N")
         AUX2 = MontaSQLFacCli(True)
-        AUx = "Select max(numfactu) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
-        SQL = AUx & " AND " & AUX2
+        Aux = "Select max(numfactu) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
+        SQL = Aux & " AND " & AUX2
         miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         MaxA = 0
         If Not miRsAux.EOF Then MaxA = DBLet(miRsAux.Fields(0), "N")
@@ -1385,8 +1350,8 @@ Dim CadenaError As String
         'Actual
         i = DBLet(Rs!Contado2, "N")
         AUX2 = MontaSQLFacCli(False)
-        AUx = "Select max(numfactu) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
-        SQL = AUx & " AND " & AUX2
+        Aux = "Select max(numfactu) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
+        SQL = Aux & " AND " & AUX2
         miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         MaxA = 0
         If Not miRsAux.EOF Then MaxA = DBLet(miRsAux.Fields(0), "N")

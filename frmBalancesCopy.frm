@@ -258,7 +258,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public opcion As Byte
+Public Opcion As Byte
     
     ' 57 .- Copiar balance configurables
     
@@ -278,12 +278,12 @@ Private WithEvents frmBal As frmBasico
 Attribute frmBal.VB_VarHelpID = -1
 
 
-Dim Sql As String
+Dim sql As String
 Dim RC As String
 Dim Rs As Recordset
 Dim PrimeraVez As Boolean
 
-Dim Cad As String
+Dim cad As String
 Dim Cont As Long
 Dim i As Integer
 
@@ -301,11 +301,6 @@ Dim HanPulsadoSalir As Boolean
 'Para cancelar
 Dim PulsadoCancelar As Boolean
 
-
-'Private Sub PonFoco(ByRef T1 As TextBox)
-'    T1.SelStart = 0
-'    T1.SelLength = Len(T1.Text)
-'End Sub
 
 Private Sub chkCopyBalan_KeyPress(KeyAscii As Integer)
     ListadoKEYpress KeyAscii
@@ -329,42 +324,42 @@ Private Sub cmdCopyBalan_Click()
     End If
     
     
-    Cad = "Va a copiar los datos del balance: " & vbCrLf & vbCrLf
-    Cad = Cad & txtNumBal(3).Text & " - " & Me.TextDescBalance(3).Text & vbCrLf
-    Cad = Cad & " sobre " & vbCrLf
-    Cad = Cad & txtNumBal(2).Text & " - " & Me.TextDescBalance(2).Text & vbCrLf
-    Cad = Cad & vbCrLf & vbCrLf & "Los datos del balance destino seran eliminados"
-    Cad = Cad & vbCrLf & vbCrLf & "¿Desea continuar?"
-    If MsgBox(Cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
+    cad = "Va a copiar los datos del balance: " & vbCrLf & vbCrLf
+    cad = cad & txtNumBal(3).Text & " - " & Me.TextDescBalance(3).Text & vbCrLf
+    cad = cad & " sobre " & vbCrLf
+    cad = cad & txtNumBal(2).Text & " - " & Me.TextDescBalance(2).Text & vbCrLf
+    cad = cad & vbCrLf & vbCrLf & "Los datos del balance destino seran eliminados"
+    cad = cad & vbCrLf & vbCrLf & "¿Desea continuar?"
+    If MsgBox(cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
     
     
-    Sql = "aparece"
-    Cad = DevuelveDesdeBD("perdidas", "balances", "numbalan", txtNumBal(3).Text, "N", Sql)
-    If Cad = "" Then
+    sql = "aparece"
+    cad = DevuelveDesdeBD("perdidas", "balances", "numbalan", txtNumBal(3).Text, "N", sql)
+    If cad = "" Then
         MsgBox "Error leyendo datos: " & txtNumBal(3).Text
         Exit Sub
     End If
     
-    Cad = "UPDATE balances SET perdidas=" & Cad & ",Aparece= " & Sql & " WHERE numbalan=" & txtNumBal(2).Text
-    Conn.Execute Cad
+    cad = "UPDATE balances SET perdidas=" & cad & ",Aparece= " & sql & " WHERE numbalan=" & txtNumBal(2).Text
+    Conn.Execute cad
     
-    Cad = "DELETE FROM balances_ctas WHERE numbalan=" & txtNumBal(2).Text
-    Conn.Execute Cad
-    Cad = "DELETE FROM balances_texto WHERE numbalan=" & txtNumBal(2).Text
-    Conn.Execute Cad
-    Cad = "INSERT INTO balances_texto (NumBalan, Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD)"
-    Cad = Cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD FROM"
-    Cad = Cad & " balances_texto WHERE numbalan = " & txtNumBal(3).Text
-    Conn.Execute Cad
+    cad = "DELETE FROM balances_ctas WHERE numbalan=" & txtNumBal(2).Text
+    Conn.Execute cad
+    cad = "DELETE FROM balances_texto WHERE numbalan=" & txtNumBal(2).Text
+    Conn.Execute cad
+    cad = "INSERT INTO balances_texto (NumBalan, Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD)"
+    cad = cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD FROM"
+    cad = cad & " balances_texto WHERE numbalan = " & txtNumBal(3).Text
+    Conn.Execute cad
     
     
     If Me.chkCopyBalan.Value = 1 Then
         'COpio los datos tb
        ' NumBalan, Pasivo, codigo, codmacta, tipsaldo, Resta
-        Cad = "INSERT INTO balances_ctas ( NumBalan, Pasivo, codigo, codmacta, tipsaldo, Resta)"
-        Cad = Cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, codmacta, tipsaldo, Resta FROM"
-        Cad = Cad & " balances_ctas WHERE numbalan = " & txtNumBal(3).Text
-        Conn.Execute Cad
+        cad = "INSERT INTO balances_ctas ( NumBalan, Pasivo, codigo, codmacta, tipsaldo, Resta)"
+        cad = cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, codmacta, tipsaldo, Resta FROM"
+        cad = cad & " balances_ctas WHERE numbalan = " & txtNumBal(3).Text
+        Conn.Execute cad
     End If
     Unload Me
 End Sub
@@ -417,7 +412,7 @@ Dim W As Single
     Next i
     
     
-    Select Case opcion
+    Select Case Opcion
     Case 57
         txtNumBal(2).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
         TextDescBalance(2).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
@@ -428,19 +423,19 @@ Dim W As Single
     HanPulsadoSalir = False
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    i = opcion
-    If opcion = 23 Then i = 22
-    If opcion = 26 Or opcion = 27 Or opcion = 39 Or opcion = 40 Then i = 25
-    If opcion = 51 Then i = 50
-    If opcion = 41 Then i = 5
-    If opcion = 52 Then i = 13
-    If opcion = 53 Then i = 8
-    If opcion = 56 Then i = 55
+    i = Opcion
+    If Opcion = 23 Then i = 22
+    If Opcion = 26 Or Opcion = 27 Or Opcion = 39 Or Opcion = 40 Then i = 25
+    If Opcion = 51 Then i = 50
+    If Opcion = 41 Then i = 5
+    If Opcion = 52 Then i = 13
+    If Opcion = 53 Then i = 8
+    If Opcion = 56 Then i = 55
     
     'Legalizacion
     HanPulsadoSalir = True
     
-    If opcion < 32 Or opcion > 38 Then
+    If Opcion < 32 Or Opcion > 38 Then
     
         Me.cmdCanListExtr(i).Cancel = True
         
@@ -537,7 +532,7 @@ End Sub
 
 
 Private Sub txtNumBal_LostFocus(Index As Integer)
-    Sql = ""
+    sql = ""
     With txtNumBal(Index)
         .Text = Trim(.Text)
         If .Text <> "" Then
@@ -545,15 +540,15 @@ Private Sub txtNumBal_LostFocus(Index As Integer)
                 MsgBox "Numero de balance debe de ser numérico: " & .Text, vbExclamation
                 .Text = ""
             Else
-                Sql = DevuelveDesdeBD("nombalan", "balances", "numbalan", .Text)
-                If Sql = "" Then
+                sql = DevuelveDesdeBD("nombalan", "balances", "numbalan", .Text)
+                If sql = "" Then
                     MsgBox "El balance " & .Text & " NO existe", vbExclamation
                     .Text = ""
                 End If
             End If
         End If
     End With
-    TextDescBalance(Index).Text = Sql
+    TextDescBalance(Index).Text = sql
 End Sub
 
 

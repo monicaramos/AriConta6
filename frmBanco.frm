@@ -1128,14 +1128,14 @@ End Sub
 ' Buscamos por el codigo, que estara en un text u  otro
 ' Normalmente el text(0)
 Private Function SituarData1() As Boolean
-    Dim Sql As String
+    Dim sql As String
     On Error GoTo ESituarData1
             'Actualizamos el recordset
             Data1.Refresh
             '#### A mano.
             'El sql para que se situe en el registro en especial es el siguiente
-            Sql = " codmacta = " & Text1(4).Text & ""
-            Data1.Recordset.Find Sql
+            sql = " codmacta = " & Text1(4).Text & ""
+            Data1.Recordset.Find sql
             If Data1.Recordset.EOF Then GoTo ESituarData1
             SituarData1 = True
         Exit Function
@@ -1524,7 +1524,7 @@ End Sub
 '----------------------------------------------------------------
 Private Sub Text1_LostFocus(Index As Integer)
     Dim Valor As Currency
-    Dim Sql As String
+    Dim sql As String
     Dim mTag As CTag
     Dim i As Integer
     Dim SQL2 As String
@@ -1560,25 +1560,25 @@ Private Sub Text1_LostFocus(Index As Integer)
              
             If ComprobarCero(Text1(0).Text) = 0 Then Text1(0).Text = ""
             
-            Sql = Text1(2).Text & Text1(3).Text & Text1(6).Text & Text1(0).Text
+            sql = Text1(2).Text & Text1(3).Text & Text1(6).Text & Text1(0).Text
                     
-            If Len(Sql) = 20 Then
+            If Len(sql) = 20 Then
                 'OK. Calculamos el IBAN
                 
-                SQL2 = Sql
+                SQL2 = sql
                 
                 If Text1(20).Text = "" Then
                     'NO ha puesto IBAN
-                    If DevuelveIBAN2("ES", Sql, Sql) Then Text1(20).Text = "ES" & Sql & SQL2
+                    If DevuelveIBAN2("ES", sql, sql) Then Text1(20).Text = "ES" & sql & SQL2
                 Else
                     DevfrmCCtas = CStr(Mid(Text1(20).Text, 1, 2))
-                    If DevuelveIBAN2(DevfrmCCtas, Sql, Sql) Then
-                        If Mid(Text1(20).Text, 3, 2) <> Sql Then
+                    If DevuelveIBAN2(DevfrmCCtas, sql, sql) Then
+                        If Mid(Text1(20).Text, 3, 2) <> sql Then
                             
-                            MsgBox "Codigo IBAN distinto del calculado [" & DevfrmCCtas & Sql & "]", vbExclamation
+                            MsgBox "Codigo IBAN distinto del calculado [" & DevfrmCCtas & sql & "]", vbExclamation
                             'Text1(49).Text = "ES" & SQL
                         End If
-                    Text1(20).Text = DevfrmCCtas & Sql & SQL2
+                    Text1(20).Text = DevfrmCCtas & sql & SQL2
                     End If
                     DevfrmCCtas = ""
                 End If
@@ -1615,16 +1615,16 @@ Private Sub Text1_LostFocus(Index As Integer)
             
             If Modo >= 2 Or Modo <= 4 Then
                 If Text1(Index).Text = "" Then
-                     Text2(Index).Text = Sql
+                     Text2(Index).Text = sql
                      Exit Sub
                 End If
                 
                 DevfrmCCtas = Text1(Index).Text
-                If CuentaCorrectaUltimoNivel(DevfrmCCtas, Sql) Then
+                If CuentaCorrectaUltimoNivel(DevfrmCCtas, sql) Then
                     Text1(Index).Text = DevfrmCCtas
-                    Text2(Index).Text = Sql
+                    Text2(Index).Text = sql
                 Else
-                    MsgBox Sql, vbExclamation
+                    MsgBox sql, vbExclamation
                     Text1(Index).Text = ""
                     Text2(Index).Text = ""
                     PonerFoco Text1(Index)
@@ -1739,7 +1739,7 @@ End Sub
 Private Sub PonerCampos()
     Dim i As Integer
     Dim mTag As CTag
-    Dim Sql As String
+    Dim sql As String
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     PonerCtasIVA
@@ -1847,7 +1847,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim sql As String
 
     
     DatosOK = False
@@ -1880,13 +1880,13 @@ Dim Sql As String
     If Trim(Text1(11).Text) = "" Then Text1(11).Text = ""
     
     If Modo = 3 Or Modo = 4 Then
-        Sql = "select count(*) from bancos where codmacta <> " & DBSet(Text1(4).Text, "T") & " and ctatransfercli = 1"
-        If TotalRegistros(Sql) <> 0 Then
+        sql = "select count(*) from bancos where codmacta <> " & DBSet(Text1(4).Text, "T") & " and ctatransfercli = 1"
+        If TotalRegistros(sql) <> 0 Then
         ' comprobamos que ya existe un registro marcado, si lo quieren cambiar
             If chkBanco(3).Value = 1 Then
                 If MsgBox("Ya existe otro registro marcado como Cuenta de Transferencia Clientes. " & vbCrLf & " ¿ Desea que sea ésta ? " & vbCrLf, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                    Sql = "update bancos set ctatransfercli = 0 where codmacta <> " & DBSet(Text1(4).Text, "T")
-                    Conn.Execute Sql
+                    sql = "update bancos set ctatransfercli = 0 where codmacta <> " & DBSet(Text1(4).Text, "T")
+                    Conn.Execute sql
                 Else
                     ' no hacemos nada
                     chkBanco(3).Value = 0
@@ -1901,26 +1901,10 @@ Dim Sql As String
     DatosOK = B
 End Function
 
-
-'### A mano
 'Esto es para que cuando pincha en siguiente le sugerimos
 'Se puede comentar todo y asi no hace nada ni da error
 'El SQL es propio de cada tabla
 Private Sub SugerirCodigoSiguiente()
-'
-'    Dim SQL As String
-'    Dim RS As ADODB.Recordset
-'
-'    SQL = "Select Max(codigiva) from " & NombreTabla
-'    Text1(0).Text = 1
-'    Set RS = New ADODB.Recordset
-'    RS.Open SQL, Conn, , , adCmdText
-'    If Not RS.EOF Then
-'        If Not IsNull(RS.Fields(0)) Then
-'            Text1(0).Text = RS.Fields(0) + 1
-'        End If
-'    End If
-'    RS.Close
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)

@@ -48,127 +48,127 @@ Begin VB.Form frmCuentas
          TabCaption(0)   =   "Datos cuentas"
          TabPicture(0)   =   "frmCuentas2.frx":000C
          Tab(0).ControlEnabled=   0   'False
-         Tab(0).Control(0)=   "Label1(11)"
+         Tab(0).Control(0)=   "Check3"
          Tab(0).Control(0).Enabled=   0   'False
-         Tab(0).Control(1)=   "Label1(2)"
+         Tab(0).Control(1)=   "Text2(27)"
          Tab(0).Control(1).Enabled=   0   'False
-         Tab(0).Control(2)=   "Label1(7)"
+         Tab(0).Control(2)=   "Text1(27)"
          Tab(0).Control(2).Enabled=   0   'False
-         Tab(0).Control(3)=   "Label1(3)"
+         Tab(0).Control(3)=   "Text1(30)"
          Tab(0).Control(3).Enabled=   0   'False
-         Tab(0).Control(4)=   "Label1(4)"
+         Tab(0).Control(4)=   "Text2(3)"
          Tab(0).Control(4).Enabled=   0   'False
-         Tab(0).Control(5)=   "Label1(5)"
+         Tab(0).Control(5)=   "Text2(2)"
          Tab(0).Control(5).Enabled=   0   'False
-         Tab(0).Control(6)=   "Label1(6)"
+         Tab(0).Control(6)=   "Text1(23)"
          Tab(0).Control(6).Enabled=   0   'False
-         Tab(0).Control(7)=   "Label1(8)"
+         Tab(0).Control(7)=   "Text1(10)"
          Tab(0).Control(7).Enabled=   0   'False
-         Tab(0).Control(8)=   "Label1(9)"
+         Tab(0).Control(8)=   "Text1(9)"
          Tab(0).Control(8).Enabled=   0   'False
-         Tab(0).Control(9)=   "Label1(10)"
+         Tab(0).Control(9)=   "Text1(8)"
          Tab(0).Control(9).Enabled=   0   'False
-         Tab(0).Control(10)=   "Label1(22)"
+         Tab(0).Control(10)=   "Text1(7)"
          Tab(0).Control(10).Enabled=   0   'False
-         Tab(0).Control(11)=   "imgppal(2)"
+         Tab(0).Control(11)=   "Text1(6)"
          Tab(0).Control(11).Enabled=   0   'False
-         Tab(0).Control(12)=   "imgWeb(0)"
+         Tab(0).Control(12)=   "Text1(5)"
          Tab(0).Control(12).Enabled=   0   'False
-         Tab(0).Control(13)=   "Image1(2)"
+         Tab(0).Control(13)=   "Text1(4)"
          Tab(0).Control(13).Enabled=   0   'False
-         Tab(0).Control(14)=   "Image1(3)"
+         Tab(0).Control(14)=   "Text1(3)"
          Tab(0).Control(14).Enabled=   0   'False
-         Tab(0).Control(15)=   "Label1(14)"
+         Tab(0).Control(15)=   "Text1(2)"
          Tab(0).Control(15).Enabled=   0   'False
-         Tab(0).Control(16)=   "Image1(4)"
+         Tab(0).Control(16)=   "Check1"
          Tab(0).Control(16).Enabled=   0   'False
-         Tab(0).Control(17)=   "Label1(15)"
+         Tab(0).Control(17)=   "Text1(12)"
          Tab(0).Control(17).Enabled=   0   'False
-         Tab(0).Control(18)=   "Image1(6)"
+         Tab(0).Control(18)=   "ToolbarMail"
          Tab(0).Control(18).Enabled=   0   'False
-         Tab(0).Control(19)=   "ToolbarMail"
+         Tab(0).Control(19)=   "Image1(6)"
          Tab(0).Control(19).Enabled=   0   'False
-         Tab(0).Control(20)=   "Text1(12)"
+         Tab(0).Control(20)=   "Label1(15)"
          Tab(0).Control(20).Enabled=   0   'False
-         Tab(0).Control(21)=   "Check1"
+         Tab(0).Control(21)=   "Image1(4)"
          Tab(0).Control(21).Enabled=   0   'False
-         Tab(0).Control(22)=   "Text1(2)"
+         Tab(0).Control(22)=   "Label1(14)"
          Tab(0).Control(22).Enabled=   0   'False
-         Tab(0).Control(23)=   "Text1(3)"
+         Tab(0).Control(23)=   "Image1(3)"
          Tab(0).Control(23).Enabled=   0   'False
-         Tab(0).Control(24)=   "Text1(4)"
+         Tab(0).Control(24)=   "Image1(2)"
          Tab(0).Control(24).Enabled=   0   'False
-         Tab(0).Control(25)=   "Text1(5)"
+         Tab(0).Control(25)=   "imgWeb(0)"
          Tab(0).Control(25).Enabled=   0   'False
-         Tab(0).Control(26)=   "Text1(6)"
+         Tab(0).Control(26)=   "imgppal(2)"
          Tab(0).Control(26).Enabled=   0   'False
-         Tab(0).Control(27)=   "Text1(7)"
+         Tab(0).Control(27)=   "Label1(22)"
          Tab(0).Control(27).Enabled=   0   'False
-         Tab(0).Control(28)=   "Text1(8)"
+         Tab(0).Control(28)=   "Label1(10)"
          Tab(0).Control(28).Enabled=   0   'False
-         Tab(0).Control(29)=   "Text1(9)"
+         Tab(0).Control(29)=   "Label1(9)"
          Tab(0).Control(29).Enabled=   0   'False
-         Tab(0).Control(30)=   "Text1(10)"
+         Tab(0).Control(30)=   "Label1(8)"
          Tab(0).Control(30).Enabled=   0   'False
-         Tab(0).Control(31)=   "Text1(23)"
+         Tab(0).Control(31)=   "Label1(6)"
          Tab(0).Control(31).Enabled=   0   'False
-         Tab(0).Control(32)=   "Text2(2)"
+         Tab(0).Control(32)=   "Label1(5)"
          Tab(0).Control(32).Enabled=   0   'False
-         Tab(0).Control(33)=   "Text2(3)"
+         Tab(0).Control(33)=   "Label1(4)"
          Tab(0).Control(33).Enabled=   0   'False
-         Tab(0).Control(34)=   "Text1(30)"
+         Tab(0).Control(34)=   "Label1(3)"
          Tab(0).Control(34).Enabled=   0   'False
-         Tab(0).Control(35)=   "Text1(27)"
+         Tab(0).Control(35)=   "Label1(7)"
          Tab(0).Control(35).Enabled=   0   'False
-         Tab(0).Control(36)=   "Text2(27)"
+         Tab(0).Control(36)=   "Label1(2)"
          Tab(0).Control(36).Enabled=   0   'False
-         Tab(0).Control(37)=   "Check3"
+         Tab(0).Control(37)=   "Label1(11)"
          Tab(0).Control(37).Enabled=   0   'False
          Tab(0).ControlCount=   38
          TabCaption(1)   =   "Tesorería"
          TabPicture(1)   =   "frmCuentas2.frx":0028
          Tab(1).ControlEnabled=   0   'False
-         Tab(1).Control(0)=   "Label1(21)"
+         Tab(1).Control(0)=   "Text1(32)"
          Tab(1).Control(0).Enabled=   0   'False
-         Tab(1).Control(1)=   "Label1(24)"
+         Tab(1).Control(1)=   "Text1(31)"
          Tab(1).Control(1).Enabled=   0   'False
-         Tab(1).Control(2)=   "Image1(1)"
+         Tab(1).Control(2)=   "Frame4"
          Tab(1).Control(2).Enabled=   0   'False
-         Tab(1).Control(3)=   "Image1(0)"
+         Tab(1).Control(3)=   "Text1(16)"
          Tab(1).Control(3).Enabled=   0   'False
-         Tab(1).Control(4)=   "Label1(12)"
+         Tab(1).Control(4)=   "Text1(15)"
          Tab(1).Control(4).Enabled=   0   'False
-         Tab(1).Control(5)=   "Label1(26)"
+         Tab(1).Control(5)=   "Text1(14)"
          Tab(1).Control(5).Enabled=   0   'False
-         Tab(1).Control(6)=   "Label1(27)"
+         Tab(1).Control(6)=   "Text1(13)"
          Tab(1).Control(6).Enabled=   0   'False
-         Tab(1).Control(7)=   "imgppal(4)"
+         Tab(1).Control(7)=   "Text1(29)"
          Tab(1).Control(7).Enabled=   0   'False
-         Tab(1).Control(8)=   "Label1(28)"
+         Tab(1).Control(8)=   "Text2(1)"
          Tab(1).Control(8).Enabled=   0   'False
-         Tab(1).Control(9)=   "Text1(25)"
+         Tab(1).Control(9)=   "Text2(0)"
          Tab(1).Control(9).Enabled=   0   'False
          Tab(1).Control(10)=   "Text1(26)"
          Tab(1).Control(10).Enabled=   0   'False
-         Tab(1).Control(11)=   "Text2(0)"
+         Tab(1).Control(11)=   "Text1(25)"
          Tab(1).Control(11).Enabled=   0   'False
-         Tab(1).Control(12)=   "Text2(1)"
+         Tab(1).Control(12)=   "Label1(28)"
          Tab(1).Control(12).Enabled=   0   'False
-         Tab(1).Control(13)=   "Text1(29)"
+         Tab(1).Control(13)=   "imgppal(4)"
          Tab(1).Control(13).Enabled=   0   'False
-         Tab(1).Control(14)=   "Text1(13)"
+         Tab(1).Control(14)=   "Label1(27)"
          Tab(1).Control(14).Enabled=   0   'False
-         Tab(1).Control(15)=   "Text1(14)"
+         Tab(1).Control(15)=   "Label1(26)"
          Tab(1).Control(15).Enabled=   0   'False
-         Tab(1).Control(16)=   "Text1(15)"
+         Tab(1).Control(16)=   "Label1(12)"
          Tab(1).Control(16).Enabled=   0   'False
-         Tab(1).Control(17)=   "Text1(16)"
+         Tab(1).Control(17)=   "Image1(0)"
          Tab(1).Control(17).Enabled=   0   'False
-         Tab(1).Control(18)=   "Frame4"
+         Tab(1).Control(18)=   "Image1(1)"
          Tab(1).Control(18).Enabled=   0   'False
-         Tab(1).Control(19)=   "Text1(31)"
+         Tab(1).Control(19)=   "Label1(24)"
          Tab(1).Control(19).Enabled=   0   'False
-         Tab(1).Control(20)=   "Text1(32)"
+         Tab(1).Control(20)=   "Label1(21)"
          Tab(1).Control(20).Enabled=   0   'False
          Tab(1).ControlCount=   21
          TabCaption(2)   =   "Departamentos"
@@ -2183,7 +2183,6 @@ Private Sub cmdAceptar_Click()
                 If DatosOkLin("FrameAux2") Then
 '                    TerminaBloquear
                     If InsertarDesdeForm2(Me, 2, "FrameAux2") Then
-'                        b = BLOQUEADesdeFormulario2(Me, Data1, 1)
                         CargaGrid 2, True
                         BotonAnyadirLinea 2
                         
@@ -2192,10 +2191,8 @@ Private Sub cmdAceptar_Click()
                 
             Case 2 ' modificar
                 If DatosOkLin("FrameAux2") Then
-'                    TerminaBloquear
                     If ModificaDesdeFormulario2(Me, 2, "FrameAux2") Then
                 
-'                        If BLOQUEADesdeFormulario2(Me, Data1, 1) Then BotonModificar
                         ModoLineas = 0
             
                         V = AdoAux(2).Recordset.Fields(1) 'el 2 es el nº de departamento
@@ -3181,11 +3178,11 @@ Dim vFact As Byte, vDocum As Byte
     
     If B And ModoLineas = 1 Then
         SQL = ""
-        SQL = DevuelveDesdeBDNew(cConta, "departamentos", "dpto", "codmacta", txtaux3(0).Text, "T", , "dpto", txtaux3(1).Text, "N")
+        SQL = DevuelveDesdeBDNew(cConta, "departamentos", "dpto", "codmacta", txtAux3(0).Text, "T", , "dpto", txtAux3(1).Text, "N")
         If SQL <> "" Then
             MsgBox "El código de departamento ya existe. Reintroduzca.", vbExclamation
             B = False
-            PonFoco txtaux3(1)
+            PonFoco txtAux3(1)
         End If
     End If
     DatosOkLin = B
@@ -3630,7 +3627,7 @@ On Error GoTo Ecargaempresas
                 kCampo = 0
                 While Not miRsAux.EOF
                     kCampo = 1
-                    C = C & "    " & miRsAux!codmacta & " - " & miRsAux!Nommacta & vbCrLf
+                    C = C & "    " & miRsAux!codmacta & " - " & miRsAux!nommacta & vbCrLf
                     miRsAux.MoveNext
                 Wend
                 miRsAux.Close
@@ -3748,8 +3745,8 @@ Dim i As Integer
 
     Select Case Index
         Case 2 'departamentos
-            For i = 0 To txtaux3.Count - 1
-                txtaux3(i).Text = ""
+            For i = 0 To txtAux3.Count - 1
+                txtAux3(i).Text = ""
             Next i
     End Select
     
@@ -3881,13 +3878,13 @@ Dim i As Integer
             
             LLamaLineas Index, ModoLineas, anc
         
-            For i = 0 To txtaux3.Count - 1
-                txtaux3(i).Text = ""
+            For i = 0 To txtAux3.Count - 1
+                txtAux3(i).Text = ""
             Next i
             
-            txtaux3(0).Text = Text1(0).Text 'cuenta
-            txtaux3(1).Text = NumF 'departamento
-            PonFoco txtaux3(1)
+            txtAux3(0).Text = Text1(0).Text 'cuenta
+            txtAux3(1).Text = NumF 'departamento
+            PonFoco txtAux3(1)
          
     End Select
 End Sub
@@ -3930,7 +3927,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         Case 2 'departamentos
             For i = 0 To 2
-                txtaux3(i).Text = DataGridAux(Index).Columns(i).Text
+                txtAux3(i).Text = DataGridAux(Index).Columns(i).Text
             Next i
         
             CargarValoresAnteriores Me, 2, "FrameAux2"
@@ -3942,7 +3939,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     ' *** foco al 1r camp visible de les llinies en grids que no siga PK (en o sense tab) ***
     Select Case Index
         Case 2 ' departamentos
-            PonFoco txtaux3(2)
+            PonFoco txtAux3(2)
     End Select
     ' ***************************************************************************************
 End Sub
@@ -3982,10 +3979,10 @@ Dim B As Boolean
     'departamentos
     B = (Modo = 5 Or Modo = 1)
     For i = 1 To 2
-        txtaux3(i).Enabled = B
+        txtAux3(i).Enabled = B
     Next i
     B = (Modo = 5 Or Modo = 1) And ModoLineas = 1
-    txtaux3(1).Enabled = B
+    txtAux3(1).Enabled = B
     
 EPonerModo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -4004,8 +4001,8 @@ Dim B As Boolean
     Select Case Index
         Case 2 ' departamentos
             For jj = 1 To 2
-                txtaux3(jj).Visible = B
-                txtaux3(jj).Top = alto
+                txtAux3(jj).Visible = B
+                txtAux3(jj).Top = alto
             Next jj
     End Select
 End Sub
@@ -4041,7 +4038,7 @@ Dim Cad As String
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    If Not txtaux3(Index).MultiLine Then ConseguirFoco txtaux3(Index), Modo
+    If Not txtAux3(Index).MultiLine Then ConseguirFoco txtAux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -4058,7 +4055,7 @@ Dim cadMen As String
 Dim Nuevo As Boolean
 Dim CADENA As String
     
-    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -4068,7 +4065,7 @@ Dim CADENA As String
     ' ******* configurar el LostFocus dels camps de llínies (dins i fora grid) ********
     Select Case Index
         Case 1 ' departamento
-            PonerFormatoEntero txtaux3(Index)
+            PonerFormatoEntero txtAux3(Index)
             
 '        Case 2
 '            cmdAceptar.SetFocus

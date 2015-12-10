@@ -918,12 +918,7 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 Dim Tipo As Byte
 
-'    SQL = "select CCoste Cuenta , nomCCoste Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
-'    SQL = SQL & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
-'    SQL = SQL & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
-'    SQL = SQL & " from tmpbalancesumas where codusu = " & vUsu.Codigo
-'    SQL = SQL & " order by 1 "
-        
+       
     sql = "SELECT tmpsaldoscc.codccost CCoste, tmpsaldoscc.nomccost Descripcion, tmpsaldoscc.ano Año,tmpsaldoscc.mes Mes, tmpsaldoscc.impmesde Debe, tmpsaldoscc.impmesha Haber, coalesce(tmpsaldoscc.impmesde,0) - coalesce(tmpsaldoscc.impmesha) Saldo "
     sql = sql & " FROM  tmpsaldoscc tmpsaldoscc "
     sql = sql & " WHERE tmpsaldoscc.codusu = " & vUsu.Codigo

@@ -407,20 +407,20 @@ End Sub
 
 
 Private Sub CargaGrid()
-Dim Sql As String
+Dim sql As String
     
     
-    Sql = ""
+    sql = ""
     If cboFiltro.ListIndex = 1 Then
-        Sql = " WHERE Perdidas = 1"
+        sql = " WHERE Perdidas = 1"
     Else
         If cboFiltro.ListIndex = 2 Then
-            Sql = " WHERE Perdidas = 0"
+            sql = " WHERE Perdidas = 0"
         End If
     End If
-    Sql = Sql & " ORDER BY Numbalan"
-    Sql = "select numbalan,nombalan, if(perdidas=1,'SI','NO') as Perd ,if(predeterminado=1,'*','') as Pre  from balances " & Sql
-    Adodc1.RecordSource = Sql
+    sql = sql & " ORDER BY Numbalan"
+    sql = "select numbalan,nombalan, if(perdidas=1,'SI','NO') as Perd ,if(predeterminado=1,'*','') as Pre  from balances " & sql
+    Adodc1.RecordSource = sql
     Adodc1.ConnectionString = Conn
     Adodc1.Refresh
     
@@ -458,21 +458,21 @@ End Function
 
 
 Private Sub EliminarBalance()
-Dim Sql As String
-    Sql = "Seguro que desea eliminar el balance: " & Adodc1.Recordset!NomBalan & "?"
-    If MsgBox(Sql, vbExclamation + vbYesNo) <> vbYes Then Exit Sub
+Dim sql As String
+    sql = "Seguro que desea eliminar el balance: " & Adodc1.Recordset!NomBalan & "?"
+    If MsgBox(sql, vbExclamation + vbYesNo) <> vbYes Then Exit Sub
     
     'Eliminamos las cuentas
-    Sql = "DELETE FROM balances_ctas WHere numbalan=" & Adodc1.Recordset!NumBalan
-    Conn.Execute Sql
+    sql = "DELETE FROM balances_ctas WHere numbalan=" & Adodc1.Recordset!NumBalan
+    Conn.Execute sql
     
     'Eliminamos las lineas del balance
-    Sql = "DELETE FROM balances_texto WHere numbalan=" & Adodc1.Recordset!NumBalan
-    Conn.Execute Sql
+    sql = "DELETE FROM balances_texto WHere numbalan=" & Adodc1.Recordset!NumBalan
+    Conn.Execute sql
     
     'Eliminamos el balance
-    Sql = "DELETE FROM balances WHere numbalan=" & Adodc1.Recordset!NumBalan
-    Conn.Execute Sql
+    sql = "DELETE FROM balances WHere numbalan=" & Adodc1.Recordset!NumBalan
+    Conn.Execute sql
     
 End Sub
 
@@ -626,25 +626,6 @@ End Sub
 Private Sub BotonImprimir()
 Dim CodigoBalanceBuscar As Integer
     
-'    If adodc1.Recordset.EOF Then Exit Sub
-'    CodigoBalanceBuscar = adodc1.Recordset!NumBalan
-'
-'    'Vamos a utilizar la temporal de balances donde dejara los valores
-'    GeneraDatosBalanConfigImpresion adodc1.Recordset!NumBalan
-'
-'
-'    CadenaDesdeOtroForm = "Titulo= """ & DevNombreSQL(adodc1.Recordset!nombalan) & """|"
-'
-'    With frmImprimir
-'        .OtrosParametros = CadenaDesdeOtroForm
-'        .NumeroParametros = 3
-'        .FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
-'        .SoloImprimir = False
-'        'Opcion dependera del combo
-'        .opcion = 73
-'        .Show vbModal
-'    End With
-    
     
     frmColBalanList.NumBalan = Adodc1.Recordset!NumBalan
     frmColBalanList.NomBalan = Adodc1.Recordset!NomBalan
@@ -749,7 +730,7 @@ End Sub
 
 Private Sub BotonEliminar()
 Dim CodigoBalanceBuscar As Integer
-Dim Sql As String
+Dim sql As String
     
     On Error GoTo Error2
     

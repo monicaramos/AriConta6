@@ -1973,7 +1973,7 @@ Attribute frmUtil.VB_VarHelpID = -1
 
 Dim AntiguoText1 As String
 Private CadenaAmpliacion As String
-Private Sql As String
+Private sql As String
 
 Private LlevaContraPartida As Boolean
 
@@ -2147,13 +2147,13 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim Sql As String
+Dim sql As String
 
     On Error Resume Next
     
-    Sql = "numasien= " & DBSet(Text1(0).Text, "N") & " and fechaent = " & DBSet(Text1(1).Text, "F") & " and numdiari = " & DBSet(Text1(2).Text, "N")
-    If conWhere Then Sql = " WHERE " & Sql
-    ObtenerWhereCP = Sql
+    sql = "numasien= " & DBSet(Text1(0).Text, "N") & " and fechaent = " & DBSet(Text1(1).Text, "F") & " and numdiari = " & DBSet(Text1(2).Text, "N")
+    If conWhere Then sql = " WHERE " & sql
+    ObtenerWhereCP = sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -2165,22 +2165,22 @@ Private Sub cmdAux_Click(Index As Integer)
         Case 0
             cmdAux(0).Tag = 0
             LlamaContraPar
-            If txtAux(4).Text <> "" Then
-                PonFoco txtAux(5)
+            If txtaux(4).Text <> "" Then
+                PonFoco txtaux(5)
             Else
-                PonFoco txtAux(4)
+                PonFoco txtaux(4)
             End If
         Case 1 'Cta contrapartida
             cmdAux(0).Tag = 1
             LlamaContraPar
-            txtAux(5).SetFocus
+            txtaux(5).SetFocus
         Case 2 'Conceptos
             Set frmCon = New frmConceptos
             frmCon.DatosADevolverBusqueda = "0|"
             frmCon.Show vbModal
             Set frmCon = Nothing
         Case 3 ' centro de coste
-            If txtAux(11).Enabled Then
+            If txtaux(11).Enabled Then
                 Set frmCC = New frmBasico
                 AyudaCC frmCC
                 Set frmCC = Nothing
@@ -2202,29 +2202,29 @@ End Sub
 Private Sub cmdSaldoHco_Click(Index As Integer)
 Dim Cta As String
     If Modo = 5 And ModoLineas > 0 Then
-        If txtAux(4).Text = "" Then
+        If txtaux(4).Text = "" Then
             MsgBox "Seleccione una cuenta", vbExclamation
             Exit Sub
         End If
-        Sql = txtAux(4).Text
-        Cta = txtAux2(4).Text
+        sql = txtaux(4).Text
+        Cta = txtaux2(4).Text
     Else
         If AdoAux(1).Recordset.EOF Then
             MsgBox "Ningún registro activo.", vbExclamation
             Exit Sub
         End If
-        Sql = AdoAux(1).Recordset!codmacta
+        sql = AdoAux(1).Recordset!codmacta
         Cta = DBLet(AdoAux(1).Recordset!nommacta)
     End If
     If Index = 0 Then
-        SaldoHistorico Sql, "", Cta, False
+        SaldoHistorico sql, "", Cta, False
     Else
         If VieneDeDesactualizar Then
             MsgBox "Acaba de desactualizar asientos. No puede hacer consulta desde aqui.", vbExclamation
         Else
             Screen.MousePointer = vbHourglass
             frmConExtr.EjerciciosCerrados = False
-            frmConExtr.Cuenta = Sql
+            frmConExtr.Cuenta = sql
             frmConExtr.Show vbModal
         End If
     End If
@@ -2241,11 +2241,11 @@ Private Sub Form_Activate()
         If ASIENTO <> "" Then
             B = True
             Modo = 2
-            Sql = "Select * from hcabapu "
-            Sql = Sql & " WHERE numasien = " & RecuperaValor(ASIENTO, 3)
-            Sql = Sql & " AND numdiari =" & RecuperaValor(ASIENTO, 1)
-            Sql = Sql & " AND fechaent= '" & Format(RecuperaValor(ASIENTO, 2), FormatoFecha) & "'"
-            CadenaConsulta = Sql
+            sql = "Select * from hcabapu "
+            sql = sql & " WHERE numasien = " & RecuperaValor(ASIENTO, 3)
+            sql = sql & " AND numdiari =" & RecuperaValor(ASIENTO, 1)
+            sql = sql & " AND fechaent= '" & Format(RecuperaValor(ASIENTO, 2), FormatoFecha) & "'"
+            CadenaConsulta = sql
             PonerCadenaBusqueda
             'BOTON lineas
             
@@ -2269,19 +2269,10 @@ Private Sub Form_Activate()
 '        CargaGrid 1, (Modo = 2)
         If Modo <> 2 Then
             
-            'ESTO LO HE CAMBIADO HOY 9 FEB 2006
-            'Antes no estaba el IF
             If ASIENTO <> "" Then
-                'CadenaConsulta = "Select * from " & NombreTabla & Ordenacion
-                'Data1.RecordSource = CadenaConsulta
                 MsgBox "Proceso de sistema. Stop. Frm_Activate"
             End If
         Else
-            'Viene de HCO
-'            Toolbar1.Buttons(1).Enabled = False
-'            Toolbar1.Buttons(2).Enabled = False
-'            Toolbar1.Buttons(6).Enabled = False
-'            DespalzamientoVisible False
 
         End If
         If ASIENTO <> "" Then
@@ -2502,8 +2493,8 @@ Dim i As Integer
     PonerModoUsuarioGnral 0, "ariconta"
     
     'Maxima longitud cuentas
-    txtAux(3).MaxLength = vEmpresa.DigitosUltimoNivel
-    txtAux(5).MaxLength = vEmpresa.DigitosUltimoNivel
+    txtaux(3).MaxLength = vEmpresa.DigitosUltimoNivel
+    txtaux(5).MaxLength = vEmpresa.DigitosUltimoNivel
     'CadAncho = False
     PulsadoSalir = False
 
@@ -2648,8 +2639,8 @@ Dim B As Boolean
         End If
     Next i
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).BackColor = vbWhite
+    For i = 0 To txtaux.Count - 1
+        txtaux(i).BackColor = vbWhite
     Next i
     For i = 0 To txtaux3.Count - 1
         txtaux3(i).BackColor = vbWhite
@@ -2707,44 +2698,44 @@ Private Function MontaSQLCarga(Index As Integer, Enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0
             tabla = "hcabapu_fichdocs"
-            Sql = "SELECT hcabapu_fichdocs.codigo, hcabapu_fichdocs.campo, hcabapu_fichdocs.numdiari, hcabapu_fichdocs.fechaent, hcabapu_fichdocs.numasien, hcabapu_fichdocs.descripfich, hcabapu_fichdocs.orden, hcabapu_fichdocs.docum"
-            Sql = Sql & " FROM " & tabla
+            sql = "SELECT hcabapu_fichdocs.codigo, hcabapu_fichdocs.campo, hcabapu_fichdocs.numdiari, hcabapu_fichdocs.fechaent, hcabapu_fichdocs.numasien, hcabapu_fichdocs.descripfich, hcabapu_fichdocs.orden, hcabapu_fichdocs.docum"
+            sql = sql & " FROM " & tabla
             If Enlaza Then
-                Sql = Sql & Replace(ObtenerWhereCab(True), "hcabapu", "hcabapu_fichdocs")
+                sql = sql & Replace(ObtenerWhereCab(True), "hcabapu", "hcabapu_fichdocs")
             Else
-                Sql = Sql & " WHERE hcabapu_fichdocs.codigo = -1"
+                sql = sql & " WHERE hcabapu_fichdocs.codigo = -1"
             End If
-            Sql = Sql & " ORDER BY orden"
+            sql = sql & " ORDER BY orden"
             
        
        
        Case 1 ' lineas de asiento
             tabla = "hlinapu"
-            Sql = "SELECT hlinapu.numasien, hlinapu.fechaent, hlinapu.numdiari, hlinapu.linliapu, hlinapu.codmacta, cuentas.nommacta, hlinapu.numdocum, hlinapu.ctacontr,"
-            Sql = Sql & " hlinapu.codconce, hlinapu.ampconce, hlinapu.timporteD, hlinapu.timporteH, hlinapu.codccost, cuentas_1.nommacta as nommactactr, conceptos.nomconce, ccoste.nomccost, hlinapu.idcontab "
-            Sql = Sql & " FROM (((hlinapu LEFT JOIN cuentas AS cuentas_1 ON hlinapu.ctacontr = "
-            Sql = Sql & " cuentas_1.codmacta) LEFT JOIN ccoste ON hlinapu.codccost = ccoste.codccost)            "
-            Sql = Sql & " INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta) "
-            Sql = Sql & " INNER JOIN conceptos ON hlinapu.codconce = conceptos.codconce "
+            sql = "SELECT hlinapu.numasien, hlinapu.fechaent, hlinapu.numdiari, hlinapu.linliapu, hlinapu.codmacta, cuentas.nommacta, hlinapu.numdocum, hlinapu.ctacontr,"
+            sql = sql & " hlinapu.codconce, hlinapu.ampconce, hlinapu.timporteD, hlinapu.timporteH, hlinapu.codccost, cuentas_1.nommacta as nommactactr, conceptos.nomconce, ccoste.nomccost, hlinapu.idcontab "
+            sql = sql & " FROM (((hlinapu LEFT JOIN cuentas AS cuentas_1 ON hlinapu.ctacontr = "
+            sql = sql & " cuentas_1.codmacta) LEFT JOIN ccoste ON hlinapu.codccost = ccoste.codccost)            "
+            sql = sql & " INNER JOIN cuentas ON hlinapu.codmacta = cuentas.codmacta) "
+            sql = sql & " INNER JOIN conceptos ON hlinapu.codconce = conceptos.codconce "
             If Enlaza Then
-                Sql = Sql & Replace(ObtenerWhereCab(True), "hcabapu", "hlinapu")
+                sql = sql & Replace(ObtenerWhereCab(True), "hcabapu", "hlinapu")
             Else
-                Sql = Sql & " WHERE hlinapu.linliapu = '-1'"
+                sql = sql & " WHERE hlinapu.linliapu = '-1'"
             End If
-            Sql = Sql & " ORDER BY 1,2,3,4"
+            sql = sql & " ORDER BY 1,2,3,4"
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = sql
 End Function
 
 Private Sub frmAsi_DatoSeleccionado(CadenaSeleccion As String)
@@ -2778,7 +2769,7 @@ End Sub
 Private Sub frmC_Selec(vFecha As Date)
 Dim indice As Byte
     indice = CByte(Me.cmdAux(0).Tag + 2)
-    txtAux(indice).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -2812,21 +2803,21 @@ Dim vFe As String
         vFe = RecuperaValor(CadenaSeleccion, 1)
         If EstaLaCuentaBloqueada(vFe, CDate(Text1(1).Text)) Then
             MsgBox "Cuenta bloqueada: " & vFe, vbExclamation
-            If cmdAux(0).Tag = "0" Then txtAux(4).Text = ""
+            If cmdAux(0).Tag = "0" Then txtaux(4).Text = ""
             Exit Sub
         End If
     End If
     If cmdAux(0).Tag = 0 Then
         'Cuenta normal
-        txtAux(4).Text = RecuperaValor(CadenaSeleccion, 1)
-        txtAux2(4).Text = RecuperaValor(CadenaSeleccion, 2)
+        txtaux(4).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtaux2(4).Text = RecuperaValor(CadenaSeleccion, 2)
         
         'Habilitaremos el ccoste
         HabilitarCentroCoste
         
     Else
         'contrapartida
-        txtAux(6).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtaux(6).Text = RecuperaValor(CadenaSeleccion, 1)
         Text3(5).Text = RecuperaValor(CadenaSeleccion, 2)
     End If
 
@@ -2834,16 +2825,16 @@ End Sub
 
 Private Sub frmCC_DatoSeleccionado(CadenaSeleccion As String)
     'Centro de coste
-    txtAux(11).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtaux(11).Text = RecuperaValor(CadenaSeleccion, 1)
     Text3(3).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
 Dim RC As Byte
     'Concepto
-    txtAux(7).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtaux(7).Text = RecuperaValor(CadenaSeleccion, 1)
     Text3(4).Text = RecuperaValor(CadenaSeleccion, 2)
-    txtAux(8).Text = RecuperaValor(CadenaSeleccion, 2) & " "
+    txtaux(8).Text = RecuperaValor(CadenaSeleccion, 2) & " "
     'Habilitamos importes
     RC = CByte(Val(RecuperaValor(CadenaSeleccion, 3)))
     HabilitarImportes RC
@@ -2869,12 +2860,12 @@ Private Sub frmUtil_DatoSeleccionado(CadenaSeleccion As String)
     Else
         cboFiltro.ListIndex = 0
         
-        Sql = "Select * from hcabapu "
-        Sql = Sql & " WHERE numasien = " & RecuperaValor(CadenaSeleccion, 1)
-        Sql = Sql & " AND numdiari =" & RecuperaValor(CadenaSeleccion, 3)
-        Sql = Sql & " AND fechaent= '" & Format(RecuperaValor(CadenaSeleccion, 2), FormatoFecha) & "'"
+        sql = "Select * from hcabapu "
+        sql = sql & " WHERE numasien = " & RecuperaValor(CadenaSeleccion, 1)
+        sql = sql & " AND numdiari =" & RecuperaValor(CadenaSeleccion, 3)
+        sql = sql & " AND fechaent= '" & Format(RecuperaValor(CadenaSeleccion, 2), FormatoFecha) & "'"
         
-        CadenaConsulta = Sql
+        CadenaConsulta = sql
         PonerCadenaBusqueda
     End If
 End Sub
@@ -3055,12 +3046,6 @@ Dim cWhere1 As String
         cWhere = ""
     End If
     
-'    Set frmAsi = New frmBasico2
-'
-'    AyudaAsientos frmAsi, , cWhere
-'
-'    Set frmAsi = Nothing
-        
      Set frmAsi = New frmAsientosHcoPrev
      
      frmAsi.cWhere = cWhere
@@ -3170,14 +3155,14 @@ Private Sub BotonEliminar(EliminarDesdeActualizar As Boolean)
     If Not EliminarDesdeActualizar Then
 '        If BloqAsien Then Exit Sub  'Bloqueamos el asiento, para ver si no esta bloqueado por otro
         '### a mano
-        Sql = "Cabecera de apuntes." & vbCrLf
-        Sql = Sql & "-----------------------------" & vbCrLf & vbCrLf
-        Sql = Sql & "Va a eliminar el asiento:"
-        Sql = Sql & vbCrLf & "Nº Asiento   :   " & Data1.Recordset.Fields(2)
-        Sql = Sql & vbCrLf & "Fecha        :   " & CStr(Data1.Recordset.Fields(1))
-        Sql = Sql & vbCrLf & "Diario           :   " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
-        Sql = Sql & "      ¿Desea continuar ? "
-        i = MsgBox(Sql, vbQuestion + vbYesNoCancel)
+        sql = "Cabecera de apuntes." & vbCrLf
+        sql = sql & "-----------------------------" & vbCrLf & vbCrLf
+        sql = sql & "Va a eliminar el asiento:"
+        sql = sql & vbCrLf & "Nº Asiento   :   " & Data1.Recordset.Fields(2)
+        sql = sql & vbCrLf & "Fecha        :   " & CStr(Data1.Recordset.Fields(1))
+        sql = sql & vbCrLf & "Diario           :   " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
+        sql = sql & "      ¿Desea continuar ? "
+        i = MsgBox(sql, vbQuestion + vbYesNoCancel)
         'Borramos
         If i <> vbYes Then
 '            DesBloqAsien
@@ -3258,8 +3243,6 @@ Dim CPostal As String, desProvi As String, desPais As String
 
     '-- Esto permanece para saber donde estamos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
-'    cmdSaldoHco(0).Visible = Not AdoAux(1).Recordset.EOF
-'    cmdSaldoHco(1).Visible = Not AdoAux(1).Recordset.EOF
     
     
 End Sub
@@ -3300,36 +3283,6 @@ Dim Mc As Contadores
                 DataGridAux(1).AllowAddNew = False
                 If Not AdoAux(1).Recordset.EOF Then
                     AdoAux(1).Recordset.MoveFirst
-'                Else
-'                    ' eliminamos cabecera
-'                    I = FechaCorrecta2(CDate(Data1.Recordset.Fields(1)))
-'                    Set Mc = New Contadores
-'                    NumRegElim = Data1.Recordset.Fields(2)
-'                    Mc.DevolverContador "0", I = 0, NumRegElim
-'                    Set Mc = Nothing
-'
-'                    Eliminar
-'
-'                    Me.Data1.Refresh
-'
-'                    If Data1.Recordset.EOF Then
-'                        'Solo habia un registro
-'                        LimpiarCampos
-'                        CargaGrid 1, False
-'                        PonerModo 0
-'                    Else
-'                            If NumRegElim > Data1.Recordset.RecordCount Then
-'                                Data1.Recordset.MoveLast
-'                            Else
-'                                Data1.Recordset.MoveFirst
-'                                Data1.Recordset.Move NumRegElim - 1
-'                            End If
-'                            PonerCampos
-'                            DataGridAux(1).Enabled = True
-'                            lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
-'                    End If
-'
-                    
                 End If
             End If
             ModoLineas = 0
@@ -3343,8 +3296,6 @@ Dim Mc As Contadores
             DataGridAux(1).Enabled = True
             PonerFocoGrid DataGridAux(1)
         
-            
-        
         
     End Select
 End Sub
@@ -3352,7 +3303,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim sql As String
 Dim cad As String
 'Dim Datos As String
 
@@ -3406,7 +3357,7 @@ End Sub
 
 Private Function Eliminar() As Boolean
 Dim vWhere As String
-Dim Sql As String
+Dim sql As String
     On Error GoTo FinEliminar
 
     Conn.BeginTrans
@@ -3422,12 +3373,12 @@ Dim Sql As String
     Conn.Execute "Delete from " & NombreTabla & vWhere
        
     'El LOG
-    Sql = "Nº Asiento   :   " & Data1.Recordset.Fields(2)
-    Sql = Sql & vbCrLf & "Fecha        :   " & CStr(Data1.Recordset.Fields(1))
-    Sql = Sql & vbCrLf & "Diario           :   " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
+    sql = "Nº Asiento   :   " & Data1.Recordset.Fields(2)
+    sql = sql & vbCrLf & "Fecha        :   " & CStr(Data1.Recordset.Fields(1))
+    sql = sql & vbCrLf & "Diario           :   " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
     
     
-    vLog.Insertar 3, vUsu, Sql
+    vLog.Insertar 3, vUsu, sql
        
        
 FinEliminar:
@@ -3464,26 +3415,26 @@ Dim RC As Byte
     
     Select Case Index
         Case 1 'fecha de entrada
-            Sql = ""
+            sql = ""
             If Not EsFechaOK(Text1(1)) Then
                 MsgBox "Fecha incorrecta. (dd/mm/yyyy)", vbExclamation
-                Sql = "mal"
+                sql = "mal"
             Else
                 RC = FechaCorrecta2(CDate(Text1(1).Text))
                 'Text1(1).Text = Format(Text1(1).Text, "dd/mm/yyyy")
-                Sql = ""
+                sql = ""
                 If RC > 1 Then
                     If RC = 2 Then
-                        Sql = varTxtFec
+                        sql = varTxtFec
                     
                     Else
                         If RC = 3 Then
-                            Sql = "El ejercicio al que pertenece la fecha: " & Text1(Index).Text & " está cerrado."
+                            sql = "El ejercicio al que pertenece la fecha: " & Text1(Index).Text & " está cerrado."
                         Else
-                            Sql = "Ejercicio para: " & Text1(Index).Text & " todavía no activo"
+                            sql = "Ejercicio para: " & Text1(Index).Text & " todavía no activo"
                         End If
                     End If
-                    MsgBox Sql, vbExclamation
+                    MsgBox sql, vbExclamation
                  Else
                     'Fecha correcta. Si tiene valor DiarioPorDefecto entonces NO paso por ese campo
                     'Y me voy directamente al siguiente
@@ -3499,16 +3450,16 @@ Dim RC As Byte
                 PonFoco Text1(2)
                 Exit Sub
             End If
-             Sql = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", Text1(2).Text, "N")
-             If Sql = "" Then
-                    Sql = "Diario no encontrado: " & Text1(2).Text
+             sql = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", Text1(2).Text, "N")
+             If sql = "" Then
+                    sql = "Diario no encontrado: " & Text1(2).Text
                     Text1(2).Text = ""
                     Text4.Text = ""
-                    MsgBox Sql, vbExclamation
+                    MsgBox sql, vbExclamation
                     PonFoco Text1(2)
             End If
             Text1(2).Text = Val(Text1(2))
-            Text4.Text = Sql
+            Text4.Text = sql
         
         Case 6 ' fecha de creacion
             PonerFormatoFecha Text1(6)
@@ -3630,29 +3581,29 @@ Dim Ampliacion As String
             If CadenaDesdeOtroForm <> "" Then
                 Set miRsAux = New ADODB.Recordset
                 
-                Sql = " SELECT max(linliapu) FROM hlinapu WHERE hlinapu.numdiari= " & Data1.Recordset!NumDiari
-                Sql = Sql & " AND hlinapu.fechaent= " & DBSet(Data1.Recordset!FechaEnt, "F")
-                Sql = Sql & " AND hlinapu.numasien=" & Data1.Recordset!NumAsien & ";"
-                miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                sql = " SELECT max(linliapu) FROM hlinapu WHERE hlinapu.numdiari= " & Data1.Recordset!NumDiari
+                sql = sql & " AND hlinapu.fechaent= " & DBSet(Data1.Recordset!FechaEnt, "F")
+                sql = sql & " AND hlinapu.numasien=" & Data1.Recordset!NumAsien & ";"
+                miRsAux.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 LINASI = 0
                 If Not miRsAux.EOF Then LINASI = DBLet(miRsAux.Fields(0), "N")
                 miRsAux.Close
                 
-                Sql = "SELECT cta,nomdocum,tmpconext.timported, tmpconext.timporteh,pos ,ccost, ctacontr, codconce, numdocum FROM tmpconext, asipre_lineas where codusu =" & vUsu.Codigo
-                Sql = Sql & " and asipre_lineas.numaspre = " & DBSet(NumAsiPre, "N") & " and asipre_lineas.linlapre = tmpconext.pos ORDER BY pos"
-                miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                Sql = ""
+                sql = "SELECT cta,nomdocum,tmpconext.timported, tmpconext.timporteh,pos ,ccost, ctacontr, codconce, numdocum FROM tmpconext, asipre_lineas where codusu =" & vUsu.Codigo
+                sql = sql & " and asipre_lineas.numaspre = " & DBSet(NumAsiPre, "N") & " and asipre_lineas.linlapre = tmpconext.pos ORDER BY pos"
+                miRsAux.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                sql = ""
                 While Not miRsAux.EOF
                     LINASI = LINASI + 1
                     'numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost
-                    Sql = Sql & ", (" & Data1.Recordset!NumDiari & "," & DBSet(Data1.Recordset!FechaEnt, "F") & "," & Data1.Recordset!NumAsien
-                    Sql = Sql & "," & LINASI & ",'" & miRsAux!Cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
-                    Sql = Sql & "," & DBSet(Ampliacion, "T") & "," & DBSet(miRsAux!timported, "N", "S") & "," & DBSet(miRsAux!timporteH, "N", "S")
-                    Sql = Sql & "," & DBSet(miRsAux!ctacontr, "T")
+                    sql = sql & ", (" & Data1.Recordset!NumDiari & "," & DBSet(Data1.Recordset!FechaEnt, "F") & "," & Data1.Recordset!NumAsien
+                    sql = sql & "," & LINASI & ",'" & miRsAux!Cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
+                    sql = sql & "," & DBSet(Ampliacion, "T") & "," & DBSet(miRsAux!timported, "N", "S") & "," & DBSet(miRsAux!timporteH, "N", "S")
+                    sql = sql & "," & DBSet(miRsAux!ctacontr, "T")
                     If vParam.autocoste Then
-                        Sql = Sql & "," & DBSet(miRsAux!CCost, "T") & ")"
+                        sql = sql & "," & DBSet(miRsAux!CCost, "T") & ")"
                     Else
-                        Sql = Sql & ",null)"
+                        sql = sql & ",null)"
                     End If
                     
                     miRsAux.MoveNext
@@ -3661,10 +3612,10 @@ Dim Ampliacion As String
                 Set miRsAux = Nothing
                 
                 
-                If Sql <> "" Then
-                    Sql = Mid(Sql, 2)
-                    Sql = "INSERT INTO hlinapu (numdiari,fechaent,numasien,linliapu,codmacta,numdocum,codconce,ampconce,timporteD,timporteH,ctacontr,codccost) VALUES " & Sql
-                    Conn.Execute Sql
+                If sql <> "" Then
+                    sql = Mid(sql, 2)
+                    sql = "INSERT INTO hlinapu (numdiari,fechaent,numasien,linliapu,codmacta,numdocum,codconce,ampconce,timporteD,timporteH,ctacontr,codccost) VALUES " & sql
+                    Conn.Execute sql
                     CargaGrid 1, True
                 End If
                 
@@ -3721,7 +3672,7 @@ Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim Sql As String
+Dim sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -3748,12 +3699,12 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'linea de asiento
-            Sql = "¿Seguro que desea eliminar la línea del asiento?"
-            Sql = Sql & vbCrLf & "Código: " & AdoAux(Index).Recordset!NumAsien & " - " & AdoAux(Index).Recordset!FechaEnt & " - " & AdoAux(Index).Recordset!NumDiari & " - " & AdoAux(Index).Recordset!Linliapu
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            sql = "¿Seguro que desea eliminar la línea del asiento?"
+            sql = sql & vbCrLf & "Código: " & AdoAux(Index).Recordset!NumAsien & " - " & AdoAux(Index).Recordset!FechaEnt & " - " & AdoAux(Index).Recordset!NumDiari & " - " & AdoAux(Index).Recordset!Linliapu
+            If MsgBox(sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM hlinapu "
-                Sql = Sql & Replace(vWhere, "hcabapu", "hlinapu") & " and linliapu = " & DBLet(AdoAux(Index).Recordset!Linliapu, "N")
+                sql = "DELETE FROM hlinapu "
+                sql = sql & Replace(vWhere, "hcabapu", "hlinapu") & " and linliapu = " & DBLet(AdoAux(Index).Recordset!Linliapu, "N")
                 
             End If
         
@@ -3762,7 +3713,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        Conn.Execute Sql
+        Conn.Execute sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -3840,26 +3791,26 @@ Dim i As Integer
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 1 'lineas de asiento
                     If Limpia Then
-                        For i = 0 To txtAux.Count - 1
-                            txtAux(i).Text = ""
+                        For i = 0 To txtaux.Count - 1
+                            txtaux(i).Text = ""
                         Next i
                     End If
-                    txtAux(0).Text = Text1(0).Text 'asiento
-                    txtAux(1).Text = Text1(1).Text 'fecha
-                    txtAux(2).Text = Text1(2).Text 'diario
+                    txtaux(0).Text = Text1(0).Text 'asiento
+                    txtaux(1).Text = Text1(1).Text 'fecha
+                    txtaux(2).Text = Text1(2).Text 'diario
                     
-                    txtAux(3).Text = Format(NumF, "000") 'linea contador
+                    txtaux(3).Text = Format(NumF, "000") 'linea contador
                     If Limpia Then
-                        txtAux2(4).Text = ""
+                        txtaux2(4).Text = ""
                         Text3(3).Text = ""
                         Text3(4).Text = ""
                         Text3(5).Text = ""
                     End If
                     
                     If Limpia Then
-                        PonFoco txtAux(4)
+                        PonFoco txtaux(4)
                     Else
-                        PonFoco txtAux(5)
+                        PonFoco txtaux(5)
                     End If
             End Select
 
@@ -3908,20 +3859,20 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 1 'asientos
-            txtAux(0).Text = DataGridAux(Index).Columns(0).Text
-            txtAux(1).Text = DataGridAux(Index).Columns(1).Text
-            txtAux(2).Text = DataGridAux(Index).Columns(2).Text
-            txtAux(3).Text = DataGridAux(Index).Columns(3).Text
+            txtaux(0).Text = DataGridAux(Index).Columns(0).Text
+            txtaux(1).Text = DataGridAux(Index).Columns(1).Text
+            txtaux(2).Text = DataGridAux(Index).Columns(2).Text
+            txtaux(3).Text = DataGridAux(Index).Columns(3).Text
             
-            txtAux(4).Text = DataGridAux(Index).Columns(4).Text 'cuenta
-            txtAux2(4).Text = DataGridAux(Index).Columns(5).Text 'denominacion
-            txtAux(5).Text = DataGridAux(Index).Columns(6).Text 'documento
-            txtAux(6).Text = DataGridAux(Index).Columns(7).Text 'contrapartida
-            txtAux(7).Text = DataGridAux(Index).Columns(8).Text 'concepto
-            txtAux(8).Text = DataGridAux(Index).Columns(9).Text 'ampliacion
-            txtAux(9).Text = DataGridAux(Index).Columns(10).Text 'importe al debe
-            txtAux(10).Text = DataGridAux(Index).Columns(11).Text 'importe al haber
-            txtAux(11).Text = DataGridAux(Index).Columns(12).Text 'centro de coste
+            txtaux(4).Text = DataGridAux(Index).Columns(4).Text 'cuenta
+            txtaux2(4).Text = DataGridAux(Index).Columns(5).Text 'denominacion
+            txtaux(5).Text = DataGridAux(Index).Columns(6).Text 'documento
+            txtaux(6).Text = DataGridAux(Index).Columns(7).Text 'contrapartida
+            txtaux(7).Text = DataGridAux(Index).Columns(8).Text 'concepto
+            txtaux(8).Text = DataGridAux(Index).Columns(9).Text 'ampliacion
+            txtaux(9).Text = DataGridAux(Index).Columns(10).Text 'importe al debe
+            txtaux(10).Text = DataGridAux(Index).Columns(11).Text 'importe al haber
+            txtaux(11).Text = DataGridAux(Index).Columns(12).Text 'centro de coste
             
             
     End Select
@@ -3929,7 +3880,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     LLamaLineas Index, ModoLineas, anc
     
     
-    PonFoco txtAux(4)
+    PonFoco txtaux(4)
     
     ' ***************************************************************************************
 End Sub
@@ -3946,25 +3897,25 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 1 'lineas de asiento
-            For jj = 4 To txtAux.Count - 1
-                txtAux(jj).Visible = B
-                txtAux(jj).Top = alto
+            For jj = 4 To txtaux.Count - 1
+                txtaux(jj).Visible = B
+                txtaux(jj).Top = alto
             Next jj
             
-            txtAux2(4).Visible = B
-            txtAux2(4).Top = alto
+            txtaux2(4).Visible = B
+            txtaux2(4).Top = alto
 
             For jj = 0 To cmdAux.Count - 1
                 cmdAux(jj).Visible = B
-                cmdAux(jj).Top = txtAux(4).Top
-                cmdAux(jj).Height = txtAux(4).Height
+                cmdAux(jj).Top = txtaux(4).Top
+                cmdAux(jj).Height = txtaux(4).Height
             Next jj
             
             If Not vParam.autocoste Then
                 cmdAux(3).Visible = False
                 cmdAux(3).Enabled = False
-                txtAux(11).Visible = False
-                txtAux(11).Enabled = False
+                txtaux(11).Visible = False
+                txtaux(11).Enabled = False
             End If
             
             
@@ -3975,7 +3926,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim sql As String
 Dim B As Boolean
 Dim cant As Integer
 Dim Mens As String
@@ -3998,40 +3949,40 @@ Dim vFact As Byte, vDocum As Byte
     
     If B And Modo = 5 Then ' tanto si insertamos como si modificamos en lineas
         'Cuenta
-        If txtAux(4).Text = "" Then
+        If txtaux(4).Text = "" Then
             MsgBox "Cuenta no puede estar vacia.", vbExclamation
             DatosOkLlin = False
-            PonFoco txtAux(4)
+            PonFoco txtaux(4)
             Exit Function
         End If
         
-        If Not IsNumeric(txtAux(4).Text) Then
+        If Not IsNumeric(txtaux(4).Text) Then
             MsgBox "Cuenta debe ser numrica", vbExclamation
             DatosOkLlin = False
-            PonFoco txtAux(4)
+            PonFoco txtaux(4)
             Exit Function
         End If
         
-        If txtAux(4).Text = NO Then
+        If txtaux(4).Text = NO Then
             MsgBox "La cuenta debe estar dada de alta en el sistema", vbExclamation
             DatosOkLlin = False
-            PonFoco txtAux(4)
+            PonFoco txtaux(4)
             Exit Function
         End If
         
-        If Not EsCuentaUltimoNivel(txtAux(4).Text) Then
+        If Not EsCuentaUltimoNivel(txtaux(4).Text) Then
             MsgBox "La cuenta no es de último nivel", vbExclamation
             DatosOkLlin = False
-            PonFoco txtAux(4)
+            PonFoco txtaux(4)
             Exit Function
         End If
         
         'Centro de coste
-        If txtAux(11).Visible Then
-            If txtAux(11).Enabled Then
-                If txtAux(11).Text = "" Then
+        If txtaux(11).Visible Then
+            If txtaux(11).Enabled Then
+                If txtaux(11).Text = "" Then
                     MsgBox "Centro de coste no puede ser nulo", vbExclamation
-                    PonFoco txtAux(11)
+                    PonFoco txtaux(11)
                     Exit Function
                 End If
             End If
@@ -4047,16 +3998,6 @@ End Function
 
 Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
     SepuedeBorrar = False
-    
-'    ' *** si cal comprovar alguna cosa abans de borrar ***
-'    Select Case Index
-'        Case 0 'cuentas bancarias
-'            If AdoAux(Index).Recordset!ctaprpal = 1 Then
-'                MsgBox "No puede borrar una Cuenta Principal. Seleccione antes otra cuenta como Principal", vbExclamation
-'                Exit Function
-'            End If
-'    End Select
-'    ' ****************************************************
     
     SepuedeBorrar = True
 End Function
@@ -4082,15 +4023,9 @@ End Sub
 Private Sub SituarTab(numTab As Integer)
     On Error Resume Next
     
-'    If numTab = 0 Then
-'        SSTab1.Tab = 2
-'    ElseIf numTab = 1 Then
-'        SSTab1.Tab = 1
-'    End If
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
-' **********************************************
 
 
 Private Sub CargaFrame(Index As Integer, Enlaza As Boolean)
@@ -4181,9 +4116,9 @@ Dim tots As String
             
             Else
                 For i = 0 To 4
-                    txtAux(i).Text = ""
+                    txtaux(i).Text = ""
                 Next i
-                txtAux2(4).Text = ""
+                txtaux2(4).Text = ""
             End If
     End Select
     DataGridAux(Index).ScrollBars = dbgAutomatic
@@ -4242,8 +4177,8 @@ Dim cad As String
 
                     'Estabamos insertando insertando lineas
                     'Si ha puesto contrapartida borramos
-                    If txtAux(6).Text <> "" Then
-                        If EstaLaCuentaBloqueada(txtAux(6).Text, CDate(Text1(1).Text)) Then
+                    If txtaux(6).Text <> "" Then
+                        If EstaLaCuentaBloqueada(txtaux(6).Text, CDate(Text1(1).Text)) Then
                             LlevaContraPartida = False
                         Else
                             If LlevaContraPartida Then
@@ -4261,14 +4196,14 @@ Dim cad As String
                     Else
                         LlevaContraPartida = False
                     End If
-                    txtAux(11).Text = ""
+                    txtaux(11).Text = ""
                     Text3(3).Text = ""
                     If Limp Then
                         For i = 3 To 5
                             Text3(i).Text = ""
                         Next i
                         For i = 0 To 11
-                            txtAux(i).Text = ""
+                            txtaux(i).Text = ""
                         Next i
                     End If
                     ModoLineas = 0
@@ -4411,10 +4346,10 @@ Dim cad As String
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    AntiguoText1 = txtAux(Index).Text
-    ConseguirFoco txtAux(Index), Modo
+    AntiguoText1 = txtaux(Index).Text
+    ConseguirFoco txtaux(Index), Modo
     
-    If Index = 8 Then txtAux(Index).SelStart = Len(txtAux(Index).Text)
+    If Index = 8 Then txtaux(Index).SelStart = Len(txtaux(Index).Text)
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4458,10 +4393,10 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
                         'De momento solo para el 5. Cliente
                         Select Case Index
                         Case 4
-                            txtAux(4).Text = ""
+                            txtaux(4).Text = ""
                             Image1_Click 1
                         Case 8
-                            txtAux(8).Text = ""
+                            txtaux(8).Text = ""
                             Image1_Click 2
                         End Select
                      End If
@@ -4498,14 +4433,14 @@ Case 0
     'Cta contrapartida
     cmdAux(0).Tag = 1
     LlamaContraPar
-    PonFoco txtAux(6)
+    PonFoco txtaux(6)
 Case 1
     Set frmCon = New frmConceptos
     frmCon.DatosADevolverBusqueda = "0|"
     frmCon.Show vbModal
     Set frmCon = Nothing
 Case 2
-    If txtAux(11).Enabled Then
+    If txtaux(11).Enabled Then
         Set frmCC = New frmCCCentroCoste
         frmCC.DatosADevolverBusqueda = "0|1|"
         frmCC.Show vbModal
@@ -4515,7 +4450,7 @@ Case 3
     'Como si hubeiran pulsado sobre el cmd +
     cmdAux(0).Tag = 0
     LlamaContraPar
-    PonFoco txtAux(6)
+    PonFoco txtaux(6)
 End Select
 End Sub
 
@@ -4533,18 +4468,18 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim RC As String
     Dim Importe As Currency
         
-        If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+        If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
         
-        If txtAux(Index).Text = AntiguoText1 Then
+        If txtaux(Index).Text = AntiguoText1 Then
              Exit Sub
         End If
     
         'Comun a todos
-        If txtAux(Index).Text = "" Then
+        If txtaux(Index).Text = "" Then
             Select Case Index
             Case 4
                 HabilitarCentroCoste
-                txtAux(1).Text = ""
+                txtaux(1).Text = ""
             Case 6
                 Text3(5).Text = ""
             Case 9
@@ -4555,23 +4490,23 @@ Private Sub txtAux_LostFocus(Index As Integer)
         
         Select Case Index
         Case 4
-            RC = txtAux(4).Text
-            If CuentaCorrectaUltimoNivel(RC, Sql) Then
-                txtAux(4).Text = RC
+            RC = txtaux(4).Text
+            If CuentaCorrectaUltimoNivel(RC, sql) Then
+                txtaux(4).Text = RC
                 If Modo = 1 Then Exit Sub
                 If EstaLaCuentaBloqueada(RC, CDate(Text1(1).Text)) Then
                     MsgBox "Cuenta bloqueada: " & RC, vbExclamation
-                    txtAux(4).Text = ""
+                    txtaux(4).Text = ""
                 Else
-                    txtAux2(4).Text = Sql
+                    txtaux2(4).Text = sql
                     RC = ""
                 End If
             Else
-                If InStr(1, Sql, "No existe la cuenta :") > 0 Then
+                If InStr(1, sql, "No existe la cuenta :") > 0 Then
                     If vUsu.PermiteOpcion("ariconta", 201, vbOpcionCrearEliminar) Then
                         'NO EXISTE LA CUENTA
-                        Sql = Sql & " ¿Desea crearla?"
-                        If MsgBox(Sql, vbQuestion + vbYesNoCancel + vbDefaultButton2) = vbYes Then
+                        sql = sql & " ¿Desea crearla?"
+                        If MsgBox(sql, vbQuestion + vbYesNoCancel + vbDefaultButton2) = vbYes Then
                             CadenaDesdeOtroForm = RC
                             cmdAux(0).Tag = Index
                             Set frmC = New frmColCtas
@@ -4579,40 +4514,40 @@ Private Sub txtAux_LostFocus(Index As Integer)
                             frmC.ConfigurarBalances = 4   ' .- Nueva opcion de insertar cuenta
                             frmC.Show vbModal
                             Set frmC = Nothing
-                            If txtAux(4).Text = RC Then Sql = "" 'Para k no los borre
+                            If txtaux(4).Text = RC Then sql = "" 'Para k no los borre
                         End If
                     Else
-                        MsgBox Sql, vbExclamation
+                        MsgBox sql, vbExclamation
                     End If
                 Else
-                    MsgBox Sql, vbExclamation
+                    MsgBox sql, vbExclamation
                 End If
                     
-                If Sql <> "" Then
-                  txtAux(4).Text = ""
-                  txtAux2(4).Text = ""
+                If sql <> "" Then
+                  txtaux(4).Text = ""
+                  txtaux2(4).Text = ""
                   RC = "NO"
                 End If
             End If
             HabilitarCentroCoste
-            If RC <> "" Then PonFoco txtAux(4)
+            If RC <> "" Then PonFoco txtaux(4)
                 
-            If Modo = 5 And ModoLineas = 1 Then MostrarObservaciones txtAux(Index)
+            If Modo = 5 And ModoLineas = 1 Then MostrarObservaciones txtaux(Index)
             
         Case 6
         
             'Contrapartida
         
-            RC = txtAux(6).Text
-            If CuentaCorrectaUltimoNivel(RC, Sql) Then
-                txtAux(6).Text = RC
-                Text3(5).Text = Sql
+            RC = txtaux(6).Text
+            If CuentaCorrectaUltimoNivel(RC, sql) Then
+                txtaux(6).Text = RC
+                Text3(5).Text = sql
             Else
             
-                If InStr(1, Sql, "No existe la cuenta :") > 0 Then
+                If InStr(1, sql, "No existe la cuenta :") > 0 Then
                     'NO EXISTE LA CUENTA
-                    Sql = Sql & " ¿Desea crearla?"
-                    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
+                    sql = sql & " ¿Desea crearla?"
+                    If MsgBox(sql, vbQuestion + vbYesNoCancel) = vbYes Then
                         CadenaDesdeOtroForm = RC
                         cmdAux(0).Tag = Index
                         Set frmC = New frmColCtas
@@ -4620,31 +4555,31 @@ Private Sub txtAux_LostFocus(Index As Integer)
                         frmC.ConfigurarBalances = 4   ' .- Nueva opcion de insertar cuenta
                         frmC.Show vbModal
                         Set frmC = Nothing
-                        If txtAux(6).Text = RC Then Sql = "" 'Para k no los borre
+                        If txtaux(6).Text = RC Then sql = "" 'Para k no los borre
                     End If
                 Else
-                    MsgBox Sql, vbExclamation
+                    MsgBox sql, vbExclamation
                 End If
-                If Sql <> "" Then
-                    txtAux(6).Text = ""
+                If sql <> "" Then
+                    txtaux(6).Text = ""
                     Text3(5).Text = ""
-                    PonFoco txtAux(6)
+                    PonFoco txtaux(6)
                 End If
             End If
             
         Case 7
-             If Not IsNumeric(txtAux(7).Text) Then
+             If Not IsNumeric(txtaux(7).Text) Then
                     MsgBox "El concepto debe de ser numérico", vbExclamation
-                    PonFoco txtAux(7)
+                    PonFoco txtaux(7)
                     Exit Sub
                 End If
                 
-                If Val(txtAux(7).Text) >= 900 Then
+                If Val(txtaux(7).Text) >= 900 Then
                     If vUsu.Nivel > 1 Then
                         MsgBox "Los conceptos superiores a 900 se los reserva la aplicación.", vbExclamation
                         Text3(4).Text = ""
-                        txtAux(7).Text = ""
-                        PonFoco txtAux(7)
+                        txtaux(7).Text = ""
+                        PonFoco txtaux(7)
                         Exit Sub
                     Else
                         If Me.Tag = "" Then
@@ -4659,56 +4594,56 @@ Private Sub txtAux_LostFocus(Index As Integer)
                 CadenaAmpliacion = ""
                 If Text3(4).Text <> "" Then
                     'Tenia concepto anterior
-                    If InStr(1, txtAux(8).Text, Text3(4).Text) > 0 Then CadenaAmpliacion = Trim(Mid(txtAux(8).Text, Len(Text3(4).Text) + 1))
+                    If InStr(1, txtaux(8).Text, Text3(4).Text) > 0 Then CadenaAmpliacion = Trim(Mid(txtaux(8).Text, Len(Text3(4).Text) + 1))
                 End If
                 
                 RC = "tipoconce"
-                Sql = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtAux(7).Text, "N", RC)
-                If Sql = "" And RC = "tipoconce" Then
-                    MsgBox "Concepto NO encontrado: " & txtAux(7).Text, vbExclamation
-                    txtAux(7).Text = ""
+                sql = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtaux(7).Text, "N", RC)
+                If sql = "" And RC = "tipoconce" Then
+                    MsgBox "Concepto NO encontrado: " & txtaux(7).Text, vbExclamation
+                    txtaux(7).Text = ""
                     RC = "0"
                 End If
                 HabilitarImportes CByte(Val(RC))
-                Text3(4).Text = Sql
-                txtAux(8).Text = Sql
-                If txtAux(8).Text <> "" Then txtAux(8).Text = txtAux(8).Text & " "
-                txtAux(8).Text = txtAux(8).Text & CadenaAmpliacion
-                If RC = "0" Then PonFoco txtAux(7)
+                Text3(4).Text = sql
+                txtaux(8).Text = sql
+                If txtaux(8).Text <> "" Then txtaux(8).Text = txtaux(8).Text & " "
+                txtaux(8).Text = txtaux(8).Text & CadenaAmpliacion
+                If RC = "0" Then PonFoco txtaux(7)
                 
         Case 9, 10
                 'LOS IMPORTES
-                If Not EsNumerico(txtAux(Index).Text) Then
+                If Not EsNumerico(txtaux(Index).Text) Then
                     MsgBox "Importes deben ser numéricos.", vbExclamation
                     On Error Resume Next
-                    txtAux(Index).Text = ""
-                    PonFoco txtAux(Index)
+                    txtaux(Index).Text = ""
+                    PonFoco txtaux(Index)
                     Exit Sub
                 End If
                 
                 
                 'Es numerico
-                Sql = TransformaPuntosComas(txtAux(Index).Text)
-                If CadenaCurrency(Sql, Importe) Then
-                    txtAux(Index).Text = Format(Importe, "0.00")
+                sql = TransformaPuntosComas(txtaux(Index).Text)
+                If CadenaCurrency(sql, Importe) Then
+                    txtaux(Index).Text = Format(Importe, "0.00")
                     'Ponemos el otro campo a ""
                     If Index = 9 Then
-                        txtAux(10).Text = ""
+                        txtaux(10).Text = ""
                     Else
-                        txtAux(9).Text = ""
+                        txtaux(9).Text = ""
                     End If
                 End If
                 
                 
                 
         Case 11
-                txtAux(11).Text = UCase(txtAux(11).Text)
-                Sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtAux(11).Text, "T")
-                If Sql = "" Then
-                    MsgBox "Concepto NO encontrado: " & txtAux(11).Text, vbExclamation
-                    txtAux(11).Text = ""
+                txtaux(11).Text = UCase(txtaux(11).Text)
+                sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtaux(11).Text, "T")
+                If sql = "" Then
+                    MsgBox "Concepto NO encontrado: " & txtaux(11).Text, vbExclamation
+                    txtaux(11).Text = ""
                 End If
-                Text3(3).Text = Sql
+                Text3(3).Text = sql
                 
         End Select
 End Sub
@@ -4718,19 +4653,19 @@ Dim hab As Boolean
 
     hab = False
     If vParam.autocoste Then
-        If txtAux(4).Text <> "" Then
-            hab = HayKHabilitarCentroCoste(txtAux(4).Text)
+        If txtaux(4).Text <> "" Then
+            hab = HayKHabilitarCentroCoste(txtaux(4).Text)
         Else
-            txtAux(11).Text = ""
+            txtaux(11).Text = ""
         End If
         If hab Then
-            txtAux(11).BackColor = &H80000005
+            txtaux(11).BackColor = &H80000005
             Else
-            txtAux(11).BackColor = &H80000018
-            txtAux(11).Text = ""
+            txtaux(11).BackColor = &H80000018
+            txtaux(11).Text = ""
         End If
     End If
-    txtAux(11).Enabled = hab
+    txtaux(11).Enabled = hab
 End Sub
 
 '1.-Debe    2.-Haber   3.-Decide en asiento
@@ -4754,18 +4689,18 @@ Private Sub HabilitarImportes(tipoConcepto As Byte)
         bHaber = True
     End Select
     
-    txtAux(9).Enabled = Not bDebe
-    txtAux(10).Enabled = Not bHaber
+    txtaux(9).Enabled = Not bDebe
+    txtaux(10).Enabled = Not bHaber
     
     If bDebe Then
-        txtAux(9).BackColor = &H80000018
+        txtaux(9).BackColor = &H80000018
     Else
-        txtAux(9).BackColor = &H80000005
+        txtaux(9).BackColor = &H80000005
     End If
     If bHaber Then
-        txtAux(10).BackColor = &H80000018
+        txtaux(10).BackColor = &H80000018
     Else
-        txtAux(10).BackColor = &H80000005
+        txtaux(10).BackColor = &H80000005
     End If
 End Sub
 
@@ -4794,20 +4729,20 @@ Private Sub HacerToolBar(Boton As Integer)
     'Si viene desde hco solo podemos MODIFCAR, ELIMINAR, LINEAS, ACTUALIZAR,SALIR
     If VieneDeDesactualizar Then
         i = Boton
-        Sql = ""
+        sql = ""
         If i < 6 Then
-            Sql = "NO"
+            sql = "NO"
         Else
             If i > 15 Then
-                Sql = "NO"
+                sql = "NO"
             Else
                 'INSERTAR, pero no estamos en edicion lineas
                 If i = 6 And Modo <> 5 Then
-                    Sql = "NO"
+                    sql = "NO"
                 End If
             End If
         End If
-        If Sql <> "" Then
+        If sql <> "" Then
             MsgBox "Esta modificando el asiento de historico. Finalice primero este proceso.", vbExclamation
             Exit Sub
         End If
@@ -4852,26 +4787,26 @@ Dim VC As Contadores
             'HAN CAMBIADO DE FECHA
             
             
-            Sql = ""
+            sql = ""
             'Estabamos(pasado) en ejercicio actual
-            If Data1.Recordset!FechaEnt <= vParam.fechafin Then Sql = "A"
+            If Data1.Recordset!FechaEnt <= vParam.fechafin Then sql = "A"
                 
                 
             B1 = False 'Hay que preguntar cambio de contador. De momento NO
             If CDate(Text1(1).Text) <= vParam.fechafin Then
                 'La nueva fecha es del actual
                 'Si la otra era del siguiente hay que preguntar
-                If Sql = "" Then B1 = True
+                If sql = "" Then B1 = True
             Else
-                If Sql <> "" Then B1 = True
+                If sql <> "" Then B1 = True
             End If
             
             If B1 Then
-                Sql = "Ha cambiado de ejercicios la fecha del asiento." & vbCrLf & " ¿Desea obtener nuevo numero de asiento?"
-                Sql = MsgBox(Sql, vbQuestion + vbYesNoCancel)
-                If CByte(Sql) = vbCancel Then Exit Function
+                sql = "Ha cambiado de ejercicios la fecha del asiento." & vbCrLf & " ¿Desea obtener nuevo numero de asiento?"
+                sql = MsgBox(sql, vbQuestion + vbYesNoCancel)
+                If CByte(sql) = vbCancel Then Exit Function
                 
-                If CByte(Sql) = vbNo Then B1 = False
+                If CByte(sql) = vbNo Then B1 = False
                 
             End If
         End If
@@ -4887,29 +4822,29 @@ Dim VC As Contadores
         Conn.BeginTrans
         'Comun
         
-        Sql = " WHERE  numdiari=" & Data1.Recordset!NumDiari
-        Sql = Sql & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
-        Sql = Sql & "' AND numasien=" & Data1.Recordset!NumAsien
+        sql = " WHERE  numdiari=" & Data1.Recordset!NumDiari
+        sql = sql & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
+        sql = sql & "' AND numasien=" & Data1.Recordset!NumAsien
         
         'BLoqueamos
-        Conn.Execute "Select * from hcabapu " & Sql & " FOR UPDATE"
+        Conn.Execute "Select * from hcabapu " & sql & " FOR UPDATE"
         
         'Añadimos tb el nunmero de asiento
-        Sql = " numasien = " & VC.Contador & " , numdiari= " & Text1(2).Text & " , fechaent ='" & Format(Text1(1).Text, FormatoFecha) & "'" & Sql
+        sql = " numasien = " & VC.Contador & " , numdiari= " & Text1(2).Text & " , fechaent ='" & Format(Text1(1).Text, FormatoFecha) & "'" & sql
         
         
        'Las lineas de apuntes
-        Conn.Execute "UPDATE hlinapu SET " & Sql
+        Conn.Execute "UPDATE hlinapu SET " & sql
       
         
         'Modificamos la cabecera
         If Text1(3).Text = "" Then
-            Sql = "obsdiari = NULL," & Sql
+            sql = "obsdiari = NULL," & sql
         Else
-            Sql = "Obsdiari ='" & DevNombreSQL(Text1(3).Text) & "'," & Sql
+            sql = "Obsdiari ='" & DevNombreSQL(Text1(3).Text) & "'," & sql
         End If
 
-        Conn.Execute "UPDATE hcabapu SET " & Sql
+        Conn.Execute "UPDATE hcabapu SET " & sql
         
   
 EModificar:
@@ -4968,14 +4903,14 @@ Private Sub ObtenerSumas()
     
     
     Set Rs = New ADODB.Recordset
-    Sql = "SELECT Sum(hlinapu.timporteD) AS SumaDetimporteD, Sum(hlinapu.timporteH) AS SumaDetimporteH"
-    Sql = Sql & " ,hlinapu.numdiari,hlinapu.fechaent,hlinapu.numasien"
-    Sql = Sql & " From hlinapu GROUP BY hlinapu.numdiari, hlinapu.fechaent, hlinapu.numasien "
-    Sql = Sql & " HAVING (((hlinapu.numdiari)=" & Data1.Recordset!NumDiari
-    Sql = Sql & ") AND ((hlinapu.fechaent)='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
-    Sql = Sql & "') AND ((hlinapu.numasien)=" & Data1.Recordset!NumAsien
-    Sql = Sql & "));"
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    sql = "SELECT Sum(hlinapu.timporteD) AS SumaDetimporteD, Sum(hlinapu.timporteH) AS SumaDetimporteH"
+    sql = sql & " ,hlinapu.numdiari,hlinapu.fechaent,hlinapu.numasien"
+    sql = sql & " From hlinapu GROUP BY hlinapu.numdiari, hlinapu.fechaent, hlinapu.numasien "
+    sql = sql & " HAVING (((hlinapu.numdiari)=" & Data1.Recordset!NumDiari
+    sql = sql & ") AND ((hlinapu.fechaent)='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
+    sql = sql & "') AND ((hlinapu.numasien)=" & Data1.Recordset!NumAsien
+    sql = sql & "));"
+    Rs.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Deb = 0
     hab = 0
     If Not Rs.EOF Then
@@ -5016,17 +4951,17 @@ Dim miI As Integer
         miI = -1
         Select Case Index
         Case 0
-            txtAux(0).Text = ""
+            txtaux(0).Text = ""
             miI = 3
         Case 3
-            txtAux(3).Text = ""
+            txtaux(3).Text = ""
             miI = 0
         Case 4
-            txtAux(4).Text = ""
+            txtaux(4).Text = ""
             miI = 1
             
         Case 8
-            txtAux(8).Text = ""
+            txtaux(8).Text = ""
             miI = 2
         End Select
         If miI >= 0 Then Image1_Click miI
@@ -5048,7 +4983,7 @@ On Error GoTo EponerLineaAnterior
     
     'Todos los casos menos la ampliacion del concepto
     If indice <> 8 Then
-        Sql = "SELECT "
+        sql = "SELECT "
         Select Case indice
         Case 4
             C = "codmacta"
@@ -5069,22 +5004,22 @@ On Error GoTo EponerLineaAnterior
             C = ""
         End Select
         If C <> "" Then
-            Sql = Sql & C & "  FROM hlinapu"
-            Sql = Sql & " WHERE numdiari=" & Data1.Recordset!NumDiari
-            Sql = Sql & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
-            Sql = Sql & "' AND numasien=" & Data1.Recordset!NumAsien
-            If ModoLineas = 2 Then Sql = Sql & " AND linliapu <" & Linliapu
-            Sql = Sql & " ORDER BY linliapu DESC"
+            sql = sql & C & "  FROM hlinapu"
+            sql = sql & " WHERE numdiari=" & Data1.Recordset!NumDiari
+            sql = sql & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
+            sql = sql & "' AND numasien=" & Data1.Recordset!NumAsien
+            If ModoLineas = 2 Then sql = sql & " AND linliapu <" & Linliapu
+            sql = sql & " ORDER BY linliapu DESC"
             Set RT = New ADODB.Recordset
-            RT.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RT.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             C = ""
             If Not RT.EOF Then C = DBLet(RT.Fields(0))
             
             'Lo ponemos en txtaux
             If C <> "" Then
-                txtAux(indice).Text = C
+                txtaux(indice).Text = C
                 If i >= 0 Then
-                    PonFoco txtAux(i)
+                    PonFoco txtaux(i)
                 End If
             End If
             RT.Close
@@ -5095,31 +5030,31 @@ On Error GoTo EponerLineaAnterior
 
 
     Else
-        Sql = "Select linliapu,ampconce,nomconce FROM hlinapu,conceptos"
-        Sql = Sql & " WHERE conceptos.codconce=hlinapu.codconce AND  numdiari=" & Data1.Recordset!NumDiari
-        Sql = Sql & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
-        Sql = Sql & "' AND numasien=" & Data1.Recordset!NumAsien
-        If ModoLineas = 2 Then Sql = Sql & " AND hlinapu <" & Linliapu
+        sql = "Select linliapu,ampconce,nomconce FROM hlinapu,conceptos"
+        sql = sql & " WHERE conceptos.codconce=hlinapu.codconce AND  numdiari=" & Data1.Recordset!NumDiari
+        sql = sql & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
+        sql = sql & "' AND numasien=" & Data1.Recordset!NumAsien
+        If ModoLineas = 2 Then sql = sql & " AND hlinapu <" & Linliapu
            
-        Sql = Sql & " ORDER BY linliapu DESC"
+        sql = sql & " ORDER BY linliapu DESC"
         Set RT = New ADODB.Recordset
-        RT.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Sql = ""
+        RT.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        sql = ""
         C = ""
         If Not RT.EOF Then
-            Sql = DBLet(RT.Fields(1))
+            sql = DBLet(RT.Fields(1))
             C = DBLet(RT.Fields(2))
         End If
         
         'Lo ponemos en txtaux
-        If Sql <> "" Then
+        If sql <> "" Then
             If C <> "" Then
-                i = InStr(1, Sql, C)
-                If i > 0 Then Sql = Trim(Mid(Sql, Len(C) + 1))
+                i = InStr(1, sql, C)
+                If i > 0 Then sql = Trim(Mid(sql, Len(C) + 1))
             End If
-            txtAux(8).Text = txtAux(8).Text & Sql & " "
-            txtAux(8).SelStart = Len(txtAux(8).Text)
-            PonFoco txtAux(9)
+            txtaux(8).Text = txtaux(8).Text & sql & " "
+            txtaux(8).SelStart = Len(txtaux(8).Text)
+            PonFoco txtaux(9)
         End If
         RT.Close
 
@@ -5167,27 +5102,27 @@ Dim C As String
         MsgBox "No se ha encontrado las lineas: " & vbCrLf & C, vbExclamation
     Else
         'Ya tengo la ultima linea
-        txtAux(4).Text = RsF6!codmacta
+        txtaux(4).Text = RsF6!codmacta
         
-        txtAux(4).Text = RsF6!codmacta
-        txtAux2(4).Text = RsF6!nommacta
-        txtAux(5).Text = DBLet(RsF6!Numdocum, "T")
-        txtAux(6).Text = DBLet(RsF6!ctacontr, "T")
-        txtAux(7).Text = RsF6!codconce
-        txtAux(8).Text = DBLet(RsF6!Ampconce, "T")
+        txtaux(4).Text = RsF6!codmacta
+        txtaux2(4).Text = RsF6!nommacta
+        txtaux(5).Text = DBLet(RsF6!Numdocum, "T")
+        txtaux(6).Text = DBLet(RsF6!ctacontr, "T")
+        txtaux(7).Text = RsF6!codconce
+        txtaux(8).Text = DBLet(RsF6!Ampconce, "T")
         C = DBLet(RsF6!timported, "T")
         If C <> "" Then
-            txtAux(9).Text = Format(C, "0.00")
+            txtaux(9).Text = Format(C, "0.00")
         Else
-            txtAux(9).Text = C
+            txtaux(9).Text = C
         End If
         C = DBLet(RsF6!timporteH, "T")
         If C <> "" Then
-            txtAux(10).Text = Format(C, "0.00")
+            txtaux(10).Text = Format(C, "0.00")
         Else
-            txtAux(10).Text = C
+            txtaux(10).Text = C
         End If
-        txtAux(11).Text = DBLet(RsF6!codccost, "T")
+        txtaux(11).Text = DBLet(RsF6!codccost, "T")
         HabilitarImportes 3
         HabilitarCentroCoste
         Text3(5).Text = DBLet(RsF6!nomctapar, "T")
@@ -5206,30 +5141,30 @@ End Sub
 Private Function AuxOK() As String
     
     'Cuenta
-    If txtAux(4).Text = "" Then
+    If txtaux(4).Text = "" Then
         AuxOK = "Cuenta no puede estar vacia."
         Exit Function
     End If
     
-    If Not IsNumeric(txtAux(4).Text) Then
+    If Not IsNumeric(txtaux(4).Text) Then
         AuxOK = "Cuenta debe ser numérica"
         Exit Function
     End If
     
-    If txtAux2(4).Text = NO Then
+    If txtaux2(4).Text = NO Then
         AuxOK = "La cuenta debe estar dada de alta en el sistema"
         Exit Function
     End If
     
-    If Not EsCuentaUltimoNivel(txtAux(4).Text) Then
+    If Not EsCuentaUltimoNivel(txtaux(4).Text) Then
         AuxOK = "La cuenta no es de último nivel"
         Exit Function
     End If
     
     
     'Contrapartida
-    If txtAux(6).Text <> "" Then
-        If Not IsNumeric(txtAux(6).Text) Then
+    If txtaux(6).Text <> "" Then
+        If Not IsNumeric(txtaux(6).Text) Then
             AuxOK = "Cuenta contrapartida debe ser numérica"
             Exit Function
         End If
@@ -5237,64 +5172,64 @@ Private Function AuxOK() As String
             AuxOK = "La cta. contrapartida no esta dada de alta en el sistema."
             Exit Function
         End If
-        If Not EsCuentaUltimoNivel(txtAux(6).Text) Then
+        If Not EsCuentaUltimoNivel(txtaux(6).Text) Then
             AuxOK = "La cuenta contrapartida no es de último nivel"
             Exit Function
         End If
     End If
         
     'Concepto
-    If txtAux(4).Text = "" Then
+    If txtaux(4).Text = "" Then
         AuxOK = "El concepto no puede estar vacio"
         Exit Function
     End If
         
-    If txtAux(7).Text <> "" Then
-        If Not IsNumeric(txtAux(7).Text) Then
+    If txtaux(7).Text <> "" Then
+        If Not IsNumeric(txtaux(7).Text) Then
             AuxOK = "El concepto debe de ser numérico."
             Exit Function
         End If
     End If
     
     'Importe
-    If txtAux(9).Text <> "" Then
-        If Not EsNumerico(txtAux(9).Text) Then
+    If txtaux(9).Text <> "" Then
+        If Not EsNumerico(txtaux(9).Text) Then
             AuxOK = "El importe DEBE debe ser numérico"
             Exit Function
         End If
     End If
     
-    If txtAux(10).Text <> "" Then
-        If Not EsNumerico(txtAux(10).Text) Then
+    If txtaux(10).Text <> "" Then
+        If Not EsNumerico(txtaux(10).Text) Then
             AuxOK = "El importe HABER debe ser numérico"
             Exit Function
         End If
     End If
     
-    If Not (txtAux(9).Text = "" Xor txtAux(10).Text = "") Then
+    If Not (txtaux(9).Text = "" Xor txtaux(10).Text = "") Then
         AuxOK = "Solo el debe, o solo el haber, tiene que tener valor"
         Exit Function
     End If
     
     
     'cENTRO DE COSTE
-    If txtAux(11).Enabled Then
-        If txtAux(11).Text = "" Then
+    If txtaux(11).Enabled Then
+        If txtaux(11).Text = "" Then
             AuxOK = "Centro de coste no puede ser nulo"
             Exit Function
         End If
     End If
     
                                             'Fecha del asiento
-    If EstaLaCuentaBloqueada(txtAux(4).Text, CDate(Text1(1).Text)) Then
-        AuxOK = "Cuenta bloqueada: " & txtAux(4).Text
+    If EstaLaCuentaBloqueada(txtaux(4).Text, CDate(Text1(1).Text)) Then
+        AuxOK = "Cuenta bloqueada: " & txtaux(4).Text
         Exit Function
     End If
     
     'Si lleva contrapartida
-    If txtAux(6).Text <> "" Then
-        If EstaLaCuentaBloqueada(txtAux(6).Text, CDate(Text1(1).Text)) Then
-            AuxOK = "Cuenta contrapartida bloqueada: " & txtAux(6).Text
+    If txtaux(6).Text <> "" Then
+        If EstaLaCuentaBloqueada(txtaux(6).Text, CDate(Text1(1).Text)) Then
+            AuxOK = "Cuenta contrapartida bloqueada: " & txtaux(6).Text
             Exit Function
         End If
     End If
@@ -5325,14 +5260,14 @@ If Trim(Text2(2).Text) = "" Then
         'Emite diario al actualizar
         If B Then
             'imprimimos, para ello borramos la tabla auxiliar
-            Sql = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
-            Conn.Execute Sql
+            sql = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
+            Conn.Execute sql
             espera 0.2
-            Sql = Text1(0).Text & "|" & Format(Text1(1).Text, FormatoFecha) & "|" & Text1(2).Text & "|"
-            If IHcoApuntesAlActualizarModificar(Sql) Then
+            sql = Text1(0).Text & "|" & Format(Text1(1).Text, FormatoFecha) & "|" & Text1(2).Text & "|"
+            If IHcoApuntesAlActualizarModificar(sql) Then
                 With frmImprimir
-                    Sql = "Actualización del dia " & Format(Now, "dd/mm/yyyy") & " a las " & Format(Now, "hh:mm") & "."
-                    .OtrosParametros = "Fechas= """ & Sql & """|Cuenta= """"|FechaIMP= """ & Format(Now, "dd/mm/yyyy") & """|"
+                    sql = "Actualización del dia " & Format(Now, "dd/mm/yyyy") & " a las " & Format(Now, "hh:mm") & "."
+                    .OtrosParametros = "Fechas= """ & sql & """|Cuenta= """"|FechaIMP= """ & Format(Now, "dd/mm/yyyy") & """|"
                     .NumeroParametros = 3
                     .FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
                     .SoloImprimir = True
@@ -5403,7 +5338,7 @@ Dim RT As ADODB.Recordset
 End Function
 
 Private Function SituarData1(Insertar As Boolean) As Boolean
-    Dim Sql As String
+    Dim sql As String
     
     On Error GoTo ESituarData1
     
@@ -5411,9 +5346,9 @@ Private Function SituarData1(Insertar As Boolean) As Boolean
     'Si es insertar, lo que hace es simplemente volver a poner el el recordset
     'este unico registro
     'If Insertar Then
-        Sql = "Select * from hcabapu WHERE numasien =" & Text1(0).Text
-        Sql = Sql & " AND fechaent='" & Format(Text1(1).Text, FormatoFecha) & "' AND numdiari = " & Text1(2).Text
-        Data1.RecordSource = Sql
+        sql = "Select * from hcabapu WHERE numasien =" & Text1(0).Text
+        sql = sql & " AND fechaent='" & Format(Text1(1).Text, FormatoFecha) & "' AND numdiari = " & Text1(2).Text
+        Data1.RecordSource = sql
     'End If
     
     Data1.Refresh
@@ -5445,19 +5380,19 @@ Private Sub FijarContraPartida()
     Dim cad As String
     'Hay contrapartida
     'Reasignamos campos de cuentas
-    cad = txtAux(4).Text
-    txtAux(4).Text = txtAux(6).Text
-    txtAux(6).Text = cad
+    cad = txtaux(4).Text
+    txtaux(4).Text = txtaux(6).Text
+    txtaux(6).Text = cad
     HabilitarCentroCoste
-    cad = txtAux2(4).Text
-    txtAux2(4).Text = Text3(5).Text
+    cad = txtaux2(4).Text
+    txtaux2(4).Text = Text3(5).Text
     Text3(5).Text = cad
     
     'Los importes
     HabilitarImportes 3
-    cad = txtAux(9).Text
-    txtAux(9).Text = txtAux(10).Text
-    txtAux(10).Text = cad
+    cad = txtaux(9).Text
+    txtaux(9).Text = txtaux(10).Text
+    txtaux(10).Text = cad
 End Sub
 
 '********************************************************
@@ -5718,7 +5653,7 @@ End Sub
 
 
 Private Sub EliminarImagen()
-Dim Sql As String
+Dim sql As String
 Dim Mens As String
     
     On Error GoTo eEliminarImagen
@@ -5726,8 +5661,8 @@ Dim Mens As String
     Mens = "Va a proceder a eliminar de la lista correspondiente al asiento. " & vbCrLf & vbCrLf & "¿ Desea continuar ?" & vbCrLf & vbCrLf
     
     If MsgBox(Mens, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
-        Sql = "delete from hcabapu_fichdocs where numasien = " & DBSet(Text1(0).Text, "N") & " and fechaent = " & DBSet(Text1(1).Text, "F") & " and numdiari = " & DBSet(Text1(2).Text, "N") & " and codigo = " & Me.lw1.SelectedItem.SubItems(3)
-        Conn.Execute Sql
+        sql = "delete from hcabapu_fichdocs where numasien = " & DBSet(Text1(0).Text, "N") & " and fechaent = " & DBSet(Text1(1).Text, "F") & " and numdiari = " & DBSet(Text1(2).Text, "N") & " and codigo = " & Me.lw1.SelectedItem.SubItems(3)
+        Conn.Execute sql
         FicheroAEliminar = lw1.SelectedItem.SubItems(2)
         CargaDatosLW
         
@@ -5835,18 +5770,10 @@ Dim CadFac As String
             End If
         End If
         If CadFac <> "" Then
-            'Esta intentando modificar o eliminar apuntes k vienen de facturas
-            'Luego si en el parametro le dice k no puede, no le dejamos segir
-'            If vParam.modhcofa Then
-'                  i = MsgBox("Va a modificar el apunte de una factura de " & CadenaDesdeOtroForm & vbCrLf & _
-'                    " DEBERIA hacerlo desde registro de facturas de " & CadenaDesdeOtroForm & "." & vbCrLf & vbCrLf & _
-'                        "¿Desea continuar?", vbQuestion + vbYesNoCancel)
-'            Else
                 If MostrarMensaje Then MsgBox "Este apunte pertenece a una factura de " & CadenaDesdeOtroForm & " y solo se puede modificar en el registro" & _
                     " de facturas de " & CadenaDesdeOtroForm & ".", vbExclamation
                 i = -1
 
-'            End If
             Exit Function
         Else
             SePuedeModificarAsiento = True

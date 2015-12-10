@@ -853,7 +853,7 @@ Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmCta As frmColCtas
 Attribute frmCta.VB_VarHelpID = -1
 
-Dim sql As String
+Dim SQL As String
 Dim vSQL As String
 Dim RC As String
 Dim Mostrar As Boolean
@@ -882,7 +882,7 @@ Dim ImpH As Currency
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
     On Error Resume Next
-    Label10.Caption = DBLet(Adodc1.Recordset!nommacta, "T")
+    Label10.Caption = DBLet(adodc1.Recordset!nommacta, "T")
     If Err.Number <> 0 Then
         Err.Clear
         Label10.Caption = ""
@@ -911,23 +911,23 @@ Dim F As Date
         End If
     End If
 
-    sql = ""
+    SQL = ""
     'Llegados aqui. Vemos la fecha y demas
     If Text3(0).Text <> "" Then
-        sql = " fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+        SQL = " fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
     End If
     
     If Text3(1).Text <> "" Then
-        If sql <> "" Then sql = sql & " AND "
-        sql = sql & " fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
     End If
     
     If Me.chkPunteo.Value = 1 Then
-        sql = sql & " and punteada = 0"
+        SQL = SQL & " and punteada = 0"
     End If
     
     
-    Text3(0).Tag = sql  'Para las fechas
+    Text3(0).Tag = SQL  'Para las fechas
     
 
     'Para ver si la cuenta tiene movimientos o no
@@ -953,11 +953,7 @@ Dim F As Date
     End If
 
 
-'aa
-    'Ponemos la cuenta
-'    Text3(2).Text = Text1.Text
-'    Text5.Text = Text2.Text
-    
+   
     Screen.MousePointer = vbHourglass
     If Not TieneMovimientos(Text3(2).Text) Then
         MsgBox "La cuenta " & Text5.Text & " NO tiene movimientos en las fechas", vbExclamation
@@ -1057,10 +1053,10 @@ Dim i As Integer
     Limpiar Me
     
     If EjerciciosCerrados Then
-        sql = "-1"
+        SQL = "-1"
     Else
         AnyoInicioEjercicio = ""
-        sql = "0"
+        SQL = "0"
     End If
     
     CargarColumnas
@@ -1097,19 +1093,7 @@ Dim i As Integer
         Next i
     End If
     
-'    Label3.Width = Text6(0).Width
-'    Label4.Width = Text6(0).Width
-'    Label7.Width = Text6(0).Width
-'    Label3.Left = Text6(0).Left
-'    Label4.Left = Text6(1).Left
-'    Label7.Left = Text6(2).Left
-    
-    'Los del periodo
-'    For i = 6 To 8
-'        Text6(3 + i).Width = Text6(i).Width
-'        Text6(3 + i).Left = Text6(i).Left - 6990 '7940
-'    Next i
-    
+   
     imgCuentas.Picture = frmPpal.ImageList3.ListImages(1).Picture
 
 
@@ -1123,14 +1107,6 @@ Dim i As Integer
         Text6((i * 3) + 1).Left = ListView1.ColumnHeaders(8).Left + 300
         Text6((i * 3) + 2).Left = ListView1.ColumnHeaders(9).Left + 300
     Next i
-
-'    Label3.Width = 1850
-'    Label4.Width = 1850
-'    Label7.Width = 1850
-'    Label3.Left = Text6(0).Left
-'    Label4.Left = Text6(1).Left
-'    Label7.Left = Text6(2).Left
-    
 
     If EjerciciosCerrados Then
         i = -1
@@ -1147,9 +1123,9 @@ Dim i As Integer
     If Cuenta <> "" Then
         VieneDeIntroduccion = True
         Text3(2).Text = Cuenta
-        sql = ""
-        CuentaCorrectaUltimoNivel Cuenta, sql
-        Text5.Text = sql
+        SQL = ""
+        CuentaCorrectaUltimoNivel Cuenta, SQL
+        Text5.Text = SQL
         RefrescarDatos
     Else
         CargaGrid
@@ -1218,20 +1194,16 @@ If Not VieneDeIntroduccion Then
     If Trim(ListView1.SelectedItem.Text) <> "" Then
         Screen.MousePointer = vbHourglass
         AsientoConExtModificado = 0
-        sql = ListView1.SelectedItem.ToolTipText & "|" & ListView1.SelectedItem.Text & "|" & ListView1.SelectedItem.SubItems(1) & "|"
-'        frmHcoApuntes.EjerciciosCerrados = EjerciciosCerrados
-'        frmHcoApuntes.ASIENTO = SQL
-'        frmHcoApuntes.LINASI = Adodc1.Recordset!Linliapu
-'        frmHcoApuntes.Show vbModal
+        SQL = ListView1.SelectedItem.ToolTipText & "|" & ListView1.SelectedItem.Text & "|" & ListView1.SelectedItem.SubItems(1) & "|"
 
-        frmAsientosHco.ASIENTO = sql
+        frmAsientosHco.ASIENTO = SQL
         frmAsientosHco.vLinapu = ListView1.SelectedItem.Tag
         frmAsientosHco.Show vbModal
         
         espera 0.1
         If AsientoConExtModificado = 1 Then
             QuedanLineasDespuesModificar = True
-            NumAsien = Adodc1.Recordset!NumAsien
+            NumAsien = adodc1.Recordset!NumAsien
             'Volvemos a recargar datos
             Screen.MousePointer = vbHourglass
             Me.Refresh
@@ -1239,7 +1211,7 @@ If Not VieneDeIntroduccion Then
             CargarDatos True
             If QuedanLineasDespuesModificar Then
                 'Intentamos buscar el asiento
-                Adodc1.Recordset.Find "numasien = " & NumAsien
+                adodc1.Recordset.Find "numasien = " & NumAsien
             Else
                 'NO QUEDAN LINEAS
                 HacerToolBar 1
@@ -1334,13 +1306,13 @@ Private Sub Text3_LostFocus(Index As Integer)
                 Text5.Text = ""
                 Exit Sub
             End If
-            If CuentaCorrectaUltimoNivel(RC, sql) Then
+            If CuentaCorrectaUltimoNivel(RC, SQL) Then
                 Text3(2).Text = RC
-                Text5.Text = sql
+                Text5.Text = SQL
                 
                 If ValorAnterior <> Text3(Index).Text Then RefrescarDatos
             Else
-                MsgBox sql, vbExclamation
+                MsgBox SQL, vbExclamation
                 Text3(2).Text = ""
                 Text5.Text = ""
                 PonerFoco Text3(2)
@@ -1357,30 +1329,24 @@ On Error GoTo ECargaDatos
     Label101.Caption = ""
     Label100.Visible = True
     Label100.Refresh
-    '-------------  ANTES DE 19/11/04
-    'SQL = "DELETE from tmpconextcab where codusu= " & vUsu.Codigo
     
-    
-    sql = "DELETE from tmpconextcab where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
-    Conn.Execute sql
+    SQL = "DELETE from tmpconextcab where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
+    Conn.Execute SQL
         
-    'SQL = "DELETE from tmpconext where codusu= " & vUsu.Codigo
-    sql = "DELETE from tmpconext where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
-    Conn.Execute sql
+    SQL = "DELETE from tmpconext where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
+    Conn.Execute SQL
     
     CargaDatosConExt Text3(2).Text, Text3(0).Text, Text3(1).Text, Text3(0).Tag, Text5.Text
     
     If DesdeModificarLinea Then
         'Compruebo que haya ALGUN datos, si no explota
-        sql = "cta = '" & Text3(2).Text & "' AND codusu"
-        N = DevuelveDesdeBD("count(*)", "tmpconext", sql, vUsu.Codigo)
+        SQL = "cta = '" & Text3(2).Text & "' AND codusu"
+        N = DevuelveDesdeBD("count(*)", "tmpconext", SQL, vUsu.Codigo)
         If N = 0 Then
             QuedanLineasDespuesModificar = False
             Exit Function
         End If
     End If
-'    CargaGrid
-
 
     CargaImportes
     
@@ -1401,32 +1367,29 @@ End Function
 Private Sub CargaGrid()
 
 
-    Adodc1.ConnectionString = Conn
-    sql = " codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, contra, ampconce, timporteD, timporteH, saldo,ccost, Punteada"
+    adodc1.ConnectionString = Conn
+    SQL = " codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, contra, ampconce, timporteD, timporteH, saldo,ccost, Punteada"
     If Text3(2).Text <> "" Then
-        sql = sql & ",nommacta"
-        sql = "Select " & sql & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
+        SQL = SQL & ",nommacta"
+        SQL = "Select " & SQL & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
     Else
         'Si esta a "" pongo otro select para que no de error
-        sql = sql & ",linliapu"
-        sql = "Select " & sql & " from tmpConExt where codusu = " & vUsu.Codigo
+        SQL = SQL & ",linliapu"
+        SQL = "Select " & SQL & " from tmpConExt where codusu = " & vUsu.Codigo
     End If
-    sql = sql & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
+    SQL = SQL & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
     
     'Si Text3(2).text=""
     
-    Adodc1.RecordSource = sql
-    Adodc1.Refresh
+    adodc1.RecordSource = SQL
+    adodc1.Refresh
     
     
     
     Label101.Caption = "Total lineas:   "
-    Label101.Caption = Label101.Caption & Me.Adodc1.Recordset.RecordCount
+    Label101.Caption = Label101.Caption & Me.adodc1.Recordset.RecordCount
     
 End Sub
-
-
-
 
 Private Sub CargaListview()
 Dim F1 As Date
@@ -1437,7 +1400,7 @@ Dim Pinta As Boolean
 
 Dim NumAto As Long  'el numero de asiento por si viene de los asientos
 
-Dim cad As String
+Dim Cad As String
 Dim miRsAux As ADODB.Recordset
 
     Me.ListView1.ListItems.Clear
@@ -1451,36 +1414,23 @@ Dim miRsAux As ADODB.Recordset
     
     
     
-    cad = " numasien,fechaent,cta codmacta,nomdocum numdocum,ampconce,timporteD impdebe,timporteH imphaber,ccost codccost"
-    cad = cad & ",if(punteada=0,' ','*') punteada,nommacta,contra ctacontr,linliapu numlinea, numdiari "
+    Cad = " numasien,fechaent,cta codmacta,nomdocum numdocum,ampconce,timporteD impdebe,timporteH imphaber,ccost codccost"
+    Cad = Cad & ",if(punteada=0,' ','*') punteada,nommacta,contra ctacontr,linliapu numlinea, numdiari "
     If Text3(2).Text <> "" Then
-        cad = "Select " & cad & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
+        Cad = "Select " & Cad & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
         If Me.chkPunteo.Value = 1 Then
-            cad = cad & " and punteada = 0"
+            Cad = Cad & " and punteada = 0"
         End If
     Else
-        cad = "Select " & cad & " from tmpConExt where codusu = " & vUsu.Codigo
+        Cad = "Select " & Cad & " from tmpConExt where codusu = " & vUsu.Codigo
         If Me.chkPunteo.Value = 1 Then
-            cad = cad & " and punteada = 0"
+            Cad = Cad & " and punteada = 0"
         End If
     End If
-    cad = cad & " AND cta = '" & Text3(2).Text & "' ORDER BY fechaent,numasien,linliapu  " ' ORDER BY POS"
+    Cad = Cad & " AND cta = '" & Text3(2).Text & "' ORDER BY fechaent,numasien,linliapu  " ' ORDER BY POS"
     
     
-' como estaba antes
-'    Cad = "SELECT numasien,fechaent,hlinapu.codmacta,numdocum,ampconce,timporteD impdebe,timporteH imphaber,codccost"
-'    Cad = Cad & ",if(punteada=0,' ','*') punteada,nommacta,ctacontr,linliapu numlinea, numdiari"
-'    Cad = Cad & " from hlinapu left join cuentas on hlinapu.ctacontr=cuentas.codmacta"
-'    Cad = Cad & " where hlinapu.codmacta=" & DBSet(Text3(2).Text, "T") & " AND fechaent>=" & DBSet(vParam.fechaini, "F") '& " and fechaent <= " & DBSet(F2, "F")  '2013-01-01'"
-'
-'    If Me.chkPunteo.Value = 1 Then
-'        Cad = Cad & " and punteada = 0"
-'    End If
-'
-'    Cad = Cad & " ORDER BY fechaent,numasien,linliapu"
-
-
-    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If miRsAux.EOF Then
     
@@ -1566,19 +1516,13 @@ Dim miRsAux As ADODB.Recordset
         
     miRsAux.Close
         
-'antes
-'    Me.Text6(6).Text = Format(ImpD, FormatoImporte)
-'    Me.Text6(7).Text = Format(ImpH, FormatoImporte)
-'    Me.Text6(8).Text = Format(ImpD - ImpH, FormatoImporte)
-    
-'ahora
     Dim Rs As ADODB.Recordset
-    cad = "SELECT codmacta, sum(coalesce(timporteD,0)) impdebe,sum(coalesce(timporteH,0)) imphaber"
-    cad = cad & " from hlinapu "
-    cad = cad & " where hlinapu.codmacta=" & DBSet(Text3(2).Text, "T") & " AND fechaent>=" & DBSet(vParam.fechaini, "F") '& " and fechaent <= " & DBSet(F2, "F")  '2013-01-01'"
-    cad = cad & " group by 1 "
+    Cad = "SELECT codmacta, sum(coalesce(timporteD,0)) impdebe,sum(coalesce(timporteH,0)) imphaber"
+    Cad = Cad & " from hlinapu "
+    Cad = Cad & " where hlinapu.codmacta=" & DBSet(Text3(2).Text, "T") & " AND fechaent>=" & DBSet(vParam.fechaini, "F") '& " and fechaent <= " & DBSet(F2, "F")  '2013-01-01'"
+    Cad = Cad & " group by 1 "
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Me.Text6(6).Text = Format(DBLet(Rs!impdebe, "N"), FormatoImporte)
@@ -1644,17 +1588,17 @@ End Sub
 
 Private Sub CargarColumnas()
 Dim i As Integer
-Dim cad As String
+Dim Cad As String
 
     
-    cad = "1300|1150|2005|3714|1500|820|1950|1950|1950|350|"  '0|0|0|"
+    Cad = "1300|1150|2005|3714|1500|820|1950|1950|1950|350|"  '0|0|0|"
     'tieneanalitica
     'If vParam.autocoste Then Cad = Replace(Cad, "|0|", "|820|")
     Me.LabelCab(5).Visible = (vParam.autocoste)
     
     
     For i = 1 To Me.ListView1.ColumnHeaders.Count
-        ListView1.ColumnHeaders.Item(i).Width = RecuperaValor(cad, i)
+        ListView1.ColumnHeaders.Item(i).Width = RecuperaValor(Cad, i)
         If i > 6 Then Me.LabelCab(i - 1).Width = ListView1.ColumnHeaders(i).Width
 
         Me.LabelCab(i - 1).Left = ListView1.ColumnHeaders.Item(i).Left + 120
@@ -1677,38 +1621,38 @@ Private Function ObtenerCuenta(Siguiente As Boolean) As Boolean
     Label101.Caption = ""
     Label100.Visible = True
     Label100.Refresh
-    sql = "select codmacta from hlinapu"
-    If EjerciciosCerrados Then sql = sql & "1"
-    sql = sql & " WHERE codmacta "
+    SQL = "select codmacta from hlinapu"
+    If EjerciciosCerrados Then SQL = SQL & "1"
+    SQL = SQL & " WHERE codmacta "
     If Siguiente Then
-        sql = sql & ">"
+        SQL = SQL & ">"
     Else
-        sql = sql & "<"
+        SQL = SQL & "<"
     End If
     If Me.chkCtaConMov.Value = 1 Then
-        sql = sql & DBSet(CtaAnt, "T")
+        SQL = SQL & DBSet(CtaAnt, "T")
     Else
-        sql = sql & " '" & Text3(2).Text & "'"
+        SQL = SQL & " '" & Text3(2).Text & "'"
     End If
-    sql = sql & " AND fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
-    sql = sql & " AND fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
-    sql = sql & " group by codmacta ORDER BY codmacta"
+    SQL = SQL & " AND fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+    SQL = SQL & " AND fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+    SQL = SQL & " group by codmacta ORDER BY codmacta"
     If Siguiente Then
-        sql = sql & " ASC"
+        SQL = SQL & " ASC"
     Else
-        sql = sql & " DESC"
+        SQL = SQL & " DESC"
     End If
     Set RT = New ADODB.Recordset
-    RT.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RT.EOF Then
-        sql = "No se ha obtenido la cuenta "
+        SQL = "No se ha obtenido la cuenta "
         If Siguiente Then
-            sql = sql & "siguiente"
+            SQL = SQL & "siguiente"
         Else
-            sql = sql & "anterior"
+            SQL = SQL & "anterior"
         End If
-        sql = sql & " con movimientos en el periodo."
-        MsgBox sql, vbExclamation
+        SQL = SQL & " con movimientos en el periodo."
+        MsgBox SQL, vbExclamation
         ObtenerCuenta = False
     Else
         'Sólo Cuentas con movimiento en el ejercicio
@@ -1742,9 +1686,9 @@ Dim Im1 As Currency
 Dim Im2 As Currency
 
 
-    sql = "Select * from tmpconextcab where codusu=" & vUsu.Codigo & " and cta='" & Text3(2).Text & "'"
+    SQL = "Select * from tmpconextcab where codusu=" & vUsu.Codigo & " and cta='" & Text3(2).Text & "'"
     Set RT = New ADODB.Recordset
-    RT.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RT.EOF Then
         'Limpiaremos
         For i = 6 To 11
@@ -1811,8 +1755,6 @@ Case 1
     Text3(2).Text = ""
     CargaGrid
     
-'    Me.framePregunta.Visible = False ' True
-    
     Screen.MousePointer = vbDefault
 Case 2
     Imprimir
@@ -1850,12 +1792,6 @@ On Error Resume Next
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
-
-
-
-
-
-
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
@@ -1867,15 +1803,15 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim Rs As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
     
     On Error Resume Next
 
-    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Toolbar1.Buttons(2).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)

@@ -19,10 +19,10 @@ Begin VB.Form frmTESCobros
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameFiltro 
       Height          =   705
-      Left            =   9810
-      TabIndex        =   122
+      Left            =   8970
+      TabIndex        =   111
       Top             =   60
-      Width           =   2415
+      Width           =   3255
       Begin VB.ComboBox cboFiltro 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -38,9 +38,9 @@ Begin VB.Form frmTESCobros
          Left            =   90
          List            =   "frmTESCobros.frx":0019
          Style           =   2  'Dropdown List
-         TabIndex        =   123
+         TabIndex        =   112
          Top             =   210
-         Width           =   2235
+         Width           =   3075
       End
    End
    Begin VB.Frame FrameBotonGnral 
@@ -377,7 +377,7 @@ Begin VB.Form frmTESCobros
       Tab(0).Control(26).Enabled=   0   'False
       Tab(0).Control(27)=   "imgFecha(3)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "SSTab2"
+      Tab(0).Control(28)=   "imgppal(0)"
       Tab(0).Control(28).Enabled=   0   'False
       Tab(0).Control(29)=   "Text1(31)"
       Tab(0).Control(29).Enabled=   0   'False
@@ -447,7 +447,335 @@ Begin VB.Form frmTESCobros
       Tab(0).Control(61).Enabled=   0   'False
       Tab(0).Control(62)=   "Frame2"
       Tab(0).Control(62).Enabled=   0   'False
-      Tab(0).ControlCount=   63
+      Tab(0).Control(63)=   "FrameAux0"
+      Tab(0).Control(63).Enabled=   0   'False
+      Tab(0).ControlCount=   64
+      Begin VB.Frame FrameAux0 
+         Caption         =   "Devoluciones"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1320
+         Left            =   330
+         TabIndex        =   113
+         Top             =   5550
+         Width           =   9255
+         Begin VB.TextBox txtaux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   5
+            Left            =   2100
+            MaxLength       =   10
+            TabIndex        =   121
+            Tag             =   "Fecha Devolucion|F|N|||cobros_devolucion|fecdevol|||"
+            Text            =   "fec"
+            Top             =   750
+            Visible         =   0   'False
+            Width           =   390
+         End
+         Begin VB.TextBox txtaux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   3
+            Left            =   1230
+            MaxLength       =   30
+            TabIndex        =   120
+            Tag             =   "Nº Vencimiento|N|N|0||cobros_devolucion|numorden||S|"
+            Text            =   "vto"
+            Top             =   750
+            Visible         =   0   'False
+            Width           =   375
+         End
+         Begin VB.TextBox txtaux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   2
+            Left            =   840
+            MaxLength       =   10
+            TabIndex        =   119
+            Tag             =   "Fecha Factura|F|N|||cobros_devolucion|fecfactu|dd/mm/yyyy|S|"
+            Text            =   "Fec"
+            Top             =   750
+            Visible         =   0   'False
+            Width           =   375
+         End
+         Begin VB.TextBox txtaux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   1
+            Left            =   450
+            MaxLength       =   10
+            TabIndex        =   118
+            Tag             =   "Nº Factura|N|N|||cobros_devolucion|numfactul|000000|S|"
+            Text            =   "fac"
+            Top             =   750
+            Visible         =   0   'False
+            Width           =   375
+         End
+         Begin VB.TextBox txtaux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   4
+            Left            =   1620
+            MaxLength       =   4
+            TabIndex        =   117
+            Tag             =   "Linea|N|N|0||cobros_devolucion|numlinea||S|"
+            Text            =   "lin"
+            Top             =   765
+            Visible         =   0   'False
+            Width           =   390
+         End
+         Begin VB.TextBox txtaux1 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   7
+            Left            =   4710
+            MaxLength       =   255
+            TabIndex        =   116
+            Tag             =   "Observaciones|T|N|||cobros_devolucion|observa|||"
+            Text            =   "obs"
+            Top             =   780
+            Visible         =   0   'False
+            Width           =   2625
+         End
+         Begin VB.TextBox txtaux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   0
+            Left            =   45
+            MaxLength       =   3
+            TabIndex        =   115
+            Tag             =   "Serie|T|N|||cobros_devolucion|numserie||S|"
+            Text            =   "ser"
+            Top             =   765
+            Visible         =   0   'False
+            Width           =   375
+         End
+         Begin VB.TextBox txtaux1 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   290
+            Index           =   6
+            Left            =   2850
+            MaxLength       =   10
+            TabIndex        =   114
+            Tag             =   "Código Devolucion|T|N|||cobros_devolucion|coddevol|||"
+            Text            =   "CodDev"
+            Top             =   780
+            Visible         =   0   'False
+            Width           =   1740
+         End
+         Begin MSAdodcLib.Adodc AdoAux 
+            Height          =   375
+            Index           =   0
+            Left            =   3720
+            Top             =   225
+            Visible         =   0   'False
+            Width           =   2055
+            _ExtentX        =   3625
+            _ExtentY        =   661
+            ConnectMode     =   0
+            CursorLocation  =   3
+            IsolationLevel  =   -1
+            ConnectionTimeout=   15
+            CommandTimeout  =   30
+            CursorType      =   3
+            LockType        =   3
+            CommandType     =   8
+            CursorOptions   =   0
+            CacheSize       =   50
+            MaxRecords      =   0
+            BOFAction       =   0
+            EOFAction       =   0
+            ConnectStringType=   1
+            Appearance      =   1
+            BackColor       =   -2147483643
+            ForeColor       =   -2147483640
+            Orientation     =   0
+            Enabled         =   -1
+            Connect         =   ""
+            OLEDBString     =   ""
+            OLEDBFile       =   ""
+            DataSourceName  =   ""
+            OtherAttributes =   ""
+            UserName        =   ""
+            Password        =   ""
+            RecordSource    =   ""
+            Caption         =   "AdoAux(0)"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            _Version        =   393216
+         End
+         Begin MSDataGridLib.DataGrid DataGridAux 
+            Bindings        =   "frmTESCobros.frx":006C
+            Height          =   825
+            Index           =   0
+            Left            =   120
+            TabIndex        =   122
+            Top             =   300
+            Width           =   8955
+            _ExtentX        =   15796
+            _ExtentY        =   1455
+            _Version        =   393216
+            AllowUpdate     =   0   'False
+            BorderStyle     =   0
+            HeadLines       =   1
+            RowHeight       =   19
+            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   -1  'True
+               Strikethrough   =   0   'False
+            EndProperty
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ColumnCount     =   2
+            BeginProperty Column00 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            BeginProperty Column01 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            SplitCount      =   1
+            BeginProperty Split0 
+               AllowFocus      =   0   'False
+               AllowRowSizing  =   0   'False
+               AllowSizing     =   0   'False
+               BeginProperty Column00 
+               EndProperty
+               BeginProperty Column01 
+               EndProperty
+            EndProperty
+         End
+      End
       Begin VB.Frame Frame2 
          Caption         =   "Cobro realizado"
          BeginProperty Font 
@@ -459,10 +787,10 @@ Begin VB.Form frmTESCobros
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   1215
+         Height          =   1335
          Left            =   9720
-         TabIndex        =   113
-         Top             =   5670
+         TabIndex        =   102
+         Top             =   5550
          Width           =   5715
          Begin VB.TextBox Text1 
             Alignment       =   2  'Center
@@ -478,7 +806,7 @@ Begin VB.Form frmTESCobros
             Height          =   360
             Index           =   17
             Left            =   930
-            TabIndex        =   117
+            TabIndex        =   106
             Tag             =   "Diario|N|S|0||cobros|numdiari|||"
             Text            =   "Text1"
             Top             =   300
@@ -498,7 +826,7 @@ Begin VB.Form frmTESCobros
             Height          =   360
             Index           =   16
             Left            =   4260
-            TabIndex        =   116
+            TabIndex        =   105
             Tag             =   "Fecha entrada|F|S|||cobros|fechaent|dd/mm/yyyy||"
             Text            =   "Text1"
             Top             =   300
@@ -518,7 +846,7 @@ Begin VB.Form frmTESCobros
             Height          =   360
             Index           =   15
             Left            =   930
-            TabIndex        =   115
+            TabIndex        =   104
             Tag             =   "Nº asiento|N|S|0||cobros|numasien|||"
             Text            =   "Text1"
             Top             =   720
@@ -538,7 +866,7 @@ Begin VB.Form frmTESCobros
             Height          =   360
             Index           =   14
             Left            =   3090
-            TabIndex        =   114
+            TabIndex        =   103
             Tag             =   "Usuario Cobro|T|S|||cobros|usuariocobro|||"
             Text            =   "Text1"
             Top             =   720
@@ -558,7 +886,7 @@ Begin VB.Form frmTESCobros
             Height          =   225
             Index           =   31
             Left            =   150
-            TabIndex        =   121
+            TabIndex        =   110
             Top             =   330
             Width           =   645
          End
@@ -576,7 +904,7 @@ Begin VB.Form frmTESCobros
             Height          =   255
             Index           =   30
             Left            =   3180
-            TabIndex        =   120
+            TabIndex        =   109
             Top             =   330
             Width           =   675
          End
@@ -594,7 +922,7 @@ Begin VB.Form frmTESCobros
             Height          =   195
             Index           =   29
             Left            =   150
-            TabIndex        =   119
+            TabIndex        =   108
             Top             =   750
             Width           =   735
          End
@@ -612,7 +940,7 @@ Begin VB.Form frmTESCobros
             Height          =   285
             Index           =   28
             Left            =   2310
-            TabIndex        =   118
+            TabIndex        =   107
             Top             =   750
             Width           =   945
          End
@@ -620,7 +948,7 @@ Begin VB.Form frmTESCobros
             Height          =   240
             Index           =   11
             Left            =   3870
-            Picture         =   "frmTESCobros.frx":006C
+            Picture         =   "frmTESCobros.frx":0084
             Top             =   330
             Width           =   240
          End
@@ -664,14 +992,13 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            ItemData        =   "frmTESCobros.frx":00F7
-            Left            =   3660
-            List            =   "frmTESCobros.frx":00F9
+            ItemData        =   "frmTESCobros.frx":010F
+            Left            =   3000
+            List            =   "frmTESCobros.frx":0111
             Style           =   2  'Dropdown List
             TabIndex        =   92
-            Tag             =   "Situacion|T|S|0||cobros|siturem|||"
             Top             =   870
-            Width           =   1935
+            Width           =   2625
          End
          Begin VB.CheckBox Check1 
             Caption         =   "NO remesar"
@@ -703,9 +1030,9 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            ItemData        =   "frmTESCobros.frx":00FB
+            ItemData        =   "frmTESCobros.frx":0113
             Left            =   1290
-            List            =   "frmTESCobros.frx":0108
+            List            =   "frmTESCobros.frx":0120
             Style           =   2  'Dropdown List
             TabIndex        =   13
             Tag             =   "Remesa|N|S|0||cobros|tiporem|||"
@@ -724,12 +1051,13 @@ Begin VB.Form frmTESCobros
             EndProperty
             Height          =   360
             Index           =   37
-            Left            =   3000
-            MaxLength       =   1
+            Left            =   3030
+            MaxLength       =   4
             TabIndex        =   16
+            Tag             =   "Situacion|T|S|||cobros|siturem|||"
             Text            =   "Text1"
             Top             =   870
-            Width           =   405
+            Width           =   885
          End
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -772,7 +1100,7 @@ Begin VB.Form frmTESCobros
             Width           =   1305
          End
          Begin VB.Label Label1 
-            Caption         =   "Situacion"
+            Caption         =   "Situación"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -784,7 +1112,7 @@ Begin VB.Form frmTESCobros
             EndProperty
             Height          =   195
             Index           =   17
-            Left            =   3660
+            Left            =   3030
             TabIndex        =   63
             Top             =   600
             Width           =   1080
@@ -920,7 +1248,7 @@ Begin VB.Form frmTESCobros
          MaxLength       =   60
          TabIndex        =   31
          Tag             =   "T|T|S|||cobros|text41csb|||"
-         Top             =   3270
+         Top             =   3240
          Width           =   9225
       End
       Begin VB.TextBox Text1 
@@ -957,7 +1285,7 @@ Begin VB.Form frmTESCobros
          Height          =   945
          Left            =   330
          TabIndex        =   75
-         Top             =   4500
+         Top             =   4620
          Width           =   9255
          Begin VB.TextBox Text1 
             Alignment       =   2  'Center
@@ -1043,7 +1371,7 @@ Begin VB.Form frmTESCobros
             Height          =   240
             Index           =   7
             Left            =   8610
-            Picture         =   "frmTESCobros.frx":0127
+            Picture         =   "frmTESCobros.frx":013F
             Top             =   210
             Width           =   240
          End
@@ -1051,7 +1379,7 @@ Begin VB.Form frmTESCobros
             Height          =   240
             Index           =   5
             Left            =   4890
-            Picture         =   "frmTESCobros.frx":01B2
+            Picture         =   "frmTESCobros.frx":01CA
             Top             =   210
             Width           =   240
          End
@@ -1059,7 +1387,7 @@ Begin VB.Form frmTESCobros
             Height          =   240
             Index           =   6
             Left            =   6870
-            Picture         =   "frmTESCobros.frx":023D
+            Picture         =   "frmTESCobros.frx":0255
             Top             =   210
             Width           =   240
          End
@@ -1067,7 +1395,7 @@ Begin VB.Form frmTESCobros
             Height          =   240
             Index           =   4
             Left            =   3510
-            Picture         =   "frmTESCobros.frx":02C8
+            Picture         =   "frmTESCobros.frx":02E0
             Top             =   210
             Width           =   240
          End
@@ -1249,7 +1577,7 @@ Begin VB.Form frmTESCobros
          Height          =   645
          Left            =   9780
          TabIndex        =   67
-         Top             =   4800
+         Top             =   4740
          Width           =   5415
          Begin VB.CheckBox Check1 
             Caption         =   "Recibo Impreso"
@@ -1265,7 +1593,7 @@ Begin VB.Form frmTESCobros
             Height          =   255
             Index           =   1
             Left            =   2970
-            TabIndex        =   108
+            TabIndex        =   101
             Tag             =   "Recibido|N|S|||cobros|recedocu|||"
             Top             =   0
             Width           =   2505
@@ -1319,14 +1647,14 @@ Begin VB.Form frmTESCobros
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   585
+         Height          =   735
          Index           =   39
          Left            =   360
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   32
-         Tag             =   "obs|T|S|||cobros|obs|||"
-         Text            =   "frmTESCobros.frx":0353
+         Tag             =   "obs|T|S|||cobros|observa|||"
+         Text            =   "frmTESCobros.frx":036B
          Top             =   3870
          Width           =   9225
       End
@@ -1627,7 +1955,7 @@ Begin VB.Form frmTESCobros
          Left            =   6390
          MaxLength       =   4
          TabIndex        =   20
-         Tag             =   "Entidad|N|S|0||cobros|codbanco|0000||"
+         Tag             =   "Entidad|N|S|0||cobros|entidad|0000||"
          Text            =   "9999"
          Top             =   1350
          Width           =   615
@@ -1647,7 +1975,7 @@ Begin VB.Form frmTESCobros
          Left            =   7050
          MaxLength       =   4
          TabIndex        =   21
-         Tag             =   "Sucursal|N|S|0||cobros|codsucur|0000||"
+         Tag             =   "Sucursal|N|S|0||cobros|oficina|0000||"
          Text            =   "9999"
          Top             =   1350
          Width           =   615
@@ -1668,7 +1996,7 @@ Begin VB.Form frmTESCobros
          Left            =   7710
          MaxLength       =   2
          TabIndex        =   22
-         Tag             =   "D.C.|T|S|0||cobros|digcontr|||"
+         Tag             =   "D.C.|T|S|0||cobros|control|||"
          Text            =   "99"
          Top             =   1350
          Width           =   435
@@ -1693,366 +2021,18 @@ Begin VB.Form frmTESCobros
          Top             =   1350
          Width           =   1365
       End
-      Begin TabDlg.SSTab SSTab2 
-         Height          =   1485
-         Left            =   360
-         TabIndex        =   101
-         Top             =   5490
-         Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   2619
-         _Version        =   393216
-         Tabs            =   1
-         TabHeight       =   520
-         ForeColor       =   12582912
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         TabCaption(0)   =   "Devoluciones"
-         TabPicture(0)   =   "frmTESCobros.frx":0359
-         Tab(0).ControlEnabled=   -1  'True
-         Tab(0).Control(0)=   "FrameAux0"
-         Tab(0).Control(0).Enabled=   0   'False
-         Tab(0).ControlCount=   1
-         Begin VB.Frame FrameAux0 
-            BorderStyle     =   0  'None
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00C00000&
-            Height          =   1110
-            Left            =   90
-            TabIndex        =   102
-            Top             =   360
-            Width           =   9105
-            Begin VB.TextBox txtaux1 
-               Alignment       =   1  'Right Justify
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   5
-               Left            =   2100
-               MaxLength       =   10
-               TabIndex        =   112
-               Tag             =   "Fecha Devolucion|F|N|||cobros_devolucion|fecdevol|||"
-               Text            =   "fec"
-               Top             =   750
-               Visible         =   0   'False
-               Width           =   390
-            End
-            Begin VB.TextBox txtaux1 
-               Alignment       =   1  'Right Justify
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   3
-               Left            =   1230
-               MaxLength       =   30
-               TabIndex        =   111
-               Tag             =   "Nº Vencimiento|N|N|0||cobros_devolucion|numorden||S|"
-               Text            =   "vto"
-               Top             =   750
-               Visible         =   0   'False
-               Width           =   375
-            End
-            Begin VB.TextBox txtaux1 
-               Alignment       =   1  'Right Justify
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   2
-               Left            =   840
-               MaxLength       =   10
-               TabIndex        =   110
-               Tag             =   "Fecha Factura|F|N|||cobros_devolucion|fecfactu|dd/mm/yyyy|S|"
-               Text            =   "Fec"
-               Top             =   750
-               Visible         =   0   'False
-               Width           =   375
-            End
-            Begin VB.TextBox txtaux1 
-               Alignment       =   1  'Right Justify
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   1
-               Left            =   450
-               MaxLength       =   10
-               TabIndex        =   109
-               Tag             =   "Nº Factura|N|N|||cobros_devolucion|numfactul|000000|S|"
-               Text            =   "fac"
-               Top             =   750
-               Visible         =   0   'False
-               Width           =   375
-            End
-            Begin VB.TextBox txtaux1 
-               Alignment       =   1  'Right Justify
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   4
-               Left            =   1620
-               MaxLength       =   4
-               TabIndex        =   106
-               Tag             =   "Linea|N|N|0||cobros_devolucion|numlinea||S|"
-               Text            =   "lin"
-               Top             =   765
-               Visible         =   0   'False
-               Width           =   390
-            End
-            Begin VB.TextBox txtaux1 
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   7
-               Left            =   4710
-               MaxLength       =   255
-               TabIndex        =   105
-               Tag             =   "Observaciones|T|N|||cobros_devolucion|observa|||"
-               Text            =   "obs"
-               Top             =   780
-               Visible         =   0   'False
-               Width           =   2625
-            End
-            Begin VB.TextBox txtaux1 
-               Alignment       =   1  'Right Justify
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   0
-               Left            =   45
-               MaxLength       =   3
-               TabIndex        =   104
-               Tag             =   "Serie|T|N|||cobros_devolucion|numserie||S|"
-               Text            =   "ser"
-               Top             =   765
-               Visible         =   0   'False
-               Width           =   375
-            End
-            Begin VB.TextBox txtaux1 
-               Appearance      =   0  'Flat
-               BorderStyle     =   0  'None
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   290
-               Index           =   6
-               Left            =   2850
-               MaxLength       =   10
-               TabIndex        =   103
-               Tag             =   "Código Devolucion|T|N|||cobros_devolucion|coddevol|||"
-               Text            =   "CodDev"
-               Top             =   780
-               Visible         =   0   'False
-               Width           =   1740
-            End
-            Begin MSAdodcLib.Adodc AdoAux 
-               Height          =   375
-               Index           =   0
-               Left            =   3720
-               Top             =   225
-               Visible         =   0   'False
-               Width           =   2055
-               _ExtentX        =   3625
-               _ExtentY        =   661
-               ConnectMode     =   0
-               CursorLocation  =   3
-               IsolationLevel  =   -1
-               ConnectionTimeout=   15
-               CommandTimeout  =   30
-               CursorType      =   3
-               LockType        =   3
-               CommandType     =   8
-               CursorOptions   =   0
-               CacheSize       =   50
-               MaxRecords      =   0
-               BOFAction       =   0
-               EOFAction       =   0
-               ConnectStringType=   1
-               Appearance      =   1
-               BackColor       =   -2147483643
-               ForeColor       =   -2147483640
-               Orientation     =   0
-               Enabled         =   -1
-               Connect         =   ""
-               OLEDBString     =   ""
-               OLEDBFile       =   ""
-               DataSourceName  =   ""
-               OtherAttributes =   ""
-               UserName        =   ""
-               Password        =   ""
-               RecordSource    =   ""
-               Caption         =   "AdoAux(0)"
-               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-                  Name            =   "MS Sans Serif"
-                  Size            =   8.25
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               _Version        =   393216
-            End
-            Begin MSDataGridLib.DataGrid DataGridAux 
-               Bindings        =   "frmTESCobros.frx":0375
-               Height          =   825
-               Index           =   0
-               Left            =   135
-               TabIndex        =   107
-               Top             =   90
-               Width           =   8685
-               _ExtentX        =   15319
-               _ExtentY        =   1455
-               _Version        =   393216
-               AllowUpdate     =   0   'False
-               BorderStyle     =   0
-               HeadLines       =   1
-               RowHeight       =   19
-               BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-                  Name            =   "Verdana"
-                  Size            =   9
-                  Charset         =   0
-                  Weight          =   700
-                  Underline       =   0   'False
-                  Italic          =   -1  'True
-                  Strikethrough   =   0   'False
-               EndProperty
-               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               ColumnCount     =   2
-               BeginProperty Column00 
-                  DataField       =   ""
-                  Caption         =   ""
-                  BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-                     Type            =   0
-                     Format          =   ""
-                     HaveTrueFalseNull=   0
-                     FirstDayOfWeek  =   0
-                     FirstWeekOfYear =   0
-                     LCID            =   3082
-                     SubFormatType   =   0
-                  EndProperty
-               EndProperty
-               BeginProperty Column01 
-                  DataField       =   ""
-                  Caption         =   ""
-                  BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-                     Type            =   0
-                     Format          =   ""
-                     HaveTrueFalseNull=   0
-                     FirstDayOfWeek  =   0
-                     FirstWeekOfYear =   0
-                     LCID            =   3082
-                     SubFormatType   =   0
-                  EndProperty
-               EndProperty
-               SplitCount      =   1
-               BeginProperty Split0 
-                  AllowFocus      =   0   'False
-                  AllowRowSizing  =   0   'False
-                  AllowSizing     =   0   'False
-                  BeginProperty Column00 
-                  EndProperty
-                  BeginProperty Column01 
-                  EndProperty
-               EndProperty
-            End
-         End
+      Begin VB.Image imgppal 
+         Height          =   240
+         Index           =   0
+         Left            =   1890
+         Top             =   3630
+         Width           =   240
       End
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   3
          Left            =   13470
-         Picture         =   "frmTESCobros.frx":038D
+         Picture         =   "frmTESCobros.frx":0371
          Top             =   3960
          Width           =   240
       End
@@ -2060,7 +2040,7 @@ Begin VB.Form frmTESCobros
          Height          =   240
          Index           =   2
          Left            =   13710
-         Picture         =   "frmTESCobros.frx":0418
+         Picture         =   "frmTESCobros.frx":03FC
          Top             =   1290
          Width           =   240
       End
@@ -2068,7 +2048,7 @@ Begin VB.Form frmTESCobros
          Height          =   240
          Index           =   1
          Left            =   10890
-         Picture         =   "frmTESCobros.frx":04A3
+         Picture         =   "frmTESCobros.frx":0487
          Top             =   1290
          Width           =   240
       End
@@ -2262,7 +2242,7 @@ Begin VB.Form frmTESCobros
          Left            =   360
          TabIndex        =   66
          Top             =   3630
-         Width           =   1935
+         Width           =   1455
       End
       Begin VB.Label Label1 
          Caption         =   "Gastos"
@@ -2492,7 +2472,7 @@ Begin VB.Form frmTESCobros
       Left            =   120
       TabIndex        =   41
       Top             =   870
-      Width           =   15375
+      Width           =   15555
       Begin VB.TextBox Text1 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -2589,7 +2569,7 @@ Begin VB.Form frmTESCobros
          Left            =   1260
          MaxLength       =   10
          TabIndex        =   1
-         Tag             =   "Nº Factura|N|N|||cobros|numfactul|000000|S|"
+         Tag             =   "Nº Factura|N|N|||cobros|numfactu|0000000|S|"
          Text            =   "Text1"
          Top             =   270
          Width           =   1335
@@ -2639,7 +2619,7 @@ Begin VB.Form frmTESCobros
          Height          =   240
          Index           =   0
          Left            =   3780
-         Picture         =   "frmTESCobros.frx":052E
+         Picture         =   "frmTESCobros.frx":0512
          Top             =   0
          Width           =   240
       End
@@ -2841,7 +2821,7 @@ Option Explicit
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
-Private Const IdPrograma = 401
+Private Const IdPrograma = 601
 
 
 Private WithEvents frmConta As frmBasico
@@ -2858,6 +2838,9 @@ Private WithEvents frmF As frmFormaPago
 Attribute frmF.VB_VarHelpID = -1
 Private WithEvents frmS As frmBasico
 Attribute frmS.VB_VarHelpID = -1
+Private WithEvents frmZ As frmZoom  'Zoom para campos Text
+Attribute frmZ.VB_VarHelpID = -1
+
 '-----------------------------
 'Se distinguen varios modos
 '   0.-  Formulario limpio sin nungun campo rellenado
@@ -2903,6 +2886,17 @@ Private Sub cboFiltro_Click()
     HacerBusqueda2
 End Sub
 
+Private Sub cboSituRem_Validate(Cancel As Boolean)
+    If (Modo = 1 Or Modo = 3 Or Modo = 4) Then
+        If cboSituRem.ListIndex = 0 Then
+            Text1(37).Text = ""
+        Else
+            If cboSituRem.ListIndex <> -1 Then Text1(37).Text = Chr(cboSituRem.ItemData(cboSituRem.ListIndex))
+        End If
+    End If
+
+End Sub
+
 Private Sub Check1_Click(Index As Integer)
     If Modo = 1 Then
         'Buscqueda
@@ -2915,7 +2909,6 @@ Private Sub Check1_KeyPress(Index As Integer, KeyAscii As Integer)
         KeyAscii = 0
         SendKeys "{tab}"
     End If
-    
 End Sub
 
 
@@ -3376,12 +3369,18 @@ Dim i As Integer
     End With
     
     CargaFiltros
-    
+    Me.cboFiltro.ListIndex = 0
+    CargarCombo
     
     'Cargo los iconos
     For i = 0 To imgCuentas.Count - 1
         imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
+    
+    For i = 0 To imgppal.Count - 1
+        imgppal(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    Next i
+    
     imgSerie.Picture = frmPpal.ImageList3.ListImages(1).Picture
     imgDepart.Picture = frmPpal.ImageList3.ListImages(1).Picture
     imgAgente.Picture = frmPpal.ImageList3.ListImages(1).Picture
@@ -3663,6 +3662,34 @@ Private Sub imgFecha_Click(Index As Integer)
     
 End Sub
 
+Private Sub imgppal_Click(Index As Integer)
+    If (Modo = 2 Or Modo = 5 Or Modo = 0) And (Index <> 0) Then Exit Sub
+    
+    Screen.MousePointer = vbHourglass
+    
+    Select Case Index
+    Case 0
+        ' observaciones
+        Screen.MousePointer = vbDefault
+        
+        indice = 39
+        
+        Set frmZ = New frmZoom
+        frmZ.pValor = Text1(indice).Text
+        frmZ.pModo = Modo
+        frmZ.Caption = "Observaciones Cobros"
+        frmZ.Show vbModal
+        Set frmZ = Nothing
+    End Select
+
+End Sub
+
+Private Sub frmZ_Actualizar(vCampo As String)
+     Text1(indice).Text = vCampo
+End Sub
+
+
+
 Private Sub imgSerie_Click()
 '    Set frmS = New frmSerie
 '    frmS.DatosADevolverBusqueda = "S"
@@ -3881,7 +3908,7 @@ Private Sub Text1_LostFocus(Index As Integer)
             MsgBox SQL, vbExclamation
             SQL = ""
         Else
-            SQL = DevuelveDesdeBD("nomforpa", "sforpa", "codforpa", Text1(Index).Text, "N", DevfrmCCtas)
+            SQL = DevuelveDesdeBD("nomforpa", "formapago", "codforpa", Text1(Index).Text, "N", DevfrmCCtas)
             If SQL = "" Then
                 SQL = "Forma de pago inexistente: " & Text1(Index).Text
                 MsgBox SQL, vbExclamation
@@ -4072,7 +4099,7 @@ Private Sub HacerBusqueda2()
         MandaBusquedaPrevia CadB
     ElseIf CadB <> "" Or CadB1 <> "" Or cadFiltro <> "" Then
         CadenaConsulta = "select distinct cobros.* from (" & NombreTabla
-        CadenaConsulta = CadenaConsulta & " left join cobros_devolucion on cobros.numserie = cobros_devolucion.numserie and cobros.numfactu = cobros_devolucion.numfactu and cobros.fecfactu = cobros_devolucion.fecfactu and cobros.numorden = cobros_devolucion.numorden "
+        CadenaConsulta = CadenaConsulta & " left join cobros_devolucion on cobros.numserie = cobros_devolucion.numserie and cobros.numfactu = cobros_devolucion.numfactu and cobros.fecfactu = cobros_devolucion.fecfactu and cobros.numorden = cobros_devolucion.numorden) "
         CadenaConsulta = CadenaConsulta & " WHERE (1=1) "
         If CadB <> "" Then CadenaConsulta = CadenaConsulta & " and " & CadB & " "
         If CadB1 <> "" Then CadenaConsulta = CadenaConsulta & " and " & CadB1 & " "
@@ -4196,7 +4223,7 @@ Private Sub PonerCampos()
     Dim SQL As String
 
     If Data1.Recordset.EOF Then Exit Sub
-    PonerCamposForma Me, Data1
+    PonerCamposForma2 Me, Data1, 1
     PonerCtasIVA
     PonerDepartamenteo
     
@@ -4204,8 +4231,18 @@ Private Sub PonerCampos()
     Text1_LostFocus 34
     Text1_LostFocus 0
     
+    If Text1(37).Text = "" Then
+        cboSituRem.ListIndex = 0
+    Else
+        PosicionarCombo cboSituRem, Asc(Text1(37).Text)
+    End If
+    
+    cboSituRem_Validate False
+    
+    
+    
     'Cargamos el LINEAS
-    DataGridAux(1).Enabled = False
+    DataGridAux(0).Enabled = False
     CargaGrid 0, True
     
     
@@ -4333,12 +4370,12 @@ Private Sub PonerModo(Kmodo As Integer)
     For i = 0 To Text1.Count - 1
         
         Text1(i).Locked = B
-        
-        If B Then
-            Text1(i).BackColor = &H80000018
-        Else
-            Text1(i).BackColor = vbWhite
-        End If
+'--
+'        If B Then
+'            Text1(i).BackColor = &H80000018
+'        Else
+'            Text1(i).BackColor = vbWhite
+'        End If
     Next i
     frameContene.Enabled = Not B
     For i = 0 To 6
@@ -4349,14 +4386,18 @@ Private Sub PonerModo(Kmodo As Integer)
     Me.imgDepart.Visible = Not B
     Me.imgAgente.Visible = Not B
         
+    cboSituRem.Locked = B
+    cboTipoRem.Locked = B
+        
+        
     Text2(1).Tag = ""
     
-    
-    If Me.FrameRemesa.Enabled Then
-        Me.cboTipoRem.BackColor = vbWhite
-    Else
-        Me.cboTipoRem.BackColor = &H80000018
-    End If
+'--
+'    If Me.FrameRemesa.Enabled Then
+'        Me.cboTipoRem.BackColor = vbWhite
+'    Else
+'        Me.cboTipoRem.BackColor = &H80000018
+'    End If
         
 End Sub
 
@@ -4366,6 +4407,14 @@ Dim B As Boolean
 Dim Tipo As Integer
 
     DatosOk = False
+    
+    
+    If cboSituRem.ListIndex = 0 Then
+        Text1(37).Text = "NULL"
+    Else
+        Text1(37).Text = Chr(cboSituRem.ItemData(cboSituRem.ListIndex))
+    End If
+    
     
     
     DevfrmCCtas = ""
@@ -4406,7 +4455,7 @@ Dim Tipo As Integer
     
     
     
-    DevfrmCCtas = DevuelveDesdeBD("tipforpa", "sforpa", "codforpa", Text1(0).Text, "N")
+    DevfrmCCtas = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", Text1(0).Text, "N")
     Tipo = CInt(DevfrmCCtas)
     
 
@@ -4911,7 +4960,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & "cobros.numserie=" & DBSet(Text1(13).Text, "T") & " and cobros.numfactu=" & DBSet(Text1(1).Text, "N") & " and cobros.fecfactu = " & DBSet(Text1(2).Text, "N")
+    vWhere = vWhere & "cobros.numserie=" & DBSet(Text1(13).Text, "T") & " and cobros.numfactu=" & DBSet(Text1(1).Text, "N") & " and cobros.fecfactu = " & DBSet(Text1(2).Text, "F")
     vWhere = vWhere & " and cobros.numorden = " & DBSet(Text1(3).Text, "N")
     ' *******************************************************
     
@@ -5033,13 +5082,17 @@ Dim J As Long
     
     cboSituRem.Clear
 
+    cboSituRem.AddItem ""
+    cboSituRem.ItemData(cboSituRem.NewIndex) = Asc("NULL")
+
+
     'Tipo de situacion de remesa
     Set Rs = New ADODB.Recordset
     SQL = "SELECT * FROM usuarios.wtiposituacionrem ORDER BY situacio"
     Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 0
     While Not Rs.EOF
-        cboSituRem.AddItem Rs!Descripcion
+        cboSituRem.AddItem Rs!Descsituacion
         cboSituRem.ItemData(cboSituRem.NewIndex) = Asc(Rs!situacio)
         i = i + 1
         Rs.MoveNext

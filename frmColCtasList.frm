@@ -1179,11 +1179,6 @@ Dim RC2 As String
     MontaSQL = True
 End Function
 
-
-
-
-
-
 Private Sub PonerNiveles()
 Dim i As Integer
 Dim J As Integer
@@ -1198,34 +1193,12 @@ Dim J As Integer
         Check1(i).Visible = True
         Me.Check1(i).Caption = Cad
         
-'        'Para los de balance presupuestario
-'        Me.ChkCtaPre(i).Visible = True
-'        Me.ChkCtaPre(i).Caption = Cad
-'        'para los de resumen dairio
-'        Me.ChkNivelRes(i).Visible = True
-'        Me.ChkNivelRes(i).Caption = Cad
-'
-'        'Evolucion de saldos
-'        ChkEvolSaldo(i).Visible = True
-'        ChkEvolSaldo(i).Caption = Cad
-'
-'        'Consolidado
-'        Me.ChkConso(i).Visible = True
-'        Me.ChkConso(i).Caption = Cad
-'
-'        chkcmp(i).Caption = Cad
-'        chkcmp(i).Visible = True
         
         Combo2.AddItem "Nivel :   " & i
         Combo2.ItemData(Combo2.NewIndex) = J
     Next i
     For i = vEmpresa.numnivel To 9
         Check1(i).Visible = False
-'        Me.ChkCtaPre(i).Visible = False
-'        Me.ChkNivelRes(i).Visible = False
-'        chkcmp(i).Visible = False
-'        ChkConso(i).Visible = False
-'        Me.ChkEvolSaldo(i).Visible = False
     Next i
     
 End Sub

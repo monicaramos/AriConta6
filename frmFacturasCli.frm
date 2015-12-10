@@ -28,9 +28,9 @@ Begin VB.Form frmFacturasCli
          Strikethrough   =   0   'False
       EndProperty
       Height          =   2265
-      Left            =   360
+      Left            =   420
       TabIndex        =   100
-      Top             =   2520
+      Top             =   5040
       Visible         =   0   'False
       Width           =   16935
       Begin VB.TextBox Text4 
@@ -576,10 +576,10 @@ Begin VB.Form frmFacturasCli
    End
    Begin VB.Frame FrameFiltro 
       Height          =   705
-      Left            =   10170
+      Left            =   9960
       TabIndex        =   71
       Top             =   90
-      Width           =   2415
+      Width           =   2445
       Begin VB.ComboBox cboFiltro 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -592,7 +592,7 @@ Begin VB.Form frmFacturasCli
          EndProperty
          Height          =   360
          ItemData        =   "frmFacturasCli.frx":0000
-         Left            =   90
+         Left            =   120
          List            =   "frmFacturasCli.frx":000D
          Style           =   2  'Dropdown List
          TabIndex        =   0
@@ -1084,7 +1084,7 @@ Begin VB.Form frmFacturasCli
          Height          =   360
          Index           =   3
          ItemData        =   "frmFacturasCli.frx":0044
-         Left            =   10530
+         Left            =   10560
          List            =   "frmFacturasCli.frx":0046
          Style           =   2  'Dropdown List
          TabIndex        =   8
@@ -1305,7 +1305,7 @@ Begin VB.Form frmFacturasCli
          Height          =   360
          Index           =   1
          ItemData        =   "frmFacturasCli.frx":004C
-         Left            =   7950
+         Left            =   7980
          List            =   "frmFacturasCli.frx":004E
          Style           =   2  'Dropdown List
          TabIndex        =   7
@@ -1542,9 +1542,9 @@ Begin VB.Form frmFacturasCli
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   285
+         Height          =   300
          Index           =   22
-         Left            =   10440
+         Left            =   10860
          MaxLength       =   30
          TabIndex        =   98
          Tag             =   "Tipo factura|T|N|||factcli|codconce340|||"
@@ -6821,7 +6821,7 @@ Dim C As String
         txtAux(4).Text = RsF6!codmacta
         
         txtAux(4).Text = RsF6!codmacta
-        txtAux2(4).Text = RsF6!Nommacta
+        txtAux2(4).Text = RsF6!nommacta
         txtAux(5).Text = DBLet(RsF6!Numdocum, "T")
         txtAux(6).Text = DBLet(RsF6!ctacontr, "T")
         txtAux(7).Text = RsF6!codconce
@@ -6841,7 +6841,7 @@ Dim C As String
         txtAux(11).Text = DBLet(RsF6!codccost, "T")
         HabilitarImportes 3
         HabilitarCentroCoste
-        txtAux2(5).Text = DBLet(RsF6!Nommacta, "T")
+        txtAux2(5).Text = DBLet(RsF6!nommacta, "T")
         txtAux2(12).Text = DBLet(RsF6!centrocoste, "T")
         
     End If
@@ -7099,11 +7099,11 @@ Dim Contador As Integer
     Else
         Set IT = lw1.ListItems.Add()
 
-        IT.Text = Me.Adodc1.Recordset!Orden '"Nuevo " & Contador
+        IT.Text = Me.adodc1.Recordset!Orden '"Nuevo " & Contador
         
-        IT.SubItems(1) = Me.Adodc1.Recordset.Fields(5)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
+        IT.SubItems(1) = Me.adodc1.Recordset.Fields(5)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
         IT.SubItems(2) = vpaz
-        IT.SubItems(3) = Me.Adodc1.Recordset.Fields(0)
+        IT.SubItems(3) = Me.adodc1.Recordset.Fields(0)
         
         Set IT = Nothing
     End If
@@ -7330,7 +7330,7 @@ Dim SQL As String
         Text1(5).Text = DBLet(Rs!Forpa, "N")
         Text4(5).Text = PonerNombreDeCod(Text1(5), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(15).Text = DBLet(Rs!Nommacta, "T")
+        Text1(15).Text = DBLet(Rs!nommacta, "T")
         Text1(16).Text = DBLet(Rs!dirdatos, "T")
         Text1(17).Text = DBLet(Rs!codposta, "T")
         Text1(18).Text = DBLet(Rs!desPobla, "T")

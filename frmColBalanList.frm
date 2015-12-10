@@ -428,7 +428,7 @@ Public NomBalan As String
 Private WithEvents frmBal As frmBasico
 Attribute frmBal.VB_VarHelpID = -1
 
-Private SQL As String
+Private sql As String
 
 
 
@@ -526,26 +526,10 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub frmBal_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    sql = CadenaSeleccion
 End Sub
 
 Private Sub ImgBalan_Click(Index As Integer)
-'    SQL = ""
-'    AbiertoOtroFormEnListado = True
-'    Set frmBal = New frmBasico
-'    frmBal.DatosADevolverBusqueda = True
-'    frmBal.Show vbModal
-'    Set frmBal = Nothing
-'    If SQL <> "" Then
-'        Me.txtBalan(Index).Text = RecuperaValor(SQL, 1)
-'        Me.lblBalan(Index).Caption = RecuperaValor(SQL, 2)
-'    Else
-'        QuitarPulsacionMas Me.txtBalan(Index)
-'    End If
-'
-'    PonFoco Me.txtBalan(Index)
-'    AbiertoOtroFormEnListado = False
-
     Set frmBal = New frmBasico
     
     AyudaBalances frmBal
@@ -613,10 +597,10 @@ Private Sub txtBalan_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtBalan_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
-Dim SQL As String
+Dim sql As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     txtBalan(Index).Text = Trim(txtBalan(Index).Text)
@@ -644,18 +628,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 '            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtBalan(Index).Text)
                                     '********
-            B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
+            B = CuentaCorrectaUltimoNivelSIN(Cta, sql)
             If B = 0 Then
                 MsgBox "NO existe la cuenta: " & txtBalan(Index).Text, vbExclamation
                 txtBalan(Index).Text = ""
                 txtNBalan(Index).Text = ""
             Else
                 txtBalan(Index).Text = Cta
-                txtNBalan(Index).Text = SQL
+                txtNBalan(Index).Text = sql
                 If B = 1 Then
                     txtNBalan(Index).Tag = ""
                 Else
-                    txtNBalan(Index).Tag = SQL
+                    txtNBalan(Index).Tag = sql
                 End If
                 Hasta = -1
                 If Index = 6 Then
@@ -692,13 +676,13 @@ End Sub
 Private Sub AccionesCSV()
     
     'Monto el SQL
-    SQL = "Select balances.numbalan as codigo, balances.descripcion as descripcion, Balans.ctaingreso as CtaIngresos, Balans.ctagastos as CtaGastos, Balans.sufijoem as sufijoem, Balans.idcedente as cedente,"
-    SQL = SQL & " concat(Balans.iban, ' ', right(concat('0000',Balans.entidad),4),' ', right(concat('0000',Balans.oficina),4),' ',  Balans.control,' ', Balans.ctaBalan) as CCC, ccoste.nomccost  as CentroCoste "
-    SQL = SQL & " FROM Balans left join ccoste on Balans.codccost = ccoste.codccost "
-    If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
+    sql = "Select balances.numbalan as codigo, balances.descripcion as descripcion, Balans.ctaingreso as CtaIngresos, Balans.ctagastos as CtaGastos, Balans.sufijoem as sufijoem, Balans.idcedente as cedente,"
+    sql = sql & " concat(Balans.iban, ' ', right(concat('0000',Balans.entidad),4),' ', right(concat('0000',Balans.oficina),4),' ',  Balans.control,' ', Balans.ctaBalan) as CCC, ccoste.nomccost  as CentroCoste "
+    sql = sql & " FROM Balans left join ccoste on Balans.codccost = ccoste.codccost "
+    If cadselect <> "" Then sql = sql & " WHERE " & cadselect
         
     'LLamoa a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV sql, txtTipoSalida(1).Text
     
 End Sub
 

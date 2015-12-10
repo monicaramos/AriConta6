@@ -877,15 +877,9 @@ Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     
 End Sub
 
-
-
-
-
-
-
 Private Sub cmdAccion_Click(Index As Integer)
     
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     
     'Exportacion a PDF
@@ -1104,17 +1098,6 @@ Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
     
 End Sub
 
-
-''++
-'Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
-'    If KeyAscii = teclaBuscar Then
-'        LanzaFormAyuda "imgCuentas", Index
-'    Else
-'        KEYpress KeyAscii
-'    End If
-'End Sub
-
-
 Private Sub txtCuentas_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
@@ -1222,8 +1205,6 @@ Dim nomDocu As String
             cadParam = cadParam & "pTipo=""Sólo punteada""|"
         Case 3
             cadParam = cadParam & "pTipo=""Sólo pendiente""|"
-'        Case 4
-'            cadParam = cadParam & "pTipo=""Extendido""|"
     End Select
     
     numParam = numParam + 6
@@ -1487,9 +1468,9 @@ Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
     End If
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
     
-    DatosOK = False
+    DatosOk = False
     
     If txtFecha(2).Text = "" Then
         MsgBox "Debe introducir un valor para la Fecha del listado.", vbExclamation
@@ -1497,7 +1478,7 @@ Private Function DatosOK() As Boolean
         Exit Function
     End If
 
-    DatosOK = True
+    DatosOk = True
 
 End Function
 
@@ -1515,12 +1496,9 @@ Private Sub CargaCombo()
     Combo1.ItemData(Combo1.NewIndex) = 2
     Combo1.AddItem "Solo pendiente"
     Combo1.ItemData(Combo1.NewIndex) = 3
-'    Combo1.AddItem "EXTENDIDO"
-'    Combo1.ItemData(Combo1.NewIndex) = 4
     
-    Combo2.Clear
-
     'saldo en la cuenta
+    Combo2.Clear
     Combo2.AddItem "Todas"
     Combo2.ItemData(Combo2.NewIndex) = 0
     Combo2.AddItem "Saldo distinto CERO"

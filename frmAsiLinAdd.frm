@@ -347,28 +347,28 @@ Attribute frmPre.VB_VarHelpID = -1
 Private Modo As Byte
 Dim gridCargado As Boolean 'Si el DataGrid ya tiene todos los Datos cargados.
 Dim PrimeraVez As Boolean
-Dim Cad As String
+Dim cad As String
 Dim PreguntarAmplia As Boolean
 Dim PasoPorAmpliacion As Boolean
 
 Private Sub cmdAceptar_Click()
 'TotalLineas llevo
     Set miRsAux = New ADODB.Recordset
-    Cad = "Select count(*) from tmpconext WHERE codusu = " & vUsu.Codigo & " and (timported <> 0 or timporteh <> 0)"
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select count(*) from tmpconext WHERE codusu = " & vUsu.Codigo & " and (timported <> 0 or timporteh <> 0)"
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If miRsAux.EOF Then
-        Cad = "X"
+        cad = "X"
     Else
         If DBLet(miRsAux.Fields(0), "N") = 0 Then
-            Cad = "X"
+            cad = "X"
         Else
-            Cad = "Va a insertar en el Asiento:" & vbCrLf
-            Cad = Cad & Space(10) & "Lineas: " & miRsAux.Fields(0) & vbCrLf
-            Cad = Cad & vbCrLf & vbCrLf & "¿Continuar?"
-            If MsgBox(Cad, vbQuestion + vbYesNoCancel) = vbYes Then
-                Cad = ""
+            cad = "Va a insertar en el Asiento:" & vbCrLf
+            cad = cad & Space(10) & "Lineas: " & miRsAux.Fields(0) & vbCrLf
+            cad = cad & vbCrLf & vbCrLf & "¿Continuar?"
+            If MsgBox(cad, vbQuestion + vbYesNoCancel) = vbYes Then
+                cad = ""
             Else
-                Cad = "NO"
+                cad = "NO"
             End If
         End If
     End If
@@ -376,10 +376,10 @@ Private Sub cmdAceptar_Click()
     miRsAux.Close
     Set miRsAux = Nothing
     
-    If Cad <> "" Then
-        If Cad = "X" Then Cad = "No hay valor para ninguna de las lineas"
+    If cad <> "" Then
+        If cad = "X" Then cad = "No hay valor para ninguna de las lineas"
         
-        If Cad <> "NO" Then MsgBox Cad, vbExclamation
+        If cad <> "NO" Then MsgBox cad, vbExclamation
         
         Exit Sub
     End If
@@ -464,20 +464,9 @@ Private Sub Form_Load()
     
 '    TerminaBloquear
     
-    
     BorrarDatos
     
     CargaGrid
-    
-
-'    Text1.Left = DataGrid1.Columns(5).Left + 130 'codalmac
-'    Text1.Width = DataGrid1.Columns(5).Width - 10
-'    Text1.Text = Format(TotalLineas, FormatoImporte)
-'    Text1.Tag = 0
-'
-'    Label1.Left = Text1.Left - Label1.Width - 120
-    
-    
     PrimeraVez = True
     
     Screen.MousePointer = vbDefault
@@ -491,11 +480,11 @@ On Error GoTo ECarga
 
     gridCargado = False
     
-    Cad = "select cta,nommacta, pos ,ccost ,ampconce,timported, timporteh"
-    Cad = Cad & " from tmpconext,cuentas  where tmpconext.cta=cuentas.codmacta AND codusu=" & vUsu.Codigo & " ORDER BY pos"
+    cad = "select cta,nommacta, pos ,ccost ,ampconce,timported, timporteh"
+    cad = cad & " from tmpconext,cuentas  where tmpconext.cta=cuentas.codmacta AND codusu=" & vUsu.Codigo & " ORDER BY pos"
 
     Data1.ConnectionString = Conn
-    Data1.RecordSource = Cad
+    Data1.RecordSource = cad
     Data1.CursorType = adOpenDynamic
     Data1.LockType = adLockPessimistic
     Data1.Refresh
@@ -612,7 +601,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmPre_DatoSeleccionado(CadenaSeleccion As String)
-    Cad = CadenaSeleccion
+    cad = CadenaSeleccion
 End Sub
 
 
@@ -626,7 +615,7 @@ Private Sub mnOpciones1_Click(Index As Integer)
             BorrarDatos
             espera 0.5
         End If
-        Cad = ""
+        cad = ""
         
         
         Set frmPre = New frmBasico
@@ -634,32 +623,27 @@ Private Sub mnOpciones1_Click(Index As Integer)
         AyudaAsientosP frmPre
         
         
-'        frmPre.DatosADevolverBusqueda = "0|1|"
-'        frmPre.Show vbModal
-'        Set frmPre = Nothing
+        If cad <> "" Then
         
-        
-        If Cad <> "" Then
-        
-            NumAsiPre = RecuperaValor(Cad, 1)
+            NumAsiPre = RecuperaValor(cad, 1)
             
-            Cad = "numaspre=" & RecuperaValor(Cad, 1)
+            cad = "numaspre=" & RecuperaValor(cad, 1)
             
             
             If vParam.autocoste Then
                 'LLEVA CENTROS DE COSTE
-                Cad = "left join ccoste on asipre_lineas.codccost =ccoste.codccost WHERE " & Cad
+                cad = "left join ccoste on asipre_lineas.codccost =ccoste.codccost WHERE " & cad
             Else
-                Cad = " WHERE  " & Cad
+                cad = " WHERE  " & cad
             End If
-            Cad = " FROM asipre_lineas " & Cad
+            cad = " FROM asipre_lineas " & cad
             
-            If vParam.autocoste Then Cad = ",asipre_lineas.codccost,nomccost " & Cad
+            If vParam.autocoste Then cad = ",asipre_lineas.codccost,nomccost " & cad
             
-            Cad = ")  select " & vUsu.Codigo & ",codmacta,0,linlapre, timported, timporteh" & Cad
-            If vParam.autocoste Then Cad = ",ccost, ampconce" & Cad
-            Cad = "INSERT INTO tmpconext(codusu,cta,saldo,pos,timported,timporteh " & Cad
-            Conn.Execute Cad
+            cad = ")  select " & vUsu.Codigo & ",codmacta,0,linlapre, timported, timporteh" & cad
+            If vParam.autocoste Then cad = ",ccost, ampconce" & cad
+            cad = "INSERT INTO tmpconext(codusu,cta,saldo,pos,timported,timporteh " & cad
+            Conn.Execute cad
             CargaGrid
             PasoPorAmpliacion = False
             BotonModificar
@@ -780,8 +764,8 @@ Dim Importe As Currency
             End If
 
             'Es numerico
-            Cad = TransformaPuntosComas(.Text)
-            If CadenaCurrency(Cad, Importe) Then .Text = Format(Importe, "0.00")
+            cad = TransformaPuntosComas(.Text)
+            If CadenaCurrency(cad, Importe) Then .Text = Format(Importe, "0.00")
         End If
     End With
 
@@ -898,7 +882,7 @@ End Function
 
 Private Function ActualizarExistencia() As Boolean
 'Actualiza la cantidad de stock Inventariada (Existencia Real en Almacen)
-Dim SQL As String
+Dim sql As String
 Dim Debe As Currency
 Dim Haber As Currency
 
@@ -908,28 +892,18 @@ Dim Haber As Currency
     Debe = TransformaPuntosComas(ComprobarCero(txtAux(0).Text))
     Haber = TransformaPuntosComas(ComprobarCero(txtAux(1).Text))
     
-'    If Cantidad < 0 Then Err.Raise 513, , "No se permiten negativos"
-'
-'    If Cantidad <> Data1.Recordset!Saldo Then
-            
-'
-        SQL = "UPDATE tmpconext  Set timported = " & DBSet(Debe, "N", "S")
-        SQL = SQL & ", timporteh = " & DBSet(Haber, "N", "S")
-        SQL = SQL & " WHERE cta = '" & Data1.Recordset!Cta & "' AND "
-        SQL = SQL & " pos =" & Data1.Recordset!Pos & " AND codusu =" & vUsu.Codigo
-        Conn.Execute SQL
+        sql = "UPDATE tmpconext  Set timported = " & DBSet(Debe, "N", "S")
+        sql = sql & ", timporteh = " & DBSet(Haber, "N", "S")
+        sql = sql & " WHERE cta = '" & Data1.Recordset!Cta & "' AND "
+        sql = sql & " pos =" & Data1.Recordset!Pos & " AND codusu =" & vUsu.Codigo
+        Conn.Execute sql
         
         
-'        Text1.Tag = Text1.Tag - Data1.Recordset!Saldo + Cantidad
-'        Cantidad = TotalLineas - CCur(Text1.Tag)
-'        Text1.Text = Format(Cantidad, FormatoImporte)
-        
-'    End If
         
 EActualizar:
     If Err.Number <> 0 Then
         'Hay error , almacenamos y salimos
-         MuestraError Err.Number, SQL, Err.Description
+         MuestraError Err.Number, sql, Err.Description
          ActualizarExistencia = False
     Else
         ActualizarExistencia = True
