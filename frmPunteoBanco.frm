@@ -1138,7 +1138,7 @@ End Sub
 
 Private Sub CargarDatosLw(BorrarImportes As Boolean)
 
-    If txtfec(0).Text = "" Or txtfec(1).Text = "" Then Exit Sub
+    If txtFec(0).Text = "" Or txtFec(1).Text = "" Then Exit Sub
 
 
 
@@ -1157,10 +1157,10 @@ Private Sub CargarDatosLw(BorrarImportes As Boolean)
         SQL = "DELETE from tmpconext where codusu= " & vUsu.Codigo
         Conn.Execute SQL
         
-        SQL = "fechaent >= '" & Format(txtfec(0).Text, FormatoFecha)
-        SQL = SQL & "' AND fechaent <= '" & Format(txtfec(1).Text, FormatoFecha) & "'"
+        SQL = "fechaent >= '" & Format(txtFec(0).Text, FormatoFecha)
+        SQL = SQL & "' AND fechaent <= '" & Format(txtFec(1).Text, FormatoFecha) & "'"
         
-        CargaDatosConExt Text1.Text, txtfec(0).Text, txtfec(1).Text, SQL, Text2.Text
+        CargaDatosConExt Text1.Text, txtFec(0).Text, txtFec(1).Text, SQL, Text2.Text
 
                     
                     
@@ -1183,18 +1183,18 @@ Dim SQL As String
 Dim Sql1 As String
 
 
-    If txtfec(2).Text = "" Or Text9.Text = "" Or Text7.Text = "" Then
+    If txtFec(2).Text = "" Or Text9.Text = "" Or Text7.Text = "" Then
         MsgBox "Todos los campos, excepto la contrapartida, son obligados", vbExclamation
         Exit Sub
     End If
     
     'Generamos el asiento en errores
-    If Not IsDate(txtfec(2).Text) Then
+    If Not IsDate(txtFec(2).Text) Then
         MsgBox "Fecha incorrecta", vbExclamation
         Exit Sub
     End If
     
-    varFecOk = FechaCorrecta2(CDate(txtfec(2).Text))
+    varFecOk = FechaCorrecta2(CDate(txtFec(2).Text))
     If varFecOk > 1 Then
         If varFecOk = 2 Then
             SQL = varTxtFec
@@ -1205,20 +1205,11 @@ Dim Sql1 As String
         Exit Sub
     End If
     
-'    Set Rs = New ADODB.Recordset
-'    NA = 0
-'    SQL = "Select max(numasien) from hcabapu"
-'    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    If Not Rs.EOF Then NA = DBLet(Rs.Fields(0), "N")
-'    Rs.Close
-'    'Ya tenemos el numero de asiento en errores
-'    NA = NA + 1
-    
     ' cogemos el nro de asiento dependiendo de la fecha
     Dim Mc As Contadores
     
     Set Mc = New Contadores
-    If Mc.ConseguirContador(0, txtfec(2).Text <= vParam.fechafin, False) = 0 Then
+    If Mc.ConseguirContador(0, txtFec(2).Text <= vParam.fechafin, False) = 0 Then
         NA = Mc.Contador
     Else
         MsgBox "Error al obtener contador", vbExclamation
@@ -1236,24 +1227,24 @@ Dim Sql1 As String
         Else
             frmAsientosHco.DesdeNorma43 = 1
         End If
-        frmAsientosHco.ASIENTO = Text9.Text & "|" & txtfec(2).Text & "|" & NA & "|"
+        frmAsientosHco.ASIENTO = Text9.Text & "|" & txtFec(2).Text & "|" & NA & "|"
         frmAsientosHco.Show vbModal
     End If
     
     ' si el asiento está descuadrado hemos de eliminarlo
-    SQL = "select sum(coalesce(timported,0) - coalesce(timporteh,0)) from hlinapu where numasien = " & DBSet(NA, "N") & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtfec(2).Text, "F")
-    Sql1 = "select count(*) from hlinapu where numasien = " & NA & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtfec(2).Text, "F")
+    SQL = "select sum(coalesce(timported,0) - coalesce(timporteh,0)) from hlinapu where numasien = " & DBSet(NA, "N") & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtFec(2).Text, "F")
+    Sql1 = "select count(*) from hlinapu where numasien = " & NA & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtFec(2).Text, "F")
     If DevuelveValor(SQL) <> 0 Or DevuelveValor(Sql1) = 0 Then
         'Borramos las lineas del apunte
         Screen.MousePointer = vbHourglass
-        SQL = "Delete from hlinapu where numasien = " & NA & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtfec(2).Text, "F")
+        SQL = "Delete from hlinapu where numasien = " & NA & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtFec(2).Text, "F")
         Conn.Execute SQL
-        SQL = "Delete from hcabapu where numasien = " & NA & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtfec(2).Text, "F")
+        SQL = "Delete from hcabapu where numasien = " & NA & " and numdiari = " & DBSet(Text9.Text, "N") & " and fechaent = " & DBSet(txtFec(2).Text, "F")
         Conn.Execute SQL
     
         'devolvemos el contador
         Set Mc = New Contadores
-        Mc.DevolverContador 0, txtfec(2).Text <= vParam.fechafin, NA
+        Mc.DevolverContador 0, txtFec(2).Text <= vParam.fechafin, NA
         Set Mc = Nothing
     
     Else
@@ -1341,7 +1332,7 @@ Private Sub CrearAsiento()
     'Deshabilitamos
     Me.FrameDatos.Enabled = False
     'Limpiamos y ponemos datos
-    Me.txtfec(2).Text = Format(ListView1.SelectedItem.Text, "dd/mm/yyyy")
+    Me.txtFec(2).Text = Format(ListView1.SelectedItem.Text, "dd/mm/yyyy")
     
     'dIARIO POR DEFECTO DE PARAMETROS
     'Veremos si hay parametros
@@ -1441,15 +1432,8 @@ Private Sub Form_Load()
     
     Text1.Text = ""
     Text2.Text = ""
-    txtfec(0).Text = ""
-    txtfec(1).Text = ""
-'    i = 0
-'    txtFec(0).Text = Format(DateAdd("yyyy", i, vParam.fechaini), "dd/mm/yyyy")
-'    If Not vParam.FecEjerAct Then i = i + 1
-'    txtFec(1).Text = Format(DateAdd("yyyy", i, vParam.fechafin), "dd/mm/yyyy")
-    
-    
-'    PonerTamanyo False
+    txtFec(0).Text = ""
+    txtFec(1).Text = ""
     
 End Sub
 
@@ -1472,7 +1456,7 @@ End Sub
 
 
 Private Sub frmC_Selec(vFecha As Date)
-    txtfec(CInt(txtfec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtFec(CInt(txtFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCC_DatoSeleccionado(CadenaSeleccion As String)
@@ -1527,16 +1511,10 @@ Private Sub Image4_Click()
 End Sub
 
 Private Sub imgCuentas_Click()
-'    Set frmCta = New frmCuentasBancarias
-'    frmCta.DatosADevolverBusqueda = "0|1|"
-'    frmCta.Show vbModal
-'    Set frmCta = Nothing
     
     Set frmCta = New frmBasico2
     AyudaCuentasBancarias frmCta
     Set frmCta = Nothing
-
-    
     
     PonerFoco Text1
 End Sub
@@ -1545,9 +1523,9 @@ Private Sub imgppal_Click(Index As Integer)
     
     Set frmC = New frmCal
     frmC.Fecha = Now
-    txtfec(0).Tag = Index
-    If txtfec(Index).Text <> "" Then
-        If IsDate(txtfec(Index).Text) Then frmC.Fecha = CDate(txtfec(Index).Text)
+    txtFec(0).Tag = Index
+    If txtFec(Index).Text <> "" Then
+        If IsDate(txtFec(Index).Text) Then frmC.Fecha = CDate(txtFec(Index).Text)
     End If
     frmC.Show vbModal
     Set frmC = Nothing
@@ -1561,7 +1539,7 @@ End Sub
 Private Sub ListView1_DblClick()
 Dim J As Integer
 Dim Find As Boolean
-Dim Fin As Long
+Dim fin As Long
 
     EstaLW1 = True
     If ListView2.ListItems.Count = 0 Then Exit Sub
@@ -1569,9 +1547,9 @@ Dim Fin As Long
     
     J = ListView2.SelectedItem.Index
     Find = False
-    Fin = ListView2.ListItems.Count
+    fin = ListView2.ListItems.Count
     Do
-        For i = J To Fin
+        For i = J To fin
             If ListView2.ListItems(i).SubItems(1) = ListView1.SelectedItem.SubItems(1) Then
                 If ListView2.ListItems(i).SubItems(2) <> ListView1.SelectedItem.SubItems(2) Then
                     'Ha encontrado con el mismo importe y signos distintos D-H
@@ -1584,7 +1562,7 @@ Dim Fin As Long
         Next i
         If Not Find Then
             If J > 1 Then
-                Fin = J
+                fin = J
                 J = 1
             Else
                 Find = True
@@ -1595,11 +1573,6 @@ Dim Fin As Long
 End Sub
 
 
-
-'Private Sub Option1_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpress KeyAscii
-'End Sub
-
 Private Sub ListView2_Click()
     EstaLW1 = False
 End Sub
@@ -1607,7 +1580,7 @@ End Sub
 Private Sub ListView2_DblClick()
 Dim J As Integer
 Dim Find As Boolean
-Dim Fin As Long
+Dim fin As Long
 
     EstaLW1 = False
     If ListView1.ListItems.Count = 0 Then Exit Sub
@@ -1618,9 +1591,9 @@ Dim Fin As Long
         J = ListView1.SelectedItem.Index + 1
     End If
     Find = False
-    Fin = ListView1.ListItems.Count
+    fin = ListView1.ListItems.Count
     Do
-        For i = J To Fin
+        For i = J To fin
             If ListView1.ListItems(i).SubItems(1) = ListView2.SelectedItem.SubItems(1) Then
                 If ListView1.ListItems(i).SubItems(2) <> ListView2.SelectedItem.SubItems(2) Then
                     'Ha encontrado con el mismo importe y signos distintos D-H
@@ -1633,7 +1606,7 @@ Dim Fin As Long
         Next i
         If Not Find Then
             If J > 1 Then
-                Fin = J
+                fin = J
                 J = 1
             Else
                 Find = True
@@ -1866,8 +1839,8 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtfec_GotFocus(Index As Integer)
-    PonFoco txtfec(Index)
-    FechaAnterior = txtfec(Index).Text
+    PonFoco txtFec(Index)
+    FechaAnterior = txtFec(Index).Text
 End Sub
 '++
 Private Sub txtfec_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -1890,24 +1863,20 @@ End Sub
 
 Private Sub txtfec_LostFocus(Index As Integer)
 Dim Mal As Boolean
-    txtfec(Index).Text = Trim(txtfec(Index).Text)
+    txtFec(Index).Text = Trim(txtFec(Index).Text)
     Mal = True
-'    If txtFec(Index).Text = "" Then
-'        MsgBox "Escriba una fecha correcta", vbExclamation
-'    Else
 
-    If txtfec(Index).Text = "" Then Exit Sub
+    If txtFec(Index).Text = "" Then Exit Sub
 
-        If Not EsFechaOK(txtfec(Index)) Then
+        If Not EsFechaOK(txtFec(Index)) Then
             MsgBox "No es una fecha correcta", vbExclamation
         Else
             Mal = False
         End If
-'    End If
     If Mal Then
-        PonerFoco txtfec(Index)
+        PonerFoco txtFec(Index)
     Else
-        If txtfec(Index).Text <> FechaAnterior Then ConfirmarDatos True
+        If txtFec(Index).Text <> FechaAnterior Then ConfirmarDatos True
     End If
     
 End Sub
@@ -1919,8 +1888,8 @@ Private Sub CargaBancario()
     ListView1.ListItems.Clear
     SQL = "Select * from norma43 where"
     SQL = SQL & " codmacta ='" & Text1.Text & "'"
-    SQL = SQL & " AND fecopera >='" & Format(txtfec(0).Text, FormatoFecha) & "'"
-    SQL = SQL & " AND fecopera <='" & Format(txtfec(1).Text, FormatoFecha) & "'"
+    SQL = SQL & " AND fecopera >='" & Format(txtFec(0).Text, FormatoFecha) & "'"
+    SQL = SQL & " AND fecopera <='" & Format(txtFec(1).Text, FormatoFecha) & "'"
     'OCultar/mostrar punteados
     If Check1.Value = 0 Then
         'Ocultar los ya puntedos
@@ -1998,8 +1967,8 @@ Private Sub CargaLineaApuntes()
         ItmX.SubItems(1) = Format(Importe, FormatoImporte)
         ItmX.SubItems(2) = SQL
         ItmX.SubItems(3) = Format(Rs!Saldo, FormatoImporte)
-        ItmX.SubItems(4) = Rs!ampconce
-        ItmX.ListSubItems(4).ToolTipText = DBLet(Rs!ampconce, "T")
+        ItmX.SubItems(4) = Rs!Ampconce
+        ItmX.ListSubItems(4).ToolTipText = DBLet(Rs!Ampconce, "T")
 
         
         ItmX.Tag = Rs!NumAsien & "|" & Rs!NumDiari & "|" & Rs!Linliapu & "|"
@@ -2219,7 +2188,7 @@ Dim Cad As String
     SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari) VALUES ("
     'Ejemplo
     ' 1, '2003-11-25', 1, 1, NULL, 'misobs')
-    SQL = SQL & Text9.Text & ",'" & Format(CDate(txtfec(2).Text), FormatoFecha) & "'," & NumAsi & ","
+    SQL = SQL & Text9.Text & ",'" & Format(CDate(txtFec(2).Text), FormatoFecha) & "'," & NumAsi & ","
     'Observaciones
     SQL = SQL & "'Asiento generado desde punteo bancario por " & vUsu.Nombre & " el " & Format(Now, "dd/mm/yyyy") & "')"
     Conn.Execute SQL
@@ -2232,7 +2201,7 @@ Dim Cad As String
     
     'Ejemplo valores
     '1, '2001-01-20', 0, 0, '0', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0)"
-    SQL = SQL & Text9.Text & ",'" & Format(CDate(txtfec(2).Text), FormatoFecha) & "'," & NumAsi & ",'"
+    SQL = SQL & Text9.Text & ",'" & Format(CDate(txtFec(2).Text), FormatoFecha) & "'," & NumAsi & ",'"
     '          documento
     SQL = SQL & Text11.Text & "','"
     
@@ -2318,7 +2287,7 @@ End Sub
 '############################################################
 
 Private Function ProcesarFichero() As Boolean
-Dim Fin As Boolean
+Dim fin As Boolean
 Dim Cad As String
 
 On Error GoTo EProcesarFichero
@@ -2888,13 +2857,9 @@ Private Sub PonerModo(vModo As Byte)
         'Primer frame
         Frame1.Visible = True
         Frame2.Visible = False
-'        Me.Width = Frame1.Width
-'        Me.Height = Frame1.Height
     Case 1
         Frame2.Visible = True
         Frame1.Visible = False
-'        Me.Width = Frame2.Width
-'        Me.Height = Frame2.Height
     End Select
     Me.Height = Me.Height + 420
     Me.Width = Me.Width + 150

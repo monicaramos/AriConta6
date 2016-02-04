@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmModelo303Liq 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   6030
@@ -493,7 +493,7 @@ Attribute frmMens.VB_VarHelpID = -1
 Private SQL As String
 Dim Cad As String
 Dim RC As String
-Dim I As Integer
+Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 Dim ImpTotal As Currency
@@ -544,13 +544,13 @@ Dim B As Boolean
         espera 0.5
         'Periodos
         SQL = ""
-        For I = 0 To 1
-            SQL = SQL & txtperiodo(I).Text & "|"
-        Next I
+        For i = 0 To 1
+            SQL = SQL & txtperiodo(i).Text & "|"
+        Next i
         SQL = SQL & txtAno(0).Text & "|"
-        I = 1
+        i = 1
         
-        Periodo = SQL & I & "|"
+        Periodo = SQL & i & "|"
         
     
         'Empresas para consolidado
@@ -558,12 +558,11 @@ Dim B As Boolean
         SQL = ""
         If EmpresasSeleccionadas = 1 Then
             B = False
-            For I = 1 To Me.ListView1(1).ListItems.Count
-                If ListView1(1).ListItems(I).Checked Then
+            For i = 1 To Me.ListView1(1).ListItems.Count
+                If ListView1(1).ListItems(i).Checked Then
                 
                     
-'                    If Me.ListView1(1).ListItems(i).Text <> vEmpresa.nomempre Then Sql = Me.ListView1(1).ListItems(i).Text
-                    NumConta = Me.ListView1(1).ListItems(I).Text
+                    NumConta = Me.ListView1(1).ListItems(i).Text
                     
                     ImprimirAsientoContable
                     
@@ -573,7 +572,7 @@ Dim B As Boolean
     
                             Set frmMens = New frmMensajes
                             
-                            frmMens.opcion = 29
+                            frmMens.Opcion = 29
                             frmMens.Show vbModal
                             
                             Set frmMens = Nothing
@@ -597,15 +596,14 @@ Dim B As Boolean
                         End If
                     End If
                 End If
-            Next I
+            Next i
         Else
             'Mas de una empresa
             SQL = "'Empresas seleccionadas:' + Chr(13) "
             B = False
-            For I = 1 To Me.ListView1(1).ListItems.Count
-'                Sql = Sql & " + '        " & Me.ListView1(0).ListItems(i).Text & "' + Chr(13)"
+            For i = 1 To Me.ListView1(1).ListItems.Count
             
-                NumConta = Me.ListView1(1).ListItems(I).Text
+                NumConta = Me.ListView1(1).ListItems(i).Text
          
                 ImprimirAsientoContable
          
@@ -625,7 +623,7 @@ Dim B As Boolean
                 Else
                     B = ActualizarLiquidacion(False)
                 End If
-            Next I
+            Next i
         End If
         
         If B Then
@@ -633,7 +631,6 @@ Dim B As Boolean
             Unload Me
         End If
 
-'        Consolidado = Sql
 
     
     End If
@@ -648,7 +645,7 @@ End Sub
 
 Private Function ActualizarLiquidacion(DentroDeTrans As Boolean, Optional NumAsiento As Long) As Boolean
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
     On Error GoTo eActualizarLiquidacion
 
     If Not DentroDeTrans Then Conn.BeginTrans
@@ -657,21 +654,21 @@ Dim I As Integer
     
     ' actualizamos los parametros
     SQL = "update ariconta" & NumConta & ".parametros set anofactu = " & DBSet(txtAno(0).Text, "N")
-    I = txtperiodo(0)
-    SQL = SQL & ", perfactu = " & DBSet(I, "N")
+    i = txtperiodo(0)
+    SQL = SQL & ", perfactu = " & DBSet(i, "N")
     Conn.Execute SQL
 
 
     vParam.anofactu = txtAno(0).Text
-    vParam.perfactu = I
+    vParam.perfactu = i
 
     If vParam.periodos = 0 Then
-        I = I + 12
+        i = i + 12
     End If
 
 
     SQL = "insert into ariconta" & NumConta & ".liqiva (anoliqui,periodo,escomplem,importe,numdiari,numasien,fechaent) values ("
-    SQL = SQL & DBSet(txtAno(0).Text, "N") & "," & DBSet(I, "N") & ",0," & DBSet(ImpLiqui, "N") & "," & DBSet(vParam.numdia303, "N") & "," & DBSet(NumAsiento, "N") & "," & DBSet(txtFecha(2).Text, "F") & ")"
+    SQL = SQL & DBSet(txtAno(0).Text, "N") & "," & DBSet(i, "N") & ",0," & DBSet(ImpLiqui, "N") & "," & DBSet(vParam.numdia303, "N") & "," & DBSet(NumAsiento, "N") & "," & DBSet(txtFecha(2).Text, "F") & ")"
     Conn.Execute SQL
     
     If Not DentroDeTrans Then Conn.CommitTrans
@@ -702,14 +699,14 @@ Dim NumAsien As Long
     
     Conn.BeginTrans
     
-    I = FechaCorrecta2(CDate(txtFecha(2).Text))
-    If Mc.ConseguirContador("0", (I = 0), False) = 0 Then
+    i = FechaCorrecta2(CDate(txtFecha(2).Text))
+    If Mc.ConseguirContador("0", (i = 0), False) = 0 Then
         NumAsien = Mc.Contador
     End If
     
     ' insertamos en cabecera
     SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion ) SELECT " & vParam.numdia303 & "," & DBSet(txtFecha(2).Text, "F") & "," & DBSet(NumAsien, "N")
-    SQL = SQL & ",'Liquidación de " & Me.cmbPeriodo(0).Text & " de " & txtAno(0).Text & "'," & DBSet(Now, "F") & "," & vUsu.Codigo & ",'Ariconta'"
+    SQL = SQL & ",'Liquidación de " & Me.cmbPeriodo(0).Text & " de " & txtAno(0).Text & "'," & DBSet(Now, "F") & "," & vUsu.Codigo & ",'ARICONTA 6: Liquidación'"
     SQL = SQL & " from parametros "
     Conn.Execute SQL
     
@@ -765,7 +762,7 @@ Dim SqlValues2 As String
 Dim Importe As Currency
 Dim vDebe As Currency
 Dim vHaber As Currency
-Dim I As Long
+Dim i As Long
 
     On Error GoTo eImprimirAsientoContable
 
@@ -791,13 +788,13 @@ Dim I As Long
     Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     SqlValues = ""
-    I = 0
+    i = 0
     While Not Rs.EOF
-        I = I + 1
+        i = i + 1
     
         Importe = DBLet(Rs!Importe, "N")
     
-        SqlValues = SqlValues & "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(I, "N") & "," & DBSet(Rs!codmacta, "T") & ","
+        SqlValues = SqlValues & "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(i, "N") & "," & DBSet(Rs!codmacta, "T") & ","
     
         If DBLet(Rs!Cliente, "N") = 0 Then ' clientes
             If Importe >= 0 Then
@@ -840,12 +837,12 @@ Dim I As Long
         vHaber = DevuelveValor(SQL)
     
         SqlValues = ""
-        I = I + 1
+        i = i + 1
         If vDebe - vHaber > 0 Then
-            SqlValues = "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(I, "N") & "," & DBSet(vParam.CtaHPAcreedor, "T") & ",0," & DBSet(vDebe - vHaber, "N") & ")"
+            SqlValues = "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(i, "N") & "," & DBSet(vParam.CtaHPAcreedor, "T") & ",0," & DBSet(vDebe - vHaber, "N") & ")"
         Else
             If vDebe - vHaber < 0 Then
-                SqlValues = "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(I, "N") & "," & DBSet(vParam.CtaHPDeudor, "T") & "," & DBSet(vHaber - vDebe, "N") & ",0)"
+                SqlValues = "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(i, "N") & "," & DBSet(vParam.CtaHPDeudor, "T") & "," & DBSet(vHaber - vDebe, "N") & ",0)"
             End If
         End If
         'Apunte de la diferencia debe - haber
@@ -961,24 +958,24 @@ Private Sub PonerPeriodoPresentacion303()
     If vParam.periodos = 0 Then
         'Liquidacion TRIMESTRAL
         
-        For I = 1 To 4
-            If I = 1 Or I = 3 Then
+        For i = 1 To 4
+            If i = 1 Or i = 3 Then
                 CadenaDesdeOtroForm = "er"
             Else
                 CadenaDesdeOtroForm = "º"
             End If
-            CadenaDesdeOtroForm = I & CadenaDesdeOtroForm & " "
+            CadenaDesdeOtroForm = i & CadenaDesdeOtroForm & " "
             Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm & " trimestre"
-            Me.cmbPeriodo(0).ItemData(cmbPeriodo(0).NewIndex) = I
+            Me.cmbPeriodo(0).ItemData(cmbPeriodo(0).NewIndex) = i
             
-        Next I
+        Next i
     Else
         'Liquidacion MENSUAL
-        For I = 1 To 12
-            CadenaDesdeOtroForm = MonthName(I)
+        For i = 1 To 12
+            CadenaDesdeOtroForm = MonthName(i)
             CadenaDesdeOtroForm = UCase(Mid(CadenaDesdeOtroForm, 1, 1)) & LCase(Mid(CadenaDesdeOtroForm, 2))
             Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm
-            Me.cmbPeriodo(0).ItemData(cmbPeriodo(0).NewIndex) = I
+            Me.cmbPeriodo(0).ItemData(cmbPeriodo(0).NewIndex) = i
         Next
     End If
     
@@ -986,22 +983,22 @@ Private Sub PonerPeriodoPresentacion303()
     'Leeremos ultimo valor liquidado
     
     txtAno(0).Text = vParam.anofactu
-    I = vParam.perfactu + 1
+    i = vParam.perfactu + 1
     If vParam.periodos = 0 Then
         NumRegElim = 4
     Else
         NumRegElim = 12
     End If
         
-    If I > NumRegElim Then
-            I = 1
+    If i > NumRegElim Then
+            i = 1
             txtAno(0).Text = vParam.anofactu + 1
     End If
-    Me.cmbPeriodo(0).ListIndex = I - 1
+    Me.cmbPeriodo(0).ListIndex = i - 1
      
      
-    txtperiodo(0).Text = I 'Me.cmbPeriodo(0).ListIndex
-    txtperiodo(1).Text = I 'Me.cmbPeriodo(0).ListIndex
+    txtperiodo(0).Text = i 'Me.cmbPeriodo(0).ListIndex
+    txtperiodo(1).Text = i 'Me.cmbPeriodo(0).ListIndex
     
      
     
@@ -1014,7 +1011,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -1023,13 +1020,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tabla de codigos de iva
         Case 0
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = False
+            Next i
         Case 1
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = True
+            Next i
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1098,22 +1095,14 @@ Dim Rs As ADODB.Recordset
     ' tipo 3:   3 enetero y dos decimales
 
     
-    'ivas devengados
-'--
-'    For i = 1 To 3
-'        'Hacemos los IVAS devengados
-'        DevuelveImporte ((i - 1) * 3), 0
-'        DevuelveImporte ((i - 1) * 3) + 1, 3
-'        DevuelveImporte ((i - 1) * 3) + 2, 0
-'    Next i
     SQL = "select iva,  bases, ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 0 "
     SQL = SQL & " order by 1 "
     
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
+    i = 0
     While Not Rs.EOF
-        I = I + 1
+        i = i + 1
         DevuelveImporte DBLet(Rs!Bases, "N"), 0
         DevuelveImporte DBLet(Rs!iva, "N"), 3
         DevuelveImporte DBLet(Rs!ivas, "N"), 0
@@ -1124,7 +1113,7 @@ Dim Rs As ADODB.Recordset
     Wend
     
     'por si hay menos de 3 porcentajes de iva hay que rellenarlos a ceros
-    For J = I + 1 To 3
+    For J = i + 1 To 3
         DevuelveImporte 0, 0
         DevuelveImporte 0, 3
         DevuelveImporte 0, 0
@@ -1196,9 +1185,9 @@ Dim Rs As ADODB.Recordset
     
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
+    i = 0
     While Not Rs.EOF
-        I = I + 1
+        i = i + 1
         DevuelveImporte DBLet(Rs!Bases, "N"), 0
         DevuelveImporte DBLet(Rs!iva, "N"), 3
         DevuelveImporte DBLet(Rs!ivas, "N"), 0
@@ -1209,7 +1198,7 @@ Dim Rs As ADODB.Recordset
     Wend
     
     'por si hay menos de 3 porcentajes de iva hay que rellenarlos a ceros
-    For J = I + 1 To 3
+    For J = i + 1 To 3
         DevuelveImporte 0, 0
         DevuelveImporte 0, 3
         DevuelveImporte 0, 0
@@ -1425,80 +1414,24 @@ Dim Rs As ADODB.Recordset
     ImpTotal = TotalClien - TotalProve
     
     
-'--
-'
-'    'Atribuible a la admon del estado
-'    DevuelveImporte 31, 3  '%
-'    DevuelveImporte 30, 0  'base
-'
-'    'A compensar de otros periodos
-'    DevuelveImporte 32, 0  'base
-'
-'    'Entregas intracomunitarias
-'    DevuelveImporte 35, 0  'base
-'
-'    'Exportaciones y asimiladas
-'    DevuelveImporte 37, 0  'base
-'
-'
-'    'DE estos dos NO hay text
-'    '---------------------
-'    'Op no sujetas o con conversion del sujeto pasivo
-'    Cad = Cad & String(17, "0")
-'    'Diputacion foral
-'    Cad = Cad & String(17, "0")
-'
-'    'Total
-'
-'    Text1Ant = Text1(36).Text      'por si acaso es negativo
-'    Text1(36).Text = Format(CCur(Text1(36).Tag), FormatoImporte)
-'    DevuelveImporte 36, 0  'base
-'    Text1(36).Text = Text1Ant
-'    Text1Ant = ""
-'
-'++
-'     Cad = Cad + Space(595) ' añadimos 595 espacios
-     
 End Sub
 
 
 'Ahora desde un importe, antes Desde un text box
 Private Sub DevuelveImporte(Importe As Currency, Tipo As Byte)
 Dim J As Integer
-Dim AUx As String
+Dim Aux As String
 Dim Resul As String
 
     Dim modelo As Integer
     modelo = 4
 
-'    Resul = ""
-'    If Text1(indice).Text = "" Then
-'        Importe = 0
-'        AUx = "0"
-'    Else
-'        AUx = Text1(indice).Text
-'        Do
-'            J = InStr(1, AUx, ".")
-'            If J > 0 Then AUx = Mid(AUx, 1, J - 1) & Mid(AUx, J + 1)
-'        Loop Until J = 0
-'        Importe = CCur(AUx)
-'        If Importe < 0 Then
-'            AUx = ""
-'            Resul = "N"
-'            Importe = Abs(Importe)
-'        Else
-'            AUx = "0"
-'        End If
-'        Importe = Importe * 100
-'        Importe = Int(Importe)
-'    End If
-'++
     Resul = ""
     If Importe < 0 Then
-        AUx = ""
+        Aux = ""
         Resul = "N"
     Else
-        AUx = "0"
+        Aux = "0"
     End If
     Importe = Importe * 100
 '++ hasta aqui
@@ -1514,21 +1447,21 @@ Dim Resul As String
     ' tipo 3:   3 enetero y dos decimales
     Select Case Tipo
     Case 1
-        AUx = AUx & "000"
+        Aux = Aux & "000"
     Case 2
-        AUx = AUx & "00"
+        Aux = Aux & "00"
     Case 3
-        AUx = AUx & "0000"
+        Aux = Aux & "0000"
     Case Else
         If modelo = 4 Then
-            AUx = AUx & String(16, "0")  '15 enteros 2 decima  17-1
+            Aux = Aux & String(16, "0")  '15 enteros 2 decima  17-1
         Else
             'Aux = Aux & "000000000000"
-            AUx = AUx & String(10, "0")   '11 enteros 2 decimales  13-1
+            Aux = Aux & String(10, "0")   '11 enteros 2 decimales  13-1
         End If
     End Select
     
-    Cad = Cad & Resul & Format(Importe, AUx)
+    Cad = Cad & Resul & Format(Importe, Aux)
         
 End Sub
 
@@ -1553,17 +1486,17 @@ Dim nomDocu As String
     
     SQL = ""
     If EmpresasSeleccionadas = 1 Then
-        For I = 1 To Me.ListView1(1).ListItems.Count
-            If ListView1(1).ListItems(I).Checked Then
-                If Me.ListView1(1).ListItems(I).Text <> vEmpresa.nomempre Then SQL = Me.ListView1(1).ListItems(I).SubItems(1)
+        For i = 1 To Me.ListView1(1).ListItems.Count
+            If ListView1(1).ListItems(i).Checked Then
+                If Me.ListView1(1).ListItems(i).Text <> vEmpresa.nomempre Then SQL = Me.ListView1(1).ListItems(i).SubItems(1)
             End If
-        Next I
+        Next i
     Else
         'Mas de una empresa
         SQL = "'Empresas seleccionadas:' + Chr(13) "
-        For I = 1 To Me.ListView1(1).ListItems.Count
-            SQL = SQL & " + '        " & Me.ListView1(1).ListItems(I).Text & "' + Chr(13)"
-        Next I
+        For i = 1 To Me.ListView1(1).ListItems.Count
+            SQL = SQL & " + '        " & Me.ListView1(1).ListItems(i).Text & "' + Chr(13)"
+        Next i
     End If
     
     cadParam = cadParam & "empresas = """ & SQL & """|"
@@ -1614,21 +1547,21 @@ End Function
 
 Private Function MontaSQL() As Boolean
 Dim SQL As String
-Dim Sql2 As String
+Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim I As Integer
+Dim i As Integer
 
 
     MontaSQL = False
     
             
     SQL = ""
-    For I = 1 To Me.ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(I).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(I).Text & ","
+    For i = 1 To Me.ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(i).Checked Then
+            SQL = SQL & Me.ListView1(1).ListItems(i).Text & ","
         End If
-    Next I
+    Next i
     
     If SQL <> "" Then
         ' quitamos la ultima coma
@@ -1715,12 +1648,12 @@ Private Function DatosOK() As Boolean
     End If
     
     If cmbPeriodo(0).ListIndex = 0 Then
-        For I = 0 To 1
-            If Me.txtperiodo(I).Text = "" Then
+        For i = 0 To 1
+            If Me.txtperiodo(i).Text = "" Then
                 MsgBox "Campos período no pueden estar vacios", vbExclamation
                 Exit Function
             End If
-        Next I
+        Next i
         
         If Val(txtperiodo(0).Text) > Val(txtperiodo(1).Text) Then
             MsgBox "Período desde mayor que período hasta.", vbExclamation
@@ -1756,13 +1689,13 @@ End Function
 
 Private Function EmpresasSeleccionadas() As Integer
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 Dim NSel As Integer
 
     NSel = 0
-    For I = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(I).Checked Then NSel = NSel + 1
-    Next I
+    For i = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(i).Checked Then NSel = NSel + 1
+    Next i
     EmpresasSeleccionadas = NSel
 
 End Function
@@ -1843,15 +1776,15 @@ Private Function GeneraLasLiquidaciones() As Boolean
     NumRegElim = 0
     'Para cada empresa
     'Para cada periodo
-    For I = 1 To Me.ListView1(1).ListItems.Count  'List2.ListCount - 1
-        If Me.ListView1(1).ListItems(I).Checked Then
+    For i = 1 To Me.ListView1(1).ListItems.Count  'List2.ListCount - 1
+        If Me.ListView1(1).ListItems(i).Checked Then
             For Cont = CInt(txtperiodo(0).Text) To CInt(txtperiodo(1).Text)
-                Label13.Caption = Mid(ListView1(1).ListItems(I).SubItems(1), 1, 20) & ".  " & Cont
+                Label13.Caption = Mid(ListView1(1).ListItems(i).SubItems(1), 1, 20) & ".  " & Cont
                 Label13.Refresh
-                LiquidaIVA CByte(Cont), CInt(txtAno(0).Text), Me.ListView1(1).ListItems(I).Text, True  '(chkIVAdetallado.Value = 1)
+                LiquidaIVA CByte(Cont), CInt(txtAno(0).Text), Me.ListView1(1).ListItems(i).Text, True  '(chkIVAdetallado.Value = 1)
             Next Cont
         End If
-    Next I
+    Next i
     'Borraremos todos aquellos IVAS de Base imponible=0
     SQL = "DELETE From tmpliquidaiva WHERE codusu = " & vUsu.Codigo
     SQL = SQL & " AND bases = 0"
@@ -1874,29 +1807,6 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     '                   3- Facturas Proveedores recargo equivalencia
     '                   4- Facturas Proveedores no deducible
 
-'    If vParam.periodos = 1 Then
-'        'Esamos en mensual
-'        If Periodo > 12 Then
-'            MsgBox "Error en el periodo a tratar.", vbExclamation
-'            Exit Function
-'        End If
-'        vFecha1 = CDate("01/" & Periodo & "/" & Anyo)
-'        M1 = DiasMes(Periodo, Anyo)
-'        vFecha2 = CDate(M1 & "/" & Periodo & "/" & Anyo)
-'
-'    Else
-'        'IVA TRIMESTRAL
-'        If Periodo > 4 Then
-'            MsgBox "Error en el periodo a tratar.", vbExclamation
-'            Exit Function
-'        End If
-'        M2 = ((Periodo - 1) * 3) + 1
-'        vFecha1 = CDate("01/" & M2 & "/" & Anyo)
-'        M2 = ((Periodo - 1) * 3) + 3
-'        M1 = DiasMes(CByte(M2), Anyo)
-'        vFecha2 = CDate(M1 & "/" & M2 & "/" & Anyo)
-'    End If
-'
     
     vCta = "ariconta" & Empresa
     

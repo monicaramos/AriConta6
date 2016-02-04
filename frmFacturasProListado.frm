@@ -1158,7 +1158,7 @@ Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
-Dim Primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -1244,8 +1244,8 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub Form_Activate()
-    If Primeravez Then
-        Primeravez = False
+    If PrimeraVez Then
+        PrimeraVez = False
         If Legalizacion <> "" Then
             optTipoSal(2).Value = True
             optVarios(2).Value = True
@@ -1258,7 +1258,7 @@ End Sub
 
 
 Private Sub Form_Load()
-    Primeravez = True
+    PrimeraVez = True
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
@@ -1504,7 +1504,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtCuentas(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -1536,7 +1535,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
                     
                 End If
                     
-                    'If txtCta(1).Text = "" Then 'ANTES solo lo hacia si el texto estaba vacio
                 If Hasta >= 0 Then
                     txtCuentas(Hasta).Text = txtCuentas(Index).Text
                     txtNCuentas(Hasta).Text = txtNCuentas(Index).Text
@@ -1597,7 +1595,6 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
     If txtNumFactu(Index).Text = "" Then
         Exit Sub
@@ -1609,7 +1606,6 @@ Dim Cad As String, cadTipo As String 'tipo cliente
         txtNumFactu(Index).Text = ""
         Exit Sub
     End If
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -1857,7 +1853,6 @@ Dim SQL As String
     'Los encabezados
     ListView1(Index).ColumnHeaders.Clear
 
- '   ListView1.ColumnHeaders.Add , , "Tipo", 650
     ListView1(Index).ColumnHeaders.Add , , "Código", 900
     ListView1(Index).ColumnHeaders.Add , , "Descripción", 2200
     

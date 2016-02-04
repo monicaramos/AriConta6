@@ -71,10 +71,10 @@ Begin VB.Form frmInfRatios
          TabCaption(1)   =   "Gráficas"
          TabPicture(1)   =   "frmInfRatios.frx":001C
          Tab(1).ControlEnabled=   0   'False
-         Tab(1).Control(0)=   "List1"
-         Tab(1).Control(1)=   "cboMes"
-         Tab(1).Control(2)=   "Label3(1)"
-         Tab(1).Control(3)=   "Label3(0)"
+         Tab(1).Control(0)=   "Label3(0)"
+         Tab(1).Control(1)=   "Label3(1)"
+         Tab(1).Control(2)=   "cboMes"
+         Tab(1).Control(3)=   "List1"
          Tab(1).ControlCount=   4
          Begin VB.CheckBox chkRatio 
             Caption         =   "Check1"
@@ -688,7 +688,7 @@ Private Sub cmdAccion_Click(Index As Integer)
 Dim B As Boolean
 Dim tabla As String
 
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     
     'Exportacion a PDF
@@ -855,7 +855,7 @@ Private Sub AccionesCrystal()
 Dim indRPT As String
 Dim nomDocu As String
 Dim SQL As String
-Dim AUx As String
+Dim Aux As String
     
     vMostrarTree = False
     conSubRPT = False
@@ -875,19 +875,19 @@ Dim AUx As String
             cadFormula = "{tmpbalancesumas.codusu}=" & vUsu.Codigo
         
             SQL = ""
-            AUx = ""
+            Aux = ""
             For NumRegElim = List1.ListCount - 1 To 0 Step -1
                 If List1.Selected(NumRegElim) Then
                     SQL = SQL & "1"
-                    If AUx = "" Then
+                    If Aux = "" Then
                         'Primer ejercicio
-                        AUx = "TextoEjer1=""" & List1.List(NumRegElim) & """|"
-                        cadParam = cadParam & AUx
+                        Aux = "TextoEjer1=""" & List1.List(NumRegElim) & """|"
+                        cadParam = cadParam & Aux
                         numParam = numParam + 1
                         
                     Else
                         'Segundo
-                        AUx = AUx & "TextoEjer2=""" & List1.List(NumRegElim) & """|"
+                        Aux = Aux & "TextoEjer2=""" & List1.List(NumRegElim) & """|"
                         cadParam = cadParam & "TextoEjer2= """ & List1.List(NumRegElim) & """|"
                         numParam = numParam + 1
                     End If
@@ -896,7 +896,7 @@ Dim AUx As String
             i = 0
             If Len(SQL) > 1 Then i = 1
             
-            SQL = "Comparativo=" & i & "|" & AUx
+            SQL = "Comparativo=" & i & "|" & Aux
             cadParam = cadParam & "Comparativo=" & i & "|"
             numParam = numParam + 1
         
@@ -907,14 +907,14 @@ Dim AUx As String
             cadFormula = "{tmpsaldoscc.codusu}=" & vUsu.Codigo
             
             SQL = ""
-            AUx = ""
+            Aux = ""
             For NumRegElim = 0 To List1.ListCount - 1
                 If List1.Selected(NumRegElim) Then
-                    If AUx = "" Then AUx = "UltAno= " & Mid(List1.List(NumRegElim), 1, 4) & "|"
+                    If Aux = "" Then Aux = "UltAno= " & Mid(List1.List(NumRegElim), 1, 4) & "|"
                 End If
             Next
-            SQL = AUx
-            cadParam = cadParam & AUx
+            SQL = Aux
+            cadParam = cadParam & Aux
             numParam = numParam + 1
             
             NumRegElim = 1
@@ -958,9 +958,9 @@ Dim RC2 As String
 
 End Function
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
     
-    DatosOK = False
+    DatosOk = False
     
     Select Case Me.SSTab1.Tab
         Case 0 ' hacer ratios
@@ -1004,7 +1004,7 @@ Private Function DatosOK() As Boolean
          
     End Select
     
-    DatosOK = True
+    DatosOk = True
 
 
 End Function
@@ -1085,20 +1085,12 @@ Private Function HacerGraficas() As Boolean
 Dim Veces As Byte  'para años partidos SON dos
 Dim Ingresos As Currency
 Dim Gastos As Currency
-Dim AUx As Currency
+Dim Aux As Currency
 Dim AnyoMes As Long
 
     
     HacerGraficas = False
     
-    
-    
-'    If Me.chkGraf1(0).Value = 1 Then
-'        If Year(vParam.fechafin) <> Year(vParam.fechaini) Then
-'            MsgBox "Error grafica resumen. Consulte soporte técnico", vbExclamation
-'            Exit Function
-'        End If
-'    End If
     
     Me.lblInd.Caption = "Prepara datos"
     Me.lblInd.Refresh
@@ -1170,11 +1162,11 @@ Dim AnyoMes As Long
                         AnyoMes = NumRegElim
                     End If
                 
-                    AUx = miRsAux!impmesde - miRsAux!impmesha
+                    Aux = miRsAux!impmesde - miRsAux!impmesha
                     If Mid(miRsAux!codmacta, 1, 1) = "6" Then
-                        Gastos = Gastos + AUx
+                        Gastos = Gastos + Aux
                     Else
-                        Ingresos = Ingresos - AUx 'va saldo
+                        Ingresos = Ingresos - Aux 'va saldo
                     End If
                     miRsAux.MoveNext
                 Wend
@@ -1199,9 +1191,6 @@ Dim AnyoMes As Long
             Me.lblInd.Refresh
             SQL = ""
             If Year(vParam.fechafin) = Year(vParam.fechaini) Then
-                'SQL = "INSERT INTO ztmpbalancesumas (`codusu`,`cta`,`nomcta`,`aperturaD`,`aperturaH`,`acumAntD`,`acumAntH`,`acumPerD`,"
-                'SQL = SQL & "`acumPerH`,`TotalD`,`TotalH`) values "
-              
                 For Veces = 1 To 12
                     SQL = SQL & ", (" & vUsu.Codigo & ",'" & Format(Veces, "00") & "','" & Format("20/" & Veces & "/2000", "mmmm") & "',0,0,0,0,0,0,0,0)"
                 Next Veces
@@ -1425,7 +1414,7 @@ End Function
 
 
 Private Sub InsertaEnTmpGraf(Id As Long, Ingr As Currency, Gast As Currency)
-Dim AUx As Currency
+Dim Aux As Currency
     If Month(vParam.fechafin) = Val(Mid(CStr(Id), 5, 2)) Then
         'MEs del cierre. Hay que quitar PyG
         If CDate("01/" & Mid(CStr(Id), 5, 2) & "/" & Mid(CStr(Id), 1, 4)) < vParam.fechaini Then
@@ -1433,14 +1422,14 @@ Dim AUx As Currency
             SQL = "fechaent='" & Mid(CStr(Id), 1, 4) & "-" & Mid(CStr(Id), 5, 2) & "-" & Day(vParam.fechafin) & "'  AND codmacta like '7%' AND codconce"
             SQL = DevuelveDesdeBD("sum(if(isnull(timported),0,timported))-sum(if(isnull(timporteh),0,timporteh))", "hlinapu", SQL, "960")
             If SQL = "" Then SQL = "0"
-            AUx = CCur(SQL)
-            Ingr = Ingr + AUx
+            Aux = CCur(SQL)
+            Ingr = Ingr + Aux
             
             SQL = "fechaent='" & Mid(CStr(Id), 1, 4) & "-" & Mid(CStr(Id), 5, 2) & "-" & Day(vParam.fechafin) & "'  AND codmacta like '6%' AND codconce"
             SQL = DevuelveDesdeBD("sum(if(isnull(timporteh),0,timporteh))-sum(if(isnull(timported),0,timported))", "hlinapu", SQL, "960")
             If SQL = "" Then SQL = "0"
-            AUx = CCur(SQL)
-            Gast = Gast + AUx
+            Aux = CCur(SQL)
+            Gast = Gast + Aux
         End If
             
     End If
@@ -1534,20 +1523,10 @@ Dim Sql10 As String
                     Sql10 = Sql10 & DBSet(miRsAux!codmacta, "T") & ","
             End Select
             
-'            SQL = SQL & ", '" & miRsAux!codmacta & "'"
-'            If Len(SQL) > 100 Then
-'                SQL = Mid(SQL, 2)
-'                Col.Add SQL
-'                SQL = ""
-'            End If
             
             miRsAux.MoveNext
         Wend
         miRsAux.Close
-'        If SQL <> "" Then
-'            SQL = Mid(SQL, 2)
-'            Col.Add SQL
-'        End If
         
         ' quitamos la ultima coma
         If Sql1 <> "" Then Sql1 = Mid(Sql1, 1, Len(Sql1) - 1)
@@ -1656,43 +1635,7 @@ Dim Sql10 As String
             End Select
                 
             
-'            If Year(vParam.fechaini) = Year(vParam.fechafin) Then
-'                'año natural
-'                If Year(vParam.fechaini) = Year(Text3(0).Text) Then
-'                    'Año ejercicio actual
-'                    SQL = SQL & " anopsald = " & Year(Text3(0).Text)
-'                    SQL = SQL & " and mespsald <= " & Month(Text3(0).Text)
-'                Else
-'                    'Año siguiente
-'                    SQL = SQL & "(( anopsald = " & Year(vParam.fechaini)
-'                    SQL = SQL & ") OR (anopsald = " & Year(Text3(0).Text)
-'                    SQL = SQL & " and mespsald <= " & Month(Text3(0).Text) & "))"
-'
-'                End If
-'
-'            Else
-'
-'                If Year(vParam.fechaini) = Year(Text3(0).Text) Then
-'                    'Este trozo de año actual
-'                    SQL = SQL & " (anopsald=" & Year(vParam.fechaini) & " and mespsald between " & Month(vParam.fechaini) & " AND  " & Month(Text3(0).Text) & ")"
-'                Else
-'                    If Year(vParam.fechafin) = Year(Text3(0).Text) Then
-'                        'Lo que queda de este año
-'                        SQL = SQL & " ((anopsald=" & Year(vParam.fechaini) & " and mespsald >= " & Month(vParam.fechaini) & " ) OR "
-'                        SQL = SQL & " (anopsald=" & Year(Text3(0).Text) & " and mespsald <= " & Month(Text3(0).Text) & " ))"
-'                    Else
-'                        'Hasta siguiente
-'                            SQL = SQL & " ((anopsald=" & Year(vParam.fechaini) & " and mespsald >= " & Month(vParam.fechaini) & " ) OR "
-'                            SQL = SQL & " anopsald = " & Year(vParam.fechafin)
-'                            SQL = SQL & " OR (anopsald=" & Year(Text3(0).Text) & " and mespsald <= " & Month(Text3(0).Text) & " ))"
-'                    End If
-'
-'                End If
-'            End If
-'            SQL = SQL & " AND codmacta IN (" & Col.Item(J) & ")"
-            
-
-            
+           
             miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not miRsAux.EOF Then
                 If Not IsNull(miRsAux.Fields(0)) Then

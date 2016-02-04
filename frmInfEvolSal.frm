@@ -853,7 +853,7 @@ Option Explicit
 
 Private Const IdPrograma = 311
 
-Public opcion As Byte
+Public Opcion As Byte
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
@@ -1195,7 +1195,6 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 6, 7 'Cuentas
-            'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtcta(Index), "T")
             
             RC = txtCta(Index).Text
             If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
@@ -1215,7 +1214,6 @@ Dim Hasta As Integer
             End If
     End Select
 
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -1368,9 +1366,6 @@ Dim RC2 As String
 
     MontaSQL = False
     
-'    If Not PonerDesdeHasta("hlinapu.fechaent", "F", Me.txtFecha(0), Me.lblFecha(0), Me.txtFecha(1), Me.lblFecha(1), "pDHFecha=""") Then Exit Function
-
-'    If Not PonerDesdeHasta("hlinapu.codmacta", "CTA", Me.txtCta(0), Me.lblCuentas(0), Me.txtCta(1), Me.lblCuentas(1), "pDHCuentas=""") Then Exit Function
     
     MontaSQL = True
            
@@ -1427,7 +1422,6 @@ End Function
 Private Function HayAsientoCierre(Mes As Byte, Anyo As Integer, Optional Contabilidad As String) As Boolean
 Dim C As String
     HayAsientoCierre = False
-    'C = "01/" & CStr(Me.cmbFecha(1).ListIndex + 1) & "/" & txtAno(1).Text
     C = "01/" & CStr(Mes) & "/" & Anyo
     'Si la fecha es menor k la fecha de inicio de ejercicio entonces SI k hay asiento de cierre
     If CDate(C) < vParam.fechaini Then
@@ -1582,34 +1576,6 @@ Dim Tipo As Integer
     FechaFinEjercicio = CDate(RC)
     
     SQL = "Select hlinapu.codmacta,nommacta from hlinapu,cuentas where hlinapu.codmacta=cuentas.codmacta "
-        'AND hlinapu.codmacta like '"
-'    'Nivel
-'    RC = ""
-'    For i = 1 To 10
-'        If ChkEvolSaldo(i).Visible And (ChkEvolSaldo(i).Value = 1) Then
-'            If i = 10 Then
-'                Cont = vEmpresa.DigitosUltimoNivel
-'            Else
-'                'En el caption pone Digitos:  luego son 8 caractares
-'                Cad = Mid(ChkEvolSaldo(i).Caption, 9)
-'                If IsNumeric(Cad) Then
-'                    Cont = Val(Cad)
-'                Else
-'                    Cont = 0
-'                End If
-'            End If
-'            If Cont > 0 Then
-'                RC = Mid("__________", 1, Cont)
-'            End If
-'            Exit For
-'        End If
-'    Next i
-'    If RC = "" Then
-'        MsgBox "Error obteniendo nivel.", vbExclamation
-'        Exit Function
-'    End If
-'
-'    SQL = SQL & RC & "'"
 
     'Si tienen desde /hasta
     If txtCta(6).Text <> "" Then SQL = SQL & " AND hlinapu.codmacta >= '" & txtCta(6).Text & "'"

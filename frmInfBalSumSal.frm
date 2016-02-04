@@ -1074,8 +1074,8 @@ Private WithEvents frmCon  As frmConceptos
 Attribute frmCon.VB_VarHelpID = -1
 Private frmCtas As frmCtasAgrupadas
 
-Private sql As String
-Dim cad As String
+Private SQL As String
+Dim Cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
@@ -1159,12 +1159,12 @@ Private Sub cmdAccion_Click(Index As Integer)
         If Me.txtCta(6).Text <> "" Or txtCta(7).Text <> "" Then
             If Cont > 1 Then
                 If vUsu.Nivel < 2 Then
-                    cad = "debe"
+                    Cad = "debe"
                 Else
-                    cad = "puede"
+                    Cad = "puede"
                 End If
-                cad = "No " & cad & " pedir un balance a distintos niveles poniendo desde/hasta cuenta"
-                MsgBox cad, vbExclamation
+                Cad = "No " & Cad & " pedir un balance a distintos niveles poniendo desde/hasta cuenta"
+                MsgBox Cad, vbExclamation
                 If vUsu.Nivel > 1 Then Exit Sub
             End If
         End If
@@ -1194,8 +1194,8 @@ Private Sub cmdAccion_Click(Index As Integer)
         Else
             Cont = Val(txtAno(0).Text) - 1
         End If
-        cad = Day(vParam.fechaini) & "/" & Month(vParam.fechaini) & "/" & Cont
-        FechaIncioEjercicio = CDate(cad)
+        Cad = Day(vParam.fechaini) & "/" & Month(vParam.fechaini) & "/" & Cont
+        FechaIncioEjercicio = CDate(Cad)
         
         i = cmbFecha(1).ListIndex + 1
         If i <= Month(vParam.fechafin) Then
@@ -1203,8 +1203,8 @@ Private Sub cmdAccion_Click(Index As Integer)
         Else
             Cont = Val(txtAno(1).Text) + 1
         End If
-        cad = Day(vParam.fechafin) & "/" & Month(vParam.fechafin) & "/" & Cont
-        FechaFinEjercicio = CDate(cad)
+        Cad = Day(vParam.fechafin) & "/" & Month(vParam.fechafin) & "/" & Cont
+        FechaFinEjercicio = CDate(Cad)
     
         
         'Veamos si pertenecen a un mismo año
@@ -1371,11 +1371,11 @@ Private Sub Form_Load()
         ' Inventario
         If RecuperaValor(Legalizacion, 5) = 1 Then
             txtTitulo(0).Text = "Inventario final cierre"
-            cad = "5"
+            Cad = "5"
             For i = 2 To vEmpresa.DigitosUltimoNivel
-                cad = cad & "9"
+                Cad = Cad & "9"
             Next
-            txtCta(7).Text = cad
+            txtCta(7).Text = Cad
         End If
     End If
     
@@ -1534,7 +1534,7 @@ End Sub
 
 
 Private Sub txtCta_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -1561,14 +1561,13 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 6, 7 'Cuentas
-            'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtcta(Index), "T")
             
             RC = txtCta(Index).Text
-            If CuentaCorrectaUltimoNivelSIN(RC, sql) Then
+            If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
                 txtCta(Index) = RC
-                txtNCta(Index).Text = sql
+                txtNCta(Index).Text = SQL
             Else
-                MsgBox sql, vbExclamation
+                MsgBox SQL, vbExclamation
                 txtCta(Index).Text = ""
                 txtNCta(Index).Text = ""
                 PonFoco txtCta(Index)
@@ -1581,7 +1580,6 @@ Dim Hasta As Integer
             End If
     End Select
 
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -1609,23 +1607,23 @@ Dim Tipo As Byte
 
     Select Case Tipo
         Case 1
-            sql = "select cta Cuenta , nomcta Titulo, totald Saldo_deudor, totalh Saldo_acreedor from tmpbalancesumas where codusu = " & vUsu.Codigo
-            sql = sql & " order by 1 "
+            SQL = "select cta Cuenta , nomcta Titulo, totald Saldo_deudor, totalh Saldo_acreedor from tmpbalancesumas where codusu = " & vUsu.Codigo
+            SQL = SQL & " order by 1 "
         
         Case 2
-            sql = "select cta Cuenta , nomcta Titulo, acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, totald Saldo_deudor, totalh Saldo_acreedor from tmpbalancesumas where codusu = " & vUsu.Codigo
-            sql = sql & " order by 1 "
+            SQL = "select cta Cuenta , nomcta Titulo, acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, totald Saldo_deudor, totalh Saldo_acreedor from tmpbalancesumas where codusu = " & vUsu.Codigo
+            SQL = SQL & " order by 1 "
         
         Case 3
-            sql = "select cta Cuenta , nomcta Titulo, aperturad Apertura_deudor, aperturah Apertura_acreedor,  totald Saldo_deudor, totalh Saldo_acreedor from tmpbalancesumas where codusu = " & vUsu.Codigo
-            sql = sql & " order by 1 "
+            SQL = "select cta Cuenta , nomcta Titulo, aperturad Apertura_deudor, aperturah Apertura_acreedor,  totald Saldo_deudor, totalh Saldo_acreedor from tmpbalancesumas where codusu = " & vUsu.Codigo
+            SQL = SQL & " order by 1 "
         
         Case 4
-            sql = "select cta Cuenta , nomcta Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
-            sql = sql & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
-            sql = sql & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
-            sql = sql & " from tmpbalancesumas where codusu = " & vUsu.Codigo
-            sql = sql & " order by 1 "
+            SQL = "select cta Cuenta , nomcta Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
+            SQL = SQL & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
+            SQL = SQL & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
+            SQL = SQL & " from tmpbalancesumas where codusu = " & vUsu.Codigo
+            SQL = SQL & " order by 1 "
         
     End Select
     
@@ -1633,7 +1631,7 @@ Dim Tipo As Byte
 
         
     'LLamos a la funcion
-    GeneraFicheroCSV sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -1683,11 +1681,11 @@ Dim nomDocu As String
     'Titulo
     txtTitulo(0).Text = Trim(txtTitulo(0).Text)
     If txtTitulo(0).Text = "" Then
-        cad = "Balance de sumas y saldos"
+        Cad = "Balance de sumas y saldos"
     Else
-        cad = txtTitulo(0).Text
+        Cad = txtTitulo(0).Text
     End If
-    cadParam = cadParam & "Titulo= """ & cad & """|"
+    cadParam = cadParam & "Titulo= """ & Cad & """|"
     numParam = numParam + 1
         
     '------------------------------
@@ -1700,23 +1698,23 @@ Dim nomDocu As String
 '                If Check2(I).Value = 1 Then Cont = Cont + 1
             If Check1(i).Value = 1 Then
                 If i = 10 Then
-                    cad = vEmpresa.DigitosUltimoNivel
+                    Cad = vEmpresa.DigitosUltimoNivel
                 Else
-                    cad = CStr(DigitosNivel(i))
+                    Cad = CStr(DigitosNivel(i))
                 End If
-                If TieneCuentasEnTmpBalance(cad) Then
+                If TieneCuentasEnTmpBalance(Cad) Then
                     Cont = Cont + 1
-                    UltimoNivel = CByte(cad)
+                    UltimoNivel = CByte(Cad)
                 End If
             End If
         End If
     Next i
-    cad = "numeroniveles= " & Cont & "|"
-    sql = sql & cad
+    Cad = "numeroniveles= " & Cont & "|"
+    SQL = SQL & Cad
     'Otro parametro mas
-    cad = "vUltimoNivel= " & UltimoNivel & "|"
+    Cad = "vUltimoNivel= " & UltimoNivel & "|"
     
-    cadParam = cadParam & cad
+    cadParam = cadParam & Cad
     numParam = numParam + 2
 
     
@@ -1743,7 +1741,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -1807,24 +1805,10 @@ Dim J As Integer
 QueCombosFechaCargar "0|1|"
 
 
-''Y ademas deshabilitamos los niveles no utilizados por la aplicacion
-'For i = vEmpresa.numnivel To 9
-'    Check2(i).Visible = False
-'    Me.chkCtaExplo(i).Visible = False
-'    chkCtaExploC(i).Visible = False
-'    chkAce(i).Visible = False
-'Next i
-
 For i = 1 To vEmpresa.numnivel - 1
     J = DigitosNivel(i)
     Check1(i).Visible = True
     Check1(i).Caption = "Digitos: " & J
-'    chkCtaExplo(i).Visible = True
-'    chkCtaExplo(i).Caption = "Digitos: " & J
-'    chkAce(i).Visible = True
-'    chkAce(i).Caption = "Digitos: " & J
-'    chkCtaExploC(i).Visible = True
-'    chkCtaExploC(i).Caption = "Digitos: " & J
 Next i
 
 
@@ -1941,17 +1925,17 @@ Dim J As Integer
     'Como queremos tener ya el n pmbre de la cuenta, por eso todo el sql "complicado2
     'La otra opcion seria sacar solamente el codmacta(si lefjoins ni leches)
     ' y cargar a posteriori el nommacta. De velocidad no se va mucho, decimas
-    cad = "SELECT substring(line.codmacta,1," & LenPrimerNivelCalculado
-    cad = cad & ") as codmacta,coalesce(nommacta,'ERROR##') nommacta From "
-    If vConta >= 0 Then cad = cad & "ariconta" & vConta & "."
-    cad = cad & "hlinapu"
-    cad = cad & " as line LEFT JOIN "
-    If vConta >= 0 Then cad = cad & "ariconta" & vConta & "."
-    cad = cad & "cuentas ON  "
-    cad = cad & "cuentas.codmacta = substring(line.codmacta,1," & LenPrimerNivelCalculado & ")"
-    cad = cad & " WHERE " & Cade
+    Cad = "SELECT substring(line.codmacta,1," & LenPrimerNivelCalculado
+    Cad = Cad & ") as codmacta,coalesce(nommacta,'ERROR##') nommacta From "
+    If vConta >= 0 Then Cad = Cad & "ariconta" & vConta & "."
+    Cad = Cad & "hlinapu"
+    Cad = Cad & " as line LEFT JOIN "
+    If vConta >= 0 Then Cad = Cad & "ariconta" & vConta & "."
+    Cad = Cad & "cuentas ON  "
+    Cad = Cad & "cuentas.codmacta = substring(line.codmacta,1," & LenPrimerNivelCalculado & ")"
+    Cad = Cad & " WHERE " & Cade
 
-    cad = cad & " GROUP BY 1 ORDER By 1"
+    Cad = Cad & " GROUP BY 1 ORDER By 1"
 
     Apertura = (Me.chkApertura.Value = 1) And vConta < 0
     
@@ -2026,7 +2010,7 @@ Dim J As Integer
     
     
     
-    Rs.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     If Rs.EOF Then
         'NO hay registros a mostrar
         If vConta < 0 Then
@@ -2039,16 +2023,16 @@ Dim J As Integer
     
         'Voy a ver si precargamos el RScon los datos para el cierr/pyg apertura
         'Veamos si precargamos los
-        sql = ""
+        SQL = ""
         If Check1(10).Value Then
             'Esta chequeado ultimo nivel
             'Veamos si tiene seleccionado alguno mas
-            sql = "1"
+            SQL = "1"
             For Cont = 1 To 9
-                If Check1(CInt(Cont)).Value = 1 Then sql = sql & "1"
+                If Check1(CInt(Cont)).Value = 1 Then SQL = SQL & "1"
             Next Cont
         End If
-        PreCargarCierre = Len(sql) = 1
+        PreCargarCierre = Len(SQL) = 1
     
         'Mostramos el frame de resultados
         Cont = 0
@@ -2068,8 +2052,8 @@ Dim J As Integer
 
 
         'Borramos los temporales
-        sql = "DELETE from tmpbalancesumas where codusu= " & vUsu.Codigo
-        Conn.Execute sql
+        SQL = "DELETE from tmpbalancesumas where codusu= " & vUsu.Codigo
+        Conn.Execute SQL
         
         
         'Nuevo  13 Enero 2005
@@ -2139,19 +2123,19 @@ Dim J As Integer
         End If
     
         If LenNivelCalculado <> 0 Then
-            sql = "insert into tmpbalancesumas (codusu,cta,nomcta,aperturaD,aperturaH,acumAntD,acumAntH,acumPerD,acumPerH,TotalD,TotalH) "
-            sql = sql & " select " & vUsu.Codigo & ",substring(line.cta,1," & LenNivelCalculado & ") as codmacta,coalesce(nommacta,'ERROR##') nommacta,"
-            sql = sql & " sum(coalesce(aperturad,0)) aperd,  sum(coalesce(aperturah,0)) aperh, sum(coalesce(acumAntD,0)) acumantd, sum(coalesce(acumAntH,0)) acumanth,"
-            sql = sql & " sum(coalesce(acumperd,0)) acumperd,  sum(coalesce(acumperh,0)) acumperh, sum(coalesce(totalD,0)) totald, sum(coalesce(totalH,0)) totalh from "
-            If vConta >= 0 Then sql = sql & "ariconta" & vConta & "."
-            sql = sql & "tmpbalancesumas line LEFT JOIN "
-            If vConta >= 0 Then sql = sql & "ariconta" & vConta & "."
-            sql = sql & "cuentas On cuentas.codmacta = substring(line.cta,1," & LenNivelCalculado & ") "
-            sql = sql & " where line.codusu = " & vUsu.Codigo & " and length(line.cta) = " & LenPrimerNivelCalculado
-            sql = sql & " group by 1,2 "
-            sql = sql & " order by 1,2 "
+            SQL = "insert into tmpbalancesumas (codusu,cta,nomcta,aperturaD,aperturaH,acumAntD,acumAntH,acumPerD,acumPerH,TotalD,TotalH) "
+            SQL = SQL & " select " & vUsu.Codigo & ",substring(line.cta,1," & LenNivelCalculado & ") as codmacta,coalesce(nommacta,'ERROR##') nommacta,"
+            SQL = SQL & " sum(coalesce(aperturad,0)) aperd,  sum(coalesce(aperturah,0)) aperh, sum(coalesce(acumAntD,0)) acumantd, sum(coalesce(acumAntH,0)) acumanth,"
+            SQL = SQL & " sum(coalesce(acumperd,0)) acumperd,  sum(coalesce(acumperh,0)) acumperh, sum(coalesce(totalD,0)) totald, sum(coalesce(totalH,0)) totalh from "
+            If vConta >= 0 Then SQL = SQL & "ariconta" & vConta & "."
+            SQL = SQL & "tmpbalancesumas line LEFT JOIN "
+            If vConta >= 0 Then SQL = SQL & "ariconta" & vConta & "."
+            SQL = SQL & "cuentas On cuentas.codmacta = substring(line.cta,1," & LenNivelCalculado & ") "
+            SQL = SQL & " where line.codusu = " & vUsu.Codigo & " and length(line.cta) = " & LenPrimerNivelCalculado
+            SQL = SQL & " group by 1,2 "
+            SQL = SQL & " order by 1,2 "
             
-            Conn.Execute sql
+            Conn.Execute SQL
             
             LenNivelCalculado = 0
         End If
@@ -2172,8 +2156,8 @@ Dim J As Integer
         Cont = DBLet(Rs.Fields(0), "N")
         Rs.Close
         If Cont > 0 Then
-            sql = "Select ctaagrupadas.codmacta,nommacta from ctaagrupadas,cuentas where ctaagrupadas.codmacta =cuentas.codmacta "
-            Rs.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = "Select ctaagrupadas.codmacta,nommacta from ctaagrupadas,cuentas where ctaagrupadas.codmacta =cuentas.codmacta "
+            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             i = 0
             While Not Rs.EOF
                 If AgrupacionCtasBalance(Rs.Fields(0), Rs.Fields(1)) Then
@@ -2201,34 +2185,34 @@ Dim J As Integer
     'Balance consolidado
     If vConta >= 0 Then
         
-        sql = "Select nomempre from Usuarios.empresasariconta where codempre =" & vConta
-        Rs.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-        cad = ""
-        If Not Rs.EOF Then cad = DBLet(Rs.Fields(0))
+        SQL = "Select nomempre from Usuarios.empresasariconta where codempre =" & vConta
+        Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Cad = ""
+        If Not Rs.EOF Then Cad = DBLet(Rs.Fields(0))
         Rs.Close
-        If cad = "" Then
+        If Cad = "" Then
             MsgBox "Error leyendo datos empresa: Codempre=" & vConta
             Exit Sub
         End If
         
-        sql = "Select count(*) from tmpbalancesumas where codusu = " & vUsu.Codigo
-        Rs.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        SQL = "Select count(*) from tmpbalancesumas where codusu = " & vUsu.Codigo
+        Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         Cont = DBLet(Rs.Fields(0), "N")
         Rs.Close
     
         
-        sql = "Select * from tmpbalancesumas where codusu = " & vUsu.Codigo
-        Rs.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        SQL = "Select * from tmpbalancesumas where codusu = " & vUsu.Codigo
+        Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         i = 0
         PB.Value = 0
         Me.Refresh
-        sql = "INSERT INTO Usuarios.ztmpbalanceconsolidado (codempre, nomempre, codusu, cta, nomcta, aperturaD, aperturaH, acumAntD, acumAntH, acumPerD, acumPerH, TotalD, TotalH) VALUES ("
-        sql = sql & vConta & ",'" & cad & "',"
+        SQL = "INSERT INTO Usuarios.ztmpbalanceconsolidado (codempre, nomempre, codusu, cta, nomcta, aperturaD, aperturaH, acumAntD, acumAntH, acumPerD, acumPerH, TotalD, TotalH) VALUES ("
+        SQL = SQL & vConta & ",'" & Cad & "',"
         While Not Rs.EOF
             PB.Value = Round((i / Cont), 3) * 1000
             BACKUP_Tabla Rs, Cade
             Cade = Mid(Cade, 2)
-            Cade = sql & Cade
+            Cade = SQL & Cade
             Conn.Execute Cade
             'Sig
             Rs.MoveNext
@@ -2244,41 +2228,41 @@ Dim J As Integer
     'Si hay datos los mostramos
     If Cont > 0 Then
         'Las fechas
-        sql = "Fechas= ""Desde " & cmbFecha(0).ListIndex + 1 & "/" & txtAno(0).Text & "   hasta "
-        sql = sql & cmbFecha(1).ListIndex + 1 & "/" & txtAno(1).Text & """|"
+        SQL = "Fechas= ""Desde " & cmbFecha(0).ListIndex + 1 & "/" & txtAno(0).Text & "   hasta "
+        SQL = SQL & cmbFecha(1).ListIndex + 1 & "/" & txtAno(1).Text & """|"
         'Si tiene desde hasta codcuenta
-        cad = ""
-        If txtCta(6).Text <> "" Then cad = cad & "Desde " & txtCta(6).Text & " - " & txtNCta(6).Tag
+        Cad = ""
+        If txtCta(6).Text <> "" Then Cad = Cad & "Desde " & txtCta(6).Text & " - " & txtNCta(6).Tag
         If txtCta(7).Text <> "" Then
-            If cad <> "" Then
-                cad = cad & "    h"
+            If Cad <> "" Then
+                Cad = Cad & "    h"
             Else
-                cad = "H"
+                Cad = "H"
             End If
-            cad = cad & "asta " & txtCta(7).Text & " - " & txtNCta(7).Tag
+            Cad = Cad & "asta " & txtCta(7).Text & " - " & txtNCta(7).Tag
         End If
-        If cad = "" Then cad = " "
-        sql = sql & "Cuenta= """ & cad & """|"
+        If Cad = "" Then Cad = " "
+        SQL = SQL & "Cuenta= """ & Cad & """|"
         
         'Fecha de impresion
-        sql = sql & "FechaImp= """ & txtFecha(7).Text & """|"
+        SQL = SQL & "FechaImp= """ & txtFecha(7).Text & """|"
         
         
         'Salto
         If Combo2.ListIndex >= 0 Then
-            sql = sql & "Salto= " & Combo2.ItemData(Combo2.ListIndex) & "|"
+            SQL = SQL & "Salto= " & Combo2.ItemData(Combo2.ListIndex) & "|"
             Else
-            sql = sql & "Salto= 11|"
+            SQL = SQL & "Salto= 11|"
         End If
         
         'Titulo
         txtTitulo(0).Text = Trim(txtTitulo(0).Text)
         If txtTitulo(0).Text = "" Then
-            cad = "Balance de sumas y saldos"
+            Cad = "Balance de sumas y saldos"
         Else
-            cad = txtTitulo(0).Text
+            Cad = txtTitulo(0).Text
         End If
-        sql = sql & "Titulo= """ & cad & """|"
+        SQL = SQL & "Titulo= """ & Cad & """|"
         
         'Numero de página
         If txtPag2(0).Text = "" Then
@@ -2288,8 +2272,8 @@ Dim J As Integer
         End If
         If i > 0 Then i = i - 1
         
-        cad = "NumPag= " & i & "|"
-        sql = sql & cad
+        Cad = "NumPag= " & i & "|"
+        SQL = SQL & Cad
         
         
         '------------------------------
@@ -2302,22 +2286,22 @@ Dim J As Integer
 '                If Check2(I).Value = 1 Then Cont = Cont + 1
                 If Check1(i).Value = 1 Then
                     If i = 10 Then
-                        cad = vEmpresa.DigitosUltimoNivel
+                        Cad = vEmpresa.DigitosUltimoNivel
                     Else
-                        cad = CStr(DigitosNivel(i))
+                        Cad = CStr(DigitosNivel(i))
                     End If
-                    If TieneCuentasEnTmpBalance(cad) Then
+                    If TieneCuentasEnTmpBalance(Cad) Then
                         Cont = Cont + 1
-                        UltimoNivel = CByte(cad)
+                        UltimoNivel = CByte(Cad)
                     End If
                 End If
             End If
         Next i
-        cad = "numeroniveles= " & Cont & "|"
-        sql = sql & cad
+        Cad = "numeroniveles= " & Cont & "|"
+        SQL = SQL & Cad
         'Otro parametro mas
-        cad = "vUltimoNivel= " & UltimoNivel & "|"
-        sql = sql & cad
+        Cad = "vUltimoNivel= " & UltimoNivel & "|"
+        SQL = SQL & Cad
     End If
     
     
@@ -2330,9 +2314,9 @@ Dim L As Integer
 
 L = 1
 Do
-    cad = RecuperaValor(Lista, L)
-    If cad <> "" Then
-        i = Val(cad)
+    Cad = RecuperaValor(Lista, L)
+    If Cad <> "" Then
+        i = Val(Cad)
         With cmbFecha(i)
             .Clear
             For Cont = 1 To 12
@@ -2343,7 +2327,7 @@ Do
         End With
     End If
     L = L + 1
-Loop Until cad = ""
+Loop Until Cad = ""
 End Sub
 
 
@@ -2444,9 +2428,9 @@ Dim J As Integer
     Check1(10).Visible = True
     For i = 1 To vEmpresa.numnivel - 1
         J = DigitosNivel(i)
-        cad = "Digitos: " & J
+        Cad = "Digitos: " & J
         Check1(i).Visible = True
-        Me.Check1(i).Caption = cad
+        Me.Check1(i).Caption = Cad
         
         Combo2.AddItem "Nivel :   " & i
         Combo2.ItemData(Combo2.NewIndex) = J
@@ -2465,17 +2449,17 @@ Private Sub HacerBalanceInicio()
         'Para cada nivel marcado veremos si tiene cuentas en la tmp
         RC = ""
         For i = 1 To 10
-            sql = "0"
+            SQL = "0"
             If Check1(i).Visible Then
-                If Check1(i).Value = 1 Then sql = "1"
+                If Check1(i).Value = 1 Then SQL = "1"
             End If
-            RC = RC & sql
+            RC = RC & SQL
         Next i
     
         
         'Borramos los temporales
-        sql = "DELETE from tmpbalancesumas where codusu= " & vUsu.Codigo
-        Conn.Execute sql
+        SQL = "DELETE from tmpbalancesumas where codusu= " & vUsu.Codigo
+        Conn.Execute SQL
     
         'Precargamos el cierre
         PrecargaApertura  'Carga en ur RS la apertura
@@ -2485,8 +2469,8 @@ Private Sub HacerBalanceInicio()
         CerrarPrecargaPerdidasyGanancias
         If Cont = 0 Then Exit Sub
                 
-        sql = "Titulo= ""Balance inicio ejercicio""|"
-        sql = sql & "NumPag= 0|"
+        SQL = "Titulo= ""Balance inicio ejercicio""|"
+        SQL = SQL & "NumPag= 0|"
         
         
         '------------------------------
@@ -2498,41 +2482,30 @@ Private Sub HacerBalanceInicio()
 '                If Check2(I).Value = 1 Then Cont = Cont + 1
                 If Check1(i).Value = 1 Then
                     If i = 10 Then
-                        cad = vEmpresa.DigitosUltimoNivel
+                        Cad = vEmpresa.DigitosUltimoNivel
                     Else
-                        cad = CStr(DigitosNivel(i))
+                        Cad = CStr(DigitosNivel(i))
                     End If
-                    If TieneCuentasEnTmpBalance(cad) Then Cont = Cont + 1
+                    If TieneCuentasEnTmpBalance(Cad) Then Cont = Cont + 1
                 End If
             End If
         Next i
-        cad = "numeroniveles= " & Cont & "|"
-        sql = sql & cad
+        Cad = "numeroniveles= " & Cont & "|"
+        SQL = SQL & Cad
         
         
         'Fecha de impresion
-        sql = sql & "FechaImp= """ & txtFecha(7).Text & """|"
+        SQL = SQL & "FechaImp= """ & txtFecha(7).Text & """|"
         
         
         'Remarcar
         If Combo2.ListIndex >= 0 Then
-            sql = sql & "Salto= " & Combo2.ItemData(Combo2.ListIndex) & "|"
+            SQL = SQL & "Salto= " & Combo2.ItemData(Combo2.ListIndex) & "|"
             Else
-            sql = sql & "Salto= 11|"
+            SQL = SQL & "Salto= 11|"
         End If
 
         
-'        With frmImprimir
-'                .OtrosParametros = SQL
-'                .NumeroParametros = 7
-'                .FormulaSeleccion = "{tmpbalancesumas.codusu}=" & vUsu.Codigo
-'                .SoloImprimir = False
-'                'Opcion dependera del combo
-'                .opcion = 18
-'                .Show vbModal
-'        End With
-    
-    
 End Sub
 
 

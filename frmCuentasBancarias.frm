@@ -596,7 +596,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -612,9 +612,9 @@ Private Sub BotonAnyadir()
     
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If Not adodc1.Recordset.EOF Then
+    If Not Adodc1.Recordset.EOF Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
     
@@ -659,7 +659,7 @@ Private Sub BotonModificar()
     Dim Cad As String
     Dim anc As Single
     Dim i As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     'If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
 
@@ -704,23 +704,23 @@ Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
  
     If Not SepuedeBorrar Then Exit Sub
     
     
     '### a mano
     SQL = "Seguro que desea eliminar la linea :"
-    SQL = SQL & vbCrLf & "Cuenta: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Cta bancaria: " & adodc1.Recordset.Fields(2) & " - " & adodc1.Recordset.Fields(3) & " - ** - " & adodc1.Recordset.Fields(5)
+    SQL = SQL & vbCrLf & "Cuenta: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Cta bancaria: " & Adodc1.Recordset.Fields(2) & " - " & Adodc1.Recordset.Fields(3) & " - ** - " & Adodc1.Recordset.Fields(5)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from bancos where codmacta = '" & adodc1.Recordset!codmacta & "'"
+        SQL = "Delete from bancos where codmacta = '" & Adodc1.Recordset!codmacta & "'"
         Conn.Execute SQL
         espera 0.5
         CargaGrid ""
-        adodc1.Recordset.Cancel
+        Adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -758,7 +758,7 @@ End Function
 
 Private Function ComprobandoEliminar(tabla As String, desca As String) As Boolean
 
-    SQL = DevuelveDesdeBD(desca, tabla, desca, adodc1.Recordset.Fields(0), "T")
+    SQL = DevuelveDesdeBD(desca, tabla, desca, Adodc1.Recordset.Fields(0), "T")
     If SQL = "" Then
         ComprobandoEliminar = True
     Else
@@ -797,10 +797,10 @@ Select Case Modo
                 'Hacemos insertar
                 If ModificaDesdeFormulario(Me) Then
                     Conn.Execute "commit"
-                    i = adodc1.Recordset.AbsolutePosition
+                    i = Adodc1.Recordset.AbsolutePosition
                     PonerModo 0
                     CargaGrid
-                    adodc1.Recordset.Move i - 1
+                    Adodc1.Recordset.Move i - 1
                     lblIndicador.Caption = ""
                 End If
             End If
@@ -816,7 +816,7 @@ Select Case Modo
     Case 3
         DataGrid1.AllowAddNew = False
         'CargaGrid
-        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+        If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
 End Select
 PonerModo 0
 lblIndicador.Caption = ""
@@ -834,13 +834,13 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim Cad As String
 
-If adodc1.Recordset.EOF Then
+If Adodc1.Recordset.EOF Then
     MsgBox "Ningún registro a devolver.", vbExclamation
     Exit Sub
 End If
 
-Cad = adodc1.Recordset.Fields(0) & "|"
-Cad = Cad & adodc1.Recordset.Fields(1) & "|"
+Cad = Adodc1.Recordset.Fields(0) & "|"
+Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
 RaiseEvent DatoSeleccionado(Cad)
 Unload Me
 End Sub
@@ -982,14 +982,14 @@ Private Sub CargaGrid(Optional vSQL As String)
     Dim TotalAncho As Integer
     Dim i As Integer
     
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     PonerSQL
     If vSQL <> "" Then SQL = SQL & " AND " & vSQL
     SQL = SQL & " ORDER BY bancos.codmacta"
-    adodc1.RecordSource = SQL
-    adodc1.CursorType = adOpenDynamic
-    adodc1.LockType = adLockOptimistic
-    adodc1.Refresh
+    Adodc1.RecordSource = SQL
+    Adodc1.CursorType = adOpenDynamic
+    Adodc1.LockType = adLockOptimistic
+    Adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 290
@@ -1052,8 +1052,8 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
     'Habilitamos modificar y eliminar
     If vUsu.Nivel < 2 Then
-        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
-        Toolbar1.Buttons(8).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(8).Enabled = Not Adodc1.Recordset.EOF
     End If
 End Sub
 
@@ -1140,18 +1140,6 @@ Dim B As Boolean
     DatosOK = B
 End Function
 
-'Private Sub DeseleccionaGrid()
-'    On Error GoTo EDeseleccionaGrid
-'
-'    While DataGrid1.SelBookmarks.Count > 0
-'        DataGrid1.SelBookmarks.Remove 0
-'    Wend
-'    Exit Sub
-'EDeseleccionaGrid:
-'        Err.Clear
-'End Sub
-
-
 Private Sub PonerOpcionesMenu()
 PonerOpcionesMenuGeneral Me
 End Sub
@@ -1166,27 +1154,6 @@ Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim Rs As ADODB.Recordset
 Dim Cad As String
     
-'    On Error Resume Next
-'
-'    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-'    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
-'
-'    Set Rs = New ADODB.Recordset
-'    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'
-'    If Not Rs.EOF Then
-'        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-'        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 0 Or Modo = 2)
-'        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-'
-'        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-'        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-'
-'        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
-'    End If
-'
-'    Rs.Close
-'    Set Rs = Nothing
     
 End Sub
 

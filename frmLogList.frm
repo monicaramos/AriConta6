@@ -677,7 +677,7 @@ End Sub
 
 Private Sub cmdAccion_Click(Index As Integer)
     
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     
     'Exportacion a PDF
@@ -1006,12 +1006,6 @@ Private Function ListadoAcciones() As Boolean
     Cad = "INSERT INTO tmppendientes(codusu,serie_cta,factura,fecha,nomforpa,Situacion,nombre,observa) " & Cad
     Conn.Execute Cad
     
-'    NumRegElim = 0
-'    Cad = DevuelveDesdeBD("count(*)", "tmppendientes", "codusu", CStr(vUsu.Codigo))
-'    If Cad <> "" Then NumRegElim = Val(Cad)
-'
-'    ListadoAcciones = NumRegElim > 0
-'    If NumRegElim = 0 Then MsgBox "Ningun dato devuelto", vbExclamation
     ListadoAcciones = True
     
     Exit Function
@@ -1046,12 +1040,12 @@ Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
     End If
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
     
-    DatosOK = False
+    DatosOk = False
     
 
-    DatosOK = True
+    DatosOk = True
 
 End Function
 
@@ -1068,8 +1062,6 @@ End Sub
 
 Private Sub CargaListLog()
 Dim IT As ListItem
- 'CadenaConsulta = "select slog.fecha,titulo,usuario,pc,descripcion from slog,tmppresu1 "
-  '  CadenaConsulta = CadenaConsulta & " where tmppresu1.codusu=" & vUsu.Codigo & " and slog.accion=tmppresu1.codigo"
    
 
     Set miRsAux = New ADODB.Recordset

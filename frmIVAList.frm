@@ -553,7 +553,7 @@ Private Sub Form_Load()
     optVarios(0).Value = True
 
     For i = 0 To 1
-        Me.imgiva(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgIVA(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
@@ -708,8 +708,3 @@ Dim nomDocu As String
     If SoloImprimir Or ExportarPDF Then Unload Me
     Screen.MousePointer = vbDefault
 End Sub
-
-
-'Private Sub txtTipoSalida_LostFocus(Index As Integer)
-'    KEYdown KeyCode
-'End Sub

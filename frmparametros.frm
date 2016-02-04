@@ -157,53 +157,53 @@ Begin VB.Form frmparametros
       TabCaption(1)   =   "Clientes - Proveedores "
       TabPicture(1)   =   "frmparametros.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(0)=   "Frame2"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Frame2"
+      Tab(1).Control(1)=   "Frame3"
       Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "I.V.A. - Norma 43"
       TabPicture(2)   =   "frmparametros.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(14)"
+      Tab(2).Control(0)=   "Text1(13)"
       Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Label1(13)"
+      Tab(2).Control(1)=   "Text1(15)"
       Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Frame1"
+      Tab(2).Control(2)=   "Text1(14)"
       Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Frame8"
+      Tab(2).Control(3)=   "Frame17"
       Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Frame17"
+      Tab(2).Control(4)=   "Frame8"
       Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Text1(14)"
+      Tab(2).Control(5)=   "Frame1"
       Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Text1(15)"
+      Tab(2).Control(6)=   "Label1(13)"
       Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Text1(13)"
+      Tab(2).Control(7)=   "Label1(14)"
       Tab(2).Control(7).Enabled=   0   'False
       Tab(2).ControlCount=   8
       TabCaption(3)   =   "Inmovilizado"
       TabPicture(3)   =   "frmparametros.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame14"
-      Tab(3).Control(1)=   "Frame15"
+      Tab(3).Control(0)=   "Frame7"
+      Tab(3).Control(1)=   "Frame9"
       Tab(3).Control(2)=   "Frame16"
-      Tab(3).Control(3)=   "Frame9"
-      Tab(3).Control(4)=   "Frame7"
+      Tab(3).Control(3)=   "Frame15"
+      Tab(3).Control(4)=   "Frame14"
       Tab(3).ControlCount=   5
       TabCaption(4)   =   "Tesorería I"
       TabPicture(4)   =   "frmparametros.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "FrameValDefecto"
-      Tab(4).Control(1)=   "Frame66"
+      Tab(4).Control(0)=   "Frame66"
+      Tab(4).Control(1)=   "FrameValDefecto"
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Tesorería II"
       TabPicture(5)   =   "frmparametros.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "FrameTalones(2)"
-      Tab(5).Control(1)=   "FrameOpAseguradas"
-      Tab(5).Control(2)=   "FrameTalones(0)"
-      Tab(5).Control(3)=   "FrameTalones(1)"
+      Tab(5).Control(0)=   "FrameTalones(1)"
+      Tab(5).Control(1)=   "FrameTalones(0)"
+      Tab(5).Control(2)=   "FrameOpAseguradas"
+      Tab(5).Control(3)=   "FrameTalones(2)"
       Tab(5).ControlCount=   4
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -3901,7 +3901,7 @@ Private Sub cmdAceptar_Click()
         PonerModo 2
         
     Case 3
-        If DatosOK Then
+        If DatosOk Then
             'Cambiamos el path
             'CambiaPath True
             If InsertarDesdeForm(Me) Then
@@ -3912,7 +3912,7 @@ Private Sub cmdAceptar_Click()
     
     Case 4
         'Modificar
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             'CambiaPath True
@@ -4039,10 +4039,10 @@ Private Sub Form_Load()
     Me.SSTab1.TabEnabled(5) = (vEmpresa.TieneTesoreria)
     Me.SSTab1.TabVisible(5) = (vEmpresa.TieneTesoreria)
     
-    adodc1.ConnectionString = Conn
-    adodc1.RecordSource = "Select * from parametros "
-    adodc1.Refresh
-    If adodc1.Recordset.EOF Then
+    Adodc1.ConnectionString = Conn
+    Adodc1.RecordSource = "Select * from parametros "
+    Adodc1.Refresh
+    If Adodc1.Recordset.EOF Then
         'No hay datos
         Limpiar Me
         PonerModo 3
@@ -4533,7 +4533,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -4549,8 +4549,8 @@ Private Sub PonerCampos()
     Dim tabla As String
     Dim Cod As String
     
-        If adodc1.Recordset.EOF Then Exit Sub
-        If PonerCamposForma(Me, adodc1) Then
+        If Adodc1.Recordset.EOF Then Exit Sub
+        If PonerCamposForma(Me, Adodc1) Then
            'Correcto, ponemos los datos auxiliares
            '----------------------------------------
            ' Diarios
@@ -4593,12 +4593,12 @@ Private Sub PonerCampos()
         End If
 End Sub
 '
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
     Dim B As Boolean
     Dim J As Integer
     
     
-    DatosOK = False
+    DatosOk = False
     
     'Si esta marcado la analitica, entonces debe tener valor grupo ventas y grupo gastos
     If Me.Check1(0).Value = 1 Then
@@ -4662,23 +4662,6 @@ Private Function DatosOK() As Boolean
     
     
     
-'    If B Then
-'        J = Len(Text1(32).Text)
-'        If J > 0 Then
-'            If Not IsNumeric(Text1(32).Text) Then
-'                MsgBox "Campo debe ser numerico: subgrupo de excepcion de automocion", vbExclamation
-'                Exit Function
-'            End If
-'        End If
-'
-'        If J > 0 And J < 3 Then
-'
-'            MsgBox "El subgrupo de excepcion(exclusion) de automocion debe ser de 3 DIGITOS", vbExclamation
-'            Exit Function
-'        End If
-'    End If
-        
-    
     ' Parte correspondiente al arimoney
     If vEmpresa.TieneTesoreria Then
         Dim C As String
@@ -4694,8 +4677,6 @@ Private Function DatosOK() As Boolean
             J = Len(Text5(9).Text) + Len(Text5(10).Text)
             If Me.Check5(5).Value = 0 Xor J = 0 Then C = C & "-  efectos "
     '        'Proveedores
-    '        If Me.Check5(6).Value = 0 Xor Text5(6).Text = "" Then C = C & "-  talones PROVEEDORES"
-    '        If Me.Check5(7).Value = 0 Xor Text5(5).Text = "" Then C = C & "-  pagarés PROVEEDORES"
             
             If C = "" Then
                 'Todo bien. Compruebo esto tb
@@ -4736,7 +4717,7 @@ Private Function DatosOK() As Boolean
                 Exit Function
             End If
             
-            DatosOK = False
+            DatosOk = False
             
             'Si es nuevo
             If Modo = 1 Then Text5(3).Text = 1
@@ -4744,7 +4725,7 @@ Private Function DatosOK() As Boolean
         End If
     End If
     
-    DatosOK = B
+    DatosOk = B
 
 End Function
 

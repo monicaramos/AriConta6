@@ -525,7 +525,6 @@ Dim B As Boolean
     Toolbar1.Buttons(2).Enabled = B
     cmdAceptar.Visible = Not B
     cmdCancelar.Visible = Not B
-    'DataGrid1.Enabled = b
     
     txtAux(0).Enabled = (Modo <> 2)
     txtAux(2).Enabled = txtAux(0).Enabled
@@ -544,7 +543,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -558,9 +557,9 @@ Private Sub BotonAnyadir()
 
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If Not adodc1.Recordset.EOF Then
+    If Not Adodc1.Recordset.EOF Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
    
@@ -609,8 +608,7 @@ Private Sub BotonModificar()
     Dim Cad As String
     Dim anc As Single
     Dim i As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
-    'If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
 
 
     Screen.MousePointer = vbHourglass
@@ -633,10 +631,10 @@ Private Sub BotonModificar()
         txtAux(jj).Text = DataGrid1.Columns(jj).Text
     Next jj
     'El porcentaje
-    SQL = adodc1.Recordset!porcinm
+    SQL = Adodc1.Recordset!porcinm
     txtAux(3).Text = TransformaComasPuntos(SQL)
         'El porcentaje
-    SQL = adodc1.Recordset!imporinm
+    SQL = Adodc1.Recordset!imporinm
     txtAux(4).Text = TransformaComasPuntos(SQL)
     
     LLamaLineas anc, 4
@@ -665,22 +663,22 @@ Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
     SQL = "Seguro que desea eliminar la linea de histórico:" & vbCrLf
-    SQL = SQL & vbCrLf & "Inmovilizado: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha       : " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Importe(€)  : " & adodc1.Recordset.Fields(3)
+    SQL = SQL & vbCrLf & "Inmovilizado: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Fecha       : " & Adodc1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Importe(€)  : " & Adodc1.Recordset.Fields(3)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from inmovele_his where codinmov=" & adodc1.Recordset!Codinmov
-        SQL = SQL & " AND fechainm ='" & Format(adodc1.Recordset!fechainm, FormatoFecha) & "';"
+        SQL = "Delete from inmovele_his where codinmov=" & Adodc1.Recordset!Codinmov
+        SQL = SQL & " AND fechainm ='" & Format(Adodc1.Recordset!fechainm, FormatoFecha) & "';"
         Conn.Execute SQL
         CargaGrid ""
-        adodc1.Recordset.Cancel
+        Adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -711,7 +709,7 @@ Select Case Modo
         End If
 
     Case 3
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -724,15 +722,15 @@ Select Case Modo
     
     Case 4
         'Modificar
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
                 Conn.Execute "commit"
-                i = adodc1.Recordset.Fields(0)
+                i = Adodc1.Recordset.Fields(0)
                 PonerModo 0
                 CargaGrid
-                adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
             End If
         End If
     End Select
@@ -773,7 +771,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
     End Select
     
     PonerModo 0
@@ -906,7 +904,7 @@ Dim tots As String
     
     
     Text1.Text = ""
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     If vSQL <> "" Then
         SQL = CadenaConsulta & " AND " & vSQL
         Else
@@ -915,7 +913,7 @@ Dim tots As String
     SQL = SQL & " ORDER BY codinmov,fechainm"
     
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|cmdAux(0)|B|||;S|txtAux(1)|T|Descripción|3800|;S|txtAux(2)|T|Fecha|1455|;S|cmdAux(1)|B|||;"
@@ -1010,7 +1008,7 @@ Dim Valor As Currency
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
 B = CompForm(Me)
 If Not B Then Exit Function
@@ -1019,7 +1017,7 @@ If Modo = 1 Then
     'Estamos insertando
     
 End If
-DatosOK = B
+DatosOk = B
 End Function
 
 Private Sub DeseleccionaGrid()

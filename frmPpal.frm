@@ -762,9 +762,6 @@ Private Sub Form_Load()
     Base = 1290
     Base = Base + 550 '550 es lo k mide de alto la imagen de ariadna
    
-
-    
-'    ListView3.Picture = LoadPicture(App.path & "\ariadna clasico pequeño.png")
     ListView1.Picture = LoadPicture(App.Path & "\fondo.dat")
     
     
@@ -807,7 +804,6 @@ Dim V ''
     If Y < 4100 Then Me.Height = 4100
     ImageLogo.Left = Me.Width - ImageLogo.Width - 240
     Label33.Left = 30
-    'Text1.Width = Me.Width - Text1.Left - 250
     X = Me.Height - Base
     
 
@@ -818,9 +814,6 @@ Dim V ''
     ListView2.Top = ListView1.Top + ListView1.Height + 500
     ListView2.Height = Me.Height - ListView2.Top - 850
     ListView3.Height = Me.Height - ListView2.Top - 850
-    '--
-    'ListView3.Top = ListView2.Top
-    'ListView3.Height = ListView2.Height
     TreeView2.Top = ListView2.Top
     TreeView2.Height = ListView2.Height
     

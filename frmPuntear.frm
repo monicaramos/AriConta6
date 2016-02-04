@@ -1138,13 +1138,13 @@ End Sub
 
 
 
-Private Sub OtraCuenta(Mas As Boolean)
+Private Sub OtraCuenta(mas As Boolean)
     
     Screen.MousePointer = vbHourglass
     
     txtDesCta.Text = "OBTENER CUENTA"
     txtDesCta.Refresh
-    If ObtenerCuenta(Mas) Then
+    If ObtenerCuenta(mas) Then
         BloqueoManual False, "PUNTEO", Text3(2).Text
         'Ponemos en text1 y 2 los valores de la nueva cuenta
         
@@ -1294,11 +1294,9 @@ On Error GoTo ECargarDatos
         ItmX.Text = Format(Rs!FechaEnt, "dd/mm/yyyy")
         
         ItmX.SubItems(1) = Rs!NumAsien
-        'ItmX.SubItems(2) = RS!ampconce
         ItmX.SubItems(2) = DBLet(Rs!Numdocum, "T")
         ItmX.SubItems(3) = Rs!Ampconce
         
-'        ItmX.SubItems(5) = Rs.Fields(8)
         
         'En el tag, para actualizaciones i demas pondremos
         'Separado por pipes los valores de numdiari y linliapu
@@ -1599,7 +1597,7 @@ Dim H As Currency
     SQL = SQL & Format(PuntD - PuntH, FormatoImporte) & "|" & Format(d - H, FormatoImporte) & "|" & Format((PuntD - PuntH) + (d - H), FormatoImporte) & "|"
     
     frmMensajes.Parametros = SQL
-    frmMensajes.opcion = 18
+    frmMensajes.Opcion = 18
     frmMensajes.Show vbModal
     
     Exit Sub
@@ -1717,10 +1715,10 @@ End Sub
 '-------------------------------------------------------
 '-------------------------------------------------------
 Private Sub InsertarCtaCadenaPunteados()
-Dim AUx As String
+Dim Aux As String
 
-    AUx = Me.Text3(2).Text & "|"
-    If InStr(1, CtasQueHaPunteado, AUx) = 0 Then CtasQueHaPunteado = CtasQueHaPunteado & AUx
+    Aux = Me.Text3(2).Text & "|"
+    If InStr(1, CtasQueHaPunteado, Aux) = 0 Then CtasQueHaPunteado = CtasQueHaPunteado & Aux
         
 End Sub
 

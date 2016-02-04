@@ -581,9 +581,9 @@ Modo = vModo
     
     B = (Modo = 0 Or Modo = 2)
     
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Visible = Not B
-        txtaux(i).BackColor = vbWhite
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Visible = Not B
+        txtAux(i).BackColor = vbWhite
     Next i
     
     Combo1.Visible = Not B
@@ -599,9 +599,9 @@ Modo = vModo
     If DatosADevolverBusqueda <> "" Then
         cmdRegresar.Visible = B
     End If
-    txtaux(0).Enabled = (Modo <> 4)
+    txtAux(0).Enabled = (Modo <> 4)
     
-    txtaux(5).Enabled = ((Modo = 1) Or (ValorCombo(Combo1) = 1))
+    txtAux(5).Enabled = ((Modo = 1) Or (ValorCombo(Combo1) = 1))
 
     PonerModoUsuarioGnral Modo, "ariconta"
 
@@ -615,7 +615,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -638,9 +638,9 @@ Private Sub BotonAnyadir()
     lblIndicador.Caption = "INSERTANDO"
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If adodc1.Recordset.RecordCount > 0 Then
+    If Adodc1.Recordset.RecordCount > 0 Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
     
@@ -650,21 +650,21 @@ Private Sub BotonAnyadir()
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
     End If
     
-    txtaux(0).Text = NumF
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Text = ""
+    txtAux(0).Text = NumF
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
     Next i
     
     Combo1.ListIndex = -1
     LLamaLineas anc, 3
     
     ' Por defecto el numero de vencimientos es 1
-    txtaux(2).Text = 1
-    txtaux(3).Text = 0
-    txtaux(4).Text = 0
+    txtAux(2).Text = 1
+    txtAux(3).Text = 0
+    txtAux(4).Text = 0
     
     'Ponemos el foco
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 
@@ -676,12 +676,12 @@ End Sub
 Private Sub BotonBuscar()
     CargaGrid "codforpa = -1"
     'Buscar
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Text = ""
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
     Next i
     Combo1.ListIndex = -1
     LLamaLineas DataGrid1.Top + 250, 1
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -691,8 +691,8 @@ Private Sub BotonModificar()
     Dim Cad As String
     Dim anc As Single
     Dim i As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
     PasamosPorCTA = False
     
@@ -712,20 +712,20 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    NumRegElim = adodc1.Recordset!TipForpa
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    NumRegElim = Adodc1.Recordset!TipForpa
     
     PosicionarCombo Combo1, CInt(NumRegElim)
     
-    txtaux(2).Text = DataGrid1.Columns(4).Text
-    txtaux(3).Text = DataGrid1.Columns(5).Text
-    txtaux(4).Text = DataGrid1.Columns(6).Text
-    txtaux(5).Text = DataGrid1.Columns(7).Text
+    txtAux(2).Text = DataGrid1.Columns(4).Text
+    txtAux(3).Text = DataGrid1.Columns(5).Text
+    txtAux(4).Text = DataGrid1.Columns(6).Text
+    txtAux(5).Text = DataGrid1.Columns(7).Text
     LLamaLineas anc, 4
    
     'Como es modificar
-    PonFoco txtaux(1)
+    PonFoco txtAux(1)
    
     Screen.MousePointer = vbDefault
 End Sub
@@ -733,8 +733,8 @@ End Sub
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     'Fijamos el ancho
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Top = alto
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
     Next i
     Combo1.Top = alto - 15
 End Sub
@@ -744,20 +744,20 @@ Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
 
     
     If Not SepuedeBorrar Then Exit Sub
     '### a mano
     SQL = "Seguro que desea eliminar la forma de pago:"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from formapago where codforpa=" & adodc1.Recordset!codforpa
+        SQL = "Delete from formapago where codforpa=" & Adodc1.Recordset!codforpa
         Conn.Execute SQL
         CargaGrid ""
-        adodc1.Recordset.Cancel
+        Adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -767,7 +767,7 @@ End Sub
 
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
-  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, adodc1
+  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, Adodc1
 End Sub
 
 
@@ -799,10 +799,10 @@ Dim CadB As String
                 '-----------------------------------------
                 'Hacemos insertar
                 If ModificaDesdeFormulario(Me) Then
-                    i = adodc1.Recordset.Fields(0)
+                    i = Adodc1.Recordset.Fields(0)
                     PonerModo 0
                     CargaGrid
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
                 End If
             End If
     End Select
@@ -817,7 +817,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
     End Select
     PonerModo 0
     lblIndicador.Caption = ""
@@ -827,14 +827,14 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim Cad As String
 
-If adodc1.Recordset.EOF Then
+If Adodc1.Recordset.EOF Then
     MsgBox "Ningún registro a devolver.", vbExclamation
     Exit Sub
 End If
 
 
-Cad = adodc1.Recordset.Fields(0) & "|"
-Cad = Cad & adodc1.Recordset.Fields(1) & "|"
+Cad = Adodc1.Recordset.Fields(0) & "|"
+Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
 RaiseEvent DatoSeleccionado(Cad)
 Unload Me
 End Sub
@@ -852,14 +852,13 @@ End Sub
 Private Sub Combo1_LostFocus()
 Dim SQL As String
     If Modo = 3 Then
-        txtaux(5).Enabled = (ValorCombo(Combo1) = 1)
-        If txtaux(5).Enabled Then
-'            SQL = "select concat(iban,'-',right(concat('0000',entidad),4),'-', right(concat('0000',oficina),4),'-', right(concat('00',control),2), right(concat('00',mid(ctabanco,1,2)),2),'-', right(concat('0000',mid(ctabanco,3,4)),10) )  from bancos where ctatransfercli = 1 "
+        txtAux(5).Enabled = (ValorCombo(Combo1) = 1)
+        If txtAux(5).Enabled Then
             SQL = "select iban from bancos where ctatransfercli = 1"
-            txtaux(5).Text = DevuelveValor(SQL)
-            If txtaux(5).Text = "0" Then txtaux(5).Text = ""
+            txtAux(5).Text = DevuelveValor(SQL)
+            If txtAux(5).Text = "0" Then txtAux(5).Text = ""
         Else
-            txtaux(5).Text = ""
+            txtAux(5).Text = ""
         End If
     End If
 End Sub
@@ -924,7 +923,6 @@ Private Sub Form_Load()
     'Cadena consulta
     CadenaConsulta = "Select formapago.codforpa, formapago.nomforpa, formapago.tipforpa, tipofpago.descformapago, formapago.numerove, formapago.primerve, formapago.restoven, "
     CadenaConsulta = CadenaConsulta & " formapago.iban "
-    'CadenaConsulta = CadenaConsulta & "if(if(formapago.ibantransfcli is null or formapago.ibantransfcli = '','',formapago.ibantransfcli) = '','',concat(mid(formapago.ibantransfcli,1,4),'-',mid(formapago.ibantransfcli,5,4),'-',mid(formapago.ibantransfcli,9,4),'-',mid(formapago.ibantransfcli,13,4),'-',mid(formapago.ibantransfcli,17,4),'-',mid(formapago.ibantransfcli,21,4)))  "
     CadenaConsulta = CadenaConsulta & " FROM formapago ,tipofpago"
     CadenaConsulta = CadenaConsulta & " WHERE formapago.tipforpa = tipofpago.tipoformapago"
     CargaGrid
@@ -1019,17 +1017,17 @@ Private Sub CargaGrid(Optional SQL As String)
     Dim TotalAncho As Integer
     Dim i As Integer
     
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     If SQL <> "" Then
         SQL = CadenaConsulta & " AND " & SQL
         Else
         SQL = CadenaConsulta
     End If
     SQL = SQL & " ORDER BY codforpa "
-    adodc1.RecordSource = SQL
-    adodc1.CursorType = adOpenDynamic
-    adodc1.LockType = adLockOptimistic
-    adodc1.Refresh
+    Adodc1.RecordSource = SQL
+    Adodc1.CursorType = adOpenDynamic
+    Adodc1.LockType = adLockOptimistic
+    Adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 350
@@ -1073,21 +1071,21 @@ Private Sub CargaGrid(Optional SQL As String)
         'Fiajamos el cadancho
     If Not CadAncho Then
         'La primera vez fijamos el ancho y alto de  los txtaux
-        txtaux(0).Width = DataGrid1.Columns(0).Width - 60
-        txtaux(1).Width = DataGrid1.Columns(1).Width - 60
-        txtaux(2).Width = DataGrid1.Columns(4).Width - 60
-        txtaux(3).Width = DataGrid1.Columns(5).Width - 60
-        txtaux(4).Width = DataGrid1.Columns(6).Width - 60
-        txtaux(5).Width = DataGrid1.Columns(7).Width - 60
+        txtAux(0).Width = DataGrid1.Columns(0).Width - 60
+        txtAux(1).Width = DataGrid1.Columns(1).Width - 60
+        txtAux(2).Width = DataGrid1.Columns(4).Width - 60
+        txtAux(3).Width = DataGrid1.Columns(5).Width - 60
+        txtAux(4).Width = DataGrid1.Columns(6).Width - 60
+        txtAux(5).Width = DataGrid1.Columns(7).Width - 60
         
         Combo1.Width = DataGrid1.Columns(3).Width
-        txtaux(0).Left = DataGrid1.Left + 340
-        txtaux(1).Left = txtaux(0).Left + txtaux(0).Width + 45
-        Combo1.Left = txtaux(1).Left + txtaux(1).Width + 45
-        txtaux(2).Left = Combo1.Left + Combo1.Width + 45
-        txtaux(3).Left = txtaux(2).Left + txtaux(2).Width + 45
-        txtaux(4).Left = txtaux(3).Left + txtaux(3).Width + 45
-        txtaux(5).Left = txtaux(4).Left + txtaux(4).Width + 75
+        txtAux(0).Left = DataGrid1.Left + 340
+        txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
+        Combo1.Left = txtAux(1).Left + txtAux(1).Width + 45
+        txtAux(2).Left = Combo1.Left + Combo1.Width + 45
+        txtAux(3).Left = txtAux(2).Left + txtAux(2).Width + 45
+        txtAux(4).Left = txtAux(3).Left + txtAux(3).Width + 45
+        txtAux(5).Left = txtAux(4).Left + txtAux(4).Width + 75
         
         CadAncho = True
     End If
@@ -1101,7 +1099,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1115,35 +1113,29 @@ End Sub
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim B As Boolean
 Dim CADENA
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
 
-    txtaux(Index).Text = Trim(txtaux(Index).Text)
-    If txtaux(Index).Text = "" Then Exit Sub
+    txtAux(Index).Text = Trim(txtAux(Index).Text)
+    If txtAux(Index).Text = "" Then Exit Sub
     If Modo = 1 Then Exit Sub 'Busquedas
     
     Select Case Index
         Case 0
-            If Not IsNumeric(txtaux(0).Text) Then
+            If Not IsNumeric(txtAux(0).Text) Then
                 MsgBox "Código concepto tiene que ser numérico", vbExclamation
                 Exit Sub
             End If
-            txtaux(0).Text = Format(txtaux(0).Text, "000")
+            txtAux(0).Text = Format(txtAux(0).Text, "000")
         
         Case 5
             PasamosPorCTA = True
-            If txtaux(Index).Text = "" Then
-'                txtAux1.Text = ""
+            If txtAux(Index).Text = "" Then
                 Exit Sub
             End If
-'            txtAux1.Text = Replace(txtAux(Index).Text, "-", "")
-'            Cadena = txtAux1.Text
-'            Cadena = Mid(Cadena, 1, 4) & "-" & Mid(Cadena, 5, 4) & "-" & Mid(Cadena, 9, 4) & "-" & Mid(Cadena, 13, 2) & "-" & Mid(Cadena, 15, 10)
-'            txtAux(Index).Text = Cadena
-            B = ComprobarIBANCuenta(txtaux(Index).Text)
+            B = ComprobarIBANCuenta(txtAux(Index).Text)
             If Not B Then
-                PonFoco txtaux(Index)
+                PonFoco txtAux(Index)
             Else
-'                txtAux1.Text = Replace(txtAux(5).Text, "-", "")
                 cmdAceptar.SetFocus
             End If
     
@@ -1201,18 +1193,17 @@ Dim B As Boolean
     
     If Modo = 3 Then
         'Estamos insertando
-         Datos = DevuelveDesdeBD("nomforpa", "formapago", "codforpa", txtaux(0).Text, "N")
+         Datos = DevuelveDesdeBD("nomforpa", "formapago", "codforpa", txtAux(0).Text, "N")
          If Datos <> "" Then
-            MsgBox "Ya existe la forma de pago : " & txtaux(0).Text & "-" & Datos, vbExclamation
+            MsgBox "Ya existe la forma de pago : " & txtAux(0).Text & "-" & Datos, vbExclamation
             B = False
         End If
     End If
     
     If B And (Modo = 3 Or Modo = 4) Then
-'        txtAux1.Text = Replace(txtAux(5).Text, "-", "")
-        If txtaux(5).Text <> "" And Not PasamosPorCTA Then
-            B = ComprobarIBANCuenta(txtaux(5).Text)
-            If Not B Then PonFoco txtaux(5)
+        If txtAux(5).Text <> "" And Not PasamosPorCTA Then
+            B = ComprobarIBANCuenta(txtAux(5).Text)
+            If Not B Then PonFoco txtAux(5)
         End If
     End If
     
@@ -1268,9 +1259,6 @@ Dim cerrar As Boolean
     KEYpressGnral KeyAscii, Modo, cerrar
     If cerrar Then Unload Me
 End Sub
-
-
-
 
 ' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
 Private Sub DataGrid1_GotFocus()

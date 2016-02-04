@@ -584,10 +584,10 @@ Attribute frmConta.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
-Private Sql As String
+Private SQL As String
 Dim Cad As String
 Dim RC As String
-Dim I As Integer
+Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -630,7 +630,7 @@ End Sub
 
 
 Private Sub cmdAccion_Click(Index As Integer)
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     
     'Exportacion a PDF
@@ -724,7 +724,6 @@ Private Sub Form_Load()
     
     
     PonerPeriodoPresentacion340
-'    cmbPeriodo(1).ListIndex = 0
      
      
     FrameSeccion.Enabled = vParam.EsMultiseccion
@@ -749,19 +748,19 @@ Private Sub PonerPeriodoPresentacion340()
     cmbPeriodo(0).Clear
     If vParam.periodos = 0 Then
         'Liquidacion TRIMESTRAL
-        For I = 1 To 4
-            If I = 1 Or I = 3 Then
+        For i = 1 To 4
+            If i = 1 Or i = 3 Then
                 CadenaDesdeOtroForm = "er"
             Else
                 CadenaDesdeOtroForm = "º"
             End If
-            CadenaDesdeOtroForm = I & CadenaDesdeOtroForm & " "
+            CadenaDesdeOtroForm = i & CadenaDesdeOtroForm & " "
             Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm & " trimestre"
-        Next I
+        Next i
     Else
         'Liquidacion MENSUAL
-        For I = 1 To 12
-            CadenaDesdeOtroForm = MonthName(I)
+        For i = 1 To 12
+            CadenaDesdeOtroForm = MonthName(i)
             CadenaDesdeOtroForm = UCase(Mid(CadenaDesdeOtroForm, 1, 1)) & LCase(Mid(CadenaDesdeOtroForm, 2))
             Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm
         Next
@@ -771,18 +770,18 @@ Private Sub PonerPeriodoPresentacion340()
     'Leeremos ultimo valor liquidaco
     
     txtAno(0).Text = vParam.anofactu
-    I = vParam.perfactu + 1
+    i = vParam.perfactu + 1
     If vParam.periodos = 0 Then
         NumRegElim = 4
     Else
         NumRegElim = 12
     End If
         
-    If I > NumRegElim Then
-            I = 1
+    If i > NumRegElim Then
+            i = 1
             txtAno(0).Text = vParam.anofactu + 1
     End If
-    Me.cmbPeriodo(0).ListIndex = I - 1
+    Me.cmbPeriodo(0).ListIndex = i - 1
      
     
     CadenaDesdeOtroForm = ""
@@ -796,7 +795,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -805,13 +804,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tabla de codigos de iva
         Case 0
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = False
+            Next i
         Case 1
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = True
+            Next i
     End Select
     
     Screen.MousePointer = vbDefault
@@ -904,16 +903,16 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    Sql = "Select factcli.numserie Serie, tmpfaclin.nomserie Descripcion, factcli.numfactu Factura, factcli.fecfactu Fecha, factcli.codmacta Cuenta, factcli.nommacta Titulo, tmpfaclin.tipoformapago TipoPago, "
-    Sql = Sql & " tmpfaclin.tipoopera TOperacion, factcli.codconce340 TFra, factcli.trefaccl Retencion, "
-    Sql = Sql & " factcli_totales.baseimpo BaseImp,factcli_totales.codigiva IVA,factcli_totales.porciva PorcIva,factcli_totales.porcrec PorcRec,factcli_totales.impoiva ImpIva,factcli_totales.imporec ImpRec "
-    Sql = Sql & " FROM (factcli inner join factcli_totales on factcli.numserie = factcli_totales.numserie and factcli.numfactu = factcli_totales.numfactu and factcli.fecfactu = factcli_totales.fecfactu) "
-    Sql = Sql & " inner join tmpfaclin ON factcli.numserie=tmpfaclin.numserie AND factcli.numfactu=tmpfaclin.Numfac and factcli.fecfactu=tmpfaclin.Fecha "
-    Sql = Sql & " WHERE  tmpfaclin.codusu = 22000 "
-    Sql = Sql & " ORDER BY factcli.codmacta, factcli.nommacta, factcli_totales.numlinea "
+    SQL = "Select factcli.numserie Serie, tmpfaclin.nomserie Descripcion, factcli.numfactu Factura, factcli.fecfactu Fecha, factcli.codmacta Cuenta, factcli.nommacta Titulo, tmpfaclin.tipoformapago TipoPago, "
+    SQL = SQL & " tmpfaclin.tipoopera TOperacion, factcli.codconce340 TFra, factcli.trefaccl Retencion, "
+    SQL = SQL & " factcli_totales.baseimpo BaseImp,factcli_totales.codigiva IVA,factcli_totales.porciva PorcIva,factcli_totales.porcrec PorcRec,factcli_totales.impoiva ImpIva,factcli_totales.imporec ImpRec "
+    SQL = SQL & " FROM (factcli inner join factcli_totales on factcli.numserie = factcli_totales.numserie and factcli.numfactu = factcli_totales.numfactu and factcli.fecfactu = factcli_totales.fecfactu) "
+    SQL = SQL & " inner join tmpfaclin ON factcli.numserie=tmpfaclin.numserie AND factcli.numfactu=tmpfaclin.Numfac and factcli.fecfactu=tmpfaclin.Fecha "
+    SQL = SQL & " WHERE  tmpfaclin.codusu = 22000 "
+    SQL = SQL & " ORDER BY factcli.codmacta, factcli.nommacta, factcli_totales.numlinea "
             
     'LLamos a la funcion
-    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -936,11 +935,11 @@ Dim nomDocu As String
     numParam = numParam + 1
     
     cadParam = cadParam & "Empresas= """
-    For I = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(I).Checked Then
-            cadParam = cadParam & Me.ListView1(1).ListItems(I).SubItems(1) & "  "
+    For i = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(i).Checked Then
+            cadParam = cadParam & Me.ListView1(1).ListItems(i).SubItems(1) & "  "
         End If
-    Next I
+    Next i
     cadParam = Trim(cadParam)
     
     cadParam = cadParam & """|"
@@ -962,24 +961,24 @@ Dim nomDocu As String
 End Sub
 
 Private Function CargarTemporal() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eCargarTemporal
 
     CargarTemporal = False
     
-    Sql = "delete from tmpfaclin where codusu = " & vUsu.Codigo
-    Conn.Execute Sql
+    SQL = "delete from tmpfaclin where codusu = " & vUsu.Codigo
+    Conn.Execute SQL
     
-    Sql = "insert into tmpfaclin (codusu, codigo, numserie, nomserie, numfac, fecha, cta, cliente, nif, imponible, impiva, total, retencion,"
-    Sql = Sql & " recargo, tipoopera, tipoformapago) "
-    Sql = Sql & " select distinct " & vUsu.Codigo & ",0, factcli.numserie, contadores.nomregis, factcli.numfactu, factcli.fecfactu, factcli.codmacta, "
-    Sql = Sql & " factcli.nommacta, factcli.nifdatos, factcli.totbases, factcli.totivas, factcli.totfaccl, factcli.trefaccl, "
-    Sql = Sql & " factcli.totrecargo, tipofpago.descformapago , aa.denominacion"
-    Sql = Sql & " from " & tabla
-    Sql = Sql & " where " & cadselect
+    SQL = "insert into tmpfaclin (codusu, codigo, numserie, nomserie, numfac, fecha, cta, cliente, nif, imponible, impiva, total, retencion,"
+    SQL = SQL & " recargo, tipoopera, tipoformapago) "
+    SQL = SQL & " select distinct " & vUsu.Codigo & ",0, factcli.numserie, contadores.nomregis, factcli.numfactu, factcli.fecfactu, factcli.codmacta, "
+    SQL = SQL & " factcli.nommacta, factcli.nifdatos, factcli.totbases, factcli.totivas, factcli.totfaccl, factcli.trefaccl, "
+    SQL = SQL & " factcli.totrecargo, tipofpago.descformapago , aa.denominacion"
+    SQL = SQL & " from " & tabla
+    SQL = SQL & " where " & cadselect
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     
     CargarTemporal = True
     Exit Function
@@ -988,46 +987,6 @@ eCargarTemporal:
     MuestraError Err.Number, "Cargar Temporal Resumen", Err.Description
 End Function
 
-Private Function MontaSQL() As Boolean
-Dim Sql As String
-Dim SQL2 As String
-Dim RC As String
-Dim RC2 As String
-Dim I As Integer
-
-
-    MontaSQL = False
-    
-            
-'    SQL = ""
-'    For i = 1 To Me.ListView1(1).ListItems.Count
-'        If Me.ListView1(1).ListItems(i).Checked Then
-'            SQL = SQL & Me.ListView1(1).ListItems(i).Text & ","
-'        End If
-'    Next i
-'
-'    If SQL <> "" Then
-'        ' quitamos la ultima coma
-'        SQL = Mid(SQL, 1, Len(SQL) - 1)
-'
-'        If Not AnyadirAFormula(cadselect, "factcli_totales.codigiva in (" & SQL & ")") Then Exit Function
-'        If Not AnyadirAFormula(cadFormula, "{factcli_totales.codigiva} in [" & SQL & "]") Then Exit Function
-'    Else
-'        If Not AnyadirAFormula(cadselect, "factcli_totales.codigiva is null") Then Exit Function
-'        If Not AnyadirAFormula(cadFormula, "isnull({factcli_totales.codigiva})") Then Exit Function
-'    End If
-'
-'
-'    If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
-'    If cadselect <> "" Then cadselect = "(" & cadselect & ")"
-'
-'    If Not CargarTemporal Then Exit Function
-'
-'    cadFormula = "{tmpfaclin.codusu} = " & vUsu.Codigo
-'
-            
-    MontaSQL = True
-End Function
 
 Private Sub txtfecha_LostFocus(Index As Integer)
     txtFecha(Index).Text = Trim(txtFecha(Index).Text)
@@ -1054,9 +1013,9 @@ Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
     End If
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
     
-    DatosOK = False
+    DatosOk = False
     
     If EmpresasSeleccionadas = 0 Then
         MsgBox "Seleccione una empresa", vbExclamation
@@ -1071,20 +1030,20 @@ Private Function DatosOK() As Boolean
     If cmbPeriodo(0).ListIndex = cmbPeriodo(0).ListCount - 1 Then UltimoPeriodoLiquidacion = True
     
    
-    DatosOK = True
+    DatosOk = True
 
 
 End Function
 
 Private Function EmpresasSeleccionadas() As Integer
-Dim Sql As String
-Dim I As Integer
+Dim SQL As String
+Dim i As Integer
 Dim NSel As Integer
 
     NSel = 0
-    For I = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(I).Checked Then NSel = NSel + 1
-    Next I
+    For i = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(i).Checked Then NSel = NSel + 1
+    Next i
     EmpresasSeleccionadas = NSel
 
 End Function
@@ -1099,29 +1058,28 @@ Private Sub CargarListView(Index As Integer)
 'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ECargarList
 
     'Los encabezados
     ListView1(Index).ColumnHeaders.Clear
 
- '   ListView1.ColumnHeaders.Add , , "Tipo", 650
     ListView1(Index).ColumnHeaders.Add , , "Código", 600
     ListView1(Index).ColumnHeaders.Add , , "Descripción", 3200
     
-    Sql = "SELECT codempre, nomempre, conta "
-    Sql = Sql & " FROM usuarios.empresasariconta "
+    SQL = "SELECT codempre, nomempre, conta "
+    SQL = SQL & " FROM usuarios.empresasariconta "
     
     If Not vParam.EsMultiseccion Then
-        Sql = Sql & " where conta = " & DBSet(Conn.DefaultDatabase, "T")
+        SQL = SQL & " where conta = " & DBSet(Conn.DefaultDatabase, "T")
     Else
-        Sql = Sql & " where mid(conta,1,8) = 'ariconta'"
+        SQL = SQL & " where mid(conta,1,8) = 'ariconta'"
     End If
-    Sql = Sql & " ORDER BY codempre "
+    SQL = SQL & " ORDER BY codempre "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         
@@ -1207,43 +1165,18 @@ End Function
 
 Private Sub InsertaLog340()
 Dim C2 As String
-'    Cad = ""
-'    i = 0
-'    Do
-'        C2 = V340(i)
-'        C2 = RecuperaValor(C2, 1)
-'        NumRegElim = Val(C2)
-'        If NumRegElim = 1 Then
-'            'Letra serie
-'            C2 = V340(i)
-'            C2 = RecuperaValor(C2, 2)
-'            If C2 <> "" Then C2 = "Serie " & C2
-'        Else
-'            'Cuenta
-'            C2 = V340(i)
-'            C2 = Mid(C2, 3)
-'            C2 = Trim(Replace(C2, "|", " "))
-'            If C2 <> "" Then C2 = "Ctas: " & C2
-'        End If
-'        If i > 0 Then Cad = Cad & vbCrLf
-'        Cad = Cad & Me.ListView1(1).ListItems(i)
-'        If C2 <> "" Then Cad = Cad & " (" & C2 & ")"
-'        i = i + 1
-'    Loop Until i = Me.ListView1(1).ListItems.Count
     
     
     Cad = Cad & " "
-    For I = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(I).Checked Then
-            Cad = Cad & Me.ListView1(1).ListItems(I).SubItems(1) & "  "
+    For i = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(i).Checked Then
+            Cad = Cad & Me.ListView1(1).ListItems(i).SubItems(1) & "  "
         End If
-    Next I
+    Next i
     Cad = Trim(Cad)
     
     
     vLog.Insertar 15, vUsu, Cad
-    
-    
     
     'DICIMEBRE 2012
     'Diciembre 2012

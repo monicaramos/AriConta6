@@ -850,7 +850,7 @@ Option Explicit
 
 Private Const IdPrograma = 1306
 
-Public opcion As Byte
+Public Opcion As Byte
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
@@ -1280,9 +1280,6 @@ Dim RC2 As String
 
     MontaSQL = False
     
-'    If Not PonerDesdeHasta("hlinapu.fechaent", "F", Me.txtFecha(0), Me.lblFecha(0), Me.txtFecha(1), Me.lblFecha(1), "pDHFecha=""") Then Exit Function
-
-'    If Not PonerDesdeHasta("hlinapu.codmacta", "CTA", Me.txtCta(0), Me.lblCuentas(0), Me.txtCta(1), Me.lblCuentas(1), "pDHCuentas=""") Then Exit Function
     
     MontaSQL = True
            
@@ -1330,19 +1327,6 @@ Private Function DatosOK() As Boolean
     End If
     
     If Not ComparaFechasCombos(0, 1, 0, 1) Then Exit Function
-'    If txtAno(11).Text <> "" And txtAno(12).Text <> "" Then
-'        If Val(txtAno(11).Text) > Val(txtAno(12).Text) Then
-'            MsgBox "Fecha inicio mayor que fecha fin", vbExclamation
-'            Exit Sub
-'        Else
-'            If Val(txtAno(11).Text) = Val(txtAno(12).Text) Then
-'                If Me.cmbFecha(11).ListIndex > Me.cmbFecha(12).ListIndex Then
-'                    MsgBox "Fecha inicio mayor que fecha fin", vbExclamation
-'                    Exit Sub
-'                End If
-'            End If
-'        End If
-'    End If
     If txtFecha(7).Text <> "" Then
         If Not IsDate(txtFecha(7).Text) Then
             MsgBox "Fecha impresión incorrecta", vbExclamation
@@ -1429,25 +1413,10 @@ Dim J As Integer
 
 QueCombosFechaCargar "0|1|"
 
-
-''Y ademas deshabilitamos los niveles no utilizados por la aplicacion
-'For i = vEmpresa.numnivel To 9
-'    Check2(i).Visible = False
-'    Me.chkCtaExplo(i).Visible = False
-'    chkCtaExploC(i).Visible = False
-'    chkAce(i).Visible = False
-'Next i
-
 For i = 1 To vEmpresa.numnivel - 1
     J = DigitosNivel(i)
     Check1(i).Visible = True
     Check1(i).Caption = "Digitos: " & J
-'    chkCtaExplo(i).Visible = True
-'    chkCtaExplo(i).Caption = "Digitos: " & J
-'    chkAce(i).Visible = True
-'    chkAce(i).Caption = "Digitos: " & J
-'    chkCtaExploC(i).Visible = True
-'    chkCtaExploC(i).Caption = "Digitos: " & J
 Next i
 
 
@@ -1502,7 +1471,6 @@ End Function
 Private Function HayAsientoCierre(Mes As Byte, Anyo As Integer, Optional Contabilidad As String) As Boolean
 Dim C As String
     HayAsientoCierre = False
-    'C = "01/" & CStr(Me.cmbFecha(1).ListIndex + 1) & "/" & txtAno(1).Text
     C = "01/" & CStr(Mes) & "/" & Anyo
     'Si la fecha es menor k la fecha de inicio de ejercicio entonces SI k hay asiento de cierre
     If CDate(C) < vParam.fechaini Then

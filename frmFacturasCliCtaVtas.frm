@@ -1059,7 +1059,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1, 2, 3 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtCuentas(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -1264,7 +1263,6 @@ Dim Rs As ADODB.Recordset
     
     If Check1(1).Value = 0 Then ' si no es comparativo
 
-'SELECT @rownum:=@rownum+1 AS rownum, smarca.* FROM (SELECT @rownum:=0) r, smarca;
     
         If Check1(0).Value = 1 Then ' desglosar por cuenta
             SQL = "insert into tmpfaclin (codusu,ctabase,cta,cliente,numserie,Numfac,Fecha,iva,imponible) "

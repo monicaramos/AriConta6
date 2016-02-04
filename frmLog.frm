@@ -525,10 +525,9 @@ Dim B As Boolean
     B = (Modo = 2)
     Me.lblIndicador.Caption = ""
     
-    txtaux(0).Visible = Not B
-    txtaux(1).Visible = Not B
-    txtaux(2).Visible = Not B
-'    txtAux(3).Visible = Not B
+    txtAux(0).Visible = Not B
+    txtAux(1).Visible = Not B
+    txtAux(2).Visible = Not B
     
     CboTipoSitu.Visible = Not B
     cmdAceptar.Visible = Not B
@@ -542,9 +541,9 @@ Dim B As Boolean
     
     'Si estamos insertando o busqueda
     
-    txtaux(0).Locked = (Modo <> 3 And Modo <> 1)
-    txtaux(1).Locked = (Modo <> 3 And Modo <> 1)
-    txtaux(2).Locked = (Modo <> 3 And Modo <> 1)
+    txtAux(0).Locked = (Modo <> 3 And Modo <> 1)
+    txtAux(1).Locked = (Modo <> 3 And Modo <> 1)
+    txtAux(2).Locked = (Modo <> 3 And Modo <> 1)
     Text2(0).Locked = (Modo <> 3 And Modo <> 1)
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
@@ -589,32 +588,12 @@ Private Sub PonerLongCampos()
 End Sub
 
 
-'Private Sub BotonAnyadir()
-'Dim anc As Single
-'
-'    'Situamos el grid al final
-'    AnyadirLinea DataGrid1, adodc1
-'
-'    'Obtenemos la siguiente numero de codigo de Situaciones
-'    txtAux(0).Text = SugerirCodigoSiguienteStr("ssitua", "codsitua")
-'    FormateaCampo txtAux(0)
-'    txtAux(1).Text = ""
-'    CboTipoSitu.ListIndex = 1
-'
-'    anc = ObtenerAlto(DataGrid1)
-'    LLamaLineas anc, 3
-'
-'    'Ponemos el foco
-'    PonerFoco txtAux(0)
-'End Sub
-
-
 Private Sub BotonBuscar()
     CargaGrid "accion= -1"
     Limpiar Me
     Me.CboTipoSitu.ListIndex = -1
     LLamaLineas DataGrid1.Top + 210, 1
-    PonerFoco txtaux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub PonerFoco(ByRef o As Object)
@@ -638,66 +617,27 @@ On Error Resume Next
 End Sub
 
 
-'Private Sub BotonModificar()
-'Dim anc As Single
-'Dim I As Integer
-'
-'    If adodc1.Recordset.EOF Then Exit Sub
-'    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
-'
-'    'El registro de codigo 0 no se puede Modificar ni Eliminar
-'    If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCod) Then Exit Sub
-'
-'    Screen.MousePointer = vbHourglass
-'
-'    If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-'        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-'        DataGrid1.Scroll 0, I
-'        DataGrid1.Refresh
-'    End If
-'
-'    'Llamamos al form
-'    txtAux(0).Text = DataGrid1.Columns(0).Text
-'    txtAux(1).Text = DataGrid1.Columns(1).Text
-'    Select Case DataGrid1.Columns(2).Value
-'        Case "Si"
-'            CboTipoSitu.ListIndex = 1
-'        Case "No"
-'            CboTipoSitu.ListIndex = 0
-'    End Select
-'
-'    anc = ObtenerAlto(DataGrid1)
-'    LLamaLineas anc, 4
-'
-'    'Como es modificar
-''    PonerFoco txtAux(1)
-'   Screen.MousePointer = vbDefault
-'End Sub
-
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
 'Pone posicion TOP y LEFT de los controles en el form
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     'Fijamos el ancho
-    txtaux(0).Top = alto
-    txtaux(1).Top = alto
-    txtaux(2).Top = alto
-'    txtAux(3).Top = alto
+    txtAux(0).Top = alto
+    txtAux(1).Top = alto
+    txtAux(2).Top = alto
     CboTipoSitu.Top = alto - 15
     
     'REultilo alto
     alto = 120
     
-    txtaux(0).Left = DataGrid1.Columns(0).Left + alto
-    txtaux(0).Width = DataGrid1.Columns(0).Width
+    txtAux(0).Left = DataGrid1.Columns(0).Left + alto
+    txtAux(0).Width = DataGrid1.Columns(0).Width
     CboTipoSitu.Left = DataGrid1.Columns(1).Left + alto
     CboTipoSitu.Width = DataGrid1.Columns(1).Width
-    txtaux(1).Left = DataGrid1.Columns(2).Left + alto
-    txtaux(1).Width = DataGrid1.Columns(2).Width
-    txtaux(2).Left = DataGrid1.Columns(3).Left + alto
-    txtaux(2).Width = DataGrid1.Columns(3).Width
-'    txtAux(3).Left = DataGrid1.Columns(4).Left + alto
-'    txtAux(3).Width = DataGrid1.Columns(4).Width
+    txtAux(1).Left = DataGrid1.Columns(2).Left + alto
+    txtAux(1).Width = DataGrid1.Columns(2).Width
+    txtAux(2).Left = DataGrid1.Columns(3).Left + alto
+    txtAux(2).Width = DataGrid1.Columns(3).Width
 End Sub
 
 
@@ -750,10 +690,6 @@ Error2:
     If Err.Number <> 0 Then MuestraError Err.Number, "Eliminar log_old", Err.Description
 End Sub
 
-
-
-
-
 Private Sub CboTipoSitu_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -767,58 +703,38 @@ Dim cerrar As Boolean
 End Sub
 
 
-
 Private Sub cmdAceptar_Click()
 'Dim I As Integer
 Dim CadB As String
-Dim AUx As String
+Dim Aux As String
 On Error Resume Next
 
     Select Case Modo
         Case 1 'HacerBusqueda
             'COMO ES UN CAMPO FECHA HORA LO TRATARE DE FORMA ESPECIAL
-            AUx = ""
-            If txtaux(0).Text <> "" Then
+            Aux = ""
+            If txtAux(0).Text <> "" Then
                 'SI lo que han puesto es una fecha
-                AUx = txtaux(0).Text
-                If EsFechaOKString(AUx) Then
-                   AUx = Format(AUx, FormatoFecha)
-                   AUx = "slog.fecha  >=  '" & AUx & "' AND slog.fecha <= '" & AUx & " 23:59:59'"
+                Aux = txtAux(0).Text
+                If EsFechaOKString(Aux) Then
+                   Aux = Format(Aux, FormatoFecha)
+                   Aux = "slog.fecha  >=  '" & Aux & "' AND slog.fecha <= '" & Aux & " 23:59:59'"
                    'Pongo txtaux(0)=""
-                   txtaux(0).Text = ""
+                   txtAux(0).Text = ""
                 Else
-                    AUx = ""
+                    Aux = ""
                 End If
             End If
         
         
             CadB = ObtenerBusqueda(Me)
-            If CadB <> "" And AUx <> "" Then AUx = " AND " & AUx
-            CadB = CadB & AUx
+            If CadB <> "" And Aux <> "" Then Aux = " AND " & Aux
+            CadB = CadB & Aux
             If CadB <> "" Then
                 PonerModo 2
                 CargaGrid CadB
                 DataGrid1.SetFocus
             End If
-'        Case 3 'Insertar
-'            If DatosOk Then
-'                If InsertarDesdeForm(Me) Then
-'                    CargaGrid
-'                    BotonAnyadir
-'                End If
-'            End If
-'        Case 4 'Modificar
-'            If DatosOk And BLOQUEADesdeFormulario(Me) Then
-'                If ModificaDesdeFormulario(Me, 3) Then
-'                   TerminaBloquear
-'                   I = adodc1.Recordset.Fields(0)
-'                   PonerModo 2
-'                   CancelaADODC Me.adodc1
-'                   CargaGrid
-'                   adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
-'                End If
-'                DataGrid1.SetFocus
-'            End If
     End Select
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -844,24 +760,8 @@ ECancelar:
 End Sub
 
 
-'Private Sub cmdRegresar_Click()
-'Dim Cad As String
-'
-'    If adodc1.Recordset.EOF Then
-'        MsgBox "Ningún registro devuelto.", vbExclamation
-'        Exit Sub
-'    End If
-'
-'    Cad = adodc1.Recordset.Fields(0) & "|"
-'    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-'    RaiseEvent DatoSeleccionado(Cad)
-'    Unload Me
-'End Sub
-
-
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.Visible = True Then
-       ' cmdRegresar_Click
     Else
         If Not (Adodc1.Recordset Is Nothing) Then
             If Not Adodc1.Recordset.EOF Then
@@ -926,11 +826,6 @@ Private Sub Form_Load()
         .Buttons(6).Image = 2
         .Buttons(8).Image = 16
         
-'        Modo = 1
-'        If (vUsu.Codigo Mod 1000) = 0 Then Modo = 0
-'        .Buttons(7).Visible = Modo = 0
-'        .Buttons(10).Enabled = Modo = 0
-'        Me.mnEliminar.Visible = Modo = 0
     End With
     
     ' La Ayuda
@@ -1042,19 +937,6 @@ Dim tots As String
    Me.DataGrid1.Columns(2).Width = 1200
    Me.DataGrid1.Columns(3).Width = 1800
    
-
-
-'    'Habilitamos botones Modificar y Eliminar
-'   If Toolbar1.Buttons(6).Enabled Then
-'        Toolbar1.Buttons(6).Enabled = Not adodc1.Recordset.EOF
-'        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
-'        mnModificar.Enabled = Not adodc1.Recordset.EOF
-'        mnEliminar.Enabled = Not adodc1.Recordset.EOF
-'   End If
-'   DataGrid1.Enabled = b
-'   DataGrid1.ScrollBars = dbgAutomatic
-'
-'   PonerOpcionesMenu
 End Sub
 
 Private Sub CargaCombo()
@@ -1084,53 +966,6 @@ Dim L As Collection
         Conn.Execute FormatoCod
     End If
 End Sub
-
-
-'Private Sub txtAux_GotFocus(Index As Integer)
-'    ConseguirFoco txtAux(Index), Modo
-'End Sub
-'
-'Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-'    KeyDown KeyCode
-'End Sub
-'
-'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpress KeyAscii
-'End Sub
-'
-'
-'Private Sub txtAux_LostFocus(Index As Integer)
-'    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
-'    'If Index = 0 Then PonerFormatoEntero txtAux(Index)
-'End Sub
-
-
-'Private Function DatosOk() As Boolean
-'Dim b As Boolean
-'
-'    b = CompForm(Me, 3)
-'    If Not b Then Exit Function
-'
-'    'comprobar si ya existe el codigo de situacion en la tabla
-'    If Modo = 3 Then 'Insertar
-'        If ExisteCP(txtAux(0)) Then b = False
-'    End If
-'
-'    DatosOk = b
-'End Function
-
-
-'Private Sub KEYpress(KeyAscii As Integer)
-'Dim cerrar As Boolean
-'
-'    KEYpressGnral KeyAscii, Modo, cerrar
-'    If cerrar Then Unload Me
-'End Sub
-'
-'
-'Private Sub PonerOpcionesMenu()
-'    PonerOpcionesMenuGeneral Me
-'End Sub
 
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)

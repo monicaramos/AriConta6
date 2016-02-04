@@ -506,9 +506,9 @@ Private Sub BotonAnyadir()
     lblIndicador.Caption = "INSERTANDO"
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If Not adodc1.Recordset.EOF Then
+    If Not Adodc1.Recordset.EOF Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
     
@@ -528,15 +528,7 @@ Private Sub BotonAnyadir()
     
     'Ponemos el foco
     txtAux(0).SetFocus
-    
-'    If FormularioHijoModificado Then
-'        CargaGrid
-'        BotonAnyadir
-'        Else
-'            'cmdCancelar.SetFocus
-'            If Not Adodc1.Recordset.EOF Then _
-'                Adodc1.Recordset.MoveFirst
-'    End If
+   
 End Sub
 
 
@@ -562,7 +554,7 @@ Private Sub BotonModificar()
     Dim Cad As String
     Dim anc As Single
     Dim i As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     'If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
 
@@ -586,7 +578,7 @@ Private Sub BotonModificar()
         txtAux(jj).Text = DataGrid1.Columns(jj).Text
     Next jj
     'El porcentaje
-    SQL = adodc1.Recordset!coefimaxi
+    SQL = Adodc1.Recordset!coefimaxi
     txtAux(2).Text = TransformaComasPuntos(SQL)
     LLamaLineas anc, 4
    
@@ -612,19 +604,19 @@ Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
     SQL = "Seguro que desea eliminar el concepto:"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from inmovcon where codconam=" & adodc1.Recordset!codconam
+        SQL = "Delete from inmovcon where codconam=" & Adodc1.Recordset!codconam
         Conn.Execute SQL
         CargaGrid ""
-        adodc1.Recordset.Cancel
+        Adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -648,7 +640,7 @@ Dim CadB As String
             CargaGrid CadB
         End If
     Case 3
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -660,15 +652,15 @@ Dim CadB As String
         End If
     Case 4
         'Modificar
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
                 Conn.Execute "commit"
-                i = adodc1.Recordset.Fields(0)
+                i = Adodc1.Recordset.Fields(0)
                 PonerModo 0
                 CargaGrid
-                adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
                 lblIndicador.Caption = ""
             End If
         End If
@@ -684,7 +676,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
     End Select
     PonerModo 0
     lblIndicador.Caption = ""
@@ -694,15 +686,15 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim Cad As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro a devolver.", vbExclamation
         Exit Sub
     End If
     
-    Cad = adodc1.Recordset.Fields(0) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(2) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(3) & "|"
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(2) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(3) & "|"
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -867,17 +859,17 @@ Private Sub CargaGrid(Optional SQL As String)
     Dim TotalAncho As Integer
     Dim i As Integer
     
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
         Else
         SQL = CadenaConsulta
     End If
     SQL = SQL & " ORDER BY codconam"
-    adodc1.RecordSource = SQL
-    adodc1.CursorType = adOpenDynamic
-    adodc1.LockType = adLockOptimistic
-    adodc1.Refresh
+    Adodc1.RecordSource = SQL
+    Adodc1.CursorType = adOpenDynamic
+    Adodc1.LockType = adLockOptimistic
+    Adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 350
@@ -924,8 +916,8 @@ Private Sub CargaGrid(Optional SQL As String)
     End If
     'Habilitamos modificar y eliminar
     If vUsu.Nivel < 2 Then
-        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
-        Toolbar1.Buttons(8).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(8).Enabled = Not Adodc1.Recordset.EOF
     End If
 End Sub
 
@@ -980,7 +972,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim Datos As String
 Dim B As Boolean
 B = CompForm(Me)
@@ -994,7 +986,7 @@ If Modo = 1 Then
         B = False
     End If
 End If
-DatosOK = B
+DatosOk = B
 End Function
 
 Private Sub DeseleccionaGrid()
@@ -1017,12 +1009,12 @@ End Sub
 
 Private Function SepuedeBorrar() As Boolean
     SepuedeBorrar = False
-    SQL = DevuelveDesdeBD("conconam", "inmovele", "conconam", adodc1.Recordset!codconam, "N")
+    SQL = DevuelveDesdeBD("conconam", "inmovele", "conconam", Adodc1.Recordset!codconam, "N")
     If SQL <> "" Then _
         Exit Function
         'No se puede borrar pq exsiten datos en la tabla inmovele que lo relaciona
         
-    SQL = DevuelveDesdeBD("condebes", "paramamort", "condebes", adodc1.Recordset!codconam, "N")
+    SQL = DevuelveDesdeBD("condebes", "paramamort", "condebes", Adodc1.Recordset!codconam, "N")
     If SQL <> "" Then _
         Exit Function
         'No se puede borrar pq exsiten datos en la tabla inmovele que lo relaciona
@@ -1066,7 +1058,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else

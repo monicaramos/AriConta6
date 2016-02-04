@@ -1264,7 +1264,7 @@ Private Sub cmdAceptar_Click()
     On Error GoTo Error1
     Select Case Modo
     Case 3
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -1275,7 +1275,7 @@ Private Sub cmdAceptar_Click()
         End If
     Case 4
         'Modificar
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
@@ -1461,7 +1461,7 @@ Private Sub cmdRegresar_Click()
 Dim Cad As String
 Dim i As Integer
 Dim J As Integer
-Dim AUx As String
+Dim Aux As String
 
 If Data1.Recordset.EOF Then
     MsgBox "Ningún registro devuelto.", vbExclamation
@@ -1474,8 +1474,8 @@ Do
     J = i + 1
     i = InStr(J, DatosADevolverBusqueda, "|")
     If i > 0 Then
-        AUx = Mid(DatosADevolverBusqueda, J, i - J)
-        J = Val(AUx)
+        Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = Val(Aux)
         Cad = Cad & Text1(J).Text & "|"
     End If
 Loop Until i = 0
@@ -1507,24 +1507,6 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
-
-'      ' ICONITOS DE LA BARRA
-'    With Me.Toolbar1
-'        .ImageList = frmPpal.imgListComun
-'        .Buttons(1).Image = 1
-'        .Buttons(2).Image = 2
-'        .Buttons(6).Image = 3
-'        .Buttons(7).Image = 4
-'        .Buttons(8).Image = 5
-'        '.Buttons(10).Image = 10
-'        .Buttons(11).Image = 16
-'        .Buttons(12).Image = 15
-'        .Buttons(14).Image = 6
-'        .Buttons(15).Image = 7
-'        .Buttons(16).Image = 8
-'        .Buttons(17).Image = 9
-'    End With
-'    Me.Icon = frmPpal.Icon
 
     Me.Icon = frmPpal.Icon
 
@@ -1616,31 +1598,6 @@ Private Sub LimpiarCampos()
         Combo2(i).BackColor = vbWhite
     Next i
 End Sub
-
-
-'Private Sub CargarCombo()
-'Dim RS As ADODB.Recordset
-''###
-''Cargaremos el combo, o bien desde una tabla o con valores fijos o como
-''se quiera, la cuestion es cargarlo
-'' El estilo del combo debe de ser 2 - Dropdown List
-'' Si queremos que este ordenado, o lo ordenamos por la sentencia sql
-'' o marcamos la opcion sorted del combo
-'
-'    Combo1.Clear
-'
-'    Set RS = New ADODB.Recordset
-'    DevfrmCCtas = "SELECT * FROm tipofpago ORDER BY tipoformapago"
-'    RS.Open DevfrmCCtas, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    While Not RS.EOF
-'        Combo1.AddItem RS!descformapago
-'        Combo1.ItemData(Combo1.NewIndex) = RS!tipoformapago
-'        RS.MoveNext
-'    Wend
-'    RS.Close
-'    Set RS = Nothing
-'End Sub
-
 
 Private Sub Form_Unload(Cancel As Integer)
     CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
@@ -1829,22 +1786,6 @@ Private Sub Text1_LostFocus(Index As Integer)
                 Text2(Index).Text = SQL
             End If
         Case 5, 6, 7, 9
-'            If Text1(Index).Text = "" Then
-'                 Text2(Index).Text = SQL
-'                 Exit Sub
-'            End If
-'            DevfrmCCtas = Text1(Index).Text
-'            If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
-'                Text1(Index).Text = DevfrmCCtas
-'                Text2(Index).Text = SQL
-'            Else
-'                MsgBox SQL, vbExclamation
-'                Text1(Index).Text = ""
-'                Text2(Index).Text = ""
-'                PonerFoco Text1(Index)
-'            End If
-'            DevfrmCCtas = ""
-        '....
     End Select
     '---
 End Sub
@@ -2015,9 +1956,9 @@ Dim i As Integer
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
-    DatosOK = False
+    DatosOk = False
     B = CompForm(Me)
     If Not B Then Exit Function
     
@@ -2063,7 +2004,7 @@ Dim B As Boolean
             B = True
         End If
     End If
-    DatosOK = B
+    DatosOk = B
 End Function
 
 
@@ -2120,14 +2061,6 @@ Dim SQL As String
 Dim i As Integer
 On Error GoTo EPonerCtasIVA
 
-
-'    'Cuentas
-'    For I = 5 To 9
-'        If I <> 8 Then
-'            SQL = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Text1(I).Text, "T")
-'            Text2(I).Text = SQL
-'        End If
-'    Next I
 
     'Conceptos
     Text2(3).Text = DevuelveDesdeBD("nomconce", "conceptos", "codconce", Text1(3).Text, "N")

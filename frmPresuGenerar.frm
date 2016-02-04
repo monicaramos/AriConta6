@@ -1553,7 +1553,7 @@ Public Modo As Byte
 Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
-Dim cad As String
+Dim Cad As String
 Dim Rs As Recordset
 Dim i As Integer
 Dim VV As Currency
@@ -1627,21 +1627,13 @@ On Error GoTo EINs
 
     If ChkEliminar.Value = 1 Then
 '        Cad = "DELETE FROM presupuestos WHERE codmacta='" & txtCta(0).Text & "' AND anopresu = " & i
-        cad = "DELETE FROM presupuestos WHERE codmacta='" & txtCta(0).Text & "' AND date(concat(anopresu,'-',mespresu,'-01')) between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
-        Conn.Execute cad
+        Cad = "DELETE FROM presupuestos WHERE codmacta='" & txtCta(0).Text & "' AND date(concat(anopresu,'-',mespresu,'-01')) between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
+        Conn.Execute Cad
     End If
     
     
-'    Cad = "INSERT INTO presupuestos (codmacta, anopresu, mespresu, imppresu) VALUES ('"
-'    Cad = Cad & txtCta(0).Text & "'," & i & ","
-'    For i = 0 To 11
-'        If txtN(i).Text <> "" Then
-'            AUx = TransformaComasPuntos(ImporteFormateado(txtN(i).Text))
-'            Conn.Execute Cad & i + 1 & "," & AUx & ")"
-'        End If
-'    Next i
-    cad = "INSERT INTO presupuestos (codmacta, anopresu, mespresu, imppresu) VALUES ('"
-    cad = cad & txtCta(0).Text & "',"
+    Cad = "INSERT INTO presupuestos (codmacta, anopresu, mespresu, imppresu) VALUES ('"
+    Cad = Cad & txtCta(0).Text & "',"
     
     Dim Anyo As Integer
     Dim Mes As Integer
@@ -1664,7 +1656,7 @@ On Error GoTo EINs
     
         If txtN(i).Text <> "" Then
             Aux = TransformaComasPuntos(ImporteFormateado(txtN(i).Text))
-            Conn.Execute cad & Anyo & "," & Mes & "," & Aux & ")"
+            Conn.Execute Cad & Anyo & "," & Mes & "," & Aux & ")"
         End If
     Next i
     
@@ -1738,10 +1730,9 @@ Private Sub Form_Load()
     LimpiarLabels
     Label5.Caption = ""
     PonerFrames
-'    chkMasiva.Visible = vUsu.Nivel < 2   'Solo administradores
     
-    For i = 0 To imgCta.Count - 1
-        imgCta(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    For i = 0 To imgcta.Count - 1
+        imgcta(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
     Next i
     
     If Opcion = 1 Then
@@ -1752,17 +1743,11 @@ Private Sub Form_Load()
         Me.chkMasiva.Value = False
         If Modo = 0 Then
             Me.Caption = "Insertar datos cuentas presupuestarias"
-'            Me.ChkEliminar.Visible = True
-'            Me.ChkEliminar.Enabled = True
-'            Me.ChkEliminar.Value = 0
         Else
             Me.Caption = "Modificar datos cuentas presupuestarias"
             Me.Check1.Visible = False
             Me.Check1.Enabled = False
             Me.Check1.Value = False
-'            Me.ChkEliminar.Value = 1
-'            Me.ChkEliminar.Visible = False
-'            Me.ChkEliminar.Enabled = False
         End If
         
     End If
@@ -1813,7 +1798,7 @@ End Function
 
 Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
     txtCta(i).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtDescta(i).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtDesCta(i).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub imgcta_Click(Index As Integer)
@@ -1840,7 +1825,7 @@ Private Sub txtAnual_LostFocus()
     txtAnual.Text = Trim(txtAnual.Text)
     If AntiguoText = txtAnual.Text Then Exit Sub
         
-    cad = ""
+    Cad = ""
     If txtAnual.Text <> "" Then
         If Not IsNumeric(txtAnual.Text) Then
             MsgBox "Campo numerico", vbExclamation
@@ -1856,11 +1841,11 @@ Private Sub txtAnual_LostFocus()
             For i = 0 To 11
                 txtN(i).Text = VV
             Next i
-            cad = "OK"
+            Cad = "OK"
         End If
         If txtAnual.Text <> "" Then txtPorc.Text = ""
     End If
-    If cad = "" Then LimpiarCampos
+    If Cad = "" Then LimpiarCampos
 End Sub
 
 Private Sub txtCta_GotFocus(Index As Integer)
@@ -1892,15 +1877,15 @@ Private Sub txtCta_LostFocus(Index As Integer)
     txtCta(Index).Text = Trim(txtCta(Index).Text)
     If txtCta(Index).Text = AntiguoText Then Exit Sub
     If txtCta(Index).Text = "" Then
-        txtDescta(Index).Text = ""
+        txtDesCta(Index).Text = ""
     Else
         CadenaDesdeOtroForm = (txtCta(Index).Text)
-        If CuentaCorrectaUltimoNivel(CadenaDesdeOtroForm, cad) Then
+        If CuentaCorrectaUltimoNivel(CadenaDesdeOtroForm, Cad) Then
                 txtCta(Index).Text = CadenaDesdeOtroForm
-                txtDescta(Index).Text = cad
+                txtDesCta(Index).Text = Cad
         Else
-            MsgBox cad, vbExclamation
-            txtDescta(Index).Text = cad
+            MsgBox Cad, vbExclamation
+            txtDesCta(Index).Text = Cad
         End If
         CadenaDesdeOtroForm = ""
     End If
@@ -1995,7 +1980,7 @@ End Sub
 
 
 Private Sub PonerValores(Anterior As Boolean)
-Dim cad As String
+Dim Cad As String
 Dim vFecIni As String
 Dim vFecFin As String
 
@@ -2036,11 +2021,11 @@ On Error GoTo EPonerValoresAnteriores
     End If
     
     
-    cad = "Select * from presupuestos where codmacta='" & txtCta(0).Text & "' AND"
-    cad = cad & " date(concat(anopresu,'-',right(concat('00',mespresu),2),'-01')) between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
+    Cad = "Select * from presupuestos where codmacta='" & txtCta(0).Text & "' AND"
+    Cad = Cad & " date(concat(anopresu,'-',right(concat('00',mespresu),2),'-01')) between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not Rs.EOF Then
         While Not Rs.EOF
             'El mes viene en el campo "mespresu"
@@ -2091,15 +2076,15 @@ End Sub
 Private Sub PonerValoresActuales()
 On Error GoTo EPonerValoresActauales
 
-    cad = "Select * from presupuestos where codmacta='" & txtCta(0).Text & "' AND"
-    cad = cad & " anopresu = "
+    Cad = "Select * from presupuestos where codmacta='" & txtCta(0).Text & "' AND"
+    Cad = Cad & " anopresu = "
     i = Year(vParam.fechaini)
     'Ejercicio siguiente
     If Check1.Value = 1 Then i = i + 1
     
-    cad = cad & i & ";"
+    Cad = Cad & i & ";"
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not Rs.EOF Then
         While Not Rs.EOF
             'El mes viene en el campo "mespresu"
@@ -2161,19 +2146,19 @@ Dim Incremento As Currency
     
     If ChkEliminar.Value = 1 Then
         FijarSQLTablaPresu False
-        SQL = "DELETE FROM presupuestos WHERE " & cad
+        SQL = "DELETE FROM presupuestos WHERE " & Cad
         Conn.Execute SQL
     End If
     
     FijarSQLTablaPresu True
     If optIncre(1).Value Then
         'Cojera los datos del presupuesto anterior
-        SQL = "Select codmacta, anopresu anyo , mespresu mes ,imppresu debe,0 haber FROM presupuestos WHERE " & cad
+        SQL = "Select codmacta, anopresu anyo , mespresu mes ,imppresu debe,0 haber FROM presupuestos WHERE " & Cad
     
     Else
-        cad = Replace(cad, "anopresu", "year(fechaEnt)")
-        cad = Replace(cad, "mespresu", "month(FechaEnt)")
-        SQL = "select codmacta,year(fechaent) anyo, month(fechaent) mes, sum(coalesce(timported,0)) debe, sum(coalesce(timporteh,0))  haber from hlinapu where " & cad
+        Cad = Replace(Cad, "anopresu", "year(fechaEnt)")
+        Cad = Replace(Cad, "mespresu", "month(FechaEnt)")
+        SQL = "select codmacta,year(fechaent) anyo, month(fechaent) mes, sum(coalesce(timported,0)) debe, sum(coalesce(timporteh,0))  haber from hlinapu where " & Cad
         'Añado codmacta ultimo nivel
         SQL = SQL & "   AND codmacta like '" & Mid("__________", 1, vEmpresa.DigitosUltimoNivel) & "'"
         SQL = SQL & " group by 1,2,3"
@@ -2189,11 +2174,11 @@ Dim Incremento As Currency
         VV = DBLet(Rs!Debe, "N") - DBLet(Rs!Haber, "N")
         VV = Round((VV * Incremento) + VV, 2)  'importe
         If optEjer(0).Value Then
-            cad = ",('" & Rs!codmacta & "'," & Rs!Anyo & "," & Rs!Mes & "," & TransformaComasPuntos(CStr(VV)) & ")"
+            Cad = ",('" & Rs!codmacta & "'," & Rs!Anyo & "," & Rs!Mes & "," & TransformaComasPuntos(CStr(VV)) & ")"
         Else
-            cad = ",('" & Rs!codmacta & "'," & Rs!Anyo + 1 & "," & Rs!Mes & "," & TransformaComasPuntos(CStr(VV)) & ")"
+            Cad = ",('" & Rs!codmacta & "'," & Rs!Anyo + 1 & "," & Rs!Mes & "," & TransformaComasPuntos(CStr(VV)) & ")"
         End If
-        SQL = SQL & cad
+        SQL = SQL & Cad
         If (i Mod 25) = 0 Then
              SQL = CadenaDesdeOtroForm & Mid(SQL, 2)  'QUITO la PRIMERa coma
             Conn.Execute SQL
@@ -2217,26 +2202,26 @@ End Function
 
 
 Private Sub FijarSQLTablaPresu(PeriodoAnterior As Boolean)
-    cad = ""
+    Cad = ""
     'Ejercicio
     If Year(vParam.fechaini) = Year(vParam.fechafin) Then
         'Año natural
         i = Year(vParam.fechaini)
         If optEjer(1).Value Then i = i + 1
         If PeriodoAnterior Then i = i - 1
-        cad = "anopresu = " & i
+        Cad = "anopresu = " & i
     Else
         i = Year(vParam.fechaini)
         If optEjer(1).Value Then i = i + 1
         If PeriodoAnterior Then i = i - 1
         
-        cad = "(( anopresu = " & i & " AND mespresu >= " & Month(vParam.fechaini) & ") OR "
-        cad = cad & " ( anopresu = " & i + 1 & " AND mespresu <= " & Month(vParam.fechafin) & ")) " ' AND ("
+        Cad = "(( anopresu = " & i & " AND mespresu >= " & Month(vParam.fechaini) & ") OR "
+        Cad = Cad & " ( anopresu = " & i + 1 & " AND mespresu <= " & Month(vParam.fechafin) & ")) " ' AND ("
         
     End If
     
-    If txtCta(1).Text <> "" Then cad = cad & " AND codmacta >= '" & txtCta(1).Text & "'"
-    If txtCta(2).Text <> "" Then cad = cad & " AND codmacta <= '" & txtCta(2).Text & "'"
+    If txtCta(1).Text <> "" Then Cad = Cad & " AND codmacta >= '" & txtCta(1).Text & "'"
+    If txtCta(2).Text <> "" Then Cad = Cad & " AND codmacta <= '" & txtCta(2).Text & "'"
     
 End Sub
 

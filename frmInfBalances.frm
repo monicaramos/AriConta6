@@ -668,8 +668,8 @@ Private WithEvents frmCon  As frmConceptos
 Attribute frmCon.VB_VarHelpID = -1
 Private frmCtas As frmCtasAgrupadas
 
-Private sql As String
-Dim cad As String
+Private SQL As String
+Dim Cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
@@ -740,8 +740,8 @@ Private Sub cmdAccion_Click(Index As Integer)
     
         If Saldo473en470 Then
             'Deberiamos indicar si esta configurado para leer de la 470
-            cad = "codmacta = '4' or codmacta='47' or codmacta like '473%' AND numbalan"
-            RC = DevuelveDesdeBD("concat(pasivo,' ',codigo,': ',codmacta)", "balances_ctas", cad, txtBalan(0).Text & " ORDER BY codmacta")
+            Cad = "codmacta = '4' or codmacta='47' or codmacta like '473%' AND numbalan"
+            RC = DevuelveDesdeBD("concat(pasivo,' ',codigo,': ',codmacta)", "balances_ctas", Cad, txtBalan(0).Text & " ORDER BY codmacta")
             If RC <> "" Then MsgBox "La cuenta 470 ha sido configurada en el balance: " & RC, vbExclamation
                 
         End If
@@ -817,8 +817,8 @@ Private Sub Form_Activate()
         If Legalizacion <> "" Then
             optTipoSal(2).Value = True
                 
-            cad = RecuperaValor(Legalizacion, 4)
-            If Val(cad) = 0 Then
+            Cad = RecuperaValor(Legalizacion, 4)
+            If Val(Cad) = 0 Then
                 chkBalPerCompa.Value = 0
             Else
                 txtAno(1).Text = Val(txtAno(0).Text) - 1
@@ -905,10 +905,8 @@ Private Sub Form_Load()
         
         txtFecha(7).Text = RecuperaValor(Legalizacion, 1)     'Fecha informe
             
-        'txtAno(0).Text = Year(CDate(RecuperaValor(Legalizacion, 2)))     'Inicio
         txtAno(0).Text = Year(CDate(RecuperaValor(Legalizacion, 3)))     'Fin
         
-        'cmbFecha(0).ListIndex = Month(CDate(RecuperaValor(Legalizacion, 2))) - 1
         cmbFecha(0).ListIndex = Month(CDate(RecuperaValor(Legalizacion, 3))) - 1
     End If
     
@@ -917,10 +915,10 @@ End Sub
 Private Sub PonerBalancePredeterminado()
 
     'El balance de P y G tiene el campo Perdidas=1
-    sql = "Select * from balances where predeterminado = 1 AND perdidas =" & Opcion
+    SQL = "Select * from balances where predeterminado = 1 AND perdidas =" & Opcion
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         Me.txtBalan(0).Text = Rs.Fields(0)
         txtNBalan(0).Text = Rs.Fields(1)
@@ -1051,7 +1049,7 @@ End Sub
 
 
 Private Sub txtBalan_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -1099,7 +1097,7 @@ Dim Hasta As Integer
 End Sub
 
 Private Function EsPyG(Balance As Integer) As Boolean
-Dim sql As String
+Dim SQL As String
 
     EsPyG = DevuelveValor("select perdidas from balances where numbalan = " & DBSet(Balance, "N")) = 1
 
@@ -1110,15 +1108,15 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 Dim Tipo As Byte
             
-    sql = "select cta Cuenta , nomcta Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
-    sql = sql & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
-    sql = sql & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
-    sql = sql & " from tmpbalancesumas where codusu = " & vUsu.Codigo
-    sql = sql & " order by 1 "
+    SQL = "select cta Cuenta , nomcta Titulo, aperturad, aperturah, case when coalesce(aperturad,0) - coalesce(aperturah,0) > 0 then concat(coalesce(aperturad,0) - coalesce(aperturah,0),'D') when coalesce(aperturad,0) - coalesce(aperturah,0) < 0 then concat(coalesce(aperturah,0) - coalesce(aperturad,0),'H') when coalesce(aperturad,0) - coalesce(aperturah,0) = 0 then 0 end Apertura, "
+    SQL = SQL & " acumantd AcumAnt_deudor, acumanth AcumAnt_acreedor, acumperd AcumPer_deudor, acumperh AcumPer_acreedor, "
+    SQL = SQL & " totald Saldo_deudor, totalh Saldo_acreedor, case when coalesce(totald,0) - coalesce(totalh,0) > 0 then concat(coalesce(totald,0) - coalesce(totalh,0),'D') when coalesce(totald,0) - coalesce(totalh,0) < 0 then concat(coalesce(totalh,0) - coalesce(totald,0),'H') when coalesce(totald,0) - coalesce(totalh,0) = 0 then 0 end Saldo"
+    SQL = SQL & " from tmpbalancesumas where codusu = " & vUsu.Codigo
+    SQL = SQL & " order by 1 "
 
         
     'LLamos a la funcion
-    GeneraFicheroCSV sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -1178,8 +1176,8 @@ Dim ConTexto As Byte
     Cont = 1
     RC = 1 'Perdidas y ganancias
     Set Rs = New ADODB.Recordset
-    sql = "Select * from balances where numbalan=" & Me.txtBalan(0).Text
-    Rs.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select * from balances where numbalan=" & Me.txtBalan(0).Text
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
 
             If DBLet(Rs!Aparece, "N") = 0 Then
@@ -1200,8 +1198,8 @@ Dim ConTexto As Byte
     'Textos
     RC = "perdidasyganancias= " & RC & "|"
           
-    sql = RC & "FechaImp= """ & txtFecha(7).Text & """|"
-    sql = sql & "Titulo= """ & Me.txtNBalan(0).Text & """|"
+    SQL = RC & "FechaImp= """ & txtFecha(7).Text & """|"
+    SQL = SQL & "Titulo= """ & Me.txtNBalan(0).Text & """|"
     'PGC 2008 SOlo pone el año, NO el mes
     If vParam.NuevoPlanContable Then
         RC = ""
@@ -1210,7 +1208,7 @@ Dim ConTexto As Byte
     End If
     RC = RC & " " & txtAno(0).Text
     RC = "fec1= """ & RC & """|"
-    sql = sql & RC
+    SQL = SQL & RC
     
     
     If Me.chkBalPerCompa.Value = 1 Then
@@ -1222,19 +1220,19 @@ Dim ConTexto As Byte
             End If
             RC = RC & " " & txtAno(1).Text
             RC = "Fec2= """ & RC & """|"
-            sql = sql & RC
+            SQL = SQL & RC
             
 
     Else
         'Pong el nombre del mes
         RC = UCase(Mid(cmbFecha(0).Text, 1, 1)) & Mid(cmbFecha(0).Text, 2, 2)
         RC = "vMes= """ & RC & """|"
-        sql = sql & RC
+        SQL = SQL & RC
     End If
-    sql = sql & "Titulo= """ & Me.txtNBalan(0).Text & """|"
+    SQL = SQL & "Titulo= """ & Me.txtNBalan(0).Text & """|"
 
 
-    cadParam = cadParam & sql
+    cadParam = cadParam & SQL
     numParam = numParam + 4
 
 
@@ -1254,16 +1252,13 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
 
     MontaSQL = False
     
-'    If Not PonerDesdeHasta("hlinapu.fechaent", "F", Me.txtFecha(0), Me.lblFecha(0), Me.txtFecha(1), Me.lblFecha(1), "pDHFecha=""") Then Exit Function
-
-'    If Not PonerDesdeHasta("hlinapu.codmacta", "CTA", Me.txtCta(0), Me.lblCuentas(0), Me.txtCta(1), Me.lblCuentas(1), "pDHCuentas=""") Then Exit Function
     
     MontaSQL = True
            
@@ -1340,9 +1335,9 @@ Dim L As Integer
 
 L = 1
 Do
-    cad = RecuperaValor(Lista, L)
-    If cad <> "" Then
-        i = Val(cad)
+    Cad = RecuperaValor(Lista, L)
+    If Cad <> "" Then
+        i = Val(Cad)
         With cmbFecha(i)
             .Clear
             For Cont = 1 To 12
@@ -1353,7 +1348,7 @@ Do
         End With
     End If
     L = L + 1
-Loop Until cad = ""
+Loop Until Cad = ""
 End Sub
 
 Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)

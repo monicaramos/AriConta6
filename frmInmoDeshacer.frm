@@ -242,14 +242,6 @@ Dim RC As String
         Cad = "01/01/1991"
         RC = Format(Now, "dd/mm/yyyy")
     End If
-    'If Simulacion Then
-    '     txtFecha.Text = Format(RC, "dd/mm/yyyy")
-    'Else
-    '     txtFecAmo.Text = Format(RC, "dd/mm/yyyy")
-    '     'Dejamos cambiar la fecha, si , y solo si, es administrador
-    '     txtFecAmo.Enabled = vUsu.Nivel < 2
-        
-    'End If
     SugerirFechaNuevo = Format(RC, "dd/mm/yyyy")
     
 End Function

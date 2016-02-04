@@ -601,7 +601,6 @@ Private Sub BotonAnyadir()
     End If
     '********************************************************************
     'Situamos el grid al final
-'    AnyadirLinea DataGrid1, Adodc1
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
@@ -662,12 +661,6 @@ Private Sub BotonModificar()
     txtAux(1).Text = DataGrid1.Columns(1).Text
     txtAux(2).Text = DataGrid1.Columns(2).Text
     
-    ' ***** canviar-ho pel nom del camp del combo *********
-'    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
-    ' *****************************************************
-
-    'PosicionarCombo Me.Combo1(0), i
-    'PosicionarCombo Me.Combo1(1), i
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -705,7 +698,6 @@ Private Sub cmdAceptar_Click()
             If CadB <> "" Then
                 CargaGrid CadB
                 PonerModo 2
-'                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
             End If
             
@@ -728,16 +720,16 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -745,10 +737,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & Adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -761,10 +753,10 @@ Private Sub DataGrid1_DblClick()
 End Sub
 
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
-Dim cad As String
+Dim Cad As String
 
-    If adodc1.Recordset Is Nothing Then Exit Sub
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset Is Nothing Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
         
     Me.Refresh
     Screen.MousePointer = vbHourglass
@@ -803,7 +795,7 @@ Private Sub Form_Activate()
         Else
             PonerModo 2
              If Me.CodigoActual <> "" Then
-                SituarData Me.adodc1, "=", "", True
+                SituarData Me.Adodc1, "=", "", True
             End If
         End If
     End If
@@ -858,24 +850,23 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim sql As String
+    Dim SQL As String
     Dim tots As String
     
-'    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        sql = CadenaConsulta & " where " & vSQL
+        SQL = CadenaConsulta & " where " & vSQL
     Else
-        sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
     If CampoOrden = "" Then
-        sql = sql & " ORDER BY numserie, numregis, fecharec "
+        SQL = SQL & " ORDER BY numserie, numregis, fecharec "
     Else
-        sql = sql & " order by " & CampoOrden & " " & TipoOrden
+        SQL = SQL & " order by " & CampoOrden & " " & TipoOrden
     End If
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
     
     
     
@@ -922,7 +913,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -942,7 +933,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else

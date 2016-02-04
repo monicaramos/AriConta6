@@ -479,10 +479,10 @@ Dim i As Integer
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Visible = False
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Visible = False
     Next i
-    txtaux2(0).Visible = False
+    txtAux2(0).Visible = False
     
     For i = 0 To chkAux.Count - 1
         chkAux(i).Visible = Not B
@@ -498,9 +498,9 @@ Dim i As Integer
     PonerLongCampos
     
     'Si estamos modo Modificar bloquear clave primaria
-    txtaux(0).Enabled = False
-    txtaux(1).Enabled = False
-    txtaux(2).Enabled = False
+    txtAux(0).Enabled = False
+    txtAux(1).Enabled = False
+    txtAux(2).Enabled = False
     
     chkAux(0).Enabled = (Modo = 4)
     chkAux(1).Enabled = (Modo = 4)
@@ -516,7 +516,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -530,21 +530,11 @@ Private Sub BotonAnyadir()
     Dim anc As Single
     
     CargaGrid CadB
-'    CadB = ""
-   
-'    '******************** canviar taula i camp **************************
-'    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-'        NumF = NuevoCodigo
-'    Else
-'        NumF = SugerirCodigoSiguienteStr("productos", "codprodu")
-'    End If
-'    '********************************************************************
-    'Situamos el grid al final
-    'Situamos el grid al final
+
     DataGrid1.AllowAddNew = True
-    If adodc1.Recordset.RecordCount > 0 Then
+    If Adodc1.Recordset.RecordCount > 0 Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
     
@@ -554,20 +544,20 @@ Private Sub BotonAnyadir()
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
     End If
          
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Text = ""
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
     Next i
-    txtaux(1).Text = Format(Now, "dd/mm/yyyy")
+    txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     chkAux(0).Value = 0
     chkAux(1).Value = 0
 
-    txtaux(2).Text = 0
-    txtaux(3).Text = 0
+    txtAux(2).Text = 0
+    txtAux(3).Text = 0
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -581,15 +571,15 @@ Private Sub BotonBuscar()
     CargaGrid "menus_usuarios.codtraba = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Text = ""
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
     Next i
     chkAux(0).Value = 0
     chkAux(1).Value = 0
     
     
     LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -611,19 +601,19 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = CodigoActual
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = adodc1.Recordset!aplicacion
-    txtaux2(0).Text = DataGrid1.Columns(3).Text
+    txtAux(0).Text = CodigoActual
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = Adodc1.Recordset!aplicacion
+    txtAux2(0).Text = DataGrid1.Columns(3).Text
     ' ***** canviar-ho pel nom del camp del combo *********
 '    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
     ' *****************************************************
     
-    Me.chkAux(0).Value = Me.adodc1.Recordset!Ver
-    Me.chkAux(1).Value = Me.adodc1.Recordset!creareliminar
-    Me.chkAux(2).Value = Me.adodc1.Recordset!Modificar
-    Me.chkAux(3).Value = Me.adodc1.Recordset!Imprimir
-    Me.chkAux(4).Value = Me.adodc1.Recordset!especial
+    Me.chkAux(0).Value = Me.Adodc1.Recordset!Ver
+    Me.chkAux(1).Value = Me.Adodc1.Recordset!creareliminar
+    Me.chkAux(2).Value = Me.Adodc1.Recordset!Modificar
+    Me.chkAux(3).Value = Me.Adodc1.Recordset!Imprimir
+    Me.chkAux(4).Value = Me.Adodc1.Recordset!especial
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -637,8 +627,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Top = alto
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
     Next i
     
     ' ### [Monica] 12/09/2006
@@ -693,8 +683,8 @@ Private Sub cmdAceptar_Click()
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
-                        If Not adodc1.Recordset.EOF Then
-                            adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
+                        If Not Adodc1.Recordset.EOF Then
+                            Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
                         End If
                         cmdRegresar_Click
                     Else
@@ -708,26 +698,16 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     ' en caso de modificar el padre, modificamos todos los hijos
-                    If adodc1.Recordset.Fields(0) Mod 10000 = 0 Then
+                    If Adodc1.Recordset.Fields(0) Mod 10000 = 0 Then
                         ModificarHijos
                     End If
                     
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(1)
+                    i = Adodc1.Recordset.Fields(1)
                     PonerModo 2
                     CargaGrid CadB
-'                    If CadB <> "" Then
-'                        CargaGrid CadB
-'                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
-'                    Else
-'                        CargaGrid
-'                        lblIndicador.Caption = ""
-'                    End If
-                    adodc1.Recordset.Find "codigo=" & i
+                    Adodc1.Recordset.Find "codigo=" & i
 
-'                    vWhere = "menus_usuarios.codusu = " & DBSet(NuevoCodigo, "N") & " and menus_usuarios.codigo = " & DBSet(txtAux(1).Text, "N") & " and menus_usuarios.aplicacion = 'ariconta'"
-'
-'                    SituarDataMULTI adodc1, vWhere, Me.lblIndicador, True
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -744,7 +724,7 @@ Dim SQL As String
     SQL = SQL & ", especial = " & DBSet(chkAux(4).Value, "N")
     SQL = SQL & " where codusu = " & DBSet(CodigoActual, "N")
     SQL = SQL & " and aplicacion = 'ariconta'"
-    SQL = SQL & " and codigo in (select codigo from menus where aplicacion = 'ariconta' and padre = " & DBSet(adodc1.Recordset!Codigo, "N") & ")"
+    SQL = SQL & " and codigo in (select codigo from menus where aplicacion = 'ariconta' and padre = " & DBSet(Adodc1.Recordset!Codigo, "N") & ")"
 
     Conn.Execute SQL
 End Sub
@@ -759,18 +739,13 @@ Private Sub cmdCancelar_Click()
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
         Case 4 'modificar
             TerminaBloquear
     End Select
     
     PonerModo 2
     
-'    If CadB <> "" Then
-'        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
-''    Else
-''        lblIndicador.Caption = ""
-'    End If
     
     PonerFocoGrid Me.DataGrid1
     If Err.Number <> 0 Then Err.Clear
@@ -780,9 +755,9 @@ Private Sub cmdRegresar_Click()
 Dim Cad As String
 Dim i As Integer
 Dim J As Integer
-Dim AUx As String
+Dim Aux As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
@@ -792,9 +767,9 @@ Dim AUx As String
         J = i + 1
         i = InStr(J, DatosADevolverBusqueda, "|")
         If i > 0 Then
-            AUx = Mid(DatosADevolverBusqueda, J, i - J)
-            J = Val(AUx)
-            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+            J = Val(Aux)
+            Cad = Cad & Adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
@@ -828,7 +803,7 @@ Private Sub Form_Activate()
         Else
             PonerModo 2
              If Me.CodigoActual <> "" Then
-                SituarData Me.adodc1, "codprodu=" & CodigoActual, "", True
+                SituarData Me.Adodc1, "codprodu=" & CodigoActual, "", True
             End If
         End If
     End If
@@ -837,37 +812,6 @@ End Sub
 Private Sub Form_Load()
     PrimeraVez = True
 
-    
-    '## A mano
-'    chkVistaPrevia.Value = CheckValueLeer(Name)
-    
-'select cast(concat(right(concat('0000',mm.codigo),4),'0000') as signed),mm.codigo, mm.orden, mm.descripcion,uu.ver, IF(ver=1,'*','') as pver, uu.creareliminar,  IF(creareliminar=1,'*','') as pcreareliminar, uu.modificar,  IF(modificar=1,'*','') as pmodificar, uu.imprimir,  IF(imprimir=1,'*','') as pimprimir,menus_usuarios.especial,  IF(especial=1,'*','') as pespecial
-'from menus mm, menus_usuarios uu
-'where mm.aplicacion = 'ariconta'
-'and mm.padre = 0
-'and mm.aplicacion = uu.aplicacion and mm.codigo = uu.codigo and uu.codusu = 0
-'Union
-'select cast(concat(right(concat('0000',hh.padre),4), right(concat('0000',hh.orden),4)) as signed), hh.codigo, hh.orden, hh.descripcion
-'from menus pp , menus hh, menus_usuarios uu
-'where pp.aplicacion = 'ariconta' and
-' pp.aplicacion = hh.aplicacion And hh.Padre = pp.Codigo
-'and hh.aplicacion = uu.aplicacion and hh.codigo = uu.codigo and uu.codusu = 0
-'order by 1
-
-    
-'select cast(concat(right(concat('0000',mm.codigo),4),'0000') as signed) , mm.codigo, mm.orden,if(cast(concat(right(concat('0000',mm.codigo),4),'0000') as signed) mod 10000<>0,concat('     ', mm.descripcion), mm.descripcion),uu.ver, IF(ver=1,'*','') as pver, uu.creareliminar,  IF(creareliminar=1,'*','') as pcreareliminar, uu.modificar,  IF(modificar=1,'*','') as pmodificar, uu.imprimir,  IF(imprimir=1,'*','') as pimprimir,uu.especial,  IF(especial=1,'*','') as pespecial
-'from menus mm, menus_usuarios uu
-'where mm.aplicacion = 'ariconta'
-'and mm.padre = 0
-'and mm.aplicacion = uu.aplicacion and mm.codigo = uu.codigo and uu.codusu = 0
-'Union
-'select cast(concat(right(concat('0000',hh.padre),4), right(concat('0000',hh.orden),4)) as signed) , hh.codigo, hh.orden, if(cast(concat(right(concat('0000',hh.padre),4), right(concat('0000',hh.orden),4)) as signed) mod 10000<>0,concat('     ', hh.descripcion), hh.descripcion),uu.ver, IF(ver=1,'*','') as pver,uu.creareliminar,  IF(creareliminar=1,'*','') as pcreareliminar, uu.modificar,  IF(modificar=1,'*','') as pmodificar, uu.imprimir,  IF(imprimir=1,'*','') as pimprimir, uu.especial,  IF(especial=1,'*','') as pespecial
-'from menus pp , menus hh, menus_usuarios uu
-'where pp.aplicacion = 'ariconta' and
-' pp.aplicacion = hh.aplicacion And hh.Padre = pp.Codigo
-'and hh.aplicacion = uu.aplicacion and hh.codigo = uu.codigo and uu.codusu = 0
-'order by 1
-    
     
     '****************** canviar la consulta *********************************
     CadenaConsulta = "SELECT cast(concat(right(concat('0000',menus.codigo),4),'0000') as signed),menus.codigo, menus_usuarios.aplicacion, if(cast(concat(right(concat('0000',menus.codigo),4),'0000') as signed) mod 10000<>0,concat('     ', menus.descripcion), menus.descripcion),menus_usuarios.ver, IF(menus_usuarios.ver=1,'*','') as pver, menus_usuarios.creareliminar,  IF(menus_usuarios.creareliminar=1,'*','') as pcreareliminar, menus_usuarios.modificar,  IF(menus_usuarios.modificar=1,'*','') as pmodificar, menus_usuarios.imprimir,  IF(menus_usuarios.imprimir=1,'*','') as pimprimir, menus_usuarios.especial, IF(menus_usuarios.especial=1,'*','') as pespecial "
@@ -912,9 +856,9 @@ End Sub
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
     If indice = 1 Then
-        txtaux(1).Text = Format(vFecha, "dd/mm/yyyy") '<===
+        txtAux(1).Text = Format(vFecha, "dd/mm/yyyy") '<===
     Else
-        txtaux(5).Text = Format(vFecha, "dd/mm/yyyy") '<===
+        txtAux(5).Text = Format(vFecha, "dd/mm/yyyy") '<===
     End If
     ' ********************************************
 End Sub
@@ -927,9 +871,9 @@ End Sub
 Private Sub mnModificar_Click()
     'Comprobaciones
     '--------------
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
@@ -968,7 +912,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
     SQL = SQL & " ORDER BY 1 "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "N||||0|;N||||0|;N||||0|;S|txtAux2(0)|T|Descripcion|5000|;"
@@ -990,17 +934,17 @@ End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
     If Index = 6 And Modo = 3 Then
-        txtaux(Index).Enabled = False
+        txtAux(Index).Enabled = False
     End If
 
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
 
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 0

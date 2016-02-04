@@ -224,7 +224,6 @@ Private Sub Form_Activate()
          
          CargaCombo
          PosicionarCombo2 Combo1, Text1(0)
-         'MsgBox "Antes codpc>0"
          
          If CodPC > 0 Then
             If ActualizarVersion Then
@@ -588,7 +587,6 @@ Dim miRsAux As ADODB.Recordset
     miRsAux.Open "Select * from usuarios.usuarios where nivelusu <> -1 order by login", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     
-'    miRsAux.Open "Select * from tipofpago order by descformapago", ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not miRsAux.EOF
         Combo1.AddItem miRsAux!Login
         Combo1.ItemData(Combo1.NewIndex) = miRsAux!codusu

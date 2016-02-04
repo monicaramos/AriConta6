@@ -521,7 +521,7 @@ Dim PrimeraVez As Boolean
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
-Dim I As Integer
+Dim i As Integer
 
     Modo = vModo
 
@@ -539,9 +539,9 @@ Dim I As Integer
     Combo1.Visible = Not B
     Combo2.Visible = Not B
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).BackColor = vbWhite
+    Next i
     Combo1.BackColor = vbWhite
     Combo2.BackColor = vbWhite
     
@@ -568,7 +568,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -585,9 +585,9 @@ Private Sub BotonAnyadir()
 '    NumF = SugerirCodigoSiguiente
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If adodc1.Recordset.RecordCount > 0 Then
+    If Adodc1.Recordset.RecordCount > 0 Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
     
@@ -632,12 +632,12 @@ Private Sub BotonModificar()
     '----------
     Dim Cad As String
     Dim anc As Single
-    Dim I As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    Dim i As Integer
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
 
-    If adodc1.Recordset!codconce > 899 Then
+    If Adodc1.Recordset!codconce > 899 Then
         MsgBox "La aplicación se reserva los 100 ultimos conceptos", vbExclamation
         Exit Sub
     End If
@@ -645,8 +645,8 @@ Private Sub BotonModificar()
     Me.lblIndicador.Caption = "MODIFICAR"
     DeseleccionaGrid
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -659,9 +659,9 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
-    I = adodc1.Recordset!TipoConce
-    Combo1.ListIndex = I - 1
-    If DBLet(adodc1.Recordset!EsEfectivo340, "T") = "" Then
+    i = Adodc1.Recordset!TipoConce
+    Combo1.ListIndex = i - 1
+    If DBLet(Adodc1.Recordset!EsEfectivo340, "T") = "" Then
         Combo2.ListIndex = 0
     Else
         Combo2.ListIndex = 1
@@ -698,23 +698,23 @@ Dim Mc As Contadores
 
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
     SQL = "Seguro que desea eliminar la liquidación:"
-    SQL = SQL & vbCrLf & "Año: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Período: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Tipo: " & adodc1.Recordset.Fields(4)
+    SQL = SQL & vbCrLf & "Año: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Período: " & Adodc1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Tipo: " & Adodc1.Recordset.Fields(4)
     
     Conn.BeginTrans
     
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Select numasien, numdiari, fechaent  from liqiva where anoliqui=" & adodc1.Recordset!anoliqui
-        SQL = SQL & " and periodo = " & DBSet(adodc1.Recordset!Periodo, "N")
-        SQL = SQL & " and escomplem = " & DBSet(adodc1.Recordset!escomplem, "N")
+        SQL = "Select numasien, numdiari, fechaent  from liqiva where anoliqui=" & Adodc1.Recordset!anoliqui
+        SQL = SQL & " and periodo = " & DBSet(Adodc1.Recordset!Periodo, "N")
+        SQL = SQL & " and escomplem = " & DBSet(Adodc1.Recordset!escomplem, "N")
         
         Set Rs = New ADODB.Recordset
         Rs.Open SQL, Conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -751,9 +751,9 @@ Dim Mc As Contadores
         
         
         
-        SQL = "Delete from liqiva where anoliqui=" & adodc1.Recordset!anoliqui
-        SQL = SQL & " and periodo = " & DBSet(adodc1.Recordset!Periodo, "N")
-        SQL = SQL & " and escomplem = " & DBSet(adodc1.Recordset!escomplem, "N")
+        SQL = "Delete from liqiva where anoliqui=" & Adodc1.Recordset!anoliqui
+        SQL = SQL & " and periodo = " & DBSet(Adodc1.Recordset!Periodo, "N")
+        SQL = SQL & " and escomplem = " & DBSet(Adodc1.Recordset!escomplem, "N")
         
         Conn.Execute SQL
         
@@ -765,7 +765,7 @@ Dim Mc As Contadores
         Actualizar = False
         If vParam.periodos = "1" Then ' mensual
             ' es la ultima liquidacion
-            If vParam.anofactu = adodc1.Recordset!anoliqui And vParam.perfactu = Combo1.ListIndex Then
+            If vParam.anofactu = Adodc1.Recordset!anoliqui And vParam.perfactu = Combo1.ListIndex Then
                 Periodo = vParam.perfactu - 1
                 Ano = vParam.anofactu
                 If Periodo = 0 Then
@@ -776,8 +776,8 @@ Dim Mc As Contadores
             End If
         Else ' trimestral
             ' es la ultima liquidacion
-            If vParam.anofactu = adodc1.Recordset!anoliqui And vParam.perfactu = (Me.adodc1.Recordset!Periodo - 12) Then
-                Periodo = adodc1.Recordset!Periodo - 13
+            If vParam.anofactu = Adodc1.Recordset!anoliqui And vParam.perfactu = (Me.Adodc1.Recordset!Periodo - 12) Then
+                Periodo = Adodc1.Recordset!Periodo - 13
                 Ano = vParam.anofactu
                 If Periodo = 0 Then
                     Periodo = 4
@@ -799,7 +799,7 @@ Dim Mc As Contadores
     
     Conn.CommitTrans
     CargaGrid ""
-    adodc1.Recordset.Cancel
+    Adodc1.Recordset.Cancel
     
     Exit Sub
     
@@ -811,12 +811,12 @@ End Sub
 
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
-  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, adodc1
+  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, Adodc1
 End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim CadB As String
     Select Case Modo
     Case 1
@@ -842,10 +842,10 @@ Dim CadB As String
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
-                I = adodc1.Recordset.Fields(0)
+                i = Adodc1.Recordset.Fields(0)
                 PonerModo 0
                 CargaGrid
-                adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
             End If
         End If
     End Select
@@ -860,7 +860,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
             
     End Select
     PonerModo 0
@@ -871,14 +871,14 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim Cad As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro a devolver.", vbExclamation
         Exit Sub
     End If
     
-    Cad = adodc1.Recordset.Fields(0) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(2) & "|"
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(2) & "|"
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -919,15 +919,15 @@ End Sub
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.Visible Then cmdRegresar_Click
     
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
-    If IsNull(adodc1.Recordset!NumAsien) Then Exit Sub
+    If IsNull(Adodc1.Recordset!NumAsien) Then Exit Sub
     
     
-    If Val(adodc1.Recordset!NumAsien) <> 0 Then
+    If Val(Adodc1.Recordset!NumAsien) <> 0 Then
         Set frmAsi = New frmAsientosHco
         
-        frmAsi.ASIENTO = adodc1.Recordset!NumDiari & "|" & adodc1.Recordset!FechaEnt & "|" & adodc1.Recordset!NumAsien & "|"
+        frmAsi.ASIENTO = Adodc1.Recordset!NumDiari & "|" & Adodc1.Recordset!FechaEnt & "|" & Adodc1.Recordset!NumAsien & "|"
         frmAsi.SoloImprimir = True
         frmAsi.Show vbModal
         
@@ -1086,7 +1086,7 @@ Dim tots As String
         SQL = CadenaConsulta
     End If
     SQL = SQL & " order by anoliqui desc, periodo desc "
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
     
     
     
@@ -1099,7 +1099,6 @@ Dim tots As String
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(5).Alignment = dbgRight
-'   DataGrid1.Columns(2).Alignment = dbgRight
     DataGrid1.RowHeight = 350
     
     
@@ -1182,8 +1181,6 @@ End Function
 Private Sub CargaCombo()
     Combo1.Clear
     'periodo liquidado
-'    Combo1.AddItem "Anual"
-'    Combo1.ItemData(Combo1.NewIndex) = 0
     Combo1.AddItem "Enero"
     Combo1.ItemData(Combo1.NewIndex) = 1
     Combo1.AddItem "Febrero"
@@ -1238,15 +1235,15 @@ Dim SQL As String
     SepuedeBorrar = False
     
     ' si no es complementaria miramos si es la ultima liquidacion
-   If Val(adodc1.Recordset!escomplem) = 0 Then
+   If Val(Adodc1.Recordset!escomplem) = 0 Then
         If vParam.periodos = "1" Then ' mensual
             ' es la ultima liquidacion
-            If vParam.anofactu = adodc1.Recordset!anoliqui And vParam.perfactu = Me.adodc1.Recordset!Periodo Then
+            If vParam.anofactu = Adodc1.Recordset!anoliqui And vParam.perfactu = Me.Adodc1.Recordset!Periodo Then
                 SepuedeBorrar = True
             End If
         Else ' trimestral
             ' es la ultima liquidacion
-            If vParam.anofactu = adodc1.Recordset!anoliqui And vParam.perfactu = (Me.adodc1.Recordset!Periodo - 12) Then
+            If vParam.anofactu = Adodc1.Recordset!anoliqui And vParam.perfactu = (Me.Adodc1.Recordset!Periodo - 12) Then
                 SepuedeBorrar = True
             End If
         End If
@@ -1280,15 +1277,6 @@ Dim cerrar As Boolean
     KEYpressGnral KeyAscii, Modo, cerrar
     If cerrar Then Unload Me
 End Sub
-
-
-' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGrid1_GotFocus()
-'  WheelHook DataGrid1
-'End Sub
-'Private Sub DataGrid1_LostFocus()
-'  WheelUnHook
-'End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)

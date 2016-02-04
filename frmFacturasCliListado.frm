@@ -1174,7 +1174,7 @@ Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
-Dim Primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -1249,8 +1249,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub Form_Activate()
-    If Primeravez Then
-        Primeravez = False
+    If PrimeraVez Then
+        PrimeraVez = False
         If Legalizacion <> "" Then
             optTipoSal(2).Value = True
             optVarios(1).Value = True
@@ -1273,7 +1273,7 @@ End Sub
 
 
 Private Sub Form_Load()
-    Primeravez = True
+    PrimeraVez = True
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
@@ -1703,8 +1703,6 @@ Dim nomDocu As String
     cadParam = cadParam & "pFecha=""" & txtFecha(2).Text & """|"
     numParam = numParam + 1
     
-'    cadParam = cadParam & "pFecDes=""" & txtFecha(0).Text & "|"
-'    cadParam = cadParam & "pFecHas=""" & txtFecha(1).Text & "|"
     cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
     cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
     numParam = numParam + 2
@@ -1852,7 +1850,6 @@ Dim SQL As String
     'Los encabezados
     ListView1(Index).ColumnHeaders.Clear
 
- '   ListView1.ColumnHeaders.Add , , "Tipo", 650
     ListView1(Index).ColumnHeaders.Add , , "Código", 900
     ListView1(Index).ColumnHeaders.Add , , "Descripción", 2200
     
