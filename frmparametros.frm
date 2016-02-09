@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmparametros 
@@ -108,6 +108,7 @@ Begin VB.Form frmparametros
       _ExtentY        =   9393
       _Version        =   393216
       Tabs            =   6
+      Tab             =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Verdana"
@@ -120,7 +121,7 @@ Begin VB.Form frmparametros
       EndProperty
       TabCaption(0)   =   "Datos Generales"
       TabPicture(0)   =   "frmparametros.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label1(1)"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(0)"
@@ -157,53 +158,53 @@ Begin VB.Form frmparametros
       TabCaption(1)   =   "Clientes - Proveedores "
       TabPicture(1)   =   "frmparametros.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame2"
+      Tab(1).Control(0)=   "Frame3"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Frame3"
+      Tab(1).Control(1)=   "Frame2"
       Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "I.V.A. - Norma 43"
       TabPicture(2)   =   "frmparametros.frx":0044
-      Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text1(13)"
+      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).Control(0)=   "Label1(14)"
       Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Text1(15)"
+      Tab(2).Control(1)=   "Label1(13)"
       Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Text1(14)"
+      Tab(2).Control(2)=   "Frame1"
       Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Frame17"
+      Tab(2).Control(3)=   "Frame8"
       Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Frame8"
+      Tab(2).Control(4)=   "Frame17"
       Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Frame1"
+      Tab(2).Control(5)=   "Text1(14)"
       Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Label1(13)"
+      Tab(2).Control(6)=   "Text1(15)"
       Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Label1(14)"
+      Tab(2).Control(7)=   "Text1(13)"
       Tab(2).Control(7).Enabled=   0   'False
       Tab(2).ControlCount=   8
       TabCaption(3)   =   "Inmovilizado"
       TabPicture(3)   =   "frmparametros.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame7"
-      Tab(3).Control(1)=   "Frame9"
+      Tab(3).Control(0)=   "Frame14"
+      Tab(3).Control(1)=   "Frame15"
       Tab(3).Control(2)=   "Frame16"
-      Tab(3).Control(3)=   "Frame15"
-      Tab(3).Control(4)=   "Frame14"
+      Tab(3).Control(3)=   "Frame9"
+      Tab(3).Control(4)=   "Frame7"
       Tab(3).ControlCount=   5
       TabCaption(4)   =   "Tesorería I"
       TabPicture(4)   =   "frmparametros.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Frame66"
-      Tab(4).Control(1)=   "FrameValDefecto"
+      Tab(4).Control(0)=   "FrameValDefecto"
+      Tab(4).Control(1)=   "Frame66"
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Tesorería II"
       TabPicture(5)   =   "frmparametros.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "FrameTalones(1)"
-      Tab(5).Control(1)=   "FrameTalones(0)"
-      Tab(5).Control(2)=   "FrameOpAseguradas"
-      Tab(5).Control(3)=   "FrameTalones(2)"
+      Tab(5).Control(0)=   "FrameTalones(2)"
+      Tab(5).Control(1)=   "FrameOpAseguradas"
+      Tab(5).Control(2)=   "FrameTalones(0)"
+      Tab(5).Control(3)=   "FrameTalones(1)"
       Tab(5).ControlCount=   4
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -218,7 +219,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   13
-         Left            =   -65070
+         Left            =   9930
          MaxLength       =   15
          TabIndex        =   35
          Tag             =   "Importe limite 347|N|S|0||parametros|limimpcl|0.00||"
@@ -238,7 +239,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   15
-         Left            =   -64170
+         Left            =   10830
          MaxLength       =   2
          TabIndex        =   34
          Tag             =   "Ultimo periodo liquidación I.V.A.|N|S|0|100|parametros|perfactu|||"
@@ -258,7 +259,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   14
-         Left            =   -65070
+         Left            =   9930
          MaxLength       =   8
          TabIndex        =   33
          Tag             =   "Ultimo año liquidación I.V.A.|N|S|0|9999|parametros|anofactu|||"
@@ -278,7 +279,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   645
-         Left            =   -67260
+         Left            =   7740
          TabIndex        =   184
          Top             =   900
          Width           =   3525
@@ -1713,7 +1714,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   31
-         Left            =   4830
+         Left            =   -70170
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Fecha fin|F|S|||parametros|fechaActiva|dd/mm/yyyy||"
@@ -1733,7 +1734,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1395
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   92
          Top             =   900
          Width           =   7365
@@ -2202,7 +2203,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   17
-         Left            =   2730
+         Left            =   -72270
          MaxLength       =   8
          TabIndex        =   82
          Text            =   "1"
@@ -2222,7 +2223,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   16
-         Left            =   2010
+         Left            =   -72990
          MaxLength       =   8
          TabIndex        =   81
          Text            =   "1"
@@ -2242,7 +2243,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   1290
+         Left            =   -73710
          MaxLength       =   8
          TabIndex        =   80
          Text            =   "1"
@@ -2262,7 +2263,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   8
-         Left            =   570
+         Left            =   -74430
          MaxLength       =   8
          TabIndex        =   79
          Text            =   "1"
@@ -2532,7 +2533,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   2685
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   76
          Top             =   2370
          Width           =   11115
@@ -2886,7 +2887,7 @@ Begin VB.Form frmparametros
       End
       Begin VB.Frame Frame6 
          Height          =   1035
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   73
          Top             =   1560
          Width           =   6765
@@ -2956,7 +2957,7 @@ Begin VB.Form frmparametros
       End
       Begin VB.Frame Frame5 
          Height          =   4305
-         Left            =   7050
+         Left            =   -67950
          TabIndex        =   72
          Top             =   840
          Width           =   4455
@@ -3089,7 +3090,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   2505
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   68
          Top             =   2640
          Width           =   6765
@@ -3343,7 +3344,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   480
+         Left            =   -74520
          MaxLength       =   10
          TabIndex        =   0
          Tag             =   "Fecha inicio|F|N|||parametros|fechaini|dd/mm/yyyy|S|"
@@ -3363,7 +3364,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   2385
+         Left            =   -72615
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Fecha fin|F|N|||parametros|fechafin|dd/mm/yyyy||"
@@ -3653,7 +3654,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   315
          Index           =   13
-         Left            =   -67230
+         Left            =   7770
          TabIndex        =   186
          Top             =   2010
          Width           =   1830
@@ -3671,7 +3672,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   315
          Index           =   14
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   185
          Top             =   1650
          Width           =   2160
@@ -3689,7 +3690,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   255
          Index           =   27
-         Left            =   4830
+         Left            =   -70170
          TabIndex        =   101
          Top             =   870
          Width           =   1320
@@ -3697,7 +3698,7 @@ Begin VB.Form frmparametros
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   2
-         Left            =   6180
+         Left            =   -68820
          Picture         =   "frmparametros.frx":01DF
          Top             =   870
          Width           =   240
@@ -3705,7 +3706,7 @@ Begin VB.Form frmparametros
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   1
-         Left            =   3390
+         Left            =   -71610
          Picture         =   "frmparametros.frx":026A
          Top             =   870
          Width           =   240
@@ -3713,7 +3714,7 @@ Begin VB.Form frmparametros
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   1680
+         Left            =   -73320
          Picture         =   "frmparametros.frx":02F5
          Top             =   870
          Width           =   240
@@ -3731,7 +3732,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   480
+         Left            =   -74520
          TabIndex        =   65
          Top             =   870
          Width           =   1215
@@ -3749,7 +3750,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   2385
+         Left            =   -72615
          TabIndex        =   64
          Top             =   870
          Width           =   1020
@@ -3901,7 +3902,7 @@ Private Sub cmdAceptar_Click()
         PonerModo 2
         
     Case 3
-        If DatosOk Then
+        If DatosOK Then
             'Cambiamos el path
             'CambiaPath True
             If InsertarDesdeForm(Me) Then
@@ -3912,7 +3913,7 @@ Private Sub cmdAceptar_Click()
     
     Case 4
         'Modificar
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             'CambiaPath True
@@ -4593,12 +4594,12 @@ Private Sub PonerCampos()
         End If
 End Sub
 '
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
     Dim B As Boolean
     Dim J As Integer
     
     
-    DatosOk = False
+    DatosOK = False
     
     'Si esta marcado la analitica, entonces debe tener valor grupo ventas y grupo gastos
     If Me.Check1(0).Value = 1 Then
@@ -4717,7 +4718,7 @@ Private Function DatosOk() As Boolean
                 Exit Function
             End If
             
-            DatosOk = False
+            DatosOK = False
             
             'Si es nuevo
             If Modo = 1 Then Text5(3).Text = 1
@@ -4725,7 +4726,7 @@ Private Function DatosOk() As Boolean
         End If
     End If
     
-    DatosOk = B
+    DatosOK = B
 
 End Function
 

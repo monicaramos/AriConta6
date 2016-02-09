@@ -2156,7 +2156,7 @@ On Error GoTo EGeneracabeceraApunte
         Cad = Cad & Format(Fecha, FormatoFecha)
         Cad = Cad & "'," & Mc.Contador
         
-        Cad = Cad & "," & DBSet(Now, "FH") & "," & vUsu.Login & ",'ARICONTA 6: Venta/Baja Inmovilizado'"
+        Cad = Cad & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Inmovilizado Amortización " & Fecha & "'"
         
         Cad = Cad & ",'"
         'Segun sea VENTA, BAJA, o calculo de inmovilizado pondremos una cosa u otra

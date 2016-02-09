@@ -7462,7 +7462,7 @@ Dim Linea As Integer
 Dim TotImpo As Currency
 Dim Sql1 As String
 Dim Rs As ADODB.Recordset
-Dim Impo As Currency
+Dim impo As Currency
 Dim Cad As String
 Dim Sql4 As String
     
@@ -7498,7 +7498,7 @@ Dim Sql4 As String
     'Inserto cabecera de apunte
     SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, feccreacion, usucreacion, desdeaplicacion, obsdiari) VALUES ("
     SQL = SQL & FP.diaricli
-    SQL = SQL & ",'" & Format(FechaPago, FormatoFecha) & "'," & Mc.Contador & "," & DBSet(Now, "FH") & "," & vUsu.Login & ",'ARICONTA 6: Facturas Proveedor',"
+    SQL = SQL & ",'" & Format(FechaPago, FormatoFecha) & "'," & Mc.Contador & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilización Pago Facturas Proveedor',"
     Sql1 = DBSet("Generado desde Facturas de Proveedor el " & Format(Now, "dd/mm/yyyy hh:mm") & " por " & vUsu.Nombre, "T")
     If TotImpo < 0 Then Sql1 = Sql1 & "  (CARGO)"
     Conn.Execute SQL & Sql1 & ")"
@@ -7509,7 +7509,7 @@ Dim Sql4 As String
         Linea = Linea + 1
         
         'importe
-        Impo = ImporteFormateado(DBLet(Rs!Imppagad))
+        impo = ImporteFormateado(DBLet(Rs!Imppagad))
         
         'Inserto en las lineas de apuntes
         SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
@@ -7526,7 +7526,7 @@ Dim Sql4 As String
         Ampliacion = ""
         'Proveedores
         Debe = True
-        If Impo < 0 Then
+        If impo < 0 Then
             If Not vParam.abononeg Then Debe = False
         End If
         If Debe Then
@@ -7541,8 +7541,8 @@ Dim Sql4 As String
                
         'Si el importe es negativo y no permite abonos negativos
         'como ya lo ha cambiado de lado (dbe <-> haber)
-        If Impo < 0 Then
-            If Not vParam.abononeg Then Impo = Abs(Impo)
+        If impo < 0 Then
+            If Not vParam.abononeg Then impo = Abs(impo)
         End If
            
         If Conce = 2 Then
@@ -7568,9 +7568,9 @@ Dim Sql4 As String
         'Importe cobro-pago
         ' nos lo dire "debe"
         If Not Debe Then
-            Cad = Cad & "NULL," & TransformaComasPuntos(CStr(Impo))
+            Cad = Cad & "NULL," & TransformaComasPuntos(CStr(impo))
         Else
-            Cad = Cad & TransformaComasPuntos(CStr(Impo)) & ",NULL"
+            Cad = Cad & TransformaComasPuntos(CStr(impo)) & ",NULL"
         End If
         'Codccost
         Cad = Cad & ",NULL,"

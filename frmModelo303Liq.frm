@@ -706,7 +706,7 @@ Dim NumAsien As Long
     
     ' insertamos en cabecera
     SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion ) SELECT " & vParam.numdia303 & "," & DBSet(txtFecha(2).Text, "F") & "," & DBSet(NumAsien, "N")
-    SQL = SQL & ",'Liquidación de " & Me.cmbPeriodo(0).Text & " de " & txtAno(0).Text & "'," & DBSet(Now, "F") & "," & vUsu.Codigo & ",'ARICONTA 6: Liquidación'"
+    SQL = SQL & ",'Liquidación de " & Me.cmbPeriodo(0).Text & " de " & txtAno(0).Text & "'," & DBSet(Now, "F") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Liquidación'"
     SQL = SQL & " from parametros "
     Conn.Execute SQL
     
@@ -1675,12 +1675,23 @@ Private Function DatosOK() As Boolean
         End If
     End If
     
-    
-    
     If EmpresasSeleccionadas = 0 Then
         MsgBox "Seleccione una empresa", vbExclamation
         Exit Function
     End If
+
+    ' comprobamos que las cuentas no esten a blancos
+    If vParam.CtaHPAcreedor = "" Then
+        MsgBox "Debe introducir una valor para Cuenta HP Acreedora. Revise.", vbExclamation
+        Exit Function
+    End If
+    If vParam.CtaHPDeudor = "" Then
+        MsgBox "Debe introducir una valor para Cuenta HP Deudora. Revise.", vbExclamation
+        Exit Function
+    End If
+    
+
+
 
     DatosOK = True
 

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInmoGenerar 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Form1"
@@ -141,7 +141,7 @@ Option Explicit
 
 Private Const IdPrograma = 509
 
-Public opcion As Byte
+Public Opcion As Byte
     '0.- Parametros
     '1.- Simular
     '2.- Cálculo amort.
@@ -302,7 +302,7 @@ Private Sub Form_Load()
     
     
     Frame2.Visible = False
-    Select Case opcion
+    Select Case Opcion
     Case 2
         txtFecAmo.Text = SugerirFechaNuevo
         txtFecAmo.Enabled = vUsu.Nivel < 2
@@ -510,7 +510,7 @@ On Error GoTo EGen
         Codinmov = Rs!Codinmov
        
         'La fecha depende si estamos calculando normal o estamos vendiendo
-        If opcion = 3 Then
+        If Opcion = 3 Then
 '            Cad = Text4(0).Text
         Else
             Cad = Me.txtFecAmo.Text
@@ -528,7 +528,7 @@ On Error GoTo EGen
         Rs.MoveNext
     Wend
     'Actualizamos la fecha de ultima amortizacion en paraemtros
-    If opcion <> 3 Then
+    If Opcion <> 3 Then
         Cad = "UPDATE paramamort SET ultfecha= '" & Format(Cad, FormatoFecha)
         Cad = Cad & "' WHERE codigo=1"
         Conn.Execute Cad
@@ -548,11 +548,13 @@ End Function
 
 Private Function GeneracabeceraApunte(vTipo As Byte) As Boolean
 Dim Fecha As Date
+Dim vCadena As String
+
 On Error GoTo EGeneracabeceraApunte
         GeneracabeceraApunte = False
-        Cad = "INSERT INTO hcabapu (numdiari, fechaent, numasien,  obsdiari) VALUES ("
+        Cad = "INSERT INTO hcabapu (numdiari, fechaent, numasien,  obsdiari, feccreacion,usucreacion,desdeaplicacion) VALUES ("
         Cad = Cad & RecuperaValor(ParametrosContabiliza, 4) & ",'"
-        If opcion = 3 Then
+        If Opcion = 3 Then
 '            Fecha = CDate(Text4(0).Text)
         Else
             Fecha = CDate(txtFecAmo.Text)
@@ -566,14 +568,18 @@ On Error GoTo EGeneracabeceraApunte
             'VENTA
             If vTipo = 0 Then
                 Cad = Cad & "Venta de "
+                vCadena = "Venta de "
             Else
                 Cad = Cad & "Baja de "
+                vCadena = "Baja de "
             End If
             Cad = Cad & DevNombreSQL(Rs!nominmov)
+            vCadena = vCadena & DevNombreSQL(Rs!nominmov)
         Case Else
             Cad = Cad & "Amortización: " & Fecha
+            vCadena = "Amortización " & Fecha
         End Select
-        Cad = Cad & "')"
+        Cad = Cad & "'," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Inmovilizado " & vCadena & "')"
         Conn.Execute Cad
         GeneracabeceraApunte = True
         Exit Function
