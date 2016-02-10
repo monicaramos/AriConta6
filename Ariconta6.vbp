@@ -156,6 +156,7 @@ Form=frmAsientosHcoPrev.frm
 Form=frmVisReport.frm
 Form=frmTESCobros.frm
 Form=frmTESCobrosDivVto.frm
+Form=frmTESVerCobrosPagos.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

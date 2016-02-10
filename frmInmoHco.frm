@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmInmoHco 
@@ -511,26 +511,26 @@ Dim B As Boolean
     B = (Modo = 0 Or Modo = 2)
     
     For jj = 0 To 4
-        txtAux(jj).Visible = Not B
+        txtaux(jj).Visible = Not B
     Next jj
     
     cmdAux(0).Visible = Not B
     cmdAux(1).Visible = Not B
     
-    For i = 0 To txtAux.Count - 1
-        If i <> 1 Then txtAux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtaux.Count - 1
+        If I <> 1 Then txtaux(I).BackColor = vbWhite
+    Next I
     
     Toolbar1.Buttons(1).Enabled = B
     Toolbar1.Buttons(2).Enabled = B
     cmdAceptar.Visible = Not B
     cmdCancelar.Visible = Not B
     
-    txtAux(0).Enabled = (Modo <> 2)
-    txtAux(2).Enabled = txtAux(0).Enabled
-    txtAux(2).BackColor = txtAux(0).BackColor
-    cmdAux(0).Enabled = txtAux(0).Enabled
-    cmdAux(1).Enabled = txtAux(2).Enabled
+    txtaux(0).Enabled = (Modo <> 2)
+    txtaux(2).Enabled = txtaux(0).Enabled
+    txtaux(2).BackColor = txtaux(0).BackColor
+    cmdAux(0).Enabled = txtaux(0).Enabled
+    cmdAux(1).Enabled = txtaux(2).Enabled
     
     PonerModoUsuarioGnral Modo, "ariconta"
     
@@ -568,14 +568,14 @@ Private Sub BotonAnyadir()
         Else
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
     End If
-    txtAux(0).Text = ""
+    txtaux(0).Text = ""
     For jj = 1 To 4
-        txtAux(jj).Text = ""
+        txtaux(jj).Text = ""
     Next jj
     LLamaLineas anc, 3
     
     'Ponemos el foco
-    PonFoco txtAux(0)
+    PonFoco txtaux(0)
     
 End Sub
 
@@ -595,10 +595,10 @@ Private Sub BotonBuscar()
     DataGrid1.Enabled = True
     'Buscar
     For jj = 0 To 4
-        txtAux(jj).Text = ""
+        txtaux(jj).Text = ""
     Next jj
     LLamaLineas DataGrid1.Top + 250, 1
-    PonFoco txtAux(0)
+    PonFoco txtaux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -607,7 +607,7 @@ Private Sub BotonModificar()
     '----------
     Dim Cad As String
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     If Adodc1.Recordset.EOF Then Exit Sub
 
 
@@ -615,8 +615,8 @@ Private Sub BotonModificar()
     Me.lblIndicador.Caption = "MODIFICAR"
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -628,19 +628,19 @@ Private Sub BotonModificar()
 
     'Llamamos al form
     For jj = 0 To 2
-        txtAux(jj).Text = DataGrid1.Columns(jj).Text
+        txtaux(jj).Text = DataGrid1.Columns(jj).Text
     Next jj
     'El porcentaje
     SQL = Adodc1.Recordset!porcinm
-    txtAux(3).Text = TransformaComasPuntos(SQL)
+    txtaux(3).Text = TransformaComasPuntos(SQL)
         'El porcentaje
     SQL = Adodc1.Recordset!imporinm
-    txtAux(4).Text = TransformaComasPuntos(SQL)
+    txtaux(4).Text = TransformaComasPuntos(SQL)
     
     LLamaLineas anc, 4
    
     'Como es modificar
-    PonFoco txtAux(3)
+    PonFoco txtaux(3)
    
     Screen.MousePointer = vbDefault
 End Sub
@@ -650,7 +650,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     'Fijamos el ancho
     For jj = 0 To 4
-        txtAux(jj).Top = alto
+        txtaux(jj).Top = alto
     Next jj
     cmdAux(0).Top = alto
     cmdAux(1).Top = alto
@@ -687,7 +687,7 @@ Error2:
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim CadB As String
 Select Case Modo
     Case 1
@@ -696,10 +696,10 @@ Select Case Modo
         
         'Para el texto
         TextoBusqueda = ""
-        If txtAux(0).Text <> "" Then TextoBusqueda = TextoBusqueda & "Cod. Inmov " & txtAux(0).Text
-        If txtAux(2).Text <> "" Then TextoBusqueda = TextoBusqueda & "Fecha " & txtAux(2).Text
-        If txtAux(3).Text <> "" Then TextoBusqueda = TextoBusqueda & "Porcentaje " & txtAux(3).Text
-        If txtAux(4).Text <> "" Then TextoBusqueda = TextoBusqueda & "Importe " & txtAux(4).Text
+        If txtaux(0).Text <> "" Then TextoBusqueda = TextoBusqueda & "Cod. Inmov " & txtaux(0).Text
+        If txtaux(2).Text <> "" Then TextoBusqueda = TextoBusqueda & "Fecha " & txtaux(2).Text
+        If txtaux(3).Text <> "" Then TextoBusqueda = TextoBusqueda & "Porcentaje " & txtaux(3).Text
+        If txtaux(4).Text <> "" Then TextoBusqueda = TextoBusqueda & "Importe " & txtaux(4).Text
         
         If CadB <> "" Then
             PonerModo 0
@@ -709,7 +709,7 @@ Select Case Modo
         End If
 
     Case 3
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -722,15 +722,15 @@ Select Case Modo
     
     Case 4
         'Modificar
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
                 Conn.Execute "commit"
-                i = Adodc1.Recordset.Fields(0)
+                I = Adodc1.Recordset.Fields(0)
                 PonerModo 0
                 CargaGrid
-                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
+                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
             End If
         End If
     End Select
@@ -748,18 +748,18 @@ Dim F As Date
             frmEI.Show vbModal
             Set frmEI = Nothing
             
-            PonFoco txtAux(0)
+            PonFoco txtaux(0)
         
         Case 1 ' fecha
             Set frmF = New frmCal
             F = Now
-            If txtAux(2).Text <> "" Then F = CDate(txtAux(2).Text)
+            If txtaux(2).Text <> "" Then F = CDate(txtaux(2).Text)
             
             frmF.Fecha = F
             frmF.Show vbModal
             Set frmF = Nothing
             
-            PonFoco txtAux(2)
+            PonFoco txtaux(2)
 
     End Select
 End Sub
@@ -846,12 +846,12 @@ End Sub
 
 
 Private Sub frmEI_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtAux(1).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtaux(0).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtaux(1).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-    txtAux(2).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(2).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -899,7 +899,7 @@ End Sub
 Private Sub CargaGrid(Optional vSQL As String)
 Dim J As Integer
 Dim TotalAncho As Integer
-Dim i As Integer
+Dim I As Integer
 Dim tots As String
     
     
@@ -937,7 +937,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -965,50 +965,50 @@ End Sub
 
 
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    cmdAux_Click (indice)
+    cmdAux_Click (Indice)
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim Valor As Currency
 
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
 
     Select Case Index
     Case 0
-        txtAux(1).Text = PonerNombreDeCod(txtAux(Index), "inmovele", "nominmov", "codinmov", "N")
+        txtaux(1).Text = PonerNombreDeCod(txtaux(Index), "inmovele", "nominmov", "codinmov", "N")
         
         
     Case 2
-        PonerFormatoFecha txtAux(Index)
+        PonerFormatoFecha txtaux(Index)
     Case Else
     
-        miTag.Cargar txtAux(Index)
-        If miTag.Comprobar(txtAux(Index)) Then
+        miTag.Cargar txtaux(Index)
+        If miTag.Comprobar(txtaux(Index)) Then
             If Index > 2 Then
                 'Son los numeros
-                If InStr(1, txtAux(Index).Text, ",") > 0 Then
-                    Valor = ImporteFormateado(txtAux(Index).Text)
+                If InStr(1, txtaux(Index).Text, ",") > 0 Then
+                    Valor = ImporteFormateado(txtaux(Index).Text)
                     SQL = CStr(Valor)
                 Else
-                     SQL = TransformaPuntosComas(txtAux(Index).Text)
+                     SQL = TransformaPuntosComas(txtaux(Index).Text)
                 End If
-                txtAux(Index).Text = Format(SQL, FormatoImporte)
+                txtaux(Index).Text = Format(SQL, FormatoImporte)
             End If
             
         Else
             'Error con los datos
-            txtAux(Index).Text = ""
-            If Modo <> 0 Then txtAux(Index).SetFocus
+            txtaux(Index).Text = ""
+            If Modo <> 0 Then txtaux(Index).SetFocus
         End If
         
     End Select
 End Sub
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 Dim B As Boolean
 B = CompForm(Me)
 If Not B Then Exit Function
@@ -1017,7 +1017,7 @@ If Modo = 1 Then
     'Estamos insertando
     
 End If
-DatosOk = B
+DatosOK = B
 End Function
 
 Private Sub DeseleccionaGrid()
@@ -1063,7 +1063,7 @@ End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad As String
     
     On Error Resume Next
@@ -1071,22 +1071,22 @@ Dim Cad As String
     Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
     Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 

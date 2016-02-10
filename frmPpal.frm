@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{BD0C1912-66C3-49CC-8B12-7B347BF6C846}#16.2#0"; "Codejock.SkinFramework.v16.2.0.ocx"
 Begin VB.Form frmPpal 
@@ -549,6 +549,32 @@ Begin VB.Form frmPpal
       EndProperty
       OLEDragMode     =   1
    End
+   Begin MSComctlLib.ImageList imgIcoForms 
+      Left            =   390
+      Top             =   8400
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   3
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":EF347
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":EFD59
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":EFDF4
+            Key             =   ""
+         EndProperty
+      EndProperty
+   End
    Begin XtremeSkinFramework.SkinFramework SkinFramework 
       Left            =   210
       Top             =   6030
@@ -598,7 +624,7 @@ Begin VB.Form frmPpal
    Begin VB.Image ImageLogo 
       Height          =   720
       Left            =   7800
-      Picture         =   "frmPpal.frx":EF347
+      Picture         =   "frmPpal.frx":F0806
       Top             =   0
       Width           =   1890
    End
@@ -785,7 +811,7 @@ End Sub
 
 
 Private Sub Form_Resize()
-    Dim X, Y As Integer
+    Dim x, y As Integer
 Dim V ''
 
     If WindowState = 1 Then
@@ -798,18 +824,18 @@ Dim V ''
         Exit Sub
     End If
     
-    X = Me.Width
-    Y = Me.Height
-    If X < 5990 Then Me.Width = 5990
-    If Y < 4100 Then Me.Height = 4100
+    x = Me.Width
+    y = Me.Height
+    If x < 5990 Then Me.Width = 5990
+    If y < 4100 Then Me.Height = 4100
     ImageLogo.Left = Me.Width - ImageLogo.Width - 240
     Label33.Left = 30
-    X = Me.Height - Base
+    x = Me.Height - Base
     
 
-    TreeView1.Height = X
-    X = X \ 6
-    ListView1.Height = X * 4
+    TreeView1.Height = x
+    x = x \ 6
+    ListView1.Height = x * 4
     
     ListView2.Top = ListView1.Top + ListView1.Height + 500
     ListView2.Height = Me.Height - ListView2.Top - 850
@@ -818,21 +844,21 @@ Dim V ''
     TreeView2.Height = ListView2.Height
     
     
-    Y = Me.Width - 200
-    Y = ((30 / 100) * Y)
+    y = Me.Width - 200
+    y = ((30 / 100) * y)
     
     TreeView1.Left = 30
-    TreeView1.Width = Y - 30
+    TreeView1.Width = y - 30
     
     'Separador
-    Me.FrameSeparador.Left = Y + 15
+    Me.FrameSeparador.Left = y + 15
     Me.FrameSeparador.Top = TreeView1.Top
     Me.FrameSeparador.Height = Me.TreeView1.Height
     
-    ListView1.Left = Y + 60
-    Me.ListView2.Left = Y + 60
+    ListView1.Left = y + 60
+    Me.ListView2.Left = y + 60
     
-    AnchoListview = Me.Width - 200 - Y - 30
+    AnchoListview = Me.Width - 200 - y - 30
     ListView1.Width = AnchoListview
     V = Me.ImageLogo.Left
     
@@ -847,11 +873,11 @@ Dim V ''
     ImageLogo.Left = Me.Width - ImageLogo.Width - 120
     ImageLogo.Height = Label22.Height
     
-    X = AnchoListview \ 3
-    ListView2.Width = 2 * X
+    x = AnchoListview \ 3
+    ListView2.Width = 2 * x
     
     Me.TreeView2.Left = Me.ListView2.Left + Me.ListView2.Width + 30
-    TreeView2.Width = X
+    TreeView2.Width = x
     
     'Dos listiview
     lblMsgUsu(0).Top = ListView2.Top - 340 '240
@@ -1200,7 +1226,7 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
         
         Case 10 ' arimailges.exe
             Dim Lanza As String
-            Dim Aux As String
+            Dim AUX As String
             
             
             Lanza = vParam.MailSoporte & "||"
@@ -1216,8 +1242,8 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
             'El/los adjuntos
             Lanza = Lanza & "|"
             
-            Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
-            Shell Aux, vbNormalFocus
+            AUX = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
+            Shell AUX, vbNormalFocus
         
         Case 12 ' Informacion de la base de datos
             If CargarInformacionBBDD Then
@@ -1269,7 +1295,7 @@ Dim FecIniSig As Date
 Dim FecFinSig As Date
 Dim Porcen1 As Currency
 Dim Porcen2 As Currency
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo eCargarInformacionBBDD
     
@@ -1313,16 +1339,16 @@ Dim Rs As ADODB.Recordset
     
     NroRegistrosTotSig = DevuelveValor(SQL)
     
-    i = 3
+    I = 3
     
     SQL = "select * from contadores where not tiporegi in ('0','1')"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
     
-        SQL = "select count(*) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
+        SQL = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
         SQL = SQL & " and fecfactu between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     
         NroRegistros = DevuelveValor(SQL)
@@ -1331,7 +1357,7 @@ Dim Rs As ADODB.Recordset
             Porcen1 = Round(NroRegistros * 100 / NroRegistrosTot, 2)
         End If
         
-        SQL = "select count(*) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
+        SQL = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
         SQL = SQL & " and fecfactu between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
         
         NroRegistrosSig = DevuelveValor(SQL)
@@ -1340,26 +1366,26 @@ Dim Rs As ADODB.Recordset
             Porcen2 = Round(NroRegistrosSig * 100 / NroRegistrosTotSig, 2)
         End If
     
-        CadValues = "(" & vUsu.Codigo & "," & DBSet(i, "N") & "," & DBSet(Rs!nomregis, "T") & "," & DBSet(NroRegistros, "N") & "," & DBSet(Porcen1, "N") & ","
+        CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & "," & DBSet(RS!nomregis, "T") & "," & DBSet(NroRegistros, "N") & "," & DBSet(Porcen1, "N") & ","
         CadValues = CadValues & DBSet(NroRegistrosSig, "N") & "," & DBSet(Porcen2, "N") & ")"
         Conn.Execute SQL2 & CadValues
         
-        i = i + 1
+        I = I + 1
     
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
     'facturas de proveedor
-    i = i + 1
+    I = I + 1
     
     SQL = "select count(*) from factpro where fecharec between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     NroRegistros = DevuelveValor(SQL)
     SQL = "select count(*) from factpro where fecharec between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
     NroRegistrosSig = DevuelveValor(SQL)
     
-    CadValues = "(" & vUsu.Codigo & "," & DBSet(i, "N") & ",'Facturas Proveedores'," & DBSet(NroRegistros, "N") & ",0,"
+    CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & ",'Facturas Proveedores'," & DBSet(NroRegistros, "N") & ",0,"
     CadValues = CadValues & DBSet(NroRegistrosSig, "N") & ",0)"
     
     Conn.Execute SQL2 & CadValues
@@ -1400,19 +1426,19 @@ Private Sub MenuComoEstaba(ByRef TW1 As TreeView, aplicacion As String)
 Dim N As Node
 Dim SQL As String
 
-    For i = 1 To TW1.Nodes.Count
+    For I = 1 To TW1.Nodes.Count
         If aplicacion = "introcon" Then
-            TW1.Nodes(i).Expanded = True
+            TW1.Nodes(I).Expanded = True
         Else
-            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(i), "T") & " and aplicacion = '" & aplicacion & "')"
+            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
     
             If DevuelveValor(SQL) = 0 Then
-                TW1.Nodes(i).Expanded = False
+                TW1.Nodes(I).Expanded = False
             Else
-                TW1.Nodes(i).Expanded = True
+                TW1.Nodes(I).Expanded = True
             End If
         End If
-    Next i
+    Next I
 
 End Sub
 
@@ -1426,27 +1452,27 @@ Dim SQL As String
 End Sub
 
 Private Sub CargaShortCuts(Seleccionado As Long)
-Dim Aux As String
-Dim Rs As ADODB.Recordset
+Dim AUX As String
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim cadAux As String
  
  
     'Para cada usuario, y a partir del menu del que disponga
     Set miRsAux = New ADODB.Recordset
-    Aux = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
-    Aux = Aux & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
+    AUX = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
+    AUX = AUX & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
     
     
     If Not vEmpresa.TieneTesoreria Then
         
-        Aux = Aux & " and tipo = 0"
+        AUX = AUX & " and tipo = 0"
     
     End If
     
     If Not vEmpresa.TieneContabilidad Then
     
-        Aux = Aux & " and tipo = 2"
+        AUX = AUX & " and tipo = 2"
     
     
     End If
@@ -1454,7 +1480,7 @@ Dim cadAux As String
     
     If Reorganizar Then Me.ListView1.Arrange = lvwAutoTop
     
-    miRsAux.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     AnchoListview = 0
     ListView1.ListItems.Clear
     While Not miRsAux.EOF
@@ -1471,18 +1497,18 @@ Dim cadAux As String
     Set miRsAux = Nothing
 
     If Not Reorganizar Then
-        For i = 1 To ListView1.ListItems.Count
-            Set Rs = New ADODB.Recordset
+        For I = 1 To ListView1.ListItems.Count
+            Set RS = New ADODB.Recordset
             
-            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(i).Text, "T") & ")"
-            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            If Not Rs.EOF Then
-                Me.ListView1.ListItems(i).Left = DBLet(Rs.Fields(0).Value)
-                Me.ListView1.ListItems(i).Top = DBLet(Rs.Fields(1).Value)
+            If Not RS.EOF Then
+                Me.ListView1.ListItems(I).Left = DBLet(RS.Fields(0).Value)
+                Me.ListView1.ListItems(I).Top = DBLet(RS.Fields(1).Value)
             End If
-            Set Rs = Nothing
-        Next i
+            Set RS = Nothing
+        Next I
     Else
         Reorganizar = False
         Me.ListView1.Arrange = lvwNone
@@ -1505,9 +1531,9 @@ Private Sub ListView1_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then ListView1_DblClick
 End Sub
 
-Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
      If Button = 2 Then
         'PopupMenu mnPopUp
@@ -1516,20 +1542,20 @@ Dim Rs As ADODB.Recordset
             SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
             SQL = SQL & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
             
-            Set Rs = New ADODB.Recordset
-            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            If Not Rs.EOF Then
-                XAnt = Rs.Fields(0)
-                YAnt = Rs.Fields(1)
+            If Not RS.EOF Then
+                XAnt = RS.Fields(0)
+                YAnt = RS.Fields(1)
             End If
-            Set Rs = Nothing
+            Set RS = Nothing
             
         End If
     End If
 End Sub
 
-Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = 1 Then
         If Not ListView1.SelectedItem Is Nothing Then
             IconoSeleccionado = True
@@ -1538,7 +1564,7 @@ Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, X As Single
     End If
 End Sub
 
-Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim RefrescarDatos As Boolean   'Porque a movido iconos fuera de los margenes
 Dim SQL As String
     
@@ -1548,7 +1574,7 @@ Dim SQL As String
 
 
         'DAVID
-        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", X, Y, RefrescarDatos
+        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", x, y, RefrescarDatos
         If RefrescarDatos Then
             ListView1.Arrange = lvwAutoTop
             ListView1.Refresh
@@ -1563,7 +1589,7 @@ Dim SQL As String
 
 End Sub
 
-Private Sub ListView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single)
 
     
 '    Caption = Data.GetData(1)
@@ -1726,15 +1752,15 @@ End Sub
 
 Private Sub mnUsuariosActivos_Click()
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad(False)
     If CadenaDesdeOtroForm <> "" Then
-        i = 1
+        I = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
+            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
             If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
-            i = i + 1
+            I = I + 1
         Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
@@ -1931,7 +1957,7 @@ End Sub
 
 '''ICONOS
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -1985,7 +2011,7 @@ End Function
 
 Private Sub BuscaEmpresas()
 Dim Prohibidas As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Cad As String
 Dim ItmX As ListItem
@@ -1996,22 +2022,22 @@ Dim SQL As String
 Prohibidas = DevuelveProhibidas
 
 'Cargamos las empresas
-Set Rs = New ADODB.Recordset
+Set RS = New ADODB.Recordset
 
 '[Monica]11/04/2014: solo debe de salir las ariconta
-Rs.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+RS.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-While Not Rs.EOF
-    Cad = "|" & Rs!codempre & "|"
+While Not RS.EOF
+    Cad = "|" & RS!codempre & "|"
     If InStr(1, Prohibidas, Cad) = 0 Then
-        Cad = Rs!nomempre
+        Cad = RS!nomempre
         Set ItmX = ListView2.ListItems.Add()
         
         ItmX.Text = Cad
-        ItmX.SubItems(1) = Rs!nomresum
+        ItmX.SubItems(1) = RS!nomresum
         
         ' sacamos las fechas de inicio y fin
-        SQL = "select fechaini, fechafin from " & Trim(Rs!CONTA) & ".parametros"
+        SQL = "select fechaini, fechafin from " & Trim(RS!CONTA) & ".parametros"
         Set Rs2 = New ADODB.Recordset
         Rs2.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         If Not Rs2.EOF Then
@@ -2020,14 +2046,14 @@ While Not Rs.EOF
         Set Rs2 = Nothing
         
             
-        Cad = Rs!CONTA & "|" & Rs!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        Cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
         ItmX.Tag = Cad
-        ItmX.ToolTipText = Rs!CONTA
+        ItmX.ToolTipText = RS!CONTA
         
         
         'Si el codconta > 100 son empresas que viene del cambio del plan contable.
         'Atenuare su visibilidad
-        If Rs!codempre > 100 Then
+        If RS!codempre > 100 Then
             ItmX.ForeColor = &H808080
             ItmX.ListSubItems(1).ForeColor = &H808080
             ItmX.ListSubItems(2).ForeColor = &H808080
@@ -2038,32 +2064,32 @@ While Not Rs.EOF
             ItmX.SmallIcon = 1
         End If
     End If
-    Rs.MoveNext
+    RS.MoveNext
 Wend
-Rs.Close
+RS.Close
 End Sub
 
 
 Private Function DevuelveProhibidas() As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad As String
-Dim i As Integer
+Dim I As Integer
     On Error GoTo EDevuelveProhibidas
     DevuelveProhibidas = ""
-    Set Rs = New ADODB.Recordset
-    i = vUsu.Codigo Mod 1000
-    Rs.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & i, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    I = vUsu.Codigo Mod 1000
+    RS.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
-        Cad = Cad & Rs.Fields(1) & "|"
-        Rs.MoveNext
+    While Not RS.EOF
+        Cad = Cad & RS.Fields(1) & "|"
+        RS.MoveNext
     Wend
     If Cad <> "" Then Cad = "|" & Cad
-    Rs.Close
+    RS.Close
     DevuelveProhibidas = Cad
 EDevuelveProhibidas:
     Err.Clear
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 

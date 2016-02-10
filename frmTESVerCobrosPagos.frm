@@ -1,15 +1,15 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTESVerCobrosPagos 
    Caption         =   "Form1"
    ClientHeight    =   5760
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   11265
+   ClientWidth     =   12135
    Icon            =   "frmTESVerCobrosPagos.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5760
-   ScaleWidth      =   11265
+   ScaleWidth      =   12135
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameTransfer 
       Height          =   1335
@@ -136,13 +136,13 @@ Begin VB.Form frmTESVerCobrosPagos
       Left            =   120
       TabIndex        =   12
       Top             =   5160
-      Width           =   11175
+      Width           =   11685
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
          Enabled         =   0   'False
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   700
@@ -153,10 +153,10 @@ Begin VB.Form frmTESVerCobrosPagos
          ForeColor       =   &H00000000&
          Height          =   375
          Index           =   3
-         Left            =   1200
+         Left            =   1440
          TabIndex        =   42
          Text            =   "Text2"
-         Top             =   0
+         Top             =   60
          Visible         =   0   'False
          Width           =   1695
       End
@@ -165,7 +165,7 @@ Begin VB.Form frmTESVerCobrosPagos
          BackColor       =   &H80000018&
          Enabled         =   0   'False
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   700
@@ -176,10 +176,10 @@ Begin VB.Form frmTESVerCobrosPagos
          ForeColor       =   &H00000000&
          Height          =   375
          Index           =   2
-         Left            =   3960
+         Left            =   4020
          TabIndex        =   24
          Text            =   "Text2"
-         Top             =   0
+         Top             =   60
          Visible         =   0   'False
          Width           =   1695
       End
@@ -188,7 +188,7 @@ Begin VB.Form frmTESVerCobrosPagos
          BackColor       =   &H80000018&
          Enabled         =   0   'False
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   700
@@ -199,10 +199,10 @@ Begin VB.Form frmTESVerCobrosPagos
          ForeColor       =   &H00000000&
          Height          =   375
          Index           =   1
-         Left            =   6720
+         Left            =   6900
          TabIndex        =   16
          Text            =   "Text2"
-         Top             =   0
+         Top             =   60
          Width           =   1575
       End
       Begin VB.TextBox Text2 
@@ -210,7 +210,7 @@ Begin VB.Form frmTESVerCobrosPagos
          BackColor       =   &H80000018&
          Enabled         =   0   'False
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   700
@@ -221,18 +221,17 @@ Begin VB.Form frmTESVerCobrosPagos
          ForeColor       =   &H00000000&
          Height          =   375
          Index           =   0
-         Left            =   9600
+         Left            =   9930
          TabIndex        =   14
          Text            =   "Text2"
-         Top             =   0
+         Top             =   60
          Width           =   1575
       End
       Begin VB.Label Label2 
-         Alignment       =   1  'Right Justify
          Caption         =   "R. Tal/Pag"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -240,20 +239,20 @@ Begin VB.Form frmTESVerCobrosPagos
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00000080&
-         Height          =   195
+         Height          =   285
          Index           =   3
          Left            =   120
          TabIndex        =   43
          Top             =   120
          Visible         =   0   'False
-         Width           =   960
+         Width           =   1440
       End
       Begin VB.Label Label2 
          Alignment       =   1  'Right Justify
          Caption         =   "RIESGO"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -273,8 +272,8 @@ Begin VB.Form frmTESVerCobrosPagos
          Alignment       =   1  'Right Justify
          Caption         =   " PENDIENTE"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -284,17 +283,17 @@ Begin VB.Form frmTESVerCobrosPagos
          ForeColor       =   &H00004080&
          Height          =   195
          Index           =   1
-         Left            =   8400
+         Left            =   8520
          TabIndex        =   15
          Top             =   120
-         Width           =   1140
+         Width           =   1320
       End
       Begin VB.Label Label2 
          Alignment       =   1  'Right Justify
          Caption         =   "VENCIDO"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -304,10 +303,10 @@ Begin VB.Form frmTESVerCobrosPagos
          ForeColor       =   &H00000080&
          Height          =   195
          Index           =   0
-         Left            =   5760
+         Left            =   5820
          TabIndex        =   13
          Top             =   120
-         Width           =   840
+         Width           =   990
       End
    End
    Begin MSComctlLib.ImageList ImageList1 
@@ -338,11 +337,11 @@ Begin VB.Form frmTESVerCobrosPagos
    End
    Begin MSComctlLib.ListView ListView1 
       Height          =   3735
-      Left            =   0
+      Left            =   30
       TabIndex        =   3
-      Top             =   1320
-      Width           =   11175
-      _ExtentX        =   19711
+      Top             =   1440
+      Width           =   11805
+      _ExtentX        =   20823
       _ExtentY        =   6588
       View            =   3
       LabelEdit       =   1
@@ -354,32 +353,59 @@ Begin VB.Form frmTESVerCobrosPagos
       BackColor       =   -2147483643
       BorderStyle     =   1
       Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       NumItems        =   0
    End
    Begin VB.Frame frame 
-      Height          =   1335
+      Height          =   1425
       Left            =   30
       TabIndex        =   0
       Top             =   0
-      Width           =   11175
+      Width           =   11805
       Begin VB.Frame FrameRemesar 
          BorderStyle     =   0  'None
          Height          =   1095
          Left            =   120
          TabIndex        =   17
-         Top             =   120
-         Width           =   10935
+         Top             =   150
+         Width           =   11505
          Begin VB.CheckBox chkVtoCuenta 
             Caption         =   "Agrupar vtos por cuenta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   0
-            Left            =   8640
+            Left            =   8760
             TabIndex        =   40
             Top             =   480
-            Width           =   2295
+            Width           =   2745
          End
          Begin VB.CheckBox chkGenerico 
             Caption         =   "Cuenta genérica"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   0
             Left            =   6240
@@ -389,71 +415,134 @@ Begin VB.Form frmTESVerCobrosPagos
          End
          Begin VB.CheckBox chkPorFechaVenci 
             Caption         =   "Contab. fecha vto."
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   6240
             TabIndex        =   35
             Top             =   720
-            Width           =   1815
+            Width           =   2265
          End
          Begin VB.CheckBox chkContrapar 
             Caption         =   "Agrupar apunte bancario"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   0
-            Left            =   8640
+            Left            =   8760
             TabIndex        =   32
             Top             =   840
-            Width           =   2295
+            Width           =   2745
          End
          Begin VB.CheckBox chkAsiento 
             Caption         =   "Asiento por pago"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   0
-            Left            =   8640
+            Left            =   8760
             TabIndex        =   31
             Top             =   120
-            Width           =   1815
+            Width           =   2265
          End
          Begin VB.CommandButton cmdGenerar2 
             Caption         =   "Contabilizar"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   375
-            Left            =   4800
+            Left            =   4770
             TabIndex        =   21
             Top             =   120
-            Width           =   1215
+            Width           =   1335
          End
          Begin VB.CommandButton cmdimprimir 
             Caption         =   "Recibos"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   375
-            Left            =   3600
+            Left            =   3420
             TabIndex        =   20
             Top             =   120
-            Width           =   1095
+            Width           =   1215
          End
          Begin VB.TextBox Text3 
             BackColor       =   &H80000018&
             Enabled         =   0   'False
-            Height          =   330
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   1
-            Left            =   840
+            Left            =   1020
             TabIndex        =   19
             Text            =   "Text3"
             Top             =   652
-            Width           =   4095
+            Width           =   4395
          End
          Begin VB.TextBox Text3 
             BackColor       =   &H80000018&
             Enabled         =   0   'False
-            Height          =   330
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   0
-            Left            =   840
+            Left            =   1020
             TabIndex        =   18
             Text            =   "Text3"
             Top             =   82
-            Width           =   1215
+            Width           =   1485
          End
          Begin VB.Image imgTraerRestoDatosCliProv 
             Height          =   240
-            Left            =   2400
+            Left            =   2940
             MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESVerCobrosPagos.frx":65F8
             Top             =   120
@@ -462,7 +551,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   2
-            Left            =   2070
+            Left            =   2610
             ToolTipText     =   "Cambiar fecha contabilizacion"
             Top             =   120
             Width           =   240
@@ -470,7 +559,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Begin VB.Image Image1 
             Height          =   240
             Index           =   1
-            Left            =   10560
+            Left            =   11220
             ToolTipText     =   "AYUDA"
             Top             =   120
             Width           =   240
@@ -478,7 +567,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Begin VB.Image imgCheck 
             Height          =   240
             Index           =   1
-            Left            =   5400
+            Left            =   5820
             MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESVerCobrosPagos.frx":6FFA
             ToolTipText     =   "Seleccionar todos"
@@ -488,7 +577,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Begin VB.Image imgCheck 
             Height          =   240
             Index           =   0
-            Left            =   5040
+            Left            =   5460
             MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESVerCobrosPagos.frx":7144
             ToolTipText     =   "Quitar seleccion"
@@ -497,21 +586,39 @@ Begin VB.Form frmTESVerCobrosPagos
          End
          Begin VB.Label Label3 
             Caption         =   "F. ORDEN"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   1
             Left            =   0
             TabIndex        =   23
             Top             =   120
-            Width           =   855
+            Width           =   1005
          End
          Begin VB.Label Label3 
             Caption         =   "BANCO"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   0
             Left            =   0
             TabIndex        =   22
-            Top             =   720
-            Width           =   555
+            Top             =   690
+            Width           =   885
          End
       End
       Begin VB.CommandButton cmdRegresar 
@@ -562,7 +669,16 @@ Begin VB.Form frmTESVerCobrosPagos
          Width           =   735
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Left            =   120
          TabIndex        =   1
          Text            =   "Text1"
@@ -571,12 +687,21 @@ Begin VB.Form frmTESVerCobrosPagos
       End
       Begin VB.CheckBox chkReme 
          Caption         =   "Mostrar riesgo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Left            =   6120
          TabIndex        =   6
          Top             =   480
          Value           =   1  'Checked
-         Width           =   1455
+         Width           =   2415
       End
       Begin VB.OptionButton Option1 
          Caption         =   "Nombre Cliente"
@@ -590,7 +715,16 @@ Begin VB.Form frmTESVerCobrosPagos
       End
       Begin VB.CheckBox chkTalPag 
          Caption         =   "Riesgo Talon  / pagare"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
          Left            =   6120
          TabIndex        =   7
          Top             =   840
@@ -610,17 +744,26 @@ Begin VB.Form frmTESVerCobrosPagos
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
-         Left            =   720
+         Left            =   1080
          Top             =   360
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Left            =   120
          TabIndex        =   11
          Top             =   360
-         Width           =   450
+         Width           =   840
       End
    End
    Begin VB.Menu mnContextual 
@@ -1638,7 +1781,7 @@ Private Sub Form_Load()
     imgCheck(0).Visible = OrdenarEfecto
     imgCheck(1).Visible = OrdenarEfecto
     chkPorFechaVenci.Value = 0
-    cmdImprimir.Visible = False
+    cmdimprimir.Visible = False
     Me.cmdDividrVto.Visible = Me.DesdeRecepcionTalones  'Para poder dividir vto
     
     imgFecha(2).Visible = False 'Para cambiar la fecha de contabilizacion de los pagos
@@ -1699,7 +1842,7 @@ Private Sub Form_Load()
         Me.chkPorFechaVenci.Visible = I = 0
         chkGenerico(0).Visible = I = 0
         Me.chkVtoCuenta(0).Visible = I = 0
-        cmdImprimir.Visible = I = 0 And Cobros
+        cmdimprimir.Visible = I = 0 And Cobros
         
         'FEBRERO 2010. hemos añadido TALON
         'ES PARA LOS PAGARES , EFECTIVO y RECIBO BANCARIO Y TALON se mostrara el boton de imprimir
@@ -1708,14 +1851,14 @@ Private Sub Form_Load()
         ' Efectos banc:  Imprimira un listado para el banco indicando los efectos k se pagan y cuales no
         If Not Cobros And (Tipo = vbPagare Or Tipo = vbEfectivo Or Tipo = vbTipoPagoRemesa Or Tipo = vbTalon) Then
 
-            cmdImprimir.Visible = True
+            cmdimprimir.Visible = True
             If Tipo = vbPagare Or Tipo = vbTalon Then
-                cmdImprimir.Caption = "Imprimir Doc"
+                cmdimprimir.Caption = "Imprimir Doc"
                 
             ElseIf Tipo = vbEfectivo Then
-                cmdImprimir.Caption = "Recibo"
+                cmdimprimir.Caption = "Recibo"
             Else
-                cmdImprimir.Caption = "List. banco"
+                cmdimprimir.Caption = "List. banco"
             End If
                 
         End If
@@ -1785,7 +1928,7 @@ Private Sub Form_Load()
     
     I = 0
     If Cobros And (Tipo = 2 Or Tipo = 3) Then I = 1
-    Me.mnBarra1.Visible = I = 1
+    Me.mnbarra1.Visible = I = 1
     Me.mnNumero.Visible = I = 1
     'Efectuar cobros
     FrameRemesar.Visible = OrdenarEfecto
@@ -1923,7 +2066,6 @@ On Error GoTo ECargando
     Text2(3).Visible = SeVeRiesgoTalPag And Cobros
     
     
-    
     Set RS = New ADODB.Recordset
     Fecha = CDate(Text1.Text)
     ListView1.ListItems.Clear
@@ -1943,7 +2085,6 @@ On Error GoTo ECargando
         Text2(2).Visible = True
         Label2(3).Visible = True And Cobros
         Text2(3).Visible = True And Cobros
-        
     End If
     
 ECargando:
@@ -1962,9 +2103,6 @@ End Sub
 
 Private Sub CargaCobros()
 Dim Inserta As Boolean
-
-
-
 
     RiesTalPag = 0
     Cad = DevSQL
@@ -2029,20 +2167,20 @@ Dim ImpAux As Currency
 
             Set ItmX = ListView1.ListItems.Add()
             
-            ItmX.Text = RS!NUmSerie
+            ItmX.Text = RS!NumSerie
             ItmX.SubItems(1) = RS!codfaccl
             ItmX.SubItems(2) = Format(RS!fecfaccl, "dd/mm/yyyy")
-            ItmX.SubItems(3) = Format(RS!fecvenci, "dd/mm/yyyy")
+            ItmX.SubItems(3) = Format(RS!FecVenci, "dd/mm/yyyy")
             ItmX.SubItems(4) = RS!numorden
-            ItmX.SubItems(5) = RS!Nommacta
+            ItmX.SubItems(5) = RS!nommacta
             ItmX.SubItems(6) = RS!siglas
             
-            ItmX.SubItems(7) = Format(RS!impvenci, FormatoImporte)
+            ItmX.SubItems(7) = Format(RS!ImpVenci, FormatoImporte)
             vImporte = DBLet(RS!Gastos, "N")
             
             'Gastos
             ItmX.SubItems(8) = Format(vImporte, FormatoImporte)
-            vImporte = vImporte + RS!impvenci
+            vImporte = vImporte + RS!ImpVenci
             
             If Not IsNull(RS!impcobro) Then
                 ItmX.SubItems(9) = Format(RS!impcobro, FormatoImporte)
@@ -2064,7 +2202,7 @@ Dim ImpAux As Currency
             
             ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
                 If OrdenarEfecto Then
-                    If RS!impvenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
+                    If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
                 End If
                 If SeVeRiesgoTalPag Then
                     If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!impcobro, "N")
@@ -2075,7 +2213,7 @@ Dim ImpAux As Currency
                 'Si tiene el parametro y le ha puesto valor
                 If vParam.IntereseCobrosTarjeta > 0 And ImporteGastosTarjeta_ > 0 Then
                     DiasDif = 0
-                    If RS!fecvenci < Fecha Then DiasDif = DateDiff("d", RS!fecvenci, Fecha)
+                    If RS!FecVenci < Fecha Then DiasDif = DateDiff("d", RS!FecVenci, Fecha)
                     If DiasDif > 0 Then
                         'Si ya tenia gastos.
                         If DBLet(RS!Gastos, "N") > 0 Then
@@ -2096,7 +2234,7 @@ Dim ImpAux As Currency
                     
                 End If
             End If
-            If RS!fecvenci < Fecha Then
+            If RS!FecVenci < Fecha Then
                 'LO DEBE
                 ItmX.SmallIcon = 1
                 Vencido = Vencido + impo
@@ -2179,11 +2317,11 @@ Private Sub InsertaItemPago()
 Dim J As Byte
         Set ItmX = ListView1.ListItems.Add()
         
-        ItmX.Text = RS!numfactu
-        ItmX.SubItems(1) = Format(RS!fecfactu, "dd/mm/yyyy")
+        ItmX.Text = RS!NumFactu
+        ItmX.SubItems(1) = Format(RS!FecFactu, "dd/mm/yyyy")
         ItmX.SubItems(2) = Format(RS!fecefect, "dd/mm/yyyy")
         ItmX.SubItems(3) = RS!numorden
-        ItmX.SubItems(4) = RS!Nommacta
+        ItmX.SubItems(4) = RS!nommacta
         ItmX.SubItems(5) = RS!siglas
         ItmX.SubItems(6) = Format(RS!ImpEfect, FormatoImporte)
         If Not IsNull(RS!imppagad) Then
@@ -2454,6 +2592,7 @@ End Sub
 Private Sub mnSelectAll_Click()
     SeleccionarTodos True
 End Sub
+
 
 Private Sub Text1_GotFocus()
     Text1.SelStart = 0
@@ -2744,7 +2883,7 @@ Dim QueDireccionMostrar As Byte
             AUX = Format(DBLet(miRsAux!codbanco, "N"), "0000")
             AUX = AUX & " " & Format(DBLet(miRsAux!codsucur, "N"), "0000") & " "
             AUX = AUX & Mid(DBLet(miRsAux!digcontr, "T") & "  ", 1, 2) & " "
-            AUX = AUX & Right(String(10, "0") & DBLet(miRsAux!cuentaba, "N"), 10)
+            AUX = AUX & Right(String(10, "0") & DBLet(miRsAux!Cuentaba, "N"), 10)
             AUX = "'" & AUX & "'"
         End If
         Cad = Cad & AUX & ","
@@ -2808,10 +2947,10 @@ Dim QueDireccionMostrar As Byte
                 If AUX <> "" Then AUX = AUX & vbCrLf
                 AUX = AUX & DevNombreSQL(DBLet(miRsAux!proclien, "T"))
             Else
-                AUX = DBLet(miRsAux!codposta, "T") & "      " & DevNombreSQL(DBLet(miRsAux!despobla, "T"))
+                AUX = DBLet(miRsAux!codposta, "T") & "      " & DevNombreSQL(DBLet(miRsAux!desPobla, "T"))
                 AUX = Trim(AUX)
                 If AUX <> "" Then AUX = AUX & vbCrLf
-                AUX = AUX & DevNombreSQL(DBLet(miRsAux!desprovi, "T"))
+                AUX = AUX & DevNombreSQL(DBLet(miRsAux!desProvi, "T"))
                 
             End If
             AUX = "'" & AUX & "'"
@@ -2858,7 +2997,7 @@ Dim RT As ADODB.Recordset
         RT.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RT.EOF Then
             AUX = DBLet(RT.Fields(1), "T")
-            If AUX = "" Then AUX = RT!Nommacta
+            If AUX = "" Then AUX = RT!nommacta
             AUX = "'" & DevNombreSQL(AUX) & "'"
             For SubItemVto = 2 To 5
                 AUX = AUX & ",'" & DevNombreSQL(DBLet(RT.Fields(SubItemVto), "T")) & "'"
@@ -4482,7 +4621,7 @@ Dim ImporteInterno As Currency
                  If NumVtos > 1 Then
                     Ampliacion = "Vtos: " & NumVtos
                  Else
-                    Ampliacion = DevNombreSQL(RecuperaValor(RS1!cliente, 1))
+                    Ampliacion = DevNombreSQL(RecuperaValor(RS1!Cliente, 1))
                  End If
                  SQL = SQL & Ampliacion & "',"
                 
@@ -4548,11 +4687,11 @@ Dim ImporteInterno As Currency
                 Select Case TipoAmpliacion
                 Case 0, 1
                    If TipoAmpliacion = 1 Then Ampliacion = Ampliacion & vp.siglas & " "
-                   Ampliacion = Ampliacion & RecuperaValor(RS1!cliente, 1)
+                   Ampliacion = Ampliacion & RecuperaValor(RS1!Cliente, 1)
                 
                 Case 2
                 
-                   Ampliacion = Ampliacion & RecuperaValor(RS1!cliente, 2)
+                   Ampliacion = Ampliacion & RecuperaValor(RS1!Cliente, 2)
                 
                 Case 3
                     'NUEVA AMPLIC
@@ -4575,12 +4714,12 @@ Dim ImporteInterno As Currency
                         'Antes cogiamos numero fra
                         'ahora contrapar
                         
-                        Ampliacion = RecuperaValor(RS1!cliente, 1)  'Num tal pag
+                        Ampliacion = RecuperaValor(RS1!Cliente, 1)  'Num tal pag
                         If False Then
                             
                             Ampliacion = "numserie = '" & Mid(Ampliacion, 1, 1) & "' AND codfaccl = " & Mid(Ampliacion, 2)
-                            Ampliacion = Ampliacion & " AND numorden = " & RecuperaValor(RS1!cliente, 3) & " AND fecfaccl "
-                            Ampliacion = DevuelveDesdeBD("reftalonpag", "scobro", Ampliacion, Format(RecuperaValor(RS1!cliente, 2), FormatoFecha), "F")
+                            Ampliacion = Ampliacion & " AND numorden = " & RecuperaValor(RS1!Cliente, 3) & " AND fecfaccl "
+                            Ampliacion = DevuelveDesdeBD("reftalonpag", "scobro", Ampliacion, Format(RecuperaValor(RS1!Cliente, 2), FormatoFecha), "F")
                             
                         Else
                             'Es numero tal pag + ctrpar
@@ -4590,7 +4729,7 @@ Dim ImporteInterno As Currency
                             DescripcionTransferencia = ""
                         End If
                         If Ampliacion = "" Then
-                            Ampliacion = RecuperaValor(RS1!cliente, 1)
+                            Ampliacion = RecuperaValor(RS1!Cliente, 1)
                         Else
                             Ampliacion = " NºDoc: " & Ampliacion
                         End If
@@ -4608,7 +4747,7 @@ Dim ImporteInterno As Currency
                         End If
                         
                         If Ampliacion = "" Then
-                            Ampliacion = RecuperaValor(RS1!cliente, 1)
+                            Ampliacion = RecuperaValor(RS1!Cliente, 1)
                         Else
                             Ampliacion = "NºDoc: " & Ampliacion
                         End If
@@ -4664,7 +4803,7 @@ Dim ImporteInterno As Currency
                     End If
                        
                     If PonerContrPartida Then
-                       Ampliacion = DevNombreSQL(RecuperaValor(RS1!cliente, 1))
+                       Ampliacion = DevNombreSQL(RecuperaValor(RS1!Cliente, 1))
                     Else
                        
                        Ampliacion = ""
@@ -4738,11 +4877,11 @@ Dim ImporteInterno As Currency
                         Select Case TipoAmpliacion
                         Case 0, 1
                            If TipoAmpliacion = 1 Then Ampliacion = Ampliacion & vp.siglas & " "
-                           Ampliacion = Ampliacion & RecuperaValor(RS1!cliente, 1)
+                           Ampliacion = Ampliacion & RecuperaValor(RS1!Cliente, 1)
                         
                         Case 2
                         
-                           Ampliacion = Ampliacion & RecuperaValor(RS1!cliente, 2)
+                           Ampliacion = Ampliacion & RecuperaValor(RS1!Cliente, 2)
                         
                         Case 3
                             'NUEVA AMPLIC
@@ -4757,13 +4896,13 @@ Dim ImporteInterno As Currency
                             
                           
                                 'Veo la el camporefencia de ese talon
-                                Ampliacion = RecuperaValor(RS1!cliente, 1)
+                                Ampliacion = RecuperaValor(RS1!Cliente, 1)
                                 Ampliacion = "numserie = '" & Mid(Ampliacion, 1, 1) & "' AND codfaccl = " & Mid(Ampliacion, 2)
-                                Ampliacion = Ampliacion & " AND numorden = " & RecuperaValor(RS1!cliente, 3) & " AND fecfaccl "
-                                Ampliacion = DevuelveDesdeBD("reftalonpag", "scobro", Ampliacion, Format(RecuperaValor(RS1!cliente, 2), FormatoFecha), "F")
+                                Ampliacion = Ampliacion & " AND numorden = " & RecuperaValor(RS1!Cliente, 3) & " AND fecfaccl "
+                                Ampliacion = DevuelveDesdeBD("reftalonpag", "scobro", Ampliacion, Format(RecuperaValor(RS1!Cliente, 2), FormatoFecha), "F")
                                 
                                 If Ampliacion = "" Then
-                                    Ampliacion = RecuperaValor(RS1!cliente, 1)
+                                    Ampliacion = RecuperaValor(RS1!Cliente, 1)
                                 Else
                                     Ampliacion = " NºDoc: " & Ampliacion
                                 End If
@@ -4773,7 +4912,7 @@ Dim ImporteInterno As Currency
                                 
                                 Ampliacion = NumeroTalonPagere
                                 If Ampliacion = "" Then
-                                    Ampliacion = RecuperaValor(RS1!cliente, 1)
+                                    Ampliacion = RecuperaValor(RS1!Cliente, 1)
                                 Else
                                     Ampliacion = "NºDoc: " & Ampliacion
                                 End If
@@ -5123,8 +5262,8 @@ Dim J As Integer
     Else
         'ok
         'z340(codusu,codigo,razosoci,dom_intracom,nifdeclarado,nifrepresante,codpais,cp_intracom)
-        SQL = ",1,'" & DevNombreSQL(DBLet(miRsAux!descripcion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!dirdatos, "T")) & "','"
-        SQL = SQL & Format(miRsAux!Entidad, "0000") & "','" & Format(miRsAux!oficina, "0000") & "','" & Right("  " & DBLet(miRsAux!Control, "T"), 2) & "','"
+        SQL = ",1,'" & DevNombreSQL(DBLet(miRsAux!Descripcion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!dirdatos, "T")) & "','"
+        SQL = SQL & Format(miRsAux!Entidad, "0000") & "','" & Format(miRsAux!Oficina, "0000") & "','" & Right("  " & DBLet(miRsAux!Control, "T"), 2) & "','"
         SQL = SQL & miRsAux!CtaBanco & "','" & UCase(DBLet(miRsAux!IBAN, "T")) & "')"
         SQL = "INSERT INTO usuarios.z340(codusu,codigo,razosoci,dom_intracom,nifdeclarado,nifrepresante,codpais,cp_intracom,numreg) VALUES (" & vUsu.Codigo & SQL
         Conn.Execute SQL
@@ -5191,7 +5330,7 @@ Dim FVto As Date
                         Cad = "Select nommacta,razosoci,dirdatos,codposta,despobla,desprovi,obsdatos from cuentas where codmacta ='" & Cta & "'"
                         miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         'NO PUEDE SER EOF
-                        Cad = miRsAux!Nommacta
+                        Cad = miRsAux!nommacta
                         If Not IsNull(miRsAux!razosoci) Then Cad = miRsAux!razosoci
                         Cad = "'" & DevNombreSQL(Cad) & "'"
                         'Direccion
@@ -5199,10 +5338,10 @@ Dim FVto As Date
                         'Poblacion
                         AUX = DBLet(miRsAux!codposta)
                         If AUX <> "" Then AUX = AUX & " - "
-                        AUX = AUX & DevNombreSQL(CStr(DBLet(miRsAux!despobla)))
+                        AUX = AUX & DevNombreSQL(CStr(DBLet(miRsAux!desPobla)))
                         Cad = Cad & ",'" & AUX & "'"
                         'Provincia
-                        Cad = Cad & ",'" & DevNombreSQL(CStr(DBLet(miRsAux!desprovi))) & "'"
+                        Cad = Cad & ",'" & DevNombreSQL(CStr(DBLet(miRsAux!desProvi))) & "'"
                         
                         
                         'Textos
@@ -5354,7 +5493,7 @@ Private Function ComprobarCuentasBloquedasYFechasVencimientos() As Boolean
     RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Cad = ""
     While Not RS.EOF
-        If CDate(RS!numfac) > RS!FecBloq Then Cad = Cad & RS!codmacta & "    " & RS!FecBloq & "     " & Format(RS!numfac, "dd/mm/yyyy") & Space(15) & RecuperaValor(RS!cliente, 1) & vbCrLf
+        If CDate(RS!NumFac) > RS!FecBloq Then Cad = Cad & RS!codmacta & "    " & RS!FecBloq & "     " & Format(RS!NumFac, "dd/mm/yyyy") & Space(15) & RecuperaValor(RS!Cliente, 1) & vbCrLf
         RS.MoveNext
     Wend
     RS.Close
@@ -5408,12 +5547,12 @@ Dim SQL As String
     
     If Not miRsAux.EOF Then
         '---------------------------------------------------------
-        SQL = DBLet(miRsAux!descripcion, "T")
+        SQL = DBLet(miRsAux!Descripcion, "T")
         If SQL = "" Then SQL = Cad
         Cad = "'" & DevNombreSQL(SQL) & "','"
         'entidad oficina control ctabanco
         Cad = Cad & Format(DBLet(miRsAux!Entidad, "N"), "0000") & " "
-        Cad = Cad & Format(DBLet(miRsAux!oficina, "N"), "0000") & " "
+        Cad = Cad & Format(DBLet(miRsAux!Oficina, "N"), "0000") & " "
         Cad = Cad & DBLet(miRsAux!Control, "T") & " "
         Cad = Cad & Format(DBLet(miRsAux!CtaBanco, "N"), "0000000000") & "', "
         
@@ -5461,9 +5600,9 @@ Dim SQL As String
                     '`entidad`,`oficina`,`CC`,`cuentaba`
                     If Not IsNull(miRsAux!Entidad) Then
                         SQL = SQL & "'" & Format(miRsAux!Entidad, "0000") & "','"
-                        SQL = SQL & Format(DBLet(miRsAux!oficina, "N"), "0000") & "','"
+                        SQL = SQL & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "','"
                         SQL = SQL & DBLet(miRsAux!CC, "T") & "','"
-                        SQL = SQL & Format(DBLet(miRsAux!cuentaba, "N"), "0000000000") & "' "
+                        SQL = SQL & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000") & "' "
                     
                     Else
                         SQL = SQL & "NULL,NULL,NULL,NULL"
@@ -5523,8 +5662,8 @@ Dim Fin As Boolean
     While Not Fin
         'numfactu fecfactu numorden
         If miRsAux!ctaprove = IT.Tag Then
-            If miRsAux!numfactu = IT.Text Then
-                If miRsAux!fecfactu = IT.SubItems(1) Then
+            If miRsAux!NumFactu = IT.Text Then
+                If miRsAux!FecFactu = IT.SubItems(1) Then
                     If miRsAux!numorden = IT.SubItems(3) Then
                         'ESTE ES
                         BuscarVtoPago = True
@@ -5604,10 +5743,10 @@ Dim Fin As Boolean
                 If RS!CCost = .Text Then
                     If RS!Pos = .SubItems(1) Then
                         If Format(RS!Nomdocum, "dd/mm/yyyy") = .SubItems(2) Then
-                            If RS!numdiari = .SubItems(4) Then
+                            If RS!NumDiari = .SubItems(4) Then
                                 'Le pongo como fecha de vto la fecha del cobro del fichero
                                 Fin = True
-                                .SubItems(3) = Format(RS!fechaent)
+                                .SubItems(3) = Format(RS!FechaEnt)
                                 .Checked = True
                             End If
                         End If
