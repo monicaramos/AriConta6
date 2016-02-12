@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmIVA 
    Caption         =   "Tipos de I.V.A."
@@ -1118,7 +1118,7 @@ Private Sub cmdRegresar_Click()
 Dim Cad As String
 Dim i As Integer
 Dim J As Integer
-Dim AUx As String
+Dim Aux As String
     
     If Not Data1.Recordset.EOF Then
     
@@ -1129,8 +1129,8 @@ Dim AUx As String
                 J = i + 1
                 i = InStr(J, DatosADevolverBusqueda, "|")
                 If i > 0 Then
-                    AUx = Mid(DatosADevolverBusqueda, J, i - J)
-                    J = Val(AUx)
+                    Aux = Mid(DatosADevolverBusqueda, J, i - J)
+                    J = Val(Aux)
                     Cad = Cad & Text1(J).Text & "|"
                 End If
             Loop Until i = 0
@@ -1196,7 +1196,7 @@ Dim i As Integer
     End With
     
     For i = 0 To imgCuentas.Count - 1
-        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     DespalzamientoVisible False

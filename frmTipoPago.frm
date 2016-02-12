@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmTipoPago 
    BorderStyle     =   1  'Fixed Single
@@ -1264,7 +1264,7 @@ Private Sub cmdAceptar_Click()
     On Error GoTo Error1
     Select Case Modo
     Case 3
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -1275,7 +1275,7 @@ Private Sub cmdAceptar_Click()
         End If
     Case 4
         'Modificar
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
@@ -1542,12 +1542,12 @@ Dim i As Integer
     
     DespalzamientoVisible False
 
-    imgCuentas(2).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCuentas(3).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCuentas(4).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCuentas(8).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCuentas(10).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCuentas(11).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    imgCuentas(2).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCuentas(4).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCuentas(8).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCuentas(10).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCuentas(11).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
 
 
     LimpiarCampos
@@ -1956,9 +1956,9 @@ Dim i As Integer
 End Sub
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 Dim B As Boolean
-    DatosOk = False
+    DatosOK = False
     B = CompForm(Me)
     If Not B Then Exit Function
     
@@ -2004,7 +2004,7 @@ Dim B As Boolean
             B = True
         End If
     End If
-    DatosOk = B
+    DatosOK = B
 End Function
 
 

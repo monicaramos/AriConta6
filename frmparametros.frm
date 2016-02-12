@@ -122,45 +122,45 @@ Begin VB.Form frmparametros
       TabCaption(0)   =   "Datos Generales"
       TabPicture(0)   =   "frmparametros.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(1)"
+      Tab(0).Control(0)=   "Text1(31)"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label1(0)"
+      Tab(0).Control(1)=   "Text1(17)"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgFec(0)"
+      Tab(0).Control(2)=   "Text1(16)"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "imgFec(1)"
+      Tab(0).Control(3)=   "Text1(12)"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "imgFec(2)"
+      Tab(0).Control(4)=   "Text1(8)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label1(27)"
+      Tab(0).Control(5)=   "Frame6"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Text1(1)"
+      Tab(0).Control(6)=   "Frame5"
       Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Text1(0)"
+      Tab(0).Control(7)=   "Frame4"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Frame4"
+      Tab(0).Control(8)=   "Text1(0)"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "Frame5"
+      Tab(0).Control(9)=   "Text1(1)"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Frame6"
+      Tab(0).Control(10)=   "Label1(27)"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "Text1(8)"
+      Tab(0).Control(11)=   "imgFec(2)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "Text1(12)"
+      Tab(0).Control(12)=   "imgFec(1)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text1(16)"
+      Tab(0).Control(13)=   "imgFec(0)"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text1(17)"
+      Tab(0).Control(14)=   "Label1(0)"
       Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text1(31)"
+      Tab(0).Control(15)=   "Label1(1)"
       Tab(0).Control(15).Enabled=   0   'False
       Tab(0).ControlCount=   16
       TabCaption(1)   =   "Clientes - Proveedores "
       TabPicture(1)   =   "frmparametros.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(0)=   "Frame2"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Frame2"
+      Tab(1).Control(1)=   "Frame3"
       Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "I.V.A. - Norma 43"
@@ -186,25 +186,25 @@ Begin VB.Form frmparametros
       TabCaption(3)   =   "Inmovilizado"
       TabPicture(3)   =   "frmparametros.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame14"
-      Tab(3).Control(1)=   "Frame15"
+      Tab(3).Control(0)=   "Frame7"
+      Tab(3).Control(1)=   "Frame9"
       Tab(3).Control(2)=   "Frame16"
-      Tab(3).Control(3)=   "Frame9"
-      Tab(3).Control(4)=   "Frame7"
+      Tab(3).Control(3)=   "Frame15"
+      Tab(3).Control(4)=   "Frame14"
       Tab(3).ControlCount=   5
       TabCaption(4)   =   "Tesorería I"
       TabPicture(4)   =   "frmparametros.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "FrameValDefecto"
-      Tab(4).Control(1)=   "Frame66"
+      Tab(4).Control(0)=   "Frame66"
+      Tab(4).Control(1)=   "FrameValDefecto"
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Tesorería II"
       TabPicture(5)   =   "frmparametros.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "FrameTalones(2)"
-      Tab(5).Control(1)=   "FrameOpAseguradas"
-      Tab(5).Control(2)=   "FrameTalones(0)"
-      Tab(5).Control(3)=   "FrameTalones(1)"
+      Tab(5).Control(0)=   "FrameTalones(1)"
+      Tab(5).Control(1)=   "FrameTalones(0)"
+      Tab(5).Control(2)=   "FrameOpAseguradas"
+      Tab(5).Control(3)=   "FrameTalones(2)"
       Tab(5).ControlCount=   4
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -4014,24 +4014,24 @@ Private Sub Form_Load()
         .Buttons(1).Image = 26
     End With
     
-    imgCta2(0).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    Image2.Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgIVA.Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCta2(4).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    imgCta2(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Image2.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgIVA.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCta2(4).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     For i = 7 To 10
-        imgCta2(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgCta2(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     For i = 0 To 2
-        imgcta(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgcta(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     For i = 0 To 3
-        imgDiario(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgDiario(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     For i = 0 To 5
-        imgConcep(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgConcep(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     For i = 0 To 1
-        Image3(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Image3(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     'Se muestra unicamente si hay tesorería

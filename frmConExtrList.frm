@@ -879,7 +879,7 @@ End Sub
 
 Private Sub cmdAccion_Click(Index As Integer)
     
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     
     'Exportacion a PDF
@@ -960,7 +960,7 @@ Private Sub Form_Load()
     Me.Caption = "Extracto de Cuentas"
 
     For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     PrimeraVez = True
@@ -1468,9 +1468,9 @@ Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
     End If
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
     
-    DatosOk = False
+    DatosOK = False
     
     If txtFecha(2).Text = "" Then
         MsgBox "Debe introducir un valor para la Fecha del listado.", vbExclamation
@@ -1478,7 +1478,7 @@ Private Function DatosOk() As Boolean
         Exit Function
     End If
 
-    DatosOk = True
+    DatosOK = True
 
 End Function
 

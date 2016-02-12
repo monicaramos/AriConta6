@@ -647,7 +647,7 @@ Dim Cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
-Dim Primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -724,7 +724,7 @@ End Sub
 
 
 Private Sub Form_Load()
-    Primeravez = True
+    PrimeraVez = True
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
@@ -739,7 +739,7 @@ Private Sub Form_Load()
     Me.PushButton2(0).Enabled = False
 
     For i = 0 To 1
-        Me.imgSerie(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     If NumSerie <> "" Then

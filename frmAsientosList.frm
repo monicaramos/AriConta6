@@ -795,8 +795,8 @@ Private Sub Form_Load()
     Me.Caption = "Asientos Diario"
 
     For i = 0 To 1
-        Me.imgAsientos(i).Picture = frmPpal.ImageList3.ListImages(29).Picture
-        Me.imgDiario(i).Picture = frmPpal.ImageList3.ListImages(29).Picture
+        Me.imgAsientos(i).Picture = frmPpal.imgIcoForms.ListImages(29).Picture
+        Me.imgDiario(i).Picture = frmPpal.imgIcoForms.ListImages(29).Picture
     Next i
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida

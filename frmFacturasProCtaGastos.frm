@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacturasProCtaGastos 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   7755
@@ -941,7 +941,7 @@ Private Sub Form_Load()
     Me.Caption = "Relación de Proveedores por Cta Gastos"
      
     For i = 0 To 3
-        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     ' La Ayuda

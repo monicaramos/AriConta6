@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInfEvolSal 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   6465
@@ -1042,7 +1042,7 @@ Private Sub Form_Load()
     Me.Caption = "Evolución de Saldos"
 
     For i = 6 To 7
-        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     PrimeraVez = True

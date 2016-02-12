@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmFacturasProPag 
@@ -830,14 +830,14 @@ Dim B As Boolean
     
     Frame2.Enabled = (Modo = 2)
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Visible = (Modo = 1)
-        txtAux(i).Enabled = (Modo = 1)
+    For i = 0 To txtaux.Count - 1
+        txtaux(i).Visible = (Modo = 1)
+        txtaux(i).Enabled = (Modo = 1)
     Next i
     
     For i = 2 To 3
-        txtAux(i).Visible = (Modo = 1 Or Modo = 4)
-        txtAux(i).Enabled = (Modo = 1 Or Modo = 4)
+        txtaux(i).Visible = (Modo = 1 Or Modo = 4)
+        txtaux(i).Enabled = (Modo = 1 Or Modo = 4)
     Next i
     
     
@@ -857,7 +857,7 @@ Dim B As Boolean
     PonerOpcionesMenu  'En funcion del usuario
     
     'Si estamos modo Modificar bloquear clave primaria
-     txtAux(1).Enabled = (Modo = 4)
+     txtaux(1).Enabled = (Modo = 4)
      
      If cmdRegresar.Visible And Modo = 2 Then cmdRegresar.SetFocus
      
@@ -907,12 +907,12 @@ Private Sub BotonBuscar()
     CargaGrid "tmppagos.codusu is null"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
+    For i = 0 To txtaux.Count - 1
+        txtaux(i).Text = ""
     Next i
     
     LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
-    PonFoco txtAux(0)
+    PonFoco txtaux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -934,16 +934,16 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtAux(0).Text = DataGrid1.Columns(0).Text
-    txtAux(1).Text = DataGrid1.Columns(1).Text 'codsocio
-    txtAux(2).Text = DataGrid1.Columns(2).Text
-    txtAux(3).Text = DataGrid1.Columns(3).Text
+    txtaux(0).Text = DataGrid1.Columns(0).Text
+    txtaux(1).Text = DataGrid1.Columns(1).Text 'codsocio
+    txtaux(2).Text = DataGrid1.Columns(2).Text
+    txtaux(3).Text = DataGrid1.Columns(3).Text
     
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonFoco txtAux(3)
+    PonFoco txtaux(3)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -952,8 +952,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
+    For i = 0 To txtaux.Count - 1
+        txtaux(i).Top = alto
     Next i
     For i = 0 To Me.btnBuscar.Count - 1
         btnBuscar(i).Top = alto
@@ -1030,7 +1030,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             
             menu = Me.Height - Me.ScaleHeight 'ací tinc el heigth del menú i de la toolbar
         
-            If txtAux(2).Text <> "" Then frmC.Fecha = txtAux(2).Text
+            If txtaux(2).Text <> "" Then frmC.Fecha = txtaux(2).Text
             
             frmC.Left = esq + btnBuscar(Index).Parent.Left + 30
             frmC.Top = dalt + btnBuscar(Index).Parent.Top + btnBuscar(Index).Height + menu - 40
@@ -1041,7 +1041,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             frmC.Show vbModal
             Set frmC = Nothing
             ' *** repasar si el camp es txtAux o Text1 ***
-            PonFoco txtAux(2) '<===
+            PonFoco txtaux(2) '<===
             ' ********************************************
             
     End Select
@@ -1220,7 +1220,7 @@ Dim SQL2 As String
         .Buttons(3).Image = 5
     End With
 
-    Image1(1).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    Image1(1).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT tmppagos.codusu, tmppagos.numorden, tmppagos.fecvenci, tmppagos.impvenci "
@@ -1270,7 +1270,7 @@ Private Sub frmBan_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-    txtAux(2).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtaux(2).Text = Format(vFecha, "dd/mm/yyyy") '<===
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -1533,19 +1533,19 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFocoLin txtaux(Index)
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 3 ' importe de vto
-            PonerFormatoDecimal txtAux(Index), 1
+            PonerFormatoDecimal txtaux(Index), 1
              
         Case 2 ' fecha de lectura actual
-            PonerFormatoFecha txtAux(Index)
+            PonerFormatoFecha txtaux(Index)
     End Select
     
 End Sub
@@ -1565,7 +1565,7 @@ Dim Limite As Long
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-         If ExisteCP(txtAux(0)) Then B = False
+         If ExisteCP(txtaux(0)) Then B = False
     End If
     
     If B And Modo = 4 Then
@@ -1713,7 +1713,7 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
 
     If Index = 3 Then ' estoy introduciendo la lectura
        If KeyAscii = 13 Then 'ENTER
-            PonerFormatoEntero txtAux(Index)
+            PonerFormatoEntero txtaux(Index)
             If Modo = 4 Then
                 cmdAceptar_Click
                 'ModificarLinea
@@ -1760,10 +1760,10 @@ Private Sub PasarSigReg()
     If Me.DataGrid1.Bookmark < Me.Adodc1.Recordset.RecordCount Then
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
         BotonModificar
-        PonFoco txtAux(3)
+        PonFoco txtaux(3)
     ElseIf DataGrid1.Bookmark = Adodc1.Recordset.RecordCount Then
         BotonModificar
-        PonFoco txtAux(3)
+        PonFoco txtaux(3)
     End If
 End Sub
 
@@ -1773,10 +1773,10 @@ Private Sub PasarAntReg()
     If Me.DataGrid1.Bookmark > 1 Then
         DataGrid1.Bookmark = DataGrid1.Bookmark - 1
         BotonModificar
-        PonFoco txtAux(3)
+        PonFoco txtaux(3)
     ElseIf DataGrid1.Bookmark = 1 Then
         BotonModificar
-        PonFoco txtAux(3)
+        PonFoco txtaux(3)
     End If
 End Sub
 

@@ -13,7 +13,7 @@ Option Explicit
 '
 'Puede NO poner pais. Sera ES
 Public Function DevuelveIBAN2(PAIS As String, ByVal CtaBancoFormateada As String, DosCaracteresIBAN As String) As Boolean
-Dim AUx As String
+Dim Aux As String
 Dim N As Long
 Dim CadenaPais As String
 On Error GoTo EDevuelveIBAN
@@ -56,20 +56,20 @@ On Error GoTo EDevuelveIBAN
     CadenaPais = CadenaPais & "00"
     'Esta es la cadena para ES. SiCadenaPais  fuera otro pais es aqui donde hay que cambiar
     CtaBancoFormateada = CtaBancoFormateada & "142800"
-    AUx = ""
+    Aux = ""
     While CtaBancoFormateada <> ""
         If Len(CtaBancoFormateada) >= 6 Then
-            AUx = AUx & Mid(CtaBancoFormateada, 1, 6)
+            Aux = Aux & Mid(CtaBancoFormateada, 1, 6)
             CtaBancoFormateada = Mid(CtaBancoFormateada, 7)
         Else
-            AUx = AUx & CtaBancoFormateada
+            Aux = Aux & CtaBancoFormateada
             CtaBancoFormateada = ""
         End If
         
-        N = CLng(AUx)
+        N = CLng(Aux)
         N = N Mod 97
         
-        AUx = CStr(N)
+        Aux = CStr(N)
     Wend
         
     N = 98 - N
@@ -88,22 +88,90 @@ End Function
 
 
 Public Function IBAN_Correcto(IBAN As String) As Boolean
-Dim AUx As String
+Dim Aux As String
     IBAN_Correcto = False
-    AUx = ""
+    Aux = ""
     If Len(IBAN) <> 4 Then
-        AUx = "Longitud incorrecta"
+        Aux = "Longitud incorrecta"
     Else
-        If IsNumeric(Mid(AUx, 3, 2)) Then
-            AUx = "Digitos 3 y 4 deben ser numericos"
+        If IsNumeric(Mid(Aux, 3, 2)) Then
+            Aux = "Digitos 3 y 4 deben ser numericos"
         Else
             'Podriamos comprobar lista de paises
     
         End If
     End If
-    If AUx <> "" Then
-        MsgBox AUx, vbExclamation
+    If Aux <> "" Then
+        MsgBox Aux, vbExclamation
     Else
         IBAN_Correcto = True
     End If
 End Function
+
+
+
+
+'A partir de una cadena, con letras y numeros convertira
+'en mod 97,10 Norma ISO 7064
+'Para ello los caracteres se pasan a dos digitos
+Public Function CadenaTextoMod97(CADENA As String) As String
+Dim I As Integer
+Dim C As String
+Dim N As Long
+
+    CADENA = Trim(CADENA)
+    C = ""
+    'Substitucion de texto por caracteres
+    For I = 1 To Len(CADENA)
+        N = Asc(Mid(CADENA, I, 1))
+        If N >= 48 Then
+            If N <= 57 Then
+                'Es numerico 0..9
+                'C = C & CStr(N)
+            Else
+                If N < 65 Or N > 90 Then
+                    'MAL. No es un caracter ASCII entre A..Z  (10..35)
+                    N = 0
+                Else
+                    N = N - 55  'el ascci menos 55 (0...35)
+                End If
+            End If
+        End If
+        If N = 0 Then
+            CadenaTextoMod97 = "Caracter NO valido: " & Mid(CADENA, I, 1) & " --- " & CADENA
+            Exit Function
+        Else
+            If N >= 48 Then
+                'Es un numero
+                C = C & Chr(N)
+            Else
+                C = C & CStr(N)
+            End If
+        End If
+        
+    Next
+    
+    
+    
+    'Ya tengo C que es numerica
+    CADENA = C
+    C = ""
+    While CADENA <> ""
+        If Len(CADENA) >= 6 Then
+            C = C & Mid(CADENA, 1, 6)
+            CADENA = Mid(CADENA, 7)
+        Else
+            C = C & CADENA
+            CADENA = ""
+        End If
+        
+        N = CLng(C)
+        N = N Mod 97
+        
+        C = CStr(N)
+    Wend
+        
+    N = 98 - N
+    CadenaTextoMod97 = Format(N, "00")
+End Function
+

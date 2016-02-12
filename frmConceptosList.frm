@@ -553,7 +553,7 @@ Private Sub Form_Load()
     optVarios(0).Value = True
 
     For i = 0 To 1
-        Me.imgConcepto(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgConcepto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0

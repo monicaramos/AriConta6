@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInfTotCtaCon 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   7365
@@ -809,10 +809,10 @@ Private Sub Form_Load()
     Me.Caption = "Totales por Cuenta y Conceptos"
 
     For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     For i = 0 To 0
-        Me.imgConceptos(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgConceptos(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     PrimeraVez = True

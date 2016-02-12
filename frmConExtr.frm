@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmConExtr 
    BorderStyle     =   1  'Fixed Single
@@ -882,7 +882,7 @@ Dim ImpH As Currency
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
     On Error Resume Next
-    Label10.Caption = DBLet(adodc1.Recordset!nommacta, "T")
+    Label10.Caption = DBLet(Adodc1.Recordset!nommacta, "T")
     If Err.Number <> 0 Then
         Err.Clear
         Label10.Caption = ""
@@ -1094,7 +1094,7 @@ Dim i As Integer
     End If
     
    
-    imgCuentas.Picture = frmPpal.ImageList3.ListImages(1).Picture
+    imgCuentas.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
 
 
     ' añadido por el tema del listview
@@ -1203,7 +1203,7 @@ If Not VieneDeIntroduccion Then
         espera 0.1
         If AsientoConExtModificado = 1 Then
             QuedanLineasDespuesModificar = True
-            NumAsien = adodc1.Recordset!NumAsien
+            NumAsien = Adodc1.Recordset!NumAsien
             'Volvemos a recargar datos
             Screen.MousePointer = vbHourglass
             Me.Refresh
@@ -1211,7 +1211,7 @@ If Not VieneDeIntroduccion Then
             CargarDatos True
             If QuedanLineasDespuesModificar Then
                 'Intentamos buscar el asiento
-                adodc1.Recordset.Find "numasien = " & NumAsien
+                Adodc1.Recordset.Find "numasien = " & NumAsien
             Else
                 'NO QUEDAN LINEAS
                 HacerToolBar 1
@@ -1367,7 +1367,7 @@ End Function
 Private Sub CargaGrid()
 
 
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     SQL = " codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, contra, ampconce, timporteD, timporteH, saldo,ccost, Punteada"
     If Text3(2).Text <> "" Then
         SQL = SQL & ",nommacta"
@@ -1381,13 +1381,13 @@ Private Sub CargaGrid()
     
     'Si Text3(2).text=""
     
-    adodc1.RecordSource = SQL
-    adodc1.Refresh
+    Adodc1.RecordSource = SQL
+    Adodc1.Refresh
     
     
     
     Label101.Caption = "Total lineas:   "
-    Label101.Caption = Label101.Caption & Me.adodc1.Recordset.RecordCount
+    Label101.Caption = Label101.Caption & Me.Adodc1.Recordset.RecordCount
     
 End Sub
 

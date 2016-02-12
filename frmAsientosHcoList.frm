@@ -780,7 +780,7 @@ Dim Cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
-Dim Primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -844,8 +844,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub Form_Activate()
-    If Primeravez Then
-        Primeravez = False
+    If PrimeraVez Then
+        PrimeraVez = False
         If Legalizacion <> "" Then
             optTipoSal(2).Value = True
             cmdAccion_Click (1)
@@ -866,7 +866,7 @@ End Sub
 
 
 Private Sub Form_Load()
-    Primeravez = True
+    PrimeraVez = True
     
     Me.Icon = frmPpal.Icon
         
@@ -874,7 +874,7 @@ Private Sub Form_Load()
     Me.Caption = "Impresión de Diario"
 
     For i = 0 To 1
-        Me.imgDiario(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgDiario(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     txtFecha(2).Text = Format(Now, "dd/mm/yyyy")

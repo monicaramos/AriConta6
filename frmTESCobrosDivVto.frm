@@ -4,7 +4,7 @@ Begin VB.Form frmTESCobrosDivVto
    Appearance      =   0  'Flat
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listados"
-   ClientHeight    =   2475
+   ClientHeight    =   3900
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   5565
@@ -12,7 +12,7 @@ Begin VB.Form frmTESCobrosDivVto
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2475
+   ScaleHeight     =   3900
    ScaleWidth      =   5565
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
@@ -23,13 +23,50 @@ Begin VB.Form frmTESCobrosDivVto
       _Version        =   393216
    End
    Begin VB.Frame FrameDividVto 
-      Height          =   2415
+      Height          =   3855
       Left            =   60
-      TabIndex        =   0
+      TabIndex        =   5
       Top             =   0
       Visible         =   0   'False
       Width           =   5415
-      Begin VB.TextBox txtImporte 
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Index           =   2
+         Left            =   2190
+         TabIndex        =   2
+         Top             =   2280
+         Width           =   1365
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Index           =   0
+         Left            =   2190
+         TabIndex        =   0
+         Tag             =   "Nº asiento|N|S|0||hcabapu|numasien|####0|S|"
+         Top             =   1350
+         Width           =   1365
+      End
+      Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
@@ -42,9 +79,9 @@ Begin VB.Form frmTESCobrosDivVto
          EndProperty
          Height          =   300
          Index           =   1
-         Left            =   1770
-         TabIndex        =   3
-         Top             =   1305
+         Left            =   2190
+         TabIndex        =   1
+         Top             =   1800
          Width           =   1365
       End
       Begin VB.CommandButton cmdDivVto 
@@ -60,8 +97,8 @@ Begin VB.Form frmTESCobrosDivVto
          EndProperty
          Height          =   375
          Left            =   3000
-         TabIndex        =   4
-         Top             =   1920
+         TabIndex        =   3
+         Top             =   3300
          Width           =   975
       End
       Begin VB.CommandButton cmdCancelar 
@@ -78,9 +115,74 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   375
          Index           =   27
          Left            =   4200
-         TabIndex        =   5
-         Top             =   1920
+         TabIndex        =   4
+         Top             =   3300
          Width           =   975
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   0
+         Left            =   1920
+         Picture         =   "frmTESCobrosDivVto.frx":000C
+         Top             =   2280
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Fecha 1er Vto"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   2
+         Left            =   450
+         TabIndex        =   11
+         Top             =   2280
+         Width           =   1410
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Nº Vencimientos"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   1
+         Left            =   450
+         TabIndex        =   10
+         Top             =   1350
+         Width           =   1650
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Importe"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   0
+         Left            =   450
+         TabIndex        =   9
+         Top             =   1800
+         Width           =   780
       End
       Begin VB.Label Label4 
          Caption         =   "euros"
@@ -96,15 +198,15 @@ Begin VB.Form frmTESCobrosDivVto
          ForeColor       =   &H00000000&
          Height          =   240
          Index           =   62
-         Left            =   3240
-         TabIndex        =   7
-         Top             =   1320
+         Left            =   3660
+         TabIndex        =   8
+         Top             =   1770
          Width           =   630
       End
       Begin VB.Label Label4 
          Caption         =   "Datos vto"
          BeginProperty Font 
-            Name            =   "Tahoma"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -116,47 +218,27 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   57
          Left            =   240
-         TabIndex        =   6
-         Top             =   960
+         TabIndex        =   7
+         Top             =   570
          Width           =   5040
       End
-      Begin VB.Label Label2 
-         Alignment       =   2  'Center
-         Caption         =   "Dividir vencimiento "
+      Begin VB.Label Label4 
+         Caption         =   "Datos vto"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   405
-         Index           =   16
-         Left            =   240
-         TabIndex        =   2
-         Top             =   240
-         Width           =   4890
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Datos vto"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
          Height          =   240
          Index           =   56
          Left            =   240
-         TabIndex        =   1
-         Top             =   720
+         TabIndex        =   6
+         Top             =   330
          Width           =   5040
       End
    End
@@ -175,27 +257,21 @@ Public Opcion As Byte
     
 Private WithEvents frmCta As frmColCtas
 Attribute frmCta.VB_VarHelpID = -1
-Private WithEvents frmC As frmCal
-Attribute frmC.VB_VarHelpID = -1
-'Private WithEvents frmB As frmBuscaGrid
-Private WithEvents frmBa As frmBanco
-Attribute frmBa.VB_VarHelpID = -1
+Private WithEvents frmF As frmCal
+Attribute frmF.VB_VarHelpID = -1
 Private WithEvents frmA As frmAgentes
 Attribute frmA.VB_VarHelpID = -1
 Private WithEvents frmP As frmFormaPago
 Attribute frmP.VB_VarHelpID = -1
-'Private WithEvents frmD As frmDepartamentos
-Private WithEvents frmS As frmBasico
-Attribute frmS.VB_VarHelpID = -1
 
 Dim SQL As String
 Dim RC As String
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim Cad As String
-Dim Cont As Long
-Dim i As Integer
+Dim cad As String
+Dim CONT As Long
+Dim I As Integer
 Dim TotalRegistros As Long
 
 Dim Importe As Currency
@@ -248,111 +324,222 @@ End Sub
 
 Private Sub cmdDivVto_Click()
 Dim Im As Currency
+Dim vImpvto As Currency
+Dim vVtos As Integer
+Dim vTotal As Currency
+Dim J As Integer
+Dim K As Integer
+Dim ImportePagado As Currency
+
+    On Error GoTo ecmdDivVto
+
 
     'Dividira el vto en dos. En uno dejara el importe que solicita y en el otro el resto
     'Los gastos s quedarian en uno asi como el cobrado si diera lugar
-    SQL = ""
-    If txtImporte(1).Text = "" Then SQL = "Ponga el importe" & vbCrLf
+'    SQL = ""
+'    If txtcodigo(1).Text = "" Then SQL = "Ponga el importe" & vbCrLf
+'
+'    RC = RecuperaValor(CadenaDesdeOtroForm, 3)
+'    Importe = CCur(RC)
+'    Im = ImporteFormateado(txtcodigo(1).Text)
+'    If Im = 0 Then
+'        SQL = "Importe no puede ser cero"
+'    Else
+'        If Importe > 0 Then
+'            'Vencimiento normal
+'            If Im > Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
+'        Else
+'            'ABONO
+'            If Im > 0 Then
+'                SQL = "Es un abono. Importes negativos"
+'            Else
+'                If Im < Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
+'            End If
+'        End If
+'    End If
+    
+    ' controles
+    
     
     RC = RecuperaValor(CadenaDesdeOtroForm, 3)
     Importe = CCur(RC)
-    Im = ImporteFormateado(txtImporte(1).Text)
-    If Im = 0 Then
-        SQL = "Importe no puede ser cero"
-    Else
-        If Importe > 0 Then
-            'Vencimiento normal
-            If Im > Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
-            
-        Else
-            'ABONO
-            If Im > 0 Then
-                SQL = "Es un abono. Importes negativos"
-            Else
-                If Im < Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
-            End If
-        End If
         
+    vImpvto = 0
+    vVtos = 0
+    If txtcodigo(1).Text <> "" Then vImpvto = ImporteSinFormato(ComprobarCero(txtcodigo(1).Text))
+    If txtcodigo(0).Text <> "" Then vVtos = CInt(ComprobarCero(txtcodigo(0).Text))
+        
+    
+    If vImpvto = 0 And vVtos = 0 Then
+        MsgBox "Debe introducir el importe o el nro de vencimientos o ambos. Revise.", vbExclamation
+        PonFoco txtcodigo(0)
+        Exit Sub
     End If
     
     
+    ' me ponen importe
+    If vImpvto <> 0 Then
+        If Importe < vImpvto Then
+            MsgBox "El importe del vencimiento es inferior del importe a dividir. Revise", vbExclamation
+            PonFoco txtcodigo(0)
+            Exit Sub
+        End If
+        ' me ponen nro de vtos
+        If vVtos <> 0 Then
+            If Importe - Round(vImpvto * (vVtos - 1), 2) < 0 Then
+                MsgBox "Es imposible dividir el vencimiento en " & vVtos & " vencimientos de " & Format(vImpvto, "###,###,##0.00") & " euros.", vbExclamation
+                PonFoco txtcodigo(0)
+                Exit Sub
+            End If
+            If vVtos = 1 And vImpvto <> Importe Then
+                MsgBox "No podemos dejar el vencimiento con menos importe del original. Revise.", vbExclamation
+                PonFoco txtcodigo(0)
+                Exit Sub
+            End If
+        End If
+    End If
+    
+    If vImpvto = 0 Then
+        vImpvto = Round(Importe / vVtos, 2)
+    End If
+    
+    If vVtos = 0 Then
+        vVtos = Round(Importe / vImpvto, 0)
+    End If
+    
+    ImportePagado = DevuelveValor("select impcobro from cobros where " & RecuperaValor(CadenaDesdeOtroForm, 1) & " and numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2))
+    If vImpvto < ImportePagado Then
+        MsgBox "El importe cobrado del vencimiento es superior al importe de vencimiento que dejaremos. Revise.", vbExclamation
+        Exit Sub
+    End If
+    
+    Conn.BeginTrans
+    
+    
+    
+    SQL = ""
     If SQL = "" Then
-        Set Rs = New ADODB.Recordset
+        Set RS = New ADODB.Recordset
         
         
         'CadenaDesdeOtroForm. Pipes
         '           1.- cadenaSQL numfac,numsere,fecfac
         '           2.- Numero vto
         '           3.- Importe maximo
-        i = -1
+        I = -1
         RC = "Select max(numorden) from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        Rs.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Rs.EOF Then
+        RS.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If RS.EOF Then
             SQL = "Error. Vencimiento NO encontrado: " & CadenaDesdeOtroForm
         Else
-            i = Rs.Fields(0) + 1
+            I = RS.Fields(0) '+ 1
         End If
-        Rs.Close
-        Set Rs = Nothing
-        
+        RS.Close
+        Set RS = Nothing
     End If
     
     If SQL <> "" Then
         MsgBox SQL, vbExclamation
-        PonFoco txtImporte(1)
+        PonFoco txtcodigo(1)
         Exit Sub
         
     Else
-        SQL = "¿Desea desdoblar el vencimiento con uno de : " & Im & " euros?"
+        SQL = "¿Desea desdoblar el vencimiento en los indicados?" 'uno de : " & Im & " euros?"
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     End If
     
     
     'OK.  a desdoblar
-    SQL = "INSERT INTO cobros (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
-    SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,reftalonpag,"
-    SQL = SQL & "`numserie`,`codfaccl`,`fecfaccl`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,"
-    SQL = SQL & "`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,"
-    SQL = SQL & "`text72csb`,`text73csb`,`text81csb`,`text82csb`,`text83csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
-    SQL = SQL & "`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban) "
-    'Valores
-    SQL = SQL & " SELECT " & i & ",NULL," & TransformaComasPuntos(CStr(Im)) & ",NULL,NULL,0,"
-    SQL = SQL & "NULL,NULL,NULL,NULL,NULL,"
-    SQL = SQL & "`numserie`,`codfaccl`,`fecfaccl`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,"
-    'text83csb`,
-    SQL = SQL & "'Div vto." & Format(Now, "dd/mm/yyyy hh:nn") & "'"
-    SQL = SQL & ",`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban FROM "
-    SQL = SQL & " scobro WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-    SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
-    Conn.BeginTrans
+    vTotal = 0
+    K = I + 1
+    For J = 1 To vVtos - 1
     
-    'Hacemos
-    Cont = 1
-    If Ejecuta(SQL) Then
-        'Hemos insertado. AHora updateamos el impvenci del que se queda
-        If Im < 0 Then
-            'Abonos
-            SQL = "UPDATE cobros SET impvenci= impvenci + " & TransformaComasPuntos(CStr(Abs(Im)))
-        Else
-            'normal
-            SQL = "UPDATE cobros SET impvenci= impvenci - " & TransformaComasPuntos(CStr(Im))
-        End If
+        vTotal = vTotal + vImpvto
+    
+        I = I + 1
+    
+        SQL = "INSERT INTO cobros (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
+        SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,reftalonpag,"
+        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,"
+        SQL = SQL & "`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,"
+        SQL = SQL & "`text72csb`,`text73csb`,`text81csb`,`text82csb`,`text83csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
+        SQL = SQL & "`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban) "
+        'Valores
+        SQL = SQL & " SELECT " & I & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
+        SQL = SQL & "NULL,NULL,NULL,NULL,NULL,"
+        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,"
+        'text83csb`,
+        SQL = SQL & "'Div vto." & Format(Now, "dd/mm/yyyy hh:nn") & "'"
+        SQL = SQL & ",`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban FROM "
+        SQL = SQL & " cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+        SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+    
+        Conn.Execute SQL
+    
+    
+    Next J
+    
+    
+    ' actualizamos el primer vencimiento
+    vTotal = vTotal + vImpvto
+        
+    SQL = "update cobros set impvenci = " & DBSet(vImpvto, "N")
+    
+    SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+    SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+    
+    Conn.Execute SQL
+    
+    ' en el ultimo dejamos la diferencia
+    If vTotal <> Importe Then
+        SQL = "update cobros set impvenci = impvenci + " & DBSet(vTotal - Importe, "N")
         
         SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
-        If Ejecuta(SQL) Then Cont = 0 'TODO BIEN ******
+        SQL = SQL & " AND numorden = " & DBSet(I, "N")
+        
+        Conn.Execute SQL
     End If
-    'Si mal, volvemos
-    If Cont = 1 Then
+    
+    
+'    'Hacemos
+'    CONT = 1
+'    If Ejecuta(SQL) Then
+'        'Hemos insertado. AHora updateamos el impvenci del que se queda
+'        If Im < 0 Then
+'            'Abonos
+'            SQL = "UPDATE cobros SET impvenci= impvenci + " & TransformaComasPuntos(CStr(Abs(Im)))
+'        Else
+'            'normal
+'            SQL = "UPDATE cobros SET impvenci= impvenci - " & TransformaComasPuntos(CStr(Im))
+'        End If
+'
+'        SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+'        SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+'        If Ejecuta(SQL) Then CONT = 0 'TODO BIEN ******
+'    End If
+'    'Si mal, volvemos
+'    If CONT = 1 Then
+'        Conn.RollbackTrans
+'    Else
+'        Conn.CommitTrans
+'        CadenaDesdeOtroForm = I
+'        Unload Me
+'    End If
+    
+    
+ecmdDivVto:
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, "Dividir vencimientos", Err.Description
         Conn.RollbackTrans
     Else
         Conn.CommitTrans
-        CadenaDesdeOtroForm = i
+        CadenaDesdeOtroForm = K
+        MsgBox "Proceso realizado correctamente", vbExclamation
         Unload Me
     End If
     
-    
 End Sub
+
 
 Private Sub Form_Activate()
     If PrimeraVez Then
@@ -361,8 +548,9 @@ Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 End Sub
 
+
 Private Sub Form_Load()
-Dim H As Integer
+Dim h As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -383,36 +571,46 @@ Dim Img As Image
             '           1.- cadenaSQL numfac,numsere,fecfac
             '           2.- Numero vto
             '           3.- Importe maximo
-            H = FrameDividVto.Height + 120
+            h = FrameDividVto.Height + 120
             W = FrameDividVto.Width
             FrameDividVto.Visible = True
+            Me.Caption = "Dividir Vencimiento"
     End Select
     
     Me.Width = W + 300
-    Me.Height = H + 400
+    Me.Height = h + 400
     
-    i = Opcion
-    If Opcion = 13 Or i = 43 Or i = 44 Then i = 11
+    I = Opcion
+    If Opcion = 13 Or I = 43 Or I = 44 Then I = 11
     
     'Aseguradas
-    Me.cmdCancelar(i).Cancel = True
+    Me.cmdCancelar(I).Cancel = True
     
+End Sub
+
+
+Private Sub frmF_Selec(vFecha As Date)
+    txtcodigo(2).Text = Format(vFecha, "dd/mm/yyyy")
+End Sub
+
+
+Private Sub imgFecha_Click(Index As Integer)
+    'Fecha de primer vencimiento
     
+    Set frmF = New frmCal
+    frmF.Fecha = Now
+    If txtcodigo(2).Text <> "" Then frmF.Fecha = CDate(txtcodigo(2).Text)
+    frmF.Show vbModal
+    Set frmF = Nothing
+    PonFoco txtcodigo(2)
+
 End Sub
 
-
-
-Private Sub frmBa_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+Private Sub txtcodigo_GotFocus(Index As Integer)
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
-
-
-Private Sub txtImporte_GotFocus(Index As Integer)
-    ConseguirFoco txtImporte(Index), 3
-End Sub
-
-Private Sub txtImporte_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtcodigo_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -423,23 +621,29 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Sub txtImporte_LostFocus(Index As Integer)
-Dim Mal As Boolean
-    txtImporte(Index).Text = Trim(txtImporte(Index).Text)
-    If txtImporte(Index).Text = "" Then Exit Sub
-    Mal = False
-    If Not EsNumerico(txtImporte(Index).Text) Then Mal = True
+Private Sub txtcodigo_LostFocus(Index As Integer)
+Dim cad As String, cadTipo As String 'tipo cliente
+Dim b As Boolean
 
-    If Not Mal Then Mal = Not CadenaCurrency(txtImporte(Index).Text, Importe)
+    'Quitar espacios en blanco por los lados
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+'    If txtCodigo(Index).Text = "" Then Exit Sub
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
-    If Mal Then
-        txtImporte(Index).Text = ""
-        txtImporte(Index).SetFocus
-
-    Else
-        txtImporte(Index).Text = Format(Importe, FormatoImporte)
-    End If
-
+    Select Case Index
+        Case 0 'nro de vtos
+            PonerFormatoEntero txtcodigo(Index)
+            
+        Case 2 'FECHAS
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            
+        Case 1 'Importe
+            PonerFormatoDecimal txtcodigo(Index), 3
+            
+    End Select
 End Sub
 
 Private Sub SubSetFocus(Obje As Object)
@@ -447,5 +651,3 @@ Private Sub SubSetFocus(Obje As Object)
     Obje.SetFocus
     If Err.Number <> 0 Then Err.Clear
 End Sub
-
-

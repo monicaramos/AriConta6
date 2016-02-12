@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInmoSimu 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   5715
@@ -522,8 +522,8 @@ Attribute frmCC.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
 
-Private Sql As String
-Dim cad As String
+Private SQL As String
+Dim Cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
@@ -624,7 +624,7 @@ Private Sub Form_Load()
 
 
     For i = 0 To 1
-        Me.imgConcepto(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgConcepto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     txtFecha(0).Text = SugerirFechaNuevo
@@ -636,7 +636,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
-    Sql = CadenaSeleccion
+    SQL = CadenaSeleccion
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -645,15 +645,15 @@ End Sub
 
 Private Sub ImgConcepto_Click(Index As Integer)
     
-    Sql = ""
+    SQL = ""
     AbiertoOtroFormEnListado = True
     Set frmCon = New frmInmoConceptos
     frmCon.DatosADevolverBusqueda = True
     frmCon.Show vbModal
     Set frmCon = Nothing
-    If Sql <> "" Then
-        Me.txtConcepto(Index).Text = RecuperaValor(Sql, 1)
-        Me.lblConcepto(Index).Caption = RecuperaValor(Sql, 2)
+    If SQL <> "" Then
+        Me.txtConcepto(Index).Text = RecuperaValor(SQL, 1)
+        Me.lblConcepto(Index).Caption = RecuperaValor(SQL, 2)
     Else
         QuitarPulsacionMas Me.txtConcepto(Index)
     End If
@@ -664,7 +664,7 @@ Private Sub ImgConcepto_Click(Index As Integer)
 End Sub
 
 Private Sub frmCC_DatoSeleccionado(CadenaSeleccion As String)
-    Sql = CadenaSeleccion
+    SQL = CadenaSeleccion
 End Sub
 
 
@@ -749,7 +749,7 @@ Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
 End Sub
 
 Private Sub txtConcepto_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
     
@@ -777,16 +777,16 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    Sql = "Select conconam Concepto,nomconam Descripción,codinmov Elemento,nominmov Descripción,fechaadq FechaAdquisicion,valoradq ValorAdquisicion,amortacu AmortAcumulada,totalamor TotalAmortizacion, "
-    Sql = Sql & "valoradq - amortacu - totalamor Pendiente "
-    Sql = Sql & " FROM tmpsimulainmo "
+    SQL = "Select conconam Concepto,nomconam Descripción,codinmov Elemento,nominmov Descripción,fechaadq FechaAdquisicion,valoradq ValorAdquisicion,amortacu AmortAcumulada,totalamor TotalAmortizacion, "
+    SQL = SQL & "valoradq - amortacu - totalamor Pendiente "
+    SQL = SQL & " FROM tmpsimulainmo "
     
-    If cadselect <> "" Then Sql = Sql & " WHERE " & cadselect
+    If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
     
-    Sql = Sql & " ORDER BY 1,2,3"
+    SQL = SQL & " ORDER BY 1,2,3"
         
     'LLamos a la funcion
-    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -826,7 +826,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -893,10 +893,10 @@ End Sub
 Private Function SugerirFechaNuevo() As String
 Dim RC As String
     RC = "tipoamor"
-    cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
+    Cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
 
-    If cad <> "" Then
-        Me.Tag = cad   'Ultima actualizacion
+    If Cad <> "" Then
+        Me.Tag = Cad   'Ultima actualizacion
         Select Case Val(RC)
         Case 2
             'Semestral
@@ -914,7 +914,7 @@ Dim RC As String
         End Select
         RC = PonFecha
     Else
-        cad = "01/01/1991"
+        Cad = "01/01/1991"
         RC = Format(Now, "dd/mm/yyyy")
     End If
     SugerirFechaNuevo = Format(RC, "dd/mm/yyyy")
@@ -926,7 +926,7 @@ Private Function PonFecha() As Date
 Dim d As Date
 'Dada la fecha en Cad y los meses k tengo k sumar
 'Pongo la fecha
-d = DateAdd("m", i, CDate(cad))
+d = DateAdd("m", i, CDate(Cad))
 Select Case Month(d)
 Case 2
     If ((Year(d) - 2000) Mod 4) = 0 Then
@@ -941,8 +941,8 @@ Case Else
     '30
         i = 30
 End Select
-cad = i & "/" & Month(d) & "/" & Year(d)
-PonFecha = CDate(cad)
+Cad = i & "/" & Month(d) & "/" & Year(d)
+PonFecha = CDate(Cad)
 End Function
 
 Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)

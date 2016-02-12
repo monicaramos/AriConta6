@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmImprimir 
    BorderStyle     =   1  'Fixed Single
@@ -284,6 +284,10 @@ Public SoloImprimir As Boolean
 Public OtrosParametros As String   ' El grupo acaba en |
                                    ' param1=valor1|param2=valor2|
 Public NumeroParametros As Integer   'Cuantos parametros hay.  EMPRESA(EMP) no es parametro. Es fijo en todos los informes
+Public EnvioEMail As Boolean
+Public QueEmpresaEs As Byte
+    '0 Todas
+    '1 Escalon
 
 
 Private MostrarTree As Boolean
@@ -295,7 +299,7 @@ Private PrimeraVez As Boolean
 
 'Private ReestableceSoloImprimir As Boolean
 
-Private Sub chkEMAIL_Click()
+Private Sub chkEmail_Click()
     If chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 0
 End Sub
 

@@ -545,7 +545,7 @@ Private Sub Form_Load()
     optVarios(0).Value = True
 
     For i = 0 To 1
-        Me.imgFormaPago(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgFormaPago(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida

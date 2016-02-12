@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmCCConExtr 
    BorderStyle     =   1  'Fixed Single
@@ -823,7 +823,7 @@ Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmCCoste As frmBasico
 Attribute frmCCoste.VB_VarHelpID = -1
 
-Dim sql As String
+Dim SQL As String
 Dim vSQL As String
 Dim RC As String
 Dim Mostrar As Boolean
@@ -878,19 +878,19 @@ Dim F As Date
         End If
     End If
 
-    sql = ""
+    SQL = ""
     'Llegados aqui. Vemos la fecha y demas
     If Text3(0).Text <> "" Then
-        sql = " fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+        SQL = " fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
     End If
     
     If Text3(1).Text <> "" Then
-        If sql <> "" Then sql = sql & " AND "
-        sql = sql & " fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
     End If
     
     
-    Text3(0).Tag = sql  'Para las fechas
+    Text3(0).Tag = SQL  'Para las fechas
     
 
     'Para ver si la cuenta tiene movimientos o no
@@ -981,10 +981,10 @@ Dim i As Integer
     Limpiar Me
     
     If EjerciciosCerrados Then
-        sql = "-1"
+        SQL = "-1"
     Else
         AnyoInicioEjercicio = ""
-        sql = "0"
+        SQL = "0"
     End If
     
     CargarColumnas
@@ -1022,7 +1022,7 @@ Dim i As Integer
     End If
     
     
-    imgCCoste.Picture = frmPpal.ImageList3.ListImages(1).Picture
+    imgCCoste.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
 
 
     ' añadido por el tema del listview
@@ -1051,9 +1051,9 @@ Dim i As Integer
     If Cuenta <> "" Then
         VieneDeIntroduccion = True
         Text3(2).Text = Cuenta
-        sql = ""
-        CuentaCorrectaUltimoNivel Cuenta, sql
-        Text5.Text = sql
+        SQL = ""
+        CuentaCorrectaUltimoNivel Cuenta, SQL
+        Text5.Text = SQL
         RefrescarDatos
     Else
         CargaGrid
@@ -1121,9 +1121,9 @@ If Not VieneDeIntroduccion Then
     If Trim(ListView1.SelectedItem.Text) <> "" Then
         Screen.MousePointer = vbHourglass
         AsientoConExtModificado = 0
-        sql = ListView1.SelectedItem.ToolTipText & "|" & ListView1.SelectedItem.Text & "|" & ListView1.SelectedItem.SubItems(1) & "|"
+        SQL = ListView1.SelectedItem.ToolTipText & "|" & ListView1.SelectedItem.Text & "|" & ListView1.SelectedItem.SubItems(1) & "|"
 
-        frmAsientosHco.ASIENTO = sql
+        frmAsientosHco.ASIENTO = SQL
         frmAsientosHco.vLinapu = ListView1.SelectedItem.Tag
         frmAsientosHco.Show vbModal
         
@@ -1248,23 +1248,23 @@ Dim B As Boolean
     Label100.Visible = True
     Label100.Refresh
     
-    sql = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
-    Conn.Execute sql
+    SQL = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
+    Conn.Execute SQL
     
-    sql = "insert into tmplinccexplo (codusu,numdiari,numasien,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
-    sql = sql & " Select " & vUsu.Codigo & ", hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
-    sql = sql & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
-    sql = sql & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) INNER JOIN ccoste on hlinapu.codccost = ccoste.codccost "
-    sql = sql & " where hlinapu.codccost = " & DBSet(Text3(2).Text, "T")
-    sql = sql & " and hlinapu.fechaent >= " & DBSet(vParam.fechaini, "F") & " and hlinapu.fechaent <= " & DBSet(vParam.fechafin, "F")
-    sql = sql & " union "
-    sql = sql & " Select " & vUsu.Codigo & ", hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
-    sql = sql & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
-    sql = sql & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) INNER JOIN ccoste_lineas ON hlinapu.codccost = ccoste_lineas.codccost "
-    sql = sql & " where ccoste_lineas.subccost = " & DBSet(Text3(2).Text, "T")
-    sql = sql & " and hlinapu.fechaent >= " & DBSet(vParam.fechaini, "F") & " and hlinapu.fechaent <= " & DBSet(vParam.fechafin, "F")
+    SQL = "insert into tmplinccexplo (codusu,numdiari,numasien,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH) "
+    SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
+    SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
+    SQL = SQL & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) INNER JOIN ccoste on hlinapu.codccost = ccoste.codccost "
+    SQL = SQL & " where hlinapu.codccost = " & DBSet(Text3(2).Text, "T")
+    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(vParam.fechaini, "F") & " and hlinapu.fechaent <= " & DBSet(vParam.fechafin, "F")
+    SQL = SQL & " union "
+    SQL = SQL & " Select " & vUsu.Codigo & ", hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost CCoste,  hlinapu.codmacta as Cuenta, hlinapu.linliapu, hlinapu.numdocum, hlinapu.fechaent,  "
+    SQL = SQL & " hlinapu.ampconce, ctacontr Contrapartida, cuentas1.nommacta Descripción , coalesce(timported,0) Debe, coalesce(timporteh,0) Haber "
+    SQL = SQL & " FROM (hlinapu LEFT JOIN cuentas cuentas1 ON hlinapu.ctacontr = cuentas1.codmacta) INNER JOIN ccoste_lineas ON hlinapu.codccost = ccoste_lineas.codccost "
+    SQL = SQL & " where ccoste_lineas.subccost = " & DBSet(Text3(2).Text, "T")
+    SQL = SQL & " and hlinapu.fechaent >= " & DBSet(vParam.fechaini, "F") & " and hlinapu.fechaent <= " & DBSet(vParam.fechafin, "F")
 
-    Conn.Execute sql
+    Conn.Execute SQL
 
     B = HacerRepartoSubcentrosCoste
     
@@ -1276,18 +1276,18 @@ Dim B As Boolean
     End If
     
     
-    sql = "DELETE from tmpconextcab where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
-    Conn.Execute sql
+    SQL = "DELETE from tmpconextcab where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
+    Conn.Execute SQL
         
-    sql = "DELETE from tmpconext where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
-    Conn.Execute sql
+    SQL = "DELETE from tmpconext where codusu= " & vUsu.Codigo & " AND Cta = '" & Text3(2).Text & "'"
+    Conn.Execute SQL
     
     CargaDatosConExt Text3(2).Text, Text3(0).Text, Text3(1).Text, Text3(0).Tag, Text5.Text, True
     
     If DesdeModificarLinea Then
         'Compruebo que haya ALGUN datos, si no explota
-        sql = "cta = '" & Text3(2).Text & "' AND codusu"
-        N = DevuelveDesdeBD("count(*)", "tmpconext", sql, vUsu.Codigo)
+        SQL = "cta = '" & Text3(2).Text & "' AND codusu"
+        N = DevuelveDesdeBD("count(*)", "tmpconext", SQL, vUsu.Codigo)
         If N = 0 Then
             QuedanLineasDespuesModificar = False
             Exit Sub
@@ -1316,20 +1316,20 @@ Private Sub CargaGrid()
 
 
     Adodc1.ConnectionString = Conn
-    sql = " codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, contra, ampconce, timporteD, timporteH, saldo,ccost, Punteada"
+    SQL = " codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, contra, ampconce, timporteD, timporteH, saldo,ccost, Punteada"
     If Text3(2).Text <> "" Then
-        sql = sql & ",nommacta"
-        sql = "Select " & sql & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
+        SQL = SQL & ",nommacta"
+        SQL = "Select " & SQL & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
     Else
         'Si esta a "" pongo otro select para que no de error
-        sql = sql & ",linliapu"
-        sql = "Select " & sql & " from tmpConExt where codusu = " & vUsu.Codigo
+        SQL = SQL & ",linliapu"
+        SQL = "Select " & SQL & " from tmpConExt where codusu = " & vUsu.Codigo
     End If
-    sql = sql & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
+    SQL = SQL & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
     
     'Si Text3(2).text=""
     
-    Adodc1.RecordSource = sql
+    Adodc1.RecordSource = SQL
     Adodc1.Refresh
     
     
@@ -1351,7 +1351,7 @@ Dim Pinta As Boolean
 
 Dim NumAto As Long  'el numero de asiento por si viene de los asientos
 
-Dim cad As String
+Dim Cad As String
 Dim miRsAux As ADODB.Recordset
 
     Me.ListView1.ListItems.Clear
@@ -1365,18 +1365,18 @@ Dim miRsAux As ADODB.Recordset
     
     
     
-    cad = " numasien,fechaent,cta codmacta,nomdocum numdocum,ampconce,timporteD impdebe,timporteH imphaber,ccost codccost"
-    cad = cad & ",if(punteada=0,' ','*') punteada,nommacta,contra ctacontr,linliapu numlinea, numdiari "
+    Cad = " numasien,fechaent,cta codmacta,nomdocum numdocum,ampconce,timporteD impdebe,timporteH imphaber,ccost codccost"
+    Cad = Cad & ",if(punteada=0,' ','*') punteada,nommacta,contra ctacontr,linliapu numlinea, numdiari "
     If Text3(2).Text <> "" Then
-        cad = "Select " & cad & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
+        Cad = "Select " & Cad & " from tmpConExt left join cuentas on tmpConExt.contra=cuentas.codmacta  WHERE codusu = " & vUsu.Codigo
     Else
-        cad = "Select " & cad & " from tmpConExt where codusu = " & vUsu.Codigo
+        Cad = "Select " & Cad & " from tmpConExt where codusu = " & vUsu.Codigo
     End If
-    cad = cad & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
+    Cad = Cad & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
     
     
 
-    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If miRsAux.EOF Then
     
@@ -1463,13 +1463,13 @@ Dim miRsAux As ADODB.Recordset
     miRsAux.Close
         
     Dim Rs As ADODB.Recordset
-    cad = "SELECT codccost, sum(coalesce(perd,0)) impdebe,sum(coalesce(perh,0)) imphaber"
-    cad = cad & " from tmplinccexplo "
-    cad = cad & " where tmplinccexplo.codccost=" & DBSet(Text3(2).Text, "T") & " AND fechaent>=" & DBSet(vParam.fechaini, "F") '& " and fechaent <= " & DBSet(F2, "F")  '2013-01-01'"
-    cad = cad & " and codusu = " & DBSet(vUsu.Codigo, "N")
-    cad = cad & " group by 1 "
+    Cad = "SELECT codccost, sum(coalesce(perd,0)) impdebe,sum(coalesce(perh,0)) imphaber"
+    Cad = Cad & " from tmplinccexplo "
+    Cad = Cad & " where tmplinccexplo.codccost=" & DBSet(Text3(2).Text, "T") & " AND fechaent>=" & DBSet(vParam.fechaini, "F") '& " and fechaent <= " & DBSet(F2, "F")  '2013-01-01'"
+    Cad = Cad & " and codusu = " & DBSet(vUsu.Codigo, "N")
+    Cad = Cad & " group by 1 "
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Me.Text6(6).Text = Format(DBLet(Rs!impdebe, "N"), FormatoImporte)
@@ -1535,17 +1535,17 @@ End Sub
 
 Private Sub CargarColumnas()
 Dim i As Integer
-Dim cad As String
+Dim Cad As String
 
     
-    cad = "1300|1150|2005|2214|1400|2420|1950|1950|1950|350|"  '0|0|0|"
+    Cad = "1300|1150|2005|2214|1400|2420|1950|1950|1950|350|"  '0|0|0|"
     'tieneanalitica
     'If vParam.autocoste Then Cad = Replace(Cad, "|0|", "|820|")
     Me.LabelCab(5).Visible = False  '(vParam.autocoste)
     
     
     For i = 1 To Me.ListView1.ColumnHeaders.Count
-        ListView1.ColumnHeaders.Item(i).Width = RecuperaValor(cad, i)
+        ListView1.ColumnHeaders.Item(i).Width = RecuperaValor(Cad, i)
         If i > 6 Then Me.LabelCab(i - 1).Width = ListView1.ColumnHeaders(i).Width
 
         Me.LabelCab(i - 1).Left = ListView1.ColumnHeaders.Item(i).Left + 120
@@ -1568,34 +1568,34 @@ Private Function ObtenerCCoste(Siguiente As Boolean) As Boolean
     Label101.Caption = ""
     Label100.Visible = True
     Label100.Refresh
-    sql = "select codccost from hlinapu"
-    If EjerciciosCerrados Then sql = sql & "1"
-    sql = sql & " WHERE codccost "
+    SQL = "select codccost from hlinapu"
+    If EjerciciosCerrados Then SQL = SQL & "1"
+    SQL = SQL & " WHERE codccost "
     If Siguiente Then
-        sql = sql & ">"
+        SQL = SQL & ">"
     Else
-        sql = sql & "<"
+        SQL = SQL & "<"
     End If
-    sql = sql & " '" & Text3(2).Text & "'"
-    sql = sql & " AND fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
-    sql = sql & " AND fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
-    sql = sql & " group by codccost ORDER BY codccost"
+    SQL = SQL & " '" & Text3(2).Text & "'"
+    SQL = SQL & " AND fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+    SQL = SQL & " AND fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+    SQL = SQL & " group by codccost ORDER BY codccost"
     If Siguiente Then
-        sql = sql & " ASC"
+        SQL = SQL & " ASC"
     Else
-        sql = sql & " DESC"
+        SQL = SQL & " DESC"
     End If
     Set RT = New ADODB.Recordset
-    RT.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RT.EOF Then
-        sql = "No se ha obtenido el centro de coste "
+        SQL = "No se ha obtenido el centro de coste "
         If Siguiente Then
-            sql = sql & "siguiente"
+            SQL = SQL & "siguiente"
         Else
-            sql = sql & "anterior"
+            SQL = SQL & "anterior"
         End If
-        sql = sql & " con movimientos en el periodo."
-        MsgBox sql, vbExclamation
+        SQL = SQL & " con movimientos en el periodo."
+        MsgBox SQL, vbExclamation
         ObtenerCCoste = False
     Else
         CtaAnt = ""
@@ -1617,9 +1617,9 @@ Dim Im1 As Currency
 Dim Im2 As Currency
 
 
-    sql = "Select * from tmpconextcab where codusu=" & vUsu.Codigo & " and cta='" & Text3(2).Text & "'"
+    SQL = "Select * from tmpconextcab where codusu=" & vUsu.Codigo & " and cta='" & Text3(2).Text & "'"
     Set RT = New ADODB.Recordset
-    RT.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RT.EOF Then
         'Limpiaremos
         For i = 6 To 11
@@ -1705,12 +1705,12 @@ End Sub
 
 Private Function TieneMovimientos() As Boolean
 Dim RT As ADODB.Recordset
-Dim sql As String
+Dim SQL As String
 
-    sql = "select count(*) from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N") & " and codccost = " & DBSet(Text3(2).Text, "T")
+    SQL = "select count(*) from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N") & " and codccost = " & DBSet(Text3(2).Text, "T")
 
     Set RT = New ADODB.Recordset
-    RT.Open sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     TieneMovimientos = False
     If Not RT.EOF Then
         If Not IsNull(RT.Fields(0)) Then
@@ -1740,15 +1740,15 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim Rs As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
     
     On Error Resume Next
 
-    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Toolbar1.Buttons(2).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
@@ -1764,7 +1764,7 @@ Dim cad As String
 End Sub
 
 Private Function HacerRepartoSubcentrosCoste() As Boolean
-Dim sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -1778,12 +1778,12 @@ Dim Nregs As Long
     HacerRepartoSubcentrosCoste = False
     
     ' hacemos el desdoble
-    sql = "select * from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N") & " and codccost in (select ccoste.codccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost) "
+    SQL = "select * from tmplinccexplo where codusu = " & DBSet(vUsu.Codigo, "N") & " and codccost in (select ccoste.codccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost) "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    Nregs = TotalRegistrosConsulta(sql)
+    Nregs = TotalRegistrosConsulta(SQL)
 
     If Nregs <> 0 Then
         pb2.Visible = True
@@ -1803,20 +1803,20 @@ Dim Nregs As Long
 
         Rs2.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs2.EOF
-            sql = "insert into tmplinccexplo (codusu,numdiari,numasien,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH,desdoblado) values ("
-            sql = sql & vUsu.Codigo & "," & DBSet(Rs!NumDiari, "N") & "," & DBSet(Rs!NumAsien, "N") & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!Linapu, "T") & ","
-            sql = sql & DBSet(Rs!DOCUM, "T") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs!ctactra, "T") & ","
-            sql = sql & DBSet(Rs!desctra, "T") & ","
+            SQL = "insert into tmplinccexplo (codusu,numdiari,numasien,codccost,codmacta,linapu,docum,fechaent,ampconce,ctactra,desctra,perD,perH,desdoblado) values ("
+            SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!NumDiari, "N") & "," & DBSet(Rs!NumAsien, "N") & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!Linapu, "T") & ","
+            SQL = SQL & DBSet(Rs!DOCUM, "T") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Ampconce, "T") & "," & DBSet(Rs!ctactra, "T") & ","
+            SQL = SQL & DBSet(Rs!desctra, "T") & ","
 
             If DBLet(Rs!perd, "N") <> 0 Then
                 ImporteLinea = Round(DBLet(Rs!perd, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
-                sql = sql & DBSet(ImporteLinea, "N") & ",null,1)"
+                SQL = SQL & DBSet(ImporteLinea, "N") & ",null,1)"
             Else
                 ImporteLinea = Round(DBLet(Rs!perh, "N") * DBLet(Rs2!porccost, "N") / 100, 2)
-                sql = sql & "null," & DBSet(ImporteLinea, "N") & ",1)"
+                SQL = SQL & "null," & DBSet(ImporteLinea, "N") & ",1)"
             End If
 
-            Conn.Execute sql
+            Conn.Execute SQL
 
             ImporteTot = ImporteTot + ImporteLinea
 
@@ -1827,50 +1827,50 @@ Dim Nregs As Long
 
         If DBLet(Rs!perd, "N") <> 0 Then
             If ImporteTot <> DBLet(Rs!perd, "N") Then
-                sql = "update tmplinccexplo set perd = perd + (" & DBSet(Round(DBLet(Rs!perd, "N") - ImporteTot, 2), "N") & ")"
-                sql = sql & " where codusu = " & vUsu.Codigo
-                sql = sql & " and codccost = " & DBSet(UltSubCC, "T")
-                sql = sql & " and codmacta = " & DBSet(Rs!codmacta, "T")
-                sql = sql & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
-                sql = sql & " and linapu = " & DBSet(Rs!Linapu, "N")
-                sql = sql & " and docum = " & DBSet(Rs!DOCUM, "T")
-                sql = sql & " and ampconce = " & DBSet(Rs!Ampconce, "T")
-                sql = sql & " and desdoblado = 1"
-                sql = sql & " and numdiari = " & DBSet(Rs!NumDiari, "N")
-                sql = sql & " and numasien = " & DBSet(Rs!NumAsien, "N")
+                SQL = "update tmplinccexplo set perd = perd + (" & DBSet(Round(DBLet(Rs!perd, "N") - ImporteTot, 2), "N") & ")"
+                SQL = SQL & " where codusu = " & vUsu.Codigo
+                SQL = SQL & " and codccost = " & DBSet(UltSubCC, "T")
+                SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
+                SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
+                SQL = SQL & " and docum = " & DBSet(Rs!DOCUM, "T")
+                SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+                SQL = SQL & " and desdoblado = 1"
+                SQL = SQL & " and numdiari = " & DBSet(Rs!NumDiari, "N")
+                SQL = SQL & " and numasien = " & DBSet(Rs!NumAsien, "N")
 
-                Conn.Execute sql
+                Conn.Execute SQL
             End If
         Else
             If ImporteTot <> DBLet(Rs!perh, "N") Then
-                sql = "update tmplinccexplo set perh = perh + (" & DBSet(Round(DBLet(Rs!perh, "N") - ImporteTot, 2), "N") & ")"
-                sql = sql & " where codusu = " & vUsu.Codigo
-                sql = sql & " and codccost = " & DBSet(UltSubCC, "T")
-                sql = sql & " and codmacta = " & DBSet(Rs!codmacta, "T")
-                sql = sql & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
-                sql = sql & " and linapu = " & DBSet(Rs!Linapu, "N")
-                sql = sql & " and docum = " & DBSet(Rs!DOCUM, "T")
-                sql = sql & " and ampconce = " & DBSet(Rs!Ampconce, "T")
-                sql = sql & " and desdoblado = 1"
-                sql = sql & " and numdiari = " & DBSet(Rs!NumDiari, "N")
-                sql = sql & " and numasien = " & DBSet(Rs!NumAsien, "N")
+                SQL = "update tmplinccexplo set perh = perh + (" & DBSet(Round(DBLet(Rs!perh, "N") - ImporteTot, 2), "N") & ")"
+                SQL = SQL & " where codusu = " & vUsu.Codigo
+                SQL = SQL & " and codccost = " & DBSet(UltSubCC, "T")
+                SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
+                SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
+                SQL = SQL & " and docum = " & DBSet(Rs!DOCUM, "T")
+                SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+                SQL = SQL & " and desdoblado = 1"
+                SQL = SQL & " and numdiari = " & DBSet(Rs!NumDiari, "N")
+                SQL = SQL & " and numasien = " & DBSet(Rs!NumAsien, "N")
 
-                Conn.Execute sql
+                Conn.Execute SQL
             End If
         End If
 
-        sql = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
-        sql = sql & " and codccost = " & DBSet(Rs!codccost, "T")
-        sql = sql & " and codmacta = " & DBSet(Rs!codmacta, "T")
-        sql = sql & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
-        sql = sql & " and linapu = " & DBSet(Rs!Linapu, "N")
-        sql = sql & " and docum = " & DBSet(Rs!DOCUM, "T")
-        sql = sql & " and ampconce = " & DBSet(Rs!Ampconce, "T")
-        sql = sql & " and desdoblado = 0"
-        sql = sql & " and numdiari = " & DBSet(Rs!NumDiari, "N")
-        sql = sql & " and numasien = " & DBSet(Rs!NumAsien, "N")
+        SQL = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
+        SQL = SQL & " and codccost = " & DBSet(Rs!codccost, "T")
+        SQL = SQL & " and codmacta = " & DBSet(Rs!codmacta, "T")
+        SQL = SQL & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+        SQL = SQL & " and linapu = " & DBSet(Rs!Linapu, "N")
+        SQL = SQL & " and docum = " & DBSet(Rs!DOCUM, "T")
+        SQL = SQL & " and ampconce = " & DBSet(Rs!Ampconce, "T")
+        SQL = SQL & " and desdoblado = 0"
+        SQL = SQL & " and numdiari = " & DBSet(Rs!NumDiari, "N")
+        SQL = SQL & " and numasien = " & DBSet(Rs!NumAsien, "N")
 
-        Conn.Execute sql
+        Conn.Execute SQL
 
         Set Rs2 = Nothing
 
@@ -1881,10 +1881,10 @@ Dim Nregs As Long
     Set Rs = Nothing
 
     'falta el borrado de los que no tocan
-    sql = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
-    sql = sql & " and codccost <> " & DBSet(Text3(2).Text, "T")
+    SQL = "delete from tmplinccexplo where codusu = " & vUsu.Codigo
+    SQL = SQL & " and codccost <> " & DBSet(Text3(2).Text, "T")
     
-    Conn.Execute sql
+    Conn.Execute SQL
 
 
     HacerRepartoSubcentrosCoste = True

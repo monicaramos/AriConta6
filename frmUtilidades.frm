@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmUtilidades 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Utilidades"
@@ -938,7 +938,7 @@ Private Sub HacerBusqueda()
             If NumCuentas = 0 Then Exit Sub
             'Solo para esto.
             frameBus2.Visible = True
-            CmdCancel.Enabled = False
+            cmdCancel.Enabled = False
 
             QuitarHlinApu 0   ' Hco apuntes
             QuitarHlinApu 3   ' Facturas clientes
@@ -962,7 +962,7 @@ Private Sub HacerBusqueda()
             RecordsetRestantes
             frameBus2.Visible = False
             PonerCampos 1
-            CmdCancel.Enabled = True
+            cmdCancel.Enabled = True
             HanPulsadoCancelar = False
             RecorriendoRecordset
     
@@ -1256,7 +1256,7 @@ Private Sub Form_Load()
             Label1.Caption = "Nº Facturas PROVEEDORES incorrectos"
         End If
         
-        imgppal(1).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgppal(1).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
         
         
     End Select
@@ -1274,17 +1274,17 @@ Private Sub PonerCampos(NuevoEstado As Byte)
     Case 0
         Me.Label2.Caption = ""
         Me.pb1.Visible = False
-        Me.CmdCancel.Caption = "Salir"
+        Me.cmdCancel.Caption = "Salir"
         Me.cmdBus.Caption = "Iniciar"
     Case 1
-        Me.CmdCancel.Caption = "Parar"
+        Me.cmdCancel.Caption = "Parar"
         
     Case 2
-        Me.CmdCancel.Caption = "Cancelar"
+        Me.cmdCancel.Caption = "Cancelar"
         Me.cmdBus.Caption = "Reanudar"
     Case 3
         Me.cmdBus.Caption = "Buscar"
-        Me.CmdCancel.Caption = "Salir"
+        Me.cmdCancel.Caption = "Salir"
     End Select
     If Opcion = 0 Then
         Me.FrameAccionesCtas.Visible = NuevoEstado = 3
@@ -1682,9 +1682,9 @@ Dim ExisteReferencia As Boolean
         
         If Opcion = 0 Then
             Me.cmdBus.Enabled = False
-            Me.CmdCancel.Enabled = False
+            Me.cmdCancel.Enabled = False
             Me.cmdBus.Visible = False
-            Me.CmdCancel.Visible = False
+            Me.cmdCancel.Visible = False
             
             VisualizarSeleccionar True
         End If
@@ -2090,9 +2090,9 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             
         Case 2 ' Nueva búsqueda
             Me.cmdBus.Enabled = True
-            Me.CmdCancel.Enabled = True
+            Me.cmdCancel.Enabled = True
             Me.cmdBus.Visible = True
-            Me.CmdCancel.Visible = True
+            Me.cmdCancel.Visible = True
             
             cmdBus_Click
 
@@ -2229,7 +2229,7 @@ End Sub
 
 Private Sub BuscarContabilizacionFacturas()
     
-    CmdCancel.Enabled = False
+    cmdCancel.Enabled = False
     cmdBus.Enabled = False
     
     ListView1.ListItems.Clear
@@ -2259,7 +2259,7 @@ EBuscarContabilizacionFacturas:
     Set Rs = Nothing
     Set miRsAux = Nothing
     Me.FrameProgresoFac.Visible = False
-    CmdCancel.Enabled = True
+    cmdCancel.Enabled = True
     cmdBus.Enabled = True
     
 End Sub

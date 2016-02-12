@@ -1732,7 +1732,7 @@ Private Sub Form_Load()
     PonerFrames
     
     For i = 0 To imgcta.Count - 1
-        imgcta(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgcta(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     If Opcion = 1 Then

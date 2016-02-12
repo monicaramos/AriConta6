@@ -278,12 +278,12 @@ Private WithEvents frmBal As frmBasico
 Attribute frmBal.VB_VarHelpID = -1
 
 
-Dim sql As String
+Dim SQL As String
 Dim RC As String
 Dim Rs As Recordset
 Dim PrimeraVez As Boolean
 
-Dim cad As String
+Dim Cad As String
 Dim Cont As Long
 Dim i As Integer
 
@@ -324,42 +324,42 @@ Private Sub cmdCopyBalan_Click()
     End If
     
     
-    cad = "Va a copiar los datos del balance: " & vbCrLf & vbCrLf
-    cad = cad & txtNumBal(3).Text & " - " & Me.TextDescBalance(3).Text & vbCrLf
-    cad = cad & " sobre " & vbCrLf
-    cad = cad & txtNumBal(2).Text & " - " & Me.TextDescBalance(2).Text & vbCrLf
-    cad = cad & vbCrLf & vbCrLf & "Los datos del balance destino seran eliminados"
-    cad = cad & vbCrLf & vbCrLf & "¿Desea continuar?"
-    If MsgBox(cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
+    Cad = "Va a copiar los datos del balance: " & vbCrLf & vbCrLf
+    Cad = Cad & txtNumBal(3).Text & " - " & Me.TextDescBalance(3).Text & vbCrLf
+    Cad = Cad & " sobre " & vbCrLf
+    Cad = Cad & txtNumBal(2).Text & " - " & Me.TextDescBalance(2).Text & vbCrLf
+    Cad = Cad & vbCrLf & vbCrLf & "Los datos del balance destino seran eliminados"
+    Cad = Cad & vbCrLf & vbCrLf & "¿Desea continuar?"
+    If MsgBox(Cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
     
     
-    sql = "aparece"
-    cad = DevuelveDesdeBD("perdidas", "balances", "numbalan", txtNumBal(3).Text, "N", sql)
-    If cad = "" Then
+    SQL = "aparece"
+    Cad = DevuelveDesdeBD("perdidas", "balances", "numbalan", txtNumBal(3).Text, "N", SQL)
+    If Cad = "" Then
         MsgBox "Error leyendo datos: " & txtNumBal(3).Text
         Exit Sub
     End If
     
-    cad = "UPDATE balances SET perdidas=" & cad & ",Aparece= " & sql & " WHERE numbalan=" & txtNumBal(2).Text
-    Conn.Execute cad
+    Cad = "UPDATE balances SET perdidas=" & Cad & ",Aparece= " & SQL & " WHERE numbalan=" & txtNumBal(2).Text
+    Conn.Execute Cad
     
-    cad = "DELETE FROM balances_ctas WHERE numbalan=" & txtNumBal(2).Text
-    Conn.Execute cad
-    cad = "DELETE FROM balances_texto WHERE numbalan=" & txtNumBal(2).Text
-    Conn.Execute cad
-    cad = "INSERT INTO balances_texto (NumBalan, Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD)"
-    cad = cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD FROM"
-    cad = cad & " balances_texto WHERE numbalan = " & txtNumBal(3).Text
-    Conn.Execute cad
+    Cad = "DELETE FROM balances_ctas WHERE numbalan=" & txtNumBal(2).Text
+    Conn.Execute Cad
+    Cad = "DELETE FROM balances_texto WHERE numbalan=" & txtNumBal(2).Text
+    Conn.Execute Cad
+    Cad = "INSERT INTO balances_texto (NumBalan, Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD)"
+    Cad = Cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, padre, Orden, tipo, deslinea, texlinea, formula, TienenCtas, Negrita, A_Cero, Pintar, LibroCD FROM"
+    Cad = Cad & " balances_texto WHERE numbalan = " & txtNumBal(3).Text
+    Conn.Execute Cad
     
     
     If Me.chkCopyBalan.Value = 1 Then
         'COpio los datos tb
        ' NumBalan, Pasivo, codigo, codmacta, tipsaldo, Resta
-        cad = "INSERT INTO balances_ctas ( NumBalan, Pasivo, codigo, codmacta, tipsaldo, Resta)"
-        cad = cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, codmacta, tipsaldo, Resta FROM"
-        cad = cad & " balances_ctas WHERE numbalan = " & txtNumBal(3).Text
-        Conn.Execute cad
+        Cad = "INSERT INTO balances_ctas ( NumBalan, Pasivo, codigo, codmacta, tipsaldo, Resta)"
+        Cad = Cad & " SELECT " & txtNumBal(2).Text & ", Pasivo, codigo, codmacta, tipsaldo, Resta FROM"
+        Cad = Cad & " balances_ctas WHERE numbalan = " & txtNumBal(3).Text
+        Conn.Execute Cad
     End If
     Unload Me
 End Sub
@@ -408,7 +408,7 @@ Dim W As Single
     
     
     For i = 2 To 3
-        Me.ImgNumBal(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.ImgNumBal(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     
@@ -532,7 +532,7 @@ End Sub
 
 
 Private Sub txtNumBal_LostFocus(Index As Integer)
-    sql = ""
+    SQL = ""
     With txtNumBal(Index)
         .Text = Trim(.Text)
         If .Text <> "" Then
@@ -540,15 +540,15 @@ Private Sub txtNumBal_LostFocus(Index As Integer)
                 MsgBox "Numero de balance debe de ser numérico: " & .Text, vbExclamation
                 .Text = ""
             Else
-                sql = DevuelveDesdeBD("nombalan", "balances", "numbalan", .Text)
-                If sql = "" Then
+                SQL = DevuelveDesdeBD("nombalan", "balances", "numbalan", .Text)
+                If SQL = "" Then
                     MsgBox "El balance " & .Text & " NO existe", vbExclamation
                     .Text = ""
                 End If
             End If
         End If
     End With
-    TextDescBalance(Index).Text = sql
+    TextDescBalance(Index).Text = SQL
 End Sub
 
 

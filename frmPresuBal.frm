@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPresuBal 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   5655
@@ -796,7 +796,7 @@ End Sub
 
 Private Sub cmdAccion_Click(Index As Integer)
     
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     PulsadoCancelar = False
     Me.cmdCancelarAccion.Visible = True
@@ -1208,7 +1208,7 @@ Private Sub Form_Load()
     Me.Caption = "Balance Presupuestario"
 
     For i = 6 To 7
-        Me.imgCuentas(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     PrimeraVez = True
@@ -1445,9 +1445,9 @@ End Sub
 
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
     
-    DatosOk = False
+    DatosOK = False
     
     If Not ComprobarCuentas(6, 7) Then Exit Function
     
@@ -1464,7 +1464,7 @@ Private Function DatosOk() As Boolean
     End If
     
     
-    DatosOk = True
+    DatosOK = True
 
 End Function
 

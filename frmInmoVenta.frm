@@ -1230,14 +1230,14 @@ Private Sub Form_Load()
     End With
 
     
-    imgElto(0).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgcta(0).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgcta(1).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCCost(2).Picture = frmPpal.ImageList3.ListImages(1).Picture
-    imgCon(0).Picture = frmPpal.ImageList3.ListImages(1).Picture
+    imgElto(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgcta(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgcta(1).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCCost(2).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgCon(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For i = 0 To Me.imgTesoreria.Count - 1
-        imgTesoreria(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        imgTesoreria(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
     
     Frame3.Visible = False

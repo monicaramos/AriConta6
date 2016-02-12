@@ -817,8 +817,8 @@ Private Sub Form_Load()
     Me.Caption = "Elementos de Inmovilizado"
 
     For i = 0 To 1
-        Me.imgConcepto(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
-        Me.imgElemento(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgConcepto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgElemento(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     Me.ChkTipo(1).Value = 1

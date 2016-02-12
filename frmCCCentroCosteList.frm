@@ -496,7 +496,7 @@ Private Sub Form_Load()
     Me.Caption = "Centros de Coste"
 
     For i = 0 To 1
-        Me.imgCCoste(i).Picture = frmPpal.ImageList3.ListImages(1).Picture
+        Me.imgCCoste(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next i
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
@@ -580,7 +580,7 @@ Private Sub txtCCoste_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCCoste_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     txtCCoste(Index).Text = Trim(txtCCoste(Index).Text)
     

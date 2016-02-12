@@ -498,25 +498,6 @@ Begin VB.Form frmPpal
          EndProperty
       EndProperty
    End
-   Begin MSComctlLib.ImageList ImageList3 
-      Left            =   2490
-      Top             =   7680
-      _ExtentX        =   1005
-      _ExtentY        =   1005
-      BackColor       =   -2147483643
-      ImageWidth      =   16
-      ImageHeight     =   16
-      MaskColor       =   12632256
-      UseMaskColor    =   0   'False
-      _Version        =   393216
-      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   1
-         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E8AE5
-            Key             =   ""
-         EndProperty
-      EndProperty
-   End
    Begin MSComctlLib.ImageList ImageListPpal16 
       Left            =   2280
       Top             =   4170
@@ -562,15 +543,41 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   3
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":EF347
+            Picture         =   "frmPpal.frx":E8AE5
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":EFD59
+            Picture         =   "frmPpal.frx":E94F7
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":EFDF4
+            Picture         =   "frmPpal.frx":E9592
+            Key             =   ""
+         EndProperty
+      EndProperty
+   End
+   Begin MSComctlLib.ImageList ImgListviews 
+      Left            =   1230
+      Top             =   8400
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   3
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":E9FA4
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":F0806
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":F2FB8
             Key             =   ""
          EndProperty
       EndProperty
@@ -624,7 +631,7 @@ Begin VB.Form frmPpal
    Begin VB.Image ImageLogo 
       Height          =   720
       Left            =   7800
-      Picture         =   "frmPpal.frx":F0806
+      Picture         =   "frmPpal.frx":F8BDA
       Top             =   0
       Width           =   1890
    End
@@ -812,7 +819,7 @@ End Sub
 
 Private Sub Form_Resize()
     Dim x, y As Integer
-Dim V ''
+Dim v ''
 
     If WindowState = 1 Then
         EstadoAnterior = 1
@@ -860,9 +867,9 @@ Dim V ''
     
     AnchoListview = Me.Width - 200 - y - 30
     ListView1.Width = AnchoListview
-    V = Me.ImageLogo.Left
+    v = Me.ImageLogo.Left
     
-    Label33.Width = V + 20
+    Label33.Width = v + 20
     Label33.Left = -15
     Label22.Left = Label33.Width - 120
     Label22.Width = Me.Width - Label22.Left
@@ -900,10 +907,10 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
 '    FijarUltimoSkin False
 '    FreeLibrary m_hMod: UnloadApp: End
-    ActualizarExpansionMenus vUsu.Id, Me.TreeView1, "ariconta"
-    ActualizarExpansionMenus vUsu.Id, Me.TreeView2, "intracon"
+    ActualizarExpansionMenus vUsu.ID, Me.TreeView1, "ariconta"
+    ActualizarExpansionMenus vUsu.ID, Me.TreeView2, "intracon"
     
-    ActualizarItems vUsu.Id, Me.ListView1, "ariconta"
+    ActualizarItems vUsu.ID, Me.ListView1, "ariconta"
     
     
     
@@ -1430,7 +1437,7 @@ Dim SQL As String
         If aplicacion = "introcon" Then
             TW1.Nodes(I).Expanded = True
         Else
-            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
+            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.ID, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
     
             If DevuelveValor(SQL) = 0 Then
                 TW1.Nodes(I).Expanded = False
@@ -1445,7 +1452,7 @@ End Sub
 Private Sub OcultarHijos(Padre As String)
 Dim SQL As String
 
-    SQL = "update menus_usuarios set ver = 0 where codusu = " & vUsu.Id & " and padre = " & DBSet(Padre, "N")
+    SQL = "update menus_usuarios set ver = 0 where codusu = " & vUsu.ID & " and padre = " & DBSet(Padre, "N")
 
     Conn.Execute SQL
     
@@ -1461,7 +1468,7 @@ Dim cadAux As String
     'Para cada usuario, y a partir del menu del que disponga
     Set miRsAux = New ADODB.Recordset
     AUX = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
-    AUX = AUX & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
+    AUX = AUX & " WHERE codusu =" & vUsu.ID & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
     
     
     If Not vEmpresa.TieneTesoreria Then
@@ -1500,7 +1507,7 @@ Dim cadAux As String
         For I = 1 To ListView1.ListItems.Count
             Set RS = New ADODB.Recordset
             
-            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
+            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.ID & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If Not RS.EOF Then
@@ -1539,7 +1546,7 @@ Dim RS As ADODB.Recordset
         'PopupMenu mnPopUp
     Else
         If Not ListView1.SelectedItem Is Nothing Then
-            SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
+            SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.ID & " and aplicacion = 'ariconta' and "
             SQL = SQL & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
             
             Set RS = New ADODB.Recordset
@@ -1574,7 +1581,7 @@ Dim SQL As String
 
 
         'DAVID
-        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", x, y, RefrescarDatos
+        ActualizarItemCuadricula vUsu.ID, Me.ListView1, "ariconta", x, y, RefrescarDatos
         If RefrescarDatos Then
             ListView1.Arrange = lvwAutoTop
             ListView1.Refresh
@@ -1641,7 +1648,7 @@ End Sub
 
 
 Private Sub ListView2_Click()
-Dim Cad As String
+Dim cad As String
 
     CambiarEmpresa
     
@@ -1713,7 +1720,7 @@ Private Sub CambiarEmpresa()
 
     CadenaDesdeOtroForm = vUsu.Login & "|" & vEmpresa.codempre & "|"
         
-    ActualizarExpansionMenus vUsu.Id, Me.TreeView1, "ariconta"
+    ActualizarExpansionMenus vUsu.ID, Me.TreeView1, "ariconta"
     
         
     Set vUsu = New Usuario
@@ -1863,7 +1870,7 @@ End Sub
 
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim Cad As String
+Dim cad As String
 '
 '    On Error Resume Next
 '    For Each T In Me
@@ -1884,7 +1891,7 @@ Dim Cad As String
 End Sub
 
 Private Sub PonerDatosVisiblesForm()
-Dim Cad As String
+Dim cad As String
 '    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
 '    Cad = Cad & ", " & Format(Now, "d")
 '    Cad = Cad & " de " & Format(Now, "mmmm")
@@ -2013,7 +2020,7 @@ Private Sub BuscaEmpresas()
 Dim Prohibidas As String
 Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -2028,12 +2035,12 @@ Set RS = New ADODB.Recordset
 RS.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
 While Not RS.EOF
-    Cad = "|" & RS!codempre & "|"
-    If InStr(1, Prohibidas, Cad) = 0 Then
-        Cad = RS!nomempre
+    cad = "|" & RS!codempre & "|"
+    If InStr(1, Prohibidas, cad) = 0 Then
+        cad = RS!nomempre
         Set ItmX = ListView2.ListItems.Add()
         
-        ItmX.Text = Cad
+        ItmX.Text = cad
         ItmX.SubItems(1) = RS!nomresum
         
         ' sacamos las fechas de inicio y fin
@@ -2046,8 +2053,8 @@ While Not RS.EOF
         Set Rs2 = Nothing
         
             
-        Cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
-        ItmX.Tag = Cad
+        cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        ItmX.Tag = cad
         ItmX.ToolTipText = RS!CONTA
         
         
@@ -2072,21 +2079,21 @@ End Sub
 
 Private Function DevuelveProhibidas() As String
 Dim RS As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim I As Integer
     On Error GoTo EDevuelveProhibidas
     DevuelveProhibidas = ""
     Set RS = New ADODB.Recordset
     I = vUsu.Codigo Mod 1000
     RS.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    Cad = ""
+    cad = ""
     While Not RS.EOF
-        Cad = Cad & RS.Fields(1) & "|"
+        cad = cad & RS.Fields(1) & "|"
         RS.MoveNext
     Wend
-    If Cad <> "" Then Cad = "|" & Cad
+    If cad <> "" Then cad = "|" & cad
     RS.Close
-    DevuelveProhibidas = Cad
+    DevuelveProhibidas = cad
 EDevuelveProhibidas:
     Err.Clear
     Set RS = Nothing
@@ -2097,7 +2104,7 @@ End Function
 Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
 Dim C1 As String
-Dim Cad As String
+Dim cad As String
 Dim Cad2 As String
 
 
@@ -2118,8 +2125,8 @@ On Error GoTo ENumeroEmpresaMemorizar
             End If
             
                 'El tercer pipe, si tiene es el ancho col1
-                Cad = AnchoLogin
-                C1 = RecuperaValor(Cad, 3)
+                cad = AnchoLogin
+                C1 = RecuperaValor(cad, 3)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2128,7 +2135,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 ListView2.ColumnHeaders(1).Width = NF
                 
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 4)
+                C1 = RecuperaValor(cad, 4)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2138,7 +2145,7 @@ On Error GoTo ENumeroEmpresaMemorizar
             
             
                 'El quinto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 5)
+                C1 = RecuperaValor(cad, 5)
                 
                 'DAVID
                 'LO hablamos con calma
@@ -2158,18 +2165,18 @@ On Error GoTo ENumeroEmpresaMemorizar
             Exit Sub
         End If
     End If
-    Cad = App.Path & "\control.dat"
+    cad = App.Path & "\control.dat"
     If Leer Then
-        If Dir(Cad) <> "" Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
-            If Cad <> "" Then
+            cad = Trim(cad)
+            If cad <> "" Then
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = RecuperaValor(Cad, 2)
+                C1 = RecuperaValor(cad, 2)
                 'el segundo es el
                 If C1 <> "" Then
                     For NF = 1 To Me.ListView2.ListItems.Count
@@ -2182,7 +2189,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = RecuperaValor(Cad, 3)
+                C1 = RecuperaValor(cad, 3)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2190,7 +2197,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 ListView2.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 4)
+                C1 = RecuperaValor(cad, 4)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2198,7 +2205,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 ListView2.ColumnHeaders(2).Width = NF
                 'El quinto pipe si tiene es el ancho de col3
-                C1 = RecuperaValor(Cad, 5)
+                C1 = RecuperaValor(cad, 5)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2214,7 +2221,7 @@ On Error GoTo ENumeroEmpresaMemorizar
         End If
     Else 'Escribir
         NF = FreeFile
-        Open Cad For Output As #NF
+        Open cad For Output As #NF
         
         Cad2 = CadenaControl
         
@@ -2225,9 +2232,9 @@ On Error GoTo ENumeroEmpresaMemorizar
         
         CadenaControl = Cad2
         
-        Cad = Cad2
+        cad = Cad2
         
-        AnchoLogin = Cad
+        AnchoLogin = cad
         Print #NF, Cad2
         Close #NF
     End If
