@@ -25,7 +25,7 @@ Begin VB.Form frmTESCobrosDivVto
    Begin VB.Frame FrameDividVto 
       Height          =   3855
       Left            =   60
-      TabIndex        =   5
+      TabIndex        =   6
       Top             =   0
       Visible         =   0   'False
       Width           =   5415
@@ -40,7 +40,25 @@ Begin VB.Form frmTESCobrosDivVto
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
+         Height          =   360
+         Index           =   3
+         Left            =   2160
+         TabIndex        =   3
+         Top             =   2700
+         Width           =   1365
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
          Left            =   2190
          TabIndex        =   2
@@ -58,7 +76,7 @@ Begin VB.Form frmTESCobrosDivVto
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
+         Height          =   360
          Index           =   0
          Left            =   2190
          TabIndex        =   0
@@ -77,7 +95,7 @@ Begin VB.Form frmTESCobrosDivVto
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
+         Height          =   360
          Index           =   1
          Left            =   2190
          TabIndex        =   1
@@ -97,7 +115,7 @@ Begin VB.Form frmTESCobrosDivVto
          EndProperty
          Height          =   375
          Left            =   3000
-         TabIndex        =   3
+         TabIndex        =   4
          Top             =   3300
          Width           =   975
       End
@@ -115,9 +133,28 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   375
          Index           =   27
          Left            =   4200
-         TabIndex        =   4
+         TabIndex        =   5
          Top             =   3300
          Width           =   975
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Días resto Vtos."
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   3
+         Left            =   450
+         TabIndex        =   13
+         Top             =   2760
+         Width           =   1680
       End
       Begin VB.Image imgFecha 
          Height          =   240
@@ -142,7 +179,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   2
          Left            =   450
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   2280
          Width           =   1410
       End
@@ -161,7 +198,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   1
          Left            =   450
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   1350
          Width           =   1650
       End
@@ -180,7 +217,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   0
          Left            =   450
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   1800
          Width           =   780
       End
@@ -199,7 +236,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   62
          Left            =   3660
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   1770
          Width           =   630
       End
@@ -218,7 +255,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   57
          Left            =   240
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   570
          Width           =   5040
       End
@@ -237,7 +274,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   56
          Left            =   240
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   330
          Width           =   5040
       End
@@ -255,6 +292,7 @@ Private Const SaltoLinea = """ + chr(13) + """
 Public Opcion As Byte
     '27.-  Divide el vencimiento en dos vtos a partir del importe introducido en el text
     
+    
 Private WithEvents frmCta As frmColCtas
 Attribute frmCta.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
@@ -270,7 +308,7 @@ Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
 Dim cad As String
-Dim CONT As Long
+Dim Cont As Long
 Dim I As Integer
 Dim TotalRegistros As Long
 
@@ -279,6 +317,10 @@ Dim MostrarFrame As Boolean
 Dim Fecha As Date
 
 Dim DevfrmCCtas As String
+
+Dim ParaElLog As String
+
+
 
 Private Sub PonFoco(ByRef T1 As TextBox)
     T1.SelStart = 0
@@ -328,8 +370,12 @@ Dim vImpvto As Currency
 Dim vVtos As Integer
 Dim vTotal As Currency
 Dim J As Integer
-Dim K As Integer
+Dim k As Integer
 Dim ImportePagado As Currency
+Dim vFecVenci As Date
+Dim FecVenci As Date
+
+Dim Dias As Integer
 
     On Error GoTo ecmdDivVto
 
@@ -369,12 +415,24 @@ Dim ImportePagado As Currency
     If txtcodigo(1).Text <> "" Then vImpvto = ImporteSinFormato(ComprobarCero(txtcodigo(1).Text))
     If txtcodigo(0).Text <> "" Then vVtos = CInt(ComprobarCero(txtcodigo(0).Text))
         
-    
     If vImpvto = 0 And vVtos = 0 Then
         MsgBox "Debe introducir el importe o el nro de vencimientos o ambos. Revise.", vbExclamation
         PonFoco txtcodigo(0)
         Exit Sub
     End If
+    
+    ' debe introducir la fecha del primer vto, viene cargada
+    If txtcodigo(2).Text = "" Then
+        MsgBox "Debe introducir la fecha del primer vencimiento", vbExclamation
+        PonFoco txtcodigo(2)
+        Exit Sub
+    End If
+    
+    
+    If txtcodigo(3).Text = "" Then
+        If MsgBox("No ha puesto valor en el campo de días de resto de vencimientos. " & vbCrLf & vbCrLf & "¿ Desea continuar ?" & vbCrLf, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
+    End If
+    
     
     
     ' me ponen importe
@@ -415,8 +473,6 @@ Dim ImportePagado As Currency
     
     Conn.BeginTrans
     
-    
-    
     SQL = ""
     If SQL = "" Then
         Set RS = New ADODB.Recordset
@@ -448,34 +504,40 @@ Dim ImportePagado As Currency
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     End If
     
+    Dias = txtcodigo(3).Text
+
     
+    FecVenci = CDate(txtcodigo(2))
+    vFecVenci = FecVenci
     'OK.  a desdoblar
     vTotal = 0
-    K = I + 1
+    k = I + 1
     For J = 1 To vVtos - 1
     
         vTotal = vTotal + vImpvto
     
-        I = I + 1
+        vFecVenci = DateAdd("d", DBLet(Dias, "N"), vFecVenci)
+        
     
         SQL = "INSERT INTO cobros (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
         SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,reftalonpag,"
-        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,"
-        SQL = SQL & "`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,"
-        SQL = SQL & "`text72csb`,`text73csb`,`text81csb`,`text82csb`,`text83csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
-        SQL = SQL & "`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban) "
+        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,`ctabanc2`,"
+        SQL = SQL & "`text33csb`,`text41csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
+        SQL = SQL & "`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban) "
         'Valores
-        SQL = SQL & " SELECT " & I & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
+        SQL = SQL & " SELECT " & k & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
         SQL = SQL & "NULL,NULL,NULL,NULL,NULL,"
-        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,"
+        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,"
+        SQL = SQL & DBSet(vFecVenci, "F") & ","
+        SQL = SQL & "`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,"
         'text83csb`,
-        SQL = SQL & "'Div vto." & Format(Now, "dd/mm/yyyy hh:nn") & "'"
-        SQL = SQL & ",`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban FROM "
+        SQL = SQL & "`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban FROM "
         SQL = SQL & " cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
     
         Conn.Execute SQL
     
+        k = k + 1
     
     Next J
     
@@ -484,6 +546,7 @@ Dim ImportePagado As Currency
     vTotal = vTotal + vImpvto
         
     SQL = "update cobros set impvenci = " & DBSet(vImpvto, "N")
+    SQL = SQL & ", fecvenci = " & DBSet(FecVenci, "F")
     
     SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
     SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
@@ -492,14 +555,24 @@ Dim ImportePagado As Currency
     
     ' en el ultimo dejamos la diferencia
     If vTotal <> Importe Then
-        SQL = "update cobros set impvenci = impvenci + " & DBSet(vTotal - Importe, "N")
+        SQL = "update cobros set impvenci = impvenci + " & DBSet(Importe - vTotal, "N")
         
         SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        SQL = SQL & " AND numorden = " & DBSet(I, "N")
+        SQL = SQL & " AND numorden = " & DBSet(k - 1, "N")
         
         Conn.Execute SQL
     End If
     
+    'Insertamos el LOG
+    ParaElLog = "Dividir Vto.Fra.: " & Me.Label4(57).Caption & vbCrLf
+    ParaElLog = ParaElLog & "Cliente         : " & Me.Label4(56).Caption & vbCrLf
+    ParaElLog = ParaElLog & "Nro.Vencimientos: " & txtcodigo(0).Text & vbCrLf
+    ParaElLog = ParaElLog & "Importe Vto     : " & txtcodigo(1).Text & vbCrLf
+    ParaElLog = ParaElLog & "Fecha primer Vto: " & txtcodigo(2).Text & vbCrLf
+    ParaElLog = ParaElLog & "Día Resto Vtos  : " & txtcodigo(3).Text & vbCrLf
+    
+    vLog.Insertar 1, vUsu, ParaElLog
+    ParaElLog = ""
     
 '    'Hacemos
 '    CONT = 1
@@ -533,7 +606,7 @@ ecmdDivVto:
         Conn.RollbackTrans
     Else
         Conn.CommitTrans
-        CadenaDesdeOtroForm = K
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & k & "|"
         MsgBox "Proceso realizado correctamente", vbExclamation
         Unload Me
     End If
@@ -550,7 +623,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -571,14 +644,14 @@ Dim Img As Image
             '           1.- cadenaSQL numfac,numsere,fecfac
             '           2.- Numero vto
             '           3.- Importe maximo
-            h = FrameDividVto.Height + 120
+            H = FrameDividVto.Height + 120
             W = FrameDividVto.Width
             FrameDividVto.Visible = True
             Me.Caption = "Dividir Vencimiento"
     End Select
     
     Me.Width = W + 300
-    Me.Height = h + 400
+    Me.Height = H + 400
     
     I = Opcion
     If Opcion = 13 Or I = 43 Or I = 44 Then I = 11
@@ -623,7 +696,7 @@ End Sub
 
 Private Sub txtcodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
-Dim b As Boolean
+Dim B As Boolean
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
