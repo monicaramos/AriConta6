@@ -256,7 +256,7 @@ Begin VB.Form frmTESCobrosDivVto
          Index           =   57
          Left            =   240
          TabIndex        =   8
-         Top             =   570
+         Top             =   660
          Width           =   5040
       End
       Begin VB.Label Label4 
@@ -307,7 +307,7 @@ Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim cad As String
+Dim Cad As String
 Dim Cont As Long
 Dim I As Integer
 Dim TotalRegistros As Long
@@ -695,7 +695,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub txtcodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim B As Boolean
 
     'Quitar espacios en blanco por los lados

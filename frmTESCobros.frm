@@ -3519,7 +3519,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim cad As String
+    Dim Cad As String
     Dim I As Integer
     
     Screen.MousePointer = vbHourglass
@@ -3529,7 +3529,7 @@ Private Sub cmdAceptar_Click()
         HacerBusqueda
     
     Case 3
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -3541,7 +3541,7 @@ Private Sub cmdAceptar_Click()
     
     Case 4
         'Modificar
-        If DatosOK Then
+        If DatosOk Then
             '-----------------------------------------
 '                Cad = DameClavesADODCForm(Me, Me.Data1)
 '
@@ -3553,10 +3553,10 @@ Private Sub cmdAceptar_Click()
                 If SituarData Then
                 
                     Text1_LostFocus 0
-                    cad = Text2(1).Tag 'para que no pierda el valor
+                    Cad = Text2(1).Tag 'para que no pierda el valor
                     PonerModo 2
-                    Text2(1).Tag = cad
-                    cad = ""
+                    Text2(1).Tag = Cad
+                    Cad = ""
                     PonPendiente
                     '-- Esto permanece para saber donde estamos
                     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -3843,7 +3843,7 @@ Dim N As Byte
 End Sub
 
 Private Sub BotonEliminar()
-    Dim cad As String
+    Dim Cad As String
     Dim I As Integer
     Dim SQL As String
 
@@ -3854,10 +3854,10 @@ Private Sub BotonEliminar()
     I = SePuedeEliminar2
     If I < 3 Then Exit Sub
     '### a mano
-    cad = "Seguro que desea eliminar de la BD el registro actual:"
-    cad = cad & vbCrLf & Data1.Recordset.Fields(0) & "  " & Data1.Recordset.Fields(1) & " "
-    cad = cad & Data1.Recordset.Fields(2) & "  " & Data1.Recordset.Fields(3)
-    I = MsgBox(cad, vbQuestion + vbYesNoCancel + vbDefaultButton2)
+    Cad = "Seguro que desea eliminar de la BD el registro actual:"
+    Cad = Cad & vbCrLf & Data1.Recordset.Fields(0) & "  " & Data1.Recordset.Fields(1) & " "
+    Cad = Cad & Data1.Recordset.Fields(2) & "  " & Data1.Recordset.Fields(3)
+    I = MsgBox(Cad, vbQuestion + vbYesNoCancel + vbDefaultButton2)
     'Borramos
     If I = vbYes Then
         'Hay que eliminar
@@ -3946,7 +3946,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim impo As Currency
     
     If Data1.Recordset.EOF Then
@@ -3980,14 +3980,14 @@ Dim impo As Currency
     
     'Devolvera muuuuchas cosas
     'serie factura fecfac numvto
-    cad = Text1(13).Text & "|" & Format(Text1(1).Text, "0000000") & "|" & Text1(2).Text & "|" & Text1(3).Text & "|"
+    Cad = Text1(13).Text & "|" & Format(Text1(1).Text, "0000000") & "|" & Text1(2).Text & "|" & Text1(3).Text & "|"
     'Codmacta nommacta codforpa   nomforpa   importe
-    cad = cad & Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(0).Text & "|" & Text2(1).Text & "|" & CStr(impo) & "|"
+    Cad = Cad & Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(0).Text & "|" & Text2(1).Text & "|" & CStr(impo) & "|"
     'Lo que lleva cobrado
-    cad = cad & Text1(8).Text & "|"
+    Cad = Cad & Text1(8).Text & "|"
     
     
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -4132,7 +4132,7 @@ Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cad As String
+Dim Cad As String
 
     If CadenaDevuelta <> "" Then
         If DevfrmCCtas <> "" Then
@@ -4146,14 +4146,14 @@ Dim cad As String
             'Sabemos que campos son los que nos devuelve
             'Creamos una cadena consulta y ponemos los datos
             DevfrmCCtas = ValorDevueltoFormGrid(Text1(4), CadenaDevuelta, 1)
-            cad = DevfrmCCtas
+            Cad = DevfrmCCtas
             DevfrmCCtas = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-            cad = cad & " AND " & DevfrmCCtas
+            Cad = Cad & " AND " & DevfrmCCtas
             DevfrmCCtas = ValorDevueltoFormGrid(Text1(2), CadenaDevuelta, 3)
-            cad = cad & " AND " & DevfrmCCtas
+            Cad = Cad & " AND " & DevfrmCCtas
             DevfrmCCtas = ValorDevueltoFormGrid(Text1(3), CadenaDevuelta, 4)
-            cad = cad & " AND " & DevfrmCCtas
-            DevfrmCCtas = cad
+            Cad = Cad & " AND " & DevfrmCCtas
+            DevfrmCCtas = Cad
             If DevfrmCCtas = "" Then Exit Sub
             '   Como la clave principal es unica, con poner el sql apuntando
             '   al valor devuelto sobre la clave ppal es suficiente
@@ -4171,16 +4171,16 @@ Dim cad As String
 End Sub
 
 Private Sub PonerDatoDevuelto(CadenaDevuelta As String)
-Dim cad As String
+Dim Cad As String
     DevfrmCCtas = ValorDevueltoFormGrid(Text1(13), CadenaDevuelta, 1)
-    cad = DevfrmCCtas
+    Cad = DevfrmCCtas
     DevfrmCCtas = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-    cad = cad & " AND " & DevfrmCCtas
+    Cad = Cad & " AND " & DevfrmCCtas
     DevfrmCCtas = ValorDevueltoFormGrid(Text1(2), CadenaDevuelta, 3)
-    cad = cad & " AND " & DevfrmCCtas
+    Cad = Cad & " AND " & DevfrmCCtas
     DevfrmCCtas = ValorDevueltoFormGrid(Text1(3), CadenaDevuelta, 4)
-    cad = cad & " AND " & DevfrmCCtas
-    DevfrmCCtas = cad
+    Cad = Cad & " AND " & DevfrmCCtas
+    DevfrmCCtas = Cad
     If DevfrmCCtas = "" Then Exit Sub
     '   Como la clave principal es unica, con poner el sql apuntando
     '   al valor devuelto sobre la clave ppal es suficiente
@@ -4246,7 +4246,7 @@ Private Sub ImgAgente_Click()
 End Sub
 
 Private Sub imgCuentas_Click(Index As Integer)
-Dim cad As String
+Dim Cad As String
 Dim Z
     Screen.MousePointer = vbHourglass
     If Index = 1 Then
@@ -4408,28 +4408,28 @@ End Sub
 Private Sub mnBuscar_Click()
 
     Dim NF As Integer
-    Dim cad As String
+    Dim Cad As String
     Dim Entidad As String
     Dim BIC As String
     
-    cad = "C:\Documents and Settings\David\Escritorio\bic.txt"
+    Cad = "C:\Documents and Settings\David\Escritorio\bic.txt"
     NF = FreeFile
-    Open cad For Input As #NF
+    Open Cad For Input As #NF
     While Not EOF(NF)
-        Line Input #NF, cad
+        Line Input #NF, Cad
         
         'sbic(entidad,Nombre,bic)
-        cad = Trim(cad)
+        Cad = Trim(Cad)
         
-        Entidad = Right(cad, 4)
-        cad = Mid(cad, 1, Len(cad) - 4)
+        Entidad = Right(Cad, 4)
+        Cad = Mid(Cad, 1, Len(Cad) - 4)
         
-        BIC = Mid(cad, 1, 11)
-        cad = Trim(Mid(cad, 12))
+        BIC = Mid(Cad, 1, 11)
+        Cad = Trim(Mid(Cad, 12))
         
-        NombreSQL cad
-        cad = "INSERT INTO sbic(entidad,Nombre,bic) VALUES (" & Entidad & ",'" & cad & "','" & BIC & "')"
-        Conn.Execute cad
+        NombreSQL Cad
+        Cad = "INSERT INTO sbic(entidad,Nombre,bic) VALUES (" & Entidad & ",'" & Cad & "','" & BIC & "')"
+        Conn.Execute Cad
         
         
     Wend
@@ -4775,7 +4775,7 @@ End Function
 
 
 Private Sub HacerBusqueda()
-Dim cad As String
+Dim Cad As String
 'CadB = ObtenerBusqueda2(Me, BuscaChekc)
 '
 'If chkVistaPrevia = 1 Then
@@ -5130,11 +5130,11 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
 Dim Tipo As Integer
 
-    DatosOK = False
+    DatosOk = False
     
     
     If cboSituRem.ListIndex = 0 Then
@@ -5283,7 +5283,7 @@ Dim Tipo As Integer
     End If
     
     
-    DatosOK = True
+    DatosOk = True
 End Function
 
 
@@ -5394,10 +5394,10 @@ Private Function SePuedeEliminar2() As Byte
         'Documento recibido
         '
         DevfrmCCtas = "numserie='" & Data1.Recordset!NUmSerie
-        DevfrmCCtas = DevfrmCCtas & "' AND fecfaccl='" & Format(Data1.Recordset!fecfaccl, FormatoFecha)
-        DevfrmCCtas = DevfrmCCtas & "' AND numfaccl=" & Data1.Recordset!codfaccl
+        DevfrmCCtas = DevfrmCCtas & "' AND fecfactu='" & Format(Data1.Recordset!FecFactu, FormatoFecha)
+        DevfrmCCtas = DevfrmCCtas & "' AND numfactu=" & Data1.Recordset!NumFactu
         DevfrmCCtas = DevfrmCCtas & " AND numvenci"
-        DevfrmCCtas = DevuelveDesdeBD("id", "slirecepdoc", DevfrmCCtas, Data1.Recordset!numorden)
+        DevfrmCCtas = DevuelveDesdeBD("id", "talones_facturas", DevfrmCCtas, Data1.Recordset!numorden)
         If DevfrmCCtas <> "" Then
             DevfrmCCtas = "Esta en la recepcion de documentos. Numero: " & DevfrmCCtas
             MsgBox DevfrmCCtas, vbExclamation
@@ -5452,39 +5452,38 @@ End Sub
 
 Private Sub RealizarPagoCuenta()
 Dim impo As Currency
-'--monica
-'    'Para realizar pago a cuenta... Varias cosas.
-'    'Primero. Hay por pagar
-'    impo = ImporteFormateado(Text1(6).Text)
-'    'Gastos
-'    If Text1(38).Text <> "" Then impo = impo + ImporteFormateado(Text1(38).Text)
-'    'Pagado
-'    If Text1(8).Text <> "" Then impo = impo - ImporteFormateado(Text1(8).Text)
-'
-'    'Si impo>0 entonces TODAVIA puedn pagarme algo
-'    If impo = 0 Then
-'        'Cosa rara. Esta todo el importe pagado
-'        Exit Sub
-'    End If
-'
-'    frmTESParciales.Cobro = True
-'    frmTESParciales.Vto = Text1(13).Text & "|" & Text1(1).Text & "|" & Text1(2).Text & "|" & Text1(3).Text & "|" & Text1(5).Text & "|"
-'    frmTESParciales.Importes = Text1(6).Text & "|" & Text1(38).Text & "|" & Text1(8).Text & "|"
-'    frmTESParciales.Cta = Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(9).Text & "|" & Text2(2).Text & "|"
-'    frmTESParciales.FormaPago = Val(Text2(1).Tag)
-'    frmTESParciales.Show vbModal
-'    If CadenaDesdeOtroForm <> "" Then
-'        'Hay que refrescar los datos
-'        lblIndicador.Caption = ""
-'        If SituarData Then
-'
-'            PonerCampos
-'
-'        Else
-'            LimpiarCampos
-'            PonerModo 0
-'        End If
-'    End If
+    'Para realizar pago a cuenta... Varias cosas.
+    'Primero. Hay por pagar
+    impo = ImporteFormateado(Text1(6).Text)
+    'Gastos
+    If Text1(16).Text <> "" Then impo = impo + ImporteFormateado(Text1(16).Text)
+    'Pagado
+    If Text1(8).Text <> "" Then impo = impo - ImporteFormateado(Text1(8).Text)
+
+    'Si impo>0 entonces TODAVIA puedn pagarme algo
+    If impo = 0 Then
+        'Cosa rara. Esta todo el importe pagado
+        Exit Sub
+    End If
+
+    frmTESParciales.Cobro = True
+    frmTESParciales.Vto = Text1(13).Text & "|" & Text1(1).Text & "|" & Text1(2).Text & "|" & Text1(3).Text & "|" & Text1(5).Text & "|"
+    frmTESParciales.Importes = Text1(6).Text & "|" & Text1(16).Text & "|" & Text1(8).Text & "|"
+    frmTESParciales.Cta = Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(9).Text & "|" & Text2(2).Text & "|"
+    frmTESParciales.FormaPago = Val(Text2(1).Tag)
+    frmTESParciales.Show vbModal
+    If CadenaDesdeOtroForm <> "" Then
+        'Hay que refrescar los datos
+        lblIndicador.Caption = ""
+        If SituarData Then
+
+            PonerCampos
+
+        Else
+            LimpiarCampos
+            PonerModo 0
+        End If
+    End If
 End Sub
 
 Private Sub HacerF1()
@@ -5557,8 +5556,6 @@ Dim Im As Currency
     frmTESCobrosDivVto.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
 
-'            CadenaConsulta = "numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
-'            CadenaConsulta = CadenaConsulta & " AND fecfactu = '" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "'"
             CadenaConsulta = "Select * from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1) 'CadenaConsulta
             Data1.RecordSource = CadenaConsulta
             Data1.Refresh
@@ -5566,18 +5563,6 @@ Dim Im As Currency
                 MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
             Else
                 DevfrmCCtas = ""
-'                While DevfrmCCtas = ""
-'                    If CStr(Data1.Recordset!numorden) = CadenaDesdeOtroForm Then
-'                        DevfrmCCtas = "YA"
-'                    Else
-'                        If Data1.Recordset.EOF Then
-'                            DevfrmCCtas = "EOF"
-'                        Else
-'                            Data1.Recordset.MoveNext
-'                        End If
-'                    End If
-'                Wend
-'                If DevfrmCCtas = "EOF" Then Data1.Recordset.MoveFirst
                 PonerCampos
             End If
     End If
@@ -5601,7 +5586,6 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
             If Me.Data1.Recordset.EOF Then Exit Sub
             If Modo <> 2 Then Exit Sub
             If Text2(1).Tag <> "" Then
-                'If Val(Text2(1).Tag) < 4 Or Val(Text2(1).Tag) > 5 Then 'El 4 y el 5 son recibo bancario y confirming
                 If Val(Text2(1).Tag) <> vbTipoPagoRemesa Then
                     If SePuedeEliminar2 < 3 Then Exit Sub
                 
@@ -5725,12 +5709,12 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
-    cad = "(numserie=" & DBSet(Text1(13).Text, "T") & " and numfactu = " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F") & " and numorden = " & DBSet(Text1(3).Text, "N") & ") "
+    Cad = "(numserie=" & DBSet(Text1(13).Text, "T") & " and numfactu = " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F") & " and numorden = " & DBSet(Text1(3).Text, "N") & ") "
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
-    If SituarDataMULTI(Data1, cad, Indicador) Then
+    If SituarDataMULTI(Data1, Cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -5744,15 +5728,15 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
     
     On Error Resume Next
 
-    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
         Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
@@ -6192,7 +6176,7 @@ Private Sub InsertarLinea()
 Dim nomframe As String
 Dim B As Boolean
 Dim Limp As Boolean
-Dim cad As String
+Dim Cad As String
 
 
 
@@ -6254,7 +6238,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim v As Integer
-Dim cad As String
+Dim Cad As String
 Dim B As Boolean
 
     On Error Resume Next

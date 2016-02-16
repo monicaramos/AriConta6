@@ -11,307 +11,9 @@ Begin VB.Form frmTESVerCobrosPagos
    ScaleHeight     =   5835
    ScaleWidth      =   14430
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameTransfer 
-      Height          =   1335
-      Left            =   0
-      TabIndex        =   26
-      Top             =   0
-      Width           =   10
-      Begin VB.CheckBox chkVtoCuenta 
-         Caption         =   "Agrupar vtos por cuenta"
-         Height          =   255
-         Index           =   1
-         Left            =   8760
-         TabIndex        =   39
-         Top             =   600
-         Width           =   2295
-      End
-      Begin VB.CheckBox chkGenerico 
-         Caption         =   "Cuenta genérica"
-         Height          =   255
-         Index           =   1
-         Left            =   6120
-         TabIndex        =   37
-         Top             =   360
-         Width           =   2535
-      End
-      Begin VB.CheckBox chkAsiento 
-         Caption         =   "Asiento por pago"
-         Height          =   255
-         Index           =   1
-         Left            =   8760
-         TabIndex        =   34
-         Top             =   240
-         Width           =   1935
-      End
-      Begin VB.CheckBox chkContrapar 
-         Caption         =   "Agrupar apunte bancario"
-         Height          =   255
-         Index           =   1
-         Left            =   8760
-         TabIndex        =   33
-         Top             =   960
-         Width           =   2055
-      End
-      Begin VB.TextBox Text5 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Left            =   1680
-         TabIndex        =   30
-         Text            =   "Text4"
-         Top             =   840
-         Width           =   3735
-      End
-      Begin VB.CommandButton cmdContabilizarTransfer 
-         Caption         =   "Contabilizar"
-         Height          =   375
-         Left            =   4080
-         TabIndex        =   29
-         Top             =   360
-         Width           =   1335
-      End
-      Begin VB.TextBox Text4 
-         Height          =   285
-         Left            =   2160
-         TabIndex        =   27
-         Text            =   "Text4"
-         Top             =   360
-         Width           =   1095
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   0
-         Left            =   10800
-         Picture         =   "frmTESVerCobrosPagos.frx":000C
-         ToolTipText     =   "AYUDA"
-         Top             =   240
-         Width           =   240
-      End
-      Begin VB.Image imgCheck 
-         Height          =   240
-         Index           =   3
-         Left            =   5640
-         Picture         =   "frmTESVerCobrosPagos.frx":010E
-         ToolTipText     =   "Quitar seleccion"
-         Top             =   360
-         Width           =   240
-      End
-      Begin VB.Image imgCheck 
-         Height          =   240
-         Index           =   2
-         Left            =   5640
-         Picture         =   "frmTESVerCobrosPagos.frx":0258
-         ToolTipText     =   "Seleccionar todos"
-         Top             =   840
-         Width           =   240
-      End
-      Begin VB.Label Label5 
-         Caption         =   "Banco"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   38
-         Top             =   840
-         Width           =   1575
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   0
-         Left            =   1800
-         Top             =   360
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Fecha contabilización"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   28
-         Top             =   360
-         Width           =   1695
-      End
-   End
-   Begin VB.Frame Frame1 
-      BorderStyle     =   0  'None
-      Height          =   495
-      Left            =   120
-      TabIndex        =   12
-      Top             =   5280
-      Width           =   14235
-      Begin VB.TextBox Text2 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   375
-         Index           =   3
-         Left            =   2370
-         TabIndex        =   42
-         Text            =   "Text2"
-         Top             =   60
-         Visible         =   0   'False
-         Width           =   2055
-      End
-      Begin VB.TextBox Text2 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   375
-         Index           =   2
-         Left            =   5400
-         TabIndex        =   24
-         Text            =   "Text2"
-         Top             =   60
-         Visible         =   0   'False
-         Width           =   2055
-      End
-      Begin VB.TextBox Text2 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   375
-         Index           =   1
-         Left            =   8580
-         TabIndex        =   16
-         Text            =   "Text2"
-         Top             =   60
-         Width           =   2055
-      End
-      Begin VB.TextBox Text2 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   375
-         Index           =   0
-         Left            =   12060
-         TabIndex        =   14
-         Text            =   "Text2"
-         Top             =   60
-         Width           =   2055
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Riesgo Talón/Pagaré"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   285
-         Index           =   3
-         Left            =   60
-         TabIndex        =   43
-         Top             =   120
-         Visible         =   0   'False
-         Width           =   2520
-      End
-      Begin VB.Label Label2 
-         Alignment       =   1  'Right Justify
-         Caption         =   "RIESGO"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   195
-         Index           =   2
-         Left            =   4380
-         TabIndex        =   25
-         Top             =   120
-         Visible         =   0   'False
-         Width           =   960
-      End
-      Begin VB.Label Label2 
-         Alignment       =   1  'Right Justify
-         Caption         =   " PENDIENTE"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00004080&
-         Height          =   195
-         Index           =   1
-         Left            =   10650
-         TabIndex        =   15
-         Top             =   120
-         Width           =   1290
-      End
-      Begin VB.Label Label2 
-         Alignment       =   1  'Right Justify
-         Caption         =   "VENCIDO"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   195
-         Index           =   0
-         Left            =   7530
-         TabIndex        =   13
-         Top             =   120
-         Width           =   990
-      End
-   End
    Begin MSComctlLib.ImageList ImageList1 
-      Left            =   720
-      Top             =   2400
+      Left            =   750
+      Top             =   2100
       _ExtentX        =   1005
       _ExtentY        =   1005
       BackColor       =   -2147483643
@@ -322,50 +24,21 @@ Begin VB.Form frmTESVerCobrosPagos
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   3
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmTESVerCobrosPagos.frx":03A2
+            Picture         =   "frmTESVerCobrosPagos.frx":000C
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmTESVerCobrosPagos.frx":5FC4
+            Picture         =   "frmTESVerCobrosPagos.frx":686E
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmTESVerCobrosPagos.frx":62DE
+            Picture         =   "frmTESVerCobrosPagos.frx":6B88
             Key             =   ""
          EndProperty
       EndProperty
    End
-   Begin MSComctlLib.ListView ListView1 
-      Height          =   3735
-      Left            =   60
-      TabIndex        =   3
-      Top             =   1470
-      Width           =   14295
-      _ExtentX        =   25215
-      _ExtentY        =   6588
-      View            =   3
-      LabelEdit       =   1
-      LabelWrap       =   -1  'True
-      HideSelection   =   -1  'True
-      FullRowSelect   =   -1  'True
-      _Version        =   393217
-      ForeColor       =   -2147483640
-      BackColor       =   -2147483643
-      BorderStyle     =   1
-      Appearance      =   1
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      NumItems        =   0
-   End
    Begin VB.Frame frame 
-      Height          =   1455
+      Height          =   1365
       Left            =   90
       TabIndex        =   0
       Top             =   30
@@ -374,8 +47,8 @@ Begin VB.Form frmTESVerCobrosPagos
          BorderStyle     =   0  'None
          Height          =   1125
          Left            =   90
-         TabIndex        =   17
-         Top             =   120
+         TabIndex        =   13
+         Top             =   180
          Width           =   13965
          Begin VB.CheckBox chkVtoCuenta 
             Caption         =   "Agrupar vtos por cuenta"
@@ -391,7 +64,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   255
             Index           =   0
             Left            =   10860
-            TabIndex        =   40
+            TabIndex        =   36
             Top             =   450
             Width           =   2745
          End
@@ -409,7 +82,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   255
             Index           =   0
             Left            =   7890
-            TabIndex        =   36
+            TabIndex        =   32
             Top             =   270
             Width           =   2175
          End
@@ -426,7 +99,7 @@ Begin VB.Form frmTESVerCobrosPagos
             EndProperty
             Height          =   255
             Left            =   7890
-            TabIndex        =   35
+            TabIndex        =   31
             Top             =   750
             Width           =   2265
          End
@@ -444,7 +117,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   255
             Index           =   0
             Left            =   10860
-            TabIndex        =   32
+            TabIndex        =   28
             Top             =   810
             Width           =   2745
          End
@@ -462,7 +135,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   255
             Index           =   0
             Left            =   10860
-            TabIndex        =   31
+            TabIndex        =   27
             Top             =   90
             Width           =   2265
          End
@@ -479,7 +152,7 @@ Begin VB.Form frmTESVerCobrosPagos
             EndProperty
             Height          =   375
             Left            =   5490
-            TabIndex        =   21
+            TabIndex        =   17
             Top             =   120
             Width           =   1335
          End
@@ -496,7 +169,7 @@ Begin VB.Form frmTESVerCobrosPagos
             EndProperty
             Height          =   375
             Left            =   4140
-            TabIndex        =   20
+            TabIndex        =   16
             Top             =   120
             Width           =   1215
          End
@@ -515,7 +188,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   360
             Index           =   1
             Left            =   1020
-            TabIndex        =   19
+            TabIndex        =   15
             Text            =   "Text3"
             Top             =   652
             Width           =   5805
@@ -535,7 +208,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   360
             Index           =   0
             Left            =   1020
-            TabIndex        =   18
+            TabIndex        =   14
             Text            =   "Text3"
             Top             =   82
             Width           =   1485
@@ -544,7 +217,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   240
             Left            =   2940
             MousePointer    =   6  'Size NE SW
-            Picture         =   "frmTESVerCobrosPagos.frx":65F8
+            Picture         =   "frmTESVerCobrosPagos.frx":6EA2
             Top             =   120
             Width           =   240
          End
@@ -569,7 +242,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Index           =   1
             Left            =   7260
             MousePointer    =   6  'Size NE SW
-            Picture         =   "frmTESVerCobrosPagos.frx":6FFA
+            Picture         =   "frmTESVerCobrosPagos.frx":78A4
             ToolTipText     =   "Seleccionar todos"
             Top             =   690
             Width           =   240
@@ -579,7 +252,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Index           =   0
             Left            =   6900
             MousePointer    =   6  'Size NE SW
-            Picture         =   "frmTESVerCobrosPagos.frx":7144
+            Picture         =   "frmTESVerCobrosPagos.frx":79EE
             ToolTipText     =   "Quitar seleccion"
             Top             =   690
             Width           =   240
@@ -598,7 +271,7 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   255
             Index           =   1
             Left            =   0
-            TabIndex        =   23
+            TabIndex        =   19
             Top             =   120
             Width           =   1005
          End
@@ -616,57 +289,29 @@ Begin VB.Form frmTESVerCobrosPagos
             Height          =   195
             Index           =   0
             Left            =   0
-            TabIndex        =   22
+            TabIndex        =   18
             Top             =   690
             Width           =   885
          End
       End
       Begin VB.CommandButton cmdRegresar 
-         Height          =   615
-         Left            =   7950
-         Picture         =   "frmTESVerCobrosPagos.frx":728E
+         Caption         =   "Regresar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   435
+         Left            =   12480
          Style           =   1  'Graphical
-         TabIndex        =   4
+         TabIndex        =   3
          ToolTipText     =   "Regresar"
          Top             =   360
-         Width           =   735
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Fec. VTO."
-         Height          =   255
-         Index           =   2
-         Left            =   2640
-         TabIndex        =   10
-         Top             =   960
-         Width           =   1095
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Fec. factura"
-         Height          =   255
-         Index           =   1
-         Left            =   2640
-         TabIndex        =   9
-         Top             =   690
-         Width           =   1455
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Cta Cliente"
-         Height          =   255
-         Index           =   0
-         Left            =   2640
-         TabIndex        =   8
-         Top             =   120
-         Width           =   1455
-      End
-      Begin VB.CommandButton Command1 
-         Height          =   615
-         Left            =   1560
-         Picture         =   "frmTESVerCobrosPagos.frx":7C90
-         Style           =   1  'Graphical
-         TabIndex        =   2
-         ToolTipText     =   "Actualizar"
-         Top             =   360
-         Width           =   735
+         Width           =   1365
       End
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -679,10 +324,10 @@ Begin VB.Form frmTESVerCobrosPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   120
+         Left            =   1440
          TabIndex        =   1
          Text            =   "Text1"
-         Top             =   600
+         Top             =   360
          Width           =   1215
       End
       Begin VB.CheckBox chkReme 
@@ -696,22 +341,12 @@ Begin VB.Form frmTESVerCobrosPagos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   195
-         Left            =   10230
-         TabIndex        =   6
-         Top             =   360
+         Height          =   240
+         Left            =   6180
+         TabIndex        =   5
+         Top             =   450
          Value           =   1  'Checked
          Width           =   2415
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Nombre Cliente"
-         Height          =   255
-         Index           =   3
-         Left            =   2640
-         TabIndex        =   41
-         Top             =   400
-         Value           =   -1  'True
-         Width           =   1455
       End
       Begin VB.CheckBox chkTalPag 
          Caption         =   "Riesgo Talon  / pagare"
@@ -724,28 +359,37 @@ Begin VB.Form frmTESVerCobrosPagos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   285
-         Left            =   10230
-         TabIndex        =   7
-         Top             =   720
+         Height          =   240
+         Left            =   3240
+         TabIndex        =   6
+         Top             =   450
          Width           =   3015
       End
       Begin VB.CommandButton cmdDividrVto 
-         Height          =   615
-         Left            =   8790
-         Picture         =   "frmTESVerCobrosPagos.frx":7F9A
+         Caption         =   "Dividir Vto"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   435
+         Left            =   10740
          Style           =   1  'Graphical
-         TabIndex        =   5
+         TabIndex        =   4
          ToolTipText     =   "Dividir vencimiento"
          Top             =   360
          Visible         =   0   'False
-         Width           =   735
+         Width           =   1605
       End
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
-         Left            =   1080
-         Top             =   360
+         Left            =   1140
+         Top             =   420
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -760,11 +404,338 @@ Begin VB.Form frmTESVerCobrosPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   120
-         TabIndex        =   11
-         Top             =   360
+         Left            =   180
+         TabIndex        =   7
+         Top             =   420
          Width           =   840
       End
+   End
+   Begin VB.Frame FrameTransfer 
+      Height          =   1335
+      Left            =   0
+      TabIndex        =   22
+      Top             =   0
+      Width           =   10
+      Begin VB.CheckBox chkVtoCuenta 
+         Caption         =   "Agrupar vtos por cuenta"
+         Height          =   255
+         Index           =   1
+         Left            =   8760
+         TabIndex        =   35
+         Top             =   600
+         Width           =   2295
+      End
+      Begin VB.CheckBox chkGenerico 
+         Caption         =   "Cuenta genérica"
+         Height          =   255
+         Index           =   1
+         Left            =   6120
+         TabIndex        =   33
+         Top             =   360
+         Width           =   2535
+      End
+      Begin VB.CheckBox chkAsiento 
+         Caption         =   "Asiento por pago"
+         Height          =   255
+         Index           =   1
+         Left            =   8760
+         TabIndex        =   30
+         Top             =   240
+         Width           =   1935
+      End
+      Begin VB.CheckBox chkContrapar 
+         Caption         =   "Agrupar apunte bancario"
+         Height          =   255
+         Index           =   1
+         Left            =   8760
+         TabIndex        =   29
+         Top             =   960
+         Width           =   2055
+      End
+      Begin VB.TextBox Text5 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Left            =   1680
+         TabIndex        =   26
+         Text            =   "Text4"
+         Top             =   840
+         Width           =   3735
+      End
+      Begin VB.CommandButton cmdContabilizarTransfer 
+         Caption         =   "Contabilizar"
+         Height          =   375
+         Left            =   4080
+         TabIndex        =   25
+         Top             =   360
+         Width           =   1335
+      End
+      Begin VB.TextBox Text4 
+         Height          =   285
+         Left            =   2160
+         TabIndex        =   23
+         Text            =   "Text4"
+         Top             =   360
+         Width           =   1095
+      End
+      Begin VB.Image Image1 
+         Height          =   240
+         Index           =   0
+         Left            =   10800
+         Picture         =   "frmTESVerCobrosPagos.frx":7B38
+         ToolTipText     =   "AYUDA"
+         Top             =   240
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   3
+         Left            =   5640
+         Picture         =   "frmTESVerCobrosPagos.frx":7C3A
+         ToolTipText     =   "Quitar seleccion"
+         Top             =   360
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   2
+         Left            =   5640
+         Picture         =   "frmTESVerCobrosPagos.frx":7D84
+         ToolTipText     =   "Seleccionar todos"
+         Top             =   840
+         Width           =   240
+      End
+      Begin VB.Label Label5 
+         Caption         =   "Banco"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   34
+         Top             =   840
+         Width           =   1575
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   0
+         Left            =   1800
+         Top             =   360
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Fecha contabilización"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   24
+         Top             =   360
+         Width           =   1695
+      End
+   End
+   Begin VB.Frame Frame1 
+      BorderStyle     =   0  'None
+      Height          =   495
+      Left            =   120
+      TabIndex        =   8
+      Top             =   5280
+      Width           =   14235
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Index           =   3
+         Left            =   2370
+         TabIndex        =   37
+         Text            =   "Text2"
+         Top             =   60
+         Visible         =   0   'False
+         Width           =   2055
+      End
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Index           =   2
+         Left            =   5400
+         TabIndex        =   20
+         Text            =   "Text2"
+         Top             =   60
+         Visible         =   0   'False
+         Width           =   2055
+      End
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Index           =   1
+         Left            =   8580
+         TabIndex        =   12
+         Text            =   "Text2"
+         Top             =   60
+         Width           =   2055
+      End
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Index           =   0
+         Left            =   12060
+         TabIndex        =   10
+         Text            =   "Text2"
+         Top             =   60
+         Width           =   2055
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Riesgo Talón/Pagaré"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   3
+         Left            =   60
+         TabIndex        =   38
+         Top             =   120
+         Visible         =   0   'False
+         Width           =   2520
+      End
+      Begin VB.Label Label2 
+         Alignment       =   1  'Right Justify
+         Caption         =   "RIESGO"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   195
+         Index           =   2
+         Left            =   4380
+         TabIndex        =   21
+         Top             =   120
+         Visible         =   0   'False
+         Width           =   960
+      End
+      Begin VB.Label Label2 
+         Alignment       =   1  'Right Justify
+         Caption         =   " PENDIENTE"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00004080&
+         Height          =   195
+         Index           =   1
+         Left            =   10650
+         TabIndex        =   11
+         Top             =   120
+         Width           =   1290
+      End
+      Begin VB.Label Label2 
+         Alignment       =   1  'Right Justify
+         Caption         =   "VENCIDO"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   195
+         Index           =   0
+         Left            =   7530
+         TabIndex        =   9
+         Top             =   120
+         Width           =   990
+      End
+   End
+   Begin MSComctlLib.ListView ListView1 
+      Height          =   3735
+      Left            =   60
+      TabIndex        =   2
+      Top             =   1470
+      Width           =   14295
+      _ExtentX        =   25215
+      _ExtentY        =   6588
+      View            =   3
+      LabelEdit       =   1
+      LabelWrap       =   -1  'True
+      HideSelection   =   -1  'True
+      FullRowSelect   =   -1  'True
+      _Version        =   393217
+      ForeColor       =   -2147483640
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      NumItems        =   0
    End
    Begin VB.Menu mnContextual 
       Caption         =   "Contextual"
@@ -864,7 +835,8 @@ Private GastosTransferencia As Currency
 
 
 Dim CampoOrden As String
-
+Dim Orden As Boolean
+Dim Campo2 As Integer
 
 
 Private Sub chkAsiento_Click(Index As Integer)
@@ -911,6 +883,26 @@ Private Sub chkGenerico_Click(Index As Integer)
             chkGenerico(Index).Value = 0
         End If
     End If
+End Sub
+
+Private Sub chkReme_Click()
+    SeVeRiesgo = False
+    If Not OrdenarEfecto Then
+        'Ver cobros pagos
+        If Cobros And (Me.chkReme.Value = 1) Then SeVeRiesgo = True
+    End If
+    Label2(2).Visible = SeVeRiesgo
+    Text2(2).Visible = SeVeRiesgo
+End Sub
+
+Private Sub chkTalPag_Click()
+    SeVeRiesgoTalPag = False
+    If Not OrdenarEfecto Then
+        'Ver cobros pagos
+        If Cobros And (Me.chkTalPag.Value = 1) Then SeVeRiesgoTalPag = True
+    End If
+    Label2(3).Visible = SeVeRiesgoTalPag And Cobros
+    Text2(3).Visible = SeVeRiesgoTalPag And Cobros
 End Sub
 
 Private Sub cmdContabilizarTransfer_Click()
@@ -1674,7 +1666,7 @@ Private Sub cmdRegresar_Click()
     Unload Me
 End Sub
 
-Private Sub Command1_Click()
+Private Sub Refrescar()
     Screen.MousePointer = vbHourglass
     CargaList
     Screen.MousePointer = vbDefault
@@ -1781,9 +1773,9 @@ Private Sub Form_Load()
     CargaIconoListview Me.ListView1
     ListView1.Checkboxes = OrdenarEfecto
     Text1.Enabled = Not OrdenarEfecto
-    Me.chkReme.Value = 0
+'    Me.chkReme.Value = 0
     Me.chkReme.Visible = False
-    Me.chkTalPag.Value = 0
+'    Me.chkTalPag.Value = 0
     Me.chkTalPag.Visible = False
     imgCheck(0).Visible = OrdenarEfecto
     imgCheck(1).Visible = OrdenarEfecto
@@ -1898,41 +1890,22 @@ Private Sub Form_Load()
         
         
         If Cobros Then
+            CampoOrden = "cobros.fecvenci"
+        
             Caption = "Cobros pendientes"
-            Me.Option1(0).Caption = "Clientes"
-            Me.Option1(3).Caption = "Nombre cliente"
-            Me.chkReme.Value = 1
-            Me.chkReme.Visible = True
-            Me.chkTalPag.Value = 1
-            Me.chkTalPag.Visible = True
+            chkReme.Value = 1
+            chkReme.Visible = True
+            chkTalPag.Value = 1
+            chkTalPag.Visible = True
     
-            CampoOrden = "cobros.codmacta"
+            
     
     
         Else
             Caption = "Pagos pendientes"
-            Me.Option1(0).Caption = "Proveedores"
-            Me.Option1(3).Caption = "Nom. proveedor "
         End If
         
-        
-        CargaGuardaOrdenacion True
     End If
-    
-    
-    
-    'ORDENACION DE LOS EFECTOS
-    If Me.OrdenacionEfectos = 1 Then
-        Me.Option1(1).Value = True
-    ElseIf Me.OrdenacionEfectos = 2 Then
-        Me.Option1(2).Value = True
-    ElseIf Me.OrdenacionEfectos = 3 Then
-        Me.Option1(3).Value = True
-    Else
-        Me.Option1(0).Value = True
-    End If
-
-    
     
     
     
@@ -1969,7 +1942,7 @@ Dim H As Integer
     'Situamos el frame y demas
     Me.frame.Width = Me.Width - 120
     Me.Frame1.Left = Me.Width - 120 - Me.Frame1.Width
-    Me.Frame1.Top = Me.Height - Frame1.Height - 360
+    Me.Frame1.Top = Me.Height - Frame1.Height - 540 '360
     FrameRemesar.Width = Me.frame.Width - 320
     Me.FrameTransfer.Width = Me.frame.Width
     
@@ -2004,8 +1977,8 @@ Dim I As Integer
     ListView1.ColumnHeaders.Clear
    If Cobros Then
         NCols = 11
-        Columnas = "Serie|Nº Factura|F. Fact|F. VTO|Nº|CLIENTE|Tipo|Importe|Gasto|Cobrado|Pendiente|"
-        ancho = "700|11%|12%|12%|520|24%|640|11%|8%|11%|11%|"
+        Columnas = "Serie|Nº Factura|F.Factura|F. VTO|Nº|CLIENTE|Tipo|Importe|Gasto|Cobrado|Pendiente|"
+        ancho = "800|11%|12%|12%|520|24%|640|12%|8%|11%|12%|"
         ALIGN = "LLLLLLLDDDD"
         
         
@@ -2112,38 +2085,10 @@ Dim Inserta As Boolean
     cad = DevSQL
     
     'ORDENACION
+    If CampoOrden = "" Then CampoOrden = "cobros.fecvenci"
     cad = cad & " ORDER BY " & CampoOrden
-    
-    
-    
-'    If Option1(0).Value Or Option1(3).Value Then
-'        'CLIENTE
-'        If Option1(0).Value Then
-'            'Codmacta
-'            cad = cad & " cobros.codmacta"
-'        Else
-'            cad = cad & " nommacta"
-'        End If
-'        cad = cad & ",numserie,numfactu,fecfactu"
-'    Else
-'        'FECHA FACTURA
-'        If Option1(1).Value Then
-'            cad = cad & " fecfaccl,numserie,codfaccl,fecvenci"
-'        Else
-'            cad = cad & " fecvenci,numserie,codfaccl,fecfaccl"
-'        End If
-'    End If
-'    'La ultima ordenacion por vto
-'    cad = cad & ",numorden"
-    
-    
-    Stop
-    
-    
-    
-    
-    
-    
+    If Orden Then cad = cad & " DESC"
+    If CampoOrden <> "cobros.fecvenci" Then cad = cad & ", cobros.fecvenci"
     
     
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2257,7 +2202,7 @@ Dim ImpAux As Currency
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
     Else
-        ItmX.SmallIcon = 2
+'        ItmX.SmallIcon = 2
     End If
     Importe = Importe + impo
     
@@ -2288,7 +2233,8 @@ Dim cad As String
     Else
         'cobros
         cad = "SELECT cobros.*, formapago.nomforpa, tipofpago.descformapago, tipofpago.siglas, "
-        cad = cad & " cuentas.nommacta,cuentas.codmacta,tipofpago.tipoformapago "
+        cad = cad & " cuentas.nommacta,cuentas.codmacta,tipofpago.tipoformapago, "
+        cad = cad & " coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0) imppdte "
         cad = cad & " FROM ((cobros INNER JOIN formapago ON cobros.codforpa = formapago.codforpa) INNER JOIN tipofpago ON formapago.tipforpa = tipofpago.tipoformapago) INNER JOIN cuentas ON cobros.codmacta = cuentas.codmacta"
         If vSQL <> "" Then cad = cad & " WHERE " & vSQL
     End If
@@ -2302,25 +2248,11 @@ Private Sub CargaPagos()
     cad = DevSQL
     
     'ORDENACION
-    cad = cad & " ORDER BY "
-    If Option1(0).Value Or Option1(3).Value Then
-        'CLIENTE
-        If Option1(0).Value Then
-            cad = cad & " spagop.ctaprove"
-        Else
-            cad = cad & " nommacta"
-        End If
-        cad = cad & " ,numfactu,fecfactu"
-    Else
-        'FECHA FACTURA
-        If Option1(1).Value Then
-            cad = cad & " fecfactu,numfactu,fecefect"
-        Else
-            cad = cad & " fecefect,numfactu,fecfactu"
-        End If
-    End If
-    'La ultima ordenacion por vto
-    cad = cad & ",numorden"
+    cad = cad & " ORDER BY " & CampoOrden
+    If Orden Then cad = cad & " DESC"
+    If CampoOrden <> "pagos.fecefect" Then cad = cad & ", pagos.fecefect"
+
+
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RS.EOF
         InsertaItemPago
@@ -2387,7 +2319,6 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
     'Para dejar las variables bien
     ContabTransfer = False
-    CargaGuardaOrdenacion False
     DesdeRecepcionTalones = False
     'Por si acaso
     NumeroTalonPagere = ""
@@ -2547,10 +2478,39 @@ Private Sub imgTraerRestoDatosCliProv_Click()
 End Sub
 
 Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    Stop
-    Me.ListView1.Sorted = True
-    Me.ListView1.SortKey = 0
+Dim Campo2 As Integer
+
+    Orden = Not Orden
+    If Cobros Then
+'        Columnas = "Serie|Nº Factura|F.Factura|F. VTO|Nº|CLIENTE|Tipo|Importe|Gasto|Cobrado|Pendiente|"
+        Select Case ColumnHeader
+            Case "Serie"
+                CampoOrden = "cobros.numserie"
+            Case "Nº Factura"
+                CampoOrden = "cobros.numfactu"
+            Case "F.Factura"
+                CampoOrden = "cobros.fecfactu"
+            Case "F. VTO"
+                CampoOrden = "cobros.fecvenci"
+            Case "Nº"
+                CampoOrden = "cobros.numorden"
+            Case "CLIENTE"
+                CampoOrden = "nommacta"
+            Case "Tipo"
+                CampoOrden = "siglas"
+            Case "Importe"
+                CampoOrden = "cobros.impvenci"
+            Case "Gasto"
+                CampoOrden = "cobros.gastos"
+            Case "Cobrado"
+                CampoOrden = "cobros.impcobro"
+            Case "Pendiente"
+                CampoOrden = "imppdte"
+        End Select
+        CargaList
+    Else
     
+    End If
 'Dim campo2 As Integer
 '
 '    Select Case ColumnHeader
@@ -2673,6 +2633,7 @@ Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader
 '    End If
 '    CargarFacturasPozos nomColumna, nomColumna2
     
+
     
 End Sub
 
@@ -2743,15 +2704,11 @@ End Sub
 
 
 Private Sub Text1_GotFocus()
-    Text1.SelStart = 0
-    Text1.SelLength = Len(Text1.Text)
+    ConseguirFoco Text1, 0
 End Sub
 
 Private Sub Text1_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        KeyAscii = 0
-        SendKeys "{tab}"
-    End If
+    KEYpress KeyAscii
 End Sub
 
 Private Sub Text1_LostFocus()
@@ -2759,9 +2716,19 @@ Private Sub Text1_LostFocus()
         MsgBox "Fecha incorrecta", vbExclamation
         Text1.Text = ""
         Text1.SetFocus
+    Else
+        Screen.MousePointer = vbHourglass
+        CargaList
+        Screen.MousePointer = vbDefault
     End If
 End Sub
 
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+End Sub
 
 Private Function GenerarRecibos2() As Boolean
 Dim SQL As String
@@ -2773,8 +2740,6 @@ Dim Poblacion As String
 
     On Error GoTo EGenerarRecibos
     GenerarRecibos2 = False
-    
-
     
     
     'Limpiamos
@@ -2826,8 +2791,6 @@ Dim Poblacion As String
     End If
     
     cad = cad & ",'" & SQL & "'"
-    
-
     
     
     '------------------------------------------------------------------------
@@ -5572,53 +5535,53 @@ Dim FVto As Date
 End Function
 
 
-Private Sub CargaGuardaOrdenacion(Leer As Boolean)
-
-    On Error GoTo ECargaGuardaOrdenacion
-    
-    
-    cad = App.Path & "\ordeefec.xdf"
-    I = FreeFile
-    If Leer Then
-        OrdenacionEfectos = 0
-        If Dir(cad, vbArchive) <> "" Then
-            Open cad For Input As #I
-            Line Input #I, cad
-            Close #I
-            If cad <> "" Then
-                I = Val(cad)
-                If I > 3 Then I = 0
-                OrdenacionEfectos = I
-            End If
-        End If
-        
-    
-    Else
-        'guardar
-        SubItemVto = 0
-        For I = 0 To 3
-            If Me.Option1(I).Value Then SubItemVto = I
-        Next I
-    
-        If SubItemVto <> OrdenacionEfectos Then
-    
-        
-            If SubItemVto = 0 Then
-                If Dir(cad, vbArchive) <> "" Then Kill cad
-            Else
-                Open cad For Output As #I
-                Print #I, SubItemVto
-                Close #I
-            End If
-        End If
-    
-    
-    End If
-    Exit Sub
-    
-ECargaGuardaOrdenacion:
-    Err.Clear
-End Sub
+'Private Sub CargaGuardaOrdenacion(Leer As Boolean)
+'
+'    On Error GoTo ECargaGuardaOrdenacion
+'
+'
+'    cad = App.Path & "\ordeefec.xdf"
+'    I = FreeFile
+'    If Leer Then
+'        OrdenacionEfectos = 0
+'        If Dir(cad, vbArchive) <> "" Then
+'            Open cad For Input As #I
+'            Line Input #I, cad
+'            Close #I
+'            If cad <> "" Then
+'                I = Val(cad)
+'                If I > 3 Then I = 0
+'                OrdenacionEfectos = I
+'            End If
+'        End If
+'
+'
+'    Else
+'        'guardar
+'        SubItemVto = 0
+'        For I = 0 To 3
+'            If Me.Option1(I).Value Then SubItemVto = I
+'        Next I
+'
+'        If SubItemVto <> OrdenacionEfectos Then
+'
+'
+'            If SubItemVto = 0 Then
+'                If Dir(cad, vbArchive) <> "" Then Kill cad
+'            Else
+'                Open cad For Output As #I
+'                Print #I, SubItemVto
+'                Close #I
+'            End If
+'        End If
+'
+'
+'    End If
+'    Exit Sub
+'
+'ECargaGuardaOrdenacion:
+'    Err.Clear
+'End Sub
 
 
 
