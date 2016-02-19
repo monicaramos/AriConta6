@@ -307,8 +307,8 @@ Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim Cad As String
-Dim Cont As Long
+Dim cad As String
+Dim CONT As Long
 Dim I As Integer
 Dim TotalRegistros As Long
 
@@ -370,7 +370,7 @@ Dim vImpvto As Currency
 Dim vVtos As Integer
 Dim vTotal As Currency
 Dim J As Integer
-Dim k As Integer
+Dim K As Integer
 Dim ImportePagado As Currency
 Dim vFecVenci As Date
 Dim FecVenci As Date
@@ -465,11 +465,11 @@ Dim Dias As Integer
         vVtos = Round(Importe / vImpvto, 0)
     End If
     
-    ImportePagado = DevuelveValor("select impcobro from cobros where " & RecuperaValor(CadenaDesdeOtroForm, 1) & " and numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2))
-    If vImpvto < ImportePagado Then
-        MsgBox "El importe cobrado del vencimiento es superior al importe de vencimiento que dejaremos. Revise.", vbExclamation
-        Exit Sub
-    End If
+'    ImportePagado = DevuelveValor("select impcobro from cobros where " & RecuperaValor(CadenaDesdeOtroForm, 1) & " and numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2))
+'    If vImpvto < ImportePagado Then
+'        MsgBox "El importe cobrado del vencimiento es superior al importe de vencimiento que dejaremos. Revise.", vbExclamation
+'        Exit Sub
+'    End If
     
     Conn.BeginTrans
     
@@ -511,7 +511,7 @@ Dim Dias As Integer
     vFecVenci = FecVenci
     'OK.  a desdoblar
     vTotal = 0
-    k = I + 1
+    K = I + 1
     For J = 1 To vVtos - 1
     
         vTotal = vTotal + vImpvto
@@ -525,7 +525,7 @@ Dim Dias As Integer
         SQL = SQL & "`text33csb`,`text41csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
         SQL = SQL & "`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban) "
         'Valores
-        SQL = SQL & " SELECT " & k & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
+        SQL = SQL & " SELECT " & K & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
         SQL = SQL & "NULL,NULL,NULL,NULL,NULL,"
         SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,"
         SQL = SQL & DBSet(vFecVenci, "F") & ","
@@ -537,7 +537,7 @@ Dim Dias As Integer
     
         Conn.Execute SQL
     
-        k = k + 1
+        K = K + 1
     
     Next J
     
@@ -545,7 +545,7 @@ Dim Dias As Integer
     ' actualizamos el primer vencimiento
     vTotal = vTotal + vImpvto
         
-    SQL = "update cobros set impvenci = " & DBSet(vImpvto, "N")
+    SQL = "update cobros set impvenci = coalesce(impcobro,0) + " & DBSet(vImpvto, "N")
     SQL = SQL & ", fecvenci = " & DBSet(FecVenci, "F")
     
     SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
@@ -558,7 +558,7 @@ Dim Dias As Integer
         SQL = "update cobros set impvenci = impvenci + " & DBSet(Importe - vTotal, "N")
         
         SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        SQL = SQL & " AND numorden = " & DBSet(k - 1, "N")
+        SQL = SQL & " AND numorden = " & DBSet(K - 1, "N")
         
         Conn.Execute SQL
     End If
@@ -606,7 +606,7 @@ ecmdDivVto:
         Conn.RollbackTrans
     Else
         Conn.CommitTrans
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & k & "|"
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & K & "|"
         MsgBox "Proceso realizado correctamente", vbExclamation
         Unload Me
     End If
@@ -623,7 +623,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim H As Integer
+Dim h As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -644,14 +644,14 @@ Dim Img As Image
             '           1.- cadenaSQL numfac,numsere,fecfac
             '           2.- Numero vto
             '           3.- Importe maximo
-            H = FrameDividVto.Height + 120
+            h = FrameDividVto.Height + 120
             W = FrameDividVto.Width
             FrameDividVto.Visible = True
             Me.Caption = "Dividir Vencimiento"
     End Select
     
     Me.Width = W + 300
-    Me.Height = H + 400
+    Me.Height = h + 400
     
     I = Opcion
     If Opcion = 13 Or I = 43 Or I = 44 Then I = 11
@@ -695,7 +695,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub txtcodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim B As Boolean
 
     'Quitar espacios en blanco por los lados
@@ -709,6 +709,10 @@ Dim B As Boolean
     Select Case Index
         Case 0 'nro de vtos
             PonerFormatoEntero txtcodigo(Index)
+            
+            If txtcodigo(0).Text <> "" Then
+                txtcodigo(1).Text = Format(Round(ImporteSinFormato(txtcodigo(1).Text) / txtcodigo(0), 2), "###,###,##0.00")
+            End If
             
         Case 2 'FECHAS
             If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)

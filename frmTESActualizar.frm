@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{FE0065C0-1B7B-11CF-9D53-00AA003C9CB6}#1.1#0"; "COMCT232.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{FE0065C0-1B7B-11CF-9D53-00AA003C9CB6}#1.1#0"; "comct232.ocx"
 Begin VB.Form frmTESActualizar 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Actualizar diario"
@@ -8,7 +8,7 @@ Begin VB.Form frmTESActualizar
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   5160
-   Icon            =   "frmActualizar.frx":0000
+   Icon            =   "frmTESActualizar.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -200,9 +200,9 @@ Public OpcionActualizar As Byte
     '---------------- DE TESORERIA
     '20
     
-Public Numasiento As Long
+Public NumAsiento As Long
 Public FechaAsiento As Date
-Public numdiari As Integer
+Public NumDiari As Integer
 Public NUmSerie As String
 
 
@@ -329,11 +329,11 @@ Private Sub cmdSalir_Click()
 End Sub
 
 Private Sub Form_Activate()
-Dim Bol As Boolean
+Dim bol As Boolean
 If PrimeraVez Then
     PrimeraVez = False
     Me.Refresh
-    Bol = False
+    bol = False
     
     'TEnemos que eliminar el archivo de errores
     If OpcionActualizar = 20 Then
@@ -343,30 +343,30 @@ If PrimeraVez Then
     Select Case OpcionActualizar
     Case 1
         ActualizaAsiento
-        Bol = True
+        bol = True
     Case 2, 3
         
-        Bol = True
+        bol = True
     Case 4, 13
 
         NUmSerie = ""
     Case 6, 8
 
-        Bol = True
+        bol = True
     Case 7, 9
 
-        Bol = True
+        bol = True
     Case 10, 11
     
     Case 20
         'COBROS, pagos
         lblAsiento.Caption = "Actualizando registros"
         lblAsiento.Refresh
-        If ObtenerRegistrosParaActualizar Then Bol = True
+        If ObtenerRegistrosParaActualizar Then bol = True
         
       
     End Select
-    If Bol Then Unload Me
+    If bol Then Unload Me
 End If
 Screen.MousePointer = vbDefault
 End Sub
@@ -387,7 +387,7 @@ Dim B As Boolean
     Select Case OpcionActualizar
     Case 1, 2, 3, 20     'Pagos, cobros tambien
         Label1.Caption = "Nº Asiento"
-        Me.lblAsiento.Caption = Numasiento
+        Me.lblAsiento.Caption = NumAsiento
         INC = 10  'Incremento para el proggress
         If OpcionActualizar = 1 Then
             Label9.Caption = "Actualizar"
@@ -416,7 +416,7 @@ Dim B As Boolean
         Else
             Label1.Caption = Label1.Caption & " Proveedor"
         End If
-        Me.lblAsiento.Caption = NUmSerie & Numasiento
+        Me.lblAsiento.Caption = NUmSerie & NumAsiento
         INC = 10  'Incremento para el proggress
         If OpcionActualizar = 6 Or OpcionActualizar = 8 Then
             Label9.Caption = "Integrar Factura"
@@ -441,7 +441,7 @@ End Sub
 
 
 Private Function ActualizaAsiento() As Boolean
-    Dim Bol As Boolean
+    Dim bol As Boolean
     Dim Donde As String
     On Error GoTo EActualizaAsiento
     
@@ -452,14 +452,14 @@ Private Function ActualizaAsiento() As Boolean
     
     'Comprobamos que no existe en historico
     If AsientoExiste(True) Then
-        MsgBox "El asiento ya existe. Fecha: " & Fecha & "     Nº: " & Numasiento, vbExclamation
+        MsgBox "El asiento ya existe. Fecha: " & Fecha & "     Nº: " & NumAsiento, vbExclamation
         Exit Function
     End If
     
     'Aqui bloquearemos
     
     Conn.BeginTrans
-    Bol = ActualizaElASiento(Donde)
+    bol = ActualizaElASiento(Donde)
     
 EActualizaAsiento:
         If Err.Number <> 0 Then
@@ -472,9 +472,9 @@ EActualizaAsiento:
                 SQL = Mid(SQL, 1, 200)
                 InsertaError SQL
             End If
-            Bol = False
+            bol = False
         End If
-        If Bol Then
+        If bol Then
             Conn.CommitTrans
             ActualizaAsiento = True
             AlgunAsientoActualizado = True
@@ -519,9 +519,9 @@ Private Function InsertarCabecera() As Boolean
 On Error Resume Next
 
     SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari) SELECT numdiari,fechaent,numasien,obsdiari from cabapu where "
-    SQL = SQL & " numdiari =" & numdiari
+    SQL = SQL & " numdiari =" & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
-    SQL = SQL & " AND numasien=" & Numasiento
+    SQL = SQL & " AND numasien=" & NumAsiento
 
     Conn.Execute SQL
 
@@ -538,9 +538,9 @@ Private Function InsertarCabeceraApuntes() As Boolean
 On Error Resume Next
 
     SQL = "INSERT INTO cabapu (numdiari, fechaent, numasien, obsdiari) SELECT numdiari,fechaent,numasien,obsdiari from hcabapu where "
-    SQL = SQL & " numdiari =" & numdiari
+    SQL = SQL & " numdiari =" & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
-    SQL = SQL & " AND numasien=" & Numasiento
+    SQL = SQL & " AND numasien=" & NumAsiento
 
     Conn.Execute SQL
 
@@ -563,9 +563,9 @@ Private Function AsientoExiste(EnHistorico As Boolean) As Boolean
         'k existe en introduccion de apuntes
         SQL = SQL & "cabapu"
     End If
-    SQL = SQL & " WHERE numdiari =" & numdiari
+    SQL = SQL & " WHERE numdiari =" & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
-    SQL = SQL & " AND numasien=" & Numasiento
+    SQL = SQL & " AND numasien=" & NumAsiento
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     If RS.EOF Then AsientoExiste = False
@@ -605,9 +605,9 @@ Dim T As String
         SQL = SQL & " linapu"
     End If
     'SQL = SQL & " GROUP BY codmacta, numdiari, fechaent, numasien"
-    SQL = SQL & " WHERE (((numdiari)= " & numdiari
+    SQL = SQL & " WHERE (((numdiari)= " & NumDiari
     SQL = SQL & ") AND ((fechaent)='" & Fecha & "'"
-    SQL = SQL & ") AND ((numasien)=" & Numasiento
+    SQL = SQL & ") AND ((numasien)=" & NumAsiento
     SQL = SQL & "));"
    
     Set RL = New ADODB.Recordset
@@ -658,9 +658,9 @@ Dim T As String
     SQL = SQL & " fechaent, numdiari, numasien, " & T & "linapu.codccost, idsubcos"
     SQL = SQL & " FROM " & T & "linapu,cabccost WHERE cabccost.codccost=" & T & "linapu.codccost"
     'SQL = SQL & " GROUP BY codmacta, fechaent, numdiari, numasien, codccost"
-    SQL = SQL & " AND numdiari=" & numdiari
+    SQL = SQL & " AND numdiari=" & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
-    SQL = SQL & " AND numasien=" & Numasiento
+    SQL = SQL & " AND numasien=" & NumAsiento
     SQL = SQL & " AND " & T & "linapu.codccost Is Not Null;"
     
     
@@ -808,9 +808,9 @@ Private Function CalcularLineasYSaldosFacturas() As Boolean
     SQL = "SELECT hlinapu.timporteD AS SD, hlinapu.timporteH AS SH, hlinapu.codmacta"
     'SQL = SQL & " , hlinapu.numdiari, hlinapu.fechaent, hlinapu.numasien"
     SQL = SQL & " From hlinapu"
-    SQL = SQL & " WHERE (((hlinapu.numdiari)= " & numdiari
+    SQL = SQL & " WHERE (((hlinapu.numdiari)= " & NumDiari
     SQL = SQL & ") AND ((hlinapu.fechaent)='" & Fecha & "'"
-    SQL = SQL & ") AND ((hlinapu.numasien)=" & Numasiento
+    SQL = SQL & ") AND ((hlinapu.numasien)=" & NumAsiento
     SQL = SQL & "));"
     
    
@@ -853,9 +853,9 @@ Private Function CalcularLineasYSaldosFacturas() As Boolean
     SQL = "SELECT hlinapu.timporteD AS SD, hlinapu.timporteH AS SH, hlinapu.codmacta,"
     SQL = SQL & " hlinapu.fechaent, hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost,idsubcos"
     SQL = SQL & " From hlinapu,cabccost WHERE cabccost.codccost=hlinapu.codccost"
-    SQL = SQL & " AND hlinapu.numdiari =" & numdiari
+    SQL = SQL & " AND hlinapu.numdiari =" & NumDiari
     SQL = SQL & " AND hlinapu.fechaent='" & Fecha & "'"
-    SQL = SQL & " AND hlinapu.numasien=" & Numasiento
+    SQL = SQL & " AND hlinapu.numasien=" & NumAsiento
     SQL = SQL & " AND hlinapu.codccost Is Not Null;"
     RL.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RL.EOF
@@ -890,8 +890,8 @@ Private Function InsertarLineas() As Boolean
 On Error Resume Next
     SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, ampconce, timporteD, timporteH, codccost, ctacontr, idcontab,punteada)"
     SQL = SQL & " SELECT numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, ampconce, timporteD, timporteH, codccost, ctacontr, idcontab,punteada From linapu"
-    SQL = SQL & " WHERE numasien = " & Numasiento
-    SQL = SQL & " AND numdiari = " & numdiari
+    SQL = SQL & " WHERE numasien = " & NumAsiento
+    SQL = SQL & " AND numdiari = " & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
     Conn.Execute SQL
     If Err.Number <> 0 Then
@@ -907,8 +907,8 @@ Private Function InsertarLineasApuntes() As Boolean
 On Error Resume Next
     SQL = "INSERT INTO linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, ampconce, timporteD, timporteH, codccost, ctacontr, idcontab,punteada)"
     SQL = SQL & " SELECT numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, ampconce, timporteD, timporteH, codccost, ctacontr, idcontab,punteada From hlinapu"
-    SQL = SQL & " WHERE numasien = " & Numasiento
-    SQL = SQL & " AND numdiari = " & numdiari
+    SQL = SQL & " WHERE numasien = " & NumAsiento
+    SQL = SQL & " AND numdiari = " & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
     Conn.Execute SQL
     If Err.Number <> 0 Then
@@ -1104,8 +1104,8 @@ Private Function BorrarASiento(EnHistorico As Boolean) As Boolean
     Else
         SQL = SQL & "linapu"
     End If
-    SQL = SQL & " WHERE numasien = " & Numasiento
-    SQL = SQL & " AND numdiari = " & numdiari
+    SQL = SQL & " WHERE numasien = " & NumAsiento
+    SQL = SQL & " AND numdiari = " & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
     Conn.Execute SQL
     
@@ -1117,9 +1117,9 @@ Private Function BorrarASiento(EnHistorico As Boolean) As Boolean
     Else
         SQL = SQL & "cabapu"
     End If
-    SQL = SQL & " WHERE numdiari =" & numdiari
+    SQL = SQL & " WHERE numdiari =" & NumDiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
-    SQL = SQL & " AND numasien=" & Numasiento
+    SQL = SQL & " AND numasien=" & NumAsiento
     Conn.Execute SQL
     
     BorrarASiento = True
@@ -1154,24 +1154,24 @@ Dim cad As String
     RS.Open "Select count(*) from tmpActualizar WHERE codusu =" & vUsu.Codigo, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RS.EOF Then
         'NINGUN REGISTTRO A ACTUALIZAR
-        Numasiento = 0
+        NumAsiento = 0
     Else
-        Numasiento = RS.Fields(0)
+        NumAsiento = RS.Fields(0)
     End If
     RS.Close
-    If Numasiento = 0 Then
+    If NumAsiento = 0 Then
         MsgBox "Ningún asiento para actualizar desde tesoreria.", vbExclamation
         Exit Function
     End If
     
     'Cargamos valores
-    If Numasiento < 32000 Then
-        CargaProgres CInt(Numasiento)
+    If NumAsiento < 32000 Then
+        CargaProgres CInt(NumAsiento)
         INC = 1
     End If
     
     'Ponemos en marcha la peli
-    If Numasiento > 20 Then PonerAVI 1
+    If NumAsiento > 20 Then PonerAVI 1
     
     
     
@@ -1188,9 +1188,9 @@ Dim cad As String
     While Not RS.EOF
         IncrementaProgres 1
         'Para poder acceder a ellos desde cualquier sitio
-        Numasiento = RS!Numasien
-        Fecha = Format(RS!fechaent, FormatoFecha)
-        numdiari = RS!numdiari
+        NumAsiento = RS!NumAsien
+        Fecha = Format(RS!FechaEnt, FormatoFecha)
+        NumDiari = RS!NumDiari
         'No esta bloqueado
         'Comprobamos que esta cuadrado
         cad = RegistroCuadrado
@@ -1198,8 +1198,8 @@ Dim cad As String
             InsertaError cad
             'Borramos de tmpactualizar
             cad = "delete from tmpactualizar where codusu =" & vUsu.Codigo
-            cad = cad & " AND numdiari =" & RS!numdiari & " AND numasien =" & RS!Numasien
-            cad = cad & " AND fechaent ='" & Format(RS!fechaent, FormatoFecha) & "'"
+            cad = cad & " AND numdiari =" & RS!NumDiari & " AND numasien =" & RS!NumAsien
+            cad = cad & " AND fechaent ='" & Format(RS!FechaEnt, FormatoFecha) & "'"
             Conn.Execute cad
         End If
         
@@ -1241,18 +1241,18 @@ On Error Resume Next
     'Bloqueamos e insertamos
     BloqAsien = ""
     
-    If BloquearAsiento(CStr(Numasiento), CStr(numdiari), Fecha) Then
+    If BloquearAsiento(CStr(NumAsiento), CStr(NumDiari), Fecha) Then
         'Utilizamos una variable existente
         Cuenta = "INSERT INTO tmpactualizar (numdiari, fechaent, numasien, codusu) VALUES ("
-        Cuenta = Cuenta & numdiari & ",'"
+        Cuenta = Cuenta & NumDiari & ",'"
         Cuenta = Cuenta & Fecha & "',"
-        Cuenta = Cuenta & Numasiento & ","
+        Cuenta = Cuenta & NumAsiento & ","
         Cuenta = Cuenta & vUsu.Codigo & ")"
         Conn.Execute Cuenta
         If Err.Number <> 0 Then
             Err.Clear
             BloqAsien = "Error al insertar temporal"
-            desBloquearAsiento CStr(Numasiento), CStr(numdiari), Fecha
+            DesbloquearAsiento CStr(NumAsiento), CStr(NumDiari), Fecha
         End If
     Else
         BloqAsien = "Error al bloquear el asiento."
@@ -1283,12 +1283,12 @@ Private Function RegistroCuadrado() As String
     RegistroCuadrado = "" 'Todo bien
     
     Set RSUM = New ADODB.Recordset
-    SQL = "SELECT Sum(linapu.timporteD) AS SumaDetimporteD, Sum(linapu.timporteH) AS SumaDetimporteH"
-    SQL = SQL & " ,linapu.numdiari,linapu.fechaent,linapu.numasien"
-    SQL = SQL & " From linapu GROUP BY linapu.numdiari, linapu.fechaent, linapu.numasien "
-    SQL = SQL & " HAVING (((linapu.numdiari)=" & numdiari
-    SQL = SQL & ") AND ((linapu.fechaent)='" & Fecha
-    SQL = SQL & "') AND ((linapu.numasien)=" & Numasiento
+    SQL = "SELECT Sum(hlinapu.timporteD) AS SumaDetimporteD, Sum(hlinapu.timporteH) AS SumaDetimporteH"
+    SQL = SQL & " ,hlinapu.numdiari,hlinapu.fechaent,hlinapu.numasien"
+    SQL = SQL & " From hlinapu GROUP BY hlinapu.numdiari, hlinapu.fechaent, hlinapu.numasien "
+    SQL = SQL & " HAVING (((hlinapu.numdiari)=" & NumDiari
+    SQL = SQL & ") AND ((hlinapu.fechaent)='" & Fecha
+    SQL = SQL & "') AND ((hlinapu.numasien)=" & NumAsiento
     SQL = SQL & "));"
     
     
@@ -1327,9 +1327,9 @@ Dim vS As String
 
 
         'Insertamos error para ASIENTOS
-        vS = numdiari & "|"
+        vS = NumDiari & "|"
         vS = vS & Fecha & "|"
-        vS = vS & Numasiento & "|"
+        vS = vS & NumAsiento & "|"
         vS = vS & CADENA & "|"
     
 
@@ -1352,10 +1352,10 @@ Dim RT As Recordset
 
 
 'Para el progress
-Numasiento = ProgressBar1.Max
+NumAsiento = ProgressBar1.Max
 Me.lblAsiento.Caption = "Nº asiento:"
-If Numasiento < 3000 Then
-    CargaProgres Numasiento * 10
+If NumAsiento < 3000 Then
+    CargaProgres NumAsiento * 10
     Else
     CargaProgres 32000
 End If
@@ -1366,12 +1366,12 @@ SQL = "Select * from tmpactualizar where codusu=" & vUsu.Codigo
 Set RT = New ADODB.Recordset
 RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 While Not RT.EOF
-    Numasiento = RT!Numasien
-    FechaAsiento = RT!fechaent
-    numdiari = RT!numdiari
+    NumAsiento = RT!NumAsien
+    FechaAsiento = RT!FechaEnt
+    NumDiari = RT!NumDiari
     'Actualiza el asiento
     If ActualizaAsiento = False Then
-         desBloquearAsiento CStr(Numasiento), CStr(numdiari), Fecha
+         DesbloquearAsiento CStr(NumAsiento), CStr(NumDiari), Fecha
 
     End If
 
@@ -1396,11 +1396,11 @@ End Sub
 
 
 'QUITAR###
-Private Function BloquearAsiento(N As String, D As String, F As String) As Boolean
+Private Function BloquearAsiento(N As String, d As String, F As String) As Boolean
 
 End Function
 
-Private Function desBloquearAsiento(N As String, D As String, F As String) As Boolean
+Private Function DesbloquearAsiento(N As String, d As String, F As String) As Boolean
 
 End Function
 
