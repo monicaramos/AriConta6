@@ -26,19 +26,9 @@ Begin VB.Form frmTESParciales
       EndProperty
       Height          =   480
       Left            =   120
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   7020
       Width           =   2685
-   End
-   Begin VB.CommandButton cmdRecibo 
-      Caption         =   "Recibo"
-      Enabled         =   0   'False
-      Height          =   375
-      Left            =   3120
-      TabIndex        =   3
-      Top             =   7140
-      Visible         =   0   'False
-      Width           =   1215
    End
    Begin VB.CommandButton Command1 
       Cancel          =   -1  'True
@@ -55,7 +45,7 @@ Begin VB.Form frmTESParciales
       Height          =   375
       Index           =   1
       Left            =   5850
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   7140
       Width           =   1095
    End
@@ -73,14 +63,14 @@ Begin VB.Form frmTESParciales
       Height          =   375
       Index           =   0
       Left            =   4530
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   7140
       Width           =   1095
    End
    Begin VB.Frame FrCobro 
       Height          =   6855
       Left            =   60
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   90
       Width           =   6855
       Begin VB.ComboBox Combo1 
@@ -99,7 +89,7 @@ Begin VB.Form frmTESParciales
          Left            =   1590
          List            =   "frmTESParciales.frx":0002
          Style           =   2  'Dropdown List
-         TabIndex        =   29
+         TabIndex        =   28
          Tag             =   "Tipo de pago|N|N|||formapago|tipforpa|||"
          Top             =   4260
          Width           =   2475
@@ -138,7 +128,7 @@ Begin VB.Form frmTESParciales
          Index           =   1
          Left            =   3000
          Locked          =   -1  'True
-         TabIndex        =   15
+         TabIndex        =   14
          Text            =   "Text2"
          Top             =   1470
          Width           =   3495
@@ -159,7 +149,7 @@ Begin VB.Form frmTESParciales
          Index           =   5
          Left            =   4710
          Locked          =   -1  'True
-         TabIndex        =   12
+         TabIndex        =   11
          Text            =   "Text1"
          Top             =   2910
          Width           =   1755
@@ -199,7 +189,7 @@ Begin VB.Form frmTESParciales
          Index           =   4
          Left            =   4710
          Locked          =   -1  'True
-         TabIndex        =   11
+         TabIndex        =   10
          Text            =   "Text1"
          Top             =   2460
          Width           =   1755
@@ -220,7 +210,7 @@ Begin VB.Form frmTESParciales
          Index           =   3
          Left            =   4710
          Locked          =   -1  'True
-         TabIndex        =   9
+         TabIndex        =   8
          Text            =   "Text1"
          Top             =   1980
          Width           =   1755
@@ -245,7 +235,7 @@ Begin VB.Form frmTESParciales
       Begin MSComctlLib.ListView ListView8 
          Height          =   1455
          Left            =   240
-         TabIndex        =   26
+         TabIndex        =   25
          Top             =   5130
          Width           =   6405
          _ExtentX        =   11298
@@ -305,7 +295,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   9
          Left            =   240
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   4290
          Width           =   495
       End
@@ -325,7 +315,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   8
          Left            =   240
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   4830
          Width           =   1920
       End
@@ -344,7 +334,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   56
          Left            =   270
-         TabIndex        =   20
+         TabIndex        =   19
          Top             =   360
          Width           =   6150
       End
@@ -363,7 +353,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   57
          Left            =   270
-         TabIndex        =   19
+         TabIndex        =   18
          Top             =   720
          Width           =   6270
       End
@@ -386,7 +376,7 @@ Begin VB.Form frmTESParciales
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   17
+         TabIndex        =   16
          Top             =   3330
          Width           =   6195
       End
@@ -406,7 +396,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   7
          Left            =   270
-         TabIndex        =   16
+         TabIndex        =   15
          Top             =   1470
          Width           =   1050
       End
@@ -434,7 +424,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   6
          Left            =   3720
-         TabIndex        =   14
+         TabIndex        =   13
          Top             =   3870
          Width           =   765
       End
@@ -454,7 +444,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   5
          Left            =   3780
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   2910
          Width           =   720
       End
@@ -480,7 +470,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   4
          Left            =   3840
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   2520
          Width           =   675
       End
@@ -500,7 +490,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   2
          Left            =   3060
-         TabIndex        =   8
+         TabIndex        =   7
          Top             =   2070
          Width           =   1500
       End
@@ -520,7 +510,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   3
          Left            =   240
-         TabIndex        =   7
+         TabIndex        =   6
          Top             =   3840
          Width           =   600
       End
@@ -548,7 +538,7 @@ Begin VB.Form frmTESParciales
       Index           =   2
       Left            =   3000
       Locked          =   -1  'True
-      TabIndex        =   21
+      TabIndex        =   20
       Text            =   "Text1"
       Top             =   1080
       Width           =   3495
@@ -568,7 +558,7 @@ Begin VB.Form frmTESParciales
       Index           =   1
       Left            =   1680
       Locked          =   -1  'True
-      TabIndex        =   22
+      TabIndex        =   21
       Text            =   "Text1"
       Top             =   1080
       Width           =   1215
@@ -588,7 +578,7 @@ Begin VB.Form frmTESParciales
       Index           =   0
       Left            =   1680
       Locked          =   -1  'True
-      TabIndex        =   23
+      TabIndex        =   22
       Text            =   "Text1"
       Top             =   600
       Width           =   4815
@@ -609,7 +599,7 @@ Begin VB.Form frmTESParciales
       Height          =   240
       Index           =   0
       Left            =   360
-      TabIndex        =   25
+      TabIndex        =   24
       Top             =   600
       Width           =   1200
    End
@@ -629,7 +619,7 @@ Begin VB.Form frmTESParciales
       Height          =   240
       Index           =   1
       Left            =   360
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   1080
       Width           =   675
    End
@@ -675,31 +665,22 @@ End Sub
 
 
 
-Private Sub cmdRecibo_Click()
+Private Sub ImprimirRecibo()
 
     If ImporteFormateado(Text2(0).Text) <= 0 Then
         MsgBox "No se pueden emitir recibos por importes menores o iguales a cero", vbExclamation
         Exit Sub
     End If
     
-    'ÇÇÇÇÇÇÇ    CAMBIOS
-    'todo lo siguiente se tiene que cambiar por la llamada a la impresion de recibos
+    frmTESImpRecibo.pImporte = Text2(0).Text
+    frmTESImpRecibo.pFechaRec = Text3(0).Text
+    frmTESImpRecibo.pFecFactu = RecuperaValor(Vto, 3)
+    frmTESImpRecibo.pNumFactu = RecuperaValor(Vto, 2)
+    frmTESImpRecibo.pNumSerie = RecuperaValor(Vto, 1)
+    frmTESImpRecibo.pNumOrden = RecuperaValor(Vto, 4)
     
-    If GenerarRecibos Then
-        'DevuelveCadenaPorTipo True, Cad
-        'If Cad = "" Then Cad = "He recibido de:"
-        'Cad = "textoherecibido= """ & Cad & """|"
-        'Imprimimos
-        'Para que imprima el mismo que por el punto: generar cobros por...
-        CadenaDesdeOtroForm = DevuelveNombreInformeSCRYST(6, "Recibo")
-        
-        frmImprimir.Opcion = 8
-        frmImprimir.NumeroParametros = 1
-        frmImprimir.OtrosParametros = cad
-        frmImprimir.FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
-        frmImprimir.Show vbModal
-            
-    End If
+    frmTESImpRecibo.Show vbModal
+    
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
@@ -727,7 +708,7 @@ Dim B As Boolean
         If Not B Then Exit Sub
         CadenaDesdeOtroForm = "OK" 'Para que refresque los datos en el form
         
-        If chkImprimir.Value = 1 Then cmdRecibo_Click
+        If chkImprimir.Value = 1 Then ImprimirRecibo
         
     End If
     Unload Me
@@ -866,7 +847,6 @@ Private Sub Form_Load()
     
     CargaCombo
     
-    cmdRecibo.Visible = Cobro
     Label4(5).Visible = Cobro
     Text1(5).Visible = Cobro
     Me.Height = Me.FrCobro.Height + 1200 '240 + Me.Command1(0).Height + 240

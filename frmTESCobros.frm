@@ -466,7 +466,7 @@ Begin VB.Form frmTESCobros
          Left            =   12720
          TabIndex        =   35
          Tag             =   "s|N|S|||cobros|noremesar|||"
-         Top             =   7440
+         Top             =   7020
          Width           =   1545
       End
       Begin VB.Frame FrameDatosFiscales 
@@ -824,6 +824,35 @@ Begin VB.Form frmTESCobros
             TabIndex        =   112
             Top             =   330
             Width           =   11145
+            Begin VB.Frame FrameToolAux 
+               Height          =   555
+               Left            =   0
+               TabIndex        =   148
+               Top             =   0
+               Width           =   1335
+               Begin MSComctlLib.Toolbar ToolbarAux 
+                  Height          =   330
+                  Left            =   180
+                  TabIndex        =   149
+                  Top             =   150
+                  Width           =   915
+                  _ExtentX        =   1614
+                  _ExtentY        =   582
+                  ButtonWidth     =   609
+                  ButtonHeight    =   582
+                  Style           =   1
+                  _Version        =   393216
+                  BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+                     NumButtons      =   2
+                     BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                        Object.ToolTipText     =   "Ver Asiento"
+                     EndProperty
+                     BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                        Object.ToolTipText     =   "Imprimir Recibo"
+                     EndProperty
+                  EndProperty
+               End
+            End
             Begin VB.TextBox txtaux 
                BorderStyle     =   0  'None
                BeginProperty Font 
@@ -1138,7 +1167,7 @@ Begin VB.Form frmTESCobros
                Index           =   0
                Left            =   0
                TabIndex        =   122
-               Top             =   360
+               Top             =   570
                Width           =   11100
                _ExtentX        =   19579
                _ExtentY        =   2328
@@ -1736,7 +1765,7 @@ Begin VB.Form frmTESCobros
                Index           =   1
                Left            =   0
                TabIndex        =   102
-               Top             =   360
+               Top             =   570
                Width           =   10875
                _ExtentX        =   19182
                _ExtentY        =   1455
@@ -1819,7 +1848,7 @@ Begin VB.Form frmTESCobros
          Left            =   12720
          TabIndex        =   34
          Tag             =   "Devuelto|N|S|||cobros|Devuelto|||"
-         Top             =   6990
+         Top             =   6570
          Width           =   1215
       End
       Begin VB.Frame FrameRemesa 
@@ -2205,30 +2234,11 @@ Begin VB.Form frmTESCobros
       End
       Begin VB.Frame frameContene 
          BorderStyle     =   0  'None
-         Height          =   1485
+         Height          =   975
          Left            =   12420
          TabIndex        =   68
          Top             =   5520
          Width           =   2805
-         Begin VB.CheckBox Check1 
-            Caption         =   "Recibo Impreso"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   1
-            Left            =   300
-            TabIndex        =   32
-            Tag             =   "Impreso|N|S|||cobros|impreso|||"
-            Top             =   540
-            Width           =   2505
-         End
          Begin VB.CheckBox Check1 
             Caption         =   "Documento recibido"
             BeginProperty Font 
@@ -2245,7 +2255,7 @@ Begin VB.Form frmTESCobros
             Left            =   300
             TabIndex        =   33
             Tag             =   "Recibido|N|S|||cobros|recedocu|||"
-            Top             =   1020
+            Top             =   570
             Width           =   2505
          End
          Begin VB.CheckBox Check1 
@@ -2266,6 +2276,25 @@ Begin VB.Form frmTESCobros
             Tag             =   "s|N|S|||cobros|situacionjuri|||"
             Top             =   90
             Width           =   2535
+         End
+         Begin VB.CheckBox Check1 
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   1
+            Left            =   300
+            TabIndex        =   32
+            Top             =   540
+            Visible         =   0   'False
+            Width           =   2205
          End
       End
       Begin VB.TextBox Text1 
@@ -3477,7 +3506,8 @@ Private WithEvents frmZ As frmZoom  'Zoom para campos Text
 Attribute frmZ.VB_VarHelpID = -1
 Private WithEvents frmPais As frmBasico2
 Attribute frmPais.VB_VarHelpID = -1
-
+Private frmAsi As frmAsientosHco
+Attribute frmAsi.VB_VarHelpID = -1
 '-----------------------------
 'Se distinguen varios modos
 '   0.-  Formulario limpio sin nungun campo rellenado
@@ -3657,13 +3687,13 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtAux(5)
+            PonFoco txtaux(5)
         Case 2 ' fecha
             'En tag pongo el txtfecha asociado
             cmdAux(1).Tag = 2
             DevfrmCCtas = Format(Now, "dd/mm/yyyy")
-            If IsDate(txtAux(CInt(cmdAux(1).Tag)).Text) Then _
-                DevfrmCCtas = Format(txtAux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
+            If IsDate(txtaux(CInt(cmdAux(1).Tag)).Text) Then _
+                DevfrmCCtas = Format(txtaux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
             Set frmC1 = New frmCal
             frmC1.Fecha = CDate(DevfrmCCtas)
             DevfrmCCtas = ""
@@ -4068,6 +4098,14 @@ Dim I As Integer
         .Buttons(1).Image = 26
     End With
     
+    With Me.ToolbarAux
+        .HotImageList = frmPpal.imgListComun_OM16
+        .DisabledImageList = frmPpal.imgListComun_BN16
+        .ImageList = frmPpal.imgListComun16
+        .Buttons(1).Image = 1
+        .Buttons(2).Image = 16
+    End With
+    
     CargaFiltros
     Me.cboFiltro.ListIndex = 0
     CargarCombo
@@ -4213,7 +4251,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -5071,8 +5109,8 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
         LLamaLineas 0, 3, anc
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).BackColor = vbWhite
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).BackColor = vbWhite
     Next I
     
     Check1(2).Enabled = (Modo = 1)
@@ -5414,6 +5452,7 @@ Dim impo As Currency
     'Si impo>0 entonces TODAVIA puedn pagarme algo
     If impo = 0 Then
         'Cosa rara. Esta todo el importe pagado
+        MsgBox "El recibo está totalmente pagado.", vbExclamation
         Exit Sub
     End If
 
@@ -5708,6 +5747,12 @@ Dim cad As String
         Me.Toolbar2.Buttons(3).Enabled = DBLet(RS!especial, "N") And Modo = 2
         
         
+'        If Not Me.AdoAux(0).Recordset.EOF Then
+'
+            ToolbarAux.Buttons(1).Enabled = DBLet(RS!especial, "N") And (Modo = 2) And Not Me.AdoAux(0).Recordset.EOF
+            ToolbarAux.Buttons(2).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 2) And Not Me.AdoAux(0).Recordset.EOF
+            
+        
         vUsu.LeerFiltros "ariconta", IdPrograma
         
     End If
@@ -5730,9 +5775,9 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'cobros_realizados
-            For jj = 5 To txtAux.Count - 1
-                txtAux(jj).Visible = B
-                txtAux(jj).Top = alto
+            For jj = 5 To txtaux.Count - 1
+                txtaux(jj).Visible = B
+                txtaux(jj).Top = alto
             Next jj
         
         Case 1 'lineas de factura
@@ -5817,14 +5862,11 @@ Dim Ampliacion As String
     'Fuerzo que se vean las lineas
     Select Case Button.Index
         Case 1
-            'AÑADIR linea factura
-            BotonAnyadirLinea 0, True
+            'Acceder a asiento del cobro
+            BotonVerAsiento
         Case 2
-            'MODIFICAR linea factura
-            BotonModificarLinea 0
-        Case 3
-            'ELIMINAR linea factura
-            BotonEliminarLinea 0
+            'Impresion del recibo
+            BotonImprimirRecibo
             
     End Select
 
@@ -5943,6 +5985,37 @@ End Sub
 ' **********************************************
 
 
+Private Sub BotonVerAsiento()
+
+    Set frmAsi = New frmAsientosHco
+    
+    frmAsi.ASIENTO = Me.AdoAux(0).Recordset.Fields(5) & "|" & Me.AdoAux(0).Recordset.Fields(6) & "|" & Me.AdoAux(0).Recordset.Fields(7) & "|"
+    frmAsi.SoloImprimir = True
+    frmAsi.Show vbModal
+    
+    Set frmAsi = Nothing
+
+End Sub
+
+Private Sub BotonImprimirRecibo()
+
+    
+
+    frmTESImpRecibo.pImporte = Me.AdoAux(0).Recordset.Fields(11)
+    frmTESImpRecibo.pFechaRec = Me.AdoAux(0).Recordset.Fields(6)
+    frmTESImpRecibo.pFecFactu = Me.AdoAux(0).Recordset.Fields(2)
+    frmTESImpRecibo.pNumFactu = Me.AdoAux(0).Recordset.Fields(1)
+    frmTESImpRecibo.pNumSerie = Me.AdoAux(0).Recordset.Fields(0)
+    frmTESImpRecibo.pNumOrden = Me.AdoAux(0).Recordset.Fields(3)
+    
+    frmTESImpRecibo.Show vbModal
+
+
+
+
+End Sub
+
+
 Private Sub BotonAnyadirLinea(Index As Integer, Limpia As Boolean)
 Dim NumF As String
 Dim vWhere As String, vTabla As String
@@ -5994,16 +6067,16 @@ Dim I As Integer
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 0 'lineas de cobros realizados
                     If Limpia Then
-                        For I = 0 To txtAux.Count - 1
-                            txtAux(I).Text = ""
+                        For I = 0 To txtaux.Count - 1
+                            txtaux(I).Text = ""
                         Next I
                     End If
-                    txtAux(0).Text = Text1(13).Text 'serie
-                    txtAux(1).Text = Text1(1).Text 'numfactu
-                    txtAux(2).Text = Text1(2).Text 'fecha
-                    txtAux(3).Text = Text1(3).Text 'nro vencimiento
+                    txtaux(0).Text = Text1(13).Text 'serie
+                    txtaux(1).Text = Text1(1).Text 'numfactu
+                    txtaux(2).Text = Text1(2).Text 'fecha
+                    txtaux(3).Text = Text1(3).Text 'nro vencimiento
                     
-                    txtAux(4).Text = Format(NumF, "0000") 'linea contador
+                    txtaux(4).Text = Format(NumF, "0000") 'linea contador
                     
                     
                     If Limpia Then
@@ -6011,7 +6084,7 @@ Dim I As Integer
 '                        txtAux2(12).Text = ""
                     End If
                     
-                    PonFoco txtAux(5)
+                    PonFoco txtaux(5)
             
             End Select
 
@@ -6061,23 +6134,23 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 1 'lineas de facturas
-            txtAux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
-            txtAux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
-            txtAux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
-            txtAux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
-            txtAux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
+            txtaux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
+            txtaux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
+            txtaux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
+            txtaux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
+            txtaux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
             
-            txtAux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
-            txtAux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
-            txtAux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
-            txtAux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
+            txtaux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
+            txtaux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
+            txtaux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
+            txtaux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
             
     End Select
 
     LLamaLineas Index, ModoLineas, anc
     
     
-    PonFoco txtAux(4)
+    PonFoco txtaux(4)
     
     ' ***************************************************************************************
 End Sub
@@ -6173,8 +6246,8 @@ Dim cad As String
                     Limp = True
 
                     If Limp Then
-                        For I = 0 To txtAux.Count - 1
-                            txtAux(I).Text = ""
+                        For I = 0 To txtaux.Count - 1
+                            txtaux(I).Text = ""
                         Next I
                     End If
                     ModoLineas = 0
@@ -6192,7 +6265,7 @@ End Sub
 Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
-Dim v As Integer
+Dim V As Integer
 Dim cad As String
 Dim B As Boolean
 
@@ -6227,7 +6300,7 @@ Dim B As Boolean
             ModoLineas = 0
 
             If NumTabMto <> 3 Then
-                v = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
                 CargaGrid NumTabMto, True
             End If
 
@@ -6237,7 +6310,7 @@ Dim B As Boolean
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & v)
+                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
             End If
             ' ***********************************************************
 
@@ -6286,7 +6359,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 
@@ -6319,33 +6392,33 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
-    If txtAux(Index).Text = "" Then Exit Sub
+    If txtaux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtAux(5)
+                PonFoco txtaux(5)
             End If
                 
         Case 6 ' fecha
-            If Not EsFechaOK(txtAux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
-                txtAux(Index).Text = ""
-                PonerFoco txtAux(Index)
+            If Not EsFechaOK(txtaux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
+                txtaux(Index).Text = ""
+                PonerFoco txtaux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtAux(Index)
+            PonerFormatoEntero txtaux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
-            PonerFormatoDecimal txtAux(Index), 1
+            PonerFormatoDecimal txtaux(Index), 1
             
     End Select
 
