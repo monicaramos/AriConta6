@@ -332,6 +332,7 @@ Public pNumFactu As String
 Public pFecFactu As String
 Public pNumOrden As String
 Public pFechaRec As String
+Public pNumlinea As String
 
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
@@ -342,7 +343,7 @@ Attribute frmFPago.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
-Private SQL As String
+Private Sql As String
 Dim cad As String
 Dim RC As String
 Dim I As Integer
@@ -406,11 +407,47 @@ Private Sub cmdAccion_Click(Index As Integer)
         AccionesCrystal
     End If
     
-    If Legalizacion <> "" Then
-        CadenaDesdeOtroForm = "OK"
+    If Not EstaReciboImpreso Then
+        If MsgBox("¿ Impresión correcta para actualizar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+            ActualizarRegistro
+        End If
     End If
     
 End Sub
+
+Private Function EstaReciboImpreso() As Boolean
+Dim Sql As String
+
+    Sql = " select impreso from cobros_realizados where "
+    Sql = Sql & " numserie = " & DBSet(pNumSerie, "T")
+    Sql = Sql & " and numfactu = " & DBSet(pNumFactu, "N")
+    Sql = Sql & " and fecfactu = " & DBSet(pFecFactu, "F")
+    Sql = Sql & " and numorden = " & DBSet(pNumOrden, "N")
+    Sql = Sql & " and numlinea = " & DBSet(pNumlinea, "N")
+    
+    EstaReciboImpreso = (DevuelveValor(Sql) = 1)
+    
+
+End Function
+
+
+Private Sub ActualizarRegistro()
+Dim Sql As String
+
+    On Error Resume Next
+
+    Sql = "update cobros_realizados set impreso = 1 where "
+    Sql = Sql & " numserie = " & DBSet(pNumSerie, "T")
+    Sql = Sql & " and numfactu = " & DBSet(pNumFactu, "N")
+    Sql = Sql & " and fecfactu = " & DBSet(pFecFactu, "F")
+    Sql = Sql & " and numorden = " & DBSet(pNumOrden, "N")
+    Sql = Sql & " and numlinea = " & DBSet(pNumlinea, "N")
+
+    Conn.Execute Sql
+
+End Sub
+
+
 
 Private Sub cmdCancelar_Click()
     Unload Me
@@ -448,29 +485,16 @@ Private Sub Form_Load()
         .Buttons(1).Image = 26
     End With
      
-    Label3(0).Caption = "Factura: " & pNumSerie & " / " & Format(pNumFactu, "0000000") & "  de " & pFecFactu & " nro." & pNumOrden
+    Label3(0).Caption = "Factura: " & pNumSerie & "-" & Format(pNumFactu, "0000000") & "  de " & pFecFactu & " Vencimiento No." & pNumOrden
     
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
     
+    optTipoSal(1).Enabled = False
+    
 End Sub
 
-
-Private Sub frmConta_DatoSeleccionado(CadenaSeleccion As String)
-    If CadenaSeleccion <> "" Then
-        txtSerie(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
-        txtNSerie(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
-    End If
-End Sub
-
-Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
-End Sub
-
-Private Sub frmF_Selec(vFecha As Date)
-    txtFecha(IndCodigo).Text = Format(vFecha, "dd/mm/yyyy")
-End Sub
 
 Private Sub optTipoSal_Click(Index As Integer)
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), Index
@@ -508,26 +532,16 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
-    Select Case Nombre
-    Case "imgDiario"
-        imgSerie_Click Indice
-    Case "imgFecha"
-        imgFec_Click Indice
-    Case "imgCuentas"
-        imgCuentas_Click Indice
-    End Select
-End Sub
 
 
 Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = ""
+    Sql = ""
             
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -552,7 +566,7 @@ Dim nomDocu As String
     
     cadParam = cadParam & "pObserva=""" & EscribeImporteLetra(ImporteFormateado(CStr(pImporte))) & """|"
     numParam = numParam + 1
-    cadParam = cadParam & "pFecha=""" & pFecFactu & """|"
+    cadParam = cadParam & "pFecha=""" & pFechaRec & """|"
     numParam = numParam + 1
     
     ImprimeGeneral
@@ -567,7 +581,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -577,7 +591,6 @@ Dim I As Integer
     MontaSQL = False
     
     cadFormula = "{cobros.numserie} = """ & pNumSerie & """ and {cobros.numfactu} = " & pNumFactu & " and {cobros.fecfactu} = Date(" & Year(pFecFactu) & "," & Month(pFecFactu) & "," & Day(pFecFactu) & ") and {cobros.numorden} = " & pNumOrden
-    cadFormula = "{cobros.numserie} = ""A"""
     MontaSQL = True
 End Function
 
