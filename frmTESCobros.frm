@@ -483,7 +483,7 @@ Begin VB.Form frmTESCobros
          Height          =   3435
          Left            =   270
          TabIndex        =   124
-         Top             =   1170
+         Top             =   1110
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
@@ -4291,7 +4291,7 @@ Private Sub frmS_DatoSeleccionado(CadenaSeleccion As String)
     Text1(13).Text = RecuperaValor(CadenaSeleccion, 1)
 End Sub
 
-Private Sub ImgAgente_Click()
+Private Sub imgAgente_Click()
     Set frmA = New frmAgentes
     frmA.DatosADevolverBusqueda = "0|1|"
     frmA.Show vbModal
@@ -5308,9 +5308,9 @@ End Sub
 
 
 
-Private Sub DespalzamientoVisible(bol As Boolean)
-    FrameDesplazamiento.Visible = bol
-    FrameDesplazamiento.Enabled = bol
+Private Sub DespalzamientoVisible(Bol As Boolean)
+    FrameDesplazamiento.Visible = Bol
+    FrameDesplazamiento.Enabled = Bol
 End Sub
 
 
@@ -5723,7 +5723,7 @@ Dim Cad As String
     On Error Resume Next
 
     Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.ID, "N")
     
     Set Rs = New ADODB.Recordset
     Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -6254,7 +6254,7 @@ End Sub
 Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
-Dim V As Integer
+Dim v As Integer
 Dim Cad As String
 Dim B As Boolean
 
@@ -6289,7 +6289,7 @@ Dim B As Boolean
             ModoLineas = 0
 
             If NumTabMto <> 3 Then
-                V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                v = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
                 CargaGrid NumTabMto, True
             End If
 
@@ -6299,7 +6299,7 @@ Dim B As Boolean
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & v)
             End If
             ' ***********************************************************
 

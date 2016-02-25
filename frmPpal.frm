@@ -1075,12 +1075,11 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 511 ' venta-baja inmmovilizado
             frmInmoVenta.Opcion = 3
             frmInmoVenta.Show vbModal
-        
-        
-        
         Case 601 ' cartera de cobros
             frmTESCobros.Show vbModal
         Case 602 ' informe de cobros pendientes
+            frmTESCobrosPdtesList.Show
+        
         Case 603 ' impresion de recibos
             frmTESImpRecibo.Show vbModal
         Case 604 ' realizar cobro

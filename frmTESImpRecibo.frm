@@ -308,7 +308,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Const IdPrograma = 602
+Private Const IdPrograma = 603
 
 
 ' ***********************************************************************************************************
@@ -343,10 +343,10 @@ Attribute frmFPago.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
-Private Sql As String
-Dim cad As String
+Private SQL As String
+Dim Cad As String
 Dim RC As String
-Dim I As Integer
+Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -416,34 +416,34 @@ Private Sub cmdAccion_Click(Index As Integer)
 End Sub
 
 Private Function EstaReciboImpreso() As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = " select impreso from cobros_realizados where "
-    Sql = Sql & " numserie = " & DBSet(pNumSerie, "T")
-    Sql = Sql & " and numfactu = " & DBSet(pNumFactu, "N")
-    Sql = Sql & " and fecfactu = " & DBSet(pFecFactu, "F")
-    Sql = Sql & " and numorden = " & DBSet(pNumOrden, "N")
-    Sql = Sql & " and numlinea = " & DBSet(pNumlinea, "N")
+    SQL = " select impreso from cobros_realizados where "
+    SQL = SQL & " numserie = " & DBSet(pNumSerie, "T")
+    SQL = SQL & " and numfactu = " & DBSet(pNumFactu, "N")
+    SQL = SQL & " and fecfactu = " & DBSet(pFecFactu, "F")
+    SQL = SQL & " and numorden = " & DBSet(pNumOrden, "N")
+    SQL = SQL & " and numlinea = " & DBSet(pNumlinea, "N")
     
-    EstaReciboImpreso = (DevuelveValor(Sql) = 1)
+    EstaReciboImpreso = (DevuelveValor(SQL) = 1)
     
 
 End Function
 
 
 Private Sub ActualizarRegistro()
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
 
-    Sql = "update cobros_realizados set impreso = 1 where "
-    Sql = Sql & " numserie = " & DBSet(pNumSerie, "T")
-    Sql = Sql & " and numfactu = " & DBSet(pNumFactu, "N")
-    Sql = Sql & " and fecfactu = " & DBSet(pFecFactu, "F")
-    Sql = Sql & " and numorden = " & DBSet(pNumOrden, "N")
-    Sql = Sql & " and numlinea = " & DBSet(pNumlinea, "N")
+    SQL = "update cobros_realizados set impreso = 1 where "
+    SQL = SQL & " numserie = " & DBSet(pNumSerie, "T")
+    SQL = SQL & " and numfactu = " & DBSet(pNumFactu, "N")
+    SQL = SQL & " and fecfactu = " & DBSet(pFecFactu, "F")
+    SQL = SQL & " and numorden = " & DBSet(pNumOrden, "N")
+    SQL = SQL & " and numlinea = " & DBSet(pNumlinea, "N")
 
-    Conn.Execute Sql
+    Conn.Execute SQL
 
 End Sub
 
@@ -538,10 +538,10 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    Sql = ""
+    SQL = ""
             
     'LLamos a la funcion
-    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -554,11 +554,11 @@ Dim nomDocu As String
     conSubRPT = False
         
     
-    indRPT = "0602-00"
+    indRPT = "0603-00"
 
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
-    cadNomRPT = nomDocu ' "FacturasCliFecha.rpt"
+    cadNomRPT = nomDocu ' "Recibo.rpt"
 
     'si se imprime el nif o la cuenta de cliente
     cadParam = cadParam & "pImporte=" & TransformaComasPuntos(ImporteSinFormato(CStr(pImporte))) & "|"
@@ -581,11 +581,11 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim I As Integer
+Dim i As Integer
 
 
     MontaSQL = False

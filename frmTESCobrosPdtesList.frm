@@ -2,18 +2,199 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTESCobrosPdtesList 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   9585
+   ClientHeight    =   9825
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   11685
+   ClientWidth     =   12090
+   Icon            =   "frmTESCobrosPdtesList.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9585
-   ScaleWidth      =   11685
+   ScaleHeight     =   9825
+   ScaleWidth      =   12090
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameTipoSalida 
+      Caption         =   "Tipo de salida"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   11.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   2655
+      Left            =   120
+      TabIndex        =   67
+      Top             =   6360
+      Width           =   6915
+      Begin VB.OptionButton optTipoSal 
+         Caption         =   "Impresora"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   240
+         TabIndex        =   77
+         Top             =   720
+         Value           =   -1  'True
+         Width           =   1335
+      End
+      Begin VB.OptionButton optTipoSal 
+         Caption         =   "Archivo csv"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   1
+         Left            =   240
+         TabIndex        =   76
+         Top             =   1200
+         Width           =   1515
+      End
+      Begin VB.OptionButton optTipoSal 
+         Caption         =   "PDF"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   2
+         Left            =   240
+         TabIndex        =   75
+         Top             =   1680
+         Width           =   975
+      End
+      Begin VB.OptionButton optTipoSal 
+         Caption         =   "eMail"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   3
+         Left            =   240
+         TabIndex        =   74
+         Top             =   2160
+         Width           =   975
+      End
+      Begin VB.TextBox txtTipoSalida 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   1770
+         Locked          =   -1  'True
+         TabIndex        =   73
+         Text            =   "Text1"
+         Top             =   720
+         Width           =   3345
+      End
+      Begin VB.TextBox txtTipoSalida 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   1770
+         Locked          =   -1  'True
+         TabIndex        =   72
+         Top             =   1200
+         Width           =   4665
+      End
+      Begin VB.TextBox txtTipoSalida 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   1770
+         Locked          =   -1  'True
+         TabIndex        =   71
+         Top             =   1680
+         Width           =   4665
+      End
+      Begin VB.CommandButton PushButton2 
+         Caption         =   ".."
+         Height          =   315
+         Index           =   0
+         Left            =   6450
+         TabIndex        =   70
+         Top             =   1200
+         Width           =   255
+      End
+      Begin VB.CommandButton PushButton2 
+         Caption         =   ".."
+         Height          =   315
+         Index           =   1
+         Left            =   6450
+         TabIndex        =   69
+         Top             =   1680
+         Width           =   255
+      End
+      Begin VB.CommandButton PushButtonImpr 
+         Caption         =   "Propiedades"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   5190
+         TabIndex        =   68
+         Top             =   720
+         Width           =   1515
+      End
+   End
    Begin VB.Frame Frame1 
       Caption         =   "Ordenación"
       BeginProperty Font 
@@ -27,29 +208,115 @@ Begin VB.Form frmTESCobrosPdtesList
       EndProperty
       Height          =   2655
       Left            =   7140
-      TabIndex        =   49
-      Top             =   6300
-      Width           =   4455
-      Begin VB.OptionButton optVarios 
-         Caption         =   "Cliente"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Index           =   1
-         Left            =   2460
-         TabIndex        =   52
-         Top             =   660
-         Width           =   1185
+      TabIndex        =   44
+      Top             =   6360
+      Width           =   4785
+      Begin VB.Frame Frame3 
+         Height          =   735
+         Left            =   150
+         TabIndex        =   63
+         Top             =   1110
+         Width           =   4455
+         Begin VB.OptionButton optVarios 
+            Caption         =   "Nombre"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   4
+            Left            =   2340
+            TabIndex        =   65
+            Top             =   270
+            Width           =   1425
+         End
+         Begin VB.OptionButton optVarios 
+            Caption         =   "Cuenta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   3
+            Left            =   510
+            TabIndex        =   64
+            Top             =   270
+            Width           =   1035
+         End
       End
-      Begin VB.OptionButton optVarios 
-         Caption         =   "Fecha"
+      Begin VB.Frame Frame2 
+         Height          =   735
+         Left            =   150
+         TabIndex        =   59
+         Top             =   360
+         Width           =   4455
+         Begin VB.OptionButton optVarios 
+            Caption         =   "Forma Pago"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   2
+            Left            =   2850
+            TabIndex        =   62
+            Top             =   270
+            Width           =   1545
+         End
+         Begin VB.OptionButton optVarios 
+            Caption         =   "Fecha Vto"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   0
+            Left            =   1350
+            TabIndex        =   61
+            Top             =   270
+            Width           =   1365
+         End
+         Begin VB.OptionButton optVarios 
+            Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   1
+            Left            =   120
+            TabIndex        =   60
+            Top             =   270
+            Width           =   1035
+         End
+      End
+      Begin VB.CheckBox Check1 
+         Caption         =   "Formato extendido"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -60,11 +327,11 @@ Begin VB.Form frmTESCobrosPdtesList
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   0
-         Left            =   390
-         TabIndex        =   51
-         Top             =   660
-         Width           =   975
+         Index           =   2
+         Left            =   1980
+         TabIndex        =   17
+         Top             =   2070
+         Width           =   2295
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Resumen"
@@ -79,9 +346,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   240
          Index           =   1
-         Left            =   2460
-         TabIndex        =   50
-         Top             =   1380
+         Left            =   330
+         TabIndex        =   16
+         Top             =   2070
          Width           =   1335
       End
    End
@@ -96,12 +363,31 @@ Begin VB.Form frmTESCobrosPdtesList
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   6225
+      Height          =   6345
       Left            =   120
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   0
       Width           =   6915
-      Begin VB.TextBox txtNCuentas 
+      Begin VB.TextBox txtNAgente 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   58
+         Top             =   4140
+         Width           =   4155
+      End
+      Begin VB.TextBox txtNAgente 
          BackColor       =   &H80000018&
          BeginProperty Font 
             Name            =   "Verdana"
@@ -114,70 +400,13 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   2550
+         Left            =   2520
          Locked          =   -1  'True
          TabIndex        =   57
-         Top             =   5160
+         Top             =   4530
          Width           =   4155
       End
-      Begin VB.TextBox txtNCuentas 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   2550
-         Locked          =   -1  'True
-         TabIndex        =   56
-         Top             =   4740
-         Width           =   4155
-      End
-      Begin VB.TextBox txtNSerie 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   2070
-         Locked          =   -1  'True
-         TabIndex        =   55
-         Top             =   1380
-         Width           =   4665
-      End
-      Begin VB.TextBox txtNSerie 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   2070
-         Locked          =   -1  'True
-         TabIndex        =   54
-         Top             =   960
-         Width           =   4665
-      End
-      Begin VB.TextBox txtNIF 
+      Begin VB.TextBox txtAgente 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
@@ -189,15 +418,265 @@ Begin VB.Form frmTESCobrosPdtesList
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
+         Index           =   0
          Left            =   1230
-         MaxLength       =   10
          TabIndex        =   8
          Tag             =   "imgConcepto"
+         Top             =   4140
+         Width           =   1275
+      End
+      Begin VB.TextBox txtAgente 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   1230
+         TabIndex        =   9
+         Tag             =   "imgConcepto"
+         Top             =   4530
+         Width           =   1275
+      End
+      Begin VB.TextBox txtNDpto 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   54
+         Top             =   3060
+         Width           =   4155
+      End
+      Begin VB.TextBox txtNDpto 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   53
+         Top             =   3480
+         Width           =   4155
+      End
+      Begin VB.TextBox txtFecha 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   1230
+         MaxLength       =   10
+         TabIndex        =   0
+         Tag             =   "imgConcepto"
+         Top             =   810
+         Width           =   1305
+      End
+      Begin VB.TextBox txtFecha 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   3
+         Left            =   1230
+         MaxLength       =   10
+         TabIndex        =   1
+         Tag             =   "imgConcepto"
+         Top             =   1230
+         Width           =   1305
+      End
+      Begin VB.TextBox txtNCuentas 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   2550
+         Locked          =   -1  'True
+         TabIndex        =   48
+         Top             =   2340
+         Width           =   4155
+      End
+      Begin VB.TextBox txtNCuentas 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   2550
+         Locked          =   -1  'True
+         TabIndex        =   47
+         Top             =   1920
+         Width           =   4155
+      End
+      Begin VB.TextBox txtNSerie 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   2040
+         Locked          =   -1  'True
+         TabIndex        =   46
          Top             =   5700
-         Width           =   1455
+         Width           =   4665
+      End
+      Begin VB.TextBox txtNSerie 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   2040
+         Locked          =   -1  'True
+         TabIndex        =   45
+         Top             =   5280
+         Width           =   4665
       End
       Begin VB.TextBox txtCuentas 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   1230
+         TabIndex        =   5
+         Tag             =   "imgConcepto"
+         Top             =   2340
+         Width           =   1275
+      End
+      Begin VB.TextBox txtCuentas 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   1230
+         TabIndex        =   4
+         Tag             =   "imgConcepto"
+         Top             =   1920
+         Width           =   1275
+      End
+      Begin VB.TextBox txtSerie 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   1230
+         TabIndex        =   10
+         Tag             =   "imgConcepto"
+         Top             =   5280
+         Width           =   765
+      End
+      Begin VB.TextBox txtSerie 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   1230
+         TabIndex        =   11
+         Tag             =   "imgConcepto"
+         Top             =   5700
+         Width           =   765
+      End
+      Begin VB.TextBox txtDpto 
+         Alignment       =   1  'Right Justify
+         Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -212,11 +691,12 @@ Begin VB.Form frmTESCobrosPdtesList
          Left            =   1230
          TabIndex        =   7
          Tag             =   "imgConcepto"
-         Top             =   5160
+         Top             =   3450
          Width           =   1275
       End
-      Begin VB.TextBox txtCuentas 
+      Begin VB.TextBox txtDpto 
          Alignment       =   1  'Right Justify
+         Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -231,29 +711,10 @@ Begin VB.Form frmTESCobrosPdtesList
          Left            =   1230
          TabIndex        =   6
          Tag             =   "imgConcepto"
-         Top             =   4740
+         Top             =   3060
          Width           =   1275
       End
-      Begin VB.TextBox txtSerie 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   1260
-         TabIndex        =   0
-         Tag             =   "imgConcepto"
-         Top             =   960
-         Width           =   765
-      End
-      Begin VB.TextBox txtSerie 
+      Begin VB.TextBox txtFecha 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
@@ -266,32 +727,14 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   1260
-         TabIndex        =   1
-         Tag             =   "imgConcepto"
-         Top             =   1380
-         Width           =   765
-      End
-      Begin VB.TextBox txtNumFactu 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   1260
+         Left            =   4260
+         MaxLength       =   10
          TabIndex        =   3
          Tag             =   "imgConcepto"
-         Top             =   2640
-         Width           =   1275
+         Top             =   1260
+         Width           =   1305
       End
-      Begin VB.TextBox txtNumFactu 
+      Begin VB.TextBox txtFecha 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
@@ -304,54 +747,100 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   1260
+         Left            =   4260
+         MaxLength       =   10
          TabIndex        =   2
          Tag             =   "imgConcepto"
-         Top             =   2250
-         Width           =   1275
-      End
-      Begin VB.TextBox txtFecha 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   1230
-         MaxLength       =   10
-         TabIndex        =   5
-         Tag             =   "imgConcepto"
-         Top             =   3930
+         Top             =   840
          Width           =   1305
       End
-      Begin VB.TextBox txtFecha 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
+      Begin VB.Image imgAgente 
+         Height          =   255
          Index           =   0
-         Left            =   1230
-         MaxLength       =   10
-         TabIndex        =   4
-         Tag             =   "imgConcepto"
-         Top             =   3510
-         Width           =   1305
+         Left            =   900
+         Top             =   4140
+         Width           =   255
+      End
+      Begin VB.Image imgAgente 
+         Height          =   255
+         Index           =   1
+         Left            =   900
+         Top             =   4590
+         Width           =   255
       End
       Begin VB.Label Label3 
-         Caption         =   "N.I.F."
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   20
+         Left            =   240
+         TabIndex        =   56
+         Top             =   4170
+         Width           =   690
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   19
+         Left            =   240
+         TabIndex        =   55
+         Top             =   4530
+         Width           =   615
+      End
+      Begin VB.Image imgDpto 
+         Enabled         =   0   'False
+         Height          =   255
+         Index           =   0
+         Left            =   900
+         Top             =   3060
+         Width           =   255
+      End
+      Begin VB.Image imgDpto 
+         Enabled         =   0   'False
+         Height          =   255
+         Index           =   1
+         Left            =   900
+         Top             =   3510
+         Width           =   255
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Agente"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   14
+         Left            =   240
+         TabIndex        =   52
+         Top             =   3840
+         Width           =   960
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Fecha Vencimiento"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -363,14 +852,64 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   195
-         Index           =   14
+         Index           =   18
          Left            =   270
-         TabIndex        =   46
-         Top             =   5730
-         Width           =   960
+         TabIndex        =   51
+         Top             =   510
+         Width           =   2280
       End
       Begin VB.Label Label3 
-         Caption         =   "Cuenta"
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   17
+         Left            =   270
+         TabIndex        =   50
+         Top             =   870
+         Width           =   690
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   16
+         Left            =   270
+         TabIndex        =   49
+         Top             =   1230
+         Width           =   615
+      End
+      Begin VB.Image ImgFec 
+         Height          =   240
+         Index           =   2
+         Left            =   960
+         Top             =   840
+         Width           =   240
+      End
+      Begin VB.Image ImgFec 
+         Height          =   240
+         Index           =   3
+         Left            =   960
+         Top             =   1230
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Cuenta Cliente"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -384,9 +923,9 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   195
          Index           =   11
          Left            =   240
-         TabIndex        =   41
-         Top             =   4380
-         Width           =   960
+         TabIndex        =   37
+         Top             =   1620
+         Width           =   1890
       End
       Begin VB.Label Label3 
          Caption         =   "Desde"
@@ -402,8 +941,8 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   195
          Index           =   10
          Left            =   240
-         TabIndex        =   40
-         Top             =   4770
+         TabIndex        =   36
+         Top             =   1950
          Width           =   690
       End
       Begin VB.Label Label3 
@@ -420,22 +959,22 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   195
          Index           =   9
          Left            =   240
-         TabIndex        =   39
-         Top             =   5130
+         TabIndex        =   35
+         Top             =   2310
          Width           =   615
       End
       Begin VB.Image imgCuentas 
          Height          =   255
          Index           =   1
          Left            =   930
-         Top             =   5190
+         Top             =   2370
          Width           =   255
       End
       Begin VB.Image imgCuentas 
          Height          =   255
          Index           =   0
          Left            =   930
-         Top             =   4740
+         Top             =   1920
          Width           =   255
       End
       Begin VB.Label lblNumFactu 
@@ -451,7 +990,7 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   255
          Index           =   1
          Left            =   2580
-         TabIndex        =   38
+         TabIndex        =   34
          Top             =   2700
          Width           =   4035
       End
@@ -468,22 +1007,22 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   255
          Index           =   0
          Left            =   2610
-         TabIndex        =   37
+         TabIndex        =   33
          Top             =   2340
          Width           =   4035
       End
       Begin VB.Image ImgFec 
          Height          =   240
          Index           =   1
-         Left            =   960
-         Top             =   3930
+         Left            =   3990
+         Top             =   1260
          Width           =   240
       End
       Begin VB.Image ImgFec 
          Height          =   240
          Index           =   0
-         Left            =   960
-         Top             =   3540
+         Left            =   3990
+         Top             =   870
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -499,9 +1038,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   2
-         Left            =   270
-         TabIndex        =   36
-         Top             =   2640
+         Left            =   240
+         TabIndex        =   32
+         Top             =   3450
          Width           =   615
       End
       Begin VB.Label Label3 
@@ -517,9 +1056,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   3
-         Left            =   270
-         TabIndex        =   35
-         Top             =   2280
+         Left            =   240
+         TabIndex        =   31
+         Top             =   3090
          Width           =   690
       End
       Begin VB.Label Label3 
@@ -535,9 +1074,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   4
-         Left            =   270
-         TabIndex        =   34
-         Top             =   3930
+         Left            =   3300
+         TabIndex        =   30
+         Top             =   1260
          Width           =   615
       End
       Begin VB.Label lblFecha1 
@@ -553,7 +1092,7 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   255
          Index           =   4
          Left            =   2580
-         TabIndex        =   33
+         TabIndex        =   29
          Top             =   3990
          Width           =   4095
       End
@@ -570,7 +1109,7 @@ Begin VB.Form frmTESCobrosPdtesList
          Height          =   255
          Index           =   0
          Left            =   2580
-         TabIndex        =   32
+         TabIndex        =   28
          Top             =   3630
          Width           =   4095
       End
@@ -587,13 +1126,13 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   5
-         Left            =   270
-         TabIndex        =   31
-         Top             =   3570
+         Left            =   3300
+         TabIndex        =   27
+         Top             =   900
          Width           =   690
       End
       Begin VB.Label Label3 
-         Caption         =   "Factura"
+         Caption         =   "Departamento"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -604,12 +1143,12 @@ Begin VB.Form frmTESCobrosPdtesList
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   195
+         Height          =   255
          Index           =   7
-         Left            =   270
-         TabIndex        =   30
-         Top             =   1890
-         Width           =   960
+         Left            =   240
+         TabIndex        =   26
+         Top             =   2760
+         Width           =   1590
       End
       Begin VB.Label Label3 
          Caption         =   "Fecha Factura"
@@ -625,9 +1164,9 @@ Begin VB.Form frmTESCobrosPdtesList
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   8
-         Left            =   270
-         TabIndex        =   29
-         Top             =   3210
+         Left            =   3300
+         TabIndex        =   25
+         Top             =   540
          Width           =   2280
       End
       Begin VB.Label Label3 
@@ -644,23 +1183,23 @@ Begin VB.Form frmTESCobrosPdtesList
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   6
-         Left            =   240
-         TabIndex        =   28
-         Top             =   630
+         Left            =   210
+         TabIndex        =   24
+         Top             =   4980
          Width           =   960
       End
       Begin VB.Image imgSerie 
          Height          =   255
          Index           =   1
-         Left            =   960
-         Top             =   1380
+         Left            =   930
+         Top             =   5700
          Width           =   255
       End
       Begin VB.Image imgSerie 
          Height          =   255
          Index           =   0
-         Left            =   960
-         Top             =   960
+         Left            =   930
+         Top             =   5280
          Width           =   255
       End
       Begin VB.Label Label3 
@@ -676,9 +1215,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   1
-         Left            =   240
-         TabIndex        =   24
-         Top             =   1380
+         Left            =   210
+         TabIndex        =   23
+         Top             =   5700
          Width           =   735
       End
       Begin VB.Label Label3 
@@ -694,9 +1233,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   0
-         Left            =   240
-         TabIndex        =   23
-         Top             =   960
+         Left            =   210
+         TabIndex        =   22
+         Top             =   5280
          Width           =   780
       End
    End
@@ -711,13 +1250,64 @@ Begin VB.Form frmTESCobrosPdtesList
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   6225
+      Height          =   6345
       Left            =   7140
-      TabIndex        =   42
+      TabIndex        =   38
       Top             =   0
-      Width           =   4455
+      Width           =   4815
+      Begin VB.ComboBox Combo3 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   2340
+         Style           =   2  'Dropdown List
+         TabIndex        =   14
+         Top             =   4710
+         Width           =   2055
+      End
+      Begin VB.ComboBox Combo1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   2340
+         Style           =   2  'Dropdown List
+         TabIndex        =   12
+         Top             =   3810
+         Width           =   2055
+      End
+      Begin VB.ComboBox Combo2 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   2340
+         Style           =   2  'Dropdown List
+         TabIndex        =   13
+         Top             =   4260
+         Width           =   2055
+      End
       Begin VB.CheckBox Check1 
-         Caption         =   "Sustituye cuenta por NIF"
+         Caption         =   "Mostrar Observaciones"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -729,52 +1319,15 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   240
          Index           =   0
-         Left            =   180
-         TabIndex        =   53
-         Top             =   1500
+         Left            =   270
+         TabIndex        =   15
+         Top             =   5730
          Width           =   3075
-      End
-      Begin VB.TextBox txtFecha 
-         Alignment       =   2  'Center
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   2
-         Left            =   1350
-         TabIndex        =   9
-         Top             =   450
-         Width           =   1485
-      End
-      Begin VB.TextBox txtPag2 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   1350
-         TabIndex        =   10
-         Tag             =   "imgConcepto"
-         Top             =   960
-         Width           =   1485
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
-         Left            =   3750
-         TabIndex        =   43
+         Left            =   4230
+         TabIndex        =   39
          Top             =   210
          Width           =   405
          _ExtentX        =   714
@@ -790,14 +1343,14 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
       End
       Begin MSComctlLib.ListView ListView1 
-         Height          =   3660
+         Height          =   2310
          Index           =   1
-         Left            =   210
-         TabIndex        =   47
-         Top             =   2280
-         Width           =   4035
-         _ExtentX        =   7117
-         _ExtentY        =   6456
+         Left            =   180
+         TabIndex        =   42
+         Top             =   1020
+         Width           =   4275
+         _ExtentX        =   7541
+         _ExtentY        =   4075
          View            =   3
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
@@ -820,22 +1373,42 @@ Begin VB.Form frmTESCobrosPdtesList
       End
       Begin VB.Image imgCheck 
          Height          =   240
-         Index           =   0
-         Left            =   3570
-         ToolTipText     =   "Quitar al Debe"
-         Top             =   1920
+         Index           =   1
+         Left            =   4110
+         Picture         =   "frmTESCobrosPdtesList.frx":000C
+         ToolTipText     =   "Puntear al Debe"
+         Top             =   720
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
-         Index           =   1
-         Left            =   3930
-         ToolTipText     =   "Puntear al Debe"
-         Top             =   1920
+         Index           =   0
+         Left            =   3750
+         Picture         =   "frmTESCobrosPdtesList.frx":0156
+         ToolTipText     =   "Quitar al Debe"
+         Top             =   720
          Width           =   240
       End
       Begin VB.Label Label3 
-         Caption         =   "IVA"
+         Caption         =   "Situación Jurídica"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   21
+         Left            =   300
+         TabIndex        =   66
+         Top             =   4800
+         Width           =   1755
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Tipo de Pago"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9
@@ -847,20 +1420,13 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   255
          Index           =   15
-         Left            =   210
-         TabIndex        =   48
-         Top             =   1980
-         Width           =   870
-      End
-      Begin VB.Image ImgFec 
-         Height          =   240
-         Index           =   2
-         Left            =   1020
-         Top             =   450
-         Width           =   240
+         Left            =   180
+         TabIndex        =   43
+         Top             =   720
+         Width           =   1500
       End
       Begin VB.Label Label3 
-         Caption         =   "Fecha"
+         Caption         =   "Devuelto"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9
@@ -872,13 +1438,13 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   195
          Index           =   13
-         Left            =   150
-         TabIndex        =   45
-         Top             =   450
-         Width           =   690
+         Left            =   300
+         TabIndex        =   41
+         Top             =   4350
+         Width           =   900
       End
       Begin VB.Label Label3 
-         Caption         =   "1ªPágina"
+         Caption         =   "Recibido"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9
@@ -890,9 +1456,9 @@ Begin VB.Form frmTESCobrosPdtesList
          EndProperty
          Height          =   255
          Index           =   12
-         Left            =   150
-         TabIndex        =   44
-         Top             =   1020
+         Left            =   300
+         TabIndex        =   40
+         Top             =   3870
          Width           =   870
       End
    End
@@ -909,9 +1475,9 @@ Begin VB.Form frmTESCobrosPdtesList
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10410
-      TabIndex        =   13
-      Top             =   9090
+      Left            =   10680
+      TabIndex        =   20
+      Top             =   9240
       Width           =   1215
    End
    Begin VB.CommandButton cmdAccion 
@@ -926,9 +1492,9 @@ Begin VB.Form frmTESCobrosPdtesList
       EndProperty
       Height          =   375
       Index           =   1
-      Left            =   8850
-      TabIndex        =   11
-      Top             =   9090
+      Left            =   9120
+      TabIndex        =   18
+      Top             =   9240
       Width           =   1455
    End
    Begin VB.CommandButton cmdAccion 
@@ -944,190 +1510,10 @@ Begin VB.Form frmTESCobrosPdtesList
       EndProperty
       Height          =   375
       Index           =   0
-      Left            =   120
-      TabIndex        =   12
-      Top             =   9030
+      Left            =   150
+      TabIndex        =   19
+      Top             =   9210
       Width           =   1335
-   End
-   Begin VB.Frame FrameTipoSalida 
-      Caption         =   "Tipo de salida"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   11.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   2655
-      Left            =   120
-      TabIndex        =   14
-      Top             =   6300
-      Width           =   6915
-      Begin VB.CommandButton PushButtonImpr 
-         Caption         =   "Propiedades"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   5190
-         TabIndex        =   27
-         Top             =   720
-         Width           =   1515
-      End
-      Begin VB.CommandButton PushButton2 
-         Caption         =   ".."
-         Height          =   315
-         Index           =   1
-         Left            =   6450
-         TabIndex        =   26
-         Top             =   1680
-         Width           =   255
-      End
-      Begin VB.CommandButton PushButton2 
-         Caption         =   ".."
-         Height          =   315
-         Index           =   0
-         Left            =   6450
-         TabIndex        =   25
-         Top             =   1200
-         Width           =   255
-      End
-      Begin VB.TextBox txtTipoSalida 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   2
-         Left            =   1770
-         Locked          =   -1  'True
-         TabIndex        =   21
-         Top             =   1680
-         Width           =   4665
-      End
-      Begin VB.TextBox txtTipoSalida 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   1770
-         Locked          =   -1  'True
-         TabIndex        =   20
-         Top             =   1200
-         Width           =   4665
-      End
-      Begin VB.TextBox txtTipoSalida 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   1770
-         Locked          =   -1  'True
-         TabIndex        =   19
-         Text            =   "Text1"
-         Top             =   720
-         Width           =   3345
-      End
-      Begin VB.OptionButton optTipoSal 
-         Caption         =   "eMail"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   3
-         Left            =   240
-         TabIndex        =   18
-         Top             =   2160
-         Width           =   975
-      End
-      Begin VB.OptionButton optTipoSal 
-         Caption         =   "PDF"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   2
-         Left            =   240
-         TabIndex        =   17
-         Top             =   1680
-         Width           =   975
-      End
-      Begin VB.OptionButton optTipoSal 
-         Caption         =   "Archivo csv"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   1
-         Left            =   240
-         TabIndex        =   16
-         Top             =   1200
-         Width           =   1515
-      End
-      Begin VB.OptionButton optTipoSal 
-         Caption         =   "Impresora"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   0
-         Left            =   240
-         TabIndex        =   15
-         Top             =   720
-         Value           =   -1  'True
-         Width           =   1335
-      End
    End
 End
 Attribute VB_Name = "frmTESCobrosPdtesList"
@@ -1137,7 +1523,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Const IdPrograma = 402
+Private Const IdPrograma = 602
 
 
 ' ***********************************************************************************************************
@@ -1159,6 +1545,10 @@ Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
 Private WithEvents frmConta As frmBasico
 Attribute frmConta.VB_VarHelpID = -1
+Private WithEvents frmAgen As frmBasico
+Attribute frmAgen.VB_VarHelpID = -1
+Private WithEvents frmDpto As frmBasico
+Attribute frmDpto.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
@@ -1204,11 +1594,8 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     InicializarVbles True
     
-    tabla = "factcli inner join factcli_totales on factcli.numserie = factcli_totales.numserie and factcli.numfactu = factcli_totales.numfactu and factcli.anofactu = factcli_totales.anofactu "
-    tabla = "(" & tabla & ") inner join contadores on factcli.numserie = contadores.tiporegi "
-    tabla = "(" & tabla & ") inner join formapago on factcli.codforpa = formapago.codforpa "
-    tabla = "(" & tabla & ") inner join tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
-    tabla = "(" & tabla & ") inner join usuarios.wtipopera aa on factcli.codopera = aa.codigo "
+    tabla = "(cobros INNER JOIN formapago on cobros.codforpa = formapago.codforpa)  "
+    tabla = tabla & " INNER JOIN tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
     
     
     If Not MontaSQL Then Exit Sub
@@ -1272,14 +1659,17 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
-    Me.Caption = "Listado de Facturas de Cliente"
+    Me.Caption = "Listado de Cobros Pendientes Clientes"
 
     For i = 0 To 1
         Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
-     
-    For i = 0 To 1
         Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgDpto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgAgente(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next i
+    
+    For i = 0 To 3
+        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next i
      
     ' La Ayuda
@@ -1289,6 +1679,7 @@ Private Sub Form_Load()
     End With
      
     CargarListView 1
+    CargarCombo
     
     Me.optVarios(0).Value = True
     
@@ -1300,9 +1691,9 @@ Private Sub Form_Load()
         txtFecha(1).Text = Format(DateAdd("yyyy", 1, vParam.fechafin), "dd/mm/yyyy")
     End If
     
-    
-    txtFecha(2).Text = Format(Now, "dd/mm/yyyy")
-    txtPag2(0).Text = "1"
+    Combo1.ListIndex = 0
+    Combo2.ListIndex = 2
+    Combo3.ListIndex = 2
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -1317,6 +1708,13 @@ End Sub
 
 
 
+Private Sub frmAgen_DatoSeleccionado(CadenaSeleccion As String)
+    If CadenaSeleccion <> "" Then
+        txtAgente(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtNAgente(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    End If
+End Sub
+
 Private Sub frmConta_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
         txtSerie(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
@@ -1326,6 +1724,13 @@ End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
     SQL = CadenaSeleccion
+End Sub
+
+Private Sub frmDpto_DatoSeleccionado(CadenaSeleccion As String)
+    If CadenaSeleccion <> "" Then
+        txtDpto(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtNDpto(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    End If
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -1340,7 +1745,7 @@ Dim TotalImporte As Currency
     Screen.MousePointer = vbHourglass
     
     Select Case Index
-        ' tabla de codigos de iva
+        ' tipos de forma de pago
         Case 0
             For i = 1 To ListView1(1).ListItems.Count
                 ListView1(1).ListItems(i).Checked = False
@@ -1355,6 +1760,30 @@ Dim TotalImporte As Currency
 
 
 End Sub
+
+Private Sub imgAgente_Click(Index As Integer)
+    IndCodigo = Index
+
+    Set frmAgen = New frmBasico
+    AyudaAgentes frmAgen, txtAgente(Index)
+    Set frmAgen = Nothing
+    
+    PonFoco Me.txtSerie(Index)
+End Sub
+
+
+
+Private Sub imgDpto_Click(Index As Integer)
+    IndCodigo = Index
+
+    Set frmDpto = New frmBasico
+    AyudaDepartamentos frmDpto, txtDpto(Index), "codmacta = " & DBSet(txtCuentas(0).Text, "T")
+    Set frmDpto = Nothing
+    
+    PonFoco Me.txtDpto(Index)
+End Sub
+
+
 
 Private Sub imgSerie_Click(Index As Integer)
     IndCodigo = Index
@@ -1371,7 +1800,7 @@ Private Sub imgFec_Click(Index As Integer)
     Screen.MousePointer = vbHourglass
     
     Select Case Index
-    Case 0, 1, 2
+    Case 0, 1, 2, 3
         IndCodigo = Index
     
         'FECHA
@@ -1381,7 +1810,6 @@ Private Sub imgFec_Click(Index As Integer)
         frmF.Show vbModal
         Set frmF = Nothing
         PonFoco txtFecha(Index)
-        
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1475,7 +1903,7 @@ End Sub
 
 
 Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
-   ' KEYpressGnral KeyAscii
+    KEYpress KeyAscii
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
@@ -1548,82 +1976,50 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
     
     
     End Select
+    
+    
+    ' solo se puede introducir departamento si cuenta cliente desde y hasta son iguales
+    txtDpto(0).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
+    imgDpto(0).Enabled = txtDpto(0).Enabled
+    imgDpto(1).Enabled = txtDpto(1).Enabled
+    If Not txtDpto(0).Enabled Then
+        txtDpto(0).Text = ""
+        txtNDpto(0).Text = ""
+    End If
+    txtDpto(1).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
+    If Not txtDpto(1).Enabled Then
+        txtDpto(1).Text = ""
+        txtNDpto(1).Text = ""
+    End If
+    
 
 End Sub
 
-Private Sub txtNIF_KeyDown(KeyCode As Integer, Shift As Integer)
-    KEYdown KeyCode
-End Sub
-
-Private Sub txtPag2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    KEYdown KeyCode
+Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+    Select Case Nombre
+    Case "imgSerie"
+        imgSerie_Click indice
+    Case "imgFecha"
+        imgFec_Click indice
+    Case "imgCuentas"
+        imgCuentas_Click indice
+    Case "imgAgente"
+        imgAgente_Click indice
+    Case "imgDpto"
+        imgDpto_Click indice
+    End Select
 End Sub
 
 Private Sub txtSerie_GotFocus(Index As Integer)
     ConseguirFoco txtSerie(Index), 3
 End Sub
 
-Private Sub txtNumFactu_GotFocus(Index As Integer)
-    ConseguirFoco txtNumFactu(Index), 3
-End Sub
-
-Private Sub txtNumFactu_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If KeyCode = vbKeyAdd Then
-        KeyCode = 0
-        
-        LanzaFormAyuda txtNumFactu(Index).Tag, Index
-    Else
-        KEYdown KeyCode
-    End If
-End Sub
-
-
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
-    Select Case Nombre
-    Case "imgDiario"
-        imgSerie_Click indice
-    Case "imgFecha"
-        imgFec_Click indice
-    Case "imgCuentas"
-        imgCuentas_Click indice
-    End Select
-End Sub
-
-Private Sub txtNumFactu_KeyPress(Index As Integer, KeyAscii As Integer)
-   ' KEYpressGnral KeyAscii
-End Sub
-
-Private Sub txtNumFactu_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
-
-    txtNumFactu(Index).Text = Trim(txtNumFactu(Index).Text)
-    
-    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
-    'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-
-    If txtNumFactu(Index).Text = "" Then
-        lblNumFactu(Index).Caption = ""
-        Exit Sub
-    End If
-
-
-    If Not IsNumeric(txtNumFactu(Index).Text) Then
-        If InStr(1, txtNumFactu(Index).Text, "+") = 0 Then MsgBox "El número de factura debe ser numérico: " & txtSerie(Index).Text, vbExclamation
-        txtNumFactu(Index).Text = ""
-        Exit Sub
-    End If
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
-End Sub
-
-
-
 Private Sub txtSerie_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
 Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
-   ' KEYpressGnral KeyAscii
+    KEYpress KeyAscii
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
@@ -1654,6 +2050,85 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
 End Sub
 
+'****** dpto
+Private Sub txtDpto_GotFocus(Index As Integer)
+    ConseguirFoco txtDpto(Index), 3
+End Sub
+
+Private Sub txtDpto_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
+Private Sub txtDpto_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub txtDpto_LostFocus(Index As Integer)
+Dim Cad As String, cadTipo As String 'tipo cliente
+Dim Cta As String
+Dim B As Boolean
+Dim SQL As String
+Dim Hasta As Integer
+
+    txtDpto(Index).Text = Trim(txtNDpto(Index).Text)
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    Select Case Index
+        Case 0, 1 'departamentos
+            txtNDpto(Index).Text = DevuelveDesdeBDNew(cConta, "departamentos", "nomconam", "codmacta", txtCuentas(0), "T", , "Dpto", txtDpto(Index), "N")
+            If txtNDpto(Index).Text <> "" Then txtDpto(Index).Text = Format(txtDpto(Index).Text, "0000")
+    End Select
+
+End Sub
+
+'******
+
+
+'****** agentes
+Private Sub txtAgente_GotFocus(Index As Integer)
+    ConseguirFoco txtAgente(Index), 3
+End Sub
+
+Private Sub txtAgente_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
+Private Sub txtAgente_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub txtAgente_LostFocus(Index As Integer)
+Dim Cad As String, cadTipo As String
+Dim Cta As String
+Dim B As Boolean
+Dim SQL As String
+Dim Hasta As Integer
+
+    txtAgente(Index).Text = Trim(txtNAgente(Index).Text)
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    Select Case Index
+        Case 0, 1 'agentes
+            txtNAgente(Index).Text = DevuelveDesdeBDNew(cConta, "agentes", "nombre", "codigo", txtAgente(0), "N")
+            If txtNAgente(Index).Text <> "" Then txtAgente(Index).Text = Format(txtAgente(Index).Text, "0000")
+    End Select
+
+End Sub
+
+'******
+
+
+
+
+
+
+
 
 
 Private Sub AccionesCSV()
@@ -1682,22 +2157,15 @@ Dim nomDocu As String
     conSubRPT = False
         
     
-    indRPT = "0402-00"
-    If optVarios(1).Value Then indRPT = "0402-01"
-    If Check1(1).Value And optVarios(1).Value Then indRPT = "0402-02"
+    indRPT = "0602-00"
+    
+    'formato extendido
+    If Check1(2).Value And optVarios(1).Value Then indRPT = "0602-01"
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
-    cadNomRPT = nomDocu ' "FacturasCliFecha.rpt"
+    cadNomRPT = nomDocu ' "CobrosPdtes.rpt"
 
-    'si se imprime el nif o la cuenta de cliente
-    cadParam = cadParam & "pConNIF=" & Check1(0).Value & "|"
-    numParam = numParam + 1
-    
-    cadParam = cadParam & "pNumPag=" & ComprobarCero(txtPag2(0).Text) & "|"
-    numParam = numParam + 1
-    cadParam = cadParam & "pFecha=""" & txtFecha(2).Text & """|"
-    numParam = numParam + 1
     
     cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
     cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
@@ -1711,6 +2179,9 @@ Dim nomDocu As String
         
     If SoloImprimir Or ExportarPDF Then Unload Me
     Screen.MousePointer = vbDefault
+    
+    
+    
 End Sub
 
 Private Function CargarTemporal() As Boolean
@@ -1750,20 +2221,17 @@ Dim i As Integer
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("factcli.NumSerie", "SER", Me.txtSerie(0), Me.txtNSerie(0), Me.txtSerie(1), Me.txtNSerie(1), "pDHSerie=""") Then Exit Function
-    If Not PonerDesdeHasta("factcli.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
-    If Not PonerDesdeHasta("factcli.NumFactu", "FRA", Me.txtNumFactu(0), Me.txtNumFactu(0), Me.txtNumFactu(1), Me.txtNumFactu(1), "pDHFactura=""") Then Exit Function
-    If Not PonerDesdeHasta("factcli.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
-            
-    If txtNIF.Text <> "" Then
-        If Not AnyadirAFormula(cadselect, "factcli.nifdatos = "" & txtnif.text & """) Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "{factcli.nifdatos} = "" & txtnif.text & """) Then Exit Function
-    End If
+    If Not PonerDesdeHasta("cobros.NumSerie", "SER", Me.txtSerie(0), Me.txtNSerie(0), Me.txtSerie(1), Me.txtNSerie(1), "pDHSerie=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros.Fecvenci", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros.agente", "AGE", Me.txtAgente(0), Me.txtNAgente(0), Me.txtAgente(1), Me.txtNAgente(1), "pDHAgente=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros.departamento", "DPTO", Me.txtDpto(0), Me.txtNDpto(0), Me.txtDpto(1), Me.txtNDpto(1), "pDHDpto=""") Then Exit Function
             
     SQL = ""
     For i = 1 To Me.ListView1(1).ListItems.Count
         If Me.ListView1(1).ListItems(i).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(i).Text & ","
+            SQL = SQL & Me.ListView1(1).ListItems(i).SubItems(2) & ","
         End If
     Next i
     
@@ -1771,24 +2239,20 @@ Dim i As Integer
         ' quitamos la ultima coma
         SQL = Mid(SQL, 1, Len(SQL) - 1)
         
-        If Not AnyadirAFormula(cadselect, "factcli_totales.codigiva in (" & SQL & ")") Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "{factcli_totales.codigiva} in [" & SQL & "]") Then Exit Function
+        If Not AnyadirAFormula(cadselect, "formapago.tipforpa in (" & SQL & ")") Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "{formapago.tipforpa} in [" & SQL & "]") Then Exit Function
     Else
-        If Not AnyadirAFormula(cadselect, "factcli_totales.codigiva is null") Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "isnull({factcli_totales.codigiva})") Then Exit Function
+        If Not AnyadirAFormula(cadselect, "formapago.tipforpa is null") Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "isnull({formapago.tipforpa})") Then Exit Function
     End If
     
-    If txtNIF.Text <> "" Then
-        If Not AnyadirAFormula(cadselect, "cuentas.nifdatos = " & DBSet(txtNIF.Text, "T")) Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "{cuentas.nifdatos} = """ & Trim(txtNIF.Text) & "") Then Exit Function
-    End If
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
     If cadselect <> "" Then cadselect = "(" & cadselect & ")"
     
-    If Not CargarTemporal Then Exit Function
+'    If Not CargarTemporal Then Exit Function
     
-    cadFormula = "{tmpfaclin.codusu} = " & vUsu.Codigo
+'    cadFormula = "{tmpfaclin.codusu} = " & vUsu.Codigo
     
             
     MontaSQL = True
@@ -1800,7 +2264,6 @@ Private Sub txtfecha_LostFocus(Index As Integer)
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-
 
     PonerFormatoFecha txtFecha(Index)
 End Sub
@@ -1835,23 +2298,20 @@ Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As
 End Sub
 
 Private Sub CargarListView(Index As Integer)
-'Muestra la lista Detallada de Facturas que dieron error al contabilizar
-'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
     On Error GoTo ECargarList
-
+ 
     'Los encabezados
     ListView1(Index).ColumnHeaders.Clear
 
-    ListView1(Index).ColumnHeaders.Add , , "Código", 900
-    ListView1(Index).ColumnHeaders.Add , , "Descripción", 2200
+    ListView1(Index).ColumnHeaders.Add , , " ", 300
+    ListView1(Index).ColumnHeaders.Add , , "Descripción", 3200
+    ListView1(Index).ColumnHeaders.Add , , " ", 0
     
-    SQL = "SELECT codigiva, nombriva "
-    SQL = SQL & " FROM tiposiva "
-    SQL = SQL & " ORDER BY codigiva "
+    SQL = "Select * from tipofpago order by 1" 'descformapago"
     
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1860,8 +2320,9 @@ Dim SQL As String
         Set ItmX = ListView1(Index).ListItems.Add
         
         ItmX.Checked = True
-        ItmX.Text = Rs.Fields(0).Value
+        ItmX.Text = " " ' Rs.Fields(0).Value
         ItmX.SubItems(1) = Rs.Fields(1).Value
+        ItmX.SubItems(2) = Rs.Fields(0).Value
         Rs.MoveNext
     Wend
     Rs.Close
@@ -1869,8 +2330,33 @@ Dim SQL As String
 
 ECargarList:
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Cargar Tipo de Iva.", Err.Description
+        MuestraError Err.Number, "Cargar Tipo de Forma de Pago.", Err.Description
     End If
 End Sub
 
-
+Private Sub CargarCombo()
+    'recibido
+    Combo1.Clear
+    Combo1.AddItem "No"
+    Combo1.ItemData(Combo1.NewIndex) = 0
+    Combo1.AddItem "Sí"
+    Combo1.ItemData(Combo1.NewIndex) = 1
+    Combo1.AddItem "Todos"
+    Combo1.ItemData(Combo1.NewIndex) = 2
+    'devuelto
+    Combo2.Clear
+    Combo2.AddItem "No"
+    Combo2.ItemData(Combo2.NewIndex) = 0
+    Combo2.AddItem "Sí"
+    Combo2.ItemData(Combo2.NewIndex) = 1
+    Combo2.AddItem "Todos"
+    Combo2.ItemData(Combo2.NewIndex) = 2
+    'situacion jurídica
+    Combo3.Clear
+    Combo3.AddItem "No"
+    Combo3.ItemData(Combo3.NewIndex) = 0
+    Combo3.AddItem "Sí"
+    Combo3.ItemData(Combo3.NewIndex) = 1
+    Combo3.AddItem "Todos"
+    Combo3.ItemData(Combo3.NewIndex) = 2
+End Sub
