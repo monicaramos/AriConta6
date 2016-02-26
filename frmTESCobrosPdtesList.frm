@@ -290,7 +290,7 @@ Begin VB.Form frmTESCobrosPdtesList
                Strikethrough   =   0   'False
             EndProperty
             Height          =   240
-            Index           =   0
+            Index           =   1
             Left            =   1350
             TabIndex        =   61
             Top             =   270
@@ -308,7 +308,7 @@ Begin VB.Form frmTESCobrosPdtesList
                Strikethrough   =   0   'False
             EndProperty
             Height          =   240
-            Index           =   1
+            Index           =   0
             Left            =   120
             TabIndex        =   60
             Top             =   270
@@ -1553,9 +1553,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -1580,6 +1580,25 @@ Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
 End Sub
 
 
+
+Private Sub Check1_Click(Index As Integer)
+    Select Case Index
+        Case 0
+            If Check1(0).Value = 1 Then
+                Check1(2).Value = 1
+                Check1_Click (2)
+            End If
+        Case 1
+            If Check1(1).Value = 1 Then
+                Check1(2).Value = 0
+                Check1(0).Value = 0
+            End If
+        Case 2
+            If Check1(2).Value = 1 Then
+                Check1(1).Value = 0
+            End If
+    End Select
+End Sub
 
 Private Sub cmdAccion_Click(Index As Integer)
 
@@ -1661,16 +1680,16 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Listado de Cobros Pendientes Clientes"
 
-    For i = 0 To 1
-        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgDpto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgAgente(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgDpto(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgAgente(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
-    For i = 0 To 3
-        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next i
+    For I = 0 To 3
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next I
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -1684,12 +1703,6 @@ Private Sub Form_Load()
     Me.optVarios(0).Value = True
     
     optVarios_Click (0)
-    
-    txtFecha(0).Text = vParam.fechaini
-    txtFecha(1).Text = vParam.fechafin
-    If Not vParam.FecEjerAct Then
-        txtFecha(1).Text = Format(DateAdd("yyyy", 1, vParam.fechafin), "dd/mm/yyyy")
-    End If
     
     Combo1.ListIndex = 0
     Combo2.ListIndex = 2
@@ -1738,7 +1751,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -1747,13 +1760,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tipos de forma de pago
         Case 0
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = False
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = False
+            Next I
         Case 1
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = True
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = True
+            Next I
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1761,7 +1774,7 @@ Dim TotalImporte As Currency
 
 End Sub
 
-Private Sub imgAgente_Click(Index As Integer)
+Private Sub ImgAgente_Click(Index As Integer)
     IndCodigo = Index
 
     Set frmAgen = New frmBasico
@@ -1840,15 +1853,15 @@ Private Sub optTipoSal_Click(Index As Integer)
 End Sub
 
 Private Sub optVarios_Click(Index As Integer)
-    Check1(1).Enabled = optVarios(1).Value
-    If Not Check1(1).Enabled Then Check1(1).Value = 0
+'    Check1(1).Enabled = optVarios(1).Value
+'    If Not Check1(1).Enabled Then Check1(1).Value = 0
 End Sub
 
 Private Sub optVarios_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
   
   
-    Check1(1).Enabled = optVarios(1).Value
+'    Check1(1).Enabled = optVarios(1).Value
     
 End Sub
 
@@ -1907,7 +1920,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1995,18 +2008,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgSerie"
-        imgSerie_Click indice
+        imgSerie_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     Case "imgAgente"
-        imgAgente_Click indice
+        ImgAgente_Click Indice
     Case "imgDpto"
-        imgDpto_Click indice
+        imgDpto_Click Indice
     End Select
 End Sub
 
@@ -2023,7 +2036,7 @@ Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2064,13 +2077,13 @@ Private Sub txtDpto_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtDpto_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer
 
-    txtDpto(Index).Text = Trim(txtNDpto(Index).Text)
+    txtDpto(Index).Text = Trim(txtDpto(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -2078,8 +2091,10 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 0, 1 'departamentos
-            txtNDpto(Index).Text = DevuelveDesdeBDNew(cConta, "departamentos", "nomconam", "codmacta", txtCuentas(0), "T", , "Dpto", txtDpto(Index), "N")
-            If txtNDpto(Index).Text <> "" Then txtDpto(Index).Text = Format(txtDpto(Index).Text, "0000")
+            If txtDpto(Index) <> "" And txtCuentas(0) <> "" Then
+                txtNDpto(Index).Text = DevuelveDesdeBDNew(cConta, "departamentos", "descripcion ", "codmacta", txtCuentas(0), "T", , "Dpto", txtDpto(Index), "N")
+                If txtNDpto(Index).Text <> "" Then txtDpto(Index).Text = Format(txtDpto(Index).Text, "0000")
+            End If
     End Select
 
 End Sub
@@ -2101,13 +2116,13 @@ Private Sub txtAgente_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAgente_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String
+Dim cad As String, cadTipo As String
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer
 
-    txtAgente(Index).Text = Trim(txtNAgente(Index).Text)
+    txtAgente(Index).Text = Trim(txtAgente(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -2115,7 +2130,7 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 0, 1 'agentes
-            txtNAgente(Index).Text = DevuelveDesdeBDNew(cConta, "agentes", "nombre", "codigo", txtAgente(0), "N")
+            txtNAgente(Index).Text = DevuelveDesdeBDNew(cConta, "agentes", "nombre", "codigo", txtAgente(Index), "N")
             If txtNAgente(Index).Text <> "" Then txtAgente(Index).Text = Format(txtAgente(Index).Text, "0000")
     End Select
 
@@ -2159,17 +2174,75 @@ Dim nomDocu As String
     
     indRPT = "0602-00"
     
-    'formato extendido
-    If Check1(2).Value And optVarios(1).Value Then indRPT = "0602-01"
+
+    If optVarios(0).Value Then
+        If optVarios(3).Value Then cadParam = cadParam & "pGroup1={cobros.codmacta}|"
+        If optVarios(4).Value Then cadParam = cadParam & "pGroup1={cobros.nomclien}|"
+        
+        numParam = numParam + 1
+        
+        cadParam = cadParam & "pTipo=1|"
+        numParam = numParam + 1
+        
+        If Check1(1).Value Then cadParam = cadParam & "pResumen=1|"
+        numParam = numParam + 1
+        
+    End If
+    
+    If optVarios(1).Value Then
+        cadParam = cadParam & "pGroup1={cobros.fecvenci}|"
+        
+        If optVarios(3).Value Then cadParam = cadParam & "pOrden={cobros.codmacta}|"
+        If optVarios(4).Value Then cadParam = cadParam & "pOrden={cobros.nomclien}|"
+        numParam = numParam + 2
+        
+        cadParam = cadParam & "pTipo=2|"
+        numParam = numParam + 1
+    
+        If Check1(1).Value Then
+            cadParam = cadParam & "pResumen=1|"
+            numParam = numParam + 1
+        End If
+    End If
+
+    If optVarios(2).Value Then
+        cadParam = cadParam & "pGroup1={tipofpago.descformapago}|"
+        
+        If optVarios(3).Value Then cadParam = cadParam & "pOrden={cobros.codmacta}|"
+        If optVarios(4).Value Then cadParam = cadParam & "pOrden={cobros.nomclien}|"
+        numParam = numParam + 2
+    
+        If Check1(1).Value Then
+            cadParam = cadParam & "pResumen=1|"
+            numParam = numParam + 1
+        End If
+    End If
+
+    If Check1(0).Value Then
+        cadParam = cadParam & "pObserva=1|"
+        numParam = numParam + 1
+    End If
+
+
+    If optVarios(0).Value Or optVarios(1).Value Then
+        'formato extendido
+        If Check1(2).Value Then indRPT = "0602-01"
+    End If
+    If optVarios(2).Value Then
+        indRPT = "0602-02"
+        If Check1(2).Value Then indRPT = "0602-03"
+    End If
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu ' "CobrosPdtes.rpt"
 
+
+
     
-    cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
-    cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
-    numParam = numParam + 2
+'    cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
+'    cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
+'    numParam = numParam + 2
     
     ImprimeGeneral
     
@@ -2216,7 +2289,7 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False
@@ -2229,11 +2302,11 @@ Dim i As Integer
     If Not PonerDesdeHasta("cobros.departamento", "DPTO", Me.txtDpto(0), Me.txtNDpto(0), Me.txtDpto(1), Me.txtNDpto(1), "pDHDpto=""") Then Exit Function
             
     SQL = ""
-    For i = 1 To Me.ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(i).SubItems(2) & ","
+    For I = 1 To Me.ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            SQL = SQL & Me.ListView1(1).ListItems(I).SubItems(2) & ","
         End If
-    Next i
+    Next I
     
     If SQL <> "" Then
         ' quitamos la ultima coma
@@ -2298,7 +2371,7 @@ Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As
 End Sub
 
 Private Sub CargarListView(Index As Integer)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -2313,20 +2386,20 @@ Dim SQL As String
     
     SQL = "Select * from tipofpago order by 1" 'descformapago"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         Set ItmX = ListView1(Index).ListItems.Add
         
         ItmX.Checked = True
         ItmX.Text = " " ' Rs.Fields(0).Value
-        ItmX.SubItems(1) = Rs.Fields(1).Value
-        ItmX.SubItems(2) = Rs.Fields(0).Value
-        Rs.MoveNext
+        ItmX.SubItems(1) = RS.Fields(1).Value
+        ItmX.SubItems(2) = RS.Fields(0).Value
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
