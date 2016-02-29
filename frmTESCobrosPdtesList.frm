@@ -1717,6 +1717,10 @@ Private Sub Form_Load()
         txtFecha(1).Text = RecuperaValor(Legalizacion, 3)
     End If
     
+    optVarios(0).Value = True
+    optVarios(3).Value = True
+    
+    
 End Sub
 
 
@@ -2150,13 +2154,41 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "Select factcli.numserie Serie, tmpfaclin.nomserie Descripcion, factcli.numfactu Factura, factcli.fecfactu Fecha, factcli.codmacta Cuenta, factcli.nommacta Titulo, tmpfaclin.tipoformapago TipoPago, "
-    SQL = SQL & " tmpfaclin.tipoopera TOperacion, factcli.codconce340 TFra, factcli.trefaccl Retencion, "
-    SQL = SQL & " factcli_totales.baseimpo BaseImp,factcli_totales.codigiva IVA,factcli_totales.porciva PorcIva,factcli_totales.porcrec PorcRec,factcli_totales.impoiva ImpIva,factcli_totales.imporec ImpRec "
-    SQL = SQL & " FROM (factcli inner join factcli_totales on factcli.numserie = factcli_totales.numserie and factcli.numfactu = factcli_totales.numfactu and factcli.fecfactu = factcli_totales.fecfactu) "
-    SQL = SQL & " inner join tmpfaclin ON factcli.numserie=tmpfaclin.numserie AND factcli.numfactu=tmpfaclin.Numfac and factcli.fecfactu=tmpfaclin.Fecha "
-    SQL = SQL & " WHERE  tmpfaclin.codusu = 22000 "
-    SQL = SQL & " ORDER BY factcli.codmacta, factcli.nommacta, factcli_totales.numlinea "
+    SQL = "Select cobros.codmacta Cliente, cobros.nomclien Nombre, cobros.fecfactu FFactura, cobros.fecvenci FVenci, "
+    SQL = SQL & " cobros.numorden Orden, cobros.gastos Gastos, cobros.impcobro Cobrado, cobros.impvenci ImpVenci, "
+    SQL = SQL & " concat(cobros.numserie,' ', concat('0000000',cobros.numfactu)) Factura , cobros.codforpa FPago, "
+    SQL = SQL & " formapago.nomforpa Descripcion, cobros.referencia Referenciasa, tipofpago.descformapago Tipo "
+    
+    If optVarios(0).Value Or optVarios(1).Value Then
+        SQL = SQL & ", cobros.noremesar NoRemesar, cobros.situacionjuri SitJuridica, cobros.Devuelto Devuelto, cobros.recedocu Recepcion, cobros.observa Observaciones "
+    End If
+    
+    SQL = SQL & " FROM (cobros inner join formapago on cobros.codforpa = formapago.codforpa) "
+    SQL = SQL & " inner join tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
+    If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
+            
+            
+    If optVarios(0).Value Then
+        If optVarios(3).Value Then SQL2 = SQL2 & " cobros.codmacta"
+        If optVarios(4).Value Then SQL2 = SQL2 & " cobros.nomclien"
+    End If
+    
+    If optVarios(1).Value Then
+        SQL2 = SQL2 & " cobros.FecVenci"
+        
+        If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
+        If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
+    End If
+
+    If optVarios(2).Value Then
+        SQL2 = SQL2 & " tipofpago.descformapago"
+        
+        If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
+        If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
+    End If
+
+    SQL = SQL & " ORDER BY " & SQL2
+
             
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text

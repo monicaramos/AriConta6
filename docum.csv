@@ -1,0 +1,4 @@
+"Cliente";"Nombre";"FFactura";"FVenci";"Orden";"Gastos";"Cobrado";"ImpVenci";"Factura";"FPago";"Descripcion";"Referenciasa";"Tipo";"NoRemesar";"SitJuridica";"Devuelto";"Recepcion";"Observaciones"
+"430000001";"VIT. DE LA POBLA DEL DUC, COOP";"08/02/2016";"09/03/2016";"1";"";"1045,25";"1122,5";"A 00000001";"2";"EFECTO A 30 DIAS";"";"RECIBO BANCARIO";"0";"0";"0";"0";""
+"430000001";"VIT. DE LA POBLA DEL DUC, COOP";"08/02/2016";"10/03/2016";"2";"";"";"87,5";"A 00000001";"1";"CONTADO";"";"EFECTIVO";"0";"0";"0";"0";""
+"430000001";"VIT. DE LA POBLA DEL DUC, COOP";"31/10/2015";"30/11/2015";"1";"";"1000";"1000";"Z 00000001";"2";"EFECTO A 30 DIAS";"";"RECIBO BANCARIO";"0";"0";"0";"0";""
