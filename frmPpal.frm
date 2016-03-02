@@ -1083,15 +1083,12 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 603 ' impresion de recibos
             frmTESImpRecibo.Show vbModal
         Case 604 ' realizar cobro
-            With frmTESVerCobrosPagos
+            With frmTESRealizarCobros
                 .ImporteGastosTarjeta_ = 10 '--Importe
-                .OrdenacionEfectos = 1 '--CByte(I)
                 '--.vSQL = SQL
-                .OrdenarEfecto = True
                 .Regresar = False
                 .ContabTransfer = False
                 .Cobros = True
-                .Tipo = 1 '--SubTipo
                 .SegundoParametro = ""
                 'Los textos
 '                .vTextos = Text1(2).Text & "|" & Me.txtCta(0).Text & " - " & Me.txtDescCta(0).Text & "|" & SubTipo & "|"

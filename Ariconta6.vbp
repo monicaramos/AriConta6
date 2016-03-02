@@ -172,6 +172,7 @@ Module=modRecaudacionEjecutiva; modRecaudacionEjecutiva.bas
 Form=frmTESParciales.frm
 Form=frmTESImpRecibo.frm
 Form=frmTESCobrosPdtesList.frm
+Form=frmTESRealizarCobros.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
