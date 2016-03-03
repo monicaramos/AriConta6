@@ -343,10 +343,10 @@ Attribute frmFPago.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
-Private SQL As String
-Dim Cad As String
+Private Sql As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -407,7 +407,7 @@ Private Sub cmdAccion_Click(Index As Integer)
         AccionesCrystal
     End If
     
-    If Not EstaReciboImpreso Then
+    If ReciboSinImprimir Then
         If MsgBox("¿ Impresión correcta para actualizar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
             ActualizarRegistro
         End If
@@ -415,35 +415,39 @@ Private Sub cmdAccion_Click(Index As Integer)
     
 End Sub
 
-Private Function EstaReciboImpreso() As Boolean
-Dim SQL As String
+Private Function ReciboSinImprimir() As Boolean
+Dim Sql As String
 
-    SQL = " select impreso from cobros_realizados where "
-    SQL = SQL & " numserie = " & DBSet(pNumSerie, "T")
-    SQL = SQL & " and numfactu = " & DBSet(pNumFactu, "N")
-    SQL = SQL & " and fecfactu = " & DBSet(pFecFactu, "F")
-    SQL = SQL & " and numorden = " & DBSet(pNumOrden, "N")
-    SQL = SQL & " and numlinea = " & DBSet(pNumlinea, "N")
+    Sql = " select count(*) from cobros_realizados aa , tmppendientes tt where "
+    Sql = Sql & " tt.codusu = " & vUsu.Codigo
+    Sql = Sql & " and aa.numserie = tt.serie_cta "
+    Sql = Sql & " and aa.numfactu = tt.importe "
+    Sql = Sql & " and aa.fecfactu = tt.fecha "
+    Sql = Sql & " and aa.numorden = tt.numorden "
+    Sql = Sql & " and aa.numlinea = tt.codforpa "
+    Sql = Sql & " and aa.impreso = 0 "
     
-    EstaReciboImpreso = (DevuelveValor(SQL) = 1)
+    ReciboSinImprimir = (TotalRegistros(Sql) > 0)
     
 
 End Function
 
 
 Private Sub ActualizarRegistro()
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
 
-    SQL = "update cobros_realizados set impreso = 1 where "
-    SQL = SQL & " numserie = " & DBSet(pNumSerie, "T")
-    SQL = SQL & " and numfactu = " & DBSet(pNumFactu, "N")
-    SQL = SQL & " and fecfactu = " & DBSet(pFecFactu, "F")
-    SQL = SQL & " and numorden = " & DBSet(pNumOrden, "N")
-    SQL = SQL & " and numlinea = " & DBSet(pNumlinea, "N")
-
-    Conn.Execute SQL
+    Sql = "update cobros_realizados aa, tmppendientes tt set aa.impreso = 1 where "
+    Sql = Sql & " tt.codusu = " & vUsu.Codigo
+    Sql = Sql & " and aa.numserie = tt.serie_cta "
+    Sql = Sql & " and aa.numfactu = tt.importe "
+    Sql = Sql & " and aa.fecfactu = tt.fecha "
+    Sql = Sql & " and aa.numorden = tt.numorden "
+    Sql = Sql & " and aa.numlinea = tt.codforpa "
+    Sql = Sql & " and aa.impreso = 0 "
+    
+    Conn.Execute Sql
 
 End Sub
 
@@ -485,7 +489,12 @@ Private Sub Form_Load()
         .Buttons(1).Image = 26
     End With
      
-    Label3(0).Caption = "Factura: " & pNumSerie & "-" & Format(pNumFactu, "0000000") & "  de " & pFecFactu & " Vencimiento No." & pNumOrden
+     
+    If pNumSerie <> "" Then
+        Label3(0).Caption = "Factura: " & pNumSerie & "-" & Format(pNumFactu, "0000000") & "  de " & pFecFactu & " Vencimiento No." & pNumOrden
+    Else
+        Label3(0).Caption = ""
+    End If
     
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
@@ -538,10 +547,10 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = ""
+    Sql = ""
             
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -561,13 +570,13 @@ Dim nomDocu As String
     cadNomRPT = nomDocu ' "Recibo.rpt"
 
     'si se imprime el nif o la cuenta de cliente
-    cadParam = cadParam & "pImporte=" & TransformaComasPuntos(ImporteSinFormato(CStr(pImporte))) & "|"
-    numParam = numParam + 1
-    
-    cadParam = cadParam & "pObserva=""" & EscribeImporteLetra(ImporteFormateado(CStr(pImporte))) & """|"
-    numParam = numParam + 1
-    cadParam = cadParam & "pFecha=""" & pFechaRec & """|"
-    numParam = numParam + 1
+'    cadParam = cadParam & "pImporte=" & TransformaComasPuntos(ImporteSinFormato(CStr(pImporte))) & "|"
+'    numParam = numParam + 1
+'
+'    cadParam = cadParam & "pObserva=""" & EscribeImporteLetra(ImporteFormateado(CStr(pImporte))) & """|"
+'    numParam = numParam + 1
+'    cadParam = cadParam & "pFecha=""" & pFechaRec & """|"
+'    numParam = numParam + 1
     
     ImprimeGeneral
     
@@ -581,16 +590,17 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False
     
-    cadFormula = "{cobros.numserie} = """ & pNumSerie & """ and {cobros.numfactu} = " & pNumFactu & " and {cobros.fecfactu} = Date(" & Year(pFecFactu) & "," & Month(pFecFactu) & "," & Day(pFecFactu) & ") and {cobros.numorden} = " & pNumOrden
+'    cadFormula = "{cobros.numserie} = """ & pNumSerie & """ and {cobros.numfactu} = " & pNumFactu & " and {cobros.fecfactu} = Date(" & Year(pFecFactu) & "," & Month(pFecFactu) & "," & Day(pFecFactu) & ") and {cobros.numorden} = " & pNumOrden
+    cadFormula = "{tmppendientes.codusu} = " & vUsu.Codigo
     MontaSQL = True
 End Function
 

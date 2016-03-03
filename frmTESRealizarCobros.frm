@@ -5,11 +5,11 @@ Begin VB.Form frmTESRealizarCobros
    ClientHeight    =   8115
    ClientLeft      =   120
    ClientTop       =   345
-   ClientWidth     =   14625
+   ClientWidth     =   15240
    Icon            =   "frmTESRealizarCobros.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   8115
-   ScaleWidth      =   14625
+   ScaleWidth      =   15240
    StartUpPosition =   2  'CenterScreen
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   750
@@ -38,18 +38,35 @@ Begin VB.Form frmTESRealizarCobros
       EndProperty
    End
    Begin VB.Frame frame 
-      Height          =   2235
+      Height          =   2325
       Left            =   90
       TabIndex        =   6
       Top             =   90
-      Width           =   14445
+      Width           =   14895
       Begin VB.Frame FrameRemesar 
          BorderStyle     =   0  'None
          Height          =   1905
          Left            =   120
          TabIndex        =   13
          Top             =   240
-         Width           =   14205
+         Width           =   14685
+         Begin VB.CheckBox chkImprimir 
+            Caption         =   "Imprimir Recibos"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Left            =   11460
+            TabIndex        =   35
+            Top             =   1560
+            Width           =   2175
+         End
          Begin VB.TextBox Text3 
             Alignment       =   1  'Right Justify
             BeginProperty Font 
@@ -66,7 +83,7 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   9960
             TabIndex        =   33
             Text            =   "0000000000"
-            Top             =   960
+            Top             =   990
             Width           =   1305
          End
          Begin VB.CheckBox chkGenerico 
@@ -84,7 +101,7 @@ Begin VB.Form frmTESRealizarCobros
             Index           =   2
             Left            =   8520
             TabIndex        =   32
-            Top             =   1500
+            Top             =   1560
             Width           =   2775
          End
          Begin VB.ComboBox Combo1 
@@ -124,7 +141,7 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   1260
             TabIndex        =   5
             Text            =   "0000000000"
-            Top             =   1410
+            Top             =   1470
             Width           =   1305
          End
          Begin VB.TextBox txtDCta 
@@ -145,7 +162,7 @@ Begin VB.Form frmTESRealizarCobros
             Locked          =   -1  'True
             TabIndex        =   28
             Text            =   "Text2"
-            Top             =   960
+            Top             =   1020
             Width           =   5745
          End
          Begin VB.TextBox txtCta 
@@ -164,7 +181,7 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   1260
             TabIndex        =   4
             Text            =   "0000000000"
-            Top             =   960
+            Top             =   1020
             Width           =   1305
          End
          Begin VB.TextBox Text3 
@@ -210,14 +227,14 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   60
             TabIndex        =   24
             Top             =   30
-            Width           =   1665
+            Width           =   1335
             Begin MSComctlLib.Toolbar Toolbar1 
                Height          =   330
                Left            =   240
                TabIndex        =   25
                Top             =   180
-               Width           =   1215
-               _ExtentX        =   2143
+               Width           =   825
+               _ExtentX        =   1455
                _ExtentY        =   582
                ButtonWidth     =   609
                ButtonHeight    =   582
@@ -225,12 +242,8 @@ Begin VB.Form frmTESRealizarCobros
                Style           =   1
                _Version        =   393216
                BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-                  NumButtons      =   2
+                  NumButtons      =   1
                   BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                     Object.ToolTipText     =   "Imprimir"
-                     Object.Tag             =   "2"
-                  EndProperty
-                  BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                      Object.ToolTipText     =   "Contabilizar"
                      Object.Tag             =   "2"
                      Object.Width           =   1e-4
@@ -344,7 +357,7 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   2670
             TabIndex        =   14
             Text            =   "Text3"
-            Top             =   1410
+            Top             =   1470
             Width           =   5745
          End
          Begin VB.TextBox Text3 
@@ -381,7 +394,7 @@ Begin VB.Form frmTESRealizarCobros
             Index           =   3
             Left            =   8760
             TabIndex        =   34
-            Top             =   990
+            Top             =   1020
             Width           =   1065
          End
          Begin VB.Label Label2 
@@ -424,14 +437,14 @@ Begin VB.Form frmTESRealizarCobros
             Height          =   240
             Index           =   1
             Left            =   960
-            Top             =   1470
+            Top             =   1530
             Width           =   240
          End
          Begin VB.Image imgCuentas 
             Height          =   240
             Index           =   0
             Left            =   960
-            Top             =   990
+            Top             =   1050
             Width           =   240
          End
          Begin VB.Label Label2 
@@ -449,7 +462,7 @@ Begin VB.Form frmTESRealizarCobros
             Index           =   6
             Left            =   60
             TabIndex        =   29
-            Top             =   960
+            Top             =   1020
             Width           =   855
          End
          Begin VB.Label Label2 
@@ -524,7 +537,7 @@ Begin VB.Form frmTESRealizarCobros
          Begin VB.Image Image1 
             Height          =   240
             Index           =   1
-            Left            =   13800
+            Left            =   14310
             ToolTipText     =   "AYUDA"
             Top             =   60
             Width           =   240
@@ -532,7 +545,7 @@ Begin VB.Form frmTESRealizarCobros
          Begin VB.Image imgCheck 
             Height          =   240
             Index           =   1
-            Left            =   13770
+            Left            =   14310
             MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESRealizarCobros.frx":7D00
             ToolTipText     =   "Seleccionar todos"
@@ -542,7 +555,7 @@ Begin VB.Form frmTESRealizarCobros
          Begin VB.Image imgCheck 
             Height          =   240
             Index           =   0
-            Left            =   13380
+            Left            =   13920
             MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESRealizarCobros.frx":7E4A
             ToolTipText     =   "Quitar seleccion"
@@ -582,7 +595,7 @@ Begin VB.Form frmTESRealizarCobros
             Index           =   0
             Left            =   60
             TabIndex        =   15
-            Top             =   1440
+            Top             =   1500
             Width           =   885
          End
       End
@@ -614,7 +627,6 @@ Begin VB.Form frmTESRealizarCobros
          TabIndex        =   17
          Text            =   "Text2"
          Top             =   60
-         Visible         =   0   'False
          Width           =   2055
       End
       Begin VB.TextBox Text2 
@@ -679,7 +691,6 @@ Begin VB.Form frmTESRealizarCobros
          Left            =   3780
          TabIndex        =   18
          Top             =   120
-         Visible         =   0   'False
          Width           =   1560
       End
       Begin VB.Label Label2 
@@ -727,9 +738,9 @@ Begin VB.Form frmTESRealizarCobros
       Height          =   5025
       Left            =   90
       TabIndex        =   7
-      Top             =   2430
-      Width           =   14475
-      _ExtentX        =   25532
+      Top             =   2490
+      Width           =   14925
+      _ExtentX        =   26326
       _ExtentY        =   8864
       View            =   3
       LabelEdit       =   1
@@ -824,7 +835,7 @@ Private WithEvents frmCCtas As frmColCtas
 Attribute frmCCtas.VB_VarHelpID = -1
 
 Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim Fecha As Date
 Dim Importe As Currency
@@ -929,7 +940,7 @@ Dim Vencimientos As Integer
     If GastosTransferencia <> 0 Then
         cad = DevuelveDesdeBD("ctagastos", "ctabancaria", "codmacta", Text3(1).Tag, "T")
         If cad = "" Then
-            MsgBox "Falta configurar la cuenta de gastos del banco:" & RS!codmacta, vbExclamation
+            MsgBox "Falta configurar la cuenta de gastos del banco:" & Rs!codmacta, vbExclamation
             Exit Sub
         End If
         
@@ -1296,7 +1307,7 @@ Dim TipoAnt As Integer
         
                EliminarCobroPago I
               
-              ListView1.ListItems.Remove I
+               ListView1.ListItems.Remove I
                 
             End If
         Next I
@@ -1375,14 +1386,11 @@ Dim EsCobroTarjetaNavarres As Boolean
         Exit Sub
     End If
     
-    
-    
     'IMPRIMIMOS
     Screen.MousePointer = vbHourglass
     
     If Cobros Then
     
-   
             If GenerarRecibos2 Then
                 'textoherecibido
                 DevuelveCadenaPorTipo True, cad
@@ -1704,8 +1712,7 @@ Private Sub Form_Load()
          .HotImageList = frmPpal.imgListComun_OM
          .DisabledImageList = frmPpal.imgListComun_BN
          .ImageList = frmPpal.imgListComun
-         .Buttons(1).Image = 16
-         .Buttons(2).Image = 30
+         .Buttons(1).Image = 30
      End With
      
      Text3(0).Text = Format(Now, "dd/mm/yyyy")
@@ -1924,7 +1931,7 @@ On Error GoTo ECargando
     Screen.MousePointer = vbHourglass
     
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
 '    Fecha = CDate(Text1.Text)
     ListView1.ListItems.Clear
     Importe = 0
@@ -1954,7 +1961,7 @@ ECargando:
 '    Text2(3).Text = Format(RiesTalPag, FormatoImporte)
     Me.MousePointer = vbDefault
     Screen.MousePointer = vbDefault
-    Set RS = Nothing
+    Set Rs = Nothing
 End Sub
 
 Private Sub CargaCobros()
@@ -1970,12 +1977,12 @@ Dim Inserta As Boolean
     If CampoOrden <> "cobros.fecvenci" Then cad = cad & ", cobros.fecvenci"
     
     
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         Inserta = True
-        If RS!tipoformapago = vbTipoPagoRemesa Then
+        If Rs!tipoformapago = vbTipoPagoRemesa Then
             
-        ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
+        ElseIf Rs!tipoformapago = vbTalon Or Rs!tipoformapago = vbPagare Then
         
         End If
         
@@ -1985,9 +1992,9 @@ Dim Inserta As Boolean
             
             
         End If  'de insertar
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 End Sub
 
 
@@ -1998,52 +2005,52 @@ Dim ImpAux As Currency
 
     Set ItmX = ListView1.ListItems.Add()
     
-    ItmX.Text = RS!NUmSerie
-    ItmX.SubItems(1) = RS!NumFactu
-    ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
-    ItmX.SubItems(3) = Format(RS!FecVenci, "dd/mm/yyyy")
-    ItmX.SubItems(4) = RS!numorden
-    ItmX.SubItems(5) = RS!nommacta
-    ItmX.SubItems(6) = RS!siglas
+    ItmX.Text = Rs!NUmSerie
+    ItmX.SubItems(1) = Rs!NumFactu
+    ItmX.SubItems(2) = Format(Rs!FecFactu, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(Rs!FecVenci, "dd/mm/yyyy")
+    ItmX.SubItems(4) = Rs!numorden
+    ItmX.SubItems(5) = Rs!Nommacta
+    ItmX.SubItems(6) = Rs!siglas
     
-    ItmX.SubItems(7) = Format(RS!ImpVenci, FormatoImporte)
-    vImporte = DBLet(RS!Gastos, "N")
+    ItmX.SubItems(7) = Format(Rs!ImpVenci, FormatoImporte)
+    vImporte = DBLet(Rs!Gastos, "N")
     
     'Gastos
     ItmX.SubItems(8) = Format(vImporte, FormatoImporte)
-    vImporte = vImporte + RS!ImpVenci
+    vImporte = vImporte + Rs!ImpVenci
     
-    If Not IsNull(RS!impcobro) Then
-        ItmX.SubItems(9) = Format(RS!impcobro, FormatoImporte)
-        impo = vImporte - RS!impcobro
+    If Not IsNull(Rs!impcobro) Then
+        ItmX.SubItems(9) = Format(Rs!impcobro, FormatoImporte)
+        impo = vImporte - Rs!impcobro
         ItmX.SubItems(10) = Format(impo, FormatoImporte)
     Else
         impo = vImporte
         ItmX.SubItems(9) = "0.00"
         ItmX.SubItems(10) = Format(vImporte, FormatoImporte)
     End If
-    If RS!tipoformapago = vbTipoPagoRemesa Then
+    If Rs!tipoformapago = vbTipoPagoRemesa Then
         '81--->
         'asc("Q") =81
-        If Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 81 Then
+        If Asc(Right(" " & DBLet(Rs!siturem, "T"), 1)) = 81 Then
             riesgo = riesgo + vImporte
         Else
            ' Stop
         End If
     
-    ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
-            If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
-            If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!impcobro, "N")
+    ElseIf Rs!tipoformapago = vbTalon Or Rs!tipoformapago = vbPagare Then
+'            If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
+            If Rs!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(Rs!impcobro, "N")
     End If
     
-    If RS!tipoformapago = vbTarjeta Then
+    If Rs!tipoformapago = vbTarjeta Then
         'Si tiene el parametro y le ha puesto valor
         If vParamT.IntereseCobrosTarjeta > 0 And ImporteGastosTarjeta_ > 0 Then
             DiasDif = 0
-            If RS!FecVenci < Fecha Then DiasDif = DateDiff("d", RS!FecVenci, Fecha)
+            If Rs!FecVenci < Fecha Then DiasDif = DateDiff("d", Rs!FecVenci, Fecha)
             If DiasDif > 0 Then
                 'Si ya tenia gastos.
-                If DBLet(RS!Gastos, "N") > 0 Then
+                If DBLet(Rs!Gastos, "N") > 0 Then
                     MsgBox "Ya tenia gastos", vbExclamation
                     ItmX.ListSubItems(8).Bold = True
                     ItmX.ListSubItems(8).ForeColor = vbRed
@@ -2055,13 +2062,13 @@ Dim ImpAux As Currency
                 impo = impo + ImpAux
                 ItmX.SubItems(10) = Format(impo, FormatoImporte)
                 'La de gastos
-                ImpAux = DBLet(RS!Gastos, "N") + ImpAux
+                ImpAux = DBLet(Rs!Gastos, "N") + ImpAux
                 ItmX.SubItems(8) = Format(ImpAux, FormatoImporte)
             End If
             
         End If
     End If
-    If RS!FecVenci < Fecha Then
+    If Rs!FecVenci < Fecha Then
         'LO DEBE
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
@@ -2070,10 +2077,10 @@ Dim ImpAux As Currency
     End If
     Importe = Importe + impo
     
-    ItmX.Tag = RS!codmacta
+    ItmX.Tag = Rs!codmacta
     
     If Tipo = 1 And SegundoParametro <> "" Then
-        If Not IsNull(RS!transfer) Then
+        If Not IsNull(Rs!transfer) Then
             ItmX.Checked = True
             ImpSeleccionado = ImpSeleccionado + impo
         End If
@@ -2102,24 +2109,28 @@ Dim cad As String
 
     
     'Forma de pago
-    If Combo1.ListIndex >= 0 Then
-    
+    If Me.txtCta(5).Text <> "" Then
+        'Los de un cliente solamente
         If vSQL <> "" Then vSQL = vSQL & " AND "
-        vSQL = vSQL & " formapago.tipforpa = " & Combo1.ItemData(Combo1.ListIndex)    'SubTipo
-    
-        If Me.txtCta(5).Text <> "" Then
-            'Los de un cliente solamente
+        vSQL = vSQL & " cobros.codmacta = '" & txtCta(5).Text & "'"
+        
+        If vSQL <> "" Then vSQL = vSQL & " AND "
+        vSQL = vSQL & " ((formapago.tipforpa in (" & vbTalon & "," & vbPagare & ") and cobros.codrem is null) or not formapago.tipforpa in (" & vbTalon & "," & vbPagare & "))"
+    Else
+        If Combo1.ListIndex >= 0 Then
             If vSQL <> "" Then vSQL = vSQL & " AND "
-            vSQL = vSQL & " cobros.codmacta = '" & txtCta(5).Text & "'"
+            vSQL = vSQL & " formapago.tipforpa = " & Combo1.ItemData(Combo1.ListIndex)    'SubTipo
+        
+            'Si son talones o pagares, NO deben estar remesados
+            If Combo1.ItemData(Combo1.ListIndex) = vbTalon Or Combo1.ItemData(Combo1.ListIndex) = vbPagare Then
+                vSQL = vSQL & " AND (codrem is null )"
+            End If
         End If
+    End If
+
     
         
-        'Si son talones o pagares, NO deben estar remesados
-        If Combo1.ItemData(Combo1.ListIndex) = vbTalon Or Combo1.ItemData(Combo1.ListIndex) = vbPagare Then
-            vSQL = vSQL & " AND (codrem is null )"
-        End If
-        
-    End If
+    
     
     ' no entran a jugar los recibos
     If vSQL <> "" Then vSQL = vSQL & " and formapago.tipforpa <> " & vbTipoPagoRemesa
@@ -2167,12 +2178,12 @@ Private Sub CargaPagos()
     If CampoOrden <> "pagos.fecefect" Then cad = cad & ", pagos.fecefect"
 
 
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         InsertaItemPago
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 End Sub
 
@@ -2181,23 +2192,23 @@ Private Sub InsertaItemPago()
 Dim J As Byte
         Set ItmX = ListView1.ListItems.Add()
         
-        ItmX.Text = RS!NumFactu
-        ItmX.SubItems(1) = Format(RS!FecFactu, "dd/mm/yyyy")
-        ItmX.SubItems(2) = Format(RS!Fecefect, "dd/mm/yyyy")
-        ItmX.SubItems(3) = RS!numorden
-        ItmX.SubItems(4) = RS!nommacta
-        ItmX.SubItems(5) = RS!siglas
-        ItmX.SubItems(6) = Format(RS!ImpEfect, FormatoImporte)
-        If Not IsNull(RS!imppagad) Then
-            ItmX.SubItems(7) = Format(RS!imppagad, FormatoImporte)
-            impo = RS!ImpEfect - RS!imppagad
+        ItmX.Text = Rs!NumFactu
+        ItmX.SubItems(1) = Format(Rs!FecFactu, "dd/mm/yyyy")
+        ItmX.SubItems(2) = Format(Rs!Fecefect, "dd/mm/yyyy")
+        ItmX.SubItems(3) = Rs!numorden
+        ItmX.SubItems(4) = Rs!Nommacta
+        ItmX.SubItems(5) = Rs!siglas
+        ItmX.SubItems(6) = Format(Rs!ImpEfect, FormatoImporte)
+        If Not IsNull(Rs!imppagad) Then
+            ItmX.SubItems(7) = Format(Rs!imppagad, FormatoImporte)
+            impo = Rs!ImpEfect - Rs!imppagad
             ItmX.SubItems(8) = Format(impo, FormatoImporte)
         Else
-            impo = RS!ImpEfect
+            impo = Rs!ImpEfect
             ItmX.SubItems(7) = "0.00"
             ItmX.SubItems(8) = ItmX.SubItems(6)
         End If
-        If RS!Fecefect < Fecha Then
+        If Rs!Fecefect < Fecha Then
             'LO DEBE
             ItmX.SmallIcon = 1
             Vencido = Vencido + impo
@@ -2206,26 +2217,26 @@ Dim J As Byte
         End If
         
         If Tipo = 1 Then
-            If Not IsNull(RS!transfer) Then
+            If Not IsNull(Rs!transfer) Then
                 ItmX.Checked = True
                 ImpSeleccionado = ImpSeleccionado + impo
             End If
         End If
         'El tag lo utilizo para la cta proveedor
-        ItmX.Tag = RS!ctaprove
+        ItmX.Tag = Rs!ctaprove
         
         Importe = Importe + impo
         
         
         
         'Si el documento estaba emitido ya
-        If Val(RS!emitdocum) = 1 Then
+        If Val(Rs!emitdocum) = 1 Then
             'Tiene marcado DOCUMENTO EMITIDO
             ItmX.ForeColor = vbRed
             For J = 1 To ListView1.ColumnHeaders.Count - 1
                 ItmX.ListSubItems(J).ForeColor = vbRed
             Next J
-            If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
+            If DBLet(Rs!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
         End If
        
 End Sub
@@ -2300,7 +2311,7 @@ Private Sub imgTraerRestoDatosCliProv_Click()
         
         
     'Auqi
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     cad = ""
     For I = 1 To Me.ListView1.ListItems.Count
         With Me.ListView1.ListItems(I)
@@ -2319,7 +2330,7 @@ Private Sub imgTraerRestoDatosCliProv_Click()
             End If
         End With
     Next
-    Set RS = Nothing
+    Set Rs = Nothing
         
         
     If cad <> "" Then
@@ -2347,13 +2358,13 @@ Private Sub imgTraerRestoDatosCliProv_Click()
     End If
     
     'Hacemos un conteo
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     I = 0
-    RS.Open "SELECT Count(*) " & cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        I = DBLet(RS.Fields(0), "N")
+    Rs.Open "SELECT Count(*) " & cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        I = DBLet(Rs.Fields(0), "N")
     End If
-    RS.Close
+    Rs.Close
     
     If I > 0 Then
         If MsgBox("Se van a añadir " & I & " vencimiento(s) a la lista.    Continuar?", vbQuestion + vbYesNo) <> vbYes Then I = 0
@@ -2373,22 +2384,22 @@ Private Sub imgTraerRestoDatosCliProv_Click()
              cad = "SELECT spagop.*, cuentas.nommacta, stipoformapago.siglas,cuentas.codmacta " & cad
         End If
 
-        RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        While Not RS.EOF
+        While Not Rs.EOF
             If Cobros Then
                 InsertaItemCobro
             Else
                 InsertaItemPago
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
+        Rs.Close
     
     
         
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     Screen.MousePointer = vbDefault
     
 End Sub
@@ -2993,7 +3004,7 @@ Dim RT As ADODB.Recordset
         RT.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RT.EOF Then
             Aux = DBLet(RT.Fields(1), "T")
-            If Aux = "" Then Aux = RT!nommacta
+            If Aux = "" Then Aux = RT!Nommacta
             Aux = "'" & DevNombreSQL(Aux) & "'"
             For SubItemVto = 2 To 5
                 Aux = Aux & ",'" & DevNombreSQL(DBLet(RT.Fields(SubItemVto), "T")) & "'"
@@ -3225,7 +3236,7 @@ Dim ContraPartidaPorLinea As Boolean
 Dim UnAsientoPorCuenta As Boolean
 Dim PonerCuentaGenerica As Boolean
 Dim AgrupaCuenta As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim MiCon As Contadores
 Dim CampoCuenta As String
 Dim CampoFecha As String
@@ -3309,23 +3320,23 @@ Dim LineaUltima As Integer
     'las cuentas son iguales.
     'Ya que al hacer group by ya lo estaran
     cad = Sql & cad
-    Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     'Inicializamos variables
     Fecha = CDate("01/01/1900")
     GeneraAsiento = False
-    While Not RS.EOF
+    While Not Rs.EOF
         'Comprobaciones iniciales
         If UnAsientoPorCuenta Then
             'Para cada linea ira su asiento
             GeneraAsiento = True
             CierraAsiento = True
             If Fecha < CDate("01/01/1950") Then CierraAsiento = False
-            Fecha = CDate(RS.Fields(CampoFecha))
+            Fecha = CDate(Rs.Fields(CampoFecha))
         Else
             'Veremos en funcion de la fecha
             GeneraAsiento = False
-            If CDate(RS.Fields(CampoFecha)) = Fecha Then
+            If CDate(Rs.Fields(CampoFecha)) = Fecha Then
                 'Estamos en la misma fecha. Luego sera el mismo asiento
                 'Excepto que asi no lo digan las variables
                 If Not PonerCuentaGenerica Then
@@ -3341,7 +3352,7 @@ Dim LineaUltima As Integer
                 CierraAsiento = True
                 If Fecha < CDate("01/01/1950") Then CierraAsiento = False
         
-                Fecha = CDate(RS.Fields(CampoFecha))
+                Fecha = CDate(Rs.Fields(CampoFecha))
             End If
         End If 'de aseinto por cuenta
         
@@ -3353,25 +3364,25 @@ Dim LineaUltima As Integer
         If CierraAsiento Then
             'Tirar atras el RS
             If Not ContraPartidaPorLinea Then
-                RS.MovePrevious
-                Fecha = CDate(RS.Fields(CampoFecha))  'Para la fecha de asiento
+                Rs.MovePrevious
+                Fecha = CDate(Rs.Fields(CampoFecha))  'Para la fecha de asiento
                 impo = ImpBanco
                 'Generamos las lineas de apunte que faltan
-                InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
                 
                 'Inserto para que actalice             3: Opcion para INSERT INTO tmpactualizar
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
                 
                 'Reestauramos variables
                 NumVtos = 0
                 'Ponemos la variable
                 CierraAsiento = False
                 'Volvemos el RS al sitio
-                RS.MoveNext
-                Fecha = CDate(RS.Fields(CampoFecha))
+                Rs.MoveNext
+                Fecha = CDate(Rs.Fields(CampoFecha))
             Else
                 'Inserto para que actalice             3: Opcion para INSERT INTO tmpactualizar
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
             End If
         End If
  
@@ -3382,7 +3393,7 @@ Dim LineaUltima As Integer
             MiCon.ConseguirContador "0", Fecha <= vParam.fechafin, True
                         
             'Genero la cabecera
-            InsertarEnAsientosDesdeTemp RS, MiCon, 0, NumLinea, NumVtos
+            InsertarEnAsientosDesdeTemp Rs, MiCon, 0, NumLinea, NumVtos
             
             NumLinea = 1
             ImpBanco = 0
@@ -3407,38 +3418,38 @@ Dim LineaUltima As Integer
         
     
         'Para el cobro /pago  que tendremos en la fila actual del recordset
-        impo = RS!Importe
-        InsertarEnAsientosDesdeTemp RS, MiCon, 1, NumLinea, RS!NumVtos
+        impo = Rs!Importe
+        InsertarEnAsientosDesdeTemp Rs, MiCon, 1, NumLinea, Rs!NumVtos
     
         If Cobros Then
-            riesgo = riesgo + RS!Gastos
+            riesgo = riesgo + Rs!Gastos
         Else
             riesgo = 0
         End If
-        ImpBanco = ImpBanco + RS!Importe
+        ImpBanco = ImpBanco + Rs!Importe
         NumLinea = NumLinea + 1
         
         'Si tengo que generar la contrapartida
         If ContraPartidaPorLinea Then
-            NumVtos = RS!NumVtos
-            InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+            NumVtos = Rs!NumVtos
+            InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
             NumLinea = NumLinea + 1
             ImpBanco = 0
             riesgo = 0
         Else
-            NumVtos = NumVtos + RS!NumVtos
+            NumVtos = NumVtos + Rs!NumVtos
         End If
         
         'Nos movemos
-        RS.MoveNext
+        Rs.MoveNext
         
         
-        If RS.EOF Then
+        If Rs.EOF Then
             
             If Not ContraPartidaPorLinea Then
                 
                 'Era la ultima linea.
-                RS.MovePrevious
+                Rs.MovePrevious
                 
                 LineaUltima = NumLinea
                 
@@ -3449,7 +3460,7 @@ Dim LineaUltima As Integer
                     If Not GastosTransDescontados Then NumLinea = 1
                 End If
                 impo = ImpBanco
-                InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
     
                 If GastosTransferencia <> 0 Then
                     If Not GastosTransDescontados Then
@@ -3457,7 +3468,7 @@ Dim LineaUltima As Integer
                 
                         impo = GastosTransferencia
                         
-                        InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+                        InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
                     End If
                 End If
     
@@ -3465,19 +3476,19 @@ Dim LineaUltima As Integer
     
     
                 'CIERRO EL APUNTE
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
                 
                 'Y vuelvo a ponerlo ande tocaba. Para que se salga del bucle
-                RS.MoveNext
+                Rs.MoveNext
                 
             Else
                 'Cada linea de asiento tiene su banco
                 'Faltara insertarlo en tmpactualizar
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
             End If
         End If
     Wend
-    RS.Close
+    Rs.Close
     
     
     
@@ -3502,17 +3513,17 @@ Dim LineaUltima As Integer
         
         cad = " select sum(imponible-total),'" & CStr(ImporteGastosTarjeta_) & "' as cliprov, 'LLEV.BANCO||' as cliente"
         cad = cad & " from tmpfaclin WHERE codusu = " & vUsu.Codigo & " group by codusu"
-        RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Err.Number = 0 Then
-            If Not RS.EOF Then
-                impo = RS.Fields(0)
+            If Not Rs.EOF Then
+                impo = Rs.Fields(0)
                 NumLinea = NumLinea + 1
-                InsertarEnAsientosDesdeTemp RS, MiCon, 1, NumLinea, 1
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 1, NumLinea, 1
                 
                 If Err.Number = 0 Then
                 
                     NumLinea = NumLinea + 1
-                    InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, 1
+                    InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, 1
                     
                     If Err.Number <> 0 Then
                         MuestraError Err.Number, "Cuadre llevar banco"
@@ -3523,7 +3534,7 @@ Dim LineaUltima As Integer
                     AgrupaCuenta = True
                 End If
             End If
-            RS.Close
+            Rs.Close
         Else
             AgrupaCuenta = True
         End If
@@ -3540,7 +3551,7 @@ Dim LineaUltima As Integer
         End If
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
 End Sub
@@ -5396,7 +5407,7 @@ Dim FVto As Date
                         cad = "Select nommacta,razosoci,dirdatos,codposta,despobla,desprovi,obsdatos from cuentas where codmacta ='" & Cta & "'"
                         miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         'NO PUEDE SER EOF
-                        cad = miRsAux!nommacta
+                        cad = miRsAux!Nommacta
                         If Not IsNull(miRsAux!razosoci) Then cad = miRsAux!razosoci
                         cad = "'" & DevNombreSQL(cad) & "'"
                         'Direccion
@@ -5500,17 +5511,17 @@ End Function
 Private Function ComprobarCuentasBloquedasYFechasVencimientos() As Boolean
     ComprobarCuentasBloquedasYFechasVencimientos = False
     On Error GoTo EComprobarCuentasBloquedasYFechasVencimientos
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
 
     cad = "select codmacta,nommacta,numfac,fecha,fecbloq,cliente from tmpfaclin,cuentas where codusu=" & vUsu.Codigo & " and cta=codmacta and not (fecbloq is null )"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
-    While Not RS.EOF
-        If CDate(RS!NumFac) > RS!FecBloq Then cad = cad & RS!codmacta & "    " & RS!FecBloq & "     " & Format(RS!NumFac, "dd/mm/yyyy") & Space(15) & RecuperaValor(RS!Cliente, 1) & vbCrLf
-        RS.MoveNext
+    While Not Rs.EOF
+        If CDate(Rs!NumFac) > Rs!FecBloq Then cad = cad & Rs!codmacta & "    " & Rs!FecBloq & "     " & Format(Rs!NumFac, "dd/mm/yyyy") & Space(15) & RecuperaValor(Rs!Cliente, 1) & vbCrLf
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 
     If cad <> "" Then
@@ -5523,7 +5534,7 @@ Private Function ComprobarCuentasBloquedasYFechasVencimientos() As Boolean
     End If
 EComprobarCuentasBloquedasYFechasVencimientos:
     If Err.Number <> 0 Then MuestraError Err.Number
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -5738,37 +5749,37 @@ End Sub
 Private Sub AjustarFechaVencimientoDesdeFicheroBancario()
 Dim Fin As Boolean
     'Para cada item buscare en la tabla from tmpconext  WHERE codusu
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     '(numserie ,codfaccl,fecfaccl,numorden )
     cad = "select ccost,pos,nomdocum,numdiari,fechaent from tmpconext  WHERE codusu =" & vUsu.Codigo & " and numasien=0 "
     cad = cad & " ORDER BY 1,2,3,4"
-    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Rs.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     cad = ""
-    If RS.EOF Then
+    If Rs.EOF Then
         cad = "NINGUN VENCIMIENTO"
     Else
     For I = 1 To Me.ListView1.ListItems.Count
         Fin = False
-        RS.MoveFirst
+        Rs.MoveFirst
         With ListView1.ListItems(I)
             
             While Not Fin
                 'Buscamos el registro... DEBERIA ESTAR
-                If RS!CCost = .Text Then
-                    If RS!Pos = .SubItems(1) Then
-                        If Format(RS!Nomdocum, "dd/mm/yyyy") = .SubItems(2) Then
-                            If RS!numdiari = .SubItems(4) Then
+                If Rs!CCost = .Text Then
+                    If Rs!Pos = .SubItems(1) Then
+                        If Format(Rs!Nomdocum, "dd/mm/yyyy") = .SubItems(2) Then
+                            If Rs!numdiari = .SubItems(4) Then
                                 'Le pongo como fecha de vto la fecha del cobro del fichero
                                 Fin = True
-                                .SubItems(3) = Format(RS!fechaent)
+                                .SubItems(3) = Format(Rs!fechaent)
                                 .Checked = True
                             End If
                         End If
                     End If
                 End If
                 If Not Fin Then
-                    RS.MoveNext
-                    If RS.EOF Then
+                    Rs.MoveNext
+                    If Rs.EOF Then
                         'Ha llegado al final, y no lo ha encotrado
                         cad = cad & "     " & .Text & .SubItems(1) & "  -  " & .SubItems(2) & vbCrLf
                         'Para que vuelva al ppio
@@ -5779,13 +5790,13 @@ Dim Fin As Boolean
         End With
     Next
     End If
-    RS.Close
+    Rs.Close
     
     If cad <> "" Then
         cad = cad & vbCrLf & "El programa continuara con la fecha de vencimiento"
         MsgBox "No se ha encotrado la fecha de cobro para los siguientes vencimientos:" & vbCrLf & cad, vbExclamation
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
 End Sub
 
 
@@ -5813,8 +5824,6 @@ End Sub
 Private Sub HacerToolBar(ButtonIndex As Integer)
     Select Case ButtonIndex
         Case 1
-            Imprimir
-        Case 2
             Generar2
     End Select
 End Sub
