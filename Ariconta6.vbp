@@ -173,6 +173,7 @@ Form=frmTESParciales.frm
 Form=frmTESImpRecibo.frm
 Form=frmTESCobrosPdtesList.frm
 Form=frmTESRealizarCobros.frm
+Form=frmTESRefTalon.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
