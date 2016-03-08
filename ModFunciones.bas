@@ -206,7 +206,7 @@ End Function
 
 Private Function ValorParaSQL(Valor, ByRef vTag As CTag) As String
 Dim Dev As String
-Dim d As Single
+Dim D As Single
 Dim I As Integer
 Dim V
     Dev = ""
@@ -257,7 +257,7 @@ Public Function InsertarDesdeForm(ByRef formulario As Form) As Boolean
     Dim mTag As CTag
     Dim Izda As String
     Dim Der As String
-    Dim Cad As String
+    Dim cad As String
     
     On Error GoTo EInsertarF
     'Exit Function
@@ -278,9 +278,9 @@ Public Function InsertarDesdeForm(ByRef formulario As Form) As Boolean
                         Izda = Izda & "" & mTag.Columna & ""
                     
                         'Parte VALUES
-                        Cad = ValorParaSQL(Control.Text, mTag)
+                        cad = ValorParaSQL(Control.Text, mTag)
                         If Der <> "" Then Der = Der & ","
-                        Der = Der & Cad
+                        Der = Der & cad
                     End If
                 End If
             End If
@@ -293,13 +293,13 @@ Public Function InsertarDesdeForm(ByRef formulario As Form) As Boolean
                 'Izda = Izda & "[" & mTag.Columna & "]"
                 Izda = Izda & "" & mTag.Columna & ""
                 If Control.Value = 1 Then
-                    Cad = "1"
+                    cad = "1"
                     Else
-                    Cad = "0"
+                    cad = "0"
                 End If
                 If Der <> "" Then Der = Der & ","
-                If mTag.TipoDato = "N" Then Cad = Abs(CBool(Cad))
-                Der = Der & Cad
+                If mTag.TipoDato = "N" Then cad = Abs(CBool(cad))
+                Der = Der & cad
             End If
         'COMBO BOX
         ElseIf TypeOf Control Is ComboBox Then
@@ -310,12 +310,12 @@ Public Function InsertarDesdeForm(ByRef formulario As Form) As Boolean
                     'Izda = Izda & "[" & mTag.Columna & "]"
                     Izda = Izda & "" & mTag.Columna & ""
                     If Control.ListIndex = -1 Then
-                        Cad = ValorNulo
+                        cad = ValorNulo
                         Else
-                        Cad = Control.ItemData(Control.ListIndex)
+                        cad = Control.ItemData(Control.ListIndex)
                     End If
                     If Der <> "" Then Der = Der & ","
-                    Der = Der & Cad
+                    Der = Der & cad
                 End If
             End If
         End If
@@ -324,11 +324,11 @@ Public Function InsertarDesdeForm(ByRef formulario As Form) As Boolean
     'Ejemplo
     'INSERT INTO Empleados (Nombre,Apellido, Cargo) VALUES ('Carlos', 'Sesma', 'Prácticas');
     
-    Cad = "INSERT INTO " & mTag.tabla
-    Cad = Cad & " (" & Izda & ") VALUES (" & Der & ");"
+    cad = "INSERT INTO " & mTag.tabla
+    cad = cad & " (" & Izda & ") VALUES (" & Der & ");"
     
    
-    Conn.Execute Cad, , adCmdText
+    Conn.Execute cad, , adCmdText
     
     
     InsertarDesdeForm = True
@@ -343,7 +343,7 @@ Dim Control As Object
 Dim mTag As CTag
 Dim Izda As String
 Dim Der As String
-Dim Cad As String
+Dim cad As String
     
     On Error GoTo EInsertarF
     
@@ -368,9 +368,9 @@ Dim Cad As String
                             Izda = Izda & "" & mTag.Columna & ""
                         
                             'Parte VALUES
-                            Cad = ValorParaSQL(Control.Text, mTag)
+                            cad = ValorParaSQL(Control.Text, mTag)
                             If Der <> "" Then Der = Der & ","
-                            Der = Der & Cad
+                            Der = Der & cad
                         End If
                     End If
                 End If
@@ -386,13 +386,13 @@ Dim Cad As String
                     'Izda = Izda & "[" & mTag.Columna & "]"
                     Izda = Izda & "" & mTag.Columna & ""
                     If Control.Value = 1 Then
-                        Cad = "1"
+                        cad = "1"
                         Else
-                        Cad = "0"
+                        cad = "0"
                     End If
                     If Der <> "" Then Der = Der & ","
-                    If mTag.TipoDato = "N" Then Cad = Abs(CBool(Cad))
-                    Der = Der & Cad
+                    If mTag.TipoDato = "N" Then cad = Abs(CBool(cad))
+                    Der = Der & cad
                 End If
             End If
             
@@ -406,14 +406,14 @@ Dim Cad As String
                         'Izda = Izda & "[" & mTag.Columna & "]"
                         Izda = Izda & "" & mTag.Columna & ""
                         If Control.ListIndex = -1 Then
-                            Cad = ValorNulo
+                            cad = ValorNulo
                         ElseIf mTag.TipoDato = "N" Then
-                            Cad = Control.ItemData(Control.ListIndex)
+                            cad = Control.ItemData(Control.ListIndex)
                         Else
-                            Cad = ValorParaSQL(Control.List(Control.ListIndex), mTag)
+                            cad = ValorParaSQL(Control.List(Control.ListIndex), mTag)
                         End If
                         If Der <> "" Then Der = Der & ","
-                        Der = Der & Cad
+                        Der = Der & cad
                     End If
                 End If
             End If
@@ -427,9 +427,9 @@ Dim Cad As String
                         If Control.Value Then
                             If Izda <> "" Then Izda = Izda & ","
                             Izda = Izda & "" & mTag.Columna & ""
-                            Cad = Control.Index
+                            cad = Control.Index
                             If Der <> "" Then Der = Der & ","
-                            Der = Der & Cad
+                            Der = Der & cad
                         End If
                     End If
                 End If
@@ -442,12 +442,12 @@ Dim Cad As String
     'Ejemplo
     'INSERT INTO Empleados (Nombre,Apellido, Cargo) VALUES ('Carlos', 'Sesma', 'Prácticas');
     
-    Cad = "INSERT INTO " & mTag.tabla
-    Cad = Cad & " (" & Izda & ") VALUES (" & Der & ");"
-    Conn.Execute Cad, , adCmdText
+    cad = "INSERT INTO " & mTag.tabla
+    cad = cad & " (" & Izda & ") VALUES (" & Der & ");"
+    Conn.Execute cad, , adCmdText
     
      ' ### [Monica] 18/12/2006
-    CadenaCambio = Cad
+    CadenaCambio = cad
    
     InsertarDesdeForm2 = True
 Exit Function
@@ -462,7 +462,7 @@ End Function
 Public Function PonerCamposForma(ByRef formulario As Form, ByRef vData As Adodc) As Boolean
     Dim Control As Object
     Dim mTag As CTag
-    Dim Cad As String
+    Dim cad As String
     Dim Valor As Variant
     Dim Campo As String  'Campo en la base de datos
     Dim I As Integer
@@ -490,11 +490,11 @@ Public Function PonerCamposForma(ByRef formulario As Form, ByRef vData As Adodc)
                             If mTag.TipoDato = "N" Then
                                 'Es numerico, entonces formatearemos y sustituiremos
                                 ' La coma por el punto
-                                Cad = Format(Valor, mTag.Formato)
+                                cad = Format(Valor, mTag.Formato)
                                 'Antiguo
                                 'Control.Text = TransformaComasPuntos(cad)
                                 'nuevo
-                                Control.Text = Cad
+                                Control.Text = cad
                             Else
                                 Control.Text = Format(Valor, mTag.Formato)
                             End If
@@ -552,7 +552,7 @@ End Function
 Public Function PonerCamposForma2(ByRef formulario As Form, ByRef vData As Adodc, Optional opcio As Integer, Optional nom_frame As String) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 Dim Valor As Variant
 Dim Campo As String  'Campo en la base de datos
 Dim I As Integer
@@ -580,11 +580,11 @@ Dim I As Integer
                                 If mTag.TipoDato = "N" Then
                                     'Es numerico, entonces formatearemos y sustituiremos
                                     ' La coma por el punto
-                                    Cad = Format(Valor, mTag.Formato)
+                                    cad = Format(Valor, mTag.Formato)
                                     'Antiguo
                                     'Control.Text = TransformaComasPuntos(cad)
                                     'nuevo
-                                    Control.Text = Cad
+                                    Control.Text = cad
                                 Else
                                     Control.Text = Format(Valor, mTag.Formato)
                                 End If
@@ -684,8 +684,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
     Dim Control As Object
     Dim Carga As Boolean
     Dim mTag As CTag
-    Dim AUX As String
-    Dim Cad As String
+    Dim Aux As String
+    Dim cad As String
     Dim SQL As String
     Dim tabla As String
     Dim RC As Byte
@@ -700,16 +700,16 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
         If TypeOf Control Is TextBox Then
-            AUX = Trim(Control.Text)
-            If AUX = ">>" Or AUX = "<<" Then
+            Aux = Trim(Control.Text)
+            If Aux = ">>" Or Aux = "<<" Then
                 Carga = mTag.Cargar(Control)
                 If Carga Then
-                    If AUX = ">>" Then
-                        Cad = " MAX(" & mTag.Columna & ")"
+                    If Aux = ">>" Then
+                        cad = " MAX(" & mTag.Columna & ")"
                     Else
-                        Cad = " MIN(" & mTag.Columna & ")"
+                        cad = " MIN(" & mTag.Columna & ")"
                     End If
-                    SQL = "Select " & Cad & " from " & mTag.tabla
+                    SQL = "Select " & cad & " from " & mTag.tabla
                     SQL = ObtenerMaximoMinimo(SQL)
                     Select Case mTag.TipoDato
                     Case "N"
@@ -730,9 +730,9 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
     'Recorremos los text en busca del NULL
     For Each Control In formulario.Controls
         If TypeOf Control Is TextBox Then
-            AUX = Trim(Control.Text)
+            Aux = Trim(Control.Text)
             'If Control.Text <> "" Then Stop
-            If UCase(AUX) = "NULL" Then
+            If UCase(Aux) = "NULL" Then
                 Carga = mTag.Cargar(Control)
                 If Carga Then
 
@@ -753,18 +753,18 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
             'Cargamos el tag
             Carga = mTag.Cargar(Control)
             If Carga Then
-                AUX = Trim(Control.Text)
+                Aux = Trim(Control.Text)
                 'If Control.Text <> "" Then Stop
-                If AUX <> "" Then
+                If Aux <> "" Then
                     If mTag.tabla <> "" Then
                         tabla = mTag.tabla & "."
                         Else
                         tabla = ""
                     End If
-                    RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.Columna, AUX, Cad)
+                    RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.Columna, Aux, cad)
                     If RC = 0 Then
                         If SQL <> "" Then SQL = SQL & " AND "
-                        SQL = SQL & "(" & Cad & ")"
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             Else
@@ -779,10 +779,10 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
             mTag.Cargar Control
             If mTag.Cargado Then
                 If Control.ListIndex > -1 Then
-                    Cad = Control.ItemData(Control.ListIndex)
-                    Cad = mTag.tabla & "." & mTag.Columna & " = " & Cad
+                    cad = Control.ItemData(Control.ListIndex)
+                    cad = mTag.tabla & "." & mTag.Columna & " = " & cad
                     If SQL <> "" Then SQL = SQL & " AND "
-                    SQL = SQL & "(" & Cad & ")"
+                    SQL = SQL & "(" & cad & ")"
                 End If
             End If
         
@@ -793,9 +793,9 @@ Public Function ObtenerBusqueda(ByRef formulario As Form) As String
                 mTag.Cargar Control
                 If mTag.Cargado Then
                     If Control.Value = 1 Then
-                        Cad = mTag.tabla & "." & mTag.Columna & " = 1"
+                        cad = mTag.tabla & "." & mTag.Columna & " = 1"
                         If SQL <> "" Then SQL = SQL & " AND "
-                        SQL = SQL & "(" & Cad & ")"
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             End If
@@ -815,8 +815,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     Dim Control As Object
     Dim Carga As Boolean
     Dim mTag As CTag
-    Dim AUX As String
-    Dim Cad As String
+    Dim Aux As String
+    Dim cad As String
     Dim SQL As String
     Dim tabla As String
     Dim RC As Byte
@@ -831,17 +831,17 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
         If TypeOf Control Is TextBox Then
-            AUX = Trim(Control.Text)
-            If AUX = ">>" Or AUX = "<<" Then
+            Aux = Trim(Control.Text)
+            If Aux = ">>" Or Aux = "<<" Then
                 Carga = mTag.Cargar(Control)
                 If Carga Then
                     If (opcio = 0) Or ((opcio = 1) And (InStr(1, Control.Container.Name, "FrameAux")) = 0) Or ((opcio = 2) And (Control.Container.Name = nom_frame)) Then
-                        If AUX = ">>" Then
-                            Cad = " MAX(" & mTag.Columna & ")"
+                        If Aux = ">>" Then
+                            cad = " MAX(" & mTag.Columna & ")"
                         Else
-                            Cad = " MIN(" & mTag.Columna & ")"
+                            cad = " MIN(" & mTag.Columna & ")"
                         End If
-                        SQL = "Select " & Cad & " from " & mTag.tabla
+                        SQL = "Select " & cad & " from " & mTag.tabla
                         SQL = ObtenerMaximoMinimo(SQL)
                         Select Case mTag.TipoDato
                         Case "N"
@@ -863,8 +863,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     'Recorremos los text en busca del NULL
     For Each Control In formulario.Controls
         If TypeOf Control Is TextBox Then
-            AUX = Trim(Control.Text)
-            If UCase(AUX) = "NULL" Then
+            Aux = Trim(Control.Text)
+            If UCase(Aux) = "NULL" Then
                 Carga = mTag.Cargar(Control)
                 If Carga Then
 
@@ -884,17 +884,17 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
             Carga = mTag.Cargar(Control)
             If Carga Then
                 If (opcio = 0) Or ((opcio = 1) And (InStr(1, Control.Container.Name, "FrameAux")) = 0) Or ((opcio = 2) And (Control.Container.Name = nom_frame)) Then
-                    AUX = Trim(Control.Text)
-                    If AUX <> "" Then
+                    Aux = Trim(Control.Text)
+                    If Aux <> "" Then
                         If mTag.tabla <> "" Then
                             tabla = mTag.tabla & "."
                             Else
                             tabla = ""
                         End If
-                        RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.Columna, AUX, Cad)
+                        RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.Columna, Aux, cad)
                         If RC = 0 Then
                             If SQL <> "" Then SQL = SQL & " AND "
-                            SQL = SQL & "(" & Cad & ")"
+                            SQL = SQL & "(" & cad & ")"
                         End If
                     End If
                 End If
@@ -912,10 +912,10 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                 If mTag.Cargado Then
                     If (opcio = 0) Or ((opcio = 1) And (InStr(1, Control.Container.Name, "FrameAux")) = 0) Or ((opcio = 2) And (Control.Container.Name = nom_frame)) Then
                         If Control.ListIndex > -1 Then
-                            Cad = Control.ItemData(Control.ListIndex)
-                            Cad = mTag.tabla & "." & mTag.Columna & " = " & Cad
+                            cad = Control.ItemData(Control.ListIndex)
+                            cad = mTag.tabla & "." & mTag.Columna & " = " & cad
                             If SQL <> "" Then SQL = SQL & " AND "
-                            SQL = SQL & "(" & Cad & ")"
+                            SQL = SQL & "(" & cad & ")"
                         End If
                     End If
                 End If
@@ -927,21 +927,21 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                 mTag.Cargar Control
                 If mTag.Cargado Then
                     ' añadido 12022007
-                    AUX = ""
+                    Aux = ""
                     If CHECK <> "" Then
                         tabla = DBLet(Control.Index, "T")
                         If tabla <> "" Then tabla = "(" & tabla & ")"
                         tabla = Control.Name & tabla & "|"
-                        If InStr(1, CHECK, tabla, vbTextCompare) > 0 Then AUX = Control.Value
+                        If InStr(1, CHECK, tabla, vbTextCompare) > 0 Then Aux = Control.Value
                     Else
-                        If Control.Value = 1 Then AUX = "1"
+                        If Control.Value = 1 Then Aux = "1"
                     End If
-                    If AUX <> "" Then
+                    If Aux <> "" Then
 '                    If Control.Value = 1 Then
-                        Cad = Control.Value
-                        Cad = mTag.tabla & "." & mTag.Columna & " = " & Cad
+                        cad = Control.Value
+                        cad = mTag.tabla & "." & mTag.Columna & " = " & cad
                         If SQL <> "" Then SQL = SQL & " AND "
-                        SQL = SQL & "(" & Cad & ")"
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             End If
@@ -960,14 +960,14 @@ End Function
 Public Function ModificaDesdeFormulario(ByRef formulario As Form) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim AUX As String
+Dim Aux As String
 Dim CadWhere As String
 Dim cadUPDATE As String
 
 On Error GoTo EModificaDesdeFormulario
     ModificaDesdeFormulario = False
     Set mTag = New CTag
-    AUX = ""
+    Aux = ""
     CadWhere = ""
     For Each Control In formulario.Controls
         'Si es texto monta esta parte de sql
@@ -978,17 +978,17 @@ On Error GoTo EModificaDesdeFormulario
                 If mTag.Cargado Then
                     If mTag.Columna <> "" Then
                         'Sea para el where o para el update esto lo necesito
-                        AUX = ValorParaSQL(Control.Text, mTag)
+                        Aux = ValorParaSQL(Control.Text, mTag)
                         'Si es campo clave NO se puede modificar y se utiliza como busqueda
                         'dentro del WHERE
                         If mTag.EsClave Then
                             'Lo pondremos para el WHERE
                              If CadWhere <> "" Then CadWhere = CadWhere & " AND "
-                             CadWhere = CadWhere & "(" & mTag.Columna & " = " & AUX & ")"
+                             CadWhere = CadWhere & "(" & mTag.Columna & " = " & Aux & ")"
                              
                         Else
                             If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
-                            cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                            cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                         End If
                     End If
                 End If
@@ -999,15 +999,15 @@ On Error GoTo EModificaDesdeFormulario
             If Control.Tag <> "" Then
                 mTag.Cargar Control
                 If Control.Value = 1 Then
-                    AUX = "TRUE"
+                    Aux = "TRUE"
                     Else
-                    AUX = "FALSE"
+                    Aux = "FALSE"
                 End If
-                If mTag.TipoDato = "N" Then AUX = Abs(CBool(AUX))
+                If mTag.TipoDato = "N" Then Aux = Abs(CBool(Aux))
                 If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
                 'Esta es para access
                 'cadUPDATE = cadUPDATE & "[" & mTag.Columna & "] = " & aux
-                cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
             End If
             
         ElseIf TypeOf Control Is ComboBox Then
@@ -1015,13 +1015,13 @@ On Error GoTo EModificaDesdeFormulario
                 mTag.Cargar Control
                 If mTag.Cargado Then
                     If Control.ListIndex = -1 Then
-                        AUX = ValorNulo
+                        Aux = ValorNulo
                         Else
-                        AUX = Control.ItemData(Control.ListIndex)
+                        Aux = Control.ItemData(Control.ListIndex)
                     End If
                     If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
                     'cadUPDATE = cadUPDATE & "[" & mTag.Columna & "] = " & aux
-                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                 End If
             End If
         End If
@@ -1036,9 +1036,9 @@ On Error GoTo EModificaDesdeFormulario
         MsgBox "No se ha definido ninguna clave principal.", vbExclamation
         Exit Function
     End If
-    AUX = "UPDATE " & mTag.tabla
-    AUX = AUX & " SET " & cadUPDATE & " WHERE " & CadWhere
-    Conn.Execute AUX, , adCmdText
+    Aux = "UPDATE " & mTag.tabla
+    Aux = Aux & " SET " & cadUPDATE & " WHERE " & CadWhere
+    Conn.Execute Aux, , adCmdText
 
 
 
@@ -1052,14 +1052,14 @@ End Function
 Public Function ModificaDesdeFormulario2(ByRef formulario As Form, Optional opcio As Integer, Optional nom_frame As String) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim AUX As String
+Dim Aux As String
 Dim CadWhere As String
 Dim cadUPDATE As String
 
 On Error GoTo EModificaDesdeFormulario
     ModificaDesdeFormulario2 = False
     Set mTag = New CTag
-    AUX = ""
+    Aux = ""
     CadWhere = ""
     For Each Control In formulario.Controls
         'Si es texto monta esta parte de sql
@@ -1070,17 +1070,17 @@ On Error GoTo EModificaDesdeFormulario
                     If mTag.Cargado Then
                         If mTag.Columna <> "" Then
                             'Sea para el where o para el update esto lo necesito
-                            AUX = ValorParaSQL(Control.Text, mTag)
+                            Aux = ValorParaSQL(Control.Text, mTag)
                             'Si es campo clave NO se puede modificar y se utiliza como busqueda
                             'dentro del WHERE
                             If mTag.EsClave Then
                                 'Lo pondremos para el WHERE
                                  If CadWhere <> "" Then CadWhere = CadWhere & " AND "
-                                 CadWhere = CadWhere & "(" & mTag.Columna & " = " & AUX & ")"
+                                 CadWhere = CadWhere & "(" & mTag.Columna & " = " & Aux & ")"
     
                             Else
                                 If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
-                                cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                                cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                             End If
                         End If
                     End If
@@ -1093,15 +1093,15 @@ On Error GoTo EModificaDesdeFormulario
                 If (opcio = 0) Or ((opcio = 1) And (InStr(1, Control.Container.Name, "FrameAux")) = 0) Or ((opcio = 2) And (Control.Container.Name = nom_frame)) Then
                     mTag.Cargar Control
                     If Control.Value = 1 Then
-                        AUX = "TRUE"
+                        Aux = "TRUE"
                     Else
-                        AUX = "FALSE"
+                        Aux = "FALSE"
                     End If
-                    If mTag.TipoDato = "N" Then AUX = Abs(CBool(AUX))
+                    If mTag.TipoDato = "N" Then Aux = Abs(CBool(Aux))
                     If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
                     'Esta es para access
                     'cadUPDATE = cadUPDATE & "[" & mTag.Columna & "] = " & aux
-                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                 End If
             End If
 
@@ -1111,11 +1111,11 @@ On Error GoTo EModificaDesdeFormulario
                     mTag.Cargar Control
                     If mTag.Cargado Then
                         If Control.ListIndex = -1 Then
-                            AUX = ValorNulo
+                            Aux = ValorNulo
                         ElseIf mTag.TipoDato = "N" Then
-                            AUX = Control.ItemData(Control.ListIndex)
+                            Aux = Control.ItemData(Control.ListIndex)
                         Else
-                            AUX = ValorParaSQL(Control.List(Control.ListIndex), mTag)
+                            Aux = ValorParaSQL(Control.List(Control.ListIndex), mTag)
                         End If
                         
                         'Si es campo clave NO se puede modificar y se utiliza como busqueda
@@ -1123,10 +1123,10 @@ On Error GoTo EModificaDesdeFormulario
                         If mTag.EsClave Then
                             'Lo pondremos para el WHERE
                              If CadWhere <> "" Then CadWhere = CadWhere & " AND "
-                             CadWhere = CadWhere & "(" & mTag.Columna & " = " & AUX & ")"
+                             CadWhere = CadWhere & "(" & mTag.Columna & " = " & Aux & ")"
                         Else
                             If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
-                            cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                            cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                         End If
 '
 '
@@ -1143,16 +1143,16 @@ On Error GoTo EModificaDesdeFormulario
                     mTag.Cargar Control
                     If mTag.Cargado Then
                         If Control.Value Then
-                            AUX = Control.Index
+                            Aux = Control.Index
                             'Si es campo clave NO se puede modificar y se utiliza como busqueda
                             'dentro del WHERE
                               If mTag.EsClave Then
                                   'Lo pondremos para el WHERE
                                    If CadWhere <> "" Then CadWhere = CadWhere & " AND "
-                                   CadWhere = CadWhere & "(" & mTag.Columna & " = " & AUX & ")"
+                                   CadWhere = CadWhere & "(" & mTag.Columna & " = " & Aux & ")"
                               Else
                                   If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
-                                  cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                                  cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                               End If
                         End If
                     End If
@@ -1171,9 +1171,9 @@ On Error GoTo EModificaDesdeFormulario
         MsgBox "No se ha definido ninguna clave principal.", vbExclamation
         Exit Function
     End If
-    AUX = "UPDATE " & mTag.tabla
-    AUX = AUX & " SET " & cadUPDATE & " WHERE " & CadWhere
-    Conn.Execute AUX, , adCmdText
+    Aux = "UPDATE " & mTag.tabla
+    Aux = Aux & " SET " & cadUPDATE & " WHERE " & CadWhere
+    Conn.Execute Aux, , adCmdText
 
     ' ### [Monica] 18/12/2006
     CadenaCambio = cadUPDATE
@@ -1191,12 +1191,12 @@ End Function
 
 Public Function ParaGrid(ByRef Control As Control, AnchoPorcentaje As Integer, Optional Desc As String) As String
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 
 'Montamos al final: "Cod Diag.|idDiag|N|10·"
 
 ParaGrid = ""
-Cad = ""
+cad = ""
 Set mTag = New CTag
 mTag.Cargar Control
 If mTag.Cargado Then
@@ -1204,14 +1204,14 @@ If mTag.Cargado Then
         'Si es texto monta esta parte de sql
         If TypeOf Control Is TextBox Then
             If Desc <> "" Then
-                Cad = Desc
+                cad = Desc
             Else
-                Cad = mTag.Nombre
+                cad = mTag.Nombre
             End If
-            Cad = Cad & "|"
-            Cad = Cad & mTag.Columna & "|"
-            Cad = Cad & mTag.TipoDato & "|"
-            Cad = Cad & AnchoPorcentaje & "·"
+            cad = cad & "|"
+            cad = cad & mTag.Columna & "|"
+            cad = cad & mTag.TipoDato & "|"
+            cad = cad & AnchoPorcentaje & "·"
             
                 
         'CheckBOX
@@ -1223,7 +1223,7 @@ If mTag.Cargado Then
         End If 'De los elseif
     End If
 Set mTag = Nothing
-ParaGrid = Cad
+ParaGrid = cad
 End If
 
 
@@ -1235,20 +1235,20 @@ End Function
 'de busqueda el sql para situar despues el datasource
 Public Function ValorDevueltoFormGrid(ByRef Control As Control, ByRef CadenaDevuelta As String, Orden As Integer) As String
 Dim mTag As CTag
-Dim Cad As String
-Dim AUX As String
+Dim cad As String
+Dim Aux As String
 'Montamos al final: " columnatabla = valordevuelto "
 
 ValorDevueltoFormGrid = ""
-Cad = ""
+cad = ""
 Set mTag = New CTag
 mTag.Cargar Control
 If mTag.Cargado Then
     If Control.Tag <> "" Then
         'Si es texto monta esta parte de sql
         If TypeOf Control Is TextBox Then
-            AUX = RecuperaValor(CadenaDevuelta, Orden)
-            If AUX <> "" Then Cad = mTag.Columna & " = " & ValorParaSQL(AUX, mTag)
+            Aux = RecuperaValor(CadenaDevuelta, Orden)
+            If Aux <> "" Then cad = mTag.Columna & " = " & ValorParaSQL(Aux, mTag)
                 
             
             
@@ -1263,22 +1263,22 @@ If mTag.Cargado Then
     End If
 End If
 Set mTag = Nothing
-ValorDevueltoFormGrid = Cad
+ValorDevueltoFormGrid = cad
 End Function
 
 
 Public Sub FormateaCampo(vTex As TextBox)
     Dim mTag As CTag
-    Dim Cad As String
+    Dim cad As String
     On Error GoTo EFormateaCampo
     Set mTag = New CTag
     mTag.Cargar vTex
     If mTag.Cargado Then
         If vTex.Text <> "" Then
             If mTag.Formato <> "" Then
-                Cad = TransformaPuntosComas(vTex.Text)
-                Cad = Format(Cad, mTag.Formato)
-                vTex.Text = Cad
+                cad = TransformaPuntosComas(vTex.Text)
+                cad = Format(cad, mTag.Formato)
+                vTex.Text = cad
             End If
         End If
     End If
@@ -1294,24 +1294,24 @@ Public Function RecuperaValor(ByRef CADENA As String, Orden As Integer) As Strin
 Dim I As Integer
 Dim J As Integer
 Dim CONT As Integer
-Dim Cad As String
+Dim cad As String
 
 I = 0
 CONT = 1
-Cad = ""
+cad = ""
 Do
     J = I + 1
     I = InStr(J, CADENA, "|")
     If I > 0 Then
         If CONT = Orden Then
-            Cad = Mid(CADENA, J, I - J)
+            cad = Mid(CADENA, J, I - J)
             I = Len(CADENA) 'Para salir del bucle
             Else
                 CONT = CONT + 1
         End If
     End If
 Loop Until I = 0
-RecuperaValor = Cad
+RecuperaValor = cad
 End Function
 
 
@@ -1321,17 +1321,17 @@ Public Function InsertaValor(ByRef CADENA As String, Orden As Integer, SubCadena
 Dim I As Integer
 Dim J As Integer
 Dim CONT As Integer
-Dim Cad As String
+Dim cad As String
 Dim Cad2 As String
 I = 0
 CONT = 1
-Cad = ""
+cad = ""
 Do
     J = I + 1
     I = InStr(J, CADENA, "|")
     If I > 0 Then
         If CONT = Orden Then
-            Cad = Mid(CADENA, J, I - J)
+            cad = Mid(CADENA, J, I - J)
             
             Cad2 = Mid(CADENA, 1, J - 1) & SubCadena & Mid(CADENA, I, Len(CADENA))
             
@@ -1409,7 +1409,7 @@ End Sub
 Public Function ModificaDesdeFormularioClaves(ByRef formulario As Form, Claves As String) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim AUX As String
+Dim Aux As String
 Dim CadWhere As String
 Dim cadUPDATE As String
 Dim I As Integer
@@ -1417,7 +1417,7 @@ Dim I As Integer
 On Error GoTo EModificaDesdeFormulario
     ModificaDesdeFormularioClaves = False
     Set mTag = New CTag
-    AUX = ""
+    Aux = ""
     CadWhere = ""
     For Each Control In formulario.Controls
         'Si es texto monta esta parte de sql
@@ -1426,10 +1426,10 @@ On Error GoTo EModificaDesdeFormulario
                 mTag.Cargar Control
                 If mTag.Cargado Then
                     'Sea para el where o para el update esto lo necesito
-                    AUX = ValorParaSQL(Control.Text, mTag)
+                    Aux = ValorParaSQL(Control.Text, mTag)
                     'Si es campo clave NO se puede modificar y se utiliza como busqueda
                     If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
-                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                 End If
             End If
         'CheckBOX
@@ -1438,15 +1438,15 @@ On Error GoTo EModificaDesdeFormulario
             If Control.Tag <> "" Then
                 mTag.Cargar Control
                 If Control.Value = 1 Then
-                    AUX = "TRUE"
+                    Aux = "TRUE"
                     Else
-                    AUX = "FALSE"
+                    Aux = "FALSE"
                 End If
-                If mTag.TipoDato = "N" Then AUX = Abs(CBool(AUX))
+                If mTag.TipoDato = "N" Then Aux = Abs(CBool(Aux))
                 If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
                 'Esta es para access
                 'cadUPDATE = cadUPDATE & "[" & mTag.Columna & "] = " & aux
-                cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
             End If
             
         ElseIf TypeOf Control Is ComboBox Then
@@ -1454,13 +1454,13 @@ On Error GoTo EModificaDesdeFormulario
                 mTag.Cargar Control
                 If mTag.Cargado Then
                     If Control.ListIndex = -1 Then
-                        AUX = ValorNulo
+                        Aux = ValorNulo
                         Else
-                        AUX = Control.ItemData(Control.ListIndex)
+                        Aux = Control.ItemData(Control.ListIndex)
                     End If
                     If cadUPDATE <> "" Then cadUPDATE = cadUPDATE & " , "
                     'cadUPDATE = cadUPDATE & "[" & mTag.Columna & "] = " & aux
-                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & AUX
+                    cadUPDATE = cadUPDATE & "" & mTag.Columna & " = " & Aux
                 End If
             End If
         End If
@@ -1471,9 +1471,9 @@ On Error GoTo EModificaDesdeFormulario
         MsgBox "No se ha definido ninguna clave principal.", vbExclamation
         Exit Function
     End If
-    AUX = "UPDATE " & mTag.tabla
-    AUX = AUX & " SET " & cadUPDATE & " WHERE " & CadWhere
-    Conn.Execute AUX, , adCmdText
+    Aux = "UPDATE " & mTag.tabla
+    Aux = Aux & " SET " & cadUPDATE & " WHERE " & CadWhere
+    Conn.Execute Aux, , adCmdText
 
 
 
@@ -1495,14 +1495,14 @@ End Function
 Public Function BLOQUEADesdeFormulario(ByRef formulario As Form) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim AUX As String
+Dim Aux As String
 Dim CadWhere As String
 Dim AntiguoCursor As Byte
 
 On Error GoTo EBLOQUEADesdeFormulario
     BLOQUEADesdeFormulario = False
     Set mTag = New CTag
-    AUX = ""
+    Aux = ""
     CadWhere = ""
     AntiguoCursor = Screen.MousePointer
     Screen.MousePointer = vbHourglass
@@ -1514,13 +1514,13 @@ On Error GoTo EBLOQUEADesdeFormulario
                 mTag.Cargar Control
                 If mTag.Cargado Then
                     'Sea para el where o para el update esto lo necesito
-                    AUX = ValorParaSQL(Control.Text, mTag)
+                    Aux = ValorParaSQL(Control.Text, mTag)
                     'Si es campo clave NO se puede modificar y se utiliza como busqueda
                     'dentro del WHERE
                     If mTag.EsClave Then
                         'Lo pondremos para el WHERE
                          If CadWhere <> "" Then CadWhere = CadWhere & " AND "
-                         CadWhere = CadWhere & "(" & mTag.Columna & " = " & AUX & ")"
+                         CadWhere = CadWhere & "(" & mTag.Columna & " = " & Aux & ")"
                     End If
                 End If
             End If
@@ -1531,12 +1531,12 @@ On Error GoTo EBLOQUEADesdeFormulario
         MsgBox "No se ha definido ninguna clave principal.", vbExclamation
         
     Else
-        AUX = "select * FROM " & mTag.tabla
-        AUX = AUX & " WHERE " & CadWhere & " FOR UPDATE"
+        Aux = "select * FROM " & mTag.tabla
+        Aux = Aux & " WHERE " & CadWhere & " FOR UPDATE"
         
         'Intenteamos bloquear
         PreparaBloquear
-        Conn.Execute AUX, , adCmdText
+        Conn.Execute Aux, , adCmdText
         BLOQUEADesdeFormulario = True
     End If
 EBLOQUEADesdeFormulario:
@@ -1551,7 +1551,7 @@ End Function
 Public Function BLOQUEADesdeFormulario2(ByRef formulario As Form, ByRef ado As Adodc, Optional opcio As Integer, Optional nom_frame As String) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim AUX As String
+Dim Aux As String
 Dim CadWhere As String
 Dim AntiguoCursor As Byte
 Dim nomcamp As String
@@ -1560,7 +1560,7 @@ Dim nomcamp As String
     
     BLOQUEADesdeFormulario2 = False
     Set mTag = New CTag
-    AUX = ""
+    Aux = ""
     CadWhere = ""
     AntiguoCursor = Screen.MousePointer
     Screen.MousePointer = vbHourglass
@@ -1576,10 +1576,10 @@ Dim nomcamp As String
                         'Si es campo clave NO se puede modificar y se utiliza como busqueda
                         'dentro del WHERE
                         If mTag.EsClave Then
-                            AUX = ValorParaSQL(CStr(ado.Recordset.Fields(mTag.Columna)), mTag)
+                            Aux = ValorParaSQL(CStr(ado.Recordset.Fields(mTag.Columna)), mTag)
                             'Lo pondremos para el WHERE
                              If CadWhere <> "" Then CadWhere = CadWhere & " AND "
-                             CadWhere = CadWhere & "(" & mTag.Columna & " = " & AUX & ")"
+                             CadWhere = CadWhere & "(" & mTag.Columna & " = " & Aux & ")"
                         End If
                     End If
                 End If
@@ -1590,12 +1590,12 @@ Dim nomcamp As String
     If CadWhere = "" Then
         MsgBox "No se ha definido ninguna clave principal.", vbExclamation
     Else
-        AUX = "select * FROM " & mTag.tabla
-        AUX = AUX & " WHERE " & CadWhere & " FOR UPDATE"
+        Aux = "select * FROM " & mTag.tabla
+        Aux = Aux & " WHERE " & CadWhere & " FOR UPDATE"
 
         'Intenteamos bloquear
         PreparaBloquear
-        Conn.Execute AUX, , adCmdText
+        Conn.Execute Aux, , adCmdText
         BLOQUEADesdeFormulario2 = True
     End If
     
@@ -1612,14 +1612,14 @@ End Function
 Public Function BloqueaRegistroForm(ByRef formulario As Form) As Boolean
 Dim Control As Object
 Dim mTag As CTag
-Dim AUX As String
+Dim Aux As String
 Dim AuxDef As String
 Dim AntiguoCursor As Byte
 
 On Error GoTo EBLOQ
     BloqueaRegistroForm = False
     Set mTag = New CTag
-    AUX = ""
+    Aux = ""
     AuxDef = ""
     AntiguoCursor = Screen.MousePointer
     Screen.MousePointer = vbHourglass
@@ -1633,8 +1633,8 @@ On Error GoTo EBLOQ
                     'Si es campo clave NO se puede modificar y se utiliza como busqueda
                     'dentro del WHERE
                     If mTag.EsClave Then
-                        AUX = ValorParaSQL(Control.Text, mTag)
-                        AuxDef = AuxDef & AUX & "|"
+                        Aux = ValorParaSQL(Control.Text, mTag)
+                        AuxDef = AuxDef & Aux & "|"
                     End If
                 End If
             End If
@@ -1645,21 +1645,21 @@ On Error GoTo EBLOQ
         MsgBox "No se ha definido ninguna clave principal.", vbExclamation
         
     Else
-        AUX = "Insert into zBloqueos(codusu,tabla,clave) VALUES(" & vUsu.Codigo & ",'" & mTag.tabla
-        AUX = AUX & "',""" & AuxDef & """)"
-        Conn.Execute AUX
+        Aux = "Insert into zBloqueos(codusu,tabla,clave) VALUES(" & vUsu.Codigo & ",'" & mTag.tabla
+        Aux = Aux & "',""" & AuxDef & """)"
+        Conn.Execute Aux
         BloqueaRegistroForm = True
     End If
 EBLOQ:
     If Err.Number <> 0 Then
-        AUX = ""
+        Aux = ""
         If Conn.Errors.Count > 0 Then
             If Conn.Errors(0).NativeError = 1062 Then
                 '¡Ya existe el registro, luego esta bloqueada
-                AUX = "BLOQUEO"
+                Aux = "BLOQUEO"
             End If
         End If
-        If AUX = "" Then
+        If Aux = "" Then
             MuestraError Err.Number, "Bloqueo tabla"
         Else
             MsgBox "Registro bloqueado por otro usuario", vbExclamation
@@ -1756,6 +1756,14 @@ On Error Resume Next
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
+Public Sub PonerFocoBtn(ByRef Btn As CommandButton)
+    On Error Resume Next
+    Btn.SetFocus
+    If Err.Number <> 0 Then Err.Clear
+End Sub
+
+
+
 Public Sub DeseleccionaGrid(ByRef DataGrid1 As DataGrid)
     On Error GoTo EDeseleccionaGrid
         
@@ -1803,17 +1811,17 @@ End Function
 
 
 Public Function BloqueaRegistro(cadtabla As String, CadWhere As String) As Boolean
-Dim AUX As String
+Dim Aux As String
 
     On Error GoTo EBloqueaRegistro
         
     BloqueaRegistro = False
-    AUX = "select * FROM " & cadtabla
-    AUX = AUX & " WHERE " & CadWhere & " FOR UPDATE"
+    Aux = "select * FROM " & cadtabla
+    Aux = Aux & " WHERE " & CadWhere & " FOR UPDATE"
 
     'Intenteamos bloquear
     PreparaBloquear
-    Conn.Execute AUX, , adCmdText
+    Conn.Execute Aux, , adCmdText
     BloqueaRegistro = True
 
 EBloqueaRegistro:
@@ -1923,7 +1931,7 @@ Public Function DBSet(vData As Variant, Tipo As String, Optional EsNulo As Strin
 '       FH
 '       B
 '       S   single O DOUBLE. sINGLE DE MOMENTO.    MAYO 2009
-Dim Cad As String
+Dim cad As String
 Dim ValorNumericoCero As Boolean
 
     On Error GoTo Error1
@@ -1943,9 +1951,9 @@ Dim ValorNumericoCero As Boolean
                             DBSet = ValorNulo
                         End If
                     Else
-                        Cad = (CStr(vData))
-                        NombreSQL Cad
-                        DBSet = "'" & Cad & "'"
+                        cad = (CStr(vData))
+                        NombreSQL cad
+                        DBSet = "'" & cad & "'"
                     End If
                     
                 Case "N", "S"   'Numero  y  SINGLE
@@ -1973,12 +1981,12 @@ Dim ValorNumericoCero As Boolean
                         End If
                     Else
                         If Tipo = "N" Then
-                            Cad = CStr(ImporteFormateado(CStr(vData)))
+                            cad = CStr(ImporteFormateado(CStr(vData)))
                         Else
                             'Sngle
-                            Cad = CStr(ImporteFormateadoSingle(CStr(vData)))
+                            cad = CStr(ImporteFormateadoSingle(CStr(vData)))
                         End If
-                        DBSet = TransformaComasPuntos(Cad)
+                        DBSet = TransformaComasPuntos(cad)
                     End If
                     
                 Case "F"    'Fecha
@@ -2146,7 +2154,7 @@ End Function
 Public Sub SituarItemList(ByRef LView As ListView)
 'Subir el item seleccionado del listview una posicion
 Dim I As Byte, Item As Byte
-Dim AUX As String
+Dim Aux As String
 On Error Resume Next
    
     For I = 1 To LView.ListItems.Count
@@ -2437,13 +2445,13 @@ Dim RS As ADODB.Recordset
 End Function
 
 Public Function TotalRegistrosConsulta(cadSQL) As Long
-Dim Cad As String
+Dim cad As String
 Dim RS As ADODB.Recordset
 
     On Error GoTo ErrTotReg
-    Cad = "SELECT count(*) FROM (" & cadSQL & ") x"
+    cad = "SELECT count(*) FROM (" & cadSQL & ") x"
     Set RS = New ADODB.Recordset
-    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     If Not RS.EOF Then
         TotalRegistrosConsulta = DBLet(RS.Fields(0).Value, "N")
@@ -2482,8 +2490,8 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, Opcion A
                     Next I
                 
                 Case 3 'para los TXTAUX
-                    For I = 0 To .txtaux.Count - 1
-                        With .txtaux(I)
+                    For I = 0 To .txtAux.Count - 1
+                        With .txtAux(I)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = 0 'tamaño infinito
@@ -2504,8 +2512,8 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, Opcion A
                         End With
                     Next I
                 Case 3 'para los txtAux
-                    For I = 0 To .txtaux.Count - 1
-                        With .txtaux(I)
+                    For I = 0 To .txtAux.Count - 1
+                        With .txtAux(I)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
@@ -2587,7 +2595,7 @@ Public Sub CargarValoresAnteriores(formulario As Form, Optional opcio As Integer
 Dim Control As Object
 Dim mTag As CTag
 Dim Izda As String
-Dim Cad As String
+Dim cad As String
     Set mTag = New CTag
 
     For Each Control In formulario.Controls
@@ -2603,8 +2611,8 @@ Dim Cad As String
                             'Izda = Izda & "[" & mTag.Columna & "]"
                             Izda = Izda & "" & mTag.Columna & " = "
                             'Parte VALUES
-                            Cad = ValorParaSQL(Control.Text, mTag)
-                            Izda = Izda & Cad
+                            cad = ValorParaSQL(Control.Text, mTag)
+                            Izda = Izda & cad
                         End If
                     End If
                 End If
@@ -2621,12 +2629,12 @@ Dim Cad As String
                         'Izda = Izda & "[" & mTag.Columna & "]"
                         Izda = Izda & "" & mTag.Columna & " = "
                         If Control.Value = 1 Then
-                            Cad = "1"
+                            cad = "1"
                             Else
-                            Cad = "0"
+                            cad = "0"
                         End If
-                        If mTag.TipoDato = "N" Then Cad = Abs(CBool(Cad))
-                        Izda = Izda & Cad
+                        If mTag.TipoDato = "N" Then cad = Abs(CBool(cad))
+                        Izda = Izda & cad
                     End If
                 End If
             End If
@@ -2641,13 +2649,13 @@ Dim Cad As String
                         'Izda = Izda & "[" & mTag.Columna & "]"
                         Izda = Izda & "" & mTag.Columna & " = "
                         If Control.ListIndex = -1 Then
-                            Cad = ValorNulo
+                            cad = ValorNulo
                         ElseIf mTag.TipoDato = "N" Then
-                            Cad = Control.ItemData(Control.ListIndex)
+                            cad = Control.ItemData(Control.ListIndex)
                         Else
-                            Cad = ValorParaSQL(Control.List(Control.ListIndex), mTag)
+                            cad = ValorParaSQL(Control.List(Control.ListIndex), mTag)
                         End If
-                        Izda = Izda & Cad
+                        Izda = Izda & cad
                     End If
                 End If
             End If
@@ -2661,8 +2669,8 @@ Dim Cad As String
                         If Control.Value Then
                             If Izda <> "" Then Izda = Izda & " , "
                             Izda = Izda & "" & mTag.Columna & " = "
-                            Cad = Control.Index
-                            Izda = Izda & Cad
+                            cad = Control.Index
+                            Izda = Izda & cad
                         End If
                     End If
                 End If
@@ -2756,15 +2764,15 @@ End Sub
 
 
 Public Function PonerFormatoFecha(ByRef T As TextBox) As Boolean
-Dim Cad As String
+Dim cad As String
 
-    Cad = T.Text
-    If Cad <> "" Then
+    cad = T.Text
+    If cad <> "" Then
         If Not EsFechaOK(T) Then
             MsgBox "Fecha incorrecta. (dd/MM/yyyy)", vbExclamation
-            Cad = "mal"
+            cad = "mal"
         End If
-        If Cad <> "" And Cad <> "mal" Then
+        If cad <> "" And cad <> "mal" Then
 '            T.Text = Cad
             PonerFormatoFecha = True
         Else
