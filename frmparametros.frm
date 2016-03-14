@@ -108,7 +108,7 @@ Begin VB.Form frmparametros
       _ExtentY        =   9393
       _Version        =   393216
       Tabs            =   6
-      Tab             =   2
+      Tab             =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Verdana"
@@ -122,50 +122,50 @@ Begin VB.Form frmparametros
       TabCaption(0)   =   "Datos Generales"
       TabPicture(0)   =   "frmparametros.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Text1(31)"
+      Tab(0).Control(0)=   "Label1(1)"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Text1(17)"
+      Tab(0).Control(1)=   "Label1(0)"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Text1(16)"
+      Tab(0).Control(2)=   "imgFec(0)"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Text1(12)"
+      Tab(0).Control(3)=   "imgFec(1)"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Text1(8)"
+      Tab(0).Control(4)=   "imgFec(2)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Frame6"
+      Tab(0).Control(5)=   "Label1(27)"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Frame5"
+      Tab(0).Control(6)=   "Text1(1)"
       Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Frame4"
+      Tab(0).Control(7)=   "Text1(0)"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Text1(0)"
+      Tab(0).Control(8)=   "Frame4"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "Text1(1)"
+      Tab(0).Control(9)=   "Frame5"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label1(27)"
+      Tab(0).Control(10)=   "Frame6"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "imgFec(2)"
+      Tab(0).Control(11)=   "Text1(8)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "imgFec(1)"
+      Tab(0).Control(12)=   "Text1(12)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "imgFec(0)"
+      Tab(0).Control(13)=   "Text1(16)"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Label1(0)"
+      Tab(0).Control(14)=   "Text1(17)"
       Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Label1(1)"
+      Tab(0).Control(15)=   "Text1(31)"
       Tab(0).Control(15).Enabled=   0   'False
       Tab(0).ControlCount=   16
       TabCaption(1)   =   "Clientes - Proveedores "
       TabPicture(1)   =   "frmparametros.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame2"
+      Tab(1).Control(0)=   "Frame3"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Frame3"
+      Tab(1).Control(1)=   "Frame2"
       Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "I.V.A. - Norma 43"
       TabPicture(2)   =   "frmparametros.frx":0044
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Label1(14)"
       Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Label1(13)"
@@ -186,25 +186,27 @@ Begin VB.Form frmparametros
       TabCaption(3)   =   "Inmovilizado"
       TabPicture(3)   =   "frmparametros.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame7"
-      Tab(3).Control(1)=   "Frame9"
+      Tab(3).Control(0)=   "Frame14"
+      Tab(3).Control(1)=   "Frame15"
       Tab(3).Control(2)=   "Frame16"
-      Tab(3).Control(3)=   "Frame15"
-      Tab(3).Control(4)=   "Frame14"
+      Tab(3).Control(3)=   "Frame9"
+      Tab(3).Control(4)=   "Frame7"
       Tab(3).ControlCount=   5
       TabCaption(4)   =   "Tesorería I"
       TabPicture(4)   =   "frmparametros.frx":007C
-      Tab(4).ControlEnabled=   0   'False
+      Tab(4).ControlEnabled=   -1  'True
       Tab(4).Control(0)=   "Frame66"
+      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).Control(1)=   "FrameValDefecto"
+      Tab(4).Control(1).Enabled=   0   'False
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Tesorería II"
       TabPicture(5)   =   "frmparametros.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "FrameTalones(1)"
-      Tab(5).Control(1)=   "FrameTalones(0)"
-      Tab(5).Control(2)=   "FrameOpAseguradas"
-      Tab(5).Control(3)=   "FrameTalones(2)"
+      Tab(5).Control(0)=   "FrameTalones(2)"
+      Tab(5).Control(1)=   "FrameOpAseguradas"
+      Tab(5).Control(2)=   "FrameTalones(0)"
+      Tab(5).Control(3)=   "FrameTalones(1)"
       Tab(5).ControlCount=   4
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -219,7 +221,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   13
-         Left            =   9930
+         Left            =   -65070
          MaxLength       =   15
          TabIndex        =   35
          Tag             =   "Importe limite 347|N|S|0||parametros|limimpcl|0.00||"
@@ -239,7 +241,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   15
-         Left            =   10830
+         Left            =   -64170
          MaxLength       =   2
          TabIndex        =   34
          Tag             =   "Ultimo periodo liquidación I.V.A.|N|S|0|100|parametros|perfactu|||"
@@ -259,7 +261,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   360
          Index           =   14
-         Left            =   9930
+         Left            =   -65070
          MaxLength       =   8
          TabIndex        =   33
          Tag             =   "Ultimo año liquidación I.V.A.|N|S|0|9999|parametros|anofactu|||"
@@ -279,7 +281,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   645
-         Left            =   7740
+         Left            =   -67260
          TabIndex        =   184
          Top             =   900
          Width           =   3525
@@ -957,12 +959,12 @@ Begin VB.Form frmparametros
          EndProperty
          ForeColor       =   &H00000000&
          Height          =   2835
-         Left            =   -68070
+         Left            =   6930
          TabIndex        =   147
          Top             =   720
          Width           =   4515
          Begin VB.CheckBox Check5 
-            Caption         =   "Asiento por pago"
+            Caption         =   "Un Asiento por recibo"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -977,7 +979,7 @@ Begin VB.Form frmparametros
             Left            =   120
             TabIndex        =   130
             Top             =   330
-            Width           =   2025
+            Width           =   2865
          End
          Begin VB.CheckBox Check5 
             Caption         =   "Agrupar apunte banco"
@@ -1072,7 +1074,7 @@ Begin VB.Form frmparametros
       End
       Begin VB.Frame Frame66 
          Height          =   2175
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   140
          Top             =   750
          Width           =   6795
@@ -1734,7 +1736,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1395
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   92
          Top             =   900
          Width           =   7365
@@ -2533,7 +2535,7 @@ Begin VB.Form frmparametros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   2685
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   76
          Top             =   2370
          Width           =   11115
@@ -3654,7 +3656,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   315
          Index           =   13
-         Left            =   7770
+         Left            =   -67230
          TabIndex        =   186
          Top             =   2010
          Width           =   1830
@@ -3672,7 +3674,7 @@ Begin VB.Form frmparametros
          EndProperty
          Height          =   315
          Index           =   14
-         Left            =   7800
+         Left            =   -67200
          TabIndex        =   185
          Top             =   1650
          Width           =   2160
@@ -3871,13 +3873,13 @@ Private WithEvents frmCta2 As frmColCtas
 Attribute frmCta2.VB_VarHelpID = -1
 
 
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Modo As Byte
-Dim i As Integer
+Dim I As Integer
 
-Dim Cad As String
+Dim cad As String
 Dim CadB As String
-Dim indice As Integer
+Dim Indice As Integer
 
 Private MaxLen As Integer 'Para los txt k son de ultimo nivel o de nivel anterior
                           'Ej:
@@ -3889,7 +3891,7 @@ Private Sub Check1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim Cad As String
+    Dim cad As String
     Dim ModificaClaves As Boolean
     
     Screen.MousePointer = vbHourglass
@@ -3923,11 +3925,11 @@ Private Sub cmdAceptar_Click()
             If vUsu.Nivel = 0 Then
                 If vParam.fechaini <> Text1(0).Text Then
                     ModificaClaves = True
-                    Cad = " fechaini = '" & Format(vParam.fechaini, FormatoFecha) & "'"
+                    cad = " fechaini = '" & Format(vParam.fechaini, FormatoFecha) & "'"
                 End If
             End If
             If ModificaClaves Then
-                If ModificaDesdeFormularioClaves(Me, Cad) Then
+                If ModificaDesdeFormularioClaves(Me, cad) Then
                     ReestableceVPARAM
                     PonerModo 0
                 End If
@@ -4018,21 +4020,21 @@ Private Sub Form_Load()
     Image2.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     imgIVA.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     imgCta2(4).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    For i = 7 To 10
-        imgCta2(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
-    For i = 0 To 2
-        imgcta(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
-    For i = 0 To 3
-        imgDiario(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
-    For i = 0 To 5
-        imgConcep(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
-    For i = 0 To 1
-        Image3(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 7 To 10
+        imgCta2(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
+    For I = 0 To 2
+        imgcta(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
+    For I = 0 To 3
+        imgDiario(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
+    For I = 0 To 5
+        imgConcep(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
+    For I = 0 To 1
+        Image3(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     'Se muestra unicamente si hay tesorería
     Me.SSTab1.TabEnabled(4) = (vEmpresa.TieneTesoreria)
@@ -4040,10 +4042,10 @@ Private Sub Form_Load()
     Me.SSTab1.TabEnabled(5) = (vEmpresa.TieneTesoreria)
     Me.SSTab1.TabVisible(5) = (vEmpresa.TieneTesoreria)
     
-    Adodc1.ConnectionString = Conn
-    Adodc1.RecordSource = "Select * from parametros "
-    Adodc1.Refresh
-    If Adodc1.Recordset.EOF Then
+    adodc1.ConnectionString = Conn
+    adodc1.RecordSource = "Select * from parametros "
+    adodc1.Refresh
+    If adodc1.Recordset.EOF Then
         'No hay datos
         Limpiar Me
         PonerModo 3
@@ -4073,15 +4075,15 @@ Private Sub frmCo_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmCta_DatoSeleccionado(CadenaSeleccion As String)
-    Select Case indice
+    Select Case Indice
         Case 18
-            Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1)
+            Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1)
             Text4.Text = RecuperaValor(CadenaSeleccion, 2)
         Case 33
-            Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1)
+            Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1)
             Text7.Text = RecuperaValor(CadenaSeleccion, 2)
         Case 34
-            Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1)
+            Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1)
             Text8.Text = RecuperaValor(CadenaSeleccion, 2)
     End Select
 End Sub
@@ -4097,10 +4099,10 @@ End Sub
 
 
 Private Sub frmF_Selec(vFecha As Date)
-    Cad = Format(vFecha, "dd/mm/yyyy")
-    Select Case i
+    cad = Format(vFecha, "dd/mm/yyyy")
+    Select Case I
     Case 0
-        Text2(0).Text = Cad
+        Text2(0).Text = cad
     End Select
 End Sub
 
@@ -4113,7 +4115,7 @@ Private Sub Image1_Click(Index As Integer)
     Set frmF = New frmCal
     frmF.Fecha = Now
     
-    i = Index
+    I = Index
     Select Case Index
         Case 0
             If Text2(0).Text <> "" Then
@@ -4135,7 +4137,7 @@ Private Sub Image2_Click()
 End Sub
 
 Private Sub Image3_Click(Index As Integer)
-    i = Index
+    I = Index
     Set frmC1 = New frmConceptos
     frmC1.DatosADevolverBusqueda = "0|1|"
     frmC1.Show vbModal
@@ -4170,11 +4172,11 @@ End Sub
 Private Sub imgcta_Click(Index As Integer)
     Select Case Index
         Case 0
-            indice = 18
+            Indice = 18
         Case 1
-            indice = 33
+            Indice = 33
         Case 2
-            indice = 34
+            Indice = 34
     End Select
     
     
@@ -4184,7 +4186,7 @@ Private Sub imgcta_Click(Index As Integer)
     frmCta.ConfigurarBalances = 3
     frmCta.Show vbModal
         
-    PonFoco Text1(indice)
+    PonFoco Text1(Indice)
 End Sub
 
 Private Sub imgCta2_Click(Index As Integer)
@@ -4310,24 +4312,24 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub KEYCuentas(KeyAscii As Integer, indice As Integer)
+Private Sub KEYCuentas(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgcta_Click indice
+    imgcta_Click Indice
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
-Private Sub KEYDiario(KeyAscii As Integer, indice As Integer)
+Private Sub KEYDiario(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgDiario_Click (indice)
+    imgDiario_Click (Indice)
 End Sub
 
-Private Sub KEYConcepto(KeyAscii As Integer, indice As Integer)
+Private Sub KEYConcepto(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgConcep_Click (indice)
+    imgConcep_Click (Indice)
 End Sub
 '++
 
@@ -4342,7 +4344,7 @@ End Sub
 '----------------------------------------------------------------
 '----------------------------------------------------------------
 Private Sub Text1_LostFocus(Index As Integer)
-    Dim Cad As String
+    Dim cad As String
     Dim SQL As String
     ''Quitamos blancos por los lados
     Text1(Index).Text = Trim(Text1(Index).Text)
@@ -4388,47 +4390,47 @@ Private Sub Text1_LostFocus(Index As Integer)
        Text2(Index).Text = SQL
         '....
     Case 18
-        Cad = Text1(18).Text
-        If CuentaCorrectaUltimoNivel(Cad, SQL) Then
-            Text1(18).Text = Cad
+        cad = Text1(18).Text
+        If CuentaCorrectaUltimoNivel(cad, SQL) Then
+            Text1(18).Text = cad
             Text4.Text = SQL
         Else
             MsgBox SQL, vbExclamation
-            Text1(18).Text = Cad
+            Text1(18).Text = cad
             Text4.Text = SQL
             If Modo > 2 Then Text1(18).SetFocus
         End If
     
     Case 28, 29
-        Cad = Trim(Text1(Index).Text)
-        If Cad <> "" Then
-            If Not IsNumeric(Cad) Then
-                MsgBox Cad & ": No es un campo numerico", vbExclamation
+        cad = Trim(Text1(Index).Text)
+        If cad <> "" Then
+            If Not IsNumeric(cad) Then
+                MsgBox cad & ": No es un campo numerico", vbExclamation
                 Text1(Index).Text = ""
                 Text1(Index).SetFocus
             End If
         End If
         
     Case 33
-        Cad = Text1(33).Text
-        If CuentaCorrectaUltimoNivel(Cad, SQL) Then
-            Text1(33).Text = Cad
+        cad = Text1(33).Text
+        If CuentaCorrectaUltimoNivel(cad, SQL) Then
+            Text1(33).Text = cad
             Text7.Text = SQL
         Else
             MsgBox SQL, vbExclamation
-            Text1(33).Text = Cad
+            Text1(33).Text = cad
             Text7.Text = SQL
             If Modo > 2 Then Text1(33).SetFocus
         End If
         
     Case 34
-        Cad = Text1(34).Text
-        If CuentaCorrectaUltimoNivel(Cad, SQL) Then
-            Text1(34).Text = Cad
+        cad = Text1(34).Text
+        If CuentaCorrectaUltimoNivel(cad, SQL) Then
+            Text1(34).Text = cad
             Text8.Text = SQL
         Else
             MsgBox SQL, vbExclamation
-            Text1(34).Text = Cad
+            Text1(34).Text = cad
             Text8.Text = SQL
             If Modo > 2 Then Text1(34).SetFocus
         End If
@@ -4477,9 +4479,9 @@ Private Sub PonerModo(Kmodo As Integer)
     cmdAceptar.Visible = Modo > 0
     cmdCancelar.Visible = Modo > 0
     
-    For i = 0 To Text1.Count - 1
-        If i <> 30 And i <> 32 Then Text1(i).BackColor = vbWhite
-    Next i
+    For I = 0 To Text1.Count - 1
+        If I <> 30 And I <> 32 Then Text1(I).BackColor = vbWhite
+    Next I
     
     Combo1.BackColor = vbWhite
     Combo2.BackColor = vbWhite
@@ -4487,9 +4489,9 @@ Private Sub PonerModo(Kmodo As Integer)
     
     
     'Ponemos los valores
-    For i = 0 To Text1.Count - 1
-        If i <> 30 And i <> 32 Then Text1(i).Locked = Valor
-    Next i
+    For I = 0 To Text1.Count - 1
+        If I <> 30 And I <> 32 Then Text1(I).Locked = Valor
+    Next I
     Frame1.Enabled = Not Valor
     Frame4.Enabled = Not Valor
     Frame6.Enabled = Not Valor
@@ -4501,28 +4503,28 @@ Private Sub PonerModo(Kmodo As Integer)
     Frame15.Enabled = Not Valor
     Frame16.Enabled = Not Valor
 
-    For i = 0 To FrameTalones.Count - 1
-        FrameTalones(i).Enabled = Not Valor
-    Next i
+    For I = 0 To FrameTalones.Count - 1
+        FrameTalones(I).Enabled = Not Valor
+    Next I
     FrameValDefecto.Enabled = Not Valor
     FrameOpAseguradas.Enabled = Not Valor
     Frame66.Enabled = Not Valor
 
-    For i = 0 To imgDiario.Count - 1
-        imgDiario(i).Enabled = Not Valor
-    Next i
-    For i = 0 To imgConcep.Count - 1
-        imgConcep(i).Enabled = Not Valor
-    Next i
+    For I = 0 To imgDiario.Count - 1
+        imgDiario(I).Enabled = Not Valor
+    Next I
+    For I = 0 To imgConcep.Count - 1
+        imgConcep(I).Enabled = Not Valor
+    Next I
     
     'Campos que solo estan habilitados para insercion
     If Not Valor Then
         Text1(0).Locked = (vUsu.Nivel >= 1)
         Text1(1).Locked = (vUsu.Nivel >= 1)
     End If
-    For i = 0 To ImgFec.Count - 1
-        ImgFec(i).Enabled = Not Text1(0).Locked
-    Next i
+    For I = 0 To ImgFec.Count - 1
+        ImgFec(I).Enabled = Not Text1(0).Locked
+    Next I
     
     PonerModoUsuarioGnral Modo, "ariconta"
     
@@ -4534,7 +4536,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.Adodc1)
+        cadReg = PonerContRegistros(Me.adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -4550,8 +4552,8 @@ Private Sub PonerCampos()
     Dim tabla As String
     Dim Cod As String
     
-        If Adodc1.Recordset.EOF Then Exit Sub
-        If PonerCamposForma(Me, Adodc1) Then
+        If adodc1.Recordset.EOF Then Exit Sub
+        If PonerCamposForma(Me, adodc1) Then
            'Correcto, ponemos los datos auxiliares
            '----------------------------------------
            ' Diarios
@@ -4645,9 +4647,9 @@ Private Function DatosOK() As Boolean
     'Comprobamos que si el periodo de liquidacion de IVA es mensual
     'Comprobaremos que el valor del periodo no excede de
     If Check1(5).Value = 1 Then
-        i = 12  'Mensual
+        I = 12  'Mensual
     Else
-        i = 4   'Trimestral
+        I = 4   'Trimestral
     End If
     If Text1(15).Text <> "" Then
         J = CInt(Text1(15).Text)
@@ -4655,7 +4657,7 @@ Private Function DatosOK() As Boolean
             MsgBox "El periodo de liquidación no puede ser 0", vbExclamation
             Exit Function
         End If
-        If J > i Then
+        If J > I Then
             MsgBox "Periodo de liquidacion incorrecto", vbExclamation
             Exit Function
         End If
@@ -4694,19 +4696,19 @@ Private Function DatosOK() As Boolean
             
             C = ""
             'AHora es desde i=5
-            For i = 7 To 9
-                Text5(i).Text = Trim(Text5(i).Text)
+            For I = 7 To 9
+                Text5(I).Text = Trim(Text5(I).Text)
                 
-                If Text5(i).Text <> "" Then
+                If Text5(I).Text <> "" Then
                     
-                    If Len(Text5(i).Text) <> vEmpresa.DigitosUltimoNivel Then
+                    If Len(Text5(I).Text) <> vEmpresa.DigitosUltimoNivel Then
                                                 'Aqui tenemos los digitos a ultnivel-1
-                        If Len(Text5(i).Text) <> MaxLen Then
-                            C = C & RecuperaValor(Text5(i).Tag, 1) & vbCrLf
+                        If Len(Text5(I).Text) <> MaxLen Then
+                            C = C & RecuperaValor(Text5(I).Tag, 1) & vbCrLf
                         End If
                     End If
                 End If
-            Next i
+            Next I
             
             If C <> "" Then
                 C = "Error en la longitud de las cuentas para: " & vbCrLf & C
@@ -4778,23 +4780,23 @@ End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim RS As ADODB.Recordset
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.ID, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 0 Or Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!Modificar, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 
@@ -4808,24 +4810,24 @@ On Error GoTo EInsertarModificar
 
     If Not Insertar Then
         'Modificar
-        Cad = "UPDATE paramamort SET tipoamor= " & Combo3.ListIndex + 1
-        Cad = Cad & ", intcont= " & Check1(16).Value
-        Cad = Cad & ", ultfecha= '" & Format(Text2(0).Text, FormatoFecha)
-        Cad = Cad & "', condebes= " & DBSet(Text2(2), "N", "S")
-        Cad = Cad & ", conhaber= " & DBSet(Text2(3), "N", "S")
-        Cad = Cad & ", numdiari=  " & DBSet(Text2(1), "N", "S")
+        cad = "UPDATE paramamort SET tipoamor= " & Combo3.ListIndex + 1
+        cad = cad & ", intcont= " & Check1(16).Value
+        cad = cad & ", ultfecha= '" & Format(Text2(0).Text, FormatoFecha)
+        cad = cad & "', condebes= " & DBSet(Text2(2), "N", "S")
+        cad = cad & ", conhaber= " & DBSet(Text2(3), "N", "S")
+        cad = cad & ", numdiari=  " & DBSet(Text2(1), "N", "S")
         
-        Cad = Cad & ", codiva = " & DBSet(txtIVA(0), "N", "S")
-        Cad = Cad & ", preimpreso =" & Check2.Value
-        Cad = Cad & " WHERE codigo=1"
+        cad = cad & ", codiva = " & DBSet(txtIVA(0), "N", "S")
+        cad = cad & ", preimpreso =" & Check2.Value
+        cad = cad & " WHERE codigo=1"
     Else
         'INSERTAR
-        Cad = "INSERT INTO paramamort (codigo, tipoamor, intcont, ultfecha, condebes, conhaber, numdiari,codiva,preimpreso) VALUES (1,"
-        Cad = Cad & Combo3.ListIndex + 1 & "," & Me.Check1(16).Value & ",'" & Format(Text2(0).Text, FormatoFecha)
-        Cad = Cad & "'," & DBSet(Text2(2), "N", "S") & "," & DBSet(Text2(3), "N", "S") & "," & DBSet(Text2(1), "N", "S")
-        Cad = Cad & ",'" & DBSet(txtIVA(0), "N", "S") & "'," & Check2.Value & ")"
+        cad = "INSERT INTO paramamort (codigo, tipoamor, intcont, ultfecha, condebes, conhaber, numdiari,codiva,preimpreso) VALUES (1,"
+        cad = cad & Combo3.ListIndex + 1 & "," & Me.Check1(16).Value & ",'" & Format(Text2(0).Text, FormatoFecha)
+        cad = cad & "'," & DBSet(Text2(2), "N", "S") & "," & DBSet(Text2(3), "N", "S") & "," & DBSet(Text2(1), "N", "S")
+        cad = cad & ",'" & DBSet(txtIVA(0), "N", "S") & "'," & Check2.Value & ")"
     End If
-    Conn.Execute Cad
+    Conn.Execute cad
     InsertarModificar = True
     Exit Function
 EInsertarModificar:
@@ -4834,34 +4836,34 @@ End Function
 
 
 Private Function CargarDatos() As Boolean
-Dim Cad As String
-Dim Rs As ADODB.Recordset
+Dim cad As String
+Dim RS As ADODB.Recordset
 
 On Error GoTo ECargarDatos
     CargarDatos = False
-    Set Rs = New ADODB.Recordset
-    Cad = "Select * from paramamort where codigo=1"
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    cad = "Select * from paramamort where codigo=1"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not RS.EOF Then
         CargarDatos = True
         '------------------  Ponemos los datos
-        Combo3.ListIndex = Rs!tipoamor - 1
-        Check1(16).Value = Rs!intcont
-        Text2(0).Text = Format(Rs!ultfecha, "dd/mm/yyyy")
-        Text2(1).Text = DBLet(Rs!NumDiari)
+        Combo3.ListIndex = RS!tipoamor - 1
+        Check1(16).Value = RS!intcont
+        Text2(0).Text = Format(RS!ultfecha, "dd/mm/yyyy")
+        Text2(1).Text = DBLet(RS!NumDiari)
         Text2_LostFocus 1
-        Text2(2).Text = DBLet(Rs!condebes)
+        Text2(2).Text = DBLet(RS!condebes)
         Text2_LostFocus 2
-        Text2(3).Text = DBLet(Rs!conhaber)
+        Text2(3).Text = DBLet(RS!conhaber)
         Text2_LostFocus 3
-        txtIVA(0).Text = DBLet(Rs!codiva)
+        txtIVA(0).Text = DBLet(RS!codiva)
         txtIVA_LostFocus 0
-        Check2.Value = Rs!Preimpreso
+        Check2.Value = RS!Preimpreso
     End If
-    Rs.Close
+    RS.Close
 ECargarDatos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando parametros"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -4883,21 +4885,21 @@ Private Sub txtIVA_LostFocus(Index As Integer)
         Exit Sub
     End If
     
-    i = 0
-    Cad = ""
+    I = 0
+    cad = ""
     If Not IsNumeric(txtIVA(0).Text) Then
         MsgBox "Tipo IVA debe ser numérico: " & txtIVA(0).Text, vbExclamation
         txtIVA(0).Text = ""
-        i = 1
+        I = 1
     End If
-    If i = 0 Then
-        Cad = DevuelveDesdeBD("nombriva", "tiposiva", "codigiva", txtIVA(0).Text, "N")
-        If Cad = "" Then
+    If I = 0 Then
+        cad = DevuelveDesdeBD("nombriva", "tiposiva", "codigiva", txtIVA(0).Text, "N")
+        If cad = "" Then
             MsgBox "IVA no encontrado: " & txtIVA(0).Text, vbExclamation
             txtIVA(0).Text = ""
         End If
     End If
-    txtIVA(1).Text = Cad
+    txtIVA(1).Text = cad
 End Sub
 
 Private Sub Text2_GotFocus(Index As Integer)
@@ -4932,28 +4934,28 @@ Private Sub Text2_LostFocus(Index As Integer)
         End If
         Select Case Index
         Case 1
-             Cad = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", Text2(1).Text, "N")
-             If Cad = "" Then
+             cad = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", Text2(1).Text, "N")
+             If cad = "" Then
                     MsgBox "Diario no encontrado: " & Text2(1).Text, vbExclamation
                     Text2(1).Text = ""
                     Text2(1).SetFocus
             End If
-            Text3(0).Text = Cad
+            Text3(0).Text = cad
         Case 2, 3
-                Cad = DevuelveDesdeBD("nomconce", "conceptos", "codconce", Text2(Index).Text, "N")
-                If Cad = "" Then
+                cad = DevuelveDesdeBD("nomconce", "conceptos", "codconce", Text2(Index).Text, "N")
+                If cad = "" Then
                     MsgBox "Concepto NO encontrado: " & Text2(Index).Text, vbExclamation
                     Text2(Index).Text = ""
                 End If
-                Text3(Index - 1).Text = Cad
+                Text3(Index - 1).Text = cad
                 
         End Select
     End If
 End Sub
 
 Private Sub frmC1_DatoSeleccionado(CadenaSeleccion As String)
-    Text2(i + 2).Text = RecuperaValor(CadenaSeleccion, 1)
-    Text3(i + 1).Text = RecuperaValor(CadenaSeleccion, 2)
+    Text2(I + 2).Text = RecuperaValor(CadenaSeleccion, 1)
+    Text3(I + 1).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmD1_DatoSeleccionado(CadenaSeleccion As String)
@@ -4962,7 +4964,7 @@ Private Sub frmD1_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 
-Private Sub KEYIva(KeyAscii As Integer, indice As Integer)
+Private Sub KEYIva(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
     imgiva_Click
 End Sub
@@ -4981,47 +4983,47 @@ On Error GoTo EInsertarModificar
 
     If Not Insertar Then
         'Modificar
-        Cad = "UPDATE paramtesor SET ctabenbanc= " & DBSet(Text5(0).Text, "T", "S")
-        Cad = Cad & ", par_pen_apli= " & DBSet(Text5(4).Text, "T", "S")
-        Cad = Cad & ", responsable= " & DBSet(Text5(2).Text, "T", "S")
-        Cad = Cad & ", interesescobrostarjeta= " & DBSet(Text5(16), "N")
-        Cad = Cad & ", remesacancelacion= " & DBSet(Text5(9), "T", "S")
-        Cad = Cad & ", ctaefectcomerciales=  " & DBSet(Text5(10), "T", "S")
-        Cad = Cad & ", taloncta = " & DBSet(Text5(7), "T", "S")
-        Cad = Cad & ", pagarecta =" & DBSet(Text5(8).Text, "T", "S")
-        Cad = Cad & ", contapag =" & DBSet(Check5(0).Value, "N")
-        Cad = Cad & ", generactrpar =" & DBSet(Check5(1).Value, "N")
-        Cad = Cad & ", abonocambiado =" & DBSet(Check5(2).Value, "N")
-        Cad = Cad & ", comprobarinicio =" & DBSet(Check5(8).Value, "N")
-        Cad = Cad & ", nor19xvto =" & DBSet(Check5(10).Value, "N")
-        Cad = Cad & ", eliminarecibidosriesgo =" & DBSet(Check5(9).Value, "N")
-        Cad = Cad & ", diasmaxavisodesde =" & DBSet(Text5(11).Text, "N", "S")
-        Cad = Cad & ", diasmaxavisohasta =" & DBSet(Text5(12).Text, "N", "S")
-        Cad = Cad & ", diasmaxsiniestrodesde =" & DBSet(Text5(13).Text, "N", "S")
-        Cad = Cad & ", diasmaxsiniestrohasta =" & DBSet(Text5(14).Text, "N", "S")
-        Cad = Cad & ", diasavisodesdeprorroga =" & DBSet(Text5(15).Text, "N", "S")
-        Cad = Cad & ", fechaasegesfra =" & DBSet(Check5(11).Value, "N")
-        Cad = Cad & ", contatalonpte =" & DBSet(Check5(3).Value, "N")
-        Cad = Cad & ", contapagarepte =" & DBSet(Check5(4).Value, "N")
-        Cad = Cad & ", contaefecpte =" & DBSet(Check5(5).Value, "N")
+        cad = "UPDATE paramtesor SET ctabenbanc= " & DBSet(Text5(0).Text, "T", "S")
+        cad = cad & ", par_pen_apli= " & DBSet(Text5(4).Text, "T", "S")
+        cad = cad & ", responsable= " & DBSet(Text5(2).Text, "T", "S")
+        cad = cad & ", interesescobrostarjeta= " & DBSet(Text5(16), "N")
+        cad = cad & ", remesacancelacion= " & DBSet(Text5(9), "T", "S")
+        cad = cad & ", ctaefectcomerciales=  " & DBSet(Text5(10), "T", "S")
+        cad = cad & ", taloncta = " & DBSet(Text5(7), "T", "S")
+        cad = cad & ", pagarecta =" & DBSet(Text5(8).Text, "T", "S")
+        cad = cad & ", contapag =" & DBSet(Check5(0).Value, "N")
+        cad = cad & ", generactrpar =" & DBSet(Check5(1).Value, "N")
+        cad = cad & ", abonocambiado =" & DBSet(Check5(2).Value, "N")
+        cad = cad & ", comprobarinicio =" & DBSet(Check5(8).Value, "N")
+        cad = cad & ", nor19xvto =" & DBSet(Check5(10).Value, "N")
+        cad = cad & ", eliminarecibidosriesgo =" & DBSet(Check5(9).Value, "N")
+        cad = cad & ", diasmaxavisodesde =" & DBSet(Text5(11).Text, "N", "S")
+        cad = cad & ", diasmaxavisohasta =" & DBSet(Text5(12).Text, "N", "S")
+        cad = cad & ", diasmaxsiniestrodesde =" & DBSet(Text5(13).Text, "N", "S")
+        cad = cad & ", diasmaxsiniestrohasta =" & DBSet(Text5(14).Text, "N", "S")
+        cad = cad & ", diasavisodesdeprorroga =" & DBSet(Text5(15).Text, "N", "S")
+        cad = cad & ", fechaasegesfra =" & DBSet(Check5(11).Value, "N")
+        cad = cad & ", contatalonpte =" & DBSet(Check5(3).Value, "N")
+        cad = cad & ", contapagarepte =" & DBSet(Check5(4).Value, "N")
+        cad = cad & ", contaefecpte =" & DBSet(Check5(5).Value, "N")
         
-        Cad = Cad & " WHERE codigo=1"
+        cad = cad & " WHERE codigo=1"
     Else
         'INSERTAR
-        Cad = "INSERT INTO paramtesor (codigo, ctabenbanc, par_pen_apli, responsable, interesescobrostarjeta, remesacancelacion, ctaefectcomerciales, "
-        Cad = Cad & "taloncta,pagarecta,contapag,generactrpar,abonocambiado,comprobarinicio,nor19xvto,eliminarecibidosriesgo, "
-        Cad = Cad & "diasmaxavisodesde,diasmaxavisohasta,diasmaxsiniestrodesde,diasmaxsiniestrohasta,diasavisodesdeprorroga,fechaasegesfra,contatalonpte, "
-        Cad = Cad & "contapagarepte,contaefecpte) values (1,"
-        Cad = Cad & DBSet(Text5(0).Text, "T", "S") & "," & DBSet(Text5(4).Text, "T", "S") & "," & DBSet(Text5(2).Text, "T", "S") & ","
-        Cad = Cad & DBSet(Text5(16), "N") & "," & DBSet(Text5(9), "T", "S") & "," & DBSet(Text5(10), "T", "S") & "," & DBSet(Text5(7), "T", "S") & ","
-        Cad = Cad & DBSet(Text5(8).Text, "T", "S") & "," & DBSet(Check5(0).Value, "N") & ","
-        Cad = Cad & DBSet(Check5(1).Value, "N") & "," & DBSet(Check5(2).Value, "N") & "," & DBSet(Check5(8).Value, "N") & "," & DBSet(Check5(10).Value, "N") & " ,"
-        Cad = Cad & DBSet(Check5(9).Value, "N") & "," & DBSet(Text5(11).Text, "N", "S") & "," & DBSet(Text5(12).Text, "N", "S") & "," & DBSet(Text5(13).Text, "N", "S") & ","
-        Cad = Cad & DBSet(Text5(14).Text, "N", "S") & "," & DBSet(Text5(15).Text, "N", "S") & "," & DBSet(Check5(11).Value, "N") & "," & DBSet(Check5(3).Value, "N") & ","
-        Cad = Cad & DBSet(Check5(4).Value, "N") & "," & DBSet(Check5(5).Value, "N") & ")"
+        cad = "INSERT INTO paramtesor (codigo, ctabenbanc, par_pen_apli, responsable, interesescobrostarjeta, remesacancelacion, ctaefectcomerciales, "
+        cad = cad & "taloncta,pagarecta,contapag,generactrpar,abonocambiado,comprobarinicio,nor19xvto,eliminarecibidosriesgo, "
+        cad = cad & "diasmaxavisodesde,diasmaxavisohasta,diasmaxsiniestrodesde,diasmaxsiniestrohasta,diasavisodesdeprorroga,fechaasegesfra,contatalonpte, "
+        cad = cad & "contapagarepte,contaefecpte) values (1,"
+        cad = cad & DBSet(Text5(0).Text, "T", "S") & "," & DBSet(Text5(4).Text, "T", "S") & "," & DBSet(Text5(2).Text, "T", "S") & ","
+        cad = cad & DBSet(Text5(16), "N") & "," & DBSet(Text5(9), "T", "S") & "," & DBSet(Text5(10), "T", "S") & "," & DBSet(Text5(7), "T", "S") & ","
+        cad = cad & DBSet(Text5(8).Text, "T", "S") & "," & DBSet(Check5(0).Value, "N") & ","
+        cad = cad & DBSet(Check5(1).Value, "N") & "," & DBSet(Check5(2).Value, "N") & "," & DBSet(Check5(8).Value, "N") & "," & DBSet(Check5(10).Value, "N") & " ,"
+        cad = cad & DBSet(Check5(9).Value, "N") & "," & DBSet(Text5(11).Text, "N", "S") & "," & DBSet(Text5(12).Text, "N", "S") & "," & DBSet(Text5(13).Text, "N", "S") & ","
+        cad = cad & DBSet(Text5(14).Text, "N", "S") & "," & DBSet(Text5(15).Text, "N", "S") & "," & DBSet(Check5(11).Value, "N") & "," & DBSet(Check5(3).Value, "N") & ","
+        cad = cad & DBSet(Check5(4).Value, "N") & "," & DBSet(Check5(5).Value, "N") & ")"
     
     End If
-    Conn.Execute Cad
+    Conn.Execute cad
     InsertarModificarTesoreria = True
     Exit Function
 EInsertarModificar:
@@ -5030,56 +5032,56 @@ End Function
 
 
 Private Function CargarDatosTesoreria() As Boolean
-Dim Cad As String
-Dim Rs As ADODB.Recordset
+Dim cad As String
+Dim RS As ADODB.Recordset
 
 On Error GoTo ECargarDatos
     CargarDatosTesoreria = False
-    Set Rs = New ADODB.Recordset
-    Cad = "Select * from paramtesor where codigo=1"
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    cad = "Select * from paramtesor where codigo=1"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not RS.EOF Then
         CargarDatosTesoreria = True
         '------------------  Ponemos los datos
-        Text5(0).Text = Rs!ctabenbanc
+        Text5(0).Text = RS!ctabenbanc
         Text5_LostFocus 0
-        Text5(4).Text = Rs!par_pen_apli
+        Text5(4).Text = RS!par_pen_apli
         Text5_LostFocus 4
-        Text5(2).Text = DBLet(Rs!responsable, "T")
-        Text5(16).Text = Rs!InteresesCobrosTarjeta
-        Text5(9).Text = DBLet(Rs!remesacancelacion, "T")
+        Text5(2).Text = DBLet(RS!responsable, "T")
+        Text5(16).Text = RS!InteresesCobrosTarjeta
+        Text5(9).Text = DBLet(RS!remesacancelacion, "T")
         Text5_LostFocus 9
-        Text5(10).Text = DBLet(Rs!ctaefectcomerciales, "T")
+        Text5(10).Text = DBLet(RS!ctaefectcomerciales, "T")
         Text5_LostFocus 10
-        Text5(7).Text = DBLet(Rs!taloncta, "T")
+        Text5(7).Text = DBLet(RS!taloncta, "T")
         Text5_LostFocus 7
-        Text5(8).Text = DBLet(Rs!pagarecta, "T")
+        Text5(8).Text = DBLet(RS!pagarecta, "T")
         Text5_LostFocus 8
     
-        Check5(0).Value = Rs!contapag
-        Check5(1).Value = Rs!generactrpar
-        Check5(2).Value = Rs!abonocambiado
-        Check5(8).Value = Rs!comprobarinicio
-        Check5(10).Value = Rs!nor19xvto
-        Check5(9).Value = Rs!EliminaRecibidosRiesgo
-        Check5(11).Value = Rs!fechaasegesfra
+        Check5(0).Value = RS!contapag
+        Check5(1).Value = RS!generactrpar
+        Check5(2).Value = RS!abonocambiado
+        Check5(8).Value = RS!comprobarinicio
+        Check5(10).Value = RS!nor19xvto
+        Check5(9).Value = RS!EliminaRecibidosRiesgo
+        Check5(11).Value = RS!fechaasegesfra
         
         
-        Text5(11).Text = DBLet(Rs!diasmaxavisodesde, "N")
-        Text5(12).Text = DBLet(Rs!diasmaxavisohasta, "N")
-        Text5(13).Text = DBLet(Rs!diasmaxsiniestrodesde, "N")
-        Text5(14).Text = DBLet(Rs!diasmaxsiniestrohasta, "N")
-        Text5(15).Text = DBLet(Rs!DiasAvisoDesdeProrroga, "N")
+        Text5(11).Text = DBLet(RS!diasmaxavisodesde, "N")
+        Text5(12).Text = DBLet(RS!diasmaxavisohasta, "N")
+        Text5(13).Text = DBLet(RS!diasmaxsiniestrodesde, "N")
+        Text5(14).Text = DBLet(RS!diasmaxsiniestrohasta, "N")
+        Text5(15).Text = DBLet(RS!DiasAvisoDesdeProrroga, "N")
     
-        Check5(3).Value = Rs!contatalonpte
-        Check5(4).Value = Rs!contapagarepte
-        Check5(5).Value = Rs!contaefecpte
+        Check5(3).Value = RS!contatalonpte
+        Check5(4).Value = RS!contapagarepte
+        Check5(5).Value = RS!contaefecpte
     
     End If
-    Rs.Close
+    RS.Close
 ECargarDatos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando parametros de Tesoreria"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -5107,7 +5109,7 @@ End Sub
 '----------------------------------------------------------------
 '----------------------------------------------------------------
 Private Sub Text5_LostFocus(Index As Integer)
-    Dim Cad As String
+    Dim cad As String
     Dim SQL As String
     Dim Valor As Currency
     
@@ -5126,17 +5128,17 @@ Private Sub Text5_LostFocus(Index As Integer)
         End If
                         
     Case 0, 4
-        Cad = Text5(Index).Text
-        If Cad = "" Then
+        cad = Text5(Index).Text
+        If cad = "" Then
             Text6(Index).Text = ""
             Exit Sub
         End If
-        If CuentaCorrectaUltimoNivel(Cad, SQL) Then
-            Text5(Index).Text = Cad
+        If CuentaCorrectaUltimoNivel(cad, SQL) Then
+            Text5(Index).Text = cad
             Text6(Index).Text = SQL
         Else
             MsgBox SQL, vbExclamation
-            Text5(Index).Text = Cad
+            Text5(Index).Text = cad
             Text6(Index).Text = SQL
             If Modo > 2 Then Text5(Index).SetFocus
         End If
@@ -5149,10 +5151,10 @@ Private Sub Text5_LostFocus(Index As Integer)
             Text5(Index).Text = ""
             Exit Sub
         End If
-        i = Len(Text5(Index).Text)
+        I = Len(Text5(Index).Text)
         NumRegElim = InStr(1, Text5(Index).Text, ".")
         If NumRegElim = 0 Then
-            If i <> vEmpresa.DigitosUltimoNivel And i <> MaxLen Then
+            If I <> vEmpresa.DigitosUltimoNivel And I <> MaxLen Then
                 MsgBox "Longitud de campo incorrecta. Digitos: " & vEmpresa.DigitosUltimoNivel & " o " & MaxLen, vbExclamation
                 Text5(Index).Text = ""
                 Exit Sub
@@ -5160,10 +5162,10 @@ Private Sub Text5_LostFocus(Index As Integer)
         End If
         
         'Llegados aqui, si es de ultimo nivel pondre la cuenta
-        If NumRegElim > 0 Or i = vEmpresa.DigitosUltimoNivel Then
-            Cad = Text5(Index).Text
-            If CuentaCorrectaUltimoNivel(Cad, SQL) Then
-                Text5(Index).Text = Cad
+        If NumRegElim > 0 Or I = vEmpresa.DigitosUltimoNivel Then
+            cad = Text5(Index).Text
+            If CuentaCorrectaUltimoNivel(cad, SQL) Then
+                Text5(Index).Text = cad
             Else
                 MsgBox SQL, vbExclamation
                 Text5(Index).Text = ""
@@ -5201,9 +5203,9 @@ Private Sub PonerLongitudCampoNivelAnterior()
     On Error GoTo EPonerLongitudCampoNivelAnterior
     
     
-    i = DigitosNivel(vEmpresa.numnivel - 1)
-    If i = 0 Then i = 4
-    MaxLen = i
+    I = DigitosNivel(vEmpresa.numnivel - 1)
+    If I = 0 Then I = 4
+    MaxLen = I
     
   
     Exit Sub

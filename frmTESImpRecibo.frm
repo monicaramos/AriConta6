@@ -325,6 +325,7 @@ Private Const IdPrograma = 603
 ' ***********************************************************************************************************
 Public Legalizacion As String
 
+Public VienedeRealizarCobro As Boolean
 
 Public pImporte As Currency
 Public pNumSerie As String
@@ -343,7 +344,7 @@ Attribute frmFPago.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
-Private Sql As String
+Private SQL As String
 Dim cad As String
 Dim RC As String
 Dim I As Integer
@@ -416,38 +417,38 @@ Private Sub cmdAccion_Click(Index As Integer)
 End Sub
 
 Private Function ReciboSinImprimir() As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = " select count(*) from cobros_realizados aa , tmppendientes tt where "
-    Sql = Sql & " tt.codusu = " & vUsu.Codigo
-    Sql = Sql & " and aa.numserie = tt.serie_cta "
-    Sql = Sql & " and aa.numfactu = tt.importe "
-    Sql = Sql & " and aa.fecfactu = tt.fecha "
-    Sql = Sql & " and aa.numorden = tt.numorden "
-    Sql = Sql & " and aa.numlinea = tt.codforpa "
-    Sql = Sql & " and aa.impreso = 0 "
+    SQL = " select count(*) from cobros_realizados aa , tmppendientes tt where "
+    SQL = SQL & " tt.codusu = " & vUsu.Codigo
+    SQL = SQL & " and aa.numserie = tt.serie_cta "
+    SQL = SQL & " and aa.numfactu = tt.importe "
+    SQL = SQL & " and aa.fecfactu = tt.fecha "
+    SQL = SQL & " and aa.numorden = tt.numorden "
+    SQL = SQL & " and aa.numlinea = tt.codforpa "
+    SQL = SQL & " and aa.impreso = 0 "
     
-    ReciboSinImprimir = (TotalRegistros(Sql) > 0)
+    ReciboSinImprimir = (TotalRegistros(SQL) > 0)
     
 
 End Function
 
 
 Private Sub ActualizarRegistro()
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
 
-    Sql = "update cobros_realizados aa, tmppendientes tt set aa.impreso = 1 where "
-    Sql = Sql & " tt.codusu = " & vUsu.Codigo
-    Sql = Sql & " and aa.numserie = tt.serie_cta "
-    Sql = Sql & " and aa.numfactu = tt.importe "
-    Sql = Sql & " and aa.fecfactu = tt.fecha "
-    Sql = Sql & " and aa.numorden = tt.numorden "
-    Sql = Sql & " and aa.numlinea = tt.codforpa "
-    Sql = Sql & " and aa.impreso = 0 "
+    SQL = "update cobros_realizados aa, tmppendientes tt set aa.impreso = 1 where "
+    SQL = SQL & " tt.codusu = " & vUsu.Codigo
+    SQL = SQL & " and aa.numserie = tt.serie_cta "
+    SQL = SQL & " and aa.numfactu = tt.importe "
+    SQL = SQL & " and aa.fecfactu = tt.fecha "
+    SQL = SQL & " and aa.numorden = tt.numorden "
+    SQL = SQL & " and aa.numlinea = tt.codforpa "
+    SQL = SQL & " and aa.impreso = 0 "
     
-    Conn.Execute Sql
+    Conn.Execute SQL
 
 End Sub
 
@@ -547,10 +548,10 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    Sql = ""
+    SQL = ""
             
     'LLamos a la funcion
-    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -565,9 +566,13 @@ Dim nomDocu As String
     
     indRPT = "0603-00"
 
+    If VienedeRealizarCobro Then indRPT = "0603-01"
+
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu ' "Recibo.rpt"
+
+
 
     'si se imprime el nif o la cuenta de cliente
 '    cadParam = cadParam & "pImporte=" & TransformaComasPuntos(ImporteSinFormato(CStr(pImporte))) & "|"
@@ -590,7 +595,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
