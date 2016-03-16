@@ -567,10 +567,18 @@ Dim nomDocu As String
     indRPT = "0603-00"
 
     If VienedeRealizarCobro Then indRPT = "0603-01"
+        
 
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu ' "Recibo.rpt"
+
+
+    If VienedeRealizarCobro Then
+        cadParam = cadParam & "pRecibo=""" & pNumFactu & """|"
+        cadParam = cadParam & "pFecha=""" & pFecFactu & """|"
+        numParam = numParam + 1
+    End If
 
 
 

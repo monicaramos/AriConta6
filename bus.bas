@@ -4,7 +4,7 @@ Option Explicit
 
 Global I&, J&, K&                             ' Contadores
 Global Msg$, MsgErr$, NumErr&                 ' Variables de control de error
-Global Cont%, Opc%, Skn$, SknDir$             ' Otros contadores
+Global CONT%, Opc%, Skn$, SknDir$             ' Otros contadores
 Public Tmp%, m_hMod&
 
 ' añadido por la insercion de documentos en las lineas de asientos
@@ -88,6 +88,8 @@ Public Const vbTalon = 2
 Public Const vbPagare = 3
 Public Const vbTarjeta = 6
 
+
+Public Const ContCreditoNav = 3
 
 '++
 Public teclaBuscar As Integer   'llamada desde prismaticos
@@ -534,7 +536,7 @@ End Function
 
 Public Sub MuestraError(numero As Long, Optional CADENA As String, Optional Desc As String)
     Dim cad As String
-    Dim AUX As String
+    Dim Aux As String
     'Con este sub pretendemos unificar el msgbox para todos los errores
     'que se produzcan
     On Error Resume Next
@@ -544,14 +546,14 @@ Public Sub MuestraError(numero As Long, Optional CADENA As String, Optional Desc
     End If
     'Numeros de errores que contolamos
     If Conn.Errors.Count > 0 Then
-        ControlamosError AUX
+        ControlamosError Aux
         Conn.Errors.Clear
     Else
-        AUX = ""
+        Aux = ""
     End If
-    If AUX <> "" Then Desc = AUX
+    If Aux <> "" Then Desc = Aux
     If Desc <> "" Then cad = cad & vbCrLf & Desc & vbCrLf & vbCrLf
-    If AUX = "" Then cad = cad & "Número: " & numero & vbCrLf & "Descripción: " & Error(numero)
+    If Aux = "" Then cad = cad & "Número: " & numero & vbCrLf & "Descripción: " & Error(numero)
     MsgBox cad, vbExclamation
 End Sub
 
@@ -566,23 +568,23 @@ End Function
 Public Function RellenaCodigoCuenta(vCodigo As String) As String
     Dim I As Integer
     Dim J As Integer
-    Dim Cont As Integer
+    Dim CONT As Integer
     Dim cad As String
     
     RellenaCodigoCuenta = vCodigo
     If Len(vCodigo) > vEmpresa.DigitosUltimoNivel Then Exit Function
-    I = 0: Cont = 0
+    I = 0: CONT = 0
     Do
         I = I + 1
         I = InStr(I, vCodigo, ".")
         If I > 0 Then
-            If Cont > 0 Then Cont = 1000
-            Cont = Cont + I
+            If CONT > 0 Then CONT = 1000
+            CONT = CONT + I
         End If
     Loop Until I = 0
     
     'Habia mas de un punto
-    If Cont > 1000 Or Cont = 0 Then Exit Function
+    If CONT > 1000 Or CONT = 0 Then Exit Function
     
     'Cambiamos el punto por 0's  .-Utilizo la variable maximocaracteres, para no tener k definir mas
     I = Len(vCodigo) - 1 'el punto lo quito
@@ -592,8 +594,8 @@ Public Function RellenaCodigoCuenta(vCodigo As String) As String
         cad = cad & "0"
     Next I
     
-    cad = Mid(vCodigo, 1, Cont - 1) & cad
-    cad = cad & Mid(vCodigo, Cont + 1)
+    cad = Mid(vCodigo, 1, CONT - 1) & cad
+    cad = cad & Mid(vCodigo, CONT + 1)
     RellenaCodigoCuenta = cad
 End Function
 
@@ -601,7 +603,7 @@ End Function
 Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef OtroCampo As String) As String
     Dim RS As Recordset
     Dim cad As String
-    Dim AUX As String
+    Dim Aux As String
     
     On Error GoTo EDevuelveDesdeBD
     DevuelveDesdeBD = ""
@@ -645,7 +647,7 @@ Public Function DevuelveDesdeBDNew(vBD As Byte, Ktabla As String, kCampo As Stri
 'IN: vBD --> Base de Datos a la que se accede
 Dim RS As Recordset
 Dim cad As String
-Dim AUX As String
+Dim Aux As String
     
 On Error GoTo EDevuelveDesdeBDnew
     DevuelveDesdeBDNew = ""
@@ -1337,13 +1339,13 @@ End Function
 Public Sub NombreSQL(ByRef CADENA As String)
 Dim J As Integer
 Dim I As Integer
-Dim AUX As String
+Dim Aux As String
     J = 1
     Do
         I = InStr(J, CADENA, "'")
         If I > 0 Then
-            AUX = Mid(CADENA, 1, I - 1) & "\"
-            CADENA = AUX & Mid(CADENA, I)
+            Aux = Mid(CADENA, 1, I - 1) & "\"
+            CADENA = Aux & Mid(CADENA, I)
             J = I + 2
         End If
     Loop Until I = 0
@@ -1352,13 +1354,13 @@ End Sub
 Public Function DevNombreSQL(CADENA As String) As String
 Dim J As Integer
 Dim I As Integer
-Dim AUX As String
+Dim Aux As String
     J = 1
     Do
         I = InStr(J, CADENA, "'")
         If I > 0 Then
-            AUX = Mid(CADENA, 1, I - 1) & "\"
-            CADENA = AUX & Mid(CADENA, I)
+            Aux = Mid(CADENA, 1, I - 1) & "\"
+            CADENA = Aux & Mid(CADENA, I)
             J = I + 2
         End If
     Loop Until I = 0
@@ -1808,7 +1810,7 @@ Dim RT As ADODB.Recordset
         If miRsAux!tipomovi = 1 Then
             Tipo = 1
             'FACTURAS PROVEEDORES
-            cad = cad & ",'FRAPRO',1,'" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!nommacta) & "','"
+            cad = cad & ",'FRAPRO',1,'" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!Nommacta) & "','"
             'Numero de factura
             cad = cad & DevNombreSQL(DBLet(miRsAux!numfacpr))
             If Not IsNull(miRsAux!numvenci) Then cad = cad & " - Vto: " & miRsAux!numvenci
@@ -1829,7 +1831,7 @@ Dim RT As ADODB.Recordset
             Else
                 'FACTURA CLIENTE
                 Tipo = 0
-                cad = cad & ",'FRACLI',0,'" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!nommacta) & "','"
+                cad = cad & ",'FRACLI',0,'" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!Nommacta) & "','"
                 'Numero factura
                 If Not IsNull(miRsAux!NUmSerie) Then cad = cad & miRsAux!NUmSerie
                 If Not IsNull(miRsAux!numfaccl) Then cad = cad & Format(miRsAux!numfaccl, "0000000000")
@@ -1888,10 +1890,10 @@ Dim SQL As String
             SQL = "ERROR','RECIBO INCORRECTO"
         Else
             SQL = miRsAux!Cta & "','"
-            If IsNull(miRsAux!nommacta) Then
+            If IsNull(miRsAux!Nommacta) Then
                 SQL = SQL & "CTA NO EXISTE"
             Else
-                SQL = SQL & DevNombreSQL(miRsAux!nommacta)
+                SQL = SQL & DevNombreSQL(miRsAux!Nommacta)
             End If
         End If
         SQL = NumRegElim & ",'" & SQL & "','"
@@ -1954,20 +1956,20 @@ End Function
 Public Sub cargaEmpresasTesor(ByRef Lis As ListView)
 Dim Prohibidas As String
 Dim IT
-Dim AUX As String
+Dim Aux As String
 
     Set miRsAux = New ADODB.Recordset
 
     Prohibidas = DevuelveProhibidas
     
     Lis.ListItems.Clear
-    AUX = "Select * from Usuarios.empresas where tesor=1"
+    Aux = "Select * from Usuarios.empresas where tesor=1"
     
-    miRsAux.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
     
-        AUX = "|" & miRsAux!codempre & "|"
-        If InStr(1, Prohibidas, AUX) = 0 Then
+        Aux = "|" & miRsAux!codempre & "|"
+        If InStr(1, Prohibidas, Aux) = 0 Then
             Set IT = Lis.ListItems.Add
             IT.Key = "C" & miRsAux!codempre
             If vEmpresa.codempre = miRsAux!codempre Then IT.Checked = True
