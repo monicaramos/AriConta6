@@ -547,7 +547,6 @@ Begin VB.Form frmTESRealizarCobros
             Height          =   240
             Index           =   1
             Left            =   14310
-            MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESRealizarCobros.frx":7D00
             ToolTipText     =   "Seleccionar todos"
             Top             =   1590
@@ -557,7 +556,6 @@ Begin VB.Form frmTESRealizarCobros
             Height          =   240
             Index           =   0
             Left            =   13920
-            MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESRealizarCobros.frx":7E4A
             ToolTipText     =   "Quitar seleccion"
             Top             =   1590
@@ -1033,7 +1031,7 @@ Dim TipoAnt As Integer
     If vParamT.IntereseCobrosTarjeta > 0 Then
         If Importe < 0 Or Importe >= 100 Then
             MsgBox "Intereses cobro tarjeta. Valor entre 0..100", vbExclamation
-            PonerFoco Me.Text3(6)
+            PonFoco Me.Text3(6)
             Exit Sub
             
         End If
@@ -1041,7 +1039,7 @@ Dim TipoAnt As Integer
         'Solo dejaremos IR cliente a cliente
         If Me.txtCta(5).Text = "" And Importe > 0 Then
             MsgBox "Seleccione una cuenta cliente", vbExclamation
-            PonerFoco Me.txtCta(5)
+            PonFoco Me.txtCta(5)
             Exit Sub
         End If
     End If
@@ -1170,10 +1168,10 @@ Dim TipoAnt As Integer
     
 '???
     ' para la impresion
-    Dim SQL As String
+    Dim Sql As String
     
-    SQL = "delete from tmppendientes where codusu = " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "delete from tmppendientes where codusu = " & vUsu.Codigo
+    Conn.Execute Sql
 '???
     
     
@@ -1195,8 +1193,8 @@ Dim TipoAnt As Integer
               Dim CadInsert As String
               Dim CadValues As String
               
-              SQL = "delete from tmpcobros2 where codusu = " & vUsu.Codigo
-              Conn.Execute SQL
+              Sql = "delete from tmpcobros2 where codusu = " & vUsu.Codigo
+              Conn.Execute Sql
 
               CadInsert = "insert into tmpcobros2 (codusu,numserie,numfactu,fecfactu,numorden,fecvenci,reftalonpag,bancotalonpag) values "
               CadValues = ""
@@ -1409,6 +1407,7 @@ End Function
 
 
 Private Sub Imprimir2()
+Dim Sql As String
 Dim EsCobroTarjetaNavarres As Boolean
 
     EsCobroTarjetaNavarres = False
@@ -1419,15 +1418,15 @@ Dim EsCobroTarjetaNavarres As Boolean
         If EsCobroTarjetaNavarres Then
         
             'parrafo1
-            SQL = ""
+            Sql = ""
             If Combo1.ItemData(Combo1.ListIndex) = vbTarjeta Then
                 If vParamT.IntereseCobrosTarjeta > 0 And ImporteGastosTarjeta_ > 0 Then
-                    SQL = "1"
-                    If Fecha <= vParam.fechafin Then SQL = "2"
-                    SQL = DevuelveDesdeBD("contado" & SQL, "contadores", "tiporegi", ContCreditoNav) 'tarjeta credito tipo NAVARRES
-                    If SQL = "" Then SQL = "1"
-                    J = Val(SQL) + 1
-                    SQL = Format(J, "00000")
+                    Sql = "1"
+                    If Fecha <= vParam.fechafin Then Sql = "2"
+                    Sql = DevuelveDesdeBD("contado" & Sql, "contadores", "tiporegi", ContCreditoNav) 'tarjeta credito tipo NAVARRES
+                    If Sql = "" Then Sql = "1"
+                    J = Val(Sql) + 1
+                    Sql = Format(J, "00000")
                 End If
             End If
                 
@@ -1437,7 +1436,7 @@ Dim EsCobroTarjetaNavarres As Boolean
 
 
     frmTESImpRecibo.VienedeRealizarCobro = EsCobroTarjetaNavarres
-    frmTESImpRecibo.pNumFactu = SQL
+    frmTESImpRecibo.pNumFactu = Sql
     frmTESImpRecibo.pFecFactu = Text3(0).Text
     frmTESImpRecibo.Show vbModal
                                                                          
@@ -1664,6 +1663,10 @@ Private Sub Refrescar()
     Screen.MousePointer = vbDefault
 End Sub
 
+Private Sub chkVerPendiente_Click()
+    CargaList
+End Sub
+
 Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -1742,7 +1745,7 @@ Private Sub Combo1_Validate(Cancel As Boolean)
         
         I = 0
         If Cobros And (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then I = 1
-        Me.mnbarra1.Visible = I = 1
+        Me.mnBarra1.Visible = I = 1
         Me.mnNumero.Visible = I = 1
         
     
@@ -2199,7 +2202,7 @@ Dim cad As String
         vSQL = vSQL & " cobros.codmacta = '" & txtCta(5).Text & "'"
         
         '++
-        If Not Me.chkVerPendiente.Value Then
+        If Me.chkVerPendiente.Value = 0 Then
             If Combo1.ListIndex <> -1 Then
                 If Combo1.ItemData(Combo1.ListIndex) >= 0 Then
                     If vSQL <> "" Then vSQL = vSQL & " and "
@@ -2320,8 +2323,6 @@ Dim J As Byte
         
         Importe = Importe + impo
         
-        
-        
         'Si el documento estaba emitido ya
         If Val(RS!emitdocum) = 1 Then
             'Tiene marcado DOCUMENTO EMITIDO
@@ -2343,12 +2344,9 @@ Private Sub Form_Unload(Cancel As Integer)
     CodmactaUnica = ""
 End Sub
 
-
 Private Sub frmC_Selec(vFecha As Date)
     cad = Format(vFecha, "dd/mm/yyyy")
 End Sub
-
-
 
 Private Sub Image1_Click(Index As Integer)
     frmTESPreguntas.Opcion = 2
@@ -2360,16 +2358,16 @@ Private Sub imgCheck_Click(Index As Integer)
 End Sub
 
 Private Sub imgCuentas_Click(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 
         Set frmCCtas = New frmColCtas
-        SQL = ""
+        Sql = ""
         frmCCtas.DatosADevolverBusqueda = "0"
         frmCCtas.Show vbModal
         
         Set frmCCtas = Nothing
-        If SQL <> "" Then
-            txtCta(Index).Text = SQL
+        If Sql <> "" Then
+            txtCta(Index).Text = Sql
             txtCta_LostFocus Index
         End If
 
@@ -2721,7 +2719,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Function GenerarRecibos2() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Contador As Integer
 Dim J As Integer
 Dim Poblacion As String
@@ -2747,40 +2745,40 @@ Dim Poblacion As String
     
     'Estos datos ya veremos com, y cuadno los relleno
     Set miRsAux = New ADODB.Recordset
-    SQL = "select nifempre,siglasvia,direccion,numero,escalera,piso,puerta,codpos,poblacion,provincia from empresa2"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select nifempre,siglasvia,direccion,numero,escalera,piso,puerta,codpos,poblacion,provincia from empresa2"
+    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'sql= "'1234567890A','Ariadna Software ','Franco Tormo 3, Bajo Izda','46007','Valencia'"
-    SQL = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'"
+    Sql = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'"
     If Not miRsAux.EOF Then
-        SQL = ""
+        Sql = ""
         For J = 1 To 6
-            SQL = SQL & DBLet(miRsAux.Fields(J), "T") & " "
+            Sql = Sql & DBLet(miRsAux.Fields(J), "T") & " "
         Next J
-        SQL = Trim(SQL)
-        SQL = "'" & DBLet(miRsAux!nifempre, "T") & "','" & DevNombreSQL(vEmpresa.nomempre) & "','" & DevNombreSQL(SQL) & "'"
-        SQL = SQL & ",'" & DBLet(miRsAux!codpos, "T") & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "'"
+        Sql = Trim(Sql)
+        Sql = "'" & DBLet(miRsAux!nifempre, "T") & "','" & DevNombreSQL(vEmpresa.nomempre) & "','" & DevNombreSQL(Sql) & "'"
+        Sql = Sql & ",'" & DBLet(miRsAux!codpos, "T") & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "'"
         Poblacion = DevNombreSQL(DBLet(miRsAux!Poblacion, "T"))
         
     End If
     miRsAux.Close
  
-    cad = cad & SQL
+    cad = cad & Sql
     'otralinea,saludos
     cad = cad & ",NULL"
     'parrafo1
-    SQL = ""
+    Sql = ""
     If Combo1.ItemData(Combo1.ListIndex) = vbTarjeta Then
         If vParamT.IntereseCobrosTarjeta > 0 And ImporteGastosTarjeta_ > 0 Then
-            SQL = "1"
-            If Fecha <= vParam.fechafin Then SQL = "2"
-            SQL = DevuelveDesdeBD("contado" & SQL, "contadores", "tiporegi", "3") 'tarjeta credito tipo NAVARRES
-            If SQL = "" Then SQL = "1"
-            J = Val(SQL) + 1
-            SQL = Format(J, "00000")
+            Sql = "1"
+            If Fecha <= vParam.fechafin Then Sql = "2"
+            Sql = DevuelveDesdeBD("contado" & Sql, "contadores", "tiporegi", "3") 'tarjeta credito tipo NAVARRES
+            If Sql = "" Then Sql = "1"
+            J = Val(Sql) + 1
+            Sql = Format(J, "00000")
         End If
     End If
     
-    cad = cad & ",'" & SQL & "'"
+    cad = cad & ",'" & Sql & "'"
     
     
     '------------------------------------------------------------------------
@@ -2788,9 +2786,9 @@ Dim Poblacion As String
     Conn.Execute cad
 
     'Empezamos
-    SQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2, texto3, texto4, texto5, "
-    SQL = SQL & "texto6, importe1, importe2, fecha1, fecha2, fecha3, observa1, observa2, opcion)"
-    SQL = SQL & " VALUES (" & vUsu.Codigo & ","
+    Sql = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2, texto3, texto4, texto5, "
+    Sql = Sql & "texto6, importe1, importe2, fecha1, fecha2, fecha3, observa1, observa2, opcion)"
+    Sql = Sql & " VALUES (" & vUsu.Codigo & ","
 
 
     Contador = 0
@@ -2805,7 +2803,7 @@ Dim Poblacion As String
             'Lo rellenamos por triplicado    'VER ESTO
             'For J = 1 To 3
                 Contador = Contador + 1
-                Conn.Execute SQL & Contador & "," & cad
+                Conn.Execute Sql & Contador & "," & cad
             'Next J
         End If
     Next I
@@ -3325,7 +3323,7 @@ End Function
 'Ahora en funcion de los check haremos la contabilizacion
 'agrupando de un modo o de otro
 Private Sub ContablizaDesdeTmp()
-Dim SQL As String
+Dim Sql As String
 Dim ContraPartidaPorLinea As Boolean
 Dim UnAsientoPorCuenta As Boolean
 Dim PonerCuentaGenerica As Boolean
@@ -3359,8 +3357,8 @@ Dim LineaUltima As Integer
         If GastosTransferencia <> 0 Then
             
             'gastos tramtiaacion transferenca descontados importe
-            SQL = DevuelveDesdeBD("GastTransDescontad", "ctabancaria", "codmacta", Text3(1).Tag, "T")
-            GastosTransDescontados = SQL = "1"
+            Sql = DevuelveDesdeBD("GastTransDescontad", "ctabancaria", "codmacta", Text3(1).Tag, "T")
+            GastosTransDescontados = Sql = "1"
             
             AgrupaCuenta = False
         Else
@@ -3383,10 +3381,10 @@ Dim LineaUltima As Integer
         CampoCuenta = "cta"
     End If
     'EL SQL lo empezamos aquin
-    SQL = CampoCuenta & " AS cliprov,"
+    Sql = CampoCuenta & " AS cliprov,"
     'Selecciona
-    SQL = "select count(*) as numvtos,codigo,numfactura,fecha,cliente," & SQL & "sum(imponible) as importe,sum(total) as gastos from tmpfaclin"
-    SQL = SQL & " where codusu =" & vUsu.Codigo & " GROUP BY "
+    Sql = "select count(*) as numvtos,codigo,numfactura,fecha,cliente," & Sql & "sum(imponible) as importe,sum(total) as gastos from tmpfaclin"
+    Sql = Sql & " where codusu =" & vUsu.Codigo & " GROUP BY "
     cad = ""
     If AgrupaCuenta Then
        If PonerCuentaGenerica Then
@@ -3413,7 +3411,7 @@ Dim LineaUltima As Integer
     'Es decir. Que si agrupo no tengo que ir moviendome por el recodset mirando a ver si
     'las cuentas son iguales.
     'Ya que al hacer group by ya lo estaran
-    cad = SQL & cad
+    cad = Sql & cad
     Set RS = New ADODB.Recordset
     RS.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     'Inicializamos variables
@@ -4428,7 +4426,7 @@ End Sub
 
 Private Sub txtCta_LostFocus(Index As Integer)
 Dim DevfrmCCtas As String
-Dim SQL As String
+Dim Sql As String
 
     Select Case Index
         Case 4 ' cuenta de banco
@@ -4436,25 +4434,25 @@ Dim SQL As String
             DevfrmCCtas = txtCta(Index).Text
             I = 0
             If DevfrmCCtas <> "" Then
-                If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
+                If CuentaCorrectaUltimoNivel(DevfrmCCtas, Sql) Then
                     DevfrmCCtas = DevuelveDesdeBD("codmacta", "bancos", "codmacta", DevfrmCCtas, "T")
                     If DevfrmCCtas = "" Then
-                        SQL = ""
+                        Sql = ""
                         MsgBox "La cuenta contable no esta asociada a ninguna cuenta bancaria", vbExclamation
                     End If
                 Else
-                    MsgBox SQL, vbExclamation
+                    MsgBox Sql, vbExclamation
                     DevfrmCCtas = ""
-                    SQL = ""
+                    Sql = ""
                 End If
                 I = 1
             Else
-                SQL = ""
+                Sql = ""
             End If
             
             
             txtCta(Index).Text = DevfrmCCtas
-            txtDCta(Index).Text = SQL
+            txtDCta(Index).Text = Sql
             If DevfrmCCtas = "" And I = 1 Then
                 PonFoco txtCta(Index)
             Else
@@ -4465,22 +4463,22 @@ Dim SQL As String
             DevfrmCCtas = Trim(txtCta(Index).Text)
             I = 0
             If DevfrmCCtas <> "" Then
-                If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
+                If CuentaCorrectaUltimoNivel(DevfrmCCtas, Sql) Then
                     
                 Else
-                    MsgBox SQL, vbExclamation
+                    MsgBox Sql, vbExclamation
                     If Index < 3 Or Index = 9 Or Index = 10 Or Index = 11 Then
                         DevfrmCCtas = ""
-                        SQL = ""
+                        Sql = ""
                     End If
                 End If
                 I = 1
             Else
-                SQL = ""
+                Sql = ""
             End If
             
             txtCta(Index).Text = DevfrmCCtas
-            txtDCta(Index).Text = SQL
+            txtDCta(Index).Text = Sql
             If DevfrmCCtas = "" And I = 1 Then
                 PonFoco txtCta(Index)
             Else
@@ -4737,7 +4735,7 @@ End Sub
 '-------------------------------------------------------------------------------------
 'ByRef m As Contadores, NumLine As Integer, Marcador As Integer, Cabecera As Byte, ByRef ContraB As String, ByRef LaUltimaAmpliacion As String, ContraParEnBanco As Boolean, CuentaDeCobroGenerica As Boolean, CodigoCtaCoborGenerica As String)
 Private Function InsertarEnAsientosDesdeTemp(ByRef RS1 As ADODB.Recordset, ByRef m As Contadores, Cabecera As Byte, ByRef NumLine As Integer, NumVtos As Integer, Optional VienedeGastos As Boolean)
-Dim SQL As String
+Dim Sql As String
 Dim Ampliacion As String
 Dim Debe As Boolean
 Dim Conce As Integer
@@ -4763,10 +4761,10 @@ Dim ImporteInterno As Currency
     
     If Cabecera = 0 Then
         'La cabecera
-        SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion) VALUES ("
-        SQL = SQL & Ampliacion & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador
-        SQL = SQL & ",  '"
-        SQL = SQL & "Generado desde Tesorería el " & Format(Now, "dd/mm/yyyy hh:mm") & " por " & vUsu.Nombre
+        Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion) VALUES ("
+        Sql = Sql & Ampliacion & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador
+        Sql = Sql & ",  '"
+        Sql = Sql & "Generado desde Tesorería el " & Format(Now, "dd/mm/yyyy hh:mm") & " por " & vUsu.Nombre
         If Combo1.ItemData(Combo1.ListIndex) = 1 And Not Cobros Then
             'TRANSFERENCIA
             Ampliacion = DevuelveDesdeBD("descripcion", "stransfer", "codigo", SegundoParametro, "N")
@@ -4774,31 +4772,31 @@ Dim ImporteInterno As Currency
                 Ampliacion = "Concepto: " & Ampliacion
                 Ampliacion = DevNombreSQL(Ampliacion)
                 Ampliacion = vbCrLf & Ampliacion
-                SQL = SQL & Ampliacion
+                Sql = Sql & Ampliacion
             End If
         End If
         
-        SQL = SQL & "',"
-        SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilizar Cobros'"
+        Sql = Sql & "',"
+        Sql = Sql & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilizar Cobros'"
 
         
-        SQL = SQL & ")"
+        Sql = Sql & ")"
         NumLine = 0
      
     Else
         If Cabecera < 3 Then
             'Lineas de apuntes o cabecera.
             'Comparten el principio
-             SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
-             SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
-             SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada) "
-             SQL = SQL & "VALUES (" & Ampliacion & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador & "," & NumLine & ",'"
+             Sql = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
+             Sql = Sql & "codmacta, numdocum, codconce, ampconce,timporteD,"
+             Sql = Sql & " timporteH, codccost, ctacontr, idcontab, punteada) "
+             Sql = Sql & "VALUES (" & Ampliacion & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador & "," & NumLine & ",'"
              
              '1:  Asiento para el VTO
              If Cabecera = 1 Then
                  'codmacta
                  'Si agrupa la cuenta entonces
-                 SQL = SQL & RS1!cliprov & "','"
+                 Sql = Sql & RS1!cliprov & "','"
                  
                  
                  'numdocum: la factura
@@ -4807,7 +4805,7 @@ Dim ImporteInterno As Currency
                  Else
                     Ampliacion = DevNombreSQL(RecuperaValor(RS1!Cliente, 1) & RecuperaValor(RS1!Cliente, 2))
                  End If
-                 SQL = SQL & Ampliacion & "',"
+                 Sql = Sql & Ampliacion & "',"
                 
                 
                  'Veamos si va al debe, al haber, si ponemos concepto debe / haber etc eyc
@@ -4861,7 +4859,7 @@ Dim ImporteInterno As Currency
                  End If
                 
                 
-                 SQL = SQL & Conce & ","
+                 Sql = Sql & Conce & ","
                  
                  'AMPLIACION
                  Ampliacion = ""
@@ -4950,23 +4948,23 @@ Dim ImporteInterno As Currency
                  Ampliacion = Aux & Ampliacion
                  If Len(Ampliacion) > 30 Then Ampliacion = Mid(Ampliacion, 1, 30)
                 
-                 SQL = SQL & "'" & DevNombreSQL(Ampliacion) & "',"
+                 Sql = Sql & "'" & DevNombreSQL(Ampliacion) & "',"
                  
                  
                  If Debe Then
-                    SQL = SQL & TransformaComasPuntos(CStr(ImporteInterno)) & ",NULL,"
+                    Sql = Sql & TransformaComasPuntos(CStr(ImporteInterno)) & ",NULL,"
                  Else
-                    SQL = SQL & "NULL," & TransformaComasPuntos(CStr(ImporteInterno)) & ","
+                    Sql = Sql & "NULL," & TransformaComasPuntos(CStr(ImporteInterno)) & ","
                  End If
              
                 'CENTRO DE COSTE
-                SQL = SQL & "NULL,"
+                Sql = Sql & "NULL,"
                 
                 'SI pone contrapardida
                 If PonerContrPartida Then
-                   SQL = SQL & "'" & Text3(1).Tag & "',"
+                   Sql = Sql & "'" & Text3(1).Tag & "',"
                 Else
-                   SQL = SQL & "NULL,"
+                   Sql = Sql & "NULL,"
                 End If
             
              
@@ -4975,7 +4973,7 @@ Dim ImporteInterno As Currency
                     'Cierre del asiento con el total contra banco o caja
                     '----------------------------------------------------
                     'codmacta
-                    SQL = SQL & Text3(1).Tag & "','"
+                    Sql = Sql & Text3(1).Tag & "','"
                      
   
                     PonerContrPartida = False
@@ -4992,7 +4990,7 @@ Dim ImporteInterno As Currency
                        Ampliacion = ""
                     End If
                      
-                    SQL = SQL & Ampliacion & "',"
+                    Sql = Sql & Ampliacion & "',"
                    
                     
                     If Cobros Then
@@ -5046,7 +5044,7 @@ Dim ImporteInterno As Currency
                      
                      
                 
-                     SQL = SQL & Conce & ","
+                     Sql = Sql & Conce & ","
                      'AMPLIACION
                      'AMPLIACION
                      Ampliacion = ""
@@ -5123,23 +5121,23 @@ Dim ImporteInterno As Currency
                      Ampliacion = Trim(Aux & Ampliacion)
                      If Len(Ampliacion) > 30 Then Ampliacion = Mid(Ampliacion, 1, 30)
                     
-                     SQL = SQL & "'" & DevNombreSQL(Ampliacion) & "',"
+                     Sql = Sql & "'" & DevNombreSQL(Ampliacion) & "',"
         
                          
                      If Debe Then
-                        SQL = SQL & TransformaComasPuntos(CStr(ImporteInterno)) & ",NULL,"
+                        Sql = Sql & TransformaComasPuntos(CStr(ImporteInterno)) & ",NULL,"
                      Else
-                        SQL = SQL & "NULL," & TransformaComasPuntos(CStr(ImporteInterno)) & ","
+                        Sql = Sql & "NULL," & TransformaComasPuntos(CStr(ImporteInterno)) & ","
                      End If
                  
                      'CENTRO DE COSTE
-                     SQL = SQL & "NULL,"
+                     Sql = Sql & "NULL,"
                     
                      'SI pone contrapardida
                      If PonerContrPartida Then
-                        SQL = SQL & "'" & RS1!cliprov & "',"
+                        Sql = Sql & "'" & RS1!cliprov & "',"
                      Else
-                        SQL = SQL & "NULL,"
+                        Sql = Sql & "NULL,"
                      End If
                 
                         
@@ -5149,10 +5147,10 @@ Dim ImporteInterno As Currency
             'Trozo comun
             '------------------------
             'IdContab
-            SQL = SQL & "'CONTAB',"
+            Sql = Sql & "'CONTAB',"
             
             'Punteado
-            SQL = SQL & "0)"
+            Sql = Sql & "0)"
             
                  
              
@@ -5166,7 +5164,7 @@ Dim ImporteInterno As Currency
     '   Cabecera=2 y impo=0.  Esto sginifica que estamos desbloqueando el apunte e insertandolo para pasarlo a hco
     Debe = True
     If Cabecera = 3 Then Debe = False
-    If Debe Then Conn.Execute SQL
+    If Debe Then Conn.Execute Sql
     
     If Debe Then
         '++monica
@@ -5179,25 +5177,25 @@ Dim ImporteInterno As Currency
             NumLin = NumLin + 1
 
 
-            SQL = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, numdiari, fechaent, "
-            SQL = SQL & " numasien, usuariocobro, tipforpa, impcobro, fecrealizado) values (" & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & ","
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & ","
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," & DBSet(NumLin, "N") & "," & DBSet(vp.diaricli, "N") & ","
-            SQL = SQL & DBSet(FechaAsiento, "F") & "," & DBSet(m.Contador, "N") & "," & DBSet(vUsu.Login, "T") & ","
-            SQL = SQL & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & DBSet(ImporteInterno, "N")
-            SQL = SQL & "," & DBSet(Now, "FH") & ")"
+            Sql = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, numdiari, fechaent, "
+            Sql = Sql & " numasien, usuariocobro, tipforpa, impcobro, fecrealizado) values (" & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & ","
+            Sql = Sql & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & ","
+            Sql = Sql & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," & DBSet(NumLin, "N") & "," & DBSet(vp.diaricli, "N") & ","
+            Sql = Sql & DBSet(FechaAsiento, "F") & "," & DBSet(m.Contador, "N") & "," & DBSet(vUsu.Login, "T") & ","
+            Sql = Sql & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & DBSet(ImporteInterno, "N")
+            Sql = Sql & "," & DBSet(Now, "FH") & ")"
 
-            Conn.Execute SQL
+            Conn.Execute Sql
 
 
             ' actualizamos los cobros realizados
-            cad = "UPDATE cobros_realizados, tmpcobros2 aaa SET cobros.reftalonpag = "
-            cad = cad & " aaa.reftalonpag, cobros.bancotalonpag = aaa.bancotalonpag  "
-
-            cad = cad & " WHERE cobros_realizados.numserie = '" & ListView1.ListItems(I).Text
-            cad = cad & "' AND cobros_realizados.numfactu = " & Val(ListView1.ListItems(I).SubItems(1))
-            cad = cad & " AND cobros_realizados.fecfactu = '" & Format(ListView1.ListItems(I).SubItems(2), FormatoFecha)
-            cad = cad & "' AND cobros_realizados.numorden = " & Val(ListView1.ListItems(I).SubItems(4))
+            cad = "UPDATE cobros_realizados, tmpcobros2 aaa SET cobros_realizados.reftalonpag = "
+            cad = cad & " aaa.reftalonpag, cobros_realizados.bancotalonpag = aaa.bancotalonpag,  "
+            cad = cad & " cobros_realizados.ctabanc2 = " & DBSet(txtCta(4).Text, "T")
+            cad = cad & " WHERE cobros_realizados.numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T")
+            cad = cad & " AND cobros_realizados.numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")
+            cad = cad & " AND cobros_realizados.fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F")
+            cad = cad & " AND cobros_realizados.numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
             cad = cad & " and aaa.codusu = " & vUsu.Codigo
             cad = cad & " and cobros_realizados.numserie = aaa.numserie "
             cad = cad & " and cobros_realizados.numfactu = aaa.numfactu "
@@ -5208,44 +5206,35 @@ Dim ImporteInterno As Currency
             Conn.Execute cad
 
 
-
-
-
-
-
-
-
-
-
-
-
+            Dim Situacion As Byte
+            
             Situacion = 2
 
             Select Case Combo1.ItemData(Combo1.ListIndex)
-                Case vbTalon, vbPagare, vbrecibo
+                Case vbTalon, vbPagare
+                
                     Situacion = 1
             End Select
 
-            SQL = "update cobros set impcobro = (select sum(impcobro) from cobros_realizados where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " AND numorden =" & RecuperaValor(RS1!Cliente, 4) & ") "
-            SQL = SQL & " ,fecultco = " & DBSet(FechaAsiento, "F")
-            SQL = SQL & " ,ctabanc2 = " & DBSet(txtCta(4).Text, "T")
-            SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
-            SQL = SQL & " where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")
-            SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " and numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
+            Sql = "update cobros set impcobro = (select sum(impcobro) from cobros_realizados where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " AND numorden =" & RecuperaValor(RS1!Cliente, 4) & ") "
+            Sql = Sql & " ,fecultco = " & DBSet(FechaAsiento, "F")
+            Sql = Sql & ", situacion = " & DBSet(Situacion, "N")
+            Sql = Sql & " where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")
+            Sql = Sql & " and fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " and numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
 
-            Conn.Execute SQL
+            Conn.Execute Sql
 
         ' en tmppendientes metemos la clave primaria de cobros_recibidos y el importe en letra
                                                           'importe=nro factura,   codforpa=linea de cobros_realizados
-            SQL = "insert into tmppendientes (codusu,serie_cta,importe,fecha,numorden,codforpa, observa) values ("
-            SQL = SQL & vUsu.Codigo & "," & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & "," 'numserie
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," 'numfactu
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & "," 'fecfactu
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," 'numorden
-            SQL = SQL & DBSet(NumLin, "N") & "," 'numlinea
-            SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(ImporteInterno))), "T") & ") "
+            Sql = "insert into tmppendientes (codusu,serie_cta,importe,fecha,numorden,codforpa, observa) values ("
+            Sql = Sql & vUsu.Codigo & "," & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & "," 'numserie
+            Sql = Sql & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," 'numfactu
+            Sql = Sql & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & "," 'fecfactu
+            Sql = Sql & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," 'numorden
+            Sql = Sql & DBSet(NumLin, "N") & "," 'numlinea
+            Sql = Sql & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(ImporteInterno))), "T") & ") "
             
-            Conn.Execute SQL
+            Conn.Execute Sql
 
 
 
@@ -5266,10 +5255,10 @@ Dim ImporteInterno As Currency
         'SOOOOLO COBROS
         If Cobros And riesgo > 0 Then
                      
-             SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
-             SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
-             SQL = SQL & " timporteH,  ctacontr,codccost, idcontab, punteada) "
-             SQL = SQL & "VALUES (" & vp.diaricli & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador & ","
+             Sql = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
+             Sql = Sql & "codmacta, numdocum, codconce, ampconce,timporteD,"
+             Sql = Sql & " timporteH,  ctacontr,codccost, idcontab, punteada) "
+             Sql = Sql & "VALUES (" & vp.diaricli & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador & ","
              
              Ampliacion = DevuelveDesdeBD("ctaingreso", "ctabancaria", "codmacta", Text3(1).Tag, "T")
              If Ampliacion = "" Then
@@ -5315,7 +5304,7 @@ Dim ImporteInterno As Currency
                     Aux = Aux & Ampliacion
                 End If
                 Aux = Aux & ",'CONTAB',0)"
-                Aux = SQL & Aux
+                Aux = Sql & Aux
                 Ejecuta Aux
             Next Conce
         End If
@@ -5328,14 +5317,14 @@ Dim ImporteInterno As Currency
             Debe = True
     End If
     If Debe Then
-        SQL = "UPDATE hcabapu SET bloqactu = 0 WHERE numdiari ="
+        Sql = "UPDATE hcabapu SET bloqactu = 0 WHERE numdiari ="
         If Cobros Then
             Ampliacion = vp.diaricli
         Else
             Ampliacion = vp.diaripro
         End If
         
-        SQL = SQL & Ampliacion & " AND Fechaent = '" & Format(FechaAsiento, FormatoFecha) & "' AND Numasien = " & m.Contador
+        Sql = Sql & Ampliacion & " AND Fechaent = '" & Format(FechaAsiento, FormatoFecha) & "' AND Numasien = " & m.Contador
         
         
         'MODIFICACION 29 Junio 05
@@ -5376,7 +5365,7 @@ End Function
 Private Function GenerarDocumentos() As Boolean
 Dim ListaProveedores As Collection
 Dim Mc As Contadores
-Dim SQL As String
+Dim Sql As String
 Dim J As Integer
 
     
@@ -5410,35 +5399,35 @@ Dim J As Integer
     
     'Estos datos ya veremos com, y cuadno los relleno
     Set miRsAux = New ADODB.Recordset
-    SQL = "select nifempre,siglasvia,direccion,numero,escalera,piso,puerta,codpos,poblacion,provincia,contacto from empresa2"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select nifempre,siglasvia,direccion,numero,escalera,piso,puerta,codpos,poblacion,provincia,contacto from empresa2"
+    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'Paarafo1 Parrafo2 contacto
-    SQL = "'" & Format(Text3(0).Text, "dd mmmm yyyy") & "','',''"
+    Sql = "'" & Format(Text3(0).Text, "dd mmmm yyyy") & "','',''"
     'sql= "'1234567890A','Ariadna Software ','Franco Tormo 3, Bajo Izda','46007','Valencia'"
-    SQL = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'," & SQL
+    Sql = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'," & Sql
     If Not miRsAux.EOF Then
-        SQL = ""
+        Sql = ""
         For I = 1 To 6
-            SQL = SQL & DBLet(miRsAux.Fields(I), "T") & " "
+            Sql = Sql & DBLet(miRsAux.Fields(I), "T") & " "
         Next I
-        SQL = Trim(SQL)
-        SQL = "'" & DBLet(miRsAux!nifempre, "T") & "','" & DevNombreSQL(vEmpresa.nomempre) & "','" & DevNombreSQL(SQL) & "'"
-        SQL = SQL & ",'" & DBLet(miRsAux!codpos, "T") & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "'"
+        Sql = Trim(Sql)
+        Sql = "'" & DBLet(miRsAux!nifempre, "T") & "','" & DevNombreSQL(vEmpresa.nomempre) & "','" & DevNombreSQL(Sql) & "'"
+        Sql = Sql & ",'" & DBLet(miRsAux!codpos, "T") & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "'"
         'Parrafo1, parrafo2
-        SQL = SQL & ",'" & DevNombreSQL(DBLet(miRsAux!Poblacion)) & " " & Format(Text3(0).Text, "dd mmmm yyyy") & "','"
-        SQL = SQL & DevNombreSQL(DBLet(miRsAux!Poblacion)) & "(" & DBLet(miRsAux!provincia) & ")'"
+        Sql = Sql & ",'" & DevNombreSQL(DBLet(miRsAux!Poblacion)) & " " & Format(Text3(0).Text, "dd mmmm yyyy") & "','"
+        Sql = Sql & DevNombreSQL(DBLet(miRsAux!Poblacion)) & "(" & DBLet(miRsAux!provincia) & ")'"
         'Contaccto
-        SQL = SQL & ",'" & DevNombreSQL(DBLet(miRsAux!contacto)) & "' "
+        Sql = Sql & ",'" & DevNombreSQL(DBLet(miRsAux!contacto)) & "' "
     End If
     miRsAux.Close
   
-    cad = cad & SQL
+    cad = cad & Sql
 
     NumRegElim = InStr(1, Text3(1).Text, "-")
-    SQL = DevNombreSQL(Mid(Text3(1).Text, NumRegElim + 1))
+    Sql = DevNombreSQL(Mid(Text3(1).Text, NumRegElim + 1))
 
     '
-    cad = cad & ",'" & SQL & "',"
+    cad = cad & ",'" & Sql & "',"
     
     
     '------------------------------------------------------------------------
@@ -5453,21 +5442,21 @@ Dim J As Integer
     cad = cad & ",'" & RecuperaValor(vTextos, 1) & "'"
     
     'Si tiene numerodetalonpagare entonces
-    SQL = "NULL"
+    Sql = "NULL"
     If NumeroTalonPagere <> "" Then
-        SQL = "codusu = " & vUsu.Codigo & " AND Pasivo = 'Z' AND codigo "
-        SQL = DevuelveDesdeBD("QueCuentas", "tmpimpbalance", SQL, "1", "N")
-        If SQL = "" Then
-            SQL = "NULL"
+        Sql = "codusu = " & vUsu.Codigo & " AND Pasivo = 'Z' AND codigo "
+        Sql = DevuelveDesdeBD("QueCuentas", "tmpimpbalance", Sql, "1", "N")
+        If Sql = "" Then
+            Sql = "NULL"
         Else
-            SQL = "'" & DevNombreSQL(SQL) & "'"
+            Sql = "'" & DevNombreSQL(Sql) & "'"
         End If
     End If
-    cad = cad & "," & SQL
+    cad = cad & "," & Sql
     'Parrafo 5 Updateare el importe total
     cad = cad & ", NULL,  NULL,  NULL)"
     Conn.Execute cad
-    SQL = ""
+    Sql = ""
     
     
     'Contador de inserciones
@@ -5511,20 +5500,20 @@ Dim J As Integer
     
     J = InStr(1, Text3(1).Text, "-")
     DescripcionTransferencia = Trim(Mid(Text3(1).Text, 1, J - 1))
-    SQL = "select ctabancaria.descripcion,ctabancaria.entidad,ctabancaria.oficina,ctabancaria.control,ctabancaria.ctabanco,cuentas.dirdatos,ctabancaria.iban  from ctabancaria ,cuentas "
-    SQL = SQL & " where ctabancaria.codmacta=cuentas.codmacta AND ctabancaria.codmacta = '" & DescripcionTransferencia & "'"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select ctabancaria.descripcion,ctabancaria.entidad,ctabancaria.oficina,ctabancaria.control,ctabancaria.ctabanco,cuentas.dirdatos,ctabancaria.iban  from ctabancaria ,cuentas "
+    Sql = Sql & " where ctabancaria.codmacta=cuentas.codmacta AND ctabancaria.codmacta = '" & DescripcionTransferencia & "'"
+    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If miRsAux.EOF Then
         'ERROR obteniendo cuentas
         If vParamT.TieneOperacionesAseguradas Then MsgBox "Error obteniendo datos cta. contable banco", vbExclamation
     Else
         'ok
         'z340(codusu,codigo,razosoci,dom_intracom,nifdeclarado,nifrepresante,codpais,cp_intracom)
-        SQL = ",1,'" & DevNombreSQL(DBLet(miRsAux!Descripcion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!dirdatos, "T")) & "','"
-        SQL = SQL & Format(miRsAux!Entidad, "0000") & "','" & Format(miRsAux!Oficina, "0000") & "','" & Right("  " & DBLet(miRsAux!Control, "T"), 2) & "','"
-        SQL = SQL & miRsAux!CtaBanco & "','" & UCase(DBLet(miRsAux!IBAN, "T")) & "')"
-        SQL = "INSERT INTO usuarios.z340(codusu,codigo,razosoci,dom_intracom,nifdeclarado,nifrepresante,codpais,cp_intracom,numreg) VALUES (" & vUsu.Codigo & SQL
-        Conn.Execute SQL
+        Sql = ",1,'" & DevNombreSQL(DBLet(miRsAux!Descripcion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!dirdatos, "T")) & "','"
+        Sql = Sql & Format(miRsAux!Entidad, "0000") & "','" & Format(miRsAux!Oficina, "0000") & "','" & Right("  " & DBLet(miRsAux!Control, "T"), 2) & "','"
+        Sql = Sql & miRsAux!CtaBanco & "','" & UCase(DBLet(miRsAux!IBAN, "T")) & "')"
+        Sql = "INSERT INTO usuarios.z340(codusu,codigo,razosoci,dom_intracom,nifdeclarado,nifrepresante,codpais,cp_intracom,numreg) VALUES (" & vUsu.Codigo & Sql
+        Conn.Execute Sql
     End If
     miRsAux.Close
 
@@ -5543,7 +5532,7 @@ End Function
 
 Private Function GenerarDocumentos2(Cta As String, ByRef CContador As Contadores) As Boolean
 Dim Aux As String
-Dim SQL As String
+Dim Sql As String
 Dim ColVtosQuePago As Collection
 Dim FVto As Date
     
@@ -5563,7 +5552,7 @@ Dim FVto As Date
     
     impo = 0
     SubItemVto = 0 'Si vale uno es que ya hemos cojido los datos del proveedor
-    SQL = ""
+    Sql = ""
     Set ColVtosQuePago = New Collection
     For I = 1 To ListView1.ListItems.Count
         With ListView1.ListItems(I)
@@ -5576,8 +5565,8 @@ Dim FVto As Date
                     'Llevara el listado de los pagos que efectuamos
                     'Antes: SQL = SQL & ".- " & Mid(.Text + Space(10), 1, 10)
                     '      fra             fecfac              vto                  fecvenci
-                    SQL = .Text & "|" & .SubItems(1) & "|" & .SubItems(3) & "|" & .SubItems(2) & "|" & .SubItems(8) & "|"
-                    ColVtosQuePago.Add SQL
+                    Sql = .Text & "|" & .SubItems(1) & "|" & .SubItems(3) & "|" & .SubItems(2) & "|" & .SubItems(8) & "|"
+                    ColVtosQuePago.Add Sql
                     
                     'SaltoLinea
                     If SubItemVto = 0 Then
@@ -5640,7 +5629,7 @@ Dim FVto As Date
     cad = cad & ",'" & Aux & "**'"
     
     'Los vencimientos
-    SQL = ""
+    Sql = ""
     For I = 1 To ColVtosQuePago.Count
         'Codigo fra. Reservamos 10 espacios
         
@@ -5661,24 +5650,24 @@ Dim FVto As Date
         'End If
        
        
-        If SQL <> "" Then SQL = SQL & vbCrLf
-        SQL = SQL & Aux
+        If Sql <> "" Then Sql = Sql & vbCrLf
+        Sql = Sql & Aux
     Next I
     
-    cad = cad & ",'" & DevNombreSQL(SQL) & "'," & TransformaComasPuntos(CStr(Importe)) & ")"
+    cad = cad & ",'" & DevNombreSQL(Sql) & "'," & TransformaComasPuntos(CStr(Importe)) & ")"
         
         
-    SQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2, texto3, texto4, texto5, "
-    SQL = SQL & "texto6, observa2, fecha1, fecha2, fecha3, observa1, texto,importe1)"
-    SQL = SQL & " VALUES (" & vUsu.Codigo & ","
+    Sql = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2, texto3, texto4, texto5, "
+    Sql = Sql & "texto6, observa2, fecha1, fecha2, fecha3, observa1, texto,importe1)"
+    Sql = Sql & " VALUES (" & vUsu.Codigo & ","
 
 
-    Conn.Execute SQL & NumRegElim & "," & cad
+    Conn.Execute Sql & NumRegElim & "," & cad
     NumRegElim = NumRegElim + 1
 
        
-    SQL = "UPDATE usuarios.z347carta SET parrafo5 = '" & Format(Importe, FormatoImporte) & "' WHERE codusu = " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "UPDATE usuarios.z347carta SET parrafo5 = '" & Format(Importe, FormatoImporte) & "' WHERE codusu = " & vUsu.Codigo
+    Conn.Execute Sql
 End Function
 
 
@@ -5728,7 +5717,7 @@ End Function
 '
 ' Listado de efectos a pagar por el banco
 Private Function ListadoOrdenPago() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EListadoOrdenPago
     ListadoOrdenPago = False
@@ -5742,20 +5731,20 @@ Dim SQL As String
 
     
     'Recupero el banco
-    SQL = RecuperaValor(vTextos, 2)
-    NumRegElim = InStr(1, SQL, "-")
-    SQL = Trim(Mid(SQL, 1, NumRegElim - 1))
+    Sql = RecuperaValor(vTextos, 2)
+    NumRegElim = InStr(1, Sql, "-")
+    Sql = Trim(Mid(Sql, 1, NumRegElim - 1))
     cad = RecuperaValor(vTextos, 2)
     cad = Trim(Mid(cad, NumRegElim + 1))
-    SegundoParametro = SQL
-    SQL = "select * from ctabancaria where codmacta ='" & SQL & "'"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SegundoParametro = Sql
+    Sql = "select * from ctabancaria where codmacta ='" & Sql & "'"
+    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not miRsAux.EOF Then
         '---------------------------------------------------------
-        SQL = DBLet(miRsAux!Descripcion, "T")
-        If SQL = "" Then SQL = cad
-        cad = "'" & DevNombreSQL(SQL) & "','"
+        Sql = DBLet(miRsAux!Descripcion, "T")
+        If Sql = "" Then Sql = cad
+        cad = "'" & DevNombreSQL(Sql) & "','"
         'entidad oficina control ctabanco
         cad = cad & Format(DBLet(miRsAux!Entidad, "N"), "0000") & " "
         cad = cad & Format(DBLet(miRsAux!Oficina, "N"), "0000") & " "
@@ -5773,11 +5762,11 @@ Dim SQL As String
     End If
     NumRegElim = 0
     
-    SQL = DevSQL
+    Sql = DevSQL
     'Cargo el rs
-    miRsAux.Open SQL, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    miRsAux.Open Sql, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     
-    SQL = ""
+    Sql = ""
     For I = 1 To Me.ListView1.ListItems.Count
         NumRegElim = NumRegElim + 1
         If ListView1.ListItems(I).Checked Then
@@ -5787,35 +5776,35 @@ Dim SQL As String
                 
                 
                 If BuscarVtoPago(ListView1.ListItems(I)) Then
-                    SQL = SQL & cad
+                    Sql = Sql & cad
                     '`codusu`,`nombanco`,`cuentabanco`"  estan en cad
                     
                     'Resto de datos--->
                     '"`ctaprove`,`numfactu`,`fecfactu`,`numorden`,`fecefect`,"
 
-                    SQL = SQL & "'" & DevNombreSQL(ListView1.ListItems(I).Tag) & "','" & DevNombreSQL(ListView1.ListItems(I).Text) & "',"
-                    SQL = SQL & "'" & Format(ListView1.ListItems(I).SubItems(1), FormatoFecha) & "'," & DevNombreSQL(ListView1.ListItems(I).SubItems(3)) & ","
-                    SQL = SQL & "'" & Format(ListView1.ListItems(I).SubItems(2), FormatoFecha) & "',"
+                    Sql = Sql & "'" & DevNombreSQL(ListView1.ListItems(I).Tag) & "','" & DevNombreSQL(ListView1.ListItems(I).Text) & "',"
+                    Sql = Sql & "'" & Format(ListView1.ListItems(I).SubItems(1), FormatoFecha) & "'," & DevNombreSQL(ListView1.ListItems(I).SubItems(3)) & ","
+                    Sql = Sql & "'" & Format(ListView1.ListItems(I).SubItems(2), FormatoFecha) & "',"
                     
                     'cad = cad & " `impefect`,`ctabanc1`,
-                    SQL = SQL & TransformaComasPuntos(CStr(impo)) & ",'"
-                    SQL = SQL & SegundoParametro & "'"
+                    Sql = Sql & TransformaComasPuntos(CStr(impo)) & ",'"
+                    Sql = Sql & SegundoParametro & "'"
                     '`ctabanc2`,`contdocu`
-                    SQL = SQL & ",NULL,0,"
+                    Sql = Sql & ",NULL,0,"
                                 
                     '`entidad`,`oficina`,`CC`,`cuentaba`
                     If Not IsNull(miRsAux!Entidad) Then
-                        SQL = SQL & "'" & Format(miRsAux!Entidad, "0000") & "','"
-                        SQL = SQL & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "','"
-                        SQL = SQL & DBLet(miRsAux!CC, "T") & "','"
-                        SQL = SQL & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000") & "' "
+                        Sql = Sql & "'" & Format(miRsAux!Entidad, "0000") & "','"
+                        Sql = Sql & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "','"
+                        Sql = Sql & DBLet(miRsAux!CC, "T") & "','"
+                        Sql = Sql & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000") & "' "
                     
                     Else
-                        SQL = SQL & "NULL,NULL,NULL,NULL"
+                        Sql = Sql & "NULL,NULL,NULL,NULL"
                     End If
                     
                     'cad = cad & " `nomprove`"
-                    SQL = SQL & ",'" & DevNombreSQL(ListView1.ListItems(I).SubItems(4)) & "') "
+                    Sql = Sql & ",'" & DevNombreSQL(ListView1.ListItems(I).SubItems(4)) & "') "
                     NumRegElim = NumRegElim + 1
                     
                     
@@ -5832,13 +5821,13 @@ Dim SQL As String
     
     
     'Cadena insercion
-    If SQL <> "" Then
-        SQL = Mid(SQL, 3)  'QUITO la primera coma
+    If Sql <> "" Then
+        Sql = Mid(Sql, 3)  'QUITO la primera coma
         cad = "INSERT INTO usuarios.zlistadopagos (`codusu`,`nombanco`,`cuentabanco`,"
         cad = cad & "`ctaprove`,`numfactu`,`fecfactu`,`numorden`,`fecefect`,"
         cad = cad & " `impefect`,`ctabanc1`,`ctabanc2`,`contdocu`,`entidad`,`oficina`,`CC`,`cuentaba`,"
         cad = cad & " `nomprove`) VALUES "
-        cad = cad & SQL
+        cad = cad & Sql
         Conn.Execute cad
     End If
     
@@ -6011,13 +6000,13 @@ End Sub
 
 
 Private Function EsTalonOPagare(NumSer As String, NumFact As String, FecFact As String, NumOrd As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Tipo As Byte
 
-    SQL = "select tipforpa from formapago, cobros  where cobros.codforpa = formapago.codforpa and cobros.numserie = " & DBSet(NumSer, "T")
-    SQL = SQL & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F") & " and numorden = " & DBSet(NumOrd, "N")
+    Sql = "select tipforpa from formapago, cobros  where cobros.codforpa = formapago.codforpa and cobros.numserie = " & DBSet(NumSer, "T")
+    Sql = Sql & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F") & " and numorden = " & DBSet(NumOrd, "N")
     
-    Tipo = DevuelveValor(SQL)
+    Tipo = DevuelveValor(Sql)
     EsTalonOPagare = (CByte(Tipo) = 2 Or CByte(Tipo) = 3)
 
 End Function
