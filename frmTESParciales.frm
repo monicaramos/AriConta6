@@ -1398,7 +1398,7 @@ Dim Situacion As Integer
         Situacion = 2
         
         Select Case Combo1.ItemData(Combo1.ListIndex)
-            Case vbTalon, vbPagare, vbrecibo
+            Case vbTalon, vbPagare, vbTipoPagoRemesa
                 Situacion = 1
         End Select
     

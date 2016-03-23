@@ -28,9 +28,9 @@ Begin VB.Form frmFacturasCli
          Strikethrough   =   0   'False
       EndProperty
       Height          =   2265
-      Left            =   390
+      Left            =   360
       TabIndex        =   100
-      Top             =   2490
+      Top             =   2520
       Visible         =   0   'False
       Width           =   16935
       Begin VB.TextBox Text4 
