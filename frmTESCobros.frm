@@ -373,97 +373,77 @@ Begin VB.Form frmTESCobros
       Tab(0).Control(24).Enabled=   0   'False
       Tab(0).Control(25)=   "Label1(10)"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "Text1(26)"
+      Tab(0).Control(26)=   "Combo1"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "Text1(31)"
+      Tab(0).Control(27)=   "Text1(19)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Text1(30)"
+      Tab(0).Control(28)=   "Text1(26)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Text1(29)"
+      Tab(0).Control(29)=   "Text1(31)"
       Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "Text1(28)"
+      Tab(0).Control(30)=   "Text1(30)"
       Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "Text2(0)"
+      Tab(0).Control(31)=   "Text1(29)"
       Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "Text1(4)"
+      Tab(0).Control(32)=   "Text1(28)"
       Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "Text2(1)"
+      Tab(0).Control(33)=   "Text2(0)"
       Tab(0).Control(33).Enabled=   0   'False
-      Tab(0).Control(34)=   "Text1(0)"
+      Tab(0).Control(34)=   "Text1(4)"
       Tab(0).Control(34).Enabled=   0   'False
-      Tab(0).Control(35)=   "Text1(5)"
+      Tab(0).Control(35)=   "Text2(1)"
       Tab(0).Control(35).Enabled=   0   'False
-      Tab(0).Control(36)=   "Text1(6)"
+      Tab(0).Control(36)=   "Text1(0)"
       Tab(0).Control(36).Enabled=   0   'False
-      Tab(0).Control(37)=   "Text2(2)"
+      Tab(0).Control(37)=   "Text1(5)"
       Tab(0).Control(37).Enabled=   0   'False
-      Tab(0).Control(38)=   "Text1(9)"
+      Tab(0).Control(38)=   "Text1(6)"
       Tab(0).Control(38).Enabled=   0   'False
-      Tab(0).Control(39)=   "Text2(3)"
+      Tab(0).Control(39)=   "Text2(2)"
       Tab(0).Control(39).Enabled=   0   'False
-      Tab(0).Control(40)=   "Text1(10)"
+      Tab(0).Control(40)=   "Text1(9)"
       Tab(0).Control(40).Enabled=   0   'False
-      Tab(0).Control(41)=   "Text1(33)"
+      Tab(0).Control(41)=   "Text2(3)"
       Tab(0).Control(41).Enabled=   0   'False
-      Tab(0).Control(42)=   "Text2(4)"
+      Tab(0).Control(42)=   "Text1(10)"
       Tab(0).Control(42).Enabled=   0   'False
-      Tab(0).Control(43)=   "Text1(32)"
+      Tab(0).Control(43)=   "Text1(33)"
       Tab(0).Control(43).Enabled=   0   'False
-      Tab(0).Control(44)=   "Text1(16)"
+      Tab(0).Control(44)=   "Text2(4)"
       Tab(0).Control(44).Enabled=   0   'False
-      Tab(0).Control(45)=   "Text1(17)"
+      Tab(0).Control(45)=   "Text1(32)"
       Tab(0).Control(45).Enabled=   0   'False
-      Tab(0).Control(46)=   "frameContene"
+      Tab(0).Control(46)=   "Text1(16)"
       Tab(0).Control(46).Enabled=   0   'False
-      Tab(0).Control(47)=   "Text2(5)"
+      Tab(0).Control(47)=   "Text1(17)"
       Tab(0).Control(47).Enabled=   0   'False
-      Tab(0).Control(48)=   "Text1(34)"
+      Tab(0).Control(48)=   "frameContene"
       Tab(0).Control(48).Enabled=   0   'False
-      Tab(0).Control(49)=   "txtPendiente"
+      Tab(0).Control(49)=   "Text2(5)"
       Tab(0).Control(49).Enabled=   0   'False
-      Tab(0).Control(50)=   "Text1(19)"
+      Tab(0).Control(50)=   "Text1(34)"
       Tab(0).Control(50).Enabled=   0   'False
-      Tab(0).Control(51)=   "Text1(12)"
+      Tab(0).Control(51)=   "txtPendiente"
       Tab(0).Control(51).Enabled=   0   'False
-      Tab(0).Control(52)=   "Text1(11)"
+      Tab(0).Control(52)=   "Text1(12)"
       Tab(0).Control(52).Enabled=   0   'False
-      Tab(0).Control(53)=   "Text1(7)"
+      Tab(0).Control(53)=   "Text1(11)"
       Tab(0).Control(53).Enabled=   0   'False
-      Tab(0).Control(54)=   "Text1(8)"
+      Tab(0).Control(54)=   "Text1(7)"
       Tab(0).Control(54).Enabled=   0   'False
-      Tab(0).Control(55)=   "FrameRemesa"
+      Tab(0).Control(55)=   "Text1(8)"
       Tab(0).Control(55).Enabled=   0   'False
-      Tab(0).Control(56)=   "Check1(2)"
+      Tab(0).Control(56)=   "FrameRemesa"
       Tab(0).Control(56).Enabled=   0   'False
-      Tab(0).Control(57)=   "SSTab2"
+      Tab(0).Control(57)=   "Check1(2)"
       Tab(0).Control(57).Enabled=   0   'False
-      Tab(0).Control(58)=   "FrameDatosFiscales"
+      Tab(0).Control(58)=   "SSTab2"
       Tab(0).Control(58).Enabled=   0   'False
-      Tab(0).Control(59)=   "Check1(4)"
+      Tab(0).Control(59)=   "FrameDatosFiscales"
       Tab(0).Control(59).Enabled=   0   'False
-      Tab(0).Control(60)=   "Combo1"
+      Tab(0).Control(60)=   "Check1(4)"
       Tab(0).Control(60).Enabled=   0   'False
       Tab(0).ControlCount=   61
-      Begin VB.ComboBox Combo1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         ItemData        =   "frmTESCobros.frx":006C
-         Left            =   7410
-         List            =   "frmTESCobros.frx":0079
-         Style           =   2  'Dropdown List
-         TabIndex        =   6
-         Tag             =   "Situación|N|N|||cobros|situacion|||"
-         Top             =   720
-         Width           =   2175
-      End
       Begin VB.CheckBox Check1 
          Caption         =   "NO remesar"
          BeginProperty Font 
@@ -495,7 +475,7 @@ Begin VB.Form frmTESCobros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3435
-         Left            =   240
+         Left            =   270
          TabIndex        =   127
          Top             =   1110
          Visible         =   0   'False
@@ -807,18 +787,18 @@ Begin VB.Form frmTESCobros
             Strikethrough   =   0   'False
          EndProperty
          TabCaption(0)   =   "Cobros Realizados"
-         TabPicture(0)   =   "frmTESCobros.frx":00B0
+         TabPicture(0)   =   "frmTESCobros.frx":006C
          Tab(0).ControlEnabled=   -1  'True
          Tab(0).Control(0)=   "FrameAux0"
          Tab(0).Control(0).Enabled=   0   'False
          Tab(0).ControlCount=   1
          TabCaption(1)   =   "Devoluciones"
-         TabPicture(1)   =   "frmTESCobros.frx":00CC
+         TabPicture(1)   =   "frmTESCobros.frx":0088
          Tab(1).ControlEnabled=   0   'False
          Tab(1).Control(0)=   "FrameAux1"
          Tab(1).ControlCount=   1
          TabCaption(2)   =   "Fechas Op.Asegurada"
-         TabPicture(2)   =   "frmTESCobros.frx":00E8
+         TabPicture(2)   =   "frmTESCobros.frx":00A4
          Tab(2).ControlEnabled=   0   'False
          Tab(2).Control(0)=   "FrameSeguro"
          Tab(2).ControlCount=   1
@@ -1531,7 +1511,7 @@ Begin VB.Form frmTESCobros
                Height          =   240
                Index           =   4
                Left            =   1740
-               Picture         =   "frmTESCobros.frx":0104
+               Picture         =   "frmTESCobros.frx":00C0
                Top             =   300
                Width           =   240
             End
@@ -1539,7 +1519,7 @@ Begin VB.Form frmTESCobros
                Height          =   240
                Index           =   6
                Left            =   6810
-               Picture         =   "frmTESCobros.frx":018F
+               Picture         =   "frmTESCobros.frx":014B
                Top             =   330
                Width           =   240
             End
@@ -1547,7 +1527,7 @@ Begin VB.Form frmTESCobros
                Height          =   240
                Index           =   5
                Left            =   4410
-               Picture         =   "frmTESCobros.frx":021A
+               Picture         =   "frmTESCobros.frx":01D6
                Top             =   300
                Width           =   240
             End
@@ -1555,7 +1535,7 @@ Begin VB.Form frmTESCobros
                Height          =   240
                Index           =   7
                Left            =   9630
-               Picture         =   "frmTESCobros.frx":02A5
+               Picture         =   "frmTESCobros.frx":0261
                Top             =   330
                Width           =   240
             End
@@ -1838,7 +1818,7 @@ Begin VB.Form frmTESCobros
                _Version        =   393216
             End
             Begin MSDataGridLib.DataGrid DataGridAux 
-               Bindings        =   "frmTESCobros.frx":0330
+               Bindings        =   "frmTESCobros.frx":02EC
                Height          =   825
                Index           =   1
                Left            =   0
@@ -1969,9 +1949,9 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            ItemData        =   "frmTESCobros.frx":0348
+            ItemData        =   "frmTESCobros.frx":0304
             Left            =   1290
-            List            =   "frmTESCobros.frx":034A
+            List            =   "frmTESCobros.frx":0306
             Style           =   2  'Dropdown List
             TabIndex        =   28
             Top             =   840
@@ -1988,9 +1968,9 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            ItemData        =   "frmTESCobros.frx":034C
+            ItemData        =   "frmTESCobros.frx":0308
             Left            =   1290
-            List            =   "frmTESCobros.frx":0359
+            List            =   "frmTESCobros.frx":0315
             Style           =   2  'Dropdown List
             TabIndex        =   25
             Tag             =   "Remesa|N|S|0||cobros|tiporem|||"
@@ -2206,7 +2186,7 @@ Begin VB.Form frmTESCobros
          TabIndex        =   16
          Tag             =   "CSB|T|S|||cobros|text33csb|||"
          Text            =   "WWW4567890WWW4567890WWW4567890WWW456789WWWW4567890WWW4567890WWW4567890WWW456789J"
-         Top             =   3540
+         Top             =   3510
          Width           =   9225
       End
       Begin VB.TextBox Text1 
@@ -2227,26 +2207,6 @@ Begin VB.Form frmTESCobros
          Tag             =   "T|T|S|||cobros|text41csb|||"
          Top             =   4200
          Width           =   9225
-      End
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   19
-         Left            =   5700
-         MaxLength       =   4
-         TabIndex        =   9
-         Tag             =   "Iban|T|S|||cobros|iban|||"
-         Text            =   "ES99"
-         Top             =   2130
-         Width           =   645
       End
       Begin VB.TextBox txtPendiente 
          Alignment       =   1  'Right Justify
@@ -2390,8 +2350,8 @@ Begin VB.Form frmTESCobros
          ScrollBars      =   2  'Vertical
          TabIndex        =   18
          Tag             =   "obs|T|S|||cobros|observa|||"
-         Text            =   "frmTESCobros.frx":0378
-         Top             =   4890
+         Text            =   "frmTESCobros.frx":0334
+         Top             =   4920
          Width           =   9225
       End
       Begin VB.TextBox Text1 
@@ -2476,7 +2436,7 @@ Begin VB.Form frmTESCobros
          Width           =   1095
       End
       Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
+         Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -2488,11 +2448,11 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   4950
+         Left            =   5100
          TabIndex        =   34
-         Text            =   "Text1"
-         Top             =   4200
-         Width           =   1350
+         Text            =   "0000"
+         Top             =   2130
+         Width           =   675
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
@@ -2507,12 +2467,12 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   6360
+         Left            =   7410
          Locked          =   -1  'True
          TabIndex        =   52
          Text            =   "Text2"
-         Top             =   4200
-         Width           =   3195
+         Top             =   720
+         Width           =   2235
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -2676,6 +2636,7 @@ Begin VB.Form frmTESCobros
          Width           =   5625
       End
       Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -2687,15 +2648,15 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   360
          Index           =   28
-         Left            =   6390
+         Left            =   6630
          MaxLength       =   4
          TabIndex        =   10
-         Tag             =   "Entidad|N|S|0||cobros|entidad|0000||"
-         Text            =   "9999"
+         Text            =   "0000"
          Top             =   2130
-         Width           =   615
+         Width           =   675
       End
       Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -2707,13 +2668,12 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   360
          Index           =   29
-         Left            =   7050
+         Left            =   7380
          MaxLength       =   4
          TabIndex        =   11
-         Tag             =   "Sucursal|N|S|0||cobros|oficina|0000||"
-         Text            =   "9999"
+         Text            =   "0000"
          Top             =   2130
-         Width           =   615
+         Width           =   675
       End
       Begin VB.TextBox Text1 
          Alignment       =   2  'Center
@@ -2728,15 +2688,15 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   360
          Index           =   30
-         Left            =   7710
-         MaxLength       =   2
+         Left            =   8145
+         MaxLength       =   4
          TabIndex        =   12
-         Tag             =   "D.C.|T|S|0||cobros|control|||"
-         Text            =   "99"
+         Text            =   "0000"
          Top             =   2130
-         Width           =   435
+         Width           =   675
       End
       Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -2748,13 +2708,32 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   360
          Index           =   31
-         Left            =   8220
-         MaxLength       =   10
+         Left            =   8910
+         MaxLength       =   4
          TabIndex        =   13
-         Tag             =   "Cuenta|T|S|||cobros|cuentaba|0000000000||"
-         Text            =   "9999999999"
+         Text            =   "0000"
          Top             =   2130
-         Width           =   1365
+         Width           =   675
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   26
+         Left            =   5865
+         MaxLength       =   20
+         TabIndex        =   35
+         Text            =   "0000"
+         Top             =   2130
+         Width           =   675
       End
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -2767,13 +2746,35 @@ Begin VB.Form frmTESCobros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   26
-         Left            =   6930
-         MaxLength       =   20
-         TabIndex        =   35
-         Text            =   "Text1"
-         Top             =   4965
-         Width           =   2535
+         Index           =   19
+         Left            =   5760
+         MaxLength       =   40
+         TabIndex        =   9
+         Tag             =   "Iban|T|S|||cobros|iban|||"
+         Text            =   "ES99"
+         Top             =   1440
+         Width           =   3795
+      End
+      Begin VB.ComboBox Combo1 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         ItemData        =   "frmTESCobros.frx":033A
+         Left            =   5190
+         List            =   "frmTESCobros.frx":0347
+         Style           =   2  'Dropdown List
+         TabIndex        =   6
+         Tag             =   "Situación|N|N|||cobros|situacion|||"
+         Top             =   720
+         Width           =   2175
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
@@ -2806,7 +2807,7 @@ Begin VB.Form frmTESCobros
          Index           =   3
          Left            =   9270
          Picture         =   "frmTESCobros.frx":037E
-         Top             =   2520
+         Top             =   2580
          Width           =   240
       End
       Begin VB.Image imgFecha 
@@ -2910,9 +2911,9 @@ Begin VB.Form frmTESCobros
          EndProperty
          Height          =   195
          Index           =   33
-         Left            =   5040
+         Left            =   5160
          TabIndex        =   76
-         Top             =   2160
+         Top             =   1860
          Width           =   780
       End
       Begin VB.Label Label6 
@@ -3266,6 +3267,7 @@ Begin VB.Form frmTESCobros
          Width           =   765
       End
       Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3320,6 +3322,7 @@ Begin VB.Form frmTESCobros
          Height          =   360
          Index           =   2
          Left            =   2760
+         MaxLength       =   8
          TabIndex        =   3
          Tag             =   "Fecha Factura|F|N|||cobros|fecfactu|dd/mm/yyyy|S|"
          Text            =   "Text1"
@@ -3751,13 +3754,13 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtaux(5)
+            PonFoco txtAux(5)
         Case 2 ' fecha
             'En tag pongo el txtfecha asociado
             cmdAux(1).Tag = 2
             DevfrmCCtas = Format(Now, "dd/mm/yyyy")
-            If IsDate(txtaux(CInt(cmdAux(1).Tag)).Text) Then _
-                DevfrmCCtas = Format(txtaux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
+            If IsDate(txtAux(CInt(cmdAux(1).Tag)).Text) Then _
+                DevfrmCCtas = Format(txtAux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
             Set frmC1 = New frmCal
             frmC1.Fecha = CDate(DevfrmCCtas)
             DevfrmCCtas = ""
@@ -3862,6 +3865,7 @@ Private Sub BotonAnyadir()
     lblIndicador.Caption = "INSERTANDO"
     
     Combo1.ListIndex = 0
+    Text2(3).Text = Combo1.Text
     
     '###A mano
     PonFoco Text1(13)
@@ -4108,6 +4112,8 @@ Dim impo As Currency
     Unload Me
 End Sub
 
+
+
 Private Sub DataGridAux_DblClick(Index As Integer)
     If Index = 0 Then BotonVerAsiento
 End Sub
@@ -4246,6 +4252,7 @@ Private Sub LimpiarCampos()
     Check1(4).Value = 0
     cboTipoRem.ListIndex = -1
     Combo1.ListIndex = -1
+    Text2(3).Text = ""
     lblIndicador.Caption = ""
     
     
@@ -4329,7 +4336,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -4648,10 +4655,10 @@ Private Sub Text1_LostFocus(Index As Integer)
         If DevfrmCCtas <> "" Then
             If Modo > 2 And Index = 4 Then
                 SQL = ""
-                For I = 1 To 4
-                    SQL = SQL & Text1(27 + I).Text
-                Next I
-        
+'                For I = 1 To 4
+'                    SQL = SQL & Text1(27 + I).Text
+'                Next I
+'
                 Valor = DevuelveLaCtaBanco(DevfrmCCtas)
                 If Len(Valor) = 5 Then Valor = ""
                 If CStr(Valor) <> "" Then
@@ -4660,12 +4667,26 @@ Private Sub Text1_LostFocus(Index As Integer)
                     End If
                     If SQL = "" Then
                         SQL = DevuelveLaCtaBanco(DevfrmCCtas)
-                        For I = 1 To 4
-                            Text1(27 + I).Text = RecuperaValor(SQL, I)
-                        Next I
-                        Text1(19).Text = RecuperaValor(SQL, I)  'I=5
+'                        For I = 1 To 4
+'                            Text1(27 + I).Text = RecuperaValor(SQL, I)
+'                        Next I
+'                        Text1(19).Text = RecuperaValor(SQL, I)  'I=5
+
+                        Text1(10).Text = Mid(RecuperaValor(SQL, 5), 1, 4)
+                        Text1(26).Text = Mid(RecuperaValor(SQL, 5), 5, 4)
+                        Text1(28).Text = Mid(RecuperaValor(SQL, 5), 9, 4)
+                        Text1(29).Text = Mid(RecuperaValor(SQL, 5), 13, 4)
+                        Text1(30).Text = Mid(RecuperaValor(SQL, 5), 17, 4)
+                        Text1(31).Text = Mid(RecuperaValor(SQL, 5), 21, 4)
+
+                        Text1(19).Text = RecuperaValor(SQL, 5)
                     End If
                 End If
+
+                SQL = DevuelveLaCtaBanco(DevfrmCCtas)
+                
+
+
             End If
             If Index = 4 Then
                 'Veremos si es asegurado
@@ -4760,55 +4781,91 @@ Private Sub Text1_LostFocus(Index As Integer)
             Text1(13).Text = UCase(Text1(13).Text)
         End If
         
-    Case 28 To 31
+'    Case 28 To 31
+'        'Cuenta bancaria
+'        If Index < 30 Then
+'            I = 4
+'        Else
+'            If Index = 30 Then
+'                I = 2
+'            Else
+'                I = 10
+'            End If
+'        End If
+'        If Not IsNumeric(Text1(Index).Text) Then
+'            MsgBox "Cuenta banco debe ser numérico: " & Text1(Index).Text, vbExclamation
+'            Text1(Index).Text = ""
+'            PonerFoco Text1(Index)
+'        Else
+'            'Formateamos
+'            SQL = ""
+'            While Len(SQL) <> I
+'                SQL = SQL & "0"
+'            Wend
+'            SQL = SQL & Text1(Index).Text
+'            Text1(Index).Text = Right(SQL, I)
+'
+'        End If
+'
+'        SQL = ""
+'        For I = 28 To 31
+'            SQL = SQL & Text1(I).Text
+'        Next
+'
+'        If Len(SQL) = 20 And Index = 31 Then 'solo cuando pierde el foco la cuentaban
+'            'OK. Calculamos el IBAN
+'
+'
+'            If Text1(19).Text = "" Then
+'                'NO ha puesto IBAN
+'                If DevuelveIBAN2("ES", SQL, SQL) Then Text1(19).Text = "ES" & SQL
+'            Else
+'                Valor = CStr(Mid(Text1(19).Text, 1, 2))
+'                If DevuelveIBAN2(CStr(Valor), SQL, SQL) Then
+'                    If Mid(Text1(19).Text, 3) <> SQL Then
+'
+'                        MsgBox "Codigo IBAN distinto del calculado [" & Valor & SQL & "]", vbExclamation
+'                        'Text1(19).Text = "ES" & SQL
+'                    End If
+'                End If
+'            End If
+'        End If
+
+    Case 28 To 31, 10, 26
         'Cuenta bancaria
-        If Index < 30 Then
-            I = 4
-        Else
-            If Index = 30 Then
-                I = 2
-            Else
-                I = 10
-            End If
-        End If
         If Not IsNumeric(Text1(Index).Text) Then
             MsgBox "Cuenta banco debe ser numérico: " & Text1(Index).Text, vbExclamation
             Text1(Index).Text = ""
             PonerFoco Text1(Index)
         Else
             'Formateamos
-            SQL = ""
-            While Len(SQL) <> I
-                SQL = SQL & "0"
-            Wend
-            SQL = SQL & Text1(Index).Text
-            Text1(Index).Text = Right(SQL, I)
+            If Index <> 28 Then
+                Text1(Index).Text = Format(Text1(Index).Text, "0000")
+            End If
             
         End If
         
-        SQL = ""
-        For I = 28 To 31
-            SQL = SQL & Text1(I).Text
-        Next
+        SQL = Text1(26).Text & Text1(28).Text & Text1(29).Text & Text1(30).Text & Text1(31).Text
         
         If Len(SQL) = 20 And Index = 31 Then 'solo cuando pierde el foco la cuentaban
             'OK. Calculamos el IBAN
             
             
-            If Text1(19).Text = "" Then
+            If Text1(10).Text = "" Then
                 'NO ha puesto IBAN
-                If DevuelveIBAN2("ES", SQL, SQL) Then Text1(19).Text = "ES" & SQL
+                If DevuelveIBAN2("ES", SQL, SQL) Then Text1(10).Text = "ES" & SQL
             Else
-                Valor = CStr(Mid(Text1(19).Text, 1, 2))
+                Valor = CStr(Mid(Text1(10).Text, 1, 2))
                 If DevuelveIBAN2(CStr(Valor), SQL, SQL) Then
-                    If Mid(Text1(19).Text, 3) <> SQL Then
+                    If Mid(Text1(10).Text, 3) <> SQL Then
                         
                         MsgBox "Codigo IBAN distinto del calculado [" & Valor & SQL & "]", vbExclamation
-                        'Text1(19).Text = "ES" & SQL
                     End If
                 End If
             End If
         End If
+        
+        Text1(19).Text = Text1(10).Text & Text1(26).Text & Text1(28).Text & Text1(29).Text & Text1(30).Text & Text1(31).Text
         
         
     Case 33
@@ -5008,7 +5065,7 @@ Private Sub PonerCampos()
     
     Text2(0).Text = PonerNombreDeCod(Text1(4), "cuentas", "nommacta", "codmacta", "T")
     Text2(2).Text = PonerNombreDeCod(Text1(9), "cuentas", "nommacta", "codmacta", "T")
-    Text2(3).Text = PonerNombreDeCod(Text1(10), "cuentas", "nommacta", "codmacta", "T")
+    Text2(3).Text = Combo1.Text 'PonerNombreDeCod(Text1(10), "cuentas", "nommacta", "codmacta", "T")
     
     Text2(36).Text = PonerNombreDeCod(Text1(36), "paises", "nompais", "codpais", "T")
     
@@ -5027,7 +5084,13 @@ Private Sub PonerCampos()
     
     cboSituRem_Validate False
     
-    
+    ' situamos los campos del iban
+    Text1(10) = Mid(Text1(19), 1, 4)
+    Text1(26) = Mid(Text1(19), 5, 4)
+    Text1(28) = Mid(Text1(19), 9, 4)
+    Text1(29) = Mid(Text1(19), 13, 4)
+    Text1(30) = Mid(Text1(19), 17, 4)
+    Text1(31) = Mid(Text1(19), 21, 4)
     
     'Cargamos el LINEAS
     DataGridAux(0).Enabled = False
@@ -5196,14 +5259,14 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
         LLamaLineas 0, 3, anc
     End If
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).BackColor = vbWhite
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
     Next I
     
     Check1(2).Enabled = (Modo = 1)
     Check1(4).Enabled = (Modo = 1)
     
-    Combo1.Enabled = (Modo = 1) Or ((vUsu.Nombre = "root") And Modo = 4)
+    Combo1.Enabled = False '(Modo = 1) Or ((vUsu.Nombre = "root") And Modo = 4)
     
         
 End Sub
@@ -5267,7 +5330,7 @@ Dim Tipo As Integer
     
 
     
-    DevfrmCCtas = Trim(Text1(28).Text) & Trim(Text1(29).Text) & Trim(Text1(31).Text)
+    DevfrmCCtas = Trim(Text1(26).Text) & Trim(Text1(28).Text) & Mid(Trim(Text1(29).Text), 3, 2) & Trim(Text1(30).Text) & Trim(Text1(31).Text)
     
     
     
@@ -5290,26 +5353,26 @@ Dim Tipo As Integer
         
     If B Then
             BuscaChekc = CodigoDeControl(DevfrmCCtas)
-            If BuscaChekc <> Text1(30).Text Then
+            If BuscaChekc <> Mid(Text1(29).Text, 1, 2) Then
                 BuscaChekc = vbCrLf & "Código de control calculado: " & BuscaChekc & vbCrLf
-                BuscaChekc = "Error en la cuenta contable: " & vbCrLf & BuscaChekc & vbCrLf & "Codigo de control: " & Text1(30).Text & vbCrLf & vbCrLf
+                BuscaChekc = "Error en la cuenta contable: " & vbCrLf & BuscaChekc & vbCrLf & "Codigo de control: " & Mid(Text1(29).Text, 1, 2) & vbCrLf & vbCrLf
                 
                 BuscaChekc = BuscaChekc & "Desea continuar?"
                 If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbNo Then Exit Function
             End If
             'Compruebo EL IBAN
             'Meto el CC
-            DevfrmCCtas = Mid(DevfrmCCtas, 1, 8) & Me.Text1(30).Text & Mid(DevfrmCCtas, 9)
+            DevfrmCCtas = Mid(DevfrmCCtas, 1, 8) & Mid(Text1(29).Text, 1, 2) & Mid(DevfrmCCtas, 9)
             BuscaChekc = ""
-            If Me.Text1(19).Text <> "" Then BuscaChekc = Mid(Text1(19).Text, 1, 2)
+            If Me.Text1(10).Text <> "" Then BuscaChekc = Mid(Text1(10).Text, 1, 2)
                 
             If DevuelveIBAN2(BuscaChekc, DevfrmCCtas, DevfrmCCtas) Then
-                If Me.Text1(19).Text = "" Then
-                    If MsgBox("Poner IBAN ?", vbQuestion + vbYesNo) = vbYes Then Me.Text1(19).Text = BuscaChekc & DevfrmCCtas
+                If Me.Text1(10).Text = "" Then
+                    If MsgBox("Poner IBAN ?", vbQuestion + vbYesNo) = vbYes Then Me.Text1(10).Text = BuscaChekc & DevfrmCCtas
                 Else
-                    If Mid(Text1(19).Text, 3) <> DevfrmCCtas Then
+                    If Mid(Text1(10).Text, 3) <> DevfrmCCtas Then
                         DevfrmCCtas = "Calculado : " & BuscaChekc & DevfrmCCtas
-                        DevfrmCCtas = "Introducido: " & Me.Text1(19).Text & vbCrLf & DevfrmCCtas & vbCrLf
+                        DevfrmCCtas = "Introducido: " & Me.Text1(10).Text & vbCrLf & DevfrmCCtas & vbCrLf
                         DevfrmCCtas = "Error en codigo IBAN" & vbCrLf & DevfrmCCtas & "Continuar?"
                         If MsgBox(DevfrmCCtas, vbQuestion + vbYesNo) = vbNo Then Exit Function
                     End If
@@ -5816,7 +5879,7 @@ Dim cad As String
     On Error Resume Next
 
     cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.ID, "N")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set RS = New ADODB.Recordset
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -5864,15 +5927,15 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'cobros_realizados
-            For jj = 5 To txtaux.Count - 1
-                txtaux(jj).Visible = B
-                txtaux(jj).Top = alto
+            For jj = 5 To txtAux.Count - 1
+                txtAux(jj).Visible = B
+                txtAux(jj).Top = alto
             Next jj
         
         Case 1 'lineas de factura
-            For jj = 5 To txtaux1.Count - 1
-                txtaux1(jj).Visible = B
-                txtaux1(jj).Top = alto
+            For jj = 5 To txtAux1.Count - 1
+                txtAux1(jj).Visible = B
+                txtAux1(jj).Top = alto
             Next jj
     End Select
 
@@ -6184,16 +6247,16 @@ Dim I As Integer
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 0 'lineas de cobros realizados
                     If Limpia Then
-                        For I = 0 To txtaux.Count - 1
-                            txtaux(I).Text = ""
+                        For I = 0 To txtAux.Count - 1
+                            txtAux(I).Text = ""
                         Next I
                     End If
-                    txtaux(0).Text = Text1(13).Text 'serie
-                    txtaux(1).Text = Text1(1).Text 'numfactu
-                    txtaux(2).Text = Text1(2).Text 'fecha
-                    txtaux(3).Text = Text1(3).Text 'nro vencimiento
+                    txtAux(0).Text = Text1(13).Text 'serie
+                    txtAux(1).Text = Text1(1).Text 'numfactu
+                    txtAux(2).Text = Text1(2).Text 'fecha
+                    txtAux(3).Text = Text1(3).Text 'nro vencimiento
                     
-                    txtaux(4).Text = Format(NumF, "0000") 'linea contador
+                    txtAux(4).Text = Format(NumF, "0000") 'linea contador
                     
                     
                     If Limpia Then
@@ -6201,7 +6264,7 @@ Dim I As Integer
 '                        txtAux2(12).Text = ""
                     End If
                     
-                    PonFoco txtaux(5)
+                    PonFoco txtAux(5)
             
             End Select
 
@@ -6251,23 +6314,23 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 1 'lineas de facturas
-            txtaux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
-            txtaux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
-            txtaux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
-            txtaux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
-            txtaux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
+            txtAux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
+            txtAux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
+            txtAux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
+            txtAux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
+            txtAux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
             
-            txtaux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
-            txtaux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
-            txtaux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
-            txtaux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
+            txtAux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
+            txtAux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
+            txtAux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
+            txtAux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
             
     End Select
 
     LLamaLineas Index, ModoLineas, anc
     
     
-    PonFoco txtaux(4)
+    PonFoco txtAux(4)
     
     ' ***************************************************************************************
 End Sub
@@ -6363,8 +6426,8 @@ Dim cad As String
                     Limp = True
 
                     If Limp Then
-                        For I = 0 To txtaux.Count - 1
-                            txtaux(I).Text = ""
+                        For I = 0 To txtAux.Count - 1
+                            txtAux(I).Text = ""
                         Next I
                     End If
                     ModoLineas = 0
@@ -6476,7 +6539,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -6509,42 +6572,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
-    If txtaux(Index).Text = "" Then Exit Sub
+    If txtAux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtaux(5)
+                PonFoco txtAux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtaux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
-                txtaux(Index).Text = ""
-                PonerFoco txtaux(Index)
+            If Not EsFechaOK(txtAux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
+                txtAux(Index).Text = ""
+                PonerFoco txtAux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtaux(Index) = ImporteSinFormato(txtaux(Index))
+             txtAux(Index) = ImporteSinFormato(txtAux(Index))
             
         Case 10 'tipo
-            txtaux(Index).Text = UCase(txtaux(Index).Text)
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtaux(12).Text
+            RC = txtAux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtaux(12).Text = RC
+                txtAux(12).Text = RC
             End If
         
     End Select
@@ -6574,7 +6637,7 @@ Dim SQL As String
         Text1(0).Text = DBLet(RS!Forpa, "N")
         Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(42).Text = DBLet(RS!Nommacta, "T")
+        Text1(42).Text = DBLet(RS!nommacta, "T")
         Text1(41).Text = DBLet(RS!dirdatos, "T")
         Text1(40).Text = DBLet(RS!codposta, "T")
         Text1(39).Text = DBLet(RS!desPobla, "T")
