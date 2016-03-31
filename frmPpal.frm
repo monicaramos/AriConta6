@@ -907,10 +907,10 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
 '    FijarUltimoSkin False
 '    FreeLibrary m_hMod: UnloadApp: End
-    ActualizarExpansionMenus vUsu.ID, Me.TreeView1, "ariconta"
-    ActualizarExpansionMenus vUsu.ID, Me.TreeView2, "intracon"
+    ActualizarExpansionMenus vUsu.Id, Me.TreeView1, "ariconta"
+    ActualizarExpansionMenus vUsu.Id, Me.TreeView2, "intracon"
     
-    ActualizarItems vUsu.ID, Me.ListView1, "ariconta"
+    ActualizarItems vUsu.Id, Me.ListView1, "ariconta"
     
     
     
@@ -1104,6 +1104,9 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 605 ' transferencia abonos
         Case 606 ' compensaciones
         Case 607 ' compensar cliente
+            frmTESCompensaAboCli.Opcion = 36
+            frmTESCompensaAboCli.Show vbModal
+        
         Case 608 ' reclamaciones
         
         Case 701 ' remesas
@@ -1455,7 +1458,7 @@ Dim SQL As String
         If aplicacion = "introcon" Then
             TW1.Nodes(I).Expanded = True
         Else
-            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.ID, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
+            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
     
             If DevuelveValor(SQL) = 0 Then
                 TW1.Nodes(I).Expanded = False
@@ -1470,7 +1473,7 @@ End Sub
 Private Sub OcultarHijos(Padre As String)
 Dim SQL As String
 
-    SQL = "update menus_usuarios set ver = 0 where codusu = " & vUsu.ID & " and padre = " & DBSet(Padre, "N")
+    SQL = "update menus_usuarios set ver = 0 where codusu = " & vUsu.Id & " and padre = " & DBSet(Padre, "N")
 
     Conn.Execute SQL
     
@@ -1486,7 +1489,7 @@ Dim cadAux As String
     'Para cada usuario, y a partir del menu del que disponga
     Set miRsAux = New ADODB.Recordset
     Aux = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
-    Aux = Aux & " WHERE codusu =" & vUsu.ID & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
+    Aux = Aux & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
     
     
     If Not vEmpresa.TieneTesoreria Then
@@ -1525,7 +1528,7 @@ Dim cadAux As String
         For I = 1 To ListView1.ListItems.Count
             Set RS = New ADODB.Recordset
             
-            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.ID & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
+            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If Not RS.EOF Then
@@ -1564,7 +1567,7 @@ Dim RS As ADODB.Recordset
         'PopupMenu mnPopUp
     Else
         If Not ListView1.SelectedItem Is Nothing Then
-            SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.ID & " and aplicacion = 'ariconta' and "
+            SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
             SQL = SQL & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
             
             Set RS = New ADODB.Recordset
@@ -1599,7 +1602,7 @@ Dim SQL As String
 
 
         'DAVID
-        ActualizarItemCuadricula vUsu.ID, Me.ListView1, "ariconta", x, y, RefrescarDatos
+        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", x, y, RefrescarDatos
         If RefrescarDatos Then
             ListView1.Arrange = lvwAutoTop
             ListView1.Refresh
@@ -1738,7 +1741,7 @@ Private Sub CambiarEmpresa()
 
     CadenaDesdeOtroForm = vUsu.Login & "|" & vEmpresa.codempre & "|"
         
-    ActualizarExpansionMenus vUsu.ID, Me.TreeView1, "ariconta"
+    ActualizarExpansionMenus vUsu.Id, Me.TreeView1, "ariconta"
     
         
     Set vUsu = New Usuario
