@@ -3322,7 +3322,7 @@ Begin VB.Form frmTESCobros
          Height          =   360
          Index           =   2
          Left            =   2760
-         MaxLength       =   8
+         MaxLength       =   10
          TabIndex        =   3
          Tag             =   "Fecha Factura|F|N|||cobros|fecfactu|dd/mm/yyyy|S|"
          Text            =   "Text1"
@@ -3912,6 +3912,7 @@ Private Sub BotonVerTodos()
 '    End If
     
     HacerBusqueda2
+    
     
 End Sub
 
@@ -4982,6 +4983,7 @@ Private Sub HacerBusqueda2()
     End If
     
 '    CargaDatosLW
+    
 
 End Sub
 
@@ -6637,7 +6639,7 @@ Dim SQL As String
         Text1(0).Text = DBLet(RS!Forpa, "N")
         Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(42).Text = DBLet(RS!nommacta, "T")
+        Text1(42).Text = DBLet(RS!Nommacta, "T")
         Text1(41).Text = DBLet(RS!dirdatos, "T")
         Text1(40).Text = DBLet(RS!codposta, "T")
         Text1(39).Text = DBLet(RS!desPobla, "T")

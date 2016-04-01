@@ -23,6 +23,179 @@ Begin VB.Form frmTESCompensaAboCli
       _ExtentY        =   847
       _Version        =   393216
    End
+   Begin VB.Frame Frame1 
+      BorderStyle     =   0  'None
+      Height          =   6885
+      Left            =   90
+      TabIndex        =   16
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   12735
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   11550
+         TabIndex        =   20
+         Top             =   6300
+         Width           =   975
+      End
+      Begin VB.CommandButton Command1 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   10350
+         TabIndex        =   19
+         Top             =   6300
+         Width           =   975
+      End
+      Begin VB.Frame Frame2 
+         Height          =   705
+         Left            =   240
+         TabIndex        =   17
+         Top             =   180
+         Width           =   3585
+         Begin MSComctlLib.Toolbar Toolbar1 
+            Height          =   330
+            Left            =   180
+            TabIndex        =   22
+            Top             =   240
+            Width           =   3135
+            _ExtentX        =   5530
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   10
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Nuevo"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Modificar"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Eliminar"
+                  Object.Tag             =   "2"
+                  Object.Width           =   1e-4
+               EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Buscar"
+               EndProperty
+               BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Ver Todos"
+                  Object.Tag             =   "0"
+               EndProperty
+               BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Imprimir"
+               EndProperty
+               BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
+                  Object.ToolTipText     =   "Salir"
+               EndProperty
+               BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
+                  Style           =   3
+               EndProperty
+            EndProperty
+         End
+      End
+      Begin MSComctlLib.ListView lw1 
+         Height          =   5085
+         Left            =   240
+         TabIndex        =   18
+         Top             =   990
+         Width           =   12315
+         _ExtentX        =   21722
+         _ExtentY        =   8969
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Código"
+            Object.Width           =   1765
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Fecha"
+            Object.Width           =   5644
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Cuenta"
+            Object.Width           =   2734
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Nombre"
+            Object.Width           =   10054
+         EndProperty
+      End
+      Begin MSComctlLib.Toolbar Toolbar3 
+         Height          =   390
+         Left            =   12060
+         TabIndex        =   21
+         Top             =   300
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   688
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ayuda"
+            EndProperty
+         EndProperty
+      End
+   End
    Begin VB.Frame FrameCompensaAbonosCliente 
       BorderStyle     =   0  'None
       Height          =   6885
@@ -36,14 +209,14 @@ Begin VB.Form frmTESCompensaAboCli
          Left            =   180
          TabIndex        =   13
          Top             =   150
-         Width           =   1425
-         Begin MSComctlLib.Toolbar Toolbar1 
+         Width           =   1035
+         Begin MSComctlLib.Toolbar Toolbar2 
             Height          =   330
             Left            =   240
             TabIndex        =   14
             Top             =   180
-            Width           =   975
-            _ExtentX        =   1720
+            Width           =   615
+            _ExtentX        =   1085
             _ExtentY        =   582
             ButtonWidth     =   609
             ButtonHeight    =   582
@@ -51,13 +224,9 @@ Begin VB.Form frmTESCompensaAboCli
             Style           =   1
             _Version        =   393216
             BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   2
+               NumButtons      =   1
                BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                   Object.ToolTipText     =   "Establecer Vencimiento"
-                  Object.Tag             =   "2"
-               EndProperty
-               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Imprimir Histórico Compensación"
                   Object.Tag             =   "2"
                EndProperty
             EndProperty
@@ -246,7 +415,6 @@ Begin VB.Form frmTESCompensaAboCli
          Width           =   975
       End
       Begin VB.CommandButton cmdCancelar 
-         Cancel          =   -1  'True
          Caption         =   "&Cancelar"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -475,6 +643,11 @@ Dim Fecha As Date
 
 Dim DevfrmCCtas As String
 
+Dim CampoOrden As String
+Dim Orden As Boolean
+Dim Modo As Byte
+
+
 Private Sub PonFoco(ByRef T1 As TextBox)
     T1.SelStart = 0
     T1.SelLength = Len(T1.Text)
@@ -493,7 +666,12 @@ Private Function ComprobarObjeto(ByRef T As TextBox) As Boolean
 End Function
 
 Private Sub cmdCancelar_Click(Index As Integer)
-    Unload Me
+    If Index = 0 Then
+        Frame1.Visible = True
+        Frame1.Enabled = True
+    Else
+        Unload Me
+    End If
 End Sub
 
 
@@ -641,14 +819,19 @@ Private Sub cmdVtoDestino(Index As Integer)
 
     Else
     
-        cad = DevuelveDesdeBD("informe", "scryst", "codigo", 10) 'Orden de pago a bancos
-        If cad = "" Then
-            MsgBox "No esta configurada la aplicación. Falta informe(10)", vbCritical
-            Exit Sub
-        End If
-        CadenaDesdeOtroForm = cad
+        frmTESCompensaAboCliImp.pCodigo = Me.lw1.SelectedItem
+        frmTESCompensaAboCliImp.Show vbModal
     
-        LanzaBuscaGrid 1, 4
+    
+    
+'        cad = DevuelveDesdeBD("informe", "scryst", "codigo", 10) 'Orden de pago a bancos
+'        If cad = "" Then
+'            MsgBox "No esta configurada la aplicación. Falta informe(10)", vbCritical
+'            Exit Sub
+'        End If
+'        CadenaDesdeOtroForm = cad
+    
+        'LanzaBuscaGrid 1, 4
 
 
     End If
@@ -686,13 +869,26 @@ Dim Img As Image
     Me.Icon = frmPpal.Icon
     CargaImagenesAyudas Me.Image3, 1, "Cuenta contable"
     
+    ' Botonera Principal
+    With Me.Toolbar1
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 3
+        .Buttons(2).Image = 4
+        .Buttons(3).Image = 5
+        .Buttons(5).Image = 1
+        .Buttons(6).Image = 2
+        .Buttons(8).Image = 16
+    End With
+    
+    
     'La toolbar
-    With Toolbar1
+    With Toolbar2
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 4
-        .Buttons(2).Image = 16
     End With
     
     ' La Ayuda
@@ -700,9 +896,6 @@ Dim Img As Image
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 26
     End With
-    
-    
-    
     
     
     'Limpiamos el tag
@@ -714,15 +907,11 @@ Dim Img As Image
         
     Case 36
         
-        
         h = FrameCompensaAbonosCliente.Height + 120
         W = FrameCompensaAbonosCliente.Width
-        FrameCompensaAbonosCliente.Visible = True
         
-        
-'        cmdVtoDestino(1).Visible = vUsu.Nivel = 0
-'        Label1(1).Visible = vUsu.Nivel = 0
-        
+        FrameCompensaAbonosCliente.Visible = False
+        Me.Frame1.Visible = True
         
     End Select
     
@@ -783,6 +972,26 @@ Private Sub Image3_Click(Index As Integer)
     If Index = 17 Then PonerVtosCompensacionCliente
 End Sub
 
+Private Sub lw1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+Dim Campo2 As Integer
+
+    Orden = Not Orden
+    
+    Select Case ColumnHeader
+        Case "Código"
+            CampoOrden = "compensa.codigo"
+        Case "Fecha"
+            CampoOrden = "compensa.fecha"
+        Case "Cuenta"
+            CampoOrden = "compensa.codmacta"
+        Case "Nombre"
+            CampoOrden = "compensa.nommacta"
+    End Select
+    CargaList
+
+
+End Sub
+
 Private Sub lwCompenCli_ItemCheck(ByVal Item As MSComctlLib.ListItem)
 Dim C As Currency
 Dim Cobro As Boolean
@@ -808,18 +1017,63 @@ Dim Cobro As Boolean
             
 End Sub
 
-Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    HacerToolBar Button.Index
-End Sub
-
 Private Sub HacerToolBar(Boton As Integer)
 
     Select Case Boton
         Case 1
-            cmdVtoDestino (0)
+            BotonAnyadir
         Case 2
-            cmdVtoDestino (1)
+'            BotonModificar
+        Case 3
+'            BotonEliminar False
+        Case 5
+'            BotonBuscar
+        Case 6 ' ver todos
+            CargaList
+        Case 8
+            'Imprimir factura
+            
+            
+'            frmFacturasCliList.NUmSerie = Text1(2).Text
+'            frmFacturasCliList.NumFactu = Text1(0).Text
+'            frmFacturasCliList.FecFactu = Text1(1).Text
+'
+'            frmFacturasCliList.Show vbModal
+
+             cmdVtoDestino (1)
+
+
     End Select
+End Sub
+
+
+
+Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
+    HacerToolBar Button.Index
+End Sub
+
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
+    HacerToolBar2 Button.Index
+End Sub
+
+Private Sub HacerToolBar2(Boton As Integer)
+
+    Select Case Boton
+        Case 1
+            cmdVtoDestino (0)
+    End Select
+End Sub
+
+
+Private Sub BotonAnyadir()
+
+    Frame1.Visible = False
+    Frame1.Enabled = False
+
+    Me.FrameCompensaAbonosCliente.Visible = True
+    Me.FrameCompensaAbonosCliente.Enabled = True
+    
+
 End Sub
 
 
@@ -1059,7 +1313,7 @@ Dim IT
     cad = "Select cobros.*,nomforpa from cobros,formapago where cobros.codforpa=formapago.codforpa "
     cad = cad & " AND codmacta = '" & Me.txtCta(17).Text & "'"
     cad = cad & " AND (transfer =0 or transfer is null) and codrem is null"
-    cad = cad & " and recedocu=0 and situacio = 0" ' pendientes de cobro
+    cad = cad & " and recedocu=0 and situacion = 0" ' pendientes de cobro
     cad = cad & " ORDER BY fecvenci"
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -1302,15 +1556,6 @@ Dim J As Integer
     RealizarProcesoCompensacionAbonos = False
 
 
-
-
-
-
-
-
-
-
-
     'Vamos a seleccionar los vtos
     '(numserie,codfaccl,fecfaccl,numorden)
     'EN SQL
@@ -1497,12 +1742,62 @@ Dim cad As String
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
-        Toolbar1.Buttons(1).Enabled = True
-        Toolbar1.Buttons(2).Enabled = DBLet(RS!especial, "N")
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N")
+        Toolbar1.Buttons(2).Enabled = False 'DBLet(RS!Modificar, "N") And (Modo = 2) And DesdeNorma43 = 0
+        Toolbar1.Buttons(3).Enabled = False 'DBLet(RS!creareliminar, "N") And (Modo = 2) And DesdeNorma43 = 0
+        
+        Toolbar1.Buttons(5).Enabled = False 'DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2) And DesdeNorma43 = 0
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N")
+        
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And Modo = 2
+    
+        Toolbar2.Buttons(1).Enabled = True
+'        Toolbar2.Buttons(2).Enabled = DBLet(RS!especial, "N")
     End If
     
     RS.Close
     Set RS = Nothing
+    
+End Sub
+
+
+
+Private Sub CargaList()
+Dim IT
+
+    lw1.ListItems.Clear
+    Set Me.lw1.SmallIcons = frmPpal.ImgListviews
+    Set miRsAux = New ADODB.Recordset
+    
+    cad = "Select codigo,fecha,codmacta,nommacta from compensa "
+    
+    
+    If CampoOrden = "" Then CampoOrden = "compensa.codigo"
+    cad = cad & " ORDER BY " & CampoOrden
+    If Orden Then cad = cad & " DESC"
+    
+    
+    
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        Set IT = lw1.ListItems.Add()
+        IT.Text = miRsAux!Codigo
+        IT.SubItems(1) = Format(miRsAux!Fecha, "dd/mm/yyyy hh:mm:ss")
+        IT.SubItems(2) = miRsAux!codmacta
+        IT.SubItems(3) = miRsAux!Nommacta
+        
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+
+    If lw1.ListItems.Count > 0 Then
+        Modo = 2
+    Else
+        Modo = 0
+    End If
+    
+    PonerModoUsuarioGnral Modo, "ariconta"
     
 End Sub
 

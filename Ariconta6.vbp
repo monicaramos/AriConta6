@@ -175,6 +175,7 @@ Form=frmTESCobrosPdtesList.frm
 Form=frmTESRealizarCobros.frm
 Form=frmTESRefTalon.frm
 Form=frmTESCompensaAboCli.frm
+Form=frmTESCompensaAboCliImp.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
