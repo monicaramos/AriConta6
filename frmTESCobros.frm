@@ -3280,7 +3280,7 @@ Begin VB.Form frmTESCobros
          Height          =   360
          Index           =   1
          Left            =   1260
-         MaxLength       =   10
+         MaxLength       =   7
          TabIndex        =   2
          Tag             =   "Nº Factura|N|N|||cobros|numfactu|0000000|S|"
          Text            =   "Text1"
@@ -3754,13 +3754,13 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtAux(5)
+            PonFoco txtaux(5)
         Case 2 ' fecha
             'En tag pongo el txtfecha asociado
             cmdAux(1).Tag = 2
             DevfrmCCtas = Format(Now, "dd/mm/yyyy")
-            If IsDate(txtAux(CInt(cmdAux(1).Tag)).Text) Then _
-                DevfrmCCtas = Format(txtAux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
+            If IsDate(txtaux(CInt(cmdAux(1).Tag)).Text) Then _
+                DevfrmCCtas = Format(txtaux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
             Set frmC1 = New frmCal
             frmC1.Fecha = CDate(DevfrmCCtas)
             DevfrmCCtas = ""
@@ -4337,7 +4337,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -4965,9 +4965,10 @@ Private Sub HacerBusqueda2()
     If chkVistaPrevia = 1 Then
         MandaBusquedaPrevia CadB
     ElseIf CadB <> "" Or CadB1 <> "" Or cadFiltro <> "" Then
-        CadenaConsulta = "select distinct cobros.* from (" & NombreTabla
-        CadenaConsulta = CadenaConsulta & " left join cobros_realizados on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden) "
-        CadenaConsulta = CadenaConsulta & " INNER JOIN tipofpago ON cobros_realizados.tipforpa = tipofpago.tipoformapago  "
+        CadenaConsulta = "select distinct cobros.* from "
+        CadenaConsulta = CadenaConsulta & " (tipofpago  INNER JOIN cobros_realizados ON cobros_realizados.tipforpa = tipofpago.tipoformapago ) "
+        CadenaConsulta = CadenaConsulta & " right join cobros on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden"
+
         
         CadenaConsulta = CadenaConsulta & " WHERE (1=1) "
         If CadB <> "" Then CadenaConsulta = CadenaConsulta & " and " & CadB & " "
@@ -5261,8 +5262,8 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
         LLamaLineas 0, 3, anc
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).BackColor = vbWhite
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).BackColor = vbWhite
     Next I
     
     Check1(2).Enabled = (Modo = 1)
@@ -5929,15 +5930,15 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'cobros_realizados
-            For jj = 5 To txtAux.Count - 1
-                txtAux(jj).Visible = B
-                txtAux(jj).Top = alto
+            For jj = 5 To txtaux.Count - 1
+                txtaux(jj).Visible = B
+                txtaux(jj).Top = alto
             Next jj
         
         Case 1 'lineas de factura
-            For jj = 5 To txtAux1.Count - 1
-                txtAux1(jj).Visible = B
-                txtAux1(jj).Top = alto
+            For jj = 5 To txtaux1.Count - 1
+                txtaux1(jj).Visible = B
+                txtaux1(jj).Top = alto
             Next jj
     End Select
 
@@ -6249,16 +6250,16 @@ Dim I As Integer
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 0 'lineas de cobros realizados
                     If Limpia Then
-                        For I = 0 To txtAux.Count - 1
-                            txtAux(I).Text = ""
+                        For I = 0 To txtaux.Count - 1
+                            txtaux(I).Text = ""
                         Next I
                     End If
-                    txtAux(0).Text = Text1(13).Text 'serie
-                    txtAux(1).Text = Text1(1).Text 'numfactu
-                    txtAux(2).Text = Text1(2).Text 'fecha
-                    txtAux(3).Text = Text1(3).Text 'nro vencimiento
+                    txtaux(0).Text = Text1(13).Text 'serie
+                    txtaux(1).Text = Text1(1).Text 'numfactu
+                    txtaux(2).Text = Text1(2).Text 'fecha
+                    txtaux(3).Text = Text1(3).Text 'nro vencimiento
                     
-                    txtAux(4).Text = Format(NumF, "0000") 'linea contador
+                    txtaux(4).Text = Format(NumF, "0000") 'linea contador
                     
                     
                     If Limpia Then
@@ -6266,7 +6267,7 @@ Dim I As Integer
 '                        txtAux2(12).Text = ""
                     End If
                     
-                    PonFoco txtAux(5)
+                    PonFoco txtaux(5)
             
             End Select
 
@@ -6316,23 +6317,23 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 1 'lineas de facturas
-            txtAux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
-            txtAux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
-            txtAux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
-            txtAux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
-            txtAux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
+            txtaux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
+            txtaux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
+            txtaux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
+            txtaux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
+            txtaux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
             
-            txtAux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
-            txtAux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
-            txtAux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
-            txtAux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
+            txtaux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
+            txtaux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
+            txtaux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
+            txtaux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
             
     End Select
 
     LLamaLineas Index, ModoLineas, anc
     
     
-    PonFoco txtAux(4)
+    PonFoco txtaux(4)
     
     ' ***************************************************************************************
 End Sub
@@ -6428,8 +6429,8 @@ Dim cad As String
                     Limp = True
 
                     If Limp Then
-                        For I = 0 To txtAux.Count - 1
-                            txtAux(I).Text = ""
+                        For I = 0 To txtaux.Count - 1
+                            txtaux(I).Text = ""
                         Next I
                     End If
                     ModoLineas = 0
@@ -6541,7 +6542,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 
@@ -6574,42 +6575,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
-    If txtAux(Index).Text = "" Then Exit Sub
+    If txtaux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtAux(5)
+                PonFoco txtaux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtAux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
-                txtAux(Index).Text = ""
-                PonerFoco txtAux(Index)
+            If Not EsFechaOK(txtaux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
+                txtaux(Index).Text = ""
+                PonerFoco txtaux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtAux(Index)
+            PonerFormatoEntero txtaux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtAux(Index) = ImporteSinFormato(txtAux(Index))
+             txtaux(Index) = ImporteSinFormato(txtaux(Index))
             
         Case 10 'tipo
-            txtAux(Index).Text = UCase(txtAux(Index).Text)
+            txtaux(Index).Text = UCase(txtaux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtAux(12).Text
+            RC = txtaux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtAux(12).Text = RC
+                txtaux(12).Text = RC
             End If
         
     End Select

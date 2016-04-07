@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmTESCompensaAboCli 
    Appearance      =   0  'Flat
@@ -27,8 +28,8 @@ Begin VB.Form frmTESCompensaAboCli
       BorderStyle     =   0  'None
       Height          =   6885
       Left            =   90
-      TabIndex        =   16
-      Top             =   0
+      TabIndex        =   15
+      Top             =   -30
       Visible         =   0   'False
       Width           =   12735
       Begin VB.CommandButton cmdCancelar 
@@ -45,37 +46,20 @@ Begin VB.Form frmTESCompensaAboCli
          Height          =   375
          Index           =   1
          Left            =   11550
-         TabIndex        =   20
-         Top             =   6300
-         Width           =   975
-      End
-      Begin VB.CommandButton Command1 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   10350
-         TabIndex        =   19
+         TabIndex        =   18
          Top             =   6300
          Width           =   975
       End
       Begin VB.Frame Frame2 
          Height          =   705
          Left            =   240
-         TabIndex        =   17
+         TabIndex        =   16
          Top             =   180
          Width           =   3585
          Begin MSComctlLib.Toolbar Toolbar1 
             Height          =   330
             Left            =   180
-            TabIndex        =   22
+            TabIndex        =   19
             Top             =   240
             Width           =   3135
             _ExtentX        =   5530
@@ -132,7 +116,7 @@ Begin VB.Form frmTESCompensaAboCli
       Begin MSComctlLib.ListView lw1 
          Height          =   5085
          Left            =   240
-         TabIndex        =   18
+         TabIndex        =   17
          Top             =   990
          Width           =   12315
          _ExtentX        =   21722
@@ -177,11 +161,11 @@ Begin VB.Form frmTESCompensaAboCli
             Object.Width           =   10054
          EndProperty
       End
-      Begin MSComctlLib.Toolbar Toolbar3 
+      Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   12060
-         TabIndex        =   21
-         Top             =   300
+         TabIndex        =   20
+         Top             =   210
          Width           =   405
          _ExtentX        =   714
          _ExtentY        =   688
@@ -204,19 +188,38 @@ Begin VB.Form frmTESCompensaAboCli
       Top             =   0
       Visible         =   0   'False
       Width           =   12735
+      Begin VB.CheckBox Check1 
+         Caption         =   "Sólo con Abonos"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   2760
+         TabIndex        =   21
+         Tag             =   "s|N|S|||cobros|situacionjuri|||"
+         Top             =   450
+         Width           =   2055
+      End
       Begin VB.Frame FrameBotonGnral 
          Height          =   705
          Left            =   180
          TabIndex        =   13
          Top             =   150
-         Width           =   1035
+         Width           =   2325
          Begin MSComctlLib.Toolbar Toolbar2 
             Height          =   330
             Left            =   240
             TabIndex        =   14
             Top             =   180
-            Width           =   615
-            _ExtentX        =   1085
+            Width           =   1995
+            _ExtentX        =   3519
             _ExtentY        =   582
             ButtonWidth     =   609
             ButtonHeight    =   582
@@ -224,10 +227,22 @@ Begin VB.Form frmTESCompensaAboCli
             Style           =   1
             _Version        =   393216
             BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   1
+               NumButtons      =   5
                BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                   Object.ToolTipText     =   "Establecer Vencimiento"
                   Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Ver todos"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Cta Anterior"
+               EndProperty
+               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Cta Siguiente"
                EndProperty
             EndProperty
          End
@@ -432,23 +447,52 @@ Begin VB.Form frmTESCompensaAboCli
          Top             =   6300
          Width           =   975
       End
-      Begin MSComctlLib.Toolbar ToolbarAyuda 
-         Height          =   390
-         Left            =   12060
-         TabIndex        =   15
-         Top             =   300
-         Width           =   405
-         _ExtentX        =   714
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ayuda"
-            EndProperty
+      Begin MSAdodcLib.Adodc Data1 
+         Height          =   330
+         Left            =   7950
+         Top             =   150
+         Visible         =   0   'False
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   582
+         ConnectMode     =   0
+         CursorLocation  =   3
+         IsolationLevel  =   -1
+         ConnectionTimeout=   15
+         CommandTimeout  =   30
+         CursorType      =   3
+         LockType        =   3
+         CommandType     =   8
+         CursorOptions   =   0
+         CacheSize       =   50
+         MaxRecords      =   0
+         BOFAction       =   0
+         EOFAction       =   0
+         ConnectStringType=   1
+         Appearance      =   1
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         Orientation     =   0
+         Enabled         =   -1
+         Connect         =   ""
+         OLEDBString     =   ""
+         OLEDBFile       =   ""
+         DataSourceName  =   ""
+         OtherAttributes =   ""
+         UserName        =   ""
+         Password        =   ""
+         RecordSource    =   ""
+         Caption         =   "Adodc1"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
          EndProperty
+         _Version        =   393216
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
@@ -627,7 +671,7 @@ Attribute frmCta.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
-Dim SQL As String
+Dim Sql As String
 Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
@@ -649,6 +693,9 @@ Dim Modo As Byte
 
 Dim Txt33Csb As String
 Dim Txt41Csb As String
+
+Dim VerTodos As Boolean
+
 
 Private Sub PonFoco(ByRef T1 As TextBox)
     T1.SelStart = 0
@@ -674,6 +721,8 @@ Private Sub cmdCancelar_Click(Index As Integer)
     Else
         Unload Me
     End If
+    
+    If Index = 0 Then BotonVerTodos True
 End Sub
 
 
@@ -707,17 +756,17 @@ Private Sub cmdCompensar_Click()
     Next
     
     I = 0
-    SQL = ""
+    Sql = ""
     If Len(cad) <> 1 Then
         'Ha seleccionado o cero o mas de uno
         If txtimpNoEdit(0).Text <> txtimpNoEdit(1).Text Then
             'importes distintos. Solo puede seleccionar UNO
-            SQL = "Debe selecionar uno(y solo uno) como vencimiento destino"
+            Sql = "Debe selecionar uno(y solo uno) como vencimiento destino"
         End If
     Else
         'Comprobaremos si el selecionado esta tb checked
         If Not lwCompenCli.ListItems(CONT).Checked Then
-            SQL = "El vencimiento seleccionado no esta marcado"
+            Sql = "El vencimiento seleccionado no esta marcado"
         
         Else
             'Si el importe Cobro es mayor que abono, deberia estar
@@ -725,16 +774,16 @@ Private Sub cmdCompensar_Click()
             If Importe <> 0 Then
                 If Importe > 0 Then
                     'Es un abono
-                    If Trim(lwCompenCli.ListItems(CONT).SubItems(6)) = "" Then SQL = "cobro"
+                    If Trim(lwCompenCli.ListItems(CONT).SubItems(6)) = "" Then Sql = "cobro"
                 Else
-                    If Trim(lwCompenCli.ListItems(CONT).SubItems(6)) <> "" Then SQL = "abono"
+                    If Trim(lwCompenCli.ListItems(CONT).SubItems(6)) <> "" Then Sql = "abono"
                 End If
-                If SQL <> "" Then SQL = "Debe marcar un " & SQL
+                If Sql <> "" Then Sql = "Debe marcar un " & Sql
             End If
             
         End If
     End If
-    If TotalRegistros = 0 Or NumRegElim = 0 Then SQL = "Debe selecionar cobro(s) y abono(s)" & vbCrLf & SQL
+    If TotalRegistros = 0 Or NumRegElim = 0 Then Sql = "Debe selecionar cobro(s) y abono(s)" & vbCrLf & Sql
         
     'Sep 2012
     'NO se pueden borrar las observaciones que ya estuvieran
@@ -845,21 +894,10 @@ Private Sub cmdVtoDestino(Index As Integer)
     
         frmTESCompensaAboCliImp.pCodigo = Me.lw1.SelectedItem
         frmTESCompensaAboCliImp.Show vbModal
-    
-    
-    
-'        cad = DevuelveDesdeBD("informe", "scryst", "codigo", 10) 'Orden de pago a bancos
-'        If cad = "" Then
-'            MsgBox "No esta configurada la aplicación. Falta informe(10)", vbCritical
-'            Exit Sub
-'        End If
-'        CadenaDesdeOtroForm = cad
-    
-        'LanzaBuscaGrid 1, 4
-
 
     End If
 End Sub
+
 
 
 Private Sub Form_Activate()
@@ -867,14 +905,15 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case Opcion
         Case 36
-            If CadenaDesdeOtroForm <> "" Then
-                txtCta(17).Text = CadenaDesdeOtroForm
-                txtCta_LostFocus 17
-            Else
-                PonFoco txtCta(17)
+            If Not Frame1.Visible Then
+                If CadenaDesdeOtroForm <> "" Then
+                    txtCta(17).Text = CadenaDesdeOtroForm
+                    txtCta_LostFocus 17
+                Else
+                    PonFoco txtCta(17)
+                End If
+                CadenaDesdeOtroForm = ""
             End If
-            CadenaDesdeOtroForm = ""
-            
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -889,7 +928,7 @@ Dim W As Integer
 Dim Img As Image
 
 
-    Limpiar Me
+    limpiar Me
     Me.Icon = frmPpal.Icon
     CargaImagenesAyudas Me.Image3, 1, "Cuenta contable"
     
@@ -913,6 +952,10 @@ Dim Img As Image
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 4
+        .Buttons(2).Image = 1
+        .Buttons(4).Image = 7
+        .Buttons(5).Image = 8
+        
     End With
     
     ' La Ayuda
@@ -1085,8 +1128,85 @@ Private Sub HacerToolBar2(Boton As Integer)
     Select Case Boton
         Case 1
             cmdVtoDestino (0)
+        Case 2 ' ver todos
+            BotonVerTodos False
+        Case 4 'cuenta anterior
+            Desplazamiento 0
+        Case 5 'cuenta siguiente
+            Desplazamiento 1
     End Select
 End Sub
+
+Private Sub Desplazamiento(Index As Integer)
+    If Data1.Recordset.EOF Then Exit Sub
+    
+    Select Case Index
+        Case 0
+            Data1.Recordset.MovePrevious
+            If Data1.Recordset.BOF Then Data1.Recordset.MoveFirst
+        Case 1
+            Data1.Recordset.MoveNext
+            If Data1.Recordset.EOF Then Data1.Recordset.MoveLast
+    End Select
+    txtCta(17).Text = Data1.Recordset.Fields(0)
+    DtxtCta(17).Text = Data1.Recordset.Fields(1)
+    PonerModoUsuarioGnral 0, "ariconta"
+    PonerVtosCompensacionCliente
+End Sub
+
+
+Private Sub BotonVerTodos(limpiar As Boolean)
+Dim Sql As String
+    'Ver todos
+    
+    VerTodos = True
+    
+    Sql = "select distinct cobros.codmacta, cuentas.nommacta from cobros inner join cuentas on cobros.codmacta = cuentas.codmacta where (1=1) "
+    If Me.Check1(0).Value Then Sql = Sql & " and impvenci + coalesce(gastos,0) - coalesce(impcobro,0) < 0"
+    If limpiar Then Sql = Sql & " and cobros.codmacta is null"
+    
+    
+    
+    If TotalRegistrosConsulta(Sql) = 0 Then
+        If Not limpiar Then MsgBox "No hay cuentas con abonos.", vbExclamation
+        
+        VerTodos = False
+    End If
+    
+    
+    Data1.ConnectionString = Conn
+    '***** canviar el nom de la PK de la capçalera; repasar codEmpre *************
+    Data1.RecordSource = Sql
+    Data1.Refresh
+    
+    If VerTodos Then
+        txtCta(17).Text = Data1.Recordset.Fields(0)
+        DtxtCta(17).Text = Data1.Recordset.Fields(1)
+    Else
+        txtCta(17).Text = ""
+        DtxtCta(17).Text = ""
+    End If
+    PonerModoUsuarioGnral 0, "ariconta"
+    PonerVtosCompensacionCliente
+    
+'    CadB = ""
+'    CadB1 = ""
+'
+'    LimpiarCampos
+'    CargaGrid 0, False
+'    CargaGrid 1, False
+''    If chkVistaPrevia.Value = 1 Then
+''        MandaBusquedaPrevia ""
+''    Else
+''        CadenaConsulta = "Select * from " & NombreTabla
+''        PonerCadenaBusqueda
+''    End If
+'
+'    HacerBusqueda2
+'
+    
+End Sub
+
 
 
 Private Sub BotonAnyadir()
@@ -1097,6 +1217,7 @@ Private Sub BotonAnyadir()
     Me.FrameCompensaAbonosCliente.Visible = True
     Me.FrameCompensaAbonosCliente.Enabled = True
     
+    PonleFoco txtCta(17)
 
 End Sub
 
@@ -1152,13 +1273,13 @@ Dim B As Byte
     Case Else
         'DE ULTIMO NIVEL
         Cta = (txtCta(Index).Text)
-        If CuentaCorrectaUltimoNivel(Cta, SQL) Then
+        If CuentaCorrectaUltimoNivel(Cta, Sql) Then
             txtCta(Index).Text = Cta
-            DtxtCta(Index).Text = SQL
+            DtxtCta(Index).Text = Sql
             
             
         Else
-            MsgBox SQL, vbExclamation
+            MsgBox Sql, vbExclamation
             txtCta(Index).Text = ""
             DtxtCta(Index).Text = ""
             txtCta(Index).SetFocus
@@ -1267,48 +1388,6 @@ End Sub
 
 
 
-'Para conceptos y diarios
-'Opcion: 0- Diario
-'        1- Conceptos
-'        2- Centros de coste
-'        3- Gastos fijos
-'        4. Hco compensaciones
-Private Sub LanzaBuscaGrid(Indice As Integer, OpcionGrid As Byte)
-
-    Select Case OpcionGrid
-    Case 4
-'        'Gasto fijos  sgastfij codigo Descripcion
-'        '-------------------------------------------
-'        DevfrmCCtas = "0"
-'        cad = "Código|codigo|T|10·"
-'        cad = cad & "Fecha|fecha|T|26·"
-'        cad = cad & "Cuenta|codmacta|T|14·"
-'        cad = cad & "Nombre|nommacta|T|50·"
-'
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = cad
-'        frmB.vTabla = "scompenclicab"
-'        frmB.vSQL = ""
-'
-'        '###A mano
-'        frmB.vDevuelve = "0|"
-'        frmB.vTitulo = "Hco. compensaciones cliente"
-'        frmB.vSelElem = 0
-'        '#
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        If DevfrmCCtas <> "" Then
-'            DevfrmCCtas = RecuperaValor(DevfrmCCtas, 1)
-'            If DevfrmCCtas = "" Then DevfrmCCtas = "0"
-'            If Val(DevfrmCCtas) Then
-'                CONT = Val(DevfrmCCtas)
-'                ImprimiCompensacion CONT
-'            End If
-'
-'        End If
-    End Select
-End Sub
-
 
 '-------------------------------------------------------------------------------
 '-------------------------------------------------------------------------------
@@ -1343,9 +1422,9 @@ Dim IT
     While Not miRsAux.EOF
         Set IT = lwCompenCli.ListItems.Add()
         IT.Text = miRsAux!NUmSerie
-        IT.SubItems(1) = Format(miRsAux!NumFactu, "000000")
+        IT.SubItems(1) = Format(miRsAux!NumFactu, "0000000")
         IT.SubItems(2) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
-        IT.SubItems(3) = miRsAux!NUmorden
+        IT.SubItems(3) = miRsAux!numorden
         IT.SubItems(4) = miRsAux!FecVenci
         IT.SubItems(5) = miRsAux!nomforpa
     
@@ -1410,9 +1489,8 @@ Dim Borras As Boolean
         CadenaDesdeOtroForm = Me.Tag
         Me.Tag = ""
         If Not Borras Then
-            ImprimiCompensacion CONT
-            
-        
+            frmTESCompensaAboCliImp.pCodigo = CONT
+            frmTESCompensaAboCliImp.Show vbModal
         End If
         
         Set miRsAux = Nothing
@@ -1424,152 +1502,6 @@ End Sub
 
 
 
-Private Sub ImprimiCompensacion(CodigoCompensacion As Long)
-
-    On Error GoTo EImprimiCompensacion
-        
-        'CadenaDesdeOtroForm:  lleva el nombre del report
-        
-        
-        'Ha ido bien. Imprimiremos la hoja por si quiere crear PDF
-        Conn.Execute "DELETE FROM Usuarios.ztmpfaclin WHERE codusu =" & vUsu.Codigo
-        Conn.Execute "Delete from Usuarios.zTesoreriaComun where codusu = " & vUsu.Codigo
-        Conn.Execute "Delete from Usuarios.z347carta where codusu = " & vUsu.Codigo
-        
-        'insert into `ztmpfaclin` (`codusu`,`codigo`,`Numfac`,`Fecha`,`cta`,`Cliente`,`NIF`,
-        '`Imponible`,`IVA`,`ImpIVA`,`Total`,`retencion`,`TipoIva`)
-        SQL = "INSERT INTO usuarios.ztmpfaclin(`codusu`,`codigo`,`Numfac`,`Fecha`,`cta`,`Cliente`,`NIF`,`Imponible`,`ImpIVA`,`retencion`,`Total`,`IVA`,TipoIva)"
-        SQL = SQL & "select " & vUsu.Codigo & ",@rownum:=@rownum+1 AS rownum,"
-        SQL = SQL & "concat(numserie,right(concat(""000000"",codfaccl),8)) fecha,date_format(fecfaccl,'%d/%m/%Y') ffaccl,"
-        SQL = SQL & "scompenclilin.codmacta,if (nommacta is null,nomclien,nommacta) nomcli,"
-        SQL = SQL & "date_format(fecvenci,'%d/%m/%Y') venci,impvenci,gastos,impcobro,"
-        SQL = SQL & "impvenci + coalesce(gastos,0) + coalesce(impcobro,0)  tot_al"
-        SQL = SQL & ",if(fecultco is null,null,date_format(fecultco,'%d/&m')) fecco ,destino"
-        SQL = SQL & " From (scompenclilin left join cuentas on scompenclilin.codmacta=cuentas.codmacta)"
-        SQL = SQL & ",(SELECT @rownum:=0) r WHERE codigo=" & CONT & " order by destino desc,numserie,codfaccl"
-        Conn.Execute SQL
-            
-        
-            
-        
-   
-    
-    
-        
-    
-    
-    
-    
-        'Datos carta
-        'Datos basicos de la empresa para la carta
-        cad = "INSERT INTO Usuarios.z347carta (codusu, nif, razosoci, dirdatos, codposta, despobla, otralineadir, "
-        cad = cad & "parrafo1, parrafo2, contacto, despedida,saludos,parrafo3, parrafo4, parrafo5, Asunto, Referencia)"
-        cad = cad & " VALUES (" & vUsu.Codigo & ", "
-        
-        'Estos datos ya veremos com, y cuadno los relleno
-        Set miRsAux = New ADODB.Recordset
-        SQL = "select nifempre,siglasvia,direccion,numero,escalera,piso,puerta,codpos,poblacion,provincia,contacto from empresa2"
-        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        'Paarafo1 Parrafo2 contacto
-        SQL = "'','',''"
-        'sql= "'1234567890A','Ariadna Software ','Franco Tormo 3, Bajo Izda','46007','Valencia'"
-        SQL = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'," & SQL
-        If Not miRsAux.EOF Then
-            SQL = ""
-            For I = 1 To 6
-                SQL = SQL & DBLet(miRsAux.Fields(I), "T") & " "
-            Next I
-            SQL = Trim(SQL)
-            SQL = "'" & DBLet(miRsAux!nifempre, "T") & "','" & DevNombreSQL(vEmpresa.nomempre) & "','" & DevNombreSQL(SQL) & "'"
-            SQL = SQL & ",'" & DBLet(miRsAux!codpos, "T") & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "'"
-
-            'Contaccto
-            SQL = SQL & ",NULL,NULL,'" & DevNombreSQL(DBLet(miRsAux!contacto)) & "' "
-        End If
-        miRsAux.Close
-      
-        cad = cad & SQL
-        cad = cad & ",NULL, NULL, NULL, NULL, NULL, NULL, NULL)"
-        
-        Conn.Execute cad
-        
-        
-        'Datos CLIENTE
-         ', texto3, texto4, texto5,texto6
-        cad = DevuelveDesdeBD("codmacta", "scompenclicab", "codigo", CStr(CONT))
-        cad = "Select nommacta,razosoci,dirdatos,codposta,despobla,desprovi from cuentas where codmacta ='" & cad & "'"
-        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        
-        'NO PUEDE SER EOF
-        cad = miRsAux!Nommacta
-        If Not IsNull(miRsAux!razosoci) Then cad = miRsAux!razosoci
-        cad = "'" & DevNombreSQL(cad) & "'"
-        'Direccion
-        cad = cad & ",'" & DevNombreSQL(CStr(DBLet(miRsAux!dirdatos))) & "'"
-        'Poblacion
-        SQL = DBLet(miRsAux!codposta)
-        If SQL <> "" Then SQL = SQL & " - "
-        SQL = SQL & DevNombreSQL(CStr(DBLet(miRsAux!desPobla)))
-        cad = cad & ",'" & SQL & "'"
-        'Provincia
-        cad = cad & ",'" & DevNombreSQL(CStr(DBLet(miRsAux!desProvi))) & "'"
-        miRsAux.Close
-        
-
-        
-        SQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2, texto3, texto4,texto5,texto6, observa1, "
-        SQL = SQL & "importe1, importe2, fecha1, fecha2, fecha3, observa2, opcion)"
-        SQL = SQL & " VALUES (" & vUsu.Codigo & ",1,'',''," & cad
-        
-        'select Numfac,fecha from usuarios.ztmpfaclin where tipoiva=1 and codusu=2200
-        Importe = 0
-        RC = "NIF"   'RC = "fecha"   La fecha de VTo esta en el campo: NIF
-        cad = DevuelveDesdeBD("numfac", "Usuarios.ztmpfaclin", "codusu =" & vUsu.Codigo & " AND tipoiva", "1", "N", RC)
-        If cad = "" Then
-            'Significa que la compesacion ha sido total, no quedaba resultante
-            
-        Else
-            cad = "Quedando el resultado en el vencimiento: " & cad & " de " & Format(RC, "dd/mm/yyyy")
-            Importe = 1
-        End If
-        
-        If Importe > 0 Then
-            RC = "select sum(impvenci + coalesce(gastos,0) + coalesce(impcobro,0)) from  scompenclilin  WHERE codigo=" & CONT
-            miRsAux.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            RC = "0"
-            If Not miRsAux.EOF Then Importe = DBLet(miRsAux.Fields(0), "N")
-            miRsAux.Close
-        Else
-            RC = "0"
-        End If
-        
-        'observa 1 texto 6 e importe1
-        SQL = SQL & ",'" & cad & "'," & TransformaComasPuntos(CStr(Importe))
-        
-        
-        'importe2, fecha1, fecha2, fecha3, observa1, observa2, opcion
-        For I = 1 To 6
-            SQL = SQL & ",NULL"
-        Next
-        SQL = SQL & ")"
-        Conn.Execute SQL
-        
-        With frmImprimir
-                .OtrosParametros = ""
-                .NumeroParametros = 0
-                .FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
-                .SoloImprimir = False
-                
-                .Opcion = 91
-                .Show vbModal
-            End With
-
-
-
-Exit Sub
-EImprimiCompensacion:
-    MuestraError Err.Number, Err.Description
-End Sub
 
 Private Function RealizarProcesoCompensacionAbonos() As Boolean
 Dim Destino As Byte
@@ -1593,7 +1525,7 @@ Dim J As Integer
     'Texto compensacion
     DevfrmCCtas = ""
     
-    RC = "Select " & cad & ", gastos, impvenci, impcobro, fecvenci FROM cobros where (numserie,numfactu,fecfactu,numorden) IN (" & SQL & ")"
+    RC = "Select " & cad & ", gastos, impvenci, impcobro, fecvenci FROM cobros where (numserie,numfactu,fecfactu,numorden) IN (" & Sql & ")"
     miRsAux.Open RC, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If miRsAux.EOF Then
         MsgBox "Error. EOF vencimientos devueltos ", vbExclamation
@@ -1614,13 +1546,14 @@ Dim J As Integer
         If miRsAux!NUmSerie = Me.lwCompenCli.ListItems(NumRegElim).Text Then
             If miRsAux!NumFactu = Val(Me.lwCompenCli.ListItems(NumRegElim).SubItems(1)) Then
                 If Format(miRsAux!FecFactu, "dd/mm/yyyy") = Me.lwCompenCli.ListItems(NumRegElim).SubItems(2) Then
-                    If miRsAux!NUmorden = Val(Me.lwCompenCli.ListItems(NumRegElim).SubItems(3)) Then Destino = 1
+                    If miRsAux!numorden = Val(Me.lwCompenCli.ListItems(NumRegElim).SubItems(3)) Then Destino = 1
                 End If
             End If
         End If
         
-        RC = "INSERT INTO compensa_facturas (codigo,linea,destino," & cad & ") VALUES (" & CONT & "," & I & "," & Destino & "," & DBSet(miRsAux!NUmSerie, "T")
-        RC = RC & "," & DBSet(miRsAux!NumFactu, "N") & "," & DBSet(miRsAux!FecFactu, "F") & "," & DBSet(miRsAux!NUmorden, "N") & ")"
+        RC = "INSERT INTO compensa_facturas (codigo,linea,destino," & cad & ",impvenci,gastos,impcobro,fecvenci) VALUES (" & CONT & "," & I & "," & Destino & "," & DBSet(miRsAux!NUmSerie, "T")
+        RC = RC & "," & DBSet(miRsAux!NumFactu, "N") & "," & DBSet(miRsAux!FecFactu, "F") & "," & DBSet(miRsAux!numorden, "N") & "," & DBSet(miRsAux!ImpVenci, "N")
+        RC = RC & "," & DBSet(miRsAux!Gastos, "N") & "," & DBSet(miRsAux!impcobro, "N") & "," & DBSet(miRsAux!FecVenci, "F") & ")"
         Conn.Execute RC
         
         'Para las observaciones de despues
@@ -1654,7 +1587,7 @@ Dim J As Integer
         
         'Para saber si ha ido bien
         Destino = 0    '0 mal,1 bien
-        If InsertarCobrosRealizados(SQL) Then
+        If InsertarCobrosRealizados(Sql) Then
             If txtimpNoEdit(0).Text = txtimpNoEdit(1).Text Then
                 Destino = 1
             Else
@@ -1663,7 +1596,7 @@ Dim J As Integer
                 
                 cad = ""
                 J = 0
-                SQL = ""
+                Sql = ""
                 
                 
                 Importe = CCur(txtimpNoEdit(0).Tag) + CCur(txtimpNoEdit(1).Tag)  'txtimpNoEdit(1).Tag es negativo
@@ -1672,8 +1605,8 @@ Dim J As Integer
                 RC = RC & ",text33csb=" & DBSet(Txt33Csb, "T")
                 RC = RC & ",text41csb=" & DBSet(Txt41Csb, "T")
                 
-                SQL = RC & SQL
-                SQL = "UPDATE cobros SET " & SQL
+                Sql = RC & Sql
+                Sql = "UPDATE cobros SET " & Sql
                 'WHERE
                 RC = ""
                 For J = 1 To Me.lwCompenCli.ListItems.Count
@@ -1687,7 +1620,7 @@ Dim J As Integer
                     End If
                 Next
                 If RC <> "" Then
-                    cad = SQL & " WHERE " & RC
+                    cad = Sql & " WHERE " & RC
                     If Ejecuta(cad) Then Destino = 1
                 Else
                     MsgBox "No encontrado destino", vbExclamation
@@ -1705,7 +1638,7 @@ Dim J As Integer
 End Function
 
 Private Function InsertarCobrosRealizados(facturas As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim SQL2 As String
 Dim CadInsert As String
 Dim CadValues As String
@@ -1716,33 +1649,33 @@ Dim NumLin As Long
 
     InsertarCobrosRealizados = True
 
-    CadInsert = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, usuariocobro,fecrealizado,impcobro) values  "
+    CadInsert = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, usuariocobro,fecrealizado,impcobro,numasien) values  "
     
-    SQL = "select * from cobros where (numserie, numfactu, fecfactu, numorden) in (" & facturas & ")"
+    Sql = "select * from cobros where (numserie, numfactu, fecfactu, numorden) in (" & facturas & ")"
     
     CadValues = ""
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
     
         Importe = DBLet(RS!ImpVenci) + DBLet(RS!Gastos, "N") - DBLet(RS!impcobro, "N")
         
         SQL2 = "select max(numlinea) from cobros_realizados where numserie = " & DBSet(RS!NUmSerie, "T") & " and numfactu = " & DBSet(RS!NumFactu, "N")
-        SQL2 = SQL2 & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and numorden = " & DBSet(RS!NUmorden, "N")
+        SQL2 = SQL2 & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and numorden = " & DBSet(RS!numorden, "N")
         NumLin = DevuelveValor(SQL2)
         NumLin = NumLin + 1
     
-        CadValues = CadValues & "(" & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFactu, "N") & "," & DBSet(RS!FecFactu, "F") & "," & DBSet(RS!NUmorden, "N")
-        CadValues = CadValues & "," & DBSet(NumLin, "N") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & "," & DBSet(Importe, "N") & "),"
+        CadValues = CadValues & "(" & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFactu, "N") & "," & DBSet(RS!FecFactu, "F") & "," & DBSet(RS!numorden, "N")
+        CadValues = CadValues & "," & DBSet(NumLin, "N") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & "," & DBSet(Importe, "N") & ",0),"
         
         
         ' actualizamos la cabecera del cobro pq ya no lo eliminamos
-        SQL = "update cobros set situacion = 2, impcobro = impvenci + coalesce(gastos,0) where numserie = " & DBSet(RS!NUmSerie, "T")
-        SQL = SQL & " and numfactu = " & DBSet(RS!NumFactu, "N") & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and numorden = " & DBSet(RS!NUmorden, "N")
+        Sql = "update cobros set situacion = 2, impcobro = impvenci + coalesce(gastos,0) where numserie = " & DBSet(RS!NUmSerie, "T")
+        Sql = Sql & " and numfactu = " & DBSet(RS!NumFactu, "N") & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and numorden = " & DBSet(RS!numorden, "N")
         
-        Conn.Execute SQL
+        Conn.Execute Sql
         
         RS.MoveNext
     Wend
@@ -1765,7 +1698,7 @@ End Function
 
 Private Sub SQLVtosSeleccionadosCompensacion(ByRef RegistroDestino As Long, SinDestino As Boolean)
 Dim Insertar As Boolean
-    SQL = ""
+    Sql = ""
     For I = 1 To Me.lwCompenCli.ListItems.Count
         If Me.lwCompenCli.ListItems(I).Checked Then
         
@@ -1775,13 +1708,13 @@ Dim Insertar As Boolean
                 If SinDestino Then Insertar = False
             End If
             If Insertar Then
-                SQL = SQL & ", ('" & lwCompenCli.ListItems(I).Text & "'," & lwCompenCli.ListItems(I).SubItems(1)
-                SQL = SQL & ",'" & Format(lwCompenCli.ListItems(I).SubItems(2), FormatoFecha) & "'," & lwCompenCli.ListItems(I).SubItems(3) & ")"
+                Sql = Sql & ", ('" & lwCompenCli.ListItems(I).Text & "'," & lwCompenCli.ListItems(I).SubItems(1)
+                Sql = Sql & ",'" & Format(lwCompenCli.ListItems(I).SubItems(2), FormatoFecha) & "'," & lwCompenCli.ListItems(I).SubItems(3) & ")"
             End If
             
         End If
     Next
-    SQL = Mid(SQL, 2)
+    Sql = Mid(Sql, 2)
             
 End Sub
 
@@ -1824,8 +1757,11 @@ Dim cad As String
         
         Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And Modo = 2
     
-        Toolbar2.Buttons(1).Enabled = True
-'        Toolbar2.Buttons(2).Enabled = DBLet(RS!especial, "N")
+        Toolbar2.Buttons(1).Enabled = True 'establecer cta
+        Toolbar2.Buttons(2).Enabled = True 'ver todos
+        Toolbar2.Buttons(4).Enabled = VerTodos
+        Toolbar2.Buttons(5).Enabled = VerTodos
+        
     End If
     
     RS.Close
