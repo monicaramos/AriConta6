@@ -176,6 +176,7 @@ Form=frmTESRealizarCobros.frm
 Form=frmTESRefTalon.frm
 Form=frmTESCompensaAboCli.frm
 Form=frmTESCompensaAboCliImp.frm
+Form=frmTESReclamaCli.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

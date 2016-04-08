@@ -1104,10 +1104,10 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 605 ' transferencia abonos
         Case 606 ' compensaciones
         Case 607 ' compensar cliente
-            frmTESCompensaAboCli.Opcion = 36
             frmTESCompensaAboCli.Show vbModal
         
         Case 608 ' reclamaciones
+            frmTESReclamaCli.Show vbModal
         
         Case 701 ' remesas
         Case 702 ' cancelacion cliente
@@ -1483,7 +1483,7 @@ Private Sub CargaShortCuts(Seleccionado As Long)
 Dim Aux As String
 Dim RS As ADODB.Recordset
 Dim SQL As String
-Dim cadAux As String
+Dim CadAux As String
  
  
     'Para cada usuario, y a partir del menu del que disponga
