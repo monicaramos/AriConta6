@@ -24,6 +24,426 @@ Begin VB.Form frmTESCompensaAboCli
       _ExtentY        =   847
       _Version        =   393216
    End
+   Begin VB.Frame FrameCompensaAbonosCliente 
+      BorderStyle     =   0  'None
+      Height          =   6885
+      Left            =   120
+      TabIndex        =   0
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   12735
+      Begin VB.CheckBox Check1 
+         Caption         =   "Sólo con Abonos"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   2760
+         TabIndex        =   21
+         Tag             =   "s|N|S|||cobros|situacionjuri|||"
+         Top             =   450
+         Width           =   2055
+      End
+      Begin VB.Frame FrameBotonGnral 
+         Height          =   705
+         Left            =   180
+         TabIndex        =   13
+         Top             =   150
+         Width           =   2325
+         Begin MSComctlLib.Toolbar Toolbar2 
+            Height          =   330
+            Left            =   240
+            TabIndex        =   14
+            Top             =   180
+            Width           =   1995
+            _ExtentX        =   3519
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   5
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Establecer Vencimiento"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Ver todos"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Cta Anterior"
+               EndProperty
+               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Cta Siguiente"
+               EndProperty
+            EndProperty
+         End
+      End
+      Begin VB.TextBox txtimpNoEdit 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   10380
+         TabIndex        =   11
+         Top             =   5790
+         Width           =   1845
+      End
+      Begin VB.TextBox txtimpNoEdit 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   10260
+         TabIndex        =   10
+         Top             =   1170
+         Width           =   2025
+      End
+      Begin VB.TextBox txtimpNoEdit 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   8250
+         TabIndex        =   7
+         Top             =   1170
+         Width           =   1965
+      End
+      Begin MSComctlLib.ListView lwCompenCli 
+         Height          =   3675
+         Left            =   240
+         TabIndex        =   6
+         Top             =   1920
+         Width           =   12315
+         _ExtentX        =   21722
+         _ExtentY        =   6482
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   8
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Tipo"
+            Object.Width           =   1410
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Factura"
+            Object.Width           =   2116
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Fecha"
+            Object.Width           =   2381
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Vto"
+            Object.Width           =   1234
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Fecha Vto"
+            Object.Width           =   2381
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "Forma pago"
+            Object.Width           =   4410
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   6
+            Text            =   "Cobro"
+            Object.Width           =   3590
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   7
+            Text            =   "Abonos"
+            Object.Width           =   3590
+         EndProperty
+      End
+      Begin VB.TextBox DtxtCta 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   17
+         Left            =   1560
+         TabIndex        =   4
+         Text            =   "Text5"
+         Top             =   1170
+         Width           =   4905
+      End
+      Begin VB.TextBox txtCta 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   17
+         Left            =   240
+         TabIndex        =   3
+         Top             =   1170
+         Width           =   1305
+      End
+      Begin VB.CommandButton cmdCompensar 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   10350
+         TabIndex        =   2
+         Top             =   6300
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   11550
+         TabIndex        =   1
+         Top             =   6300
+         Width           =   975
+      End
+      Begin MSAdodcLib.Adodc Data1 
+         Height          =   330
+         Left            =   7950
+         Top             =   150
+         Visible         =   0   'False
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   582
+         ConnectMode     =   0
+         CursorLocation  =   3
+         IsolationLevel  =   -1
+         ConnectionTimeout=   15
+         CommandTimeout  =   30
+         CursorType      =   3
+         LockType        =   3
+         CommandType     =   8
+         CursorOptions   =   0
+         CacheSize       =   50
+         MaxRecords      =   0
+         BOFAction       =   0
+         EOFAction       =   0
+         ConnectStringType=   1
+         Appearance      =   1
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         Orientation     =   0
+         Enabled         =   -1
+         Connect         =   ""
+         OLEDBString     =   ""
+         OLEDBFile       =   ""
+         DataSourceName  =   ""
+         OtherAttributes =   ""
+         UserName        =   ""
+         Password        =   ""
+         RecordSource    =   ""
+         Caption         =   "Adodc1"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         _Version        =   393216
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   0
+         Left            =   11820
+         Picture         =   "frmTESCompensaAboCli.frx":000C
+         ToolTipText     =   "Quitar al Debe"
+         Top             =   1620
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   1
+         Left            =   12180
+         Picture         =   "frmTESCompensaAboCli.frx":0156
+         ToolTipText     =   "Puntear al Debe"
+         Top             =   1620
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Resultado"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   240
+         Index           =   72
+         Left            =   9300
+         TabIndex        =   12
+         Top             =   5835
+         Width           =   960
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Rectifca./Abono"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   71
+         Left            =   10740
+         TabIndex        =   9
+         Top             =   900
+         Width           =   1590
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Cobro"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   70
+         Left            =   9300
+         TabIndex        =   8
+         Top             =   900
+         Width           =   570
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Cuenta cliente"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   69
+         Left            =   240
+         TabIndex        =   5
+         Top             =   900
+         Width           =   1440
+      End
+      Begin VB.Image Image3 
+         Height          =   240
+         Index           =   17
+         Left            =   1770
+         Top             =   900
+         Width           =   240
+      End
+   End
    Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
       Height          =   6885
@@ -178,408 +598,6 @@ Begin VB.Form frmTESCompensaAboCli
                Object.ToolTipText     =   "Ayuda"
             EndProperty
          EndProperty
-      End
-   End
-   Begin VB.Frame FrameCompensaAbonosCliente 
-      BorderStyle     =   0  'None
-      Height          =   6885
-      Left            =   120
-      TabIndex        =   0
-      Top             =   0
-      Visible         =   0   'False
-      Width           =   12735
-      Begin VB.CheckBox Check1 
-         Caption         =   "Sólo con Abonos"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   0
-         Left            =   2760
-         TabIndex        =   21
-         Tag             =   "s|N|S|||cobros|situacionjuri|||"
-         Top             =   450
-         Width           =   2055
-      End
-      Begin VB.Frame FrameBotonGnral 
-         Height          =   705
-         Left            =   180
-         TabIndex        =   13
-         Top             =   150
-         Width           =   2325
-         Begin MSComctlLib.Toolbar Toolbar2 
-            Height          =   330
-            Left            =   240
-            TabIndex        =   14
-            Top             =   180
-            Width           =   1995
-            _ExtentX        =   3519
-            _ExtentY        =   582
-            ButtonWidth     =   609
-            ButtonHeight    =   582
-            AllowCustomize  =   0   'False
-            Style           =   1
-            _Version        =   393216
-            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   5
-               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Establecer Vencimiento"
-                  Object.Tag             =   "2"
-               EndProperty
-               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Ver todos"
-               EndProperty
-               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Style           =   3
-               EndProperty
-               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Cta Anterior"
-               EndProperty
-               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Cta Siguiente"
-               EndProperty
-            EndProperty
-         End
-      End
-      Begin VB.TextBox txtimpNoEdit 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   2
-         Left            =   10380
-         TabIndex        =   11
-         Top             =   5790
-         Width           =   1845
-      End
-      Begin VB.TextBox txtimpNoEdit 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   10260
-         TabIndex        =   10
-         Top             =   1230
-         Width           =   2025
-      End
-      Begin VB.TextBox txtimpNoEdit 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   8250
-         TabIndex        =   7
-         Top             =   1230
-         Width           =   1965
-      End
-      Begin MSComctlLib.ListView lwCompenCli 
-         Height          =   3975
-         Left            =   240
-         TabIndex        =   6
-         Top             =   1650
-         Width           =   12315
-         _ExtentX        =   21722
-         _ExtentY        =   7011
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         Checkboxes      =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   8
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Tipo"
-            Object.Width           =   1410
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Factura"
-            Object.Width           =   2116
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "Fecha"
-            Object.Width           =   2381
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   3
-            Text            =   "Vto"
-            Object.Width           =   1234
-         EndProperty
-         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   4
-            Text            =   "Fecha Vto"
-            Object.Width           =   2381
-         EndProperty
-         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   5
-            Text            =   "Forma pago"
-            Object.Width           =   4410
-         EndProperty
-         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   6
-            Text            =   "Cobro"
-            Object.Width           =   3590
-         EndProperty
-         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   7
-            Text            =   "Abonos"
-            Object.Width           =   3590
-         EndProperty
-      End
-      Begin VB.TextBox DtxtCta 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   17
-         Left            =   1560
-         TabIndex        =   4
-         Text            =   "Text5"
-         Top             =   1200
-         Width           =   4905
-      End
-      Begin VB.TextBox txtCta 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   17
-         Left            =   240
-         TabIndex        =   3
-         Top             =   1200
-         Width           =   1305
-      End
-      Begin VB.CommandButton cmdCompensar 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   10350
-         TabIndex        =   2
-         Top             =   6300
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   0
-         Left            =   11550
-         TabIndex        =   1
-         Top             =   6300
-         Width           =   975
-      End
-      Begin MSAdodcLib.Adodc Data1 
-         Height          =   330
-         Left            =   7950
-         Top             =   150
-         Visible         =   0   'False
-         Width           =   2055
-         _ExtentX        =   3625
-         _ExtentY        =   582
-         ConnectMode     =   0
-         CursorLocation  =   3
-         IsolationLevel  =   -1
-         ConnectionTimeout=   15
-         CommandTimeout  =   30
-         CursorType      =   3
-         LockType        =   3
-         CommandType     =   8
-         CursorOptions   =   0
-         CacheSize       =   50
-         MaxRecords      =   0
-         BOFAction       =   0
-         EOFAction       =   0
-         ConnectStringType=   1
-         Appearance      =   1
-         BackColor       =   -2147483643
-         ForeColor       =   -2147483640
-         Orientation     =   0
-         Enabled         =   -1
-         Connect         =   ""
-         OLEDBString     =   ""
-         OLEDBFile       =   ""
-         DataSourceName  =   ""
-         OtherAttributes =   ""
-         UserName        =   ""
-         Password        =   ""
-         RecordSource    =   ""
-         Caption         =   "Adodc1"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         _Version        =   393216
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Resultado"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   240
-         Index           =   72
-         Left            =   9300
-         TabIndex        =   12
-         Top             =   5835
-         Width           =   960
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Rectifca./Abono"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   240
-         Index           =   71
-         Left            =   10740
-         TabIndex        =   9
-         Top             =   960
-         Width           =   1590
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Cobro"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   240
-         Index           =   70
-         Left            =   9300
-         TabIndex        =   8
-         Top             =   960
-         Width           =   570
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Cuenta cliente"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   240
-         Index           =   69
-         Left            =   240
-         TabIndex        =   5
-         Top             =   930
-         Width           =   1440
-      End
-      Begin VB.Image Image3 
-         Height          =   240
-         Index           =   17
-         Left            =   1770
-         Top             =   930
-         Width           =   240
       End
    End
 End
@@ -843,6 +861,8 @@ Private Sub Form_Activate()
             End If
             CadenaDesdeOtroForm = ""
         End If
+        CargaList
+        
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -964,6 +984,17 @@ Private Sub Image3_Click(Index As Integer)
     If Index = 17 Then PonerVtosCompensacionCliente
 End Sub
 
+Private Sub imgCheck_Click(Index As Integer)
+Dim It
+Dim I As Integer
+    For I = 1 To Me.lwCompenCli.ListItems.Count
+        Set It = lwCompenCli.ListItems(I)
+        lwCompenCli.ListItems(I).Checked = (Index = 1)
+        lwCompenCli_ItemCheck (It)
+        Set It = Nothing
+    Next I
+End Sub
+
 Private Sub lw1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
 Dim Campo2 As Integer
 
@@ -1006,6 +1037,11 @@ Dim Cobro As Boolean
     Me.txtimpNoEdit(I).Tag = Me.txtimpNoEdit(I).Tag + C
     txtimpNoEdit(I).Text = Format(Abs(txtimpNoEdit(I).Tag))
     txtimpNoEdit(2).Text = Format(CCur(txtimpNoEdit(0).Tag) + CCur(txtimpNoEdit(1).Tag), FormatoImporte)
+            
+    If ComprobarCero(txtimpNoEdit(0).Text) = 0 Then txtimpNoEdit(0).Text = ""
+    If ComprobarCero(txtimpNoEdit(1).Text) = 0 Then txtimpNoEdit(1).Text = ""
+    If ComprobarCero(txtimpNoEdit(2).Text) = 0 Then txtimpNoEdit(2).Text = ""
+    
             
 End Sub
 
@@ -1330,7 +1366,7 @@ End Sub
 '-------------------------------------------------------------------------------
 
 Private Sub PonerVtosCompensacionCliente()
-Dim IT
+Dim It
 
 
     lwCompenCli.ListItems.Clear
@@ -1348,13 +1384,13 @@ Dim IT
     cad = cad & " ORDER BY fecvenci"
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Set IT = lwCompenCli.ListItems.Add()
-        IT.Text = miRsAux!NUmSerie
-        IT.SubItems(1) = Format(miRsAux!NumFactu, "0000000")
-        IT.SubItems(2) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
-        IT.SubItems(3) = miRsAux!numorden
-        IT.SubItems(4) = miRsAux!FecVenci
-        IT.SubItems(5) = miRsAux!nomforpa
+        Set It = lwCompenCli.ListItems.Add()
+        It.Text = miRsAux!NUmSerie
+        It.SubItems(1) = Format(miRsAux!NumFactu, "0000000")
+        It.SubItems(2) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
+        It.SubItems(3) = miRsAux!numorden
+        It.SubItems(4) = miRsAux!FecVenci
+        It.SubItems(5) = miRsAux!nomforpa
     
         Importe = DBLet(miRsAux!Gastos, "N")
         Importe = Importe + miRsAux!ImpVenci
@@ -1363,13 +1399,13 @@ Dim IT
         If Not IsNull(miRsAux!impcobro) Then Importe = Importe - miRsAux!impcobro
         
         If Importe > 0 Then
-            IT.SubItems(6) = Format(Importe, FormatoImporte)
-            IT.SubItems(7) = " "
+            It.SubItems(6) = Format(Importe, FormatoImporte)
+            It.SubItems(7) = " "
         Else
-            IT.SubItems(6) = " "
-            IT.SubItems(7) = Format(-Importe, FormatoImporte)
+            It.SubItems(6) = " "
+            It.SubItems(7) = Format(-Importe, FormatoImporte)
         End If
-        IT.Tag = Abs(Importe)  'siempre valor absoluto
+        It.Tag = Abs(Importe)  'siempre valor absoluto
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1701,7 +1737,7 @@ End Sub
 
 
 Private Sub CargaList()
-Dim IT
+Dim It
 
     lw1.ListItems.Clear
     Set Me.lw1.SmallIcons = frmPpal.ImgListviews
@@ -1718,11 +1754,11 @@ Dim IT
     
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Set IT = lw1.ListItems.Add()
-        IT.Text = miRsAux!Codigo
-        IT.SubItems(1) = Format(miRsAux!Fecha, "dd/mm/yyyy hh:mm:ss")
-        IT.SubItems(2) = miRsAux!codmacta
-        IT.SubItems(3) = miRsAux!Nommacta
+        Set It = lw1.ListItems.Add()
+        It.Text = miRsAux!Codigo
+        It.SubItems(1) = Format(miRsAux!Fecha, "dd/mm/yyyy hh:mm:ss")
+        It.SubItems(2) = miRsAux!codmacta
+        It.SubItems(3) = miRsAux!Nommacta
         
         miRsAux.MoveNext
     Wend

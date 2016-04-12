@@ -505,7 +505,7 @@ Dim Mens As String
     
     If vFecha >= vParam.fechaini Then
         'Mayor que fecha inicio
-        If vFecha >= vParamT.fechaAmbito Then
+        If vFecha >= vParam.FechaActiva Then 'vParamT.fechaAmbito Then --> por si no tenemos tesoreria
             If vFecha <= vParam.fechafin Then
                 FechaCorrecta2 = 0
             Else
