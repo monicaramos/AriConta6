@@ -517,7 +517,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Top             =   5700
          Width           =   765
       End
-      Begin VB.TextBox txtDpto 
+      Begin VB.TextBox txtFPago 
          Alignment       =   1  'Right Justify
          Enabled         =   0   'False
          BeginProperty Font 
@@ -534,10 +534,10 @@ Begin VB.Form frmTESReclamaCliEfe
          Left            =   1230
          TabIndex        =   7
          Tag             =   "imgConcepto"
-         Top             =   3450
+         Top             =   3480
          Width           =   1275
       End
-      Begin VB.TextBox txtDpto 
+      Begin VB.TextBox txtFPago 
          Alignment       =   1  'Right Justify
          Enabled         =   0   'False
          BeginProperty Font 
@@ -1098,7 +1098,52 @@ Begin VB.Form frmTESReclamaCliEfe
       TabIndex        =   33
       Top             =   0
       Width           =   4815
-      Begin VB.TextBox txtSerie 
+      Begin VB.TextBox txtVarios 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   270
+         TabIndex        =   78
+         Text            =   "Text1"
+         Top             =   5700
+         Width           =   4215
+      End
+      Begin VB.TextBox txtVarios 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   270
+         TabIndex        =   76
+         Text            =   "Text1"
+         Top             =   5040
+         Width           =   4215
+      End
+      Begin VB.TextBox txtVarios 
+         Height          =   285
+         Index           =   1
+         Left            =   4980
+         TabIndex        =   75
+         Text            =   "Text1"
+         Top             =   5070
+         Width           =   2775
+      End
+      Begin VB.TextBox txtCarta 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1110,14 +1155,13 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   2
-         Left            =   300
+         Left            =   240
          TabIndex        =   72
          Tag             =   "imgConcepto"
-         Top             =   4590
+         Top             =   4350
          Width           =   765
       End
-      Begin VB.TextBox txtNSerie 
+      Begin VB.TextBox txtNCarta 
          BackColor       =   &H80000018&
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1129,14 +1173,13 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   2
-         Left            =   1140
+         Left            =   1080
          Locked          =   -1  'True
          TabIndex        =   71
-         Top             =   4590
-         Width           =   3345
+         Top             =   4350
+         Width           =   3405
       End
-      Begin VB.CheckBox Check1 
+      Begin VB.CheckBox chkExcluirConEmail 
          Caption         =   "Excluir clientes con email (carta)"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1148,13 +1191,12 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   5
-         Left            =   330
+         Left            =   270
          TabIndex        =   70
-         Top             =   8280
+         Top             =   8430
          Width           =   4095
       End
-      Begin VB.CheckBox Check1 
+      Begin VB.CheckBox chkInsertarReclamas 
          Caption         =   "Insertar registros reclamaciones"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1166,13 +1208,12 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   4
-         Left            =   330
+         Left            =   270
          TabIndex        =   69
-         Top             =   7920
+         Top             =   8010
          Width           =   4095
       End
-      Begin VB.CheckBox Check1 
+      Begin VB.CheckBox chkEmail 
          Caption         =   "Enviar por email"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1184,13 +1225,12 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   3
-         Left            =   300
+         Left            =   270
          TabIndex        =   68
-         Top             =   7350
+         Top             =   7590
          Width           =   4095
       End
-      Begin VB.CheckBox Check1 
+      Begin VB.CheckBox chkMarcarUtlRecla 
          Caption         =   "Marcar fecha última reclamación"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1202,13 +1242,12 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   2
          Left            =   270
          TabIndex        =   67
-         Top             =   6870
+         Top             =   7170
          Width           =   4095
       End
-      Begin VB.CheckBox Check1 
+      Begin VB.CheckBox chkMostrarCta 
          Caption         =   "Mostrar cuenta"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1220,13 +1259,12 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   1
          Left            =   270
          TabIndex        =   66
-         Top             =   6270
+         Top             =   6750
          Width           =   3075
       End
-      Begin VB.TextBox txtFecha 
+      Begin VB.TextBox txtDias 
          Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1238,10 +1276,9 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   5
-         Left            =   2490
+         Left            =   2850
          TabIndex        =   64
-         Top             =   3870
+         Top             =   3600
          Width           =   1485
       End
       Begin VB.TextBox txtFecha 
@@ -1257,12 +1294,12 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   2490
+         Left            =   240
          TabIndex        =   62
-         Top             =   3480
+         Top             =   3630
          Width           =   1485
       End
-      Begin VB.CheckBox Check1 
+      Begin VB.CheckBox chkReclamaDevueltos 
          Caption         =   "Sólo devueltos"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1274,10 +1311,9 @@ Begin VB.Form frmTESReclamaCliEfe
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Index           =   0
          Left            =   270
          TabIndex        =   12
-         Top             =   5730
+         Top             =   6330
          Width           =   3075
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
@@ -1299,14 +1335,14 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
       End
       Begin MSComctlLib.ListView ListView1 
-         Height          =   2310
+         Height          =   2190
          Index           =   1
          Left            =   180
          TabIndex        =   35
          Top             =   1020
          Width           =   4275
          _ExtentX        =   7541
-         _ExtentY        =   4075
+         _ExtentY        =   3863
          View            =   3
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
@@ -1328,6 +1364,42 @@ Begin VB.Form frmTESReclamaCliEfe
          NumItems        =   0
       End
       Begin VB.Label Label3 
+         Caption         =   "Cargo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   21
+         Left            =   270
+         TabIndex        =   77
+         Top             =   5400
+         Width           =   840
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Asunto"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   13
+         Left            =   270
+         TabIndex        =   74
+         Top             =   4740
+         Width           =   840
+      End
+      Begin VB.Label Label3 
          Caption         =   "Carta"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -1340,16 +1412,15 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   195
          Index           =   12
-         Left            =   300
+         Left            =   240
          TabIndex        =   73
-         Top             =   4320
+         Top             =   4080
          Width           =   630
       End
-      Begin VB.Image imgSerie 
+      Begin VB.Image imgCarta 
          Height          =   255
-         Index           =   2
-         Left            =   990
-         Top             =   4290
+         Left            =   930
+         Top             =   4050
          Width           =   255
       End
       Begin VB.Label Label3 
@@ -1365,9 +1436,9 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   195
          Index           =   23
-         Left            =   300
+         Left            =   2850
          TabIndex        =   65
-         Top             =   3930
+         Top             =   3330
          Width           =   1800
       End
       Begin VB.Label Label3 
@@ -1383,17 +1454,17 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   195
          Index           =   22
-         Left            =   300
+         Left            =   270
          TabIndex        =   63
-         Top             =   3510
+         Top             =   3330
          Width           =   1800
       End
       Begin VB.Image ImgFec 
          Height          =   240
          Index           =   4
-         Left            =   2190
+         Left            =   2130
          Picture         =   "frmTESReclamaCliEfe.frx":000C
-         Top             =   3510
+         Top             =   3330
          Width           =   240
       End
       Begin VB.Image imgCheck 
@@ -1427,7 +1498,7 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   255
          Index           =   15
-         Left            =   180
+         Left            =   240
          TabIndex        =   36
          Top             =   720
          Width           =   1500
@@ -1514,6 +1585,8 @@ Public Legalizacion As String
 
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
+Private WithEvents frmCarta As frmBasico
+Attribute frmCarta.VB_VarHelpID = -1
 Private WithEvents frmConta As frmBasico
 Attribute frmConta.VB_VarHelpID = -1
 Private WithEvents frmAgen As frmBasico
@@ -1529,6 +1602,7 @@ Dim RC As String
 Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
+Dim Fecha As Date
 
 Dim PrimeraVez As Boolean
 
@@ -1552,28 +1626,123 @@ End Sub
 
 
 
-Private Sub Check1_Click(Index As Integer)
-    Select Case Index
-        Case 0
-            If Check1(0).Value = 1 Then
-                Check1(2).Value = 1
-                Check1_Click (2)
-            End If
-        Case 1
-            If Check1(1).Value = 1 Then
-                Check1(2).Value = 0
-                Check1(0).Value = 0
-            End If
-        Case 2
-            If Check1(2).Value = 1 Then
-                Check1(1).Value = 0
-            End If
-    End Select
-End Sub
-
 Private Sub cmdAccion_Click(Index As Integer)
+Dim Rs As ADODB.Recordset
+Dim I As Long
+Dim Importe As Currency
 
     If Not DatosOK Then Exit Sub
+    
+    Screen.MousePointer = vbHourglass
+    
+    'Ahora haremos todo el proceso
+    I = Val(txtDias.Text)
+    I = I * -1
+    Fecha = CDate(txtFecha(4).Text)
+    Fecha = DateAdd("d", I, Fecha)
+    
+    'Ya tenemos en F la fecha a partir de la cual reclamamos
+    'Montamos el SQL
+    MontaSQLReclamacion
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    I = 0
+    While Not Rs.EOF
+    
+        I = I + 1
+        Rs.MoveNext
+    Wend
+    Rs.Close
+    
+    If I = 0 Then
+        MsgBox "No hay valores entre las fechas", vbExclamation
+        Exit Sub
+    End If
+    
+    If Me.optTipoSal(3).Value = 1 Then
+            CadenaDesdeOtroForm = ""
+            frmVarios.Opcion = 31
+            frmVarios.Show vbModal
+            
+            If CadenaDesdeOtroForm = "" Then
+                Screen.MousePointer = vbDefault
+                Set Rs = Nothing
+                Exit Sub
+            End If
+    End If
+    
+    
+    
+    
+    
+    'No enlazamos por NIF, si no k en NIF guardaremos codmacta
+    'codinmov, nominmov, fechaadq, valoradq, amortacu, fecventa, impventa, impperiodo) VALUES (
+    cad = "DELETE FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo
+    Conn.Execute cad
+    
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "INSERT INTO tmpentrefechas(codusu,codigo,codccost,nomccost,fecventa,conconam,fechaadq"
+    SQL = SQL & ",nominmov,impventa,impperiodo,valoradq,codinmov,nomconam ) VALUES (" & vUsu.Codigo & ","
+    
+    'Nuevo. Febrero 2010. Departamento ira en codinmov
+    
+    'Codigo
+    'Clave autonumerica
+    '   codccost,nomccost,fecventa,conconam
+    '    numserie,codfac,fecfac,numoreden
+    '  Importes
+    'en fechaadq pondremos codmacta, asi luego iremos a insertar
+    
+    I = 1
+    While Not Rs.EOF
+    
+        'Neuvo Febero 2010
+        'Ademas de ver si me debe algo, si esta recibido NO lo puedo meter
+        
+        Importe = Rs!ImpVenci + DBLet(Rs!Gastos, "N") - DBLet(Rs!impcobro, "N")
+        If DBLet(Rs!recedocu, "N") = 1 Then Importe = 0
+        'If DBLet(Rs!recedocu, "N") = 1 And Importe > 0 Then Stop
+        If Importe > 0 Then
+            cad = I & ",'" & Rs!NUmSerie & "','"
+            cad = cad & Rs!NumFactu & "','"
+            cad = cad & Format(Rs!FecFactu, FormatoFecha) & "',"
+            cad = cad & Rs!numorden & ",'"
+            cad = cad & Rs!codmacta & "','"
+            'nomconam,impventa,impperiodo
+            ' fec vto cobro, imp, cobrado
+            cad = cad & Rs!FecVenci & "',"
+            cad = cad & TransformaComasPuntos(CStr(Rs!ImpVenci)) & ","
+            If IsNull(Rs!impcobro) Then
+                cad = cad & "NULL"
+            Else
+                cad = cad & TransformaComasPuntos(CStr(Rs!impcobro))
+            End If
+            'ValorADQ=GASTOS
+            cad = cad & "," & TransformaComasPuntos(CStr(DBLet(Rs!Gastos, "N")))
+            
+            'Febrero 2010
+            'Departamento
+            cad = cad & "," & DBLet(Rs!departamento, "N") & "," & DBSet(Rs!codmacta, "T")
+            cad = SQL & cad & ")"
+            Conn.Execute cad
+            
+            I = I + 1
+            
+        End If
+        Rs.MoveNext
+        
+    Wend
+    Rs.Close
+    
+    If I = 1 Then
+        'Ningun valor con esa opcion
+        MsgBox "No hay valores entre las fechas", vbExclamation
+        Exit Sub
+    End If
+    
+    
+    
     
     
     'Exportacion a PDF
@@ -1584,13 +1753,12 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     InicializarVbles True
     
-    tabla = "(cobros INNER JOIN formapago on cobros.codforpa = formapago.codforpa)  "
-    tabla = tabla & " INNER JOIN tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
+    tabla = "tmpentrefechas"
     
     
     If Not MontaSQL Then Exit Sub
     
-    If Not HayRegParaInforme(tabla, cadselect) Then Exit Sub
+    If Not HayRegParaInforme(tabla, "{tmpentrefechas.codusu} = " & vUsu.Codigo) Then Exit Sub
     
     If optTipoSal(1).Value Then
         'EXPORTAR A CSV
@@ -1610,9 +1778,6 @@ Private Sub cmdAccion_Click(Index As Integer)
         AccionesCrystal
     End If
     
-    If Legalizacion <> "" Then
-        CadenaDesdeOtroForm = "OK"
-    End If
     
 End Sub
 
@@ -1625,7 +1790,6 @@ Private Sub Form_Activate()
         PrimeraVez = False
         If Legalizacion <> "" Then
             optTipoSal(2).Value = True
-            optVarios(1).Value = True
             cmdAccion_Click (1)
         End If
     End If
@@ -1649,7 +1813,7 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
-    Me.Caption = "Listado de Cobros Pendientes Clientes"
+    Me.Caption = "Efectuar Reclamaciones Clientes"
 
     For I = 0 To 1
         Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
@@ -1659,7 +1823,7 @@ Private Sub Form_Load()
     Next I
     
     For I = 0 To 3
-        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
     ' La Ayuda
@@ -1669,15 +1833,7 @@ Private Sub Form_Load()
     End With
      
     CargarListView 1
-    CargarCombo
     
-    Me.optVarios(0).Value = True
-    
-    optVarios_Click (0)
-    
-    Combo1.ListIndex = 0
-    Combo2.ListIndex = 2
-    Combo3.ListIndex = 2
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -1688,8 +1844,6 @@ Private Sub Form_Load()
         txtFecha(1).Text = RecuperaValor(Legalizacion, 3)
     End If
     
-    optVarios(0).Value = True
-    optVarios(3).Value = True
     
     
 End Sub
@@ -1700,6 +1854,13 @@ Private Sub frmAgen_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
         txtAgente(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
         txtNAgente(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    End If
+End Sub
+
+Private Sub frmCarta_DatoSeleccionado(CadenaSeleccion As String)
+    If CadenaSeleccion <> "" Then
+        txtCarta.Text = RecuperaValor(CadenaSeleccion, 1)
+        txtNCarta.Text = RecuperaValor(CadenaSeleccion, 2)
     End If
 End Sub
 
@@ -1714,15 +1875,18 @@ Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
     SQL = CadenaSeleccion
 End Sub
 
-Private Sub frmDpto_DatoSeleccionado(CadenaSeleccion As String)
-    If CadenaSeleccion <> "" Then
-        txtDpto(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
-        txtNDpto(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
-    End If
-End Sub
-
 Private Sub frmF_Selec(vFecha As Date)
     txtFecha(IndCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+End Sub
+
+Private Sub imgCarta_Click()
+
+    Set frmCarta = New frmBasico
+    AyudaCartas frmCarta, txtCarta
+    Set frmCarta = Nothing
+    
+    PonFoco Me.txtCarta
+
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
@@ -1825,6 +1989,14 @@ End Sub
 
 Private Sub optTipoSal_Click(Index As Integer)
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), Index
+    If Index = 3 Then
+        If optTipoSal(Index).Value = 1 Then
+            chkExcluirConEmail.Enabled = False
+            chkExcluirConEmail.Value = 0
+        Else
+            chkExcluirConEmail.Enabled = True
+        End If
+    End If
 End Sub
 
 Private Sub optVarios_Click(Index As Integer)
@@ -1874,6 +2046,35 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
             LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
+
+Private Sub txtCarta_GotFocus()
+    PonFoco txtCarta
+End Sub
+
+Private Sub txtCarta_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub txtCarta_LostFocus()
+    SQL = ""
+    txtCarta.Text = Trim(txtCarta.Text)
+    If txtCarta.Text <> "" Then
+        
+        If Not IsNumeric(txtCarta.Text) Then
+            MsgBox "Campo numérico", vbExclamation
+            txtCarta.Text = ""
+            SubSetFocus txtCarta
+        Else
+            txtCarta.Text = Val(txtCarta.Text)
+            SQL = DevuelveDesdeBD("descarta", "cartas", "codcarta", txtCarta.Text, "N")
+            If SQL = "" Then txtCarta.Text = ""
+        End If
+    End If
+    Me.txtDescCarta.Text = SQL
+End Sub
+
+
+
 
 Private Sub txtCuentas_GotFocus(Index As Integer)
     ConseguirFoco txtCuentas(Index), 3
@@ -1966,19 +2167,19 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
     End Select
     
     
-    ' solo se puede introducir departamento si cuenta cliente desde y hasta son iguales
-    txtDpto(0).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
-    imgDpto(0).Enabled = txtDpto(0).Enabled
-    imgDpto(1).Enabled = txtDpto(1).Enabled
-    If Not txtDpto(0).Enabled Then
-        txtDpto(0).Text = ""
-        txtNDpto(0).Text = ""
-    End If
-    txtDpto(1).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
-    If Not txtDpto(1).Enabled Then
-        txtDpto(1).Text = ""
-        txtNDpto(1).Text = ""
-    End If
+'    ' solo se puede introducir departamento si cuenta cliente desde y hasta son iguales
+'    txtDpto(0).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
+'    imgDpto(0).Enabled = txtDpto(0).Enabled
+'    imgDpto(1).Enabled = txtDpto(1).Enabled
+'    If Not txtDpto(0).Enabled Then
+'        txtDpto(0).Text = ""
+'        txtNDpto(0).Text = ""
+'    End If
+'    txtDpto(1).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
+'    If Not txtDpto(1).Enabled Then
+'        txtDpto(1).Text = ""
+'        txtNDpto(1).Text = ""
+'    End If
     
 
 End Sub
@@ -2130,33 +2331,11 @@ Dim SQL2 As String
     SQL = SQL & " concat(cobros.numserie,' ', concat('0000000',cobros.numfactu)) Factura , cobros.codforpa FPago, "
     SQL = SQL & " formapago.nomforpa Descripcion, cobros.referencia Referenciasa, tipofpago.descformapago Tipo "
     
-    If optVarios(0).Value Or optVarios(1).Value Then
-        SQL = SQL & ", cobros.noremesar NoRemesar, cobros.situacionjuri SitJuridica, cobros.Devuelto Devuelto, cobros.recedocu Recepcion, cobros.observa Observaciones "
-    End If
-    
     SQL = SQL & " FROM (cobros inner join formapago on cobros.codforpa = formapago.codforpa) "
     SQL = SQL & " inner join tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
             
             
-    If optVarios(0).Value Then
-        If optVarios(3).Value Then SQL2 = SQL2 & " cobros.codmacta"
-        If optVarios(4).Value Then SQL2 = SQL2 & " cobros.nomclien"
-    End If
-    
-    If optVarios(1).Value Then
-        SQL2 = SQL2 & " cobros.FecVenci"
-        
-        If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
-        If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
-    End If
-
-    If optVarios(2).Value Then
-        SQL2 = SQL2 & " tipofpago.descformapago"
-        
-        If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
-        If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
-    End If
 
     SQL = SQL & " ORDER BY " & SQL2
 
@@ -2178,62 +2357,9 @@ Dim nomDocu As String
     indRPT = "0602-00"
     
 
-    If optVarios(0).Value Then
-        If optVarios(3).Value Then cadParam = cadParam & "pGroup1={cobros.codmacta}|"
-        If optVarios(4).Value Then cadParam = cadParam & "pGroup1={cobros.nomclien}|"
-        
-        numParam = numParam + 1
-        
-        cadParam = cadParam & "pTipo=1|"
-        numParam = numParam + 1
-        
-        If Check1(1).Value Then cadParam = cadParam & "pResumen=1|"
-        numParam = numParam + 1
-        
-    End If
-    
-    If optVarios(1).Value Then
-        cadParam = cadParam & "pGroup1={cobros.fecvenci}|"
-        
-        If optVarios(3).Value Then cadParam = cadParam & "pOrden={cobros.codmacta}|"
-        If optVarios(4).Value Then cadParam = cadParam & "pOrden={cobros.nomclien}|"
-        numParam = numParam + 2
-        
-        cadParam = cadParam & "pTipo=2|"
-        numParam = numParam + 1
-    
-        If Check1(1).Value Then
-            cadParam = cadParam & "pResumen=1|"
-            numParam = numParam + 1
-        End If
-    End If
-
-    If optVarios(2).Value Then
-        cadParam = cadParam & "pGroup1={tipofpago.descformapago}|"
-        
-        If optVarios(3).Value Then cadParam = cadParam & "pOrden={cobros.codmacta}|"
-        If optVarios(4).Value Then cadParam = cadParam & "pOrden={cobros.nomclien}|"
-        numParam = numParam + 2
-    
-        If Check1(1).Value Then
-            cadParam = cadParam & "pResumen=1|"
-            numParam = numParam + 1
-        End If
-    End If
-
     If Check1(0).Value Then
         cadParam = cadParam & "pObserva=1|"
         numParam = numParam + 1
-    End If
-
-
-    If optVarios(0).Value Or optVarios(1).Value Then
-        'formato extendido
-        If Check1(2).Value Then indRPT = "0602-01"
-    End If
-    If optVarios(2).Value Then
-        indRPT = "0602-02"
-        If Check1(2).Value Then indRPT = "0602-03"
     End If
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
@@ -2362,6 +2488,30 @@ Private Function DatosOK() As Boolean
     
     DatosOK = False
     
+    If txtFecha(4).Text = "" Then
+        MsgBox "Introduzca la Fecha de Reclamación.", vbExclamation
+        PonleFoco txtFecha(4)
+        Exit Function
+    End If
+    If txtDias.Text = "" Then
+        MsgBox "Introduzca los días de última Reclamación.", vbExclamation
+        PonleFoco txtDias
+        Exit Function
+    End If
+    If txtCarta.Text = "" Then
+        MsgBox "Seleccione la carta a adjuntar.", vbExclamation
+        PonleFoco txtCarta
+        Exit Function
+    End If
+    'Si poner marcar como reclamacion entonces debe estar marcada la opcion
+    'de insertar en las tablas de col reclamas
+    If chkMarcarUtlRecla.Value = 1 Then
+        If Me.chkInsertarReclamas.Value = 0 Then
+            MsgBox "Debe marcar tambien la opcion de ' INSERTAR REGISTROS RECLAMACIONES '", vbExclamation
+            Exit Function
+        End If
+    End If
+       
     
     DatosOK = True
 
@@ -2374,7 +2524,7 @@ Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As
 End Sub
 
 Private Sub CargarListView(Index As Integer)
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -2389,20 +2539,20 @@ Dim SQL As String
     
     SQL = "Select * from tipofpago order by 1" 'descformapago"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
+    While Not Rs.EOF
         Set ItmX = ListView1(Index).ListItems.Add
         
         ItmX.Checked = True
         ItmX.Text = " " ' Rs.Fields(0).Value
-        ItmX.SubItems(1) = RS.Fields(1).Value
-        ItmX.SubItems(2) = RS.Fields(0).Value
-        RS.MoveNext
+        ItmX.SubItems(1) = Rs.Fields(1).Value
+        ItmX.SubItems(2) = Rs.Fields(0).Value
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -2410,29 +2560,143 @@ ECargarList:
     End If
 End Sub
 
-Private Sub CargarCombo()
-    'recibido
-    Combo1.Clear
-    Combo1.AddItem "No"
-    Combo1.ItemData(Combo1.NewIndex) = 0
-    Combo1.AddItem "Sí"
-    Combo1.ItemData(Combo1.NewIndex) = 1
-    Combo1.AddItem "Todos"
-    Combo1.ItemData(Combo1.NewIndex) = 2
-    'devuelto
-    Combo2.Clear
-    Combo2.AddItem "No"
-    Combo2.ItemData(Combo2.NewIndex) = 0
-    Combo2.AddItem "Sí"
-    Combo2.ItemData(Combo2.NewIndex) = 1
-    Combo2.AddItem "Todos"
-    Combo2.ItemData(Combo2.NewIndex) = 2
-    'situacion jurídica
-    Combo3.Clear
-    Combo3.AddItem "No"
-    Combo3.ItemData(Combo3.NewIndex) = 0
-    Combo3.AddItem "Sí"
-    Combo3.ItemData(Combo3.NewIndex) = 1
-    Combo3.AddItem "Todos"
-    Combo3.ItemData(Combo3.NewIndex) = 2
+Private Sub MontaSQLReclamacion()
+    
+    'Siempre hay que añadir el AND
+    
+    
+    SQL = ""
+    
+    
+    'Numero de serie
+    RC = CampoABD(txtSerie(0), "T", "cobros.numserie", True)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    RC = CampoABD(txtSerie(1), "T", "cobros.numserie", False)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    
+    'Fecha factura
+    RC = CampoABD(txtFecha(0), "F", "fecfactu", True)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    
+    RC = CampoABD(txtFecha(1), "F", "fecfactu", False)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    'Fecha vto
+    RC = CampoABD(txtFecha(2), "F", "fecvenci", True)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    RC = CampoABD(txtFecha(3), "F", "fecvenci", False)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    'cuenta
+    RC = CampoABD(txtCuentas(0), "T", "cobros.codmacta", True)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    RC = CampoABD(txtCuentas(1), "T", "cobros.codmacta", False)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+
+    
+    
+    'Agente
+    RC = CampoABD(txtAgente(0), "N", "cobros.agente", True)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    RC = CampoABD(txtAgente(1), "N", "cobros.agente", False)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    
+    'Forma de pago
+    RC = CampoABD(txtFPago(0), "N", "cobros.codforpa", True)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    RC = CampoABD(txtFPago(1), "N", "cobros.codforpa", False)
+    If RC <> "" Then SQL = SQL & " AND " & RC
+    
+    'Solo devueltos
+    If chkReclamaDevueltos.Value = 1 Then SQL = SQL & " AND devuelto = 1"
+      
+    
+    'Marzo2015
+    If chkExcluirConEmail.Value = 1 Then SQL = SQL & " AND coalesce(maidatos,'')=''"
+    
+    
+    'LA de la fecha
+    SQL = SQL & " AND ((ultimareclamacion  is null) OR (ultimareclamacion <= '" & Format(Fecha, FormatoFecha) & "'))"
+    
+    'QUE FALTE POR PAGAR
+    SQL = SQL & " AND (impvenci>0)"
+    
+    
+    RC = PonerTipoPagoCobro_(True, True)
+    If RC <> "" Then SQL = SQL & " AND tipforpa IN " & RC
+    
+    
+    
+    'Select
+    cad = "Select cobros.*, cuentas.codmacta FROM cobros,cuentas,formapago "
+    cad = cad & " WHERE  formapago.codforpa=cobros.codforpa AND cobros.codmacta = cuentas.codmacta"
+    cad = cad & " AND formapago.codforpa=cobros.codforpa "
+    SQL = cad & SQL
+    
+    
+    
+    
+    
 End Sub
+
+Private Function PonerTipoPagoCobro_(ParaSelect As Boolean, EsReclamacion As Boolean) As String
+Dim I As Integer
+Dim Sele As Integer
+Dim AUX As String
+Dim Visibles As Byte
+
+    AUX = ""
+    Sele = 0
+    Visibles = 0
+    If Not EsReclamacion Then
+        For I = 0 To Me.chkTipPago.Count - 1
+            If Me.chkTipPago(I).Visible Then
+                Visibles = Visibles + 1
+                If Me.chkTipPago(I).Value = 1 Then
+                    Sele = Sele + 1
+                    If ParaSelect Then
+                        AUX = AUX & ", " & I
+                    Else
+                        AUX = AUX & "-" & Me.chkTipPago(I).Caption
+                    End If
+                End If
+            End If
+        Next
+        'No ha marcado ninguno o los ha nmarcado todos. NO pongo nada
+        If Sele = 0 Or Sele = Visibles Then AUX = ""
+        
+    Else
+        '************************
+        'Reclamaciones
+        
+        For I = 0 To Me.chkTipPagoRec.Count - 1
+            If Me.chkTipPagoRec(I).Visible Then
+                Visibles = Visibles + 1
+                If Me.chkTipPagoRec(I).Value = 1 Then
+                    Sele = Sele + 1
+                    If ParaSelect Then
+                        AUX = AUX & ", " & I
+                    Else
+                        AUX = AUX & "-" & Me.chkTipPagoRec(I).Caption
+                    End If
+                End If
+            End If
+        Next
+        'No ha marcado ninguno o los ha nmarcado todos. NO pongo nada
+        If Sele = 0 Or Sele = Visibles Then AUX = ""
+    End If
+    If AUX <> "" Then
+        AUX = Mid(AUX, 2)
+        AUX = "(" & AUX & ")"
+    End If
+    PonerTipoPagoCobro_ = AUX
+End Function
+
+

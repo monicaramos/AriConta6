@@ -1326,7 +1326,7 @@ End Sub
 Private Sub HacerToolBar2(Boton As Integer)
     Select Case Boton
         Case 1
-            
+            frmTESReclamaCliEfe.Show vbModal
     End Select
 End Sub
 
