@@ -1182,3 +1182,73 @@ Dim Encontrado As Boolean
 
 End Function
 
+Public Sub LanzaProgramaAbrirOutlookMasivo(outTipoDocumento As Integer, Cuerpo As String)
+Dim NombrePDF As String
+Dim Aux As String
+Dim Lanza As String
+
+    On Error GoTo ELanzaProgramaAbrirOutlook
+
+    
+    If Not ExisteARIMAILGES Then Exit Sub
+
+    'Primer tema. Copiar el docum.pdf con otro nombre mas significatiov
+    Select Case outTipoDocumento
+    Case 1
+        'Reclamacion
+        Aux = "Reclamacion.pdf"
+    End Select
+    
+    SQL = "select tmp347.*, cuentas.razosoci, cuentas.maidatos from tmp347, cuentas "
+    SQL = SQL & " where codusu = " & vUsu.Codigo & " and importe <> 0 and tmp347.cta = cuentas.codmacta"
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+    
+        NombrePDF = App.Path & "\temp\" & Rs!NIF
+        
+        'direccion email
+        Aux = DBLet(Rs!maidatos)
+        Lanza = Aux & "|"
+        
+        'asunto
+        Aux = ""
+        Select Case outTipoDocumento
+        Case 1 ' reclamaciones
+            Aux = RecuperaValor(Cuerpo, 1)
+        End Select
+        
+        Lanza = Lanza & Aux & "|"
+        
+        
+        'Aqui pondremos lo del texto del BODY
+        Aux = ""
+        Select Case outTipoDocumento
+        Case 1 ' reclamaciones
+            Aux = RecuperaValor(Cuerpo, 2)
+        End Select
+        Lanza = Lanza & Aux & "|"
+        
+        'Envio o mostrar
+        Lanza = Lanza & "1"   '0. Display   1.  send
+        
+        'Campos reservados para el futuro
+        Lanza = Lanza & "||||"
+        
+        'El/los adjuntos
+        Lanza = Lanza & NombrePDF & "|"
+        
+        Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
+        Shell Aux, vbNormalFocus
+        
+        Rs.MoveNext
+    Wend
+    
+    Set Rs = Nothing
+    
+    
+    Exit Sub
+ELanzaProgramaAbrirOutlook:
+    MuestraError Err.Number, Err.Description
+End Sub
+

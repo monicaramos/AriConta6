@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTESReclamaCliEfe 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   9825
+   ClientHeight    =   9630
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   12090
@@ -11,7 +11,7 @@ Begin VB.Form frmTESReclamaCliEfe
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9825
+   ScaleHeight     =   9630
    ScaleWidth      =   12090
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -1111,7 +1111,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   360
          Index           =   2
          Left            =   270
-         TabIndex        =   78
+         TabIndex        =   77
          Text            =   "Text1"
          Top             =   5700
          Width           =   4215
@@ -1129,7 +1129,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   360
          Index           =   0
          Left            =   270
-         TabIndex        =   76
+         TabIndex        =   75
          Text            =   "Text1"
          Top             =   5040
          Width           =   4215
@@ -1138,7 +1138,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   285
          Index           =   1
          Left            =   4980
-         TabIndex        =   75
+         TabIndex        =   74
          Text            =   "Text1"
          Top             =   5070
          Width           =   2775
@@ -1156,7 +1156,7 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   360
          Left            =   240
-         TabIndex        =   72
+         TabIndex        =   71
          Tag             =   "imgConcepto"
          Top             =   4350
          Width           =   765
@@ -1175,7 +1175,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   360
          Left            =   1080
          Locked          =   -1  'True
-         TabIndex        =   71
+         TabIndex        =   70
          Top             =   4350
          Width           =   3405
       End
@@ -1192,7 +1192,7 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   240
          Left            =   270
-         TabIndex        =   70
+         TabIndex        =   69
          Top             =   8430
          Width           =   4095
       End
@@ -1209,25 +1209,8 @@ Begin VB.Form frmTESReclamaCliEfe
          EndProperty
          Height          =   240
          Left            =   270
-         TabIndex        =   69
-         Top             =   8010
-         Width           =   4095
-      End
-      Begin VB.CheckBox chkEmail 
-         Caption         =   "Enviar por email"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Left            =   270
          TabIndex        =   68
-         Top             =   7590
+         Top             =   7905
          Width           =   4095
       End
       Begin VB.CheckBox chkMarcarUtlRecla 
@@ -1244,7 +1227,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   240
          Left            =   270
          TabIndex        =   67
-         Top             =   7170
+         Top             =   7380
          Width           =   4095
       End
       Begin VB.CheckBox chkMostrarCta 
@@ -1261,7 +1244,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   240
          Left            =   270
          TabIndex        =   66
-         Top             =   6750
+         Top             =   6855
          Width           =   3075
       End
       Begin VB.TextBox txtDias 
@@ -1377,7 +1360,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   255
          Index           =   21
          Left            =   270
-         TabIndex        =   77
+         TabIndex        =   76
          Top             =   5400
          Width           =   840
       End
@@ -1395,7 +1378,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   195
          Index           =   13
          Left            =   270
-         TabIndex        =   74
+         TabIndex        =   73
          Top             =   4740
          Width           =   840
       End
@@ -1413,7 +1396,7 @@ Begin VB.Form frmTESReclamaCliEfe
          Height          =   195
          Index           =   12
          Left            =   240
-         TabIndex        =   73
+         TabIndex        =   72
          Top             =   4080
          Width           =   630
       End
@@ -1519,7 +1502,7 @@ Begin VB.Form frmTESReclamaCliEfe
       Height          =   375
       Left            =   10680
       TabIndex        =   15
-      Top             =   9240
+      Top             =   9120
       Width           =   1215
    End
    Begin VB.CommandButton cmdAccion 
@@ -1536,7 +1519,7 @@ Begin VB.Form frmTESReclamaCliEfe
       Index           =   1
       Left            =   9120
       TabIndex        =   13
-      Top             =   9240
+      Top             =   9120
       Width           =   1455
    End
    Begin VB.CommandButton cmdAccion 
@@ -1554,7 +1537,7 @@ Begin VB.Form frmTESReclamaCliEfe
       Index           =   0
       Left            =   150
       TabIndex        =   14
-      Top             =   9210
+      Top             =   9090
       Width           =   1335
    End
 End
@@ -1597,9 +1580,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim cad As String
+Dim Cad As String
 Dim RC As String
-Dim I As Integer
+Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 Dim Fecha As Date
@@ -1628,122 +1611,131 @@ End Sub
 
 Private Sub cmdAccion_Click(Index As Integer)
 Dim Rs As ADODB.Recordset
-Dim I As Long
-Dim Importe As Currency
+Dim indRPT As String
+Dim nomDocu As String
+
 
     If Not DatosOK Then Exit Sub
     
-    Screen.MousePointer = vbHourglass
+    InicializarVbles True
     
-    'Ahora haremos todo el proceso
-    I = Val(txtDias.Text)
-    I = I * -1
-    Fecha = CDate(txtFecha(4).Text)
-    Fecha = DateAdd("d", I, Fecha)
-    
-    'Ya tenemos en F la fecha a partir de la cual reclamamos
-    'Montamos el SQL
-    MontaSQLReclamacion
-    
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
-    While Not Rs.EOF
-    
-        I = I + 1
-        Rs.MoveNext
-    Wend
-    Rs.Close
-    
-    If I = 0 Then
-        MsgBox "No hay valores entre las fechas", vbExclamation
-        Exit Sub
-    End If
-    
-    If Me.optTipoSal(3).Value = 1 Then
-            CadenaDesdeOtroForm = ""
-            frmVarios.Opcion = 31
-            frmVarios.Show vbModal
-            
-            If CadenaDesdeOtroForm = "" Then
-                Screen.MousePointer = vbDefault
-                Set Rs = Nothing
-                Exit Sub
-            End If
-    End If
+    If Not MontaSQL Then Exit Sub
     
     
+    indRPT = "0608-01"
+    
+    If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
+    
+    cadNomRPT = nomDocu ' "CobrosPdtes.rpt"
     
     
-    
-    'No enlazamos por NIF, si no k en NIF guardaremos codmacta
-    'codinmov, nominmov, fechaadq, valoradq, amortacu, fecventa, impventa, impperiodo) VALUES (
-    cad = "DELETE FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo
-    Conn.Execute cad
-    
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = "INSERT INTO tmpentrefechas(codusu,codigo,codccost,nomccost,fecventa,conconam,fechaadq"
-    SQL = SQL & ",nominmov,impventa,impperiodo,valoradq,codinmov,nomconam ) VALUES (" & vUsu.Codigo & ","
-    
-    'Nuevo. Febrero 2010. Departamento ira en codinmov
-    
-    'Codigo
-    'Clave autonumerica
-    '   codccost,nomccost,fecventa,conconam
-    '    numserie,codfac,fecfac,numoreden
-    '  Importes
-    'en fechaadq pondremos codmacta, asi luego iremos a insertar
-    
-    I = 1
-    While Not Rs.EOF
-    
-        'Neuvo Febero 2010
-        'Ademas de ver si me debe algo, si esta recibido NO lo puedo meter
+    ' si es por email
+    If Me.optTipoSal(3).Value Then
         
-        Importe = Rs!ImpVenci + DBLet(Rs!Gastos, "N") - DBLet(Rs!impcobro, "N")
-        If DBLet(Rs!recedocu, "N") = 1 Then Importe = 0
-        'If DBLet(Rs!recedocu, "N") = 1 And Importe > 0 Then Stop
-        If Importe > 0 Then
-            cad = I & ",'" & Rs!NUmSerie & "','"
-            cad = cad & Rs!NumFactu & "','"
-            cad = cad & Format(Rs!FecFactu, FormatoFecha) & "',"
-            cad = cad & Rs!numorden & ",'"
-            cad = cad & Rs!codmacta & "','"
-            'nomconam,impventa,impperiodo
-            ' fec vto cobro, imp, cobrado
-            cad = cad & Rs!FecVenci & "',"
-            cad = cad & TransformaComasPuntos(CStr(Rs!ImpVenci)) & ","
-            If IsNull(Rs!impcobro) Then
-                cad = cad & "NULL"
+        
+        Cad = "DELETE FROM tmp347 WHERE codusu =" & vUsu.Codigo
+        Conn.Execute Cad
+        
+        Set Rs = New ADODB.Recordset
+        
+        Cad = "SELECT fechaadq,maidatos,razosoci,nommacta FROM tmpentrefechas,cuentas WHERE"
+        Cad = Cad & " fechaadq=codmacta AND    CodUsu = " & vUsu.Codigo
+        Cad = Cad & " GROUP BY fechaadq ORDER BY maidatos"
+        Rs.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+        
+        Cad = "FechaIMP= """ & txtFecha(4).Text & """|"
+        Cad = Cad & "verCCC= " & Abs(Me.chkMostrarCta) & "|"
+        SQL = "{tmpentrefechas.codusu}=" & vUsu.Codigo
+        NumRegElim = 0
+        CONT = 0
+        frmPpal.Visible = False
+
+        While Not Rs.EOF
+            Me.Refresh
+            espera 0.5
+            RC = DBLet(Rs!maidatos, "T")
+            If RC = "" Then
+                
+                If MsgBox("Sin mail para la cuenta: " & Rs!fechaadq & " - " & Rs!Nommacta & vbCrLf & "    ¿Continuar?", vbQuestion + vbYesNo) = vbNo Then
+                    CONT = 0
+                    Rs.MoveLast
+                End If
+                
+                SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif, importe) VALUES (" & vUsu.Codigo
+                SQL = SQL & ",0," & Rs!fechaadq & ",NULL,0)"
+                '
+                'AL meter la cuenta con el importe a 0, entonces no la leera para enviarala
+                'Pero despues si k podremos NO actualizar sus pagosya que no se han enviado nada
+                Conn.Execute SQL
             Else
-                cad = cad & TransformaComasPuntos(CStr(Rs!impcobro))
+                Screen.MousePointer = vbHourglass
+
+                cadPDFrpt = cadNomRPT
+                
+                With frmVisReport
+                    .Informe = App.Path & "\Informes\"
+                    If ExportarPDF Then
+                        'PDF
+                        .Informe = .Informe & cadPDFrpt
+                    Else
+                        'IMPRIMIR
+                        .Informe = .Informe & cadNomRPT
+                    End If
+                    .FormulaSeleccion = "{tmpentrefechas.codusu}=" & vUsu.Codigo & " AND {tmpentrefechas.nomconam}= """ & Rs.Fields(0) & """"
+                    .SoloImprimir = False
+                    .OtrosParametros = Cad
+                    .NumeroParametros = numParam
+                    .ConSubInforme = True
+            
+                    .NumCopias2 = 1
+            
+                    .SoloImprimir = SoloImprimir
+                    .ExportarPDF = True
+                    .MostrarTree = vMostrarTree
+                    .Show vbModal
+                    'HaPulsadoImprimir = .EstaImpreso
+                 
+                 End With
+
+                If CadenaDesdeOtroForm = "OK" Then
+                    Me.Refresh
+                    espera 0.5
+                    CONT = CONT + 1
+                    'Se ha generado bien el documento
+                    'Lo copiamos sobre app.path & \temp
+                    SQL = Rs.Fields(0) & ".pdf"
+
+                    FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & SQL
+
+                    'Insertamos en tmp347 la cuenta
+                    SQL = "INSERT INTO tmp347(codusu, cliprov, cta, nif) VALUES (" & vUsu.Codigo & ",0,'" & Rs.Fields(0) & "','" & SQL & "')"
+                    Conn.Execute SQL
+                End If
+
+                
             End If
-            'ValorADQ=GASTOS
-            cad = cad & "," & TransformaComasPuntos(CStr(DBLet(Rs!Gastos, "N")))
-            
-            'Febrero 2010
-            'Departamento
-            cad = cad & "," & DBLet(Rs!departamento, "N") & "," & DBSet(Rs!codmacta, "T")
-            cad = SQL & cad & ")"
-            Conn.Execute cad
-            
-            I = I + 1
+            Rs.MoveNext
+        Wend
+        Rs.Close
+
+        If CONT > 0 Then
+             
+             espera 0.5
+             
+             SQL = "Reclamacion fecha: " & txtFecha(4).Text & "|"
+             
+             SQL = SQL & "Reclamación pago facturas efectuada el : " & txtFecha(4).Text & "|"
+             
+             'Escalona
+             SQL = txtVarios(0).Text & "|Recuerde: En el archivo adjunto le enviamos información de su interés.|"
+
+             LanzaProgramaAbrirOutlookMasivo 1, SQL
+
+             Exit Sub
             
         End If
-        Rs.MoveNext
         
-    Wend
-    Rs.Close
-    
-    If I = 1 Then
-        'Ningun valor con esa opcion
-        MsgBox "No hay valores entre las fechas", vbExclamation
-        Exit Sub
     End If
-    
-    
-    
-    
     
     'Exportacion a PDF
     If optTipoSal(3).Value + optTipoSal(2).Value + optTipoSal(1).Value Then
@@ -1751,14 +1743,10 @@ Dim Importe As Currency
     End If
     
     
-    InicializarVbles True
-    
     tabla = "tmpentrefechas"
     
     
-    If Not MontaSQL Then Exit Sub
-    
-    If Not HayRegParaInforme(tabla, "{tmpentrefechas.codusu} = " & vUsu.Codigo) Then Exit Sub
+    If Not HayRegParaInforme(tabla, "tmpentrefechas.codusu=" & vUsu.Codigo) Then Exit Sub
     
     If optTipoSal(1).Value Then
         'EXPORTAR A CSV
@@ -1815,16 +1803,17 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Efectuar Reclamaciones Clientes"
 
-    For I = 0 To 1
-        Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgDpto(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgAgente(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next I
+    For i = 0 To 1
+        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgDpto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgAgente(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgCarta.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next i
     
-    For I = 0 To 3
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next I
+    For i = 0 To 3
+        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next i
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -1833,18 +1822,13 @@ Private Sub Form_Load()
     End With
      
     CargarListView 1
-    
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
     
-    If Legalizacion <> "" Then
-        txtFecha(2).Text = RecuperaValor(Legalizacion, 1)
-        txtFecha(0).Text = RecuperaValor(Legalizacion, 2)
-        txtFecha(1).Text = RecuperaValor(Legalizacion, 3)
-    End If
-    
-    
+    optTipoSal(1).Enabled = False
+    txtTipoSalida(1).Enabled = False
+    PushButton2(0).Enabled = False
     
 End Sub
 
@@ -1890,7 +1874,7 @@ Private Sub imgCarta_Click()
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -1899,13 +1883,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tipos de forma de pago
         Case 0
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = False
+            Next i
         Case 1
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = True
+            Next i
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1922,19 +1906,6 @@ Private Sub ImgAgente_Click(Index As Integer)
     
     PonFoco Me.txtSerie(Index)
 End Sub
-
-
-
-Private Sub imgDpto_Click(Index As Integer)
-    IndCodigo = Index
-
-    Set frmDpto = New frmBasico
-    AyudaDepartamentos frmDpto, txtDpto(Index), "codmacta = " & DBSet(txtCuentas(0).Text, "T")
-    Set frmDpto = Nothing
-    
-    PonFoco Me.txtDpto(Index)
-End Sub
-
 
 
 Private Sub imgSerie_Click(Index As Integer)
@@ -2047,34 +2018,6 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtCarta_GotFocus()
-    PonFoco txtCarta
-End Sub
-
-Private Sub txtCarta_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
-
-Private Sub txtCarta_LostFocus()
-    SQL = ""
-    txtCarta.Text = Trim(txtCarta.Text)
-    If txtCarta.Text <> "" Then
-        
-        If Not IsNumeric(txtCarta.Text) Then
-            MsgBox "Campo numérico", vbExclamation
-            txtCarta.Text = ""
-            SubSetFocus txtCarta
-        Else
-            txtCarta.Text = Val(txtCarta.Text)
-            SQL = DevuelveDesdeBD("descarta", "cartas", "codcarta", txtCarta.Text, "N")
-            If SQL = "" Then txtCarta.Text = ""
-        End If
-    End If
-    Me.txtDescCarta.Text = SQL
-End Sub
-
-
-
 
 Private Sub txtCuentas_GotFocus(Index As Integer)
     ConseguirFoco txtCuentas(Index), 3
@@ -2096,7 +2039,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2184,18 +2127,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
     Select Case Nombre
     Case "imgSerie"
-        imgSerie_Click Indice
+        imgSerie_Click indice
     Case "imgFecha"
-        imgFec_Click Indice
+        imgFec_Click indice
     Case "imgCuentas"
-        imgCuentas_Click Indice
+        imgCuentas_Click indice
     Case "imgAgente"
-        ImgAgente_Click Indice
-    Case "imgDpto"
-        imgDpto_Click Indice
+        ImgAgente_Click indice
+    Case "imgCarta"
+        imgCarta_Click
     End Select
 End Sub
 
@@ -2212,7 +2155,7 @@ Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2239,39 +2182,36 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
 End Sub
 
-'****** dpto
-Private Sub txtDpto_GotFocus(Index As Integer)
-    ConseguirFoco txtDpto(Index), 3
+'****** Carta
+Private Sub txtCarta_GotFocus()
+    ConseguirFoco txtCarta, 3
 End Sub
 
-Private Sub txtDpto_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCarta_KeyDown(KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtDpto_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtcarta_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtDpto_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+
+Private Sub txtCarta_LostFocus()
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer
 
-    txtDpto(Index).Text = Trim(txtDpto(Index).Text)
+    txtCarta.Text = Trim(txtCarta.Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-
-    Select Case Index
-        Case 0, 1 'departamentos
-            If txtDpto(Index) <> "" And txtCuentas(0) <> "" Then
-                txtNDpto(Index).Text = DevuelveDesdeBDNew(cConta, "departamentos", "descripcion ", "codmacta", txtCuentas(0), "T", , "Dpto", txtDpto(Index), "N")
-                If txtNDpto(Index).Text <> "" Then txtDpto(Index).Text = Format(txtDpto(Index).Text, "0000")
-            End If
-    End Select
+    If txtCarta <> "" Then
+        txtNCarta.Text = DevuelveDesdeBDNew(cConta, "cartas", "descarta", "codcarta", txtCarta, "N")
+        If txtNCarta.Text <> "" Then txtCarta.Text = Format(txtCarta.Text, "0000")
+    End If
 
 End Sub
 
@@ -2292,7 +2232,7 @@ Private Sub txtAgente_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAgente_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String
+Dim Cad As String, cadTipo As String
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2352,21 +2292,12 @@ Dim nomDocu As String
     
     vMostrarTree = False
     conSubRPT = False
-        
     
-    indRPT = "0602-00"
-    
-
-    If Check1(0).Value Then
-        cadParam = cadParam & "pObserva=1|"
-        numParam = numParam + 1
-    End If
+    indRPT = "0608-01"
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu ' "CobrosPdtes.rpt"
-
-
 
     
 '    cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
@@ -2387,24 +2318,222 @@ Dim nomDocu As String
 End Sub
 
 Private Function CargarTemporal() As Boolean
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim i As Long
+Dim Importe As Currency
+Dim Dpto As Long
 
     On Error GoTo eCargarTemporal
 
     CargarTemporal = False
     
-    SQL = "delete from tmpfaclin where codusu = " & vUsu.Codigo
-    Conn.Execute SQL
+    Screen.MousePointer = vbHourglass
     
-    SQL = "insert into tmpfaclin (codusu, codigo, numserie, nomserie, numfac, fecha, cta, cliente, nif, imponible, impiva, total, retencion,"
-    SQL = SQL & " recargo, tipoopera, tipoformapago) "
-    SQL = SQL & " select distinct " & vUsu.Codigo & ",0, factcli.numserie, contadores.nomregis, factcli.numfactu, factcli.fecfactu, factcli.codmacta, "
-    SQL = SQL & " factcli.nommacta, factcli.nifdatos, factcli.totbases, factcli.totivas, factcli.totfaccl, factcli.trefaccl, "
-    SQL = SQL & " factcli.totrecargo, tipofpago.descformapago , aa.denominacion"
-    SQL = SQL & " from " & tabla
-    SQL = SQL & " where " & cadselect
+    'Ahora haremos todo el proceso
+    i = Val(txtDias.Text)
+    i = i * -1
+    Fecha = CDate(txtFecha(4).Text)
+    Fecha = DateAdd("d", i, Fecha)
     
-    Conn.Execute SQL
+    'Ya tenemos en F la fecha a partir de la cual reclamamos
+    'Montamos el SQL
+    MontaSQLReclamacion
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    i = 0
+    While Not Rs.EOF
+    
+        i = i + 1
+        Rs.MoveNext
+    Wend
+    Rs.Close
+    
+    If i = 0 Then
+        MsgBox "No hay valores entre las fechas", vbExclamation
+        Exit Function
+    End If
+    
+    
+    
+    
+    'No enlazamos por NIF, si no k en NIF guardaremos codmacta
+    'codinmov, nominmov, fechaadq, valoradq, amortacu, fecventa, impventa, impperiodo) VALUES (
+    Cad = "DELETE FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo
+    Conn.Execute Cad
+    
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "INSERT INTO tmpentrefechas(codusu,codigo,codccost,nomccost,fecventa,conconam,fechaadq"
+    SQL = SQL & ",nominmov,impventa,impperiodo,valoradq,codinmov ) VALUES (" & vUsu.Codigo & ","
+    
+    'Nuevo. Febrero 2010. Departamento ira en codinmov
+    
+    'Codigo
+    'Clave autonumerica
+    '   codccost,nomccost,fecventa,conconam
+    '    numserie,codfac,fecfac,numoreden
+    '  Importes
+    'en fechaadq pondremos codmacta, asi luego iremos a insertar
+    
+    i = 1
+    While Not Rs.EOF
+    
+        'Neuvo Febero 2010
+        'Ademas de ver si me debe algo, si esta recibido NO lo puedo meter
+        
+        Importe = Rs!ImpVenci + DBLet(Rs!Gastos, "N") - DBLet(Rs!impcobro, "N")
+        If DBLet(Rs!recedocu, "N") = 1 Then Importe = 0
+        'If DBLet(Rs!recedocu, "N") = 1 And Importe > 0 Then Stop
+        If Importe > 0 Then
+            Cad = i & ",'" & Rs!NUmSerie & "','"
+            Cad = Cad & Rs!NumFactu & "','"
+            Cad = Cad & Format(Rs!FecFactu, FormatoFecha) & "',"
+            Cad = Cad & Rs!numorden & ",'"
+            Cad = Cad & Rs!codmacta & "','"
+            'nomconam,impventa,impperiodo
+            ' fec vto cobro, imp, cobrado
+            Cad = Cad & Rs!FecVenci & "',"
+            Cad = Cad & TransformaComasPuntos(CStr(Rs!ImpVenci)) & ","
+            If IsNull(Rs!impcobro) Then
+                Cad = Cad & "NULL"
+            Else
+                Cad = Cad & TransformaComasPuntos(CStr(Rs!impcobro))
+            End If
+            'ValorADQ=GASTOS
+            Cad = Cad & "," & TransformaComasPuntos(CStr(DBLet(Rs!Gastos, "N")))
+            
+            'Febrero 2010
+            'Departamento
+            Cad = Cad & "," & DBLet(Rs!departamento, "N")
+            Cad = SQL & Cad & ")"
+            Conn.Execute Cad
+            
+            i = i + 1
+            
+        End If
+        Rs.MoveNext
+        
+    Wend
+    Rs.Close
+    
+    If i = 1 Then
+        'Ningun valor con esa opcion
+        MsgBox "No hay valores entre las fechas", vbExclamation
+        Exit Function
+    End If
+    
+    
+    
+    'Noviembre 2014
+    'Comprobamos que todas las cuentas tienen email(si va por email)
+    If optTipoSal(3).Value Then
+        CadenaDesdeOtroForm = ""
+        frmTESVarios.Opcion = 31
+        frmTESVarios.Show vbModal
+        
+        If CadenaDesdeOtroForm = "" Then
+            Screen.MousePointer = vbDefault
+            Set Rs = Nothing
+            Exit Function
+        End If
+    End If
+    
+    
+    
+    
+    
+    Cad = "DELETE FROM tmpcuentas  where codusu = " & vUsu.Codigo
+    Conn.Execute Cad
+    
+    Cad = "SELECT fechaadq,codinmov FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo & " GROUP BY fechaadq,codinmov"
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    'Datos contables
+    Set miRsAux = New ADODB.Recordset
+    CONT = 0
+    While Not Rs.EOF
+        'BUSCAMOS DATOS
+        Cad = "SELECT * from cuentas where codmacta='" & Rs.Fields(0) & "'"
+    
+        'Insertar datos en z347
+        miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        'Nuevo. Ya no llevamos NIF, llevaremos departamento
+        RC = "" 'SERA EL NIF. Sera el DPTO
+        i = 1
+        If Not miRsAux.EOF Then
+            'NIF -> codmacta
+            RC = Rs.Fields(0)
+            Dpto = Rs.Fields(1)
+        Else
+            'EOF
+            i = 0
+            MsgBox "No se encuentra la cuenta: " & Rs.Fields(0), vbExclamation
+            'NOS SALIMOS
+            Rs.Close
+            Exit Function
+        End If
+        
+        'NO es EOF y tiene NIF
+        If i > 0 Then
+            'Aumentamos el contador
+            CONT = CONT + 1
+            
+            
+'            'INSERTAMOS EN z347
+'            '-----------------------------------------
+'            SQL = "INSERT INTO Usuarios.z347 (codusu, cliprov, nif, importe, razosoci, dirdatos, codposta, despobla,Provincia) "
+'            'Febrero 2010
+'            'SQL = SQL & "VALUES (" & vUsu.Codigo & ",0,'" & RC & "',0,'"
+'            SQL = SQL & "VALUES (" & vUsu.Codigo & "," & Dpto & ",'" & RC & "',0,'"
+'
+'
+'            'Razon social, dirdatos,codposta,despobla
+'            SQL = SQL & DevNombreSQL(DBLet(miRsAux!razosoci, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!dirdatos, "T")) & "','" & DBLet(miRsAux!codposta, "T") & "','" & DevNombreSQL(DBLet(miRsAux!desPobla, "T"))
+'            SQL = SQL & "','" & DevNombreSQL(DBLet(miRsAux!desProvi, "T"))
+'            SQL = SQL & "')"
+'
+'            Conn.Execute SQL
+        
+            
+            SQL = "INSERT INTO tmpcuentas (codusu, codmacta, nommacta,despobla,razosoci,dpto) VALUES (" & vUsu.Codigo & ",'" & RC & "','"
+            SQL = SQL & DBLet(miRsAux!nifdatos, "T") & "','" 'En nommacta meto el NIF del cliente
+            If IsNull(miRsAux!Entidad) Then
+                'Puede que sean todos nulos
+                Cad = DBLet(miRsAux!Oficina) & "   " & DBLet(miRsAux!Control, "T") & "    " & DBLet(miRsAux!Cuentaba, "T")
+                Cad = Trim(Cad)
+            Else
+                Cad = DBLet(miRsAux!IBAN, "T") '& " " & Format(miRsAux!Entidad, "0000") & " " & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "  " & Format(DBLet(miRsAux!Control, "N"), "00") & " " & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000")
+            End If
+            Cad = Cad & "','"
+            'El dpto si tiene
+            Cad = Cad & DevNombreSQL(DevuelveDesdeBD("descripcion", "departamentos", "codmacta = '" & miRsAux!codmacta & "' AND dpto", CStr(Dpto)))
+            Cad = Cad & "'," & Dpto
+            Ejecuta SQL & Cad & ")"   'Lo pongo en funcion para que no me de error
+            
+            
+            'Updatear  FALTA### codusu = vusu.codusu
+            SQL = "UPDATE tmpentrefechas SET nomconam='" & RC & "' WHERE fechaadq = '" & Rs!fechaadq & "'"
+            SQL = SQL & " AND codusu = " & vUsu.Codigo
+            Conn.Execute SQL
+            
+            
+        End If
+        miRsAux.Close
+            
+        'Siguiente
+        Rs.MoveNext
+    Wend
+    Rs.Close
+    
+        
+    If CONT = 0 Then
+        MsgBox "Ningun dato devuelto para procesar por carta/mail", vbExclamation
+        Exit Function
+    End If
+    
+    
+    Screen.MousePointer = vbHourglass
+    
     
     CargarTemporal = True
     Exit Function
@@ -2418,7 +2547,10 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim I As Integer
+Dim Rs As ADODB.Recordset
+Dim i As Long
+Dim Importe As Currency
+
 
 
     MontaSQL = False
@@ -2428,14 +2560,13 @@ Dim I As Integer
     If Not PonerDesdeHasta("cobros.Fecvenci", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
     If Not PonerDesdeHasta("cobros.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
     If Not PonerDesdeHasta("cobros.agente", "AGE", Me.txtAgente(0), Me.txtNAgente(0), Me.txtAgente(1), Me.txtNAgente(1), "pDHAgente=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros.departamento", "DPTO", Me.txtDpto(0), Me.txtNDpto(0), Me.txtDpto(1), Me.txtNDpto(1), "pDHDpto=""") Then Exit Function
             
     SQL = ""
-    For I = 1 To Me.ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(I).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(I).SubItems(2) & ","
+    For i = 1 To Me.ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(i).Checked Then
+            SQL = SQL & Me.ListView1(1).ListItems(i).SubItems(2) & ","
         End If
-    Next I
+    Next i
     
     If SQL <> "" Then
         ' quitamos la ultima coma
@@ -2448,13 +2579,17 @@ Dim I As Integer
         If Not AnyadirAFormula(cadFormula, "isnull({formapago.tipforpa})") Then Exit Function
     End If
     
+    If Not AnyadirAFormula(cadselect, "cobros.situacion = 0") Then Exit Function
+    If Not AnyadirAFormula(cadFormula, "{cobros.situacion} = 0") Then Exit Function
+    
+    
+    
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
     If cadselect <> "" Then cadselect = "(" & cadselect & ")"
     
-'    If Not CargarTemporal Then Exit Function
+    If Not CargarTemporal Then Exit Function
     
-'    cadFormula = "{tmpfaclin.codusu} = " & vUsu.Codigo
     
             
     MontaSQL = True
@@ -2565,54 +2700,8 @@ Private Sub MontaSQLReclamacion()
     'Siempre hay que añadir el AND
     
     
-    SQL = ""
+    SQL = " and " & cadselect
     
-    
-    'Numero de serie
-    RC = CampoABD(txtSerie(0), "T", "cobros.numserie", True)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    RC = CampoABD(txtSerie(1), "T", "cobros.numserie", False)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    
-    'Fecha factura
-    RC = CampoABD(txtFecha(0), "F", "fecfactu", True)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    
-    RC = CampoABD(txtFecha(1), "F", "fecfactu", False)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    'Fecha vto
-    RC = CampoABD(txtFecha(2), "F", "fecvenci", True)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    RC = CampoABD(txtFecha(3), "F", "fecvenci", False)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    'cuenta
-    RC = CampoABD(txtCuentas(0), "T", "cobros.codmacta", True)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    RC = CampoABD(txtCuentas(1), "T", "cobros.codmacta", False)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-
-    
-    
-    'Agente
-    RC = CampoABD(txtAgente(0), "N", "cobros.agente", True)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    RC = CampoABD(txtAgente(1), "N", "cobros.agente", False)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    
-    'Forma de pago
-    RC = CampoABD(txtFPago(0), "N", "cobros.codforpa", True)
-    If RC <> "" Then SQL = SQL & " AND " & RC
-    
-    RC = CampoABD(txtFPago(1), "N", "cobros.codforpa", False)
-    If RC <> "" Then SQL = SQL & " AND " & RC
     
     'Solo devueltos
     If chkReclamaDevueltos.Value = 1 Then SQL = SQL & " AND devuelto = 1"
@@ -2629,74 +2718,14 @@ Private Sub MontaSQLReclamacion()
     SQL = SQL & " AND (impvenci>0)"
     
     
-    RC = PonerTipoPagoCobro_(True, True)
-    If RC <> "" Then SQL = SQL & " AND tipforpa IN " & RC
-    
     
     
     'Select
-    cad = "Select cobros.*, cuentas.codmacta FROM cobros,cuentas,formapago "
-    cad = cad & " WHERE  formapago.codforpa=cobros.codforpa AND cobros.codmacta = cuentas.codmacta"
-    cad = cad & " AND formapago.codforpa=cobros.codforpa "
-    SQL = cad & SQL
-    
-    
-    
+    Cad = "Select cobros.*, cuentas.codmacta FROM cobros,cuentas,formapago "
+    Cad = Cad & " WHERE  formapago.codforpa=cobros.codforpa AND cobros.codmacta = cuentas.codmacta"
+    Cad = Cad & " AND formapago.codforpa=cobros.codforpa "
+    SQL = Cad & SQL
     
     
 End Sub
-
-Private Function PonerTipoPagoCobro_(ParaSelect As Boolean, EsReclamacion As Boolean) As String
-Dim I As Integer
-Dim Sele As Integer
-Dim AUX As String
-Dim Visibles As Byte
-
-    AUX = ""
-    Sele = 0
-    Visibles = 0
-    If Not EsReclamacion Then
-        For I = 0 To Me.chkTipPago.Count - 1
-            If Me.chkTipPago(I).Visible Then
-                Visibles = Visibles + 1
-                If Me.chkTipPago(I).Value = 1 Then
-                    Sele = Sele + 1
-                    If ParaSelect Then
-                        AUX = AUX & ", " & I
-                    Else
-                        AUX = AUX & "-" & Me.chkTipPago(I).Caption
-                    End If
-                End If
-            End If
-        Next
-        'No ha marcado ninguno o los ha nmarcado todos. NO pongo nada
-        If Sele = 0 Or Sele = Visibles Then AUX = ""
-        
-    Else
-        '************************
-        'Reclamaciones
-        
-        For I = 0 To Me.chkTipPagoRec.Count - 1
-            If Me.chkTipPagoRec(I).Visible Then
-                Visibles = Visibles + 1
-                If Me.chkTipPagoRec(I).Value = 1 Then
-                    Sele = Sele + 1
-                    If ParaSelect Then
-                        AUX = AUX & ", " & I
-                    Else
-                        AUX = AUX & "-" & Me.chkTipPagoRec(I).Caption
-                    End If
-                End If
-            End If
-        Next
-        'No ha marcado ninguno o los ha nmarcado todos. NO pongo nada
-        If Sele = 0 Or Sele = Visibles Then AUX = ""
-    End If
-    If AUX <> "" Then
-        AUX = Mid(AUX, 2)
-        AUX = "(" & AUX & ")"
-    End If
-    PonerTipoPagoCobro_ = AUX
-End Function
-
 
