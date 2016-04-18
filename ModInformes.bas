@@ -20,9 +20,9 @@ Public ExportarPDF As Boolean
 Public SoloImprimir As Boolean
 
 
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim Cad As String
-Dim SQL As String
+Dim Sql As String
 Dim i As Integer
 
 
@@ -89,22 +89,22 @@ On Error GoTo EGI_Conceptos
     Conn.Execute "Delete from Usuarios.zconceptos where codusu = " & vUsu.Codigo
     Cad = "INSERT INTO Usuarios.zconceptos (codusu, codconce, nomconce,tipoconce) VALUES ("
     Cad = Cad & vUsu.Codigo & ",'"
-    Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-        SQL = Cad & Format(Rs.Fields(0), "000")
-        SQL = SQL & "','" & Rs.Fields(1) & "','" & Rs.Fields(3) & "')"
-        Conn.Execute SQL
+    Set RS = New ADODB.Recordset
+    RS.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
+        Sql = Cad & Format(RS.Fields(0), "000")
+        Sql = Sql & "','" & RS.Fields(1) & "','" & RS.Fields(3) & "')"
+        Conn.Execute Sql
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     InformeConceptos = True
 Exit Function
 EGI_Conceptos:
     MuestraError Err.Number
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -121,28 +121,28 @@ On Error GoTo EListadoEstadisticas
     Cad = Cad & vUsu.Codigo & ","
     
     'Empezamos
-    Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     i = 1
-    While Not Rs.EOF
+    While Not RS.EOF
         
-        SQL = i & ParaBD(Rs!codconam, 1) & ParaBD(Rs!nomconam)
-        SQL = SQL & ParaBD(Rs!Codinmov) & ",'" & DevNombreSQL(Rs!nominmov) & "'"
+        Sql = i & ParaBD(RS!codconam, 1) & ParaBD(RS!nomconam)
+        Sql = Sql & ParaBD(RS!Codinmov) & ",'" & DevNombreSQL(RS!nominmov) & "'"
         
-        SQL = SQL & ParaBD(Rs!tipoamor) & ParaBD(Rs!coeficie) & ParaBD(Rs!codprove)
-        SQL = SQL & ParaBD(Rs!fechaadq, 2) & ParaBD(Rs!valoradq, 1) & ParaBD(Rs!amortacu, 1)
-        SQL = SQL & ParaBD(Rs!fecventa, 2) 'FECHA
-        SQL = SQL & ParaBD(Rs!impventa, 1) & ")"
-        Conn.Execute Cad & SQL
+        Sql = Sql & ParaBD(RS!tipoamor) & ParaBD(RS!coeficie) & ParaBD(RS!codprove)
+        Sql = Sql & ParaBD(RS!fechaadq, 2) & ParaBD(RS!valoradq, 1) & ParaBD(RS!amortacu, 1)
+        Sql = Sql & ParaBD(RS!fecventa, 2) 'FECHA
+        Sql = Sql & ParaBD(RS!impventa, 1) & ")"
+        Conn.Execute Cad & Sql
         
         'Sig
-        Rs.MoveNext
+        RS.MoveNext
         i = i + 1
     Wend
     ListadoEstadisticas = True
 EListadoEstadisticas:
     If Err.Number <> 0 Then MuestraError Err.Number
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -158,23 +158,23 @@ On Error GoTo Err1
     Cad = Cad & vUsu.Codigo & ","
     
     'Empezamos
-    Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     i = 1
-    While Not Rs.EOF
-        SQL = Rs!nominmov
-        NombreSQL SQL
-        SQL = i & ParaBD(Rs!Codinmov) & ",'" & SQL & "'"
-        SQL = SQL & ParaBD(Rs!fechaadq, 2) & ParaBD(Rs!valoradq, 1) & ParaBD(Rs!fechainm, 2)
-        SQL = SQL & ParaBD(Rs!imporinm, 1) & ParaBD(Rs!porcinm, 1)
-        SQL = SQL & ")"
-        Conn.Execute Cad & SQL
+    While Not RS.EOF
+        Sql = RS!nominmov
+        NombreSQL Sql
+        Sql = i & ParaBD(RS!Codinmov) & ",'" & Sql & "'"
+        Sql = Sql & ParaBD(RS!fechaadq, 2) & ParaBD(RS!valoradq, 1) & ParaBD(RS!fechainm, 2)
+        Sql = Sql & ParaBD(RS!imporinm, 1) & ParaBD(RS!porcinm, 1)
+        Sql = Sql & ")"
+        Conn.Execute Cad & Sql
         
         'Sig
-        Rs.MoveNext
+        RS.MoveNext
         i = i + 1
     Wend
-    Rs.Close
+    RS.Close
     If i > 1 Then
         ListadoFichaInmo = True
     Else
@@ -182,7 +182,7 @@ On Error GoTo Err1
     End If
 Err1:
     If Err.Number <> 0 Then MuestraError Err.Number
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -289,14 +289,14 @@ On Error GoTo EGen
     
     Conn.Execute Cad
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     Cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        If DBLet(Rs.Fields(0), "N") > 0 Then Cad = ""
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        If DBLet(RS.Fields(0), "N") > 0 Then Cad = ""
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     If Cad <> "" Then
         MsgBox "Ningun registro por mostrar.", vbExclamation
@@ -332,14 +332,14 @@ On Error GoTo EGen
     
     Conn.Execute Cad
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     Cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        If DBLet(Rs.Fields(0), "N") > 0 Then Cad = ""
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        If DBLet(RS.Fields(0), "N") > 0 Then Cad = ""
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     If Cad <> "" Then
         MsgBox "Ningun registro por mostrar.", vbExclamation
@@ -384,16 +384,16 @@ On Error GoTo EGen
     
     'Contamos para ver cuantos hay
     Cad = "Select count(*) from Usuarios.ztotalctaconce WHERE codusu =" & vUsu.Codigo
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 0
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            If Rs.Fields(0) > 0 Then i = 1
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            If RS.Fields(0) > 0 Then i = 1
         End If
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     If i > 0 Then
         ITotalesCtaConcepto = True
     Else
@@ -511,31 +511,31 @@ On Error GoTo EGeneraDatosHcoInmov
     Cad = "Delete from Usuarios.zfichainmo where codusu = " & vUsu.Codigo
     Conn.Execute Cad
     'Abrimos datos
-    Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    RS.Open vSQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If RS.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
         Cad = "INSERT INTO Usuarios.zfichainmo (codusu, codigo, codinmov, nominmov, fechaadq, valoradq, fechaamor, Importe, porcenta) VALUES (" & vUsu.Codigo & ","
         TotalReg = 0
-        While Not Rs.EOF
+        While Not RS.EOF
            
             TotalReg = TotalReg + 1
             'Metemos los nuevos datos
-            SQL = TotalReg & ParaBD(Rs!Codinmov, 1) & ",'" & DevNombreSQL(CStr(Rs!nominmov)) & "'" & ParaBD(Rs!fechainm, 2)
-            SQL = SQL & ",NULL,NULL" & ParaBD(Rs!imporinm, 1) & ParaBD(Rs!porcinm, 1) & ")"
-            SQL = Cad & SQL
-            Conn.Execute SQL
-            Rs.MoveNext
+            Sql = TotalReg & ParaBD(RS!Codinmov, 1) & ",'" & DevNombreSQL(CStr(RS!nominmov)) & "'" & ParaBD(RS!fechainm, 2)
+            Sql = Sql & ",NULL,NULL" & ParaBD(RS!imporinm, 1) & ParaBD(RS!porcinm, 1) & ")"
+            Sql = Cad & Sql
+            Conn.Execute Sql
+            RS.MoveNext
         Wend
         GeneraDatosHcoInmov = True
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 EGeneraDatosHcoInmov:
     MuestraError Err.Number, Err.Description
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -551,29 +551,29 @@ On Error GoTo EGeneraDatosConceptosInmov
     Cad = "Delete from Usuarios.ztmppresu1 where codusu = " & vUsu.Codigo
     Conn.Execute Cad
     'Abrimos datos
-    SQL = "Select * from inmovcon"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Rs.EOF Then
+    Sql = "Select * from inmovcon"
+    Set RS = New ADODB.Recordset
+    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If RS.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
         Cad = "INSERT INTO Usuarios.ztmppresu1 (codusu, codigo, cta, titulo, ano, mes, Importe) VALUES (" & vUsu.Codigo
-        While Not Rs.EOF
+        While Not RS.EOF
             'Metemos los nuevos datos
-            SQL = ParaBD(Rs!codconam, 1) & ",'" & Format(Rs!codconam, "0000") & "'" & ParaBD(Rs!nomconam)
-            SQL = SQL & ",0" & ParaBD(Rs!perimaxi, 1) & ParaBD(Rs!coefimaxi, 1) & ")"
-            SQL = Cad & SQL
-            Conn.Execute SQL
-            Rs.MoveNext
+            Sql = ParaBD(RS!codconam, 1) & ",'" & Format(RS!codconam, "0000") & "'" & ParaBD(RS!nomconam)
+            Sql = Sql & ",0" & ParaBD(RS!perimaxi, 1) & ParaBD(RS!coefimaxi, 1) & ")"
+            Sql = Cad & Sql
+            Conn.Execute Sql
+            RS.MoveNext
         Wend
         GeneraDatosConceptosInmov = True
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 EGeneraDatosConceptosInmov:
     MuestraError Err.Number, Err.Description
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -1123,7 +1123,7 @@ End Function
 
 
 Public Function ExisteARIMAILGES()
-Dim SQL As String
+Dim Sql As String
 
     If Dir(App.Path & "\ArimailGes.exe") = "" Then
         MsgBox "No existe el programa ArimailGes.exe. Llame a Ariadna.", vbExclamation
@@ -1137,14 +1137,14 @@ End Function
 
 Public Function HayRegParaInforme(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "Select count(*) FROM " & cTabla
+    Sql = "Select count(*) FROM " & cTabla
     If cWhere <> "" Then
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    If TotalRegistros(SQL) = 0 Then
+    If TotalRegistros(Sql) = 0 Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
         HayRegParaInforme = False
     Else
@@ -1162,11 +1162,11 @@ Dim Encontrado As Boolean
         
         Cad = "select informe from scryst where codigo = " & DBSet(indice, "T")
         
-        Set Rs = New ADODB.Recordset
-        Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        If Not Rs.EOF Then
-            nomDocu = DBLet(Rs!Informe, "T")
+        If Not RS.EOF Then
+            nomDocu = DBLet(RS!Informe, "T")
             Encontrado = True
         End If
         
@@ -1199,16 +1199,16 @@ Dim Lanza As String
         Aux = "Reclamacion.pdf"
     End Select
     
-    SQL = "select tmp347.*, cuentas.razosoci, cuentas.maidatos from tmp347, cuentas "
-    SQL = SQL & " where codusu = " & vUsu.Codigo & " and importe <> 0 and tmp347.cta = cuentas.codmacta"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    Sql = "select tmp347.*, cuentas.razosoci, cuentas.maidatos from tmp347, cuentas "
+    Sql = Sql & " where codusu = " & vUsu.Codigo & " and importe <> 0 and tmp347.cta = cuentas.codmacta"
+    Set RS = New ADODB.Recordset
+    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
     
-        NombrePDF = App.Path & "\temp\" & Rs!NIF
+        NombrePDF = App.Path & "\temp\" & RS!NIF
         
         'direccion email
-        Aux = DBLet(Rs!maidatos)
+        Aux = DBLet(RS!maidatos)
         Lanza = Aux & "|"
         
         'asunto
@@ -1221,11 +1221,79 @@ Dim Lanza As String
         Lanza = Lanza & Aux & "|"
         
         
+        
+    If LCase(Mid(cadNomRPT, 1, 3)) = "esc" Then
+    ' para el caso de escalona
+    
+        Cad = "<!DOCTYPE HTML PUBLIC " & Chr(34) & "-//W3C//DTD HTML 4.0 Transitional//EN" & Chr(34) & ">"
+        Cad = Cad & "<HTML><HEAD><TITLE>Mensaje</TITLE></HEAD>"
+        Cad = Cad & "<TR><TD VALIGN=""TOP""><P><FONT FACE=""Tahoma""><FONT SIZE=3>"
+        Cad = Cad & RecuperaValor(Cuerpo, 2)
+        'FijarTextoMensaje
+        
+        Cad = Cad & "</FONT></FONT></P></TD></TR><TR><TD VALIGN=""TOP"">"
+        Cad = Cad & "<p class=""MsoNormal""><b><i>"
+        Cad = Cad & "<span style=""font-size: 7.5pt; font-family: Arial,sans-serif; color: #9999FF"">C."
+        Cad = Cad & "R. Reial Séquia Escalona</span></i></b></p>"
+        Cad = Cad & "<p class=""MsoNormal""><em><b>"
+        Cad = Cad & "<span style=""font-size: 7.5pt; font-family: Arial,sans-serif; color: #9999FF"">"
+        Cad = Cad & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; La Junta</span></b></em><span style=""font-size: 10.0pt; font-family: Arial,sans-serif; color: black"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style=""font-size: 7.5pt; font-family: Arial,sans-serif; color: #9999FF"">&nbsp;</span></p>"
+        Cad = Cad & "<p class=""MsoNormal"">"
+        Cad = Cad & "<span style=""font-size: 13.5pt; font-family: Arial,sans-serif; color: #9999FF"">"
+        Cad = Cad & "********************</span></p>"
+        Cad = Cad & "<p class=MsoNormal><b>"
+         Cad = Cad & "<span style='font-size:8.0pt;font-family:""Comic Sans MS"";color:black'>Confidencialidad"
+         Cad = Cad & "</span></b><span style='font-size:8.0pt;font-family:""Comic Sans MS"";color:black'><br>"
+         Cad = Cad & "Este mensaje y sus archivos adjuntos van dirigidos exclusivamente a su destinatario, "
+         Cad = Cad & "pudiendo contener información confidencial sometida a secreto profesional. No está permitida su reproducción o "
+         Cad = Cad & "distribución sin la autorización expresa de Real Acequia Escalona. Si usted no es el destinatario final por favor "
+         Cad = Cad & "elimínelo e infórmenos por esta vía.<o:p></o:p></span></p><p class=MsoNormal style='mso-margin-top-alt:6.0pt;"
+         Cad = Cad & "margin-right:0cm;margin-bottom:6.0pt;margin-left:0cm;text-align:justify'><span style='font-size:8.0pt;"
+         Cad = Cad & "font-family:""Comic Sans MS"";color:black'>De acuerdo con la Ley 34/2002 (LSSI) y la Ley 15/1999 (LOPD), "
+         Cad = Cad & "usted tiene derecho al acceso, rectificación y cancelación de sus datos personales informados en el fichero del que es "
+         Cad = Cad & "titular Real Acequia Escalona. Si desea modificar sus datos o darse de baja en el sistema de comunicación electrónica "
+         Cad = Cad & "envíe un correo a</span> <span style='font-size:8.0pt;font-family:""Comic Sans MS"";color:black'>"
+         Cad = Cad & "<a href=""mailto:escalona@acequiaescalona.org"">escalona@acequiaescalona.org</a> </span><span style='font-size:8.0pt;"
+         Cad = Cad & "font-family:""Comic Sans MS""'>, <span style='color:black'>indicando en la línea de <b>&#8220;Asunto&#8221;</b> el derecho "
+         Cad = Cad & "que desea ejercitar. <o:p></o:p></span></span></p><p class=MsoNormal><o:p>&nbsp;</o> "
+         
+         'ahora en valenciano
+         Cad = Cad & ""
+         Cad = Cad & "<p class=MsoNormal><b>"
+         Cad = Cad & "<span style='font-size:8.0pt;font-family:""Comic Sans MS"";color:black'>Confidencialitat"
+         Cad = Cad & "</span></b><span style='font-size:8.0pt;font-family:""Comic Sans MS"";color:black'><br>"
+         Cad = Cad & "Aquest missatge i els seus arxius adjunts van dirigits exclusivamente al seu destinatari, "
+         Cad = Cad & "podent contindre informació confidencial sotmesa a secret professional. No està permesa la seua reproducció o "
+         Cad = Cad & "distribució sense la autorització expressa de Reial Séquia Escalona. Si vosté no és el destinatari final per favor "
+         Cad = Cad & "elimíneu-lo e informe-nos per aquesta via.<o:p></o:p></span></p><p class=MsoNormal style='mso-margin-top-alt:6.0pt;"
+         Cad = Cad & "margin-right:0cm;margin-bottom:6.0pt;margin-left:0cm;text-align:justify'><span style='font-size:8.0pt;"
+         Cad = Cad & "font-family:""Comic Sans MS"";color:black'>D'acord amb la Llei 34/2002 (LSSI) i la Llei 15/1999 (LOPD), "
+         Cad = Cad & "vosté té dret a l'accés, rectificació i cancelació de les seues dades personals informats en el ficher del qué és "
+         Cad = Cad & "titolar Reial Séquia Escalona. Si vol modificar les seues dades o donar-se de baixa en el sistema de comunicació electrònica "
+         Cad = Cad & "envíe un correu a</span> <span style='font-size:8.0pt;font-family:""Comic Sans MS"";color:black'>"
+         Cad = Cad & "<a href=""mailto:escalona@acequiaescalona.org"">escalona@acequiaescalona.org</a> </span><span style='font-size:8.0pt;"
+         Cad = Cad & "font-family:""Comic Sans MS""'>, <span style='color:black'>indicant en la línea de <b>&#8220;Asumpte&#8221;</b> el dret "
+         Cad = Cad & "que desitja exercitar. <o:p></o:p></span></span></p><p class=MsoNormal><o:p>&nbsp;</o:p></p> "
+        
+        
+        Cad = Cad & "</TR></BODY></HTML>"
+        
+        
+    Else
+    
+        Cad = RecuperaValor(Cad, 2)
+        
+    End If
+        
+    ' end
+        
+        
         'Aqui pondremos lo del texto del BODY
+        
         Aux = ""
         Select Case outTipoDocumento
         Case 1 ' reclamaciones
-            Aux = RecuperaValor(Cuerpo, 2)
+            Aux = Cad
         End Select
         Lanza = Lanza & Aux & "|"
         
@@ -1241,10 +1309,10 @@ Dim Lanza As String
         Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
         Shell Aux, vbNormalFocus
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
     
     Exit Sub
