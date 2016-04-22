@@ -480,7 +480,6 @@ On Error GoTo EUltimoUsuario
     End If
 EUltimoUsuario:
     Err.Clear
-
 End Sub
 
 
@@ -619,7 +618,7 @@ On Error GoTo ECargarCadenaControl
     Else
         NF = FreeFile
         Open Cad For Output As #NF
-        Cad2 = "|ariconta1|4360|1399|3000|2|"
+        Cad2 = "|ariconta1|4360|1399|3000|2||"
         CadenaControl = Cad2
         Print #NF, Cad2
         Close #NF
