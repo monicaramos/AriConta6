@@ -2,7 +2,7 @@ Attribute VB_Name = "modTesoreria"
 Option Explicit
 
 Public Function CargarCobrosTemporal(Forpa As String, FecFactu As String, TotalFac As Currency) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim CadValues As String
 Dim rsVenci As ADODB.Recordset
 Dim FecVenci As String
@@ -12,10 +12,10 @@ Dim ImpVenci As Currency
 
     CargarCobrosTemporal = False
 
-    SQL = "SELECT numerove, primerve, restoven FROM formapago WHERE codforpa=" & DBSet(Forpa, "N")
+    Sql = "SELECT numerove, primerve, restoven FROM formapago WHERE codforpa=" & DBSet(Forpa, "N")
     
     Set rsVenci = New ADODB.Recordset
-    rsVenci.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    rsVenci.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     CadValues = ""
     
@@ -56,9 +56,9 @@ Dim ImpVenci As Currency
     Set rsVenci = Nothing
     
     If CadValues <> "" Then
-        SQL = "INSERT INTO tmpcobros (codusu, numorden, fecvenci, impvenci)"
-        SQL = SQL & " VALUES " & Mid(CadValues, 1, Len(CadValues) - 1)
-        Conn.Execute SQL
+        Sql = "INSERT INTO tmpcobros (codusu, numorden, fecvenci, impvenci)"
+        Sql = Sql & " VALUES " & Mid(CadValues, 1, Len(CadValues) - 1)
+        Conn.Execute Sql
     End If
     
     CargarCobrosTemporal = True
@@ -69,4 +69,20 @@ eCargarCobros:
 End Function
 
 
+Public Function BancoPropio() As String
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    BancoPropio = ""
+
+    Sql = "select codmacta from bancos "
+    
+    If TotalRegistrosConsulta(Sql) = 1 Then
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then BancoPropio = DBLet(Rs!codmacta, "T")
+        Set Rs = Nothing
+    End If
+
+End Function
 
