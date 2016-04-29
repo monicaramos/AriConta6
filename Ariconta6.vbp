@@ -179,6 +179,7 @@ Form=frmTESReclamaCli.frm
 Form=frmTESReclamaCliList.frm
 Form=frmTESReclamaCliEfe.frm
 Form=frmTESRemesas.frm
+Form=frmTESRemesasList.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
