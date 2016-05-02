@@ -477,7 +477,7 @@ Begin VB.Form frmTESCobros
          Height          =   3435
          Left            =   270
          TabIndex        =   127
-         Top             =   1110
+         Top             =   1140
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
@@ -5876,7 +5876,7 @@ End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad As String
     
     On Error Resume Next
@@ -5884,36 +5884,36 @@ Dim Cad As String
     Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
     Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2)
         
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 0 Or Modo = 2)
         
-        Me.Toolbar2.Buttons(1).Enabled = DBLet(Rs!especial, "N") And (Modo <> 0 And Modo <> 5)
-        Me.Toolbar2.Buttons(2).Enabled = DBLet(Rs!especial, "N") And Modo = 2
-        Me.Toolbar2.Buttons(3).Enabled = DBLet(Rs!especial, "N") And Modo = 2
+        Me.Toolbar2.Buttons(1).Enabled = DBLet(RS!especial, "N") And (Modo <> 0 And Modo <> 5)
+        Me.Toolbar2.Buttons(2).Enabled = DBLet(RS!especial, "N") And Modo = 2
+        Me.Toolbar2.Buttons(3).Enabled = DBLet(RS!especial, "N") And Modo = 2
         
         
 '        If Not Me.AdoAux(0).Recordset.EOF Then
 '
-            ToolbarAux.Buttons(1).Enabled = DBLet(Rs!especial, "N") And (Modo = 2) And Not Me.AdoAux(0).Recordset.EOF
-            ToolbarAux.Buttons(2).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 2) And Not Me.AdoAux(0).Recordset.EOF
+            ToolbarAux.Buttons(1).Enabled = DBLet(RS!especial, "N") And (Modo = 2) And Not Me.AdoAux(0).Recordset.EOF
+            ToolbarAux.Buttons(2).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 2) And Not Me.AdoAux(0).Recordset.EOF
             
         
         vUsu.LeerFiltros "ariconta", IdPrograma
         
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 
@@ -5978,7 +5978,7 @@ End Sub
 
 
 Private Sub CargarCombo()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim J As Long
     
@@ -5989,18 +5989,18 @@ Dim J As Long
 
 
     'Tipo de situacion de remesa
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     SQL = "SELECT * FROM usuarios.wtiposituacionrem ORDER BY situacio"
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 0
-    While Not Rs.EOF
-        cboSituRem.AddItem Rs!descsituacion
-        cboSituRem.ItemData(cboSituRem.NewIndex) = Asc(Rs!situacio)
+    While Not RS.EOF
+        cboSituRem.AddItem RS!descsituacion
+        cboSituRem.ItemData(cboSituRem.NewIndex) = Asc(RS!situacio)
         i = i + 1
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     Combo1.Clear
 
@@ -6179,7 +6179,7 @@ End Sub
 
 Private Sub CargarTemporal()
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     SQL = "delete from tmppendientes where codusu = " & vUsu.Codigo
     Conn.Execute SQL
@@ -6350,7 +6350,7 @@ Dim SQL As String
 Dim SqlInsert As String
 Dim SqlValues As String
 Dim i As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
 Dim Baseimpo As Currency
 
@@ -6508,7 +6508,7 @@ End Sub
 
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim B As Boolean
 Dim cant As Integer
@@ -6619,15 +6619,15 @@ End Sub
 
 
 Private Sub CargarDatosCuenta(Cuenta As String)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo eTraerDatosCuenta
     
     SQL = "select * from cuentas where codmacta = " & DBSet(Cuenta, "T")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Text1(0).Text = ""
     Text2(1).Text = ""
@@ -6636,17 +6636,17 @@ Dim SQL As String
         Text1(i).Text = ""
     Next i
     
-    If Not Rs.EOF Then
-        Text1(0).Text = DBLet(Rs!Forpa, "N")
+    If Not RS.EOF Then
+        Text1(0).Text = DBLet(RS!ForPa, "N")
         Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(42).Text = DBLet(Rs!Nommacta, "T")
-        Text1(41).Text = DBLet(Rs!dirdatos, "T")
-        Text1(40).Text = DBLet(Rs!codposta, "T")
-        Text1(39).Text = DBLet(Rs!desPobla, "T")
-        Text1(38).Text = DBLet(Rs!desProvi, "T")
-        Text1(37).Text = DBLet(Rs!nifdatos, "T")
-        Text1(36).Text = DBLet(Rs!codPAIS, "T")
+        Text1(42).Text = DBLet(RS!Nommacta, "T")
+        Text1(41).Text = DBLet(RS!dirdatos, "T")
+        Text1(40).Text = DBLet(RS!codposta, "T")
+        Text1(39).Text = DBLet(RS!desPobla, "T")
+        Text1(38).Text = DBLet(RS!desProvi, "T")
+        Text1(37).Text = DBLet(RS!nifdatos, "T")
+        Text1(36).Text = DBLet(RS!codPAIS, "T")
         Text2(36).Text = PonerNombreDeCod(Text1(36), "paises", "nompais", "codpais", "T")
     End If
     Exit Sub

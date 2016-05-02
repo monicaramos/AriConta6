@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
+<CstmrDrctDbtInitn>
+<GrpHdr>
+<MsgId>PRE2016050217023684380RE10000012016</MsgId>
+   <CreDtTm>2016-05-02T17:02:39</CreDtTm>
+   <NbOfTxs>2</NbOfTxs>
+   <CtrlSum>1134.85</CtrlSum>
+   <InitgPty>
+     <Nm>Ariadna Software, S.L.</Nm>
+     <Id>
+        <OrgId>
+           <Othr>
+              <Id>ES70000B96470190</Id>
+           </Othr>
+        </OrgId>
+      </Id>
+   </InitgPty>
+</GrpHdr>
+<PmtInf>
+   <PmtInfId>RE000012016 02/05/16B96470190</PmtInfId>
+   <PmtMtd>DD</PmtMtd>
+   <BtchBookg>false</BtchBookg>
+   <PmtTpInf>
+      <SvcLvl>
+          <Cd>SEPA</Cd>
+      </SvcLvl>
+      <LclInstrm>
+         <Cd>COR1</Cd>
+      </LclInstrm>
+      <SeqTp>RCUR</SeqTp>
+      <CtgyPurp>
+         <Cd>TRAD</Cd>
+      </CtgyPurp>
+   </PmtTpInf>
+   <ReqdColltnDt>2016-05-02</ReqdColltnDt>
+   <Cdtr>
+      <Nm>Ariadna Software, S.L.</Nm>
+      <PstlAdr>
+          <Ctry>ES</Ctry>
+          <AdrLine>DANIEL SANJUAN, 11</AdrLine>
+      </PstlAdr>
+   </Cdtr>
+   <CdtrAcct>
+      <Id>
+         <IBAN>490821001864930200004908</IBAN>
+      </Id>
+   </CdtrAcct>
+   <CdtrAgt>
+      <FinInstnId>
+         <BIC>CAIXESBBXXX</BIC>
+      </FinInstnId>
+   </CdtrAgt>
+   <CdtrSchmeId>
+       <Id>
+          <PrvtId>
+             <Othr>
+                 <Id>ES70000B96470190</Id>
+                 <SchmeNm><Prtry>SEPA</Prtry></SchmeNm>
+             </Othr>
+          </PrvtId>
+       </Id>
+   </CdtrSchmeId>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000001 A  0000099920160427001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">125.00</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026696</MndtId>
+            <DtOfSgntr>2015-12-02</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>DANIEL SANJUAN, 11</AdrLine>
+              <AdrLine>POBLA DEL DUC   46840     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46026696</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES08</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>

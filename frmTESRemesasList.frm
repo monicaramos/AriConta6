@@ -634,7 +634,7 @@ Option Explicit
 
 Public Legalizacion As String
 
-Public Numero As String
+Public numero As String
 Public Anyo As String
 
 
@@ -745,9 +745,9 @@ Private Sub Form_Load()
     
     PrimeraVez = True
      
-    If Numero <> "" Then
-        txtNum(0).Text = Numero
-        txtNum(1).Text = Numero
+    If numero <> "" Then
+        txtNum(0).Text = numero
+        txtNum(1).Text = numero
         txtAnyo(0).Text = Anyo
         txtAnyo(1).Text = Anyo
         Check1(0).Value = 1
@@ -755,6 +755,7 @@ Private Sub Form_Load()
     
     Frame1.Enabled = (Check1(0).Value = 1)
     
+    optVarios(0).Value = 1
     
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -831,10 +832,24 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = " "
+    SQL = "select remesas.anyo Año, remesas.codigo, remesas.codmacta Cuenta, cuentas.nommacta Nombre, remesas.fecremesa Fecha,  "
+    SQL = SQL & " remesas.descripcion, wtiposituacionrem.descsituacion Situacion, "
+    If Me.Check1(0).Value = 1 Then
+        SQL = SQL & "cobros.numserie, cobros.numfactu Factura, cobros.fecfactu Fecha, cobros.fecvenci FVencim, cobros.codmacta Cuenta, aaa.nommacta Descripcion, cobros.iban, cobros.impvenci Importe"
+        SQL = SQL & " from remesas, cuentas, usuarios.wtiposituacionrem, cuentas aaa, cobros "
+    Else
+        SQL = SQL & "remesas.importe "
+        SQL = SQL & " from remesas, cuentas, usuarios.wtiposituacionrem"
+    End If
     SQL = SQL & " where " & cadselect
     
-    SQL = SQL & " ORDER BY 1  "
+    SQL = SQL & " and remesas.codmacta = cuentas.codmacta and remesas.situacion = wtiposituacionrem.situacio "
+    
+    If Me.Check1(0).Value = 1 Then
+        SQL = SQL & " and cobros.codmacta = aaa.codmacta and remesas.anyo = cobros.anyorem and remesas.codigo = cobros.codrem "
+    End If
+    
+    SQL = SQL & " ORDER BY 1 desc, 2 "
         
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
@@ -855,6 +870,20 @@ Dim nomDocu As String
     
     cadNomRPT = nomDocu
 
+    If Me.Check1(0).Value Then
+        cadParam = cadParam & "pDetalle=1|"
+    Else
+        cadParam = cadParam & "pDetalle=0|"
+    End If
+    numParam = numParam + 1
+    
+    'ordenacion
+    If optVarios(0).Value Then cadParam = cadParam & "pOrden=0|"
+    If optVarios(1).Value Then cadParam = cadParam & "pOrden=1|"
+    If optVarios(2).Value Then cadParam = cadParam & "pOrden=2|"
+    If optVarios(3).Value Then cadParam = cadParam & "pOrden=3|"
+    numParam = numParam + 1
+
     ImprimeGeneral
     
     If optTipoSal(1).Value Then CopiarFicheroASalida True, txtTipoSalida(1).Text
@@ -874,8 +903,8 @@ Dim RC2 As String
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("remesas.codigo", "N", Me.txtNum(0), Me.txtNum(0), Me.txtNum(1), Me.txtNum(1), "pDHRemesa=""") Then Exit Function
-    If Not PonerDesdeHasta("remesas.anyo", "N", Me.txtAnyo(0), Me.txtAnyo(0), Me.txtAnyo(1), Me.txtAnyo(1), "pDHAnyo=""") Then Exit Function
+    If Not PonerDesdeHasta("remesas.codigo", "REM", Me.txtNum(0), Me.txtNum(0), Me.txtNum(1), Me.txtNum(1), "pDHRemesa=""") Then Exit Function
+    If Not PonerDesdeHasta("remesas.anyo", "ANYO", Me.txtAnyo(0), Me.txtAnyo(0), Me.txtAnyo(1), Me.txtAnyo(1), "pDHAnyo=""") Then Exit Function
     
     MontaSQL = True
            
