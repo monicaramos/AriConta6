@@ -324,23 +324,17 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 SQL = DBLet(miRsAux!SEPA_Refere, "T")
                 If SQL = "" Then
                     Select Case TipoReferenciaCliente
-                    Case 1
+                    Case 0
                         'ALZIRA. La referencia final de 12 es el ctan bancaria del cli + su CC
                         SQL = Format(miRsAux!Control, "00") ' Dígitos de control
                         SQL = SQL & Format(miRsAux!Cuentaba, "0000000000") ' Código de cuenta
-                    Case 2
+                    Case 1
                         'NIF
                         SQL = DBLet(miRsAux!nifclien, "T")
-                        If SQL = "" Then SQL = miRsAux!codmacta
-                     
                         
-                    Case 3
+                    Case 2
                         'Referencia en el VTO. No es Nula
                         SQL = DBLet(miRsAux!referencia, "T")
-                        If SQL = "" Then SQL = miRsAux!codmacta
-                    Case Else
-                        
-                        SQL = miRsAux!codmacta
                         
                     End Select
                 End If
@@ -394,27 +388,26 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 
                 
                 'Opcion nueva: 3   Quiere el campo referencia de scobro
-                Select Case TipoReferenciaCliente
-                Case 1
-                    'ALZIRA. La referencia final de 12 es el ctan bancaria del cli + su CC
-                    SQL = Format(miRsAux!Control, "00") ' Dígitos de control
-                    SQL = SQL & Format(miRsAux!Cuentaba, "0000000000") ' Código de cuenta
-                Case 2
-                    'NIF
-                    SQL = DBLet(miRsAux!nifclien, "T")
-                    If SQL = "" Then SQL = miRsAux!codmacta
-             
-                Case 3
-                    'Referencia en el VTO. No es Nula
-                    SQL = DBLet(miRsAux!referencia, "T")
-                    If SQL = "" Then SQL = miRsAux!codmacta
-                Case Else
+'??             SQL = DBLet(miRsAux!SEPA_Refere, "T")
+'??             If SQL = "" Then
+                   Select Case TipoReferenciaCliente
+                   Case 0
+                       'ALZIRA. La referencia final de 12 es el ctan bancaria del cli + su CC
+                       SQL = Format(miRsAux!Control, "00") ' Dígitos de control
+                       SQL = SQL & Format(miRsAux!Cuentaba, "0000000000") ' Código de cuenta
+                   Case 1
+                       'NIF
+                       SQL = DBLet(miRsAux!nifclien, "T")
                 
-                    SQL = miRsAux!codmacta
-                End Select
+                   Case 2
+                       'Referencia en el VTO. No es Nula
+                       SQL = DBLet(miRsAux!referencia, "T")
+                   
+                   End Select
+'??             End If
                 
                 Print #NFic, "                   <Id>" & SQL & "</Id>"
-                If TipoReferenciaCliente = 2 Then Print #NFic, "                   <Issr>NIF</Issr>"
+                If TipoReferenciaCliente = 1 Then Print #NFic, "                   <Issr>NIF</Issr>"
                 Print #NFic, "               </Othr>"
                 Print #NFic, "            </PrvtId>"
                 Print #NFic, "         </Id>"

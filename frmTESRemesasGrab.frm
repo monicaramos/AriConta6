@@ -34,7 +34,7 @@ Begin VB.Form frmTESRemesasGrab
          EndProperty
          Height          =   495
          Index           =   1
-         Left            =   4410
+         Left            =   4440
          TabIndex        =   28
          Top             =   4440
          Width           =   1515
@@ -170,7 +170,7 @@ Begin VB.Form frmTESRemesasGrab
             Height          =   360
             ItemData        =   "frmTESRemesasGrab.frx":000C
             Left            =   4980
-            List            =   "frmTESRemesasGrab.frx":001C
+            List            =   "frmTESRemesasGrab.frx":0019
             Style           =   2  'Dropdown List
             TabIndex        =   13
             Top             =   480
@@ -205,9 +205,9 @@ Begin VB.Form frmTESRemesasGrab
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            ItemData        =   "frmTESRemesasGrab.frx":005B
+            ItemData        =   "frmTESRemesasGrab.frx":0047
             Left            =   1740
-            List            =   "frmTESRemesasGrab.frx":005D
+            List            =   "frmTESRemesasGrab.frx":0049
             Style           =   2  'Dropdown List
             TabIndex        =   12
             Top             =   480
@@ -656,10 +656,10 @@ Dim FCobro As String
         End If
     
         'El identificador REFERENCIA solo es valido para la norma 19
-        If Me.cmbReferencia.ListIndex = 3 Then
+        If Me.cmbReferencia.ListIndex = 2 Then
             B = cboTipoRemesa.ListIndex = 0 Or cboTipoRemesa.ListIndex = 3
             If Not B Then
-                MsgBox "Campo 'REFERENCIA EN EL VTO.' solo es válido para la norma 19", vbExclamation
+                MsgBox "Campo 'Referencia del recibo.' solo es válido para la norma 19", vbExclamation
                 Exit Sub
             End If
         End If
@@ -750,12 +750,12 @@ Dim Im As Currency
     On Error GoTo EUpdatearCobrosRemesa
     UpdatearCobrosRemesa = False
     
-    SQL = "Select * from scobro WHERE codrem=" & Text3(0).Text
+    SQL = "Select * from cobros WHERE codrem=" & Text3(0).Text
     SQL = SQL & " AND anyorem =" & Text3(1).Text
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
             While Not miRsAux.EOF
-                SQL = "UPDATE scobro SET fecultco = '" & Format(Text1(9).Text, FormatoFecha) & "', impcobro = "
+                SQL = "UPDATE cobros SET fecultco = '" & Format(Text1(9).Text, FormatoFecha) & "', impcobro = "
                 Im = miRsAux!ImpVenci
                 If Not IsNull(miRsAux!Gastos) Then Im = Im + miRsAux!Gastos
                 SQL = SQL & TransformaComasPuntos(CStr(Im))
@@ -765,8 +765,8 @@ Dim Im As Currency
                 
                 'WHERE
                 SQL = SQL & " WHERE numserie='" & miRsAux!NUmSerie
-                SQL = SQL & "' AND  codfaccl =  " & miRsAux!codfaccl
-                SQL = SQL & "  AND  fecfaccl =  '" & Format(miRsAux!fecfaccl, FormatoFecha)
+                SQL = SQL & "' AND  numfactu =  " & miRsAux!NumFactu
+                SQL = SQL & "  AND  fecfactu =  '" & Format(miRsAux!FecFactu, FormatoFecha)
                 SQL = SQL & "' AND  numorden =  " & miRsAux!numorden
                 'Muevo siguiente
                 miRsAux.MoveNext
@@ -861,6 +861,7 @@ Private Sub cmdRemeTipo1_Click(Index As Integer)
         'Generar diskete
         CrearDisco
         
+        UltimoComboReferencia False
         
     End Select
     
@@ -948,7 +949,7 @@ Dim W As Integer
     'If optSepaXML(1).Value Then Text1(9).Text = ""
     
     
-    Me.cmbReferencia.ListIndex = LeerComboReferencia(True)
+    Me.cmbReferencia.ListIndex = UltimoComboReferencia(True)
     
     'Me.cmbReferencia.ListIndex = 2
     Text7(0).Text = UCase(vEmpresa.nomempre)
@@ -988,7 +989,7 @@ Private Sub Form_Unload(Cancel As Integer)
     Set RS = Nothing
     Set miRsAux = Nothing
     If Opcion = 7 Then
-        LeerComboReferencia False
+'        UltimoComboReferencia False
         'La seleccion cobro o vencimiento
         CheckValueGuardar "FCob", Me.optSepaXML(1).Value   'seimpre tendremos true
     End If
@@ -1132,31 +1133,30 @@ End Function
 
 
 
-Private Function LeerComboReferencia(Leer As Boolean) As Integer
-    LeerComboReferencia = 0
+Private Function UltimoComboReferencia(Leer As Boolean) As Integer
+    UltimoComboReferencia = 0
     On Error GoTo ELeerRef
     SQL = App.Path & "\control.dat"
     If Leer Then
-        LeerComboReferencia = 2
+        UltimoComboReferencia = 2
         If Dir(SQL, vbArchive) <> "" Then
             i = FreeFile
             Open SQL For Input As #i
             Line Input #i, SQL
             Close #i
-            LeerComboReferencia = RecuperaValor(SQL, 8)
+            If RecuperaValor(SQL, 8) <> "" Then UltimoComboReferencia = RecuperaValor(SQL, 8)
         End If
         
     Else
         i = FreeFile
         Open SQL For Output As #i
-        Print #i, InsertaValor(SQL, 8, cmbReferencia.ListIndex)
+        CadenaControl = InsertaValor(CadenaControl, 8, CStr(cmbReferencia.ListIndex))
+        Print #i, CadenaControl
         Close #i
     End If
     Exit Function
 ELeerRef:
     Err.Clear
-'???
-'???
 End Function
 
 

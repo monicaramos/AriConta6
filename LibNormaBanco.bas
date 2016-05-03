@@ -3159,7 +3159,7 @@ Dim B As Boolean
 
 
     'Si es el campo referencia del fichero de cobros, entonces hay que comprobar que es obligado
-    If TipoReferenciaCliente = 3 Then
+    If TipoReferenciaCliente = 2 Then
         'Campo REFERENCAI como identificador
         If Not ComprobarCampoReferenciaRemesaNorma19(Remesa) Then Exit Function
     End If

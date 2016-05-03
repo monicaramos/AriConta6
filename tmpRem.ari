@@ -2,8 +2,8 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016050217023684380RE10000012016</MsgId>
-   <CreDtTm>2016-05-02T17:02:39</CreDtTm>
+<MsgId>PRE2016050312271438280RE10000012016</MsgId>
+   <CreDtTm>2016-05-03T12:27:14</CreDtTm>
    <NbOfTxs>2</NbOfTxs>
    <CtrlSum>1134.85</CtrlSum>
    <InitgPty>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000012016 02/05/16B96470190</PmtInfId>
+   <PmtInfId>RE000012016 03/05/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-05-02</ReqdColltnDt>
+   <ReqdColltnDt>2016-05-03</ReqdColltnDt>
    <Cdtr>
       <Nm>Ariadna Software, S.L.</Nm>
       <PstlAdr>
@@ -95,7 +95,7 @@
       </Dbtr>
       <DbtrAcct>
          <Id>
-            <IBAN>ES08</IBAN>
+            <IBAN>ES0830582267072710000069</IBAN>
          </Id>
       </DbtrAcct>
       <Purp>
@@ -105,3 +105,5 @@
          <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
+</PmtInf>
+</CstmrDrctDbtInitn></Document>
