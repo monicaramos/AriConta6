@@ -175,11 +175,11 @@ Begin VB.Form frmTESRemesasCont
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   375
+         Height          =   1245
          Index           =   2
          Left            =   180
          TabIndex        =   1
-         Top             =   810
+         Top             =   390
          Width           =   5175
       End
    End
@@ -219,7 +219,7 @@ Attribute frmP.VB_VarHelpID = -1
 
 Dim RS As ADODB.Recordset
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 Dim IT As ListItem  'Comun
 Dim PrimeraVez As Boolean
 Dim Cancelado As Boolean
@@ -707,7 +707,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim H As Integer
+Dim h As Integer
 Dim W As Integer
     Limpiar Me
     PrimeraVez = True
@@ -760,7 +760,7 @@ Dim W As Integer
         
         If Opcion = 8 Then
             Me.Caption = "Abono remesa"
-            Label5(2).Caption = "Remesa : " & RecuperaValor(NumeroDocumento, 1) & "/" & RecuperaValor(NumeroDocumento, 2) & " Banco : " & RecuperaValor(NumeroDocumento, 4) & " de " & RecuperaValor(NumeroDocumento, 5)
+            Label5(2).Caption = "Remesa : " & RecuperaValor(NumeroDocumento, 1) & "/" & RecuperaValor(NumeroDocumento, 2) & vbCrLf & " Banco : " & RecuperaValor(NumeroDocumento, 4) & vbCrLf & " Importe: " & RecuperaValor(NumeroDocumento, 5)
         End If
         
         CuentasCC = ""
@@ -778,15 +778,15 @@ Dim W As Integer
         
         
         W = FrameContabilRem2.Width
-        H = FrameContabilRem2.Height
+        h = FrameContabilRem2.Height
     End Select
     
     
-    Me.Height = H + 360
+    Me.Height = h + 360
     Me.Width = W + 90
     
-    H = Opcion
-    Me.cmdCancelar(H).Cancel = True
+    h = Opcion
+    Me.cmdCancelar(h).Cancel = True
     
 End Sub
 
@@ -797,7 +797,7 @@ End Sub
 
 
 Private Sub frmC_Selec(vFecha As Date)
-    Text1(CInt(Image1(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    Text1(CInt(Image1(10).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -809,16 +809,16 @@ Private Sub Image1_Click(Index As Integer)
     Set frmC = New frmCal
     frmC.Fecha = Now
     If Text1(Index).Text <> "" Then frmC.Fecha = CDate(Text1(Index).Text)
-    Image1(0).Tag = Index
+    Image1(10).Tag = Index
     frmC.Show vbModal
     Set frmC = Nothing
-    If Text1(Index).Text <> "" Then PonerFoco Text1(Index)
+    If Text1(Index).Text <> "" Then Ponerfoco Text1(Index)
 End Sub
 
 
-Private Sub PonerFoco(ByRef o As Object)
+Private Sub Ponerfoco(ByRef O As Object)
     On Error Resume Next
-    o.SetFocus
+    O.SetFocus
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -827,11 +827,11 @@ Private Sub ObtenerFoco(ByRef T As TextBox)
     T.SelLength = Len(T.Text)
 End Sub
 
-Private Sub KEYpress(ByRef Tecla As Integer)
-    If Tecla = 13 Then
-        Tecla = 0
-        SendKeys "{tab}"
-    End If
+Private Sub KEYpress(ByRef KeyAscii As Integer)
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
@@ -855,7 +855,7 @@ Private Sub Text1_LostFocus(Index As Integer)
     If Not EsFechaOK(Text1(Index)) Then
         MsgBox "Fecha incorrecta: " & Text1(Index).Text, vbExclamation
         Text1(Index).Text = ""
-        PonerFoco Text1(Index)
+        Ponerfoco Text1(Index)
     End If
     
 End Sub
@@ -874,26 +874,23 @@ Private Sub txtImporte_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtImporte_LostFocus(Index As Integer)
- Dim Valor
-        txtImporte(Index).Text = Trim(txtImporte(Index))
-        If txtImporte(Index).Text = "" Then Exit Sub
-        
-
-        If Not EsNumerico(txtImporte(Index).Text) Then
-            txtImporte(Index).Text = ""
-            Exit Sub
-        End If
+Dim Valor
+ 
+    txtImporte(Index).Text = Trim(txtImporte(Index))
+    If txtImporte(Index).Text = "" Then Exit Sub
     
-        
-        If Index = 6 Or Index = 7 Then
-           
-            If InStr(1, txtImporte(Index).Text, ",") > 0 Then
-                Valor = ImporteFormateado(txtImporte(Index).Text)
-            Else
-                Valor = CCur(TransformaPuntosComas(txtImporte(Index).Text))
-            End If
-            txtImporte(Index).Text = Format(Valor, FormatoImporte)
-        End If
+
+    If Not EsNumerico(txtImporte(Index).Text) Then
+        txtImporte(Index).Text = ""
+        Exit Sub
+    End If
+
+    If InStr(1, txtImporte(Index).Text, ",") > 0 Then
+        Valor = ImporteFormateado(txtImporte(Index).Text)
+    Else
+        Valor = CCur(TransformaPuntosComas(txtImporte(Index).Text))
+    End If
+    txtImporte(Index).Text = Format(Valor, FormatoImporte)
         
 End Sub
 
@@ -936,15 +933,15 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         CuentasCC = ""
         CualesEliminar = ""
         J = 0
-        For i = 0 To 1
+        For I = 0 To 1
             ' contatalonpte
             SQL = "pagarecta"
-            If i = 1 Then SQL = "contatalonpte"
+            If I = 1 Then SQL = "contatalonpte"
             CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
             
             'Repetiremos el proceso dos veces
             SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            SQL = SQL & " AND   talon = " & i
+            SQL = SQL & " AND   talon = " & I
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                     'Si lleva cta puente habra que ver si esta contbilizada
@@ -981,7 +978,7 @@ On Error GoTo EEliminarEnRecepcionDocumentos
             
             
             
-        Next i
+        Next I
         
         
 
@@ -1003,12 +1000,12 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         J = 1
         SQL = "X"
         Do
-            i = InStr(J, CualesEliminar, ",")
-            If i > 0 Then
-                J = i + 1
+            I = InStr(J, CualesEliminar, ",")
+            If I > 0 Then
+                J = I + 1
                 SQL = SQL & "X"
             End If
-        Loop Until i = 0
+        Loop Until I = 0
         
         SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
         If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
@@ -1031,28 +1028,28 @@ End Sub
 
 
 Private Function ComprobacionFechasRemesaN19PorVto() As String
-Dim Aux As String
+Dim AUX As String
 
     ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & RS!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("min(fecvenci)", "cobros", Aux, RS!Codigo)
-    If Aux = "" Then
+    AUX = "anyorem = " & RS!Anyo & " AND codrem "
+    AUX = DevuelveDesdeBD("min(fecvenci)", "cobros", AUX, RS!Codigo)
+    If AUX = "" Then
         ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
     Else
-        If CDate(Aux) < vParam.fechaini Then
+        If CDate(AUX) < vParam.fechaini Then
             ComprobacionFechasRemesaN19PorVto = "Vtos con fecha menor que inicio de ejercicio"
         End If
     End If
     If ComprobacionFechasRemesaN19PorVto <> "" Then Exit Function
     
     ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & RS!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("max(fecvenci)", "cobros", Aux, RS!Codigo)
-    If Aux = "" Then
+    AUX = "anyorem = " & RS!Anyo & " AND codrem "
+    AUX = DevuelveDesdeBD("max(fecvenci)", "cobros", AUX, RS!Codigo)
+    If AUX = "" Then
         ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
         Exit Function
     End If
-    If CDate(Aux) > DateAdd("yyyy", 1, vParam.fechafin) Then ComprobacionFechasRemesaN19PorVto = "Vtos con fecha mayor que fin de ejercicio"
+    If CDate(AUX) > DateAdd("yyyy", 1, vParam.fechafin) Then ComprobacionFechasRemesaN19PorVto = "Vtos con fecha mayor que fin de ejercicio"
     
     
     
