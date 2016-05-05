@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmMensajes 
    BorderStyle     =   3  'Fixed Dialog
@@ -4264,7 +4264,7 @@ Private PrimeraVez As Boolean
 
 Dim i As Integer
 Dim SQL As String
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim ItmX As ListItem
 Dim Errores As String
 Dim NE As Integer
@@ -4309,7 +4309,7 @@ Dim SQL As String
 Dim CadenaIconos As String
 
 
-Dim k As Integer
+Dim K As Integer
 Dim J As Integer
 Dim Px As Single
 Dim Py As Single
@@ -4340,8 +4340,8 @@ Dim Ocupado As Boolean
             If ListView6.ListItems(i).SubItems(2) = "0" Then
                 SQL = ""
                 For J = 1 To 8
-                    For k = 1 To 5
-                        DevuelCoordenadasCuadricula J, k, Px, Py
+                    For K = 1 To 5
+                        DevuelCoordenadasCuadricula J, K, Px, Py
                         Ocupado = False
                         'Busco hueco
                         For H = 1 To ListView6.ListItems.Count
@@ -4369,7 +4369,7 @@ Dim Ocupado As Boolean
                             Conn.Execute SQL
                            Exit For
                         End If
-                    Next k
+                    Next K
                     If SQL <> "" Then Exit For
                 Next J
             End If
@@ -4479,7 +4479,7 @@ Private Sub cmdBloqEmpre_Click(Index As Integer)
 End Sub
 
 Private Sub cmdCabError_Click(Index As Integer)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim J As Long
 Dim ii As Long
 Dim Anyo As Integer
@@ -4495,16 +4495,16 @@ Dim Anyo As Integer
             SQL = "select numasien,fechaent from hcabapu where fechaent >= '"
             SQL = SQL & Format(DateAdd("yyyy", Anyo, vParam.fechaini), FormatoFecha)
             SQL = SQL & "' AND fechaent <= '" & Format(DateAdd("yyyy", Anyo, vParam.fechafin), FormatoFecha) & "' ORDER By NumAsien"
-            Set Rs = New ADODB.Recordset
-            Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             ii = 0
-            While Not Rs.EOF
-               J = Rs.Fields(0)
+            While Not RS.EOF
+               J = RS.Fields(0)
                'Igual
                 If J - ii = 0 Then
                     
                     SQL = Format(J, "00000")
-                    SQL = SQL & "  -  " & Format(Rs!FechaEnt, "dd/mm/yyyy")
+                    SQL = SQL & "  -  " & Format(RS!FechaEnt, "dd/mm/yyyy")
                     Text5.Text = Text5.Text & SQL & vbCrLf
                     i = i + 1
                 Else
@@ -4528,9 +4528,9 @@ Dim Anyo As Integer
                 End If
                 
                 '
-                Rs.MoveNext
+                RS.MoveNext
             Wend
-            Rs.Close
+            RS.Close
             Anyo = Anyo + 1
         Loop Until Anyo > 1
         Me.Refresh
@@ -5203,32 +5203,32 @@ On Error GoTo Ecargaempresas
     SQL = SQL & " order by codempre"
     Set lwE.SmallIcons = Me.ImageList1
     lwE.ListItems.Clear
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     i = -1
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-        SQL = "|" & Rs!codempre & "|"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
+        SQL = "|" & RS!codempre & "|"
         If InStr(1, Prohibidas, SQL) = 0 Then
-            Set ItmX = lwE.ListItems.Add(, , Rs!nomempre, , 3)
-            ItmX.Tag = Rs!codempre
+            Set ItmX = lwE.ListItems.Add(, , RS!nomempre, , 3)
+            ItmX.Tag = RS!codempre
             If ItmX.Tag = vEmpresa.codempre Then
                 If CadenaDesdeOtroForm = "" Then
                     ItmX.Checked = True
                     i = ItmX.Index
                 End If
             End If
-            ItmX.ToolTipText = Rs!CONTA
+            ItmX.ToolTipText = RS!CONTA
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     If i > 0 Then Set lwE.SelectedItem = lwE.ListItems(i)
     
     CadenaDesdeOtroForm = ""
     
 Ecargaempresas:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos empresas"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 Private Sub VerEmresasProhibidas(ByRef VarProhibidas As String)
@@ -5237,17 +5237,17 @@ On Error GoTo EVerEmresasProhibidas
     VarProhibidas = "|"
     SQL = "Select codempre from Usuarios.usuarioempresa WHERE codusu = " & (vUsu.Codigo Mod 1000)
     SQL = SQL & " order by codempre"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-          VarProhibidas = VarProhibidas & Rs!codempre & "|"
-          Rs.MoveNext
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
+          VarProhibidas = VarProhibidas & RS!codempre & "|"
+          RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     Exit Sub
 EVerEmresasProhibidas:
     MuestraError Err.Number, Err.Description & vbCrLf & " Consulte soporte técnico"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -5352,14 +5352,6 @@ Private Sub imgCheck_Click(Index As Integer)
     End Select
         
     
-End Sub
-
-Private Sub Label13_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Button = 2 Then
-        If Shift And vbCtrlMask > 0 Then
-            MsgBox "HOLITA VECINO. Has encontrado el huevo de pascua...., a curraaaaaarrr", vbExclamation
-        End If
-    End If
 End Sub
 
 Private Sub Option1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -5942,16 +5934,16 @@ Dim Aux As String
     End If
     SQL = SQL & " where " & Parametros & " >= '" & Format(CDate(txtFecha(2).Text), FormatoFecha) & "'"
     SQL = SQL & " AND " & Parametros & " <= '" & Format(CDate(txtFecha(3).Text), FormatoFecha) & "'"
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     Errores = "select count(*) from cabfact" & SQL
-    Rs.Open Errores, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Errores, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Ok = 0
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            If Rs.Fields(0) > 0 Then Ok = 1
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            If RS.Fields(0) > 0 Then Ok = 1
         End If
     End If
-    Rs.Close
+    RS.Close
     
     If Ok = 0 Then
         SQL = "Ningun dato a traspasar de facturas "
@@ -5998,21 +5990,21 @@ Dim Aux As String
     'Cuentas que necesito
     
     Parametros = "Select distinct(codmacta) from cabfact" & SQL
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
         InsertaEnTmpCta
-        Rs.MoveNext
+        RS.MoveNext
         
     Wend
-    Rs.Close
+    RS.Close
     
     Parametros = "Select distinct(Cuereten) from cabfact" & SQL & " and not (cuereten is null)"
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
         InsertaEnTmpCta
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
     'la cuentas de las lineas de factura
@@ -6025,31 +6017,31 @@ Dim Aux As String
         Parametros = Parametros & " and anofaccl <=" & Year(CDate(txtFecha(3).Text))
     End If
     Parametros = Parametros & " GROUP BY codtbase"
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
         InsertaEnTmpCta
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
     'Ahora cojo todos los datos de tmpcierr1 y creo los inserts de las cuentas
     Parametros = "Select cuentas.* from cuentas,tmpcierre1 where cuentas.codmacta=tmpcierre1.cta "
     Parametros = Parametros & " and codusu =" & vUsu.Codigo
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    BACKUP_TablaIzquierda Rs, CadenaDesdeOtroForm
+    BACKUP_TablaIzquierda RS, CadenaDesdeOtroForm
     Ok = 0
-    While Not Rs.EOF
-        Label40.Caption = Rs!codmacta
+    While Not RS.EOF
+        Label40.Caption = RS!codmacta
         Label40.Refresh
         Ok = Ok + 1
-        BACKUP_Tabla Rs, Parametros
+        BACKUP_Tabla RS, Parametros
         Parametros = "INSERT INTO Cuentas " & CadenaDesdeOtroForm & " VALUES " & Parametros & ";"
         Print #NE, Parametros
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     EncabezadoPieFact True, vOpc, Ok
 
@@ -6074,15 +6066,15 @@ Dim Aux As String
     End If
     Parametros = Parametros & " AND not (codccost is null)"
     Parametros = Parametros & " GROUP BY codccost"
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Ok = 0
-    While Not Rs.EOF
+    While Not RS.EOF
         Ok = Ok + 1
         InsertaEnTmpCta
-        Rs.MoveNext
+        RS.MoveNext
         
     Wend
-    Rs.Close
+    RS.Close
     
     
     
@@ -6091,20 +6083,20 @@ Dim Aux As String
         'Ahora cojo todos los datos de tmpcierr1 y creo los inserts de las cuentas
         Parametros = "Select ccoste.* from ccoste,tmpcierre1 where ccoste.codccost=tmpcierre1.cta "
         Parametros = Parametros & " and codusu =" & vUsu.Codigo
-        Rs.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        BACKUP_TablaIzquierda Rs, CadenaDesdeOtroForm
+        BACKUP_TablaIzquierda RS, CadenaDesdeOtroForm
 
         'Si k hay CC
         
-        While Not Rs.EOF
+        While Not RS.EOF
             Ok = Ok + 1
-            BACKUP_Tabla Rs, Parametros
+            BACKUP_Tabla RS, Parametros
             Parametros = "INSERT INTO ccoste " & CadenaDesdeOtroForm & " VALUES " & Parametros & ";"
             Print #NE, Parametros
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
             
     End If
     
@@ -6119,19 +6111,19 @@ Dim Aux As String
     vOpc = "IVA"
     EncabezadoPieFact False, vOpc, 0
     Parametros = "Select * from tiposiva"
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    BACKUP_TablaIzquierda Rs, CadenaDesdeOtroForm
+    BACKUP_TablaIzquierda RS, CadenaDesdeOtroForm
 
 
-    While Not Rs.EOF
+    While Not RS.EOF
         Ok = Ok + 1
-        BACKUP_Tabla Rs, Parametros
+        BACKUP_Tabla RS, Parametros
         Parametros = "INSERT INTO tiposiva " & CadenaDesdeOtroForm & " VALUES " & Parametros & ";"
         Print #NE, Parametros
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
 
     
     EncabezadoPieFact True, vOpc, 1
@@ -6143,19 +6135,19 @@ Dim Aux As String
         vOpc = "CONTADORES"
         EncabezadoPieFact False, vOpc, 0
         Parametros = "Select * from contadores"
-        Rs.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Parametros, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        BACKUP_TablaIzquierda Rs, CadenaDesdeOtroForm
+        BACKUP_TablaIzquierda RS, CadenaDesdeOtroForm
 
 
-        While Not Rs.EOF
+        While Not RS.EOF
             Ok = Ok + 1
-            BACKUP_Tabla Rs, Parametros
+            BACKUP_Tabla RS, Parametros
             Parametros = "INSERT INTO contadores " & CadenaDesdeOtroForm & " VALUES " & Parametros & ";"
             Print #NE, Parametros
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
     
         
         EncabezadoPieFact True, vOpc, 1
@@ -6188,8 +6180,8 @@ Dim Aux As String
         Ok = 2
     End If
     
-    Rs.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    BACKUP_TablaIzquierda Rs, CadenaDesdeOtroForm
+    RS.Open Parametros, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    BACKUP_TablaIzquierda RS, CadenaDesdeOtroForm
     If Not Proveedores Then
         CadenaDesdeOtroForm = "INSERT INTO cabfact " & CadenaDesdeOtroForm & " VALUES "
     Else
@@ -6200,41 +6192,41 @@ Dim Aux As String
     Set miRsAux = New ADODB.Recordset
     Errores = ""
     NumRegElim = 0
-    While Not Rs.EOF
+    While Not RS.EOF
         
         NumRegElim = NumRegElim + 1
-        SQL = Rs.Fields(0) & "|"
+        SQL = RS.Fields(0) & "|"
         If Not Proveedores Then SQL = SQL & "0" 'meto un 0 para que las facturas que coinciden con el año no den errores
-        SQL = SQL & Rs.Fields(1) & "|"
-        If Not Proveedores Then SQL = SQL & Rs.Fields(2) & "|"
+        SQL = SQL & RS.Fields(1) & "|"
+        If Not Proveedores Then SQL = SQL & RS.Fields(2) & "|"
         Label40.Caption = SQL
         Label40.Refresh
         'Cadena insert
-        BACKUP_Tabla Rs, Parametros
+        BACKUP_Tabla RS, Parametros
         Parametros = SQL & CadenaDesdeOtroForm & Parametros & ";|"
         
         
         'El UPDATE
         SQL = ""
         
-        For i = Ok To Rs.Fields.Count - 1
+        For i = Ok To RS.Fields.Count - 1
             If SQL <> "" Then SQL = SQL & ","
-            SQL = SQL & Rs.Fields(i).Name & " = "
-            If IsNull(Rs.Fields(i)) Then
+            SQL = SQL & RS.Fields(i).Name & " = "
+            If IsNull(RS.Fields(i)) Then
                 SQL = SQL & "NULL"
             Else
-                Select Case Rs.Fields(i).Type
+                Select Case RS.Fields(i).Type
                 Case 133
-                    SQL = SQL & "'" & Format(Rs.Fields(i), FormatoFecha) & "'"
+                    SQL = SQL & "'" & Format(RS.Fields(i), FormatoFecha) & "'"
                 
                 Case 17
                     'numero
-                    SQL = SQL & Rs.Fields(i)
+                    SQL = SQL & RS.Fields(i)
                     
                 Case 131
-                    SQL = SQL & TransformaComasPuntos(CStr(Rs.Fields(i)))
+                    SQL = SQL & TransformaComasPuntos(CStr(RS.Fields(i)))
                 Case Else
-                    SQL = SQL & "'" & DevNombreSQL(Rs.Fields(i)) & "'"
+                    SQL = SQL & "'" & DevNombreSQL(RS.Fields(i)) & "'"
                 End Select
                 
             End If
@@ -6243,7 +6235,7 @@ Dim Aux As String
         SQL = SQL & " WHERE "
         Aux = ""
         For i = 0 To Ok - 1
-            Aux = Aux & Rs.Fields(i).Name & " = '" & Rs.Fields(i) & "' and "
+            Aux = Aux & RS.Fields(i).Name & " = '" & RS.Fields(i) & "' and "
         Next
         Aux = Mid(Aux, 1, Len(Aux) - 4)
         SQL = SQL & Aux
@@ -6280,9 +6272,9 @@ Dim Aux As String
         miRsAux.Close
         Print #NE, Parametros
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     Set miRsAux = Nothing
     
     EncabezadoPieFact True, vOpc, CInt(NumRegElim)
@@ -6295,7 +6287,7 @@ Dim Aux As String
     Conn.Execute Parametros
     Label40.Caption = ""
     CadenaDesdeOtroForm = "2"
-    Set Rs = Nothing
+    Set RS = Nothing
     
     ExportarDatosFacturas = True
 End Function
@@ -6329,7 +6321,7 @@ End Sub
 Private Sub InsertaEnTmpCta()
 On Error Resume Next
     
-    Conn.Execute "INSERT INTO tmpcierre1 (codusu, cta) VALUES (" & vUsu.Codigo & ",'" & Rs.Fields(0) & "')"
+    Conn.Execute "INSERT INTO tmpcierre1 (codusu, cta) VALUES (" & vUsu.Codigo & ",'" & RS.Fields(0) & "')"
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -6355,7 +6347,7 @@ End Sub
 
 '---------------------------------------------------------------------------------------
 Private Function ImportarDatosFacturas() As Boolean
-Dim fin As Boolean
+Dim Fin As Boolean
 Dim Clientes As Boolean
 
     On Error GoTo EIM
@@ -6396,12 +6388,12 @@ Dim Clientes As Boolean
     Label40.Refresh
     Line Input #NE, SQL   'CUENTAS
     i = 0
-    fin = False
+    Fin = False
     Do
         Line Input #NE, SQL   'FIN OPCION
         If InStr(1, SQL, "[/CUENTAS]") > 0 Then
             'Fin
-            fin = True
+            Fin = True
             'Ver numero registros
             Ok = InStr(1, SQL, "]")
             SQL = Mid(SQL, Ok + 1)
@@ -6417,7 +6409,7 @@ Dim Clientes As Boolean
             i = i + 1
             
         End If
-    Loop Until fin
+    Loop Until Fin
     
     'CC
     CadenaDesdeOtroForm = "CC"
@@ -6425,12 +6417,12 @@ Dim Clientes As Boolean
     Label40.Refresh
     Line Input #NE, SQL   'CC
     i = 0
-    fin = False
+    Fin = False
     Do
         Line Input #NE, SQL   'FIN OPCION
         If InStr(1, SQL, "[/CC]") > 0 Then
             'Fin
-            fin = True
+            Fin = True
             'Ver numero registros
         Else
             'Mandamos la linea a ejecutar
@@ -6438,7 +6430,7 @@ Dim Clientes As Boolean
             i = i + 1
             
         End If
-    Loop Until fin
+    Loop Until Fin
     
     
     
@@ -6448,12 +6440,12 @@ Dim Clientes As Boolean
     Label40.Refresh
     Line Input #NE, SQL   'IVA
     i = 0
-    fin = False
+    Fin = False
     Do
         Line Input #NE, SQL   'FIN OPCION
         If InStr(1, SQL, "[/IVA]") > 0 Then
             'Fin
-            fin = True
+            Fin = True
             'Ver numero registros
         Else
             'Mandamos la linea a ejecutar
@@ -6461,7 +6453,7 @@ Dim Clientes As Boolean
             i = i + 1
             
         End If
-    Loop Until fin
+    Loop Until Fin
     
     
     If Clientes Then
@@ -6471,12 +6463,12 @@ Dim Clientes As Boolean
         Label40.Refresh
         Line Input #NE, SQL   'CONTADPORES
         i = 0
-        fin = False
+        Fin = False
         Do
             Line Input #NE, SQL   'FIN OPCION
             If InStr(1, SQL, "[/CONTADORES]") > 0 Then
                 'Fin
-                fin = True
+                Fin = True
                 'Ver numero registros
             Else
                 'Mandamos la linea a ejecutar
@@ -6484,25 +6476,25 @@ Dim Clientes As Boolean
                 i = i + 1
                 
             End If
-        Loop Until fin
+        Loop Until Fin
     End If
     
     
     
     
     'FACTURAS
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     CadenaDesdeOtroForm = "FACTURAS"
     Label40.Caption = CadenaDesdeOtroForm
     Label40.Refresh
     Line Input #NE, SQL   'FACTS
     i = 0
-    fin = False
+    Fin = False
     Do
         Line Input #NE, SQL   'FIN OPCION
         If InStr(1, SQL, "[/FACT") > 0 Then
             'Fin
-            fin = True
+            Fin = True
             'Ver numero registros
             Ok = InStr(1, SQL, "]")
             Ok = Val(Mid(SQL, Ok + 1))
@@ -6512,7 +6504,7 @@ Dim Clientes As Boolean
             ProcesarLineaFactura Clientes
             i = i + 1
         End If
-    Loop Until fin
+    Loop Until Fin
     Label40.Caption = "Actualizando datos"
     Me.Refresh
     espera 1
@@ -6531,7 +6523,7 @@ EIM:
     If i = 0 Then
         If Me.chkImportarFacturas.Value = 1 Then Kill Text8.Text
     End If
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -6588,9 +6580,9 @@ Dim Aux As String
         Aux = "Select * from cabfactprov WHERE "
         Aux = Aux & " anofacpr = " & Año & " and numregis =" & numero
     End If
-    Rs.Open Aux, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Aux, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     J = 1
-    If Not Rs.EOF Then
+    If Not RS.EOF Then
         J = 2
         'Borro las lineas
         If Clientes Then
@@ -6602,7 +6594,7 @@ Dim Aux As String
         End If
         Conn.Execute Aux
     End If
-    Rs.Close
+    RS.Close
     
     Aux = RecuperaValor(SQL, CInt(J))
     Conn.Execute Aux
@@ -6710,16 +6702,16 @@ End Function
 
 
 Private Sub cargarObservacionesCuenta()
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     SQL = "select codmacta,nommacta,obsdatos from cuentas where codmacta = '" & Parametros & "'"
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        SQL = Rs!codmacta & "|" & Rs!nommacta & "|" & DBMemo(Rs!obsdatos) & "|"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        SQL = RS!codmacta & "|" & RS!Nommacta & "|" & DBMemo(RS!obsdatos) & "|"
     Else
         SQL = "Err|ERROR  LEYENDO DATOS CUENTAS | ****  ERROR ****|"
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     For i = 1 To 3
         Text1(i + 3).Text = RecuperaValor(SQL, i)
     Next i
@@ -6729,18 +6721,18 @@ End Sub
 Private Sub cargaempresasbloquedas()
 Dim IT As ListItem
     On Error GoTo Ecargaempresasbloquedas
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     SQL = "select empresasariconta.codempre,nomempre,nomresum,usuarioempresasariconta.codempre bloqueada from usuarios.empresasariconta left join usuarios.usuarioempresasariconta on "
     SQL = SQL & " empresasariconta.codempre = usuarioempresasariconta.codempre And (usuarioempresasariconta.codusu = " & Parametros & " Or codusu Is Null)"
     '[Monica] solo ariconta
     SQL = SQL & " WHERE conta like 'ariconta%' "
     SQL = SQL & " ORDER BY empresasariconta.codempre"
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-        Errores = Format(Rs!codempre, "00000")
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
+        Errores = Format(RS!codempre, "00000")
         SQL = "C" & Errores
         
-        If IsNull(Rs!bloqueada) Then
+        If IsNull(RS!bloqueada) Then
             'Va al list de la derecha
             Set IT = ListView2(0).ListItems.Add(, SQL)
             IT.SmallIcon = 1
@@ -6749,18 +6741,18 @@ Dim IT As ListItem
             IT.SmallIcon = 2
         End If
         IT.Text = Errores
-        IT.SubItems(1) = Rs!nomempre
-        Rs.MoveNext
+        IT.SubItems(1) = RS!nomempre
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Errores = ""
     Exit Sub
 Ecargaempresasbloquedas:
     MuestraError Err.Number, Err.Description
     Me.cmdBloqEmpre(0).Enabled = False
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -6785,7 +6777,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
     On Error GoTo ECargaIconosVisibles
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     SQL = "select menus.codigo, menus.imagen, menus.descripcion, menus_usuarios.posx, menus_usuarios.posy, menus_usuarios.vericono "
     SQL = SQL & " from menus inner join menus_usuarios on menus.codigo = menus_usuarios.codigo and menus.aplicacion = menus_usuarios.aplicacion"
@@ -6794,8 +6786,8 @@ Dim TotalArray  As Long
     SQL = SQL & " and menus_usuarios.ver = 1 "
     SQL = SQL & " ORDER BY menus.codigo "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ListView6.SmallIcons = frmPpal.ImageListPpal16
     
@@ -6810,18 +6802,18 @@ Dim TotalArray  As Long
     
     
     TotalArray = 0
-    While Not Rs.EOF
+    While Not RS.EOF
         Set IT = ListView6.ListItems.Add
         
-        IT.SmallIcon = DBLet(Rs!imagen, "N")
+        IT.SmallIcon = DBLet(RS!imagen, "N")
         
-        IT.Text = Format(DBLet(Rs!Codigo, "N"), "000000")
-        IT.SubItems(1) = DBLet(Rs!Descripcion, "T")
-        If DBLet(Rs!vericono, "N") <> 0 Then
+        IT.Text = Format(DBLet(RS!Codigo, "N"), "000000")
+        IT.SubItems(1) = DBLet(RS!Descripcion, "T")
+        If DBLet(RS!vericono, "N") <> 0 Then
             IT.Checked = True
             IT.SubItems(2) = 1
-            IT.SubItems(3) = Rs!PosX
-            IT.SubItems(4) = Rs!PosY
+            IT.SubItems(3) = RS!PosX
+            IT.SubItems(4) = RS!PosY
         Else
            
             IT.SubItems(2) = 0
@@ -6832,21 +6824,21 @@ Dim TotalArray  As Long
         
         
         
-        Rs.MoveNext
+        RS.MoveNext
         TotalArray = TotalArray + 1
         If TotalArray > 300 Then
             TotalArray = 0
             DoEvents
         End If
     Wend
-    Rs.Close
+    RS.Close
     Exit Sub
     
 ECargaIconosVisibles:
     MuestraError Err.Number, Err.Description
     Me.cmdBloqEmpre(0).Enabled = False
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -6855,12 +6847,12 @@ Dim IT As ListItem
 Dim TotalArray  As Long
     On Error GoTo ECargaInformeBBDD
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     SQL = "select * from tmpinfbbdd where codusu = " & vUsu.Codigo & " order by posicion "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
     ListView3.ColumnHeaders.Clear
@@ -6874,31 +6866,31 @@ Dim TotalArray  As Long
     
     
     TotalArray = 0
-    While Not Rs.EOF
+    While Not RS.EOF
         Set IT = ListView3.ListItems.Add
         
-        IT.Text = UCase(DBLet(Rs!Concepto, "T"))
+        IT.Text = UCase(DBLet(RS!Concepto, "T"))
         
-        If DBLet(Rs!posicion, "N") > 2 Then
-            IT.SubItems(1) = Format(DBLet(Rs!nactual, "N"), "###,###,###,##0")
-            IT.SubItems(2) = Format(DBLet(Rs!Poractual, "N"), "##0.00") & "%"
-            IT.SubItems(3) = Format(DBLet(Rs!nsiguiente, "N"), "###,###,###,##0")
-            IT.SubItems(4) = Format(DBLet(Rs!Porsiguiente, "N"), "##0.00") & "%"
+        If DBLet(RS!posicion, "N") > 2 Then
+            IT.SubItems(1) = Format(DBLet(RS!nactual, "N"), "###,###,###,##0")
+            IT.SubItems(2) = Format(DBLet(RS!Poractual, "N"), "##0.00") & "%"
+            IT.SubItems(3) = Format(DBLet(RS!nsiguiente, "N"), "###,###,###,##0")
+            IT.SubItems(4) = Format(DBLet(RS!Porsiguiente, "N"), "##0.00") & "%"
         Else
-            IT.SubItems(1) = Format(DBLet(Rs!nactual, "N"), "###,###,###,##0")
-            IT.SubItems(3) = Format(DBLet(Rs!nsiguiente, "N"), "###,###,###,##0")
+            IT.SubItems(1) = Format(DBLet(RS!nactual, "N"), "###,###,###,##0")
+            IT.SubItems(3) = Format(DBLet(RS!nsiguiente, "N"), "###,###,###,##0")
         End If
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
+    RS.Close
     Exit Sub
     
 ECargaInformeBBDD:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -6912,7 +6904,7 @@ Dim Equipo As String
 
     On Error GoTo ECargaShowProcessList
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     ListView4.ColumnHeaders.Clear
     
@@ -6922,7 +6914,7 @@ Dim Equipo As String
     ListView4.ColumnHeaders.Add , , "Tiempo espera", 3050.2522, 1
     
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     SERVER = Mid(Conn.ConnectionString, InStr(LCase(Conn.ConnectionString), "server=") + 7)
     SERVER = Mid(SERVER, 1, InStr(1, SERVER, ";"))
@@ -6930,13 +6922,13 @@ Dim Equipo As String
     EquipoConBD = (UCase(vUsu.PC) = UCase(SERVER)) Or (LCase(SERVER) = "localhost")
     
     Cad = "show full processlist"
-    Rs.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
-        If Not IsNull(Rs.Fields(3)) Then
-            If InStr(1, Rs.Fields(3), "ariconta") <> 0 Then
-                If UCase(Rs.Fields(3)) = UCase(vUsu.CadenaConexion) Then
-                    Equipo = Rs.Fields(2)
+    While Not RS.EOF
+        If Not IsNull(RS.Fields(3)) Then
+            If InStr(1, RS.Fields(3), "ariconta") <> 0 Then
+                If UCase(RS.Fields(3)) = UCase(vUsu.CadenaConexion) Then
+                    Equipo = RS.Fields(2)
                     'Primero quitamos los dos puntos del puerto
                     NumRegElim = InStr(1, Equipo, ":")
                     If NumRegElim > 0 Then Equipo = Mid(Equipo, 1, NumRegElim - 1)
@@ -6950,31 +6942,31 @@ Dim Equipo As String
                     
                     Set IT = ListView4.ListItems.Add
                     
-                    IT.Text = Rs.Fields(0)
-                    IT.SubItems(1) = Rs.Fields(1)
+                    IT.Text = RS.Fields(0)
+                    IT.SubItems(1) = RS.Fields(1)
                     IT.SubItems(2) = Equipo
                     
                     'tiempo de espera
                     Dim FechaAnt As Date
-                    FechaAnt = DateAdd("s", Rs.Fields(5), Now)
+                    FechaAnt = DateAdd("s", RS.Fields(5), Now)
                     IT.SubItems(3) = Format((Now - FechaAnt), "hh:mm:ss")
                 End If
             End If
         End If
         
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     NumRegElim = 0
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
     
 ECargaShowProcessList:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -6989,7 +6981,7 @@ Dim Equipo As String
 
     On Error GoTo ECargaCobrosFactura
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     ListView5.ColumnHeaders.Clear
     
@@ -7002,7 +6994,7 @@ Dim Equipo As String
     ListView5.ColumnHeaders.Add , , "Imp.Pagado", 1550.2522, 1
     ListView5.ColumnHeaders.Add , , "Pendiente", 1550.2522, 1
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     ListView5.SmallIcons = frmPpal.imgListComun
     
@@ -7013,36 +7005,36 @@ Dim Equipo As String
     Cad = Cad & " and cobros.fecfactu = " & DBSet(RecuperaValor(Parametros, 3), "F")
     Cad = Cad & " order by numorden "
     
-    Rs.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
+    While Not RS.EOF
                     
         Set IT = ListView5.ListItems.Add
         
-        If DBLet(Rs!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
+        If DBLet(RS!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
         
-        IT.Text = DBLet(Rs.Fields(0))
-        IT.SubItems(1) = DBLet(Rs.Fields(1))
-        IT.SubItems(2) = DBLet(Rs.Fields(2))
-        IT.SubItems(3) = Format(DBLet(Rs.Fields(3)), "###,###,##0.00")
-        IT.SubItems(4) = Format(DBLet(Rs.Fields(4)), "###,###,##0.00")
-        IT.SubItems(5) = DBLet(Rs.Fields(5))
-        IT.SubItems(6) = Format(DBLet(Rs.Fields(6)), "###,###,##0.00")
-        IT.SubItems(7) = Format(DBLet(Rs.Fields(7)), "###,###,##0.00")
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        IT.SubItems(3) = Format(DBLet(RS.Fields(3)), "###,###,##0.00")
+        IT.SubItems(4) = Format(DBLet(RS.Fields(4)), "###,###,##0.00")
+        IT.SubItems(5) = DBLet(RS.Fields(5))
+        IT.SubItems(6) = Format(DBLet(RS.Fields(6)), "###,###,##0.00")
+        IT.SubItems(7) = Format(DBLet(RS.Fields(7)), "###,###,##0.00")
         
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     NumRegElim = 0
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
     
 ECargaCobrosFactura:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -7057,7 +7049,7 @@ Dim Equipo As String
 
     On Error GoTo ECargaPagosFactura
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     ListView5.ColumnHeaders.Clear
     
@@ -7069,7 +7061,7 @@ Dim Equipo As String
     ListView5.ColumnHeaders.Add , , "Imp.Pagado", 1550.2522, 1
     ListView5.ColumnHeaders.Add , , "Pendiente", 1550.2522, 1
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     ListView5.SmallIcons = frmPpal.imgListComun
     
@@ -7081,35 +7073,35 @@ Dim Equipo As String
     Cad = Cad & " and pagos.fecfactu = " & DBSet(RecuperaValor(Parametros, 4), "F")
     Cad = Cad & " order by numorden "
     
-    Rs.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
+    While Not RS.EOF
                     
         Set IT = ListView5.ListItems.Add
         
-        If DBLet(Rs!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
+        If DBLet(RS!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
         
-        IT.Text = DBLet(Rs.Fields(0))
-        IT.SubItems(1) = DBLet(Rs.Fields(1))
-        IT.SubItems(2) = DBLet(Rs.Fields(2))
-        IT.SubItems(3) = Format(DBLet(Rs.Fields(3)), "###,###,##0.00")
-        IT.SubItems(4) = DBLet(Rs.Fields(4))
-        IT.SubItems(5) = Format(DBLet(Rs.Fields(5)), "###,###,##0.00")
-        IT.SubItems(6) = Format(DBLet(Rs.Fields(6)), "###,###,##0.00")
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        IT.SubItems(3) = Format(DBLet(RS.Fields(3)), "###,###,##0.00")
+        IT.SubItems(4) = DBLet(RS.Fields(4))
+        IT.SubItems(5) = Format(DBLet(RS.Fields(5)), "###,###,##0.00")
+        IT.SubItems(6) = Format(DBLet(RS.Fields(6)), "###,###,##0.00")
         
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     NumRegElim = 0
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
     
 ECargaPagosFactura:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -7137,7 +7129,7 @@ Dim Pos As Long
     ListView7.ColumnHeaders.Add , , "Haber", 2050.2522, 1
     ListView7.ColumnHeaders.Add , , "Saldo", 2050.2522, 1
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     
     Pos = DevuelveValor("select max(pos) from tmpconext where codusu = " & DBSet(vUsu.Codigo, "N"))
@@ -7149,30 +7141,30 @@ Dim Pos As Long
     Cad = Cad & " where tmpconext.codusu = " & DBSet(vUsu.Codigo, "N")
     Cad = Cad & " order by pos "
     
-    Rs.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
+    While Not RS.EOF
                     
         Set IT = ListView7.ListItems.Add
         
         
-        IT.Text = DBLet(Rs.Fields(0))
-        IT.SubItems(1) = DBLet(Rs.Fields(1))
-        If DBLet(Rs.Fields(2)) <> 0 Then
-            IT.SubItems(2) = Format(DBLet(Rs.Fields(2)), "###,###,##0.00")
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        If DBLet(RS.Fields(2)) <> 0 Then
+            IT.SubItems(2) = Format(DBLet(RS.Fields(2)), "###,###,##0.00")
         Else
             IT.SubItems(2) = ""
         End If
-        If DBLet(Rs.Fields(3)) <> 0 Then
-            IT.SubItems(3) = Format(DBLet(Rs.Fields(3)), "###,###,##0.00")
+        If DBLet(RS.Fields(3)) <> 0 Then
+            IT.SubItems(3) = Format(DBLet(RS.Fields(3)), "###,###,##0.00")
         Else
             IT.SubItems(3) = ""
         End If
         
         ' si no estamos en la última línea mostramos el saldo de la cuenta
-        If DBLet(Rs.Fields(5)) <> Pos Then
-            If DBLet(Rs.Fields(4)) <> 0 Then
-                IT.SubItems(4) = Format(DBLet(Rs.Fields(4)), "###,###,##0.00")
+        If DBLet(RS.Fields(5)) <> Pos Then
+            If DBLet(RS.Fields(4)) <> 0 Then
+                IT.SubItems(4) = Format(DBLet(RS.Fields(4)), "###,###,##0.00")
             Else
                 IT.SubItems(4) = ""
             End If
@@ -7181,7 +7173,7 @@ Dim Pos As Long
             
         End If
         
-        If DBLet(Rs.Fields(5)) = Pos Then
+        If DBLet(RS.Fields(5)) = Pos Then
             IT.Bold = True
             IT.ListSubItems(1).Bold = True
             IT.ListSubItems(2).Bold = True
@@ -7190,18 +7182,18 @@ Dim Pos As Long
         End If
         
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     NumRegElim = 0
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
     
 ECargarAsiento:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -7227,7 +7219,7 @@ Dim Pos As Long
     ListView8.ColumnHeaders.Add , , "Debe", 2050.2522, 1
     ListView8.ColumnHeaders.Add , , "Haber", 2050.2522, 1
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     
     Cad = "select tmphistoapu.numdiari, tmphistoapu.numasien, tmphistoapu.fechaent, tmphistoapu.timported, tmphistoapu.timporteh, tmphistoapu.timported - tmphistoapu.timporteh "
@@ -7235,41 +7227,41 @@ Dim Pos As Long
     Cad = Cad & " where tmphistoapu.codusu = " & DBSet(vUsu.Codigo, "N")
     Cad = Cad & " order by numdiari, numasien, fechaent "
     
-    Rs.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
+    While Not RS.EOF
                     
         Set IT = ListView8.ListItems.Add
         
         
-        IT.Text = DBLet(Rs.Fields(0))
-        IT.SubItems(1) = DBLet(Rs.Fields(1))
-        IT.SubItems(2) = DBLet(Rs.Fields(2))
-        If DBLet(Rs.Fields(3)) <> 0 Then
-            IT.SubItems(3) = Format(DBLet(Rs.Fields(3)), "###,###,##0.00")
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        If DBLet(RS.Fields(3)) <> 0 Then
+            IT.SubItems(3) = Format(DBLet(RS.Fields(3)), "###,###,##0.00")
         Else
             IT.SubItems(3) = ""
         End If
-        If DBLet(Rs.Fields(4)) <> 0 Then
-            IT.SubItems(4) = Format(DBLet(Rs.Fields(4)), "###,###,##0.00")
+        If DBLet(RS.Fields(4)) <> 0 Then
+            IT.SubItems(4) = Format(DBLet(RS.Fields(4)), "###,###,##0.00")
         Else
             IT.SubItems(4) = ""
         End If
         
         
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     NumRegElim = 0
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
     
 ECargarAsiento:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -7296,42 +7288,42 @@ Dim Pos As Long
     ListView8.ColumnHeaders.Add , , "Fecha", 1500.2522
     ListView8.ColumnHeaders.Add , , "Total", 2000.2522, 1
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     Cad = "select tmpfaclin.numserie, tmpfaclin.nomserie, tmpfaclin.numfac, tmpfaclin.fecha, tmpfaclin.total "
     Cad = Cad & " from tmpfaclin "
     Cad = Cad & " where tmpfaclin.codusu = " & DBSet(vUsu.Codigo, "N")
     Cad = Cad & " order by numserie, numfac, fecha "
     
-    Rs.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     Cad = ""
-    While Not Rs.EOF
+    While Not RS.EOF
                     
         Set IT = ListView8.ListItems.Add
         
-        IT.Text = DBLet(Rs.Fields(0))
-        IT.SubItems(1) = DBLet(Rs.Fields(1))
-        IT.SubItems(2) = DBLet(Rs.Fields(2))
-        IT.SubItems(3) = DBLet(Rs.Fields(3))
-        If DBLet(Rs.Fields(4)) <> 0 Then
-            IT.SubItems(4) = Format(DBLet(Rs.Fields(4)), "###,###,##0.00")
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        IT.SubItems(3) = DBLet(RS.Fields(3))
+        If DBLet(RS.Fields(4)) <> 0 Then
+            IT.SubItems(4) = Format(DBLet(RS.Fields(4)), "###,###,##0.00")
         Else
             IT.SubItems(4) = ""
         End If
         
         'Siguiente
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     NumRegElim = 0
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
     
 ECargarAsiento:
     MuestraError Err.Number, Err.Description
     Errores = ""
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 

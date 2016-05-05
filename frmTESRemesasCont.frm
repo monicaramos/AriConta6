@@ -219,7 +219,7 @@ Attribute frmP.VB_VarHelpID = -1
 
 Dim RS As ADODB.Recordset
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 Dim IT As ListItem  'Comun
 Dim PrimeraVez As Boolean
 Dim Cancelado As Boolean
@@ -330,7 +330,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
     While Not miRsAux.EOF
-        SQL = SQL & miRsAux!codmacta & Space(10) & miRsAux!FecBloq & Space(10) & miRsAux!Nomclien & vbCrLf
+        SQL = SQL & miRsAux!codmacta & Space(10) & miRsAux!FecBloq & Space(10) & miRsAux!nomclien & vbCrLf
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -456,6 +456,10 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             Conn.CommitTrans
             'AQUI updateamos el registro pq es una tabla myisam
             'y no debemos meterla en la transaccion
+            
+            HaHabidoCambios = True
+            
+            
             SQL = "UPDATE remesas SET"
             SQL = SQL & " situacion= 'Q'"
             SQL = SQL & " WHERE codigo=" & RS!Codigo
@@ -707,7 +711,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
 Dim W As Integer
     Limpiar Me
     PrimeraVez = True
@@ -778,15 +782,15 @@ Dim W As Integer
         
         
         W = FrameContabilRem2.Width
-        h = FrameContabilRem2.Height
+        H = FrameContabilRem2.Height
     End Select
     
     
-    Me.Height = h + 360
+    Me.Height = H + 360
     Me.Width = W + 90
     
-    h = Opcion
-    Me.cmdCancelar(h).Cancel = True
+    H = Opcion
+    Me.cmdCancelar(H).Cancel = True
     
 End Sub
 
@@ -812,13 +816,13 @@ Private Sub Image1_Click(Index As Integer)
     Image1(10).Tag = Index
     frmC.Show vbModal
     Set frmC = Nothing
-    If Text1(Index).Text <> "" Then Ponerfoco Text1(Index)
+    If Text1(Index).Text <> "" Then PonerFoco Text1(Index)
 End Sub
 
 
-Private Sub Ponerfoco(ByRef O As Object)
+Private Sub PonerFoco(ByRef o As Object)
     On Error Resume Next
-    O.SetFocus
+    o.SetFocus
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -855,7 +859,7 @@ Private Sub Text1_LostFocus(Index As Integer)
     If Not EsFechaOK(Text1(Index)) Then
         MsgBox "Fecha incorrecta: " & Text1(Index).Text, vbExclamation
         Text1(Index).Text = ""
-        Ponerfoco Text1(Index)
+        PonerFoco Text1(Index)
     End If
     
 End Sub
@@ -933,15 +937,15 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         CuentasCC = ""
         CualesEliminar = ""
         J = 0
-        For I = 0 To 1
+        For i = 0 To 1
             ' contatalonpte
             SQL = "pagarecta"
-            If I = 1 Then SQL = "contatalonpte"
+            If i = 1 Then SQL = "contatalonpte"
             CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
             
             'Repetiremos el proceso dos veces
             SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            SQL = SQL & " AND   talon = " & I
+            SQL = SQL & " AND   talon = " & i
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                     'Si lleva cta puente habra que ver si esta contbilizada
@@ -978,7 +982,7 @@ On Error GoTo EEliminarEnRecepcionDocumentos
             
             
             
-        Next I
+        Next i
         
         
 
@@ -1000,12 +1004,12 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         J = 1
         SQL = "X"
         Do
-            I = InStr(J, CualesEliminar, ",")
-            If I > 0 Then
-                J = I + 1
+            i = InStr(J, CualesEliminar, ",")
+            If i > 0 Then
+                J = i + 1
                 SQL = SQL & "X"
             End If
-        Loop Until I = 0
+        Loop Until i = 0
         
         SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
         If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
@@ -1028,28 +1032,28 @@ End Sub
 
 
 Private Function ComprobacionFechasRemesaN19PorVto() As String
-Dim AUX As String
+Dim Aux As String
 
     ComprobacionFechasRemesaN19PorVto = ""
-    AUX = "anyorem = " & RS!Anyo & " AND codrem "
-    AUX = DevuelveDesdeBD("min(fecvenci)", "cobros", AUX, RS!Codigo)
-    If AUX = "" Then
+    Aux = "anyorem = " & RS!Anyo & " AND codrem "
+    Aux = DevuelveDesdeBD("min(fecvenci)", "cobros", Aux, RS!Codigo)
+    If Aux = "" Then
         ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
     Else
-        If CDate(AUX) < vParam.fechaini Then
+        If CDate(Aux) < vParam.fechaini Then
             ComprobacionFechasRemesaN19PorVto = "Vtos con fecha menor que inicio de ejercicio"
         End If
     End If
     If ComprobacionFechasRemesaN19PorVto <> "" Then Exit Function
     
     ComprobacionFechasRemesaN19PorVto = ""
-    AUX = "anyorem = " & RS!Anyo & " AND codrem "
-    AUX = DevuelveDesdeBD("max(fecvenci)", "cobros", AUX, RS!Codigo)
-    If AUX = "" Then
+    Aux = "anyorem = " & RS!Anyo & " AND codrem "
+    Aux = DevuelveDesdeBD("max(fecvenci)", "cobros", Aux, RS!Codigo)
+    If Aux = "" Then
         ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
         Exit Function
     End If
-    If CDate(AUX) > DateAdd("yyyy", 1, vParam.fechafin) Then ComprobacionFechasRemesaN19PorVto = "Vtos con fecha mayor que fin de ejercicio"
+    If CDate(Aux) > DateAdd("yyyy", 1, vParam.fechafin) Then ComprobacionFechasRemesaN19PorVto = "Vtos con fecha mayor que fin de ejercicio"
     
     
     

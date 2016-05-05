@@ -120,6 +120,9 @@ Public XAnt As Currency
 Public YAnt As Currency
 
 
+Public HaHabidoCambios As Boolean
+
+
     'Para los asientos k vemos desde la consulta de extractos
     '  0.- NADA
     '  1.- SIIII
