@@ -357,7 +357,7 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 Print #NFic, "      </DbtrAgt>"
                 Print #NFic, "      <Dbtr>"
                 
-                Print #NFic, "         <Nm>" & XML(miRsAux!Nomclien) & "</Nm>"
+                Print #NFic, "         <Nm>" & XML(miRsAux!nomclien) & "</Nm>"
                 Print #NFic, "         <PstlAdr>"
                 
                 SQL = "ES"
@@ -425,7 +425,7 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 Print #NFic, "      <RmtInf>"
                 
                 SQL = Trim(DBLet(miRsAux!text33csb, "T") & " " & FrmtStr(DBLet(miRsAux!text41csb, "T"), 60))
-                If SQL = "" Then SQL = miRsAux!Nomclien
+                If SQL = "" Then SQL = miRsAux!nomclien
                 Print #NFic, "         <Ustrd>" & XML(SQL) & "</Ustrd>"
                 Print #NFic, "      </RmtInf>"
                 Print #NFic, "   </DrctDbtTxInf>"
@@ -894,14 +894,14 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
             '           FrmtStr(miRsAux!codmacta, 10) & FrmtStr(miRsAux!NUmSerie, 3) & Format(miRsAux!codfaccl, "00000000")
             '           Format(miRsAux!fecfaccl, "yyyymmdd") & Format(miRsAux!numorden, "000")
             
-            SQL = "Select codrem,anyorem,siturem from scobro where fecfaccl='" & Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2)
-            SQL = SQL & "' AND numserie = '" & Trim(Mid(AUX2, 11, 3)) & "' AND codfaccl = " & Val(Mid(AUX2, 14, 8)) & " AND numorden=" & Mid(AUX2, 30, 3)
+            SQL = "Select codrem,anyorem,siturem from cobros where fecfactu='" & Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2)
+            SQL = SQL & "' AND numserie = '" & Trim(Mid(AUX2, 11, 3)) & "' AND numfactu = " & Val(Mid(AUX2, 14, 8)) & " AND numorden=" & Mid(AUX2, 30, 3)
 
             miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             SQL = Mid(SQL, InStr(1, UCase(SQL), " WHERE ") + 7)
-            SQL = Replace(SQL, "fecfaccl", "F.Fac:")
+            SQL = Replace(SQL, "fecfactu", "F.Fac:")
             SQL = Replace(SQL, "numserie", "Serie:")
-            SQL = Replace(SQL, "codfaccl", "NºFac:")
+            SQL = Replace(SQL, "numfactu", "NºFac:")
             SQL = Replace(SQL, "numorden", "Ord:")
             SQL = Replace(SQL, "AND", ""): SQL = Replace(SQL, "=", "")
             SQL = "Vto no encontrado: " & Mid(SQL, InStr(1, UCase(SQL), " WHERE ") + 7)

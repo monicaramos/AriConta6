@@ -1791,21 +1791,21 @@ Dim EsFormatoAntiguoDevolucion As Boolean
                                 'Los vtos vienen en estas lineas
                                 Cuantos = Cuantos + 1
                                 Registro = Mid(Registro, 99, 17)
-                                SQL = "Select codrem,anyorem,siturem from scobro where fecfaccl='20" & Mid(Registro, 5, 2) & "-" & Mid(Registro, 3, 2) & "-" & Mid(Registro, 1, 2)
+                                SQL = "Select codrem,anyorem,siturem from cobros where fecfactu='20" & Mid(Registro, 5, 2) & "-" & Mid(Registro, 3, 2) & "-" & Mid(Registro, 1, 2)
                                 AUX2 = SQL
                                 
                                 'Problemas en alzira
                                 'If Not IsNumeric(Mid(Registro, 17, 1)) Then
                                 'Sept 2013
                                 If Not EsFormatoAntiguoDevolucion Then
-                                    SQL = SQL & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND codfaccl = " & Val(Mid(Registro, 9, 7)) & " AND numorden=" & Mid(Registro, 16, 1)
+                                    SQL = SQL & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND numfactu = " & Val(Mid(Registro, 9, 7)) & " AND numorden=" & Mid(Registro, 16, 1)
                                     'Problema en herbelca. El numero de vto NO viene con la factura
-                                    AUX2 = AUX2 & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND codfaccl = " & Val(Mid(Registro, 9, 8))
+                                    AUX2 = AUX2 & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND numfactu = " & Val(Mid(Registro, 9, 8))
                                     
                                 Else
                                     'El vencimiento si que es el 17
-                                    SQL = SQL & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND codfaccl = " & Val(Mid(Registro, 10, 7)) & " AND numorden=" & Mid(Registro, 17, 1)
-                                    AUX2 = AUX2 & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND codfaccl = " & Val(Mid(Registro, 10, 8))
+                                    SQL = SQL & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND numfactu = " & Val(Mid(Registro, 10, 7)) & " AND numorden=" & Mid(Registro, 17, 1)
+                                    AUX2 = AUX2 & "' AND numserie like '" & Trim(Mid(Registro, 7, 1)) & "%' AND numfactu = " & Val(Mid(Registro, 10, 8))
                                     
                                 End If
                                 
@@ -2503,7 +2503,7 @@ End Sub
 'ConceptoTransferencia
 '1.- Abono nomina
 '9.- Transferencia ordinaria
-Private Sub Linea1(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Importe1 As Currency, ByRef Cad As String, vConceptoTransferencia As String)
+Private Sub Linea1(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Importe1 As Currency, ByRef Cad As String, vConceptoTransferencia As String)
 
 
    
@@ -2512,36 +2512,36 @@ Private Sub Linea1(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Re
     Cad = Cad & "010"
     Cad = Cad & RellenaAceros(CStr(Round(Importe1, 2) * 100), False, 12)
     
-    Cad = Cad & RellenaAceros(CStr(Rs1!Entidad), False, 4)     'Entidad
-    Cad = Cad & RellenaAceros(CStr(Rs1!Oficina), False, 4)   'Sucur
-    Cad = Cad & RellenaAceros(CStr(Rs1!Cuentaba), False, 10)  'Cta
+    Cad = Cad & RellenaAceros(CStr(RS1!Entidad), False, 4)     'Entidad
+    Cad = Cad & RellenaAceros(CStr(RS1!Oficina), False, 4)   'Sucur
+    Cad = Cad & RellenaAceros(CStr(RS1!Cuentaba), False, 10)  'Cta
     Cad = Cad & "1" & vConceptoTransferencia
     Cad = Cad & "  "
-    Cad = Cad & RellenaAceros(CStr(Rs1!CC), False, 2)  'CC
+    Cad = Cad & RellenaAceros(CStr(RS1!CC), False, 2)  'CC
     Cad = RellenaABlancos(Cad, True, 72)
     Print #NF, Cad
 End Sub
 
 
-Private Sub Linea2(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea2(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "011"
-    Cad = Cad & RellenaABlancos(Rs1!Nommacta, False, 36)
+    Cad = Cad & RellenaABlancos(RS1!Nommacta, False, 36)
     Cad = RellenaABlancos(Cad, True, 72)
     Print #NF, Cad
 End Sub
 
 
-Private Sub Linea3(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea3(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "012"
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!dirdatos, "T"), False, 36)
+    Cad = Cad & RellenaABlancos(DBLet(RS1!dirdatos, "T"), False, 36)
     Cad = RellenaABlancos(Cad, True, 72)
     Print #NF, Cad
 End Sub
 
 
-Private Sub Linea4(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea4(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "013"
     Cad = RellenaABlancos(Cad, True, 72)
@@ -2549,23 +2549,23 @@ Private Sub Linea4(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Re
 End Sub
 
 
-Private Sub Linea5(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea5(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "014"
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!codposta, "T"), False, 5) & " "
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!desPobla, "T"), False, 30)
+    Cad = Cad & RellenaABlancos(DBLet(RS1!codposta, "T"), False, 5) & " "
+    Cad = Cad & RellenaABlancos(DBLet(RS1!desPobla, "T"), False, 30)
     Cad = RellenaABlancos(Cad, True, 72)
     Print #NF, Cad
 End Sub
 
 
-Private Sub Linea6(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String, ByRef ConceptoT As String, Pagos As Boolean)
+Private Sub Linea6(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String, ByRef ConceptoT As String, Pagos As Boolean)
 Dim Aux As String
 
     Aux = ConceptoT
     If Pagos Then
         'Tiene dos campos para las descripcion. Si no tiene nada pondre la descripcion de la transferencia
-        Aux = Trim(DBLet(Rs1!text1csb, "T"))
+        Aux = Trim(DBLet(RS1!text1csb, "T"))
         If Aux = "" Then Aux = ConceptoT
     End If
 
@@ -2577,12 +2577,12 @@ Dim Aux As String
 End Sub
 
 
-Private Sub Linea7(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea7(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
 
 
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "017"
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!text2csb, "T"), False, 35)
+    Cad = Cad & RellenaABlancos(DBLet(RS1!text2csb, "T"), False, 35)
     Cad = RellenaABlancos(Cad, True, 72)
     Print #NF, Cad
 End Sub
@@ -2776,13 +2776,13 @@ End Sub
 
 
 
-Private Sub Linea1_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea1_68(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "010"
-    If IsNull(Rs1!razosoci) Then
-        Cad = Cad & RellenaABlancos(Rs1!Nommacta, True, 40)
+    If IsNull(RS1!razosoci) Then
+        Cad = Cad & RellenaABlancos(RS1!Nommacta, True, 40)
     Else
-        Cad = Cad & RellenaABlancos(Rs1!razosoci, True, 40)
+        Cad = Cad & RellenaABlancos(RS1!razosoci, True, 40)
     End If
     Cad = RellenaABlancos(Cad, True, 100)
     Cad = Mid(Cad, 1, 100)
@@ -2790,10 +2790,10 @@ Private Sub Linea1_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB
 End Sub
 
 
-Private Sub Linea2_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea2_68(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "011"
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!dirdatos, "T"), True, 45)
+    Cad = Cad & RellenaABlancos(DBLet(RS1!dirdatos, "T"), True, 45)
     Cad = RellenaABlancos(Cad, True, 100)
     Cad = Mid(Cad, 1, 100)
     Print #NF, Cad
@@ -2803,24 +2803,24 @@ End Sub
 
 
 
-Private Sub Linea3_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea3_68(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "012"
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!codposta, "T"), True, 5) & " "
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!desPobla, "T"), True, 40)
+    Cad = Cad & RellenaABlancos(DBLet(RS1!codposta, "T"), True, 5) & " "
+    Cad = Cad & RellenaABlancos(DBLet(RS1!desPobla, "T"), True, 40)
     Cad = RellenaABlancos(Cad, True, 100)
     Cad = Mid(Cad, 1, 100)
     Print #NF, Cad
 End Sub
 
-Private Sub Linea4_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String)
+Private Sub Linea4_68(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "013"
     'De mommento pongo balancos, ya que es para extranjero
     'Cad = Cad & RellenaABlancos(DBLet(RS1!codposta, "T"), False, 5) & " "
     Cad = Cad & "     "
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!desProvi, "T"), True, 30)   'desprovi,pais
-    Cad = Cad & RellenaABlancos(DBLet(Rs1!PAIS, "T"), True, 20)   'desprovi,pais
+    Cad = Cad & RellenaABlancos(DBLet(RS1!desProvi, "T"), True, 30)   'desprovi,pais
+    Cad = Cad & RellenaABlancos(DBLet(RS1!PAIS, "T"), True, 20)   'desprovi,pais
     Cad = RellenaABlancos(Cad, True, 100)
     Cad = Mid(Cad, 1, 100)
     Print #NF, Cad
@@ -2829,7 +2829,7 @@ End Sub
 ' Febrero 2016.
 ' En la cabecera llevamos si queremos todos los pagos a una fecha o cada uno en su vencimiento
 ' con lo cual aqui siempre enviaremos el valor fecha que ya llevara uno u otro
-Private Sub Linea5_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Cad As String, ByRef Fechapag As Date, ByRef Importe1 As Currency)
+Private Sub Linea5_68(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String, ByRef Fechapag As Date, ByRef Importe1 As Currency)
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "014"
 
@@ -2847,7 +2847,7 @@ Private Sub Linea5_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB
 End Sub
 
 
-Private Sub Linea6_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB.Recordset, ByRef Importe1 As Currency, ByRef Cad As String, vConceptoTransferencia As String)
+Private Sub Linea6_68(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Importe1 As Currency, ByRef Cad As String, vConceptoTransferencia As String)
 
 
    
@@ -2855,8 +2855,8 @@ Private Sub Linea6_68(NF As Integer, ByRef CodOrde As String, ByRef Rs1 As ADODB
     Cad = CodOrde   'llevara tb la ID del socio
     Cad = Cad & "015"
     Cad = Cad & "00000000" 'Numero de pago domiciliado
-    Cad = Cad & RellenaABlancos(Rs1!NumFactu, False, 12)
-    Cad = Cad & Format(Rs1!FecFactu, "ddmmyyyy") 'fecha fac
+    Cad = Cad & RellenaABlancos(RS1!NumFactu, False, 12)
+    Cad = Cad & Format(RS1!FecFactu, "ddmmyyyy") 'fecha fac
 
     Cad = Cad & RellenaAceros(CStr(Round(Importe1, 2) * 100), False, 12)
     
@@ -4079,9 +4079,9 @@ Dim LinDelFichero As Collection
                                 Cuantos = Cuantos + 1
                                 Registro = Mid(Registro, 21, 35)
                                 'M  0330047820131201001
-                                SQL = "Select codrem,anyorem,siturem from scobro where fecfaccl='" & Mid(Registro, 12, 4) & "-" & Mid(Registro, 16, 2) & "-" & Mid(Registro, 18, 2)
+                                SQL = "Select codrem,anyorem,siturem from cobros where fecfactu='" & Mid(Registro, 12, 4) & "-" & Mid(Registro, 16, 2) & "-" & Mid(Registro, 18, 2)
                                 
-                                SQL = SQL & "' AND numserie = '" & Trim(Mid(Registro, 1, 3)) & "' AND codfaccl = " & Val(Mid(Registro, 4, 8)) & " AND numorden=" & Mid(Registro, 20, 3)
+                                SQL = SQL & "' AND numserie = '" & Trim(Mid(Registro, 1, 3)) & "' AND numfactu = " & Val(Mid(Registro, 4, 8)) & " AND numorden=" & Mid(Registro, 20, 3)
                                 
                                 
                                 miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText

@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016050312271438280RE10000012016</MsgId>
-   <CreDtTm>2016-05-03T12:27:14</CreDtTm>
-   <NbOfTxs>2</NbOfTxs>
-   <CtrlSum>1134.85</CtrlSum>
+<MsgId>PRE2016050614224884770RE10000052016</MsgId>
+   <CreDtTm>2016-05-06T14:22:48</CreDtTm>
+   <NbOfTxs>1</NbOfTxs>
+   <CtrlSum>11.00</CtrlSum>
    <InitgPty>
      <Nm>Ariadna Software, S.L.</Nm>
      <Id>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000012016 03/05/16B96470190</PmtInfId>
+   <PmtInfId>RE000052016 06/05/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-05-03</ReqdColltnDt>
+   <ReqdColltnDt>2016-05-06</ReqdColltnDt>
    <Cdtr>
       <Nm>Ariadna Software, S.L.</Nm>
       <PstlAdr>
@@ -63,9 +63,9 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000001 A  0000099920160427001   </EndToEndId>
+          <EndToEndId>430000001 A  0000595920650906001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">125.00</InstdAmt>
+      <InstdAmt Ccy="EUR">11.00</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
             <MndtId>F46026696</MndtId>
