@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016050614224884770RE10000052016</MsgId>
-   <CreDtTm>2016-05-06T14:22:48</CreDtTm>
+<MsgId>PRE2016050917460863670RE10000112016</MsgId>
+   <CreDtTm>2016-05-09T17:46:08</CreDtTm>
    <NbOfTxs>1</NbOfTxs>
-   <CtrlSum>11.00</CtrlSum>
+   <CtrlSum>303.10</CtrlSum>
    <InitgPty>
      <Nm>Ariadna Software, S.L.</Nm>
      <Id>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000052016 06/05/16B96470190</PmtInfId>
+   <PmtInfId>RE000112016 09/05/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-05-06</ReqdColltnDt>
+   <ReqdColltnDt>2016-05-09</ReqdColltnDt>
    <Cdtr>
       <Nm>Ariadna Software, S.L.</Nm>
       <PstlAdr>
@@ -63,9 +63,9 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000001 A  0000595920650906001   </EndToEndId>
+          <EndToEndId>430000001 A  0000000820160509001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">11.00</InstdAmt>
+      <InstdAmt Ccy="EUR">303.10</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
             <MndtId>F46026696</MndtId>
@@ -102,7 +102,7 @@
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+         <Ustrd>Factura A-0000008 de Fecha 09/05/2016</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
 </PmtInf>

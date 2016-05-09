@@ -3700,6 +3700,7 @@ Dim ImporteQueda As Currency
         End If
         miRsAux.Close
         
+        
         NumeroRemesa = NumeroRemesa + 1
     Else
         NumeroRemesa = lw1.SelectedItem.Text

@@ -903,10 +903,11 @@ Dim TipoFicheroDevolucion As Byte
         
         SQL = ""
         If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
+        SQL = SQL & " and siturem = 'Q'"
         SQL = Mid(SQL, 5)
         
         
-        SQL = "Select codrem,anyorem,NUmSerie,codfaccl,numorden from scobro where " & SQL
+        SQL = "Select codrem,anyorem,NUmSerie,numfactu,numorden from cobros where " & SQL
         RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RS.EOF Then
             SQL = "Ninguna pertence a ninguna remesa "
@@ -914,20 +915,20 @@ Dim TipoFicheroDevolucion As Byte
             RS.Close
             Exit Sub
         End If
-        Text3(5).Text = DBLet(RS!CodRem, "T")
-        Text3(6).Text = DBLet(RS!AnyoRem, "T")
-        CadenaVencimiento = RS!NUmSerie & "|" & RS!codfaccl & "|" & RS!numorden & "|"
+'        Text3(5).Text = DBLet(RS!CodRem, "T")
+'        Text3(6).Text = DBLet(RS!AnyoRem, "T")
+'        CadenaVencimiento = RS!NUmSerie & "|" & RS!NumFactu & "|" & RS!numorden & "|"
         RS.Close
         Set RS = Nothing
     End If
     
     
     SQL = ""
-    If Text3(5).Text = "" Or Text3(6).Text = "" Then
+    If (Text3(5).Text = "" Or Text3(6).Text = "") Then
         If Opcion = 9 Then
             SQL = "Ponga una remesa."
         Else
-            SQL = "ERROR leyendo remesa"
+'            SQL = "ERROR leyendo remesa"
         End If
     Else
         If Not IsNumeric(Text3(5).Text) Or Not IsNumeric(Text3(6).Text) Then SQL = "La remesa debe ser numérica"
@@ -1006,42 +1007,46 @@ Dim TipoFicheroDevolucion As Byte
         End If
     End If
     'Ahora miramos la remesa. En que sitaucion , y de que tipo es
-    SQL = "Select * from remesas where codigo =" & Text3(5).Text
-    SQL = SQL & " AND anyo =" & Text3(6).Text
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If RS.EOF Then
-        SQL = "Ninguna remesa con esos valores."
-        If Opcion = 16 Then SQL = SQL & "  Remesa: " & Text3(5).Text & " / " & Text3(6).Text
-        MsgBox SQL, vbExclamation
-        RS.Close
-        Set RS = Nothing
-        Exit Sub
+    
+    If Opcion = 9 Then
+    
+        SQL = "Select * from remesas where codigo =" & Text3(5).Text
+        SQL = SQL & " AND anyo =" & Text3(6).Text
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If RS.EOF Then
+            SQL = "Ninguna remesa con esos valores."
+            If Opcion = 16 Then SQL = SQL & "  Remesa: " & Text3(5).Text & " / " & Text3(6).Text
+            MsgBox SQL, vbExclamation
+            RS.Close
+            Set RS = Nothing
+            Exit Sub
+        End If
+        
+        
+        'Tiene valor
+        If RS!Situacion = "A" Then
+            MsgBox "Remesa abierta. Sin llevar al banco.", vbExclamation
+            RS.Close
+            Set RS = Nothing
+            Exit Sub
+        End If
+        
+        
+        
+        If Asc(RS!Situacion) < Asc("Q") Then
+            MsgBox "Remesa sin contabilizar.", vbExclamation
+            RS.Close
+            Set RS = Nothing
+            Exit Sub
+        End If
+        
+        
+    
+        SQL = RS!Codigo & "|" & RS!Anyo & "|" & RS!codmacta & "|" & Text1(11).Text & "|"
+    Else
+        SQL = "|||" & Text1(11).Text & "|"
     End If
-    
-    
-    'Tiene valor
-    If RS!Situacion = "A" Then
-        MsgBox "Remesa abierta. Sin llevar al banco.", vbExclamation
-        RS.Close
-        Set RS = Nothing
-        Exit Sub
-    End If
-    
-    
-    
-    If Asc(RS!Situacion) < Asc("Q") Then
-        MsgBox "Remesa sin contabilizar.", vbExclamation
-        RS.Close
-        Set RS = Nothing
-        Exit Sub
-    End If
-    
-    
-    
-    
-    SQL = RS!Codigo & "|" & RS!Anyo & "|" & RS!codmacta & "|" & Text1(11).Text & "|"
-    
     
     Importe = TextoAimporte(txtImporte(1).Text)   ''Levara el gasto por recibo
     If Me.optDevRem(1).Value Or Me.optDevRem(2).Value Then SQL = SQL & "%"
@@ -1065,7 +1070,7 @@ Dim TipoFicheroDevolucion As Byte
             'Voy a contabiñizar los gastos.
             'Vere si tiene CC
             If vParam.autocoste Then
-                If DevuelveDesdeBD("codccost", "ctabancaria", "codmacta", RS!codmacta, "T") = "" Then
+                If DevuelveDesdeBD("codccost", "bancos", "codmacta", RS!codmacta, "T") = "" Then
                     MsgBox "Va a contabilizar los gastos pero no esta configurado el Centro de coste para el banco: " & RS!codmacta, vbExclamation
                     RS.Close
                     Set RS = Nothing
@@ -1265,7 +1270,7 @@ Dim jj As Long
      Else
         'Vya obteneer la cuenta de gastos bancarios
         Cad = RecuperaValor(vRemesa, 3)  'cta contable
-        Cad = DevuelveDesdeBD("ctagastos", "ctabancaria", "codmacta", Cad, "T")
+        Cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", Cad, "T")
         If Cad = "" Then
             'NO esta configurada
             'Veo si esta en parametros
@@ -1372,14 +1377,21 @@ End Sub
 Private Sub CargaList()
     lwCobros.ColumnHeaders.Clear
 
-    lwCobros.ColumnHeaders.Add , , "Serie", 720
-    lwCobros.ColumnHeaders.Add , , "Factura", 1440
-    lwCobros.ColumnHeaders.Add , , "Vto", 850
-    lwCobros.ColumnHeaders.Add , , "Cuenta", 1500
-    lwCobros.ColumnHeaders.Add , , "Cliente", 4500
-    lwCobros.ColumnHeaders.Add , , "Importe", 1950, 1
-    lwCobros.ColumnHeaders.Add , , "FechaOrden", 0
-    lwCobros.ColumnHeaders.Add , , "ImporteOrden", 0
+    
+    If Opcion = 9 Or Opcion = 28 Then
+        lwCobros.ColumnHeaders.Add , , "Serie", 720
+        lwCobros.ColumnHeaders.Add , , "Factura", 1440
+        lwCobros.ColumnHeaders.Add , , "Vto", 850
+        lwCobros.ColumnHeaders.Add , , "Cuenta", 1500
+        lwCobros.ColumnHeaders.Add , , "Cliente", 4500
+        lwCobros.ColumnHeaders.Add , , "Importe", 1950, 1
+        lwCobros.ColumnHeaders.Add , , "FechaOrden", 0
+        lwCobros.ColumnHeaders.Add , , "ImporteOrden", 0
+    Else
+        ' en el caso de devolucion desde fichero mostramos el codigo de devolucion
+    
+    
+    End If
 
 End Sub
 
@@ -1635,7 +1647,7 @@ Dim TipoFicheroDevolucion As Byte
             
             SQL = "situacion = 'Q' "
             If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
-            SQL = Mid(SQL, 5)
+'            SQL = Mid(SQL, 5)
             
             SQL = "Select codrem,anyorem,NUmSerie,numfactu,numorden from cobros where " & SQL
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1647,16 +1659,13 @@ Dim TipoFicheroDevolucion As Byte
             End If
 '            Text3(5).Text = DBLet(RS!CodRem, "T")
 '            Text3(6).Text = DBLet(RS!AnyoRem, "T")
-            CadenaVencimiento = RS!NUmSerie & "|" & RS!codfaccl & "|" & RS!numorden & "|"
+'            CadenaVencimiento = RS!NUmSerie & "|" & RS!NumFactu & "|" & RS!numorden & "|"
             RS.Close
             Set RS = Nothing
             
     End Select
     
     
-    
-    
-'****************
     
     Select Case Opcion
         Case 9
@@ -1672,7 +1681,12 @@ Dim TipoFicheroDevolucion As Byte
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
 
-        SQL = RS!Codigo & "|" & RS!Anyo & "|" & RS!codmacta & "|" & Text1(11).Text & "|"
+        If Opcion = 9 Then
+            SQL = RS!Codigo & "|" & RS!Anyo & "|" & RS!codmacta & "|" & Text1(11).Text & "|"
+        Else
+            SQL = "|||" & Text1(11).Text & "|"
+        End If
+        
         
         
 '        Importe = TextoAimporte(txtImporte(1).Text)   ''Levara el gasto por recibo
@@ -1697,7 +1711,7 @@ Dim TipoFicheroDevolucion As Byte
                 'Voy a contabiñizar los gastos.
                 'Vere si tiene CC
                 If vParam.autocoste Then
-                    If DevuelveDesdeBD("codccost", "ctabancaria", "codmacta", RS!codmacta, "T") = "" Then
+                    If DevuelveDesdeBD("codccost", "bancos", "codmacta", RS!codmacta, "T") = "" Then
                         MsgBox "Va a contabilizar los gastos pero no esta configurado el Centro de coste para el banco: " & RS!codmacta, vbExclamation
                         RS.Close
                         Set RS = Nothing
@@ -1798,9 +1812,12 @@ Dim jj As Long
 
     If vSQL = "" Then
         'Normal
-        vSQL = " AND codrem =" & RecuperaValor(vRemesa, 1)
-        vSQL = vSQL & " AND anyorem =" & RecuperaValor(vRemesa, 2)
-    
+        If Opcion = 9 Then
+            vSQL = " AND codrem =" & RecuperaValor(vRemesa, 1)
+            vSQL = vSQL & " AND anyorem =" & RecuperaValor(vRemesa, 2)
+        Else
+            vSQL = " and (codrem,anyorem) in (select codrem, anyorem from cobros where codmacta = " & DBSet(txtCtaNormal(11).Text, "T") & " and situacion ='Q' and not codrem is null) "
+        End If
     Else
         'Multi remesa
         vSQL = " AND (codrem,anyorem) IN ( " & vSQL & ")"
