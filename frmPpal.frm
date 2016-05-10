@@ -239,15 +239,15 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   3
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":57E2
+            Picture         =   "frmPpal.frx":08CA
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C044
+            Picture         =   "frmPpal.frx":712C
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E7F6
+            Picture         =   "frmPpal.frx":98DE
             Key             =   ""
          EndProperty
       EndProperty
@@ -265,43 +265,43 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   10
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":15058
+            Picture         =   "frmPpal.frx":10140
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":162DA
+            Picture         =   "frmPpal.frx":113C2
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":18A8C
+            Picture         =   "frmPpal.frx":13B74
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1ABC6
+            Picture         =   "frmPpal.frx":15CAE
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1AEE0
+            Picture         =   "frmPpal.frx":15FC8
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1E2D2
+            Picture         =   "frmPpal.frx":193BA
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1FEE4
+            Picture         =   "frmPpal.frx":1AFCC
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":20CC1
+            Picture         =   "frmPpal.frx":1BDA9
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":21C30
+            Picture         =   "frmPpal.frx":1CD18
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":22BA8
+            Picture         =   "frmPpal.frx":1DC90
             Key             =   ""
          EndProperty
       EndProperty
@@ -319,35 +319,35 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   8
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":23B45
+            Picture         =   "frmPpal.frx":1EC2D
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":2A3A7
+            Picture         =   "frmPpal.frx":2548F
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":30C09
+            Picture         =   "frmPpal.frx":2BCF1
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":3746B
+            Picture         =   "frmPpal.frx":32553
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":3DCCD
+            Picture         =   "frmPpal.frx":38DB5
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":4452F
+            Picture         =   "frmPpal.frx":3F617
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":4AD91
+            Picture         =   "frmPpal.frx":45E79
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":515F3
+            Picture         =   "frmPpal.frx":4C6DB
             Key             =   ""
          EndProperty
       EndProperty
@@ -372,31 +372,31 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   7
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":52005
+            Picture         =   "frmPpal.frx":4D0ED
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":58867
+            Picture         =   "frmPpal.frx":5394F
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":5F0C9
+            Picture         =   "frmPpal.frx":5A1B1
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6592B
+            Picture         =   "frmPpal.frx":60A13
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6C18D
+            Picture         =   "frmPpal.frx":67275
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":729EF
+            Picture         =   "frmPpal.frx":6DAD7
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":79251
+            Picture         =   "frmPpal.frx":74339
             Key             =   ""
          EndProperty
       EndProperty
@@ -415,31 +415,31 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   7
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7FAB3
+            Picture         =   "frmPpal.frx":7AB9B
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":86315
+            Picture         =   "frmPpal.frx":813FD
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":8CB77
+            Picture         =   "frmPpal.frx":87C5F
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":933D9
+            Picture         =   "frmPpal.frx":8E4C1
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":99C3B
+            Picture         =   "frmPpal.frx":94D23
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A049D
+            Picture         =   "frmPpal.frx":9B585
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A6CFF
+            Picture         =   "frmPpal.frx":A1DE7
             Key             =   ""
          EndProperty
       EndProperty
@@ -457,43 +457,43 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   10
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AD561
+            Picture         =   "frmPpal.frx":A8649
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B3DC3
+            Picture         =   "frmPpal.frx":AEEAB
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BA625
+            Picture         =   "frmPpal.frx":B570D
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C0E87
+            Picture         =   "frmPpal.frx":BBF6F
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C76E9
+            Picture         =   "frmPpal.frx":C27D1
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":CDF4B
+            Picture         =   "frmPpal.frx":C9033
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D47AD
+            Picture         =   "frmPpal.frx":CF895
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":DB00F
+            Picture         =   "frmPpal.frx":D60F7
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E1871
+            Picture         =   "frmPpal.frx":DC959
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E80D3
+            Picture         =   "frmPpal.frx":E31BB
             Key             =   ""
          EndProperty
       EndProperty
@@ -543,15 +543,15 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   3
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E8AE5
+            Picture         =   "frmPpal.frx":E3BCD
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E94F7
+            Picture         =   "frmPpal.frx":E45DF
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E9592
+            Picture         =   "frmPpal.frx":E467A
             Key             =   ""
          EndProperty
       EndProperty
@@ -569,15 +569,15 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   3
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E9FA4
+            Picture         =   "frmPpal.frx":E508C
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F0806
+            Picture         =   "frmPpal.frx":EB8EE
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F2FB8
+            Picture         =   "frmPpal.frx":EE0A0
             Key             =   ""
          EndProperty
       EndProperty
@@ -631,7 +631,7 @@ Begin VB.Form frmPpal
    Begin VB.Image ImageLogo 
       Height          =   720
       Left            =   7800
-      Picture         =   "frmPpal.frx":F8BDA
+      Picture         =   "frmPpal.frx":F3CC2
       Top             =   0
       Width           =   1890
    End
@@ -818,8 +818,8 @@ End Sub
 
 
 Private Sub Form_Resize()
-    Dim X, Y As Integer
-Dim V ''
+    Dim x, y As Integer
+Dim v ''
 
     If WindowState = 1 Then
         EstadoAnterior = 1
@@ -831,18 +831,18 @@ Dim V ''
         Exit Sub
     End If
     
-    X = Me.Width
-    Y = Me.Height
-    If X < 5990 Then Me.Width = 5990
-    If Y < 4100 Then Me.Height = 4100
+    x = Me.Width
+    y = Me.Height
+    If x < 5990 Then Me.Width = 5990
+    If y < 4100 Then Me.Height = 4100
     ImageLogo.Left = Me.Width - ImageLogo.Width - 240
     Label33.Left = 30
-    X = Me.Height - Base
+    x = Me.Height - Base
     
 
-    TreeView1.Height = X
-    X = X \ 6
-    ListView1.Height = X * 4
+    TreeView1.Height = x
+    x = x \ 6
+    ListView1.Height = x * 4
     
     ListView2.Top = ListView1.Top + ListView1.Height + 500
     ListView2.Height = Me.Height - ListView2.Top - 850
@@ -851,25 +851,25 @@ Dim V ''
     TreeView2.Height = ListView2.Height
     
     
-    Y = Me.Width - 200
-    Y = ((30 / 100) * Y)
+    y = Me.Width - 200
+    y = ((30 / 100) * y)
     
     TreeView1.Left = 30
-    TreeView1.Width = Y - 30
+    TreeView1.Width = y - 30
     
     'Separador
-    Me.FrameSeparador.Left = Y + 15
+    Me.FrameSeparador.Left = y + 15
     Me.FrameSeparador.Top = TreeView1.Top
     Me.FrameSeparador.Height = Me.TreeView1.Height
     
-    ListView1.Left = Y + 60
-    Me.ListView2.Left = Y + 60
+    ListView1.Left = y + 60
+    Me.ListView2.Left = y + 60
     
-    AnchoListview = Me.Width - 200 - Y - 30
+    AnchoListview = Me.Width - 200 - y - 30
     ListView1.Width = AnchoListview
-    V = Me.ImageLogo.Left
+    v = Me.ImageLogo.Left
     
-    Label33.Width = V + 20
+    Label33.Width = v + 20
     Label33.Left = -15
     Label22.Left = Label33.Width - 120
     Label22.Width = Me.Width - Label22.Left
@@ -880,11 +880,11 @@ Dim V ''
     ImageLogo.Left = Me.Width - ImageLogo.Width - 120
     ImageLogo.Height = Label22.Height
     
-    X = AnchoListview \ 3
-    ListView2.Width = 2 * X
+    x = AnchoListview \ 3
+    ListView2.Width = 2 * x
     
     Me.TreeView2.Left = Me.ListView2.Left + Me.ListView2.Width + 30
-    TreeView2.Width = X
+    TreeView2.Width = x
     
     'Dos listiview
     lblMsgUsu(0).Top = ListView2.Top - 340 '240
@@ -1560,7 +1560,7 @@ Private Sub ListView1_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then ListView1_DblClick
 End Sub
 
-Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim SQL As String
 Dim RS As ADODB.Recordset
 
@@ -1584,7 +1584,7 @@ Dim RS As ADODB.Recordset
     End If
 End Sub
 
-Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = 1 Then
         If Not ListView1.SelectedItem Is Nothing Then
             IconoSeleccionado = True
@@ -1593,7 +1593,7 @@ Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, X As Single
     End If
 End Sub
 
-Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim RefrescarDatos As Boolean   'Porque a movido iconos fuera de los margenes
 Dim SQL As String
     
@@ -1603,7 +1603,7 @@ Dim SQL As String
 
 
         'DAVID
-        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", X, Y, RefrescarDatos
+        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", x, y, RefrescarDatos
         If RefrescarDatos Then
             ListView1.Arrange = lvwAutoTop
             ListView1.Refresh
@@ -1618,7 +1618,7 @@ Dim SQL As String
 
 End Sub
 
-Private Sub ListView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single)
 
     
 '    Caption = Data.GetData(1)

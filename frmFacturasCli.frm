@@ -1084,7 +1084,7 @@ Begin VB.Form frmFacturasCli
          Height          =   360
          Index           =   3
          ItemData        =   "frmFacturasCli.frx":0044
-         Left            =   10560
+         Left            =   10530
          List            =   "frmFacturasCli.frx":0046
          Style           =   2  'Dropdown List
          TabIndex        =   8
@@ -1305,7 +1305,7 @@ Begin VB.Form frmFacturasCli
          Height          =   360
          Index           =   1
          ItemData        =   "frmFacturasCli.frx":004C
-         Left            =   7980
+         Left            =   7950
          List            =   "frmFacturasCli.frx":004E
          Style           =   2  'Dropdown List
          TabIndex        =   7

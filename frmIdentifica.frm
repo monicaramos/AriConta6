@@ -14,26 +14,6 @@ Begin VB.Form frmIdentifica
    ScaleWidth      =   9705
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.ComboBox Combo1 
-      Appearance      =   0  'Flat
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   12
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   390
-      ItemData        =   "frmIdentifica.frx":0000
-      Left            =   4530
-      List            =   "frmIdentifica.frx":0002
-      Style           =   2  'Dropdown List
-      TabIndex        =   1
-      Top             =   2580
-      Width           =   2685
-   End
    Begin VB.TextBox Text1 
       Alignment       =   2  'Center
       BackColor       =   &H00FFFFFF&
@@ -49,12 +29,32 @@ Begin VB.Form frmIdentifica
       Height          =   330
       IMEMode         =   3  'DISABLE
       Index           =   1
-      Left            =   4530
+      Left            =   4410
       PasswordChar    =   "*"
       TabIndex        =   2
       Text            =   "aritel"
-      Top             =   3540
+      Top             =   4590
       Width           =   2655
+   End
+   Begin VB.ComboBox Combo1 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      ItemData        =   "frmIdentifica.frx":0000
+      Left            =   4410
+      List            =   "frmIdentifica.frx":0002
+      Style           =   2  'Dropdown List
+      TabIndex        =   1
+      Top             =   3630
+      Width           =   2685
    End
    Begin VB.TextBox Text1 
       Alignment       =   2  'Center
@@ -72,10 +72,10 @@ Begin VB.Form frmIdentifica
       EndProperty
       Height          =   330
       Index           =   0
-      Left            =   4560
+      Left            =   4470
       TabIndex        =   0
       Text            =   "Text1"
-      Top             =   2640
+      Top             =   3630
       Visible         =   0   'False
       Width           =   2655
    End
@@ -91,12 +91,12 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00765341&
+      ForeColor       =   &H00FFFFFF&
       Height          =   375
       Index           =   3
-      Left            =   4530
+      Left            =   3930
       TabIndex        =   6
-      Top             =   1230
+      Top             =   1800
       Width           =   1575
    End
    Begin VB.Label Label1 
@@ -112,11 +112,11 @@ Begin VB.Form frmIdentifica
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00765341&
-      Height          =   375
+      Height          =   285
       Index           =   2
-      Left            =   4530
+      Left            =   4440
       TabIndex        =   5
-      Top             =   1590
+      Top             =   5130
       Width           =   2655
    End
    Begin VB.Label Label1 
@@ -134,9 +134,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00765341&
       Height          =   375
       Index           =   1
-      Left            =   4530
+      Left            =   4410
       TabIndex        =   4
-      Top             =   3150
+      Top             =   4200
       Width           =   2175
    End
    Begin VB.Label Label1 
@@ -154,9 +154,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00765341&
       Height          =   375
       Index           =   0
-      Left            =   4530
+      Left            =   4410
       TabIndex        =   3
-      Top             =   2190
+      Top             =   3240
       Width           =   2175
    End
    Begin VB.Image Image1 
@@ -544,23 +544,23 @@ End Function
 
 
 Private Function HayQueActualizar() As Integer
-Dim V As Integer
+Dim v As Integer
     On Error GoTo EA
     HayQueActualizar = 0
     
     CadenaDesdeOtroForm = "Select max(ver) from yVersion where app='CONTA'"
     miRsAux.Open CadenaDesdeOtroForm, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    V = 0
-    If Not miRsAux.EOF Then V = DBLet(miRsAux.Fields(0), "N")
+    v = 0
+    If Not miRsAux.EOF Then v = DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
-    If V = 0 Then Exit Function
+    If v = 0 Then Exit Function
     
     
     'YA TENGO LA ULTIMA VERSION disponible. Voy a ver cual tengo
     CadenaDesdeOtroForm = DevuelveDesdeBD("Conta", "PCs", "codpc", CStr(CodPC), "N")
     If CadenaDesdeOtroForm = "" Then CadenaDesdeOtroForm = 0
     NumRegElim = Val(CadenaDesdeOtroForm)
-    If V > NumRegElim Then
+    If v > NumRegElim Then
         'OK esta desactualizado.
         'Veo cual es la version qe hay que lanzar.
         HayQueActualizar = NumRegElim + 1

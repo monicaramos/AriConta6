@@ -670,22 +670,22 @@ End Function
     '21 Octubre 2011
     'Desdoblaremos el procedimiento de deolucion
     'de talones-pagares frente a efectos
-Public Function RealizarDevolucionRemesa(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String) As Boolean
+Public Function RealizarDevolucionRemesa(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String, CodigoDevolucion As String) As Boolean
 Dim C As String
     
     C = "codigo =" & RecuperaValor(Remesa, 1) & " AND anyo "
     C = DevuelveDesdeBD("tiporem", "remesas", C, RecuperaValor(Remesa, 2))
-    
+    C = RecuperaValor(Remesa, 10)
     If C = "1" Then
-        RealizarDevolucionRemesa = RealizarDevolucionRemesaEfectos(FechaDevolucion, ContabilizoGastoBanco, CtaBenBancarios, Remesa, DatosContabilizacionDevolucion)
+        RealizarDevolucionRemesa = RealizarDevolucionRemesaEfectos(FechaDevolucion, ContabilizoGastoBanco, CtaBenBancarios, Remesa, DatosContabilizacionDevolucion, CodigoDevolucion)
     Else
-        RealizarDevolucionRemesa = RealizarDevolucionRemesaTalPag(FechaDevolucion, ContabilizoGastoBanco, CtaBenBancarios, Remesa, DatosContabilizacionDevolucion)
+        RealizarDevolucionRemesa = RealizarDevolucionRemesaTalPag(FechaDevolucion, ContabilizoGastoBanco, CtaBenBancarios, Remesa, DatosContabilizacionDevolucion, CodigoDevolucion)
     End If
     
 End Function
 
 
-Public Function RealizarDevolucionRemesaEfectos(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String) As Boolean
+Public Function RealizarDevolucionRemesaEfectos(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String, CodigoDevolucion As String) As Boolean
 
 'Dim Cuenta As String
 Dim Mc As Contadores
@@ -758,27 +758,29 @@ Dim LINAPU As String
 
 
     
-    SQL = "Select descripcion,tiporem from remesas where codigo =" & RecuperaValor(Remesa, 1)
-    SQL = SQL & " AND anyo =" & RecuperaValor(Remesa, 2)
+'    SQL = "Select descripcion,tiporem from remesas where codigo =" & RecuperaValor(Remesa, 1)
+'    SQL = SQL & " AND anyo =" & RecuperaValor(Remesa, 2)
+'
+'
+'
+'
+'
+'    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'    TipoRemesa = RS!Tiporem
+'    If DescRemesa = "" Then
+'        'Solo hay una remesa
+'        If Not IsNull(RS.Fields(0)) Then
+'            DescRemesa = DevNombreSQL(RS.Fields(0))
+'        Else
+'            DescRemesa = ": " & RecuperaValor(Remesa, 1) & " / " & RecuperaValor(Remesa, 2)
+'        End If
+'        DescRemesa = "Devolución remesa " & DescRemesa
+'
+'    End If
+'    RS.Close
     
-    
-   
-    
-    
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    TipoRemesa = RS!Tiporem
-    If DescRemesa = "" Then
-        'Solo hay una remesa
-        If Not IsNull(RS.Fields(0)) Then
-            DescRemesa = DevNombreSQL(RS.Fields(0))
-        Else
-            DescRemesa = ": " & RecuperaValor(Remesa, 1) & " / " & RecuperaValor(Remesa, 2)
-        End If
-        DescRemesa = "Devolución remesa " & DescRemesa
-        
-    End If
-    RS.Close
-    
+    DescRemesa = RecuperaValor(Remesa, 9)
+    TipoRemesa = RecuperaValor(Remesa, 10)
     CuentaPuente = False
     
     
@@ -1459,7 +1461,7 @@ Dim LINAPU As String
                 
                      Ampliacion = "insert into cobros_realizados (numserie,numfactu,fecfactu,numorden,numlinea,numdiari,fechaent,numasien,"
                      Ampliacion = Ampliacion & "usuariocobro,fecrealizado,impcobro,tipforpa, ctabanc2,"
-                     Ampliacion = Ampliacion & "fecdevol,gastodev,tiporem,codrem,anyorem) values (" & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFac, "N") & ","
+                     Ampliacion = Ampliacion & "fecdevol,gastodev,tiporem,codrem,anyorem,coddevol) values (" & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFac, "N") & ","
                      Ampliacion = Ampliacion & DBSet(RS!Fecha, "F") & "," & DBSet(RS!NIF, "N") & "," & DBSet(NLinea, "N") & "," & vCP.diaricli & "," & DBSet(FechaDevolucion, "F") & ","
                      Ampliacion = Ampliacion & Mc.Contador & "," & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & "," & DBSet((-1) * DBLet(RS!imponible), "N") & ","
                      Ampliacion = Ampliacion & DBSet(RsCobro!TipForpa, "N") & ","
@@ -1467,8 +1469,9 @@ Dim LINAPU As String
                      Ampliacion = Ampliacion & DBSet(FechaDevolucion, "F") & ","
                      Ampliacion = Ampliacion & DBSet(RS!Total, "N") & ","
                      Ampliacion = Ampliacion & DBSet(RsCobro!Tiporem, "N") & ","
-                     Ampliacion = Ampliacion & DBSet(RsCobro!CodRem, "N") & ","
-                     Ampliacion = Ampliacion & DBSet(RsCobro!AnyoRem, "N") & ")"
+                     Ampliacion = Ampliacion & DBSet(RsCobro!codrem, "N") & ","
+                     Ampliacion = Ampliacion & DBSet(RsCobro!anyorem, "N") & ","
+                     Ampliacion = Ampliacion & DBSet(CodigoDevolucion, "T", "S") & ")"
                      
                      Ejecuta Ampliacion
                      
@@ -1520,13 +1523,8 @@ ECon:
 End Function
 
 
-
-
-
-
-
 '*************************************************************************************
-Public Function RealizarDevolucionRemesaTalPag(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String) As Boolean
+Public Function RealizarDevolucionRemesaTalPag(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String, CodigoDevolucion As String) As Boolean
 
 'Dim Cuenta As String
 Dim Mc As Contadores

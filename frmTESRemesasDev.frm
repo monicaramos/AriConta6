@@ -8,6 +8,7 @@ Begin VB.Form frmTESRemesasDev
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   15690
+   Icon            =   "frmTESRemesasDev.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -64,6 +65,26 @@ Begin VB.Form frmTESRemesasDev
          TabIndex        =   22
          Top             =   1800
          Width           =   14895
+         Begin VB.ComboBox CmbDevol 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            ItemData        =   "frmTESRemesasDev.frx":000C
+            Left            =   2790
+            List            =   "frmTESRemesasDev.frx":001F
+            Style           =   2  'Dropdown List
+            TabIndex        =   40
+            Tag             =   "Ampliacion debe/CLIENTES|N|N|0||stipoformapago|ampdecli|||"
+            Top             =   2010
+            Width           =   4020
+         End
          Begin VB.ComboBox Combo2 
             BeginProperty Font 
                Name            =   "Verdana"
@@ -76,9 +97,9 @@ Begin VB.Form frmTESRemesasDev
             EndProperty
             Height          =   360
             Index           =   0
-            ItemData        =   "frmTESRemesasDev.frx":0000
+            ItemData        =   "frmTESRemesasDev.frx":0093
             Left            =   9450
-            List            =   "frmTESRemesasDev.frx":0013
+            List            =   "frmTESRemesasDev.frx":00A6
             Style           =   2  'Dropdown List
             TabIndex        =   38
             Tag             =   "Ampliacion debe/CLIENTES|N|N|0||stipoformapago|ampdecli|||"
@@ -287,6 +308,26 @@ Begin VB.Form frmTESRemesasDev
             Text            =   "Text4"
             Top             =   2040
             Width           =   1125
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Código de Devolución"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00800000&
+            Height          =   240
+            Index           =   50
+            Left            =   420
+            TabIndex        =   39
+            Top             =   2070
+            Width           =   2115
          End
          Begin VB.Label Label4 
             AutoSize        =   -1  'True
@@ -738,7 +779,7 @@ Begin VB.Form frmTESRemesasDev
          Height          =   240
          Index           =   0
          Left            =   12420
-         Picture         =   "frmTESRemesasDev.frx":0087
+         Picture         =   "frmTESRemesasDev.frx":011A
          ToolTipText     =   "Quitar al Debe"
          Top             =   4440
          Width           =   240
@@ -747,7 +788,7 @@ Begin VB.Form frmTESRemesasDev
          Height          =   240
          Index           =   1
          Left            =   12780
-         Picture         =   "frmTESRemesasDev.frx":01D1
+         Picture         =   "frmTESRemesasDev.frx":0264
          ToolTipText     =   "Puntear al Debe"
          Top             =   4440
          Width           =   240
@@ -830,11 +871,17 @@ Dim vRemesa As String
 Dim ValoresDevolucionRemesa As String
 Dim ImporteRemesa As Currency
 Dim vSQL As String
+Dim OpcionAnt As Integer
 
+Dim Remesa As Long
+Dim AñoRem As Long
+Dim BancoRem As String
 
 Private Sub chkDevolRemesa2_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
+
+
 
 Private Sub cmdCancelar_Click(Index As Integer)
     If Index = 21 Or Index = 25 Or Index = 31 Then CadenaDesdeOtroForm = "" 'ME garantizo =""
@@ -844,7 +891,25 @@ Private Sub cmdCancelar_Click(Index As Integer)
     Unload Me
 End Sub
 
+Private Sub CargaCombo()
 
+    CmbDevol.Clear
+    
+    Set RS = New ADODB.Recordset
+    SQL = "select codigo, descripcion from usuarios.wdevolucion order by codigo"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    i = 0
+    While Not RS.EOF
+        CmbDevol.AddItem RS!Descripcion
+        CmbDevol.ItemData(CmbDevol.NewIndex) = Asc(RS!Codigo)
+        i = i + 1
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+
+
+End Sub
 
 Private Sub cmdDevolRem_Click()
 Dim Importe As Currency
@@ -853,86 +918,12 @@ Dim CadenaVencimiento As String
 Dim MultiRemesaDevuelta As String
 Dim TipoFicheroDevolucion As Byte
 
-    MultiRemesaDevuelta = ""
-    CadenaVencimiento = ""
-    
     If Text8.Text <> "" Then Opcion = 16
     If Text3(5).Text <> "" Then Opcion = 9
     If txtCtaNormal(11).Text <> "" Then Opcion = 28
     
     
-    
-    If Opcion = 16 Then
-        'DESDE FICHERO
-        Text8.Text = Trim(Text8.Text)
-        If Text8.Text = "" Then Exit Sub
-        If Dir(Text8.Text, vbArchive) = "" Then
-            MsgBox "El fichero: " & Text8.Text & "    NO existe", vbExclamation
-            Exit Sub
-        End If
-        Text3(5).Text = ""
-        Text3(6).Text = ""
-        
-        'Si que existe el fichero
-        TipoFicheroDevolucion = EsFicheroDevolucionSEPA2(Text8.Text)
-        If TipoFicheroDevolucion > 0 Then
-            If TipoFicheroDevolucion = 2 Then
-                'SEPA xml
-                ProcesaFicheroDevolucionSEPA_XML Text8, SQL
-            Else
-                ProcesaCabeceraFicheroDevolucionSEPA Text8, SQL
-            End If
-        Else
-            'Texto normal
-            ProcesaCabeceraFicheroDevolucion Text8.Text, SQL
-        End If
-        If SQL = "" Then Exit Sub
-        
-        
-    
-        
-        MultiRemesaDevuelta = SQL
-        Text3(5).Text = RecuperaValor(SQL, 1)
-        Text3(6).Text = RecuperaValor(SQL, 2)
-        
-    End If
-    If Opcion = 28 Then
-        
-        'Desde el Vto
-        Set RS = New ADODB.Recordset
-        
-        SQL = ""
-        If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
-        SQL = SQL & " and siturem = 'Q'"
-        SQL = Mid(SQL, 5)
-        
-        
-        SQL = "Select codrem,anyorem,NUmSerie,numfactu,numorden from cobros where " & SQL
-        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If RS.EOF Then
-            SQL = "Ninguna pertence a ninguna remesa "
-            MsgBox SQL, vbExclamation
-            RS.Close
-            Exit Sub
-        End If
-'        Text3(5).Text = DBLet(RS!CodRem, "T")
-'        Text3(6).Text = DBLet(RS!AnyoRem, "T")
-'        CadenaVencimiento = RS!NUmSerie & "|" & RS!NumFactu & "|" & RS!numorden & "|"
-        RS.Close
-        Set RS = Nothing
-    End If
-    
-    
     SQL = ""
-    If (Text3(5).Text = "" Or Text3(6).Text = "") Then
-        If Opcion = 9 Then
-            SQL = "Ponga una remesa."
-        Else
-'            SQL = "ERROR leyendo remesa"
-        End If
-    Else
-        If Not IsNumeric(Text3(5).Text) Or Not IsNumeric(Text3(6).Text) Then SQL = "La remesa debe ser numérica"
-    End If
     
     If Text1(11).Text = "" Then SQL = "Ponga la fecha de abono"
     
@@ -1045,7 +1036,7 @@ Dim TipoFicheroDevolucion As Byte
     
         SQL = RS!Codigo & "|" & RS!Anyo & "|" & RS!codmacta & "|" & Text1(11).Text & "|"
     Else
-        SQL = "|||" & Text1(11).Text & "|"
+        SQL = Remesa & "|" & AñoRem & "|" & BancoRem & "|" & Text1(11).Text & "|"
     End If
     
     Importe = TextoAimporte(txtImporte(1).Text)   ''Levara el gasto por recibo
@@ -1096,8 +1087,6 @@ Dim TipoFicheroDevolucion As Byte
     
 
     
-    'Cierro aqui
-    RS.Close
     
     'Bloqueamos la devolucion
     BloqueoManual True, "Devolrem", vUsu.Codigo
@@ -1168,19 +1157,19 @@ Dim Aux As String
     End If
     
     Aux = RecuperaValor(vRemesa, 5)
-    If Aux = "%" Then
-        Aux = "Porcentaje por recibo: " & ImporteRemesa & "%" & vbCrLf
-        If RecuperaValor(vRemesa, 6) <> "" Then
-            Aux = Aux & "Gasto mínimo: " & RecuperaValor(vRemesa, 6) & " €" & vbCrLf
+    If optDevRem(1).Value Then
+        Aux = "Porcentaje por recibo: " & txtImporte(1) & "%" & vbCrLf
+        If txtImporte(2) <> "" Then
+            Aux = Aux & "Gasto mínimo: " & txtImporte(2) & " €" & vbCrLf
         End If
     Else
-        Aux = "Gasto por recibo: " & ImporteRemesa & " €" & vbCrLf
+        Aux = "Gasto por recibo: " & txtImporte(1) & " €" & vbCrLf
     End If
     
     Cad = Cad & Aux & vbCrLf
     
     'Gasto tramitacion devolucion
-    Aux = RecuperaValor(vRemesa, 7)
+    Aux = RecuperaValor(txtImporte(5), 7)
     If Aux <> "" Then
         Aux = "Gasto bancario : " & Aux & "€" & vbCrLf
         Cad = Cad & vbCrLf & Aux
@@ -1201,15 +1190,16 @@ Dim Gasto As Currency
 Dim Minimo As Currency
 Dim Cad As String
 Dim jj As Long
+Dim CtaBan As String
 
     RealizarDevolucion = False
     'Tipo de aumento del gasto de devolucion
     Cad = RecuperaValor(vRemesa, 5)
-    If Cad = "%" Then
+    If optDevRem(1).Value Then
         'Porcentual
         IncPorcentaje = True
         Minimo = 0
-        Cad = RecuperaValor(vRemesa, 6)
+        Cad = txtImporte(2).Text 'RecuperaValor(vRemesa, 6)
         If Cad <> "" Then Minimo = Cad
     Else
         IncPorcentaje = False
@@ -1252,6 +1242,10 @@ Dim jj As Long
             Cad = Cad & RecuperaValor(vRemesa, 3) & "')"
             Cad = vSQL & Cad
             If Not Ejecuta(Cad) Then Exit Function
+            
+            CtaBan = DevuelveValor("select ctabanc2 from cobros_realizados where numserie = " & DBSet(lwCobros.ListItems(jj).Text, "T") & " and numfactu = " & DBSet(Val(lwCobros.ListItems(jj).SubItems(1)), "N") & " and fecfactu = " & DBSet(lwCobros.ListItems(jj).Tag, "F") & " and numorden = " & Val(lwCobros.ListItems(jj).SubItems(2)))
+
+            
         End If
     Next jj
     
@@ -1262,7 +1256,7 @@ Dim jj As Long
     '       - marcar los cobros como devueltos, añadirle el gasto y insertar en la
     '           tabla de hco de devueltos
     
-    jj = Val(RecuperaValor(vRemesa, 7))
+    jj = Val(txtImporte(5).Text) 'Val(RecuperaValor(vRemesa, 7))
     
     If jj = 0 Then
         'Como no se contabilizan los beneficios no hace falta que calcule nada
@@ -1270,7 +1264,7 @@ Dim jj As Long
      Else
         'Vya obteneer la cuenta de gastos bancarios
         Cad = RecuperaValor(vRemesa, 3)  'cta contable
-        Cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", Cad, "T")
+        Cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", CtaBan, "T")
         If Cad = "" Then
             'NO esta configurada
             'Veo si esta en parametros
@@ -1285,7 +1279,30 @@ Dim jj As Long
     
     ValoresDevolucionRemesa = txtConcepto(1).Text & "|" & Combo2(0).ListIndex & "|"
     
-    If RealizarDevolucionRemesa(CDate(RecuperaValor(vRemesa, 4)), jj > 0, Cad, vRemesa, ValoresDevolucionRemesa) Then
+    
+    vRemesa = Text3(5).Text & "|" & Text3(6).Text & "|" & CtaBan & "|" & Text1(11).Text & "|"
+    If optDevRem(1).Value Then
+        vRemesa = vRemesa & "%|"
+    Else
+        vRemesa = vRemesa & "|"
+    End If
+    vRemesa = vRemesa & txtImporte(2).Text & "|" & txtImporte(5).Text & "|" & Text8.Text & "|"
+    
+    Select Case Opcion
+        Case 9
+            vRemesa = vRemesa & "Remesa: " & Text3(5).Text & "/" & Text3(6).Text
+        Case 28
+            vRemesa = vRemesa & "Remesas de Cta : " & txtCtaNormal(11).Text
+        Case 16
+            vRemesa = vRemesa & "Fichero: " & Text8.Text
+    End Select
+    vRemesa = vRemesa & "|1|"
+    
+    Dim CodDev As String
+    CodDev = ""
+    If CmbDevol.ListIndex <> -1 Then CodDev = Chr(CmbDevol.ItemData(CmbDevol.ListIndex))
+    
+    If RealizarDevolucionRemesa(CDate(Text1(11)), jj > 0, CtaBan, vRemesa, ValoresDevolucionRemesa, CodDev) Then
         RealizarDevolucion = True
         Screen.MousePointer = vbHourglass
 '        frmActualizar2.OpcionActualizar = 20
@@ -1305,7 +1322,10 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         Select Case Opcion
-        
+            Case 9
+                PonerFocoLw lwCobros
+            Case 16, 28
+                PonerFoco Text3(5)
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -1352,17 +1372,21 @@ Dim W As Integer
         
     End Select
     
-    CargaList
+    OpcionAnt = 0
+    CargaCabecera
     
     If NumeroDocumento <> "" Then
         Text3(5).Text = RecuperaValor(NumeroDocumento, 1)
         Text3(6).Text = RecuperaValor(NumeroDocumento, 2)
         Text3_LostFocus (5)
-        PonFoco Text3(5)
     End If
     
+    CargaCombo
     
-    Me.Height = H + 360
+    Remesa = 0
+    AñoRem = 0
+    
+    Me.Height = H + 560
     Me.Width = W + 90
 '--
 '    h = Opcion
@@ -1374,24 +1398,31 @@ Dim W As Integer
     
 End Sub
 
-Private Sub CargaList()
+Private Sub CargaCabecera()
+    
+    
+    If OpcionAnt = Opcion Then Exit Sub
+    
     lwCobros.ColumnHeaders.Clear
-
     
     If Opcion = 9 Or Opcion = 28 Then
         lwCobros.ColumnHeaders.Add , , "Serie", 720
-        lwCobros.ColumnHeaders.Add , , "Factura", 1440
-        lwCobros.ColumnHeaders.Add , , "Vto", 850
-        lwCobros.ColumnHeaders.Add , , "Cuenta", 1500
-        lwCobros.ColumnHeaders.Add , , "Cliente", 4500
+        lwCobros.ColumnHeaders.Add , , "Factura", 1140
+        lwCobros.ColumnHeaders.Add , , "Vto", 650
+        lwCobros.ColumnHeaders.Add , , "Cuenta", 1300
+        lwCobros.ColumnHeaders.Add , , "Cliente", 3800
         lwCobros.ColumnHeaders.Add , , "Importe", 1950, 1
         lwCobros.ColumnHeaders.Add , , "FechaOrden", 0
         lwCobros.ColumnHeaders.Add , , "ImporteOrden", 0
+        lwCobros.ColumnHeaders.Add , , "Remesa", 1000, 1
+        lwCobros.ColumnHeaders.Add , , "Año", 800
+        lwCobros.ColumnHeaders.Add , , "Banco", 1500
     Else
         ' en el caso de devolucion desde fichero mostramos el codigo de devolucion
     
-    
     End If
+
+    OpcionAnt = Opcion
 
 End Sub
 
@@ -1460,6 +1491,19 @@ Private Sub imgCheck_Click(Index As Integer)
     If Index < 2 Then
         'Selecciona forma de pago
         For i = 1 To Me.lwCobros.ListItems.Count
+            If Remesa <> 0 And AñoRem <> 0 Then
+                If Index = 1 And (Remesa <> lwCobros.ListItems(i).SubItems(8) Or AñoRem <> lwCobros.ListItems(i).SubItems(9)) Then
+                    MsgBox "No pueden ser cobros de distintas remesas.", vbExclamation
+                    lwCobros.ListItems(i).Checked = False
+                    Exit Sub
+                End If
+            Else
+                If Index = 1 Then
+                    Remesa = lwCobros.ListItems(i).SubItems(8)
+                    AñoRem = lwCobros.ListItems(i).SubItems(9)
+                    BancoRem = lwCobros.ListItems(i).SubItems(10)
+                End If
+            End If
             Me.lwCobros.ListItems(i).Checked = Index = 1
         Next
     End If
@@ -1491,9 +1535,7 @@ Private Sub imgCtaNorma_Click(Index As Integer)
             
         End If
             
-            
 End Sub
-
 
 
 Private Sub imgRem_Click(Index As Integer)
@@ -1510,6 +1552,21 @@ End Sub
 
 Private Sub lwCobros_ItemCheck(ByVal Item As MSComctlLib.ListItem)
 Dim i As Currency
+
+    If Remesa <> 0 And AñoRem <> 0 Then
+        If Item.Checked And (Remesa <> Item.SubItems(8) Or AñoRem <> Item.SubItems(9)) Then
+            MsgBox "No pueden ser cobros de distintas remesas.", vbExclamation
+            Item.Checked = False
+            Exit Sub
+        End If
+    Else
+        If Item.Checked Then
+            Remesa = Item.SubItems(8)
+            AñoRem = Item.SubItems(9)
+            BancoRem = Item.SubItems(10)
+        End If
+    End If
+
     Set lwCobros.SelectedItem = Item
     i = ImporteFormateado(Item.SubItems(5))
     If Not Item.Checked Then i = -1 * i
@@ -1551,10 +1608,7 @@ Private Sub Text1_LostFocus(Index As Integer)
         Text1(Index).Text = ""
         PonerFoco Text1(Index)
     End If
-    
 End Sub
-
-
 
 Private Sub Text3_GotFocus(Index As Integer)
     With Text3(Index)
@@ -1585,8 +1639,12 @@ Private Sub Text3_LostFocus(Index As Integer)
             LimpiarLin Me, "FrameDevDesdeVto"
             
             If Text3(5).Text <> "" And Text3(6).Text <> "" Then
-                SQL = " from cobros, formapago where cobros.codforpa = formapago.codforpa and codrem= " & DBSet(Text3(5).Text, "N") & " and anyorem = " & DBSet(Text3(6).Text, "N")
-                CargaDevolucion 'PonerVtosRemesa SQL, False
+                If RemesaCorrecta Then
+                    CargaList
+                Else
+                    Text3(5).Text = ""
+                    Text3(6).Text = ""
+                End If
             End If
         End If
         
@@ -1595,6 +1653,47 @@ Private Sub Text3_LostFocus(Index As Integer)
     End With
 End Sub
 
+Private Function RemesaCorrecta() As Boolean
+        
+    On Error GoTo eRemesaCorrecta
+        
+     RemesaCorrecta = False
+        
+        SQL = "Select * from remesas where codigo =" & Text3(5).Text
+        SQL = SQL & " AND anyo =" & Text3(6).Text
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If RS.EOF Then
+            SQL = "Ninguna remesa con esos valores."
+            If Opcion = 16 Then SQL = SQL & "  Remesa: " & Text3(5).Text & " / " & Text3(6).Text
+            MsgBox SQL, vbExclamation
+            RS.Close
+            Set RS = Nothing
+            Exit Function
+        End If
+        
+        
+        'Tiene valor
+        If RS!Situacion = "A" Then
+            MsgBox "Remesa abierta. Sin llevar al banco.", vbExclamation
+            RS.Close
+            Set RS = Nothing
+            Exit Function
+        End If
+        
+        
+        
+        If Asc(RS!Situacion) < Asc("Q") Then
+            MsgBox "Remesa sin contabilizar.", vbExclamation
+            RS.Close
+            Set RS = Nothing
+            Exit Function
+        End If
+        RemesaCorrecta = True
+eRemesaCorrecta:
+    
+
+End Function
 
 Private Sub CargarValores()
 Dim Importe As Currency
@@ -1737,16 +1836,12 @@ Dim TipoFicheroDevolucion As Byte
         
         vRemesa = SQL
     End If
-    
-    
 
 
 End Sub
 
 
-
-
-Private Sub CargaDevolucion()
+Private Sub CargaList()
 Dim Itm As ListItem
 Dim Col As Collection
 Dim EfectoSerie As String
@@ -1758,71 +1853,21 @@ Dim Cad As String
 Dim jj As Long
 
 
-
-'***
-    CargaList
+    CargaCabecera
     
-    CargarValores
-'***
+    lwCobros.ListItems.Clear
     
-    
-    'Si viene de la opcion de devolucion por efecto, este campo tiene valor
-    EfectoSerie = ""
-    Set EltoItm = Nothing
-    If vSQL <> "" Then
-        EfectoSerie = RecuperaValor(vSQL, 1)
-        EfectoFra = Format(Val(RecuperaValor(vSQL, 2)), "00000000")
-        EfectoVto = RecuperaValor(vSQL, 3)
-    End If
-
-
-    'Veremos si viene de un fichero de devolicion, y si trae mas de una remesa
     vSQL = ""
-    Cad = RecuperaValor(vRemesa, 8)
-    If Cad <> "" Then
-        'Fichero de dovocucion
-        Cad = RecuperaValor(vRemesa, 9)
-        'Vuelvo a susitiuri los # por |
-        Cad = Replace(Cad, "#", "|")
-        vSQL = ""
-        For jj = 1 To Len(Cad)
-            If Mid(Cad, jj, 1) = "·" Then vSQL = vSQL & "X"
-        Next
+    Select Case Opcion
+        Case 9
+            vSQL = " AND codrem =" & DBSet(Text3(5).Text, "N")
+            vSQL = vSQL & " AND anyorem =" & DBSet(Text3(6).Text, "N")
+        Case 16
         
-        If Len(vSQL) > 1 Then
-            'Tienen mas de una remesa
-            vSQL = ""
-            While Cad <> ""
-                jj = InStr(1, Cad, "·")
-                If jj = 0 Then
-                    Cad = ""
-                Else
-                    vSQL = vSQL & ", (" & RecuperaValor(Mid(Cad, 1, jj - 1), 1) & " , " & RecuperaValor(Mid(Cad, 1, jj - 1), 2) & ")"
-                    Cad = Mid(Cad, jj + 1)
-                End If
-            
-            Wend
-            vSQL = Mid(vSQL, 2) 'quitammos la preimar coma
-        Else
-            vSQL = ""
-        End If
-        
-    End If
-
-
-    If vSQL = "" Then
-        'Normal
-        If Opcion = 9 Then
-            vSQL = " AND codrem =" & RecuperaValor(vRemesa, 1)
-            vSQL = vSQL & " AND anyorem =" & RecuperaValor(vRemesa, 2)
-        Else
-            vSQL = " and (codrem,anyorem) in (select codrem, anyorem from cobros where codmacta = " & DBSet(txtCtaNormal(11).Text, "T") & " and situacion ='Q' and not codrem is null) "
-        End If
-    Else
-        'Multi remesa
-        vSQL = " AND (codrem,anyorem) IN ( " & vSQL & ")"
-        
-    End If
+        Case 28
+            vSQL = " and (codrem,anyorem) in (select codrem, anyorem from cobros where codmacta = " & DBSet(txtCtaNormal(11).Text, "T") & " and siturem ='Q' and not codrem is null) "
+    End Select
+    
     vSQL = "Select cobros.* from cobros where (1=1)" & vSQL
     
     vSQL = vSQL & " ORDER BY numserie,numfactu"
@@ -1834,7 +1879,7 @@ Dim jj As Long
         Set Itm = lwCobros.ListItems.Add(, "C" & jj)
         Itm.Text = miRsAux!NUmSerie
         
-        Itm.SubItems(1) = Format(DBLet(miRsAux!NumFactu, "N"), "00000000")
+        Itm.SubItems(1) = Format(DBLet(miRsAux!NumFactu, "N"), "0000000")
         Itm.SubItems(2) = miRsAux!numorden
         Itm.SubItems(3) = miRsAux!codmacta
         Itm.SubItems(4) = miRsAux!nomclien
@@ -1854,24 +1899,15 @@ Dim jj As Long
         'Por si ordena por importe
         Itm.SubItems(7) = Format(miRsAux!ImpVenci * 100, "0000000000")
         
+                
+        'remesas
+        Itm.SubItems(8) = miRsAux!codrem
+        Itm.SubItems(9) = miRsAux!Anyorem
+        Itm.SubItems(10) = DevuelveValor("select codmacta from remesas where codigo = " & DBSet(miRsAux!codrem, "N") & " and anyo = " & DBSet(miRsAux!Anyorem, "N"))
         
         
         'En el tag meto la fecha factura
         Itm.Tag = Format(miRsAux!FecFactu, "dd/mm/yyyy")
-        
-        
-
-        If EfectoSerie <> "" Then
-            If EfectoSerie = Itm.Text Then
-                If EfectoFra = Itm.SubItems(1) Then
-                    If EfectoVto = Itm.SubItems(2) Then
-                        Set EltoItm = Itm
-                        'Este es. Para que ya no busque mas
-                        EfectoSerie = ""
-                    End If
-                End If
-            End If
-        End If
         
         
         jj = jj + 1
@@ -2010,7 +2046,7 @@ Private Sub Text8_LostFocus()
         Opcion = 16
         LimpiarLin Me, "FrameDevDesdeVto"
         LimpiarLin Me, "FrameDevDesdeRemesa"
-        CargaDevolucion
+        CargaList
     End If
 End Sub
 
@@ -2079,7 +2115,6 @@ Dim DevfrmCCtas As String
             SQL = ""
         End If
         
-        
         txtCtaNormal(Index).Text = DevfrmCCtas
         txtDCtaNormal(Index).Text = SQL
         If DevfrmCCtas = "" And i = 1 Then
@@ -2091,7 +2126,7 @@ Dim DevfrmCCtas As String
             Opcion = 28
             LimpiarLin Me, "FrameDevDesdeFichero"
             LimpiarLin Me, "FrameDevDesdeRemesa"
-            CargaDevolucion
+            CargaList
         End If
         
 End Sub
