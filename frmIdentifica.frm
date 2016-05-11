@@ -96,7 +96,7 @@ Begin VB.Form frmIdentifica
       Index           =   3
       Left            =   3930
       TabIndex        =   6
-      Top             =   1800
+      Top             =   2310
       Width           =   1575
    End
    Begin VB.Label Label1 

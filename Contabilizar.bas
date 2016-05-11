@@ -620,14 +620,18 @@ Dim CtaEfectosComDescontados As String
     SQL = SQL & " and anyorem=" & Anyo
     Conn.Execute SQL
 
+    Dim MaxLin As Integer
+
+'    maxlin = devuelvevalor("select max(numlinea) from cobros_realizados where
 
     SQL = "insert into cobros_realizados (numserie,numfactu,fecfactu,numorden,numlinea,numdiari,fechaent,numasien,usuariocobro,"
     SQL = SQL & "fecrealizado,impcobro,tipforpa,ctabanc2) "
-    SQL = SQL & "select cobros.numserie,cobros.numfactu,cobros.fecfactu,cobros.numorden,coalesce(cobros_realizados.numlinea,0) + 1," & vCP.diaricli & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & ","
+    SQL = SQL & "select cobros.numserie,cobros.numfactu,cobros.fecfactu,cobros.numorden,coalesce(max(cobros_realizados.numlinea),0) + 1," & vCP.diaricli & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & ","
     SQL = SQL & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & ",impvenci+coalesce(gastos,0), formapago.tipforpa, "
     SQL = SQL & RecuperaValor(CtaBanco, 1) & " from formapago, cobros left join cobros_realizados on cobros.numserie=cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu =  cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden"
     SQL = SQL & " where cobros.codrem = " & Codigo & " and cobros.anyorem = " & Anyo
     SQL = SQL & " and cobros.codforpa = formapago.codforpa "
+    SQL = SQL & " group by 1,2,3,4 "
     
     Conn.Execute SQL
 
@@ -673,8 +677,6 @@ End Function
 Public Function RealizarDevolucionRemesa(FechaDevolucion As Date, ContabilizoGastoBanco As Boolean, CtaBenBancarios As String, Remesa As String, DatosContabilizacionDevolucion As String, CodigoDevolucion As String) As Boolean
 Dim C As String
     
-    C = "codigo =" & RecuperaValor(Remesa, 1) & " AND anyo "
-    C = DevuelveDesdeBD("tiporem", "remesas", C, RecuperaValor(Remesa, 2))
     C = RecuperaValor(Remesa, 10)
     If C = "1" Then
         RealizarDevolucionRemesa = RealizarDevolucionRemesaEfectos(FechaDevolucion, ContabilizoGastoBanco, CtaBenBancarios, Remesa, DatosContabilizacionDevolucion, CodigoDevolucion)
@@ -1469,8 +1471,8 @@ Dim LINAPU As String
                      Ampliacion = Ampliacion & DBSet(FechaDevolucion, "F") & ","
                      Ampliacion = Ampliacion & DBSet(RS!Total, "N") & ","
                      Ampliacion = Ampliacion & DBSet(RsCobro!Tiporem, "N") & ","
-                     Ampliacion = Ampliacion & DBSet(RsCobro!codrem, "N") & ","
-                     Ampliacion = Ampliacion & DBSet(RsCobro!anyorem, "N") & ","
+                     Ampliacion = Ampliacion & DBSet(RsCobro!CodRem, "N") & ","
+                     Ampliacion = Ampliacion & DBSet(RsCobro!AnyoRem, "N") & ","
                      Ampliacion = Ampliacion & DBSet(CodigoDevolucion, "T", "S") & ")"
                      
                      Ejecuta Ampliacion
@@ -1479,7 +1481,7 @@ Dim LINAPU As String
            
            
                 Ampliacion = "UPDATE cobros SET "
-                Ampliacion = Ampliacion & " Devuelto =1  "
+                Ampliacion = Ampliacion & " Devuelto = 1, situacion = 0   "
                 Importe = RS!Total - RS!imponible '- Rs!impiva
                 
                 miRsAux.Open "Select * from cobros " & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText

@@ -17,6 +17,176 @@ Begin VB.Form frmTESRemesas
    ScaleHeight     =   9120
    ScaleWidth      =   16035
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame Frame1 
+      BorderStyle     =   0  'None
+      Height          =   9015
+      Left            =   30
+      TabIndex        =   20
+      Top             =   30
+      Visible         =   0   'False
+      Width           =   15915
+      Begin VB.Frame FrameBotonGnral2 
+         Height          =   705
+         Left            =   4020
+         TabIndex        =   28
+         Top             =   180
+         Width           =   1965
+         Begin MSComctlLib.Toolbar Toolbar2 
+            Height          =   330
+            Left            =   210
+            TabIndex        =   29
+            Top             =   240
+            Width           =   1545
+            _ExtentX        =   2725
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   3
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Grabación Fichero"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Abono Remesa"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Devolución"
+               EndProperty
+            EndProperty
+         End
+      End
+      Begin VB.Frame Frame2 
+         Height          =   705
+         Left            =   240
+         TabIndex        =   21
+         Top             =   180
+         Width           =   3585
+         Begin MSComctlLib.Toolbar Toolbar1 
+            Height          =   330
+            Left            =   180
+            TabIndex        =   1
+            Top             =   240
+            Width           =   3135
+            _ExtentX        =   5530
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   10
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Nuevo"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Modificar"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Eliminar"
+                  Object.Tag             =   "2"
+                  Object.Width           =   1e-4
+               EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Buscar"
+               EndProperty
+               BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Ver Todos"
+                  Object.Tag             =   "0"
+               EndProperty
+               BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Imprimir"
+               EndProperty
+               BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
+                  Object.ToolTipText     =   "Salir"
+               EndProperty
+               BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
+                  Style           =   3
+               EndProperty
+            EndProperty
+         End
+      End
+      Begin MSComctlLib.ListView lw1 
+         Height          =   7305
+         Left            =   240
+         TabIndex        =   22
+         Top             =   990
+         Width           =   15525
+         _ExtentX        =   27384
+         _ExtentY        =   12885
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   0
+      End
+      Begin MSComctlLib.Toolbar ToolbarAyuda 
+         Height          =   390
+         Left            =   15270
+         TabIndex        =   23
+         Top             =   210
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   688
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ayuda"
+            EndProperty
+         EndProperty
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   14670
+         TabIndex        =   0
+         Top             =   7860
+         Width           =   975
+      End
+   End
    Begin MSComDlg.CommonDialog cd1 
       Left            =   6930
       Top             =   150
@@ -27,9 +197,9 @@ Begin VB.Form frmTESRemesas
    Begin VB.Frame FrameCreacionRemesa 
       BorderStyle     =   0  'None
       Height          =   9045
-      Left            =   90
+      Left            =   60
       TabIndex        =   19
-      Top             =   0
+      Top             =   -90
       Visible         =   0   'False
       Width           =   15855
       Begin VB.Frame FrameModRem 
@@ -46,7 +216,7 @@ Begin VB.Form frmTESRemesas
          Height          =   3735
          Left            =   120
          TabIndex        =   62
-         Top             =   90
+         Top             =   60
          Width           =   15645
          Begin VB.TextBox txtFecha 
             Alignment       =   2  'Center
@@ -1376,176 +1546,6 @@ Begin VB.Form frmTESRemesas
          TabIndex        =   61
          Top             =   3900
          Width           =   1575
-      End
-   End
-   Begin VB.Frame Frame1 
-      BorderStyle     =   0  'None
-      Height          =   9015
-      Left            =   30
-      TabIndex        =   20
-      Top             =   30
-      Visible         =   0   'False
-      Width           =   15915
-      Begin VB.Frame FrameBotonGnral2 
-         Height          =   705
-         Left            =   4020
-         TabIndex        =   28
-         Top             =   180
-         Width           =   1965
-         Begin MSComctlLib.Toolbar Toolbar2 
-            Height          =   330
-            Left            =   210
-            TabIndex        =   29
-            Top             =   240
-            Width           =   1545
-            _ExtentX        =   2725
-            _ExtentY        =   582
-            ButtonWidth     =   609
-            ButtonHeight    =   582
-            AllowCustomize  =   0   'False
-            Style           =   1
-            _Version        =   393216
-            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   3
-               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Grabación Fichero"
-               EndProperty
-               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Abono Remesa"
-               EndProperty
-               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Devolución"
-               EndProperty
-            EndProperty
-         End
-      End
-      Begin VB.Frame Frame2 
-         Height          =   705
-         Left            =   240
-         TabIndex        =   21
-         Top             =   180
-         Width           =   3585
-         Begin MSComctlLib.Toolbar Toolbar1 
-            Height          =   330
-            Left            =   180
-            TabIndex        =   1
-            Top             =   240
-            Width           =   3135
-            _ExtentX        =   5530
-            _ExtentY        =   582
-            ButtonWidth     =   609
-            ButtonHeight    =   582
-            AllowCustomize  =   0   'False
-            Style           =   1
-            _Version        =   393216
-            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   10
-               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Nuevo"
-                  Object.Tag             =   "2"
-               EndProperty
-               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Modificar"
-                  Object.Tag             =   "2"
-               EndProperty
-               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Eliminar"
-                  Object.Tag             =   "2"
-                  Object.Width           =   1e-4
-               EndProperty
-               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Style           =   3
-               EndProperty
-               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Buscar"
-               EndProperty
-               BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Ver Todos"
-                  Object.Tag             =   "0"
-               EndProperty
-               BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Style           =   3
-               EndProperty
-               BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Imprimir"
-               EndProperty
-               BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Enabled         =   0   'False
-                  Object.Visible         =   0   'False
-                  Object.ToolTipText     =   "Salir"
-               EndProperty
-               BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Enabled         =   0   'False
-                  Object.Visible         =   0   'False
-                  Style           =   3
-               EndProperty
-            EndProperty
-         End
-      End
-      Begin MSComctlLib.ListView lw1 
-         Height          =   7305
-         Left            =   240
-         TabIndex        =   22
-         Top             =   990
-         Width           =   15525
-         _ExtentX        =   27384
-         _ExtentY        =   12885
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   0
-      End
-      Begin MSComctlLib.Toolbar ToolbarAyuda 
-         Height          =   390
-         Left            =   15270
-         TabIndex        =   23
-         Top             =   210
-         Width           =   405
-         _ExtentX        =   714
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ayuda"
-            EndProperty
-         EndProperty
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   1
-         Left            =   14670
-         TabIndex        =   0
-         Top             =   7860
-         Width           =   975
       End
    End
 End

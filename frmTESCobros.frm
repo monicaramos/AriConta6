@@ -1914,14 +1914,14 @@ Begin VB.Form frmTESCobros
             End
             Begin MSDataGridLib.DataGrid DataGridAux 
                Bindings        =   "frmTESCobros.frx":02EC
-               Height          =   825
+               Height          =   1215
                Index           =   1
                Left            =   0
                TabIndex        =   100
                Top             =   570
                Width           =   13365
                _ExtentX        =   23574
-               _ExtentY        =   1455
+               _ExtentY        =   2143
                _Version        =   393216
                AllowUpdate     =   0   'False
                BorderStyle     =   0
