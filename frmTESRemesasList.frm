@@ -646,9 +646,9 @@ Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
 
@@ -813,7 +813,7 @@ End Sub
 
 
 Private Sub txtNum_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -862,7 +862,7 @@ Dim indRPT As String
 Dim nomDocu As String
     
     vMostrarTree = False
-    conSubRPT = False
+    conSubRPT = True
         
     indRPT = "0609-00" '"ConsExtrac.rpt"
     

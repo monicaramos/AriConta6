@@ -183,6 +183,7 @@ Form=frmTESRemesasList.frm
 Form=frmTESRemesasGrab.frm
 Form=frmTESRemesasCont.frm
 Form=frmTESRemesasDev.frm
+Form=frmTESCobrosDevList.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

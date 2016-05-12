@@ -579,7 +579,9 @@ Public Sub MuestraError(numero As Long, Optional CADENA As String, Optional Desc
     End If
     If Aux <> "" Then Desc = Aux
     If Desc <> "" Then Cad = Cad & vbCrLf & Desc & vbCrLf & vbCrLf
-    If Aux = "" Then Cad = Cad & "Número: " & numero & vbCrLf & "Descripción: " & Error(numero)
+    If Aux = "" Then
+        If numero <> 513 Then Cad = Cad & "Número: " & numero & vbCrLf & "Descripción: " & Error(numero)
+    End If
     MsgBox Cad, vbExclamation
 End Sub
 

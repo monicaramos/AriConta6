@@ -29,11 +29,11 @@ Begin VB.Form frmIdentifica
       Height          =   330
       IMEMode         =   3  'DISABLE
       Index           =   1
-      Left            =   4410
+      Left            =   4950
       PasswordChar    =   "*"
       TabIndex        =   2
       Text            =   "aritel"
-      Top             =   4590
+      Top             =   5070
       Width           =   2655
    End
    Begin VB.ComboBox Combo1 
@@ -49,11 +49,11 @@ Begin VB.Form frmIdentifica
       EndProperty
       Height          =   390
       ItemData        =   "frmIdentifica.frx":0000
-      Left            =   4410
+      Left            =   4950
       List            =   "frmIdentifica.frx":0002
       Style           =   2  'Dropdown List
       TabIndex        =   1
-      Top             =   3630
+      Top             =   4110
       Width           =   2685
    End
    Begin VB.TextBox Text1 
@@ -72,10 +72,10 @@ Begin VB.Form frmIdentifica
       EndProperty
       Height          =   330
       Index           =   0
-      Left            =   4470
+      Left            =   4980
       TabIndex        =   0
       Text            =   "Text1"
-      Top             =   3630
+      Top             =   4170
       Visible         =   0   'False
       Width           =   2655
    End
@@ -94,9 +94,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00FFFFFF&
       Height          =   375
       Index           =   3
-      Left            =   3930
+      Left            =   4350
       TabIndex        =   6
-      Top             =   2310
+      Top             =   2340
       Width           =   1575
    End
    Begin VB.Label Label1 
@@ -114,9 +114,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00765341&
       Height          =   285
       Index           =   2
-      Left            =   4440
+      Left            =   360
       TabIndex        =   5
-      Top             =   5130
+      Top             =   2850
       Width           =   2655
    End
    Begin VB.Label Label1 
@@ -134,9 +134,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00765341&
       Height          =   375
       Index           =   1
-      Left            =   4410
+      Left            =   4950
       TabIndex        =   4
-      Top             =   4200
+      Top             =   4680
       Width           =   2175
    End
    Begin VB.Label Label1 
@@ -154,18 +154,17 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00765341&
       Height          =   375
       Index           =   0
-      Left            =   4410
+      Left            =   4950
       TabIndex        =   3
-      Top             =   3240
+      Top             =   3720
       Width           =   2175
    End
    Begin VB.Image Image1 
       Appearance      =   0  'Flat
-      Height          =   5625
+      Height          =   5790
       Left            =   0
-      Stretch         =   -1  'True
       Top             =   0
-      Width           =   9705
+      Width           =   9750
    End
 End
 Attribute VB_Name = "frmIdentifica"
