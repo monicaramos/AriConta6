@@ -26,6 +26,128 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   13500
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameReclamaciones 
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   5535
+      Left            =   0
+      TabIndex        =   246
+      Top             =   0
+      Width           =   9795
+      Begin VB.CommandButton Command1 
+         Caption         =   "&Salir"
+         Height          =   375
+         Index           =   3
+         Left            =   8370
+         TabIndex        =   247
+         Top             =   4770
+         Width           =   1095
+      End
+      Begin MSComctlLib.ImageList ImageList3 
+         Left            =   1320
+         Top             =   5760
+         _ExtentX        =   1005
+         _ExtentY        =   1005
+         BackColor       =   -2147483643
+         ImageWidth      =   16
+         ImageHeight     =   16
+         MaskColor       =   12632256
+         _Version        =   393216
+         BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+            NumListImages   =   3
+            BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmMensajes.frx":000C
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmMensajes.frx":57FE
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmMensajes.frx":6210
+               Key             =   ""
+            EndProperty
+         EndProperty
+      End
+      Begin MSComctlLib.ListView ListView9 
+         Height          =   3735
+         Left            =   180
+         TabIndex        =   248
+         Top             =   840
+         Width           =   9315
+         _ExtentX        =   16431
+         _ExtentY        =   6588
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         SmallIcons      =   "ImageList1"
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Nivel"
+            Object.Width           =   2699
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   1
+            Text            =   "Debe"
+            Object.Width           =   2999
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   2
+            Text            =   "Haber"
+            Object.Width           =   2999
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   3
+            Text            =   "Saldo"
+            Object.Width           =   2999
+         EndProperty
+      End
+      Begin VB.Label Label30 
+         Caption         =   "Label30"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   11.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   405
+         Left            =   210
+         TabIndex        =   249
+         Top             =   240
+         Width           =   9195
+      End
+   End
    Begin VB.Frame FrameDescuadre 
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -64,15 +186,15 @@ Begin VB.Form frmMensajes
          BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
             NumListImages   =   3
             BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":000C
+               Picture         =   "frmMensajes.frx":6662
                Key             =   ""
             EndProperty
             BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":57FE
+               Picture         =   "frmMensajes.frx":BE54
                Key             =   ""
             EndProperty
             BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":6210
+               Picture         =   "frmMensajes.frx":C866
                Key             =   ""
             EndProperty
          EndProperty
@@ -171,15 +293,15 @@ Begin VB.Form frmMensajes
          BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
             NumListImages   =   3
             BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":6662
+               Picture         =   "frmMensajes.frx":CCB8
                Key             =   ""
             EndProperty
             BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":BE54
+               Picture         =   "frmMensajes.frx":124AA
                Key             =   ""
             EndProperty
             BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":C866
+               Picture         =   "frmMensajes.frx":12EBC
                Key             =   ""
             EndProperty
          EndProperty
@@ -460,7 +582,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image Image3 
          Height          =   240
          Left            =   1290
-         Picture         =   "frmMensajes.frx":CCB8
+         Picture         =   "frmMensajes.frx":1330E
          Top             =   1920
          Width           =   240
       End
@@ -1013,7 +1135,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   6480
-         Picture         =   "frmMensajes.frx":D6BA
+         Picture         =   "frmMensajes.frx":13D10
          Top             =   330
          Width           =   240
       End
@@ -1021,7 +1143,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   6120
-         Picture         =   "frmMensajes.frx":D804
+         Picture         =   "frmMensajes.frx":13E5A
          Top             =   330
          Width           =   240
       End
@@ -1408,7 +1530,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   5820
-         Picture         =   "frmMensajes.frx":D94E
+         Picture         =   "frmMensajes.frx":13FA4
          Top             =   1605
          Width           =   240
       End
@@ -1416,7 +1538,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   5820
-         Picture         =   "frmMensajes.frx":E350
+         Picture         =   "frmMensajes.frx":149A6
          Top             =   2070
          Width           =   240
       End
@@ -1536,7 +1658,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          TabIndex        =   189
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":ED52
+         Text            =   "frmMensajes.frx":153A8
          Top             =   720
          Width           =   7665
       End
@@ -1548,7 +1670,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          TabIndex        =   188
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":ED58
+         Text            =   "frmMensajes.frx":153AE
          Top             =   720
          Width           =   1005
       End
@@ -1569,7 +1691,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   185
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":ED5E
+         Text            =   "frmMensajes.frx":153B4
          Top             =   1320
          Width           =   8775
       End
@@ -1740,7 +1862,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   960
-         Picture         =   "frmMensajes.frx":ED64
+         Picture         =   "frmMensajes.frx":153BA
          Top             =   1080
          Width           =   240
       End
@@ -1861,7 +1983,7 @@ Begin VB.Form frmMensajes
             Locked          =   -1  'True
             MultiLine       =   -1  'True
             TabIndex        =   210
-            Text            =   "frmMensajes.frx":F766
+            Text            =   "frmMensajes.frx":15DBC
             Top             =   840
             Width           =   6015
          End
@@ -1970,7 +2092,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          TabIndex        =   88
          Tag             =   "#Despedida"
-         Text            =   "frmMensajes.frx":F7D9
+         Text            =   "frmMensajes.frx":15E2F
          Top             =   4860
          Width           =   3075
       End
@@ -2032,7 +2154,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   86
          Tag             =   "#Parrafo4"
-         Text            =   "frmMensajes.frx":F7DF
+         Text            =   "frmMensajes.frx":15E35
          Top             =   4860
          Width           =   3135
       End
@@ -2054,7 +2176,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   87
          Tag             =   "#Parrafo5"
-         Text            =   "frmMensajes.frx":F7E5
+         Text            =   "frmMensajes.frx":15E3B
          Top             =   4860
          Width           =   3135
       End
@@ -2076,7 +2198,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   85
          Tag             =   "#Parrafo3"
-         Text            =   "frmMensajes.frx":F7EB
+         Text            =   "frmMensajes.frx":15E41
          Top             =   2580
          Width           =   3135
       End
@@ -2098,7 +2220,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   84
          Tag             =   "#Parrafo2"
-         Text            =   "frmMensajes.frx":F8E8
+         Text            =   "frmMensajes.frx":15F3E
          Top             =   2580
          Width           =   3135
       End
@@ -2120,7 +2242,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   83
          Tag             =   "#Parrafo1"
-         Text            =   "frmMensajes.frx":F8EE
+         Text            =   "frmMensajes.frx":15F44
          Top             =   2580
          Width           =   3135
       End
@@ -2647,7 +2769,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   103
-         Text            =   "frmMensajes.frx":F8F4
+         Text            =   "frmMensajes.frx":15F4A
          Top             =   900
          Width           =   4365
       End
@@ -2658,7 +2780,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   102
-         Text            =   "frmMensajes.frx":F8FA
+         Text            =   "frmMensajes.frx":15F50
          Top             =   900
          Width           =   4125
       End
@@ -2919,7 +3041,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   4920
-         Picture         =   "frmMensajes.frx":F900
+         Picture         =   "frmMensajes.frx":15F56
          ToolTipText     =   "Quitar seleccion"
          Top             =   720
          Width           =   240
@@ -2928,7 +3050,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   4920
-         Picture         =   "frmMensajes.frx":FA4A
+         Picture         =   "frmMensajes.frx":160A0
          ToolTipText     =   "Todos"
          Top             =   1080
          Width           =   240
@@ -3035,7 +3157,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image ImageAyudaImpcta 
          Height          =   240
          Left            =   2640
-         Picture         =   "frmMensajes.frx":FB94
+         Picture         =   "frmMensajes.frx":161EA
          Top             =   360
          Width           =   240
       End
@@ -3077,7 +3199,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   2280
-         Picture         =   "frmMensajes.frx":10596
+         Picture         =   "frmMensajes.frx":16BEC
          Top             =   360
          Width           =   240
       End
@@ -3255,7 +3377,7 @@ Begin VB.Form frmMensajes
          Begin VB.Image Image5 
             Height          =   240
             Left            =   840
-            Picture         =   "frmMensajes.frx":10F98
+            Picture         =   "frmMensajes.frx":175EE
             Top             =   360
             Width           =   240
          End
@@ -4252,8 +4374,8 @@ Public Opcion As Byte
      
      '30- Asientos descuadrados
      
-    
-    
+     '***** TESORERIA *****
+     '50- Facturas de Reclamaciones
     
 Public Parametros As String
     '1.- Vendran empipados: Cuenta, PunteadoD, punteadoH, pdteD,PdteH
@@ -4269,6 +4391,10 @@ Dim ItmX As ListItem
 Dim Errores As String
 Dim NE As Integer
 Dim Ok As Integer
+
+Dim CampoOrden As String
+Dim Orden As Boolean
+
 
 Private Sub cmd347_Click(Index As Integer)
     If Index = 0 Then
@@ -4846,6 +4972,10 @@ Private Sub Form_Activate()
             CargarAsientosDescuadrados
         Case 31
             CargarFacturasSinAsientos
+        Case 50
+            CargarFacturasReclamaciones
+        Case 51
+            CargarFacturasRemesas
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -4858,13 +4988,17 @@ End Sub
 '++
 
 
+Private Sub Form_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
 Private Sub Form_Load()
 Dim W, H
     Me.tCuadre.Enabled = False
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.FrameAmort.Visible = False
+    Me.frameamort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
@@ -4885,6 +5019,7 @@ Dim W, H
     Me.FrameCobros.Visible = False
     Me.FrameAsientoLiquida.Visible = False
     Me.FrameDescuadre.Visible = False
+    Me.FrameReclamaciones.Visible = False
     
     Select Case Opcion
     Case 1
@@ -4904,9 +5039,9 @@ Dim W, H
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.FrameAmort.Width
-        H = Me.FrameAmort.Height + 200
-        Me.FrameAmort.Visible = True
+        W = Me.frameamort.Width
+        H = Me.frameamort.Height + 200
+        Me.frameamort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
@@ -5103,8 +5238,26 @@ Dim W, H
         W = Me.FrameDescuadre.Width
         H = Me.FrameDescuadre.Height + 300
         
+    Case 50 ' facturas de reclamaciones
+        Me.Caption = "Facturas Reclamadas"
+        Me.Label30.Caption = "Reclamación a " & RecuperaValor(Parametros, 2) & " de fecha " & RecuperaValor(Parametros, 3)
+        Me.FrameReclamaciones.Visible = True
+        W = Me.FrameReclamaciones.Width
+        H = Me.FrameReclamaciones.Height + 300
         
-        
+        Orden = True
+        CampoOrden = "fecfactu"
+    
+    Case 51 ' facturas de remesas
+        Me.Caption = "Facturas de Remesa"
+        Me.Label30.Caption = "Remesa " & RecuperaValor(Parametros, 1) & " / " & RecuperaValor(Parametros, 2)
+        Me.FrameReclamaciones.Visible = True
+        W = Me.FrameReclamaciones.Width
+        H = Me.FrameReclamaciones.Height + 300
+    
+        Orden = True
+        CampoOrden = "fecfactu"
+            
     End Select
     Me.Width = W + 120
     Me.Height = H + 120
@@ -5351,6 +5504,51 @@ Private Sub imgCheck_Click(Index As Integer)
             Next i
     End Select
         
+    
+End Sub
+
+Private Sub ListView9_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    
+    If Opcion = 51 Then
+        Orden = Not Orden
+        
+        Select Case ColumnHeader
+            Case "Serie"
+                CampoOrden = "numserie"
+            Case "Factura"
+                CampoOrden = "numfactu"
+            Case "Fecha"
+                CampoOrden = "fecfactu"
+            Case "Vto"
+                CampoOrden = "numorden"
+            Case "Fecha Vto"
+                CampoOrden = "fecvenci"
+            Case "Importe"
+                CampoOrden = "importe"
+        End Select
+        
+        CargarFacturasRemesas
+    Else
+        Orden = Not Orden
+        
+        Select Case ColumnHeader
+            Case "Serie"
+                CampoOrden = "numserie"
+            Case "Factura"
+                CampoOrden = "numfactu"
+            Case "Fecha"
+                CampoOrden = "fecfactu"
+            Case "Vto"
+                CampoOrden = "numorden"
+            Case "Fecha Vto"
+                CampoOrden = "fecvenci"
+            Case "Importe"
+                CampoOrden = "importe"
+        End Select
+        
+        CargarFacturasReclamaciones
+    
+    End If
     
 End Sub
 
@@ -7325,6 +7523,154 @@ ECargarAsiento:
     Errores = ""
     Set RS = Nothing
 End Sub
+
+
+
+
+Private Sub CargarFacturasReclamaciones()
+Dim IT As ListItem
+Dim TotalArray  As Long
+Dim SERVER As String
+Dim EquipoConBD As Boolean
+Dim Cad As String
+Dim Equipo As String
+Dim Pos As Long
+
+    On Error GoTo ECargarFacturas
+    
+    
+    ListView9.ColumnHeaders.Clear
+    ListView9.ListItems.Clear
+    
+    
+    ListView9.ColumnHeaders.Add , , "Serie", 800.2522
+    ListView9.ColumnHeaders.Add , , "Factura", 2000.2522
+    ListView9.ColumnHeaders.Add , , "Fecha", 2000.2522
+    ListView9.ColumnHeaders.Add , , "Vto", 1500.2522
+    ListView9.ColumnHeaders.Add , , "Importe", 2000.2522, 1
+    
+    Set RS = New ADODB.Recordset
+    
+    Cad = "select numserie, numfactu, fecfactu, numorden, impvenci importe "
+    Cad = Cad & " from reclama_facturas "
+    Cad = Cad & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
+    
+    If CampoOrden = "" Then CampoOrden = "fecfactu"
+    Cad = Cad & " ORDER BY " & CampoOrden
+    If Orden Then Cad = Cad & " DESC"
+    
+'    Cad = Cad & " order by numserie, numfactu, fecfactu "
+    
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Cad = ""
+    While Not RS.EOF
+                    
+        Set IT = ListView9.ListItems.Add
+        
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        IT.SubItems(3) = DBLet(RS.Fields(3))
+        If DBLet(RS.Fields(4)) <> 0 Then
+            IT.SubItems(4) = Format(DBLet(RS.Fields(4)), "###,###,##0.00")
+        Else
+            IT.SubItems(4) = ""
+        End If
+        
+        'Siguiente
+        RS.MoveNext
+    Wend
+    NumRegElim = 0
+    RS.Close
+    Set RS = Nothing
+    
+    Exit Sub
+    
+ECargarFacturas:
+    MuestraError Err.Number, Err.Description
+    Errores = ""
+    Set RS = Nothing
+End Sub
+
+
+Private Sub CargarFacturasRemesas()
+Dim IT As ListItem
+Dim TotalArray  As Long
+Dim SERVER As String
+Dim EquipoConBD As Boolean
+Dim Cad As String
+Dim Equipo As String
+Dim Pos As Long
+
+    On Error GoTo ECargarFacturas
+    
+    
+    ListView9.ColumnHeaders.Clear
+    ListView9.ListItems.Clear
+    
+    
+    ListView9.ColumnHeaders.Add , , "Serie", 800.2522
+    ListView9.ColumnHeaders.Add , , "Factura", 1500.2522
+    ListView9.ColumnHeaders.Add , , "Fecha", 1500.2522
+    ListView9.ColumnHeaders.Add , , "Vto", 700.2522
+    ListView9.ColumnHeaders.Add , , "Fecha Vto", 1500.2522
+    ListView9.ColumnHeaders.Add , , "Importe", 2000.2522, 1
+    
+    Set RS = New ADODB.Recordset
+    
+    Cad = "select cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci, cobros.impvenci importe, ' ' devol"
+    Cad = Cad & " from cobros "
+    Cad = Cad & " where (cobros.codrem = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and cobros.anyorem = " & DBSet(RecuperaValor(Parametros, 2), "N") & ") "
+    Cad = Cad & " union "
+    Cad = Cad & " select cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros.fecvenci, cobros_realizados.impcobro * (-1) importe, '*' devol"
+    Cad = Cad & " from cobros left join cobros_realizados on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden "
+    Cad = Cad & " where (cobros_realizados.codrem = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and cobros_realizados.anyorem = " & DBSet(RecuperaValor(Parametros, 2), "N") & ") "
+    
+    If CampoOrden = "" Then CampoOrden = "fecfactu"
+    Cad = Cad & " ORDER BY " & CampoOrden
+    If Orden Then Cad = Cad & " DESC"
+    
+    
+    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Cad = ""
+    While Not RS.EOF
+                    
+        Set IT = ListView9.ListItems.Add
+        
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        IT.SubItems(3) = DBLet(RS.Fields(3))
+        IT.SubItems(4) = DBLet(RS.Fields(4))
+        
+        If DBLet(RS.Fields(5)) <> 0 Then
+            IT.SubItems(5) = Format(DBLet(RS.Fields(5)), "###,###,##0.00")
+        Else
+            IT.SubItems(5) = ""
+        End If
+        'Siguiente
+        
+        If RS.Fields(6) = "*" Then
+            IT.Bold = True
+            IT.ForeColor = vbRed
+        End If
+        
+        
+        
+        RS.MoveNext
+    Wend
+    NumRegElim = 0
+    RS.Close
+    Set RS = Nothing
+    
+    Exit Sub
+    
+ECargarFacturas:
+    MuestraError Err.Number, Err.Description
+    Errores = ""
+    Set RS = Nothing
+End Sub
+
 
 
 

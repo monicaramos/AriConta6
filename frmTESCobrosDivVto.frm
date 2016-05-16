@@ -307,9 +307,9 @@ Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim cad As String
+Dim Cad As String
 Dim CONT As Long
-Dim I As Integer
+Dim i As Integer
 Dim TotalRegistros As Long
 
 Dim Importe As Currency
@@ -327,14 +327,6 @@ Private Sub PonFoco(ByRef T1 As TextBox)
     T1.SelLength = Len(T1.Text)
 End Sub
 
-
-
-
-
-
-
-
-
 Private Function ComprobarObjeto(ByRef T As TextBox) As Boolean
     Set miTag = New CTag
     ComprobarObjeto = False
@@ -346,14 +338,6 @@ Private Function ComprobarObjeto(ByRef T As TextBox) As Boolean
 
     Set miTag = Nothing
 End Function
-
-
-
-
-
-
-
-
 
 Private Sub cmdCancelar_Click(Index As Integer)
     If Index = 20 Or Index = 23 Or Index >= 26 Then
@@ -382,27 +366,6 @@ Dim Dias As Integer
 
     'Dividira el vto en dos. En uno dejara el importe que solicita y en el otro el resto
     'Los gastos s quedarian en uno asi como el cobrado si diera lugar
-'    SQL = ""
-'    If txtcodigo(1).Text = "" Then SQL = "Ponga el importe" & vbCrLf
-'
-'    RC = RecuperaValor(CadenaDesdeOtroForm, 3)
-'    Importe = CCur(RC)
-'    Im = ImporteFormateado(txtcodigo(1).Text)
-'    If Im = 0 Then
-'        SQL = "Importe no puede ser cero"
-'    Else
-'        If Importe > 0 Then
-'            'Vencimiento normal
-'            If Im > Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
-'        Else
-'            'ABONO
-'            If Im > 0 Then
-'                SQL = "Es un abono. Importes negativos"
-'            Else
-'                If Im < Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
-'            End If
-'        End If
-'    End If
     
     ' controles
     
@@ -465,12 +428,6 @@ Dim Dias As Integer
         vVtos = Round(Importe / vImpvto, 0)
     End If
     
-'    ImportePagado = DevuelveValor("select impcobro from cobros where " & RecuperaValor(CadenaDesdeOtroForm, 1) & " and numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2))
-'    If vImpvto < ImportePagado Then
-'        MsgBox "El importe cobrado del vencimiento es superior al importe de vencimiento que dejaremos. Revise.", vbExclamation
-'        Exit Sub
-'    End If
-    
     Conn.BeginTrans
     
     SQL = ""
@@ -482,13 +439,13 @@ Dim Dias As Integer
         '           1.- cadenaSQL numfac,numsere,fecfac
         '           2.- Numero vto
         '           3.- Importe maximo
-        I = -1
+        i = -1
         RC = "Select max(numorden) from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         RS.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RS.EOF Then
             SQL = "Error. Vencimiento NO encontrado: " & CadenaDesdeOtroForm
         Else
-            I = RS.Fields(0) '+ 1
+            i = RS.Fields(0) '+ 1
         End If
         RS.Close
         Set RS = Nothing
@@ -511,7 +468,7 @@ Dim Dias As Integer
     vFecVenci = FecVenci
     'OK.  a desdoblar
     vTotal = 0
-    K = I + 1
+    K = i + 1
     For J = 1 To vVtos - 1
     
         vTotal = vTotal + vImpvto
@@ -574,31 +531,6 @@ Dim Dias As Integer
     vLog.Insertar 1, vUsu, ParaElLog
     ParaElLog = ""
     
-'    'Hacemos
-'    CONT = 1
-'    If Ejecuta(SQL) Then
-'        'Hemos insertado. AHora updateamos el impvenci del que se queda
-'        If Im < 0 Then
-'            'Abonos
-'            SQL = "UPDATE cobros SET impvenci= impvenci + " & TransformaComasPuntos(CStr(Abs(Im)))
-'        Else
-'            'normal
-'            SQL = "UPDATE cobros SET impvenci= impvenci - " & TransformaComasPuntos(CStr(Im))
-'        End If
-'
-'        SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-'        SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
-'        If Ejecuta(SQL) Then CONT = 0 'TODO BIEN ******
-'    End If
-'    'Si mal, volvemos
-'    If CONT = 1 Then
-'        Conn.RollbackTrans
-'    Else
-'        Conn.CommitTrans
-'        CadenaDesdeOtroForm = I
-'        Unload Me
-'    End If
-    
     
 ecmdDivVto:
     If Err.Number <> 0 Then
@@ -623,7 +555,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -644,20 +576,20 @@ Dim Img As Image
             '           1.- cadenaSQL numfac,numsere,fecfac
             '           2.- Numero vto
             '           3.- Importe maximo
-            h = FrameDividVto.Height + 120
+            H = FrameDividVto.Height + 120
             W = FrameDividVto.Width
             FrameDividVto.Visible = True
             Me.Caption = "Dividir Vencimiento"
     End Select
     
     Me.Width = W + 300
-    Me.Height = h + 400
+    Me.Height = H + 400
     
-    I = Opcion
-    If Opcion = 13 Or I = 43 Or I = 44 Then I = 11
+    i = Opcion
+    If Opcion = 13 Or i = 43 Or i = 44 Then i = 11
     
     'Aseguradas
-    Me.cmdCancelar(I).Cancel = True
+    Me.cmdCancelar(i).Cancel = True
     
 End Sub
 
@@ -695,7 +627,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub txtcodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim B As Boolean
 
     'Quitar espacios en blanco por los lados

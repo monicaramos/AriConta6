@@ -861,7 +861,7 @@ Attribute frmB.VB_VarHelpID = -1
 
 Dim RS As ADODB.Recordset
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 Dim IT As ListItem  'Comun
 Dim PrimeraVez As Boolean
 Dim Cancelado As Boolean
@@ -900,11 +900,11 @@ Private Sub CargaCombo()
     Set RS = New ADODB.Recordset
     SQL = "select codigo, descripcion from usuarios.wdevolucion order by codigo"
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
+    i = 0
     While Not RS.EOF
         CmbDevol.AddItem RS!Codigo & "-" & RS!Descripcion
-        CmbDevol.ItemData(CmbDevol.NewIndex) = I
-        I = I + 1
+        CmbDevol.ItemData(CmbDevol.NewIndex) = i
+        i = i + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -1093,14 +1093,6 @@ Dim TipoFicheroDevolucion As Byte
     'Bloqueamos la devolucion
     BloqueoManual True, "Devolrem", vUsu.Codigo
     'Hacemos la devolucion
-'--
-'    frmRemesas.Opcion = 2
-'    frmRemesas.vRemesa = SQL
-'    frmRemesas.ImporteRemesa = Importe 'Utilizamos esta variable para indicar el gasto a cargar por recibo
-    '28Marzo2007
-    'Para la contabilizacion de la devolucion
-    'Client
-'++
     vRemesa = SQL
     ImporteRemesa = Importe
     
@@ -1110,18 +1102,9 @@ Dim TipoFicheroDevolucion As Byte
     'Agrupa el apunte del banco
     SQL = SQL & Abs(chkAgrupadevol2.Value) & "|"
     
-    
-'--
-'    frmRemesas.ValoresDevolucionRemesa = SQL
-'    'Si es desde el vto, para que lo busque
-'    frmRemesas.vSQL = CadenaVencimiento
-'
-'    frmRemesas.Show vbModal
-'++
     vSQL = CadenaVencimiento
     
     DevolverRemesa
-
 
     'Desbloqueamos
     BloqueoManual False, "Devolrem", vUsu.Codigo
@@ -1147,12 +1130,6 @@ Dim Aux As String
     
     'Llegado aqui hago la pregunta
     cad = "Va a realizar la devolución de " & cad & vbCrLf
-   '--
-   'If InStr(1, Label6.Caption, ":") > 0 Then
-   '    Cad = Cad & vbCrLf & "Importe total de la devolución: "
-   '    Cad = Cad & Mid(Label6.Caption, InStr(1, Label6.Caption, ":")) & "€" & vbCrLf & vbCrLf
-   'End If
-   '++ sustituido por esto
     If Text1(4).Text <> "" Then
         cad = cad & vbCrLf & "Importe total de la devolución: "
         cad = cad & Text1(4).Text & "€" & vbCrLf & vbCrLf
@@ -1318,8 +1295,6 @@ Dim CtaBan As String
     If RealizarDevolucionRemesa(CDate(Text1(11)), jj > 0, CtaBan, vRemesa, ValoresDevolucionRemesa) Then
         RealizarDevolucion = True
         Screen.MousePointer = vbHourglass
-'        frmActualizar2.OpcionActualizar = 20
-'        frmActualizar2.Show vbModal
         Screen.MousePointer = vbDefault
     End If
 End Function
@@ -1508,21 +1483,21 @@ Private Sub imgCheck_Click(Index As Integer)
 
     If Index < 2 Then
         'Selecciona forma de pago
-        For I = 1 To Me.lwCobros.ListItems.Count
+        For i = 1 To Me.lwCobros.ListItems.Count
             If Remesa <> 0 And AñoRem <> 0 Then
-                If Index = 1 And (Remesa <> lwCobros.ListItems(I).SubItems(8) Or AñoRem <> lwCobros.ListItems(I).SubItems(9)) Then
+                If Index = 1 And (Remesa <> lwCobros.ListItems(i).SubItems(8) Or AñoRem <> lwCobros.ListItems(i).SubItems(9)) Then
                     MsgBox "No pueden ser cobros de distintas remesas.", vbExclamation
-                    lwCobros.ListItems(I).Checked = False
+                    lwCobros.ListItems(i).Checked = False
                     Exit Sub
                 End If
             Else
                 If Index = 1 Then
-                    Remesa = lwCobros.ListItems(I).SubItems(8)
-                    AñoRem = lwCobros.ListItems(I).SubItems(9)
-                    BancoRem = lwCobros.ListItems(I).SubItems(10)
+                    Remesa = lwCobros.ListItems(i).SubItems(8)
+                    AñoRem = lwCobros.ListItems(i).SubItems(9)
+                    BancoRem = lwCobros.ListItems(i).SubItems(10)
                 End If
             End If
-            Me.lwCobros.ListItems(I).Checked = Index = 1
+            Me.lwCobros.ListItems(i).Checked = Index = 1
         Next
     End If
 End Sub
@@ -1557,7 +1532,7 @@ End Sub
 
 
 Private Sub imgRem_Click(Index As Integer)
-    I = Index
+    i = Index
     Set frmRe = New frmTESRemesas
     frmRe.Tipo = SubTipo  'Para abrir efectos o talonesypagares
     frmRe.DatosADevolverBusqueda = "1|"
@@ -1569,7 +1544,7 @@ Private Sub imgRem_Click(Index As Integer)
 End Sub
 
 Private Sub lwCobros_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-Dim I As Currency
+Dim i As Currency
 
     If Remesa <> 0 And AñoRem <> 0 Then
         If Item.Checked And (Remesa <> Item.SubItems(8) Or AñoRem <> Item.SubItems(9)) Then
@@ -1586,9 +1561,9 @@ Dim I As Currency
     End If
 
     Set lwCobros.SelectedItem = Item
-    I = ImporteFormateado(Item.SubItems(5))
-    If Not Item.Checked Then I = -1 * I
-    ImporteQueda = ImporteQueda + I
+    i = ImporteFormateado(Item.SubItems(5))
+    If Not Item.Checked Then i = -1 * i
+    ImporteQueda = ImporteQueda + i
     Text1(4).Text = Format(ImporteQueda, FormatoImporte)
 End Sub
 
@@ -1755,8 +1730,6 @@ Dim TipoFicheroDevolucion As Byte
             If SQL = "" Then Exit Sub
             
             MultiRemesaDevuelta = SQL
-'            Text3(5).Text = RecuperaValor(SQL, 1)
-'            Text3(6).Text = RecuperaValor(SQL, 2)
             
         Case 28
             'Desde la cuenta
@@ -1764,7 +1737,6 @@ Dim TipoFicheroDevolucion As Byte
             
             SQL = "situacion = 'Q' "
             If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
-'            SQL = Mid(SQL, 5)
             
             SQL = "Select codrem,anyorem,NUmSerie,numfactu,numorden from cobros where " & SQL
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1774,9 +1746,6 @@ Dim TipoFicheroDevolucion As Byte
                 RS.Close
                 Exit Sub
             End If
-'            Text3(5).Text = DBLet(RS!CodRem, "T")
-'            Text3(6).Text = DBLet(RS!AnyoRem, "T")
-'            CadenaVencimiento = RS!NUmSerie & "|" & RS!NumFactu & "|" & RS!numorden & "|"
             RS.Close
             Set RS = Nothing
             
@@ -1907,15 +1876,15 @@ Dim TipoFicheroDevolucion As Byte
             Next
             Text1(4).Text = Format(ImporteQueda, "###,###,##0.00")
             
-            For I = 1 To lwCobros.ListItems.Count
-                If lwCobros.ListItems(I).Checked Then
-                    Remesa = lwCobros.ListItems(I).SubItems(8)
-                    AñoRem = lwCobros.ListItems(I).SubItems(9)
-                    BancoRem = lwCobros.ListItems(I).SubItems(10)
+            For i = 1 To lwCobros.ListItems.Count
+                If lwCobros.ListItems(i).Checked Then
+                    Remesa = lwCobros.ListItems(i).SubItems(8)
+                    AñoRem = lwCobros.ListItems(i).SubItems(9)
+                    BancoRem = lwCobros.ListItems(i).SubItems(10)
                     
                     Exit For
                 End If
-            Next I
+            Next i
             
         
         Case 28
@@ -2070,28 +2039,28 @@ Private Sub txtConcepto_LostFocus(Index As Integer)
     'Lost focus
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
     SQL = ""
-    I = 0
+    i = 0
     If txtConcepto(Index).Text <> "" Then
         If Not IsNumeric(txtConcepto(Index).Text) Then
             MsgBox "Campo numérico", vbExclamation
-            I = 1
+            i = 1
         Else
             
             SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtConcepto(Index).Text, "N")
             If SQL = "" Then
                 MsgBox "Concepto no existe", vbExclamation
-                I = 1
+                i = 1
             End If
         End If
     End If
     Me.txtDConcpeto(Index).Text = SQL
-    If I = 1 Then
+    If i = 1 Then
         txtConcepto(Index).Text = ""
         PonerFoco txtConcepto(Index)
     Else
         SQL = "select ampdecli from tipofpago where tipoformapago = 4"
-        I = DevuelveValor(SQL)
-        PosicionarCombo Me.Combo2(0), I
+        i = DevuelveValor(SQL)
+        PosicionarCombo Me.Combo2(0), i
     End If
 End Sub
 
@@ -2107,7 +2076,7 @@ Private Sub txtCtaNormal_LostFocus(Index As Integer)
 Dim DevfrmCCtas As String
        
         DevfrmCCtas = Trim(txtCtaNormal(Index).Text)
-        I = 0
+        i = 0
         If DevfrmCCtas <> "" Then
             If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
                 
@@ -2118,14 +2087,14 @@ Dim DevfrmCCtas As String
                     SQL = ""
                 End If
             End If
-            I = 1
+            i = 1
         Else
             SQL = ""
         End If
         
         txtCtaNormal(Index).Text = DevfrmCCtas
         txtDCtaNormal(Index).Text = SQL
-        If DevfrmCCtas = "" And I = 1 Then
+        If DevfrmCCtas = "" And i = 1 Then
             PonerFoco txtCtaNormal(Index)
         End If
         VisibleCC
@@ -2193,64 +2162,6 @@ End Sub
 
 Private Sub LanzaBuscaGrid(Opcion As Integer)
 
-'No tocar variable SQL
-'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
-
-
-'
-'    SQL = ""
-'    Screen.MousePointer = vbHourglass
-'    Set frmB = New frmBasico
-'    frmB.vSQL = ""
-'
-'    '###A mano
-'    frmB.vDevuelve = "0|"   'Siempre el 0
-'
-'    frmB.vSelElem = 0
-'
-'    'Ejemplo
-'        'Cod Diag.|idDiag|N|10·
-'        Select Case Opcion
-'        Case 1
-'            'CONCEPTO
-'            Cad = "Codigo|codconce|N|15·"
-'            Cad = Cad & "Descripcion|nomconce|T|60·"
-'            frmB.vTabla = "Conceptos"
-'            frmB.vTitulo = "Conceptos"
-'
-'            frmB.vSQL = " codconce <900"
-'
-'        Case 2
-'            'CC
-'            Cad = "Codigo|codccost|N|15·"
-'            Cad = Cad & "Descripcion|nomccost|T|60·"
-'            frmB.vTabla = "cabccost"
-'            frmB.vTitulo = "Centros de coste"
-'
-'        Case 3
-'            'Cuentas agrupadas bajo el concepto: grupotesoreria
-'            Cad = "Grupo tesoreria|grupotesoreria|T|60·"
-'            frmB.vTabla = "cuentas"
-'            frmB.vSQL = " grupotesoreria <> '' GROUP BY 1"
-'            frmB.vTitulo = "Cuentas grupos tesoreria"
-'        End Select
-'
-'
-'        frmB.vCampos = Cad
-'
-'
-'
-'
-'
-''        frmB.vConexionGrid = conAri 'Conexion a BD Ariges
-''        frmB.vBuscaPrevia = chkVistaPrevia
-'        '#
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'
-'
-'    Screen.MousePointer = vbDefault
 End Sub
 
 
@@ -2315,15 +2226,15 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         CuentasCC = ""
         CualesEliminar = ""
         J = 0
-        For I = 0 To 1
+        For i = 0 To 1
             ' contatalonpte
             SQL = "pagarecta"
-            If I = 1 Then SQL = "contatalonpte"
+            If i = 1 Then SQL = "contatalonpte"
             CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
             
             'Repetiremos el proceso dos veces
             SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            SQL = SQL & " AND   talon = " & I
+            SQL = SQL & " AND   talon = " & i
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                     'Si lleva cta puente habra que ver si esta contbilizada
@@ -2360,7 +2271,7 @@ On Error GoTo EEliminarEnRecepcionDocumentos
             
             
             
-        Next I
+        Next i
         
         
 
@@ -2382,12 +2293,12 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         J = 1
         SQL = "X"
         Do
-            I = InStr(J, CualesEliminar, ",")
-            If I > 0 Then
-                J = I + 1
+            i = InStr(J, CualesEliminar, ",")
+            If i > 0 Then
+                J = i + 1
                 SQL = SQL & "X"
             End If
-        Loop Until I = 0
+        Loop Until i = 0
         
         SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
         If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
@@ -2509,12 +2420,6 @@ End Sub
 Private Function EstaElReciboSEPA(Serie As String, Fac As String, Fec As String, Venci As String) As Boolean
 Dim J As Integer
 
-        'Itm.Text = miRsAux!NUmSerie
-        'Itm.SubItems(1) = Format(miRsAux!codfaccl, "0000000000")
-        'Itm.SubItems(2) = miRsAux!numorden
-        'Itm.Tag = miRsAux!fecfaccl
-        
-
     EstaElReciboSEPA = False
     With lwCobros
         For J = 1 To .ListItems.Count
@@ -2536,12 +2441,6 @@ End Function
 
 Private Function EstaElRecibo(Serie As String, Fac As String, Fec As String, Venci As String) As Boolean
 Dim J As Integer
-
-        'Itm.Text = miRsAux!NUmSerie
-        'Itm.SubItems(1) = Format(miRsAux!codfaccl, "0000000000")
-        'Itm.SubItems(2) = miRsAux!numorden
-        'Itm.Tag = miRsAux!fecfaccl
-        
 
     EstaElRecibo = False
     With lwCobros

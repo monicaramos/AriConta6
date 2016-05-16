@@ -868,25 +868,6 @@ End Sub
 
 
 
-Private Sub Check1_Click(Index As Integer)
-    Select Case Index
-        Case 0
-            If Check1(0).Value = 1 Then
-                Check1(2).Value = 1
-                Check1_Click (2)
-            End If
-        Case 1
-            If Check1(1).Value = 1 Then
-                Check1(2).Value = 0
-                Check1(0).Value = 0
-            End If
-        Case 2
-            If Check1(2).Value = 1 Then
-                Check1(1).Value = 0
-            End If
-    End Select
-End Sub
-
 Private Sub cmdAccion_Click(Index As Integer)
 
     If Not DatosOK Then Exit Sub
@@ -900,8 +881,7 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     InicializarVbles True
     
-    tabla = "(cobros INNER JOIN formapago on cobros.codforpa = formapago.codforpa)  "
-    tabla = tabla & " INNER JOIN tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
+    tabla = "cobros INNER JOIN cobros_realizados on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden  "
     
     
     If Not MontaSQL Then Exit Sub
@@ -1192,39 +1172,19 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "Select cobros.codmacta Cliente, cobros.nomclien Nombre, cobros.fecfactu FFactura, cobros.fecvenci FVenci, "
-    SQL = SQL & " cobros.numorden Orden, cobros.gastos Gastos, cobros.impcobro Cobrado, cobros.impvenci ImpVenci, "
-    SQL = SQL & " concat(cobros.numserie,' ', concat('0000000',cobros.numfactu)) Factura , cobros.codforpa FPago, "
-    SQL = SQL & " formapago.nomforpa Descripcion, cobros.referencia Referenciasa, tipofpago.descformapago Tipo "
+    SQL = "SELECT cobros.codmacta Cuenta, cobros.nomclien Descripcion, cobros_realizados.fecdevol FecDevol, "
+    SQL = SQL & "cobros.numserie Serie, cobros.numfactu Factura, cobros.fecfactu FecFra, cobros.numorden Vto, cobros_realizados.impcobro * (-1) Importe, "
+    SQL = SQL & "cobros_realizados.gastodev Gastos, cobros_realizados.coddevol Devol, wdevolucion.descripcion Descripcion "
+    SQL = SQL & " FROM  (cobros INNER JOIN cobros_realizados ON cobros.numserie = cobros_realizados.numserie AND "
+    SQL = SQL & " cobros.numfactu = cobros_realizados.numfactu AND cobros.fecfactu = cobros_realizados.fecfactu AND "
+    SQL = SQL & " cobros.numorden = cobros_realizados.numorden) "
+    SQL = SQL & "  LEFT JOIN usuarios.wdevolucion ON cobros_realizados.coddevol = wdevolucion.codigo "
     
-    If optVarios(0).Value Or optVarios(1).Value Then
-        SQL = SQL & ", cobros.noremesar NoRemesar, cobros.situacionjuri SitJuridica, cobros.Devuelto Devuelto, cobros.recedocu Recepcion, cobros.observa Observaciones "
-    End If
+    If cadselect <> "" Then SQL = SQL & " where " & cadselect
     
-    SQL = SQL & " FROM (cobros inner join formapago on cobros.codforpa = formapago.codforpa) "
-    SQL = SQL & " inner join tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
-    If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
-            
-            
-    If optVarios(0).Value Then
-        If optVarios(3).Value Then SQL2 = SQL2 & " cobros.codmacta"
-        If optVarios(4).Value Then SQL2 = SQL2 & " cobros.nomclien"
-    End If
+    If optVarios(0).Value Then SQL2 = "1"
+    If optVarios(1).Value Then SQL2 = "3"
     
-    If optVarios(1).Value Then
-        SQL2 = SQL2 & " cobros.FecVenci"
-        
-        If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
-        If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
-    End If
-
-    If optVarios(2).Value Then
-        SQL2 = SQL2 & " tipofpago.descformapago"
-        
-        If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
-        If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
-    End If
-
     SQL = SQL & " ORDER BY " & SQL2
 
             
@@ -1242,32 +1202,26 @@ Dim nomDocu As String
     conSubRPT = False
         
     
-    indRPT = "0607-00"
+    indRPT = "0610-00"
     
 
     If optVarios(0).Value Then
         cadParam = cadParam & "pGroup1={cobros.codmacta}|"
+        cadParam = cadParam & "pTipo=0|"
     Else
         cadParam = cadParam & "pGroup1={cobros_realizados.fecdevol}|"
+        cadParam = cadParam & "pTipo=1|"
     End If
     
-    numParam = numParam + 1
+    numParam = numParam + 2
         
-    If Check1(1).Value Then cadParam = cadParam & "pResumen=1|"
+    If Check1(0).Value Then cadParam = cadParam & "pResumen=1|"
     numParam = numParam + 1
         
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu ' "CobrosPdtes.rpt"
-
-
-
-    
-'    cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
-'    cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
-'    numParam = numParam + 2
-    
     ImprimeGeneral
     
     If optTipoSal(1).Value Then CopiarFicheroASalida True, txtTipoSalida(1).Text
@@ -1318,10 +1272,14 @@ Dim I As Integer
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("cobros.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros.Fecvenci", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros_realizados.fecfactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros_realizados.fecdevol", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
     If Not PonerDesdeHasta("cobros.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
             
+    If cadFormula <> "" Then cadFormula = cadFormula & " and "
+    If cadselect <> "" Then cadselect = cadselect & " and "
+    cadFormula = cadFormula & "not isnull({cobros_realizados.codrem}) "
+    cadselect = cadselect & "not cobros_realizados.codrem is null"
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
     If cadselect <> "" Then cadselect = "(" & cadselect & ")"

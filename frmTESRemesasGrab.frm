@@ -790,73 +790,6 @@ Private Sub cmdRemeTipo1_Click(Index As Integer)
 
     Select Case Index
     Case 0
-'        'Lo qu vamos a hacer es , primero bloquear la opcioin de remesar
-'        If BloqueoManual(True, "Remesas", "Remesas") Then
-'
-'
-'
-'
-'
-'            'Ver /modifcar recibos
-'            'Primero añadimos en la tabla temporal tmpcierr1 los valores
-'            'Del banco
-'            SQL = "DELETE FROM tmpcierre1 where codusu =" & vUsu.Codigo
-'            If Ejecuta(SQL) Then
-'
-'                SQL = "Select cuentas.codmacta,nommacta  from cuentas,remesas where "
-'                SQL = SQL & " cuentas.codmacta=remesas.codmacta "
-'                SQL = SQL & " AND codigo =" & Text3(0).Text & " AND anyo =" & Text3(1).Text
-'                Set RS = New ADODB.Recordset
-'                RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'
-'                If RS.EOF Then
-'                    SQL = ""
-'                    MsgBox "Error leyendo datos remesas/banco", vbExclamation
-'                Else
-'                    SQL = vUsu.Codigo & ",'" & RS!codmacta & "','" & RS!Nommacta & "',0)"
-'                    SQL = "INSERT INTO tmpcierre1 (codusu, cta, nomcta, acumPerD) VALUES (" & SQL
-'                End If
-'                RS.Close
-'                Set RS = Nothing
-'                If SQL <> "" Then
-'                    If Ejecuta(SQL) Then
-'
-'
-'                        'Genero el SQL para la lectura de los disquetes
-'                        SQL = "FROM cobros,formapago,cuentas WHERE cobros.codforpa = formapago.codforpa AND"
-'                        SQL = SQL & " cobros.codmacta=cuentas.codmacta AND"
-'                        'SQL = SQL & " scobro.fecvenci <= '2005-09-22' AND sforpa.tipforpa = 4"
-'                        SQL = SQL & " formapago.tipforpa = " & SubTipo
-'                        'Modificacion de Febrero 2009. Remesas de talones y pagares
-'
-'
-'                        'Modificacion de 2 Dic 2005. nueva var: noremesar
-'                        'SQL = SQL & " AND ( (siturem is null) or (codrem = " & Text3(0).Text
-'                        SQL = SQL & " AND ( (siturem is null and noremesar=0) or (codrem = " & Text3(0).Text
-'                        SQL = SQL & " AND anyorem = " & Text3(1).Text & "))"
-'
-'                        'frmRemesas.TipoRemesa = Text3(7).Tag
-'                        frmRemesas.Opcion = 1
-'                        frmRemesas.vSQL = SQL
-'                        frmRemesas.vRemesa = Text3(0).Text & "|" & Text3(1).Text & "|"
-'                        'frmRemesas.ImporteRemesa = Impor
-'                        frmRemesas.Show vbModal
-'                        If CadenaDesdeOtroForm = "" Then
-'                            CadenaDesdeOtroForm = "OK" 'para el formulario anterior
-'                            'HA ido bien. Salimos
-'                            Unload Me
-'                        End If
-'                    End If
-'                End If
-'
-'            End If
-'
-'
-'            BloqueoManual False, "Remesas", "Remesas"
-'        Else
-'            MsgBox "Opcion bloqueada por otro usuario", vbExclamation
-'        End If
-'
     Case 1
         'Generar diskete
         CrearDisco
@@ -917,11 +850,7 @@ Dim W As Integer
         SubTipo = vbTipoPagoRemesa
             
         cboTipoRemesa.Clear
-'        cboTipoRemesa.AddItem "Norma 19"
-'        cboTipoRemesa.AddItem "Norma 32"
-'        cboTipoRemesa.AddItem "Norma 58"
         If vParamT.NuevasNormasSEPA Then
-'            cboTipoRemesa.List(0) = "Norma 19 SEPA"
             chkSEPA_GraboNIF(0).Visible = True
             chkSEPA_GraboNIF(1).Visible = True
             SQL = CheckValueLeer("FCob")
@@ -946,26 +875,14 @@ Dim W As Integer
     Text1(9).Text = Format(Now, "dd/mm/yyyy")
     Text1(18).Text = Text1(9).Text
     
-    'If optSepaXML(1).Value Then Text1(9).Text = ""
-    
-    
     Me.cmbReferencia.ListIndex = UltimoComboReferencia(True)
     
-    'Me.cmbReferencia.ListIndex = 2
     Text7(0).Text = UCase(vEmpresa.nomempre)
     
-    
-    'Enero 2014
-    'Antes hacia
-    'SQL = RecuperaValor(CadenaDesdeOtroForm, 5)
-    'Text7(1).Text = DevuelveDesdeBD("sufijoem", "ctabancaria", "codmacta", SQL, "T")
-    'AHora
     Set miRsAux = New ADODB.Recordset
     SQL = RecuperaValor(CadenaDesdeOtroForm, 5)
     SQL = "Select N1914GrabaNifDeudor,sufijoem from bancos where codmacta = '" & SQL & "'"
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    'NO PUEDE SER EOF
-    'If Not miRsAux.EOF Then
     Text7(1).Text = DBLet(miRsAux!sufijoem, "T")
     If vParamT.NuevasNormasSEPA Then chkSEPA_GraboNIF(0).Value = DBLet(miRsAux!N1914GrabaNifDeudor, "N")
     miRsAux.Close

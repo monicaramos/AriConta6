@@ -1578,7 +1578,7 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
 Dim i As Integer
 Dim IndCodigo As Integer
@@ -1631,18 +1631,18 @@ Dim nomDocu As String
     If Me.optTipoSal(3).Value Then
         
         
-        Cad = "DELETE FROM tmp347 WHERE codusu =" & vUsu.Codigo
-        Conn.Execute Cad
+        cad = "DELETE FROM tmp347 WHERE codusu =" & vUsu.Codigo
+        Conn.Execute cad
         
         Set RS = New ADODB.Recordset
         
-        Cad = "SELECT fechaadq,maidatos,razosoci,nommacta FROM tmpentrefechas,cuentas WHERE"
-        Cad = Cad & " fechaadq=codmacta AND    CodUsu = " & vUsu.Codigo
-        Cad = Cad & " GROUP BY fechaadq ORDER BY maidatos"
-        RS.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+        cad = "SELECT fechaadq,maidatos,razosoci,nommacta FROM tmpentrefechas,cuentas WHERE"
+        cad = cad & " fechaadq=codmacta AND    CodUsu = " & vUsu.Codigo
+        cad = cad & " GROUP BY fechaadq ORDER BY maidatos"
+        RS.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
         
-        Cad = "FechaIMP= """ & txtFecha(4).Text & """|"
-        Cad = Cad & "verCCC= " & Abs(Me.chkMostrarCta) & "|"
+        cad = "FechaIMP= """ & txtFecha(4).Text & """|"
+        cad = cad & "verCCC= " & Abs(Me.chkMostrarCta) & "|"
         SQL = "{tmpentrefechas.codusu}=" & vUsu.Codigo
         NumRegElim = 0
         CONT = 0
@@ -1681,7 +1681,7 @@ Dim nomDocu As String
                     End If
                     .FormulaSeleccion = "{tmpentrefechas.codusu}=" & vUsu.Codigo & " AND {tmpentrefechas.nomconam}= """ & RS.Fields(0) & """"
                     .SoloImprimir = False
-                    .OtrosParametros = Cad
+                    .OtrosParametros = cad
                     .NumeroParametros = numParam
                     .ConSubInforme = True
             
@@ -1929,7 +1929,7 @@ Private Sub Form_Load()
     Next i
     
     For i = 0 To 3
-        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next i
      
     ' La Ayuda
@@ -2156,7 +2156,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2184,7 +2184,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtCuentas(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -2227,33 +2226,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
     End Select
     
     
-'    ' solo se puede introducir departamento si cuenta cliente desde y hasta son iguales
-'    txtDpto(0).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
-'    imgDpto(0).Enabled = txtDpto(0).Enabled
-'    imgDpto(1).Enabled = txtDpto(1).Enabled
-'    If Not txtDpto(0).Enabled Then
-'        txtDpto(0).Text = ""
-'        txtNDpto(0).Text = ""
-'    End If
-'    txtDpto(1).Enabled = (txtCuentas(0).Text = txtCuentas(1).Text)
-'    If Not txtDpto(1).Enabled Then
-'        txtDpto(1).Text = ""
-'        txtNDpto(1).Text = ""
-'    End If
-    
-
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgSerie"
-        imgSerie_Click indice
+        imgSerie_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     Case "imgAgente"
-        ImgAgente_Click indice
+        ImgAgente_Click Indice
     Case "imgCarta"
         imgCarta_Click
     End Select
@@ -2272,7 +2256,7 @@ Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2314,7 +2298,7 @@ End Sub
 
 
 Private Sub txtCarta_LostFocus()
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2349,7 +2333,7 @@ Private Sub txtAgente_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAgente_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String
+Dim cad As String, cadTipo As String
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -2368,15 +2352,6 @@ Dim Hasta As Integer
     End Select
 
 End Sub
-
-'******
-
-
-
-
-
-
-
 
 
 Private Sub AccionesCSV()
@@ -2421,10 +2396,6 @@ Dim nomDocu As String
     numParam = numParam + 2
     
     cadFormula = "{tmpentrefechas.codusu}=" & vUsu.Codigo
-    
-'    cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
-'    cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
-'    numParam = numParam + 2
     
     ImprimeGeneral
     
@@ -2481,8 +2452,8 @@ Dim Dpto As Long
     
     'No enlazamos por NIF, si no k en NIF guardaremos codmacta
     'codinmov, nominmov, fechaadq, valoradq, amortacu, fecventa, impventa, impperiodo) VALUES (
-    Cad = "DELETE FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "DELETE FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo
+    Conn.Execute cad
     
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = "INSERT INTO tmpentrefechas(codusu,codigo,codccost,nomccost,fecventa,conconam,fechaadq"
@@ -2490,12 +2461,6 @@ Dim Dpto As Long
     
     'Nuevo. Febrero 2010. Departamento ira en codinmov
     
-    'Codigo
-    'Clave autonumerica
-    '   codccost,nomccost,fecventa,conconam
-    '    numserie,codfac,fecfac,numoreden
-    '  Importes
-    'en fechaadq pondremos codmacta, asi luego iremos a insertar
     
     i = 1
     While Not RS.EOF
@@ -2505,30 +2470,27 @@ Dim Dpto As Long
         
         Importe = RS!ImpVenci + DBLet(RS!Gastos, "N") - DBLet(RS!impcobro, "N")
         If DBLet(RS!recedocu, "N") = 1 Then Importe = 0
-        'If DBLet(Rs!recedocu, "N") = 1 And Importe > 0 Then Stop
         If Importe > 0 Then
-            Cad = i & ",'" & RS!NUmSerie & "','"
-            Cad = Cad & RS!NumFactu & "','"
-            Cad = Cad & Format(RS!FecFactu, FormatoFecha) & "',"
-            Cad = Cad & RS!numorden & ",'"
-            Cad = Cad & RS!codmacta & "','"
-            'nomconam,impventa,impperiodo
-            ' fec vto cobro, imp, cobrado
-            Cad = Cad & RS!FecVenci & "',"
-            Cad = Cad & TransformaComasPuntos(CStr(RS!ImpVenci)) & ","
+            cad = i & ",'" & RS!NUmSerie & "','"
+            cad = cad & RS!NumFactu & "','"
+            cad = cad & Format(RS!FecFactu, FormatoFecha) & "',"
+            cad = cad & RS!numorden & ",'"
+            cad = cad & RS!codmacta & "','"
+            cad = cad & RS!FecVenci & "',"
+            cad = cad & TransformaComasPuntos(CStr(RS!ImpVenci)) & ","
             If IsNull(RS!impcobro) Then
-                Cad = Cad & "NULL"
+                cad = cad & "NULL"
             Else
-                Cad = Cad & TransformaComasPuntos(CStr(RS!impcobro))
+                cad = cad & TransformaComasPuntos(CStr(RS!impcobro))
             End If
             'ValorADQ=GASTOS
-            Cad = Cad & "," & TransformaComasPuntos(CStr(DBLet(RS!Gastos, "N")))
+            cad = cad & "," & TransformaComasPuntos(CStr(DBLet(RS!Gastos, "N")))
             
             'Febrero 2010
             'Departamento
-            Cad = Cad & "," & DBLet(RS!departamento, "N")
-            Cad = SQL & Cad & ")"
-            Conn.Execute Cad
+            cad = cad & "," & DBLet(RS!departamento, "N")
+            cad = SQL & cad & ")"
+            Conn.Execute cad
             
             i = i + 1
             
@@ -2564,21 +2526,21 @@ Dim Dpto As Long
     
     
     
-    Cad = "DELETE FROM tmpcuentas  where codusu = " & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "DELETE FROM tmpcuentas  where codusu = " & vUsu.Codigo
+    Conn.Execute cad
     
-    Cad = "SELECT fechaadq,codinmov FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo & " GROUP BY fechaadq,codinmov"
-    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "SELECT fechaadq,codinmov FROM tmpentrefechas WHERE codusu = " & vUsu.Codigo & " GROUP BY fechaadq,codinmov"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Datos contables
     Set miRsAux = New ADODB.Recordset
     CONT = 0
     While Not RS.EOF
         'BUSCAMOS DATOS
-        Cad = "SELECT * from cuentas where codmacta='" & RS.Fields(0) & "'"
+        cad = "SELECT * from cuentas where codmacta='" & RS.Fields(0) & "'"
     
         'Insertar datos en z347
-        miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         'Nuevo. Ya no llevamos NIF, llevaremos departamento
         RC = "" 'SERA EL NIF. Sera el DPTO
         i = 1
@@ -2601,39 +2563,21 @@ Dim Dpto As Long
             CONT = CONT + 1
             
             
-'            'INSERTAMOS EN z347
-'            '-----------------------------------------
-'            SQL = "INSERT INTO Usuarios.z347 (codusu, cliprov, nif, importe, razosoci, dirdatos, codposta, despobla,Provincia) "
-'            'Febrero 2010
-'            'SQL = SQL & "VALUES (" & vUsu.Codigo & ",0,'" & RC & "',0,'"
-'            SQL = SQL & "VALUES (" & vUsu.Codigo & "," & Dpto & ",'" & RC & "',0,'"
-'
-'
-'            'Razon social, dirdatos,codposta,despobla
-'            SQL = SQL & DevNombreSQL(DBLet(miRsAux!razosoci, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!dirdatos, "T")) & "','" & DBLet(miRsAux!codposta, "T") & "','" & DevNombreSQL(DBLet(miRsAux!desPobla, "T"))
-'            SQL = SQL & "','" & DevNombreSQL(DBLet(miRsAux!desProvi, "T"))
-'            SQL = SQL & "')"
-'
-'            Conn.Execute SQL
-        
-            
             SQL = "INSERT INTO tmpcuentas (codusu, codmacta, nommacta,despobla,razosoci,dpto) VALUES (" & vUsu.Codigo & ",'" & RC & "','"
             SQL = SQL & DBLet(miRsAux!nifdatos, "T") & "','" 'En nommacta meto el NIF del cliente
             If IsNull(miRsAux!Entidad) Then
                 'Puede que sean todos nulos
-                Cad = DBLet(miRsAux!Oficina) & "   " & DBLet(miRsAux!Control, "T") & "    " & DBLet(miRsAux!Cuentaba, "T")
-                Cad = Trim(Cad)
+                cad = DBLet(miRsAux!Oficina) & "   " & DBLet(miRsAux!Control, "T") & "    " & DBLet(miRsAux!Cuentaba, "T")
+                cad = Trim(cad)
             Else
-                Cad = DBLet(miRsAux!IBAN, "T") '& " " & Format(miRsAux!Entidad, "0000") & " " & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "  " & Format(DBLet(miRsAux!Control, "N"), "00") & " " & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000")
+                cad = DBLet(miRsAux!IBAN, "T") '& " " & Format(miRsAux!Entidad, "0000") & " " & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "  " & Format(DBLet(miRsAux!Control, "N"), "00") & " " & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000")
             End If
-            Cad = Cad & "','"
+            cad = cad & "','"
             'El dpto si tiene
-            Cad = Cad & DevNombreSQL(DevuelveDesdeBD("descripcion", "departamentos", "codmacta = '" & miRsAux!codmacta & "' AND dpto", CStr(Dpto)))
-            Cad = Cad & "'," & Dpto
-            Ejecuta SQL & Cad & ")"   'Lo pongo en funcion para que no me de error
+            cad = cad & DevNombreSQL(DevuelveDesdeBD("descripcion", "departamentos", "codmacta = '" & miRsAux!codmacta & "' AND dpto", CStr(Dpto)))
+            cad = cad & "'," & Dpto
+            Ejecuta SQL & cad & ")"   'Lo pongo en funcion para que no me de error
             
-            
-            'Updatear  FALTA### codusu = vusu.codusu
             SQL = "UPDATE tmpentrefechas SET nomconam='" & RC & "' WHERE fechaadq = '" & RS!fechaadq & "'"
             SQL = SQL & " AND codusu = " & vUsu.Codigo
             Conn.Execute SQL
@@ -2821,17 +2765,13 @@ Private Sub MontaSQLReclamacion()
     
     'Siempre hay que añadir el AND
     
-    
     SQL = " and " & cadselect
-    
     
     'Solo devueltos
     If chkReclamaDevueltos.Value = 1 Then SQL = SQL & " AND devuelto = 1"
-      
     
     'Marzo2015
     If chkExcluirConEmail.Value = 1 Then SQL = SQL & " AND coalesce(maidatos,'')=''"
-    
     
     'LA de la fecha
     SQL = SQL & " AND ((ultimareclamacion  is null) OR (ultimareclamacion <= '" & Format(Fecha, FormatoFecha) & "'))"
@@ -2839,14 +2779,11 @@ Private Sub MontaSQLReclamacion()
     'QUE FALTE POR PAGAR
     SQL = SQL & " AND (impvenci>0)"
     
-    
-    
-    
     'Select
-    Cad = "Select cobros.*, cuentas.codmacta FROM cobros,cuentas,formapago "
-    Cad = Cad & " WHERE  formapago.codforpa=cobros.codforpa AND cobros.codmacta = cuentas.codmacta"
-    Cad = Cad & " AND formapago.codforpa=cobros.codforpa "
-    SQL = Cad & SQL
+    cad = "Select cobros.*, cuentas.codmacta FROM cobros,cuentas,formapago "
+    cad = cad & " WHERE  formapago.codforpa=cobros.codforpa AND cobros.codmacta = cuentas.codmacta"
+    cad = cad & " AND formapago.codforpa=cobros.codforpa "
+    SQL = cad & SQL
     
     
 End Sub

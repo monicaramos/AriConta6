@@ -28,7 +28,7 @@ Option Explicit
 Dim NFic As Integer   'Para no tener que pasarlo a todas las funciones
 
 Private Function XML(CADENA As String) As String
-Dim i As Integer
+Dim I As Integer
 Dim Aux As String
 Dim Le As String
 Dim C As Integer
@@ -46,8 +46,8 @@ Dim C As Integer
     '/ - ? : ( ) . , ' +
     'Espacio
     Aux = ""
-    For i = 1 To Len(CADENA)
-        Le = Mid(CADENA, i, 1)
+    For I = 1 To Len(CADENA)
+        Le = Mid(CADENA, I, 1)
         C = Asc(Le)
         
         
@@ -493,7 +493,7 @@ Public Function GeneraFicheroNorma34SEPA_XML(CIF As String, Fecha As Date, Cuent
 Dim Regs As Integer
 Dim Importe As Currency
 Dim Im As Currency
-Dim Cad As String
+Dim cad As String
 Dim Aux As String
 Dim SufijoOEM As String
 Dim NFic As Integer
@@ -506,26 +506,26 @@ Dim EsPersonaJuridica2 As Boolean
     
     
     'Cargamos la cuenta
-    Cad = "Select * from ctabancaria where codmacta='" & CuentaPropia2 & "'"
+    cad = "Select * from ctabancaria where codmacta='" & CuentaPropia2 & "'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If miRsAux.EOF Then
-        Cad = ""
+        cad = ""
     Else
         If IsNull(miRsAux!Entidad) Then
-            Cad = ""
+            cad = ""
         Else
             SufijoOEM = "000" ''Sufijo3414
-            Cad = miRsAux!IBAN & Format(miRsAux!Entidad, "0000") & Format(DBLet(miRsAux!Oficina, "T"), "0000") & DBLet(miRsAux!Control, "T") & Format(DBLet(miRsAux!CtaBanco, "T"), "0000000000")
+            cad = miRsAux!IBAN & Format(miRsAux!Entidad, "0000") & Format(DBLet(miRsAux!Oficina, "T"), "0000") & DBLet(miRsAux!Control, "T") & Format(DBLet(miRsAux!CtaBanco, "T"), "0000000000")
             If DBLet(miRsAux!Sufijo3414, "T") <> "" Then SufijoOEM = Right("000" & miRsAux!Sufijo3414, 3)
-            CuentaPropia2 = Cad
+            CuentaPropia2 = cad
         End If
         
         
     End If
     miRsAux.Close
   
-    If Cad = "" Then
+    If cad = "" Then
         MsgBox "Error leyendo datos para: " & CuentaPropia2, vbExclamation
         Exit Function
     End If
@@ -538,21 +538,21 @@ Dim EsPersonaJuridica2 As Boolean
     Print #NFic, "<Document xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""urn:iso:std:iso:20022:tech:xsd:pain.001.001.03"">"
     Print #NFic, "<CstmrCdtTrfInitn>"
     Print #NFic, "   <GrpHdr>"
-    Cad = "TRAN" & IIf(Pagos, "PAG", "ABO") & Format(NumeroTransferencia, "000000") & "F" & Format(Now, "yyyymmddThhnnss")
-    Print #NFic, "      <MsgId>" & Cad & "</MsgId>"
+    cad = "TRAN" & IIf(Pagos, "PAG", "ABO") & Format(NumeroTransferencia, "000000") & "F" & Format(Now, "yyyymmddThhnnss")
+    Print #NFic, "      <MsgId>" & cad & "</MsgId>"
     Print #NFic, "      <CreDtTm>" & Format(Now, "yyyy-mm-ddThh:nn:ss") & "</CreDtTm>"
     
     
     If Pagos Then
         Aux = "ImpEfect - coalesce(imppagad ,0)"
-        Cad = "spagop"
+        cad = "spagop"
     Else
         Aux = "abs(impvenci + coalesce(Gastos, 0) - coalesce(impcobro, 0))"
-        Cad = "scobro"
+        cad = "scobro"
     End If
-    Cad = "Select count(*),sum(" & Aux & ") FROM " & Cad & " WHERE transfer = " & NumeroTransferencia
+    cad = "Select count(*),sum(" & Aux & ") FROM " & cad & " WHERE transfer = " & NumeroTransferencia
     Aux = "0|0|"
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(1)) Then Aux = miRsAux.Fields(0) & "|" & Format(miRsAux.Fields(1), "#.00") & "|"
     End If
@@ -563,21 +563,21 @@ Dim EsPersonaJuridica2 As Boolean
     Print #NFic, "      <InitgPty>"
     Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
     Print #NFic, "         <Id>"
-    Cad = Mid(CIF, 1, 1)
+    cad = Mid(CIF, 1, 1)
     
-    EsPersonaJuridica2 = Not IsNumeric(Cad)
+    EsPersonaJuridica2 = Not IsNumeric(cad)
 
     
     
     
-    Cad = "PrvtId"
-    If EsPersonaJuridica2 Then Cad = "OrgId"
+    cad = "PrvtId"
+    If EsPersonaJuridica2 Then cad = "OrgId"
     
-    Print #NFic, "           <" & Cad & ">"
+    Print #NFic, "           <" & cad & ">"
     Print #NFic, "               <Othr>"
     Print #NFic, "                  <Id>" & CIF & SufijoOEM & "</Id>"
     Print #NFic, "               </Othr>"
-    Print #NFic, "           </" & Cad & ">"
+    Print #NFic, "           </" & cad & ">"
     
     Print #NFic, "         </Id>"
     Print #NFic, "      </InitgPty>"
@@ -592,18 +592,18 @@ Dim EsPersonaJuridica2 As Boolean
     
      'Nombre
     miRsAux.Open "Select siglasvia ,direccion ,numero ,codpobla,pobempre,provempre,provincia from empresa2"
-    Cad = Cad & FrmtStr(vEmpresa.nomempre, 70)
+    cad = cad & FrmtStr(vEmpresa.nomempre, 70)
     If miRsAux.EOF Then Err.Raise 513, , "Error obteniendo datos empresa(empresa2)"
     
     Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
     Print #NFic, "         <PstlAdr>"
     Print #NFic, "            <Ctry>ES</Ctry>"
 
-    Cad = DBLet(miRsAux!siglasvia, "T") & " " & miRsAux!Direccion & " " & DBLet(miRsAux!numero, "T") & " "
-    Cad = Cad & Trim(DBLet(miRsAux!CodPobla, "T") & " " & miRsAux!pobempre) & " "
-    Cad = Cad & DBLet(miRsAux!provincia, "T")
+    cad = DBLet(miRsAux!siglasvia, "T") & " " & miRsAux!Direccion & " " & DBLet(miRsAux!numero, "T") & " "
+    cad = cad & Trim(DBLet(miRsAux!CodPobla, "T") & " " & miRsAux!pobempre) & " "
+    cad = cad & DBLet(miRsAux!provincia, "T")
     miRsAux.Close
-    Print #NFic, "            <AdrLine>" & XML(Trim(Cad)) & "</AdrLine>"
+    Print #NFic, "            <AdrLine>" & XML(Trim(cad)) & "</AdrLine>"
     
     Print #NFic, "         </PstlAdr>"
     Print #NFic, "         <Id>"
@@ -631,9 +631,9 @@ Dim EsPersonaJuridica2 As Boolean
     Print #NFic, "    <DbtrAgt>"
     Print #NFic, "       <FinInstnId>"
     
-    Cad = Mid(CuentaPropia2, 5, 4)
-    Cad = DevuelveDesdeBD("bic", "sbic", "entidad", Cad)
-    Print #NFic, "          <BIC>" & Trim(Cad) & "</BIC>"
+    cad = Mid(CuentaPropia2, 5, 4)
+    cad = DevuelveDesdeBD("bic", "sbic", "entidad", cad)
+    Print #NFic, "          <BIC>" & Trim(cad) & "</BIC>"
     Print #NFic, "       </FinInstnId>"
     Print #NFic, "    </DbtrAgt>"
     
@@ -642,19 +642,19 @@ Dim EsPersonaJuridica2 As Boolean
     
     'Para ello abrimos la tabla tmpNorma34
     If Pagos Then
-        Cad = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,desprovi,pais,cuentas.despobla,bic,nifdatos from spagop"
-        Cad = Cad & " left join sbic on spagop.entidad=sbic.entidad INNER JOIN cuentas ON"
-        Cad = Cad & " codmacta=ctaprove WHERE transfer =" & NumeroTransferencia
+        cad = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,desprovi,pais,cuentas.despobla,bic,nifdatos from spagop"
+        cad = cad & " left join sbic on spagop.entidad=sbic.entidad INNER JOIN cuentas ON"
+        cad = cad & " codmacta=ctaprove WHERE transfer =" & NumeroTransferencia
     Else
         'ABONOS
          '
-        Cad = "Select scobro.codbanco as entidad,scobro.codsucur as oficina,scobro.cuentaba,scobro.digcontr as CC,scobro.iban"
-        Cad = Cad & ",nommacta,dirdatos,codposta,despobla,impvenci,scobro.codmacta,pais,Gastos,impcobro,desprovi"
-        Cad = Cad & " ,NUmSerie,codfaccl,fecfaccl,numorden,text33csb,text41csb,bic,nifdatos from scobro"
-        Cad = Cad & " LEFT JOIN sbic on scobro.codbanco=sbic.entidad INNER JOIN cuentas ON"
-        Cad = Cad & " cuentas.codmacta=scobro.codmacta WHERE transfer =" & NumeroTransferencia
+        cad = "Select scobro.codbanco as entidad,scobro.codsucur as oficina,scobro.cuentaba,scobro.digcontr as CC,scobro.iban"
+        cad = cad & ",nommacta,dirdatos,codposta,despobla,impvenci,scobro.codmacta,pais,Gastos,impcobro,desprovi"
+        cad = cad & " ,NUmSerie,codfaccl,fecfaccl,numorden,text33csb,text41csb,bic,nifdatos from scobro"
+        cad = cad & " LEFT JOIN sbic on scobro.codbanco=sbic.entidad INNER JOIN cuentas ON"
+        cad = cad & " cuentas.codmacta=scobro.codmacta WHERE transfer =" & NumeroTransferencia
     End If
-    miRsAux.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    miRsAux.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     Regs = 0
     While Not miRsAux.EOF
         Print #NFic, "   <CdtTrfTxInf>"
@@ -686,8 +686,8 @@ Dim EsPersonaJuridica2 As Boolean
         End If
         
         'Persona fisica o juridica
-        Cad = Mid(miRsAux!nifdatos, 1, 1)
-        EsPersonaJuridica2 = Not IsNumeric(Cad)
+        cad = Mid(miRsAux!nifdatos, 1, 1)
+        EsPersonaJuridica2 = Not IsNumeric(cad)
         'Como da problemas Cajamar, siempre ponemos Perosna juridica. Veremos
         EsPersonaJuridica2 = True
         
@@ -711,8 +711,8 @@ Dim EsPersonaJuridica2 As Boolean
         Print #NFic, "       </Amt>"
         Print #NFic, "       <CdtrAgt>"
         Print #NFic, "          <FinInstnId>"
-        Cad = DBLet(miRsAux!BIC, "T")
-        If Cad = "" Then Err.Raise 513, , "No existe BIC: " & miRsAux!Nommacta & vbCrLf & "Entidad: " & miRsAux!Entidad
+        cad = DBLet(miRsAux!BIC, "T")
+        If cad = "" Then Err.Raise 513, , "No existe BIC: " & miRsAux!Nommacta & vbCrLf & "Entidad: " & miRsAux!Entidad
         Print #NFic, "             <BIC>" & DBLet(miRsAux!BIC, "T") & "</BIC>"
         Print #NFic, "          </FinInstnId>"
         Print #NFic, "       </CdtrAgt>"
@@ -1114,7 +1114,7 @@ Dim RegistroErroneo As Boolean
                 '        NIF
                 AUX2 = Mid(AUX2, 6)
                 If AUX2 <> SQL Then
-                    Stop
+'                    Stop
                     Err.Raise 513, , "NIF empresa del fichero no coincide con el de la empresa en Ariconta"
                 End If
             End If
@@ -1219,8 +1219,8 @@ Dim RegistroErroneo As Boolean
                 Itm.SubItems(5) = Format(AUX3, FormatoImporte)
                 If VtoEncontrado Then
                     'El importe deberia coincidir. Si no lo marcariamos como error
-                    Stop
-                    Stop
+'                    Stop
+'                    Stop
                     
                     Dim ImporteRemesado As Currency
                     

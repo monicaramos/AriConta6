@@ -318,9 +318,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim cad As String
+Dim Cad As String
 Dim RC As String
-Dim I As Integer
+Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -494,21 +494,6 @@ Dim nomDocu As String
     
     cadNomRPT = nomDocu ' "HerCompenCli.rpt"
 
-'    If VienedeRealizarCobro Then
-'        cadParam = cadParam & "pRecibo=""" & pNumFactu & """|"
-'        cadParam = cadParam & "pFecha=""" & pFecFactu & """|"
-'        numParam = numParam + 1
-'    End If
-
-    'si se imprime el nif o la cuenta de cliente
-'    cadParam = cadParam & "pImporte=" & TransformaComasPuntos(ImporteSinFormato(CStr(pImporte))) & "|"
-'    numParam = numParam + 1
-'
-'    cadParam = cadParam & "pObserva=""" & EscribeImporteLetra(ImporteFormateado(CStr(pImporte))) & """|"
-'    numParam = numParam + 1
-'    cadParam = cadParam & "pFecha=""" & pFechaRec & """|"
-'    numParam = numParam + 1
-    
     ImprimeGeneral
     
     If optTipoSal(1).Value Then CopiarFicheroASalida True, txtTipoSalida(1).Text

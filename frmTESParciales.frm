@@ -676,14 +676,6 @@ Private Sub ImprimirRecibo()
     
     CargarTemporal
     
-'    frmTESImpRecibo.pImporte = Text2(0).Text
-'    frmTESImpRecibo.pFechaRec = Text3(0).Text
-'    frmTESImpRecibo.pFecFactu = RecuperaValor(Vto, 3)
-'    frmTESImpRecibo.pNumFactu = RecuperaValor(Vto, 2)
-'    frmTESImpRecibo.pNumSerie = RecuperaValor(Vto, 1)
-'    frmTESImpRecibo.pNumOrden = RecuperaValor(Vto, 4)
-'    frmTESImpRecibo.pNumlinea = LineaCobro
-    
     frmTESImpRecibo.Show vbModal
     
 End Sub
@@ -1524,11 +1516,9 @@ Dim QueDireccionMostrar As Byte
       Cad = Cad & ",'" & Lugar & "'"
       
       'text3 mostrare el codmacta
-      'Cad = Cad & ",'" & DevNombreSQL(.SubItems(5)) & "',"
       Cad = Cad & ",'" & miRsAux!codmacta & "',"
       
       'MAYO 2010.    Ahora en este campo ira el CCC del cliente si es que lo tiene
-      'Cad = Cad & "'" & .SubItems(6) & "'," ANTES
       Aux = DBLet(miRsAux!codbanco, "N")
       If Aux = "" Or Aux = "0" Then
           Aux = "NULL"

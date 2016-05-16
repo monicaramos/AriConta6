@@ -75,7 +75,7 @@ Begin VB.Form frmTESRemesasCont
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   1950
+         Left            =   2640
          TabIndex        =   3
          Text            =   "Text4"
          Top             =   2520
@@ -93,7 +93,7 @@ Begin VB.Form frmTESRemesasCont
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   1980
+         Left            =   2640
          TabIndex        =   2
          Text            =   "Text1"
          Top             =   1920
@@ -118,7 +118,7 @@ Begin VB.Form frmTESRemesasCont
          Width           =   1245
       End
       Begin VB.Label Label3 
-         Caption         =   "Gastos (€)"
+         Caption         =   "Gastos banco (€)"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -134,10 +134,10 @@ Begin VB.Form frmTESRemesasCont
          Left            =   450
          TabIndex        =   8
          Top             =   2490
-         Width           =   1320
+         Width           =   2070
       End
       Begin VB.Label Label3 
-         Caption         =   "Fecha"
+         Caption         =   "Fecha Contable"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -153,12 +153,12 @@ Begin VB.Form frmTESRemesasCont
          Left            =   450
          TabIndex        =   7
          Top             =   1950
-         Width           =   750
+         Width           =   1800
       End
       Begin VB.Image Image1 
          Height          =   240
          Index           =   10
-         Left            =   1260
+         Left            =   2280
          Top             =   1980
          Width           =   240
       End
@@ -469,18 +469,12 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             
             
             'Ahora actualizamos los registros que estan en tmpactualziar
-'--
-'            frmActualizar2.OpcionActualizar = 20
-'            frmActualizar2.Show vbModal
             Screen.MousePointer = vbDefault
             'Cerramos
             RS.Close
             Unload Me
             Exit Sub
         Else
-            'ANtes
-            'Conn.RollbackTrans
-            'Ahora
             TirarAtrasTransaccion
         End If
     
@@ -523,9 +517,6 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             
             
             'Ahora actualizamos los registros que estan en tmpactualziar
-'--
-'            frmActualizar2.OpcionActualizar = 20
-'            frmActualizar2.Show vbModal
             Screen.MousePointer = vbDefault
             'Cerramos
             RS.Close
@@ -592,13 +583,6 @@ Dim C As String
     Else
        'Vamos a proceder al proceso de generacion cancelacion  /* CANCELACION */
        If SubTipo = 1 Then
-            'Para los efectos la norma no tiene que ser 19
-            'Febrero 2009.  Para tooodas las normas
-            'If Rs!Tipo = 0 Then
-            '    SQL = "Proceso no válido para NORMA 19"
-            '    Exit Function
-            'End If
-        
        End If
        
        'Para elos tipos 1,2
@@ -671,17 +655,6 @@ Dim C As String
     AdelanteConLaRemesa = SQL = ""
     
 End Function
-
-
-
-
-
-
-
-
-
-
-
 
 Private Function SugerirCodigoSiguienteTransferencia() As String
     
@@ -771,14 +744,6 @@ Dim W As Integer
         'Los gastos solo van en la contabilizacion
         Label3(0).Visible = Opcion = 8
         txtImporte(0).Visible = Opcion = 8
-        
-        'noviembre 2009
-        'Opcion 8. Contabilizar(ABONO)
-        ' tipo  efectos
-        ' si tiene cta efectos comerciales descontados y es de ultimo nivel
-        ' mostrar el agrupar efectos comerciales descontad
-        ' DEBERIA IR AQUI el check visible o no.
-        'Veremos si hay que ponerlo o no
         
         
         W = FrameContabilRem2.Width
@@ -898,13 +863,6 @@ Dim Valor
         
 End Sub
 
-
-
-
-
-
-
-
 Private Sub PonerCuentasCC()
 
     CuentasCC = ""
@@ -918,11 +876,6 @@ Private Sub PonerCuentasCC()
         Set miRsAux = Nothing
     End If
 End Sub
-
-
-
-
-
 
 Private Sub EliminarEnRecepcionDocumentos()
 Dim CtaPte As Boolean

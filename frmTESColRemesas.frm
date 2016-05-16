@@ -381,10 +381,6 @@ Modo = vModo
 
 B = (Modo = 0)
 
-'txtAux(0).Visible = Not B
-'txtAux(1).Visible = Not B
-'Combo1.Visible = Not B
-'mnOpciones.Enabled = B
 Toolbar1.Buttons(1).Enabled = B
 Toolbar1.Buttons(2).Enabled = B
 Toolbar1.Buttons(8).Enabled = B
@@ -401,13 +397,6 @@ DataGrid2.Enabled = B
 If DatosADevolverBusqueda <> "" Then
     cmdRegresar.Visible = B
 End If
-'Si estamo mod or insert
-'If Modo = 2 Then
-'   txtAux(0).BackColor = &H80000018
-'   Else
-'    txtAux(0).BackColor = &H80000005
-'End If
-'txtAux(0).Enabled = (Modo <> 2)
 End Sub
 
 
@@ -430,45 +419,6 @@ Private Sub BotonAnyadir()
     
     CargaGrid
 
-
-
-'    Dim anc As Single
-'
-'
-'
-'    lblIndicador.Caption = "INSERTANDO"
-'    'Situamos el grid al final
-'    DataGrid2.AllowAddNew = True
-'    If adodc1.Recordset.RecordCount > 0 Then
-'        DataGrid2.HoldFields
-'        adodc1.Recordset.MoveLast
-'        DataGrid2.Row = DataGrid2.Row + 1
-'    End If
-'
-'
-'
-'    If DataGrid2.Row < 0 Then
-'        anc = 770
-'        Else
-'        anc = DataGrid2.RowTop(DataGrid2.Row) + 545
-'    End If
-'    txtAux(0).Text = NumF
-'    txtAux(1).Text = ""
-'    Combo1.ListIndex = -1
-'    LLamaLineas anc, 0
-'
-'
-'    'Ponemos el foco
-'    txtAux(0).SetFocus
-'
-'    If FormularioHijoModificado Then
-'        CargaGrid
-'        BotonAnyadir
-'        Else
-'            'cmdCancelar.SetFocus
-'            If Not Adodc1.Recordset.EOF Then _
-'                Adodc1.Recordset.MoveFirst
-'    End If
 End Sub
 
 
@@ -478,19 +428,13 @@ Private Sub BotonVerTodos()
 End Sub
 
 Private Sub BotonBuscar()
-'    CargaGrid "codconce = -1"
-'    'Buscar
-'    txtAux(0).Text = ""
-'    txtAux(1).Text = ""
-'    LLamaLineas DataGrid2.Top + 206, 2
-'    txtAux(0).SetFocus
 End Sub
 
 
 '0.- Modificar recibo
 '1.- Crear dislette
 Private Sub BotonModificar(vOp As Byte)
-Dim I As Integer
+Dim i As Integer
 
 
     If vUsu.Nivel > 1 Then Exit Sub
@@ -522,51 +466,6 @@ Dim I As Integer
     If BloqueoManual(True, "ModRemesas", CStr(Adodc1.Recordset!Codigo & "/" & Adodc1.Recordset!Anyo)) Then
 
         If Val(Adodc1.Recordset!Tiporem) > 1 Then
-            '**************      T A L O N E S
-            'Preparamos algunas cosillas
-            'Aqui guardaremos cuanto llevamos a cada banco
-''            CadenaDesdeOtroForm = "Delete from tmpCierre1 where codusu =" & vUsu.Codigo
-''            Conn.Execute CadenaDesdeOtroForm
-''
-''
-''
-''            ' Metermos cta banco, nºremesa . El resto no necesito
-''            CadenaDesdeOtroForm = "INSERT INTO tmpcierre1 (codusu, cta, nomcta, acumPerD) VALUES ("
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & vUsu.Codigo & ",'" & CStr(Adodc1.Recordset!Codmacta) & "','"
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & CStr(Adodc1.Recordset!Codigo) & "',0)"
-''            Conn.Execute CadenaDesdeOtroForm
-''
-''            'TALONES PAGARES
-''            '-----------------------------------------------------------------------------
-''            CadenaDesdeOtroForm = " FROM scobro,sforpa,cuentas WHERE scobro.codforpa = sforpa.codforpa AND  "
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & " scobro.codmacta=cuentas.codmacta AND sforpa.tipforpa = "
-''            'Forma pago
-''            If Val(Adodc1.Recordset!tiporem) = 2 Then
-''                CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbPagare
-''            Else
-''                CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbTalon
-''            End If
-''            'Que no tengan la marca de NOREMESAR
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND noremesar=0"
-''
-''            'O la remesa es null, o pertence a la remesa que estoy modificando"
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND ("
-''            'Remesa null
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & " (codrem is null) OR "
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & " (codrem = " & CStr(Adodc1.Recordset!Codigo)
-''            CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND anyorem = " & CStr(Adodc1.Recordset!Anyo) & "))"
-''
-''            frmRemeTalPag.vRemesa = CStr(Adodc1.Recordset!Codigo) & "|" & CStr(Adodc1.Recordset!Anyo) & "|" & DBLet(Adodc1.Recordset!descripcion, "T") & "|"
-''            frmRemeTalPag.SQL = CadenaDesdeOtroForm
-''            frmRemeTalPag.Talon = CStr(Adodc1.Recordset!tiporem) = 1 '0 pagare   1 talon
-''            frmRemeTalPag.Text1(0).Text = CStr(Adodc1.Recordset!Codmacta) & " - " & CStr(Adodc1.Recordset!Nommacta)
-''            frmRemeTalPag.Text1(1).Text = Format(Adodc1.Recordset!fecremesa, "dd/mm/yyyy")
-''            frmRemeTalPag.Show vbModal
-
-             '*****************
-            '03 Junio 2009
-            'Modificar una remesa en situacion B sera la de cambiar de banco
-            
             frmVarios.Opcion = 25
             frmVarios.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
@@ -611,54 +510,7 @@ Dim I As Integer
         MsgBox "Registro bloqueado", vbExclamation
     End If
 
-    '---------
-'    'MODIFICAR
-'    '----------
-'    Dim cad As String
-'    Dim anc As Single
-'    Dim I As Integer
-'    If adodc1.Recordset.EOF Then Exit Sub
-'    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
-'
-'
-'
-'    Screen.MousePointer = vbHourglass
-'    Me.lblIndicador.Caption = "MODIFICAR"
-'    DeseleccionaGrid
-'    If DataGrid2.Bookmark < DataGrid2.FirstRow Or DataGrid2.Bookmark > (DataGrid2.FirstRow + DataGrid2.VisibleRows - 1) Then
-'        I = DataGrid2.Bookmark - DataGrid2.FirstRow
-'        DataGrid2.Scroll 0, I
-'        DataGrid2.Refresh
-'    End If
-'
-'    If DataGrid2.Row < 0 Then
-'        anc = 320
-'        Else
-'        anc = DataGrid2.RowTop(DataGrid2.Row) + 545
-'    End If
-'
-'    'Llamamos al form
-'    txtAux(0).Text = DataGrid2.Columns(0).Text
-'    txtAux(1).Text = DataGrid2.Columns(1).Text
-'    I = adodc1.Recordset!TipoConce
-'    Combo1.ListIndex = I - 1
-'    LLamaLineas anc, 1
-'
-'   'Como es modificar
-'   txtAux(1).SetFocus
-'
-'    Screen.MousePointer = vbDefault
 End Sub
-
-'Private Sub LLamaLineas(alto As Single, xModo As Byte)
-'PonerModo xModo + 1
-''Fijamos el ancho
-'txtAux(0).Top = alto
-'txtAux(1).Top = alto
-'Combo1.Top = alto - 15
-'End Sub
-
-
 
 
 Private Sub BotonEliminar()
@@ -672,14 +524,8 @@ Dim SQL As String
     
     'Ciertas comprobaciones
     If Adodc1.Recordset.EOF Then Exit Sub
-
-
-
-
+    
     If Not SepuedeBorrar Then Exit Sub
-    
-    
-    
     
     'Boqueo, borro y sigo
     If Val(Adodc1.Recordset!Tiporem) = 2 Then
@@ -707,8 +553,6 @@ Dim SQL As String
                 SQL = SQL & " AND tiporem =" & Adodc1.Recordset!Tiporem
                 Conn.Execute SQL
             
-            
-            
                 'Agosto2013  Ponemos a null la cuenta real de cobroctabanc2
                 'Pongo A NULL todos los recibos con esos valores
                 SQL = "UPDATE scobro set codrem=NULL,anyorem=NULL,siturem=NULL,tiporem=NULL"
@@ -735,55 +579,9 @@ Error2:
         MuestraError Err.Number, "Eliminando registro", Err.Description
 End Sub
 
-
-
-
-
-
-
-'Private Sub cmdAceptar_Click()
-'Dim I As Integer
-'Dim CadB As String
-'Select Case Modo
-'    Case 1
-'    If DatosOk Then
-'            '-----------------------------------------
-'            'Hacemos insertar
-'            If InsertarDesdeForm(Me) Then
-'                'MsgBox "Registro insertado.", vbInformation
-'                CargaGrid
-'                BotonAnyadir
-'            End If
-'        End If
-'    Case 2
-'            'Modificar
-'            If DatosOk Then
-'                '-----------------------------------------
-'                'Hacemos insertar
-'                If ModificaDesdeFormulario(Me) Then
-'                    I = adodc1.Recordset.Fields(0)
-'                    PonerModo 0
-'                    CargaGrid
-'                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
-'                End If
-'            End If
-'    Case 3
-'        'HacerBusqueda
-'        CadB = ObtenerBusqueda(Me)
-'        If CadB <> "" Then
-'            PonerModo 0
-'            CargaGrid CadB
-'        End If
-'    End Select
-'
-'
-'End Sub
-
 Private Sub cmdCancelar_Click()
 Select Case Modo
 Case 1
-    'DataGrid2.AllowAddNew = False
-    'CargaGrid
     If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
     
 Case 3
@@ -795,19 +593,19 @@ DataGrid2.SetFocus
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
 If Adodc1.Recordset.EOF Then
     MsgBox "Ningún registro a devolver.", vbExclamation
     Exit Sub
 End If
 
-cad = Adodc1.Recordset.Fields(1) & "|"
-cad = cad & Adodc1.Recordset.Fields(2) & "|"
-cad = cad & Adodc1.Recordset.Fields(3) & "|"
+Cad = Adodc1.Recordset.Fields(1) & "|"
+Cad = Cad & Adodc1.Recordset.Fields(2) & "|"
+Cad = Cad & Adodc1.Recordset.Fields(3) & "|"
 
 
-RaiseEvent DatoSeleccionado(cad)
+RaiseEvent DatoSeleccionado(Cad)
 Unload Me
 End Sub
 
@@ -885,16 +683,10 @@ Private Sub Form_Load()
     
     LeerGuardarOrdenacion True
     
-    'Cadena consulta
-    'CadenaConsulta = "Select codigo,anyo, fecremesa,situacion,tipo,remesas.codmacta,nommacta,importe,descripcion"
-    'CadenaConsulta = CadenaConsulta & " from remesas,cuentas where remesas.codmacta=cuentas.codmacta"
-    
-    
     CadenaConsulta = "Select DescripcionT,codigo,anyo, fecremesa,tiporemesa.descripcion,descsituacion,remesas.codmacta,nommacta,"
     CadenaConsulta = CadenaConsulta & " Importe , remesas.descripcion, remesas.Tipo,situacion,tiporem"
     CadenaConsulta = CadenaConsulta & " from cuentas,tiporemesa2,tiposituacionrem,remesas left join tiporemesa on remesas.tipo=tiporemesa.tipo where remesas.codmacta=cuentas.codmacta"
     CadenaConsulta = CadenaConsulta & " and situacio=situacion and tiporemesa2.tipo=remesas.tiporem"
-    
     
     Set DataGrid2.DataSource = Adodc1
     CargaGrid
@@ -905,8 +697,6 @@ Private Sub Form_Unload(Cancel As Integer)
     CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     LeerGuardarOrdenacion False
 End Sub
-
-
 
 Private Sub LeerGuardarOrdenacion(Leer As Boolean)
 Dim NF As Integer
@@ -1050,17 +840,10 @@ Case Else
 End Select
 End Sub
 
-'Private Sub DespalzamientoVisible(Bol As Boolean)
-'    Dim I
-'    For I = 14 To 17
-'        Toolbar1.Buttons(I).Visible = Bol
-'    Next I
-'End Sub
-
 Private Sub CargaGrid(Optional SQL As String)
    ' Dim J As Integer
     
-    Dim I As Integer
+    Dim i As Integer
     DataGrid2.EditActive = False
     DataGrid2.AllowUpdate = False
     Adodc1.ConnectionString = Conn
@@ -1070,8 +853,6 @@ Private Sub CargaGrid(Optional SQL As String)
         SQL = CadenaConsulta
     End If
     
-    
-    'SQL = SQL & " ORDER BY anyo desc,codigo desc"
     SQL = SQL & PonerOrdenFiltro
     Adodc1.RecordSource = SQL
     Adodc1.CursorType = adOpenDynamic
@@ -1082,56 +863,51 @@ Private Sub CargaGrid(Optional SQL As String)
     DataGrid2.RowHeight = 290
     
     
-    I = 0
-    DataGrid2.Columns(I).Caption = "Tipo"
-    DataGrid2.Columns(I).Width = 900
+    i = 0
+    DataGrid2.Columns(i).Caption = "Tipo"
+    DataGrid2.Columns(i).Width = 900
     DataGrid2.HeadFont.Bold = True
     
-    I = 1
-        DataGrid2.Columns(I).Caption = "Cod."
-        DataGrid2.Columns(I).Width = 600
+    i = 1
+        DataGrid2.Columns(i).Caption = "Cod."
+        DataGrid2.Columns(i).Width = 600
 '        DataGrid2.Columns(i).NumberFormat = "000"
         
     
     'Leemos del vector en 2
-    I = 2
-        DataGrid2.Columns(I).Caption = "Año"
-        DataGrid2.Columns(I).Width = 700
-'        TotalAncho = TotalAncho + DataGrid2.Columns(i).Width
+    i = 2
+        DataGrid2.Columns(i).Caption = "Año"
+        DataGrid2.Columns(i).Width = 700
     
     'El importe es campo calculado
-    I = 3
-        DataGrid2.Columns(I).Caption = "Fecha"
-        DataGrid2.Columns(I).Width = 1100
-        DataGrid2.Columns(I).NumberFormat = "dd/mm/yyyy"
-'        TotalAncho = TotalAncho + DataGrid2.Columns(i).Width
+    i = 3
+        DataGrid2.Columns(i).Caption = "Fecha"
+        DataGrid2.Columns(i).Width = 1100
+        DataGrid2.Columns(i).NumberFormat = "dd/mm/yyyy"
     
     
     DataGrid2.Columns(4).Caption = "Norma"
     DataGrid2.Columns(4).Width = 850
     
-    I = 5
-        DataGrid2.Columns(I).Caption = "Situación"
-        DataGrid2.Columns(I).Width = 1300
-'        TotalAncho = TotalAncho + DataGrid2.Columns(i).Width
+    i = 5
+        DataGrid2.Columns(i).Caption = "Situación"
+        DataGrid2.Columns(i).Width = 1300
         
-
-    
-    I = 6
-    DataGrid2.Columns(I).Caption = "Cuenta"
-    DataGrid2.Columns(I).Width = 1000
- '       TotalAncho = TotalAncho + DataGrid2.Columns(i).Width
+   
+    i = 6
+    DataGrid2.Columns(i).Caption = "Cuenta"
+    DataGrid2.Columns(i).Width = 1000
                 
         
-    I = 7
-    DataGrid2.Columns(I).Caption = "Nombre"
-    DataGrid2.Columns(I).Width = 1980
+    i = 7
+    DataGrid2.Columns(i).Caption = "Nombre"
+    DataGrid2.Columns(i).Width = 1980
         
-    I = 8
-    DataGrid2.Columns(I).Caption = "Importe"
-    DataGrid2.Columns(I).Width = 1100
-    DataGrid2.Columns(I).Alignment = dbgRight
-    DataGrid2.Columns(I).NumberFormat = FormatoImporte
+    i = 8
+    DataGrid2.Columns(i).Caption = "Importe"
+    DataGrid2.Columns(i).Width = 1100
+    DataGrid2.Columns(i).Alignment = dbgRight
+    DataGrid2.Columns(i).NumberFormat = FormatoImporte
 
     DataGrid2.Columns(9).Width = 2000
        
@@ -1140,84 +916,12 @@ Private Sub CargaGrid(Optional SQL As String)
     DataGrid2.Columns(11).Visible = False
     DataGrid2.Columns(12).Visible = False
         
-        
-        
-        
-        
-'        'Fiajamos el cadancho
-'    If Not CadAncho Then
-'        'La primera vez fijamos el ancho y alto de  los txtaux
-'        txtAux(0).Width = DataGrid2.Columns(0).Width - 60
-'        txtAux(1).Width = DataGrid2.Columns(1).Width - 60
-'        Combo1.Width = DataGrid2.Columns(3).Width
-'        txtAux(0).Left = DataGrid2.Left + 340
-'        txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
-'        Combo1.Left = txtAux(1).Left + txtAux(1).Width + 45
-'        CadAncho = True
-'    End If
     'Habilitamos modificar y eliminar
     If vUsu.Nivel < 2 Then
         Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
         Toolbar1.Buttons(8).Enabled = Not Adodc1.Recordset.EOF
     End If
 End Sub
-
-'Private Sub txtaux_GotFocus(Index As Integer)
-'With txtAux(Index)
-'    .SelStart = 0
-'    .SelLength = Len(.Text)
-'End With
-'End Sub
-'
-'Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpress KeyAscii
-'End Sub
-'
-'Private Sub txtAux_LostFocus(Index As Integer)
-'
-'txtAux(Index).Text = Trim(txtAux(Index).Text)
-'If txtAux(Index).Text = "" Then Exit Sub
-'If Modo = 3 Then Exit Sub 'Busquedas
-'If Index = 0 Then
-'    If Not IsNumeric(txtAux(0).Text) Then
-'        MsgBox "Código concepto tiene que ser numérico", vbExclamation
-'        Exit Sub
-'    End If
-'    txtAux(0).Text = Format(txtAux(0).Text, "000")
-'End If
-'End Sub
-
-
-'Private Function DatosOk() As Boolean
-'Dim Datos As String
-'Dim B As Boolean
-'B = CompForm(Me)
-'If Not B Then Exit Function
-'
-'If Modo = 1 Then
-'    'Estamos insertando
-'     Datos = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtAux(0).Text, "N")
-'     If Datos <> "" Then
-'        MsgBox "Ya existe el concepto : " & txtAux(0).Text, vbExclamation
-'        B = False
-'    End If
-'End If
-'DatosOk = B
-'End Function
-'
-'Private Sub CargaCombo()
-'    Combo1.Clear
-'    'Conceptos
-'    Combo1.AddItem "Debe"
-'    Combo1.ItemData(Combo1.NewIndex) = 1
-'
-'    Combo1.AddItem "Haber"
-'    Combo1.ItemData(Combo1.NewIndex) = 2
-'
-'    Combo1.AddItem "Decide asiento"
-'    Combo1.ItemData(Combo1.NewIndex) = 3
-'End Sub
-
 
 Private Sub PonerOpcionesMenu()
 PonerOpcionesMenuGeneral Me
@@ -1233,17 +937,6 @@ Private Function SepuedeBorrar() As Boolean
         SepuedeBorrar = True
     Else
         
-    
-'        SQL = DevuelveDesdeBD("tipoamor", "samort", "condebes", adodc1.Recordset!codconce, "N")
-'        If SQL <> "" Then
-'            MsgBox "Esta vinculada con parametros de amortizacion", vbExclamation
-'            Exit Function
-'        End If
-'        SQL = DevuelveDesdeBD("tipoamor", "samort", "conhaber", adodc1.Recordset!codconce, "N")
-'        If SQL <> "" Then
-'            MsgBox "Esta vinculada con parametros de amortizacion", vbExclamation
-'            Exit Function
-'        End If
         If Tipo = 1 Then
             MsgBox "No se puede eliminar la remesa en esta situación: " & Adodc1.Recordset!Situacion, vbExclamation
         Else
@@ -1412,7 +1105,7 @@ Dim C As String
     C = C & " codrem=" & Adodc1.Recordset!Codigo & " AND anyorem = " & Adodc1.Recordset!Anyo & ")"
     miRsAux.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        C = "UPDATE scarecepdoc set LlevadoBanco = 0 WHERE codigo = " & miRsAux!ID
+        C = "UPDATE scarecepdoc set LlevadoBanco = 0 WHERE codigo = " & miRsAux!Id
         Conn.Execute C
         miRsAux.MoveNext
     Wend
