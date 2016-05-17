@@ -658,6 +658,7 @@ Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As S
     
     'Creamos el sql
     Set RS = New ADODB.Recordset
+    
     RS.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RS.EOF Then
         DevuelveDesdeBD = DBLet(RS.Fields(0))

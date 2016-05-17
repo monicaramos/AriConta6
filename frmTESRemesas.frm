@@ -1615,7 +1615,7 @@ Dim Modo As Byte
 Dim Txt33Csb As String
 Dim Txt41Csb As String
 
-Dim indice As Integer
+Dim Indice As Integer
 Dim Codigo As Long
 
 Dim SubTipo As Integer
@@ -1886,7 +1886,7 @@ Dim Img As Image
     Me.imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For i = 0 To 5
-        Me.imgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next i
     
     ' Botonera Principal
@@ -1986,19 +1986,19 @@ Dim i As Integer
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-    txtFecha(indice).Text = Format(vFecha, "dd/mm/yyyy")
+    txtFecha(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
     'FECHA FACTURA
-    indice = Index
+    Indice = Index
     
     Set frmF = New frmCal
     frmF.Fecha = Now
-    If txtFecha(indice).Text <> "" Then frmF.Fecha = CDate(txtFecha(indice).Text)
+    If txtFecha(Indice).Text <> "" Then frmF.Fecha = CDate(txtFecha(Indice).Text)
     frmF.Show vbModal
     Set frmF = Nothing
-    PonFoco txtFecha(indice)
+    PonFoco txtFecha(Indice)
 
 End Sub
 
@@ -2028,7 +2028,7 @@ Private Sub imgFec_Click(Index As Integer)
     
     Select Case Index
     Case 0, 1, 2, 3, 4, 5
-        indice = Index
+        Indice = Index
     
         'FECHA
         Set frmF = New frmCal
@@ -2641,7 +2641,11 @@ Dim ImporteTot As Currency
     
     ImporteTot = 0
     
-    Set Me.lwCobros.SmallIcons = frmPpal.ImgListviews
+    
+'    Set Me.lwCobros.SmallIcons = frmPpal.ImgListviews
+    Set lwCobros.SmallIcons = frmPpal.imgListComun16
+    
+    
     Set miRsAux = New ADODB.Recordset
     
     Cad = "Select cobros.*,nomforpa " & vSQL
@@ -2670,6 +2674,10 @@ Dim ImporteTot As Currency
         ImporteTot = ImporteTot + Importe
 
         IT.Tag = Abs(Importe)  'siempre valor absoluto
+            
+        If DBLet(miRsAux!devuelto, "N") = 1 Then
+            IT.SmallIcon = 42
+        End If
             
         miRsAux.MoveNext
     Wend
@@ -2780,8 +2788,8 @@ Dim IT
         IT.SubItems(3) = DBLet(miRsAux!descsituacion, "T")
         IT.ListSubItems(3).ToolTipText = DBLet(miRsAux!descsituacion, "T")
         IT.SubItems(4) = miRsAux!codmacta
-        IT.SubItems(5) = DBLet(miRsAux!Nommacta, "T")
-        IT.ListSubItems(5).ToolTipText = DBLet(miRsAux!Nommacta, "T")
+        IT.SubItems(5) = DBLet(miRsAux!nommacta, "T")
+        IT.ListSubItems(5).ToolTipText = DBLet(miRsAux!nommacta, "T")
         IT.SubItems(6) = DBLet(miRsAux!Descripcion, "T")
         IT.ListSubItems(6).ToolTipText = DBLet(miRsAux!Descripcion, "T")
         IT.SubItems(7) = Format(miRsAux!Importe, "###,###,##0.00")
@@ -2892,10 +2900,10 @@ Dim colCtas As Collection
             SQL = SQL & " AND cobros.fecfactu <= '" & Format(txtFecha(1).Text, FormatoFecha) & "'"
         
         'Codigo factura
-        If txtNumFac(0).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu >= '" & txtNumFac(0).Text & "'"
-        If txtNumFac(1).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu <= '" & txtNumFac(1).Text & "'"
+        If txtnumfac(0).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu >= '" & txtnumfac(0).Text & "'"
+        If txtnumfac(1).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu <= '" & txtnumfac(1).Text & "'"
     
     Else
         'Fecha factura
@@ -2954,7 +2962,7 @@ Dim colCtas As Collection
             Set colCtas = New Collection
             While Not RS.EOF
                 If i < 15 Then
-                    Cad = Cad & vbCrLf & RS!codmacta & " " & RS!Nommacta & "  " & RS!NUmSerie & Format(RS!NumFactu, "000000") & "   -> " & Format(RS!ImpVenci, FormatoImporte)
+                    Cad = Cad & vbCrLf & RS!codmacta & " " & RS!nommacta & "  " & RS!NUmSerie & Format(RS!NumFactu, "000000") & "   -> " & Format(RS!ImpVenci, FormatoImporte)
                 End If
                 i = i + 1
                 colCtas.Add CStr(RS!codmacta)
@@ -3014,7 +3022,7 @@ Dim colCtas As Collection
         Cad = ""
         i = 1
         While Not RS.EOF
-            Cad = Cad & RS!codmacta & " - " & RS!Nommacta & " : " & RS!FecBloq & vbCrLf
+            Cad = Cad & RS!codmacta & " - " & RS!nommacta & " : " & RS!FecBloq & vbCrLf
             RS.MoveNext
         Wend
     End If
@@ -3105,7 +3113,7 @@ Dim colCtas As Collection
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub UltimoBancoRem(Leer As Boolean, Txt As TextBox)
+Private Sub UltimoBancoRem(leer As Boolean, Txt As TextBox)
 Dim NF As Integer
 Dim Cad As String
 Dim Cad2 As String
@@ -3115,7 +3123,7 @@ On Error GoTo EUltimoBancoRem
 
     Cad = App.Path & "\control.dat"
 
-    If Leer Then
+    If leer Then
         If Dir(Cad) <> "" Then
             NF = FreeFile
             Open Cad For Input As #NF
@@ -3137,14 +3145,14 @@ EUltimoBancoRem:
     Err.Clear
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgSerie"
-        imgSerie_Click indice
+        imgSerie_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     End Select
 End Sub
 
@@ -3307,7 +3315,7 @@ End Sub
 
 
 Private Sub txtNumFac_GotFocus(Index As Integer)
-    ConseguirFoco txtNumFac(Index), 3
+    ConseguirFoco txtnumfac(Index), 3
 End Sub
 
 Private Sub txtNumFac_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3325,12 +3333,12 @@ Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
-    txtNumFac(Index).Text = UCase(Trim(txtNumFac(Index).Text))
+    txtnumfac(Index).Text = UCase(Trim(txtnumfac(Index).Text))
     
     
     Select Case Index
         Case 0, 1 'numero de factura
-            PonerFormatoEntero txtNumFac(Index)
+            PonerFormatoEntero txtnumfac(Index)
     End Select
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no

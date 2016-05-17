@@ -1010,3 +1010,28 @@ Public Sub AyudaBalances(frmBas As frmBasico, Optional CodActual As String, Opti
 End Sub
 
 
+Public Sub AyudaDevolucion(frmBas As frmBasico, Optional CodActual As String, Optional cWhere As String)
+
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|870|;S|txtAux(1)|T|Descripción|5230|;"
+    frmBas.CadenaConsulta = "SELECT codigo, descripcion "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM usuarios.wdevolucion "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    frmBas.Tag1 = "Código|T|N|||usuarios.wdevolucion|codigo||S|"
+    frmBas.Tag2 = "Nombre|T|N|||usuarios.wdevolucion|descripcion|||"
+    
+    frmBas.Maxlen1 = 10
+    frmBas.Maxlen2 = 100
+    
+    frmBas.tabla = "usuarios.wdevolucion"
+    frmBas.CampoCP = "codigo"
+    frmBas.Caption = "Conceptos Devolución"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    frmBas.Show vbModal
+    
+End Sub
+
+

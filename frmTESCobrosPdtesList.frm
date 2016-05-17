@@ -2012,18 +2012,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgSerie"
-        imgSerie_Click indice
+        imgSerie_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     Case "imgAgente"
-        ImgAgente_Click indice
+        ImgAgente_Click Indice
     Case "imgDpto"
-        imgDpto_Click indice
+        imgDpto_Click Indice
     End Select
 End Sub
 
@@ -2210,6 +2210,10 @@ Dim nomDocu As String
         If Check1(1).Value Then cadParam = cadParam & "pResumen=1|"
         numParam = numParam + 1
         
+         cadParam = cadParam & "pOrden={cobros.fecvenci}|"
+         numParam = numParam + 1
+        
+        
     End If
     
     If optVarios(1).Value Then
@@ -2335,6 +2339,15 @@ Dim i As Integer
         If Not AnyadirAFormula(cadselect, "formapago.tipforpa is null") Then Exit Function
         If Not AnyadirAFormula(cadFormula, "isnull({formapago.tipforpa})") Then Exit Function
     End If
+    
+    
+    ' Añadimos la condicion de que la situacion = 0 y que el importe pendiente <> 0
+    If Not AnyadirAFormula(cadselect, "cobros.situacion = 0") Then Exit Function
+    If Not AnyadirAFormula(cadFormula, "{cobros.situacion} = 0") Then Exit Function
+    
+    If Not AnyadirAFormula(cadselect, "(cobros.impvenci + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0)) <> 0") Then Exit Function
+    If Not AnyadirAFormula(cadFormula, "{@Pendiente} <> 0") Then Exit Function
+
     
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"

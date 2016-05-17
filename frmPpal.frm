@@ -781,11 +781,15 @@ Private Sub Form_Load()
     imgListComun_BN.ImageHeight = 24
     imgListComun_BN.ImageWidth = 24
     GetIconsFromLibrary App.Path & "\iconosconta_BN.dll", 3, 24
+    
     imgListComun_OM.ImageHeight = 24
     imgListComun_OM.ImageWidth = 24
     GetIconsFromLibrary App.Path & "\iconosconta_OM.dll", 4, 24
     
+    imgListComun16.ImageHeight = 16
+    imgListComun16.ImageWidth = 16
     GetIconsFromLibrary App.Path & "\iconosconta.dll", 5, 16
+    
     GetIconsFromLibrary App.Path & "\iconosconta_BN.dll", 6, 16
     GetIconsFromLibrary App.Path & "\iconosconta_OM.dll", 7, 16
     '++

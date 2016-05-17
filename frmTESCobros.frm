@@ -31,7 +31,7 @@ Begin VB.Form frmTESCobros
       Height          =   375
       Left            =   14610
       TabIndex        =   145
-      Top             =   10080
+      Top             =   10200
       Visible         =   0   'False
       Width           =   1035
    End
@@ -49,7 +49,7 @@ Begin VB.Form frmTESCobros
       Height          =   375
       Left            =   13470
       TabIndex        =   143
-      Top             =   10080
+      Top             =   10200
       Width           =   1035
    End
    Begin VB.CommandButton cmdCancelar 
@@ -67,7 +67,7 @@ Begin VB.Form frmTESCobros
       Height          =   375
       Left            =   14610
       TabIndex        =   144
-      Top             =   10080
+      Top             =   10200
       Width           =   1035
    End
    Begin VB.Frame FrameFiltro 
@@ -298,13 +298,13 @@ Begin VB.Form frmTESCobros
       _Version        =   393216
    End
    Begin TabDlg.SSTab SSTab1 
-      Height          =   8085
+      Height          =   8235
       Left            =   90
       TabIndex        =   48
       Top             =   1740
       Width           =   15585
       _ExtentX        =   27490
-      _ExtentY        =   14261
+      _ExtentY        =   14526
       _Version        =   393216
       Tabs            =   1
       TabsPerRow      =   2
@@ -772,14 +772,15 @@ Begin VB.Form frmTESCobros
          End
       End
       Begin TabDlg.SSTab SSTab2 
-         Height          =   2355
+         Height          =   2475
          Left            =   360
          TabIndex        =   90
          Top             =   5550
          Width           =   14775
          _ExtentX        =   26061
-         _ExtentY        =   4154
+         _ExtentY        =   4366
          _Version        =   393216
+         Tab             =   1
          TabHeight       =   520
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
@@ -792,14 +793,14 @@ Begin VB.Form frmTESCobros
          EndProperty
          TabCaption(0)   =   "Cobros Realizados"
          TabPicture(0)   =   "frmTESCobros.frx":006C
-         Tab(0).ControlEnabled=   -1  'True
+         Tab(0).ControlEnabled=   0   'False
          Tab(0).Control(0)=   "FrameAux0"
-         Tab(0).Control(0).Enabled=   0   'False
          Tab(0).ControlCount=   1
          TabCaption(1)   =   "Devoluciones"
          TabPicture(1)   =   "frmTESCobros.frx":0088
-         Tab(1).ControlEnabled=   0   'False
+         Tab(1).ControlEnabled=   -1  'True
          Tab(1).Control(0)=   "FrameAux1"
+         Tab(1).Control(0).Enabled=   0   'False
          Tab(1).ControlCount=   1
          TabCaption(2)   =   "Fechas Op.Asegurada"
          TabPicture(2)   =   "frmTESCobros.frx":00A4
@@ -817,8 +818,8 @@ Begin VB.Form frmTESCobros
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   1875
-            Left            =   150
+            Height          =   2085
+            Left            =   -74850
             TabIndex        =   110
             Top             =   330
             Width           =   14475
@@ -887,6 +888,7 @@ Begin VB.Form frmTESCobros
             End
             Begin VB.Frame FrameToolAux 
                Height          =   555
+               Index           =   0
                Left            =   0
                TabIndex        =   148
                Top             =   0
@@ -1273,13 +1275,13 @@ Begin VB.Form frmTESCobros
                _Version        =   393216
             End
             Begin MSComctlLib.ListView lwCobros 
-               Height          =   1335
+               Height          =   1425
                Left            =   -30
                TabIndex        =   158
-               Top             =   540
+               Top             =   570
                Width           =   14415
                _ExtentX        =   25426
-               _ExtentY        =   2355
+               _ExtentY        =   2514
                View            =   3
                LabelEdit       =   1
                LabelWrap       =   -1  'True
@@ -1549,11 +1551,61 @@ Begin VB.Form frmTESCobros
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   1875
-            Left            =   -74850
+            Height          =   1995
+            Left            =   150
             TabIndex        =   91
             Top             =   330
             Width           =   14295
+            Begin VB.TextBox txtaux1 
+               Appearance      =   0  'Flat
+               BorderStyle     =   0  'None
+               BeginProperty Font 
+                  Name            =   "Verdana"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   290
+               Index           =   12
+               Left            =   8130
+               MaxLength       =   255
+               TabIndex        =   161
+               Tag             =   "TipoRemesa|N|S|||cobros_realizados|tiporem|||"
+               Text            =   "Tipo"
+               Top             =   780
+               Visible         =   0   'False
+               Width           =   1845
+            End
+            Begin VB.Frame FrameToolAux 
+               Height          =   555
+               Index           =   1
+               Left            =   0
+               TabIndex        =   159
+               Top             =   -30
+               Width           =   855
+               Begin MSComctlLib.Toolbar ToolbarAux1 
+                  Height          =   330
+                  Left            =   210
+                  TabIndex        =   160
+                  Top             =   180
+                  Width           =   435
+                  _ExtentX        =   767
+                  _ExtentY        =   582
+                  ButtonWidth     =   609
+                  ButtonHeight    =   582
+                  Style           =   1
+                  _Version        =   393216
+                  BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+                     NumButtons      =   1
+                     BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                        Object.ToolTipText     =   "Modificar"
+                     EndProperty
+                  EndProperty
+               End
+            End
             Begin VB.CommandButton cmdAux 
                Appearance      =   0  'Flat
                Caption         =   "+"
@@ -1570,7 +1622,7 @@ Begin VB.Form frmTESCobros
                Index           =   2
                Left            =   4590
                TabIndex        =   157
-               ToolTipText     =   "Buscar cuenta"
+               ToolTipText     =   "Buscar código"
                Top             =   780
                Visible         =   0   'False
                Width           =   195
@@ -1592,7 +1644,7 @@ Begin VB.Form frmTESCobros
                Left            =   11910
                MaxLength       =   255
                TabIndex        =   156
-               Tag             =   "Gastos Dev|N|S|||cobros_realizados|gastosdev|###,##0.00||"
+               Tag             =   "Gastos Dev|N|S|||cobros_realizados|gastodev|###,##0.00||"
                Text            =   "Gastos"
                Top             =   780
                Visible         =   0   'False
@@ -1646,6 +1698,7 @@ Begin VB.Form frmTESCobros
             End
             Begin VB.TextBox txtaux1 
                Appearance      =   0  'Flat
+               BackColor       =   &H80000018&
                BorderStyle     =   0  'None
                BeginProperty Font 
                   Name            =   "Verdana"
@@ -1661,7 +1714,6 @@ Begin VB.Form frmTESCobros
                Left            =   4830
                MaxLength       =   255
                TabIndex        =   142
-               Tag             =   "Observaciones|T|N|||cobros_realizados|observa|||"
                Text            =   "nomconcedevol"
                Top             =   780
                Visible         =   0   'False
@@ -1684,7 +1736,7 @@ Begin VB.Form frmTESCobros
                Left            =   2850
                MaxLength       =   10
                TabIndex        =   99
-               Tag             =   "Código Devolucion|T|N|||cobros_realizados|coddevol00|||"
+               Tag             =   "Código Devolucion|T|S|||cobros_realizados|coddevol|||"
                Text            =   "CodDev"
                Top             =   780
                Visible         =   0   'False
@@ -1731,7 +1783,6 @@ Begin VB.Form frmTESCobros
                Left            =   7560
                MaxLength       =   255
                TabIndex        =   97
-               Tag             =   "TipoRemesa|N|S|||cobros_realizados|tiporem|||"
                Text            =   "Tipo"
                Top             =   780
                Visible         =   0   'False
@@ -1907,14 +1958,14 @@ Begin VB.Form frmTESCobros
             End
             Begin MSDataGridLib.DataGrid DataGridAux 
                Bindings        =   "frmTESCobros.frx":02EC
-               Height          =   1215
+               Height          =   1335
                Index           =   1
                Left            =   0
                TabIndex        =   100
                Top             =   570
-               Width           =   13365
-               _ExtentX        =   23574
-               _ExtentY        =   2143
+               Width           =   13545
+               _ExtentX        =   23892
+               _ExtentY        =   2355
                _Version        =   393216
                AllowUpdate     =   0   'False
                BorderStyle     =   0
@@ -3288,7 +3339,7 @@ Begin VB.Form frmTESCobros
       Height          =   540
       Left            =   120
       TabIndex        =   41
-      Top             =   9930
+      Top             =   10050
       Width           =   4095
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -3692,6 +3743,9 @@ Private WithEvents frmZ As frmZoom  'Zoom para campos Text
 Attribute frmZ.VB_VarHelpID = -1
 Private WithEvents frmPais As frmBasico2
 Attribute frmPais.VB_VarHelpID = -1
+Private WithEvents frmDev As frmBasico
+Attribute frmDev.VB_VarHelpID = -1
+
 Private frmAsi As frmAsientosHco
 Attribute frmAsi.VB_VarHelpID = -1
 '-----------------------------
@@ -3720,7 +3774,7 @@ Private BuscaChekc As String
 
 Dim PrimeraVez As Boolean
 
-Dim indice As Byte
+Dim Indice As Byte
 
 Dim CadB As String
 Dim CadB1 As String
@@ -3879,17 +3933,13 @@ Private Sub cmdAux_Click(Index As Integer)
             Set frmDia = Nothing
             
             PonFoco txtAux(5)
-        Case 2 ' fecha
-            'En tag pongo el txtfecha asociado
-            cmdAux(1).Tag = 2
-            DevfrmCCtas = Format(Now, "dd/mm/yyyy")
-            If IsDate(txtAux(CInt(cmdAux(1).Tag)).Text) Then _
-                DevfrmCCtas = Format(txtAux(CInt(cmdAux(1).Tag)).Text, "dd/mm/yyyy")
-            Set frmC1 = New frmCal
-            frmC1.Fecha = CDate(DevfrmCCtas)
-            DevfrmCCtas = ""
-            frmC1.Show vbModal
-            Set frmC1 = Nothing
+            
+        Case 2 ' cocnepto de devolucion
+            Set frmDev = New frmBasico
+            
+            AyudaDevolucion frmDev, txtaux1(6)
+            
+            Set frmDev = Nothing
             
     End Select
 '    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
@@ -3967,7 +4017,7 @@ Private Sub BotonAnyadir()
     cmdAceptar.Caption = "&Aceptar"
     PonerModo 3
     
-    CargaGrid 0, False
+    CargaList 0, False 'CargaGrid 0, False
     CargaGrid 1, False
     
     
@@ -4245,7 +4295,7 @@ Dim i As Integer
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 47
         .Buttons(2).Image = 44
-        .Buttons(3).Image = 42
+        .Buttons(3).Image = 37
     End With
 
 
@@ -4274,6 +4324,15 @@ Dim i As Integer
         .Buttons(1).Image = 1
         .Buttons(2).Image = 16
     End With
+    
+    With Me.ToolbarAux1
+        .HotImageList = frmPpal.imgListComun_OM16
+        .DisabledImageList = frmPpal.imgListComun_BN16
+        .ImageList = frmPpal.imgListComun16
+        .Buttons(1).Image = 4
+    End With
+    
+    
     
     CargarColumnas
     
@@ -4428,6 +4487,13 @@ Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
     DevfrmCCtas = CadenaSeleccion
 End Sub
 
+Private Sub frmDev_DatoSeleccionado(CadenaSeleccion As String)
+    If CadenaSeleccion <> "" Then
+        txtaux1(6).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtaux1(8).Text = RecuperaValor(CadenaSeleccion, 2)
+    End If
+End Sub
+
 Private Sub frmPais_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
         Text1(36).Text = RecuperaValor(CadenaSeleccion, 1)
@@ -4504,12 +4570,12 @@ End Sub
 Private Sub imgDepart_Click()
 
         ' departamento
-        indice = 33
+        Indice = 33
         
         Set frmDpto = New frmBasico
-        AyudaDepartamentos frmDpto, Text1(indice).Text, "codmacta = " & DBSet(Text1(4).Text, "T")
+        AyudaDepartamentos frmDpto, Text1(Indice).Text, "codmacta = " & DBSet(Text1(4).Text, "T")
         Set frmDpto = Nothing
-        PonFoco Text1(indice)
+        PonFoco Text1(Indice)
         
 
 
@@ -4558,10 +4624,10 @@ Private Sub imgppal_Click(Index As Integer)
         ' observaciones
         Screen.MousePointer = vbDefault
         
-        indice = 17
+        Indice = 17
         
         Set frmZ = New frmZoom
-        frmZ.pValor = Text1(indice).Text
+        frmZ.pValor = Text1(Indice).Text
         frmZ.pModo = Modo
         frmZ.Caption = "Observaciones Cobros"
         frmZ.Show vbModal
@@ -4577,7 +4643,7 @@ Private Sub imgppal_Click(Index As Integer)
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(indice).Text = vCampo
+     Text1(Indice).Text = vCampo
 End Sub
 
 
@@ -4945,7 +5011,7 @@ Dim Cad As String
 
     CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
-    CadB1 = ObtenerBusqueda2(Me, , 2, "FrameAux0")
+    CadB1 = ObtenerBusqueda2(Me, , 2, "FrameAux1")
     
     HacerBusqueda2
 
@@ -4991,10 +5057,8 @@ Private Sub CargarSqlFiltro()
     Select Case cboFiltro.ItemData(cboFiltro.ListIndex) 'cboFiltro.ListIndex
         Case 0 ' pendientes de cobro
             cadFiltro = "(coalesce(cobros.impvenci,0) + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0) <> 0) "
-        Case 1 ' en riesgo
+        Case 1 ' cobrados
             cadFiltro = "(coalesce(cobros.impvenci,0) + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0) = 0) and cobros.situacion = 1"
-        Case 2 ' cobrados
-            cadFiltro = "(coalesce(cobros.impvenci,0) + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0) = 0) and cobros.situacion = 2"
         Case 9 ' todos
             cadFiltro = "(1=1)"
     End Select
@@ -5236,22 +5300,22 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
     Text2(4).Tag = ""
     
     'lineas de cobros_realizados
-'    Dim anc As Single
-'    anc = DataGridAux(0).Top
-'    If DataGridAux(0).Row < 0 Then
-'        anc = anc + 230
-'    Else
-'        anc = anc + DataGridAux(0).RowTop(DataGridAux(0).Row) + 5
-'    End If
-'    If Modo = 1 Then
-'        LLamaLineas 0, Modo, anc
-'    Else
-'        LLamaLineas 0, 3, anc
-'    End If
-'
-'    For i = 0 To txtaux.Count - 1
-'        txtaux(i).BackColor = vbWhite
-'    Next i
+    Dim anc As Single
+    anc = DataGridAux(1).Top
+    If DataGridAux(1).Row < 0 Then
+        anc = anc + 230
+    Else
+        anc = anc + DataGridAux(1).RowTop(DataGridAux(1).Row) + 5
+    End If
+    If Modo = 1 Then
+        LLamaLineas 1, Modo, anc
+    Else
+        LLamaLineas 1, 3, anc
+    End If
+
+    For i = 0 To txtaux1.Count - 1
+        If i <> 8 Then txtaux1(i).BackColor = vbWhite
+    Next i
     
     Check1(2).Enabled = (Modo = 1)
     Check1(4).Enabled = (Modo = 1)
@@ -5491,7 +5555,7 @@ Private Function SePuedeEliminar2() As Byte
     SePuedeEliminar2 = 0 'NO se puede eliminar
 
     SePuedeEliminar2 = 1
-    If Val(DBLet(Data1.Recordset!codrem)) > 0 Then
+    If Val(DBLet(Data1.Recordset!CodRem)) > 0 Then
         MsgBox "Pertenece a una remesa", vbExclamation
         'Noviembre 2009
         If vUsu.Nivel < 2 Then
@@ -5710,7 +5774,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
             If Me.Data1.Recordset.EOF Then Exit Sub
             If Modo <> 2 Then Exit Sub
             If vTipForpa <> "" Then
-                If (Val(vTipForpa) <> vbTipoPagoRemesa) Or (Val(vTipForpa) = vbTipoPagoRemesa And Val(DBLet(Data1.Recordset!codrem)) = 0) Then
+                If (Val(vTipForpa) <> vbTipoPagoRemesa) Or (Val(vTipForpa) = vbTipoPagoRemesa And Val(DBLet(Data1.Recordset!CodRem)) = 0) Then
                     If SePuedeEliminar2 < 3 Then Exit Sub
                 
                     'Bloqueamos
@@ -5726,12 +5790,12 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 
 End Sub
 
-Private Sub CargaList(Index As Integer, enlaza As Boolean)
+Private Sub CargaList(Index As Integer, Enlaza As Boolean)
 Dim IT
 Dim Cad As String
 
     lwCobros.ListItems.Clear
-    Set Me.lwCobros.SmallIcons = frmPpal.imgListComun 'ImgListviews
+    Set Me.lwCobros.SmallIcons = frmPpal.imgListComun16 'imgListComun 'ImgListviews
     Set miRsAux = New ADODB.Recordset
     
     Cad = "SELECT  cobros_realizados.numdiari, cobros_realizados.fechaent, "
@@ -5740,7 +5804,7 @@ Dim Cad As String
     Cad = Cad & " cobros_realizados.reftalonpag, cobros_realizados.bancotalonpag, "
     Cad = Cad & " cobros_realizados.impcobro, cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea, cobros_realizados.codrem "
     Cad = Cad & " FROM cobros_realizados INNER JOIN tipofpago ON cobros_realizados.tipforpa = tipofpago.tipoformapago "
-    If enlaza Then
+    If Enlaza Then
         Cad = Cad & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
     Else
         Cad = Cad & " WHERE cobros_realizados.numlinea is null"
@@ -5761,7 +5825,7 @@ Dim Cad As String
         IT.Text = DBLet(miRsAux!NumDiari, "N")
         IT.SubItems(1) = Format(miRsAux!FechaEnt, "dd/mm/yyyy")
         IT.SubItems(2) = DBLet(miRsAux!NumAsien, "N")
-        IT.SubItems(3) = miRsAux!Ctabanc2
+        IT.SubItems(3) = DBLet(miRsAux!Ctabanc2, "T")
         IT.SubItems(4) = DBLet(miRsAux!usuariocobro, "T")
         IT.SubItems(5) = Format(DBLet(miRsAux!fecrealizado, "F"), "dd/mm/yyyy")
         IT.SubItems(6) = DBLet(miRsAux!siglas, "T")
@@ -5774,9 +5838,9 @@ Dim Cad As String
         IT.SubItems(12) = DBLet(miRsAux!FecFactu, "F")
         IT.SubItems(13) = DBLet(miRsAux!numorden)
         IT.SubItems(14) = DBLet(miRsAux!NumLinea)
-        IT.SubItems(15) = DBLet(miRsAux!codrem)
+        IT.SubItems(15) = DBLet(miRsAux!CodRem)
         
-        If DBLet(miRsAux!codrem, "N") <> 0 Then
+        If DBLet(miRsAux!CodRem, "N") <> 0 Then
             IT.SmallIcon = 42
         End If
          
@@ -5786,22 +5850,17 @@ Dim Cad As String
     miRsAux.Close
     Set miRsAux = Nothing
 
-    If lwCobros.ListItems.Count > 0 Then
-        Modo = 2
-    Else
-        Modo = 0
-    End If
 
 End Sub
 
 
 
-Private Sub CargaGrid(Index As Integer, enlaza As Boolean)
+Private Sub CargaGrid(Index As Integer, Enlaza As Boolean)
 Dim B As Boolean
 Dim i As Byte
 Dim tots As String
 
-    tots = MontaSQLCarga(Index, enlaza)
+    tots = MontaSQLCarga(Index, Enlaza)
 
     CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
 
@@ -5832,7 +5891,7 @@ Dim tots As String
             tots = tots & "N||||0|;S|txtaux1(7)|T|Tipo |1500|;"
             tots = tots & "S|txtaux1(9)|T|Remesa|1000|;"
             tots = tots & "S|txtaux1(10)|T|Año|1000|;"
-            tots = tots & "S|txtaux1(11)|T|Importe|2000|;"
+            tots = tots & "S|txtaux1(11)|T|Importe|2120|;"
             
 
             arregla tots, DataGridAux(Index), Me
@@ -5850,7 +5909,7 @@ ECarga:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid: " & DataGridAux(Index).Tag, Err.Description
 End Sub
 
-Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
+Private Function MontaSQLCarga(Index As Integer, Enlaza As Boolean) As String
 '--------------------------------------------------------------------
 ' MontaSQlCarga:
 '   Basant-se en la informació proporcionada pel vector de camps
@@ -5872,7 +5931,7 @@ Dim tabla As String
             SQL = SQL & " cobros_realizados.reftalonpag, cobros_realizados.bancotalonpag, "
             SQL = SQL & " cobros_realizados.impcobro "
             SQL = SQL & " FROM " & tabla & " INNER JOIN tipofpago ON cobros_realizados.tipforpa = tipofpago.tipoformapago "
-            If enlaza Then
+            If Enlaza Then
                 SQL = SQL & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
             Else
                 SQL = SQL & " WHERE cobros_realizados.numlinea is null"
@@ -5884,7 +5943,7 @@ Dim tabla As String
             SQL = SQL & "cobros_realizados.coddevol, usuarios.wdevolucion.descripcion, cobros_realizados.tiporem, "
             SQL = SQL & "CASE cobros_realizados.tiporem WHEN 1 THEN 'Efectos' WHEN 2 THEN 'Pagarés' WHEN 3 THEN 'Talones' END as TTipo, codrem, anyorem, impcobro * (-1) "
             SQL = SQL & " FROM " & tabla & " LEFT JOIN usuarios.wdevolucion ON cobros_realizados.coddevol = usuarios.wdevolucion.codigo "
-            If enlaza Then
+            If Enlaza Then
                 SQL = SQL & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
             Else
                 SQL = SQL & " WHERE cobros_realizados.numlinea is null"
@@ -5990,10 +6049,24 @@ Dim B As Boolean
             Next jj
         
         Case 1 'lineas de factura
-            For jj = 5 To txtaux1.Count - 1
-                txtaux1(jj).Visible = B
-                txtaux1(jj).Top = alto
-            Next jj
+            txtaux1(6).Visible = B
+            txtaux1(6).Top = alto
+            txtaux1(8).Visible = B
+            txtaux1(8).Top = alto
+            txtaux1(8).Locked = True
+            Me.cmdAux(2).Visible = B
+            Me.cmdAux(2).Top = alto
+            
+            
+            txtaux1(5).Visible = B And (Modo = 1)
+            txtaux1(5).Top = alto
+            txtaux1(9).Visible = B And (Modo = 1)
+            txtaux1(9).Top = alto
+            txtaux1(10).Visible = B And (Modo = 1)
+            txtaux1(10).Top = alto
+            txtaux1(11).Visible = B And (Modo = 1)
+            txtaux1(11).Top = alto
+            
     End Select
 
 End Sub
@@ -6007,15 +6080,27 @@ Dim Aux As String
     
     cboFiltro.AddItem "Pendientes de Cobro "
     cboFiltro.ItemData(cboFiltro.NewIndex) = 0
-    cboFiltro.AddItem "En riesgo "
-    cboFiltro.ItemData(cboFiltro.NewIndex) = 1
-    ' los del medio se dejan por si aparecen nuevas situaciones
     cboFiltro.AddItem "Cobrado "
-    cboFiltro.ItemData(cboFiltro.NewIndex) = 2
+    cboFiltro.ItemData(cboFiltro.NewIndex) = 1
 
     cboFiltro.AddItem "Sin Filtro "
     cboFiltro.ItemData(cboFiltro.NewIndex) = 9
 
+
+End Sub
+
+
+Private Sub ToolbarAux1_ButtonClick(ByVal Button As MSComctlLib.Button)
+Dim LINASI As Long
+Dim Ampliacion As String
+
+    'Fuerzo que se vean las lineas
+    Select Case Button.Index
+        Case 1
+            'Acceder a asiento del cobro
+            BotonModificarLinea 1
+
+    End Select
 
 End Sub
 
@@ -6060,10 +6145,8 @@ Dim J As Long
 
     Combo1.AddItem "Pendientes de Cobro"
     Combo1.ItemData(Combo1.NewIndex) = 0
-    Combo1.AddItem "En riesgo"
-    Combo1.ItemData(Combo1.NewIndex) = 1
     Combo1.AddItem "Cobrado"
-    Combo1.ItemData(Combo1.NewIndex) = 2
+    Combo1.ItemData(Combo1.NewIndex) = 1
     
 
 
@@ -6184,7 +6267,7 @@ Error2:
     MuestraError Err.Number, "Eliminando linea", Err.Description
 End Sub
 
-Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
+Private Sub CargaFrame(Index As Integer, Enlaza As Boolean)
 End Sub
 
 ' ***** si n'hi han varios nivells de tabs *****
@@ -6204,9 +6287,12 @@ End Sub
 
 Private Sub BotonVerAsiento()
 
+    If lwCobros.SelectedItem Is Nothing Then Exit Sub
+
+
     Set frmAsi = New frmAsientosHco
     
-    frmAsi.ASIENTO = Me.AdoAux(0).Recordset.Fields(5) & "|" & Me.AdoAux(0).Recordset.Fields(6) & "|" & Me.AdoAux(0).Recordset.Fields(7) & "|"
+    frmAsi.ASIENTO = lwCobros.SelectedItem.Text & "|" & lwCobros.SelectedItem.SubItems(1) & "|" & lwCobros.SelectedItem.SubItems(2) & "|" '& Me.AdoAux(0).Recordset.Fields(5) & "|" & Me.AdoAux(0).Recordset.Fields(6) & "|" & Me.AdoAux(0).Recordset.Fields(7) & "|"
     frmAsi.SoloImprimir = True
     frmAsi.Show vbModal
     
@@ -6216,15 +6302,18 @@ End Sub
 
 Private Sub BotonImprimirRecibo()
 
+    If lwCobros.SelectedItem Is Nothing Then Exit Sub
+
+
     CargarTemporal
 
-    frmTESImpRecibo.pImporte = Me.AdoAux(0).Recordset.Fields(14)
-    frmTESImpRecibo.pFechaRec = Me.AdoAux(0).Recordset.Fields(6)
-    frmTESImpRecibo.pFecFactu = Me.AdoAux(0).Recordset.Fields(2)
-    frmTESImpRecibo.pNumFactu = Me.AdoAux(0).Recordset.Fields(1)
-    frmTESImpRecibo.pNumSerie = Me.AdoAux(0).Recordset.Fields(0)
-    frmTESImpRecibo.pNumOrden = Me.AdoAux(0).Recordset.Fields(3)
-    frmTESImpRecibo.pNumlinea = Me.AdoAux(0).Recordset.Fields(4)
+    frmTESImpRecibo.pImporte = lwCobros.SelectedItem.SubItems(9) 'Me.AdoAux(0).Recordset.Fields(14)
+    frmTESImpRecibo.pFechaRec = lwCobros.SelectedItem.SubItems(1) 'Me.AdoAux(0).Recordset.Fields(6)
+    frmTESImpRecibo.pFecFactu = lwCobros.SelectedItem.SubItems(12) 'Me.AdoAux(0).Recordset.Fields(2)
+    frmTESImpRecibo.pNumFactu = lwCobros.SelectedItem.SubItems(11) 'Me.AdoAux(0).Recordset.Fields(1)
+    frmTESImpRecibo.pNumSerie = lwCobros.SelectedItem.SubItems(10) 'Me.AdoAux(0).Recordset.Fields(0)
+    frmTESImpRecibo.pNumOrden = lwCobros.SelectedItem.SubItems(13) 'Me.AdoAux(0).Recordset.Fields(3)
+    frmTESImpRecibo.pNumlinea = lwCobros.SelectedItem.SubItems(14) 'Me.AdoAux(0).Recordset.Fields(4)
     
     frmTESImpRecibo.Show vbModal
 
@@ -6241,12 +6330,12 @@ Dim RS As ADODB.Recordset
     ' en tmppendientes metemos la clave primaria de cobros_recibidos y el importe en letra
                                                       'importe=nro factura,   codforpa=linea de cobros_realizados
     SQL = "insert into tmppendientes (codusu,serie_cta,importe,fecha,numorden,codforpa, observa) values ("
-    SQL = SQL & vUsu.Codigo & "," & DBSet(Me.AdoAux(0).Recordset.Fields(0), "T") & "," 'numserie
-    SQL = SQL & DBSet(Me.AdoAux(0).Recordset.Fields(1), "N") & "," 'numfactu
-    SQL = SQL & DBSet(Me.AdoAux(0).Recordset.Fields(2), "F") & "," 'fecfactu
-    SQL = SQL & DBSet(Me.AdoAux(0).Recordset.Fields(3), "N") & "," 'numorden
-    SQL = SQL & DBSet(Me.AdoAux(0).Recordset.Fields(4), "N") & "," 'numlinea
-    SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(Me.AdoAux(0).Recordset.Fields(14)))), "T") & ") "
+    SQL = SQL & vUsu.Codigo & "," & DBSet(lwCobros.SelectedItem.SubItems(10), "T") & "," 'numserie
+    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(11), "N") & "," 'numfactu
+    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(12), "F") & "," 'fecfactu
+    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(13), "N") & "," 'numorden
+    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(14), "N") & "," 'numlinea
+    SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(lwCobros.SelectedItem.SubItems(9)))), "T") & ") "
     
     Conn.Execute SQL
 
@@ -6352,7 +6441,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     ' *********************************
 
     Select Case Index
-        Case 0, 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
+        Case 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
             If DataGridAux(Index).Bookmark < DataGridAux(Index).FirstRow Or DataGridAux(Index).Bookmark > (DataGridAux(Index).FirstRow + DataGridAux(Index).VisibleRows - 1) Then
                 i = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
                 DataGridAux(Index).Scroll 0, i
@@ -6371,23 +6460,27 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 1 'lineas de facturas
-            txtAux(0).Text = DataGridAux(Index).Columns(0).Text 'serie
-            txtAux(1).Text = DataGridAux(Index).Columns(1).Text 'factura
-            txtAux(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
-            txtAux(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
-            txtAux(4).Text = DataGridAux(Index).Columns(4).Text 'linea
+            txtaux1(0).Text = DataGridAux(Index).Columns(0).Text 'serie
+            txtaux1(1).Text = DataGridAux(Index).Columns(1).Text 'factura
+            txtaux1(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
+            txtaux1(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
+            txtaux1(4).Text = DataGridAux(Index).Columns(4).Text 'linea
             
-            txtAux(5).Text = DataGridAux(Index).Columns(5).Text 'diario
-            txtAux(6).Text = DataGridAux(Index).Columns(6).Text 'fecha
-            txtAux(7).Text = DataGridAux(Index).Columns(7).Text 'asiento
-            txtAux(8).Text = DataGridAux(Index).Columns(8).Text 'importe
+            txtaux1(5).Text = DataGridAux(Index).Columns(5).Text ' concepto de devolucion
+            txtaux1(6).Text = DataGridAux(Index).Columns(6).Text ' concepto
+            txtaux1(8).Text = DataGridAux(Index).Columns(7).Text ' nombre del concepto
+            
+            txtaux1(9).Text = DataGridAux(Index).Columns(10).Text ' numero remesa
+            txtaux1(10).Text = DataGridAux(Index).Columns(11).Text ' año
+            txtaux1(11).Text = DataGridAux(Index).Columns(12).Text ' importe
+            txtaux1(12).Text = DataGridAux(Index).Columns(8).Text ' tipo de remesa
             
     End Select
 
     LLamaLineas Index, ModoLineas, anc
     
     
-    PonFoco txtAux(4)
+    PonFoco txtaux1(6)
     
     ' ***************************************************************************************
 End Sub
@@ -6617,9 +6710,9 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYImage(KeyAscii As Integer, indice As Integer)
+Private Sub KEYImage(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    cmdAux_Click (indice)
+    cmdAux_Click (Indice)
 End Sub
 '++
 
@@ -6694,7 +6787,7 @@ Dim SQL As String
         Text1(0).Text = DBLet(RS!Forpa, "N")
         Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(42).Text = DBLet(RS!Nommacta, "T")
+        Text1(42).Text = DBLet(RS!nommacta, "T")
         Text1(41).Text = DBLet(RS!dirdatos, "T")
         Text1(40).Text = DBLet(RS!codposta, "T")
         Text1(39).Text = DBLet(RS!desPobla, "T")
@@ -6714,15 +6807,15 @@ Private Sub CargarColumnas()
     
     lwCobros.ColumnHeaders.Clear
     
-    lwCobros.ColumnHeaders.Add , , "Diario", 730
-    lwCobros.ColumnHeaders.Add , , "Fecha", 1220
-    lwCobros.ColumnHeaders.Add , , "Asiento", 1100, 1
-    lwCobros.ColumnHeaders.Add , , "Cta.Cobro", 1305, 1
-    lwCobros.ColumnHeaders.Add , , "Usuario", 1505, 1
-    lwCobros.ColumnHeaders.Add , , "Realizado", 1555, 1
-    lwCobros.ColumnHeaders.Add , , "Tipo", 805
-    lwCobros.ColumnHeaders.Add , , "Ref.Talon", 1855, 1
-    lwCobros.ColumnHeaders.Add , , "Banco Talon/Pag", 1855, 1
+    lwCobros.ColumnHeaders.Add , , "Diario", 830
+    lwCobros.ColumnHeaders.Add , , "Fecha", 1320
+    lwCobros.ColumnHeaders.Add , , "Asiento", 1200, 1
+    lwCobros.ColumnHeaders.Add , , "Cta.Cobro", 1405
+    lwCobros.ColumnHeaders.Add , , "Usuario", 1405
+    lwCobros.ColumnHeaders.Add , , "Realizado", 1455
+    lwCobros.ColumnHeaders.Add , , "Tipo", 905
+    lwCobros.ColumnHeaders.Add , , "Ref.Talon", 1755
+    lwCobros.ColumnHeaders.Add , , "Banco Talon/Pag", 1855
     lwCobros.ColumnHeaders.Add , , "Importe", 1900, 1
     
     lwCobros.ColumnHeaders.Add , , "serie", 0
@@ -6731,6 +6824,50 @@ Private Sub CargarColumnas()
     lwCobros.ColumnHeaders.Add , , "vto", 0
     lwCobros.ColumnHeaders.Add , , "Linea", 0
     lwCobros.ColumnHeaders.Add , , "Remesa", 0
-    
 
 End Sub
+
+Private Sub txtAux1_GotFocus(Index As Integer)
+    ConseguirFoco txtaux1(Index), Modo
+End Sub
+
+
+Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
+'++
+Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
+    If KeyAscii = teclaBuscar Then
+        Select Case Index
+            Case 6:  KEYImage KeyAscii, 2 ' concepto de devolucion
+        End Select
+    Else
+        KEYpress KeyAscii
+    End If
+End Sub
+
+'++
+
+
+Private Sub txtAux1_LostFocus(Index As Integer)
+    Dim RC As String
+    Dim Importe As Currency
+        
+    If Not PerderFocoGnral(txtaux1(Index), Modo) Then Exit Sub
+    
+    If txtaux1(Index).Text = "" Then Exit Sub
+    
+    Select Case Index
+            
+        Case 6 ' iva
+            txtaux1(6).Text = UCase(txtaux1(6).Text)
+            txtaux1(8).Text = DevuelveDesdeBD("descripcion", "usuarios.wdevolucion", "codigo", txtaux1(6), "T")
+            If txtaux1(8).Text = "" Then
+                MsgBox "No existe el Tipo de Devolución. Reintroduzca.", vbExclamation
+                PonFoco txtaux1(6)
+            End If
+                
+    End Select
+End Sub
+

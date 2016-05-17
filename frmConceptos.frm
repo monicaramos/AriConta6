@@ -536,7 +536,7 @@ Dim Modo As Byte
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
-Dim I As Integer
+Dim i As Integer
 
     Modo = vModo
 
@@ -554,9 +554,9 @@ Dim I As Integer
     Combo1.Visible = Not B
     Combo2.Visible = Not B
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).BackColor = vbWhite
+    Next i
     Combo1.BackColor = vbWhite
     Combo2.BackColor = vbWhite
     
@@ -643,9 +643,9 @@ Private Sub BotonModificar()
     '---------
     'MODIFICAR
     '----------
-    Dim cad As String
+    Dim Cad As String
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
@@ -658,8 +658,8 @@ Private Sub BotonModificar()
     Me.lblIndicador.Caption = "MODIFICAR"
     DeseleccionaGrid
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -672,8 +672,8 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
-    I = adodc1.Recordset!TipoConce
-    Combo1.ListIndex = I - 1
+    i = adodc1.Recordset!TipoConce
+    Combo1.ListIndex = i - 1
     If DBLet(adodc1.Recordset!EsEfectivo340, "T") = "" Then
         Combo2.ListIndex = 0
     Else
@@ -736,7 +736,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim CadB As String
     Select Case Modo
     Case 1
@@ -762,10 +762,10 @@ Dim CadB As String
                 '-----------------------------------------
                 'Hacemos insertar
                 If ModificaDesdeFormulario(Me) Then
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 0
                     CargaGrid
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                 End If
             End If
     End Select
@@ -789,7 +789,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro a devolver.", vbExclamation
@@ -802,14 +802,14 @@ Dim cad As String
             MsgBox "Los conceptos superiores a 900 se los reserva la aplicación.", vbExclamation
             Exit Sub
         Else
-            cad = "Los conceptos superiores a 900 son de la aplicación y no deberia utilizarlis. ¿Desea continuar de igual modo?"
-            If MsgBox(cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
+            Cad = "Los conceptos superiores a 900 son de la aplicación y no deberia utilizarlis. ¿Desea continuar de igual modo?"
+            If MsgBox(Cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
         End If
     End If
-    cad = adodc1.Recordset.Fields(0) & "|"
-    cad = cad & adodc1.Recordset.Fields(1) & "|"
-    cad = cad & adodc1.Recordset.Fields(2) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
+    Cad = Cad & adodc1.Recordset.Fields(2) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -916,6 +916,11 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & "if(EsEfectivo340=1,""*"","""") EsEfectivo340"
     CadenaConsulta = CadenaConsulta & " FROM conceptos,usuarios.wtipoconceptos"
     CadenaConsulta = CadenaConsulta & " WHERE conceptos.tipoconce= usuarios.wtipoconceptos.tipoconce"
+    
+    If DatosADevolverBusqueda <> "" Then
+        CadenaConsulta = CadenaConsulta & " and conceptos.codconce < 900 "
+    End If
+    
     If vWhere <> "" Then CadenaConsulta = CadenaConsulta & " and " & vWhere
     CargaGrid
 End Sub
@@ -999,15 +1004,15 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub DespalzamientoVisible(Bol As Boolean)
-    FrameDesplazamiento.Visible = Bol
-    FrameDesplazamiento.Enabled = Bol
+Private Sub DespalzamientoVisible(bol As Boolean)
+    FrameDesplazamiento.Visible = bol
+    FrameDesplazamiento.Enabled = bol
 End Sub
 
 Private Sub CargaGrid(Optional SQL As String)
     Dim J As Integer
     Dim TotalAncho As Integer
-    Dim I As Integer
+    Dim i As Integer
     
     adodc1.ConnectionString = Conn
     If SQL <> "" Then
@@ -1026,29 +1031,29 @@ Private Sub CargaGrid(Optional SQL As String)
     
     
     'Nombre producto
-    I = 0
-        DataGrid1.Columns(I).Caption = "Cod."
-        DataGrid1.Columns(I).Width = 600
-        DataGrid1.Columns(I).NumberFormat = "000"
+    i = 0
+        DataGrid1.Columns(i).Caption = "Cod."
+        DataGrid1.Columns(i).Width = 600
+        DataGrid1.Columns(i).NumberFormat = "000"
         
     
     'Leemos del vector en 2
-    I = 1
-        DataGrid1.Columns(I).Caption = "Denominación"
-        DataGrid1.Columns(I).Width = 3000
-        TotalAncho = TotalAncho + DataGrid1.Columns(I).Width
+    i = 1
+        DataGrid1.Columns(i).Caption = "Denominación"
+        DataGrid1.Columns(i).Width = 3000
+        TotalAncho = TotalAncho + DataGrid1.Columns(i).Width
     
     'El importe es campo calculado
-    I = 2
-        DataGrid1.Columns(I).Visible = False
+    i = 2
+        DataGrid1.Columns(i).Visible = False
         
-    I = 3
-        DataGrid1.Columns(I).Caption = "Tipo concepto"
-        DataGrid1.Columns(I).Width = 1830
+    i = 3
+        DataGrid1.Columns(i).Caption = "Tipo concepto"
+        DataGrid1.Columns(i).Width = 1830
         
-    I = 4
-        DataGrid1.Columns(I).Caption = "Efectivo"
-        DataGrid1.Columns(I).Width = 870
+    i = 4
+        DataGrid1.Columns(i).Caption = "Efectivo"
+        DataGrid1.Columns(i).Width = 870
         
         'Fiajamos el cadancho
     If Not CadAncho Then
@@ -1225,15 +1230,15 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
     
     On Error Resume Next
 
-    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
         Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)

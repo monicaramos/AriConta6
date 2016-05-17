@@ -4562,7 +4562,7 @@ End Sub
 
 
 
-Private Sub PasarUnaEmpresaBloqueada(ABLoquedas As Boolean, indice As Integer)
+Private Sub PasarUnaEmpresaBloqueada(ABLoquedas As Boolean, Indice As Integer)
 Dim Origen As Integer
 Dim Destino As Integer
 Dim IT
@@ -4576,14 +4576,14 @@ Dim IT
         NE = 1 'icono
     End If
     
-    SQL = ListView2(Origen).ListItems(indice).Key
+    SQL = ListView2(Origen).ListItems(Indice).Key
     Set IT = ListView2(Destino).ListItems.Add(, SQL)
     IT.SmallIcon = NE
-    IT.Text = ListView2(Origen).ListItems(indice).Text
-    IT.SubItems(1) = ListView2(Origen).ListItems(indice).SubItems(1)
+    IT.Text = ListView2(Origen).ListItems(Indice).Text
+    IT.SubItems(1) = ListView2(Origen).ListItems(Indice).SubItems(1)
 
     'Borramos en origen
-    ListView2(Origen).ListItems.Remove indice
+    ListView2(Origen).ListItems.Remove Indice
 End Sub
 
 Private Sub cmdBloqEmpre_Click(Index As Integer)
@@ -4998,7 +4998,7 @@ Dim W, H
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.frameamort.Visible = False
+    Me.FrameAmort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
@@ -5039,9 +5039,9 @@ Dim W, H
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.frameamort.Width
-        H = Me.frameamort.Height + 200
-        Me.frameamort.Visible = True
+        W = Me.FrameAmort.Width
+        H = Me.FrameAmort.Height + 200
+        Me.FrameAmort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
@@ -6904,7 +6904,7 @@ Private Sub cargarObservacionesCuenta()
     SQL = "select codmacta,nommacta,obsdatos from cuentas where codmacta = '" & Parametros & "'"
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
-        SQL = RS!codmacta & "|" & RS!Nommacta & "|" & DBMemo(RS!obsdatos) & "|"
+        SQL = RS!codmacta & "|" & RS!nommacta & "|" & DBMemo(RS!obsdatos) & "|"
     Else
         SQL = "Err|ERROR  LEYENDO DATOS CUENTAS | ****  ERROR ****|"
     End If
@@ -7538,6 +7538,7 @@ Dim Pos As Long
 
     On Error GoTo ECargarFacturas
     
+    Set ListView9.SmallIcons = frmPpal.imgListComun16
     
     ListView9.ColumnHeaders.Clear
     ListView9.ListItems.Clear
@@ -7577,6 +7578,13 @@ Dim Pos As Long
             IT.SubItems(4) = ""
         End If
         
+        SQL = "select devuelto from cobros where numserie = " & DBSet(RS.Fields(0), "T") & " and numfactu = " & DBSet(RS.Fields(1), "N")
+        SQL = SQL & " and fecfactu = " & DBSet(RS.Fields(2), "F") & " and numorden = " & DBSet(RS.Fields(3), "N")
+        
+        If DevuelveValor(SQL) = 1 Then
+            IT.SmallIcon = 42
+        End If
+        
         'Siguiente
         RS.MoveNext
     Wend
@@ -7604,6 +7612,7 @@ Dim Pos As Long
 
     On Error GoTo ECargarFacturas
     
+    Set ListView9.SmallIcons = frmPpal.imgListComun16
     
     ListView9.ColumnHeaders.Clear
     ListView9.ListItems.Clear
@@ -7651,11 +7660,8 @@ Dim Pos As Long
         'Siguiente
         
         If RS.Fields(6) = "*" Then
-            IT.Bold = True
-            IT.ForeColor = vbRed
+            IT.SmallIcon = 42
         End If
-        
-        
         
         RS.MoveNext
     Wend

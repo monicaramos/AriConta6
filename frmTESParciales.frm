@@ -952,6 +952,13 @@ Dim Im As Currency
     On Error GoTo EDa
     DatosOK = False
     
+'    If Combo1.List = 4 Then
+    If Combo1.ItemData(Combo1.ListIndex) = vbTipoPagoRemesa Then
+        MsgBox "No se puede realizar cobros con este tipo de forma de pago.", vbExclamation
+        Exit Function
+    End If
+    
+    
     Cad = ""
     If Text2(0).Text = "" Then Cad = "importe"
     If Text3(0).Text = "" Then Cad = Cad & " fecha"
@@ -1387,20 +1394,37 @@ Dim Situacion As Integer
     
         Conn.Execute SQL
     
-        Situacion = 2
-        
-        Select Case Combo1.ItemData(Combo1.ListIndex)
-            Case vbTalon, vbPagare, vbTipoPagoRemesa
-                Situacion = 1
-        End Select
+'        Situacion = 1
+'
+'        Select Case Combo1.ItemData(Combo1.ListIndex)
+'            Case vbTalon, vbPagare, vbTipoPagoRemesa
+'                Situacion = 0
+'        End Select
     
-        SQL = "update cobros set impcobro = (select sum(impcobro) from cobros_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4) & ") "
+        SQL = "update cobros set impcobro = (select sum(coalesce(impcobro,0)) from cobros_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4) & ") "
         SQL = SQL & ", fecultco = " & DBSet(Text3(0).Text, "F")
-        SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
+'        SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
         SQL = SQL & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "N")
         SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F") & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
     
         Conn.Execute SQL
+        
+        SQL = "select impvenci + coalesce(gastos,0) - coalesce(impcobro,0) from cobros where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "N")
+        SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F") & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
+     
+        Situacion = 0
+        If DevuelveValor(SQL) = 0 Then
+            Situacion = 1
+        End If
+    
+        SQL = "update cobros set "
+        SQL = SQL & " situacion = " & DBSet(Situacion, "N")
+        SQL = SQL & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "N")
+        SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F") & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
+    
+        Conn.Execute SQL
+    
+    
     End If
     
     

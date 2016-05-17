@@ -857,6 +857,8 @@ Private WithEvents frmRe As frmTESRemesas
 Attribute frmRe.VB_VarHelpID = -1
 Private WithEvents frmB As frmBasico
 Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmCon As frmConceptos
+Attribute frmCon.VB_VarHelpID = -1
 
 
 Dim RS As ADODB.Recordset
@@ -1112,27 +1114,27 @@ Dim TipoFicheroDevolucion As Byte
 End Sub
 
 Private Sub DevolverRemesa()
-Dim cad As String
+Dim Cad As String
 Dim jj As Integer
 Dim Aux As String
 
-    cad = ""
+    Cad = ""
     For jj = 1 To Me.lwCobros.ListItems.Count
         If lwCobros.ListItems(jj).Checked Then
-            cad = cad & "1"
+            Cad = Cad & "1"
         End If
     Next jj
-    If cad = "" Then
+    If Cad = "" Then
         MsgBox "Seleccione los efectos devueltos", vbExclamation
         Exit Sub
     End If
-    cad = Len(cad) & " efecto(s)."
+    Cad = Len(Cad) & " efecto(s)."
     
     'Llegado aqui hago la pregunta
-    cad = "Va a realizar la devolución de " & cad & vbCrLf
+    Cad = "Va a realizar la devolución de " & Cad & vbCrLf
     If Text1(4).Text <> "" Then
-        cad = cad & vbCrLf & "Importe total de la devolución: "
-        cad = cad & Text1(4).Text & "€" & vbCrLf & vbCrLf
+        Cad = Cad & vbCrLf & "Importe total de la devolución: "
+        Cad = Cad & Text1(4).Text & "€" & vbCrLf & vbCrLf
     End If
     
     Aux = RecuperaValor(vRemesa, 5)
@@ -1145,17 +1147,17 @@ Dim Aux As String
         Aux = "Gasto por recibo: " & txtImporte(1) & " €" & vbCrLf
     End If
     
-    cad = cad & Aux & vbCrLf
+    Cad = Cad & Aux & vbCrLf
     
     'Gasto tramitacion devolucion
     Aux = RecuperaValor(txtImporte(5), 7)
     If Aux <> "" Then
         Aux = "Gasto bancario : " & Aux & "€" & vbCrLf
-        cad = cad & vbCrLf & Aux
+        Cad = Cad & vbCrLf & Aux
     End If
     
-    cad = cad & vbCrLf & "¿Desea continuar?"
-    If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    Cad = Cad & vbCrLf & "¿Desea continuar?"
+    If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
     If Not RealizarDevolucion Then Exit Sub
 
@@ -1167,19 +1169,19 @@ Private Function RealizarDevolucion() As Boolean
 Dim IncPorcentaje As Boolean
 Dim Gasto As Currency
 Dim Minimo As Currency
-Dim cad As String
+Dim Cad As String
 Dim jj As Long
 Dim CtaBan As String
 
     RealizarDevolucion = False
     'Tipo de aumento del gasto de devolucion
-    cad = RecuperaValor(vRemesa, 5)
+    Cad = RecuperaValor(vRemesa, 5)
     If optDevRem(1).Value Then
         'Porcentual
         IncPorcentaje = True
         Minimo = 0
-        cad = txtImporte(2).Text 'RecuperaValor(vRemesa, 6)
-        If cad <> "" Then Minimo = cad
+        Cad = txtImporte(2).Text 'RecuperaValor(vRemesa, 6)
+        If Cad <> "" Then Minimo = Cad
     Else
         IncPorcentaje = False
     End If
@@ -1193,13 +1195,13 @@ Dim CtaBan As String
     For jj = 1 To lwCobros.ListItems.Count
         If Me.lwCobros.ListItems(jj).Checked Then
                                         'cdofaccl
-            cad = jj & "," & Val(lwCobros.ListItems(jj).SubItems(1)) & ",'"
+            Cad = jj & "," & Val(lwCobros.ListItems(jj).SubItems(1)) & ",'"
                                     'fecfaccl                                                   SERIE
-            cad = cad & Format(lwCobros.ListItems(jj).Tag, FormatoFecha) & "','" & lwCobros.ListItems(jj).Text
+            Cad = Cad & Format(lwCobros.ListItems(jj).Tag, FormatoFecha) & "','" & lwCobros.ListItems(jj).Text
                                     'numvencimiento numorden
-            cad = cad & "'," & Val(lwCobros.ListItems(jj).SubItems(2)) & ","
+            Cad = Cad & "'," & Val(lwCobros.ListItems(jj).SubItems(2)) & ","
             ImporteQueda = ImporteFormateado(lwCobros.ListItems(jj).SubItems(5))
-            cad = cad & TransformaComasPuntos(CStr(ImporteQueda)) & ","
+            Cad = Cad & TransformaComasPuntos(CStr(ImporteQueda)) & ","
             
             'Calculo el gasto
             If IncPorcentaje Then
@@ -1214,19 +1216,19 @@ Dim CtaBan As String
                 Gasto = ImporteRemesa
                 ImporteQueda = ImporteQueda + ImporteRemesa
             End If
-            cad = cad & TransformaComasPuntos(CStr(Gasto)) & ","
-            cad = cad & TransformaComasPuntos(CStr(ImporteQueda)) & ",'"
+            Cad = Cad & TransformaComasPuntos(CStr(Gasto)) & ","
+            Cad = Cad & TransformaComasPuntos(CStr(ImporteQueda)) & ",'"
             'Cuenta cliente, y banco
-            cad = cad & lwCobros.ListItems(jj).SubItems(3) & "','"
-            cad = cad & RecuperaValor(vRemesa, 3) & "','"
+            Cad = Cad & lwCobros.ListItems(jj).SubItems(3) & "','"
+            Cad = Cad & RecuperaValor(vRemesa, 3) & "','"
             If Opcion = 16 Then
-                cad = cad & Mid(lwCobros.ListItems(jj).SubItems(11), 1, 4)
+                Cad = Cad & Mid(lwCobros.ListItems(jj).SubItems(11), 1, 4)
             Else
-                cad = cad & Mid(CmbDevol.Text, 1, 4)
+                Cad = Cad & Mid(CmbDevol.Text, 1, 4)
             End If
-            cad = cad & "')"
-            cad = vSQL & cad
-            If Not Ejecuta(cad) Then Exit Function
+            Cad = Cad & "')"
+            Cad = vSQL & Cad
+            If Not Ejecuta(Cad) Then Exit Function
             
             CtaBan = RecuperaValor(vRemesa, 3)
 
@@ -1245,18 +1247,18 @@ Dim CtaBan As String
     
     If jj = 0 Then
         'Como no se contabilizan los beneficios no hace falta que calcule nada
-        cad = ""
+        Cad = ""
      Else
         'Vya obteneer la cuenta de gastos bancarios
-        cad = RecuperaValor(vRemesa, 3)  'cta contable
-        cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", cad, "T")
-        If cad = "" Then
+        Cad = RecuperaValor(vRemesa, 3)  'cta contable
+        Cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", Cad, "T")
+        If Cad = "" Then
             'NO esta configurada
             'Veo si esta en parametros
             'ctabenbanc
-            cad = DevuelveDesdeBD("ctabenbanc", "paramtesor", "codigo", "1", "N")
+            Cad = DevuelveDesdeBD("ctabenbanc", "paramtesor", "codigo", "1", "N")
         End If
-        If cad = "" Then
+        If Cad = "" Then
             MsgBox "No esta configurada la gastos  bancarios", vbExclamation
             Exit Function
         End If
@@ -1265,7 +1267,7 @@ Dim CtaBan As String
     ValoresDevolucionRemesa = txtConcepto(1).Text & "|" & Combo2(0).ListIndex & "|"
     
     If Opcion = 9 Then
-        vRemesa = Text3(5).Text & "|" & Text3(6).Text & "|" & cad & "|" & Text1(11).Text & "|"
+        vRemesa = Text3(5).Text & "|" & Text3(6).Text & "|" & BancoRem & "|" & Text1(11).Text & "|"
     Else
         vRemesa = Remesa & "|" & AñoRem & "|" & BancoRem & "|" & Text1(11).Text & "|"
     End If
@@ -1376,6 +1378,7 @@ Private Sub CargaCabecera()
     
     If OpcionAnt = Opcion Then Exit Sub
     
+    
     lwCobros.ColumnHeaders.Clear
     
     If Opcion = 9 Or Opcion = 28 Then
@@ -1432,6 +1435,13 @@ Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
     SQL = RecuperaValor(CadenaSeleccion, 1)
 End Sub
 
+Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
+    If CadenaSeleccion <> "" Then
+        txtConcepto(1).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtConcepto_LostFocus 1
+    End If
+End Sub
+
 Private Sub Image1_Click(Index As Integer)
     Set frmC = New frmCal
     frmC.Fecha = Now
@@ -1460,6 +1470,7 @@ Dim cerrar As Boolean
     KEYpressGnral KeyAscii, 0, cerrar
     If cerrar Then Unload Me
 End Sub
+
 Private Sub Image4_Click()
     SQL = ""
     cd1.ShowOpen
@@ -1504,11 +1515,11 @@ End Sub
 
 Private Sub imgConcepto_Click(Index As Integer)
   
-    LanzaBuscaGrid 1
-    If SQL <> "" Then
-        txtConcepto(Index).Text = SQL
-        txtConcepto_LostFocus Index
-    End If
+    Set frmCon = New frmConceptos
+    frmCon.DatosADevolverBusqueda = "0|"
+    frmCon.Show vbModal
+    Set frmCon = Nothing
+    
 End Sub
 
 Private Sub imgCtaNorma_Click(Index As Integer)
@@ -1836,12 +1847,14 @@ Dim EfectoFra As String
 Dim EfectoVto As String
 Dim EltoItm  As ListItem
 Dim EsSepa As Boolean
-Dim cad As String
+Dim Cad As String
 Dim jj As Long
 
 Dim TipoFicheroDevolucion As Byte
 
     CargaCabecera
+    
+    Set lwCobros.SmallIcons = frmPpal.imgListComun16
     
     lwCobros.ListItems.Clear
     
@@ -1911,9 +1924,8 @@ Dim TipoFicheroDevolucion As Byte
             ImporteQueda = DBLet(miRsAux!Gastos, "N")
             'No lo pongo con el importe de gastos pq pudiera ser k habiendo sido devuelto, no quiera
             ' cobrarle gastos
-            If miRsAux!Devuelto = 1 Then
-                Itm.Bold = True
-                Itm.ForeColor = vbRed
+            If DBLet(miRsAux!devuelto, "N") = 1 Then
+                Itm.SmallIcon = 42
             End If
             ImporteQueda = ImporteQueda + miRsAux!ImpVenci
             Itm.SubItems(5) = Format(ImporteQueda, FormatoImporte)
@@ -1968,7 +1980,7 @@ End Sub
 Private Sub PonerVtosRemesa(vSQL As String, Modificar As Boolean)
 Dim IT
 Dim ImporteTot As Currency
-Dim cad As String
+Dim Cad As String
 Dim Importe As Currency
 
 
@@ -1977,13 +1989,14 @@ Dim Importe As Currency
     
     ImporteTot = 0
     
-    Set Me.lwCobros.SmallIcons = frmPpal.ImgListviews
+'    Set Me.lwCobros.SmallIcons = frmPpal.ImgListviews
+    Set lwCobros.SmallIcons = frmPpal.imgListComun16
     Set miRsAux = New ADODB.Recordset
     
-    cad = "Select cobros.*,nomforpa " & vSQL
-    cad = cad & " ORDER BY fecvenci"
+    Cad = "Select cobros.*,nomforpa " & vSQL
+    Cad = Cad & " ORDER BY fecvenci"
     
-    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lwCobros.ListItems.Add()
         IT.Text = miRsAux!NUmSerie
@@ -2006,6 +2019,10 @@ Dim Importe As Currency
         ImporteTot = ImporteTot + Importe
 
         IT.Tag = Abs(Importe)  'siempre valor absoluto
+            
+        If DBLet(miRsAux!devuelto, "N") = 1 Then
+            IT.SmallIcon = 42
+        End If
             
         miRsAux.MoveNext
     Wend
@@ -2036,6 +2053,8 @@ Private Sub txtConcepto_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtConcepto_LostFocus(Index As Integer)
+Dim SQL As String
+
     'Lost focus
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
     SQL = ""
@@ -2174,7 +2193,7 @@ Dim FP As Ctipoformapago
     
     
     Set FP = New Ctipoformapago
-    FP.Leer vbTipoPagoRemesa
+    FP.leer vbTipoPagoRemesa
     Me.txtConcepto(1).Text = FP.condecli
     'Ampliaciones
     Combo2(0).ListIndex = FP.ampdecli
@@ -2320,33 +2339,33 @@ End Sub
 'Esta recibo SEPA
 Private Sub RecorreBuscandoReciboSEPA(ByRef Recibos As Collection, EsMensajeNoEncontrados As Boolean)
 Dim B As Boolean
-Dim cad As String
+Dim Cad As String
 Dim jj As Integer
 
 
     If EsMensajeNoEncontrados Then
-            cad = ""
+            Cad = ""
             For jj = Recibos.Count To 1 Step -1
                 'M  0330047820131201001   430000061
                 'SER FACTU    FEC   VTO
                 
                 'ImporteQueda = CCur(Val(Mid(Recibos(jj), 1, 10)) / 100)
-                cad = cad & jj & ".-Fecha: "
-                cad = cad & Mid(Recibos(jj), 18, 2) & "/" & Mid(Recibos(jj), 16, 2) & "/" & Mid(Recibos(jj), 12, 4)
-                cad = cad & " Vto: " & Mid(Recibos(jj), 1, 3) & "/" & Mid(Recibos(jj), 4, 8) & "-" & Mid(Recibos(jj), 20, 3) & vbCrLf
+                Cad = Cad & jj & ".-Fecha: "
+                Cad = Cad & Mid(Recibos(jj), 18, 2) & "/" & Mid(Recibos(jj), 16, 2) & "/" & Mid(Recibos(jj), 12, 4)
+                Cad = Cad & " Vto: " & Mid(Recibos(jj), 1, 3) & "/" & Mid(Recibos(jj), 4, 8) & "-" & Mid(Recibos(jj), 20, 3) & vbCrLf
             Next jj
-            cad = "Recibos no encontrados que vienen del fichero." & vbCrLf & vbCrLf & cad
-            MsgBox cad, vbExclamation
+            Cad = "Recibos no encontrados que vienen del fichero." & vbCrLf & vbCrLf & Cad
+            MsgBox Cad, vbExclamation
             ImporteQueda = 0
     Else
         
         For jj = Recibos.Count To 1 Step -1
             'M  0330047820131201001   430000061
             'SER FACTU    FEC   VTO
-            cad = Mid(Recibos(jj), 18, 2) & "/" & Mid(Recibos(jj), 16, 2) & "/" & Mid(Recibos(jj), 12, 4)
+            Cad = Mid(Recibos(jj), 18, 2) & "/" & Mid(Recibos(jj), 16, 2) & "/" & Mid(Recibos(jj), 12, 4)
             
             
-            B = EstaElReciboSEPA(Trim(Mid(Recibos(jj), 1, 3)), Mid(Recibos(jj), 4, 8), cad, Mid(Recibos(jj), 20, 3))
+            B = EstaElReciboSEPA(Trim(Mid(Recibos(jj), 1, 3)), Mid(Recibos(jj), 4, 8), Cad, Mid(Recibos(jj), 20, 3))
 
             If B Then Recibos.Remove jj
         Next jj
@@ -2361,7 +2380,7 @@ Private Sub RecorreBuscandoRecibo2(ByRef Recibos As Collection, EsMensajeNoEncon
 Dim B As Boolean
 
 Dim EsFormatoAntiguoDevolucion As Boolean
-Dim cad As String
+Dim Cad As String
 Dim jj As Long
 
     'Formato antiguo:A020500021
@@ -2370,7 +2389,7 @@ Dim jj As Long
     
 
     If EsMensajeNoEncontrados Then
-            cad = ""
+            Cad = ""
             For jj = Recibos.Count To 1 Step -1
                 'Ejemplo 0047080000004708
                 '        251205A020500021
@@ -2380,12 +2399,12 @@ Dim jj As Long
                 '                       $  Vencimiento      1
                 'La fecha
                 ImporteQueda = CCur(Val(Mid(Recibos(jj), 1, 10)) / 100)
-                cad = cad & jj & ".-Fecha: "
-                cad = cad & Mid(Recibos(jj), 11, 2) & "/" & Mid(Recibos(jj), 13, 2) & "/20" & Mid(Recibos(jj), 15, 2)
-                cad = cad & " Vto: " & Mid(Recibos(jj), 17, 1) & "/" & Mid(Recibos(jj), 18, 8) & "-" & Mid(Recibos(jj), 26, 1) & "   Importe: " & Format(ImporteQueda, FormatoImporte) & vbCrLf
+                Cad = Cad & jj & ".-Fecha: "
+                Cad = Cad & Mid(Recibos(jj), 11, 2) & "/" & Mid(Recibos(jj), 13, 2) & "/20" & Mid(Recibos(jj), 15, 2)
+                Cad = Cad & " Vto: " & Mid(Recibos(jj), 17, 1) & "/" & Mid(Recibos(jj), 18, 8) & "-" & Mid(Recibos(jj), 26, 1) & "   Importe: " & Format(ImporteQueda, FormatoImporte) & vbCrLf
             Next jj
-            cad = "Recibos no encontrados que vienen del fichero." & vbCrLf & vbCrLf & cad
-            MsgBox cad, vbExclamation
+            Cad = "Recibos no encontrados que vienen del fichero." & vbCrLf & vbCrLf & Cad
+            MsgBox Cad, vbExclamation
             ImporteQueda = 0
     Else
         
@@ -2398,16 +2417,16 @@ Dim jj As Long
             '                        $$$$$$$$  Facutra           8
             '                                $  Vencimiento      1
             'La fecha
-            cad = Mid(Recibos(jj), 11, 2) & "/" & Mid(Recibos(jj), 13, 2) & "/20" & Mid(Recibos(jj), 15, 2)
+            Cad = Mid(Recibos(jj), 11, 2) & "/" & Mid(Recibos(jj), 13, 2) & "/20" & Mid(Recibos(jj), 15, 2)
             'Octubre 2011
             'If Not IsNumeric(Mid(Recibos(jj), 27, 1)) Then
                
             'SEPT 2013
             If Not EsFormatoAntiguoDevolucion Then
                 'Alzira. Estaba mal formateado el numfac.
-               B = EstaElRecibo(Mid(Recibos(jj), 17, 2), Mid(Recibos(jj), 19, 7), cad, Mid(Recibos(jj), 26, 1))
+               B = EstaElRecibo(Mid(Recibos(jj), 17, 2), Mid(Recibos(jj), 19, 7), Cad, Mid(Recibos(jj), 26, 1))
             Else
-               B = EstaElRecibo(Mid(Recibos(jj), 17, 2), Mid(Recibos(jj), 20, 7), cad, Mid(Recibos(jj), 27, 1))
+               B = EstaElRecibo(Mid(Recibos(jj), 17, 2), Mid(Recibos(jj), 20, 7), Cad, Mid(Recibos(jj), 27, 1))
             End If
             If B Then Recibos.Remove jj
         Next jj

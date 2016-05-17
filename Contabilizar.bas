@@ -190,7 +190,7 @@ Dim CtaEfectosComDescontados As String
     End If  'de comprobar cta efectos comerciales descontados
             
             
-    If vCP.Leer(Linea) = 1 Then GoTo ECon
+    If vCP.leer(Linea) = 1 Then GoTo ECon
     
     
     Set Mc = New Contadores
@@ -782,7 +782,7 @@ Dim LINAPU As String
 
     End If
     
-    If vCP.Leer(Linea) = 1 Then GoTo ECon
+    If vCP.leer(Linea) = 1 Then GoTo ECon
 
 
     'Los parametros de contbilizacion se le pasan en el frame de pedida de datos
@@ -1208,7 +1208,7 @@ Dim LINAPU As String
                      Ampliacion = Ampliacion & DBSet(RsCobro!AnyoRem, "N") & ","
                      
                                           
-                     Ampliacion = Ampliacion & DBSet(RS!ctabase, "T", "S") & ")"
+                     Ampliacion = Ampliacion & DBSet(RS!CtaBase, "T", "S") & ")"
                      
                      Ejecuta Ampliacion
                      
@@ -1333,7 +1333,7 @@ Dim LINAPU As String
     End If
 
     
-    If vCP.Leer(Linea) = 1 Then GoTo ECon
+    If vCP.leer(Linea) = 1 Then GoTo ECon
 
 
     'Los parametros de contbilizacion se le pasan en el frame de pedida de datos
@@ -1890,7 +1890,7 @@ Dim VaAlDebe As Boolean
 
     'La forma de pago
     Set vCP = New Ctipoformapago
-    If vCP.Leer(vbEfectivo) = 1 Then GoTo ECon
+    If vCP.leer(vbEfectivo) = 1 Then GoTo ECon
     
     
     Set Mc = New Contadores
@@ -2173,7 +2173,7 @@ Dim TextoFactura As String
 
     'La forma de pago
     Set vCP = New Ctipoformapago
-    If vCP.Leer(vbEfectivo) = 1 Then GoTo ECon
+    If vCP.leer(vbEfectivo) = 1 Then GoTo ECon
     
     
     Set Mc = New Contadores
@@ -2445,7 +2445,7 @@ Dim SQL As String
 Dim Mc As Contadores
 Dim CadenaSQL As String
 Dim FechaContab As Date
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo EEContabilizarCompensaciones
 
@@ -2502,13 +2502,13 @@ Dim I As Integer
 
     NumRegElim = 1
     'Los cobros
-    For I = 1 To ColCobros.Count
+    For i = 1 To ColCobros.Count
         
-        SQL = NumRegElim & "," & RecuperaValor(ColCobros.Item(I), 1) & "NULL,'CONTAB',0)"
+        SQL = NumRegElim & "," & RecuperaValor(ColCobros.Item(i), 1) & "NULL,'CONTAB',0)"
         Conn.Execute CadenaSQL & SQL
         NumRegElim = NumRegElim + 1
         'Borro el cobro pago
-        SQL = RecuperaValor(ColCobros.Item(I), 2)
+        SQL = RecuperaValor(ColCobros.Item(i), 2)
         If Mid(SQL, 1, 6) = "UPDATE" Then
             'UPDATEAMOS
             Conn.Execute SQL
@@ -2518,18 +2518,18 @@ Dim I As Integer
             'Borramos de efectos devueltos... por si acaso sefecdev
             Ejecuta "DELETE FROM sefecdev " & SQL
         End If
-    Next I
+    Next i
 
 
     
     'Los pagos
-    For I = 1 To ColPagos.Count
-        SQL = NumRegElim & "," & RecuperaValor(ColPagos.Item(I), 1) & "NULL,'CONTAB',0)"
+    For i = 1 To ColPagos.Count
+        SQL = NumRegElim & "," & RecuperaValor(ColPagos.Item(i), 1) & "NULL,'CONTAB',0)"
         Conn.Execute CadenaSQL & SQL
         NumRegElim = NumRegElim + 1
         'Borro el  pago   La linea del banco va aqui dentro, con lo cual
         'Si tengo que comprobar si es la linea del banco o no para borrar
-        SQL = RecuperaValor(ColPagos.Item(I), 2)
+        SQL = RecuperaValor(ColPagos.Item(i), 2)
         If SQL <> "" Then
             If Mid(SQL, 1, 6) = "UPDATE" Then
                 'UPDATEAMOS
@@ -2539,7 +2539,7 @@ Dim I As Integer
             End If
 
         End If
-    Next I
+    Next i
 
     Conn.CommitTrans   'TODO HA IDO BIEN
     
@@ -2705,7 +2705,7 @@ Dim CtaBancoIngresos As String
     
     'La forma de pago
     Set vCP = New Ctipoformapago
-    If vCP.Leer(vbTipoPagoRemesa) = 1 Then GoTo ERemesa_CancelacionCliente
+    If vCP.leer(vbTipoPagoRemesa) = 1 Then GoTo ERemesa_CancelacionCliente
     
     
     Set Mc = New Contadores
@@ -2989,7 +2989,7 @@ Dim LCta As Integer
 Dim Importeauxiliar As Currency
 Dim AgrupaVtosPuente As Boolean
 Dim CadenaAgrupaVtoPuente As String
-Dim AUX2 As String
+Dim aux2 As String
 Dim RequiereCCDiferencia As Boolean
 
 
@@ -3105,7 +3105,7 @@ Dim RequiereCCDiferencia As Boolean
         SQL = CStr(vbPagare)
         Ampliacion = "Pagarés"
     End If
-    If vCP.Leer(CInt(SQL)) = 1 Then GoTo ERemesa_CancelacionCliente2
+    If vCP.leer(CInt(SQL)) = 1 Then GoTo ERemesa_CancelacionCliente2
     'Ahora fijo los valores que me ha dado el
     vCP.diaricli = RecuperaValor(DiarioConcepto, 1)
     vCP.condecli = RecuperaValor(DiarioConcepto, 2)
@@ -3202,13 +3202,13 @@ Dim RequiereCCDiferencia As Boolean
                 
                 'Noviembre 2014
                 'si pone contrapartida, pondre la nommacta
-                AUX2 = ""
-                If vCP.ampdecli = 4 Then AUX2 = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", CtaCancelacion, "T")
+                aux2 = ""
+                If vCP.ampdecli = 4 Then aux2 = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", CtaCancelacion, "T")
                 
-                If AUX2 = "" Then AUX2 = Mid(vCP.descformapago & " " & DBLet(RS!reftalonpag, "T"), 1, 30)
+                If aux2 = "" Then aux2 = Mid(vCP.descformapago & " " & DBLet(RS!reftalonpag, "T"), 1, 30)
                 
-                SQL = SQL & ",'" & DevNombreSQL(AUX2) & "',"
-                AUX2 = ""
+                SQL = SQL & ",'" & DevNombreSQL(aux2) & "',"
+                aux2 = ""
                 'Importe al DEBE.
                 SQL = SQL & "###,NULL,NULL,"
                 'Contra partida
@@ -3238,10 +3238,10 @@ Dim RequiereCCDiferencia As Boolean
         'Noviembre 2014
         'Noviembre 2014
         'si pone contrapartida, pondre la nommacta
-        AUX2 = ""
-        If vCP.ampdecli = 4 Then AUX2 = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", CtaCancelacion, "T")
-        If AUX2 = "" Then AUX2 = Mid(vCP.descformapago & Ampliacion, 1, 30)
-        SQL = SQL & ",'" & DevNombreSQL(AUX2) & "',"
+        aux2 = ""
+        If vCP.ampdecli = 4 Then aux2 = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", CtaCancelacion, "T")
+        If aux2 = "" Then aux2 = Mid(vCP.descformapago & Ampliacion, 1, 30)
+        SQL = SQL & ",'" & DevNombreSQL(aux2) & "',"
         
         
         
@@ -3309,11 +3309,11 @@ Dim RequiereCCDiferencia As Boolean
         
         'Ampliacion
         If Talones Then
-            AUX2 = " Tal nº: " & Ampliacion
+            aux2 = " Tal nº: " & Ampliacion
         Else
-            AUX2 = " Pag. nº: " & Ampliacion
+            aux2 = " Pag. nº: " & Ampliacion
         End If
-        SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.descformapago & AUX2, 1, 30)) & "',"
+        SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.descformapago & aux2, 1, 30)) & "',"
 
         
         If Importeauxiliar < 0 Then
@@ -3326,8 +3326,8 @@ Dim RequiereCCDiferencia As Boolean
         'Centro de coste
         RequiereCCDiferencia = False
         If vParam.autocoste Then
-            AUX2 = Mid(CtaCancelacion, 1, 1)
-            If AUX2 = "6" Or AUX2 = "7" Then RequiereCCDiferencia = True
+            aux2 = Mid(CtaCancelacion, 1, 1)
+            If aux2 = "6" Or aux2 = "7" Then RequiereCCDiferencia = True
         End If
         If RequiereCCDiferencia Then
             CtaCancelacion = UCase(RecuperaValor(DiarioConcepto, 6))
@@ -3366,11 +3366,11 @@ Dim RequiereCCDiferencia As Boolean
                 SQL = Linea & "," & Cuenta & ",'Nº" & Format(IdRecepcion, "00000000") & "'," & vCP.conhacli
                 
                  If Talones Then
-                    AUX2 = " Tal nº: " & Ampliacion
+                    aux2 = " Tal nº: " & Ampliacion
                 Else
-                    AUX2 = " Pag. nº: " & Ampliacion
+                    aux2 = " Pag. nº: " & Ampliacion
                 End If
-                SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.CadenaAuxiliar & AUX2, 1, 30)) & "',"
+                SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.CadenaAuxiliar & aux2, 1, 30)) & "',"
         
                 
                 If Importeauxiliar > 0 Then
@@ -3383,8 +3383,8 @@ Dim RequiereCCDiferencia As Boolean
                 'Centro de coste
                 RequiereCCDiferencia = False
                 If vParam.autocoste Then
-                    AUX2 = Mid(Cuenta, 2, 1)  'pq lleva una comilla
-                    If AUX2 = "6" Or AUX2 = "7" Then RequiereCCDiferencia = True
+                    aux2 = Mid(Cuenta, 2, 1)  'pq lleva una comilla
+                    If aux2 = "6" Or aux2 = "7" Then RequiereCCDiferencia = True
                 End If
                 If RequiereCCDiferencia Then
                     CtaCancelacion = UCase(RecuperaValor(DiarioConcepto, 6))
@@ -4553,7 +4553,7 @@ Dim LCta As Integer
 Dim Importeauxiliar As Currency
 Dim AgrupaVtosPuente As Boolean
 Dim CadenaAgrupaVtoPuente As String
-Dim AUX2 As String
+Dim aux2 As String
 Dim RequiereCCDiferencia As Boolean
 
 
@@ -4669,7 +4669,7 @@ Dim RequiereCCDiferencia As Boolean
         SQL = CStr(vbPagare)
         Ampliacion = "Pagarés"
     End If
-    If vCP.Leer(CInt(SQL)) = 1 Then GoTo ERemesa_CancelacionCliente3
+    If vCP.leer(CInt(SQL)) = 1 Then GoTo ERemesa_CancelacionCliente3
     'Ahora fijo los valores que me ha dado el
     vCP.diaricli = RecuperaValor(DiarioConcepto, 1)
     'En la contabilizacion
@@ -4862,11 +4862,11 @@ Dim RequiereCCDiferencia As Boolean
         
         'Ampliacion
         If Talones Then
-            AUX2 = " Tal nº: " & Ampliacion
+            aux2 = " Tal nº: " & Ampliacion
         Else
-            AUX2 = " Pag. nº: " & Ampliacion
+            aux2 = " Pag. nº: " & Ampliacion
         End If
-        SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.descformapago & AUX2, 1, 30)) & "',"
+        SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.descformapago & aux2, 1, 30)) & "',"
 
         
         If Importeauxiliar < 0 Then
@@ -4879,8 +4879,8 @@ Dim RequiereCCDiferencia As Boolean
         'Centro de coste
         RequiereCCDiferencia = False
         If vParam.autocoste Then
-            AUX2 = Mid(CtaCancelacion, 1, 1)
-            If AUX2 = "6" Or AUX2 = "7" Then RequiereCCDiferencia = True
+            aux2 = Mid(CtaCancelacion, 1, 1)
+            If aux2 = "6" Or aux2 = "7" Then RequiereCCDiferencia = True
         End If
         If RequiereCCDiferencia Then
             CtaCancelacion = UCase(RecuperaValor(DiarioConcepto, 6))
@@ -4919,11 +4919,11 @@ Dim RequiereCCDiferencia As Boolean
                 SQL = Linea & "," & Cuenta & ",'Nº" & Format(IdRecepcion, "00000000") & "'," & vCP.conhacli
                 
                  If Talones Then
-                    AUX2 = " Tal nº: " & Ampliacion
+                    aux2 = " Tal nº: " & Ampliacion
                 Else
-                    AUX2 = " Pag. nº: " & Ampliacion
+                    aux2 = " Pag. nº: " & Ampliacion
                 End If
-                SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.CadenaAuxiliar & AUX2, 1, 30)) & "',"
+                SQL = SQL & ",'" & DevNombreSQL(Mid(vCP.CadenaAuxiliar & aux2, 1, 30)) & "',"
         
                 
                 If Importeauxiliar > 0 Then
@@ -4936,8 +4936,8 @@ Dim RequiereCCDiferencia As Boolean
                 'Centro de coste
                 RequiereCCDiferencia = False
                 If vParam.autocoste Then
-                    AUX2 = Mid(Cuenta, 2, 1)  'pq lleva una comilla
-                    If AUX2 = "6" Or AUX2 = "7" Then RequiereCCDiferencia = True
+                    aux2 = Mid(Cuenta, 2, 1)  'pq lleva una comilla
+                    If aux2 = "6" Or aux2 = "7" Then RequiereCCDiferencia = True
                 End If
                 If RequiereCCDiferencia Then
                     CtaCancelacion = UCase(RecuperaValor(DiarioConcepto, 6))
@@ -5044,7 +5044,7 @@ Dim FecAsto As Date
 
     'La forma de pago
     Set vCP = New Ctipoformapago
-    If vCP.Leer(vbTipoPagoRemesa) = 1 Then GoTo ECon
+    If vCP.leer(vbTipoPagoRemesa) = 1 Then GoTo ECon
     
     Set RS = New ADODB.Recordset
     Set ColFechas = New Collection
