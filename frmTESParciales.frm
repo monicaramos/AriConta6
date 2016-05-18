@@ -6,12 +6,12 @@ Begin VB.Form frmTESParciales
    ClientHeight    =   7740
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   7020
+   ClientWidth     =   8430
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7740
-   ScaleWidth      =   7020
+   ScaleWidth      =   8430
    StartUpPosition =   2  'CenterScreen
    Begin VB.CheckBox chkImprimir 
       Caption         =   "Imprimir Recibo"
@@ -26,7 +26,7 @@ Begin VB.Form frmTESParciales
       EndProperty
       Height          =   480
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   19
       Top             =   7020
       Width           =   2685
    End
@@ -44,8 +44,8 @@ Begin VB.Form frmTESParciales
       EndProperty
       Height          =   375
       Index           =   1
-      Left            =   5850
-      TabIndex        =   4
+      Left            =   7140
+      TabIndex        =   6
       Top             =   7140
       Width           =   1095
    End
@@ -62,17 +62,36 @@ Begin VB.Form frmTESParciales
       EndProperty
       Height          =   375
       Index           =   0
-      Left            =   4530
-      TabIndex        =   3
+      Left            =   5820
+      TabIndex        =   5
       Top             =   7140
       Width           =   1095
    End
    Begin VB.Frame FrCobro 
       Height          =   6855
       Left            =   60
-      TabIndex        =   5
+      TabIndex        =   7
       Top             =   90
-      Width           =   6855
+      Width           =   8175
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   6000
+         TabIndex        =   4
+         Text            =   "Text2"
+         Top             =   4290
+         Width           =   1755
+      End
       Begin VB.ComboBox Combo1 
          Appearance      =   0  'Flat
          BeginProperty Font 
@@ -89,7 +108,7 @@ Begin VB.Form frmTESParciales
          Left            =   1590
          List            =   "frmTESParciales.frx":0002
          Style           =   2  'Dropdown List
-         TabIndex        =   28
+         TabIndex        =   3
          Tag             =   "Tipo de pago|N|N|||formapago|tipforpa|||"
          Top             =   4260
          Width           =   2475
@@ -128,10 +147,10 @@ Begin VB.Form frmTESParciales
          Index           =   1
          Left            =   3000
          Locked          =   -1  'True
-         TabIndex        =   14
+         TabIndex        =   16
          Text            =   "Text2"
          Top             =   1470
-         Width           =   3495
+         Width           =   4785
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -147,11 +166,11 @@ Begin VB.Form frmTESParciales
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   4710
+         Left            =   6030
          Locked          =   -1  'True
-         TabIndex        =   11
+         TabIndex        =   13
          Text            =   "Text1"
-         Top             =   2910
+         Top             =   2940
          Width           =   1755
       End
       Begin VB.TextBox Text2 
@@ -167,10 +186,10 @@ Begin VB.Form frmTESParciales
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   4710
+         Left            =   6000
          TabIndex        =   2
          Text            =   "Text2"
-         Top             =   3825
+         Top             =   3855
          Width           =   1755
       End
       Begin VB.TextBox Text1 
@@ -187,11 +206,11 @@ Begin VB.Form frmTESParciales
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   4710
+         Left            =   6030
          Locked          =   -1  'True
-         TabIndex        =   10
+         TabIndex        =   12
          Text            =   "Text1"
-         Top             =   2460
+         Top             =   2490
          Width           =   1755
       End
       Begin VB.TextBox Text1 
@@ -208,11 +227,11 @@ Begin VB.Form frmTESParciales
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   4710
+         Left            =   6030
          Locked          =   -1  'True
-         TabIndex        =   8
+         TabIndex        =   10
          Text            =   "Text1"
-         Top             =   1980
+         Top             =   2010
          Width           =   1755
       End
       Begin VB.TextBox Text3 
@@ -235,10 +254,10 @@ Begin VB.Form frmTESParciales
       Begin MSComctlLib.ListView ListView8 
          Height          =   1455
          Left            =   240
-         TabIndex        =   25
+         TabIndex        =   27
          Top             =   5130
-         Width           =   6405
-         _ExtentX        =   11298
+         Width           =   7605
+         _ExtentX        =   13414
          _ExtentY        =   2566
          View            =   3
          LabelWrap       =   -1  'True
@@ -281,6 +300,26 @@ Begin VB.Form frmTESParciales
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
+         Caption         =   "Gasto Bancario"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   10
+         Left            =   4350
+         TabIndex        =   30
+         Top             =   4335
+         Width           =   1485
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
          Caption         =   "Tipo "
          BeginProperty Font 
             Name            =   "Verdana"
@@ -295,7 +334,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   9
          Left            =   240
-         TabIndex        =   27
+         TabIndex        =   29
          Top             =   4290
          Width           =   495
       End
@@ -315,7 +354,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   8
          Left            =   240
-         TabIndex        =   26
+         TabIndex        =   28
          Top             =   4830
          Width           =   1920
       End
@@ -334,7 +373,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   56
          Left            =   270
-         TabIndex        =   19
+         TabIndex        =   21
          Top             =   360
          Width           =   6150
       End
@@ -353,13 +392,13 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   57
          Left            =   270
-         TabIndex        =   18
+         TabIndex        =   20
          Top             =   720
          Width           =   6270
       End
       Begin VB.Line Line2 
          X1              =   240
-         X2              =   6600
+         X2              =   7860
          Y1              =   4710
          Y2              =   4710
       End
@@ -376,7 +415,7 @@ Begin VB.Form frmTESParciales
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   16
+         TabIndex        =   18
          Top             =   3330
          Width           =   6195
       End
@@ -396,7 +435,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   7
          Left            =   270
-         TabIndex        =   15
+         TabIndex        =   17
          Top             =   1470
          Width           =   1050
       End
@@ -423,9 +462,9 @@ Begin VB.Form frmTESParciales
          ForeColor       =   &H00000000&
          Height          =   240
          Index           =   6
-         Left            =   3720
-         TabIndex        =   13
-         Top             =   3870
+         Left            =   4380
+         TabIndex        =   15
+         Top             =   3900
          Width           =   765
       End
       Begin VB.Label Label4 
@@ -443,14 +482,14 @@ Begin VB.Form frmTESParciales
          ForeColor       =   &H00000000&
          Height          =   240
          Index           =   5
-         Left            =   3780
-         TabIndex        =   12
-         Top             =   2910
+         Left            =   5100
+         TabIndex        =   14
+         Top             =   2940
          Width           =   720
       End
       Begin VB.Line Line1 
          X1              =   240
-         X2              =   6600
+         X2              =   7860
          Y1              =   3690
          Y2              =   3690
       End
@@ -469,9 +508,9 @@ Begin VB.Form frmTESParciales
          ForeColor       =   &H00000000&
          Height          =   240
          Index           =   4
-         Left            =   3840
-         TabIndex        =   9
-         Top             =   2520
+         Left            =   5160
+         TabIndex        =   11
+         Top             =   2550
          Width           =   675
       End
       Begin VB.Label Label4 
@@ -489,9 +528,9 @@ Begin VB.Form frmTESParciales
          ForeColor       =   &H00000000&
          Height          =   240
          Index           =   2
-         Left            =   3060
-         TabIndex        =   7
-         Top             =   2070
+         Left            =   4380
+         TabIndex        =   9
+         Top             =   2100
          Width           =   1500
       End
       Begin VB.Label Label4 
@@ -510,7 +549,7 @@ Begin VB.Form frmTESParciales
          Height          =   240
          Index           =   3
          Left            =   240
-         TabIndex        =   6
+         TabIndex        =   8
          Top             =   3840
          Width           =   600
       End
@@ -538,7 +577,7 @@ Begin VB.Form frmTESParciales
       Index           =   2
       Left            =   3000
       Locked          =   -1  'True
-      TabIndex        =   20
+      TabIndex        =   22
       Text            =   "Text1"
       Top             =   1080
       Width           =   3495
@@ -558,7 +597,7 @@ Begin VB.Form frmTESParciales
       Index           =   1
       Left            =   1680
       Locked          =   -1  'True
-      TabIndex        =   21
+      TabIndex        =   23
       Text            =   "Text1"
       Top             =   1080
       Width           =   1215
@@ -578,7 +617,7 @@ Begin VB.Form frmTESParciales
       Index           =   0
       Left            =   1680
       Locked          =   -1  'True
-      TabIndex        =   22
+      TabIndex        =   24
       Text            =   "Text1"
       Top             =   600
       Width           =   4815
@@ -599,7 +638,7 @@ Begin VB.Form frmTESParciales
       Height          =   240
       Index           =   0
       Left            =   360
-      TabIndex        =   24
+      TabIndex        =   26
       Top             =   600
       Width           =   1200
    End
@@ -619,7 +658,7 @@ Begin VB.Form frmTESParciales
       Height          =   240
       Index           =   1
       Left            =   360
-      TabIndex        =   23
+      TabIndex        =   25
       Top             =   1080
       Width           =   675
    End
@@ -869,6 +908,8 @@ Private Sub Form_Load()
     Me.Height = Me.FrCobro.Height + 1200 '240 + Me.Command1(0).Height + 240
     'Text2(0).Text = ""
     Text2(0).Text = Format(impo, FormatoImporte)
+    Text2(1).Text = "0,00"
+    
     Caption = Caption & " de factura"
 End Sub
 
@@ -914,7 +955,7 @@ Dim Valor
 
         If Text2(Index).Text = "" Then Exit Sub
         If Not IsNumeric(Text2(Index).Text) Then
-            MsgBox "importe debe ser numérico", vbExclamation
+            MsgBox "Importe debe ser numérico", vbExclamation
             Text2(Index).Text = ""
             PonFoco Text2(Index)
         Else
@@ -948,6 +989,8 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim Im As Currency
+Dim CtaBancoGastos As String
+
 
     On Error GoTo EDa
     DatosOK = False
@@ -989,6 +1032,16 @@ Dim Im As Currency
     If FechaCorrecta2(CDate(Text3(0).Text), True) > 1 Then Exit Function
     
     
+    If ComprobarCero(Text2(1).Text) <> 0 Then
+        CtaBancoGastos = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", txtCta(1), "T")
+        If CtaBancoGastos = "" Then
+            CtaBancoGastos = DevuelveDesdeBD("ctabenbanc", "paramtesor", "codigo", "1", "N")
+        End If
+        If CtaBancoGastos = "" Then
+            MsgBox "Falta configurar la cuenta de gastos bancarios. Revise.", vbExclamation
+            Exit Function
+        End If
+    End If
     
     If Cobro Then
         impo = ImporteFormateado(Text1(3).Text) 'Vto
@@ -1066,11 +1119,8 @@ Private Function RealizarAnticipo() As Boolean
 
         Conn.BeginTrans
         If Contabilizar Then
-        
-        
             Conn.CommitTrans
             RealizarAnticipo = True
-            
         Else
             'Conn.RollbackTrans
             TirarAtrasTransaccion
@@ -1093,13 +1143,23 @@ Dim ElConcepto As Integer
 Dim vNumDiari As Integer
 Dim Situacion As Integer
 
+Dim Gastos As Currency
+Dim Importe As Currency
+Dim CtaBancoGastos As String
+Dim DescuentaImporteDevolucion As Boolean
+Dim Sql5 As String
+
+
     On Error GoTo ECon
     Contabilizar = False
+    
+    
+    
     Set Mc = New Contadores
     If Mc.ConseguirContador("0", CDate(Text3(0).Text) <= vParam.fechafin, True) = 1 Then Exit Function
 
     Set FP = New Ctipoformapago
-    If FP.Leer(Combo1.ListIndex) Then ' antes forma de pago
+    If FP.leer(Combo1.ListIndex) Then ' antes forma de pago
         Set Mc = Nothing
         Set FP = Nothing
     End If
@@ -1126,8 +1186,6 @@ Dim Situacion As Integer
     
     
     Conn.Execute SQL
-        
-        
         
         
         
@@ -1240,7 +1298,7 @@ Dim Situacion As Integer
     Else
         Cad = Cad & "NULL"
     End If
-    Cad = Cad & ",'contab',0)"
+    Cad = Cad & ",'COBRO',0)"
     Cad = SQL & Cad
     Conn.Execute Cad
     
@@ -1300,22 +1358,33 @@ Dim Situacion As Integer
     Ampliacion = Mid(Ampliacion, 1, 35)
     
     
+    Gastos = 0
+    If ComprobarCero(Text2(1).Text) <> 0 Then
+        Gastos = ImporteFormateado(Text2(1).Text)
+    End If
     
-    
-    
-    
-    
-    
+'++
+    DescuentaImporteDevolucion = False
+    If Gastos > 0 Then
+        Sql5 = txtCta(1)
+        Sql5 = DevuelveDesdeBD("GastRemDescontad", "bancos", "codmacta", Sql5, "T")
+        If Sql5 = "1" Then DescuentaImporteDevolucion = True
+    End If
+    Importe = impo
+    If DescuentaImporteDevolucion Then
+        Importe = impo - Gastos
+    End If
+'++
     
     Cad = "2,'" & txtCta(1).Text & "','" & Numdocum & "'," & Conce & ",'" & Ampliacion & "',"
     'Importe cliente
     'Si el cobro/pago va al debe el contrapunte ira al haber
     If Not Debe Then
         'al debe
-        Cad = Cad & TransformaComasPuntos(CStr(impo)) & ",NULL"
+        Cad = Cad & TransformaComasPuntos(CStr(Importe)) & ",NULL"
     Else
         'al haber
-        Cad = Cad & "NULL," & TransformaComasPuntos(CStr(impo))
+        Cad = Cad & "NULL," & TransformaComasPuntos(CStr(Importe))
     End If
     
     'Codccost
@@ -1326,9 +1395,77 @@ Dim Situacion As Integer
     Else
         Cad = Cad & "NULL"
     End If
-    Cad = Cad & ",'idcontab',0)"
+    Cad = Cad & ",'COBRO',0)" ' idcontab
     Cad = SQL & Cad
     Conn.Execute Cad
+    
+        
+    '++
+    'Gasto.
+    ' Si tiene y no agrupa
+    '-------------------------------------------------------
+    If Gastos > 0 Then
+        If CtaBancoGastos = "" Then CtaBancoGastos = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", txtCta(1), "T")
+        If CtaBancoGastos = "" Then
+            CtaBancoGastos = DevuelveDesdeBD("ctabenbanc", "paramtesor", "codigo", "1", "N")
+        End If
+
+        Cad = "3,'"
+
+        Cad = Cad & CtaBancoGastos & "','" & Numdocum & "'," & Conce
+        Cad = Cad & ",'Gastos vto.'"
+
+        'Importe al debe
+        Cad = Cad & "," & TransformaComasPuntos(CStr(Gastos)) & ",NULL,"
+
+        'Codccost
+        Cad = Cad & "NULL,"
+
+        If LlevaContr Then
+            If Not DescuentaImporteDevolucion Then
+                Cad = Cad & "'" & txtCta(1).Text & "'"
+            Else
+                Cad = Cad & "'" & Text1(1).Text & "'"
+            End If
+        Else
+            Cad = Cad & "NULL"
+        End If
+
+        Cad = Cad & ",'COBRO',0)"
+        
+        Cad = SQL & Cad
+        Conn.Execute Cad
+        
+        
+        If Not DescuentaImporteDevolucion Then
+            Cad = "4,'"
+    
+            Cad = Cad & txtCta(1).Text & "','" & Numdocum & "'," & Conce
+            Cad = Cad & ",'Gastos vto.'"
+    
+            'Importe al debe
+            Cad = Cad & ",NULL, " & TransformaComasPuntos(CStr(Gastos)) & ","
+    
+            'Codccost
+            Cad = Cad & "NULL,"
+    
+            If LlevaContr Then
+                Cad = Cad & "'" & CtaBancoGastos & "'"
+            Else
+                Cad = Cad & "NULL"
+            End If
+    
+            Cad = Cad & ",'COBRO',0)"
+            
+            Cad = SQL & Cad
+            Conn.Execute Cad
+        
+        End If
+        
+    End If
+    '++
+    
+    
     
     'Insertamos en la temporal para que lo ac
     If Cobro Then
@@ -1394,16 +1531,9 @@ Dim Situacion As Integer
     
         Conn.Execute SQL
     
-'        Situacion = 1
-'
-'        Select Case Combo1.ItemData(Combo1.ListIndex)
-'            Case vbTalon, vbPagare, vbTipoPagoRemesa
-'                Situacion = 0
-'        End Select
     
         SQL = "update cobros set impcobro = (select sum(coalesce(impcobro,0)) from cobros_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4) & ") "
         SQL = SQL & ", fecultco = " & DBSet(Text3(0).Text, "F")
-'        SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
         SQL = SQL & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "N")
         SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F") & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
     
@@ -1412,6 +1542,7 @@ Dim Situacion As Integer
         SQL = "select impvenci + coalesce(gastos,0) - coalesce(impcobro,0) from cobros where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "N")
         SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F") & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
      
+        'ahora es cuando ponemos la situacion
         Situacion = 0
         If DevuelveValor(SQL) = 0 Then
             Situacion = 1

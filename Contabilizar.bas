@@ -281,7 +281,7 @@ Dim CtaEfectosComDescontados As String
         Else
             SQL = SQL & "NULL,"
         End If
-        SQL = SQL & "'CONTAB',0)"
+        SQL = SQL & "'COBRO',0)"
 
         If Not Ejecuta(SQL) Then Exit Function
   
@@ -344,7 +344,7 @@ Dim CtaEfectosComDescontados As String
                 Else
                     SQL = SQL & "NULL,"
                 End If
-                SQL = SQL & "'CONTAB',0)"
+                SQL = SQL & "'COBRO',0)"
                 
                 If Not Ejecuta(SQL) Then Exit Function
                 
@@ -405,7 +405,7 @@ Dim CtaEfectosComDescontados As String
                 Else
                     SQL = SQL & "NULL,"
                 End If
-                SQL = SQL & "'CONTAB',0)"
+                SQL = SQL & "'COBRO',0)"
                 
                 If Not Ejecuta(SQL) Then Exit Function
                 
@@ -441,7 +441,7 @@ Dim CtaEfectosComDescontados As String
         Else
             Ampliacion = Ampliacion & "'" & RecuperaValor(CtaBanco, 3) & "'"
         End If
-        Ampliacion = Ampliacion & ",NULL,'CONTAB',0)"
+        Ampliacion = Ampliacion & ",NULL,'COBRO',0)"
         Ampliacion = SQL & Ampliacion
         If Not Ejecuta(Ampliacion) Then Exit Function
         Linea = Linea + 1
@@ -480,7 +480,7 @@ Dim CtaEfectosComDescontados As String
             Ampliacion = Ampliacion & "NULL"
         End If
     End If
-    Ampliacion = Ampliacion & ",'CONTAB',0)"
+    Ampliacion = Ampliacion & ",'COBRO',0)"
     Ampliacion = SQL & Ampliacion
     If Not Ejecuta(Ampliacion) Then Exit Function
     
@@ -511,7 +511,7 @@ Dim CtaEfectosComDescontados As String
         Else
             Ampliacion = Ampliacion & "NULL"
         End If
-        Ampliacion = Ampliacion & ",'" & RecuperaValor(CtaBanco, 1) & "','CONTAB',0)"
+        Ampliacion = Ampliacion & ",'" & RecuperaValor(CtaBanco, 1) & "','COBRO',0)"
         Ampliacion = SQL & Ampliacion
         
         If Not Ejecuta(Ampliacion) Then Exit Function
@@ -595,7 +595,7 @@ Dim CtaEfectosComDescontados As String
             Else
                 SQL = SQL & "NULL,"
             End If
-            SQL = SQL & "'CONTAB',0)"
+            SQL = SQL & "'COBRO',0)"
             
             If Not Ejecuta(SQL) Then Exit Function
             Linea = Linea + 1
@@ -678,6 +678,13 @@ Public Function RealizarDevolucionRemesa(FechaDevolucion As Date, ContabilizoGas
 Dim C As String
     
     C = RecuperaValor(Remesa, 10)
+    
+    CtaBenBancarios = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", RecuperaValor(Remesa, 3), "T")
+    If CtaBenBancarios = "" Then
+        CtaBenBancarios = DevuelveDesdeBD("ctabenbanc", "paramtesor", "codigo", "1", "N")
+    End If
+    
+    
     If C = "1" Then
         RealizarDevolucionRemesa = RealizarDevolucionRemesaEfectos(FechaDevolucion, ContabilizoGastoBanco, CtaBenBancarios, Remesa, DatosContabilizacionDevolucion)
     Else
@@ -943,7 +950,7 @@ Dim LINAPU As String
         Else
             SQL = SQL & "NULL,"
         End If
-        SQL = SQL & "'CONTAB',0)"
+        SQL = SQL & "'COBRO',0)"
 
         If Not Ejecuta(SQL) Then GoTo ECon
 
@@ -982,7 +989,7 @@ Dim LINAPU As String
                     Aux = "NULL"
                 End If
                
-                SQL = SQL & "," & Aux & ",'CONTAB',0)"
+                SQL = SQL & "," & Aux & ",'COBRO',0)"
                 If Not Ejecuta(SQL) Then Exit Function
                 
                 Linea = Linea + 1
@@ -1075,78 +1082,78 @@ Dim LINAPU As String
     'SI hay que contabilizar los gastos de devolucion
     If ContabilizoGastoBanco Then
         
-             If GastoDevolucion > 0 And DescuentaImporteDevolucion And ContabilizoGastoBanco Then
-             Else
-                Linea = Linea + 1
-             End If
-             SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
-             SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
-             SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada) "
-             SQL = SQL & "VALUES (" & vCP.diaricli & ",'" & Format(FechaDevolucion, FormatoFecha) & "'," & Mc.Contador & "," & Linea & ",'"
+         If GastoDevolucion > 0 And DescuentaImporteDevolucion And ContabilizoGastoBanco Then
+         Else
+            Linea = Linea + 1
+         End If
+         SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
+         SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
+         SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada) "
+         SQL = SQL & "VALUES (" & vCP.diaricli & ",'" & Format(FechaDevolucion, FormatoFecha) & "'," & Mc.Contador & "," & Linea & ",'"
+
+         'Cuenta
+         SQL = SQL & CtaBenBancarios & "','RE" & Format(RecuperaValor(Remesa, 1), "0000") & RecuperaValor(Remesa, 2) & "'," & vCP.condecli
+         'SQL = SQL & Rs!Cta & "','REM" & Format(Rs!numfac, "000000000") & "'," & vCP.condecli
+        
+
+        If vCP.ampdecli = 3 Then
+            Ampliacion = DescRemesa
+        Else
+            Ampliacion = DevuelveDesdeBD("nomconce", "conceptos", "codconce", vCP.condecli)
+            Ampliacion = Ampliacion & " Gasto remesa:" & Format(RecuperaValor(Remesa, 1), "0000") & "/" & RecuperaValor(Remesa, 2)
+        End If
+        SQL = SQL & ",'" & DevNombreSQL(Mid(Ampliacion, 1, 30)) & "',"
+
+
+        ' timporteH, codccost, ctacontr, idcontab, punteada
+        'Importe.  Va al debe
+        SQL = SQL & TransformaComasPuntos(CStr(GastoDevolucion)) & ",NULL,"
+        
+        'Centro de coste.
+        '--------------------------
+        Amp11 = "NULL"
+        If vParam.autocoste Then
+            Amp11 = DevuelveDesdeBD("codccost", "bancos", "codmacta", RS!Cliente, "T")
+            Amp11 = "'" & Amp11 & "'"
+        End If
+        SQL = SQL & Amp11 & ","
+
+        
+        SQL = SQL & "'" & RS!Cliente & "',"
+        SQL = SQL & "'CONTAB',0)"
+
+        If Not Ejecuta(SQL) Then GoTo ECon
+
+        
+        
     
-             'Cuenta
-             SQL = SQL & CtaBenBancarios & "','RE" & Format(RecuperaValor(Remesa, 1), "0000") & RecuperaValor(Remesa, 2) & "'," & vCP.condecli
-             'SQL = SQL & Rs!Cta & "','REM" & Format(Rs!numfac, "000000000") & "'," & vCP.condecli
+        'El total del banco..
+        
+        'La linea del banco
+        'Rs.MoveFirst
+        'Si no agrupa dto importe
+        If Not DescuentaImporteDevolucion Then
+            Linea = Linea + 1
+            SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
+            SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
+            SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada) "
+            SQL = SQL & "VALUES (" & vCP.diaricli & ",'" & Format(FechaDevolucion, FormatoFecha) & "'," & Mc.Contador & ","
+        
             
-    
-            If vCP.ampdecli = 3 Then
+            If vCP.amphacli = 3 Then
                 Ampliacion = DescRemesa
             Else
-                Ampliacion = DevuelveDesdeBD("nomconce", "conceptos", "codconce", vCP.condecli)
+                Ampliacion = DevuelveDesdeBD("nomconce", "conceptos", "codconce", vCP.conhacli)
                 Ampliacion = Ampliacion & " Gasto remesa:" & Format(RecuperaValor(Remesa, 1), "0000") & "/" & RecuperaValor(Remesa, 2)
             End If
-            SQL = SQL & ",'" & DevNombreSQL(Mid(Ampliacion, 1, 30)) & "',"
-    
-    
-            ' timporteH, codccost, ctacontr, idcontab, punteada
-            'Importe.  Va al debe
-            SQL = SQL & TransformaComasPuntos(CStr(GastoDevolucion)) & ",NULL,"
             
-            'Centro de coste.
-            '--------------------------
-            Amp11 = "NULL"
-            If vParam.autocoste Then
-                Amp11 = DevuelveDesdeBD("codccost", "bancos", "codmacta", RS!Cliente, "T")
-                Amp11 = "'" & Amp11 & "'"
-            End If
-            SQL = SQL & Amp11 & ","
-    
+            Ampliacion = Linea & ",'" & RS!Cliente & "','RE" & Format(RecuperaValor(Remesa, 1), "0000") & RecuperaValor(Remesa, 2) & "'," & vCP.conhacli & ",'" & Ampliacion & "',"
+            'Ampliacion = Ampliacion & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",NULL,'" & CtaBenBancarios & "','CONTAB',0)"
+            Ampliacion = Ampliacion & "NULL," & TransformaComasPuntos(CStr(GastoDevolucion)) & ",NULL,'" & CtaBenBancarios & "','CONTAB',0)"
+            Ampliacion = SQL & Ampliacion
+            If Not Ejecuta(Ampliacion) Then GoTo ECon
             
-            SQL = SQL & "'" & RS!Cliente & "',"
-            SQL = SQL & "'CONTAB',0)"
-    
-            If Not Ejecuta(SQL) Then GoTo ECon
-    
-            
-            
-        
-            'El total del banco..
-            
-            'La linea del banco
-            'Rs.MoveFirst
-            'Si no agrupa dto importe
-            If Not DescuentaImporteDevolucion Then
-                Linea = Linea + 1
-                SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
-                SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
-                SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada) "
-                SQL = SQL & "VALUES (" & vCP.diaricli & ",'" & Format(FechaDevolucion, FormatoFecha) & "'," & Mc.Contador & ","
-            
-                
-                If vCP.amphacli = 3 Then
-                    Ampliacion = DescRemesa
-                Else
-                    Ampliacion = DevuelveDesdeBD("nomconce", "conceptos", "codconce", vCP.conhacli)
-                    Ampliacion = Ampliacion & " Gasto remesa:" & Format(RecuperaValor(Remesa, 1), "0000") & "/" & RecuperaValor(Remesa, 2)
-                End If
-                
-                Ampliacion = Linea & ",'" & RS!Cliente & "','RE" & Format(RecuperaValor(Remesa, 1), "0000") & RecuperaValor(Remesa, 2) & "'," & vCP.conhacli & ",'" & Ampliacion & "',"
-                'Ampliacion = Ampliacion & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",NULL,'" & CtaBenBancarios & "','CONTAB',0)"
-                Ampliacion = Ampliacion & "NULL," & TransformaComasPuntos(CStr(GastoDevolucion)) & ",NULL,'" & CtaBenBancarios & "','CONTAB',0)"
-                Ampliacion = SQL & Ampliacion
-                If Not Ejecuta(Ampliacion) Then GoTo ECon
-                
-            End If
+        End If
       
     
     End If
@@ -5163,7 +5170,7 @@ Dim FecAsto As Date
                 Else
                     SQL = SQL & "NULL,"
                 End If
-                SQL = SQL & "'CONTAB',0)"
+                SQL = SQL & "'COBRO',0)"
                 
                 If Not Ejecuta(SQL) Then Exit Function
                 
@@ -5195,7 +5202,7 @@ Dim FecAsto As Date
           
             Ampliacion = Ampliacion & "NULL"
            
-            Ampliacion = Ampliacion & ",NULL,'CONTAB',0)"
+            Ampliacion = Ampliacion & ",NULL,'COBRO',0)"
             Ampliacion = SQL & Ampliacion
             If Not Ejecuta(Ampliacion) Then Exit Function
             Linea = Linea + 1
@@ -5219,7 +5226,7 @@ Dim FecAsto As Date
             Ampliacion = Ampliacion & "NULL"
     
         End If
-        Ampliacion = Ampliacion & ",'CONTAB',0)"
+        Ampliacion = Ampliacion & ",'COBRO',0)"
         Ampliacion = SQL & Ampliacion
         If Not Ejecuta(Ampliacion) Then Exit Function
         

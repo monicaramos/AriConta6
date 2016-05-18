@@ -2156,8 +2156,10 @@ Dim SQL2 As String
     
     SQL = SQL & " FROM (cobros inner join formapago on cobros.codforpa = formapago.codforpa) "
     SQL = SQL & " inner join tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
-    If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
+    SQL = SQL & " WHERE cobros.situacion = 0 and (cobros.impvenci + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0)) <> 0 "
+    If cadselect <> "" Then SQL = SQL & " AND " & cadselect
             
+    SQL2 = ""
             
     If optVarios(0).Value Then
         If optVarios(3).Value Then SQL2 = SQL2 & " cobros.codmacta"
@@ -2177,6 +2179,10 @@ Dim SQL2 As String
         If optVarios(3).Value Then SQL2 = SQL2 & ",cobros.codmacta"
         If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
     End If
+
+
+
+
 
     SQL = SQL & " ORDER BY " & SQL2
 

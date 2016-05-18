@@ -1863,7 +1863,7 @@ Private Sub Form_Activate()
         CargaList
         PonerFocoBtn cmdCancelar(1)
         If lw1.ListItems.Count > 0 Then Set lw1.SelectedItem = Nothing
-        PonerModoUsuarioGnral 0, "ariconta"
+        PonerModoUsuarioGnral Modo, "ariconta"
 
     End If
     Screen.MousePointer = vbDefault
@@ -2104,7 +2104,7 @@ End Sub
 
 
 Private Sub lw1_ItemClick(ByVal Item As MSComctlLib.ListItem)
-    PonerModoUsuarioGnral 0, "ariconta"
+    PonerModoUsuarioGnral 2, "ariconta"
 End Sub
 
 Private Sub lwCobros_ItemCheck(ByVal Item As MSComctlLib.ListItem)
@@ -2900,10 +2900,10 @@ Dim colCtas As Collection
             SQL = SQL & " AND cobros.fecfactu <= '" & Format(txtFecha(1).Text, FormatoFecha) & "'"
         
         'Codigo factura
-        If txtnumfac(0).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu >= '" & txtnumfac(0).Text & "'"
-        If txtnumfac(1).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu <= '" & txtnumfac(1).Text & "'"
+        If txtNumFac(0).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu >= '" & txtNumFac(0).Text & "'"
+        If txtNumFac(1).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu <= '" & txtNumFac(1).Text & "'"
     
     Else
         'Fecha factura
@@ -3315,7 +3315,7 @@ End Sub
 
 
 Private Sub txtNumFac_GotFocus(Index As Integer)
-    ConseguirFoco txtnumfac(Index), 3
+    ConseguirFoco txtNumFac(Index), 3
 End Sub
 
 Private Sub txtNumFac_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3333,12 +3333,12 @@ Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
-    txtnumfac(Index).Text = UCase(Trim(txtnumfac(Index).Text))
+    txtNumFac(Index).Text = UCase(Trim(txtNumFac(Index).Text))
     
     
     Select Case Index
         Case 0, 1 'numero de factura
-            PonerFormatoEntero txtnumfac(Index)
+            PonerFormatoEntero txtNumFac(Index)
     End Select
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no

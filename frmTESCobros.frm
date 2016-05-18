@@ -5809,7 +5809,7 @@ Dim Cad As String
     Else
         Cad = Cad & " WHERE cobros_realizados.numlinea is null"
     End If
-    Cad = Cad & " ORDER BY 1,2,3,4,5"
+    Cad = Cad & " ORDER BY cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea"
     
 '    Cad = Cad & PonerOrdenFiltro
     
