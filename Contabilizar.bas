@@ -330,7 +330,7 @@ Dim CtaEfectosComDescontados As String
                     Ampliacion = Ampliacion & AmpRemesa
                 Case Else
                    If vCP.amphacli = 1 Then Ampliacion = Ampliacion & vCP.siglas & " "
-                   Ampliacion = Ampliacion & RS!NUmSerie & "/" & RS!NumFactu
+                   Ampliacion = Ampliacion & RS!NUmSerie & Format(RS!NumFactu, "0000000")
                 End Select
                 SQL = SQL & ",'" & DevNombreSQL(Mid(Ampliacion, 1, 30)) & "',"
                 
@@ -388,7 +388,7 @@ Dim CtaEfectosComDescontados As String
                     Ampliacion = Ampliacion & AmpRemesa
                 Case Else
                    If vCP.amphacli = 1 Then Ampliacion = Ampliacion & vCP.siglas & " "
-                   Ampliacion = Ampliacion & RS!NUmSerie & "/" & RS!NumFactu
+                   Ampliacion = Ampliacion & RS!NUmSerie & Format(RS!NumFactu, "0000000")
                 End Select
                 SQL = SQL & ",'" & DevNombreSQL(Mid(Ampliacion, 1, 30)) & "',"
                 
@@ -581,7 +581,7 @@ Dim CtaEfectosComDescontados As String
                 Ampliacion = Ampliacion & AmpRemesa
             Case Else
                If vCP.amphacli = 1 Then Ampliacion = Ampliacion & vCP.siglas & " "
-               Ampliacion = Ampliacion & RS!NUmSerie & "/" & RS!NumFactu
+               Ampliacion = Ampliacion & RS!NUmSerie & Format(RS!NumFactu, "0000000")
             End Select
             SQL = SQL & ",'" & DevNombreSQL(Mid(Ampliacion, 1, 30)) & "',"
             
@@ -923,7 +923,7 @@ Dim LINAPU As String
                 Else
                    If vCP.ampdecli = 1 Then Ampliacion = Ampliacion & vCP.siglas & " "
                    'Ampliacion = Ampliacion & RS!NUmSerie & "/" & RS!codfaccl
-                   Ampliacion = Ampliacion & RS!NUmSerie & "/" & RS!NumFac
+                   Ampliacion = Ampliacion & RS!NUmSerie & Format(RS!NumFac, "0000000") ' & "/" & RS!NumFac
                    
                 End If
             End If
@@ -5153,7 +5153,7 @@ Dim FecAsto As Date
                     Ampliacion = Ampliacion & AmpRemesa
                 Case Else
                    If vCP.amphacli = 1 Then Ampliacion = Ampliacion & vCP.siglas & " "
-                   Ampliacion = Ampliacion & RS!NUmSerie & "/" & RS!NumFactu
+                   Ampliacion = Ampliacion & RS!NUmSerie & Format(RS!NumFactu, "0000000")
                 End Select
                 SQL = SQL & ",'" & DevNombreSQL(Mid(Ampliacion, 1, 30)) & "',"
                 

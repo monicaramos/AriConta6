@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTESRealizarCobros 
    Caption         =   "Form1"
-   ClientHeight    =   8115
+   ClientHeight    =   8625
    ClientLeft      =   120
    ClientTop       =   345
    ClientWidth     =   15240
@@ -10,7 +10,7 @@ Begin VB.Form frmTESRealizarCobros
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8115
+   ScaleHeight     =   8625
    ScaleWidth      =   15240
    StartUpPosition =   2  'CenterScreen
    Begin MSComctlLib.ImageList ImageList1 
@@ -41,10 +41,10 @@ Begin VB.Form frmTESRealizarCobros
    End
    Begin VB.Frame frame 
       Height          =   2325
-      Left            =   90
+      Left            =   0
       TabIndex        =   6
-      Top             =   90
-      Width           =   14895
+      Top             =   0
+      Width           =   14985
       Begin VB.Frame FrameRemesar 
          BorderStyle     =   0  'None
          Height          =   1905
@@ -65,7 +65,7 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Left            =   11460
-            TabIndex        =   35
+            TabIndex        =   32
             Top             =   1560
             Width           =   2175
          End
@@ -82,10 +82,10 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   360
             Index           =   6
-            Left            =   9960
-            TabIndex        =   33
+            Left            =   10050
+            TabIndex        =   30
             Text            =   "0000000000"
-            Top             =   990
+            Top             =   930
             Width           =   1305
          End
          Begin VB.CheckBox chkVerPendiente 
@@ -101,7 +101,7 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Left            =   8520
-            TabIndex        =   32
+            TabIndex        =   29
             Top             =   1560
             Width           =   2775
          End
@@ -118,13 +118,13 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   360
             ItemData        =   "frmTESRealizarCobros.frx":6EA2
-            Left            =   8700
+            Left            =   8520
             List            =   "frmTESRealizarCobros.frx":6EA4
             Style           =   2  'Dropdown List
             TabIndex        =   3
             Tag             =   "Tipo de pago|N|N|||formapago|tipforpa|||"
-            Top             =   390
-            Width           =   2595
+            Top             =   330
+            Width           =   2775
          End
          Begin VB.TextBox txtCta 
             Alignment       =   1  'Right Justify
@@ -161,10 +161,10 @@ Begin VB.Form frmTESRealizarCobros
             Index           =   4
             Left            =   2670
             Locked          =   -1  'True
-            TabIndex        =   28
+            TabIndex        =   26
             Text            =   "Text2"
-            Top             =   1020
-            Width           =   5745
+            Top             =   930
+            Width           =   5715
          End
          Begin VB.TextBox txtCta 
             Alignment       =   1  'Right Justify
@@ -182,7 +182,7 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   1260
             TabIndex        =   4
             Text            =   "0000000000"
-            Top             =   1020
+            Top             =   930
             Width           =   1305
          End
          Begin VB.TextBox Text3 
@@ -198,10 +198,10 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   360
             Index           =   1
-            Left            =   5640
+            Left            =   4230
             TabIndex        =   1
             Text            =   "0000000000"
-            Top             =   390
+            Top             =   330
             Width           =   1305
          End
          Begin VB.TextBox Text3 
@@ -217,40 +217,11 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   360
             Index           =   2
-            Left            =   7110
+            Left            =   7050
             TabIndex        =   2
             Text            =   "0000000000"
-            Top             =   390
+            Top             =   330
             Width           =   1305
-         End
-         Begin VB.Frame FrameBotonGnral 
-            Height          =   705
-            Left            =   60
-            TabIndex        =   24
-            Top             =   30
-            Width           =   1095
-            Begin MSComctlLib.Toolbar Toolbar1 
-               Height          =   330
-               Left            =   240
-               TabIndex        =   25
-               Top             =   210
-               Width           =   675
-               _ExtentX        =   1191
-               _ExtentY        =   582
-               ButtonWidth     =   609
-               ButtonHeight    =   582
-               AllowCustomize  =   0   'False
-               Style           =   1
-               _Version        =   393216
-               BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-                  NumButtons      =   1
-                  BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                     Object.ToolTipText     =   "Contabilizar"
-                     Object.Tag             =   "2"
-                     Object.Width           =   1e-4
-                  EndProperty
-               EndProperty
-            End
          End
          Begin VB.CheckBox chkVtoCuenta 
             Caption         =   "Agrupar por Cliente"
@@ -339,7 +310,7 @@ Begin VB.Form frmTESRealizarCobros
             Left            =   11460
             TabIndex        =   19
             Top             =   60
-            Width           =   2655
+            Width           =   2385
          End
          Begin VB.TextBox txtDCta 
             BackColor       =   &H80000018&
@@ -374,14 +345,32 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   360
             Index           =   0
-            Left            =   2760
+            Left            =   1260
             TabIndex        =   0
             Text            =   "Text3"
-            Top             =   390
+            Top             =   330
             Width           =   1365
          End
+         Begin MSComctlLib.Toolbar ToolbarAyuda 
+            Height          =   390
+            Left            =   14280
+            TabIndex        =   33
+            Top             =   30
+            Width           =   405
+            _ExtentX        =   714
+            _ExtentY        =   688
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   1
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Ayuda"
+               EndProperty
+            EndProperty
+         End
          Begin VB.Label Label2 
-            Caption         =   "Gastos"
+            Caption         =   "Gastos banco"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -393,10 +382,10 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Index           =   3
-            Left            =   8760
-            TabIndex        =   34
-            Top             =   1020
-            Width           =   1065
+            Left            =   8610
+            TabIndex        =   31
+            Top             =   960
+            Width           =   1425
          End
          Begin VB.Label Label2 
             Caption         =   "Tipo de Pago"
@@ -411,28 +400,10 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Index           =   8
-            Left            =   8730
-            TabIndex        =   31
+            Left            =   8580
+            TabIndex        =   28
             Top             =   60
             Width           =   2025
-         End
-         Begin VB.Label Label2 
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   7
-            Left            =   5640
-            TabIndex        =   30
-            Top             =   60
-            Width           =   825
          End
          Begin VB.Image imgCuentas 
             Height          =   240
@@ -445,7 +416,7 @@ Begin VB.Form frmTESRealizarCobros
             Height          =   240
             Index           =   0
             Left            =   960
-            Top             =   1050
+            Top             =   960
             Width           =   240
          End
          Begin VB.Label Label2 
@@ -462,12 +433,12 @@ Begin VB.Form frmTESRealizarCobros
             Height          =   255
             Index           =   6
             Left            =   60
-            TabIndex        =   29
-            Top             =   1020
+            TabIndex        =   27
+            Top             =   930
             Width           =   855
          End
          Begin VB.Label Label2 
-            Caption         =   "Fecha Vto."
+            Caption         =   "Desde Vto"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -479,13 +450,13 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Index           =   5
-            Left            =   4350
-            TabIndex        =   27
-            Top             =   420
-            Width           =   1215
+            Left            =   2850
+            TabIndex        =   25
+            Top             =   330
+            Width           =   1065
          End
          Begin VB.Label Label2 
-            Caption         =   "Hasta"
+            Caption         =   "Hasta Vto"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -497,50 +468,50 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Index           =   4
-            Left            =   7140
-            TabIndex        =   26
-            Top             =   60
-            Width           =   795
+            Left            =   5640
+            TabIndex        =   24
+            Top             =   330
+            Width           =   1125
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   1
-            Left            =   6690
+            Left            =   3930
             Picture         =   "frmTESRealizarCobros.frx":6EA6
-            Top             =   60
+            Top             =   360
             Width           =   240
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   2
-            Left            =   8130
+            Left            =   6780
             Picture         =   "frmTESRealizarCobros.frx":6F31
-            Top             =   60
+            Top             =   360
             Width           =   240
          End
          Begin VB.Image imgTraerRestoDatosCliProv 
             Height          =   240
-            Left            =   2280
+            Left            =   2220
             MousePointer    =   6  'Size NE SW
             Picture         =   "frmTESRealizarCobros.frx":6FBC
-            Top             =   180
+            Top             =   30
             Width           =   240
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   0
-            Left            =   3870
+            Left            =   960
             Picture         =   "frmTESRealizarCobros.frx":79BE
             ToolTipText     =   "Cambiar fecha contabilizacion"
-            Top             =   60
+            Top             =   330
             Width           =   240
          End
          Begin VB.Image Image1 
             Height          =   240
             Index           =   1
-            Left            =   14310
+            Left            =   13920
             ToolTipText     =   "AYUDA"
-            Top             =   60
+            Top             =   90
             Width           =   240
          End
          Begin VB.Image imgCheck 
@@ -574,9 +545,9 @@ Begin VB.Form frmTESRealizarCobros
             EndProperty
             Height          =   255
             Index           =   1
-            Left            =   2760
+            Left            =   90
             TabIndex        =   16
-            Top             =   90
+            Top             =   330
             Width           =   585
          End
          Begin VB.Label Label3 
@@ -601,11 +572,28 @@ Begin VB.Form frmTESRealizarCobros
    End
    Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
-      Height          =   495
-      Left            =   120
+      Height          =   615
+      Left            =   360
       TabIndex        =   8
-      Top             =   7590
+      Top             =   7740
       Width           =   14415
+      Begin VB.CommandButton cmdAceptar 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   180
+         TabIndex        =   34
+         Top             =   120
+         Width           =   1425
+      End
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
@@ -625,7 +613,7 @@ Begin VB.Form frmTESRealizarCobros
          Left            =   5400
          TabIndex        =   17
          Text            =   "Text2"
-         Top             =   60
+         Top             =   120
          Width           =   2055
       End
       Begin VB.TextBox Text2 
@@ -647,7 +635,7 @@ Begin VB.Form frmTESRealizarCobros
          Left            =   8580
          TabIndex        =   12
          Text            =   "Text2"
-         Top             =   60
+         Top             =   120
          Width           =   2055
       End
       Begin VB.TextBox Text2 
@@ -669,7 +657,7 @@ Begin VB.Form frmTESRealizarCobros
          Left            =   12060
          TabIndex        =   10
          Text            =   "Text2"
-         Top             =   60
+         Top             =   120
          Width           =   2055
       End
       Begin VB.Label Label2 
@@ -689,7 +677,7 @@ Begin VB.Form frmTESRealizarCobros
          Index           =   2
          Left            =   3780
          TabIndex        =   18
-         Top             =   120
+         Top             =   180
          Width           =   1560
       End
       Begin VB.Label Label2 
@@ -709,7 +697,7 @@ Begin VB.Form frmTESRealizarCobros
          Index           =   1
          Left            =   10650
          TabIndex        =   11
-         Top             =   120
+         Top             =   180
          Width           =   1290
       End
       Begin VB.Label Label2 
@@ -729,15 +717,15 @@ Begin VB.Form frmTESRealizarCobros
          Index           =   0
          Left            =   7530
          TabIndex        =   9
-         Top             =   120
+         Top             =   180
          Width           =   990
       End
    End
    Begin MSComctlLib.ListView ListView1 
       Height          =   5025
-      Left            =   90
+      Left            =   30
       TabIndex        =   7
-      Top             =   2490
+      Top             =   2520
       Width           =   14925
       _ExtentX        =   26326
       _ExtentY        =   8864
@@ -785,6 +773,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
+Private Const IdPrograma = 604
+
+
 
 Public vSQL As String
 Public Cobros As Boolean
@@ -1222,7 +1214,7 @@ Dim TipoAnt As Integer
     Else
         i = Val(Cad)
     End If
-    If vp.Leer(i) = 1 Then
+    If vp.leer(i) = 1 Then
         'ERROR GRAVE LEYENDO LA FORMA DE PAGO
         Screen.MousePointer = vbDefault
         Set vp = Nothing
@@ -1655,6 +1647,10 @@ Private Sub chkVerPendiente_Click()
     CargaList
 End Sub
 
+Private Sub cmdAceptar_Click()
+    Generar2
+End Sub
+
 Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -1673,12 +1669,12 @@ Private Sub Combo1_Validate(Cancel As Boolean)
                  Cad = RecuperaValor(vTextos, 5) 'Dira si es PAGO DOMICILIADO
                  If Cad <> "" Then
                      If vParamT.PagosConfirmingCaixa Then
-                         Me.Toolbar1.Buttons(2).ToolTipText = "Confirming"
+'                         Me.Toolbar1.Buttons(2).ToolTipText = "Confirming"
                      Else
-                         Me.Toolbar1.Buttons(2).ToolTipText = "PAGO DOM."
+'                         Me.Toolbar1.Buttons(2).ToolTipText = "PAGO DOM."
                      End If
                  Else
-                     Me.Toolbar1.Buttons(2).ToolTipText = "Transferencia"
+'                     Me.Toolbar1.Buttons(2).ToolTipText = "Transferencia"
                  End If
                  Image1(1).Visible = False  'No muestre la ayuda
              Else
@@ -1686,7 +1682,7 @@ Private Sub Combo1_Validate(Cancel As Boolean)
                  'Es una transferencia o, si es PAGO, puede ser un pago domiciliado
                  If Not Cobros Then
                      Cad = RecuperaValor(vTextos, 5)
-                     If Cad <> "" Then Caption = "ORDENAR pago DOMICILIADO "
+                     If Cad <> "" Then Caption = "Realizar pago DOMICILIADO "
                  End If
              End If
          End If
@@ -1814,23 +1810,23 @@ Private Sub Form_Load()
     imgFecha(2).Visible = False 'Para cambiar la fecha de contabilizacion de los pagos
     imgTraerRestoDatosCliProv.Visible = False 'traer resto vtos del cliente o proveedor
     
-     With Toolbar1
-         .HotImageList = frmPpal.imgListComun_OM
-         .DisabledImageList = frmPpal.imgListComun_BN
-         .ImageList = frmPpal.imgListComun
-         .Buttons(1).Image = 30
-     End With
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 26
+    End With
      
-     Text3(0).Text = Format(Now, "dd/mm/yyyy")
-     Me.ImporteGastosTarjeta_ = 0
-     Me.CodmactaUnica = ""
+     
+    Text3(0).Text = Format(Now, "dd/mm/yyyy")
+    Me.ImporteGastosTarjeta_ = 0
+    Me.CodmactaUnica = ""
      
      If Cobros Then
-         Caption = "ORDENAR Cobros"
+         Caption = "Realizar Cobros"
          imgTraerRestoDatosCliProv.ToolTipText = "Traer vtos. del cliente."
          imgFecha(2).Visible = True  'Manolo alaman. Mayo 2013. Tb puede cambiar fechas en cobros
      Else
-         Caption = "ORDENAR pagos"
+         Caption = "Realizar pagos"
          imgFecha(2).Visible = True
          imgTraerRestoDatosCliProv.ToolTipText = "Traer vtos. del proveedor."   'aqui aqui aqui
      End If
@@ -1858,20 +1854,21 @@ End Sub
 Private Sub Form_Resize()
 Dim i As Integer
 Dim H As Integer
+
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
     If Me.Height < 2700 Then Me.Height = 2700
     If Me.Width < 2700 Then Me.Width = 2700
-    
+
     'Situamos el frame y demas
     Me.frame.Width = Me.Width - 120
     Me.Frame1.Left = Me.Width - 120 - Me.Frame1.Width
     Me.Frame1.Top = Me.Height - Frame1.Height - 540 '360
     FrameRemesar.Width = Me.frame.Width - 320
-    
+
     Me.ListView1.Top = Me.frame.Height + 60
     Me.ListView1.Height = Me.Frame1.Top - Me.ListView1.Top - 60
     Me.ListView1.Width = Me.frame.Width
-    
+
     'Las columnas
     H = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
@@ -3375,9 +3372,9 @@ Private Function ColD(Colu As Integer) As Integer
     If Not Cobros Then ColD = ColD - 2
 End Function
 
-Private Sub EliminarCobroPago(indice As Integer)
+Private Sub EliminarCobroPago(Indice As Integer)
     
-    With ListView1.ListItems(indice)
+    With ListView1.ListItems(Indice)
         If Cobros Then
             
             Cad = "DELETE FROM  cobros WHERE "
@@ -3474,6 +3471,13 @@ Private Sub Text3_LostFocus(Index As Integer)
             End If
     
             If Index = 1 Or Index = 2 Then CargaList
+    End Select
+End Sub
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 

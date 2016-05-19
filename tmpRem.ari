@@ -2,8 +2,8 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016051814160823440RE10000272016</MsgId>
-   <CreDtTm>2016-05-18T14:16:08</CreDtTm>
+<MsgId>PRE2016051913250141020RE10000332016</MsgId>
+   <CreDtTm>2016-05-19T13:25:01</CreDtTm>
    <NbOfTxs>1</NbOfTxs>
    <CtrlSum>100.00</CtrlSum>
    <InitgPty>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000272016 18/05/16B96470190</PmtInfId>
+   <PmtInfId>RE000332016 19/05/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-05-18</ReqdColltnDt>
+   <ReqdColltnDt>2016-05-19</ReqdColltnDt>
    <Cdtr>
       <Nm>Ariadna Software, S.L.</Nm>
       <PstlAdr>

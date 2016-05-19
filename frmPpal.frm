@@ -1100,10 +1100,8 @@ Private Sub AbrirFormularios(Accion As Long)
                 'Marzo2013   Cobramos un solo cliente
                 'Aparecera un boton para traer todos los cobros
                 '.CodmactaUnica = "4300000001" 'Trim(txtCtaNormal(9).Text)
-                
                 .Show vbModal
             End With
-        
         
         Case 605 ' transferencia abonos
         Case 606 ' compensaciones
@@ -1123,6 +1121,7 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 711 ' Eliminar riesgo
         
         Case 801 ' Cartera de Pagos
+            frmTESPagos.Show vbModal
         Case 802 ' Informe Pagos pendientes
         Case 803 ' Informe Pagos bancos
         Case 804 ' Realizar Pago
@@ -1745,7 +1744,7 @@ Private Sub CambiarEmpresa()
     
         
     Set vUsu = New Usuario
-    vUsu.Leer RecuperaValor(CadenaDesdeOtroForm, 1)
+    vUsu.leer RecuperaValor(CadenaDesdeOtroForm, 1)
     
     vUsu.CadenaConexion = ListView2.SelectedItem.ToolTipText
     
@@ -1758,9 +1757,9 @@ Private Sub CambiarEmpresa()
     Set vParam = New Cparametros
     Set vParamT = New CparametrosT
     'NO DEBERIAN DAR ERROR
-    vEmpresa.Leer
-    vParam.Leer
-    If vEmpresa.TieneTesoreria Then vParamT.Leer
+    vEmpresa.leer
+    vParam.leer
+    If vEmpresa.TieneTesoreria Then vParamT.leer
     
     PonerCaption
 
@@ -2122,7 +2121,7 @@ End Function
 
 
 
-Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
+Private Sub NumeroEmpresaMemorizar(leer As Boolean)
 Dim NF As Integer
 Dim C1 As String
 Dim Cad As String
@@ -2131,7 +2130,7 @@ Dim Cad2 As String
 
 On Error GoTo ENumeroEmpresaMemorizar
 
-    If Leer Then
+    If leer Then
         If CadenaDesdeOtroForm <> "" Then
             'Ya estabamos trabajando con la aplicacion
             
@@ -2187,7 +2186,7 @@ On Error GoTo ENumeroEmpresaMemorizar
         End If
     End If
     Cad = App.Path & "\control.dat"
-    If Leer Then
+    If leer Then
         If Dir(Cad) <> "" Then
             NF = FreeFile
             Open Cad For Input As #NF

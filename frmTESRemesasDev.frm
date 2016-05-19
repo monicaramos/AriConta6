@@ -26,7 +26,7 @@ Begin VB.Form frmTESRemesasDev
    Begin VB.Frame FrameDevlucionRe 
       Height          =   9195
       Left            =   60
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   60
       Width           =   15315
       Begin VB.TextBox Text1 
@@ -45,7 +45,7 @@ Begin VB.Form frmTESRemesasDev
          Height          =   360
          Index           =   4
          Left            =   8970
-         TabIndex        =   36
+         TabIndex        =   35
          Tag             =   "Importe|N|N|||reclama|importes|||"
          Top             =   8700
          Width           =   1815
@@ -63,7 +63,7 @@ Begin VB.Form frmTESRemesasDev
          EndProperty
          Height          =   2535
          Left            =   300
-         TabIndex        =   22
+         TabIndex        =   21
          Top             =   1800
          Width           =   14895
          Begin VB.ComboBox CmbDevol 
@@ -81,7 +81,7 @@ Begin VB.Form frmTESRemesasDev
             Left            =   2340
             List            =   "frmTESRemesasDev.frx":001F
             Style           =   2  'Dropdown List
-            TabIndex        =   40
+            TabIndex        =   39
             Tag             =   "Ampliacion debe/CLIENTES|N|N|0||stipoformapago|ampdecli|||"
             Top             =   2010
             Width           =   4830
@@ -102,7 +102,7 @@ Begin VB.Form frmTESRemesasDev
             Left            =   9450
             List            =   "frmTESRemesasDev.frx":00A6
             Style           =   2  'Dropdown List
-            TabIndex        =   38
+            TabIndex        =   37
             Tag             =   "Ampliacion debe/CLIENTES|N|N|0||stipoformapago|ampdecli|||"
             Top             =   1500
             Width           =   2820
@@ -158,7 +158,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   255
             Index           =   0
             Left            =   780
-            TabIndex        =   29
+            TabIndex        =   28
             Top             =   810
             Value           =   -1  'True
             Width           =   1485
@@ -177,7 +177,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   255
             Index           =   1
             Left            =   780
-            TabIndex        =   28
+            TabIndex        =   27
             Top             =   1170
             Width           =   2205
          End
@@ -195,7 +195,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   360
             Index           =   2
             Left            =   6360
-            TabIndex        =   27
+            TabIndex        =   26
             Text            =   "Text4"
             Top             =   1500
             Visible         =   0   'False
@@ -215,26 +215,9 @@ Begin VB.Form frmTESRemesasDev
             Height          =   255
             Index           =   2
             Left            =   780
-            TabIndex        =   26
+            TabIndex        =   25
             Top             =   1545
             Width           =   2535
-         End
-         Begin VB.CheckBox chkDevolRemesa2 
-            Caption         =   "Importe gastos banco"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Left            =   9450
-            TabIndex        =   7
-            Top             =   2070
-            Width           =   2805
          End
          Begin VB.TextBox txtDConcpeto 
             BackColor       =   &H80000018&
@@ -251,7 +234,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   360
             Index           =   1
             Left            =   10050
-            TabIndex        =   25
+            TabIndex        =   24
             Text            =   "Text9"
             Top             =   1050
             Width           =   4725
@@ -287,7 +270,7 @@ Begin VB.Form frmTESRemesasDev
             EndProperty
             Height          =   255
             Left            =   11970
-            TabIndex        =   24
+            TabIndex        =   23
             Top             =   600
             Width           =   2475
          End
@@ -304,11 +287,30 @@ Begin VB.Form frmTESRemesasDev
             EndProperty
             Height          =   360
             Index           =   5
-            Left            =   12480
-            TabIndex        =   8
+            Left            =   9450
+            TabIndex        =   7
             Text            =   "Text4"
-            Top             =   2040
-            Width           =   1125
+            Top             =   1950
+            Width           =   1245
+         End
+         Begin VB.Label Label7 
+            Caption         =   "Gastos Banco"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00800000&
+            Height          =   345
+            Index           =   0
+            Left            =   7380
+            TabIndex        =   40
+            Top             =   2010
+            Width           =   1740
          End
          Begin VB.Label Label4 
             AutoSize        =   -1  'True
@@ -326,7 +328,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   50
             Left            =   420
-            TabIndex        =   39
+            TabIndex        =   38
             Top             =   2070
             Width           =   1785
          End
@@ -346,7 +348,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   0
             Left            =   390
-            TabIndex        =   34
+            TabIndex        =   33
             Top             =   390
             Width           =   3630
          End
@@ -366,7 +368,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   3
             Left            =   3720
-            TabIndex        =   33
+            TabIndex        =   32
             Top             =   930
             Width           =   1785
          End
@@ -393,7 +395,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   4
             Left            =   7380
-            TabIndex        =   32
+            TabIndex        =   31
             Top             =   600
             Width           =   1740
          End
@@ -413,7 +415,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   8
             Left            =   3720
-            TabIndex        =   31
+            TabIndex        =   30
             Top             =   1515
             Visible         =   0   'False
             Width           =   1875
@@ -440,7 +442,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   345
             Index           =   9
             Left            =   7380
-            TabIndex        =   30
+            TabIndex        =   29
             Top             =   1110
             Width           =   1740
          End
@@ -457,7 +459,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   255
             Index           =   1
             Left            =   2550
-            TabIndex        =   23
+            TabIndex        =   22
             Top             =   1440
             Width           =   4095
          End
@@ -465,7 +467,7 @@ Begin VB.Form frmTESRemesasDev
       Begin VB.Frame FrameDevDesdeRemesa 
          Height          =   1185
          Left            =   270
-         TabIndex        =   18
+         TabIndex        =   17
          Top             =   540
          Width           =   3585
          Begin VB.TextBox Text3 
@@ -527,7 +529,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   5
             Left            =   120
-            TabIndex        =   21
+            TabIndex        =   20
             Top             =   210
             Width           =   885
          End
@@ -545,7 +547,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   255
             Index           =   5
             Left            =   240
-            TabIndex        =   20
+            TabIndex        =   19
             Top             =   585
             Width           =   705
          End
@@ -564,7 +566,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   255
             Index           =   6
             Left            =   1830
-            TabIndex        =   19
+            TabIndex        =   18
             Top             =   585
             Width           =   555
          End
@@ -572,7 +574,7 @@ Begin VB.Form frmTESRemesasDev
       Begin VB.Frame FrameDevDesdeVto 
          Height          =   1215
          Left            =   3990
-         TabIndex        =   15
+         TabIndex        =   14
          Top             =   540
          Width           =   5565
          Begin VB.TextBox txtDCtaNormal 
@@ -590,7 +592,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   360
             Index           =   11
             Left            =   1560
-            TabIndex        =   16
+            TabIndex        =   15
             Text            =   "Text9"
             Top             =   570
             Width           =   3885
@@ -635,7 +637,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   195
             Index           =   37
             Left            =   180
-            TabIndex        =   17
+            TabIndex        =   16
             Top             =   210
             Width           =   825
          End
@@ -643,7 +645,7 @@ Begin VB.Form frmTESRemesasDev
       Begin VB.Frame FrameDevDesdeFichero 
          Height          =   1215
          Left            =   9630
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   540
          Width           =   5535
          Begin VB.TextBox Text8 
@@ -685,7 +687,7 @@ Begin VB.Form frmTESRemesasDev
             Height          =   240
             Index           =   10
             Left            =   120
-            TabIndex        =   14
+            TabIndex        =   13
             Top             =   210
             UseMnemonic     =   0   'False
             Width           =   780
@@ -705,7 +707,7 @@ Begin VB.Form frmTESRemesasDev
          Height          =   375
          Index           =   9
          Left            =   13920
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   8730
          Width           =   1215
       End
@@ -722,14 +724,14 @@ Begin VB.Form frmTESRemesasDev
          EndProperty
          Height          =   375
          Left            =   12510
-         TabIndex        =   9
+         TabIndex        =   8
          Top             =   8730
          Width           =   1335
       End
       Begin MSComctlLib.ListView lwCobros 
          Height          =   3915
          Left            =   300
-         TabIndex        =   35
+         TabIndex        =   34
          Top             =   4710
          Width           =   14835
          _ExtentX        =   26167
@@ -772,7 +774,7 @@ Begin VB.Form frmTESRemesasDev
          Height          =   240
          Index           =   72
          Left            =   7740
-         TabIndex        =   37
+         TabIndex        =   36
          Top             =   8700
          Width           =   1575
       End
@@ -810,7 +812,7 @@ Begin VB.Form frmTESRemesasDev
          Height          =   375
          Index           =   3
          Left            =   5100
-         TabIndex        =   12
+         TabIndex        =   11
          Top             =   210
          Width           =   5175
       End
@@ -879,11 +881,6 @@ Dim OpcionAnt As Integer
 Dim Remesa As Long
 Dim AñoRem As Long
 Dim BancoRem As String
-
-Private Sub chkDevolRemesa2_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
-
 
 
 
@@ -987,20 +984,8 @@ Dim TipoFicheroDevolucion As Byte
     
     'Nuevo Noviembre 2009
     GastoDevolGral = 0
-    If Me.chkDevolRemesa2.Value = 1 Then
-        'Ha puesto gasto devolucion pero NO indica el gasto
-        GastoDevolGral = TextoAimporte(txtImporte(5).Text)
-        If GastoDevolGral = 0 Then
-            MsgBox "Ha marcado contabilizar gasto y no lo ha indicado", vbExclamation
-            Exit Sub
-        End If
+    GastoDevolGral = TextoAimporte(txtImporte(5).Text)
     
-    Else
-        If txtImporte(5).Text <> "" Then
-            MsgBox "Ha indicado el gasto pero no ha marcado contabilizarlo", vbExclamation
-            Exit Sub
-        End If
-    End If
     'Ahora miramos la remesa. En que sitaucion , y de que tipo es
     
     If Opcion = 9 Then
@@ -1061,7 +1046,7 @@ Dim TipoFicheroDevolucion As Byte
         SQL = SQL & "0|"
     Else
         SQL = SQL & CStr(GastoDevolGral) & "|"
-        If Me.chkDevolRemesa2.Value = 1 Then
+        If ComprobarCero(txtImporte(5).Text) <> 0 Then
             'Voy a contabiñizar los gastos.
             'Vere si tiene CC
             If vParam.autocoste Then
@@ -1804,7 +1789,7 @@ Dim TipoFicheroDevolucion As Byte
             SQL = SQL & "0|"
         Else
             SQL = SQL & CStr(GastoDevolGral) & "|"
-            If Me.chkDevolRemesa2.Value = 1 Then
+            If ComprobarCero(txtImporte(5).Text) <> 0 Then
                 'Voy a contabiñizar los gastos.
                 'Vere si tiene CC
                 If vParam.autocoste Then

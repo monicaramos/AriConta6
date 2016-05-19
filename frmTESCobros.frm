@@ -780,7 +780,7 @@ Begin VB.Form frmTESCobros
          _ExtentX        =   26061
          _ExtentY        =   4366
          _Version        =   393216
-         Tab             =   1
+         Tab             =   2
          TabHeight       =   520
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
@@ -798,14 +798,15 @@ Begin VB.Form frmTESCobros
          Tab(0).ControlCount=   1
          TabCaption(1)   =   "Devoluciones"
          TabPicture(1)   =   "frmTESCobros.frx":0088
-         Tab(1).ControlEnabled=   -1  'True
+         Tab(1).ControlEnabled=   0   'False
          Tab(1).Control(0)=   "FrameAux1"
          Tab(1).Control(0).Enabled=   0   'False
          Tab(1).ControlCount=   1
          TabCaption(2)   =   "Fechas Op.Asegurada"
          TabPicture(2)   =   "frmTESCobros.frx":00A4
-         Tab(2).ControlEnabled=   0   'False
+         Tab(2).ControlEnabled=   -1  'True
          Tab(2).Control(0)=   "FrameSeguro"
+         Tab(2).Control(0).Enabled=   0   'False
          Tab(2).ControlCount=   1
          Begin VB.Frame FrameAux0 
             BorderStyle     =   0  'None
@@ -1351,7 +1352,7 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   945
-            Left            =   -74910
+            Left            =   90
             TabIndex        =   101
             Top             =   540
             Width           =   11415
@@ -1552,7 +1553,7 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   1995
-            Left            =   150
+            Left            =   -74850
             TabIndex        =   91
             Top             =   330
             Width           =   14295
@@ -3932,7 +3933,7 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtAux(5)
+            PonFoco txtaux(5)
             
         Case 2 ' cocnepto de devolucion
             Set frmDev = New frmBasico
@@ -4480,7 +4481,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -6043,9 +6044,9 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'cobros_realizados
-            For jj = 5 To txtAux.Count - 1
-                txtAux(jj).Visible = B
-                txtAux(jj).Top = alto
+            For jj = 5 To txtaux.Count - 1
+                txtaux(jj).Visible = B
+                txtaux(jj).Top = alto
             Next jj
         
         Case 1 'lineas de factura
@@ -6393,16 +6394,16 @@ Dim i As Integer
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 0 'lineas de cobros realizados
                     If Limpia Then
-                        For i = 0 To txtAux.Count - 1
-                            txtAux(i).Text = ""
+                        For i = 0 To txtaux.Count - 1
+                            txtaux(i).Text = ""
                         Next i
                     End If
-                    txtAux(0).Text = Text1(13).Text 'serie
-                    txtAux(1).Text = Text1(1).Text 'numfactu
-                    txtAux(2).Text = Text1(2).Text 'fecha
-                    txtAux(3).Text = Text1(3).Text 'nro vencimiento
+                    txtaux(0).Text = Text1(13).Text 'serie
+                    txtaux(1).Text = Text1(1).Text 'numfactu
+                    txtaux(2).Text = Text1(2).Text 'fecha
+                    txtaux(3).Text = Text1(3).Text 'nro vencimiento
                     
-                    txtAux(4).Text = Format(NumF, "0000") 'linea contador
+                    txtaux(4).Text = Format(NumF, "0000") 'linea contador
                     
                     
                     If Limpia Then
@@ -6410,7 +6411,7 @@ Dim i As Integer
 '                        txtAux2(12).Text = ""
                     End If
                     
-                    PonFoco txtAux(5)
+                    PonFoco txtaux(5)
             
             End Select
 
@@ -6576,8 +6577,8 @@ Dim Cad As String
                     Limp = True
 
                     If Limp Then
-                        For i = 0 To txtAux.Count - 1
-                            txtAux(i).Text = ""
+                        For i = 0 To txtaux.Count - 1
+                            txtaux(i).Text = ""
                         Next i
                     End If
                     ModoLineas = 0
@@ -6689,7 +6690,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 
@@ -6722,42 +6723,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
-    If txtAux(Index).Text = "" Then Exit Sub
+    If txtaux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtAux(5)
+                PonFoco txtaux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtAux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
-                txtAux(Index).Text = ""
-                PonerFoco txtAux(Index)
+            If Not EsFechaOK(txtaux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
+                txtaux(Index).Text = ""
+                PonerFoco txtaux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtAux(Index)
+            PonerFormatoEntero txtaux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtAux(Index) = ImporteSinFormato(txtAux(Index))
+             txtaux(Index) = ImporteSinFormato(txtaux(Index))
             
         Case 10 'tipo
-            txtAux(Index).Text = UCase(txtAux(Index).Text)
+            txtaux(Index).Text = UCase(txtaux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtAux(12).Text
+            RC = txtaux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtAux(12).Text = RC
+                txtaux(12).Text = RC
             End If
         
     End Select
@@ -6787,7 +6788,7 @@ Dim SQL As String
         Text1(0).Text = DBLet(RS!Forpa, "N")
         Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(42).Text = DBLet(RS!nommacta, "T")
+        Text1(42).Text = DBLet(RS!Nommacta, "T")
         Text1(41).Text = DBLet(RS!dirdatos, "T")
         Text1(40).Text = DBLet(RS!codposta, "T")
         Text1(39).Text = DBLet(RS!desPobla, "T")

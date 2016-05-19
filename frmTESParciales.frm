@@ -1209,7 +1209,8 @@ Dim Sql5 As String
         'Antes 21 Sept 2011
         'Numdocum = RecuperaValor(Vto, 1) & Format(Mid(Numdocum, 1, 9), "000000000")
         'Ahora
-        Numdocum = SerieNumeroFactura(10, RecuperaValor(Vto, 1), Numdocum)
+        'Numdocum = SerieNumeroFactura(10, RecuperaValor(Vto, 1), Numdocum)
+        Numdocum = RecuperaValor(Vto, 1) & Format(Numdocum, "0000000")
     End If
     
     
@@ -1266,7 +1267,8 @@ Dim Sql5 As String
         
        If Conce = 1 Then Ampliacion = Ampliacion & FP.siglas & " "
        If Cobro Then
-            Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
+       
+            Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & Format(RecuperaValor(Vto, 2), "0000000") '& "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
        Else
             Ampliacion = Ampliacion & Mid(RecuperaValor(Vto, 2), 1, 9)
        End If
@@ -1345,7 +1347,7 @@ Dim Sql5 As String
         
     If Conce = 1 Then Ampliacion = Ampliacion & FP.siglas & " "
        If Cobro Then
-            Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
+            Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & Format(RecuperaValor(Vto, 2), "0000000") ' "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
        Else
             Ampliacion = Ampliacion & Mid(RecuperaValor(Vto, 2), 1, 9)
        End If
