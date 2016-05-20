@@ -294,6 +294,25 @@ Begin VB.Form frmTESRemesasDev
             Width           =   1245
          End
          Begin VB.Label Label7 
+            Caption         =   "Ampliación"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00800000&
+            Height          =   345
+            Index           =   1
+            Left            =   7410
+            TabIndex        =   41
+            Top             =   1560
+            Width           =   1830
+         End
+         Begin VB.Label Label7 
             Caption         =   "Gastos Banco"
             BeginProperty Font 
                Name            =   "Verdana"

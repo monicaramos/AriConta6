@@ -29,7 +29,7 @@ Begin VB.Form frmTESPagos
       EndProperty
       Height          =   375
       Left            =   14610
-      TabIndex        =   125
+      TabIndex        =   103
       Top             =   10200
       Visible         =   0   'False
       Width           =   1035
@@ -47,7 +47,7 @@ Begin VB.Form frmTESPagos
       EndProperty
       Height          =   375
       Left            =   13470
-      TabIndex        =   123
+      TabIndex        =   101
       Top             =   10200
       Width           =   1035
    End
@@ -65,14 +65,14 @@ Begin VB.Form frmTESPagos
       EndProperty
       Height          =   375
       Left            =   14610
-      TabIndex        =   124
+      TabIndex        =   102
       Top             =   10200
       Width           =   1035
    End
    Begin VB.Frame FrameFiltro 
       Height          =   705
       Left            =   8490
-      TabIndex        =   88
+      TabIndex        =   66
       Top             =   30
       Width           =   3255
       Begin VB.ComboBox cboFiltro 
@@ -90,7 +90,7 @@ Begin VB.Form frmTESPagos
          Left            =   90
          List            =   "frmTESPagos.frx":0019
          Style           =   2  'Dropdown List
-         TabIndex        =   89
+         TabIndex        =   67
          Top             =   210
          Width           =   3075
       End
@@ -98,13 +98,13 @@ Begin VB.Form frmTESPagos
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   120
-      TabIndex        =   85
+      TabIndex        =   63
       Top             =   30
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   240
-         TabIndex        =   86
+         TabIndex        =   64
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -161,13 +161,13 @@ Begin VB.Form frmTESPagos
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   5880
-      TabIndex        =   83
+      TabIndex        =   61
       Top             =   30
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   84
+         TabIndex        =   62
          Top             =   210
          Width           =   1965
          _ExtentX        =   3466
@@ -219,13 +219,13 @@ Begin VB.Form frmTESPagos
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
       Left            =   3810
-      TabIndex        =   81
+      TabIndex        =   59
       Top             =   30
       Width           =   1965
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
-         TabIndex        =   82
+         TabIndex        =   60
          Top             =   180
          Width           =   1635
          _ExtentX        =   2884
@@ -299,7 +299,7 @@ Begin VB.Form frmTESPagos
    Begin TabDlg.SSTab SSTab1 
       Height          =   8235
       Left            =   90
-      TabIndex        =   48
+      TabIndex        =   35
       Top             =   1740
       Width           =   15585
       _ExtentX        =   27490
@@ -342,130 +342,95 @@ Begin VB.Form frmTESPagos
       Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "Label1(11)"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "Label1(18)"
+      Tab(0).Control(11)=   "Label5"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "Label5"
+      Tab(0).Control(12)=   "Label6"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Label1(14)"
+      Tab(0).Control(13)=   "Label1(33)"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "imgAgente"
+      Tab(0).Control(14)=   "Label1(34)"
       Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Label6"
+      Tab(0).Control(15)=   "Label1(35)"
       Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Label1(33)"
+      Tab(0).Control(16)=   "Label1(7)"
       Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "Label1(34)"
+      Tab(0).Control(17)=   "Label1(8)"
       Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Label1(35)"
+      Tab(0).Control(18)=   "imgFecha(1)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Label1(7)"
+      Tab(0).Control(19)=   "imgFecha(2)"
       Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Label1(8)"
+      Tab(0).Control(20)=   "imgFecha(3)"
       Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "imgFecha(1)"
+      Tab(0).Control(21)=   "imgppal(0)"
       Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "imgFecha(2)"
+      Tab(0).Control(22)=   "Label1(10)"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "imgFecha(3)"
+      Tab(0).Control(23)=   "Text1(21)"
       Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "imgppal(0)"
+      Tab(0).Control(24)=   "Text1(20)"
       Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "Label1(10)"
+      Tab(0).Control(25)=   "Combo1"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "Text1(44)"
+      Tab(0).Control(26)=   "Text1(19)"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "Text1(43)"
+      Tab(0).Control(27)=   "Text1(26)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Combo1"
+      Tab(0).Control(28)=   "Text1(31)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Text1(19)"
+      Tab(0).Control(29)=   "Text1(30)"
       Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "Text1(26)"
+      Tab(0).Control(30)=   "Text1(29)"
       Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "Text1(31)"
+      Tab(0).Control(31)=   "Text1(28)"
       Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "Text1(30)"
+      Tab(0).Control(32)=   "Text2(0)"
       Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "Text1(29)"
+      Tab(0).Control(33)=   "Text1(4)"
       Tab(0).Control(33).Enabled=   0   'False
-      Tab(0).Control(34)=   "Text1(28)"
+      Tab(0).Control(34)=   "Text2(1)"
       Tab(0).Control(34).Enabled=   0   'False
-      Tab(0).Control(35)=   "Text2(0)"
+      Tab(0).Control(35)=   "Text1(0)"
       Tab(0).Control(35).Enabled=   0   'False
-      Tab(0).Control(36)=   "Text1(4)"
+      Tab(0).Control(36)=   "Text1(5)"
       Tab(0).Control(36).Enabled=   0   'False
-      Tab(0).Control(37)=   "Text2(1)"
+      Tab(0).Control(37)=   "Text1(6)"
       Tab(0).Control(37).Enabled=   0   'False
-      Tab(0).Control(38)=   "Text1(0)"
+      Tab(0).Control(38)=   "Text2(2)"
       Tab(0).Control(38).Enabled=   0   'False
-      Tab(0).Control(39)=   "Text1(5)"
+      Tab(0).Control(39)=   "Text1(9)"
       Tab(0).Control(39).Enabled=   0   'False
-      Tab(0).Control(40)=   "Text1(6)"
+      Tab(0).Control(40)=   "Text2(3)"
       Tab(0).Control(40).Enabled=   0   'False
-      Tab(0).Control(41)=   "Text2(2)"
+      Tab(0).Control(41)=   "Text1(10)"
       Tab(0).Control(41).Enabled=   0   'False
-      Tab(0).Control(42)=   "Text1(9)"
+      Tab(0).Control(42)=   "Text1(33)"
       Tab(0).Control(42).Enabled=   0   'False
-      Tab(0).Control(43)=   "Text2(3)"
+      Tab(0).Control(43)=   "Text2(4)"
       Tab(0).Control(43).Enabled=   0   'False
-      Tab(0).Control(44)=   "Text1(10)"
+      Tab(0).Control(44)=   "Text1(32)"
       Tab(0).Control(44).Enabled=   0   'False
-      Tab(0).Control(45)=   "Text1(33)"
+      Tab(0).Control(45)=   "Text1(17)"
       Tab(0).Control(45).Enabled=   0   'False
-      Tab(0).Control(46)=   "Text2(4)"
+      Tab(0).Control(46)=   "frameContene"
       Tab(0).Control(46).Enabled=   0   'False
-      Tab(0).Control(47)=   "Text1(32)"
+      Tab(0).Control(47)=   "txtPendiente"
       Tab(0).Control(47).Enabled=   0   'False
-      Tab(0).Control(48)=   "Text1(16)"
+      Tab(0).Control(48)=   "Text1(12)"
       Tab(0).Control(48).Enabled=   0   'False
-      Tab(0).Control(49)=   "Text1(17)"
+      Tab(0).Control(49)=   "Text1(11)"
       Tab(0).Control(49).Enabled=   0   'False
-      Tab(0).Control(50)=   "frameContene"
+      Tab(0).Control(50)=   "Text1(7)"
       Tab(0).Control(50).Enabled=   0   'False
-      Tab(0).Control(51)=   "Text2(5)"
+      Tab(0).Control(51)=   "Text1(8)"
       Tab(0).Control(51).Enabled=   0   'False
-      Tab(0).Control(52)=   "Text1(34)"
+      Tab(0).Control(52)=   "FrameRemesa"
       Tab(0).Control(52).Enabled=   0   'False
-      Tab(0).Control(53)=   "txtPendiente"
+      Tab(0).Control(53)=   "SSTab2"
       Tab(0).Control(53).Enabled=   0   'False
-      Tab(0).Control(54)=   "Text1(12)"
+      Tab(0).Control(54)=   "FrameDatosFiscales"
       Tab(0).Control(54).Enabled=   0   'False
-      Tab(0).Control(55)=   "Text1(11)"
-      Tab(0).Control(55).Enabled=   0   'False
-      Tab(0).Control(56)=   "Text1(7)"
-      Tab(0).Control(56).Enabled=   0   'False
-      Tab(0).Control(57)=   "Text1(8)"
-      Tab(0).Control(57).Enabled=   0   'False
-      Tab(0).Control(58)=   "FrameRemesa"
-      Tab(0).Control(58).Enabled=   0   'False
-      Tab(0).Control(59)=   "Check1(2)"
-      Tab(0).Control(59).Enabled=   0   'False
-      Tab(0).Control(60)=   "SSTab2"
-      Tab(0).Control(60).Enabled=   0   'False
-      Tab(0).Control(61)=   "FrameDatosFiscales"
-      Tab(0).Control(61).Enabled=   0   'False
-      Tab(0).Control(62)=   "Check1(4)"
-      Tab(0).Control(62).Enabled=   0   'False
-      Tab(0).ControlCount=   63
-      Begin VB.CheckBox Check1 
-         Caption         =   "NO remesar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   4
-         Left            =   13590
-         TabIndex        =   33
-         Tag             =   "s|N|S|||cobros|noremesar|||"
-         Top             =   5040
-         Width           =   1545
-      End
+      Tab(0).ControlCount=   55
       Begin VB.Frame FrameDatosFiscales 
          Caption         =   "DATOS FISCALES"
          BeginProperty Font 
@@ -478,9 +443,9 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3435
-         Left            =   270
-         TabIndex        =   107
-         Top             =   1140
+         Left            =   2910
+         TabIndex        =   85
+         Top             =   1200
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
@@ -495,10 +460,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   36
+            Index           =   25
             Left            =   2040
             Locked          =   -1  'True
-            TabIndex        =   115
+            TabIndex        =   93
             Text            =   "Text4"
             Top             =   2250
             Width           =   3345
@@ -514,10 +479,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   36
+            Index           =   25
             Left            =   1470
-            TabIndex        =   113
-            Tag             =   "País|T|S|||cobros|codpais|||"
+            TabIndex        =   91
+            Tag             =   "País|T|S|||pagos|codpais|||"
             Top             =   2250
             Width           =   465
          End
@@ -532,10 +497,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   37
+            Index           =   24
             Left            =   1470
-            TabIndex        =   114
-            Tag             =   "Nif|T|S|||cobros|nifclien|||"
+            TabIndex        =   92
+            Tag             =   "Nif|T|S|||pagos|nifprove|||"
             Top             =   2820
             Width           =   1350
          End
@@ -550,10 +515,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   38
+            Index           =   23
             Left            =   1470
-            TabIndex        =   112
-            Tag             =   "Provincia|T|S|||cobros|proclien|||"
+            TabIndex        =   90
+            Tag             =   "Provincia|T|S|||pagos|proprove|||"
             Top             =   1770
             Width           =   7800
          End
@@ -568,10 +533,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   39
+            Index           =   22
             Left            =   4020
-            TabIndex        =   111
-            Tag             =   "Poblacion|T|S|||cobros|pobclien|||"
+            TabIndex        =   89
+            Tag             =   "Poblacion|T|S|||pagos|pobprove|||"
             Top             =   1320
             Width           =   5250
          End
@@ -586,10 +551,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   40
+            Index           =   14
             Left            =   1470
-            TabIndex        =   110
-            Tag             =   "CP|T|S|||cobros|cpclien|||"
+            TabIndex        =   88
+            Tag             =   "CP|T|S|||pagos|cpprove|||"
             Top             =   1290
             Width           =   1320
          End
@@ -604,10 +569,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   41
+            Index           =   15
             Left            =   1470
-            TabIndex        =   109
-            Tag             =   "Dirección|T|S|||cobros|domclien|||"
+            TabIndex        =   87
+            Tag             =   "Dirección|T|S|||pagos|domprove|||"
             Top             =   840
             Width           =   7800
          End
@@ -622,10 +587,10 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   42
+            Index           =   16
             Left            =   1470
-            TabIndex        =   108
-            Tag             =   "Nombre|T|S|||cobros|nomclien|||"
+            TabIndex        =   86
+            Tag             =   "Nombre|T|S|||pagos|nomprove|||"
             Top             =   390
             Width           =   7800
          End
@@ -651,7 +616,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   28
             Left            =   300
-            TabIndex        =   122
+            TabIndex        =   100
             Top             =   2310
             Width           =   555
          End
@@ -670,7 +635,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   29
             Left            =   300
-            TabIndex        =   121
+            TabIndex        =   99
             Top             =   1830
             Width           =   1395
          End
@@ -689,7 +654,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   30
             Left            =   3000
-            TabIndex        =   120
+            TabIndex        =   98
             Top             =   1350
             Width           =   1545
          End
@@ -708,7 +673,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   31
             Left            =   300
-            TabIndex        =   119
+            TabIndex        =   97
             Top             =   2880
             Width           =   1065
          End
@@ -727,7 +692,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   32
             Left            =   300
-            TabIndex        =   118
+            TabIndex        =   96
             Top             =   1350
             Width           =   855
          End
@@ -746,7 +711,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   36
             Left            =   300
-            TabIndex        =   117
+            TabIndex        =   95
             Top             =   900
             Width           =   1545
          End
@@ -765,7 +730,7 @@ Begin VB.Form frmTESPagos
             Height          =   255
             Index           =   37
             Left            =   300
-            TabIndex        =   116
+            TabIndex        =   94
             Top             =   450
             Width           =   1545
          End
@@ -773,15 +738,13 @@ Begin VB.Form frmTESPagos
       Begin TabDlg.SSTab SSTab2 
          Height          =   2475
          Left            =   360
-         TabIndex        =   90
+         TabIndex        =   68
          Top             =   5550
          Width           =   14775
          _ExtentX        =   26061
          _ExtentY        =   4366
          _Version        =   393216
-         Tabs            =   2
-         Tab             =   1
-         TabsPerRow      =   2
+         Tabs            =   1
          TabHeight       =   520
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
@@ -794,216 +757,10 @@ Begin VB.Form frmTESPagos
          EndProperty
          TabCaption(0)   =   "Pagos Realizados"
          TabPicture(0)   =   "frmTESPagos.frx":006C
-         Tab(0).ControlEnabled=   0   'False
+         Tab(0).ControlEnabled=   -1  'True
          Tab(0).Control(0)=   "FrameAux0"
+         Tab(0).Control(0).Enabled=   0   'False
          Tab(0).ControlCount=   1
-         TabCaption(1)   =   "Fechas Op.Asegurada"
-         TabPicture(1)   =   "frmTESPagos.frx":0088
-         Tab(1).ControlEnabled=   -1  'True
-         Tab(1).Control(0)=   "FrameSeguro"
-         Tab(1).Control(0).Enabled=   0   'False
-         Tab(1).ControlCount=   1
-         Begin VB.Frame FrameSeguro 
-            BorderStyle     =   0  'None
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   945
-            Left            =   420
-            TabIndex        =   135
-            Top             =   630
-            Width           =   11415
-            Begin VB.TextBox Text1 
-               Alignment       =   2  'Center
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   360
-               Index           =   20
-               Left            =   9900
-               TabIndex        =   139
-               Tag             =   "Fecha ult ejecucion|F|S|||cobros|fecejecutiva|dd/mm/yyyy||"
-               Text            =   "Text1"
-               Top             =   300
-               Width           =   1275
-            End
-            Begin VB.TextBox Text1 
-               Alignment       =   2  'Center
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   360
-               Index           =   21
-               Left            =   7110
-               TabIndex        =   138
-               Tag             =   "Aviso siniestro|F|S|||cobros|fecsiniestro|dd/mm/yyyy||"
-               Text            =   "Text1"
-               Top             =   300
-               Width           =   1275
-            End
-            Begin VB.TextBox Text1 
-               Alignment       =   2  'Center
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   360
-               Index           =   22
-               Left            =   4710
-               TabIndex        =   137
-               Tag             =   "Aviso prorroga|F|S|||cobros|fecprorroga|dd/mm/yyyy||"
-               Text            =   "Text1"
-               Top             =   300
-               Width           =   1275
-            End
-            Begin VB.TextBox Text1 
-               Alignment       =   2  'Center
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   360
-               Index           =   23
-               Left            =   2010
-               TabIndex        =   136
-               Tag             =   "Fecha Aviso falta pago|F|S|||cobros|feccomunica|dd/mm/yyyy||"
-               Text            =   "Text1"
-               Top             =   300
-               Width           =   1275
-            End
-            Begin VB.Image imgFecha 
-               Height          =   240
-               Index           =   7
-               Left            =   9630
-               Picture         =   "frmTESPagos.frx":00A4
-               Top             =   330
-               Width           =   240
-            End
-            Begin VB.Image imgFecha 
-               Height          =   240
-               Index           =   5
-               Left            =   4410
-               Picture         =   "frmTESPagos.frx":012F
-               Top             =   300
-               Width           =   240
-            End
-            Begin VB.Image imgFecha 
-               Height          =   240
-               Index           =   6
-               Left            =   6810
-               Picture         =   "frmTESPagos.frx":01BA
-               Top             =   330
-               Width           =   240
-            End
-            Begin VB.Image imgFecha 
-               Height          =   240
-               Index           =   4
-               Left            =   1740
-               Picture         =   "frmTESPagos.frx":0245
-               Top             =   300
-               Width           =   240
-            End
-            Begin VB.Label Label1 
-               Caption         =   "Ejecutiva"
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   285
-               Index           =   27
-               Left            =   8610
-               TabIndex        =   143
-               Top             =   300
-               Width           =   945
-            End
-            Begin VB.Label Label1 
-               Caption         =   "Aviso"
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   195
-               Index           =   26
-               Left            =   6210
-               TabIndex        =   142
-               Top             =   330
-               Width           =   555
-            End
-            Begin VB.Label Label1 
-               Caption         =   "Prorroga"
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   255
-               Index           =   25
-               Left            =   3480
-               TabIndex        =   141
-               Top             =   330
-               Width           =   915
-            End
-            Begin VB.Label Label1 
-               Caption         =   "Comunicación"
-               BeginProperty Font 
-                  Name            =   "Verdana"
-                  Size            =   9.75
-                  Charset         =   0
-                  Weight          =   400
-                  Underline       =   0   'False
-                  Italic          =   0   'False
-                  Strikethrough   =   0   'False
-               EndProperty
-               Height          =   225
-               Index           =   24
-               Left            =   210
-               TabIndex        =   140
-               Top             =   330
-               Width           =   1455
-            End
-         End
          Begin VB.Frame FrameAux0 
             BorderStyle     =   0  'None
             BeginProperty Font 
@@ -1016,8 +773,8 @@ Begin VB.Form frmTESPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   2085
-            Left            =   -74850
-            TabIndex        =   91
+            Left            =   150
+            TabIndex        =   69
             Top             =   330
             Width           =   14475
             Begin VB.TextBox txtaux 
@@ -1034,8 +791,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   14
                Left            =   12000
-               TabIndex        =   100
-               Tag             =   "Banco Talon/Pag|T|S|||cobros_realizados|bancotalonpag|||"
+               TabIndex        =   78
+               Tag             =   "Banco Talon/Pag|T|S|||pagos_realizados|bancotalonpag|||"
                Text            =   "Banco"
                Top             =   1050
                Visible         =   0   'False
@@ -1055,8 +812,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   13
                Left            =   11370
-               TabIndex        =   99
-               Tag             =   "Ref. Talon/Pag|T|S|||cobros_realizados|reftalonpag|||"
+               TabIndex        =   77
+               Tag             =   "Ref. Talon/Pag|T|S|||pagos_realizados|reftalonpag|||"
                Text            =   "ref"
                Top             =   1050
                Visible         =   0   'False
@@ -1076,8 +833,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   12
                Left            =   6870
-               TabIndex        =   95
-               Tag             =   "Cta.Real Cobro|T|S|||cobros_realizados|ctabanc2|||"
+               TabIndex        =   73
+               Tag             =   "Cta.Real Cobro|T|S|||pagos_realizados|ctabanc2|||"
                Text            =   "cta.cobro"
                Top             =   1080
                Visible         =   0   'False
@@ -1087,13 +844,13 @@ Begin VB.Form frmTESPagos
                Height          =   555
                Index           =   0
                Left            =   0
-               TabIndex        =   128
+               TabIndex        =   106
                Top             =   0
                Width           =   1335
                Begin MSComctlLib.Toolbar ToolbarAux 
                   Height          =   330
                   Left            =   180
-                  TabIndex        =   129
+                  TabIndex        =   107
                   Top             =   150
                   Width           =   915
                   _ExtentX        =   1614
@@ -1127,8 +884,8 @@ Begin VB.Form frmTESPagos
                Height          =   315
                Index           =   11
                Left            =   9870
-               TabIndex        =   97
-               Tag             =   "F.Realizado|F|S|||cobros_realizados|fecrealizado|dd/mm/yyyy||"
+               TabIndex        =   75
+               Tag             =   "F.Realizado|F|S|||pagos_realizados|fecrealizado|dd/mm/yyyy||"
                Text            =   "FRealizado"
                Top             =   1080
                Visible         =   0   'False
@@ -1148,7 +905,7 @@ Begin VB.Form frmTESPagos
                Height          =   315
                Index           =   10
                Left            =   10620
-               TabIndex        =   98
+               TabIndex        =   76
                Tag             =   "Tipo|T|S|||tipofpago|siglas|||"
                Text            =   "T FP"
                Top             =   1080
@@ -1170,7 +927,7 @@ Begin VB.Form frmTESPagos
                Height          =   315
                Index           =   1
                Left            =   5400
-               TabIndex        =   127
+               TabIndex        =   105
                ToolTipText     =   "Buscar cuenta"
                Top             =   1110
                Visible         =   0   'False
@@ -1191,7 +948,7 @@ Begin VB.Form frmTESPagos
                Height          =   315
                Index           =   0
                Left            =   4020
-               TabIndex        =   126
+               TabIndex        =   104
                ToolTipText     =   "Buscar cuenta"
                Top             =   1110
                Visible         =   0   'False
@@ -1212,8 +969,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   9
                Left            =   12810
-               TabIndex        =   101
-               Tag             =   "Importe Cobro|T|S|||cobros_realizados|impcobro|###,##0.00||"
+               TabIndex        =   79
+               Tag             =   "Importe Cobro|T|S|||pagos_realizados|impcobro|###,##0.00||"
                Text            =   "importe"
                Top             =   1050
                Visible         =   0   'False
@@ -1236,8 +993,8 @@ Begin VB.Form frmTESPagos
                Index           =   0
                Left            =   720
                MaxLength       =   3
-               TabIndex        =   106
-               Tag             =   "Serie|T|N|||cobros_devolucion|numserie||S|"
+               TabIndex        =   84
+               Tag             =   "Serie|T|N|||pagos_devolucion|numserie||S|"
                Text            =   "ser"
                Top             =   1090
                Visible         =   0   'False
@@ -1260,8 +1017,8 @@ Begin VB.Form frmTESPagos
                Index           =   4
                Left            =   2340
                MaxLength       =   4
-               TabIndex        =   105
-               Tag             =   "Linea|N|N|0||cobros_devolucion|numlinea||S|"
+               TabIndex        =   83
+               Tag             =   "Linea|N|N|0||pagos_devolucion|numlinea||S|"
                Text            =   "lin"
                Top             =   1090
                Visible         =   0   'False
@@ -1284,8 +1041,8 @@ Begin VB.Form frmTESPagos
                Index           =   1
                Left            =   1125
                MaxLength       =   10
-               TabIndex        =   104
-               Tag             =   "Nº Factura|N|N|||cobros_devolucion|numfactul|000000|S|"
+               TabIndex        =   82
+               Tag             =   "Nº Factura|N|N|||pagos_devolucion|numfactul|000000|S|"
                Text            =   "fac"
                Top             =   1090
                Visible         =   0   'False
@@ -1308,8 +1065,8 @@ Begin VB.Form frmTESPagos
                Index           =   2
                Left            =   1515
                MaxLength       =   10
-               TabIndex        =   103
-               Tag             =   "Fecha Factura|F|N|||cobros_devolucion|fecfactu|dd/mm/yyyy|S|"
+               TabIndex        =   81
+               Tag             =   "Fecha Factura|F|N|||pagos_devolucion|fecfactu|dd/mm/yyyy|S|"
                Text            =   "Fec"
                Top             =   1090
                Visible         =   0   'False
@@ -1332,8 +1089,8 @@ Begin VB.Form frmTESPagos
                Index           =   3
                Left            =   1905
                MaxLength       =   30
-               TabIndex        =   102
-               Tag             =   "Nº Vencimiento|N|N|0||cobros_devolucion|numorden||S|"
+               TabIndex        =   80
+               Tag             =   "Nº Vencimiento|N|N|0||pagos_devolucion|numorden||S|"
                Text            =   "vto"
                Top             =   1090
                Visible         =   0   'False
@@ -1353,8 +1110,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   8
                Left            =   8250
-               TabIndex        =   96
-               Tag             =   "Usuario Cobro|T|S|||cobros_realizados|usuariocobro|||"
+               TabIndex        =   74
+               Tag             =   "Usuario Cobro|T|S|||pagos_realizados|usuariocobro|||"
                Text            =   "usuario"
                Top             =   1080
                Visible         =   0   'False
@@ -1374,8 +1131,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   7
                Left            =   5550
-               TabIndex        =   94
-               Tag             =   "Nº asiento|N|S|0||cobros_realizados|numasien|00000000||"
+               TabIndex        =   72
+               Tag             =   "Nº asiento|N|S|0||pagos_realizados|numasien|00000000||"
                Text            =   "asiento"
                Top             =   1080
                Visible         =   0   'False
@@ -1395,8 +1152,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   6
                Left            =   4200
-               TabIndex        =   93
-               Tag             =   "Fecha entrada|F|S|||cobros_realizados|fechaent|dd/mm/yyyy||"
+               TabIndex        =   71
+               Tag             =   "Fecha entrada|F|S|||pagos_realizados|fechaent|dd/mm/yyyy||"
                Text            =   "fecha"
                Top             =   1090
                Visible         =   0   'False
@@ -1416,8 +1173,8 @@ Begin VB.Form frmTESPagos
                Height          =   350
                Index           =   5
                Left            =   2850
-               TabIndex        =   92
-               Tag             =   "Diario|N|S|0||cobros_realizados|numdiari|00||"
+               TabIndex        =   70
+               Tag             =   "Diario|N|S|0||pagos_realizados|numdiari|00||"
                Text            =   "diario"
                Top             =   1090
                Visible         =   0   'False
@@ -1471,10 +1228,10 @@ Begin VB.Form frmTESPagos
                EndProperty
                _Version        =   393216
             End
-            Begin MSComctlLib.ListView lwCobros 
+            Begin MSComctlLib.ListView lwpagos 
                Height          =   1425
                Left            =   -30
-               TabIndex        =   134
+               TabIndex        =   112
                Top             =   570
                Width           =   14415
                _ExtentX        =   25426
@@ -1537,32 +1294,13 @@ Begin VB.Form frmTESPagos
             End
          End
       End
-      Begin VB.CheckBox Check1 
-         Caption         =   "Devuelto"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   2
-         Left            =   13590
-         TabIndex        =   32
-         Tag             =   "Devuelto|N|S|||cobros|Devuelto|||"
-         Top             =   4740
-         Width           =   1215
-      End
       Begin VB.Frame FrameRemesa 
          BorderStyle     =   0  'None
          Caption         =   "Frame3"
          Enabled         =   0   'False
-         Height          =   1335
+         Height          =   825
          Left            =   9690
-         TabIndex        =   60
+         TabIndex        =   47
          Top             =   3330
          Width           =   5715
          Begin VB.TextBox Text1 
@@ -1577,116 +1315,16 @@ Begin VB.Form frmTESPagos
             EndProperty
             Height          =   360
             Index           =   27
-            Left            =   4140
+            Left            =   4170
             MaxLength       =   10
-            TabIndex        =   29
-            Tag             =   "Transferencia|N|S|0||cobros|transfer|0000000000||"
+            TabIndex        =   23
+            Tag             =   "Nro Documento|N|S|0||pagos|nrodocum|0000000000||"
             Text            =   "Text1"
-            Top             =   840
+            Top             =   300
             Width           =   1425
          End
-         Begin VB.ComboBox cboSituRem 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            ItemData        =   "frmTESPagos.frx":02D0
-            Left            =   1290
-            List            =   "frmTESPagos.frx":02D2
-            Style           =   2  'Dropdown List
-            TabIndex        =   28
-            Top             =   840
-            Width           =   2805
-         End
-         Begin VB.ComboBox cboTipoRem 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            ItemData        =   "frmTESPagos.frx":02D4
-            Left            =   1290
-            List            =   "frmTESPagos.frx":02E1
-            Style           =   2  'Dropdown List
-            TabIndex        =   25
-            Tag             =   "Remesa|N|S|0||cobros|tiporem|||"
-            Top             =   240
-            Width           =   1485
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   285
-            Index           =   15
-            Left            =   1320
-            MaxLength       =   4
-            TabIndex        =   37
-            Tag             =   "Situacion|T|S|||cobros|siturem|||"
-            Text            =   "Text1"
-            Top             =   870
-            Width           =   885
-         End
-         Begin VB.TextBox Text1 
-            Alignment       =   2  'Center
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   14
-            Left            =   4170
-            MaxLength       =   4
-            TabIndex        =   27
-            Tag             =   "Año remesa|N|S|0||cobros|anyorem|||"
-            Text            =   "Text"
-            Top             =   240
-            Width           =   1395
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   35
-            Left            =   2850
-            MaxLength       =   30
-            TabIndex        =   26
-            Tag             =   "Remesa|N|S|0||cobros|codrem|||"
-            Text            =   "Text1"
-            Top             =   240
-            Width           =   1185
-         End
          Begin VB.Label Label1 
-            Caption         =   "Transferencia"
+            Caption         =   "Documento"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -1698,81 +1336,10 @@ Begin VB.Form frmTESPagos
             EndProperty
             Height          =   195
             Index           =   19
-            Left            =   4140
-            TabIndex        =   130
-            Top             =   600
-            Width           =   1380
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Situación"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   17
-            Left            =   60
-            TabIndex        =   64
-            Top             =   870
-            Width           =   1080
-         End
-         Begin VB.Label Label4 
-            Caption         =   "REMESA"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Left            =   60
-            TabIndex        =   63
-            Top             =   270
-            Width           =   855
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Año"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   16
-            Left            =   4200
-            TabIndex        =   62
-            Top             =   0
-            Width           =   540
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Número"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   15
-            Left            =   2880
-            TabIndex        =   61
-            Top             =   30
-            Width           =   1170
+            Left            =   2820
+            TabIndex        =   108
+            Top             =   360
+            Width           =   1260
          End
       End
       Begin VB.TextBox Text1 
@@ -1790,8 +1357,8 @@ Begin VB.Form frmTESPagos
          Index           =   8
          Left            =   13830
          MaxLength       =   30
-         TabIndex        =   23
-         Tag             =   "Importe|N|S|||cobros|impcobro|#,##0.00||"
+         TabIndex        =   22
+         Tag             =   "Importe|N|S|||pagos|imppagad|#,##0.00||"
          Text            =   "1.999.999.00"
          Top             =   2130
          Width           =   1455
@@ -1810,8 +1377,8 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   7
          Left            =   13980
-         TabIndex        =   21
-         Tag             =   "Fecha ult. pago|F|S|||cobros|fecultco|dd/mm/yyyy||"
+         TabIndex        =   20
+         Tag             =   "Fecha ult. pago|F|S|||pagos|fecultpa|dd/mm/yyyy||"
          Text            =   "99/99/9999"
          Top             =   1380
          Width           =   1305
@@ -1830,8 +1397,8 @@ Begin VB.Form frmTESPagos
          Index           =   11
          Left            =   360
          MaxLength       =   80
-         TabIndex        =   16
-         Tag             =   "CSB|T|S|||cobros|text33csb|||"
+         TabIndex        =   15
+         Tag             =   "CSB|T|S|||pagos|text2csb|||"
          Text            =   "WWW4567890WWW4567890WWW4567890WWW456789WWWW4567890WWW4567890WWW4567890WWW456789J"
          Top             =   3510
          Width           =   9225
@@ -1850,8 +1417,8 @@ Begin VB.Form frmTESPagos
          Index           =   12
          Left            =   360
          MaxLength       =   60
-         TabIndex        =   17
-         Tag             =   "T|T|S|||cobros|text41csb|||"
+         TabIndex        =   16
+         Tag             =   "T|T|S|||pagos|text2csb|||"
          Top             =   4200
          Width           =   9225
       End
@@ -1870,60 +1437,20 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   360
          Left            =   13830
-         TabIndex        =   72
+         TabIndex        =   52
          Text            =   "Text4"
          Top             =   2850
          Width           =   1425
       End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   34
-         Left            =   360
-         TabIndex        =   8
-         Tag             =   "Agente|N|S|0||cobros|agente|||"
-         Text            =   "Text1"
-         Top             =   2130
-         Width           =   795
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   5
-         Left            =   1200
-         Locked          =   -1  'True
-         TabIndex        =   69
-         Text            =   "Text2"
-         Top             =   2130
-         Width           =   3735
-      End
       Begin VB.Frame frameContene 
          BorderStyle     =   0  'None
          Height          =   975
-         Left            =   9720
-         TabIndex        =   68
-         Top             =   4560
+         Left            =   10050
+         TabIndex        =   50
+         Top             =   4710
          Width           =   3675
          Begin VB.CheckBox Check1 
-            Caption         =   "Documento recibido"
+            Caption         =   "Documento emitido"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -1935,49 +1462,11 @@ Begin VB.Form frmTESPagos
             EndProperty
             Height          =   255
             Index           =   0
-            Left            =   60
-            TabIndex        =   31
-            Tag             =   "Recibido|N|S|||cobros|recedocu|||"
-            Top             =   450
+            Left            =   90
+            TabIndex        =   24
+            Tag             =   "Emitido|N|S|||pagos|emitedocum|||"
+            Top             =   210
             Width           =   2505
-         End
-         Begin VB.CheckBox Check1 
-            Caption         =   "Situacion jurídica"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   3
-            Left            =   60
-            TabIndex        =   30
-            Tag             =   "s|N|S|||cobros|situacionjuri|||"
-            Top             =   150
-            Width           =   2535
-         End
-         Begin VB.CheckBox Check1 
-            Enabled         =   0   'False
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   1
-            Left            =   300
-            TabIndex        =   36
-            Top             =   480
-            Visible         =   0   'False
-            Width           =   2205
          End
       End
       Begin VB.TextBox Text1 
@@ -1995,32 +1484,11 @@ Begin VB.Form frmTESPagos
          Left            =   360
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   18
-         Tag             =   "obs|T|S|||cobros|observa|||"
-         Text            =   "frmTESPagos.frx":0300
+         TabIndex        =   17
+         Tag             =   "obs|T|S|||pagos|observa|||"
+         Text            =   "frmTESPagos.frx":0088
          Top             =   4920
          Width           =   9225
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   16
-         Left            =   10950
-         MaxLength       =   30
-         TabIndex        =   24
-         Tag             =   "Gastos|N|S|||cobros|gastos|#,###,##0.00||"
-         Text            =   "1.999.999.00"
-         Top             =   2850
-         Width           =   1455
       End
       Begin VB.TextBox Text1 
          Alignment       =   2  'Center
@@ -2036,8 +1504,8 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   32
          Left            =   7710
-         TabIndex        =   15
-         Tag             =   "Ultima reclamacion|F|S|||cobros|ultimareclamacion|dd/mm/yyyy||"
+         TabIndex        =   14
+         Tag             =   "Ultima reclamacion|F|S|||pagos|ultimareclamacion|dd/mm/yyyy||"
          Text            =   "99/99/9999"
          Top             =   2850
          Width           =   1875
@@ -2057,7 +1525,7 @@ Begin VB.Form frmTESPagos
          Index           =   4
          Left            =   1560
          Locked          =   -1  'True
-         TabIndex        =   58
+         TabIndex        =   45
          Text            =   "Text2"
          Top             =   1440
          Width           =   8025
@@ -2077,7 +1545,7 @@ Begin VB.Form frmTESPagos
          Index           =   33
          Left            =   360
          TabIndex        =   7
-         Tag             =   "departamento|N|S|||cobros|departamento|||"
+         Tag             =   "departamento|N|S|||pagos|departamento|||"
          Text            =   "Text1"
          Top             =   1440
          Width           =   1095
@@ -2096,7 +1564,7 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   10
          Left            =   5100
-         TabIndex        =   34
+         TabIndex        =   25
          Text            =   "0000"
          Top             =   2130
          Width           =   675
@@ -2116,7 +1584,7 @@ Begin VB.Form frmTESPagos
          Index           =   3
          Left            =   7410
          Locked          =   -1  'True
-         TabIndex        =   52
+         TabIndex        =   39
          Text            =   "Text2"
          Top             =   720
          Width           =   2235
@@ -2135,8 +1603,8 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   9
          Left            =   360
-         TabIndex        =   14
-         Tag             =   "Cta prevista|T|N|||cobros|ctabanc1|||"
+         TabIndex        =   13
+         Tag             =   "Cta prevista|T|N|||pagos|ctabanc1|||"
          Text            =   "Text1"
          Top             =   2850
          Width           =   1350
@@ -2156,7 +1624,7 @@ Begin VB.Form frmTESPagos
          Index           =   2
          Left            =   1740
          Locked          =   -1  'True
-         TabIndex        =   51
+         TabIndex        =   38
          Text            =   "Text2"
          Top             =   2850
          Width           =   5925
@@ -2176,8 +1644,8 @@ Begin VB.Form frmTESPagos
          Index           =   6
          Left            =   10950
          MaxLength       =   30
-         TabIndex        =   22
-         Tag             =   "Importe|N|N|||cobros|impvenci|#,###,##0.00||"
+         TabIndex        =   21
+         Tag             =   "Importe|N|N|||pagos|impefect|#,###,##0.00||"
          Text            =   "1.999.999.00"
          Top             =   2130
          Width           =   1455
@@ -2196,8 +1664,8 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   5
          Left            =   11160
-         TabIndex        =   20
-         Tag             =   "Fecha vencimiento|F|N|||cobros|fecvenci|dd/mm/yyyy||"
+         TabIndex        =   19
+         Tag             =   "Fecha Efecto|F|N|||pagos|fecefect|dd/mm/yyyy||"
          Text            =   "99/99/9999"
          Top             =   1380
          Width           =   1245
@@ -2216,8 +1684,8 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   0
          Left            =   9720
-         TabIndex        =   19
-         Tag             =   "Forma Pago|N|N|0||cobros|codforpa|000||"
+         TabIndex        =   18
+         Tag             =   "Forma Pago|N|N|0||pagos|codforpa|000||"
          Text            =   "Text1"
          Top             =   720
          Width           =   735
@@ -2237,7 +1705,7 @@ Begin VB.Form frmTESPagos
          Index           =   1
          Left            =   10500
          Locked          =   -1  'True
-         TabIndex        =   50
+         TabIndex        =   37
          Text            =   "Text2"
          Top             =   720
          Width           =   4785
@@ -2257,7 +1725,7 @@ Begin VB.Form frmTESPagos
          Index           =   4
          Left            =   360
          TabIndex        =   5
-         Tag             =   "Cta. cliente|T|N|||cobros|codmacta|||"
+         Tag             =   "Cta. cliente|T|N|||pagos|codmacta|||"
          Text            =   "Text1"
          Top             =   720
          Width           =   1350
@@ -2277,7 +1745,7 @@ Begin VB.Form frmTESPagos
          Index           =   0
          Left            =   1740
          Locked          =   -1  'True
-         TabIndex        =   49
+         TabIndex        =   36
          Text            =   "Text2"
          Top             =   720
          Width           =   5625
@@ -2297,8 +1765,8 @@ Begin VB.Form frmTESPagos
          Index           =   28
          Left            =   6630
          MaxLength       =   4
-         TabIndex        =   10
-         Tag             =   "Sucursal|N|S|0||cobros|oficina|0000||"
+         TabIndex        =   9
+         Tag             =   "Sucursal|N|S|0||pagos|oficina|0000||"
          Text            =   "0000"
          Top             =   2130
          Width           =   675
@@ -2318,7 +1786,7 @@ Begin VB.Form frmTESPagos
          Index           =   29
          Left            =   7380
          MaxLength       =   4
-         TabIndex        =   11
+         TabIndex        =   10
          Text            =   "0000"
          Top             =   2130
          Width           =   675
@@ -2336,9 +1804,9 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   360
          Index           =   30
-         Left            =   8145
+         Left            =   8190
          MaxLength       =   4
-         TabIndex        =   12
+         TabIndex        =   11
          Text            =   "0000"
          Top             =   2130
          Width           =   675
@@ -2358,7 +1826,7 @@ Begin VB.Form frmTESPagos
          Index           =   31
          Left            =   8910
          MaxLength       =   4
-         TabIndex        =   13
+         TabIndex        =   12
          Text            =   "0000"
          Top             =   2130
          Width           =   675
@@ -2376,10 +1844,10 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   360
          Index           =   26
-         Left            =   5865
+         Left            =   5880
          MaxLength       =   20
-         TabIndex        =   35
-         Tag             =   "Entidad|N|S|0||cobros|entidad|0000||"
+         TabIndex        =   26
+         Tag             =   "Entidad|N|S|0||pagos|entidad|0000||"
          Text            =   "0000"
          Top             =   2130
          Width           =   675
@@ -2398,8 +1866,8 @@ Begin VB.Form frmTESPagos
          Index           =   19
          Left            =   5760
          MaxLength       =   40
-         TabIndex        =   9
-         Tag             =   "Iban|T|S|||cobros|iban|||"
+         TabIndex        =   8
+         Tag             =   "Iban|T|S|||pagos|iban|||"
          Text            =   "ES99"
          Top             =   1440
          Width           =   3795
@@ -2416,12 +1884,12 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         ItemData        =   "frmTESPagos.frx":0306
+         ItemData        =   "frmTESPagos.frx":008E
          Left            =   5190
-         List            =   "frmTESPagos.frx":0313
+         List            =   "frmTESPagos.frx":009B
          Style           =   2  'Dropdown List
          TabIndex        =   6
-         Tag             =   "Situación|N|N|||cobros|situacion|||"
+         Tag             =   "Situación|N|N|||pagos|situacion|||"
          Top             =   720
          Width           =   2175
       End
@@ -2437,11 +1905,11 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   43
+         Index           =   20
          Left            =   7710
          MaxLength       =   2
-         TabIndex        =   132
-         Tag             =   "D.C.|T|S|0||cobros|control|||"
+         TabIndex        =   110
+         Tag             =   "D.C.|T|S|0||pagos|control|||"
          Text            =   "00"
          Top             =   1440
          Width           =   675
@@ -2458,11 +1926,11 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   44
+         Index           =   21
          Left            =   8250
          MaxLength       =   10
-         TabIndex        =   133
-         Tag             =   "Cuenta|T|S|||cobros|cuentaba|0000000000||"
+         TabIndex        =   111
+         Tag             =   "Cuenta|T|S|||pagos|cuentaba|0000000000||"
          Text            =   "00"
          Top             =   1440
          Width           =   1335
@@ -2482,7 +1950,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   10
          Left            =   7410
-         TabIndex        =   131
+         TabIndex        =   109
          Top             =   420
          Width           =   915
       End
@@ -2497,7 +1965,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   3
          Left            =   9270
-         Picture         =   "frmTESPagos.frx":034A
+         Picture         =   "frmTESPagos.frx":00D2
          Top             =   2580
          Width           =   240
       End
@@ -2505,7 +1973,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   2
          Left            =   13710
-         Picture         =   "frmTESPagos.frx":03D5
+         Picture         =   "frmTESPagos.frx":015D
          Top             =   1410
          Width           =   240
       End
@@ -2513,7 +1981,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   1
          Left            =   10890
-         Picture         =   "frmTESPagos.frx":0460
+         Picture         =   "frmTESPagos.frx":01E8
          Top             =   1410
          Width           =   240
       End
@@ -2531,7 +1999,7 @@ Begin VB.Form frmTESPagos
          Height          =   285
          Index           =   8
          Left            =   12510
-         TabIndex        =   80
+         TabIndex        =   58
          Top             =   2130
          Width           =   1200
       End
@@ -2549,7 +2017,7 @@ Begin VB.Form frmTESPagos
          Height          =   255
          Index           =   7
          Left            =   12510
-         TabIndex        =   79
+         TabIndex        =   57
          Top             =   1410
          Width           =   1185
       End
@@ -2567,7 +2035,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   35
          Left            =   360
-         TabIndex        =   78
+         TabIndex        =   56
          Top             =   3960
          Width           =   1335
       End
@@ -2585,7 +2053,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   34
          Left            =   360
-         TabIndex        =   77
+         TabIndex        =   55
          Top             =   3270
          Width           =   1335
       End
@@ -2602,9 +2070,9 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   195
          Index           =   33
-         Left            =   5160
-         TabIndex        =   76
-         Top             =   1860
+         Left            =   4140
+         TabIndex        =   54
+         Top             =   2220
          Width           =   780
       End
       Begin VB.Label Label6 
@@ -2620,34 +2088,9 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   255
          Left            =   12510
-         TabIndex        =   73
+         TabIndex        =   53
          Top             =   2880
          Width           =   1245
-      End
-      Begin VB.Image imgAgente 
-         Height          =   255
-         Left            =   1170
-         Top             =   1860
-         Width           =   255
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Agente"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Index           =   14
-         Left            =   360
-         TabIndex        =   70
-         Top             =   1860
-         Width           =   705
       End
       Begin VB.Label Label5 
          Caption         =   "Observaciones"
@@ -2662,27 +2105,9 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   255
          Left            =   360
-         TabIndex        =   67
+         TabIndex        =   49
          Top             =   4620
          Width           =   1455
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Gastos"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   18
-         Left            =   9720
-         TabIndex        =   66
-         Top             =   2850
-         Width           =   780
       End
       Begin VB.Label Label1 
          Caption         =   "Ultima reclam."
@@ -2698,7 +2123,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   11
          Left            =   7770
-         TabIndex        =   65
+         TabIndex        =   48
          Top             =   2580
          Width           =   1485
       End
@@ -2724,7 +2149,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   12
          Left            =   360
-         TabIndex        =   59
+         TabIndex        =   46
          Top             =   1140
          Width           =   1395
       End
@@ -2750,7 +2175,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   9
          Left            =   360
-         TabIndex        =   57
+         TabIndex        =   44
          Top             =   2580
          Width           =   2130
       End
@@ -2768,7 +2193,7 @@ Begin VB.Form frmTESPagos
          Height          =   285
          Index           =   6
          Left            =   9720
-         TabIndex        =   56
+         TabIndex        =   43
          Top             =   2130
          Width           =   780
       End
@@ -2786,7 +2211,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   5
          Left            =   9720
-         TabIndex        =   55
+         TabIndex        =   42
          Top             =   1440
          Width           =   1125
       End
@@ -2812,7 +2237,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   0
          Left            =   9750
-         TabIndex        =   54
+         TabIndex        =   41
          Top             =   420
          Width           =   1470
       End
@@ -2838,7 +2263,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   3
          Left            =   360
-         TabIndex        =   53
+         TabIndex        =   40
          Top             =   420
          Width           =   1770
       End
@@ -2846,7 +2271,7 @@ Begin VB.Form frmTESPagos
    Begin VB.Frame Frame1 
       Height          =   540
       Left            =   120
-      TabIndex        =   41
+      TabIndex        =   28
       Top             =   10050
       Width           =   4095
       Begin VB.Label lblIndicador 
@@ -2863,7 +2288,7 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   42
+         TabIndex        =   29
          Top             =   210
          Width           =   3675
       End
@@ -2873,49 +2298,9 @@ Begin VB.Form frmTESPagos
       Caption         =   "Frame3"
       Height          =   765
       Left            =   120
-      TabIndex        =   43
+      TabIndex        =   30
       Top             =   870
       Width           =   15555
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   25
-         Left            =   10500
-         MaxLength       =   15
-         TabIndex        =   38
-         Tag             =   "Referencia1|T|S|||cobros|referencia1|||"
-         Text            =   "Text1"
-         Top             =   270
-         Width           =   2145
-      End
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   24
-         Left            =   12840
-         MaxLength       =   15
-         TabIndex        =   40
-         Tag             =   "Referencia2|T|S|||cobros|referencia2|||"
-         Text            =   "Text1"
-         Top             =   270
-         Width           =   2235
-      End
       Begin VB.TextBox Text1 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -2930,8 +2315,8 @@ Begin VB.Form frmTESPagos
          Index           =   18
          Left            =   8100
          MaxLength       =   15
-         TabIndex        =   39
-         Tag             =   "Referencia|T|S|0||cobros|referencia|||"
+         TabIndex        =   27
+         Tag             =   "Referencia|T|S|0||pagos|referencia|||"
          Text            =   "Text1"
          Top             =   270
          Width           =   2145
@@ -2952,7 +2337,7 @@ Begin VB.Form frmTESPagos
          Left            =   360
          MaxLength       =   30
          TabIndex        =   1
-         Tag             =   "Serie|T|N|||cobros|numserie||S|"
+         Tag             =   "Serie|T|N|||pagos|numserie||S|"
          Text            =   "Text1"
          Top             =   270
          Width           =   765
@@ -2973,7 +2358,7 @@ Begin VB.Form frmTESPagos
          Left            =   1260
          MaxLength       =   7
          TabIndex        =   2
-         Tag             =   "Nº Factura|N|N|||cobros|numfactu|0000000|S|"
+         Tag             =   "Nº Factura|T|N|||pagos|numfactu||S|"
          Text            =   "Text1"
          Top             =   270
          Width           =   1335
@@ -2994,7 +2379,7 @@ Begin VB.Form frmTESPagos
          Left            =   4200
          MaxLength       =   30
          TabIndex        =   4
-         Tag             =   "Nº Vencimiento|N|N|0||cobros|numorden||S|"
+         Tag             =   "Nº Vencimiento|N|N|0||pagos|numorden||S|"
          Text            =   "Text1"
          Top             =   270
          Width           =   1125
@@ -3015,7 +2400,7 @@ Begin VB.Form frmTESPagos
          Left            =   2760
          MaxLength       =   10
          TabIndex        =   3
-         Tag             =   "Fecha Factura|F|N|||cobros|fecfactu|dd/mm/yyyy|S|"
+         Tag             =   "Fecha Factura|F|N|||pagos|fecfactu|dd/mm/yyyy|S|"
          Text            =   "Text1"
          Top             =   270
          Width           =   1275
@@ -3024,45 +2409,9 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   0
          Left            =   3780
-         Picture         =   "frmTESPagos.frx":04EB
+         Picture         =   "frmTESPagos.frx":0273
          Top             =   0
          Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Referencia (I)"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   22
-         Left            =   10500
-         TabIndex        =   75
-         Top             =   0
-         Width           =   1740
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Referencia (II)"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   225
-         Index           =   23
-         Left            =   12840
-         TabIndex        =   74
-         Top             =   0
-         Width           =   1770
       End
       Begin VB.Image imgSerie 
          Height          =   255
@@ -3084,7 +2433,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   20
          Left            =   8100
-         TabIndex        =   71
+         TabIndex        =   51
          Top             =   0
          Width           =   1710
       End
@@ -3102,7 +2451,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   13
          Left            =   360
-         TabIndex        =   47
+         TabIndex        =   34
          Top             =   0
          Width           =   540
       End
@@ -3120,7 +2469,7 @@ Begin VB.Form frmTESPagos
          Height          =   255
          Index           =   1
          Left            =   1260
-         TabIndex        =   46
+         TabIndex        =   33
          Top             =   0
          Width           =   1455
       End
@@ -3138,7 +2487,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   2
          Left            =   4170
-         TabIndex        =   45
+         TabIndex        =   32
          Top             =   30
          Width           =   1860
       End
@@ -3156,7 +2505,7 @@ Begin VB.Form frmTESPagos
          Height          =   195
          Index           =   4
          Left            =   2760
-         TabIndex        =   44
+         TabIndex        =   31
          Top             =   0
          Width           =   975
       End
@@ -3164,7 +2513,7 @@ Begin VB.Form frmTESPagos
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   390
       Left            =   15060
-      TabIndex        =   87
+      TabIndex        =   65
       Top             =   210
       Width           =   405
       _ExtentX        =   714
@@ -3311,25 +2660,6 @@ Private Sub cboFiltro_Click()
     HacerBusqueda2
 End Sub
 
-Private Sub cboSituRem_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
-
-Private Sub cboSituRem_Validate(Cancel As Boolean)
-    If (Modo = 1 Or Modo = 3 Or Modo = 4) Then
-        If cboSituRem.ListIndex = 0 Then
-            Text1(15).Text = ""
-        Else
-            If cboSituRem.ListIndex <> -1 Then Text1(15).Text = Chr(cboSituRem.ItemData(cboSituRem.ListIndex))
-        End If
-    End If
-
-End Sub
-
-
-Private Sub cboTipoRem_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
 
 
 Private Sub Check1_Click(Index As Integer)
@@ -3529,7 +2859,6 @@ Private Sub BotonAnyadir()
     
     Combo1.ListIndex = 0
     Text2(3).Text = Combo1.Text
-    cboSituRem.ListIndex = -1
     '###A mano
     PonFoco Text1(13)
 End Sub
@@ -3669,12 +2998,12 @@ Private Sub BotonEliminar()
     'Borramos
     If i = vbYes Then
         
-        SQL = "Delete from cobros_realizados WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
+        SQL = "Delete from pagos_realizados WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
         SQL = SQL & " AND fecfactu = '" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND numorden =" & Data1.Recordset!numorden
         Conn.Execute SQL
 
         'Borro el elemento
-        SQL = "Delete from cobros  WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
+        SQL = "Delete from pagos  WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
         SQL = SQL & " AND fecfactu = " & DBSet(Data1.Recordset!FecFactu, "F") & " AND numorden =" & Data1.Recordset!numorden
 '        DataGridAux(1).Enabled = False
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -3724,9 +3053,6 @@ Dim impo As Currency
         Exit Sub
     End If
 
-
-    'Mas gastos
-    If Text1(38).Text <> "" Then impo = impo + ImporteFormateado(Text1(38).Text)
     'Menos ya pagado
     If Text1(8).Text <> "" Then impo = impo - ImporteFormateado(Text1(8).Text)
     
@@ -3847,18 +3173,13 @@ Dim i As Integer
     
     imgSerie.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     imgDepart.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    imgAgente.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     Me.SSTab1.Tab = 0
     Me.Icon = frmPpal.Icon
     LimpiarCampos
     'FrameSeguro.Visible = vParamT.TieneOperacionesAseguradas
-    Me.SSTab2.TabEnabled(1) = vParamT.TieneOperacionesAseguradas
     
     'Recaudacion ejecutiva
-    Label1(27).Visible = vParamT.RecaudacionEjecutiva
-    Text1(20).Visible = vParamT.RecaudacionEjecutiva
-    imgFecha(7).Visible = vParamT.RecaudacionEjecutiva
     
     
     '## A mano
@@ -3891,11 +3212,6 @@ Private Sub LimpiarCampos()
     Limpiar Me   'Metodo general
     txtPendiente.Text = ""
     Check1(0).Value = 0
-    Check1(1).Value = 0
-    Check1(2).Value = 0
-    Check1(3).Value = 0
-    Check1(4).Value = 0
-    cboTipoRem.ListIndex = -1
     Combo1.ListIndex = -1
     Text2(3).Text = ""
     lblIndicador.Caption = ""
@@ -4118,7 +3434,7 @@ Private Sub imgppal_Click(Index As Integer)
         Set frmZ = New frmZoom
         frmZ.pValor = Text1(Indice).Text
         frmZ.pModo = Modo
-        frmZ.Caption = "Observaciones Cobros"
+        frmZ.Caption = "Observaciones pagos"
         frmZ.Show vbModal
         Set frmZ = Nothing
         
@@ -4223,7 +3539,7 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 24 Then
+    If Index = 27 Then
         'Despues de la fecha prorroga va el btn
         'PonerFocoGral Me.cmdAceptar
         PonleFoco Me.cmdAceptar
@@ -4301,8 +3617,8 @@ Private Sub Text1_LostFocus(Index As Integer)
                         Text1(31).Text = Mid(RecuperaValor(SQL, 5), 21, 4)
 
                         Text1(19).Text = RecuperaValor(SQL, 5)
-                        Text1(43).Text = Mid(RecuperaValor(SQL, 5), 13, 2)
-                        Text1(44).Text = Mid(RecuperaValor(SQL, 5), 15, 10)
+                        Text1(20).Text = Mid(RecuperaValor(SQL, 5), 13, 2)
+                        Text1(21).Text = Mid(RecuperaValor(SQL, 5), 15, 10)
                     End If
                 End If
 
@@ -4362,7 +3678,7 @@ Private Sub Text1_LostFocus(Index As Integer)
         End If
         
         
-    Case 2, 5, 7, 32, 23, 22, 20, 21
+    Case 2, 5, 7, 32, 20
         'FECHAS,32
         If Not EsFechaOK(Text1(Index)) Then
             MsgBox "Fecha incorrecta: " & Text1(Index).Text, vbExclamation
@@ -4370,7 +3686,7 @@ Private Sub Text1_LostFocus(Index As Integer)
             PonerFoco Text1(Index)
         End If
         
-    Case 6, 8, 16
+    Case 6, 8
         PonerFormatoDecimal Text1(Index), 3
 
     Case 3
@@ -4514,9 +3830,9 @@ Private Sub HacerBusqueda2()
     If chkVistaPrevia = 1 Then
         MandaBusquedaPrevia CadB
     ElseIf CadB <> "" Or CadB1 <> "" Or cadFiltro <> "" Then
-        CadenaConsulta = "select distinct cobros.* from "
-        CadenaConsulta = CadenaConsulta & " (tipofpago  INNER JOIN cobros_realizados ON cobros_realizados.tipforpa = tipofpago.tipoformapago ) "
-        CadenaConsulta = CadenaConsulta & " right join cobros on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden"
+        CadenaConsulta = "select distinct pagos.* from "
+        CadenaConsulta = CadenaConsulta & " (tipofpago  INNER JOIN pagos_realizados ON pagos_realizados.tipforpa = tipofpago.tipoformapago ) "
+        CadenaConsulta = CadenaConsulta & " right join pagos on pagos.numserie = pagos_realizados.numserie and pagos.numfactu = pagos_realizados.numfactu and pagos.fecfactu = pagos_realizados.fecfactu and pagos.numorden = pagos_realizados.numorden"
 
         
         CadenaConsulta = CadenaConsulta & " WHERE (1=1) "
@@ -4545,9 +3861,9 @@ Private Sub CargarSqlFiltro()
     
     Select Case cboFiltro.ItemData(cboFiltro.ListIndex) 'cboFiltro.ListIndex
         Case 0 ' pendientes de cobro
-            cadFiltro = "(coalesce(cobros.impvenci,0) + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0) <> 0) "
+            cadFiltro = "(coalesce(pagos.impefect,0)  - coalesce(pagos.imppagad,0) <> 0) "
         Case 1 ' cobrados
-            cadFiltro = "(coalesce(cobros.impvenci,0) + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0) = 0) and cobros.situacion = 1"
+            cadFiltro = "(coalesce(pagos.impefect,0)  - coalesce(pagos.imppagad,0) = 0) and pagos.situacion = 1"
         Case 9 ' todos
             cadFiltro = "(1=1)"
     End Select
@@ -4563,7 +3879,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
     frmTESVerCobrosPagos.vSQL = CadB
     frmTESVerCobrosPagos.OrdenarEfecto = False
     frmTESVerCobrosPagos.Regresar = True
-    frmTESVerCobrosPagos.Cobros = True
+    frmTESVerCobrosPagos.Cobros = False
     frmTESVerCobrosPagos.Show vbModal
     
     If CadenaDesdeOtroForm <> "" Then
@@ -4617,7 +3933,7 @@ Private Sub PonerCampos()
     Text2(2).Text = PonerNombreDeCod(Text1(9), "cuentas", "nommacta", "codmacta", "T")
     Text2(3).Text = Combo1.Text 'PonerNombreDeCod(Text1(10), "cuentas", "nommacta", "codmacta", "T")
     
-    Text2(36).Text = PonerNombreDeCod(Text1(36), "paises", "nompais", "codpais", "T")
+    Text2(25).Text = PonerNombreDeCod(Text1(25), "paises", "nompais", "codpais", "T")
     
     Text2(5).Text = PonerNombreDeCod(Text1(34), "agentes", "nombre", "codigo", "N")
     Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
@@ -4625,14 +3941,6 @@ Private Sub PonerCampos()
     
     PonerDepartamenteo
     
-    
-    If Text1(15).Text = "" Then
-        cboSituRem.ListIndex = -1
-    Else
-        PosicionarCombo cboSituRem, Asc(Text1(15).Text)
-    End If
-    
-    cboSituRem_Validate False
     
     ' situamos los campos del iban
     Text1(10) = Mid(Text1(19), 1, 4)
@@ -4773,22 +4081,17 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
     
     frameContene.Enabled = Not B
     
-    For i = 0 To 6
-        If i < 4 And i <> 3 Then imgCuentas(i).Visible = Not B
+    For i = 0 To 3
+        If i <> 3 Then imgCuentas(i).Visible = Not B
         Me.imgFecha(i).Visible = Not B
     Next i
     
     Me.imgSerie.Visible = Not B
-    Me.imgDepart.Visible = Not B
-    Me.imgAgente.Visible = Not B
-        
-    cboSituRem.Locked = B
-    cboTipoRem.Locked = B
         
         
     Text2(4).Tag = ""
     
-    'lineas de cobros_realizados
+    'lineas de pagos_realizados
     Dim anc As Single
 '    anc = DataGridAux(1).Top
 '    If DataGridAux(1).Row < 0 Then
@@ -4806,9 +4109,6 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
 '        If i <> 8 Then txtaux1(i).BackColor = vbWhite
 '    Next i
     
-    Check1(2).Enabled = (Modo = 1)
-    Check1(4).Enabled = (Modo = 1)
-    
     Combo1.Enabled = False '(Modo = 1) Or ((vUsu.Nombre = "root") And Modo = 4)
     
         
@@ -4821,12 +4121,6 @@ Dim Tipo As Integer
 
     DatosOK = False
     
-    
-    If cboSituRem.ListIndex = 0 Or cboSituRem.ListIndex = -1 Then
-        Text1(15).Text = ""
-    Else
-        Text1(15).Text = Chr(cboSituRem.ItemData(cboSituRem.ListIndex))
-    End If
     
     
     
@@ -4950,22 +4244,6 @@ Dim Tipo As Integer
     End If
     
     
-    
-    'Ultimas comprobaciones
-    If vParamT.TieneOperacionesAseguradas Then
-        B = Me.Text1(23).Text <> "" Or Me.Text1(22).Text <> "" Or Me.Text1(21).Text <> ""
-        If B Then
-'            'Tiene valores en fechas de riesgo/aviso/siniestro
-'            If Me.lblAsegurado.Visible Then
-'                'ok. el cliente tiene operaciones aseguradas
-'
-'            Else
-                MsgBox "No debe indicar fechas de operaciones aseguradas" & vbCrLf & "-Falta pago/prorroga/aviso siniestro" & vbCrLf & " Si no esta asegurado", vbExclamation
-                PonerFoco Me.Text1(23)
-                Exit Function
-'            End If
-        End If
-    End If
     
     
     DatosOK = True
@@ -5135,8 +4413,6 @@ Dim impo As Currency
     'Para realizar pago a cuenta... Varias cosas.
     'Primero. Hay por pagar
     impo = ImporteFormateado(Text1(6).Text)
-    'Gastos
-    If Text1(16).Text <> "" Then impo = impo + ImporteFormateado(Text1(16).Text)
     'Pagado
     If Text1(8).Text <> "" Then impo = impo - ImporteFormateado(Text1(8).Text)
 
@@ -5149,7 +4425,7 @@ Dim impo As Currency
 
     frmTESParciales.Cobro = True
     frmTESParciales.Vto = Text1(13).Text & "|" & Text1(1).Text & "|" & Text1(2).Text & "|" & Text1(3).Text & "|" & Text1(5).Text & "|"
-    frmTESParciales.Importes = Text1(6).Text & "|" & Text1(16).Text & "|" & Text1(8).Text & "|"
+    frmTESParciales.Importes = Text1(6).Text & "|" & Text1(8).Text & "|"
     frmTESParciales.Cta = Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(9).Text & "|" & Text2(2).Text & "|"
     frmTESParciales.FormaPago = Val(vTipForpa)
     frmTESParciales.Show vbModal
@@ -5188,16 +4464,16 @@ Dim Im As Currency
     
     
     
-    If Val(DBLet(Data1.Recordset!transfer, "N")) = 1 Then
+    If Val(DBLet(Data1.Recordset!nrodocum, "N")) = 1 Then
         MsgBox "Pertenece a una transferencia", vbExclamation
         Exit Sub
     End If
     
     
-    Im = Data1.Recordset!ImpVenci + DBLet(Data1.Recordset!Gastos, "N")
-    Im = Im - DBLet(Data1.Recordset!impcobro, "N")
+    Im = Data1.Recordset!ImpEfect
+    Im = Im - DBLet(Data1.Recordset!imppagad, "N")
     If Im = 0 Then
-        MsgBox "NO puede dividir el vencimiento. Importe totalmente cobrado", vbExclamation
+        MsgBox "NO puede dividir el vencimiento. Importe totalmente pagado", vbExclamation
         Exit Sub
     End If
     
@@ -5221,11 +4497,11 @@ Dim Im As Currency
     frmTESCobrosDivVto.Label4(57).Caption = Data1.Recordset!NUmSerie & Format(Data1.Recordset!NumFactu, "000000") & " / " & Data1.Recordset!numorden & "      de " & Format(Data1.Recordset!FecFactu, "dd/mm/yyyy")
     
     'Si ya ha cobrado algo...
-    Im = DBLet(Data1.Recordset!impcobro, "N")
+    Im = DBLet(Data1.Recordset!imppagad, "N")
     If Im > 0 Then frmTESCobrosDivVto.txtcodigo(1).Text = txtPendiente.Text
     
     If Text1(0).Text = "" Then
-        MsgBox "El cobro no tiene forma de pago. Revise.", vbExclamation
+        MsgBox "El pago no tiene forma de pago. Revise.", vbExclamation
         Exit Sub
     End If
     
@@ -5233,7 +4509,7 @@ Dim Im As Currency
     frmTESCobrosDivVto.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
 
-            CadenaConsulta = "Select * from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1) 'CadenaConsulta
+            CadenaConsulta = "Select * from pagos WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1) 'CadenaConsulta
             Data1.RecordSource = CadenaConsulta
             Data1.Refresh
             If Data1.Recordset.RecordCount <= 0 Then
@@ -5259,7 +4535,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
         
         
         Case 3
-            'Generar Cobros
+            'Generar pagos
             If Me.Data1.Recordset.EOF Then Exit Sub
             If Modo <> 2 Then Exit Sub
             If vTipForpa <> "" Then
@@ -5283,22 +4559,21 @@ Private Sub CargaList(Index As Integer, Enlaza As Boolean)
 Dim IT
 Dim Cad As String
 
-    lwCobros.ListItems.Clear
-    Set Me.lwCobros.SmallIcons = frmPpal.imgListComun16 'imgListComun 'ImgListviews
+    lwpagos.ListItems.Clear
+    Set Me.lwpagos.SmallIcons = frmPpal.imgListComun16 'imgListComun 'ImgListviews
     Set miRsAux = New ADODB.Recordset
     
-    Cad = "SELECT  cobros_realizados.numdiari, cobros_realizados.fechaent, "
-    Cad = Cad & " cobros_realizados.numasien, cobros_realizados.ctabanc2, "
-    Cad = Cad & " cobros_realizados.usuariocobro, cobros_realizados.fecrealizado, tipofpago.siglas, "
-    Cad = Cad & " cobros_realizados.reftalonpag, cobros_realizados.bancotalonpag, "
-    Cad = Cad & " cobros_realizados.impcobro, cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea, cobros_realizados.codrem "
-    Cad = Cad & " FROM cobros_realizados INNER JOIN tipofpago ON cobros_realizados.tipforpa = tipofpago.tipoformapago "
+    Cad = "SELECT  pagos_realizados.numdiari, pagos_realizados.fechaent, "
+    Cad = Cad & " pagos_realizados.numasien, pagos_realizados.ctabanc2, "
+    Cad = Cad & " pagos_realizados.usuariopago, pagos_realizados.fecrealizado, tipofpago.siglas, "
+    Cad = Cad & " pagos_realizados.imppago, pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea "
+    Cad = Cad & " FROM pagos_realizados INNER JOIN tipofpago ON pagos_realizados.tipforpa = tipofpago.tipoformapago "
     If Enlaza Then
-        Cad = Cad & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
+        Cad = Cad & Replace(ObtenerWhereCab(True), "pagos", "pagos_realizados")
     Else
-        Cad = Cad & " WHERE cobros_realizados.numlinea is null"
+        Cad = Cad & " WHERE pagos_realizados.numlinea is null"
     End If
-    Cad = Cad & " ORDER BY cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea"
+    Cad = Cad & " ORDER BY pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea"
     
 '    Cad = Cad & PonerOrdenFiltro
     
@@ -5310,7 +4585,7 @@ Dim Cad As String
     
     miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Set IT = lwCobros.ListItems.Add()
+        Set IT = lwpagos.ListItems.Add()
         IT.Text = DBLet(miRsAux!NumDiari, "N")
         IT.SubItems(1) = Format(miRsAux!FechaEnt, "dd/mm/yyyy")
         IT.SubItems(2) = DBLet(miRsAux!NumAsien, "N")
@@ -5354,7 +4629,7 @@ Dim tots As String
 ''    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
 '
 '    Select Case Index
-'        Case 0 ' cobros_realizados
+'        Case 0 ' pagos_realizados
 ''            'si es visible|control|tipo campo|nombre campo|ancho control|
 ''            tots = "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;S|txtaux(5)|T|Diario|730|;S|cmdAux(0)|B|||;S|txtaux(6)|T|Fecha|1220|;S|cmdAux(1)|B|||;"
 ''            tots = tots & "S|txtaux(7)|T|Asiento|1100|;"
@@ -5412,33 +4687,33 @@ Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
-        Case 0 'cobros realizados
-            tabla = "cobros_realizados"
-            SQL = "SELECT cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea, cobros_realizados.numdiari, cobros_realizados.fechaent, "
-            SQL = SQL & " cobros_realizados.numasien, cobros_realizados.ctabanc2, "
-            SQL = SQL & " cobros_realizados.usuariocobro, cobros_realizados.fecrealizado, tipofpago.siglas, "
-            SQL = SQL & " cobros_realizados.reftalonpag, cobros_realizados.bancotalonpag, "
-            SQL = SQL & " cobros_realizados.impcobro "
-            SQL = SQL & " FROM " & tabla & " INNER JOIN tipofpago ON cobros_realizados.tipforpa = tipofpago.tipoformapago "
+        Case 0 'pagos realizados
+            tabla = "pagos_realizados"
+            SQL = "SELECT pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea, pagos_realizados.numdiari, pagos_realizados.fechaent, "
+            SQL = SQL & " pagos_realizados.numasien, pagos_realizados.ctabanc2, "
+            SQL = SQL & " pagos_realizados.usuariocobro, pagos_realizados.fecrealizado, tipofpago.siglas, "
+            SQL = SQL & " pagos_realizados.reftalonpag, pagos_realizados.bancotalonpag, "
+            SQL = SQL & " pagos_realizados.impcobro "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN tipofpago ON pagos_realizados.tipforpa = tipofpago.tipoformapago "
             If Enlaza Then
-                SQL = SQL & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
+                SQL = SQL & Replace(ObtenerWhereCab(True), "pagos", "pagos_realizados")
             Else
-                SQL = SQL & " WHERE cobros_realizados.numlinea is null"
+                SQL = SQL & " WHERE pagos_realizados.numlinea is null"
             End If
             SQL = SQL & " ORDER BY 1,2,3,4,5"
         Case 1 ' devoluciones
-            tabla = "cobros_realizados"
-            SQL = "SELECT cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea, cobros_realizados.fecdevol, "
-            SQL = SQL & "cobros_realizados.coddevol, usuarios.wdevolucion.descripcion, cobros_realizados.tiporem, "
-            SQL = SQL & "CASE cobros_realizados.tiporem WHEN 1 THEN 'Efectos' WHEN 2 THEN 'Pagarés' WHEN 3 THEN 'Talones' END as TTipo, codrem, anyorem, impcobro * (-1) "
-            SQL = SQL & " FROM " & tabla & " LEFT JOIN usuarios.wdevolucion ON cobros_realizados.coddevol = usuarios.wdevolucion.codigo "
+            tabla = "pagos_realizados"
+            SQL = "SELECT pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea, pagos_realizados.fecdevol, "
+            SQL = SQL & "pagos_realizados.coddevol, usuarios.wdevolucion.descripcion, pagos_realizados.tiporem, "
+            SQL = SQL & "CASE pagos_realizados.tiporem WHEN 1 THEN 'Efectos' WHEN 2 THEN 'Pagarés' WHEN 3 THEN 'Talones' END as TTipo, codrem, anyorem, impcobro * (-1) "
+            SQL = SQL & " FROM " & tabla & " LEFT JOIN usuarios.wdevolucion ON pagos_realizados.coddevol = usuarios.wdevolucion.codigo "
             If Enlaza Then
-                SQL = SQL & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
+                SQL = SQL & Replace(ObtenerWhereCab(True), "pagos", "pagos_realizados")
             Else
-                SQL = SQL & " WHERE cobros_realizados.numlinea is null"
+                SQL = SQL & " WHERE pagos_realizados.numlinea is null"
             End If
             
-            SQL = SQL & " and not cobros_realizados.tiporem is null "
+            SQL = SQL & " and not pagos_realizados.tiporem is null "
             SQL = SQL & " ORDER BY 1,2,3,4,5"
             
             
@@ -5456,8 +4731,9 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & "cobros.numserie=" & DBSet(Text1(13).Text, "T") & " and cobros.numfactu=" & DBSet(Text1(1).Text, "N") & " and cobros.fecfactu = " & DBSet(Text1(2).Text, "F")
-    vWhere = vWhere & " and cobros.numorden = " & DBSet(Text1(3).Text, "N")
+    vWhere = vWhere & "pagos.numserie=" & DBSet(Text1(13).Text, "T") & " and pagos.numfactu=" & DBSet(Text1(1).Text, "T") & " and pagos.fecfactu = " & DBSet(Text1(2).Text, "F")
+    vWhere = vWhere & " and pagos.numorden = " & DBSet(Text1(3).Text, "N")
+    vWhere = vWhere & " and pagos.codmacta = " & DBSet(Text1(4).Text, "T")
     ' *******************************************************
     
     ObtenerWhereCab = vWhere
@@ -5531,7 +4807,7 @@ Dim B As Boolean
 '
 '    B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
 '    Select Case Index
-'        Case 0 'cobros_realizados
+'        Case 0 'pagos_realizados
 '            For jj = 5 To txtaux.Count - 1
 '                txtaux(jj).Visible = B
 '                txtaux(jj).Top = alto
@@ -5610,25 +4886,6 @@ Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim J As Long
     
-    cboSituRem.Clear
-
-    cboSituRem.AddItem ""
-    cboSituRem.ItemData(cboSituRem.NewIndex) = Asc("NULL")
-
-
-    'Tipo de situacion de remesa
-    Set RS = New ADODB.Recordset
-    SQL = "SELECT * FROM usuarios.wtiposituacionrem ORDER BY situacio"
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    i = 0
-    While Not RS.EOF
-        cboSituRem.AddItem RS!descsituacion
-        cboSituRem.ItemData(cboSituRem.NewIndex) = Asc(RS!situacio)
-        i = i + 1
-        RS.MoveNext
-    Wend
-    RS.Close
-    Set RS = Nothing
 
     Combo1.Clear
 
@@ -5636,10 +4893,6 @@ Dim J As Long
     Combo1.ItemData(Combo1.NewIndex) = 0
     Combo1.AddItem "Pagado"
     Combo1.ItemData(Combo1.NewIndex) = 1
-    
-
-
-
 
 End Sub
 
@@ -5776,12 +5029,12 @@ End Sub
 
 Private Sub BotonVerAsiento()
 
-    If lwCobros.SelectedItem Is Nothing Then Exit Sub
+    If lwpagos.SelectedItem Is Nothing Then Exit Sub
 
 
     Set frmAsi = New frmAsientosHco
     
-    frmAsi.ASIENTO = lwCobros.SelectedItem.Text & "|" & lwCobros.SelectedItem.SubItems(1) & "|" & lwCobros.SelectedItem.SubItems(2) & "|" '& Me.AdoAux(0).Recordset.Fields(5) & "|" & Me.AdoAux(0).Recordset.Fields(6) & "|" & Me.AdoAux(0).Recordset.Fields(7) & "|"
+    frmAsi.ASIENTO = lwpagos.SelectedItem.Text & "|" & lwpagos.SelectedItem.SubItems(1) & "|" & lwpagos.SelectedItem.SubItems(2) & "|" '& Me.AdoAux(0).Recordset.Fields(5) & "|" & Me.AdoAux(0).Recordset.Fields(6) & "|" & Me.AdoAux(0).Recordset.Fields(7) & "|"
     frmAsi.SoloImprimir = True
     frmAsi.Show vbModal
     
@@ -5791,18 +5044,18 @@ End Sub
 
 Private Sub BotonImprimirRecibo()
 
-    If lwCobros.SelectedItem Is Nothing Then Exit Sub
+    If lwpagos.SelectedItem Is Nothing Then Exit Sub
 
 
     CargarTemporal
 
-    frmTESImpRecibo.pImporte = lwCobros.SelectedItem.SubItems(9) 'Me.AdoAux(0).Recordset.Fields(14)
-    frmTESImpRecibo.pFechaRec = lwCobros.SelectedItem.SubItems(1) 'Me.AdoAux(0).Recordset.Fields(6)
-    frmTESImpRecibo.pFecFactu = lwCobros.SelectedItem.SubItems(12) 'Me.AdoAux(0).Recordset.Fields(2)
-    frmTESImpRecibo.pNumFactu = lwCobros.SelectedItem.SubItems(11) 'Me.AdoAux(0).Recordset.Fields(1)
-    frmTESImpRecibo.pNumSerie = lwCobros.SelectedItem.SubItems(10) 'Me.AdoAux(0).Recordset.Fields(0)
-    frmTESImpRecibo.pNumOrden = lwCobros.SelectedItem.SubItems(13) 'Me.AdoAux(0).Recordset.Fields(3)
-    frmTESImpRecibo.pNumlinea = lwCobros.SelectedItem.SubItems(14) 'Me.AdoAux(0).Recordset.Fields(4)
+    frmTESImpRecibo.pImporte = lwpagos.SelectedItem.SubItems(9) 'Me.AdoAux(0).Recordset.Fields(14)
+    frmTESImpRecibo.pFechaRec = lwpagos.SelectedItem.SubItems(1) 'Me.AdoAux(0).Recordset.Fields(6)
+    frmTESImpRecibo.pFecFactu = lwpagos.SelectedItem.SubItems(12) 'Me.AdoAux(0).Recordset.Fields(2)
+    frmTESImpRecibo.pNumFactu = lwpagos.SelectedItem.SubItems(11) 'Me.AdoAux(0).Recordset.Fields(1)
+    frmTESImpRecibo.pNumSerie = lwpagos.SelectedItem.SubItems(10) 'Me.AdoAux(0).Recordset.Fields(0)
+    frmTESImpRecibo.pNumOrden = lwpagos.SelectedItem.SubItems(13) 'Me.AdoAux(0).Recordset.Fields(3)
+    frmTESImpRecibo.pNumlinea = lwpagos.SelectedItem.SubItems(14) 'Me.AdoAux(0).Recordset.Fields(4)
     
     frmTESImpRecibo.Show vbModal
 
@@ -5816,15 +5069,15 @@ Dim RS As ADODB.Recordset
     SQL = "delete from tmppendientes where codusu = " & vUsu.Codigo
     Conn.Execute SQL
                                                                               
-    ' en tmppendientes metemos la clave primaria de cobros_recibidos y el importe en letra
-                                                      'importe=nro factura,   codforpa=linea de cobros_realizados
+    ' en tmppendientes metemos la clave primaria de pagos_recibidos y el importe en letra
+                                                      'importe=nro factura,   codforpa=linea de pagos_realizados
     SQL = "insert into tmppendientes (codusu,serie_cta,importe,fecha,numorden,codforpa, observa) values ("
-    SQL = SQL & vUsu.Codigo & "," & DBSet(lwCobros.SelectedItem.SubItems(10), "T") & "," 'numserie
-    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(11), "N") & "," 'numfactu
-    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(12), "F") & "," 'fecfactu
-    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(13), "N") & "," 'numorden
-    SQL = SQL & DBSet(lwCobros.SelectedItem.SubItems(14), "N") & "," 'numlinea
-    SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(lwCobros.SelectedItem.SubItems(9)))), "T") & ") "
+    SQL = SQL & vUsu.Codigo & "," & DBSet(lwpagos.SelectedItem.SubItems(10), "T") & "," 'numserie
+    SQL = SQL & DBSet(lwpagos.SelectedItem.SubItems(11), "N") & "," 'numfactu
+    SQL = SQL & DBSet(lwpagos.SelectedItem.SubItems(12), "F") & "," 'fecfactu
+    SQL = SQL & DBSet(lwpagos.SelectedItem.SubItems(13), "N") & "," 'numorden
+    SQL = SQL & DBSet(lwpagos.SelectedItem.SubItems(14), "N") & "," 'numlinea
+    SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(lwpagos.SelectedItem.SubItems(9)))), "T") & ") "
     
     Conn.Execute SQL
 
@@ -5853,7 +5106,7 @@ Dim i As Integer
 '
 '    ' *** posar el nom del les distintes taules de llínies ***
 '    Select Case Index
-'        Case 0: vTabla = "cobros_realizados"
+'        Case 0: vTabla = "pagos_realizados"
 '
 '    End Select
 '    ' ********************************************************
@@ -5861,10 +5114,10 @@ Dim i As Integer
 '    vWhere = ObtenerWhereCab(False)
 '
 '    Select Case Index
-'         Case 0   'cobros_realizados
+'         Case 0   'pagos_realizados
 '            'pasar a "" si no volem que mos sugerixca res a l'afegir ***
 '            NumF = ""
-'            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", Replace(vWhere, "cobros", "cobros_realizados"))
+'            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", Replace(vWhere, "pagos", "pagos_realizados"))
 '            ' ***************************************************************
 '
 '            AnyadirLinea DataGridAux(Index), AdoAux(Index)
@@ -5880,7 +5133,7 @@ Dim i As Integer
 '
 '            Select Case Index
 '                ' *** valor per defecte a l'insertar i formateig de tots els camps ***
-'                Case 0 'lineas de cobros realizados
+'                Case 0 'lineas de pagos realizados
 '                    If Limpia Then
 '                        For i = 0 To txtaux.Count - 1
 '                            txtaux(i).Text = ""
@@ -5981,7 +5234,7 @@ Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
 End Function
 
 
-Private Function RecalcularTotalesCobros() As Boolean
+Private Function RecalcularTotalespagos() As Boolean
 Dim SQL As String
 Dim SqlInsert As String
 Dim SqlValues As String
@@ -5990,13 +5243,13 @@ Dim RS As ADODB.Recordset
 
 Dim Baseimpo As Currency
 
-    On Error GoTo eRecalcularTotalesCobros
+    On Error GoTo eRecalcularTotalespagos
 
-    RecalcularTotalesCobros = False
+    RecalcularTotalespagos = False
 
     Baseimpo = 0
     
-    SQL = "select sum(impcobro) importe from cobros_realizados "
+    SQL = "select sum(impcobro) importe from pagos_realizados "
     SQL = SQL & " where numserie = " & DBSet(Text1(13).Text, "T") & " and numfactu = " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F")
     SQL = SQL & " and numorden = " & DBSet(Text1(3).Text, "N")
     
@@ -6004,18 +5257,18 @@ Dim Baseimpo As Currency
     
     Text1(6).Text = Format(Baseimpo, FormatoImporte)
     
-    SQL = "update cobros set "
+    SQL = "update pagos set "
     SQL = SQL & " impcobro = " & DBSet(Baseimpo, "N")
     SQL = SQL & " where numserie= " & DBSet(Text1(13).Text, "T") & " and numfactu= " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F")
     SQL = SQL & " and numorden = " & DBSet(Text1(3).Text, "N")
     
     Conn.Execute SQL
     
-    RecalcularTotalesCobros = True
+    RecalcularTotalespagos = True
     Exit Function
     
-eRecalcularTotalesCobros:
-    MuestraError Err.Number, "Recalcular Totales Cobros", Err.Description
+eRecalcularTotalespagos:
+    MuestraError Err.Number, "Recalcular Totales pagos", Err.Description
 End Function
 
 Private Sub InsertarLinea()
@@ -6044,7 +5297,7 @@ Private Sub InsertarLinea()
 '
 '        If B And InsertarDesdeForm2(Me, 2, nomframe) Then
 '
-'            B = RecalcularTotalesCobros
+'            B = RecalcularTotalespagos
 '
 '            If B Then
 '                Conn.CommitTrans
@@ -6104,7 +5357,7 @@ Dim B As Boolean
 '
 '        If B And ModificaDesdeFormulario2(Me, 2, nomframe) Then
 '
-'            B = RecalcularTotalesCobros
+'            B = RecalcularTotalespagos
 '
 '            If B Then
 '                Conn.CommitTrans
@@ -6276,14 +5529,14 @@ Dim SQL As String
         Text1(0).Text = DBLet(RS!Forpa, "N")
         Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
         
-        Text1(42).Text = DBLet(RS!Nommacta, "T")
-        Text1(41).Text = DBLet(RS!dirdatos, "T")
-        Text1(40).Text = DBLet(RS!codposta, "T")
-        Text1(39).Text = DBLet(RS!desPobla, "T")
-        Text1(38).Text = DBLet(RS!desProvi, "T")
-        Text1(37).Text = DBLet(RS!nifdatos, "T")
-        Text1(36).Text = DBLet(RS!codPAIS, "T")
-        Text2(36).Text = PonerNombreDeCod(Text1(36), "paises", "nompais", "codpais", "T")
+        Text1(16).Text = DBLet(RS!Nommacta, "T")
+        Text1(15).Text = DBLet(RS!dirdatos, "T")
+        Text1(14).Text = DBLet(RS!codposta, "T")
+        Text1(22).Text = DBLet(RS!desPobla, "T")
+        Text1(23).Text = DBLet(RS!desProvi, "T")
+        Text1(24).Text = DBLet(RS!nifdatos, "T")
+        Text1(25).Text = DBLet(RS!codPAIS, "T")
+        Text2(25).Text = PonerNombreDeCod(Text1(25), "paises", "nompais", "codpais", "T")
     End If
     Exit Sub
     
@@ -6294,25 +5547,25 @@ End Sub
 
 Private Sub CargarColumnas()
     
-    lwCobros.ColumnHeaders.Clear
+    lwpagos.ColumnHeaders.Clear
     
-    lwCobros.ColumnHeaders.Add , , "Diario", 830
-    lwCobros.ColumnHeaders.Add , , "Fecha", 1320
-    lwCobros.ColumnHeaders.Add , , "Asiento", 1200, 1
-    lwCobros.ColumnHeaders.Add , , "Cta.Cobro", 1405
-    lwCobros.ColumnHeaders.Add , , "Usuario", 1405
-    lwCobros.ColumnHeaders.Add , , "Realizado", 1455
-    lwCobros.ColumnHeaders.Add , , "Tipo", 905
-    lwCobros.ColumnHeaders.Add , , "Ref.Talon", 1755
-    lwCobros.ColumnHeaders.Add , , "Banco Talon/Pag", 1855
-    lwCobros.ColumnHeaders.Add , , "Importe", 1900, 1
+    lwpagos.ColumnHeaders.Add , , "Diario", 830
+    lwpagos.ColumnHeaders.Add , , "Fecha", 1320
+    lwpagos.ColumnHeaders.Add , , "Asiento", 1200, 1
+    lwpagos.ColumnHeaders.Add , , "Cta.Pago", 1405
+    lwpagos.ColumnHeaders.Add , , "Usuario", 1405
+    lwpagos.ColumnHeaders.Add , , "Realizado", 1455
+    lwpagos.ColumnHeaders.Add , , "Tipo", 905
+    lwpagos.ColumnHeaders.Add , , "Ref.Talon", 1755
+    lwpagos.ColumnHeaders.Add , , "Banco Talon/Pag", 1855
+    lwpagos.ColumnHeaders.Add , , "Importe", 1900, 1
     
-    lwCobros.ColumnHeaders.Add , , "serie", 0
-    lwCobros.ColumnHeaders.Add , , "Factura", 0
-    lwCobros.ColumnHeaders.Add , , "Fecha", 0
-    lwCobros.ColumnHeaders.Add , , "vto", 0
-    lwCobros.ColumnHeaders.Add , , "Linea", 0
-    lwCobros.ColumnHeaders.Add , , "Remesa", 0
+    lwpagos.ColumnHeaders.Add , , "serie", 0
+    lwpagos.ColumnHeaders.Add , , "Factura", 0
+    lwpagos.ColumnHeaders.Add , , "Fecha", 0
+    lwpagos.ColumnHeaders.Add , , "vto", 0
+    lwpagos.ColumnHeaders.Add , , "Linea", 0
+    lwpagos.ColumnHeaders.Add , , "Remesa", 0
 
 End Sub
 
