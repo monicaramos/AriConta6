@@ -606,7 +606,7 @@ Private Sub Form_Load()
     
     I = 0
     If Cobros And (Tipo = 2 Or Tipo = 3) Then I = 1
-    Me.mnbarra1.Visible = I = 1
+    Me.mnBarra1.Visible = I = 1
     Me.mnNumero.Visible = I = 1
     'Efectuar cobros
     Me.cmdRegresar.Visible = Regresar
@@ -627,7 +627,7 @@ End Sub
 
 Private Sub Form_Resize()
 Dim I As Integer
-Dim h As Integer
+Dim H As Integer
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
     If Me.Height < 2700 Then Me.Height = 2700
     If Me.Width < 2700 Then Me.Width = 2700
@@ -642,7 +642,7 @@ Dim h As Integer
     Me.ListView1.Width = Me.frame.Width
     
     'Las columnas
-    h = ListView1.Tag
+    H = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
     For I = 1 To Me.ListView1.ColumnHeaders.Count
         If InStr(1, ListView1.ColumnHeaders(I).Tag, "%") Then
@@ -653,7 +653,7 @@ Dim h As Integer
         End If
         Me.ListView1.ColumnHeaders(I).Width = Val(cad)
     Next I
-    ListView1.Tag = h
+    ListView1.Tag = H
 End Sub
 
 
@@ -825,7 +825,7 @@ Dim ImpAux As Currency
     ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
     ItmX.SubItems(3) = Format(RS!FecVenci, "dd/mm/yyyy")
     ItmX.SubItems(4) = RS!numorden
-    ItmX.SubItems(5) = RS!nommacta
+    ItmX.SubItems(5) = RS!Nommacta
     ItmX.SubItems(6) = RS!siglas
     
     ItmX.SubItems(7) = Format(RS!ImpVenci, FormatoImporte)
@@ -915,7 +915,7 @@ Dim cad As String
     If Not Cobros Then
         cad = "SELECT pagos.*, cuentas.nommacta, tipofpago.siglas,cuentas.codmacta FROM"
         cad = cad & " pagos , cuentas, formapago, tipofpago"
-        cad = cad & " Where spagop.ctaprove = cuentas.codmacta"
+        cad = cad & " Where pagos.codmacta = cuentas.codmacta"
         cad = cad & " AND formapago.tipforpa = tipofpago.tipoformapago"
         cad = cad & " AND pagos.codforpa = formapago.codforpa"
         If vSQL <> "" Then cad = cad & " AND " & vSQL
@@ -961,7 +961,7 @@ Dim J As Byte
         ItmX.SubItems(1) = Format(RS!FecFactu, "dd/mm/yyyy")
         ItmX.SubItems(2) = Format(RS!Fecefect, "dd/mm/yyyy")
         ItmX.SubItems(3) = RS!numorden
-        ItmX.SubItems(4) = RS!nommacta
+        ItmX.SubItems(4) = RS!Nommacta
         ItmX.SubItems(5) = RS!siglas
         ItmX.SubItems(6) = Format(RS!ImpEfect, FormatoImporte)
         If Not IsNull(RS!imppagad) Then

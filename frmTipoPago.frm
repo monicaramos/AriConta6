@@ -1257,8 +1257,8 @@ Private Sub Check1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim Cad As String
-    Dim i As Integer
+    Dim cad As String
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -1417,8 +1417,8 @@ Private Sub BotonModificar()
 End Sub
 
 Private Sub BotonEliminar()
-    Dim Cad As String
-    Dim i As Integer
+    Dim cad As String
+    Dim I As Integer
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -1426,10 +1426,10 @@ Private Sub BotonEliminar()
     'Comprobamos si se puede eliminar
     If Not SePuedeEliminar Then Exit Sub
     '### a mano
-    Cad = "Seguro que desea eliminar de la BD el registro:"
-    i = MsgBox(Cad, vbQuestion + vbYesNo)
+    cad = "Seguro que desea eliminar de la BD el registro:"
+    I = MsgBox(cad, vbQuestion + vbYesNo)
     'Borramos
-    If i = vbYes Then
+    If I = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -1444,9 +1444,9 @@ Private Sub BotonEliminar()
                 Data1.Recordset.MoveFirst
                 NumRegElim = NumRegElim - 1
                 If NumRegElim > 1 Then
-                    For i = 1 To NumRegElim - 1
+                    For I = 1 To NumRegElim - 1
                         Data1.Recordset.MoveNext
-                    Next i
+                    Next I
                 End If
                 PonerCampos
         End If
@@ -1458,8 +1458,8 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1468,18 +1468,18 @@ If Data1.Recordset.EOF Then
     Exit Sub
 End If
 
-Cad = ""
-i = 0
+cad = ""
+I = 0
 Do
-    J = i + 1
-    i = InStr(J, DatosADevolverBusqueda, "|")
-    If i > 0 Then
-        Aux = Mid(DatosADevolverBusqueda, J, i - J)
+    J = I + 1
+    I = InStr(J, DatosADevolverBusqueda, "|")
+    If I > 0 Then
+        Aux = Mid(DatosADevolverBusqueda, J, I - J)
         J = Val(Aux)
-        Cad = Cad & Text1(J).Text & "|"
+        cad = cad & Text1(J).Text & "|"
     End If
-Loop Until i = 0
-RaiseEvent DatoSeleccionado(Cad)
+Loop Until I = 0
+RaiseEvent DatoSeleccionado(cad)
 Unload Me
 End Sub
 
@@ -1506,7 +1506,7 @@ End Sub
 '++
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
 
     Me.Icon = frmPpal.Icon
 
@@ -1587,16 +1587,16 @@ Private Sub LimpiarCampos()
     Check1(2).Value = 0
     Check1(3).Value = 0
     
-    For i = 0 To Combo2.Count - 1
-        Combo2(i).ListIndex = -1
-    Next i
+    For I = 0 To Combo2.Count - 1
+        Combo2(I).ListIndex = -1
+    Next I
     lblIndicador.Caption = ""
-    For i = 0 To Text1.Count - 1
-        Text1(i).BackColor = vbWhite
-    Next i
-    For i = 0 To Combo2.Count - 1
-        Combo2(i).BackColor = vbWhite
-    Next i
+    For I = 0 To Text1.Count - 1
+        Text1(I).BackColor = vbWhite
+    Next I
+    For I = 0 To Combo2.Count - 1
+        Combo2(I).BackColor = vbWhite
+    Next I
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -1634,7 +1634,7 @@ Dim CadB As String
 End Sub
 
 Private Sub imgCuentas_Click(Index As Integer)
-Dim Cad As String
+Dim cad As String
 
 
  Screen.MousePointer = vbHourglass
@@ -1791,7 +1791,7 @@ Private Sub Text1_LostFocus(Index As Integer)
 End Sub
 
 Private Sub HacerBusqueda()
-Dim Cad As String
+Dim cad As String
 Dim CadB As String
 CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
 
@@ -1846,7 +1846,7 @@ EEPonerBusq:
 End Sub
 
 Private Sub PonerCampos()
-    Dim i As Integer
+    Dim I As Integer
     Dim mTag As CTag
     Dim SQL As String
     If Data1.Recordset.EOF Then Exit Sub
@@ -1863,7 +1863,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 '
 Private Sub PonerModo(Kmodo As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim B As Boolean
 
     BuscaChekc = ""
@@ -1898,9 +1898,9 @@ Private Sub PonerModo(Kmodo As Integer)
         cmdCancelar.Cancel = False
     End If
     'Los combo
-    For i = 0 To 3
-        Combo2(i).Enabled = B Or Modo = 1
-    Next i
+    For I = 0 To 3
+        Combo2(I).Enabled = B Or Modo = 1
+    Next I
     Toolbar1.Buttons(3).Enabled = Not B And vUsu.Nivel < 2
     Toolbar1.Buttons(5).Enabled = Not B
     Toolbar1.Buttons(6).Enabled = Not B
@@ -1943,15 +1943,15 @@ End Sub
 
 
 Private Sub HabilitarText(Boleana As Boolean)
-Dim i As Integer
+Dim I As Integer
     On Error Resume Next
-    For i = 0 To Text1.Count - 1
-        Text1(i).Locked = Boleana
-        Text1(i).BackColor = vbWhite
-    Next i
-    For i = 2 To 11
-        imgCuentas(i).Enabled = Not Boleana
-    Next i
+    For I = 0 To Text1.Count - 1
+        Text1(I).Locked = Boleana
+        Text1(I).BackColor = vbWhite
+    Next I
+    For I = 2 To 11
+        imgCuentas(I).Enabled = Not Boleana
+    Next I
     Err.Clear
 End Sub
 
@@ -2015,18 +2015,18 @@ End Function
 Private Sub SugerirCodigoSiguiente()
 
     Dim SQL As String
-    Dim Rs As ADODB.Recordset
+    Dim RS As ADODB.Recordset
 
     SQL = "Select Max(tipoformapago) from " & NombreTabla
     Text1(0).Text = 1
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, , , adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            Text1(0).Text = Rs.Fields(0) + 1
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, , , adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            Text1(0).Text = RS.Fields(0) + 1
         End If
     End If
-    Rs.Close
+    RS.Close
 End Sub
 
 
@@ -2058,7 +2058,7 @@ End Sub
 
 Private Sub PonerCtasIVA()
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 On Error GoTo EPonerCtasIVA
 
 
@@ -2094,13 +2094,13 @@ End Sub
 
 
 Private Function SePuedeEliminar() As Boolean
-Dim Cad As String
+Dim cad As String
 
     Screen.MousePointer = vbHourglass
     SePuedeEliminar = False
-    Cad = "Select * from formapago where  tipforpa =" & Data1.Recordset!tipoformapago
+    cad = "Select * from formapago where  tipforpa =" & Data1.Recordset!tipoformapago
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If miRsAux.EOF Then
         SePuedeEliminar = True
     Else
@@ -2113,30 +2113,30 @@ End Function
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim RS As ADODB.Recordset
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
+    If Not RS.EOF Then
         Toolbar1.Buttons(1).Enabled = False
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 2 And Me.Data1.Recordset.RecordCount > 0)
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2 And Me.Data1.Recordset.RecordCount > 0)
         Toolbar1.Buttons(3).Enabled = False
         
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 

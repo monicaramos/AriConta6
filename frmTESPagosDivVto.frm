@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Begin VB.Form frmTESCobrosDivVto 
+Begin VB.Form frmTESPagosDivVto 
    Appearance      =   0  'Flat
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listados"
@@ -8,7 +8,7 @@ Begin VB.Form frmTESCobrosDivVto
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   5565
-   Icon            =   "frmTESCobrosDivVto.frx":0000
+   Icon            =   "frmTESPagosDivVto.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -160,7 +160,7 @@ Begin VB.Form frmTESCobrosDivVto
          Height          =   240
          Index           =   0
          Left            =   1920
-         Picture         =   "frmTESCobrosDivVto.frx":000C
+         Picture         =   "frmTESPagosDivVto.frx":000C
          Top             =   2280
          Width           =   240
       End
@@ -280,7 +280,7 @@ Begin VB.Form frmTESCobrosDivVto
       End
    End
 End
-Attribute VB_Name = "frmTESCobrosDivVto"
+Attribute VB_Name = "frmTESPagosDivVto"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -292,7 +292,7 @@ Private Const SaltoLinea = """ + chr(13) + """
 Public Opcion As Byte
     '27.-  Divide el vencimiento en dos vtos a partir del importe introducido en el text
     
-
+    
 Private WithEvents frmCta As frmColCtas
 Attribute frmCta.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
@@ -307,9 +307,9 @@ Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim Cad As String
+Dim cad As String
 Dim CONT As Long
-Dim i As Integer
+Dim I As Integer
 Dim TotalRegistros As Long
 
 Dim Importe As Currency
@@ -354,7 +354,7 @@ Dim vImpvto As Currency
 Dim vVtos As Integer
 Dim vTotal As Currency
 Dim J As Integer
-Dim K As Integer
+Dim k As Integer
 Dim ImportePagado As Currency
 Dim vFecVenci As Date
 Dim FecVenci As Date
@@ -439,13 +439,13 @@ Dim Dias As Integer
         '           1.- cadenaSQL numfac,numsere,fecfac
         '           2.- Numero vto
         '           3.- Importe maximo
-        i = -1
-        RC = "Select max(numorden) from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+        I = -1
+        RC = "Select max(numorden) from pagos WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         RS.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RS.EOF Then
             SQL = "Error. Vencimiento NO encontrado: " & CadenaDesdeOtroForm
         Else
-            i = RS.Fields(0) '+ 1
+            I = RS.Fields(0) '+ 1
         End If
         RS.Close
         Set RS = Nothing
@@ -468,7 +468,7 @@ Dim Dias As Integer
     vFecVenci = FecVenci
     'OK.  a desdoblar
     vTotal = 0
-    K = i + 1
+    k = I + 1
     For J = 1 To vVtos - 1
     
         vTotal = vTotal + vImpvto
@@ -476,25 +476,24 @@ Dim Dias As Integer
         vFecVenci = DateAdd("d", DBLet(Dias, "N"), vFecVenci)
         
     
-        SQL = "INSERT INTO cobros (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
-        SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,"
-        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,"
-        SQL = SQL & "`text33csb`,`text41csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
-        SQL = SQL & "`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban) "
+        SQL = "INSERT INTO pagos (numorden,impefect,fecultpa,imppagad,emitdocum,"
+        SQL = SQL & "numserie,numfactu,fecfactu,codmacta,codforpa,fecefect,ctabanc1,entidad,oficina,control,cuentaba,"
+        SQL = SQL & "text1csb,text2csb,"
+        SQL = SQL & "observa,nomprove,domprove,pobprove,cpprove,proprove,codpais,nifprove,iban) "
         'Valores
-        SQL = SQL & " SELECT " & K & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
-        SQL = SQL & "NULL,NULL,NULL,NULL,"
-        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,"
+        SQL = SQL & " SELECT " & k & "," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
+        SQL = SQL & "numserie,numfactu,fecfactu,codmacta,codforpa,"
         SQL = SQL & DBSet(vFecVenci, "F") & ","
-        SQL = SQL & "`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,`text33csb`,`text41csb`,"
+        SQL = SQL & "ctabanc1,entidad,oficina,control,cuentaba,text1csb,text2csb,"
         'text83csb`,
-        SQL = SQL & "`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban FROM "
-        SQL = SQL & " cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+        SQL = SQL & "observa,nomprove,domprove,pobprove,cpprove,proprove,codpais,nifprove,iban FROM "
+        SQL = SQL & " pagos WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+        SQL = SQL & " and codmacta = "
     
         Conn.Execute SQL
     
-        K = K + 1
+        k = k + 1
     
     Next J
     
@@ -502,8 +501,8 @@ Dim Dias As Integer
     ' actualizamos el primer vencimiento
     vTotal = vTotal + vImpvto
         
-    SQL = "update cobros set impvenci = coalesce(impcobro,0) + " & DBSet(vImpvto, "N")
-    SQL = SQL & ", fecvenci = " & DBSet(FecVenci, "F")
+    SQL = "update pagos set impefect = coalesce(impefect,0) + " & DBSet(vImpvto, "N")
+    SQL = SQL & ", fecefect = " & DBSet(FecVenci, "F")
     
     SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
     SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
@@ -512,17 +511,17 @@ Dim Dias As Integer
     
     ' en el ultimo dejamos la diferencia
     If vTotal <> Importe Then
-        SQL = "update cobros set impvenci = impvenci + " & DBSet(Importe - vTotal, "N")
+        SQL = "update pagos set impefect = impefect + " & DBSet(Importe - vTotal, "N")
         
         SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        SQL = SQL & " AND numorden = " & DBSet(K - 1, "N")
+        SQL = SQL & " AND numorden = " & DBSet(k - 1, "N")
         
         Conn.Execute SQL
     End If
     
     'Insertamos el LOG
     ParaElLog = "Dividir Vto.Fra.: " & Me.Label4(57).Caption & vbCrLf
-    ParaElLog = ParaElLog & "Cliente         : " & Me.Label4(56).Caption & vbCrLf
+    ParaElLog = ParaElLog & "Proveedor         : " & Me.Label4(56).Caption & vbCrLf
     ParaElLog = ParaElLog & "Nro.Vencimientos: " & txtcodigo(0).Text & vbCrLf
     ParaElLog = ParaElLog & "Importe Vto     : " & txtcodigo(1).Text & vbCrLf
     ParaElLog = ParaElLog & "Fecha primer Vto: " & txtcodigo(2).Text & vbCrLf
@@ -538,7 +537,7 @@ ecmdDivVto:
         Conn.RollbackTrans
     Else
         Conn.CommitTrans
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & K & "|"
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & k & "|"
         MsgBox "Proceso realizado correctamente", vbExclamation
         Unload Me
     End If
@@ -585,11 +584,11 @@ Dim Img As Image
     Me.Width = W + 300
     Me.Height = H + 400
     
-    i = Opcion
-    If Opcion = 13 Or i = 43 Or i = 44 Then i = 11
+    I = Opcion
+    If Opcion = 13 Or I = 43 Or I = 44 Then I = 11
     
     'Aseguradas
-    Me.cmdCancelar(i).Cancel = True
+    Me.cmdCancelar(I).Cancel = True
     
 End Sub
 
@@ -627,7 +626,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub txtcodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim B As Boolean
 
     'Quitar espacios en blanco por los lados
