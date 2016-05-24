@@ -428,10 +428,10 @@ Begin VB.Form frmTESPagos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   3435
-         Left            =   270
+         Height          =   3525
+         Left            =   300
          TabIndex        =   80
-         Top             =   1140
+         Top             =   1080
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
@@ -3151,6 +3151,9 @@ Dim cad As String
     cad = cad & " AND " & DevfrmCCtas
     DevfrmCCtas = ValorDevueltoFormGrid(Text1(3), CadenaDevuelta, 4)
     cad = cad & " AND " & DevfrmCCtas
+    DevfrmCCtas = ValorDevueltoFormGrid(Text1(4), CadenaDevuelta, 5)
+    cad = cad & " AND " & DevfrmCCtas
+    
     DevfrmCCtas = cad
     If DevfrmCCtas = "" Then Exit Sub
     'Se muestran en el mismo form
@@ -3712,7 +3715,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
     CadenaDesdeOtroForm = ""
     
-    frmTESVerCobrosPagos.vSQL = CadB
+    frmTESVerCobrosPagos.vSQL = cadFiltro
     frmTESVerCobrosPagos.OrdenarEfecto = False
     frmTESVerCobrosPagos.Regresar = True
     frmTESVerCobrosPagos.Cobros = False

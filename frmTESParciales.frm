@@ -1050,10 +1050,8 @@ Dim CtaBancoGastos As String
         Exit Function
     End If
         
-    
     'Fecha dentro ejercicios
     If FechaCorrecta2(CDate(Text3(0).Text), True) > 1 Then Exit Function
-    
     
     If ComprobarCero(Text2(1).Text) <> 0 Then
         CtaBancoGastos = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", txtCta(1), "T")
@@ -1079,8 +1077,6 @@ Dim CtaBancoGastos As String
             Im = ImporteFormateado(Text1(5).Text)
             impo = impo - Im
         End If
-        
-        
     Else
         impo = ImporteFormateado(Text1(3).Text) 'Vto
 
@@ -1089,11 +1085,7 @@ Dim CtaBancoGastos As String
             Im = ImporteFormateado(Text1(5).Text)
             impo = impo - Im
         End If
-        
-        
     End If
-    
-    
     
     Im = ImporteFormateado(Text2(0).Text) 'Lo que voy a pagar
     cad = ""
@@ -1122,13 +1114,9 @@ Dim CtaBancoGastos As String
         MsgBox cad, vbExclamation
         Exit Function
     End If
-    
-        
         
     'Comprobaremos un par de cosillas
     If CuentaBloqeada(RecuperaValor(Cta, 1), CDate(Text3(0).Text), True) Then Exit Function
-        
-        
         
     DatosOK = True
     Exit Function
@@ -1139,15 +1127,16 @@ End Function
 
 Private Function RealizarAnticipo() As Boolean
 
-        Conn.BeginTrans
-        If Contabilizar Then
-            Conn.CommitTrans
-            RealizarAnticipo = True
-        Else
-            'Conn.RollbackTrans
-            TirarAtrasTransaccion
-            RealizarAnticipo = False
-        End If
+    Conn.BeginTrans
+    If Contabilizar Then
+        Conn.CommitTrans
+        RealizarAnticipo = True
+    Else
+        'Conn.RollbackTrans
+        TirarAtrasTransaccion
+        RealizarAnticipo = False
+    End If
+
 End Function
 
 
@@ -1210,9 +1199,7 @@ Dim Sql5 As String
         SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilizar Pagos')"
     End If
     
-    
     Conn.Execute SQL
-        
         
         
     'Inserto en las lineas de apuntes
@@ -1227,8 +1214,6 @@ Dim Sql5 As String
     SQL = SQL & ",'" & Format(Text3(0).Text, FormatoFecha) & "'," & Mc.Contador & ","
     
     
-    
-    
     'numdocum
     Numdocum = DevNombreSQL(RecuperaValor(Vto, 2))
     If Cobro Then
@@ -1238,7 +1223,6 @@ Dim Sql5 As String
         'Numdocum = SerieNumeroFactura(10, RecuperaValor(Vto, 1), Numdocum)
         Numdocum = RecuperaValor(Vto, 1) & Format(Numdocum, "0000000")
     End If
-    
     
     
     'Concepto y ampliacion del apunte
@@ -1283,7 +1267,6 @@ Dim Sql5 As String
     End If
        
            
-           
     If Conce = 2 Then
        Ampliacion = Ampliacion & RecuperaValor(Vto, 3)  'Fecha vto
     ElseIf Conce = 4 Then
@@ -1326,7 +1309,11 @@ Dim Sql5 As String
     Else
         cad = cad & "NULL"
     End If
-    cad = cad & ",'COBRO',0)"
+    If Cobro Then
+        cad = cad & ",'COBRO',0)"
+    Else
+        cad = cad & ",'PAGO',0)"
+    End If
     cad = SQL & cad
     Conn.Execute cad
     
@@ -1544,9 +1531,9 @@ Dim Sql5 As String
     
     
     '++monica
+    Dim NumLin As Long
+    
     If Cobro Then
-        Dim NumLin As Long
-        
         NumLin = DevuelveValor("select max(numlinea) from cobros_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4))
         NumLin = NumLin + 1
         

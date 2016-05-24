@@ -5068,7 +5068,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
     CadenaDesdeOtroForm = ""
     
-    frmTESVerCobrosPagos.vSQL = CadB
+    frmTESVerCobrosPagos.vSQL = cadFiltro
     frmTESVerCobrosPagos.OrdenarEfecto = False
     frmTESVerCobrosPagos.Regresar = True
     frmTESVerCobrosPagos.Cobros = True

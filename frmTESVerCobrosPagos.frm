@@ -545,8 +545,9 @@ Private Sub cmdRegresar_Click()
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & ListView1.SelectedItem.SubItems(2) & "|" & ListView1.SelectedItem.SubItems(4) & "|"
         Else
             'Pagos proveedores
-            CadenaDesdeOtroForm = ListView1.SelectedItem.Tag & "|" & ListView1.SelectedItem.Text & "|"
-            CadenaDesdeOtroForm = CadenaDesdeOtroForm & ListView1.SelectedItem.SubItems(1) & "|" & ListView1.SelectedItem.SubItems(3) & "|"
+            CadenaDesdeOtroForm = ListView1.SelectedItem.Text & "|"
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & ListView1.SelectedItem.SubItems(1) & "|" & ListView1.SelectedItem.SubItems(2) & "|"
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & ListView1.SelectedItem.SubItems(4) & "|" & ListView1.SelectedItem.Tag & "|"
         End If
     Else
         CadenaDesdeOtroForm = ""
@@ -601,6 +602,8 @@ Private Sub Form_Load()
         chkReme.Visible = True
     Else
         Caption = "Pagos pendientes"
+        
+        CampoOrden = "pagos.fecefect"
     End If
     
     
@@ -683,10 +686,10 @@ Dim I As Integer
             ALIGN = ALIGN & "L"
         End If
    Else
-        NCols = 9
-        Columnas = "Nº Factura|F. Fact|F. VTO|Nº|PROVEEDOR|Tipo|Importe|Pagado|Pendiente|"
-        ancho = "15%|12%|12%|400|26%|800|12%|12%|12%|"
-        ALIGN = "LLLLLLDDD"
+        NCols = 10
+        Columnas = "Serie|Nº Factura|F. Fact|F. VTO|Nº|PROVEEDOR|Tipo|Importe|Pagado|Pendiente|"
+        ancho = "800|12%|11%|11%|400|25%|800|12%|11%|12%|"
+        ALIGN = "LLLLLLLDDD"
         ListView1.Tag = 1600  'La suma de los valores fijos. Para k ajuste los campos k pueden crecer
     End If
         
@@ -825,8 +828,8 @@ Dim ImpAux As Currency
     ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
     ItmX.SubItems(3) = Format(RS!FecVenci, "dd/mm/yyyy")
     ItmX.SubItems(4) = RS!numorden
-    ItmX.SubItems(5) = RS!Nommacta
-    ItmX.SubItems(6) = RS!siglas
+    ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
+    ItmX.SubItems(6) = DBLet(RS!siglas, "T")
     
     ItmX.SubItems(7) = Format(RS!ImpVenci, FormatoImporte)
     vImporte = DBLet(RS!Gastos, "N")
@@ -913,19 +916,18 @@ Private Function DevSQL() As String
 Dim cad As String
 
     If Not Cobros Then
-        cad = "SELECT pagos.*, cuentas.nommacta, tipofpago.siglas,cuentas.codmacta FROM"
-        cad = cad & " pagos , cuentas, formapago, tipofpago"
-        cad = cad & " Where pagos.codmacta = cuentas.codmacta"
-        cad = cad & " AND formapago.tipforpa = tipofpago.tipoformapago"
+        cad = "SELECT pagos.*, pagos.nomprove nommacta, tipofpago.siglas,pagos.codmacta FROM"
+        cad = cad & " pagos, formapago, tipofpago"
+        cad = cad & " Where formapago.tipforpa = tipofpago.tipoformapago"
         cad = cad & " AND pagos.codforpa = formapago.codforpa"
         If vSQL <> "" Then cad = cad & " AND " & vSQL
     
     Else
         'cobros
         cad = "SELECT cobros.*, formapago.nomforpa, tipofpago.descformapago, tipofpago.siglas, "
-        cad = cad & " cuentas.nommacta,cuentas.codmacta,tipofpago.tipoformapago, "
+        cad = cad & " cobros.nomclien nommacta,cobros.codmacta,tipofpago.tipoformapago, "
         cad = cad & " coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0) imppdte "
-        cad = cad & " FROM ((cobros INNER JOIN formapago ON cobros.codforpa = formapago.codforpa) INNER JOIN tipofpago ON formapago.tipforpa = tipofpago.tipoformapago) INNER JOIN cuentas ON cobros.codmacta = cuentas.codmacta"
+        cad = cad & " FROM (cobros INNER JOIN formapago ON cobros.codforpa = formapago.codforpa) INNER JOIN tipofpago ON formapago.tipforpa = tipofpago.tipoformapago "
         If vSQL <> "" Then cad = cad & " WHERE " & vSQL
     End If
     'SQL pedido
@@ -938,6 +940,7 @@ Private Sub CargaPagos()
     cad = DevSQL
     
     'ORDENACION
+    If CampoOrden = "" Then CampoOrden = "pagos.fecefect"
     cad = cad & " ORDER BY " & CampoOrden
     If Orden Then cad = cad & " DESC"
     If CampoOrden <> "pagos.fecefect" Then cad = cad & ", pagos.fecefect"
@@ -955,55 +958,55 @@ End Sub
 
 Private Sub InsertaItemPago()
 Dim J As Byte
-        Set ItmX = ListView1.ListItems.Add()
-        
-        ItmX.Text = RS!NumFactu
-        ItmX.SubItems(1) = Format(RS!FecFactu, "dd/mm/yyyy")
-        ItmX.SubItems(2) = Format(RS!Fecefect, "dd/mm/yyyy")
-        ItmX.SubItems(3) = RS!numorden
-        ItmX.SubItems(4) = RS!Nommacta
-        ItmX.SubItems(5) = RS!siglas
-        ItmX.SubItems(6) = Format(RS!ImpEfect, FormatoImporte)
-        If Not IsNull(RS!imppagad) Then
-            ItmX.SubItems(7) = Format(RS!imppagad, FormatoImporte)
-            impo = RS!ImpEfect - RS!imppagad
-            ItmX.SubItems(8) = Format(impo, FormatoImporte)
-        Else
-            impo = RS!ImpEfect
-            ItmX.SubItems(7) = "0.00"
-            ItmX.SubItems(8) = ItmX.SubItems(6)
+    
+    Set ItmX = ListView1.ListItems.Add()
+    
+    ItmX.Text = RS!NUmSerie
+    ItmX.SubItems(1) = RS!NumFactu
+    ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(RS!Fecefect, "dd/mm/yyyy")
+    ItmX.SubItems(4) = RS!numorden
+    ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
+    ItmX.SubItems(6) = DBLet(RS!siglas, "T")
+    ItmX.SubItems(7) = Format(RS!ImpEfect, FormatoImporte)
+    If Not IsNull(RS!imppagad) Then
+        ItmX.SubItems(8) = Format(RS!imppagad, FormatoImporte)
+        impo = RS!ImpEfect - RS!imppagad
+        ItmX.SubItems(9) = Format(impo, FormatoImporte)
+    Else
+        impo = RS!ImpEfect
+        ItmX.SubItems(8) = "0.00"
+        ItmX.SubItems(9) = ItmX.SubItems(7)
+    End If
+    If RS!Fecefect < Fecha Then
+        'LO DEBE
+        ItmX.SmallIcon = 1
+        Vencido = Vencido + impo
+    Else
+        ItmX.SmallIcon = 2
+    End If
+    
+    If Tipo = 1 Then
+        If Not IsNull(RS!nrodocum) Then
+            ItmX.Checked = True
+            ImpSeleccionado = ImpSeleccionado + impo
         End If
-        If RS!Fecefect < Fecha Then
-            'LO DEBE
-            ItmX.SmallIcon = 1
-            Vencido = Vencido + impo
-        Else
-            ItmX.SmallIcon = 2
-        End If
-        
-        If Tipo = 1 Then
-            If Not IsNull(RS!transfer) Then
-                ItmX.Checked = True
-                ImpSeleccionado = ImpSeleccionado + impo
-            End If
-        End If
-        'El tag lo utilizo para la cta proveedor
-        ItmX.Tag = RS!ctaprove
-        
-        Importe = Importe + impo
-        
-        
-        
-        'Si el documento estaba emitido ya
-        If Val(RS!emitdocum) = 1 Then
-            'Tiene marcado DOCUMENTO EMITIDO
-            ItmX.ForeColor = vbRed
-            For J = 1 To ListView1.ColumnHeaders.Count - 1
-                ItmX.ListSubItems(J).ForeColor = vbRed
-            Next J
-            If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
-        End If
-       
+    End If
+    'El tag lo utilizo para la cta proveedor
+    ItmX.Tag = RS!codmacta
+    
+    Importe = Importe + impo
+    
+    'Si el documento estaba emitido ya
+    If Val(RS!emitdocum) = 1 Then
+        'Tiene marcado DOCUMENTO EMITIDO
+        ItmX.ForeColor = vbRed
+        For J = 1 To ListView1.ColumnHeaders.Count - 1
+            ItmX.ListSubItems(J).ForeColor = vbRed
+        Next J
+        If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
+    End If
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -1015,11 +1018,10 @@ Private Sub Form_Unload(Cancel As Integer)
     CodmactaUnica = ""
 End Sub
 
+
 Private Sub frmC_Selec(vFecha As Date)
     cad = Format(vFecha, "dd/mm/yyyy")
 End Sub
-
-
 
 
 Private Sub imgFecha_Click(Index As Integer)
@@ -1076,6 +1078,29 @@ Dim Campo2 As Integer
         End Select
         CargaList
     Else
+        Select Case ColumnHeader
+            Case "Serie"
+                CampoOrden = "pagos.numserie"
+            Case "Nº Factura"
+                CampoOrden = "pagos.numfactu"
+            Case "F.Factura"
+                CampoOrden = "pagos.fecfactu"
+            Case "F. VTO"
+                CampoOrden = "pagos.fecefect"
+            Case "Nº"
+                CampoOrden = "pagos.numorden"
+            Case "PROVEEDOR"
+                CampoOrden = "pagos.nomprove"
+            Case "Tipo"
+                CampoOrden = "siglas"
+            Case "Importe"
+                CampoOrden = "pagos.impefect"
+            Case "Pagado"
+                CampoOrden = "pagos.imppagad"
+            Case "Pendiente"
+                CampoOrden = "imppdte"
+        End Select
+        CargaList
     
     End If
     

@@ -28,7 +28,7 @@ Begin VB.Form frmTESPagosBancoList
       EndProperty
       Height          =   2655
       Left            =   150
-      TabIndex        =   21
+      TabIndex        =   23
       Top             =   3090
       Width           =   6915
       Begin VB.OptionButton optTipoSal 
@@ -45,7 +45,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   31
+         TabIndex        =   33
          Top             =   720
          Value           =   -1  'True
          Width           =   1335
@@ -64,7 +64,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   30
+         TabIndex        =   32
          Top             =   1200
          Width           =   1515
       End
@@ -82,7 +82,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   29
+         TabIndex        =   31
          Top             =   1680
          Width           =   975
       End
@@ -100,7 +100,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   28
+         TabIndex        =   30
          Top             =   2160
          Width           =   975
       End
@@ -118,7 +118,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   0
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   27
+         TabIndex        =   29
          Text            =   "Text1"
          Top             =   720
          Width           =   3345
@@ -137,7 +137,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   1
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   26
+         TabIndex        =   28
          Top             =   1200
          Width           =   4665
       End
@@ -155,7 +155,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   2
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   25
+         TabIndex        =   27
          Top             =   1680
          Width           =   4665
       End
@@ -164,7 +164,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   315
          Index           =   0
          Left            =   6450
-         TabIndex        =   24
+         TabIndex        =   26
          Top             =   1200
          Width           =   255
       End
@@ -173,7 +173,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   315
          Index           =   1
          Left            =   6450
-         TabIndex        =   23
+         TabIndex        =   25
          Top             =   1680
          Width           =   255
       End
@@ -190,7 +190,7 @@ Begin VB.Form frmTESPagosBancoList
          EndProperty
          Height          =   375
          Left            =   5190
-         TabIndex        =   22
+         TabIndex        =   24
          Top             =   720
          Width           =   1515
       End
@@ -208,7 +208,7 @@ Begin VB.Form frmTESPagosBancoList
       EndProperty
       Height          =   5745
       Left            =   7140
-      TabIndex        =   18
+      TabIndex        =   20
       Top             =   0
       Width           =   4785
       Begin VB.CheckBox Check1 
@@ -226,7 +226,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   240
          Index           =   1
          Left            =   510
-         TabIndex        =   34
+         TabIndex        =   5
          Top             =   1380
          Width           =   3075
       End
@@ -244,14 +244,14 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   240
          Index           =   0
          Left            =   510
-         TabIndex        =   33
+         TabIndex        =   4
          Top             =   840
          Width           =   3075
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   4200
-         TabIndex        =   32
+         TabIndex        =   34
          Top             =   240
          Width           =   405
          _ExtentX        =   714
@@ -280,7 +280,7 @@ Begin VB.Form frmTESPagosBancoList
       EndProperty
       Height          =   3015
       Left            =   150
-      TabIndex        =   7
+      TabIndex        =   9
       Top             =   0
       Width           =   6915
       Begin VB.TextBox txtNCuentas 
@@ -298,7 +298,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   1
          Left            =   2580
          Locked          =   -1  'True
-         TabIndex        =   20
+         TabIndex        =   22
          Top             =   1230
          Width           =   4155
       End
@@ -317,7 +317,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   0
          Left            =   2580
          Locked          =   -1  'True
-         TabIndex        =   19
+         TabIndex        =   21
          Top             =   810
          Width           =   4155
       End
@@ -335,7 +335,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   360
          Index           =   1
          Left            =   1260
-         TabIndex        =   3
+         TabIndex        =   1
          Tag             =   "imgConcepto"
          Top             =   1230
          Width           =   1275
@@ -354,7 +354,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   360
          Index           =   0
          Left            =   1260
-         TabIndex        =   2
+         TabIndex        =   0
          Tag             =   "imgConcepto"
          Top             =   810
          Width           =   1275
@@ -374,7 +374,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   1
          Left            =   1260
          MaxLength       =   10
-         TabIndex        =   1
+         TabIndex        =   3
          Tag             =   "imgConcepto"
          Top             =   2430
          Width           =   1305
@@ -394,7 +394,7 @@ Begin VB.Form frmTESPagosBancoList
          Index           =   0
          Left            =   1260
          MaxLength       =   10
-         TabIndex        =   0
+         TabIndex        =   2
          Tag             =   "imgConcepto"
          Top             =   2010
          Width           =   1305
@@ -414,7 +414,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   195
          Index           =   11
          Left            =   270
-         TabIndex        =   17
+         TabIndex        =   19
          Top             =   510
          Width           =   1890
       End
@@ -432,7 +432,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   195
          Index           =   10
          Left            =   270
-         TabIndex        =   16
+         TabIndex        =   18
          Top             =   840
          Width           =   690
       End
@@ -450,7 +450,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   195
          Index           =   9
          Left            =   270
-         TabIndex        =   15
+         TabIndex        =   17
          Top             =   1200
          Width           =   615
       End
@@ -481,7 +481,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   1
          Left            =   2580
-         TabIndex        =   14
+         TabIndex        =   16
          Top             =   2700
          Width           =   4035
       End
@@ -498,7 +498,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   0
          Left            =   2610
-         TabIndex        =   13
+         TabIndex        =   15
          Top             =   2340
          Width           =   4035
       End
@@ -530,7 +530,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   195
          Index           =   4
          Left            =   270
-         TabIndex        =   12
+         TabIndex        =   14
          Top             =   2430
          Width           =   615
       End
@@ -547,7 +547,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   4
          Left            =   2580
-         TabIndex        =   11
+         TabIndex        =   13
          Top             =   3990
          Width           =   4095
       End
@@ -564,7 +564,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   255
          Index           =   0
          Left            =   2580
-         TabIndex        =   10
+         TabIndex        =   12
          Top             =   3630
          Width           =   4095
       End
@@ -582,7 +582,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   195
          Index           =   5
          Left            =   270
-         TabIndex        =   9
+         TabIndex        =   11
          Top             =   2040
          Width           =   690
       End
@@ -601,7 +601,7 @@ Begin VB.Form frmTESPagosBancoList
          Height          =   195
          Index           =   8
          Left            =   270
-         TabIndex        =   8
+         TabIndex        =   10
          Top             =   1680
          Width           =   2280
       End
@@ -620,7 +620,7 @@ Begin VB.Form frmTESPagosBancoList
       EndProperty
       Height          =   375
       Left            =   10680
-      TabIndex        =   6
+      TabIndex        =   8
       Top             =   5940
       Width           =   1215
    End
@@ -637,7 +637,7 @@ Begin VB.Form frmTESPagosBancoList
       Height          =   375
       Index           =   1
       Left            =   9120
-      TabIndex        =   4
+      TabIndex        =   6
       Top             =   5940
       Width           =   1455
    End
@@ -655,7 +655,7 @@ Begin VB.Form frmTESPagosBancoList
       Height          =   375
       Index           =   0
       Left            =   150
-      TabIndex        =   5
+      TabIndex        =   7
       Top             =   5910
       Width           =   1335
    End
@@ -693,9 +693,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim cad As String
+Dim Cad As String
 Dim RC As String
-Dim I As Integer
+Dim i As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -797,13 +797,13 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Listado de Pagos Bancos"
 
-    For I = 0 To 1
-        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next I
+    For i = 0 To 1
+        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next i
     
-    For I = 0 To 1
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next I
+    For i = 0 To 1
+        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next i
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -934,7 +934,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1022,20 +1022,13 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "SELECT pagos.codmacta Cuenta, pagos.nomclien Descripcion, pagos_realizados.fecdevol FecDevol, "
-    SQL = SQL & "pagos.numserie Serie, pagos.numfactu Factura, pagos.fecfactu FecFra, pagos.numorden Vto, pagos_realizados.impcobro * (-1) Importe, "
-    SQL = SQL & "pagos_realizados.gastodev Gastos, pagos_realizados.coddevol Devol, wdevolucion.descripcion Descripcion "
-    SQL = SQL & " FROM  (pagos INNER JOIN pagos_realizados ON pagos.numserie = pagos_realizados.numserie AND "
-    SQL = SQL & " pagos.numfactu = pagos_realizados.numfactu AND pagos.fecfactu = pagos_realizados.fecfactu AND "
-    SQL = SQL & " pagos.numorden = pagos_realizados.numorden) "
-    SQL = SQL & "  LEFT JOIN usuarios.wdevolucion ON pagos_realizados.coddevol = wdevolucion.codigo "
+    SQL = "SELECT pagos.ctabanc1, pagos.fecefect, pagos.codmacta Proveedor, pagos.nomprove Descripcion, pagos.numserie Serie, pagos.numfactu Fra., pagos.fecfactu FecFact, "
+    SQL = SQL & "pagos.numorden Vto, pagos.impefect - coalesce(pagos.imppagad,0) Importe "
+    SQL = SQL & " FROM  pagos "
     
     If cadselect <> "" Then SQL = SQL & " where " & cadselect
     
-    If optVarios(0).Value Then SQL2 = "1"
-    If optVarios(1).Value Then SQL2 = "3"
-    
-    SQL = SQL & " ORDER BY " & SQL2
+    SQL = SQL & " ORDER BY 1, 2, 4"
 
             
     'LLamos a la funcion
@@ -1078,7 +1071,7 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim I As Integer
+Dim i As Integer
 
 
     MontaSQL = False
