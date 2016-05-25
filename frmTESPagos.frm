@@ -429,7 +429,7 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3525
-         Left            =   300
+         Left            =   6510
          TabIndex        =   80
          Top             =   1080
          Visible         =   0   'False
@@ -2189,7 +2189,7 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   360
          Index           =   18
-         Left            =   8100
+         Left            =   8460
          MaxLength       =   15
          TabIndex        =   25
          Tag             =   "Referencia|T|S|0||pagos|referencia|||"
@@ -2308,7 +2308,7 @@ Begin VB.Form frmTESPagos
          EndProperty
          Height          =   195
          Index           =   20
-         Left            =   8100
+         Left            =   8460
          TabIndex        =   46
          Top             =   0
          Width           =   1710
@@ -3939,29 +3939,6 @@ Dim Tipo As Integer
 
     DatosOK = False
     
-    
-    
-    
-    DevfrmCCtas = ""
-    
-    If Text1(9).Text = "" Then
-        DevfrmCCtas = DevfrmCCtas & vbCrLf & "-  Cuenta prevista cobro "
-        Tipo = 9
-    End If
-    
-    If Text1(4).Text = "" Then
-        DevfrmCCtas = DevfrmCCtas & vbCrLf & "-  Cuenta cliente "
-        Tipo = 4
-    End If
-    If DevfrmCCtas <> "" Then
-        DevfrmCCtas = "Los siguientes campos son requeridos:" & vbCrLf & vbCrLf & DevfrmCCtas
-        MsgBox DevfrmCCtas, vbExclamation
-        PonerFoco Text1(Tipo)
-        Exit Function
-    End If
-    
-    vTipForpa = ""
-    
     B = CompForm2(Me, 1)
     If Not B Then Exit Function
     
@@ -3973,19 +3950,12 @@ Dim Tipo As Integer
         Exit Function
     End If
     
-    
-    
     DevfrmCCtas = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", Text1(0).Text, "N")
     Tipo = CInt(DevfrmCCtas)
-    
 
-    
     DevfrmCCtas = Trim(Text1(26).Text) & Trim(Text1(28).Text) & Mid(Trim(Text1(29).Text), 3, 2) & Trim(Text1(30).Text) & Trim(Text1(31).Text)
     
-    
-    
-    
-    'Para preguntar por el Banco
+    'AHora comprobare Si tiene cuenta bancaria, si es correcta
     B = False
     If DevfrmCCtas <> "" Then
         If Val(DevfrmCCtas) <> 0 Then B = True
@@ -4000,54 +3970,49 @@ Dim Tipo As Integer
         End If
     End If
         
-        
     If B Then
-            BuscaChekc = CodigoDeControl(DevfrmCCtas)
-            If BuscaChekc <> Mid(Text1(29).Text, 1, 2) Then
-                BuscaChekc = vbCrLf & "Código de control calculado: " & BuscaChekc & vbCrLf
-                BuscaChekc = "Error en la cuenta contable: " & vbCrLf & BuscaChekc & vbCrLf & "Codigo de control: " & Mid(Text1(29).Text, 1, 2) & vbCrLf & vbCrLf
-                
-                BuscaChekc = BuscaChekc & "Desea continuar?"
-                If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbNo Then Exit Function
-            End If
-            'Compruebo EL IBAN
-            'Meto el CC
-            DevfrmCCtas = Mid(DevfrmCCtas, 1, 8) & Mid(Text1(29).Text, 1, 2) & Mid(DevfrmCCtas, 9)
-            BuscaChekc = ""
-            If Me.Text1(10).Text <> "" Then BuscaChekc = Mid(Text1(10).Text, 1, 2)
-                
-            If DevuelveIBAN2(BuscaChekc, DevfrmCCtas, DevfrmCCtas) Then
-                If Me.Text1(10).Text = "" Then
-                    If MsgBox("Poner IBAN ?", vbQuestion + vbYesNo) = vbYes Then Me.Text1(10).Text = BuscaChekc & DevfrmCCtas
-                Else
-                    If Mid(Text1(10).Text, 3) <> DevfrmCCtas Then
-                        DevfrmCCtas = "Calculado : " & BuscaChekc & DevfrmCCtas
-                        DevfrmCCtas = "Introducido: " & Me.Text1(10).Text & vbCrLf & DevfrmCCtas & vbCrLf
-                        DevfrmCCtas = "Error en codigo IBAN" & vbCrLf & DevfrmCCtas & "Continuar?"
-                        If MsgBox(DevfrmCCtas, vbQuestion + vbYesNo) = vbNo Then Exit Function
-                    End If
-                End If
-            End If
+        BuscaChekc = CodigoDeControl(DevfrmCCtas)
+        If BuscaChekc <> Mid(Text1(29).Text, 1, 2) Then
+            BuscaChekc = vbCrLf & "Código de control calculado: " & BuscaChekc & vbCrLf
+            BuscaChekc = "Error en la cuenta contable: " & vbCrLf & BuscaChekc & vbCrLf & "Codigo de control: " & Mid(Text1(29).Text, 1, 2) & vbCrLf & vbCrLf
             
-            
-    Else
-        If Tipo = vbTipoPagoRemesa Then
-                DevfrmCCtas = "Debe poner cuenta bancaria. Desea continuar?"
-                If MsgBox(DevfrmCCtas, vbQuestion + vbYesNo) = vbNo Then Exit Function
+            BuscaChekc = BuscaChekc & "Desea continuar?"
+            If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbNo Then Exit Function
         End If
-    End If
-    
-   
-        If Modo = 4 Then
-            If DBLet(Me.Data1.Recordset!emitdocum, "N") = 1 Then
-                'Tiene la marca de documento emitido
-                'Veremos si se la ha quitado
-                If Me.Check1(0).Value = 0 Then
-                    DevfrmCCtas = "Seguro que desea quitarle la marca de documento emitido?"
+        'Compruebo EL IBAN
+        'Meto el CC
+        DevfrmCCtas = Mid(DevfrmCCtas, 1, 8) & Mid(Text1(29).Text, 1, 2) & Mid(DevfrmCCtas, 9)
+        BuscaChekc = ""
+        If Me.Text1(10).Text <> "" Then BuscaChekc = Mid(Text1(10).Text, 1, 2)
+            
+        If DevuelveIBAN2(BuscaChekc, DevfrmCCtas, DevfrmCCtas) Then
+            If Me.Text1(10).Text = "" Then
+                If MsgBox("Poner IBAN ?", vbQuestion + vbYesNo) = vbYes Then Me.Text1(10).Text = BuscaChekc & DevfrmCCtas
+            Else
+                If Mid(Text1(10).Text, 3) <> DevfrmCCtas Then
+                    DevfrmCCtas = "Calculado : " & BuscaChekc & DevfrmCCtas
+                    DevfrmCCtas = "Introducido: " & Me.Text1(10).Text & vbCrLf & DevfrmCCtas & vbCrLf
+                    DevfrmCCtas = "Error en codigo IBAN" & vbCrLf & DevfrmCCtas & "Continuar?"
                     If MsgBox(DevfrmCCtas, vbQuestion + vbYesNo) = vbNo Then Exit Function
                 End If
             End If
         End If
+    End If
+    
+    
+    If CuentaBloqeada(Me.Text1(4).Text, CDate(Text1(2).Text), True) Then Exit Function
+        
+
+    If Modo = 4 Then
+        If DBLet(Me.Data1.Recordset!emitdocum, "N") = 1 Then
+            'Tiene la marca de documento emitido
+            'Veremos si se la ha quitado
+            If Me.Check1(0).Value = 0 Then
+                DevfrmCCtas = "Seguro que desea quitarle la marca de documento emitido?"
+                If MsgBox(DevfrmCCtas, vbQuestion + vbYesNo) = vbNo Then Exit Function
+            End If
+        End If
+    End If
 
     
     'Nuevo. 12 Mayo 2008
@@ -4086,7 +4051,7 @@ Private Sub HacerToolBar(Boton As Integer)
         Case 8
             'Imprimir factura
             
-            frmTESCobrosPdtesList.Show vbModal
+            frmTESPagosPdtesList.Show vbModal
 
     End Select
 End Sub

@@ -693,9 +693,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -797,13 +797,13 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Listado de Pagos Bancos"
 
-    For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
-    For i = 0 To 1
-        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next i
+    For I = 0 To 1
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next I
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -934,7 +934,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1071,7 +1071,7 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False
@@ -1083,7 +1083,7 @@ Dim i As Integer
     If cadselect <> "" Then cadselect = cadselect & " and "
     
     If Check1(0).Value = 1 And Check1(1).Value = 1 Then
-        cadFormula = cadFormula & "{pagos.impefect}>0) "
+        cadFormula = cadFormula & "{pagos.impefect}>0 "
         cadselect = cadselect & "pagos.impefect>0"
     End If
     

@@ -1127,6 +1127,7 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 803 ' Informe Pagos bancos
             frmTESPagosBancoList.Show vbModal
         Case 804 ' Realizar Pago
+            frmTESRealizarPagos.Show vbModal
         Case 805 ' Transferencias
         Case 806 ' Pagos domiciliados
         Case 807 ' Gastos Fijos

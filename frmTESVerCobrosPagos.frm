@@ -609,7 +609,7 @@ Private Sub Form_Load()
     
     I = 0
     If Cobros And (Tipo = 2 Or Tipo = 3) Then I = 1
-    Me.mnBarra1.Visible = I = 1
+    Me.mnbarra1.Visible = I = 1
     Me.mnNumero.Visible = I = 1
     'Efectuar cobros
     Me.cmdRegresar.Visible = Regresar
@@ -728,7 +728,7 @@ On Error GoTo ECargando
     SeVeRiesgoTalPag = False
     If Not OrdenarEfecto Then
         'Ver cobros pagos
-        If Cobros And (Me.chkReme.Value = 1) Then SeVeRiesgo = True
+'        If Cobros And (Me.chkReme.Value = 1) Then SeVeRiesgo = True
     End If
     Label2(2).Visible = SeVeRiesgo
     Text2(2).Visible = SeVeRiesgo
@@ -983,7 +983,7 @@ Dim J As Byte
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
     Else
-        ItmX.SmallIcon = 2
+'        ItmX.SmallIcon = 2
     End If
     
     If Tipo = 1 Then
@@ -1006,6 +1006,7 @@ Dim J As Byte
         Next J
         If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
     End If
+
 
 End Sub
 
@@ -1044,6 +1045,7 @@ Private Sub imgFecha_Click(Index As Integer)
         End Select
     End If
 End Sub
+
 
 
 Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)

@@ -1136,9 +1136,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -1163,26 +1163,6 @@ Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
 End Sub
 
 
-
-Private Sub Check1_Click(Index As Integer)
-    Select Case Index
-        Case 0
-            If Check1(0).Value = 1 Then
-                Check1(2).Value = 1
-                Check1_Click (2)
-            End If
-        Case 1
-            If Check1(1).Value = 1 Then
-                Check1(2).Value = 0
-                Check1(0).Value = 0
-            End If
-        Case 2
-            If Check1(2).Value = 1 Then
-                Check1(1).Value = 0
-            End If
-    End Select
-End Sub
-
 Private Sub cmdAccion_Click(Index As Integer)
 
     If Not DatosOK Then Exit Sub
@@ -1196,7 +1176,7 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     InicializarVbles True
     
-    tabla = "(cobros INNER JOIN formapago on cobros.codforpa = formapago.codforpa)  "
+    tabla = "(pagos INNER JOIN formapago on pagos.codforpa = formapago.codforpa)  "
     tabla = tabla & " INNER JOIN tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
     
     
@@ -1261,16 +1241,16 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
-    Me.Caption = "Listado de Cobros Pendientes Clientes"
+    Me.Caption = "Listado de Pagos Pendientes Proveedores"
 
-    For i = 0 To 1
-        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
-    For i = 0 To 3
-        Me.ImgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next i
+    For I = 0 To 3
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next I
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -1289,12 +1269,6 @@ Private Sub Form_Load()
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
-    
-    If Legalizacion <> "" Then
-        txtFecha(2).Text = RecuperaValor(Legalizacion, 1)
-        txtFecha(0).Text = RecuperaValor(Legalizacion, 2)
-        txtFecha(1).Text = RecuperaValor(Legalizacion, 3)
-    End If
     
     optVarios(0).Value = True
     optVarios(3).Value = True
@@ -1320,7 +1294,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -1329,13 +1303,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tipos de forma de pago
         Case 0
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = False
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = False
+            Next I
         Case 1
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = True
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = True
+            Next I
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1348,7 +1322,7 @@ Private Sub imgSerie_Click(Index As Integer)
     IndCodigo = Index
 
     Set frmConta = New frmBasico
-    AyudaContadores frmConta, txtSerie(Index), "tiporegi REGEXP '^[0-9]+$' = 0"
+    AyudaContadores frmConta, txtSerie(Index), "tiporegi REGEXP '^[0-9]+$' <> 0 and cast(tiporegi as unsigned) > 0"
     Set frmConta = Nothing
     
     PonFoco Me.txtSerie(Index)
@@ -1405,10 +1379,6 @@ End Sub
 
 Private Sub optVarios_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
-  
-  
-'    Check1(1).Enabled = optVarios(1).Value
-    
 End Sub
 
 Private Sub PushButton2_Click(Index As Integer)
@@ -1434,10 +1404,6 @@ Private Sub PushButtonImpr_Click()
     frmPpal.cd1.ShowPrinter
     PonerDatosPorDefectoImpresion Me, True
 End Sub
-
-
-
-
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -1466,7 +1432,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1562,7 +1528,7 @@ Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1630,12 +1596,7 @@ Dim SQL2 As String
         If optVarios(4).Value Then SQL2 = SQL2 & ",cobros.nomclien"
     End If
 
-
-
-
-
     SQL = SQL & " ORDER BY " & SQL2
-
             
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
@@ -1651,12 +1612,12 @@ Dim nomDocu As String
     conSubRPT = False
         
     
-    indRPT = "0602-00"
+    indRPT = "0802-00"
     
 
     If optVarios(0).Value Then
-        If optVarios(3).Value Then cadParam = cadParam & "pGroup1={cobros.codmacta}|"
-        If optVarios(4).Value Then cadParam = cadParam & "pGroup1={cobros.nomclien}|"
+        If optVarios(3).Value Then cadParam = cadParam & "pGroup1={pagos.codmacta}|"
+        If optVarios(4).Value Then cadParam = cadParam & "pGroup1={pagos.nomprove}|"
         
         numParam = numParam + 1
         
@@ -1666,17 +1627,15 @@ Dim nomDocu As String
         If Check1(1).Value Then cadParam = cadParam & "pResumen=1|"
         numParam = numParam + 1
         
-         cadParam = cadParam & "pOrden={cobros.fecvenci}|"
+         cadParam = cadParam & "pOrden={pagos.fecefect}|"
          numParam = numParam + 1
-        
-        
     End If
     
     If optVarios(1).Value Then
-        cadParam = cadParam & "pGroup1={cobros.fecvenci}|"
+        cadParam = cadParam & "pGroup1={pagos.fecefect}|"
         
-        If optVarios(3).Value Then cadParam = cadParam & "pOrden={cobros.codmacta}|"
-        If optVarios(4).Value Then cadParam = cadParam & "pOrden={cobros.nomclien}|"
+        If optVarios(3).Value Then cadParam = cadParam & "pOrden={pagos.codmacta}|"
+        If optVarios(4).Value Then cadParam = cadParam & "pOrden={pagos.nomprove}|"
         numParam = numParam + 2
         
         cadParam = cadParam & "pTipo=2|"
@@ -1691,8 +1650,8 @@ Dim nomDocu As String
     If optVarios(2).Value Then
         cadParam = cadParam & "pGroup1={tipofpago.descformapago}|"
         
-        If optVarios(3).Value Then cadParam = cadParam & "pOrden={cobros.codmacta}|"
-        If optVarios(4).Value Then cadParam = cadParam & "pOrden={cobros.nomclien}|"
+        If optVarios(3).Value Then cadParam = cadParam & "pOrden={pagos.codmacta}|"
+        If optVarios(4).Value Then cadParam = cadParam & "pOrden={pagos.nomprove}|"
         numParam = numParam + 2
     
         If Check1(1).Value Then
@@ -1701,19 +1660,10 @@ Dim nomDocu As String
         End If
     End If
 
-    If Check1(0).Value Then
-        cadParam = cadParam & "pObserva=1|"
-        numParam = numParam + 1
-    End If
 
-
-    If optVarios(0).Value Or optVarios(1).Value Then
-        'formato extendido
-        If Check1(2).Value Then indRPT = "0602-01"
-    End If
+    ' ordenado por forma de pago
     If optVarios(2).Value Then
-        indRPT = "0602-02"
-        If Check1(2).Value Then indRPT = "0602-03"
+        indRPT = "0802-01"
     End If
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
@@ -1766,23 +1716,23 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("cobros.NumSerie", "SER", Me.txtSerie(0), Me.txtNSerie(0), Me.txtSerie(1), Me.txtNSerie(1), "pDHSerie=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros.Fecvenci", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
+    If Not PonerDesdeHasta("pagos.NumSerie", "SER", Me.txtSerie(0), Me.txtNSerie(0), Me.txtSerie(1), Me.txtNSerie(1), "pDHSerie=""") Then Exit Function
+    If Not PonerDesdeHasta("pagos.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
+    If Not PonerDesdeHasta("pagos.Fecvenci", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
+    If Not PonerDesdeHasta("pagos.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
     
     
     SQL = ""
-    For i = 1 To Me.ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(i).SubItems(2) & ","
+    For I = 1 To Me.ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            SQL = SQL & Me.ListView1(1).ListItems(I).SubItems(2) & ","
         End If
-    Next i
+    Next I
     
     If SQL <> "" Then
         ' quitamos la ultima coma
@@ -1795,14 +1745,24 @@ Dim i As Integer
         If Not AnyadirAFormula(cadFormula, "isnull({formapago.tipforpa})") Then Exit Function
     End If
     
-    
     ' Añadimos la condicion de que la situacion = 0 y que el importe pendiente <> 0
-    If Not AnyadirAFormula(cadselect, "cobros.situacion = 0") Then Exit Function
-    If Not AnyadirAFormula(cadFormula, "{cobros.situacion} = 0") Then Exit Function
+    If Not AnyadirAFormula(cadselect, "pagos.situacion = 0") Then Exit Function
+    If Not AnyadirAFormula(cadFormula, "{pagos.situacion} = 0") Then Exit Function
     
-    If Not AnyadirAFormula(cadselect, "(cobros.impvenci + coalesce(cobros.gastos,0) - coalesce(cobros.impcobro,0)) <> 0") Then Exit Function
+    If Not AnyadirAFormula(cadselect, "(pagos.impefect - coalesce(pagos.imppagad,0)) <> 0") Then Exit Function
     If Not AnyadirAFormula(cadFormula, "{@Pendiente} <> 0") Then Exit Function
-
+    
+    Select Case Combo1.ListIndex
+        Case 0 ' No
+            If Not AnyadirAFormula(cadselect, "pagos.emitdocum = 0") Then Exit Function
+            If Not AnyadirAFormula(cadFormula, "{pagos.emitdocum} = 0") Then Exit Function
+        Case 1 ' Si
+            If Not AnyadirAFormula(cadselect, "pagos.emitdocum = 1") Then Exit Function
+            If Not AnyadirAFormula(cadFormula, "{pagos.emitdocum} = 1") Then Exit Function
+        Case 2 ' Todos
+        
+    End Select
+    
     
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"

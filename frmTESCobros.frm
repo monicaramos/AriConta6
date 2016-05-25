@@ -479,9 +479,9 @@ Begin VB.Form frmTESCobros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3435
-         Left            =   270
+         Left            =   4980
          TabIndex        =   126
-         Top             =   1140
+         Top             =   4440
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
