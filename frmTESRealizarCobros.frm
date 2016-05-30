@@ -1477,7 +1477,7 @@ Private Sub Combo1_Validate(Cancel As Boolean)
         
         I = 0
         If Cobros And (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then I = 1
-        Me.mnbarra1.Visible = I = 1
+        Me.mnBarra1.Visible = I = 1
         Me.mnNumero.Visible = I = 1
         
     
@@ -2071,7 +2071,7 @@ Dim SQL As String
             Set frmCCtas = New frmColCtas
             
             frmCCtas.DatosADevolverBusqueda = "0"
-            frmCCtas.Filtro = "1" ' clientes
+            frmCCtas.FILTRO = "1" ' clientes
             frmCCtas.Show vbModal
             
             Set frmCCtas = Nothing
@@ -2743,6 +2743,7 @@ Dim vGasto As Currency
     Conn.Execute "DELETE FROM tmpfaclin" & C
 
 
+
     'Fechas fin ejercicios
     FechaFinEjercicios = DateAdd("yyyy", 1, vParam.fechafin)
 
@@ -2829,48 +2830,52 @@ Dim vGasto As Currency
     'Si es por tarjeta hay una opcion para meter el gasto total
     'que a partir de la cuenta de banco gasto tarjeta crear una linea mas
     If Cobros And Combo1.ItemData(Combo1.ListIndex) = 6 And ImporteGastosTarjeta_ > 0 Then
-            
-            'Agosto 2014
-            'Pagos credito NAVARRES  --> NO llevan esta linea
-            
-            If vParamT.IntereseCobrosTarjeta = 0 Then
-                cad = DevuelveDesdeBD("ctagastostarj", "ctabancaria", "codmacta", Text3(1).Tag, "T")
-                
-                FechaContab = CDate(Text3(0).Text)
-                C = "'" & Format(FechaContab, FormatoFecha) & "'"
-                C = C & "," & C
-                C = J & "," & C & ",'" & cad & "','"
-                'Serie factura |FECHAfactura| ----> pondre: "gastos" | fecha contab
-                C = C & "GASTOS|" & FechaContab & "|','" & cad & "',"
-                'Dinerito
-                'riesgo es GASTO
-                impo = -ImporteGastosTarjeta_
-                C = C & TransformaComasPuntos(CStr(impo)) & ",0)"
-                C = Aux & C
-                Conn.Execute C
-            End If
-    End If
-    
-    'Gastos contabilizacion transferencia
-    If Combo1.ItemData(Combo1.ListIndex) = 1 And GastosTransferencia <> 0 Then
-            'aqui ira los gastos asociados a la transferencia
-            'Hay que ver los lados
-            
-            'Cad = DevuelveDesdeBD("ctagastostarj", "ctabancaria", "codmacta", Text3(1).Tag, "T")
-            cad = DevuelveDesdeBD("ctagastos", "ctabancaria", "codmacta", Text3(1).Tag, "T")
+        'Agosto 2014
+        'Pagos credito NAVARRES  --> NO llevan esta linea
+        
+        If vParamT.IntereseCobrosTarjeta = 0 Then
+            cad = DevuelveDesdeBD("ctagastostarj", "bancos", "codmacta", Text3(1).Tag, "T")
             
             FechaContab = CDate(Text3(0).Text)
             C = "'" & Format(FechaContab, FormatoFecha) & "'"
             C = C & "," & C
             C = J & "," & C & ",'" & cad & "','"
             'Serie factura |FECHAfactura| ----> pondre: "gastos" | fecha contab
-            C = C & "TRA" & Format(SegundoParametro, "0000000") & "|" & FechaContab & "|','" & cad & "',"
+            C = C & "GASTOS|" & FechaContab & "|','" & cad & "',"
             'Dinerito
             'riesgo es GASTO
-            impo = GastosTransferencia
+            impo = -ImporteGastosTarjeta_
             C = C & TransformaComasPuntos(CStr(impo)) & ",0)"
             C = Aux & C
             Conn.Execute C
+        End If
+    
+    End If
+    
+    'Gastos contabilizacion transferencia
+'    If Combo1.ItemData(Combo1.ListIndex) = 1 And GastosTransferencia <> 0 Then
+    
+    
+    
+    If GastosTransferencia <> 0 Then
+        'aqui ira los gastos asociados a la transferencia
+        'Hay que ver los lados
+        
+        'Cad = DevuelveDesdeBD("ctagastostarj", "ctabancaria", "codmacta", Text3(1).Tag, "T")
+        cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", Text3(1).Tag, "T")
+        
+        FechaContab = CDate(Text3(0).Text)
+        C = "'" & Format(FechaContab, FormatoFecha) & "'"
+        C = C & "," & C
+        C = J & "," & C & ",'" & cad & "','"
+        'Serie factura |FECHAfactura| ----> pondre: "gastos" | fecha contab
+        C = C & "TRA" & Format(SegundoParametro, "0000000") & "|" & FechaContab & "|','" & cad & "',"
+        'Dinerito
+        'riesgo es GASTO
+        impo = GastosTransferencia
+        C = C & TransformaComasPuntos(CStr(impo)) & ",0)"
+        C = Aux & C
+        Conn.Execute C
         
     End If
     
@@ -2908,22 +2913,28 @@ Dim LineaUltima As Integer
     AgrupaCuenta = False
     CampoFecha = "numfactura"
     GastosTransDescontados = False 'por lo que pueda pasar
+    
+    '++
+    GastosTransferencia = Val(Text3(6).Text)
+    
+    
+    
     'Si va agrupado por cta
-    If Combo1.ItemData(Combo1.ListIndex) = 1 And ContabTransfer Then
-        If Me.chkContrapar(1).Value Then ContraPartidaPorLinea = False
-        If Me.chkAsiento(1).Value Then UnAsientoPorCuenta = True
-        If chkGenerico(1).Value Then PonerCuentaGenerica = True
+    If Combo1.ItemData(Combo1.ListIndex) = 1 Then '--  And ContabTransfer Then
+        If Me.chkContrapar(0).Value Then ContraPartidaPorLinea = False
+        If Me.chkAsiento(0).Value Then UnAsientoPorCuenta = True
+        If chkGenerico(0).Value Then PonerCuentaGenerica = True
         
         'Si lleva GastosTransferencia entonce AGRUPAMOS banco
         If GastosTransferencia <> 0 Then
             
             'gastos tramtiaacion transferenca descontados importe
-            SQL = DevuelveDesdeBD("GastTransDescontad", "ctabancaria", "codmacta", Text3(1).Tag, "T")
+            SQL = DevuelveDesdeBD("GastTransDescontad", "bancos", "codmacta", Text3(1).Tag, "T")
             GastosTransDescontados = SQL = "1"
             
             AgrupaCuenta = False
         Else
-            If Me.chkVtoCuenta(1).Value Then AgrupaCuenta = True
+            If Me.chkVtoCuenta(0).Value Then AgrupaCuenta = True
         End If
     Else
         'Si no es transferencia
@@ -3122,9 +3133,6 @@ Dim LineaUltima As Integer
                         InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
                     End If
                 End If
-    
-    
-    
     
                 'CIERRO EL APUNTE
                 InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
@@ -3716,13 +3724,11 @@ Dim ImporteInterno As Currency
                             DescripcionTransferencia = Ampliacion
                             If Cobros Then
                                 
-                            
-                          
                                 'Veo la el camporefencia de ese talon
                                 Ampliacion = RecuperaValor(RS1!Cliente, 1) & RecuperaValor(RS1!Cliente, 2)
                                 Ampliacion = "numserie = '" & RecuperaValor(RS1!Cliente, 1) & "' AND numfactu = " & RecuperaValor(RS1!Cliente, 2)
                                 Ampliacion = Ampliacion & " AND numorden = " & RecuperaValor(RS1!Cliente, 4) & " AND fecfactu "
-                                Ampliacion = DevuelveDesdeBD("reftalonpag", "cobros", Ampliacion, Format(RecuperaValor(RS1!Cliente, 3), FormatoFecha), "F")
+                                Ampliacion = DevuelveDesdeBD("reftalonpag", "cobros_realizados", Ampliacion, Format(RecuperaValor(RS1!Cliente, 3), FormatoFecha), "F")
                                 
                                 If Ampliacion = "" Then
                                     Ampliacion = RecuperaValor(RS1!Cliente, 1) & RecuperaValor(RS1!Cliente, 2)
@@ -3789,7 +3795,7 @@ Dim ImporteInterno As Currency
             'Trozo comun
             '------------------------
             'IdContab
-            SQL = SQL & "'CONTAB',"
+            SQL = SQL & "'COBROS',"
             
             'Punteado
             SQL = SQL & "0)"
@@ -3850,13 +3856,14 @@ Dim ImporteInterno As Currency
 
             Dim Situacion As Byte
             
-            Situacion = 2
+            Situacion = 1
 
-            Select Case Combo1.ItemData(Combo1.ListIndex)
-                Case vbTalon, vbPagare
-                
-                    Situacion = 1
-            End Select
+'            Select Case Combo1.ItemData(Combo1.ListIndex)
+'                Case vbTalon, vbPagare
+'
+'                    Situacion = 1
+'            End Select
+
 
             SQL = "update cobros set impcobro = (select sum(impcobro) from cobros_realizados where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " AND numorden =" & RecuperaValor(RS1!Cliente, 4) & ") "
             SQL = SQL & " ,fecultco = " & DBSet(FechaAsiento, "F")
@@ -3902,7 +3909,7 @@ Dim ImporteInterno As Currency
              SQL = SQL & " timporteH,  ctacontr,codccost, idcontab, punteada) "
              SQL = SQL & "VALUES (" & vp.diaricli & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador & ","
              
-             Ampliacion = DevuelveDesdeBD("ctaingreso", "ctabancaria", "codmacta", Text3(1).Tag, "T")
+             Ampliacion = DevuelveDesdeBD("ctaingreso", "bancos", "codmacta", Text3(1).Tag, "T")
              If Ampliacion = "" Then
                 MsgBox "Cta ingreso bancario MAL configurada. Se utilizara la misma del banco", vbExclamation
                 Ampliacion = Text3(1).Tag
@@ -4330,7 +4337,7 @@ Private Function ComprobarCuentasBloquedasYFechasVencimientos() As Boolean
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
     While Not RS.EOF
-        If CDate(RS!NumFactura) > RS!FecBloq Then cad = cad & RS!codmacta & "    " & RS!FecBloq & "     " & Format(RS!NumFactura, "dd/mm/yyyy") & Space(15) & RecuperaValor(RS!Cliente, 1) & RecuperaValor(RS!Cliente, 2) & vbCrLf
+        If CDate(RS!NumFactura) > RS!fecbloq Then cad = cad & RS!codmacta & "    " & RS!fecbloq & "     " & Format(RS!NumFactura, "dd/mm/yyyy") & Space(15) & RecuperaValor(RS!Cliente, 1) & RecuperaValor(RS!Cliente, 2) & vbCrLf
         RS.MoveNext
     Wend
     RS.Close

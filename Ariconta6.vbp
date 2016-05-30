@@ -189,6 +189,7 @@ Form=frmTESPagosDivVto.frm
 Form=frmTESPagosBancoList.frm
 Form=frmTESPagosPdtesList.frm
 Form=frmTESRealizarPagos.frm
+Form=frmTESRefTalonPagos.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
