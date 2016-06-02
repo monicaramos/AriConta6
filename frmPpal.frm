@@ -822,7 +822,7 @@ End Sub
 
 
 Private Sub Form_Resize()
-    Dim X, Y As Integer
+    Dim x, y As Integer
 Dim v ''
 
     If WindowState = 1 Then
@@ -835,18 +835,18 @@ Dim v ''
         Exit Sub
     End If
     
-    X = Me.Width
-    Y = Me.Height
-    If X < 5990 Then Me.Width = 5990
-    If Y < 4100 Then Me.Height = 4100
+    x = Me.Width
+    y = Me.Height
+    If x < 5990 Then Me.Width = 5990
+    If y < 4100 Then Me.Height = 4100
     ImageLogo.Left = Me.Width - ImageLogo.Width - 240
     Label33.Left = 30
-    X = Me.Height - Base
+    x = Me.Height - Base
     
 
-    TreeView1.Height = X
-    X = X \ 6
-    ListView1.Height = X * 4
+    TreeView1.Height = x
+    x = x \ 6
+    ListView1.Height = x * 4
     
     ListView2.Top = ListView1.Top + ListView1.Height + 500
     ListView2.Height = Me.Height - ListView2.Top - 850
@@ -855,21 +855,21 @@ Dim v ''
     TreeView2.Height = ListView2.Height
     
     
-    Y = Me.Width - 200
-    Y = ((30 / 100) * Y)
+    y = Me.Width - 200
+    y = ((30 / 100) * y)
     
     TreeView1.Left = 30
-    TreeView1.Width = Y - 30
+    TreeView1.Width = y - 30
     
     'Separador
-    Me.FrameSeparador.Left = Y + 15
+    Me.FrameSeparador.Left = y + 15
     Me.FrameSeparador.Top = TreeView1.Top
     Me.FrameSeparador.Height = Me.TreeView1.Height
     
-    ListView1.Left = Y + 60
-    Me.ListView2.Left = Y + 60
+    ListView1.Left = y + 60
+    Me.ListView2.Left = y + 60
     
-    AnchoListview = Me.Width - 200 - Y - 30
+    AnchoListview = Me.Width - 200 - y - 30
     ListView1.Width = AnchoListview
     v = Me.ImageLogo.Left
     
@@ -884,11 +884,11 @@ Dim v ''
     ImageLogo.Left = Me.Width - ImageLogo.Width - 120
     ImageLogo.Height = Label22.Height
     
-    X = AnchoListview \ 3
-    ListView2.Width = 2 * X
+    x = AnchoListview \ 3
+    ListView2.Width = 2 * x
     
     Me.TreeView2.Left = Me.ListView2.Left + Me.ListView2.Width + 30
-    TreeView2.Width = X
+    TreeView2.Width = x
     
     'Dos listiview
     lblMsgUsu(0).Top = ListView2.Top - 340 '240
@@ -1561,7 +1561,7 @@ Private Sub ListView1_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then ListView1_DblClick
 End Sub
 
-Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim SQL As String
 Dim RS As ADODB.Recordset
 
@@ -1585,7 +1585,7 @@ Dim RS As ADODB.Recordset
     End If
 End Sub
 
-Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = 1 Then
         If Not ListView1.SelectedItem Is Nothing Then
             IconoSeleccionado = True
@@ -1594,7 +1594,7 @@ Private Sub ListView1_MouseMove(Button As Integer, Shift As Integer, X As Single
     End If
 End Sub
 
-Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim RefrescarDatos As Boolean   'Porque a movido iconos fuera de los margenes
 Dim SQL As String
     
@@ -1604,7 +1604,7 @@ Dim SQL As String
 
 
         'DAVID
-        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", X, Y, RefrescarDatos
+        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", x, y, RefrescarDatos
         If RefrescarDatos Then
             ListView1.Arrange = lvwAutoTop
             ListView1.Refresh
@@ -1619,7 +1619,7 @@ Dim SQL As String
 
 End Sub
 
-Private Sub ListView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub ListView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single)
 
     
 '    Caption = Data.GetData(1)
