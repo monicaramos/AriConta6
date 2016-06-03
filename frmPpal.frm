@@ -825,6 +825,8 @@ Private Sub Form_Resize()
     Dim x, y As Integer
 Dim v ''
 
+    On Error GoTo eResize
+
     If WindowState = 1 Then
         EstadoAnterior = 1
         Exit Sub         ' ha pulsado minimizar
@@ -904,8 +906,12 @@ Dim v ''
     Shape1.Height = Me.Height - Shape1.Top - 50
     
     EstadoAnterior = Me.WindowState
+        
+    Exit Sub
     
-    
+eResize:
+'    Caption = Now
+    Err.Clear
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
