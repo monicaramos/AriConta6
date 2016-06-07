@@ -429,9 +429,9 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3525
-         Left            =   6510
+         Left            =   270
          TabIndex        =   80
-         Top             =   1080
+         Top             =   1140
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
@@ -2232,7 +2232,7 @@ Begin VB.Form frmTESPagos
          Height          =   360
          Index           =   1
          Left            =   1260
-         MaxLength       =   7
+         MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Nº Factura|T|N|||pagos|numfactu||S|"
          Text            =   "Text1"
@@ -2644,7 +2644,7 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtaux(5)
+            PonFoco txtAux(5)
             
             
     End Select
@@ -2874,9 +2874,9 @@ Private Sub BotonEliminar()
     'Borramos
     If I = vbYes Then
         
-        SQL = "Delete from pagos_realizados WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
-        SQL = SQL & " AND fecfactu = '" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND numorden =" & Data1.Recordset!numorden
-        Conn.Execute SQL
+'        SQL = "Delete from pagos_realizados WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
+'        SQL = SQL & " AND fecfactu = '" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND numorden =" & Data1.Recordset!numorden
+'        Conn.Execute SQL
 
         'Borro el elemento
         SQL = "Delete from pagos  WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
@@ -3168,7 +3168,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -3670,8 +3670,8 @@ Private Sub HacerBusqueda2()
         MandaBusquedaPrevia CadB
     ElseIf CadB <> "" Or CadB1 <> "" Or cadFiltro <> "" Then
         CadenaConsulta = "select distinct pagos.* from "
-        CadenaConsulta = CadenaConsulta & " (tipofpago  INNER JOIN pagos_realizados ON pagos_realizados.tipforpa = tipofpago.tipoformapago ) "
-        CadenaConsulta = CadenaConsulta & " right join pagos on pagos.numserie = pagos_realizados.numserie and pagos.numfactu = pagos_realizados.numfactu and pagos.fecfactu = pagos_realizados.fecfactu and pagos.numorden = pagos_realizados.numorden"
+        CadenaConsulta = CadenaConsulta & " (tipofpago  INNER JOIN hlinapu ON hlinapu.tipforpa = tipofpago.tipoformapago ) "
+        CadenaConsulta = CadenaConsulta & " right join pagos on pagos.numserie = hlinapu.numserie and pagos.numfactu = hlinapu.numfacpr and pagos.fecfactu = hlinapu.fecfactu and pagos.numorden = hlinapu.numorden and pagos.codmacta = hlinapu.codmacta "
 
         
         CadenaConsulta = CadenaConsulta & " WHERE (1=1) "
@@ -4271,18 +4271,18 @@ Dim cad As String
     Set Me.lwpagos.SmallIcons = frmPpal.imgListComun16 'imgListComun 'ImgListviews
     Set miRsAux = New ADODB.Recordset
     
-    cad = "SELECT  pagos_realizados.numdiari, pagos_realizados.fechaent, "
-    cad = cad & " pagos_realizados.numasien, pagos_realizados.ctabanc2, "
-    cad = cad & " pagos_realizados.usuariopago, pagos_realizados.fecrealizado, tipofpago.siglas, "
-    cad = cad & " pagos_realizados.reftalonpag, pagos_realizados.bancotalonpag, "
-    cad = cad & " pagos_realizados.imppago, pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea, pagos_realizados.codmacta "
-    cad = cad & " FROM pagos_realizados INNER JOIN tipofpago ON pagos_realizados.tipforpa = tipofpago.tipoformapago "
+    cad = "SELECT  hlinapu.numdiari, hlinapu.fechaent, "
+    cad = cad & " hlinapu.numasien, hlinapu.ctacontr, "
+    cad = cad & " hcabapu.usucreacion, hcabapu.feccreacion, tipofpago.siglas, "
+    cad = cad & " hlinapu.reftalonpag, hlinapu.bancotalonpag, "
+    cad = cad & " (coalesce(hlinapu.timported,0) - coalesce(hlinapu.timporteh,0)) imppago, hlinapu.numserie, hlinapu.numfacpr, hlinapu.fecfactu, hlinapu.numorden, hlinapu.codmacta "
+    cad = cad & " FROM (hlinapu INNER JOIN tipofpago ON hlinapu.tipforpa = tipofpago.tipoformapago) INNER JOIN hcabapu ON hlinapu.numdiari = hcabapu.numdiari and hlinapu.fechaent = hcabapu.fechaent and hlinapu.numasien = hcabapu.numasien "
     If Enlaza Then
-        cad = cad & Replace(ObtenerWhereCab(True), "pagos", "pagos_realizados")
+        cad = cad & Replace(Replace(ObtenerWhereCab(True), "pagos", "hlinapu"), "numfactu", "numfacpr")
     Else
-        cad = cad & " WHERE pagos_realizados.numlinea is null"
+        cad = cad & " WHERE hlinapu.codmacta is null"
     End If
-    cad = cad & " ORDER BY pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea"
+    cad = cad & " ORDER BY hlinapu.numserie, hlinapu.numfacpr, hlinapu.fecfactu, hlinapu.numorden, hlinapu.fechaent"
     
     
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4291,20 +4291,19 @@ Dim cad As String
         IT.Text = DBLet(miRsAux!NumDiari, "N")
         IT.SubItems(1) = Format(miRsAux!FechaEnt, "dd/mm/yyyy")
         IT.SubItems(2) = DBLet(miRsAux!NumAsien, "N")
-        IT.SubItems(3) = DBLet(miRsAux!Ctabanc2, "T")
-        IT.SubItems(4) = DBLet(miRsAux!usuariopago, "T")
-        IT.SubItems(5) = Format(DBLet(miRsAux!fecrealizado, "F"), "dd/mm/yyyy")
+        IT.SubItems(3) = DBLet(miRsAux!ctacontr, "T")
+        IT.SubItems(4) = DBLet(miRsAux!usucreacion, "T")
+        IT.SubItems(5) = Format(DBLet(miRsAux!feccreacion, "F"), "dd/mm/yyyy")
         IT.SubItems(6) = DBLet(miRsAux!siglas, "T")
         IT.SubItems(7) = DBLet(miRsAux!reftalonpag, "T")
         IT.SubItems(8) = DBLet(miRsAux!bancotalonpag, "T")
         IT.SubItems(9) = Format(miRsAux!imppago, "###,###,##0.00")
         
         IT.SubItems(10) = DBLet(miRsAux!NUmSerie)
-        IT.SubItems(11) = DBLet(miRsAux!NumFactu)
+        IT.SubItems(11) = DBLet(miRsAux!NumFacpr)
         IT.SubItems(12) = DBLet(miRsAux!FecFactu, "F")
         IT.SubItems(13) = DBLet(miRsAux!numorden)
-        IT.SubItems(14) = DBLet(miRsAux!NumLinea)
-        IT.SubItems(15) = DBLet(miRsAux!codmacta)
+        IT.SubItems(14) = DBLet(miRsAux!codmacta)
         
         
         
@@ -5131,7 +5130,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -5164,42 +5163,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
-    If txtaux(Index).Text = "" Then Exit Sub
+    If txtAux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtaux(5)
+                PonFoco txtAux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtaux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
-                txtaux(Index).Text = ""
-                PonerFoco txtaux(Index)
+            If Not EsFechaOK(txtAux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
+                txtAux(Index).Text = ""
+                PonerFoco txtAux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtaux(Index) = ImporteSinFormato(txtaux(Index))
+             txtAux(Index) = ImporteSinFormato(txtAux(Index))
             
         Case 10 'tipo
-            txtaux(Index).Text = UCase(txtaux(Index).Text)
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtaux(12).Text
+            RC = txtAux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtaux(12).Text = RC
+                txtAux(12).Text = RC
             End If
         
     End Select

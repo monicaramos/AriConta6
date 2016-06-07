@@ -53,7 +53,7 @@ Begin VB.Form frmInmoSimu
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   3870
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   210
          Width           =   405
          _ExtentX        =   714
@@ -91,7 +91,7 @@ Begin VB.Form frmInmoSimu
          Height          =   285
          Index           =   8
          Left            =   180
-         TabIndex        =   25
+         TabIndex        =   23
          Top             =   780
          Width           =   2325
       End
@@ -112,6 +112,44 @@ Begin VB.Form frmInmoSimu
       TabIndex        =   14
       Top             =   0
       Width           =   6915
+      Begin VB.TextBox txtNConcepto 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   2610
+         Locked          =   -1  'True
+         TabIndex        =   25
+         Top             =   1380
+         Width           =   4125
+      End
+      Begin VB.TextBox txtNConcepto 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   2610
+         Locked          =   -1  'True
+         TabIndex        =   24
+         Top             =   960
+         Width           =   4125
+      End
       Begin VB.TextBox txtConcepto 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -149,40 +187,6 @@ Begin VB.Form frmInmoSimu
          Tag             =   "imgConcepto"
          Top             =   1380
          Width           =   1305
-      End
-      Begin VB.Label lblConcepto 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   0
-         Left            =   2550
-         TabIndex        =   23
-         Top             =   990
-         Width           =   4095
-      End
-      Begin VB.Label lblConcepto 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   1
-         Left            =   2550
-         TabIndex        =   22
-         Top             =   1440
-         Width           =   4095
       End
       Begin VB.Label Label3 
          Caption         =   "Concepto"
@@ -523,9 +527,9 @@ Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 
 
@@ -623,9 +627,9 @@ Private Sub Form_Load()
     End With
 
 
-    For i = 0 To 1
-        Me.imgConcepto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgConcepto(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     txtFecha(0).Text = SugerirFechaNuevo
      
@@ -643,7 +647,7 @@ Private Sub frmF_Selec(vFecha As Date)
     txtFecha(IndCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub ImgConcepto_Click(Index As Integer)
+Private Sub imgConcepto_Click(Index As Integer)
     
     SQL = ""
     AbiertoOtroFormEnListado = True
@@ -653,7 +657,7 @@ Private Sub ImgConcepto_Click(Index As Integer)
     Set frmCon = Nothing
     If SQL <> "" Then
         Me.txtConcepto(Index).Text = RecuperaValor(SQL, 1)
-        Me.lblConcepto(Index).Caption = RecuperaValor(SQL, 2)
+        Me.txtNConcepto(Index).Text = RecuperaValor(SQL, 2)
     Else
         QuitarPulsacionMas Me.txtConcepto(Index)
     End If
@@ -741,15 +745,15 @@ Private Sub txtConcepto_KeyDown(Index As Integer, KeyCode As Integer, Shift As I
     End If
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgConcepto"
-        ImgConcepto_Click indice
+        imgConcepto_Click Indice
     End Select
 End Sub
 
 Private Sub txtConcepto_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
     
@@ -759,7 +763,7 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0, 1 'Tipos de concepto de inmovilizado
-            lblConcepto(Index).Caption = DevuelveDesdeBD("nomconam", "inmovcon", "codconam", txtConcepto(Index), "N")
+            txtNConcepto(Index).Text = DevuelveDesdeBD("nomconam", "inmovcon", "codconam", txtConcepto(Index), "N")
             If txtConcepto(Index).Text <> "" Then txtConcepto(Index).Text = Format(txtConcepto(Index).Text, "0000")
     End Select
 
@@ -834,7 +838,7 @@ Dim Situacion As String
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("inmovele.conconam", "COI", Me.txtConcepto(0), Me.lblConcepto(0), Me.txtConcepto(1), Me.lblConcepto(1), "pDHConcepto=""") Then Exit Function
+    If Not PonerDesdeHasta("inmovele.conconam", "COI", Me.txtConcepto(0), txtNConcepto(0), Me.txtConcepto(1), txtNConcepto(1), "pDHConcepto=""") Then Exit Function
             
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
     If cadselect <> "" Then cadselect = "(" & cadselect & ")"
@@ -845,7 +849,7 @@ End Function
 
 
 Private Function DatosOK() As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim CADENA As String
 
     DatosOK = False
@@ -893,28 +897,28 @@ End Sub
 Private Function SugerirFechaNuevo() As String
 Dim RC As String
     RC = "tipoamor"
-    Cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
+    cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
 
-    If Cad <> "" Then
-        Me.Tag = Cad   'Ultima actualizacion
+    If cad <> "" Then
+        Me.Tag = cad   'Ultima actualizacion
         Select Case Val(RC)
         Case 2
             'Semestral
-            i = 6
+            I = 6
             'Siempre es la ultima fecha de mes
         Case 3
             'Trimestral
-            i = 3
+            I = 3
         Case 4
             'Mensual
-            i = 1
+            I = 1
         Case Else
             'Anual
-            i = 12
+            I = 12
         End Select
         RC = PonFecha
     Else
-        Cad = "01/01/1991"
+        cad = "01/01/1991"
         RC = Format(Now, "dd/mm/yyyy")
     End If
     SugerirFechaNuevo = Format(RC, "dd/mm/yyyy")
@@ -926,23 +930,23 @@ Private Function PonFecha() As Date
 Dim d As Date
 'Dada la fecha en Cad y los meses k tengo k sumar
 'Pongo la fecha
-d = DateAdd("m", i, CDate(Cad))
+d = DateAdd("m", I, CDate(cad))
 Select Case Month(d)
 Case 2
     If ((Year(d) - 2000) Mod 4) = 0 Then
-        i = 29
+        I = 29
     Else
-        i = 28
+        I = 28
     End If
 Case 1, 3, 5, 7, 8, 10, 12
     '31
-        i = 31
+        I = 31
 Case Else
     '30
-        i = 30
+        I = 30
 End Select
-Cad = i & "/" & Month(d) & "/" & Year(d)
-PonFecha = CDate(Cad)
+cad = I & "/" & Month(d) & "/" & Year(d)
+PonFecha = CDate(cad)
 End Function
 
 Private Sub txtTipoSalida_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)

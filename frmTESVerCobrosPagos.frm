@@ -569,6 +569,9 @@ Private Sub Form_Activate()
         espera 0.1
         'Cargamos el LIST
         CargaList
+        
+        PonerFocoLw Me.ListView1
+        
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -609,7 +612,7 @@ Private Sub Form_Load()
     
     I = 0
     If Cobros And (Tipo = 2 Or Tipo = 3) Then I = 1
-    Me.mnbarra1.Visible = I = 1
+    Me.mnBarra1.Visible = I = 1
     Me.mnNumero.Visible = I = 1
     'Efectuar cobros
     Me.cmdRegresar.Visible = Regresar
@@ -964,7 +967,7 @@ Dim J As Byte
     ItmX.Text = RS!NUmSerie
     ItmX.SubItems(1) = RS!NumFactu
     ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
-    ItmX.SubItems(3) = Format(RS!Fecefect, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(RS!fecefect, "dd/mm/yyyy")
     ItmX.SubItems(4) = RS!numorden
     ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
     ItmX.SubItems(6) = DBLet(RS!siglas, "T")
@@ -978,7 +981,7 @@ Dim J As Byte
         ItmX.SubItems(8) = "0.00"
         ItmX.SubItems(9) = ItmX.SubItems(7)
     End If
-    If RS!Fecefect < Fecha Then
+    If RS!fecefect < Fecha Then
         'LO DEBE
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo

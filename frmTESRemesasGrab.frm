@@ -382,7 +382,7 @@ Begin VB.Form frmTESRemesasGrab
             EndProperty
             Height          =   360
             Index           =   2
-            Left            =   4470
+            Left            =   4500
             TabIndex        =   6
             Text            =   "Text3"
             Top             =   345
@@ -623,7 +623,7 @@ Attribute frmP.VB_VarHelpID = -1
 
 Dim RS As ADODB.Recordset
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 Dim IT As ListItem  'Comun
 Dim PrimeraVez As Boolean
 Dim Cancelado As Boolean
@@ -832,7 +832,7 @@ Dim W As Integer
     For H = 1 To 3
             Text3(H - 1).Text = RecuperaValor(CadenaDesdeOtroForm, H)
     Next H
-    Text3(7).Text = RecuperaValor(CadenaDesdeOtroForm, 6)
+    Text3(7).Text = DevuelveDesdeBD("descsituacion", "usuarios.wtiposituacionrem", "situacio", Text3(2).Text, "T")  ' RecuperaValor(CadenaDesdeOtroForm, 6)
     H = Val(RecuperaValor(CadenaDesdeOtroForm, 7))
     Text3(7).Tag = H
     'Por defecto
@@ -1050,26 +1050,26 @@ End Function
 
 
 
-Private Function UltimoComboReferencia(Leer As Boolean) As Integer
+Private Function UltimoComboReferencia(leer As Boolean) As Integer
     UltimoComboReferencia = 0
     On Error GoTo ELeerRef
     SQL = App.Path & "\control.dat"
-    If Leer Then
+    If leer Then
         UltimoComboReferencia = 2
         If Dir(SQL, vbArchive) <> "" Then
-            i = FreeFile
-            Open SQL For Input As #i
-            Line Input #i, SQL
-            Close #i
+            I = FreeFile
+            Open SQL For Input As #I
+            Line Input #I, SQL
+            Close #I
             If RecuperaValor(SQL, 8) <> "" Then UltimoComboReferencia = RecuperaValor(SQL, 8)
         End If
         
     Else
-        i = FreeFile
-        Open SQL For Output As #i
+        I = FreeFile
+        Open SQL For Output As #I
         CadenaControl = InsertaValor(CadenaControl, 8, CStr(cmbReferencia.ListIndex))
-        Print #i, CadenaControl
-        Close #i
+        Print #I, CadenaControl
+        Close #I
     End If
     Exit Function
 ELeerRef:
@@ -1093,15 +1093,15 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         CuentasCC = ""
         CualesEliminar = ""
         J = 0
-        For i = 0 To 1
+        For I = 0 To 1
             ' contatalonpte
             SQL = "pagarecta"
-            If i = 1 Then SQL = "contatalonpte"
+            If I = 1 Then SQL = "contatalonpte"
             CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
             
             'Repetiremos el proceso dos veces
             SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            SQL = SQL & " AND   talon = " & i
+            SQL = SQL & " AND   talon = " & I
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                     'Si lleva cta puente habra que ver si esta contbilizada
@@ -1138,7 +1138,7 @@ On Error GoTo EEliminarEnRecepcionDocumentos
             
             
             
-        Next i
+        Next I
         
         
 
@@ -1160,12 +1160,12 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         J = 1
         SQL = "X"
         Do
-            i = InStr(J, CualesEliminar, ",")
-            If i > 0 Then
-                J = i + 1
+            I = InStr(J, CualesEliminar, ",")
+            If I > 0 Then
+                J = I + 1
                 SQL = SQL & "X"
             End If
-        Loop Until i = 0
+        Loop Until I = 0
         
         SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
         If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
@@ -1185,14 +1185,14 @@ EEliminarEnRecepcionDocumentos:
 End Sub
 
 
-Private Sub SituarComboReferencia(Leer As Boolean)
+Private Sub SituarComboReferencia(leer As Boolean)
 Dim NF As Integer
     
     On Error GoTo eSituarComboReferencia
     
     SQL = App.Path & "\cboremref.dat"
-    If Leer Then
-        i = 2
+    If leer Then
+        I = 2
         If Dir(SQL, vbArchive) <> "" Then
             NF = FreeFile
             Open SQL For Input As #NF
@@ -1200,14 +1200,14 @@ Dim NF As Integer
                 Line Input #NF, SQL
                 If SQL <> "" Then
                     If IsNumeric(SQL) Then
-                        If Val(SQL) > 0 And Val(SQL) < 3 Then i = Val(SQL)
+                        If Val(SQL) > 0 And Val(SQL) < 3 Then I = Val(SQL)
                     End If
                 End If
             End If
             Close #NF
             
         End If
-        Me.cmbReferencia.ListIndex = i
+        Me.cmbReferencia.ListIndex = I
     Else
         'GUARDAR
         If Me.cmbReferencia.ListIndex = 2 Then

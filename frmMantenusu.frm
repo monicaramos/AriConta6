@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMantenusu 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Usuarios"
@@ -868,7 +868,7 @@ Private Const IdPrograma = 105
 
 Dim PrimeraVez As Boolean
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 Dim UsuarioOrigen As Long
 
 
@@ -905,15 +905,15 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
             End If
         End If
     
-        For i = 0 To Text2.Count - 1
-            Text2(i).Text = Trim(Text2(i).Text)
-            If i < 4 Then
-                If Text2(i).Text = "" Then
-                    MsgBox Label4(i).Caption & " requerido.", vbExclamation
+        For I = 0 To Text2.Count - 1
+            Text2(I).Text = Trim(Text2(I).Text)
+            If I < 4 Then
+                If Text2(I).Text = "" Then
+                    MsgBox Label4(I).Caption & " requerido.", vbExclamation
                     Exit Sub
                 End If
             End If
-        Next i
+        Next I
         
         If Combo2.ListIndex < 0 Then
             MsgBox "Seleccione un nivel de acceso", vbExclamation
@@ -934,9 +934,9 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
         
         'Ahora vamos con los campos de e-mail
         CadenaDesdeOtroForm = ""
-        For i = 4 To 7
-            If Text2(i).Text <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "1"
-        Next i
+        For I = 4 To 7
+            If Text2(I).Text <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "1"
+        Next I
         
         If Len(CadenaDesdeOtroForm) > 0 And Len(CadenaDesdeOtroForm) <> 4 Then
             MsgBox "Falta por rellenar correctamente los datos del e-mail.", vbExclamation
@@ -945,7 +945,7 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
         End If
         
         'Compruebo que el login es unico
-        i = 0
+        I = 0
         If UCase(Label6.Caption) = "NUEVO" Then
             Set miRsAux = New ADODB.Recordset
             SQL = "Select login from Usuarios.Usuarios where login='" & Text2(0).Text & "'"
@@ -963,17 +963,17 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
             'MODIFICAR
             If FrameUsuario.Tag = 0 Then
                 'Estoy modificando un dato normal
-                i = CInt(ListView1.SelectedItem.Text)
+                I = CInt(ListView1.SelectedItem.Text)
             Else
                 'Estoy agregando un usuario que ya existia en contabiñlidad
                 'es decir, le estoy asignando su NIVELUSU de contabilidad
-                i = CInt(FrameUsuario.Tag)
+                I = CInt(FrameUsuario.Tag)
             End If
         End If
         
         UsuarioOrigen = Combo6.ListIndex
         
-        InsertarModificar i
+        InsertarModificar I
         
     End If
     
@@ -996,12 +996,12 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
     
     CargaUsuarios
     If CadenaDesdeOtroForm <> "" Then
-        For i = 1 To ListView1.ListItems.Count
-            If ListView1.ListItems(i).Text = CadenaDesdeOtroForm Then
-                Set ListView1.SelectedItem = ListView1.ListItems(i)
+        For I = 1 To ListView1.ListItems.Count
+            If ListView1.ListItems(I).Text = CadenaDesdeOtroForm Then
+                Set ListView1.SelectedItem = ListView1.ListItems(I)
                 Exit For
             End If
-        Next i
+        Next I
     End If
     DatosUsusario
     CadenaDesdeOtroForm = ""
@@ -1016,7 +1016,7 @@ End Sub
 
 Private Sub InsertarModificar(ByVal CodigoUsuario As Integer)
 Dim Ant As Integer
-Dim fin As Boolean
+Dim Fin As Boolean
 Dim SQL2 As String
 Dim Excepcion As String
 
@@ -1039,22 +1039,22 @@ On Error GoTo EInsertarModificar
         miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         Ant = 1
-        i = 1
-        fin = False
-        If miRsAux.EOF Then fin = True
-        While Not fin
+        I = 1
+        Fin = False
+        If miRsAux.EOF Then Fin = True
+        While Not Fin
             If miRsAux!codusu - Ant > 0 Then
                 'Hay un salto
-                i = Ant
-                fin = True
+                I = Ant
+                Fin = True
             Else
                 Ant = Ant + 1
             End If
-            If Not fin Then
+            If Not Fin Then
                 miRsAux.MoveNext
                 If miRsAux.EOF Then
-                    fin = True
-                    i = Ant
+                    Fin = True
+                    I = Ant
                 End If
             End If
         Wend
@@ -1062,7 +1062,7 @@ On Error GoTo EInsertarModificar
 
         
         SQL = "INSERT INTO Usuarios.usuarios (codusu, nomusu,  nivelusu, login, passwordpropio,dirfich,skin) VALUES ("
-        SQL = SQL & i
+        SQL = SQL & I
         SQL = SQL & ",'" & Text2(1).Text & "',"
         'Combo
         SQL = SQL & Combo2.ItemData(Combo2.ListIndex) & ",'"
@@ -1073,9 +1073,9 @@ On Error GoTo EInsertarModificar
             CadenaDesdeOtroForm = "NULL"
         Else
             CadenaDesdeOtroForm = ""
-            For i = 4 To 7
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(i).Text & "|"
-            Next i
+            For I = 4 To 7
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(I).Text & "|"
+            Next I
             CadenaDesdeOtroForm = "'" & CadenaDesdeOtroForm & "'"
         End If
         SQL = SQL & CadenaDesdeOtroForm
@@ -1086,7 +1086,7 @@ On Error GoTo EInsertarModificar
         
         ' insercion en el menu_usuarios
         SQL2 = "INSERT INTO menus_usuarios (codusu,codigo,aplicacion,ver,creareliminar,modificar,imprimir,especial,expandido) "
-        SQL2 = SQL2 & " select " & i & ",codigo, aplicacion, "
+        SQL2 = SQL2 & " select " & I & ",codigo, aplicacion, "
         
         ' insertamos sin partir de ningún usuario
         If UsuarioOrigen <= 0 Then
@@ -1129,7 +1129,7 @@ On Error GoTo EInsertarModificar
         
         If Excepcion <> "" Then
             SQL2 = "update menus_usuarios set ver = 0, creareliminar=0, modificar=0, imprimir = 0, especial= 0, expandido = 0 "
-            SQL2 = SQL2 & " where aplicacion in ('ariconta') and codusu = " & DBSet(i, "N")
+            SQL2 = SQL2 & " where aplicacion in ('ariconta') and codusu = " & DBSet(I, "N")
             SQL2 = SQL2 & " and (codigo in " & Excepcion
             SQL2 = SQL2 & " or codigo in (select codigo from menus where padre in " & Excepcion & " and aplicacion in ('ariconta')))"
         
@@ -1139,7 +1139,7 @@ On Error GoTo EInsertarModificar
         If Not vEmpresa.TieneTesoreria Then
             
             SQL2 = "update menus_usuarios set ver = 0, creareliminar=0, modificar=0, imprimir = 0, especial= 0, expandido = 0 "
-            SQL2 = SQL2 & " where aplicacion in ('ariconta') and codusu = " & DBSet(i, "N")
+            SQL2 = SQL2 & " where aplicacion in ('ariconta') and codusu = " & DBSet(I, "N")
             SQL2 = SQL2 & " codigo in (select codigo from menus where aplicacion = 'ariconta' and tipo = 1)"
         
             Conn.Execute SQL2
@@ -1153,14 +1153,14 @@ On Error GoTo EInsertarModificar
         If Combo2.ListIndex = 2 Then
             'Si el combo1 es 3 entonces es super
             If Combo1.ListIndex = 3 Then
-                i = 0
+                I = 0
             Else
-                i = 1
+                I = 1
             End If
         Else
-            i = Combo2.ItemData(Combo2.ListIndex)
+            I = Combo2.ItemData(Combo2.ListIndex)
         End If
-        SQL = SQL & "' , nivelusu =" & i
+        SQL = SQL & "' , nivelusu =" & I
         'SQL = SQL & "  , login = '" & Text2(2).Text
         SQL = SQL & "  , passwordpropio = '" & Text2(3).Text & "'"
         
@@ -1170,9 +1170,9 @@ On Error GoTo EInsertarModificar
             CadenaDesdeOtroForm = "NULL"
         Else
             CadenaDesdeOtroForm = ""
-            For i = 4 To 7
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(i).Text & "|"
-            Next i
+            For I = 4 To 7
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(I).Text & "|"
+            Next I
             CadenaDesdeOtroForm = "'" & CadenaDesdeOtroForm & "'"
         End If
         SQL = SQL & " ,dirfich = " & CadenaDesdeOtroForm
@@ -1270,7 +1270,7 @@ Dim k As Integer
             CargaCombo6 0
             
             Label6.Caption = "NUEVO"
-            i = 0 'Para el foco
+            I = 0 'Para el foco
             
             Combo2.ListIndex = -1
             Combo4.ListIndex = -1
@@ -1290,7 +1290,7 @@ Dim k As Integer
                 'LimpiarCamposUsuario
                 PonerDatosUsuario
             End If
-            i = 1 'Para el foco
+            I = 1 'Para el foco
             FrameUsuario.Tag = 0  'Marcamos que es una modificacion desde un usuario existente
         End If
         Text2(0).Enabled = (Index = 0)
@@ -1302,12 +1302,12 @@ Dim k As Integer
         Me.FrameEditorMenus.Visible = False
         Me.FrameEditorMenus.Enabled = False
         
-        Text2(i).SetFocus
+        Text2(I).SetFocus
         
     Case 2, 3
         If ListView1.SelectedItem Is Nothing Then Exit Sub
-        i = vUsu.Codigo Mod 1000
-        If i = CInt(ListView1.SelectedItem.Text) Then
+        I = vUsu.Codigo Mod 1000
+        If I = CInt(ListView1.SelectedItem.Text) Then
             MsgBox "El usuario es el mismo con el que esta trabajando actualmente", vbInformation
             Exit Sub
         End If
@@ -1373,30 +1373,30 @@ Private Sub PonerDatosUsuario()
      Text2(1).Text = miRsAux!nomusu
      Text2(2).Text = miRsAux!passwordpropio
      Text2(3).Text = miRsAux!passwordpropio
-     i = miRsAux!nivelusu
+     I = miRsAux!nivelusu
 
-    Select Case i
+    Select Case I
         Case 0
-            i = 3
+            I = 3
         Case 1
-            i = 2
+            I = 2
         Case 2
-            i = 1
+            I = 1
         Case 3
-            i = 0
+            I = 0
     End Select
 
 
-    Combo2.ListIndex = i
+    Combo2.ListIndex = I
     
      Combo4.ListIndex = miRsAux!Skin
      
      'Cargamos los datos del correo e-mail
      SQL = Trim(DBLet(miRsAux!Dirfich, "T"))
      If SQL <> "" Then
-         For i = 1 To 4
-             Text2(3 + i).Text = RecuperaValor(SQL, i)
-         Next i
+         For I = 1 To 4
+             Text2(3 + I).Text = RecuperaValor(SQL, I)
+         Next I
      End If
 
 End Sub
@@ -1472,25 +1472,25 @@ Private Sub Form_Load()
 End Sub
 
 
-Private Sub LeerDatosCombo(Leer As Boolean)
+Private Sub LeerDatosCombo(leer As Boolean)
 Dim Cad2 As String
 
     On Error GoTo ELe
     SQL = App.Path & "\control.dat"
-    If Leer Then
+    If leer Then
     
         Combo3(1).ListIndex = 0
-        i = RecuperaValor(CadenaControl, 6)
-        Combo3(1).ListIndex = i
+        I = RecuperaValor(CadenaControl, 6)
+        Combo3(1).ListIndex = I
     Else
         'GUARDAR
         SQL = App.Path & "\control.dat"
         If Dir(SQL, vbArchive) <> "" Then
-            i = FreeFile
-            Open SQL For Output As #i
+            I = FreeFile
+            Open SQL For Output As #I
             
-            Print #i, InsertaValor(CadenaControl, 6, Combo3(1).ListIndex)
-            Close #i
+            Print #I, InsertaValor(CadenaControl, 6, Combo3(1).ListIndex)
+            Close #I
             
             CadenaControl = InsertaValor(CadenaControl, 6, Combo3(1).ListIndex)
             
@@ -1707,9 +1707,9 @@ Dim AsignarDatos As Boolean
 End Sub
 
 Private Sub LimpiarCamposUsuario()
-    For i = 0 To 7
-        Text2(i).Text = ""
-    Next i
+    For I = 0 To 7
+        Text2(I).Text = ""
+    Next I
 End Sub
 Private Sub LeerEditorMenus()
     On Error GoTo ELeerEditorMenus
@@ -1749,7 +1749,7 @@ Dim J As Integer
             Set Nod = TreeView1.Nodes.Add(SQL, tvwChild, "C" & miRsAux!Contador)
         End If
         SQL = miRsAux!Name & "|"
-        If Not IsNull(miRsAux!indice) Then SQL = SQL & miRsAux!indice
+        If Not IsNull(miRsAux!Indice) Then SQL = SQL & miRsAux!Indice
         Nod.Tag = SQL
    
         Nod.Text = miRsAux!Caption
@@ -1764,14 +1764,14 @@ Dim J As Integer
     SQL = "Select * from usuarios.appmenusUsuario where aplicacion='Conta' AND codusu =" & ListView1.SelectedItem.Text
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        For i = 1 To TreeView1.Nodes.Count
+        For I = 1 To TreeView1.Nodes.Count
             SQL = miRsAux!Tag
-            If TreeView1.Nodes(i).Tag = SQL Then
-                TreeView1.Nodes(i).Checked = False
-                If TreeView1.Nodes(i).Children > 0 Then Recursivo2 TreeView1.Nodes(i).Child, TreeView1.Nodes(i).Checked
+            If TreeView1.Nodes(I).Tag = SQL Then
+                TreeView1.Nodes(I).Checked = False
+                If TreeView1.Nodes(I).Children > 0 Then Recursivo2 TreeView1.Nodes(I).Child, TreeView1.Nodes(I).Checked
                 Exit For
             End If
-        Next i
+        Next I
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1875,16 +1875,16 @@ Private Sub GuardarMenuUsuario()
     SQL = "DELETE from usuarios.appmenusUsuario where aplicacion='Conta' AND codusu =" & ListView1.SelectedItem.Text
     Conn.Execute SQL
     
-    i = 0
+    I = 0
     SQL = "INSERT INTO usuarios.appmenususuario (aplicacion, codusu, codigo, tag) VALUES ('Conta'," & ListView1.SelectedItem.Text & ","
     RecursivoBD TreeView1.Nodes(1)
 End Sub
 
 Private Sub InsertaBD(vTag As String)
 Dim C As String
-    i = i + 1
+    I = I + 1
     'SQL = "INSERT INTO appmenususuario (aplicacion, codusu, codigo, tag)
-    C = SQL & i & ",'" & vTag & "')"
+    C = SQL & I & ",'" & vTag & "')"
     Conn.Execute C
 End Sub
 
@@ -1929,10 +1929,10 @@ Private Sub CargaCombo()
     Combo2.AddItem "Administrador"
     Combo2.ItemData(Combo2.NewIndex) = 1
     
-    If vUsu.Login = "root" Then
+'    If vUsu.Login = "root" Then
         Combo2.AddItem "Superusuario"
         Combo2.ItemData(Combo2.NewIndex) = 0
-    End If
+'    End If
 
     'skin
     Combo5.Clear
@@ -1969,27 +1969,27 @@ End Sub
 
 Private Sub CargaCombo6(Usuario As Integer)
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     'skin
     Combo6.Clear
     
     SQL = "select codusu, login from usuarios.usuarios where codusu <> " & DBSet(Usuario, "N") & " and login <> 'root' and nivelusu > -1 order by 1"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Combo6.AddItem "Ninguno"
     Combo6.ItemData(Combo6.NewIndex) = 0
     
-    While Not Rs.EOF
-        Combo6.AddItem Rs.Fields(1).Value
-        Combo6.ItemData(Combo6.NewIndex) = Rs.Fields(0).Value
+    While Not RS.EOF
+        Combo6.AddItem RS.Fields(1).Value
+        Combo6.ItemData(Combo6.NewIndex) = RS.Fields(0).Value
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
 End Sub
 

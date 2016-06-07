@@ -239,10 +239,10 @@ Private Sub Form_Activate()
         PonerVisible True
          
         '??????quitar
-        If Combo1.Text = "root" Then
-            Text1(1).Text = "aritel"
-            Exit Sub
-        End If
+'        If Combo1.Text = "root" Then
+'            Text1(1).Text = "aritel"
+'            Exit Sub
+'        End If
          
          
         If Text1(0).Text <> "" Then
@@ -334,7 +334,7 @@ Dim Ok As Byte
     
     
     
-    If vUsu.Leer(Text1(0).Text) = 0 Then
+    If vUsu.leer(Text1(0).Text) = 0 Then
         If vUsu.Nivel < 0 Then
             'NO tiene autorizacion de ningun nivel. Es menos 1
             Ok = 3
@@ -449,30 +449,30 @@ Private Sub PonerVisible(Visible As Boolean)
     Combo1.Visible = Visible
 End Sub
 
-Private Sub UltimoUsuario(Leer As Boolean)
+Private Sub UltimoUsuario(leer As Boolean)
 Dim NF As Integer
-Dim Cad As String
+Dim cad As String
 Dim Cad2 As String
 
 On Error GoTo EUltimoUsuario
 
 
-    Cad = App.Path & "\control.dat"
+    cad = App.Path & "\control.dat"
     
-    If Leer Then
-        If Dir(Cad) <> "" Then
+    If leer Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
-            CadenaControl = Cad
+            cad = Trim(cad)
+            CadenaControl = cad
             'El primer pipe es el usuario
-            Text1(0).Text = RecuperaValor(Cad, 1)
+            Text1(0).Text = RecuperaValor(cad, 1)
         End If
     Else 'Escribir
         NF = FreeFile
-        Open Cad For Output As #NF
+        Open cad For Output As #NF
         Cad2 = Text1(0).Text
         Print #NF, InsertaValor(CadenaControl, 1, Cad2)
         Close #NF
@@ -484,33 +484,33 @@ End Sub
 
 'Lo que haremos aqui es ver, o guardar, el ultimo numero de empresa
 'a la que ha entrado, y el usuario
-Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
+Private Sub NumeroEmpresaMemorizar(leer As Boolean)
 Dim NF As Integer
-Dim Cad As String
+Dim cad As String
 On Error GoTo ENumeroEmpresaMemorizar
 
 
-    Cad = App.Path & "\ultusu.dat"
+    cad = App.Path & "\ultusu.dat"
     
     
     
-    If Leer Then
-        If Dir(Cad) <> "" Then
+    If leer Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
+            cad = Trim(cad)
                 
                 
                 'El primer pipe es el usuario
-                Text1(0).Text = Cad
+                Text1(0).Text = cad
         End If
     Else 'Escribir
         NF = FreeFile
-        Open Cad For Output As #NF
-        Cad = Text1(0).Text
-        Print #NF, Cad
+        Open cad For Output As #NF
+        cad = Text1(0).Text
+        Print #NF, cad
         Close #NF
     End If
 ENumeroEmpresaMemorizar:
@@ -599,24 +599,24 @@ End Sub
 
 Private Sub CargarCadenaControl()
 Dim NF As Integer
-Dim Cad As String
+Dim cad As String
 Dim Cad2 As String
 
 On Error GoTo ECargarCadenaControl
 
 
-    Cad = App.Path & "\control.dat"
+    cad = App.Path & "\control.dat"
     
-    If Dir(Cad) <> "" Then
+    If Dir(cad) <> "" Then
         NF = FreeFile
-        Open Cad For Input As #NF
-        Line Input #NF, Cad
+        Open cad For Input As #NF
+        Line Input #NF, cad
         Close #NF
-        Cad = Trim(Cad)
-        CadenaControl = Cad
+        cad = Trim(cad)
+        CadenaControl = cad
     Else
         NF = FreeFile
-        Open Cad For Output As #NF
+        Open cad For Output As #NF
         Cad2 = "|ariconta1|4360|1399|3000|2|||"
         CadenaControl = Cad2
         Print #NF, Cad2
