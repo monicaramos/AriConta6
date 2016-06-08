@@ -2961,7 +2961,7 @@ End Sub
 Private Sub Form_Activate()
 
     If PrimeraVez Then
-        cboFiltro.ListIndex = vUsu.FiltroCobros
+        cboFiltro.ListIndex = vUsu.FiltroPagos
     
         PrimeraVez = False
     

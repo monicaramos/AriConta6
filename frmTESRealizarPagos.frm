@@ -1161,39 +1161,36 @@ Dim TipoAnt As Integer
     'el nº de talon pagare en reftalonpag
     
     
-'    If Cobros Then
 
-        If Combo1.ItemData(Combo1.ListIndex) = vbTalon Or Combo1.ItemData(Combo1.ListIndex) = vbPagare Then
-        
-        
-              ' llamamos a un formulario para que me introduzca la referencia de los talones o pagarés
-              Dim CadInsert As String
-              Dim CadValues As String
-              
-              SQL = "delete from tmppagos2 where codusu = " & vUsu.Codigo
-              Conn.Execute SQL
+    If Combo1.ItemData(Combo1.ListIndex) = vbTalon Or Combo1.ItemData(Combo1.ListIndex) = vbPagare Then
+    
+    
+          ' llamamos a un formulario para que me introduzca la referencia de los talones o pagarés
+          Dim CadInsert As String
+          Dim CadValues As String
+          
+          SQL = "delete from tmppagos2 where codusu = " & vUsu.Codigo
+          Conn.Execute SQL
 
-              CadInsert = "insert into tmppagos2 (codusu,numserie,numfactu,fecfactu,numorden,fecefect,reftalonpag,bancotalonpag,codmacta) values "
-              CadValues = ""
+          CadInsert = "insert into tmppagos2 (codusu,numserie,numfactu,fecfactu,numorden,fecefect,reftalonpag,bancotalonpag,codmacta) values "
+          CadValues = ""
 
-              For I = 1 To Me.ListView1.ListItems.Count
-                If ListView1.ListItems(I).Checked Then
-                    CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(ListView1.ListItems(I).Text, "T") & "," & DBSet(Val(ListView1.ListItems(I).SubItems(1)), "N") & ","
-                    CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(2), "F") & "," & DBSet(ListView1.ListItems(I).SubItems(4), "N") & ","
-                    CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(3), "F") & ","
-                    CadValues = CadValues & ValorNulo & "," & ValorNulo & "," & DBSet(ListView1.ListItems(I).Tag, "T") & "),"
-                End If
-              Next I
-              
-              If CadValues <> "" Then
-                  Conn.Execute CadInsert & Mid(CadValues, 1, Len(CadValues) - 1)
+          For I = 1 To Me.ListView1.ListItems.Count
+            If ListView1.ListItems(I).Checked Then
+                CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(ListView1.ListItems(I).Text, "T") & "," & DBSet(Val(ListView1.ListItems(I).SubItems(1)), "N") & ","
+                CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(2), "F") & "," & DBSet(ListView1.ListItems(I).SubItems(4), "N") & ","
+                CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(3), "F") & ","
+                CadValues = CadValues & ValorNulo & "," & ValorNulo & "," & DBSet(ListView1.ListItems(I).Tag, "T") & "),"
+            End If
+          Next I
+          
+          If CadValues <> "" Then
+              Conn.Execute CadInsert & Mid(CadValues, 1, Len(CadValues) - 1)
 
-                  frmTESRefTalonPagos.Show vbModal
-              End If
-        
-        End If
-'    End If
-
+              frmTESRefTalonPagos.Show vbModal
+          End If
+    
+    End If
     
     
     'Si el parametro dice k van todos en el mismo asiento, pues eso, todos en el mismo asiento
@@ -3950,7 +3947,7 @@ Dim ImporteInterno As Currency
                         Select Case TipoAmpliacion
                         Case 0, 1
                            If TipoAmpliacion = 1 Then Ampliacion = Ampliacion & vp.siglas & " "
-                           Ampliacion = Ampliacion & RecuperaValor(RS1!Cliente, 1) & RecuperaValor(RS1!Cliente, 2)
+                           Ampliacion = Ampliacion & RecuperaValor(RS1!Cliente, 2)
                         
                         Case 2
                         
@@ -4044,7 +4041,7 @@ Dim ImporteInterno As Currency
             'Punteado
             SQL = SQL & "0,"
             
-            If Cabecera = 1 Then
+            If Cabecera = 1 And Not VienedeGastos Then
             
                 ' nuevos campos de la factura
                 'numSerie , numfacpr, FecFactu, numorden, TipForpa, reftalonpag, bancotalonpag

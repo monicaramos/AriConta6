@@ -805,7 +805,6 @@ Begin VB.Form frmTESCobros
          TabPicture(2)   =   "frmTESCobros.frx":00A4
          Tab(2).ControlEnabled=   0   'False
          Tab(2).Control(0)=   "FrameSeguro"
-         Tab(2).Control(0).Enabled=   0   'False
          Tab(2).ControlCount=   1
          Begin VB.Frame FrameAux0 
             BorderStyle     =   0  'None
@@ -5785,18 +5784,19 @@ Dim cad As String
     Set Me.lwCobros.SmallIcons = frmPpal.imgListComun16 'imgListComun 'ImgListviews
     Set miRsAux = New ADODB.Recordset
     
-    cad = "SELECT  cobros_realizados.numdiari, cobros_realizados.fechaent, "
-    cad = cad & " cobros_realizados.numasien, cobros_realizados.ctabanc2, "
-    cad = cad & " cobros_realizados.usuariocobro, cobros_realizados.fecrealizado, tipofpago.siglas, "
-    cad = cad & " cobros_realizados.reftalonpag, cobros_realizados.bancotalonpag, "
-    cad = cad & " cobros_realizados.impcobro, cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea, cobros_realizados.codrem "
-    cad = cad & " FROM cobros_realizados INNER JOIN tipofpago ON cobros_realizados.tipforpa = tipofpago.tipoformapago "
+    cad = "SELECT  hlinapu.numdiari, hlinapu.fechaent, "
+    cad = cad & " hlinapu.numasien, hlinapu.ctacontr, "
+    cad = cad & " hcabapu.usucreacion, hcabapu.feccreacion, tipofpago.siglas, "
+    cad = cad & " hlinapu.reftalonpag, hlinapu.bancotalonpag, "
+    cad = cad & " (coalesce(hlinapu.timported,0) - coalesce(hlinapu.timporteh,0)) impcobro, hlinapu.numserie, hlinapu.numfaccl, hlinapu.fecfactu, hlinapu.numorden,  hlinapu.codrem "
+    cad = cad & " FROM (hlinapu INNER JOIN tipofpago ON hlinapu.tipforpa = tipofpago.tipoformapago)  INNER JOIN hcabapu ON hlinapu.numdiari = hcabapu.numdiari and hlinapu.fechaent = hcabapu.fechaent and hlinapu.numasien = hcabapu.numasien  "
     If Enlaza Then
-        cad = cad & Replace(ObtenerWhereCab(True), "cobros", "cobros_realizados")
+        cad = cad & Replace(ObtenerWhereCab(True), "cobros", "hlinapu")
     Else
-        cad = cad & " WHERE cobros_realizados.numlinea is null"
+        cad = cad & " WHERE hlinapu.codmacta is null"
     End If
-    cad = cad & " ORDER BY cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros_realizados.numlinea"
+    cad = cad & " ORDER BY hlinapu.numserie, hlinapu.numfaccl, hlinapu.fecfactu, hlinapu.numorden, hlinapu.fechaent"
+    
     
 '    Cad = Cad & PonerOrdenFiltro
     
@@ -5812,20 +5812,20 @@ Dim cad As String
         IT.Text = DBLet(miRsAux!NumDiari, "N")
         IT.SubItems(1) = Format(miRsAux!FechaEnt, "dd/mm/yyyy")
         IT.SubItems(2) = DBLet(miRsAux!NumAsien, "N")
-        IT.SubItems(3) = DBLet(miRsAux!Ctabanc2, "T")
-        IT.SubItems(4) = DBLet(miRsAux!usuariocobro, "T")
-        IT.SubItems(5) = Format(DBLet(miRsAux!fecrealizado, "F"), "dd/mm/yyyy")
+        IT.SubItems(3) = DBLet(miRsAux!ctacontr, "T")
+        IT.SubItems(4) = DBLet(miRsAux!usucreacion, "T")
+        IT.SubItems(5) = Format(DBLet(miRsAux!feccreacion, "F"), "dd/mm/yyyy")
         IT.SubItems(6) = DBLet(miRsAux!siglas, "T")
         IT.SubItems(7) = DBLet(miRsAux!reftalonpag, "T")
         IT.SubItems(8) = DBLet(miRsAux!bancotalonpag, "T")
         IT.SubItems(9) = Format(miRsAux!impcobro, "###,###,##0.00")
         
         IT.SubItems(10) = DBLet(miRsAux!NUmSerie)
-        IT.SubItems(11) = DBLet(miRsAux!NumFactu)
+        IT.SubItems(11) = DBLet(miRsAux!NumFaccl)
         IT.SubItems(12) = DBLet(miRsAux!FecFactu, "F")
         IT.SubItems(13) = DBLet(miRsAux!numorden)
-        IT.SubItems(14) = DBLet(miRsAux!NumLinea)
-        IT.SubItems(15) = DBLet(miRsAux!CodRem)
+        IT.SubItems(14) = DBLet(miRsAux!CodRem)
+        
         
         If DBLet(miRsAux!CodRem, "N") <> 0 Then
             IT.SmallIcon = 42
