@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016051913250141020RE10000332016</MsgId>
-   <CreDtTm>2016-05-19T13:25:01</CreDtTm>
-   <NbOfTxs>1</NbOfTxs>
-   <CtrlSum>100.00</CtrlSum>
+<MsgId>PRE2016060909434350390RE10000312016</MsgId>
+   <CreDtTm>2016-06-09T09:43:43</CreDtTm>
+   <NbOfTxs>43</NbOfTxs>
+   <CtrlSum>5765.65</CtrlSum>
    <InitgPty>
      <Nm>Ariadna Software, S.L.</Nm>
      <Id>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000332016 19/05/16B96470190</PmtInfId>
+   <PmtInfId>RE000312016 09/06/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,22 +33,22 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-05-19</ReqdColltnDt>
+   <ReqdColltnDt>2016-06-09</ReqdColltnDt>
    <Cdtr>
       <Nm>Ariadna Software, S.L.</Nm>
       <PstlAdr>
           <Ctry>ES</Ctry>
-          <AdrLine>DANIEL SANJUAN, 11</AdrLine>
+          <AdrLine>Pasaje Ventura Feliu 13 I. En 2</AdrLine>
       </PstlAdr>
    </Cdtr>
    <CdtrAcct>
       <Id>
-         <IBAN>490821001864930200004908</IBAN>
+         <IBAN>ES6600810204010001438853</IBAN>
       </Id>
    </CdtrAcct>
    <CdtrAgt>
       <FinInstnId>
-         <BIC>CAIXESBBXXX</BIC>
+         <BIC>BSABESBBXXX</BIC>
       </FinInstnId>
    </CdtrAgt>
    <CdtrSchmeId>
@@ -63,13 +63,13 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000001 A  0020202020160518001   </EndToEndId>
+          <EndToEndId>430000189 M  0360022020160501001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">100.00</InstdAmt>
+      <InstdAmt Ccy="EUR">60.50</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
-            <MndtId>F46026696</MndtId>
-            <DtOfSgntr>2015-12-02</DtOfSgntr>
+            <MndtId>19887695D</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
          </MndtRltdInf>
       </DrctDbtTx>
       <DbtrAgt>
@@ -78,11 +78,1463 @@
          </FinInstnId>
       </DbtrAgt>
       <Dbtr>
-         <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
+         <Nm>SALVADOR MAS MARTI</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-              <AdrLine>DANIEL SANJUAN, 11</AdrLine>
-              <AdrLine>POBLA DEL DUC   46840     VALENCIA</AdrLine>
+              <AdrLine>C/ Serra Penaguila, 1</AdrLine>
+              <AdrLine>PU OL   46530     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>19887695D</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6230250010291400032564</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600220 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000276 M  0360023420160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">18.15</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>22672487F</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>RICARDO MORELL TARIN</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Matias Perell , 25</AdrLine>
+              <AdrLine>46005   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>22672487F</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4000750828300602102464</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600234 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000290 M  0360023820160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">60.50</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>73906379L</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>JOSE LUIS MUR ESTADA</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Plaza Ayuntamiento, 5 - 5  -13 </AdrLine>
+              <AdrLine>46002   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>73906379L</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES7830250010261400014090</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600238 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000015 M  0360020120160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B03036340</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>PEREZ PASCUAL, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Av. Alfonso Puchades, 25</AdrLine>
+              <AdrLine>BENIDORM   03502     ALICANTE</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B03036340</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES8302160872610560000638</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600201 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000230 M  0360022120160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">42.35</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B03038866</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>VIAJES BENIBLANCA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Avda. Martinez Alejos, 14</AdrLine>
+              <AdrLine>BENIDORM   03501     ALICANTE</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B03038866</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES2500750165310600643781</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600221 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000304 M  0360024220160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B20899563</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>EULER POMPAK, S.L.U.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ LLauradors, 4</AdrLine>
+              <AdrLine>PUZOL   46530     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B20899563</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES7900754624540600234529</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600242 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000130 M  0360020820160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">211.75</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B46135372</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>HERBELCA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Azagador de la Torre, 93</AdrLine>
+              <AdrLine>HORNO DE ALCEDO   46026     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B46135372</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES3521002736440200061910</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600208 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000282 M  0360023720160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">145.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B96431762</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>FRUTAS MONTIFRUT, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ La Paz, 3</AdrLine>
+              <AdrLine>MONTIXELVO   46842     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B96431762</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES7401280621250100023775</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600237 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000271 M  0360023120160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">179.08</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B96465265</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>SMT ASESORES, S.L.P.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Palleter, 9 - Entresuelo</AdrLine>
+              <AdrLine>46008   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B96465265</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4621002316560200251195</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600231 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000294 M  0360024020160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">229.90</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97090781</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>NATURAL DE MONTA A, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Partida Alegea, s/n</AdrLine>
+              <AdrLine>ANNA   46820     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97090781</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES2230582262882720000872</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600240 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000182 M  0360021820160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">302.50</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97112973</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>CARRAU CORP.JURID.Y FINAN. SL</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Dr. Romagosa 1, planta 3 </AdrLine>
+              <AdrLine>46002   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97112973</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6101280601830100001894</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600218 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000178 M  0360021620160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">60.50</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97131338</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>AUTO REQUENA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Ctra. Madrid-Valencia, km. 283</AdrLine>
+              <AdrLine>REQUENA   46340     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97131338</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES0801820569130201535303</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600216 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000187 M  0360021920160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">114.95</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97163117</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>ISABEL LOZANO SIMARRO, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Jesus, 43-2 -Pta. 4</AdrLine>
+              <AdrLine>46007   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97163117</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES7720386158416000064917</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600219 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000251 M  0360022520160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">60.50</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97208086</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>AMESA SUMINISTROS, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Av. Constitucion, 4 - Pol.Torrubero</AdrLine>
+              <AdrLine>MUSEROS   46136     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97208086</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES1021004474760200022586</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600225 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000293 M  0360023920160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">145.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97694160</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>NEW CELLARS CLIMATIC, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Sorollera, 2 - Apdo. 117</AdrLine>
+              <AdrLine>BENIPARRELL   46469     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97694160</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES1021004335960200090539</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600239 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000231 M  0360022220160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">139.15</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97727390</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>R Y D CONSULTA MATERNO-INFANTIL, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Fernando El Cat lico, 76, izq. 1 </AdrLine>
+              <AdrLine>46008   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97727390</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6900810204060001593560</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600222 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000272 M  0360023220160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">24.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B97765655</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>ABASTOS ABOGADOS, S.L.P.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Palleter, 9 - entresuelo</AdrLine>
+              <AdrLine>46008   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B97765655</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES2121002316590200251886</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600232 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000263 M  0360022720160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">121.00</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B98155666</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>VALENTAXI VALENCIA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Doctor Soriano Benlloch, 39 - Bajo</AdrLine>
+              <AdrLine>BENIMAMET   46035     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B98155666</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES1304870370312007000436</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600227 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000280 M  0360023520160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">48.40</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B98182124</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>NAVARRO LLUTXENT, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Avda. de Valencia, 17</AdrLine>
+              <AdrLine>LLUTXENT   46838     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B98182124</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES1720456021173000024997</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600235 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000264 M  0360022820160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">145.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B98354574</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>GRUPO CLINICO MIESTETIC, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Plaza Alfonso El Magnanimo, 5 - 15 </AdrLine>
+              <AdrLine>46003   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B98354574</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES3501820558110201576496</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600228 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000281 M  0360023620160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">145.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B98515208</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>EXCLUSIVAS BACCHUS VALENCIA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Paseo Clara Campoamor n  6 pta 69</AdrLine>
+              <AdrLine>MISLATA   46920     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B98515208</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES1521004493720200114765</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600236 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000311 M  0360024320160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">133.10</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>B98798598</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>INDUSTRIAL GIL FOLGADO, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Joan Martorell, 7</AdrLine>
+              <AdrLine>RIBARROJA DEL TURIA   46190     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>B98798598</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6030587027312720006843</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600243 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000179 M  0360021720160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">223.85</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46024196</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>ALZICOOP, COOP.HORT. DE ALZIRA</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Partida Materna, 17</AdrLine>
+              <AdrLine>ALZIRA   46600     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46024196</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES5730587105352712000010</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600217 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000061 M  0360020520160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">121.00</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46024493</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COANNA, COOP.V.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Camino Hondo, 1</AdrLine>
+              <AdrLine>ANNA   46820     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46024493</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES5830582218912710000025</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600205 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000022 M  0360024420160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">121.00</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46024790</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. AGRICOLA DE BOLBAITE</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Canalejas, 15 - 1 </AdrLine>
+              <AdrLine>BOLBAITE   46822     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46024790</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES7530582261322710000072</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600244 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000022 M  0360020220160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">24.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46024790</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. AGRICOLA DE BOLBAITE</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Canalejas, 15 - 1 </AdrLine>
+              <AdrLine>BOLBAITE   46822     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46024790</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES7530582261322710000072</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600202 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000170 M  0360021420160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46025151</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>CASTELDUC. S.COOP.V.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Cami de LLutxent, s/n.</AdrLine>
+              <AdrLine>CASTELLO DE RUGAT   46841     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46025151</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES0630582286002710000080</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600214 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000135 M  0360020920160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46025326</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. VIN. QUATRETONDA, COOP.V</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Garc a Lorca, 2</AdrLine>
+              <AdrLine>QUATRETONDA   46837     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46025326</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES2930582269141021001686</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600209 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000116 M  0360020620160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">308.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026084</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. DEL CAMP DE LLUTXENT</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Cami Pla, s/n</AdrLine>
+              <AdrLine>LLUTXENT   46838     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46026084</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES8630582278232710000047</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600206 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000148 M  0360021120160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">60.50</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026142</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. AGRICOLA SANTA BARBARA</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Plaza los Arboles, 6</AdrLine>
+              <AdrLine>MACASTRE   46368     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46026142</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES0430582109242720000924</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600211 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000024 M  0360020320160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026282</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. V. SAN PEDRO APOSTOL</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Plaza Hispanidad, 4</AdrLine>
+              <AdrLine>MOIXENT   46640     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46026282</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4030582287541021004157</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600203 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000295 M  0360024120160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">121.00</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026464</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. V. CRISTO DE LA SALUD</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Avda. Pintor Tarraso, 62</AdrLine>
+              <AdrLine>NAVARRES   46823     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46026464</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES3330582262882710000071</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600241 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000011 M  0360019920160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">229.90</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026621</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>AGRO-CITRICA DE PICASSENT, COOP. V.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Pol. Ind. C/6, nro.3</AdrLine>
+              <AdrLine>PICASSENT   46220     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46026621</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6121007414902200088187</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600199 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000030 M  0360020420160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">127.05</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46026696</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>VIT. DE LA POBLA DEL DUC</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Marxillent, 58</AdrLine>
+              <AdrLine>LA POBLA DEL DUC   46840     VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <PrvtId>
@@ -102,7 +1554,403 @@
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+         <Ustrd>FACTURA  M-3600204 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000003 M  0360019820160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">229.90</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46038881</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>AGRICOLA DE CATADAU, S.C.V.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Plaza de Espa a, 1</AdrLine>
+              <AdrLine>CATADAU   46196     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46038881</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES5230582268501021006736</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600198 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000013 M  0360020020160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">216.59</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F46221503</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. V. LIMITADA TELE-TAXI</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Ciudad del Aprendiz, 17 Acc.</AdrLine>
+              <AdrLine>46017   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F46221503</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES3521005375110200012378</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600200 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000117 M  0360020720160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F96697131</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>COOP. DE 2  GRADO EL REGAIXO</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Ctra. Catadau - Llombai, s/n</AdrLine>
+              <AdrLine>LLOMBAI   46195     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F96697131</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6630582268522710000068</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600207 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000262 M  0360022620160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">48.40</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F96773411</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>SAT 198 SINDICAT REGANTS SERRETA UTXERA</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C/ Ajuntament, 8</AdrLine>
+              <AdrLine>VILLANUEVA DE CASTELLON   46270     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F96773411</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4630582263212710000063</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600226 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000265 M  0360022920160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">179.08</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>F98314610</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>ABN ACEITES COOP.V .</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Paraje Alto, s/n</AdrLine>
+              <AdrLine>NAVARRES   46823     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>F98314610</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4230582261312710000133</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600229 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000274 M  0360023320160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">114.95</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>G46076147</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>REAL ACEQUIA ESCALONA</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Pla a del Ajuntament, 8</AdrLine>
+              <AdrLine>VILLANUEVA DE CASTELLON   46270     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>G46076147</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6030582263252720001867</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600233 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000240 M  0360022420160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">42.35</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>G46995015</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>ASOC. EMP. OFICINAS Y DESPACHOS C.VALENC</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>San Vicente, 83 y 85 - 7  R y S</AdrLine>
+              <AdrLine>46007   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>G46995015</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES0620386112886000024191</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600224 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000240 M  0360024520160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">24.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>G46995015</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>ASOC. EMP. OFICINAS Y DESPACHOS C.VALENC</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>San Vicente, 83 y 85 - 7  R y S</AdrLine>
+              <AdrLine>46007   VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>G46995015</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES0620386112886000024191</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600245 de Fecha 01 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000172 M  0360021520160501001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">60.50</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>G96311097</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>           </BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>CDAD.REG. POU DE LES MALLAES</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Calle Vicente Montesinos,10 - 2 </AdrLine>
+              <AdrLine>TURIS   46389     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>G96311097</Id>
+                   <Issr>NIF</Issr>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6931237271192720001515</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600215 de Fecha 01 may 2016</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
 </PmtInf>

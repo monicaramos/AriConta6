@@ -248,25 +248,35 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                         Print #NFic, "      <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
                         Print #NFic, "      <PstlAdr>"
                         Print #NFic, "          <Ctry>ES</Ctry>"
-                        SQL = "Direccion"
-                        SQL = DBLet(miRsAux!domclien, "T")
+                        
+                        Dim RsDirec As ADODB.Recordset
+                        Dim SqlDirec As String
+                        Dim Direccion As String
+                        
+                        Direccion = ""
+                        
+                        SqlDirec = "select direccion, numero, escalera, piso, puerta from empresa2"
+                        Set RsDirec = New ADODB.Recordset
+                        RsDirec.Open SqlDirec, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                        If Not RsDirec.EOF Then
+                            Direccion = DBLet(RsDirec!Direccion) & " " & DBLet(RsDirec!numero) & " " & DBLet(RsDirec!escalera) & " " & DBLet(RsDirec!piso) & " " & DBLet(RsDirec!puerta)
+                        End If
+                        Set RsDirec = Nothing
+                        
+                        SQL = Direccion
                         If SQL <> "" Then Print #NFic, "          <AdrLine>" & XML(SQL) & "</AdrLine>"
                         Print #NFic, "      </PstlAdr>"
                         Print #NFic, "   </Cdtr>"
                         Print #NFic, "   <CdtrAcct>"
                         Print #NFic, "      <Id>"
                         'IBAN
-                        SQL = RecuperaValor(DatosBanco, 5)
-                        For J = 1 To 4
-                            SQL = SQL & RecuperaValor(DatosBanco, J)
-                        Next
-            
-                        Print #NFic, "         <IBAN>" & SQL & "</IBAN>"
+
+                        Print #NFic, "         <IBAN>" & DatosBanco & "</IBAN>"
                         Print #NFic, "      </Id>"
                         Print #NFic, "   </CdtrAcct>"
                         Print #NFic, "   <CdtrAgt>"
                         Print #NFic, "      <FinInstnId>"
-                        SQL = RecuperaValor(DatosBanco, 1)
+                        SQL = Mid(DatosBanco, 5, 4)
                         SQL = DevuelveDesdeBD("bic", "bics", "entidad", SQL)
                         Print #NFic, "         <BIC>" & Trim(SQL) & "</BIC>"
                         Print #NFic, "      </FinInstnId>"

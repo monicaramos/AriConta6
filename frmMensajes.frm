@@ -4435,7 +4435,7 @@ Dim SQL As String
 Dim CadenaIconos As String
 
 
-Dim k As Integer
+Dim K As Integer
 Dim J As Integer
 Dim Px As Single
 Dim Py As Single
@@ -4466,8 +4466,8 @@ Dim Ocupado As Boolean
             If ListView6.ListItems(I).SubItems(2) = "0" Then
                 SQL = ""
                 For J = 1 To 8
-                    For k = 1 To 5
-                        DevuelCoordenadasCuadricula J, k, Px, Py
+                    For K = 1 To 5
+                        DevuelCoordenadasCuadricula J, K, Px, Py
                         Ocupado = False
                         'Busco hueco
                         For H = 1 To ListView6.ListItems.Count
@@ -4495,7 +4495,7 @@ Dim Ocupado As Boolean
                             Conn.Execute SQL
                            Exit For
                         End If
-                    Next k
+                    Next K
                     If SQL <> "" Then Exit For
                 Next J
             End If
@@ -4787,7 +4787,7 @@ Private Sub cmdEmpresa_Click(Index As Integer)
 End Sub
 
 Private Sub cmdImpCta_Click(Index As Integer)
-Dim Cad As String
+Dim cad As String
 
     If Index = 1 Then
         Unload Me
@@ -4803,8 +4803,8 @@ Dim Cad As String
         Exit Sub
     End If
     
-    Cad = "Seguro que desa continuar con la importación de los datos fiscales?"
-    If MsgBox(Cad, vbQuestion + vbYesNoCancel + vbDefaultButton2) <> vbYes Then Exit Sub
+    cad = "Seguro que desa continuar con la importación de los datos fiscales?"
+    If MsgBox(cad, vbQuestion + vbYesNoCancel + vbDefaultButton2) <> vbYes Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     'Ya esta preparado comprobemos k podemos abrir la conexion
@@ -4998,7 +4998,7 @@ Dim W, H
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.frameamort.Visible = False
+    Me.FrameAmort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
@@ -5039,9 +5039,9 @@ Dim W, H
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.frameamort.Width
-        H = Me.frameamort.Height + 200
-        Me.frameamort.Visible = True
+        W = Me.FrameAmort.Width
+        H = Me.FrameAmort.Height + 200
+        Me.FrameAmort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
@@ -5847,7 +5847,7 @@ Private Function ProcesarLinea(Linea As String) As Boolean
 'Dim Valores(6) As String
 Dim Valores(13) As String    'ENero 2009. Dos campos msa. Total camppos=14. Vector(13)
 Dim I As Integer
-Dim Cad As String
+Dim cad As String
 Dim Crear As Boolean
 
     On Error GoTo EProcesarLinea
@@ -5913,9 +5913,9 @@ Dim Crear As Boolean
     'Controlamos valores de Multibase para los textos, y las ' para la insercion
     For I = 1 To 5 'Sin NIF ni codmacta, 6 y 0 respectivamente
         If I <> 3 Then
-            Cad = RevisaCaracterMultibase(Valores(I))
-            NombreSQL Cad
-            Valores(I) = Cad
+            cad = RevisaCaracterMultibase(Valores(I))
+            NombreSQL cad
+            Valores(I) = cad
         End If
     Next I
     
@@ -5927,90 +5927,90 @@ Dim Crear As Boolean
     
      If Crear Then
         I = DigitosNivel(vEmpresa.numnivel - 1)
-        Cad = Mid(Valores(0), 1, I)
-        If Cad <> CadenaDesdeOtroForm Then
+        cad = Mid(Valores(0), 1, I)
+        If cad <> CadenaDesdeOtroForm Then
             If Not CreaSubcuentas(Valores(0), I, "IMPORTACION AUTOMATICA") Then
                 AnyadeErrores "Cuenta: " & Valores(0), "GENERANDO SUBNIVELES"
                 Exit Function
             End If
-            CadenaDesdeOtroForm = Cad
+            CadenaDesdeOtroForm = cad
         End If
     End If
     
     'Montamos el SQL
         'Montamos el SQL
     If Crear Then
-        Cad = "INSERT INTO Cuentas (codmacta,nommacta,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,"
+        cad = "INSERT INTO Cuentas (codmacta,nommacta,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,"
         'NUEVO
-        Cad = Cad & "entidad,oficina,CC,cuentaba,"
-        Cad = Cad & "model347,apudirec,forpa ,ctabanco"
-        Cad = Cad & ") VALUES ("
-        Cad = Cad & "'" & Valores(0) & "',"
-        Cad = Cad & "'" & Valores(1) & "',"
-        Cad = Cad & "'" & Valores(1) & "',"
-        Cad = Cad & "'" & Valores(2) & "',"
-        Cad = Cad & "'" & Valores(3) & "',"
-        Cad = Cad & "'" & Valores(4) & "',"
-        Cad = Cad & "'" & Valores(5) & "',"
-        Cad = Cad & "'" & Valores(6) & "',"
+        cad = cad & "entidad,oficina,CC,cuentaba,"
+        cad = cad & "model347,apudirec,forpa ,ctabanco"
+        cad = cad & ") VALUES ("
+        cad = cad & "'" & Valores(0) & "',"
+        cad = cad & "'" & Valores(1) & "',"
+        cad = cad & "'" & Valores(1) & "',"
+        cad = cad & "'" & Valores(2) & "',"
+        cad = cad & "'" & Valores(3) & "',"
+        cad = cad & "'" & Valores(4) & "',"
+        cad = cad & "'" & Valores(5) & "',"
+        cad = cad & "'" & Valores(6) & "',"
         For I = 7 To 10
             If Valores(I) = "" Then
-                Cad = Cad & "NULL,"
+                cad = cad & "NULL,"
             Else
-                Cad = Cad & "'" & Valores(I) & "',"
+                cad = cad & "'" & Valores(I) & "',"
             End If
         Next I
         If Valores(11) = "1" Then
-            Cad = Cad & "1"
+            cad = cad & "1"
         Else
-            Cad = Cad & "0"
+            cad = cad & "0"
         End If
         
-        Cad = Cad & ",'S'"
+        cad = cad & ",'S'"
         'Enerom2009
         'forpa ,ctabanco
         For I = 12 To 13
             If Valores(I) = "" Then
-                Cad = Cad & ",NULL"
+                cad = cad & ",NULL"
             Else
-                Cad = Cad & ",'" & Valores(I) & "'"
+                cad = cad & ",'" & Valores(I) & "'"
             End If
         Next
         
         'Final
-        Cad = Cad & ")"
+        cad = cad & ")"
     
     Else
-        Cad = "UPDATE Cuentas SET "
-        Cad = Cad & " nommacta = '" & Valores(1) & "',"
-        Cad = Cad & " razosoci = '" & Valores(1) & "',"
-        Cad = Cad & " dirdatos = '" & Valores(2) & "',"
-        Cad = Cad & " codposta = '" & Valores(3) & "',"
-        Cad = Cad & " despobla = '" & Valores(4) & "',"
-        Cad = Cad & " desprovi = '" & Valores(5) & "',"
-        Cad = Cad & " nifdatos = '" & Valores(6) & "',"
+        cad = "UPDATE Cuentas SET "
+        cad = cad & " nommacta = '" & Valores(1) & "',"
+        cad = cad & " razosoci = '" & Valores(1) & "',"
+        cad = cad & " dirdatos = '" & Valores(2) & "',"
+        cad = cad & " codposta = '" & Valores(3) & "',"
+        cad = cad & " despobla = '" & Valores(4) & "',"
+        cad = cad & " desprovi = '" & Valores(5) & "',"
+        cad = cad & " nifdatos = '" & Valores(6) & "',"
         'model347
-        Cad = Cad & " model347 = "
+        cad = cad & " model347 = "
         If Valores(11) = "1" Then
-            Cad = Cad & "1"
+            cad = cad & "1"
         Else
-            Cad = Cad & "0"
+            cad = cad & "0"
         End If
         
         'CCC
-        Cad = Cad & ", entidad =" & ValorSQL(Valores(7))
-        Cad = Cad & ", oficina =" & ValorSQL(Valores(8))
-        Cad = Cad & ", CC =" & ValorSQL(Valores(9))
-        Cad = Cad & ", cuentaba =" & ValorSQL(Valores(10))
+        cad = cad & ", entidad =" & ValorSQL(Valores(7))
+        cad = cad & ", oficina =" & ValorSQL(Valores(8))
+        cad = cad & ", CC =" & ValorSQL(Valores(9))
+        cad = cad & ", cuentaba =" & ValorSQL(Valores(10))
             
         'Enero 2009
-        Cad = Cad & ", forpa  =" & ValorSQL(Valores(12))
-        Cad = Cad & ", ctabanco =" & ValorSQL(Valores(13))
+        cad = cad & ", forpa  =" & ValorSQL(Valores(12))
+        cad = cad & ", ctabanco =" & ValorSQL(Valores(13))
             
-        Cad = Cad & " WHERE codmacta ='" & Valores(0) & "'"
+        cad = cad & " WHERE codmacta ='" & Valores(0) & "'"
     End If
    
-    If Not EjecutaSQL2(Cad) Then Exit Function
+    If Not EjecutaSQL2(cad) Then Exit Function
     ProcesarLinea = True
     Exit Function
 EProcesarLinea:
@@ -7097,7 +7097,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 
     On Error GoTo ECargaShowProcessList
@@ -7119,9 +7119,9 @@ Dim Equipo As String
     
     EquipoConBD = (UCase(vUsu.PC) = UCase(SERVER)) Or (LCase(SERVER) = "localhost")
     
-    Cad = "show full processlist"
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    cad = "show full processlist"
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
         If Not IsNull(RS.Fields(3)) Then
             If InStr(1, RS.Fields(3), "ariconta") <> 0 Then
@@ -7174,7 +7174,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 
     On Error GoTo ECargaCobrosFactura
@@ -7196,15 +7196,15 @@ Dim Equipo As String
     
     ListView5.SmallIcons = frmPpal.imgListComun
     
-    Cad = "select numorden, formapago.nomforpa, fecvenci, impvenci, gastos, fecultco, impcobro, (coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) pendiente, cobros.ctabanc1, numasien  "
-    Cad = Cad & " from (cobros left join formapago on cobros.codforpa = formapago.codforpa) "
-    Cad = Cad & " where cobros.numserie = " & DBSet(RecuperaValor(Parametros, 1), "T")
-    Cad = Cad & " and cobros.numfactu = " & DBSet(RecuperaValor(Parametros, 2), "N")
-    Cad = Cad & " and cobros.fecfactu = " & DBSet(RecuperaValor(Parametros, 3), "F")
-    Cad = Cad & " order by numorden "
+    cad = "select numorden, formapago.nomforpa, fecvenci, impvenci, gastos, fecultco, impcobro, (coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) pendiente, cobros.ctabanc1, numasien  "
+    cad = cad & " from (cobros left join formapago on cobros.codforpa = formapago.codforpa) "
+    cad = cad & " where cobros.numserie = " & DBSet(RecuperaValor(Parametros, 1), "T")
+    cad = cad & " and cobros.numfactu = " & DBSet(RecuperaValor(Parametros, 2), "N")
+    cad = cad & " and cobros.fecfactu = " & DBSet(RecuperaValor(Parametros, 3), "F")
+    cad = cad & " order by numorden "
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView5.ListItems.Add
@@ -7242,7 +7242,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 
     On Error GoTo ECargaPagosFactura
@@ -7263,16 +7263,16 @@ Dim Equipo As String
     
     ListView5.SmallIcons = frmPpal.imgListComun
     
-    Cad = "select numorden, formapago.nomforpa, fecefect, impefect, fecultpa, imppagad, (coalesce(impefect,0)  - coalesce(imppagad,0)) pendiente, pagos.ctabanc1, numasien  "
-    Cad = Cad & " from (pagos left join formapago on pagos.codforpa = formapago.codforpa) "
-    Cad = Cad & " where pagos.numserie = " & DBSet(RecuperaValor(Parametros, 1), "T")
-    Cad = Cad & " and pagos.codmacta = " & DBSet(RecuperaValor(Parametros, 2), "T")
-    Cad = Cad & " and pagos.numfactu = " & DBSet(RecuperaValor(Parametros, 3), "T")
-    Cad = Cad & " and pagos.fecfactu = " & DBSet(RecuperaValor(Parametros, 4), "F")
-    Cad = Cad & " order by numorden "
+    cad = "select numorden, formapago.nomforpa, fecefect, impefect, fecultpa, imppagad, (coalesce(impefect,0)  - coalesce(imppagad,0)) pendiente, pagos.ctabanc1, numasien  "
+    cad = cad & " from (pagos left join formapago on pagos.codforpa = formapago.codforpa) "
+    cad = cad & " where pagos.numserie = " & DBSet(RecuperaValor(Parametros, 1), "T")
+    cad = cad & " and pagos.codmacta = " & DBSet(RecuperaValor(Parametros, 2), "T")
+    cad = cad & " and pagos.numfactu = " & DBSet(RecuperaValor(Parametros, 3), "T")
+    cad = cad & " and pagos.fecfactu = " & DBSet(RecuperaValor(Parametros, 4), "F")
+    cad = cad & " order by numorden "
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView5.ListItems.Add
@@ -7309,7 +7309,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 Dim Pos As Long
 
@@ -7333,14 +7333,14 @@ Dim Pos As Long
     Pos = DevuelveValor("select max(pos) from tmpconext where codusu = " & DBSet(vUsu.Codigo, "N"))
     
     
-    Cad = "select tmpconext.cta, cuentas.nommacta, tmpconext.timported, tmpconext.timporteh, acumtotT, tmpconext.pos"
-    Cad = Cad & " from (ariconta" & NumConta & ".tmpconext inner join ariconta" & NumConta & ".cuentas on tmpconext.cta = cuentas.codmacta) "
-    Cad = Cad & " left join ariconta" & NumConta & ".tmpconextcab on tmpconext.codusu = tmpconextcab.codusu and tmpconext.cta = tmpconextcab.cta"
-    Cad = Cad & " where tmpconext.codusu = " & DBSet(vUsu.Codigo, "N")
-    Cad = Cad & " order by pos "
+    cad = "select tmpconext.cta, cuentas.nommacta, tmpconext.timported, tmpconext.timporteh, acumtotT, tmpconext.pos"
+    cad = cad & " from (ariconta" & NumConta & ".tmpconext inner join ariconta" & NumConta & ".cuentas on tmpconext.cta = cuentas.codmacta) "
+    cad = cad & " left join ariconta" & NumConta & ".tmpconextcab on tmpconext.codusu = tmpconextcab.codusu and tmpconext.cta = tmpconextcab.cta"
+    cad = cad & " where tmpconext.codusu = " & DBSet(vUsu.Codigo, "N")
+    cad = cad & " order by pos "
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView7.ListItems.Add
@@ -7401,7 +7401,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 Dim Pos As Long
 
@@ -7420,13 +7420,13 @@ Dim Pos As Long
     Set RS = New ADODB.Recordset
     
     
-    Cad = "select tmphistoapu.numdiari, tmphistoapu.numasien, tmphistoapu.fechaent, tmphistoapu.timported, tmphistoapu.timporteh, tmphistoapu.timported - tmphistoapu.timporteh "
-    Cad = Cad & " from tmphistoapu "
-    Cad = Cad & " where tmphistoapu.codusu = " & DBSet(vUsu.Codigo, "N")
-    Cad = Cad & " order by numdiari, numasien, fechaent "
+    cad = "select tmphistoapu.numdiari, tmphistoapu.numasien, tmphistoapu.fechaent, tmphistoapu.timported, tmphistoapu.timporteh, tmphistoapu.timported - tmphistoapu.timporteh "
+    cad = cad & " from tmphistoapu "
+    cad = cad & " where tmphistoapu.codusu = " & DBSet(vUsu.Codigo, "N")
+    cad = cad & " order by numdiari, numasien, fechaent "
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView8.ListItems.Add
@@ -7469,7 +7469,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 Dim Pos As Long
 
@@ -7488,13 +7488,13 @@ Dim Pos As Long
     
     Set RS = New ADODB.Recordset
     
-    Cad = "select tmpfaclin.numserie, tmpfaclin.nomserie, tmpfaclin.numfac, tmpfaclin.fecha, tmpfaclin.total "
-    Cad = Cad & " from tmpfaclin "
-    Cad = Cad & " where tmpfaclin.codusu = " & DBSet(vUsu.Codigo, "N")
-    Cad = Cad & " order by numserie, numfac, fecha "
+    cad = "select tmpfaclin.numserie, tmpfaclin.nomserie, tmpfaclin.numfac, tmpfaclin.fecha, tmpfaclin.total "
+    cad = cad & " from tmpfaclin "
+    cad = cad & " where tmpfaclin.codusu = " & DBSet(vUsu.Codigo, "N")
+    cad = cad & " order by numserie, numfac, fecha "
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView8.ListItems.Add
@@ -7532,7 +7532,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 Dim Pos As Long
 
@@ -7552,18 +7552,18 @@ Dim Pos As Long
     
     Set RS = New ADODB.Recordset
     
-    Cad = "select numserie, numfactu, fecfactu, numorden, impvenci importe "
-    Cad = Cad & " from reclama_facturas "
-    Cad = Cad & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
+    cad = "select numserie, numfactu, fecfactu, numorden, impvenci importe "
+    cad = cad & " from reclama_facturas "
+    cad = cad & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
     
     If CampoOrden = "" Then CampoOrden = "fecfactu"
-    Cad = Cad & " ORDER BY " & CampoOrden
-    If Orden Then Cad = Cad & " DESC"
+    cad = cad & " ORDER BY " & CampoOrden
+    If Orden Then cad = cad & " DESC"
     
 '    Cad = Cad & " order by numserie, numfactu, fecfactu "
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView9.ListItems.Add
@@ -7606,7 +7606,7 @@ Dim IT As ListItem
 Dim TotalArray  As Long
 Dim SERVER As String
 Dim EquipoConBD As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Equipo As String
 Dim Pos As Long
 
@@ -7628,21 +7628,21 @@ Dim Pos As Long
     
     Set RS = New ADODB.Recordset
     
-    Cad = "select cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci, cobros.gastos, cobros.impvenci importe, ' ' devol"
-    Cad = Cad & " from cobros "
-    Cad = Cad & " where (cobros.codrem = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and cobros.anyorem = " & DBSet(RecuperaValor(Parametros, 2), "N") & ") "
-    Cad = Cad & " union "
-    Cad = Cad & " select cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros.fecvenci, cobros_realizados.gastodev, cobros_realizados.impcobro * (-1) importe, '*' devol"
-    Cad = Cad & " from cobros inner join cobros_realizados on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden "
-    Cad = Cad & " where (cobros_realizados.codrem = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and cobros_realizados.anyorem = " & DBSet(RecuperaValor(Parametros, 2), "N") & ") "
+    cad = "select cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci, cobros.gastos, cobros.impvenci importe, ' ' devol"
+    cad = cad & " from cobros "
+    cad = cad & " where (cobros.codrem = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and cobros.anyorem = " & DBSet(RecuperaValor(Parametros, 2), "N") & ") "
+    cad = cad & " union "
+    cad = cad & " select hlinapu.numserie, hlinapu.numfaccl, hlinapu.fecfactu, hlinapu.numorden, cobros.fecvenci, hlinapu.gastodev, coalesce(hlinapu.timporteh,0) - coalesce(hlinapu.timported,0) importe, '*' devol"
+    cad = cad & " from cobros inner join hlinapu on cobros.numserie = hlinapu.numserie and cobros.numfactu = hlinapu.numfaccl and cobros.fecfactu = hlinapu.fecfactu and cobros.numorden = hlinapu.numorden "
+    cad = cad & " where (hlinapu.codrem = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and hlinapu.anyorem = " & DBSet(RecuperaValor(Parametros, 2), "N") & ") "
     
     If CampoOrden = "" Then CampoOrden = "fecfactu"
-    Cad = Cad & " ORDER BY " & CampoOrden
-    If Orden Then Cad = Cad & " DESC"
+    cad = cad & " ORDER BY " & CampoOrden
+    If Orden Then cad = cad & " DESC"
     
     
-    RS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
                     
         Set IT = ListView9.ListItems.Add

@@ -176,14 +176,14 @@ Begin VB.Form frmBanco
       Width           =   1605
    End
    Begin VB.CheckBox chkBanco 
-      Caption         =   "Gastos transferencia separados de apunte banco"
+      Caption         =   "Gastos bancarios en pagos separados de apunte banco"
       Height          =   255
       Index           =   1
       Left            =   120
       TabIndex        =   24
       Tag             =   "G.transfer|N|S|||bancos|GastTransDescontad|||"
       Top             =   7320
-      Width           =   5685
+      Width           =   5925
    End
    Begin VB.Frame FrameAnalitica 
       BorderStyle     =   0  'None
@@ -203,7 +203,7 @@ Begin VB.Form frmBanco
       Width           =   5685
    End
    Begin VB.CheckBox chkBanco 
-      Caption         =   "Gastos remesa separados de apunte banco"
+      Caption         =   "Gastos bancarios en cobros separados de apunte banco"
       Height          =   255
       Index           =   0
       Left            =   120

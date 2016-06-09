@@ -791,8 +791,9 @@ Dim IT As ListItem
     Set RS = New ADODB.Recordset
     
     If Cobro Then
-        cad = "select hlinapu.fechaent, hcabapu.usucreacion, tipofpago.siglas,  hlinapu.impcobro "
-        cad = cad & " from hlinapu inner join tipofpago on hlinapu.tipforpa = tipofpago.tipoformapago "
+        cad = "select hlinapu.fechaent, hcabapu.usucreacion, tipofpago.siglas,  coalesce(timporteh,0) - coalesce(timported,0) impcobro "
+        cad = cad & " from (hlinapu inner join tipofpago on hlinapu.tipforpa = tipofpago.tipoformapago) "
+        cad = cad & " inner join hcabapu on hlinapu.numdiari = hcabapu.numdiari and hlinapu.fechaent = hcabapu.fechaent and hlinapu.numasien = hcabapu.numasien "
         cad = cad & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T")
         cad = cad & " and numfaccl = " & DBSet(RecuperaValor(Vto, 2), "N")
         cad = cad & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F")
@@ -893,11 +894,9 @@ Private Sub Form_Load()
 '        Label4(4).Visible = False
 '        Text1(4).Enabled = False
 '        Text1(4).Visible = False
-        Label4(10).Visible = False
-        Text2(1).Enabled = False
-        Text2(1).Visible = False
         
         Text1(3).Text = RecuperaValor(Importes, 1)
+        Text1(4).Text = ""
         Text1(5).Text = RecuperaValor(Importes, 2)  'Esto es lo pagado ya
         '''''Text1(5).Text = RecuperaValor(Importes, 3)
         Text3(0).Text = Format(Now, "dd/mm/yyyy")
@@ -925,6 +924,9 @@ Private Sub Form_Load()
         If Text1(5).Text <> "" Then impo = impo - ImporteFormateado(Text1(5).Text)
         
     Else
+        'Gastos
+        If Text1(4).Text <> "" Then impo = impo + ImporteFormateado(Text1(4).Text)
+        
         'Ya cobrado
         If Text1(5).Text <> "" Then impo = impo - ImporteFormateado(Text1(5).Text)
             
@@ -1285,7 +1287,6 @@ Dim Sql5 As String
         
        If Conce = 1 Then Ampliacion = Ampliacion & FP.siglas & " "
        If Cobro Then
-       
             Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & Format(RecuperaValor(Vto, 2), "0000000") '& "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
        Else
             Ampliacion = Ampliacion & Mid(RecuperaValor(Vto, 2), 1, 9)
@@ -1320,18 +1321,15 @@ Dim Sql5 As String
     End If
     If Cobro Then
         cad = cad & ",'COBRO',0,"
-        cad = cad & RecuperaValor(Vto, 1) & "," & RecuperaValor(Vto, 2) & ","
-        
-        
-        
+        cad = cad & DBSet(RecuperaValor(Vto, 1), "T") & "," '& RecuperaValor(Vto, 2) & ","
     Else
         cad = cad & ",'PAGO',0,"
-        cad = cad & DBSet(RecuperaValor(Vto, 1), "T") & "," & DBSet(RecuperaValor(Vto, 2), "T") & "," & DBSet(RecuperaValor(Vto, 3), "F") & ","
-        cad = cad & DBSet(RecuperaValor(Vto, 4), "N") & "," & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & ValorNulo & "," & ValorNulo & ")"
-        
-        
-        
+        cad = cad & DBSet(RecuperaValor(Vto, 1), "T") & ","
     End If
+    
+    cad = cad & DBSet(RecuperaValor(Vto, 2), "T") & "," & DBSet(RecuperaValor(Vto, 3), "F") & ","
+    cad = cad & DBSet(RecuperaValor(Vto, 4), "N") & "," & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & ValorNulo & "," & ValorNulo & ")"
+    
     cad = SQL & cad
     Conn.Execute cad
     
@@ -1375,13 +1373,12 @@ Dim Sql5 As String
         'Contra partida
         Ampliacion = DevNombreSQL(Text1(2).Text)
     Else
-        
-    If Conce = 1 Then Ampliacion = Ampliacion & FP.siglas & " "
-       If Cobro Then
-            Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & Format(RecuperaValor(Vto, 2), "0000000") ' "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
-       Else
-            Ampliacion = Ampliacion & Mid(RecuperaValor(Vto, 2), 1, 9)
-       End If
+        If Conce = 1 Then Ampliacion = Ampliacion & FP.siglas & " "
+        If Cobro Then
+             Ampliacion = Ampliacion & RecuperaValor(Vto, 1) & Format(RecuperaValor(Vto, 2), "0000000") ' "/" & Mid(RecuperaValor(Vto, 2), 1, 9)
+        Else
+             Ampliacion = Ampliacion & Mid(RecuperaValor(Vto, 2), 1, 9)
+        End If
     End If
     
     
@@ -1400,7 +1397,11 @@ Dim Sql5 As String
     DescuentaImporteDevolucion = False
     If Gastos > 0 Then
         Sql5 = txtCta(1)
-        Sql5 = DevuelveDesdeBD("GastRemDescontad", "bancos", "codmacta", Sql5, "T")
+        If Cobro Then
+            Sql5 = DevuelveDesdeBD("GastRemDescontad", "bancos", "codmacta", Sql5, "T")
+        Else
+            Sql5 = DevuelveDesdeBD("GasttransDescontad", "bancos", "codmacta", Sql5, "T")
+        End If
         If Sql5 = "1" Then DescuentaImporteDevolucion = True
     End If
     Importe = impo
@@ -1472,7 +1473,13 @@ Dim Sql5 As String
             cad = cad & "NULL"
         End If
 
-        cad = cad & ",'COBRO',0)"
+        If Cobro Then
+            cad = cad & ",'COBRO',0,"
+        Else
+            cad = cad & ",'PAGO',0,"
+        End If
+        ' todo valores a null ????
+        cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ")"
         
         cad = SQL & cad
         Conn.Execute cad
@@ -1496,7 +1503,14 @@ Dim Sql5 As String
                 cad = cad & "NULL"
             End If
     
-            cad = cad & ",'COBRO',0)"
+            If Cobro Then
+                cad = cad & ",'COBRO',0,"
+            Else
+                cad = cad & ",'PAGO',0,"
+            End If
+            ' todo valores a null ????
+            cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ")"
+            
             
             cad = SQL & cad
             Conn.Execute cad
@@ -1556,22 +1570,7 @@ Dim Sql5 As String
     Dim NumLin As Long
     
     If Cobro Then
-'        NumLin = DevuelveValor("select max(numlinea) from cobros_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4))
-'        NumLin = NumLin + 1
-'
-'        LineaCobro = NumLin
-'
-'        SQL = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, numdiari, fechaent, "
-'        SQL = SQL & " numasien, ctabanc2, usuariocobro, tipforpa, impcobro, fecrealizado) values (" & DBSet(RecuperaValor(Vto, 1), "T") & ","
-'        SQL = SQL & DBSet(RecuperaValor(Vto, 2), "N") & "," & DBSet(RecuperaValor(Vto, 3), "F") & ","
-'        SQL = SQL & DBSet(RecuperaValor(Vto, 4), "N") & "," & DBSet(NumLin, "N") & "," & DBSet(vNumDiari, "N") & ","
-'        SQL = SQL & DBSet(Text3(0).Text, "F") & "," & DBSet(Mc.Contador, "N") & "," & DBSet(txtCta(1).Text, "T") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & DBSet(Text2(0).Text, "N")
-'        SQL = SQL & "," & DBSet(Now, "FH") & ")"
-'
-'        Conn.Execute SQL
-    
-    
-        SQL = "update cobros set impcobro = (select sum(coalesce(impcobro,0)) from cobros_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4) & ") "
+        SQL = "update cobros set impcobro = coalesce(impcobro,0) + " & DBSet(Text2(0).Text, "N")
         SQL = SQL & ", fecultco = " & DBSet(Text3(0).Text, "F")
         SQL = SQL & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "N")
         SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F") & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
@@ -1596,22 +1595,6 @@ Dim Sql5 As String
     
     Else
         
-'        NumLin = DevuelveValor("select max(numlinea) from pagos_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "T") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4) & " AND codmacta = " & DBSet(RecuperaValor(Cta, 1), "T"))
-'        NumLin = NumLin + 1
-'
-'        LineaCobro = NumLin
-'
-'        SQL = "insert into pagos_realizados (numserie, codmacta, numfactu, fecfactu, numorden, numlinea, numdiari, fechaent, "
-'        SQL = SQL & " numasien, ctabanc2, usuariopago, tipforpa, imppago, fecrealizado) values (" & DBSet(RecuperaValor(Vto, 1), "T") & "," & DBSet(RecuperaValor(Cta, 1), "N") & ","
-'        SQL = SQL & DBSet(RecuperaValor(Vto, 2), "T") & "," & DBSet(RecuperaValor(Vto, 3), "F") & ","
-'        SQL = SQL & DBSet(RecuperaValor(Vto, 4), "N") & "," & DBSet(NumLin, "N") & "," & DBSet(vNumDiari, "N") & ","
-'        SQL = SQL & DBSet(Text3(0).Text, "F") & "," & DBSet(Mc.Contador, "N") & "," & DBSet(txtCta(1).Text, "T") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & DBSet(Text2(0).Text, "N")
-'        SQL = SQL & "," & DBSet(Now, "FH") & ")"
-'
-'        Conn.Execute SQL
-    
-    
-'        SQL = "update pagos set imppagad = (select sum(coalesce(imppago,0)) from pagos_realizados where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(Vto, 2), "T") & " and fecfactu=" & DBSet(RecuperaValor(Vto, 3), "F") & " AND numorden =" & RecuperaValor(Vto, 4) & " AND codmacta = " & DBSet(RecuperaValor(Cta, 1), "T") & ") "
         SQL = "update pagos set imppagad = coalesce(imppagad,0) + " & DBSet(Text2(0).Text, "N")
         SQL = SQL & ", fecultpa = " & DBSet(Text3(0).Text, "F")
         SQL = SQL & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(Vto, 2), "T")

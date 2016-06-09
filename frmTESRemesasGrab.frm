@@ -689,28 +689,6 @@ Dim FCobro As String
                 'Copio el disquete
                 B = CopiarArchivo
             End If
-        Else
-        
-            If cboTipoRemesa.ListIndex = 1 Then
-                'NORMA 32
-                If GrabarDisketteNorma32(App.Path & "\tmpRem32.ari", Text3(0).Text & "|" & Text3(1).Text & "|" & Text7(1).Text & "|", Text1(9).Text) Then
-                    SQL = App.Path & "\tmpRem32.ari"
-                    'Copio el disquete
-                    B = CopiarArchivo
-                End If
-                
-            Else
-                'NORMA 58
-                SQL = Mid(Text7(1).Text & "   ", 1, 3) & "|" & Mid(Text7(0).Text & Space(40), 1, 40) & "|"
-                If GrabarDisketteNorma58(App.Path & "\tmpRem58.ari", Text3(0).Text & "|" & Text3(1).Text & "|", Text1(18).Text, SQL, Me.cmbReferencia.ListIndex, CDate(Text1(9).Text)) Then
-                    SQL = App.Path & "\tmpRem58.ari"
-                    'Copio el disquete
-                    B = CopiarArchivo
-                End If
-                
-                
-                
-            End If
         End If
         
         

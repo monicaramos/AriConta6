@@ -4143,7 +4143,6 @@ Dim ImporteInterno As Currency
             Conn.Execute SQL
 
         ' en tmppendientes metemos la clave primaria de pagos_realizados y el importe en letra
-                                                          'importe=nro factura,   codforpa=linea de cobros_realizados
             SQL = "insert into tmppendientes (codusu,serie_cta,factura,fecha,numorden,codmacta,observa) values ("
             SQL = SQL & vUsu.Codigo & "," & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & "," 'numserie
             SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "T") & "," 'numfactu
