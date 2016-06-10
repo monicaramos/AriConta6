@@ -23,7 +23,6 @@ Private mvarfechaAmbito As Date
 Private mvarabononeg As Boolean
 Private mvarautocoste As Boolean
 
-Private mvarEfectosCtaPuente As Boolean
 Private mvarPagaresCtaPuente As Boolean
 Private mvarTalonesCtaPuente As Boolean
 
@@ -109,23 +108,6 @@ Public Property Let AgrupaBancario(ByVal vData As Boolean)
      mvarAgrupaBancario = vData
 End Property
 
-
-
-Public Property Get EfectosCtaPuente() As Boolean
-'se usa cuando se asigna un valor a la propiedad, en el
-'lado derecho de la asignacion
-'Syntax: Debug.Print X.fechafin
-     EfectosCtaPuente = mvarEfectosCtaPuente
-End Property
-
-
-
-Public Property Let EfectosCtaPuente(ByVal vData As Boolean)
-'se usa cuando se asigna un valor a la propiedad, en el
-'lado izquierdo de la asignacion
-'Syntax: X.fechafin = 5
-     mvarEfectosCtaPuente = vData
-End Property
 
 
 
@@ -550,9 +532,6 @@ Private Function ParametrosTesoreriaNuevos()
     mvarAgrupaBancario = (DBLet(RS.Fields(SQL), "N") = 1)
 
 
-    SQL = "contaefecpte"
-    mvarEfectosCtaPuente = (DBLet(RS.Fields(SQL), "N") = 1)
-
 
     SQL = "contapagarepte"
     mvarPagaresCtaPuente = (DBLet(RS.Fields(SQL), "N") = 1)
@@ -647,10 +626,10 @@ Private Function Leer2() As Byte
         Else
             mvarfechaini = RS!fechaini
             mvarfechafin = RS!fechafin
-            If IsNull(RS!Fechaactiva) Then
+            If IsNull(RS!FechaActiva) Then
                 mvarfechaAmbito = mvarfechaini
             Else
-                mvarfechaAmbito = RS!Fechaactiva
+                mvarfechaAmbito = RS!FechaActiva
             End If
             mvarabononeg = (RS!abononeg = 1)
             'Centros de coste

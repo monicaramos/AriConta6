@@ -219,7 +219,7 @@ Attribute frmP.VB_VarHelpID = -1
 
 Dim RS As ADODB.Recordset
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 Dim IT As ListItem  'Comun
 Dim PrimeraVez As Boolean
 Dim Cancelado As Boolean
@@ -565,9 +565,6 @@ Dim C As String
             'Ahora toooodas las remesas se hace lo mismmo
             ' De llevada a banco a cancelar cliente. De cancelar a abonar y de abonar a eliminar. NO
             'hay distinciones entre remesas. Para podrer abonar una remesa esta tiene que estar cancelada
-            If vParamT.EfectosCtaPuente Then
-                If RS!Situacion <> "F" Then SQL = "La remesa NO puede abonarse. Faltan cancelacion "
-            End If
             
         Else
             If RS!Tiporem = 2 And vParamT.PagaresCtaPuente Then
@@ -609,19 +606,19 @@ Dim C As String
             'Comprobamos si esta bien configurada
             '
             If SubTipo = 1 Then
-                    If Opcion = 22 Then
-                        'SQL = "4310"
-                        SQL = "RemesaCancelacion"
-                    Else
-                        SQL = "RemesaConfirmacion"
-                    End If
-                    SQL = DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1")
-                    If SQL = "" Then
-                        SQL = "Falta configurar parámetros cuentas confirmación/cancelación remesa. "
-                    Else
-                        'OK. Esta configurado
-                        SQL = ""
-                    End If
+                If Opcion = 22 Then
+                    'SQL = "4310"
+                    SQL = "RemesaCancelacion"
+                Else
+                    SQL = "RemesaConfirmacion"
+                End If
+                SQL = DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1")
+                If SQL = "" Then
+                    SQL = "Falta configurar parámetros cuentas confirmación/cancelación remesa. "
+                Else
+                    'OK. Esta configurado
+                    SQL = ""
+                End If
                     
             Else
                 'talones pagares
@@ -890,15 +887,15 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         CuentasCC = ""
         CualesEliminar = ""
         J = 0
-        For i = 0 To 1
+        For I = 0 To 1
             ' contatalonpte
             SQL = "pagarecta"
-            If i = 1 Then SQL = "contatalonpte"
+            If I = 1 Then SQL = "contatalonpte"
             CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
             
             'Repetiremos el proceso dos veces
             SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            SQL = SQL & " AND   talon = " & i
+            SQL = SQL & " AND   talon = " & I
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                     'Si lleva cta puente habra que ver si esta contbilizada
@@ -935,7 +932,7 @@ On Error GoTo EEliminarEnRecepcionDocumentos
             
             
             
-        Next i
+        Next I
         
         
 
@@ -957,12 +954,12 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         J = 1
         SQL = "X"
         Do
-            i = InStr(J, CualesEliminar, ",")
-            If i > 0 Then
-                J = i + 1
+            I = InStr(J, CualesEliminar, ",")
+            If I > 0 Then
+                J = I + 1
                 SQL = SQL & "X"
             End If
-        Loop Until i = 0
+        Loop Until I = 0
         
         SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
         If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
