@@ -261,7 +261,7 @@ Begin VB.Form frmTESPagosPdtesList
          Top             =   360
          Width           =   4455
          Begin VB.OptionButton optVarios 
-            Caption         =   "Forma Pago"
+            Caption         =   "Tipo Pago"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75

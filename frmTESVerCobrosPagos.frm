@@ -465,6 +465,7 @@ Private Sub chkReme_Click()
     Text2(2).Visible = SeVeRiesgo
     Label2(3).Visible = SeVeRiesgo And Cobros
     Text2(3).Visible = SeVeRiesgo And Cobros
+    CargaList
 End Sub
 
 
@@ -633,7 +634,7 @@ End Sub
 
 Private Sub Form_Resize()
 Dim I As Integer
-Dim H As Integer
+Dim h As Integer
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
     If Me.Height < 2700 Then Me.Height = 2700
     If Me.Width < 2700 Then Me.Width = 2700
@@ -648,7 +649,7 @@ Dim H As Integer
     Me.ListView1.Width = Me.frame.Width
     
     'Las columnas
-    H = ListView1.Tag
+    h = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
     For I = 1 To Me.ListView1.ColumnHeaders.Count
         If InStr(1, ListView1.ColumnHeaders(I).Tag, "%") Then
@@ -659,7 +660,7 @@ Dim H As Integer
         End If
         Me.ListView1.ColumnHeaders(I).Width = Val(cad)
     Next I
-    ListView1.Tag = H
+    ListView1.Tag = h
 End Sub
 
 
@@ -727,7 +728,7 @@ On Error GoTo ECargando
 
     Me.MousePointer = vbHourglass
     Screen.MousePointer = vbHourglass
-    SeVeRiesgo = False
+    SeVeRiesgo = (chkReme.Value = 1)
     SeVeRiesgoTalPag = False
     If Not OrdenarEfecto Then
         'Ver cobros pagos
@@ -794,10 +795,14 @@ Dim Inserta As Boolean
             If Not OrdenarEfecto Then
              
                 If Not SeVeRiesgo Then
-                    If DBLet(RS!CodRem, "N") > 0 Then
+                ' por lo de mc añado la condicion And DBLet(RS!siturem, "T") >= "B"
+                    If DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") >= "B" Then
                         Inserta = False
                         'Stop
                     End If
+                ' añadido lo que pide Mc de que se vean las remesas que tengan situacion B
+                Else
+                    If (DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") > "B") Then Inserta = False
                 End If
             End If
             
@@ -852,8 +857,8 @@ Dim ImpAux As Currency
     End If
     If RS!tipoformapago = vbTipoPagoRemesa Then
         '81--->
-        'asc("Q") =81
-        If Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 81 Then
+        'asc("Q") =81 or asc("B") = 66
+        If Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 81 Or Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 66 Then
             riesgo = riesgo + vImporte
         Else
            ' Stop
@@ -967,7 +972,7 @@ Dim J As Byte
     ItmX.Text = RS!NUmSerie
     ItmX.SubItems(1) = RS!NumFactu
     ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
-    ItmX.SubItems(3) = Format(RS!fecefect, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(RS!Fecefect, "dd/mm/yyyy")
     ItmX.SubItems(4) = RS!numorden
     ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
     ItmX.SubItems(6) = DBLet(RS!siglas, "T")
@@ -981,7 +986,7 @@ Dim J As Byte
         ItmX.SubItems(8) = "0.00"
         ItmX.SubItems(9) = ItmX.SubItems(7)
     End If
-    If RS!fecefect < Fecha Then
+    If RS!Fecefect < Fecha Then
         'LO DEBE
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
@@ -1137,7 +1142,7 @@ Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
     
 End Sub
 
-Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = 2 Then
         PopupMenu Me.mnContextual
     End If

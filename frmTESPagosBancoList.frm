@@ -1079,10 +1079,14 @@ Dim I As Integer
     If Not PonerDesdeHasta("pagos.fecefect", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
     If Not PonerDesdeHasta("pagos.ctabanc1", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
             
-    If cadFormula <> "" Then cadFormula = cadFormula & " and "
-    If cadselect <> "" Then cadselect = cadselect & " and "
+    If Not AnyadirAFormula(cadFormula, "(isnull({pagos.imppagad}) or ({pagos.impefect}-{pagos.imppagad})<>0)") Then Exit Function
+    If Not AnyadirAFormula(cadselect, "(pagos.impefect - coalesce(pagos.imppagad,0)) <> 0") Then Exit Function
+    
     
     If Check1(0).Value = 1 And Check1(1).Value = 1 Then
+        If cadFormula <> "" Then cadFormula = cadFormula & " and "
+        If cadselect <> "" Then cadselect = cadselect & " and "
+        
         cadFormula = cadFormula & "{pagos.impefect}>0 "
         cadselect = cadselect & "pagos.impefect>0"
     End If

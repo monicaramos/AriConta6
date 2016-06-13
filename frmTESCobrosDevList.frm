@@ -881,7 +881,7 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     InicializarVbles True
     
-    tabla = "cobros INNER JOIN cobros_realizados on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden  "
+    tabla = "cobros INNER JOIN hlinapu on cobros.numserie = hlinapu.numserie and cobros.numfactu = hlinapu.numfaccl and cobros.fecfactu = hlinapu.fecfactu and cobros.numorden = hlinapu.numorden  "
     
     
     If Not MontaSQL Then Exit Sub
@@ -1209,7 +1209,7 @@ Dim nomDocu As String
         cadParam = cadParam & "pGroup1={cobros.codmacta}|"
         cadParam = cadParam & "pTipo=0|"
     Else
-        cadParam = cadParam & "pGroup1={cobros_realizados.fecdevol}|"
+        cadParam = cadParam & "pGroup1={hlinapu.fecdevol}|"
         cadParam = cadParam & "pTipo=1|"
     End If
     
@@ -1272,14 +1272,14 @@ Dim I As Integer
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("cobros_realizados.fecfactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros_realizados.fecdevol", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
+    If Not PonerDesdeHasta("hlinapu.fecfactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
+    If Not PonerDesdeHasta("hlinapu.fecdevol", "F", Me.txtFecha(2), Me.txtFecha(2), Me.txtFecha(3), Me.txtFecha(3), "pDHFecVto=""") Then Exit Function
     If Not PonerDesdeHasta("cobros.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
             
     If cadFormula <> "" Then cadFormula = cadFormula & " and "
     If cadselect <> "" Then cadselect = cadselect & " and "
-    cadFormula = cadFormula & "not isnull({cobros_realizados.codrem}) "
-    cadselect = cadselect & "not cobros_realizados.codrem is null"
+    cadFormula = cadFormula & "{hlinapu.esdevolucion} = 1"
+    cadselect = cadselect & "hlinapu.esdevolucion =1"
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
     If cadselect <> "" Then cadselect = "(" & cadselect & ")"

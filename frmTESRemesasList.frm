@@ -645,10 +645,10 @@ Attribute frmDia.VB_VarHelpID = -1
 Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
-Private Sql As String
-Dim Cad As String
+Private SQL As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
 
@@ -813,7 +813,7 @@ End Sub
 
 
 Private Sub txtNum_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -832,28 +832,28 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    Sql = "select remesas.anyo Año, remesas.codigo, remesas.codmacta Cuenta, cuentas.nommacta Nombre, remesas.fecremesa Fecha,  "
-    Sql = Sql & " remesas.descripcion, wtiposituacionrem.descsituacion Situacion, "
+    SQL = "select remesas.anyo Año, remesas.codigo, remesas.codmacta Cuenta, cuentas.nommacta Nombre, remesas.fecremesa Fecha,  "
+    SQL = SQL & " remesas.descripcion, wtiposituacionrem.descsituacion Situacion, "
     If Me.Check1(0).Value = 1 Then
-        Sql = Sql & "cobros.numserie, cobros.numfactu Factura, cobros.fecfactu Fecha, cobros.fecvenci FVencim, cobros.codmacta Cuenta, aaa.nommacta Descripcion, cobros.iban, cobros.impvenci Importe"
-        Sql = Sql & " from remesas, cuentas, usuarios.wtiposituacionrem, cuentas aaa, tmpcobros2 "
+        SQL = SQL & "cobros.numserie, cobros.numfactu Factura, cobros.fecfactu Fecha, cobros.fecvenci FVencim, cobros.codmacta Cuenta, aaa.nommacta Descripcion, cobros.iban, cobros.impvenci Importe"
+        SQL = SQL & " from remesas, cuentas, usuarios.wtiposituacionrem, cuentas aaa, tmpcobros2 "
     Else
-        Sql = Sql & "remesas.importe "
-        Sql = Sql & " from remesas, cuentas, usuarios.wtiposituacionrem"
+        SQL = SQL & "remesas.importe "
+        SQL = SQL & " from remesas, cuentas, usuarios.wtiposituacionrem"
     End If
-    Sql = Sql & " where " & cadselect
+    SQL = SQL & " where " & cadselect
     
-    Sql = Sql & " and remesas.codmacta = cuentas.codmacta and remesas.situacion = wtiposituacionrem.situacio "
+    SQL = SQL & " and remesas.codmacta = cuentas.codmacta and remesas.situacion = wtiposituacionrem.situacio "
     
     If Me.Check1(0).Value = 1 Then
-        Sql = Sql & " and tmpcobros2.codusu = " & vUsu.Codigo
-        Sql = Sql & " and tmpcobros2.codmacta = aaa.codmacta and remesas.anyo = tmpcobros2.anyorem and remesas.codigo = tmpcobros2.codrem "
+        SQL = SQL & " and tmpcobros2.codusu = " & vUsu.Codigo
+        SQL = SQL & " and tmpcobros2.codmacta = aaa.codmacta and remesas.anyo = tmpcobros2.anyorem and remesas.codigo = tmpcobros2.codrem "
     End If
     
-    Sql = Sql & " ORDER BY 1 desc, 2 "
+    SQL = SQL & " ORDER BY 1 desc, 2 "
         
     'LLamos a la funcion
-    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
+    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
 End Sub
 
@@ -900,7 +900,7 @@ End Sub
 
 
 Private Function MontaSQL() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
@@ -917,7 +917,7 @@ Dim RC2 As String
 End Function
 
 Private Function CargarTemporal() As Boolean
-Dim Cad As String
+Dim cad As String
 Dim SqlInsert As String
 Dim SqlValues As String
 
@@ -926,22 +926,22 @@ Dim SqlValues As String
     CargarTemporal = False
 
 
-    Cad = "delete from tmpcobros2 where codusu= " & DBSet(vUsu.Codigo, "N")
-    Conn.Execute Cad
+    cad = "delete from tmpcobros2 where codusu= " & DBSet(vUsu.Codigo, "N")
+    Conn.Execute cad
     
     SqlInsert = "insert into tmpcobros2 (codusu,numserie,numfactu,fecfactu,numorden,fecvenci,codmacta,cliente,iban,gastos,impvenci,esdevol,codrem,anyorem)  "
     
-    Cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, codrem, anyorem "
-    Cad = Cad & " from cobros "
-    Cad = Cad & " where (1=1) "
-    If cadselect <> "" Then Cad = Cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "cobros"), "codigo", "codrem"), "anyo", "anyorem")
-    Cad = Cad & " union "
-    Cad = Cad & " select " & vUsu.Codigo & ",cobros_realizados.numserie, cobros_realizados.numfactu, cobros_realizados.fecfactu, cobros_realizados.numorden, cobros.fecvenci, cobros.codmacta, cobros.nomclien, cobros.iban, cobros_realizados.gastodev, cobros_realizados.impcobro * (-1) importe, 1 devol, cobros_realizados.codrem, cobros_realizados.anyorem "
-    Cad = Cad & " from cobros inner join cobros_realizados on cobros.numserie = cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu = cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden "
-    Cad = Cad & " where (1=1) "
-    If cadselect <> "" Then Cad = Cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "cobros_realizados"), "codigo", "codrem"), "anyo", "anyorem")
+    cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, codrem, anyorem "
+    cad = cad & " from cobros "
+    cad = cad & " where (1=1) "
+    If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "cobros"), "codigo", "codrem"), "anyo", "anyorem")
+    cad = cad & " union "
+    cad = cad & " select " & vUsu.Codigo & ",hlinapu.numserie, hlinapu.numfaccl numfactu, hlinapu.fecfactu, hlinapu.numorden, cobros.fecvenci, cobros.codmacta, cobros.nomclien, cobros.iban, hlinapu.gastodev, coalesce(hlinapu.timported,0) - coalesce(hlinapu.timporteh,0) importe, 1 devol, hlinapu.codrem, hlinapu.anyorem "
+    cad = cad & " from cobros inner join hlinapu on cobros.numserie = hlinapu.numserie and cobros.numfactu = hlinapu.numfaccl and cobros.fecfactu = hlinapu.fecfactu and cobros.numorden = hlinapu.numorden "
+    cad = cad & " where (1=1) and hlinapu.esdevolucion = 1 "
+    If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "hlinapu"), "codigo", "codrem"), "anyo", "anyorem")
     
-    Conn.Execute SqlInsert & Cad
+    Conn.Execute SqlInsert & cad
     
     CargarTemporal = True
     Exit Function
