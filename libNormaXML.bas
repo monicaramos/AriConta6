@@ -824,7 +824,7 @@ End Function
 'Devolucion SEPA
 '
 Public Sub ProcesaFicheroDevolucionSEPA_XML(Fichero As String, ByRef Remesa As String)
-Dim AUX2 As String  'Para buscar los vencimientos
+Dim aux2 As String  'Para buscar los vencimientos
 Dim FinLecturaLineas As Boolean
 
 Dim ErroresVto As String
@@ -848,8 +848,8 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
     Open Fichero For Input As #NF
     ContenidoFichero = ""
     While Not EOF(NF)
-        Line Input #NF, AUX2
-        ContenidoFichero = ContenidoFichero & AUX2
+        Line Input #NF, aux2
+        ContenidoFichero = ContenidoFichero & aux2
     Wend
     Close #NF
     
@@ -863,11 +863,11 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
     posicion = PosicionEnFichero(posicion, ContenidoFichero, "<OrgnlMsgId>")
     L2 = PosicionEnFichero(posicion, ContenidoFichero, "</OrgnlMsgId>")
     
-    AUX2 = Mid(ContenidoFichero, posicion, L2 - posicion)
-    AUX2 = Mid(AUX2, InStr(10, AUX2, "RE") + 3) 'QUTIAMO EL RE y ye tipo RE1(ejemp)
+    aux2 = Mid(ContenidoFichero, posicion, L2 - posicion)
+    aux2 = Mid(aux2, InStr(10, aux2, "RE") + 3) 'QUTIAMO EL RE y ye tipo RE1(ejemp)
     
     'Los 4 ultimos son año
-    Remesa = Mid(AUX2, 1, 6) & "|" & Mid(AUX2, 7, 4) & "|"
+    Remesa = Mid(aux2, 1, 6) & "|" & Mid(aux2, 7, 4) & "|"
     
     
     'Voy a buscar el numero total de vencimientos que devuelven y el importe total(comproabacion ultima
@@ -896,7 +896,7 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
             'Si existe un grupo de registros TxInfAndSts, los de abjo deben existir SI o SI
             posicion = PosicionEnFichero(posicion, ContenidoFichero, "<OrgnlEndToEndId>")
             L2 = PosicionEnFichero(posicion, ContenidoFichero, "</OrgnlEndToEndId>")
-            AUX2 = Mid(ContenidoFichero, posicion, L2 - posicion)
+            aux2 = Mid(ContenidoFichero, posicion, L2 - posicion)
             
             'Id del recibo devuleto. Ejemplo
             '4300106840T  0001180220150925001
@@ -904,8 +904,8 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
             '           FrmtStr(miRsAux!codmacta, 10) & FrmtStr(miRsAux!NUmSerie, 3) & Format(miRsAux!codfaccl, "00000000")
             '           Format(miRsAux!fecfaccl, "yyyymmdd") & Format(miRsAux!numorden, "000")
             
-            SQL = "Select codrem,anyorem,siturem from cobros where fecfactu='" & Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2)
-            SQL = SQL & "' AND numserie = '" & Trim(Mid(AUX2, 11, 3)) & "' AND numfactu = " & Val(Mid(AUX2, 14, 8)) & " AND numorden=" & Mid(AUX2, 30, 3)
+            SQL = "Select codrem,anyorem,siturem from cobros where fecfactu='" & Mid(aux2, 22, 4) & "-" & Mid(aux2, 26, 2) & "-" & Mid(aux2, 28, 2)
+            SQL = SQL & "' AND numserie = '" & Trim(Mid(aux2, 11, 3)) & "' AND numfactu = " & Val(Mid(aux2, 14, 8)) & " AND numorden=" & Mid(aux2, 30, 3)
 
             miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             SQL = Mid(SQL, InStr(1, UCase(SQL), " WHERE ") + 7)
@@ -917,7 +917,7 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
             SQL = "Vto no encontrado: " & Mid(SQL, InStr(1, UCase(SQL), " WHERE ") + 7)
             If Not miRsAux.EOF Then
                 If IsNull(miRsAux!CodRem) Then
-                    SQL = "Vencimiento sin Remesa: " & AUX2
+                    SQL = "Vencimiento sin Remesa: " & aux2
                 Else
         
                     SQL = ""
@@ -948,27 +948,27 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
 
     
         'En aux2 tendre codrem|anñorem|
-        AUX2 = RecuperaValor(Remesa, 1) & " AND anyo = " & RecuperaValor(Remesa, 2)
-        AUX2 = "Select situacion from remesas where codigo = " & AUX2
-        miRsAux.Open AUX2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        aux2 = RecuperaValor(Remesa, 1) & " AND anyo = " & RecuperaValor(Remesa, 2)
+        aux2 = "Select situacion from remesas where codigo = " & aux2
+        miRsAux.Open aux2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If miRsAux.EOF Then
-            AUX2 = "-No se encuentra remesa"
+            aux2 = "-No se encuentra remesa"
             
         Else
             'Si que esta.
             'Situacion
             If CStr(miRsAux!Situacion) <> "Q" And CStr(miRsAux!Situacion) <> "Y" Then
-                AUX2 = "- Situacion incorrecta : " & miRsAux!Situacion
+                aux2 = "- Situacion incorrecta : " & miRsAux!Situacion
             Else
-                AUX2 = "" 'TODO OK
+                aux2 = "" 'TODO OK
             End If
         End If
 
-        If AUX2 <> "" Then
-            AUX2 = AUX2 & " ->" & Mid(miRsAux.Source, InStr(1, UCase(miRsAux.Source), " WHERE ") + 7)
-            AUX2 = Replace(AUX2, " AND ", " ")
-            AUX2 = Replace(AUX2, "anyo", "año")
-            ErroresVto = ErroresVto & vbCrLf & AUX2
+        If aux2 <> "" Then
+            aux2 = aux2 & " ->" & Mid(miRsAux.Source, InStr(1, UCase(miRsAux.Source), " WHERE ") + 7)
+            aux2 = Replace(aux2, " AND ", " ")
+            aux2 = Replace(aux2, "anyo", "año")
+            ErroresVto = ErroresVto & vbCrLf & aux2
         End If
         miRsAux.Close
 
@@ -977,8 +977,8 @@ Dim CadenaComprobacionDevueltos As String  'cuantos|importe|
 
 
         If ErroresVto <> "" Then
-            AUX2 = "Error remesas " & vbCrLf & String(30, "=") & ErroresVto
-            MsgBox AUX2, vbExclamation
+            aux2 = "Error remesas " & vbCrLf & String(30, "=") & ErroresVto
+            MsgBox aux2, vbExclamation
 
             'Pongo REMESA=""
             Remesa = "" 'para que no continue el preoceso de devolucion
@@ -1015,14 +1015,14 @@ Dim NF As Integer
 Dim ContenidoFichero As String
 Dim posicion As Long
 Dim L2 As Long
-Dim AUX2 As String
+Dim aux2 As String
 
     NF = FreeFile
     Open Fichero For Input As #NF
     ContenidoFichero = ""
     While Not EOF(NF)
-        Line Input #NF, AUX2
-        ContenidoFichero = ContenidoFichero & AUX2
+        Line Input #NF, aux2
+        ContenidoFichero = ContenidoFichero & aux2
     Wend
     Close #NF
     
@@ -1035,7 +1035,7 @@ Dim AUX2 As String
             'Si existe un grupo de registros TxInfAndSts, los de abjo deben existir SI o SI
             posicion = PosicionEnFichero(posicion, ContenidoFichero, "<OrgnlEndToEndId>")
             L2 = PosicionEnFichero(posicion, ContenidoFichero, "</OrgnlEndToEndId>")
-            AUX2 = Mid(ContenidoFichero, posicion, L2 - posicion)
+            aux2 = Mid(ContenidoFichero, posicion, L2 - posicion)
             
             'Id del recibo devuleto. Ejemplo
             '4300106840T  0001180220150925001
@@ -1045,8 +1045,8 @@ Dim AUX2 As String
             
             'Vamos a guardar en el col la linea en formato antiguo SEPA y asi no toco el programa
             'M  0330047820131201001   430000061
-            AUX2 = Mid(AUX2, 11, 23) & "   " & Mid(AUX2, 1, 10)
-            Listado.Add AUX2
+            aux2 = Mid(aux2, 11, 23) & "   " & Mid(aux2, 1, 10)
+            Listado.Add aux2
             posicion = InStr(posicion, ContenidoFichero, "</TxInfAndSts>") + 11 'Para que pase al siguiente registro, si es que existe
             
         
@@ -1060,7 +1060,7 @@ End Sub
 
 
 Public Sub LeerLineaDevolucionSEPA_XML(Fichero As String, ByRef Remesa As String, ByRef lwCobros As ListView)
-Dim AUX2 As String  'Para buscar los vencimientos
+Dim aux2 As String  'Para buscar los vencimientos
 Dim AUX3 As String
 Dim FinLecturaLineas As Boolean
 
@@ -1090,8 +1090,8 @@ Dim RegistroErroneo As Boolean
     Open Fichero For Input As #NF
     ContenidoFichero = ""
     While Not EOF(NF)
-        Line Input #NF, AUX2
-        ContenidoFichero = ContenidoFichero & AUX2
+        Line Input #NF, aux2
+        ContenidoFichero = ContenidoFichero & aux2
     Wend
     Close #NF
     
@@ -1106,24 +1106,24 @@ Dim RegistroErroneo As Boolean
     L2 = PosicionEnFichero(posicion, ContenidoFichero, "</OrgnlPmtInfAndSts>")
     If posicion > 0 And L2 > 0 Then
         '
-        AUX2 = Mid(ContenidoFichero, posicion, L2 - posicion)
-        posicion = PosicionEnFichero(1, AUX2, "<StsRsnInf>")
-        L2 = PosicionEnFichero(posicion, AUX2, "</StsRsnInf>")
+        aux2 = Mid(ContenidoFichero, posicion, L2 - posicion)
+        posicion = PosicionEnFichero(1, aux2, "<StsRsnInf>")
+        L2 = PosicionEnFichero(posicion, aux2, "</StsRsnInf>")
         
         If posicion > 0 And L2 > 0 Then
-            AUX2 = Mid(AUX2, posicion, L2 - posicion)
-            posicion = PosicionEnFichero(1, AUX2, "<Id>ES")   'de momento todos los clientes seran de españa
-            L2 = PosicionEnFichero(posicion, AUX2, "</Id>")
+            aux2 = Mid(aux2, posicion, L2 - posicion)
+            posicion = PosicionEnFichero(1, aux2, "<Id>ES")   'de momento todos los clientes seran de españa
+            L2 = PosicionEnFichero(posicion, aux2, "</Id>")
     
-            AUX2 = Mid(AUX2, posicion, L2 - posicion)
-            If Len(AUX2) > 5 Then
+            aux2 = Mid(aux2, posicion, L2 - posicion)
+            If Len(aux2) > 5 Then
                 SQL = DevuelveDesdeBD("nifempre", "empresa2", "1", "1")
                 'Es CCSSSNNNNNN
                 '   contro
                 '     SUFIJO
                 '        NIF
-                AUX2 = Mid(AUX2, 6)
-                If AUX2 <> SQL Then
+                aux2 = Mid(aux2, 6)
+                If aux2 <> SQL Then
 '                    Stop
                     Err.Raise 513, , "NIF empresa del fichero no coincide con el de la empresa en Ariconta"
                 End If
@@ -1141,11 +1141,11 @@ Dim RegistroErroneo As Boolean
     posicion = PosicionEnFichero(posicion, ContenidoFichero, "<OrgnlMsgId>")
     L2 = PosicionEnFichero(posicion, ContenidoFichero, "</OrgnlMsgId>")
     
-    AUX2 = Mid(ContenidoFichero, posicion, L2 - posicion)
-    AUX2 = Mid(AUX2, InStr(10, AUX2, "RE") + 3) 'QUTIAMO EL RE y ye tipo RE1(ejemp)
+    aux2 = Mid(ContenidoFichero, posicion, L2 - posicion)
+    aux2 = Mid(aux2, InStr(10, aux2, "RE") + 3) 'QUTIAMO EL RE y ye tipo RE1(ejemp)
     
     'Los 4 ultimos son año
-    Remesa = Mid(AUX2, 1, 6) & "|" & Mid(AUX2, 7, 4) & "|"
+    Remesa = Mid(aux2, 1, 6) & "|" & Mid(aux2, 7, 4) & "|"
     
     
     'Voy a buscar el numero total de vencimientos que devuelven y el importe total(comproabacion ultima
@@ -1181,26 +1181,24 @@ Dim RegistroErroneo As Boolean
             'Si existe un grupo de registros TxInfAndSts, los de abjo deben existir SI o SI
             posicion = PosicionEnFichero(1, DatosXMLVto, "<OrgnlEndToEndId>")
             L2 = PosicionEnFichero(posicion, DatosXMLVto, "</OrgnlEndToEndId>")
-            AUX2 = Mid(DatosXMLVto, posicion, L2 - posicion)
+            aux2 = Mid(DatosXMLVto, posicion, L2 - posicion)
             
             
             Set Itm = lwCobros.ListItems.Add(, "C" & jj)
-            Itm.Text = Trim(Mid(AUX2, 11, 3))  'miRsAux!NUmSerie
+            Itm.Text = Trim(Mid(aux2, 11, 3))  'miRsAux!NUmSerie
             
-            Itm.SubItems(1) = Mid(AUX2, 14, 8) ' numfactu
-            Itm.SubItems(2) = Mid(AUX2, 30, 3) ' miRsAux!numorden
-            Itm.SubItems(3) = Mid(AUX2, 1, 10) 'miRsAux!codmacta
-            Itm.Tag = Format(Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2), "dd/mm/yyyy")
+            Itm.SubItems(1) = Mid(aux2, 14, 8) ' numfactu
+            Itm.SubItems(2) = Mid(aux2, 30, 3) ' miRsAux!numorden
+            Itm.SubItems(3) = Mid(aux2, 1, 10) 'miRsAux!codmacta
+            Itm.Tag = Format(Mid(aux2, 22, 4) & "-" & Mid(aux2, 26, 2) & "-" & Mid(aux2, 28, 2), "dd/mm/yyyy")
             
             Itm.SubItems(8) = RecuperaValor(Remesa, 1) ' remesa
             Itm.SubItems(9) = RecuperaValor(Remesa, 2) ' año de remesa
             Itm.SubItems(10) = DevuelveValor("select codmacta from remesas where codigo = " & RecuperaValor(Remesa, 1) & " and anyo = " & RecuperaValor(Remesa, 2))
             
-            
-            
             SQL = "select * from cobros where "
-            SQL = SQL & " numserie = " & DBSet(Trim(Mid(AUX2, 11, 3)), "T") & " and numfactu = " & DBSet(Val(Mid(AUX2, 14, 8)), "N")
-            SQL = SQL & " and fecfactu = '" & Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2) & "'"
+            SQL = SQL & " numserie = " & DBSet(Trim(Mid(aux2, 11, 3)), "T") & " and numfactu = " & DBSet(Val(Mid(aux2, 14, 8)), "N")
+            SQL = SQL & " and fecfactu = '" & Mid(aux2, 22, 4) & "-" & Mid(aux2, 26, 2) & "-" & Mid(aux2, 28, 2) & "'"
             
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
@@ -1214,8 +1212,6 @@ Dim RegistroErroneo As Boolean
                 VtoEncontrado = True
             Else
                 Itm.SubItems(4) = " "    'miRsAux!nomclien    'AVISAR A MONICA--> Si no pones espacio en blanco cuando lo selecciona sale raro
-                
-                
             End If
             
             posicion = PosicionEnFichero(1, DatosXMLVto, "<InstdAmt Ccy=""EUR"">")
@@ -1233,19 +1229,17 @@ Dim RegistroErroneo As Boolean
 '                    Stop
                     
                     Dim ImporteRemesado As Currency
-                    
-                    SQL = "select impcobro from cobros_realizados where "
-                    SQL = SQL & " numserie = " & DBSet(Trim(Mid(AUX2, 11, 3)), "T") & " and numfactu = " & DBSet(Val(Mid(AUX2, 14, 8)), "N")
-                    SQL = SQL & " and fecfactu = '" & Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2) & "' "
-                    SQL = SQL & " and numlinea in (select max(numlinea) from cobros_realizados where "
-                    SQL = SQL & " numserie = " & DBSet(Trim(Mid(AUX2, 11, 3)), "T") & " and numfactu = " & DBSet(Val(Mid(AUX2, 14, 8)), "N")
-                    SQL = SQL & " and fecfactu = '" & Mid(AUX2, 22, 4) & "-" & Mid(AUX2, 26, 2) & "-" & Mid(AUX2, 28, 2) & "')"
+                    '[[[[[[[[[[[[[[PREGUNTAR a DAVID
+                    'antes cobros_realizados
+                    SQL = "select impcobro cobros where "
+                    SQL = SQL & " numserie = " & DBSet(Trim(Mid(aux2, 11, 3)), "T") & " and numfactu = " & DBSet(Val(Mid(aux2, 14, 8)), "N")
+                    SQL = SQL & " and fecfactu = '" & Mid(aux2, 22, 4) & "-" & Mid(aux2, 26, 2) & "-" & Mid(aux2, 28, 2) & "' "
                     
                     ImporteRemesado = DevuelveValor(SQL)
                     
                     If ImporteRemesado <> AUX3 Then
                     
-                        MsgBox "La factura " & DBSet(Trim(Mid(AUX2, 11, 3)), "T") & "-" & DBSet(Val(Mid(AUX2, 14, 8)), "N") & " de fecha " & Mid(AUX2, 28, 2) & "/" & Mid(AUX2, 26, 2) & "/" & Mid(AUX2, 22, 4) & " es de " & AUX2 & " euros", vbExclamation
+                        MsgBox "La factura " & DBSet(Trim(Mid(aux2, 11, 3)), "T") & "-" & DBSet(Val(Mid(aux2, 14, 8)), "N") & " de fecha " & Mid(aux2, 28, 2) & "/" & Mid(aux2, 26, 2) & "/" & Mid(aux2, 22, 4) & " es de " & aux2 & " euros", vbExclamation
                     
                     Else
                         
@@ -1262,26 +1256,26 @@ Dim RegistroErroneo As Boolean
             '</Rsn>
             posicion = PosicionEnFichero(1, DatosXMLVto, "<Rsn>")
             L2 = PosicionEnFichero(posicion, DatosXMLVto, "</Rsn>")
-            AUX2 = Mid(DatosXMLVto, posicion, L2 - posicion)
+            aux2 = Mid(DatosXMLVto, posicion, L2 - posicion)
             
             posicion = PosicionEnFichero(1, DatosXMLVto, "<Cd>")
             L2 = PosicionEnFichero(posicion, DatosXMLVto, "</Cd>")
             If posicion > 0 And L2 > 0 Then
-                AUX2 = Mid(DatosXMLVto, posicion, L2 - posicion)
+                aux2 = Mid(DatosXMLVto, posicion, L2 - posicion)
                 
-                AUX2 = DevuelveDesdeBD("concat(codigo,' - ', descripcion)", "usuarios.wdevolucion", "codigo", AUX2, "T")
+                aux2 = DevuelveDesdeBD("concat(codigo,' - ', descripcion)", "usuarios.wdevolucion", "codigo", aux2, "T")
                 
-                If AUX2 = "" Then AUX2 = " "
+                If aux2 = "" Then aux2 = " "
            
             Else
                 'MOTIVO no encontrado
                 'Ver por que
                 'Ver que poner
-                AUX2 = " "
+                aux2 = " "
                 
                 
             End If
-            Itm.SubItems(11) = AUX2
+            Itm.SubItems(11) = aux2
            
            
             If Not VtoEncontrado Then

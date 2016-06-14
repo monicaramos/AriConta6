@@ -1208,7 +1208,7 @@ Dim TipoAnt As Integer
     Else
         I = Val(cad)
     End If
-    If vp.leer(I) = 1 Then
+    If vp.Leer(I) = 1 Then
         'ERROR GRAVE LEYENDO LA FORMA DE PAGO
         Screen.MousePointer = vbDefault
         Set vp = Nothing
@@ -1626,7 +1626,7 @@ End Sub
 
 Private Sub Form_Resize()
 Dim I As Integer
-Dim H As Integer
+Dim h As Integer
 
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
     If Me.Height < 2700 Then Me.Height = 2700
@@ -1643,7 +1643,7 @@ Dim H As Integer
     Me.ListView1.Width = Me.frame.Width
 
     'Las columnas
-    H = ListView1.Tag
+    h = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
     For I = 1 To Me.ListView1.ColumnHeaders.Count
         If InStr(1, ListView1.ColumnHeaders(I).Tag, "%") Then
@@ -1654,7 +1654,7 @@ Dim H As Integer
         End If
         Me.ListView1.ColumnHeaders(I).Width = Val(cad)
     Next I
-    ListView1.Tag = H
+    ListView1.Tag = h
 End Sub
 
 
@@ -1986,7 +1986,7 @@ Dim J As Byte
         
         ItmX.Text = RS!NumFactu
         ItmX.SubItems(1) = Format(RS!FecFactu, "dd/mm/yyyy")
-        ItmX.SubItems(2) = Format(RS!fecefect, "dd/mm/yyyy")
+        ItmX.SubItems(2) = Format(RS!Fecefect, "dd/mm/yyyy")
         ItmX.SubItems(3) = RS!numorden
         ItmX.SubItems(4) = RS!Nommacta
         ItmX.SubItems(5) = RS!siglas
@@ -2000,7 +2000,7 @@ Dim J As Byte
             ItmX.SubItems(7) = "0.00"
             ItmX.SubItems(8) = ItmX.SubItems(6)
         End If
-        If RS!fecefect < Fecha Then
+        If RS!Fecefect < Fecha Then
             'LO DEBE
             ItmX.SmallIcon = 1
             Vencido = Vencido + impo
@@ -3729,9 +3729,9 @@ Dim ImporteInterno As Currency
                                 
                                 'Veo la el camporefencia de ese talon
                                 Ampliacion = RecuperaValor(RS1!Cliente, 1) & RecuperaValor(RS1!Cliente, 2)
-                                Ampliacion = "numserie = '" & RecuperaValor(RS1!Cliente, 1) & "' AND numfactu = " & RecuperaValor(RS1!Cliente, 2)
+                                Ampliacion = "numserie = '" & RecuperaValor(RS1!Cliente, 1) & "' AND numfaccl = " & RecuperaValor(RS1!Cliente, 2)
                                 Ampliacion = Ampliacion & " AND numorden = " & RecuperaValor(RS1!Cliente, 4) & " AND fecfactu "
-                                Ampliacion = DevuelveDesdeBD("reftalonpag", "cobros_realizados", Ampliacion, Format(RecuperaValor(RS1!Cliente, 3), FormatoFecha), "F")
+                                Ampliacion = DevuelveDesdeBD("reftalonpag", "hlinapu", Ampliacion, Format(RecuperaValor(RS1!Cliente, 3), FormatoFecha), "F")
                                 
                                 If Ampliacion = "" Then
                                     Ampliacion = RecuperaValor(RS1!Cliente, 1) & RecuperaValor(RS1!Cliente, 2)
@@ -3895,7 +3895,7 @@ Dim ImporteInterno As Currency
 '            End Select
 
 
-            SQL = "update cobros set impcobro = (select sum(impcobro) from cobros_realizados where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " AND numorden =" & RecuperaValor(RS1!Cliente, 4) & ") "
+            SQL = "update cobros set impcobro = coalesce(impcobro,0) + " & DBSet(ImporteInterno, "N")
             SQL = SQL & " ,fecultco = " & DBSet(FechaAsiento, "F")
             SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
             SQL = SQL & " where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")

@@ -345,9 +345,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -419,10 +419,10 @@ End Sub
 Private Function ReciboSinImprimir() As Boolean
 Dim SQL As String
 
-    SQL = " select count(*) from cobros_realizados aa , tmppendientes tt where "
+    SQL = " select count(*) from hlinapu aa , tmppendientes tt where "
     SQL = SQL & " tt.codusu = " & vUsu.Codigo
     SQL = SQL & " and aa.numserie = tt.serie_cta "
-    SQL = SQL & " and aa.numfactu = tt.importe "
+    SQL = SQL & " and aa.numfaccl = tt.importe "
     SQL = SQL & " and aa.fecfactu = tt.fecha "
     SQL = SQL & " and aa.numorden = tt.numorden "
     SQL = SQL & " and aa.numlinea = tt.codforpa "
@@ -439,10 +439,10 @@ Dim SQL As String
 
     On Error Resume Next
 
-    SQL = "update cobros_realizados aa, tmppendientes tt set aa.impreso = 1 where "
+    SQL = "update hlinapu aa, tmppendientes tt set aa.impreso = 1 where "
     SQL = SQL & " tt.codusu = " & vUsu.Codigo
     SQL = SQL & " and aa.numserie = tt.serie_cta "
-    SQL = SQL & " and aa.numfactu = tt.importe "
+    SQL = SQL & " and aa.numfaccl = tt.importe "
     SQL = SQL & " and aa.fecfactu = tt.fecha "
     SQL = SQL & " and aa.numorden = tt.numorden "
     SQL = SQL & " and aa.numlinea = tt.codforpa "
@@ -596,7 +596,7 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False

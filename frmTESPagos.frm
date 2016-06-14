@@ -2602,28 +2602,6 @@ Private Sub cmdAceptar_Click()
             End If
         End If
     
-    Case 5
-        
-        Select Case ModoLineas
-            Case 1 'afegir llínia
-                InsertarLinea
-            Case 2 'modificar llínies
-                ModificarLinea
-                                    
-                '**** parte de contabilizacion de la factura
-                '--DesBloqueaRegistroForm Me.Text1(0)
-                TerminaBloquear
-                
-            
-                'LOG
-                vLog.Insertar 5, vUsu, Text1(2).Text & Text1(0).Text & " " & Text1(1).Text
-                'Creo que no hace falta volver a situar el datagrid
-                'If SituarData1(0) Then
-                
-                PosicionarData
-                
-        End Select
-            
     
     
     End Select
@@ -2644,7 +2622,7 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtaux(5)
+            PonFoco txtAux(5)
             
             
     End Select
@@ -3168,7 +3146,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -3788,7 +3766,6 @@ Private Sub PonerCampos()
     'Cargamos el LINEAS
 '    DataGridAux(0).Enabled = False
     CargaList 0, True
-    CargaGrid 1, True
     
     PonPendiente
     
@@ -4318,59 +4295,6 @@ End Sub
 
 
 
-Private Sub CargaGrid(Index As Integer, Enlaza As Boolean)
-Dim B As Boolean
-Dim I As Byte
-Dim tots As String
-
-'    tots = MontaSQLCarga(Index, Enlaza)
-'
-''    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
-'
-'    Select Case Index
-'        Case 0 ' pagos_realizados
-''            'si es visible|control|tipo campo|nombre campo|ancho control|
-''            tots = "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;S|txtaux(5)|T|Diario|730|;S|cmdAux(0)|B|||;S|txtaux(6)|T|Fecha|1220|;S|cmdAux(1)|B|||;"
-''            tots = tots & "S|txtaux(7)|T|Asiento|1100|;"
-''            tots = tots & "S|txtaux(12)|T|Cta.Cobro|1305|;"
-''            tots = tots & "S|txtaux(8)|T|Usuario|1505|;"
-''            tots = tots & "S|txtaux(11)|T|Realizado|1555|;"
-''            tots = tots & "S|txtaux(10)|T|Tipo|805|;"
-''            tots = tots & "S|txtaux(13)|T|Ref.Talon/Pag|1855|;"
-''            tots = tots & "S|txtaux(14)|T|Banco Talon/Pag|1855|;"
-''            tots = tots & "S|txtaux(9)|T|Importe|1900|;"
-''
-''            arregla tots, DataGridAux(Index), Me
-''
-''            B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
-''
-''            DataGridAux(Index).Columns(14).Alignment = dbgRight
-'
-'        Case 1 'DEVOLUCIONES
-'            'si es visible|control|tipo campo|nombre campo|ancho control|
-'            tots = "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;S|txtaux1(5)|T|Fecha|1255|;S|txtaux1(6)|T|Código|1005|;S|cmdAux(2)|B|||;"
-'            tots = tots & "S|txtaux1(8)|T|Descripción|5055|;"
-'            'tots = tots & "S|txtaux1(7)|T|Observación|5005|;"
-'            tots = tots & "N||||0|;S|txtaux1(7)|T|Tipo |1500|;"
-'            tots = tots & "S|txtaux1(9)|T|Remesa|1000|;"
-'            tots = tots & "S|txtaux1(10)|T|Año|1000|;"
-'            tots = tots & "S|txtaux1(11)|T|Importe|2120|;"
-'
-'
-'            arregla tots, DataGridAux(Index), Me
-'
-'            B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
-'
-'    End Select
-'
-'    DataGridAux(Index).ScrollBars = dbgAutomatic
-'
-'    PonerModoUsuarioGnral Modo, "ariconta"
-'
-'
-'ECarga:
-'    If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid: " & DataGridAux(Index).Tag, Err.Description
-End Sub
 
 Private Function MontaSQLCarga(Index As Integer, Enlaza As Boolean) As String
 '--------------------------------------------------------------------
@@ -4386,36 +4310,8 @@ Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
-        Case 0 'pagos realizados
-            tabla = "pagos_realizados"
-            SQL = "SELECT pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea, pagos_realizados.numdiari, pagos_realizados.fechaent, "
-            SQL = SQL & " pagos_realizados.numasien, pagos_realizados.ctabanc2, "
-            SQL = SQL & " pagos_realizados.usuariocobro, pagos_realizados.fecrealizado, tipofpago.siglas, "
-            SQL = SQL & " pagos_realizados.reftalonpag, pagos_realizados.bancotalonpag, "
-            SQL = SQL & " pagos_realizados.impcobro "
-            SQL = SQL & " FROM " & tabla & " INNER JOIN tipofpago ON pagos_realizados.tipforpa = tipofpago.tipoformapago "
-            If Enlaza Then
-                SQL = SQL & Replace(ObtenerWhereCab(True), "pagos", "pagos_realizados")
-            Else
-                SQL = SQL & " WHERE pagos_realizados.numlinea is null"
-            End If
-            SQL = SQL & " ORDER BY 1,2,3,4,5"
-        Case 1 ' devoluciones
-            tabla = "pagos_realizados"
-            SQL = "SELECT pagos_realizados.numserie, pagos_realizados.numfactu, pagos_realizados.fecfactu, pagos_realizados.numorden, pagos_realizados.numlinea, pagos_realizados.fecdevol, "
-            SQL = SQL & "pagos_realizados.coddevol, usuarios.wdevolucion.descripcion, pagos_realizados.tiporem, "
-            SQL = SQL & "CASE pagos_realizados.tiporem WHEN 1 THEN 'Efectos' WHEN 2 THEN 'Pagarés' WHEN 3 THEN 'Talones' END as TTipo, codrem, anyorem, impcobro * (-1) "
-            SQL = SQL & " FROM " & tabla & " LEFT JOIN usuarios.wdevolucion ON pagos_realizados.coddevol = usuarios.wdevolucion.codigo "
-            If Enlaza Then
-                SQL = SQL & Replace(ObtenerWhereCab(True), "pagos", "pagos_realizados")
-            Else
-                SQL = SQL & " WHERE pagos_realizados.numlinea is null"
-            End If
-            
-            SQL = SQL & " and not pagos_realizados.tiporem is null "
-            SQL = SQL & " ORDER BY 1,2,3,4,5"
-            
-            
+        Case 0 'hlinapu
+            ' esta en un listview
             
     End Select
     ' ********************************************************************************
@@ -4496,44 +4392,6 @@ End Sub
 
 
 
-Private Sub LLamaLineas(Index As Integer, xModo As Byte, Optional alto As Single)
-Dim jj As Integer
-Dim B As Boolean
-
-'    ' *** si n'hi han tabs sense datagrid posar el If ***
-'    If Index <> 3 Then DeseleccionaGrid DataGridAux(Index)
-'    ' ***************************************************
-'
-'    B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
-'    Select Case Index
-'        Case 0 'pagos_realizados
-'            For jj = 5 To txtaux.Count - 1
-'                txtaux(jj).Visible = B
-'                txtaux(jj).Top = alto
-'            Next jj
-'
-'        Case 1 'lineas de factura
-'            txtaux1(6).Visible = B
-'            txtaux1(6).Top = alto
-'            txtaux1(8).Visible = B
-'            txtaux1(8).Top = alto
-'            txtaux1(8).Locked = True
-'            Me.cmdAux(2).Visible = B
-'            Me.cmdAux(2).Top = alto
-'
-'
-'            txtaux1(5).Visible = B And (Modo = 1)
-'            txtaux1(5).Top = alto
-'            txtaux1(9).Visible = B And (Modo = 1)
-'            txtaux1(9).Top = alto
-'            txtaux1(10).Visible = B And (Modo = 1)
-'            txtaux1(10).Top = alto
-'            txtaux1(11).Visible = B And (Modo = 1)
-'            txtaux1(11).Top = alto
-'
-'    End Select
-'
-End Sub
 
 
 Private Sub CargaFiltros()
@@ -4554,19 +4412,6 @@ Dim Aux As String
 End Sub
 
 
-Private Sub ToolbarAux1_ButtonClick(ByVal Button As MSComctlLib.Button)
-Dim LINASI As Long
-Dim Ampliacion As String
-
-    'Fuerzo que se vean las lineas
-    Select Case Button.Index
-        Case 1
-            'Acceder a asiento del cobro
-            BotonModificarLinea 1
-
-    End Select
-
-End Sub
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -4684,7 +4529,8 @@ Dim Eliminar As Boolean
         
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
-            CargaGrid Index, True
+'            CargaGrid Index, True
+        End If
         ' ***************************************************
         If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
 '            PonerCampos
@@ -4783,148 +4629,8 @@ Dim RS As ADODB.Recordset
 End Sub
 
 
-Private Sub BotonAnyadirLinea(Index As Integer, Limpia As Boolean)
-Dim NumF As String
-Dim vWhere As String, vTabla As String
-Dim anc As Single
-Dim I As Integer
-
-'    ModoLineas = 1 'Posem Modo Afegir Llínia
-'
-'    If (Modo = 3) Or (Modo = 4) Then 'Insertar o Modificar Capçalera
-'        cmdAceptar_Click
-'        If ModoLineas = 0 Then Exit Sub
-'    End If
-'
-'    NumTabMto = Index
-'    PonerModo 5, Index
-'
-'    ' *** bloquejar la clau primaria de la capçalera ***
-''    BloquearTxt Text1(0), True
-'    ' **************************************************
-'
-'    ' *** posar el nom del les distintes taules de llínies ***
-'    Select Case Index
-'        Case 0: vTabla = "pagos_realizados"
-'
-'    End Select
-'    ' ********************************************************
-'
-'    vWhere = ObtenerWhereCab(False)
-'
-'    Select Case Index
-'         Case 0   'pagos_realizados
-'            'pasar a "" si no volem que mos sugerixca res a l'afegir ***
-'            NumF = ""
-'            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", Replace(vWhere, "pagos", "pagos_realizados"))
-'            ' ***************************************************************
-'
-'            AnyadirLinea DataGridAux(Index), AdoAux(Index)
-'
-'            anc = DataGridAux(Index).Top
-'            If DataGridAux(Index).Row < 0 Then
-'                anc = anc + 230 '248
-'            Else
-'                anc = anc + DataGridAux(Index).RowTop(DataGridAux(Index).Row) + 5
-'            End If
-'
-'            LLamaLineas Index, ModoLineas, anc
-'
-'            Select Case Index
-'                ' *** valor per defecte a l'insertar i formateig de tots els camps ***
-'                Case 0 'lineas de pagos realizados
-'                    If Limpia Then
-'                        For i = 0 To txtaux.Count - 1
-'                            txtaux(i).Text = ""
-'                        Next i
-'                    End If
-'                    txtaux(0).Text = Text1(13).Text 'serie
-'                    txtaux(1).Text = Text1(1).Text 'numfactu
-'                    txtaux(2).Text = Text1(2).Text 'fecha
-'                    txtaux(3).Text = Text1(3).Text 'nro vencimiento
-'
-'                    txtaux(4).Text = Format(NumF, "0000") 'linea contador
-'
-'
-'                    If Limpia Then
-''                        txtAux2(5).Text = ""
-''                        txtAux2(12).Text = ""
-'                    End If
-'
-'                    PonFoco txtaux(5)
-'
-'            End Select
-'
-'    End Select
-End Sub
 
 
-Private Sub BotonModificarLinea(Index As Integer)
-'    Dim anc As Single
-'    Dim i As Integer
-'    Dim J As Integer
-'
-'    If AdoAux(Index).Recordset.EOF Then Exit Sub
-'    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
-'
-'
-'    ModoLineas = 2 'Modificar llínia
-'
-'    If Modo = 4 Then 'Modificar Capçalera
-'        cmdAceptar_Click
-'        If ModoLineas = 0 Then Exit Sub
-'    End If
-'
-'    NumTabMto = Index
-'    PonerModo 5, Index
-'    ' *** bloqueje la clau primaria de la capçalera ***
-''    BloquearTxt Text1(0), True
-'    ' *********************************
-'
-'    Select Case Index
-'        Case 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
-'            If DataGridAux(Index).Bookmark < DataGridAux(Index).FirstRow Or DataGridAux(Index).Bookmark > (DataGridAux(Index).FirstRow + DataGridAux(Index).VisibleRows - 1) Then
-'                i = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
-'                DataGridAux(Index).Scroll 0, i
-'                DataGridAux(Index).Refresh
-'            End If
-'
-'            anc = DataGridAux(Index).Top
-'            If DataGridAux(Index).Row < 0 Then
-'                anc = anc + 210
-'            Else
-'                anc = anc + DataGridAux(Index).RowTop(DataGridAux(Index).Row) + 5
-'            End If
-'
-'    End Select
-'
-'    Select Case Index
-'        ' *** valor per defecte al modificar dels camps del grid ***
-'        Case 1 'lineas de facturas
-'            txtaux1(0).Text = DataGridAux(Index).Columns(0).Text 'serie
-'            txtaux1(1).Text = DataGridAux(Index).Columns(1).Text 'factura
-'            txtaux1(2).Text = DataGridAux(Index).Columns(2).Text 'fecha
-'            txtaux1(3).Text = DataGridAux(Index).Columns(3).Text 'vencimiento
-'            txtaux1(4).Text = DataGridAux(Index).Columns(4).Text 'linea
-'
-'            txtaux1(5).Text = DataGridAux(Index).Columns(5).Text ' concepto de devolucion
-'            txtaux1(6).Text = DataGridAux(Index).Columns(6).Text ' concepto
-'            txtaux1(8).Text = DataGridAux(Index).Columns(7).Text ' nombre del concepto
-'
-'            txtaux1(9).Text = DataGridAux(Index).Columns(10).Text ' numero remesa
-'            txtaux1(10).Text = DataGridAux(Index).Columns(11).Text ' año
-'            txtaux1(11).Text = DataGridAux(Index).Columns(12).Text ' importe
-'            txtaux1(12).Text = DataGridAux(Index).Columns(8).Text ' tipo de remesa
-'
-'    End Select
-'
-'    LLamaLineas Index, ModoLineas, anc
-'
-'
-'    PonFoco txtaux1(6)
-'
-'    ' ***************************************************************************************
-End Sub
 
 Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
     SepuedeBorrar = False
@@ -4933,166 +4639,7 @@ Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
 End Function
 
 
-Private Function RecalcularTotalespagos() As Boolean
-Dim SQL As String
-Dim SqlInsert As String
-Dim SqlValues As String
-Dim I As Long
-Dim RS As ADODB.Recordset
 
-Dim Baseimpo As Currency
-
-    On Error GoTo eRecalcularTotalespagos
-
-    RecalcularTotalespagos = False
-
-    Baseimpo = 0
-    
-    SQL = "select sum(impcobro) importe from pagos_realizados "
-    SQL = SQL & " where numserie = " & DBSet(Text1(13).Text, "T") & " and numfactu = " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F")
-    SQL = SQL & " and numorden = " & DBSet(Text1(3).Text, "N")
-    
-    Baseimpo = DevuelveValor(SQL)
-    
-    Text1(6).Text = Format(Baseimpo, FormatoImporte)
-    
-    SQL = "update pagos set "
-    SQL = SQL & " impcobro = " & DBSet(Baseimpo, "N")
-    SQL = SQL & " where numserie= " & DBSet(Text1(13).Text, "T") & " and numfactu= " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F")
-    SQL = SQL & " and numorden = " & DBSet(Text1(3).Text, "N")
-    
-    Conn.Execute SQL
-    
-    RecalcularTotalespagos = True
-    Exit Function
-    
-eRecalcularTotalespagos:
-    MuestraError Err.Number, "Recalcular Totales pagos", Err.Description
-End Function
-
-Private Sub InsertarLinea()
-''Inserta registre en les taules de Llínies
-'Dim nomframe As String
-'Dim B As Boolean
-'Dim Limp As Boolean
-'Dim Cad As String
-'
-'
-'
-'    On Error Resume Next
-'
-'    ' *** posa els noms del frames, tant si son de grid com si no ***
-'    Select Case NumTabMto
-'        Case 0: nomframe = "FrameAux0"
-'        Case 1: nomframe = "FrameAux1"
-'    End Select
-'    ' ***************************************************************
-'
-'    If DatosOkLlin(nomframe) Then
-'        TerminaBloquear
-'        Conn.BeginTrans
-'
-'        B = True
-'
-'        If B And InsertarDesdeForm2(Me, 2, nomframe) Then
-'
-'            B = RecalcularTotalespagos
-'
-'            If B Then
-'                Conn.CommitTrans
-'            Else
-'                Conn.RollbackTrans
-'            End If
-'
-'            B = BLOQUEADesdeFormulario2(Me, Data1, 1)
-'
-'            Select Case NumTabMto
-'                Case 0, 1 ' *** els index de les llinies en grid (en o sense tab) ***
-'                    CargaGrid NumTabMto, True
-'
-'                    DataGridAux(NumTabMto).AllowAddNew = False
-'
-'                    If Not AdoAux(NumTabMto).Recordset.EOF Then PosicionGrid = DataGridAux(NumTabMto).FirstRow
-'                    CargaGrid NumTabMto, True
-'                    Limp = True
-'
-'                    If Limp Then
-'                        For i = 0 To txtaux.Count - 1
-'                            txtaux(i).Text = ""
-'                        Next i
-'                    End If
-'                    ModoLineas = 0
-'                    If B Then
-'                         BotonAnyadirLinea NumTabMto, True
-'                    End If
-'            End Select
-'
-'        Else
-'           Conn.RollbackTrans
-'        End If
-'    End If
-End Sub
-
-Private Sub ModificarLinea()
-'Modifica registre en les taules de Llínies
-Dim nomframe As String
-Dim v As Integer
-Dim cad As String
-Dim B As Boolean
-
-'    On Error Resume Next
-'
-'    ' *** posa els noms del frames, tant si son de grid com si no ***
-'    Select Case NumTabMto
-'        Case 1: nomframe = "FrameAux1" 'apuntes
-'    End Select
-'    ' **************************************************************
-'
-'    If DatosOkLlin(nomframe) Then
-'        TerminaBloquear
-'        Conn.BeginTrans
-'
-'        B = True
-'
-'        If B And ModificaDesdeFormulario2(Me, 2, nomframe) Then
-'
-'            B = RecalcularTotalespagos
-'
-'            If B Then
-'                Conn.CommitTrans
-'            Else
-'                Conn.RollbackTrans
-'            End If
-'
-'            ' *** si cal que fer alguna cosa abas d'insertar ***
-'            If NumTabMto = 0 Then
-'            End If
-'            ' ******************************************************
-'            ModoLineas = 0
-'
-'            If NumTabMto <> 3 Then
-'                v = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
-'                CargaGrid NumTabMto, True
-'            End If
-'
-'            ' *** si n'hi han tabs ***
-'            SituarTab (NumTabMto)
-'
-'            ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
-'            If NumTabMto <> 3 Then
-'                DataGridAux(NumTabMto).SetFocus
-'                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & v)
-'            End If
-'            ' ***********************************************************
-'
-'            LLamaLineas NumTabMto, 0
-'
-'        Else
-'            Conn.RollbackTrans
-'        End If
-'    End If
-        
-End Sub
 
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
@@ -5130,7 +4677,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -5163,42 +4710,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
-    If txtaux(Index).Text = "" Then Exit Sub
+    If txtAux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtaux(5)
+                PonFoco txtAux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtaux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
-                txtaux(Index).Text = ""
-                PonerFoco txtaux(Index)
+            If Not EsFechaOK(txtAux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
+                txtAux(Index).Text = ""
+                PonerFoco txtAux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtaux(Index) = ImporteSinFormato(txtaux(Index))
+             txtAux(Index) = ImporteSinFormato(txtAux(Index))
             
         Case 10 'tipo
-            txtaux(Index).Text = UCase(txtaux(Index).Text)
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtaux(12).Text
+            RC = txtAux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtaux(12).Text = RC
+                txtAux(12).Text = RC
             End If
         
     End Select

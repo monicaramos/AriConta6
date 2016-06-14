@@ -624,9 +624,9 @@ Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim Cad As String
+Dim cad As String
 Dim CONT As Long
-Dim i As Integer
+Dim I As Integer
 Dim TotalRegistros As Long
 
 Dim Importe As Currency
@@ -679,36 +679,36 @@ End Sub
 
 Private Sub cmdCompensar_Click()
     
-    Cad = DevuelveDesdeBD("informe", "scryst", "codigo", IdPrograma) 'Orden de pago a bancos
-    If Cad = "" Then
+    cad = DevuelveDesdeBD("informe", "scryst", "codigo", IdPrograma) 'Orden de pago a bancos
+    If cad = "" Then
         MsgBox "No esta configurada la aplicación. Falta el informe", vbCritical
         Exit Sub
     End If
-    Me.Tag = Cad
+    Me.Tag = cad
     
-    Cad = ""
+    cad = ""
     RC = ""
     CONT = 0
     TotalRegistros = 0
     NumRegElim = 0
-    For i = 1 To Me.lwCompenCli.ListItems.Count
-        If Me.lwCompenCli.ListItems(i).Checked Then
-            If Trim(lwCompenCli.ListItems(i).SubItems(6)) = "" Then
+    For I = 1 To Me.lwCompenCli.ListItems.Count
+        If Me.lwCompenCli.ListItems(I).Checked Then
+            If Trim(lwCompenCli.ListItems(I).SubItems(6)) = "" Then
                 'Es un abono
                 TotalRegistros = TotalRegistros + 1
             Else
                 NumRegElim = NumRegElim + 1
             End If
         End If
-        If Me.lwCompenCli.ListItems(i).Bold Then
-            Cad = Cad & "A"
-            If CONT = 0 Then CONT = i
+        If Me.lwCompenCli.ListItems(I).Bold Then
+            cad = cad & "A"
+            If CONT = 0 Then CONT = I
         End If
     Next
     
-    i = 0
+    I = 0
     SQL = ""
-    If Len(Cad) <> 1 Then
+    If Len(cad) <> 1 Then
         'Ha seleccionado o cero o mas de uno
         If txtimpNoEdit(0).Text <> txtimpNoEdit(1).Text Then
             'importes distintos. Solo puede seleccionar UNO
@@ -742,9 +742,9 @@ Private Sub cmdCompensar_Click()
         
         Txt33Csb = "Compensa: "
         Txt41Csb = ""
-        For i = 1 To Me.lwCompenCli.ListItems.Count - 1
-            If Me.lwCompenCli.ListItems(i).Checked Then
-                CadAux = Trim(lwCompenCli.ListItems(i).Text & lwCompenCli.ListItems(i).SubItems(1)) & " " & Trim(lwCompenCli.ListItems(i).SubItems(2))
+        For I = 1 To Me.lwCompenCli.ListItems.Count - 1
+            If Me.lwCompenCli.ListItems(I).Checked Then
+                CadAux = Trim(lwCompenCli.ListItems(I).Text & lwCompenCli.ListItems(I).SubItems(1)) & " " & Trim(lwCompenCli.ListItems(I).SubItems(2))
                 If Len(Txt33Csb & " " & CadAux) < 80 Then
                     Txt33Csb = Txt33Csb & " " & CadAux
                 Else
@@ -756,7 +756,7 @@ Private Sub cmdCompensar_Click()
                     End If
                 End If
             End If
-        Next i
+        Next I
         
 
     End If
@@ -782,25 +782,25 @@ Private Sub cmdVtoDestino(Index As Integer)
         If Not Me.lwCompenCli.SelectedItem Is Nothing Then TotalRegistros = Me.lwCompenCli.SelectedItem.Index
     
     
-        For i = 1 To Me.lwCompenCli.ListItems.Count
-            If Me.lwCompenCli.ListItems(i).Bold Then
-                Me.lwCompenCli.ListItems(i).Bold = False
-                Me.lwCompenCli.ListItems(i).ForeColor = vbBlack
+        For I = 1 To Me.lwCompenCli.ListItems.Count
+            If Me.lwCompenCli.ListItems(I).Bold Then
+                Me.lwCompenCli.ListItems(I).Bold = False
+                Me.lwCompenCli.ListItems(I).ForeColor = vbBlack
                 For CONT = 1 To Me.lwCompenCli.ColumnHeaders.Count - 1
-                    Me.lwCompenCli.ListItems(i).ListSubItems(CONT).ForeColor = vbBlack
-                    Me.lwCompenCli.ListItems(i).ListSubItems(CONT).Bold = False
+                    Me.lwCompenCli.ListItems(I).ListSubItems(CONT).ForeColor = vbBlack
+                    Me.lwCompenCli.ListItems(I).ListSubItems(CONT).Bold = False
                 Next
             End If
         Next
         Me.Refresh
         
         If TotalRegistros > 0 Then
-            i = TotalRegistros
-            Me.lwCompenCli.ListItems(i).Bold = True
-            Me.lwCompenCli.ListItems(i).ForeColor = vbRed
+            I = TotalRegistros
+            Me.lwCompenCli.ListItems(I).Bold = True
+            Me.lwCompenCli.ListItems(I).ForeColor = vbRed
             For CONT = 1 To Me.lwCompenCli.ColumnHeaders.Count - 1
-                Me.lwCompenCli.ListItems(i).ListSubItems(CONT).ForeColor = vbRed
-                Me.lwCompenCli.ListItems(i).ListSubItems(CONT).Bold = True
+                Me.lwCompenCli.ListItems(I).ListSubItems(CONT).ForeColor = vbRed
+                Me.lwCompenCli.ListItems(I).ListSubItems(CONT).Bold = True
             Next
         End If
         lwCompenCli.Refresh
@@ -855,7 +855,7 @@ End Sub
 
     
 Private Sub Form_Load()
-Dim H As Integer
+Dim h As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -901,7 +901,7 @@ Dim Img As Image
     PrimeraVez = True
     CommitConexion  'Porque son listados. No hay nada dentro transaccion
     
-    H = FrameCompensaAbonosCliente.Height + 120
+    h = FrameCompensaAbonosCliente.Height + 120
     W = FrameCompensaAbonosCliente.Width
     
     FrameCompensaAbonosCliente.Visible = False
@@ -910,7 +910,7 @@ Dim Img As Image
     VerTodos = False
     
     Me.Width = W + 300
-    Me.Height = H + 400
+    Me.Height = h + 400
     
     Me.cmdCancelar(0).Cancel = True
     
@@ -942,13 +942,13 @@ End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
 Dim IT
-Dim i As Integer
-    For i = 1 To Me.lwCompenCli.ListItems.Count
-        Set IT = lwCompenCli.ListItems(i)
-        lwCompenCli.ListItems(i).Checked = (Index = 1)
+Dim I As Integer
+    For I = 1 To Me.lwCompenCli.ListItems.Count
+        Set IT = lwCompenCli.ListItems(I)
+        lwCompenCli.ListItems(I).Checked = (Index = 1)
         lwCompenCli_ItemCheck (IT)
         Set IT = Nothing
-    Next i
+    Next I
 End Sub
 
 Private Sub lw1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
@@ -987,11 +987,11 @@ Dim Cobro As Boolean
     'Si no es checkear cambiamos los signos
     If Not Item.Checked Then C = -C
     
-    i = 0
-    If Not Cobro Then i = 1
+    I = 0
+    If Not Cobro Then I = 1
     
-    Me.txtimpNoEdit(i).Tag = Me.txtimpNoEdit(i).Tag + C
-    txtimpNoEdit(i).Text = Format(Abs(txtimpNoEdit(i).Tag))
+    Me.txtimpNoEdit(I).Tag = Me.txtimpNoEdit(I).Tag + C
+    txtimpNoEdit(I).Text = Format(Abs(txtimpNoEdit(I).Tag))
     txtimpNoEdit(2).Text = Format(CCur(txtimpNoEdit(0).Tag) + CCur(txtimpNoEdit(1).Tag), FormatoImporte)
             
     If ComprobarCero(txtimpNoEdit(0).Text) = 0 Then txtimpNoEdit(0).Text = ""
@@ -1291,12 +1291,12 @@ Dim IT
     If Me.txtCta(17).Text = "" Then Exit Sub
     Set Me.lwCompenCli.SmallIcons = frmPpal.ImgListviews
     Set miRsAux = New ADODB.Recordset
-    Cad = "Select cobros.*,nomforpa from cobros,formapago where cobros.codforpa=formapago.codforpa "
-    Cad = Cad & " AND codmacta = '" & Me.txtCta(17).Text & "'"
-    Cad = Cad & " AND (transfer =0 or transfer is null) and codrem is null"
-    Cad = Cad & " and recedocu=0 and situacion = 0" ' pendientes de cobro
-    Cad = Cad & " ORDER BY fecvenci"
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select cobros.*,nomforpa from cobros,formapago where cobros.codforpa=formapago.codforpa "
+    cad = cad & " AND codmacta = '" & Me.txtCta(17).Text & "'"
+    cad = cad & " AND (transfer =0 or transfer is null) and codrem is null"
+    cad = cad & " and recedocu=0 and situacion = 0" ' pendientes de cobro
+    cad = cad & " ORDER BY fecvenci"
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lwCompenCli.ListItems.Add()
         IT.Text = miRsAux!NUmSerie
@@ -1333,17 +1333,17 @@ Dim Borras As Boolean
     
     If BloqueoManual(True, "COMPEABONO", "1") Then
 
-        Cad = DevuelveDesdeBD("max(codigo)", "compensa", "1", "1")
-        If Cad = "" Then Cad = "0"
-        CONT = Val(Cad) + 1 'ID de la operacion
+        cad = DevuelveDesdeBD("max(codigo)", "compensa", "1", "1")
+        If cad = "" Then cad = "0"
+        CONT = Val(cad) + 1 'ID de la operacion
         
-        Cad = "INSERT INTO compensa(codigo,fecha,login,PC,codmacta,nommacta) VALUES (" & CONT
-        Cad = Cad & ",now(),'" & DevNombreSQL(vUsu.Login) & "','" & DevNombreSQL(vUsu.PC)
-        Cad = Cad & "','" & txtCta(17).Text & "','" & DevNombreSQL(DtxtCta(17).Text) & "')"
+        cad = "INSERT INTO compensa(codigo,fecha,login,PC,codmacta,nommacta) VALUES (" & CONT
+        cad = cad & ",now(),'" & DevNombreSQL(vUsu.Login) & "','" & DevNombreSQL(vUsu.PC)
+        cad = cad & "','" & txtCta(17).Text & "','" & DevNombreSQL(DtxtCta(17).Text) & "')"
         
         Set miRsAux = New ADODB.Recordset
         Borras = True
-        If Ejecuta(Cad) Then
+        If Ejecuta(cad) Then
             
             Borras = Not RealizarProcesoCompensacionAbonos
         
@@ -1404,7 +1404,7 @@ Dim J As Integer
     'Texto compensacion
     DevfrmCCtas = ""
     
-    RC = "Select " & Cad & ", gastos, impvenci, impcobro, fecvenci FROM cobros where (numserie,numfactu,fecfactu,numorden) IN (" & SQL & ")"
+    RC = "Select " & cad & ", gastos, impvenci, impcobro, fecvenci FROM cobros where (numserie,numfactu,fecfactu,numorden) IN (" & SQL & ")"
     miRsAux.Open RC, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If miRsAux.EOF Then
         MsgBox "Error. EOF vencimientos devueltos ", vbExclamation
@@ -1412,10 +1412,10 @@ Dim J As Integer
     End If
     
     
-    i = 0
+    I = 0
     
     While Not miRsAux.EOF
-        i = i + 1
+        I = I + 1
         BACKUP_Tabla miRsAux, RC
         'Quito los parentesis
         RC = Mid(RC, 1, Len(RC) - 1)
@@ -1430,7 +1430,7 @@ Dim J As Integer
             End If
         End If
         
-        RC = "INSERT INTO compensa_facturas (codigo,linea,destino," & Cad & ",impvenci,gastos,impcobro,fecvenci) VALUES (" & CONT & "," & i & "," & Destino & "," & DBSet(miRsAux!NUmSerie, "T")
+        RC = "INSERT INTO compensa_facturas (codigo,linea,destino," & cad & ",impvenci,gastos,impcobro,fecvenci) VALUES (" & CONT & "," & I & "," & Destino & "," & DBSet(miRsAux!NUmSerie, "T")
         RC = RC & "," & DBSet(miRsAux!NumFactu, "N") & "," & DBSet(miRsAux!FecFactu, "F") & "," & DBSet(miRsAux!numorden, "N") & "," & DBSet(miRsAux!ImpVenci, "N")
         RC = RC & "," & DBSet(miRsAux!Gastos, "N") & "," & DBSet(miRsAux!impcobro, "N") & "," & DBSet(miRsAux!FecVenci, "F") & ")"
         Conn.Execute RC
@@ -1473,7 +1473,7 @@ Dim J As Integer
                 'Updatearemos los campos csb del vto restante. A partir del segundo
                 'La variable CadenaDesdeOtroForm  tiene los que vamos a actualizar
                 
-                Cad = ""
+                cad = ""
                 J = 0
                 SQL = ""
                 
@@ -1499,8 +1499,8 @@ Dim J As Integer
                     End If
                 Next
                 If RC <> "" Then
-                    Cad = SQL & " WHERE " & RC
-                    If Ejecuta(Cad) Then Destino = 1
+                    cad = SQL & " WHERE " & RC
+                    If Ejecuta(cad) Then Destino = 1
                 Else
                     MsgBox "No encontrado destino", vbExclamation
                     
@@ -1525,11 +1525,8 @@ Dim NumLin As Long
 
     On Error GoTo eInsertarCobrosRealizados
 
-
     InsertarCobrosRealizados = True
 
-    CadInsert = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, usuariocobro,fecrealizado,impcobro,numasien) values  "
-    
     SQL = "select * from cobros where (numserie, numfactu, fecfactu, numorden) in (" & facturas & ")"
     
     CadValues = ""
@@ -1538,20 +1535,8 @@ Dim NumLin As Long
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
-    
-        Importe = DBLet(RS!ImpVenci) + DBLet(RS!Gastos, "N") - DBLet(RS!impcobro, "N")
-        
-        SQL2 = "select max(numlinea) from cobros_realizados where numserie = " & DBSet(RS!NUmSerie, "T") & " and numfactu = " & DBSet(RS!NumFactu, "N")
-        SQL2 = SQL2 & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and numorden = " & DBSet(RS!numorden, "N")
-        NumLin = DevuelveValor(SQL2)
-        NumLin = NumLin + 1
-    
-        CadValues = CadValues & "(" & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFactu, "N") & "," & DBSet(RS!FecFactu, "F") & "," & DBSet(RS!numorden, "N")
-        CadValues = CadValues & "," & DBSet(NumLin, "N") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & "," & DBSet(Importe, "N") & ",0),"
-        
-        
         ' actualizamos la cabecera del cobro pq ya no lo eliminamos
-        SQL = "update cobros set situacion = 2, impcobro = impvenci + coalesce(gastos,0) where numserie = " & DBSet(RS!NUmSerie, "T")
+        SQL = "update cobros set situacion = 1, impcobro = impvenci + coalesce(gastos,0) where numserie = " & DBSet(RS!NUmSerie, "T")
         SQL = SQL & " and numfactu = " & DBSet(RS!NumFactu, "N") & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and numorden = " & DBSet(RS!numorden, "N")
         
         Conn.Execute SQL
@@ -1578,17 +1563,17 @@ End Function
 Private Sub SQLVtosSeleccionadosCompensacion(ByRef RegistroDestino As Long, SinDestino As Boolean)
 Dim Insertar As Boolean
     SQL = ""
-    For i = 1 To Me.lwCompenCli.ListItems.Count
-        If Me.lwCompenCli.ListItems(i).Checked Then
+    For I = 1 To Me.lwCompenCli.ListItems.Count
+        If Me.lwCompenCli.ListItems(I).Checked Then
         
             Insertar = True
-            If Me.lwCompenCli.ListItems(i).Bold Then
-                RegistroDestino = i
+            If Me.lwCompenCli.ListItems(I).Bold Then
+                RegistroDestino = I
                 If SinDestino Then Insertar = False
             End If
             If Insertar Then
-                SQL = SQL & ", ('" & lwCompenCli.ListItems(i).Text & "'," & lwCompenCli.ListItems(i).SubItems(1)
-                SQL = SQL & ",'" & Format(lwCompenCli.ListItems(i).SubItems(2), FormatoFecha) & "'," & lwCompenCli.ListItems(i).SubItems(3) & ")"
+                SQL = SQL & ", ('" & lwCompenCli.ListItems(I).Text & "'," & lwCompenCli.ListItems(I).SubItems(1)
+                SQL = SQL & ",'" & Format(lwCompenCli.ListItems(I).SubItems(2), FormatoFecha) & "'," & lwCompenCli.ListItems(I).SubItems(3) & ")"
             End If
             
         End If
@@ -1600,7 +1585,7 @@ End Sub
 
 Private Sub FijaCadenaSQLCobrosCompen()
 
-    Cad = "numserie, numfactu, fecfactu, numorden "
+    cad = "numserie, numfactu, fecfactu, numorden "
     
 End Sub
 
@@ -1608,15 +1593,15 @@ End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim RS As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
     Set RS = New ADODB.Recordset
-    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
         Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N")
@@ -1649,16 +1634,16 @@ Dim IT
     Set Me.lw1.SmallIcons = frmPpal.ImgListviews
     Set miRsAux = New ADODB.Recordset
     
-    Cad = "Select codigo,fecha,codmacta,nommacta from compensa "
+    cad = "Select codigo,fecha,codmacta,nommacta from compensa "
     
     
     If CampoOrden = "" Then CampoOrden = "compensa.codigo"
-    Cad = Cad & " ORDER BY " & CampoOrden
-    If Orden Then Cad = Cad & " DESC"
+    cad = cad & " ORDER BY " & CampoOrden
+    If Orden Then cad = cad & " DESC"
     
     
     
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lw1.ListItems.Add()
         IT.Text = miRsAux!Codigo

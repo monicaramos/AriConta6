@@ -278,7 +278,7 @@ Dim CtaEfectosComDescontados As String
         Else
             SQL = SQL & "NULL,"
         End If
-        SQL = SQL & "'COBRO',0,"
+        SQL = SQL & "'COBROS',0,"
         
         'los datos de la factura (solo en el apunte del cliente)
         Dim TipForpa As Byte
@@ -321,7 +321,7 @@ Dim CtaEfectosComDescontados As String
         Else
             Ampliacion = Ampliacion & "'" & RecuperaValor(CtaBanco, 3) & "'"
         End If
-        Ampliacion = Ampliacion & ",NULL,'COBRO',0)"
+        Ampliacion = Ampliacion & ",NULL,'COBROS',0)"
         Ampliacion = SQL & Ampliacion
         If Not Ejecuta(Ampliacion) Then Exit Function
         Linea = Linea + 1
@@ -352,7 +352,7 @@ Dim CtaEfectosComDescontados As String
     Else
         Ampliacion = Ampliacion & "NULL"
     End If
-    Ampliacion = Ampliacion & ",'COBRO',0)"
+    Ampliacion = Ampliacion & ",'COBROS',0)"
     Ampliacion = SQL & Ampliacion
     If Not Ejecuta(Ampliacion) Then Exit Function
     
@@ -383,7 +383,7 @@ Dim CtaEfectosComDescontados As String
         Else
             Ampliacion = Ampliacion & "NULL"
         End If
-        Ampliacion = Ampliacion & ",'" & RecuperaValor(CtaBanco, 1) & "','COBRO',0," & TipoRemesa & "," & DBSet(Codigo, "N") & "," & DBSet(Anyo, "N") & ")"
+        Ampliacion = Ampliacion & ",'" & RecuperaValor(CtaBanco, 1) & "','COBROS',0," & TipoRemesa & "," & DBSet(Codigo, "N") & "," & DBSet(Anyo, "N") & ")"
         Ampliacion = SQL & Ampliacion
         
         If Not Ejecuta(Ampliacion) Then Exit Function
@@ -394,7 +394,7 @@ Dim CtaEfectosComDescontados As String
             Ampliacion = Ampliacion & " Gastos Remesa: " & Codigo & " / " & Anyo
             Ampliacion = Linea & ",'" & RecuperaValor(CtaBanco, 1) & "','RE" & Format(Codigo, "0000") & Format(Anyo, "0000") & "'," & vCP.conhacli & ",'" & Ampliacion & "',"
             Ampliacion = Ampliacion & "NULL," & TransformaComasPuntos(CStr(GastosBancarios)) & ",NULL,'"
-            Ampliacion = Ampliacion & RecuperaValor(CtaBanco, 2) & "','COBRO',0)"
+            Ampliacion = Ampliacion & RecuperaValor(CtaBanco, 2) & "','COBROS',0)"
             Ampliacion = SQL & Ampliacion
             If Not Ejecuta(Ampliacion) Then Exit Function
         End If
@@ -467,7 +467,7 @@ Dim CtaEfectosComDescontados As String
             Else
                 SQL = SQL & "NULL,"
             End If
-            SQL = SQL & "'COBRO',0)"
+            SQL = SQL & "'COBROS',0)"
             
             If Not Ejecuta(SQL) Then Exit Function
             Linea = Linea + 1
@@ -824,7 +824,7 @@ Dim LINAPU As String
         Else
             SQL = SQL & "NULL,"
         End If
-        SQL = SQL & "'COBRO',0,"
+        SQL = SQL & "'COBROS',0,"
         
         '%%%%% aqui van todos los datos de la devolucion en la linea de cuenta
         SQL = SQL & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFac, "N") & "," & DBSet(RS!Fecha, "F") & "," & DBSet(RS!NIF, "N") & ","
@@ -849,7 +849,7 @@ Dim LINAPU As String
          
 '    SQL = SQL & " numserie,numfaccl,fecfactu,numorden,tipforpa,fecdevol,coddevol,gastodev,tiporem,codrem,anyorem) "
             SQL = SQL & DBSet(RsCobro!TipForpa, "N") & "," & DBSet(FechaDevolucion, "F") & "," & DBSet(RS!CtaBase, "T", "S") & ","
-            SQL = SQL & DBSet(RS!ImpIva, "N") & "," & DBSet(RsCobro!tiporem, "N") & "," & DBSet(RsCobro!CodRem, "N") & "," & DBSet(RsCobro!AnyoRem, "N") & ",1)"
+            SQL = SQL & DBSet(RS!ImpIva, "N") & "," & DBSet(RsCobro!Tiporem, "N") & "," & DBSet(RsCobro!CodRem, "N") & "," & DBSet(RsCobro!AnyoRem, "N") & ",1)"
               
          
             Ampliacion = "UPDATE cobros SET "
@@ -908,7 +908,7 @@ Dim LINAPU As String
             'Si no lleva cuenta puente contabiliza los gastos
             Aux = "NULL"
            
-            SQL = SQL & "," & Aux & ",'COBRO',0)"
+            SQL = SQL & "," & Aux & ",'COBROS',0)"
             If Not Ejecuta(SQL) Then Exit Function
             
             Linea = Linea + 1
@@ -1144,7 +1144,7 @@ Dim LINAPU As String
     DescRemesa = "Remesa: " & RecuperaValor(Remesa, 1) & " / " & RecuperaValor(Remesa, 2)
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    TipoRemesa2 = RS!tiporem
+    TipoRemesa2 = RS!Tiporem
     If Not IsNull(RS.Fields(0)) Then DescRemesa = DevNombreSQL(RS.Fields(0))
     RS.Close
     
@@ -4994,7 +4994,7 @@ Dim FecAsto As Date
             Else
                 SQL = SQL & "NULL,"
             End If
-            SQL = SQL & "'COBRO',0,"
+            SQL = SQL & "'COBROS',0,"
             
             'los datos de la factura (solo en el apunte del cliente)
             Dim TipForpa As Byte
@@ -5034,7 +5034,7 @@ Dim FecAsto As Date
           
             Ampliacion = Ampliacion & "NULL"
            
-            Ampliacion = Ampliacion & ",NULL,'COBRO',0)"
+            Ampliacion = Ampliacion & ",NULL,'COBROS',0)"
             Ampliacion = SQL & Ampliacion
             If Not Ejecuta(Ampliacion) Then Exit Function
             Linea = Linea + 1
@@ -5058,7 +5058,7 @@ Dim FecAsto As Date
             Ampliacion = Ampliacion & "NULL"
     
         End If
-        Ampliacion = Ampliacion & ",'COBRO',0)"
+        Ampliacion = Ampliacion & ",'COBROS',0)"
         Ampliacion = SQL & Ampliacion
         If Not Ejecuta(Ampliacion) Then Exit Function
         
@@ -5084,15 +5084,15 @@ Dim FecAsto As Date
     Conn.Execute SQL
 
     ' insertamos los registros de cobros_realizados
-    SQL = "insert into cobros_realizados (numserie,numfactu,fecfactu,numorden,numlinea,numdiari,fechaent,numasien,usuariocobro,"
-    SQL = SQL & "fecrealizado,impcobro,tipforpa,ctabanc2) "
-    SQL = SQL & "select cobros.numserie,cobros.numfactu,cobros.fecfactu,cobros.numorden,coalesce(cobros_realizados.numlinea,0) + 1," & vCP.diaricli & ",'" & Format(FecAsto, FormatoFecha) & "'," & Mc.Contador & ","
-    SQL = SQL & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & ",impvenci+coalesce(gastos,0)-coalesce(impcobro,0), formapago.tipforpa, "
-    SQL = SQL & RecuperaValor(CtaBanco, 1) & " from formapago, cobros left join cobros_realizados on cobros.numserie=cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu =  cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden"
-    SQL = SQL & " where cobros.codrem = " & Codigo & " and cobros.anyorem = " & Anyo
-    SQL = SQL & " and cobros.codforpa = formapago.codforpa "
-    
-    Conn.Execute SQL
+'    SQL = "insert into cobros_realizados (numserie,numfactu,fecfactu,numorden,numlinea,numdiari,fechaent,numasien,usuariocobro,"
+'    SQL = SQL & "fecrealizado,impcobro,tipforpa,ctabanc2) "
+'    SQL = SQL & "select cobros.numserie,cobros.numfactu,cobros.fecfactu,cobros.numorden,coalesce(cobros_realizados.numlinea,0) + 1," & vCP.diaricli & ",'" & Format(FecAsto, FormatoFecha) & "'," & Mc.Contador & ","
+'    SQL = SQL & DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & ",impvenci+coalesce(gastos,0)-coalesce(impcobro,0), formapago.tipforpa, "
+'    SQL = SQL & RecuperaValor(CtaBanco, 1) & " from formapago, cobros left join cobros_realizados on cobros.numserie=cobros_realizados.numserie and cobros.numfactu = cobros_realizados.numfactu and cobros.fecfactu =  cobros_realizados.fecfactu and cobros.numorden = cobros_realizados.numorden"
+'    SQL = SQL & " where cobros.codrem = " & Codigo & " and cobros.anyorem = " & Anyo
+'    SQL = SQL & " and cobros.codforpa = formapago.codforpa "
+'
+'    Conn.Execute SQL
     
     
     'Todo OK

@@ -1173,7 +1173,7 @@ Dim Sql5 As String
     If Mc.ConseguirContador("0", CDate(Text3(0).Text) <= vParam.fechafin, True) = 1 Then Exit Function
 
     Set FP = New Ctipoformapago
-    If FP.leer(Combo1.ListIndex) Then  ' antes forma de pago
+    If FP.Leer(Combo1.ListIndex) Then  ' antes forma de pago
         Set Mc = Nothing
         Set FP = Nothing
     End If
@@ -1320,10 +1320,10 @@ Dim Sql5 As String
         cad = cad & "NULL"
     End If
     If Cobro Then
-        cad = cad & ",'COBRO',0,"
+        cad = cad & ",'COBROS',0,"
         cad = cad & DBSet(RecuperaValor(Vto, 1), "T") & "," '& RecuperaValor(Vto, 2) & ","
     Else
-        cad = cad & ",'PAGO',0,"
+        cad = cad & ",'PAGOS',0,"
         cad = cad & DBSet(RecuperaValor(Vto, 1), "T") & ","
     End If
     
@@ -1430,9 +1430,9 @@ Dim Sql5 As String
         cad = cad & "NULL"
     End If
     If Cobro Then
-        cad = cad & ",'COBRO',0," ' idcontab
+        cad = cad & ",'COBROS',0," ' idcontab
     Else
-        cad = cad & ",'PAGO',0," ' idcontab
+        cad = cad & ",'PAGOS',0," ' idcontab
     End If
     
     ' todo valores a null ????
@@ -1474,9 +1474,9 @@ Dim Sql5 As String
         End If
 
         If Cobro Then
-            cad = cad & ",'COBRO',0,"
+            cad = cad & ",'COBROS',0,"
         Else
-            cad = cad & ",'PAGO',0,"
+            cad = cad & ",'PAGOS',0,"
         End If
         ' todo valores a null ????
         cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ")"
@@ -1504,9 +1504,9 @@ Dim Sql5 As String
             End If
     
             If Cobro Then
-                cad = cad & ",'COBRO',0,"
+                cad = cad & ",'COBROS',0,"
             Else
-                cad = cad & ",'PAGO',0,"
+                cad = cad & ",'PAGOS',0,"
             End If
             ' todo valores a null ????
             cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ")"

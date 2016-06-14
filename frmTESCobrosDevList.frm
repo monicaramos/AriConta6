@@ -1172,13 +1172,13 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "SELECT cobros.codmacta Cuenta, cobros.nomclien Descripcion, cobros_realizados.fecdevol FecDevol, "
-    SQL = SQL & "cobros.numserie Serie, cobros.numfactu Factura, cobros.fecfactu FecFra, cobros.numorden Vto, cobros_realizados.impcobro * (-1) Importe, "
-    SQL = SQL & "cobros_realizados.gastodev Gastos, cobros_realizados.coddevol Devol, wdevolucion.descripcion Descripcion "
-    SQL = SQL & " FROM  (cobros INNER JOIN cobros_realizados ON cobros.numserie = cobros_realizados.numserie AND "
-    SQL = SQL & " cobros.numfactu = cobros_realizados.numfactu AND cobros.fecfactu = cobros_realizados.fecfactu AND "
-    SQL = SQL & " cobros.numorden = cobros_realizados.numorden) "
-    SQL = SQL & "  LEFT JOIN usuarios.wdevolucion ON cobros_realizados.coddevol = wdevolucion.codigo "
+    SQL = "SELECT cobros.codmacta Cuenta, cobros.nomclien Descripcion, hlinapu.fecdevol FecDevol, "
+    SQL = SQL & "cobros.numserie Serie, cobros.numfactu Factura, cobros.fecfactu FecFra, cobros.numorden Vto, hlinapu.timporteh - hlinapu.timported Importe, "
+    SQL = SQL & "hlinapu.gastodev Gastos, hlinapu.coddevol Devol, wdevolucion.descripcion Descripcion "
+    SQL = SQL & " FROM  (cobros INNER JOIN hlinapu ON cobros.numserie = hlinapu.numserie AND "
+    SQL = SQL & " cobros.numfactu = hlinapu.numfaccl AND cobros.fecfactu = hlinapu.fecfactu AND "
+    SQL = SQL & " cobros.numorden = hlinapu.numorden) "
+    SQL = SQL & "  LEFT JOIN usuarios.wdevolucion ON hlinapu.coddevol = wdevolucion.codigo "
     
     If cadselect <> "" Then SQL = SQL & " where " & cadselect
     
