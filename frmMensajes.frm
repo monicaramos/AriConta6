@@ -4441,7 +4441,7 @@ Dim Px As Single
 Dim Py As Single
 
 
-Dim h As Integer
+Dim H As Integer
 Dim MargenX As Single
 Dim MargenY As Single
 Dim Ocupado As Boolean
@@ -4470,10 +4470,10 @@ Dim Ocupado As Boolean
                         DevuelCoordenadasCuadricula J, K, Px, Py
                         Ocupado = False
                         'Busco hueco
-                        For h = 1 To ListView6.ListItems.Count
-                            If ListView6.ListItems(h).SubItems(2) = "1" Then
-                                MargenX = Abs(Px - CSng(ListView6.ListItems(h).SubItems(3)))
-                                MargenY = Abs(Py - CSng(ListView6.ListItems(h).SubItems(4)))
+                        For H = 1 To ListView6.ListItems.Count
+                            If ListView6.ListItems(H).SubItems(2) = "1" Then
+                                MargenX = Abs(Px - CSng(ListView6.ListItems(H).SubItems(3)))
+                                MargenY = Abs(Py - CSng(ListView6.ListItems(H).SubItems(4)))
                                 
                                 If MargenX < 300 And MargenY < 300 Then
                                     'HUECO
@@ -4481,7 +4481,7 @@ Dim Ocupado As Boolean
                                     Exit For
                                 End If
                             End If
-                        Next h
+                        Next H
                         
                         If Not Ocupado Then
                             'OK. Este es. Lo ponemos a true y actualizamos BD
@@ -4993,12 +4993,12 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim W, h
+Dim W, H
     Me.tCuadre.Enabled = False
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.FrameAmort.Visible = False
+    Me.frameamort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
@@ -5025,7 +5025,7 @@ Dim W, h
     Case 1
         Me.Caption = "Cálculo de saldo"
         W = frameSaldosHco.Width
-        h = Me.frameSaldosHco.Height
+        H = Me.frameSaldosHco.Height
         Me.frameSaldosHco.Visible = True
         
         CargaValoresHco
@@ -5033,26 +5033,26 @@ Dim W, h
     Case 2
         Me.Caption = "Comprobacion saldos"
         W = Me.frameCalculoSaldos.Width
-        h = Me.frameCalculoSaldos.Height + 150
+        H = Me.frameCalculoSaldos.Height + 150
         Me.frameCalculoSaldos.Visible = True
         Command1(1).Enabled = True
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.FrameAmort.Width
-        h = Me.FrameAmort.Height + 200
-        Me.FrameAmort.Visible = True
+        W = Me.frameamort.Width
+        H = Me.frameamort.Height + 200
+        Me.frameamort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
-        h = Me.FrameeMPRESAS.Height + 200
+        H = Me.FrameeMPRESAS.Height + 200
         Me.FrameeMPRESAS.Visible = True
         cargaempresas
     Case 5
         'Lanzar automaticamente la comprobación de saldo
         Me.Caption = "Comprobacion saldos"
         W = Me.frameCalculoSaldos.Width
-        h = Me.frameCalculoSaldos.Height
+        H = Me.frameCalculoSaldos.Height
         Me.frameCalculoSaldos.Visible = True
         Command1(1).Enabled = False
         Command2.Enabled = False
@@ -5060,13 +5060,13 @@ Dim W, h
         CargaImagen
         Me.Caption = "Acerca de ....."
         W = Me.frameAcercaDE.Width
-        h = Me.frameAcercaDE.Height + 200
+        H = Me.frameAcercaDE.Height + 200
         Me.frameAcercaDE.Visible = True
         Label13.Caption = "Versión:  " & App.Major & "." & App.Minor & "." & App.Revision & " "
     Case 7, 8
         Me.Caption = "Lineas configuracion balance"
         W = Me.frameBalance.Width
-        h = Me.frameBalance.Height + 300
+        H = Me.frameBalance.Height + 300
         Me.frameBalance.Visible = True
         PonerCamposBalance
     Case 9, 10
@@ -5077,7 +5077,7 @@ Dim W, h
         End If
         Me.Caption = "Cuentas configuracion balances"
         W = Me.frameCtasBalance.Width
-        h = Me.frameCtasBalance.Height + 300
+        H = Me.frameCtasBalance.Height + 300
         frameCtasBalance.Visible = True
         PonerCamposCtaBalance
         
@@ -5085,14 +5085,14 @@ Dim W, h
         'Carta modelo 347
         Me.Caption = "Datos carta modelo 347"
         W = Me.FrameCarta347.Width
-        h = Me.FrameCarta347.Height + 300
+        H = Me.FrameCarta347.Height + 300
         Me.FrameCarta347.Visible = True
         CargarDatosCarta
     Case 12
         'Saltos y repedtidos
         Me.Caption = "Búsqueda cabeceras asientos incorrectos"
         W = Me.frameSaltos.Width
-        h = Me.frameSaltos.Height + 300
+        H = Me.frameSaltos.Height + 300
         Me.frameSaltos.Visible = True
         Me.cmdCabError(0).Enabled = True
         Text5.Text = ""
@@ -5101,7 +5101,7 @@ Dim W, h
     Case 13
         Me.Caption = "Importar datos fiscales de las cuentas"
         W = Me.FrameImpCta.Width
-        h = Me.FrameImpCta.Height + 450
+        H = Me.FrameImpCta.Height + 450
         Me.FrameImpCta.Visible = True
         cmdImpCta(1).Cancel = True
         txtImpCta.Text = ""
@@ -5111,7 +5111,7 @@ Dim W, h
         'Cambio password usuario
         Me.Caption = "Cambio password"
         W = Me.FrameCambioPWD.Width
-        h = Me.FrameCambioPWD.Height + 300
+        H = Me.FrameCambioPWD.Height + 300
         Me.FrameCambioPWD.Visible = True
         Text7(0).Text = vUsu.Nombre
         For I = 1 To 3
@@ -5122,7 +5122,7 @@ Dim W, h
         Text8.Text = ""
         Caption = "UTIL. FACTURAS"
         W = Me.framaLlevarFacturas.Width
-        h = Me.framaLlevarFacturas.Height + 300
+        H = Me.framaLlevarFacturas.Height + 300
         Me.framaLlevarFacturas.Visible = True
         chkImportarFacturas.Visible = Opcion = 17
         FrameImportarFechas.Visible = Opcion = 17
@@ -5144,13 +5144,13 @@ Dim W, h
             Me.txtImporteP(I).Text = RecuperaValor(Parametros, I + 1)
         Next I
         W = Me.FrameImpPunteo.Width
-        h = Me.FrameImpPunteo.Height + 300
+        H = Me.FrameImpPunteo.Height + 300
         cmdPunteo.Cancel = True
     Case 20
         Me.Frame347DatExt.Visible = True
         Caption = "Importar datos 347"
         W = Me.Frame347DatExt.Width
-        h = Me.Frame347DatExt.Height + 300
+        H = Me.Frame347DatExt.Height + 300
         Me.cmd347DatExt(1).Cancel = True
         
     Case 21
@@ -5158,7 +5158,7 @@ Dim W, h
         FrameVerObservacionesCuentas.Visible = True
         Caption = "Observaciones P.G.C."
         W = Me.FrameVerObservacionesCuentas.Width
-        h = Me.FrameVerObservacionesCuentas.Height + 300
+        H = Me.FrameVerObservacionesCuentas.Height + 300
         
         cmdVerObservaciones.Cancel = True
         
@@ -5167,7 +5167,7 @@ Dim W, h
         Me.FrameBloqueoEmpresas.Visible = True
         Caption = "Bloqueo empresas"
         W = Me.FrameBloqueoEmpresas.Width
-        h = Me.FrameBloqueoEmpresas.Height + 300
+        H = Me.FrameBloqueoEmpresas.Height + 300
         'Como cuando venga por esta opcion, viene llamado desde el manteusu
         Me.ListView2(0).SmallIcons = frmMantenusu.ImageList1
         Me.ListView2(1).SmallIcons = frmMantenusu.ImageList1
@@ -5178,20 +5178,20 @@ Dim W, h
         Me.FrameAyuda.Visible = True
         Caption = "Ayuda Ariconta"
         W = Me.FrameAyuda.Width
-        h = Me.FrameAyuda.Height + 300
+        H = Me.FrameAyuda.Height + 300
         
         
     Case 24 ' iconos visbles
         Me.Caption = "Panel de Control"
         Me.FrameIconosVisibles.Visible = True
         W = Me.FrameIconosVisibles.Width
-        h = Me.FrameIconosVisibles.Height + 300
+        H = Me.FrameIconosVisibles.Height + 300
         
     Case 25 ' informe de base de datos
         Me.Caption = "Información de Base de Datos"
         Me.FrameInformeBBDD.Visible = True
         W = Me.FrameInformeBBDD.Width
-        h = Me.FrameInformeBBDD.Height + 300
+        H = Me.FrameInformeBBDD.Height + 300
         
         Me.Label47.Caption = "Ejercicio " & vParam.fechaini & " a " & vParam.fechafin
         Me.Label48.Caption = "Ejercicio " & DateAdd("yyyy", 1, vParam.fechaini) & " a " & DateAdd("yyyy", 1, vParam.fechafin)
@@ -5200,7 +5200,7 @@ Dim W, h
         Me.Caption = "Información de Procesos del Sistema"
         Me.FrameShowProcess.Visible = True
         W = Me.FrameShowProcess.Width
-        h = Me.FrameShowProcess.Height + 300
+        H = Me.FrameShowProcess.Height + 300
         
         Label53.Caption = Label53.Caption & " Ariconta" & vEmpresa.codempre & " (" & vEmpresa.nomempre & ")"
         
@@ -5209,41 +5209,41 @@ Dim W, h
         Label52.Caption = "Cobros de la Factura " & RecuperaValor(Parametros, 1) & "-" & Format(RecuperaValor(Parametros, 2), "0000000") & " de fecha " & RecuperaValor(Parametros, 3)
         Me.FrameCobros.Visible = True
         W = Me.FrameCobros.Width
-        h = Me.FrameCobros.Height + 300
+        H = Me.FrameCobros.Height + 300
     
     Case 28 ' pagos de facturas
         Me.Caption = "Facturas de Proveedor"
         Label52.Caption = "Pagos de la Factura " & RecuperaValor(Parametros, 1) & "-" & RecuperaValor(Parametros, 3) & " de fecha " & RecuperaValor(Parametros, 4)
         Me.FrameCobros.Visible = True
         W = Me.FrameCobros.Width
-        h = Me.FrameCobros.Height + 300
+        H = Me.FrameCobros.Height + 300
         
         
     Case 29 ' asiento de liquidacion
         Me.Caption = "Asiento de Liquidación"
         Me.FrameAsientoLiquida.Visible = True
         W = Me.FrameAsientoLiquida.Width
-        h = Me.FrameAsientoLiquida.Height + 300
+        H = Me.FrameAsientoLiquida.Height + 300
         
         
     Case 30 ' asientos descuadrados
         Me.Caption = "Asientos descuadrados"
         Me.FrameDescuadre.Visible = True
         W = Me.FrameDescuadre.Width
-        h = Me.FrameDescuadre.Height + 300
+        H = Me.FrameDescuadre.Height + 300
         
     Case 31 ' facturas sin asientos
         Me.Caption = "Facturas sin asiento"
         Me.FrameDescuadre.Visible = True
         W = Me.FrameDescuadre.Width
-        h = Me.FrameDescuadre.Height + 300
+        H = Me.FrameDescuadre.Height + 300
         
     Case 50 ' facturas de reclamaciones
         Me.Caption = "Facturas Reclamadas"
         Me.Label30.Caption = "Reclamación a " & RecuperaValor(Parametros, 2) & " de fecha " & RecuperaValor(Parametros, 3)
         Me.FrameReclamaciones.Visible = True
         W = Me.FrameReclamaciones.Width
-        h = Me.FrameReclamaciones.Height + 300
+        H = Me.FrameReclamaciones.Height + 300
         
         Orden = True
         CampoOrden = "fecfactu"
@@ -5253,14 +5253,14 @@ Dim W, h
         Me.Label30.Caption = "Remesa " & RecuperaValor(Parametros, 1) & " / " & RecuperaValor(Parametros, 2)
         Me.FrameReclamaciones.Visible = True
         W = Me.FrameReclamaciones.Width
-        h = Me.FrameReclamaciones.Height + 300
+        H = Me.FrameReclamaciones.Height + 300
     
         Orden = True
         CampoOrden = "fecfactu"
             
     End Select
     Me.Width = W + 120
-    Me.Height = h + 120
+    Me.Height = H + 120
 End Sub
 
 
@@ -7176,6 +7176,16 @@ Dim SQL As String
 
 End Function
 
+Private Function PagoContabilizado(Serie As String, Proveedor As String, FACTURA As String, Fecha As String, Orden As String) As Boolean
+Dim SQL As String
+
+    SQL = "select * from hlinapu where numserie = " & DBSet(Serie, "T") & " and codmacta = " & DBSet(Proveedor, "T") & " and numfacpr = " & DBSet(FACTURA, "T") & " and fecfactu = " & DBSet(Fecha, "F") & " and numorden = " & DBSet(Orden, "N")
+    PagoContabilizado = (TotalRegistrosConsulta(SQL) <> 0)
+
+End Function
+
+
+
 Private Sub CargaCobrosFactura()
 Dim IT As ListItem
 Dim TotalArray  As Long
@@ -7270,7 +7280,7 @@ Dim Equipo As String
     
     ListView5.SmallIcons = frmPpal.imgListComun
     
-    cad = "select numorden, formapago.nomforpa, fecefect, impefect, fecultpa, imppagad, (coalesce(impefect,0)  - coalesce(imppagad,0)) pendiente, pagos.ctabanc1, numasien  "
+    cad = "select numorden, formapago.nomforpa, fecefect, impefect, fecultpa, imppagad, (coalesce(impefect,0)  - coalesce(imppagad,0)) pendiente, pagos.ctabanc1  "
     cad = cad & " from (pagos left join formapago on pagos.codforpa = formapago.codforpa) "
     cad = cad & " where pagos.numserie = " & DBSet(RecuperaValor(Parametros, 1), "T")
     cad = cad & " and pagos.codmacta = " & DBSet(RecuperaValor(Parametros, 2), "T")
@@ -7284,6 +7294,8 @@ Dim Equipo As String
                     
         Set IT = ListView5.ListItems.Add
         
+        If PagoContabilizado(RecuperaValor(Parametros, 1), RecuperaValor(Parametros, 2), RecuperaValor(Parametros, 3), RecuperaValor(Parametros, 4), DBLet(RS.Fields(0))) Then IT.SmallIcon = 18
+
         If DBLet(RS!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
         
         IT.Text = DBLet(RS.Fields(0))
