@@ -7833,7 +7833,7 @@ Dim I As Long
     
     Set RS = Nothing
     
-    InsertarCobros = True
+    InsertarCobros = B
     Exit Function
     
 eInsertarCobros:

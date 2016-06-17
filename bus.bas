@@ -134,7 +134,7 @@ Public Sub Main()
 Dim cad As String
 Dim NF As Integer
 
-Dim Sql As String
+Dim SQL As String
 Dim PrimeraBD As String
 
 
@@ -164,14 +164,14 @@ Dim PrimeraBD As String
         Screen.MousePointer = vbHourglass
 
         ' antes de cerrar la conexion cojo de usuarios.empresasariconta la primera que encuentre
-        Sql = "select min(conta) from usuarios.empresasariconta  "
-        PrimeraBD = DevuelveValor(Sql)
+        SQL = "select min(conta) from usuarios.empresasariconta  "
+        PrimeraBD = DevuelveValor(SQL)
 
 
         'Cerramos la conexion
         Conn.Close
         
-        If AbrirConexion(CadenaDesdeOtroForm) = False Then
+        If AbrirConexion(CadenaDesdeOtroForm, True) = False Then
             CadenaDesdeOtroForm = PrimeraBD
             If AbrirConexion(CadenaDesdeOtroForm) = False Then
                 End
@@ -366,7 +366,7 @@ End Sub
 
 
 'Usuario As String, Pass As String --> Directamente el usuario
-Public Function AbrirConexion(BBDD As String) As Boolean
+Public Function AbrirConexion(BBDD As String, Optional OcultarMsg As Boolean) As Boolean
 Dim cad As String
 On Error GoTo EAbrirConexion
     AbrirConexion = False
@@ -390,7 +390,9 @@ On Error GoTo EAbrirConexion
     
     
 EAbrirConexion:
-    MuestraError Err.Number, "Abrir conexión.", Err.Description
+    If Not OcultarMsg Then
+        MuestraError Err.Number, "Abrir conexión.", Err.Description
+    End If
 End Function
 
 
@@ -787,7 +789,7 @@ End Function
 
 Public Function CuentaCorrectaUltimoNivel(ByRef Cuenta As String, ByRef Devuelve As String) As Boolean
 'Comprueba si es numerica
-Dim Sql As String
+Dim SQL As String
 
 CuentaCorrectaUltimoNivel = False
 If Cuenta = "" Then
@@ -807,15 +809,15 @@ If Not EsCuentaUltimoNivel(Cuenta) Then
     Exit Function
 End If
 
-Sql = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Cuenta, "T")
-If Sql = "" Then
+SQL = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Cuenta, "T")
+If SQL = "" Then
     Devuelve = "No existe la cuenta : " & Cuenta
     Exit Function
 End If
 
 'Llegados aqui, si que existe la cuenta
 CuentaCorrectaUltimoNivel = True
-Devuelve = Sql
+Devuelve = SQL
 End Function
 
 '-------------------------------------------------------------------------
@@ -823,7 +825,7 @@ End Function
 '   Es la misma solo k no si no existe cuenta no da error
 Public Function CuentaCorrectaUltimoNivelSIN(ByRef Cuenta As String, ByRef Devuelve As String) As Byte
 'Comprueba si es numerica
-Dim Sql As String
+Dim SQL As String
 
 CuentaCorrectaUltimoNivelSIN = 0
 If Cuenta = "" Then
@@ -840,18 +842,18 @@ Cuenta = RellenaCodigoCuenta(Cuenta)
 
 CuentaCorrectaUltimoNivelSIN = 1
 If Not EsCuentaUltimoNivel(Cuenta) Then
-    Sql = "No es cuenta de último nivel"
+    SQL = "No es cuenta de último nivel"
 Else
-    Sql = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Cuenta, "T")
-    If Sql = "" Then
-        Sql = "No existe la cuenta  "
+    SQL = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Cuenta, "T")
+    If SQL = "" Then
+        SQL = "No existe la cuenta  "
     Else
         CuentaCorrectaUltimoNivelSIN = 2
     End If
 End If
 
 'Llegados aqui, si que existe la cuenta
-Devuelve = Sql
+Devuelve = SQL
 End Function
 
 
@@ -1008,22 +1010,22 @@ End Function
 'Periodo vendran las fechas Ini y fin con pipe final
 Public Sub SaldoHistorico(Cuenta As String, Periodo As String, DescCuenta As String, EsSobreEjerciciosCerrados As Boolean)
 Dim RS As Recordset
-Dim Sql As String
+Dim SQL As String
 Dim RC2 As String
 Dim vImp As Currency
 
     Screen.MousePointer = vbHourglass
-    Sql = "Select Sum(timporteD),sum(timporteH) from hlinapu"
-    If EsSobreEjerciciosCerrados Then Sql = Sql & "1"
-    Sql = Sql & " WHERE codmacta='" & Cuenta & "'"
+    SQL = "Select Sum(timporteD),sum(timporteH) from hlinapu"
+    If EsSobreEjerciciosCerrados Then SQL = SQL & "1"
+    SQL = SQL & " WHERE codmacta='" & Cuenta & "'"
     
     If Not EsSobreEjerciciosCerrados Then _
-        Sql = Sql & " AND fechaent>='" & Format(vParam.fechaini, FormatoFecha) & "'"
-    Sql = Sql & " AND punteada "
+        SQL = SQL & " AND fechaent>='" & Format(vParam.fechaini, FormatoFecha) & "'"
+    SQL = SQL & " AND punteada "
     Set RS = New ADODB.Recordset
     RC2 = Cuenta & "|"
     'PUNTEADO
-    RS.Open Sql & "='S';", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open SQL & "='S';", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RS.EOF Then
        RC2 = RC2 & Format(RS.Fields(0), FormatoImporte) & "|"
        RC2 = RC2 & Format(RS.Fields(1), FormatoImporte) & "|"
@@ -1032,7 +1034,7 @@ Dim vImp As Currency
     End If
     RS.Close
     'SIN puntear
-    RS.Open Sql & "<>'S';", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open SQL & "<>'S';", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RS.EOF Then
        RC2 = RC2 & Format(RS.Fields(0), FormatoImporte) & "|"
        RC2 = RC2 & Format(RS.Fields(1), FormatoImporte) & "|"
@@ -1043,11 +1045,11 @@ Dim vImp As Currency
     
     'En el periodo. Para cuando viene de puntear
     If Periodo <> "" Then
-        Sql = "Select Sum(timporteD) , sum(timporteH) from hlinapu"
-        If EsSobreEjerciciosCerrados Then Sql = Sql & "1"
-        Sql = Sql & " WHERE codmacta='" & Cuenta & "' AND "
-        Sql = Sql & Periodo
-        RS.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        SQL = "Select Sum(timporteD) , sum(timporteH) from hlinapu"
+        If EsSobreEjerciciosCerrados Then SQL = SQL & "1"
+        SQL = SQL & " WHERE codmacta='" & Cuenta & "' AND "
+        SQL = SQL & Periodo
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         If Not RS.EOF Then
             vImp = DBLet(RS.Fields(0), "N")
             vImp = vImp - DBLet(RS.Fields(1), "N")
@@ -1501,7 +1503,7 @@ Public Function UsuariosConectados(vMens As String, Optional DejarContinuar As B
 Dim I As Integer
 Dim cad As String
 Dim metag As String
-Dim Sql As String
+Dim SQL As String
 cad = OtrosPCsContraContabiliad(False)
 UsuariosConectados = False
 If cad <> "" Then
@@ -1512,12 +1514,12 @@ If cad <> "" Then
     metag = metag & vbCrLf & "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
     
     Do
-        Sql = RecuperaValor(cad, I)
-        If Sql <> "" Then
-            metag = metag & "    - " & Sql & vbCrLf
+        SQL = RecuperaValor(cad, I)
+        If SQL <> "" Then
+            metag = metag & "    - " & SQL & vbCrLf
             I = I + 1
         End If
-    Loop Until Sql = ""
+    Loop Until SQL = ""
     If DejarContinuar Then
         'Hare la pregunta
         metag = metag & vbCrLf & "¿Continuar?"
@@ -1551,10 +1553,10 @@ Dim Ch As String
 End Function
 
 
-Public Function EjecutaSQL(ByRef Sql As String) As Boolean
+Public Function EjecutaSQL(ByRef SQL As String) As Boolean
     EjecutaSQL = False
     On Error Resume Next
-    Conn.Execute Sql
+    Conn.Execute SQL
     If Err.Number <> 0 Then
         Err.Clear
     Else
@@ -1898,48 +1900,48 @@ Dim RT As ADODB.Recordset
 End Function
 
 Public Function ListadoEfectosDevueltos(ByRef vSQL As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     ListadoEfectosDevueltos = False
     Conn.Execute "DELETE from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
     
     
-    Sql = "SELECT sefecdev.*,scobro.codmacta as cta,scobro.impvenci , cuentas.nommacta"
-    Sql = Sql & " FROM (sefecdev LEFT JOIN scobro ON (sefecdev.numorden = scobro.numorden) AND "
-    Sql = Sql & "(sefecdev.fecfaccl = scobro.fecfaccl) AND (sefecdev.codfaccl = scobro.codfaccl) AND "
-    Sql = Sql & "(sefecdev.numserie = scobro.numserie)) LEFT JOIN cuentas ON scobro.codmacta = "
-    Sql = Sql & "cuentas.codmacta"
+    SQL = "SELECT sefecdev.*,scobro.codmacta as cta,scobro.impvenci , cuentas.nommacta"
+    SQL = SQL & " FROM (sefecdev LEFT JOIN scobro ON (sefecdev.numorden = scobro.numorden) AND "
+    SQL = SQL & "(sefecdev.fecfaccl = scobro.fecfaccl) AND (sefecdev.codfaccl = scobro.codfaccl) AND "
+    SQL = SQL & "(sefecdev.numserie = scobro.numserie)) LEFT JOIN cuentas ON scobro.codmacta = "
+    SQL = SQL & "cuentas.codmacta"
     
     
     
-    If vSQL <> "" Then Sql = Sql & " WHERE sefecdev.numorden>=0 " & vSQL
-    Sql = Sql & " ORDER BY fechadev"
+    If vSQL <> "" Then SQL = SQL & " WHERE sefecdev.numorden>=0 " & vSQL
+    SQL = SQL & " ORDER BY fechadev"
     Set miRsAux = New ADODB.Recordset
     
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 1
     vSQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2,texto3,texto4,texto5,"
     vSQL = vSQL & "fecha1,fecha2,importe1 ,importe2 ) VALUES (" & vUsu.Codigo & ","
     
     While Not miRsAux.EOF
-        Sql = NumRegElim & ",'"
+        SQL = NumRegElim & ",'"
         'Si se hubiera producido errores y la cuenta estuviera mal
         If IsNull(miRsAux!Cta) Then
-            Sql = "ERROR','RECIBO INCORRECTO"
+            SQL = "ERROR','RECIBO INCORRECTO"
         Else
-            Sql = miRsAux!Cta & "','"
+            SQL = miRsAux!Cta & "','"
             If IsNull(miRsAux!Nommacta) Then
-                Sql = Sql & "CTA NO EXISTE"
+                SQL = SQL & "CTA NO EXISTE"
             Else
-                Sql = Sql & DevNombreSQL(miRsAux!Nommacta)
+                SQL = SQL & DevNombreSQL(miRsAux!Nommacta)
             End If
         End If
-        Sql = NumRegElim & ",'" & Sql & "','"
-        Sql = Sql & miRsAux!NUmSerie & "','" & Format(miRsAux!codfaccl, "0000000000") & "','" & miRsAux!numorden
-        Sql = Sql & "','" & Format(miRsAux!fecfaccl, FormatoFecha) & "','" & Format(miRsAux!fechadev, FormatoFecha) & "',"
-        Sql = Sql & TransformaComasPuntos(CStr(DBLet(miRsAux!ImpVenci, "N"))) & ","
-        Sql = Sql & TransformaComasPuntos(CStr(miRsAux!gastodev)) & ")"
-        Conn.Execute vSQL & Sql
+        SQL = NumRegElim & ",'" & SQL & "','"
+        SQL = SQL & miRsAux!NUmSerie & "','" & Format(miRsAux!codfaccl, "0000000000") & "','" & miRsAux!numorden
+        SQL = SQL & "','" & Format(miRsAux!fecfaccl, FormatoFecha) & "','" & Format(miRsAux!fechadev, FormatoFecha) & "',"
+        SQL = SQL & TransformaComasPuntos(CStr(DBLet(miRsAux!ImpVenci, "N"))) & ","
+        SQL = SQL & TransformaComasPuntos(CStr(miRsAux!gastodev)) & ")"
+        Conn.Execute vSQL & SQL
     
         NumRegElim = NumRegElim + 1
         miRsAux.MoveNext
@@ -1952,7 +1954,7 @@ Dim Sql As String
     ListadoEfectosDevueltos = True
 End Function
 
-Public Function ListadoFormaPago(ByRef Sql As String) As Boolean
+Public Function ListadoFormaPago(ByRef SQL As String) As Boolean
 
     On Error GoTo EListadoFormaPago
     ListadoFormaPago = False
@@ -1961,26 +1963,26 @@ Public Function ListadoFormaPago(ByRef Sql As String) As Boolean
         
     'MONTO EL SQL AL REVES. Empezando por el where
 
-    Sql = " WHERE sforpa.tipforpa = stipoformapago.tipoformapago " & Sql
-    Sql = " FROM sforpa ,stipoformapago" & Sql
-    Sql = " sforpa.codforpa,sforpa.nomforpa,stipoformapago.descformapago " & Sql
-    Sql = "INSERT INTO Usuarios.ztesoreriacomun(codusu,codigo,texto1,texto2) Select " & vUsu.Codigo & "," & Sql
+    SQL = " WHERE sforpa.tipforpa = stipoformapago.tipoformapago " & SQL
+    SQL = " FROM sforpa ,stipoformapago" & SQL
+    SQL = " sforpa.codforpa,sforpa.nomforpa,stipoformapago.descformapago " & SQL
+    SQL = "INSERT INTO Usuarios.ztesoreriacomun(codusu,codigo,texto1,texto2) Select " & vUsu.Codigo & "," & SQL
     'INSERT INTO Usuarios.ztesoreriacomun (codusu, observa1, codigo,
     'texto1, texto2,  texto3, texto4 ,texto5) VALUES (
     
     
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     
     Set miRsAux = New ADODB.Recordset
-    Sql = "select count(*) from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select count(*) from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
-        If DBLet(miRsAux.Fields(0), "N") > 0 Then Sql = ""
+        If DBLet(miRsAux.Fields(0), "N") > 0 Then SQL = ""
     End If
     miRsAux.Close
     Set miRsAux = Nothing
-    If Sql <> "" Then
+    If SQL <> "" Then
         MsgBox "Ningun dato se ha generado", vbExclamation
     Else
         ListadoFormaPago = True

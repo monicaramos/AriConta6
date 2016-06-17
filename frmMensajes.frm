@@ -4998,7 +4998,7 @@ Dim W, H
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.frameamort.Visible = False
+    Me.FrameAmort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
@@ -5039,9 +5039,9 @@ Dim W, H
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.frameamort.Width
-        H = Me.frameamort.Height + 200
-        Me.frameamort.Visible = True
+        W = Me.FrameAmort.Width
+        H = Me.FrameAmort.Height + 200
+        Me.FrameAmort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
@@ -7296,7 +7296,7 @@ Dim Equipo As String
         
         If PagoContabilizado(RecuperaValor(Parametros, 1), RecuperaValor(Parametros, 2), RecuperaValor(Parametros, 3), RecuperaValor(Parametros, 4), DBLet(RS.Fields(0))) Then IT.SmallIcon = 18
 
-        If DBLet(RS!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
+'        If DBLet(RS!NumAsien, "N") <> 0 Then IT.SmallIcon = 18
         
         IT.Text = DBLet(RS.Fields(0))
         IT.SubItems(1) = DBLet(RS.Fields(1))
