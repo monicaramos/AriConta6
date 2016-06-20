@@ -1832,7 +1832,7 @@ Begin VB.Form frmTESPagos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   360
+         Height          =   600
          Index           =   20
          Left            =   5760
          MaxLength       =   2
@@ -3532,7 +3532,7 @@ Private Sub Text1_LostFocus(Index As Integer)
         End If
         
         
-    Case 2, 5, 7, 32, 20
+    Case 2, 5, 7, 32
         'FECHAS,32
         If Not EsFechaOK(Text1(Index)) Then
             MsgBox "Fecha incorrecta: " & Text1(Index).Text, vbExclamation
@@ -4221,7 +4221,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
             If Me.Data1.Recordset.EOF Then Exit Sub
             If Modo <> 2 Then Exit Sub
             If vTipForpa <> "" Then
-                If (Val(vTipForpa) <> vbTransferencia) Or (Val(vTipForpa) = vbTipoPagoRemesa And Val(DBLet(Data1.Recordset!nrodocum)) = 0) Then
+                If (Val(vTipForpa) <> vbTransferencia) Or (Val(vTipForpa) = vbTransferencia And Val(DBLet(Data1.Recordset!nrodocum)) = 0) Then
                     If Not SePuedeEliminar Then Exit Sub
                 
                     If PertenceAlgunoDocumentoEmitido Then Exit Sub

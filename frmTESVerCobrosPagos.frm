@@ -634,7 +634,7 @@ End Sub
 
 Private Sub Form_Resize()
 Dim I As Integer
-Dim h As Integer
+Dim H As Integer
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
     If Me.Height < 2700 Then Me.Height = 2700
     If Me.Width < 2700 Then Me.Width = 2700
@@ -649,7 +649,7 @@ Dim h As Integer
     Me.ListView1.Width = Me.frame.Width
     
     'Las columnas
-    h = ListView1.Tag
+    H = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
     For I = 1 To Me.ListView1.ColumnHeaders.Count
         If InStr(1, ListView1.ColumnHeaders(I).Tag, "%") Then
@@ -660,7 +660,7 @@ Dim h As Integer
         End If
         Me.ListView1.ColumnHeaders(I).Width = Val(cad)
     Next I
-    ListView1.Tag = h
+    ListView1.Tag = H
 End Sub
 
 
@@ -972,7 +972,7 @@ Dim J As Byte
     ItmX.Text = RS!NUmSerie
     ItmX.SubItems(1) = RS!NumFactu
     ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
-    ItmX.SubItems(3) = Format(RS!Fecefect, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(RS!fecefect, "dd/mm/yyyy")
     ItmX.SubItems(4) = RS!numorden
     ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
     ItmX.SubItems(6) = DBLet(RS!siglas, "T")
@@ -986,7 +986,7 @@ Dim J As Byte
         ItmX.SubItems(8) = "0.00"
         ItmX.SubItems(9) = ItmX.SubItems(7)
     End If
-    If RS!Fecefect < Fecha Then
+    If RS!fecefect < Fecha Then
         'LO DEBE
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
@@ -1093,7 +1093,7 @@ Dim Campo2 As Integer
                 CampoOrden = "pagos.numserie"
             Case "Nº Factura"
                 CampoOrden = "pagos.numfactu"
-            Case "F.Factura"
+            Case "F. Fact"
                 CampoOrden = "pagos.fecfactu"
             Case "F. VTO"
                 CampoOrden = "pagos.fecefect"
