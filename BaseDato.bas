@@ -958,10 +958,10 @@ Dim NuloPer As Boolean
 Dim NuloAper As Boolean
 Dim CalcularImporteAnterior As Boolean
     
-'    M1 = Mes1
-'    M2 = Mes2
-'    A1 = Anyo1
-'    A2 = Anyo2
+    M1 = Month(FechaInicioPeriodo)
+    M2 = Month(FechaFinPeriodo)
+    A1 = Year(FechaInicioPeriodo)
+    A2 = Year(FechaFinPeriodo)
     vCta = Cta
     vDig = Len(Cta)
     
@@ -4065,6 +4065,10 @@ Dim AuxPyG As String
     d = vContabilidad
     VarConsolidado(0) = "": VarConsolidado(1) = "": VarConsolidado(2) = ""
     
+    
+    
+    M2 = 1 'PRUEBA
+    
     While d <> ""
             'Vemos cual es
             M1 = InStr(1, d, "|")
@@ -4184,9 +4188,16 @@ Dim AuxPyG As String
         
         RT.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not RT.EOF
+        
+            
+            
+        
             CalculaSuma DBLet(RT!Formula), Val(RT!A_Cero) <> 0
             d = TransformaComasPuntos(CStr(ImpD))
             'UPDATEAMOS
+            
+            
+            
             
             SQL = "UPDATE "
             If Contabilidad > 0 Then SQL = SQL & "Conta" & Contabilidad & "."
@@ -4295,6 +4306,10 @@ Dim Tipo As Integer
             Tipo = RS!Tipo
         End If
         If Tipo = 0 Then
+        
+        
+           
+        
             If RS!tienenctas = 1 Then
                 QueCuentas = ""
                 If EsListado Then
@@ -4320,6 +4335,8 @@ Dim Tipo As Integer
         vImporte = vImporte + OtroImporte
         vimporte2 = vimporte2 + OtroImporte2
         
+        
+
         'Insertamos la linea
         'en aux hay
         'codusu, Pasivo, codigo, descripcion, linea, importe1, importe2, negrita,orden) VALUES (1
@@ -4348,8 +4365,8 @@ End Sub
 
 Private Function CalculaImporteCtas(Pasivo As String, Codigo As Integer, ByRef mess1 As Integer, ByRef anyos1 As Integer, Año1_o2 As Boolean, ByRef Contabilidades As String) As Currency
 Dim RT As ADODB.Recordset
-Dim x As Integer
-Dim y As Integer
+Dim X As Integer
+Dim Y As Integer
 Dim vI1 As Currency
 Dim vI2 As Currency
 Dim QuitarUno As Boolean
@@ -4369,11 +4386,11 @@ Dim ContaX As String
         While ContaX <> ""
             
             'Vemos cual ContaX
-            x = InStr(1, ContaX, "|")
-            y = CInt(Mid(ContaX, 1, x - 1))
-            ContaX = Mid(ContaX, x + 1)
+            X = InStr(1, ContaX, "|")
+            Y = CInt(Mid(ContaX, 1, X - 1))
+            ContaX = Mid(ContaX, X + 1)
             
-            Contabilidad = y
+            Contabilidad = Y
             
             'Fecha del utlimo en hco
             VFecha3 = CDate(Mid(VarConsolidado(0), (11 * Contador) + 1, 10))
@@ -4608,7 +4625,7 @@ Dim RA As ADODB.Recordset
     'Dejamos medio montado el sql
     ' "INSERT INTO tmpimpbalance (codusu, Pasivo, codigo, descripcion, linea, importe1, importe2, negrita,orden) VALUES (" & vUsu.Codigo & ","
     SQL = "Select importe1,importe2 from "
-    If Contabilidad > 0 Then SQL = SQL & "Conta" & Contabilidad & "."
+    If Contabilidad > 0 Then SQL = SQL & "ariconta" & Contabilidad & "."
     SQL = SQL & "tmpimpbalance where codusu =" & vUsu.Codigo
 
     
@@ -4698,7 +4715,7 @@ Dim QueCuentas As String
     Set RS = New ADODB.Recordset
     RS.Open MiAux, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RS.EOF
-        
+         
         
         If vParam.NuevoPlanContable Then
             'Nueva contabilidad
@@ -4864,7 +4881,7 @@ Dim importeCierreH As Currency
     
     
     ' Nueva tabla para el informe apaisado de meses
-    Dim k As Integer
+    Dim K As Integer
     Dim K1 As Integer
     Dim Anyo As Integer
     Dim Mes As Integer
@@ -4884,19 +4901,19 @@ Dim importeCierreH As Currency
 
 
     If Year(vParam.fechaini) = Year(vParam.fechafin) Then ' año natural
-        For k = 1 To 12
-            SQL = SQL & Format(Year(FechaInicio), "0000") & Format(k, "00") & ","
-        Next k
+        For K = 1 To 12
+            SQL = SQL & Format(Year(FechaInicio), "0000") & Format(K, "00") & ","
+        Next K
     Else
         Anyo = Year(FechaInicio)
-        For k = 1 To 12
-            K1 = Month(FechaInicio - 1 + k)
+        For K = 1 To 12
+            K1 = Month(FechaInicio - 1 + K)
             If K1 > 12 Then
                 K1 = K1 - 12
                 Anyo = Year(FechaInicio) + 1
             End If
             Mes = Format(Anyo, "0000") & Format(K1, "00")
-        Next k
+        Next K
         SQL = SQL & DBSet(Mes, "N") & ","
     End If
     SQL = SQL & "0,0,0,0,0,0,0,0,0,0,0,0)"
@@ -5573,16 +5590,16 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     'CLIENTES
     '-----------------------------------------------
     ' iva
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente )"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",0 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0)), " & Empresa & "," & Periodo & "," & Anyo & ",0 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factcli_totales," & vCta & ".factcli"
     SQL = SQL & " where fecliqcl >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqcl <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factcli.codopera = 0 " ' tipo de operacion general
     SQL = SQL & " and tipodiva in (0,1) " 'solo iva e igic
     SQL = SQL & " and factcli_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factcli_totales.numserie = factcli.numserie and factcli_totales.numfactu = factcli.numfactu and factcli_totales.anofactu = factcli.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
@@ -5590,7 +5607,7 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     ' recargo de equivalencia
     SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porcrec,sum(baseimpo),sum(imporec)," & Empresa & "," & Periodo & "," & Anyo & ",1 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",1 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factcli_totales," & vCta & ".factcli"
     SQL = SQL & " where fecliqcl >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqcl <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and tipodiva in (0,1) " 'solo iva e igic
@@ -5602,53 +5619,53 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     Conn.Execute SQL
     
     ' intracomunitarias
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",10 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",10 "
     SQL = SQL & " from " & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factpro.codopera = 1 " ' tipo de operacion intracomunitaria
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     ' inversion sujeto pasivo
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porcrec,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",12 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva),sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",12 "
     SQL = SQL & " from " & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factpro.codopera = 4 " ' tipo de operacion inversion sujeto pasivo
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     ' entregas intracomunitarias
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",14 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",14 "
     SQL = SQL & " from " & vCta & ".factcli_totales," & vCta & ".factcli"
     SQL = SQL & " where fecliqcl >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqcl <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factcli.codopera = 1 " ' tipo de operacion intracomunitaria
     SQL = SQL & " and factcli_totales.numserie = factcli.numserie and factcli_totales.numfactu = factcli.numfactu and factcli_totales.anofactu = factcli.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     
     ' exportaciones y operaciones asimiladas
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",16 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec, sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",16 "
     SQL = SQL & " from " & vCta & ".factcli_totales," & vCta & ".factcli"
     SQL = SQL & " where fecliqcl >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqcl <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factcli.codopera = 2 " ' tipo de operacion exportacion / importacion
 '????
 '    SQL = SQL & " and tipodiva in (0,1) " 'solo iva e igic
     SQL = SQL & " and factcli_totales.numserie = factcli.numserie and factcli_totales.numfactu = factcli.numfactu and factcli_totales.anofactu = factcli.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
@@ -5659,61 +5676,61 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     '-----------------------------------------------
     '           PROVEEDORES
     '-----------------------------------------------
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",2 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",2 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factpro.codopera = 0 " ' tipo de operacion general
     SQL = SQL & " and not tipodiva in (2) " ' no sean de bienes de inversion
     SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     
     ' bienes de inversion
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",30 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",30 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and tipodiva = 2 " 'solo bienes de inversion y no de importacion / exportacion
     SQL = SQL & " and factpro.codopera = 0 " ' tipo de operacion general
     SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     
     ' iva de importacion de bienes corrientes
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",32 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",32 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and tipodiva <> 2 " ' no tipo de iva de bien de inversion
     SQL = SQL & " and factpro.codopera = 2 " ' tipo facturas de importacion
     SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     
     ' iva de importacion de bienes de inversion
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",34 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",34 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and tipodiva = 2 " ' no tipo de iva de bien de inversion
     SQL = SQL & " and factpro.codopera = 2 " ' tipo facturas de importacion
     SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
@@ -5721,38 +5738,38 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     
     
     ' iva intracomunitaria normales
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",36 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",36 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and not tipodiva in (2) " ' tipo de iva distinto de BI
     SQL = SQL & " and factpro.codopera = 1 " ' tipo intracomunitaria
     SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     ' iva intracomunitaria bien de inversion
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",38 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",38 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and tipodiva = 2 " ' tipo de iva de BI
     SQL = SQL & " and factpro.codopera = 1 " ' tipo intracomunitaria
     SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
-    SQL = SQL & " group by 1,2"
+    SQL = SQL & " group by 1,2,3"
                     
     Conn.Execute SQL
     
     
     ' compensaciones regimen especial agrario
-    SQL = "insert into tmpliquidaiva(codusu,iva,bases,ivas,codempre,periodo,ano,cliente)"
+    SQL = "insert into tmpliquidaiva(codusu,iva,porcrec,bases,ivas,imporec,codempre,periodo,ano,cliente)"
     
-    SQL = SQL & " select " & vUsu.Codigo & ",porciva,sum(baseimpo),sum(impoiva)," & Empresa & "," & Periodo & "," & Anyo & ",42 "
+    SQL = SQL & " select " & vUsu.Codigo & ",porciva,porcrec,sum(baseimpo),sum(impoiva), sum(coalesce(imporec,0))," & Empresa & "," & Periodo & "," & Anyo & ",42 "
     SQL = SQL & " from " & vCta & ".factpro_totales," & vCta & ".factpro"
     SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and factpro.codopera = 5 " ' factura de REA

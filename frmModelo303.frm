@@ -797,6 +797,7 @@ Private Sub cmbPeriodo_Validate(Index As Integer, Cancel As Boolean)
     FramePeriodo.Visible = (cmbPeriodo(0).ListIndex = 0)
 End Sub
 
+
 Private Sub cmdAccion_Click(Index As Integer)
 
     If Not DatosOK Then Exit Sub
@@ -820,6 +821,8 @@ Private Sub cmdAccion_Click(Index As Integer)
     Label13.Visible = True
     Label13.Refresh
     If GeneraLasLiquidaciones Then
+        
+    
         Label13.Caption = ""
         Label13.Refresh
         espera 0.5
@@ -2029,6 +2032,10 @@ Private Function GeneraLasLiquidaciones() As Boolean
         SQL = "DELETE FROM tmpimpbalance WHERE codusu =" & vUsu.Codigo
         Conn.Execute SQL
 '    End If
+    
+    
+    SQL = "delete from tmpfaclin where codusu = " & vUsu.Codigo
+    Conn.Execute SQL
     
     NumRegElim = 0
     'Para cada empresa

@@ -804,7 +804,7 @@ Dim IT As ListItem
         cad = cad & " from (hlinapu inner join tipofpago on hlinapu.tipforpa = tipofpago.tipoformapago) "
         cad = cad & " inner join hcabapu on hlinapu.numdiari = hcabapu.numdiari and hlinapu.fechaent = hcabapu.fechaent and hlinapu.numasien = hcabapu.numasien "
         cad = cad & " where numserie = " & DBSet(RecuperaValor(Vto, 1), "T")
-        cad = cad & " and numfacpr = " & DBSet(RecuperaValor(Vto, 2), "N")
+        cad = cad & " and numfacpr = " & DBSet(RecuperaValor(Vto, 2), "T")
         cad = cad & " and fecfactu = " & DBSet(RecuperaValor(Vto, 3), "F")
         cad = cad & " and numorden = " & DBSet(RecuperaValor(Vto, 4), "N")
         cad = cad & " and codmacta = " & DBSet(RecuperaValor(Cta, 1), "T")
