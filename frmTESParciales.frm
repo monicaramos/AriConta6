@@ -890,15 +890,9 @@ Private Sub Form_Load()
         txtCta(1).Text = RecuperaValor(Cta, 3)
         Me.txtDescCta(1).Text = RecuperaValor(Cta, 4)
         
-        'Importes
-'        Label4(4).Visible = False
-'        Text1(4).Enabled = False
-'        Text1(4).Visible = False
-        
         Text1(3).Text = RecuperaValor(Importes, 1)
         Text1(4).Text = ""
         Text1(5).Text = RecuperaValor(Importes, 2)  'Esto es lo pagado ya
-        '''''Text1(5).Text = RecuperaValor(Importes, 3)
         Text3(0).Text = Format(Now, "dd/mm/yyyy")
         
     
@@ -938,7 +932,6 @@ Private Sub Form_Load()
     Label4(4).Visible = Cobro
     Text1(4).Visible = Cobro
     Me.Height = Me.FrCobro.Height + 1200 '240 + Me.Command1(0).Height + 240
-    'Text2(0).Text = ""
     Text2(0).Text = Format(impo, FormatoImporte)
     Text2(1).Text = "0,00"
     
@@ -1228,10 +1221,6 @@ Dim Sql5 As String
     'numdocum
     Numdocum = DevNombreSQL(RecuperaValor(Vto, 2))
     If Cobro Then
-        'Antes 21 Sept 2011
-        'Numdocum = RecuperaValor(Vto, 1) & Format(Mid(Numdocum, 1, 9), "000000000")
-        'Ahora
-        'Numdocum = SerieNumeroFactura(10, RecuperaValor(Vto, 1), Numdocum)
         Numdocum = RecuperaValor(Vto, 1) & Format(Numdocum, "0000000")
     End If
     

@@ -2643,23 +2643,8 @@ Private Sub cmdCancelar_Click()
             PonerModo 2
             PonerCampos
         Case 5 'LLÍNIES
-'            TerminaBloquear
-'
-'            If ModoLineas = 1 Then 'INSERTAR
-'                ModoLineas = 0
-'                DataGridAux(0).AllowAddNew = False
-'            End If
-'            ModoLineas = 0
-'            LLamaLineas 0, 0, 0
-'
-'            Modo = 2   'Para que el lostfocus NO haga nada
-'
-'            PosicionarData
-'            PonerCampos
     End Select
 End Sub
-
-
 
 Private Function SituarData() As Boolean
     Dim posicion As Long
@@ -2852,10 +2837,6 @@ Private Sub BotonEliminar()
     'Borramos
     If I = vbYes Then
         
-'        SQL = "Delete from pagos_realizados WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
-'        SQL = SQL & " AND fecfactu = '" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND numorden =" & Data1.Recordset!numorden
-'        Conn.Execute SQL
-
         'Borro el elemento
         SQL = "Delete from pagos  WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
         SQL = SQL & " AND fecfactu = " & DBSet(Data1.Recordset!FecFactu, "F") & " AND numorden =" & Data1.Recordset!numorden
@@ -3884,31 +3865,14 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
     Me.imgSerie.Visible = Not B
         
         
-'    Text2(4).Tag = ""
     
     'lineas de pagos_realizados
     Dim anc As Single
-'    anc = DataGridAux(1).Top
-'    If DataGridAux(1).Row < 0 Then
-'        anc = anc + 230
-'    Else
-'        anc = anc + DataGridAux(1).RowTop(DataGridAux(1).Row) + 5
-'    End If
-'    If Modo = 1 Then
-'        LLamaLineas 1, Modo, anc
-'    Else
-'        LLamaLineas 1, 3, anc
-'    End If
-'
-'    For i = 0 To txtaux1.Count - 1
-'        If i <> 8 Then txtaux1(i).BackColor = vbWhite
-'    Next i
     
     Combo1.Enabled = False '(Modo = 1) Or ((vUsu.Nombre = "root") And Modo = 4)
     
         
 End Sub
-
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean

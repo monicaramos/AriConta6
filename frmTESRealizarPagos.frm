@@ -1205,7 +1205,7 @@ Dim TipoAnt As Integer
     Else
         I = Val(cad)
     End If
-    If vp.leer(I) = 1 Then
+    If vp.Leer(I) = 1 Then
         'ERROR GRAVE LEYENDO LA FORMA DE PAGO
         Screen.MousePointer = vbDefault
         Set vp = Nothing
@@ -4086,43 +4086,6 @@ Dim ImporteInterno As Currency
         '++monica
         If Cabecera = 1 And Not VienedeGastos Then
         
-' de momento no quitar cuando funcione todo lo quito
-'            Dim NumLin As Long
-'
-'            NumLin = DevuelveValor("select max(numlinea) from pagos_realizados where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " AND numorden =" & RecuperaValor(RS1!Cliente, 4) & " AND codmacta = " & RecuperaValor(RS1!Cliente, 5))
-'
-'            NumLin = NumLin + 1
-'
-'            SQL = "insert into pagos_realizados (numserie, codmacta, numfactu, fecfactu, numorden, numlinea, numdiari, fechaent, "
-'            SQL = SQL & " numasien, usuariopago, tipforpa, imppago, fecrealizado) values (" & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & "," & DBSet(RecuperaValor(RS1!Cliente, 5), "T") & ","
-'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "T") & "," & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & ","
-'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," & DBSet(NumLin, "N") & "," & DBSet(vp.diaricli, "N") & ","
-'            SQL = SQL & DBSet(FechaAsiento, "F") & "," & DBSet(m.Contador, "N") & "," & DBSet(vUsu.Login, "T") & ","
-'            SQL = SQL & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & DBSet(ImporteInterno, "N")
-'            SQL = SQL & "," & DBSet(Now, "FH") & ")"
-'
-'            Conn.Execute SQL
-'
-'            ' actualizamos los cobros realizados
-'            cad = "UPDATE pagos_realizados, tmppagos2 aaa SET pagos_realizados.reftalonpag = "
-'            cad = cad & " aaa.reftalonpag, pagos_realizados.bancotalonpag = aaa.bancotalonpag,  "
-'            cad = cad & " pagos_realizados.ctabanc2 = " & DBSet(txtCta(4).Text, "T")
-'            cad = cad & " WHERE pagos_realizados.numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T")
-'            cad = cad & " AND pagos_realizados.numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "T")
-'            cad = cad & " AND pagos_realizados.fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F")
-'            cad = cad & " AND pagos_realizados.numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
-'            cad = cad & " AND pagos_realizados.codmacta = " & DBSet(RecuperaValor(RS1!Cliente, 5), "T")
-'            cad = cad & " and aaa.codusu = " & vUsu.Codigo
-'            cad = cad & " and pagos_realizados.numserie = aaa.numserie "
-'            cad = cad & " and pagos_realizados.numfactu = aaa.numfactu "
-'            cad = cad & " and pagos_realizados.fecfactu = aaa.fecfactu "
-'            cad = cad & " and pagos_realizados.numorden = aaa.numorden "
-'            cad = cad & " and pagos_realizados.codmacta = aaa.codmacta "
-'            cad = cad & " and pagos_realizados.numlinea = " & DBSet(NumLin, "N")
-'
-'            Conn.Execute cad
-
-
             Dim Situacion As Byte
             
             Situacion = 1
@@ -4150,8 +4113,6 @@ Dim ImporteInterno As Currency
             SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," 'numorden
             SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 5), "T") & "," 'codmacta
             
-' estaba antes en codforpa
-'            SQL = SQL & DBSet(NumLin, "N") & "," 'numlinea
             SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(ImporteInterno))), "T") & ") "
             
             Conn.Execute SQL

@@ -1652,24 +1652,6 @@ Dim I As Integer
             ModoInsertar = False
         End If
     
-        'FALTA####
-        ' Si cancelar, hace falta cargar el listview otra vez?
-        
-'        I = -1
-'
-'        If Not lw1.SelectedItem Is Nothing Then I = lw1.SelectedItem.Index
-'
-'        CargaList
-'
-'        For K = 1 To I
-'            If lw1.ListItems(K).Index = I Then
-'                Set lw1.SelectedItem = lw1.ListItems(K)
-'                lw1.SelectedItem.Selected = True
-'                lw1.SelectedItem.EnsureVisible
-'                Exit For
-'            End If
-'        Next K
-        
         Frame1.Visible = True
         Frame1.Enabled = True
         
@@ -1874,8 +1856,6 @@ Private Sub Form_Activate()
         PrimeraVez = False
         If Not Frame1.Visible Then
             If CadenaDesdeOtroForm <> "" Then
-'                Text1(2).Text = CadenaDesdeOtroForm
-'                Text1_LostFocus 2
             Else
 '                PonFoco Text1(2)
             End If
@@ -1890,7 +1870,7 @@ Private Sub Form_Activate()
 End Sub
     
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -1945,7 +1925,7 @@ Dim Img As Image
     CommitConexion  'Porque son listados. No hay nada dentro transaccion
     
         
-    h = FrameCreacionRemesa.Height + 120
+    H = FrameCreacionRemesa.Height + 120
     W = FrameCreacionRemesa.Width
     
     FrameCreacionRemesa.Visible = False
@@ -1953,7 +1933,7 @@ Dim Img As Image
     
     
     Me.Width = W + 300
-    Me.Height = h + 400
+    Me.Height = H + 400
     
     Me.cmdCancelar(0).Cancel = True
     

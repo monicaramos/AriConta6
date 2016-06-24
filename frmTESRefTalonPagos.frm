@@ -615,13 +615,6 @@ Private Sub BotonModificar()
     If txtAux(6).Text = "" Then txtAux(6).Text = RefAnt
     If txtAux(7).Text = "" Then txtAux(7).Text = BancoAnt
     
-    ' ***** canviar-ho pel nom del camp del combo *********
-'    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
-    ' *****************************************************
-
-    'PosicionarCombo Me.Combo1(0), i
-    'PosicionarCombo Me.Combo1(1), i
-
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
@@ -659,20 +652,6 @@ Private Sub cmdAceptar_Click()
     
     Select Case Modo
         Case 1 'BUSQUEDA
-'            CadB = ObtenerBusqueda(Me)
-'            If CadB <> "" Then
-'
-'                ' inicio
-'                Conn.Execute "delete from tmpinformes where codusu = " & vUsu.Codigo
-'                Sql2 = "insert into tmpinformes  (codusu, nombre1) select " & vUsu.Codigo & ", hidrante from rpozos where " & CadB & AnyadeCadenaFiltro(True)
-'                Conn.Execute Sql2
-'                ' fin
-'
-'                CargaGrid "" ' CadB & AnyadeCadenaFiltro(True)
-'                PonerModo 2
-''                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
-'                PonerFocoGrid Me.DataGrid1
-'            End If
             
         Case 3 'INSERTAR
             If DatosOK Then
@@ -828,11 +807,6 @@ Dim SQL2 As String
     
     FechaAnt = ""
     
-'    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-'        BotonAnyadir
-'    Else
-'        PonerModo 2
-'    End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -854,12 +828,6 @@ Private Sub mnModificar_Click()
     If adodc1.Recordset.EOF Then Exit Sub
     
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
-    
-    ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
-    ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
-    'El registre de codi 0 no es pot Modificar ni Eliminar
-    'If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCampo(txtAux(0))) Then Exit Sub
-    
     
     'Preparamos para modificar
     '-------------------------
@@ -903,7 +871,6 @@ Private Sub CargaGrid(Optional vSQL As String)
     tots = tots & "S|txtAux(8)|T|Cuenta|1500|;"
     tots = tots & "S|txtAux(5)|T|Fecha Vto|1250|;S|txtAux(6)|T|Referencia|1500|;"
     tots = tots & "S|txtAux(7)|T|Banco|1500|;"
-    'N||||0|;
     arregla tots, DataGrid1, Me
     
     DataGrid1.ScrollBars = dbgAutomatic
@@ -913,7 +880,6 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.Columns(7).Alignment = dbgCenter
     DataGrid1.Columns(8).Alignment = dbgLeft
     
-'   DataGrid1.Columns(2).Alignment = dbgRight
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
@@ -1025,17 +991,10 @@ On Error GoTo EKeyD
     
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
-'050509
             cmdAceptar_Click
-'            ModificarLinea
-            
-'            If Me.DataGridAux(0).Bookmark > 0 Then
-'                DataGridAux(0).Bookmark = DataGridAux(0).Bookmark - 1
-'            End If
             If Ok Then PasarAntReg
         Case 40 'Desplazamiento Flecha Hacia Abajo
             'ModificarExistencia
-'050509
                 
             RefAnt = txtAux(6)
             BancoAnt = txtAux(7)
@@ -1052,26 +1011,21 @@ End Sub
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
     If Me.DataGrid1.Bookmark < Me.adodc1.Recordset.RecordCount Then
-'        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
         BotonModificar
         PonFoco txtAux(6)
     ElseIf DataGrid1.Bookmark = adodc1.Recordset.RecordCount Then
         PonerFocoBtn cmdAceptar
-'        BotonModificar
-'        PonFoco txtAux(6)
     End If
 End Sub
 
 Private Sub PasarAntReg()
 'Nos situamos en el siguiente registro
     If Me.DataGrid1.Bookmark > 1 Then
-'        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGrid1.Bookmark = DataGrid1.Bookmark - 1
         BotonModificar
         PonFoco txtAux(6)
     ElseIf DataGrid1.Bookmark = 1 Then
-'        PonerFocoBtn Me.cmdAceptar
         BotonModificar
         PonFoco txtAux(6)
     End If

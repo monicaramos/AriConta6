@@ -4160,11 +4160,6 @@ Private Sub BotonEliminar()
     I = MsgBox(cad, vbQuestion + vbYesNoCancel + vbDefaultButton2)
     'Borramos
     If I = vbYes Then
-        
-'        SQL = "Delete from cobros_realizados WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
-'        SQL = SQL & " AND fecfactu = '" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND numorden =" & Data1.Recordset!numorden
-'        Conn.Execute SQL
-
         'Borro el elemento
         SQL = "Delete from cobros  WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
         SQL = SQL & " AND fecfactu = " & DBSet(Data1.Recordset!FecFactu, "F") & " AND numorden =" & Data1.Recordset!numorden
@@ -4437,9 +4432,6 @@ Dim cad As String
             If DevfrmCCtas = "" Then Exit Sub
             '   Como la clave principal es unica, con poner el sql apuntando
             '   al valor devuelto sobre la clave ppal es suficiente
-            'Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-            'If CadB <> "" Then CadB = CadB & " AND "
-            'CadB = CadB & Aux
             'Se muestran en el mismo form
             CadenaConsulta = "select * from " & NombreTabla & " WHERE " & DevfrmCCtas & " " & Ordenacion
             PonerCadenaBusqueda
@@ -6367,12 +6359,6 @@ Dim I As Integer
                     
                     txtAux(4).Text = Format(NumF, "0000") 'linea contador
                     
-                    
-                    If Limpia Then
-'                        txtAux2(5).Text = ""
-'                        txtAux2(12).Text = ""
-                    End If
-                    
                     PonFoco txtAux(5)
             
             End Select
@@ -6711,7 +6697,6 @@ Private Sub txtAux_LostFocus(Index As Integer)
         
         Case 9
            ' IMPORTE
-'            PonerFormatoDecimal txtAux(Index), 1
              txtAux(Index) = ImporteSinFormato(txtAux(Index))
             
         Case 10 'tipo

@@ -1398,7 +1398,9 @@ Dim RS As ADODB.Recordset
 '--
 '    DevuelveImporte 21, 0
 '    DevuelveImporte 22, 0
-    SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 2 "
+
+    '[Monica]24/06/2016: en las facturas de proveedores faltaba añadir las fras de ISP, he añadido el 12
+    SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente in ( 2, 12 )  "
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2066,7 +2068,7 @@ Private Function GeneraLasLiquidaciones() As Boolean
     GeneraLasLiquidaciones = True
 End Function
 
-Private Sub ModeloIva(Leer As Boolean)
+Private Sub ModeloIva(leer As Boolean)
 
 On Error GoTo EModeloIva
 EModeloIva:

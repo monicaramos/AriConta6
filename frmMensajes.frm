@@ -4435,7 +4435,7 @@ Dim SQL As String
 Dim CadenaIconos As String
 
 
-Dim K As Integer
+Dim k As Integer
 Dim J As Integer
 Dim Px As Single
 Dim Py As Single
@@ -4466,8 +4466,8 @@ Dim Ocupado As Boolean
             If ListView6.ListItems(I).SubItems(2) = "0" Then
                 SQL = ""
                 For J = 1 To 8
-                    For K = 1 To 5
-                        DevuelCoordenadasCuadricula J, K, Px, Py
+                    For k = 1 To 5
+                        DevuelCoordenadasCuadricula J, k, Px, Py
                         Ocupado = False
                         'Busco hueco
                         For H = 1 To ListView6.ListItems.Count
@@ -4495,7 +4495,7 @@ Dim Ocupado As Boolean
                             Conn.Execute SQL
                            Exit For
                         End If
-                    Next K
+                    Next k
                     If SQL <> "" Then Exit For
                 Next J
             End If
@@ -6989,7 +6989,6 @@ Dim TotalArray  As Long
     
     ListView6.SmallIcons = frmPpal.ImageListPpal16
     
-    
     ListView6.ColumnHeaders.Clear
     
     ListView6.ColumnHeaders.Add , , "Código", 1800.0631
@@ -6997,7 +6996,6 @@ Dim TotalArray  As Long
     ListView6.ColumnHeaders.Add , , "EraVisible", 0, 0
     ListView6.ColumnHeaders.Add , , "X", 0, 0
     ListView6.ColumnHeaders.Add , , "Y", 0, 0
-    
     
     TotalArray = 0
     While Not RS.EOF
@@ -7013,14 +7011,11 @@ Dim TotalArray  As Long
             IT.SubItems(3) = RS!PosX
             IT.SubItems(4) = RS!PosY
         Else
-           
             IT.SubItems(2) = 0
             IT.SubItems(3) = 0
             IT.SubItems(4) = 0
             IT.Checked = False
         End If
-        
-        
         
         RS.MoveNext
         TotalArray = TotalArray + 1

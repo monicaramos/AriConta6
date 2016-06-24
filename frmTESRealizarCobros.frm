@@ -1437,7 +1437,6 @@ Private Sub Combo1_Validate(Cancel As Boolean)
         Combo1.SetFocus
     
     Else
-         'If Tipo = 1 And OrdenarEfecto And Not Cobros Then cmdGenerar.Caption = "Transferencia"
          I = 0
          If Combo1.ItemData(Combo1.ListIndex) = 1 And Me.SegundoParametro <> "" Then
              If Not ContabTransfer Then
@@ -1445,12 +1444,9 @@ Private Sub Combo1_Validate(Cancel As Boolean)
                  cad = RecuperaValor(vTextos, 5) 'Dira si es PAGO DOMICILIADO
                  If cad <> "" Then
                      If vParamT.PagosConfirmingCaixa Then
-'                         Me.Toolbar1.Buttons(2).ToolTipText = "Confirming"
                      Else
-'                         Me.Toolbar1.Buttons(2).ToolTipText = "PAGO DOM."
                      End If
                  Else
-'                     Me.Toolbar1.Buttons(2).ToolTipText = "Transferencia"
                  End If
                  Image1(1).Visible = False  'No muestre la ayuda
              Else
@@ -1462,15 +1458,6 @@ Private Sub Combo1_Validate(Cancel As Boolean)
                  End If
              End If
          End If
-         
-         '++
-'         Dim EsTransferencia As Boolean
-'
-'         EsTransferencia = (Combo1.ItemData(Combo1.ListIndex) = 1)
-'         Text3(6).Enabled = Not EsTransferencia
-'         If Not Text3(6).Enabled Then Text3(6).Text = ""
-         
-         
          
          Me.chkPorFechaVenci.Visible = I = 0
          chkGenerico(0).Visible = I = 0
@@ -1488,9 +1475,6 @@ Private Sub Combo1_Validate(Cancel As Boolean)
         If Cobros And (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then I = 1
         Me.mnBarra1.Visible = I = 1
         Me.mnNumero.Visible = I = 1
-        
-    
-    
     
         CargaList
     End If
@@ -1501,9 +1485,6 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Me.Refresh
         espera 0.1
-        'Cargamos el LIST
-        
-'        CargaList
         
         'OCTUBRE 2014
         'PAgos por ventanilla.
@@ -1590,7 +1571,6 @@ Private Sub Form_Load()
     imgCheck(0).Visible = True
     imgCheck(1).Visible = True
     chkPorFechaVenci.Value = 0
-'    Me.cmdDividrVto.Visible = Me.DesdeRecepcionTalones  'Para poder dividir vto
     
     imgFecha(2).Visible = False 'Para cambiar la fecha de contabilizacion de los pagos
     
@@ -1626,7 +1606,7 @@ End Sub
 
 Private Sub Form_Resize()
 Dim I As Integer
-Dim h As Integer
+Dim H As Integer
 
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
     If Me.Height < 2700 Then Me.Height = 2700
@@ -1643,7 +1623,7 @@ Dim h As Integer
     Me.ListView1.Width = Me.frame.Width
 
     'Las columnas
-    h = ListView1.Tag
+    H = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
     For I = 1 To Me.ListView1.ColumnHeaders.Count
         If InStr(1, ListView1.ColumnHeaders(I).Tag, "%") Then
@@ -1654,7 +1634,7 @@ Dim h As Integer
         End If
         Me.ListView1.ColumnHeaders(I).Width = Val(cad)
     Next I
-    ListView1.Tag = h
+    ListView1.Tag = H
 End Sub
 
 
@@ -1820,16 +1800,12 @@ Dim ImpAux As Currency
         ItmX.SubItems(10) = Format(vImporte, FormatoImporte)
     End If
     If RS!tipoformapago = vbTipoPagoRemesa Then
-        '81--->
-        'asc("Q") =81
         If Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 81 Then
             riesgo = riesgo + vImporte
         Else
-           ' Stop
         End If
     
     ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
-'            If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
             If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!impcobro, "N")
     End If
     
@@ -1986,7 +1962,7 @@ Dim J As Byte
         
         ItmX.Text = RS!NumFactu
         ItmX.SubItems(1) = Format(RS!FecFactu, "dd/mm/yyyy")
-        ItmX.SubItems(2) = Format(RS!Fecefect, "dd/mm/yyyy")
+        ItmX.SubItems(2) = Format(RS!fecefect, "dd/mm/yyyy")
         ItmX.SubItems(3) = RS!numorden
         ItmX.SubItems(4) = RS!Nommacta
         ItmX.SubItems(5) = RS!siglas
@@ -2000,7 +1976,7 @@ Dim J As Byte
             ItmX.SubItems(7) = "0.00"
             ItmX.SubItems(8) = ItmX.SubItems(6)
         End If
-        If RS!Fecefect < Fecha Then
+        If RS!fecefect < Fecha Then
             'LO DEBE
             ItmX.SmallIcon = 1
             Vencido = Vencido + impo
@@ -2339,7 +2315,6 @@ Dim Poblacion As String
     Set miRsAux = New ADODB.Recordset
     SQL = "select nifempre,siglasvia,direccion,numero,escalera,piso,puerta,codpos,poblacion,provincia from empresa2"
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    'sql= "'1234567890A','Ariadna Software ','Franco Tormo 3, Bajo Izda','46007','Valencia'"
     SQL = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'"
     If Not miRsAux.EOF Then
         SQL = ""
@@ -3848,52 +3823,9 @@ Dim ImporteInterno As Currency
         '++monica
         If Cobros And Cabecera = 1 And Not VienedeGastos Then
         
-'            Dim NumLin As Long
-'
-'
-'            NumLin = DevuelveValor("select max(numlinea) from cobros_realizados where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " AND numfactu=" & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & " and fecfactu=" & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " AND numorden =" & RecuperaValor(RS1!Cliente, 4))
-'            NumLin = NumLin + 1
-'
-'
-'            SQL = "insert into cobros_realizados (numserie, numfactu, fecfactu, numorden, numlinea, numdiari, fechaent, "
-'            SQL = SQL & " numasien, usuariocobro, tipforpa, impcobro, fecrealizado) values (" & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & ","
-'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & ","
-'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," & DBSet(NumLin, "N") & "," & DBSet(vp.diaricli, "N") & ","
-'            SQL = SQL & DBSet(FechaAsiento, "F") & "," & DBSet(m.Contador, "N") & "," & DBSet(vUsu.Login, "T") & ","
-'            SQL = SQL & DBSet(Combo1.ItemData(Combo1.ListIndex), "N") & "," & DBSet(ImporteInterno, "N")
-'            SQL = SQL & "," & DBSet(Now, "FH") & ")"
-'
-'            Conn.Execute SQL
-'
-'
-'            ' actualizamos los cobros realizados
-'            cad = "UPDATE cobros_realizados, tmpcobros2 aaa SET cobros_realizados.reftalonpag = "
-'            cad = cad & " aaa.reftalonpag, cobros_realizados.bancotalonpag = aaa.bancotalonpag,  "
-'            cad = cad & " cobros_realizados.ctabanc2 = " & DBSet(txtCta(4).Text, "T")
-'            cad = cad & " WHERE cobros_realizados.numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T")
-'            cad = cad & " AND cobros_realizados.numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")
-'            cad = cad & " AND cobros_realizados.fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F")
-'            cad = cad & " AND cobros_realizados.numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
-'            cad = cad & " and aaa.codusu = " & vUsu.Codigo
-'            cad = cad & " and cobros_realizados.numserie = aaa.numserie "
-'            cad = cad & " and cobros_realizados.numfactu = aaa.numfactu "
-'            cad = cad & " and cobros_realizados.fecfactu = aaa.fecfactu "
-'            cad = cad & " and cobros_realizados.numorden = aaa.numorden "
-'            cad = cad & " and cobros_realizados.numlinea = " & DBSet(NumLin, "N")
-'
-'            Conn.Execute cad
-
-
             Dim Situacion As Byte
             
             Situacion = 1
-
-'            Select Case Combo1.ItemData(Combo1.ListIndex)
-'                Case vbTalon, vbPagare
-'
-'                    Situacion = 1
-'            End Select
-
 
             SQL = "update cobros set impcobro = coalesce(impcobro,0) + " & DBSet(ImporteInterno, "N")
             SQL = SQL & " ,fecultco = " & DBSet(FechaAsiento, "F")
@@ -3914,12 +3846,7 @@ Dim ImporteInterno As Currency
             
             Conn.Execute SQL
 
-
-
-
         End If
-    
-    
     
     End If
     
@@ -4005,35 +3932,15 @@ Dim ImporteInterno As Currency
         SQL = SQL & Ampliacion & " AND Fechaent = '" & Format(FechaAsiento, FormatoFecha) & "' AND Numasien = " & m.Contador
         
         
-        'MODIFICACION 29 Junio 05
-        ' NO lo pongo a bloqactu =0 ya que despues voy a pasarlos a HISTORICO apuntes
-        'Conn.Execute SQL
-    
-    
-    
-    
-        '------------------------------------------
-    
-'        SQL = "INSERT INTO tmpactualizar (numdiari, fechaent, numasien, codusu) VALUES ("
         If Cobros Then
             Ampliacion = vp.diaricli
         Else
             Ampliacion = vp.diaripro
         End If
         
-'        SQL = SQL & Ampliacion & ",'" & Format(Text1.Text, FormatoFecha) & "'," & m.Contador
-'        SQL = SQL & "," & vUsu.Codigo & ")"
-'        Conn.Execute SQL
         InsertaTmpActualizar m.Contador, Ampliacion, CDate(FechaAsiento)
         
     End If
-    
-    
-    
-    
-    
-    
-
     
     
 End Function

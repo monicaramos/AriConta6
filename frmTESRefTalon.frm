@@ -511,14 +511,14 @@ Dim B As Boolean
     End If
 
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Visible = (Modo = 1)
-        txtaux(I).Enabled = (Modo = 1)
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Visible = (Modo = 1)
+        txtAux(I).Enabled = (Modo = 1)
     Next I
     
     For I = 6 To 7
-        txtaux(I).Visible = (Modo = 1 Or Modo = 4)
-        txtaux(I).Enabled = (Modo = 1 Or Modo = 4)
+        txtAux(I).Visible = (Modo = 1 Or Modo = 4)
+        txtAux(I).Enabled = (Modo = 1 Or Modo = 4)
     Next I
     
     cmdAceptar.Visible = Not B
@@ -541,7 +541,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.Adodc1)
+        cadReg = PonerContRegistros(Me.adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -583,28 +583,21 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = DataGrid1.Columns(2).Text
-    txtaux(3).Text = DataGrid1.Columns(3).Text
-    txtaux(4).Text = DataGrid1.Columns(4).Text
-    txtaux(5).Text = DataGrid1.Columns(5).Text
-    txtaux(6).Text = DataGrid1.Columns(6).Text
-    txtaux(7).Text = DataGrid1.Columns(7).Text
-    If txtaux(6).Text = "" Then txtaux(6).Text = RefAnt
-    If txtaux(7).Text = "" Then txtaux(7).Text = BancoAnt
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
+    txtAux(3).Text = DataGrid1.Columns(3).Text
+    txtAux(4).Text = DataGrid1.Columns(4).Text
+    txtAux(5).Text = DataGrid1.Columns(5).Text
+    txtAux(6).Text = DataGrid1.Columns(6).Text
+    txtAux(7).Text = DataGrid1.Columns(7).Text
+    If txtAux(6).Text = "" Then txtAux(6).Text = RefAnt
+    If txtAux(7).Text = "" Then txtAux(7).Text = BancoAnt
     
-    ' ***** canviar-ho pel nom del camp del combo *********
-'    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
-    ' *****************************************************
-
-    'PosicionarCombo Me.Combo1(0), i
-    'PosicionarCombo Me.Combo1(1), i
-
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonFoco txtaux(6)
+    PonFoco txtAux(6)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -614,8 +607,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Top = alto
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
     Next I
     ' ### [Monica] 12/09/2006
 End Sub
@@ -638,20 +631,6 @@ Private Sub cmdAceptar_Click()
     
     Select Case Modo
         Case 1 'BUSQUEDA
-'            CadB = ObtenerBusqueda(Me)
-'            If CadB <> "" Then
-'
-'                ' inicio
-'                Conn.Execute "delete from tmpinformes where codusu = " & vUsu.Codigo
-'                Sql2 = "insert into tmpinformes  (codusu, nombre1) select " & vUsu.Codigo & ", hidrante from rpozos where " & CadB & AnyadeCadenaFiltro(True)
-'                Conn.Execute Sql2
-'                ' fin
-'
-'                CargaGrid "" ' CadB & AnyadeCadenaFiltro(True)
-'                PonerModo 2
-''                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
-'                PonerFocoGrid Me.DataGrid1
-'            End If
             
         Case 3 'INSERTAR
             If DatosOK Then
@@ -660,8 +639,8 @@ Private Sub cmdAceptar_Click()
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
-                        If Not Adodc1.Recordset.EOF Then
-                            Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
+                        If Not adodc1.Recordset.EOF Then
+                            adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
                         End If
                         cmdRegresar_Click
                     Else
@@ -679,16 +658,16 @@ Private Sub cmdAceptar_Click()
                     Ok = True
                 
                 
-                    FechaAnt = txtaux(4).Text
+                    FechaAnt = txtAux(4).Text
                     TerminaBloquear
-                    I = Adodc1.Recordset.AbsolutePosition
+                    I = adodc1.Recordset.AbsolutePosition
                     
                     PonerModo 2
                     CargaGrid "" 'CadB
-                    If I = Me.Adodc1.Recordset.RecordCount Then
-                        Me.Adodc1.Recordset.MoveLast
+                    If I = Me.adodc1.Recordset.RecordCount Then
+                        Me.adodc1.Recordset.MoveLast
                     Else
-                        Me.Adodc1.Recordset.Move I - 1
+                        Me.adodc1.Recordset.Move I - 1
                     End If
                     
 '                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " ='" & I & "'")
@@ -709,7 +688,7 @@ Private Sub cmdCancelar_Click()
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'modificar
             TerminaBloquear
     End Select
@@ -726,7 +705,7 @@ Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
-    If Adodc1.Recordset.EOF Then
+    If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
@@ -738,7 +717,7 @@ Dim Aux As String
         If I > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            cad = cad & Adodc1.Recordset.Fields(J) & "|"
+            cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
@@ -748,8 +727,8 @@ End Sub
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
 Dim cad As String
 
-If Adodc1.Recordset Is Nothing Then Exit Sub
-If Adodc1.Recordset.EOF Then Exit Sub
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
 
 Me.Refresh
 Screen.MousePointer = vbHourglass
@@ -780,7 +759,7 @@ Private Sub Form_Activate()
         Else
             PonerModo 2
              If Me.CodigoActual <> "" Then
-                SituarData Me.Adodc1, "hidrante='" & CodigoActual & "'", "", True
+                SituarData Me.adodc1, "hidrante='" & CodigoActual & "'", "", True
             End If
         End If
     End If
@@ -813,15 +792,9 @@ Dim SQL2 As String
     
     FechaAnt = ""
     
-'    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-'        BotonAnyadir
-'    Else
-'        PonerModo 2
-'    End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-'    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     Screen.MousePointer = vbDefault
     
     
@@ -829,16 +802,16 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-    txtaux(4).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtAux(4).Text = Format(vFecha, "dd/mm/yyyy") '<===
 End Sub
 
 
 Private Sub mnModificar_Click()
     'Comprobaciones
     '--------------
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
-    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
@@ -848,7 +821,7 @@ Private Sub mnModificar_Click()
     
     'Preparamos para modificar
     '-------------------------
-    If BLOQUEADesdeFormulario2(Me, Adodc1, 1) Then BotonModificar
+    If BLOQUEADesdeFormulario2(Me, adodc1, 1) Then BotonModificar
 End Sub
 
 
@@ -880,7 +853,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     '**************************************************************++
     
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "N||||0|;S|txtAux(1)|T|Serie|700|;S|txtAux(2)|T|Factura|1000|;S|txtAux(3)|T|Fecha Fra.|1250|;"
@@ -897,32 +870,31 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.Columns(6).Alignment = dbgCenter
     DataGrid1.Columns(7).Alignment = dbgLeft
     
-'   DataGrid1.Columns(2).Alignment = dbgRight
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtaux(Index)
+    ConseguirFocoLin txtAux(Index)
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 1, 2 ' <1> = socio <2> = partida
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         
         Case 3, 5 ' lectura anterior / lectura actual
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
              
         Case 4 ' fecha de lectura actual
             '[Monica]28/08/2013: no comprobamos que la fecha esté en la campaña
-            PonerFormatoFecha txtaux(Index)
+            PonerFormatoFecha txtAux(Index)
             
         Case 6
-            RefAnt = txtaux(Index)
+            RefAnt = txtAux(Index)
         Case 7
-            BancoAnt = txtaux(Index)
+            BancoAnt = txtAux(Index)
     End Select
     
 End Sub
@@ -943,7 +915,7 @@ Dim Limite As Long
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-         If ExisteCP(txtaux(0)) Then B = False
+         If ExisteCP(txtAux(0)) Then B = False
     End If
     
     If B And Modo = 4 Then
@@ -968,8 +940,8 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
        If KeyAscii = 13 Then 'ENTER
             If Modo = 4 Then
                 '050509 cmdAceptar_Click 'ModificarExistencia
-                RefAnt = txtaux(6)
-                BancoAnt = txtaux(7)
+                RefAnt = txtAux(6)
+                BancoAnt = txtAux(7)
                 
                 cmdAceptar_Click
                 'ModificarLinea
@@ -1009,20 +981,12 @@ On Error GoTo EKeyD
     
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
-'050509
             cmdAceptar_Click
-'            ModificarLinea
-            
-'            If Me.DataGridAux(0).Bookmark > 0 Then
-'                DataGridAux(0).Bookmark = DataGridAux(0).Bookmark - 1
-'            End If
             If Ok Then PasarAntReg
         Case 40 'Desplazamiento Flecha Hacia Abajo
-            'ModificarExistencia
-'050509
                 
-            RefAnt = txtaux(6)
-            BancoAnt = txtaux(7)
+            RefAnt = txtAux(6)
+            BancoAnt = txtAux(7)
             
             cmdAceptar_Click
 '            ModificarLinea
@@ -1035,29 +999,24 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If Me.DataGrid1.Bookmark < Me.Adodc1.Recordset.RecordCount Then
-'        DataGridAux(0).Row = DataGridAux(0).Row + 1
+    If Me.DataGrid1.Bookmark < Me.adodc1.Recordset.RecordCount Then
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
         BotonModificar
-        PonFoco txtaux(6)
-    ElseIf DataGrid1.Bookmark = Adodc1.Recordset.RecordCount Then
+        PonFoco txtAux(6)
+    ElseIf DataGrid1.Bookmark = adodc1.Recordset.RecordCount Then
         PonerFocoBtn cmdAceptar
-'        BotonModificar
-'        PonFoco txtAux(6)
     End If
 End Sub
 
 Private Sub PasarAntReg()
 'Nos situamos en el siguiente registro
     If Me.DataGrid1.Bookmark > 1 Then
-'        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGrid1.Bookmark = DataGrid1.Bookmark - 1
         BotonModificar
-        PonFoco txtaux(6)
+        PonFoco txtAux(6)
     ElseIf DataGrid1.Bookmark = 1 Then
-'        PonerFocoBtn Me.cmdAceptar
         BotonModificar
-        PonFoco txtaux(6)
+        PonFoco txtAux(6)
     End If
 End Sub
 

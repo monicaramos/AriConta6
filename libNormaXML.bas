@@ -127,7 +127,7 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
     SQL = SQL & " as fecvenci,impvenci,ctabanc1,cobros.entidad"
     SQL = SQL & ",cobros.oficina,cobros.control,cobros.cuentaba,text33csb,text41csb,cobros.gastos,cobros.iban"
     SQL = SQL & ",cobros.nomclien,cobros.nifclien,cobros.domclien,cobros.cpclien,cobros.pobclien,cobros.proclien,cobros.codpais,bics.bic,cobros.referencia,cuentas.SEPA_Refere,cuentas.SEPA_FecFirma  from cobros"
-    SQL = SQL & "  left join bics on cobros.oficina=bics.entidad inner join cuentas on "
+    SQL = SQL & "  left join bics on cobros.entidad=bics.entidad inner join cuentas on "
     SQL = SQL & " cobros.codmacta = cuentas.codmacta WHERE "
     SQL = SQL & " codrem = " & RecuperaValor(Remesa_, 1)
     SQL = SQL & " AND anyorem=" & RecuperaValor(Remesa_, 2)

@@ -434,14 +434,14 @@ End Sub
 '0.- Modificar recibo
 '1.- Crear dislette
 Private Sub BotonModificar(vOp As Byte)
-Dim i As Integer
+Dim I As Integer
 
 
     If vUsu.Nivel > 1 Then Exit Sub
 
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     'Si tiporemesa NO es efecto, NO genera diskett ni na
-    If Val(Adodc1.Recordset!Tiporem) <> 1 And vOp = 1 Then
+    If Val(adodc1.Recordset!Tiporem) <> 1 And vOp = 1 Then
         MsgBox "No hay soporte fisico para talones / pagarés", vbExclamation
         Exit Sub
     End If
@@ -451,10 +451,10 @@ Dim i As Integer
     'Si es modificar rcibos o para los talones vtos, modificar cuenta banco
     If vOp <= 1 Then
         CadenaDesdeOtroForm = ""
-        If Val(Adodc1.Recordset!Tiporem) = 1 Then
-            If Asc(UCase(Adodc1.Recordset!Situacion)) > Asc("B") Then CadenaDesdeOtroForm = "No se puede modificar la remesa en esta situacion"
+        If Val(adodc1.Recordset!Tiporem) = 1 Then
+            If Asc(UCase(adodc1.Recordset!Situacion)) > Asc("B") Then CadenaDesdeOtroForm = "No se puede modificar la remesa en esta situacion"
         Else
-            If Asc(UCase(Adodc1.Recordset!Situacion)) <> Asc("F") Then CadenaDesdeOtroForm = "Debe estar en cancelacion cliente"
+            If Asc(UCase(adodc1.Recordset!Situacion)) <> Asc("F") Then CadenaDesdeOtroForm = "Debe estar en cancelacion cliente"
         End If
         If CadenaDesdeOtroForm <> "" Then
             MsgBox CadenaDesdeOtroForm, vbExclamation
@@ -463,9 +463,9 @@ Dim i As Integer
     End If
     
     
-    If BloqueoManual(True, "ModRemesas", CStr(Adodc1.Recordset!Codigo & "/" & Adodc1.Recordset!Anyo)) Then
+    If BloqueoManual(True, "ModRemesas", CStr(adodc1.Recordset!Codigo & "/" & adodc1.Recordset!Anyo)) Then
 
-        If Val(Adodc1.Recordset!Tiporem) > 1 Then
+        If Val(adodc1.Recordset!Tiporem) > 1 Then
             frmVarios.Opcion = 25
             frmVarios.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
@@ -482,18 +482,18 @@ Dim i As Integer
                 End If
             End If
         Else
-            CadenaDesdeOtroForm = Adodc1.Recordset!Codigo & "|" & Adodc1.Recordset!Anyo & "|" & Adodc1.Recordset!Situacion & "|" & Adodc1.Recordset!fecremesa & "|"
+            CadenaDesdeOtroForm = adodc1.Recordset!Codigo & "|" & adodc1.Recordset!Anyo & "|" & adodc1.Recordset!Situacion & "|" & adodc1.Recordset!fecremesa & "|"
             If vOp = 0 Then
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & "|"
                 frmVarios.Opcion = 6  'o lo k sea
                 
             Else
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Adodc1.Recordset!codmacta & "|"
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & adodc1.Recordset!codmacta & "|"
                 frmVarios.Opcion = 7
             End If
             
             'Indicamos tb el tipo de remesa
-            CadenaDesdeOtroForm = CadenaDesdeOtroForm & Adodc1.Recordset!DescripcionT & "|" & Adodc1.Recordset!Tiporem & "|"
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & adodc1.Recordset!DescripcionT & "|" & adodc1.Recordset!Tiporem & "|"
             
             frmVarios.Show vbModal
     
@@ -523,23 +523,23 @@ Dim SQL As String
     If vUsu.Nivel > 1 Then Exit Sub
     
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     If Not SepuedeBorrar Then Exit Sub
     
     'Boqueo, borro y sigo
-    If Val(Adodc1.Recordset!Tiporem) = 2 Then
+    If Val(adodc1.Recordset!Tiporem) = 2 Then
         SQL = "Pagaré"
-    ElseIf Val(Adodc1.Recordset!Tiporem) = 3 Then
+    ElseIf Val(adodc1.Recordset!Tiporem) = 3 Then
         SQL = "Talón"
     Else
         SQL = "Efectos"
     End If
     SQL = vbCrLf & "Tipo :  " & SQL
     SQL = "Seguro que desea eliminar la remesa:" & SQL
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset!Codigo
-    SQL = SQL & vbCrLf & "Año: " & Adodc1.Recordset!Anyo
-    SQL = SQL & vbCrLf & "Banco: " & Adodc1.Recordset!codmacta & " " & Adodc1.Recordset!Nommacta
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset!Codigo
+    SQL = SQL & vbCrLf & "Año: " & adodc1.Recordset!Anyo
+    SQL = SQL & vbCrLf & "Banco: " & adodc1.Recordset!codmacta & " " & adodc1.Recordset!Nommacta
     
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         If BloqueoManual(True, "Remesas", "Remesas") Then
@@ -548,25 +548,25 @@ Dim SQL As String
             If Tipo = 1 Then
             
             
-                SQL = "Delete from remesas where codigo=" & Adodc1.Recordset!Codigo
-                SQL = SQL & " AND anyo =" & Adodc1.Recordset!Anyo
-                SQL = SQL & " AND tiporem =" & Adodc1.Recordset!Tiporem
+                SQL = "Delete from remesas where codigo=" & adodc1.Recordset!Codigo
+                SQL = SQL & " AND anyo =" & adodc1.Recordset!Anyo
+                SQL = SQL & " AND tiporem =" & adodc1.Recordset!Tiporem
                 Conn.Execute SQL
             
                 'Agosto2013  Ponemos a null la cuenta real de cobroctabanc2
                 'Pongo A NULL todos los recibos con esos valores
                 SQL = "UPDATE scobro set codrem=NULL,anyorem=NULL,siturem=NULL,tiporem=NULL"
                 SQL = SQL & ",fecultco=NULL,impcobro=NULL,ctabanc2=NULL"
-                SQL = SQL & " where codrem=" & Adodc1.Recordset!Codigo
-                SQL = SQL & " AND anyorem =" & Adodc1.Recordset!Anyo
-                SQL = SQL & " AND tiporem =" & Adodc1.Recordset!Tiporem
+                SQL = SQL & " where codrem=" & adodc1.Recordset!Codigo
+                SQL = SQL & " AND anyorem =" & adodc1.Recordset!Anyo
+                SQL = SQL & " AND tiporem =" & adodc1.Recordset!Tiporem
                 Conn.Execute SQL
             
             Else
                 BorrarRemesaEnCancelacionTalonesPagares
             End If
             CargaGrid ""
-            Adodc1.Recordset.Cancel
+            adodc1.Recordset.Cancel
             BloqueoManual False, "Remesas", ""
         
         Else
@@ -582,7 +582,7 @@ End Sub
 Private Sub cmdCancelar_Click()
 Select Case Modo
 Case 1
-    If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+    If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
     
 Case 3
     CargaGrid
@@ -593,19 +593,19 @@ DataGrid2.SetFocus
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
-If Adodc1.Recordset.EOF Then
+If adodc1.Recordset.EOF Then
     MsgBox "Ningún registro a devolver.", vbExclamation
     Exit Sub
 End If
 
-Cad = Adodc1.Recordset.Fields(1) & "|"
-Cad = Cad & Adodc1.Recordset.Fields(2) & "|"
-Cad = Cad & Adodc1.Recordset.Fields(3) & "|"
+cad = adodc1.Recordset.Fields(1) & "|"
+cad = cad & adodc1.Recordset.Fields(2) & "|"
+cad = cad & adodc1.Recordset.Fields(3) & "|"
 
 
-RaiseEvent DatoSeleccionado(Cad)
+RaiseEvent DatoSeleccionado(cad)
 Unload Me
 End Sub
 
@@ -644,10 +644,8 @@ Private Sub Form_Load()
         .Buttons(14).Image = 26 'ELiminar rem y vtos
         
         .Buttons(16).Image = 15
-        
-        
-        
     End With
+    
     If Tipo = 2 Then
         Caption = Caption & "       PAGARES y TALONES"
         Label1.Caption = "Talones - Pagarés"
@@ -671,9 +669,6 @@ Private Sub Form_Load()
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
-    
-    
-    
     cmdRegresar.Visible = (DatosADevolverBusqueda <> "")
     
     'DespalzamientoVisible False
@@ -688,7 +683,7 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " from cuentas,tiporemesa2,tiposituacionrem,remesas left join tiporemesa on remesas.tipo=tiporemesa.tipo where remesas.codmacta=cuentas.codmacta"
     CadenaConsulta = CadenaConsulta & " and situacio=situacion and tiporemesa2.tipo=remesas.tiporem"
     
-    Set DataGrid2.DataSource = Adodc1
+    Set DataGrid2.DataSource = adodc1
     CargaGrid
     lblIndicador.Caption = ""
 End Sub
@@ -737,13 +732,9 @@ ELeerGuardarOrdenacion:
           
 End Sub
 
-
-
 Private Sub mnBuscar_Click()
     BotonBuscar
 End Sub
-
-
 
 Private Sub mnEliminar_Click()
     BotonEliminar
@@ -783,9 +774,6 @@ End Sub
 Private Sub mnVerTodos_Click()
     BotonVerTodos
 End Sub
-
-
-
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
@@ -830,7 +818,7 @@ Case 12
         
 Case 14
         'Eliminar remesa y VTO
-        If Not Me.Adodc1.Recordset.EOF Then BorrarRemesaVtos
+        If Not Me.adodc1.Recordset.EOF Then BorrarRemesaVtos
 Case 16
         Unload Me
         
@@ -843,10 +831,10 @@ End Sub
 Private Sub CargaGrid(Optional SQL As String)
    ' Dim J As Integer
     
-    Dim i As Integer
+    Dim I As Integer
     DataGrid2.EditActive = False
     DataGrid2.AllowUpdate = False
-    Adodc1.ConnectionString = Conn
+    adodc1.ConnectionString = Conn
     If SQL <> "" Then
         SQL = CadenaConsulta & " AND " & SQL
         Else
@@ -854,60 +842,60 @@ Private Sub CargaGrid(Optional SQL As String)
     End If
     
     SQL = SQL & PonerOrdenFiltro
-    Adodc1.RecordSource = SQL
-    Adodc1.CursorType = adOpenDynamic
-    Adodc1.LockType = adLockOptimistic
-    Adodc1.Refresh
+    adodc1.RecordSource = SQL
+    adodc1.CursorType = adOpenDynamic
+    adodc1.LockType = adLockOptimistic
+    adodc1.Refresh
     
     DataGrid2.AllowRowSizing = False
     DataGrid2.RowHeight = 290
     
     
-    i = 0
-    DataGrid2.Columns(i).Caption = "Tipo"
-    DataGrid2.Columns(i).Width = 900
+    I = 0
+    DataGrid2.Columns(I).Caption = "Tipo"
+    DataGrid2.Columns(I).Width = 900
     DataGrid2.HeadFont.Bold = True
     
-    i = 1
-        DataGrid2.Columns(i).Caption = "Cod."
-        DataGrid2.Columns(i).Width = 600
+    I = 1
+        DataGrid2.Columns(I).Caption = "Cod."
+        DataGrid2.Columns(I).Width = 600
 '        DataGrid2.Columns(i).NumberFormat = "000"
         
     
     'Leemos del vector en 2
-    i = 2
-        DataGrid2.Columns(i).Caption = "Año"
-        DataGrid2.Columns(i).Width = 700
+    I = 2
+        DataGrid2.Columns(I).Caption = "Año"
+        DataGrid2.Columns(I).Width = 700
     
     'El importe es campo calculado
-    i = 3
-        DataGrid2.Columns(i).Caption = "Fecha"
-        DataGrid2.Columns(i).Width = 1100
-        DataGrid2.Columns(i).NumberFormat = "dd/mm/yyyy"
+    I = 3
+        DataGrid2.Columns(I).Caption = "Fecha"
+        DataGrid2.Columns(I).Width = 1100
+        DataGrid2.Columns(I).NumberFormat = "dd/mm/yyyy"
     
     
     DataGrid2.Columns(4).Caption = "Norma"
     DataGrid2.Columns(4).Width = 850
     
-    i = 5
-        DataGrid2.Columns(i).Caption = "Situación"
-        DataGrid2.Columns(i).Width = 1300
+    I = 5
+        DataGrid2.Columns(I).Caption = "Situación"
+        DataGrid2.Columns(I).Width = 1300
         
    
-    i = 6
-    DataGrid2.Columns(i).Caption = "Cuenta"
-    DataGrid2.Columns(i).Width = 1000
+    I = 6
+    DataGrid2.Columns(I).Caption = "Cuenta"
+    DataGrid2.Columns(I).Width = 1000
                 
         
-    i = 7
-    DataGrid2.Columns(i).Caption = "Nombre"
-    DataGrid2.Columns(i).Width = 1980
+    I = 7
+    DataGrid2.Columns(I).Caption = "Nombre"
+    DataGrid2.Columns(I).Width = 1980
         
-    i = 8
-    DataGrid2.Columns(i).Caption = "Importe"
-    DataGrid2.Columns(i).Width = 1100
-    DataGrid2.Columns(i).Alignment = dbgRight
-    DataGrid2.Columns(i).NumberFormat = FormatoImporte
+    I = 8
+    DataGrid2.Columns(I).Caption = "Importe"
+    DataGrid2.Columns(I).Width = 1100
+    DataGrid2.Columns(I).Alignment = dbgRight
+    DataGrid2.Columns(I).NumberFormat = FormatoImporte
 
     DataGrid2.Columns(9).Width = 2000
        
@@ -918,8 +906,8 @@ Private Sub CargaGrid(Optional SQL As String)
         
     'Habilitamos modificar y eliminar
     If vUsu.Nivel < 2 Then
-        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
-        Toolbar1.Buttons(8).Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(8).Enabled = Not adodc1.Recordset.EOF
     End If
 End Sub
 
@@ -933,22 +921,22 @@ Private Function SepuedeBorrar() As Boolean
 'Dim SQL As String
     SepuedeBorrar = False
     
-    If Adodc1.Recordset!Situacion = "A" Or Adodc1.Recordset!Situacion = "B" Then
+    If adodc1.Recordset!Situacion = "A" Or adodc1.Recordset!Situacion = "B" Then
         SepuedeBorrar = True
     Else
         
         If Tipo = 1 Then
-            MsgBox "No se puede eliminar la remesa en esta situación: " & Adodc1.Recordset!Situacion, vbExclamation
+            MsgBox "No se puede eliminar la remesa en esta situación: " & adodc1.Recordset!Situacion, vbExclamation
         Else
             'TALONES PAGARES
-            If Adodc1.Recordset!Situacion = "F" Then
+            If adodc1.Recordset!Situacion = "F" Then
                 'En cancelacion si que dejo eliminar, ya que lo que se hace realmente es:
                 '1.- QUitar la remesa de los cobros
                 '2.- Quitar la remesa de la tabla remesas
                 '3.- poner en scarecepdoc LlevadoBanco=0
                 SepuedeBorrar = True
             Else
-                MsgBox "No se puede eliminar la remesa en esta situación: " & Adodc1.Recordset!Situacion, vbExclamation
+                MsgBox "No se puede eliminar la remesa en esta situación: " & adodc1.Recordset!Situacion, vbExclamation
             End If
         End If
     End If
@@ -985,16 +973,16 @@ End Sub
 Private Sub BorrarRemesaVtos()
 Dim SQL As String
 
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
-    If Val(Adodc1.Recordset!Tiporem) > 1 Then
+    If Val(adodc1.Recordset!Tiporem) > 1 Then
         MsgBox "Solo para efectos.", vbExclamation
         Exit Sub
     End If
     
     NumRegElim = 0
-    SQL = "Select count(*) from scobro where codrem=" & Adodc1.Recordset!Codigo
-    SQL = SQL & " AND anyorem =" & Adodc1.Recordset!Anyo
+    SQL = "Select count(*) from scobro where codrem=" & adodc1.Recordset!Codigo
+    SQL = SQL & " AND anyorem =" & adodc1.Recordset!Anyo
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then NumRegElim = DBLet(miRsAux.Fields(0), "N")
@@ -1003,11 +991,11 @@ Dim SQL As String
     
     SQL = "Va a borrar la remesa y los vencimientos para: "
     SQL = SQL & vbCrLf & " --------------------------------------------------------------------"
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset!Codigo
-    SQL = SQL & vbCrLf & "Año: " & Adodc1.Recordset!Anyo
-    SQL = SQL & vbCrLf & "Banco: " & Adodc1.Recordset!codmacta & " " & Adodc1.Recordset!Nommacta
-    SQL = SQL & vbCrLf & "Situación: " & Adodc1.Recordset!descsituacion
-    SQL = SQL & vbCrLf & "Importe: " & Format(Adodc1.Recordset!Importe, FormatoImporte)
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset!Codigo
+    SQL = SQL & vbCrLf & "Año: " & adodc1.Recordset!Anyo
+    SQL = SQL & vbCrLf & "Banco: " & adodc1.Recordset!codmacta & " " & adodc1.Recordset!Nommacta
+    SQL = SQL & vbCrLf & "Situación: " & adodc1.Recordset!descsituacion
+    SQL = SQL & vbCrLf & "Importe: " & Format(adodc1.Recordset!Importe, FormatoImporte)
     SQL = SQL & vbCrLf & "Vencimientos: " & NumRegElim
     SQL = SQL & vbCrLf & vbCrLf & "                         ¿Continuar?"
     NumRegElim = 0
@@ -1041,10 +1029,10 @@ Private Function HacerEliminacionRemesaVtos() As Boolean
     HacerEliminacionRemesaVtos = False
 
     'Eliminamos los vencimientos asociados
-    Conn.Execute "DELETE FROM scobro where codrem=" & Adodc1.Recordset!Codigo & " AND anyorem =" & Adodc1.Recordset!Anyo
+    Conn.Execute "DELETE FROM scobro where codrem=" & adodc1.Recordset!Codigo & " AND anyorem =" & adodc1.Recordset!Anyo
     
     'Eliminamos la remesa
-    Conn.Execute "DELETE FROM remesas where codigo=" & Adodc1.Recordset!Codigo & " AND anyo =" & Adodc1.Recordset!Anyo
+    Conn.Execute "DELETE FROM remesas where codigo=" & adodc1.Recordset!Codigo & " AND anyo =" & adodc1.Recordset!Anyo
     
     HacerEliminacionRemesaVtos = True
     Exit Function
@@ -1102,7 +1090,7 @@ Dim C As String
     Set miRsAux = New ADODB.Recordset
     C = "select id from slirecepdoc where (numserie,numfaccl,fecfaccl,numvenci) IN ("
     C = C & "SELECT numserie,codfaccl,fecfaccl,numorden FROM scobro WHERE "
-    C = C & " codrem=" & Adodc1.Recordset!Codigo & " AND anyorem = " & Adodc1.Recordset!Anyo & ")"
+    C = C & " codrem=" & adodc1.Recordset!Codigo & " AND anyorem = " & adodc1.Recordset!Anyo & ")"
     miRsAux.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         C = "UPDATE scarecepdoc set LlevadoBanco = 0 WHERE codigo = " & miRsAux!Id
@@ -1113,12 +1101,12 @@ Dim C As String
     
     'Ponemos los vencimientos sin remesa
     C = "UPDATE scobro SET codrem=NULL, anyorem=NULL,siturem=NULL where"
-    C = C & " codrem=" & Adodc1.Recordset!Codigo & " AND anyorem = " & Adodc1.Recordset!Anyo
+    C = C & " codrem=" & adodc1.Recordset!Codigo & " AND anyorem = " & adodc1.Recordset!Anyo
     Conn.Execute C
     
     'Borramos la remesa
     C = "DELETE from remesas WHERE "
-    C = C & " Codigo=" & Adodc1.Recordset!Codigo & " AND Anyo = " & Adodc1.Recordset!Anyo
+    C = C & " Codigo=" & adodc1.Recordset!Codigo & " AND Anyo = " & adodc1.Recordset!Anyo
     Conn.Execute C
     BorrarRemesaEnCancelacionTalonesPagares = True
     Exit Function
@@ -1138,14 +1126,14 @@ Dim C As String
     C = RecuperaValor(CadenaDesdeOtroForm, 2)
     
     If C <> "" Then
-        C = "UPDATE scobro set ctabanc2 ='" & C & "' WHERE codrem = " & Adodc1.Recordset!Codigo
-        C = C & " AND anyorem = " & Adodc1.Recordset!Anyo & " AND tiporem =" & Adodc1.Recordset!Tiporem
+        C = "UPDATE scobro set ctabanc2 ='" & C & "' WHERE codrem = " & adodc1.Recordset!Codigo
+        C = C & " AND anyorem = " & adodc1.Recordset!Anyo & " AND tiporem =" & adodc1.Recordset!Tiporem
         Conn.Execute C
         
         
         C = RecuperaValor(CadenaDesdeOtroForm, 2)
-        C = "UPDATE remesas set codmacta = '" & C & "' WHERE codigo = " & Adodc1.Recordset!Codigo
-        C = C & " AND anyo = " & Adodc1.Recordset!Anyo & " AND tiporem =" & Adodc1.Recordset!Tiporem
+        C = "UPDATE remesas set codmacta = '" & C & "' WHERE codigo = " & adodc1.Recordset!Codigo
+        C = C & " AND anyo = " & adodc1.Recordset!Anyo & " AND tiporem =" & adodc1.Recordset!Tiporem
         Conn.Execute C
     End If
         
@@ -1153,8 +1141,8 @@ Dim C As String
     
     C = RecuperaValor(CadenaDesdeOtroForm, 1)
     If C <> "" Then
-        C = "UPDATE remesas set fecremesa = '" & Format(C, FormatoFecha) & "' WHERE codigo = " & Adodc1.Recordset!Codigo
-        C = C & " AND anyo = " & Adodc1.Recordset!Anyo & " AND tiporem =" & Adodc1.Recordset!Tiporem
+        C = "UPDATE remesas set fecremesa = '" & Format(C, FormatoFecha) & "' WHERE codigo = " & adodc1.Recordset!Codigo
+        C = C & " AND anyo = " & adodc1.Recordset!Anyo & " AND tiporem =" & adodc1.Recordset!Tiporem
         Conn.Execute C
     End If
     'Fecha vto

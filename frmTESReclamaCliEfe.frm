@@ -1580,7 +1580,7 @@ Attribute frmCtas.VB_VarHelpID = -1
 Private SQL As String
 Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 Dim Fecha As Date
@@ -1811,7 +1811,6 @@ Dim CONT As Long
     RS.Close
     CONT = CONT + 1
 
-    'INSERT INTO shcocob (codigo, numserie, codfaccl, fecfaccl, numorden, impvenci, codmacta, nommacta, carta) VALUES (
     SQL = "SELECT tmpentrefechas.nomconam,cuentas.nommacta from tmpentrefechas, cuentas where codusu = " & vUsu.Codigo
     SQL = SQL & " and tmpentrefechas.nomconam = cuentas.codmacta "
     SQL = SQL & " group by 1"
@@ -1920,17 +1919,17 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Efectuar Reclamaciones Clientes"
 
-    For i = 0 To 1
-        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgDpto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-        Me.imgAgente(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    For I = 0 To 1
+        Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgDpto(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgAgente(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
         Me.imgCarta.Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    Next I
     
-    For i = 0 To 3
-        Me.imgFec(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next i
+    For I = 0 To 3
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next I
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -1991,7 +1990,7 @@ Private Sub imgCarta_Click()
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -2000,13 +1999,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tipos de forma de pago
         Case 0
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = False
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = False
+            Next I
         Case 1
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = True
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = True
+            Next I
     End Select
     
     Screen.MousePointer = vbDefault
@@ -2412,7 +2411,7 @@ End Sub
 
 Private Function CargarTemporal() As Boolean
 Dim RS As ADODB.Recordset
-Dim i As Long
+Dim I As Long
 Dim Importe As Currency
 Dim Dpto As Long
 
@@ -2423,10 +2422,10 @@ Dim Dpto As Long
     Screen.MousePointer = vbHourglass
     
     'Ahora haremos todo el proceso
-    i = Val(txtDias.Text)
-    i = i * -1
+    I = Val(txtDias.Text)
+    I = I * -1
     Fecha = CDate(txtFecha(4).Text)
-    Fecha = DateAdd("d", i, Fecha)
+    Fecha = DateAdd("d", I, Fecha)
     
     'Ya tenemos en F la fecha a partir de la cual reclamamos
     'Montamos el SQL
@@ -2434,15 +2433,15 @@ Dim Dpto As Long
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    i = 0
+    I = 0
     While Not RS.EOF
     
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
     
-    If i = 0 Then
+    If I = 0 Then
         MsgBox "No hay valores entre las fechas", vbExclamation
         Exit Function
     End If
@@ -2462,7 +2461,7 @@ Dim Dpto As Long
     'Nuevo. Febrero 2010. Departamento ira en codinmov
     
     
-    i = 1
+    I = 1
     While Not RS.EOF
     
         'Neuvo Febero 2010
@@ -2471,7 +2470,7 @@ Dim Dpto As Long
         Importe = RS!ImpVenci + DBLet(RS!Gastos, "N") - DBLet(RS!impcobro, "N")
         If DBLet(RS!recedocu, "N") = 1 Then Importe = 0
         If Importe > 0 Then
-            cad = i & ",'" & RS!NUmSerie & "','"
+            cad = I & ",'" & RS!NUmSerie & "','"
             cad = cad & RS!NumFactu & "','"
             cad = cad & Format(RS!FecFactu, FormatoFecha) & "',"
             cad = cad & RS!numorden & ",'"
@@ -2492,7 +2491,7 @@ Dim Dpto As Long
             cad = SQL & cad & ")"
             Conn.Execute cad
             
-            i = i + 1
+            I = I + 1
             
         End If
         RS.MoveNext
@@ -2500,7 +2499,7 @@ Dim Dpto As Long
     Wend
     RS.Close
     
-    If i = 1 Then
+    If I = 1 Then
         'Ningun valor con esa opcion
         MsgBox "No hay valores entre las fechas", vbExclamation
         Exit Function
@@ -2543,14 +2542,14 @@ Dim Dpto As Long
         miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         'Nuevo. Ya no llevamos NIF, llevaremos departamento
         RC = "" 'SERA EL NIF. Sera el DPTO
-        i = 1
+        I = 1
         If Not miRsAux.EOF Then
             'NIF -> codmacta
             RC = RS.Fields(0)
             Dpto = RS.Fields(1)
         Else
             'EOF
-            i = 0
+            I = 0
             MsgBox "No se encuentra la cuenta: " & RS.Fields(0), vbExclamation
             'NOS SALIMOS
             RS.Close
@@ -2558,7 +2557,7 @@ Dim Dpto As Long
         End If
         
         'NO es EOF y tiene NIF
-        If i > 0 Then
+        If I > 0 Then
             'Aumentamos el contador
             CONT = CONT + 1
             
@@ -2614,7 +2613,7 @@ Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
 Dim RS As ADODB.Recordset
-Dim i As Long
+Dim I As Long
 Dim Importe As Currency
 
 
@@ -2628,11 +2627,11 @@ Dim Importe As Currency
     If Not PonerDesdeHasta("cobros.agente", "AGE", Me.txtAgente(0), Me.txtNAgente(0), Me.txtAgente(1), Me.txtNAgente(1), "pDHAgente=""") Then Exit Function
             
     SQL = ""
-    For i = 1 To Me.ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(i).SubItems(2) & ","
+    For I = 1 To Me.ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            SQL = SQL & Me.ListView1(1).ListItems(I).SubItems(2) & ","
         End If
-    Next i
+    Next I
     
     If SQL <> "" Then
         ' quitamos la ultima coma

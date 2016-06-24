@@ -573,9 +573,9 @@ Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
 
@@ -664,9 +664,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Histórico de Reclamaciones"
 
-    For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     PrimeraVez = True
      
@@ -777,18 +777,18 @@ Private Sub txtCuentas_KeyDown(Index As Integer, KeyCode As Integer, Shift As In
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -815,8 +815,6 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 0, 1 'Cuentas
-            'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
-            
             RC = txtCuentas(Index).Text
             If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
                 txtCuentas(Index) = RC
@@ -835,7 +833,6 @@ Dim Hasta As Integer
             End If
     End Select
 
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 

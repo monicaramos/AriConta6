@@ -1831,6 +1831,7 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     'CLIENTES
     '-----------------------------------------------
     ' iva
+    
     SQL = "insert into tmpliquidaiva(codusu,codmacta,bases,ivas,codempre,periodo,ano,cliente)"
     
     SQL = SQL & " select " & vUsu.Codigo & ",cuenta,sum(base),sum(iva), a, b," & Anyo & ",0    "
@@ -1844,14 +1845,38 @@ Dim IvasBienInversion As String 'Para saber si hemos comprado bien de inversion
     SQL = SQL & " and factcli_totales.numserie = factcli.numserie and factcli_totales.numfactu = factcli.numfactu and factcli_totales.anofactu = factcli.anofactu "
     SQL = SQL & " group by 1,2"
     SQL = SQL & " union "
+    'isp
+    SQL = SQL & " select " & vUsu.Codigo & ",tiposiva.cuentare cuenta,sum(baseimpo) base,sum(impoiva) iva," & Empresa & " a," & Periodo & " b," & Anyo & ",0 "
+    SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
+    SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
+    SQL = SQL & " and factpro.codopera = 4 " ' tipo de operacion inversion sujeto pasivo
+    SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
+    SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
+    SQL = SQL & " group by 1,2"
+    SQL = SQL & " union "
+    'f isp
+    
+    
     ' recargo de equivalencia
-    SQL = SQL & " select " & vUsu.Codigo & ",tiposiva.cuentarr cuenta,sum(baseimpo) base,sum(imporec) iva," & Empresa & " a," & Periodo & " b," & Anyo & ",0 "
+    SQL = SQL & " select " & vUsu.Codigo & ",tiposiva.cuentarr cuenta,sum(baseimpo) base,sum(coalesce(imporec,0)) iva," & Empresa & " a," & Periodo & " b," & Anyo & ",0 "
     SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factcli_totales," & vCta & ".factcli"
     SQL = SQL & " where fecliqcl >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqcl <= '" & Format(vFecha2, FormatoFecha) & "'"
     SQL = SQL & " and tipodiva <> 3 " 'todos menos no deducible
     SQL = SQL & " and factcli_totales.codigiva = tiposiva.codigiva "
     SQL = SQL & " and factcli_totales.numserie = factcli.numserie and factcli_totales.numfactu = factcli.numfactu and factcli_totales.anofactu = factcli.anofactu "
     SQL = SQL & " group by 1,2"
+    'isp
+    SQL = SQL & " union "
+    SQL = SQL & " select " & vUsu.Codigo & ",tiposiva.cuentarr cuenta,sum(baseimpo) base,sum(coalesce(imporec,0)) iva," & Empresa & " a," & Periodo & " b," & Anyo & ",0 "
+    SQL = SQL & " from " & vCta & ".tiposiva," & vCta & ".factpro_totales," & vCta & ".factpro"
+    SQL = SQL & " where fecliqpr >= '" & Format(vFecha1, FormatoFecha) & "'  AND fecliqpr <= '" & Format(vFecha2, FormatoFecha) & "'"
+    SQL = SQL & " and factpro.codopera = 4 " ' tipo de operacion inversion sujeto pasivo
+    SQL = SQL & " and factpro_totales.numserie = factpro.numserie and factpro_totales.numregis = factpro.numregis and factpro_totales.anofactu = factpro.anofactu "
+    SQL = SQL & " and factpro_totales.codigiva = tiposiva.codigiva "
+    SQL = SQL & " group by 1,2"
+    'f isp
+        
+    
     SQL = SQL & " ) aaaaa "
     
     SQL = SQL & " group by 1,2"

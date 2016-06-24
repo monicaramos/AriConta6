@@ -123,11 +123,12 @@ Private mvarconce303 As Integer 'copia local
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
-Private Rs As Recordset
+Private RS As Recordset
 Private RC As Byte
 
 
 Private mvarEsMultiseccion As Boolean
+Private mvarContabApteIva0 As Boolean
 
 
 
@@ -973,6 +974,22 @@ Public Property Let EsMultiseccion(ByVal vData As Boolean)
 End Property
 
 
+' Contabiliza o no el apunte de iva 0
+Public Property Get ContabApteIva0() As Boolean
+'se usa cuando se asigna un valor a la propiedad, en el
+'lado derecho de la asignacion
+'Syntax: Debug.Print X.nomempre
+     ContabApteIva0 = mvarContabApteIva0
+End Property
+
+
+Public Property Let ContabApteIva0(ByVal vData As Boolean)
+'se usa cuando se asigna un valor a la propiedad, en el
+'lado izquierdo de la asignacion
+'Syntax: X.numdigi10 = 5
+     mvarContabApteIva0 = vData
+End Property
+
 
 Public Property Let CtaHPDeudor(ByVal vData As String)
 'se usa cuando se asigna un valor a la propiedad, en el
@@ -1134,74 +1151,74 @@ End Property
 
 
 '****   LEER  ***
-Public Function Leer() As Byte
+Public Function leer() As Byte
     On Error GoTo Err3
     SQL = "SELECT * FROM parametros"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic
-    If Rs.EOF Then
-        Leer = 1
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic
+    If RS.EOF Then
+        leer = 1
         'ELSE
         Else
-            mvarfechaini = Rs!fechaini
-            mvarfechafin = Rs!fechafin
-            mvarautocoste = Rs!autocoste
-            mvaremitedia = Rs!emitedia
-            mvarlistahco = Rs!listahco
-            mvarnumdiapr = Rs!numdiapr
-            mvarconcefpr = DBLet(Rs!concefpr, "N")
-            mvarconceapr = DBLet(Rs!conceapr, "N")
-            mvarnumdiacl = DBLet(Rs!numdiacl, "N")
-            mvarconcefcl = DBLet(Rs!concefcl, "N")
-            mvarconceacl = DBLet(Rs!conceacl, "N")
-            mvarlimimpcl = Rs!limimpcl
+            mvarfechaini = RS!fechaini
+            mvarfechafin = RS!fechafin
+            mvarautocoste = RS!autocoste
+            mvaremitedia = RS!emitedia
+            mvarlistahco = RS!listahco
+            mvarnumdiapr = RS!numdiapr
+            mvarconcefpr = DBLet(RS!concefpr, "N")
+            mvarconceapr = DBLet(RS!conceapr, "N")
+            mvarnumdiacl = DBLet(RS!numdiacl, "N")
+            mvarconcefcl = DBLet(RS!concefcl, "N")
+            mvarconceacl = DBLet(RS!conceacl, "N")
+            mvarlimimpcl = RS!limimpcl
             'mvarconpresu = RS!conpresu
-            mvarperiodos = Rs!periodos
-            mvargrupogto = DBLet(Rs!grupogto)
-            mvargrupovta = DBLet(Rs!grupovta)
-            mvarctaperga = DBLet(Rs!ctaperga)
-            mvarabononeg = Rs!abononeg
-            mvargrupoord = DBLet(Rs!grupoord)
-            mvartinumfac = Rs!tinumfac
-            mvarmodhcofa = Rs!modhcofa
-            mvaranofactu = Rs!anofactu
-            mvarperfactu = Rs!perfactu
-            mvarnctafact = Rs!nctafact
-            mvarAsienActAuto = Rs!AsienActAuto
-            mvarCodiNume = Rs!CodiNume
+            mvarperiodos = RS!periodos
+            mvargrupogto = DBLet(RS!grupogto)
+            mvargrupovta = DBLet(RS!grupovta)
+            mvarctaperga = DBLet(RS!ctaperga)
+            mvarabononeg = RS!abononeg
+            mvargrupoord = DBLet(RS!grupoord)
+            mvartinumfac = RS!tinumfac
+            mvarmodhcofa = RS!modhcofa
+            mvaranofactu = RS!anofactu
+            mvarperfactu = RS!perfactu
+            mvarnctafact = RS!nctafact
+            mvarAsienActAuto = RS!AsienActAuto
+            mvarCodiNume = RS!CodiNume
             
             'Modificacion del 28 de Octubre de 2003
-            mvarContabilizaFactura = DBLet(Rs!ContabilizaFact, "N")
+            mvarContabilizaFactura = DBLet(RS!ContabilizaFact, "N")
             
-            mvarConstructoras = (Rs!Constructoras = 1)
-            
-            '++
-            mvarPathAyuda = DBLet(Rs!PathAyuda, "T")
-            mvarFecEjerAct = DBLet(Rs!FecEjerAct, "N")
-            mvarHayAriges = DBLet(Rs!HayAriges, "N")
-            
-            mvarWebSoporte = DBLet(Rs!WebSoporte, "T")
-            mvarMailSoporte = DBLet(Rs!MailSoporte, "T")
+            mvarConstructoras = (RS!Constructoras = 1)
             
             '++
-            mvarctahpdeudor = DBLet(Rs!CtaHPDeudor, "T")
-            mvarctahpacreedor = DBLet(Rs!CtaHPAcreedor, "T")
-            mvarnumdia303 = DBLet(Rs!diario303, "N")
-            mvarconce303 = DBLet(Rs!conce303, "N")
+            mvarPathAyuda = DBLet(RS!PathAyuda, "T")
+            mvarFecEjerAct = DBLet(RS!FecEjerAct, "N")
+            mvarHayAriges = DBLet(RS!HayAriges, "N")
+            
+            mvarWebSoporte = DBLet(RS!WebSoporte, "T")
+            mvarMailSoporte = DBLet(RS!MailSoporte, "T")
+            
+            '++
+            mvarctahpdeudor = DBLet(RS!CtaHPDeudor, "T")
+            mvarctahpacreedor = DBLet(RS!CtaHPAcreedor, "T")
+            mvarnumdia303 = DBLet(RS!diario303, "N")
+            mvarconce303 = DBLet(RS!conce303, "N")
             
             ParametrosNuevos
 
-            If ASignarConceptosFacturas Then Leer = 0
+            If ASignarConceptosFacturas Then leer = 0
     End If
 
-    Rs.Close
+    RS.Close
     
     
                     'Para que lea si hay bloqueo de cuentas
-    If Leer = 0 Then ObtenerCuentasBloqueadas
+    If leer = 0 Then ObtenerCuentasBloqueadas
     
     
-    Set Rs = Nothing
+    Set RS = Nothing
     Exit Function
 
 Err3:
@@ -1210,8 +1227,8 @@ Err3:
     Mens = Mens & "Descripción: " & Err.Description
     MsgBox Mens, vbExclamation
     On Error Resume Next
-    CerrarRs Rs
-    Leer = 1
+    CerrarRs RS
+    leer = 1
     Err.Clear
 End Function
 
@@ -1231,58 +1248,60 @@ Dim Nuevos As String
             mvarAutomocion = ""
             mvarEnviarPorOutlook = False
             mvarEsMultiseccion = False
-            
+            mvarContabApteIva0 = False
             Nuevos = ""
             
             
             On Error Resume Next
             
-            mvarCCenFacturas = DBLet(Rs!CCenFacturas, "B")
+            mvarCCenFacturas = DBLet(RS!CCenFacturas, "B")
             If Err.Number <> 0 Then AgregarMsg Nuevos, "CCenFacturas"
             
-            mvarSubgrupo1 = DBLet(Rs!Subgrupo1, "T")
+            mvarSubgrupo1 = DBLet(RS!Subgrupo1, "T")
             If Err.Number <> 0 Then AgregarMsg Nuevos, "Subgrupo1"
             
-            mvarSubgrupo2 = DBLet(Rs!Subgrupo2, "T")
+            mvarSubgrupo2 = DBLet(RS!Subgrupo2, "T")
             If Err.Number <> 0 Then AgregarMsg Nuevos, "Subgrupo2"
             
-            If Not IsNull(Rs!FechaActiva) Then mvarFechaActiva = Rs!FechaActiva
+            If Not IsNull(RS!FechaActiva) Then mvarFechaActiva = RS!FechaActiva
             If Err.Number <> 0 Then AgregarMsg Nuevos, "FechaActiva"
             
             
-            mvarEnlazaCtasMultibase = DBLet(Rs!enlaza_cta, "T")
+            mvarEnlazaCtasMultibase = DBLet(RS!enlaza_cta, "T")
             If Err.Number <> 0 Then AgregarMsg Nuevos, "enlaza_cta"
             
-            mvarAgenciaViajes = (DBLet(Rs!AgenciaViajes, "N") = 1)
+            mvarAgenciaViajes = (DBLet(RS!AgenciaViajes, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "AgenciaViajes"
             
-            mvarNuevoPlanContable = (DBLet(Rs!NuevaPlan, "N") = 1)
+            mvarNuevoPlanContable = (DBLet(RS!NuevaPlan, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "NuevaPlan"
             
-            mvarAutomocion = DBLet(Rs!Automocion, "T")
+            mvarAutomocion = DBLet(RS!Automocion, "T")
             If Err.Number <> 0 Then AgregarMsg Nuevos, "Automocion"
             
             
             
-            mvarTicketsEn340LetraSerie = (DBLet(Rs!TicketsEn340LetraSerie, "N") = 1)
+            mvarTicketsEn340LetraSerie = (DBLet(RS!TicketsEn340LetraSerie, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "TicketsEn340LetraSerie"
             
-            mvarPresentacion349Mensual = (DBLet(Rs!Presentacion349Mensual, "N") = 1)
+            mvarPresentacion349Mensual = (DBLet(RS!Presentacion349Mensual, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "Presentacion349Mensual"
             
             
-            mvarEnviarPorOutlook = (DBLet(Rs!EnvioDesdeOutlook, "N") = 1)
+            mvarEnviarPorOutlook = (DBLet(RS!EnvioDesdeOutlook, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "EnvioDesdeOutlook"
             
-            mvarGranEmpresa = (DBLet(Rs!GranEmpresa, "N") = 1)
+            mvarGranEmpresa = (DBLet(RS!GranEmpresa, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "GranEmpresa"
             
-            mvarTraspasCtasBanco = DBLet(Rs!TraspasCtasBanco, "N")
+            mvarTraspasCtasBanco = DBLet(RS!TraspasCtasBanco, "N")
             If Err.Number <> 0 Then AgregarMsg Nuevos, "Trapaso bancos entre secciones"
             
-            mvarEsMultiseccion = (DBLet(Rs!EsMultiseccion, "N") = 1)
+            mvarEsMultiseccion = (DBLet(RS!EsMultiseccion, "N") = 1)
             If Err.Number <> 0 Then AgregarMsg Nuevos, "Multisección"
             
+            mvarContabApteIva0 = (DBLet(RS!ContabApteIva0, "N") = 1)
+            If Err.Number <> 0 Then AgregarMsg Nuevos, "Contabilizacion Apte Iva 0"
             
             
             
@@ -1298,7 +1317,7 @@ Private Sub AgregarMsg(CADENA As String, Trozo As String)
 End Sub
 
 Private Function ASignarConceptosFacturas() As Boolean
-Dim AUx As String
+Dim Aux As String
     
     On Error GoTo EASignarConceptosFacturas
     'Private mvarconcefpr As Integer
@@ -1313,25 +1332,25 @@ Dim AUx As String
     'Private mvarAmpliacionFacurasPro As String
     
     'FACTURAS PROVEEDORES
-    AUx = "tipoconce"
-    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconcefpr), "N", AUx)
-    If SQL = "" And AUx = "tipoconce" Then Exit Function
+    Aux = "tipoconce"
+    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconcefpr), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
     mvarAmpliacionFacurasPro = SQL & "|"
         
-    AUx = "tipoconce"
-    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconceapr), "N", AUx)
-    If SQL = "" And AUx = "tipoconce" Then Exit Function
+    Aux = "tipoconce"
+    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconceapr), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
     mvarAmpliacionFacurasPro = mvarAmpliacionFacurasPro & SQL & "|"
     
     'FACTURAS CLIENTES
-    AUx = "tipoconce"
-    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconcefcl), "N", AUx)
-    If SQL = "" And AUx = "tipoconce" Then Exit Function
+    Aux = "tipoconce"
+    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconcefcl), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
     mvarAmpliacionFacurasCli = SQL & "|"
         
-    AUx = "tipoconce"
-    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconceacl), "N", AUx)
-    If SQL = "" And AUx = "tipoconce" Then Exit Function
+    Aux = "tipoconce"
+    SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(mvarconceacl), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
     mvarAmpliacionFacurasCli = mvarAmpliacionFacurasCli & SQL & "|"
     
     
@@ -1354,16 +1373,16 @@ Public Sub ObtenerCuentasBloqueadas()
     On Error GoTo EmvarCuentasBloqueadas
     
     mvarCuentasBloqueadas = ""
-    Set Rs = Nothing
-    Set Rs = New ADODB.Recordset
+    Set RS = Nothing
+    Set RS = New ADODB.Recordset
     SQL = "Select codmacta,fecbloq from cuentas where apudirec = 'S' and not (fecbloq is null)"
     
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-        mvarCuentasBloqueadas = mvarCuentasBloqueadas & Rs!codmacta & ":" & Rs!fecbloq & "|"
-        Rs.MoveNext
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        mvarCuentasBloqueadas = mvarCuentasBloqueadas & RS!codmacta & ":" & RS!FecBloq & "|"
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
 EmvarCuentasBloqueadas:
     If Err.Number <> 0 Then MuestraError Err.Number, "Obtener CuentasBloqueadas"

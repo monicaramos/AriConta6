@@ -919,9 +919,6 @@ Private Sub cmdVtoDestino(Index As Integer)
 
     Else
     
-'        frmTESReclamaCliImp.pCodigo = Me.lw1.SelectedItem
-'        frmTESReclamaCliImp.Show vbModal
-
     End If
 End Sub
 
@@ -947,7 +944,7 @@ End Sub
 
     
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -992,7 +989,7 @@ Dim Img As Image
     CommitConexion  'Porque son listados. No hay nada dentro transaccion
     
         
-    h = FrameReclamacionesCliente.Height + 120
+    H = FrameReclamacionesCliente.Height + 120
     W = FrameReclamacionesCliente.Width
     
     FrameReclamacionesCliente.Visible = False
@@ -1001,7 +998,7 @@ Dim Img As Image
     VerTodos = False
     
     Me.Width = W + 300
-    Me.Height = h + 400
+    Me.Height = H + 400
     
     Me.cmdCancelar(0).Cancel = True
     
