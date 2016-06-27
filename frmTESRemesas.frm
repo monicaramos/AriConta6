@@ -17,19 +17,185 @@ Begin VB.Form frmTESRemesas
    ScaleHeight     =   9120
    ScaleWidth      =   16035
    StartUpPosition =   2  'CenterScreen
-   Begin MSComDlg.CommonDialog cd1 
-      Left            =   6930
-      Top             =   150
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
+   Begin VB.Frame Frame1 
+      BorderStyle     =   0  'None
+      Height          =   9015
+      Left            =   30
+      TabIndex        =   20
+      Top             =   30
+      Visible         =   0   'False
+      Width           =   15915
+      Begin VB.Frame FrameBotonGnral2 
+         Height          =   705
+         Left            =   4020
+         TabIndex        =   28
+         Top             =   180
+         Width           =   2355
+         Begin MSComctlLib.Toolbar Toolbar2 
+            Height          =   330
+            Left            =   210
+            TabIndex        =   29
+            Top             =   240
+            Width           =   1935
+            _ExtentX        =   3413
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   4
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Grabación Fichero"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Abono Remesa"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Devolución"
+               EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Eliminar remesa y Vencimientos"
+               EndProperty
+            EndProperty
+         End
+      End
+      Begin VB.Frame Frame2 
+         Height          =   705
+         Left            =   240
+         TabIndex        =   21
+         Top             =   180
+         Width           =   3585
+         Begin MSComctlLib.Toolbar Toolbar1 
+            Height          =   330
+            Left            =   180
+            TabIndex        =   1
+            Top             =   240
+            Width           =   3135
+            _ExtentX        =   5530
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   10
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Nuevo"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Modificar"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Eliminar"
+                  Object.Tag             =   "2"
+                  Object.Width           =   1e-4
+               EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Buscar"
+               EndProperty
+               BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Ver Todos"
+                  Object.Tag             =   "0"
+               EndProperty
+               BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Style           =   3
+               EndProperty
+               BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Imprimir"
+               EndProperty
+               BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
+                  Object.ToolTipText     =   "Salir"
+               EndProperty
+               BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
+                  Style           =   3
+               EndProperty
+            EndProperty
+         End
+      End
+      Begin MSComctlLib.ListView lw1 
+         Height          =   7305
+         Left            =   240
+         TabIndex        =   22
+         Top             =   990
+         Width           =   15525
+         _ExtentX        =   27384
+         _ExtentY        =   12885
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   0
+      End
+      Begin MSComctlLib.Toolbar ToolbarAyuda 
+         Height          =   390
+         Left            =   15270
+         TabIndex        =   23
+         Top             =   210
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   688
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ayuda"
+            EndProperty
+         EndProperty
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   14670
+         TabIndex        =   0
+         Top             =   7860
+         Width           =   975
+      End
    End
    Begin VB.Frame FrameCreacionRemesa 
       BorderStyle     =   0  'None
       Height          =   9045
-      Left            =   60
+      Left            =   30
       TabIndex        =   19
-      Top             =   -90
+      Top             =   -60
       Visible         =   0   'False
       Width           =   15855
       Begin VB.Frame FrameModRem 
@@ -1378,175 +1544,12 @@ Begin VB.Form frmTESRemesas
          Width           =   1575
       End
    End
-   Begin VB.Frame Frame1 
-      BorderStyle     =   0  'None
-      Height          =   9015
-      Left            =   30
-      TabIndex        =   20
-      Top             =   30
-      Visible         =   0   'False
-      Width           =   15915
-      Begin VB.Frame FrameBotonGnral2 
-         Height          =   705
-         Left            =   4020
-         TabIndex        =   28
-         Top             =   180
-         Width           =   1965
-         Begin MSComctlLib.Toolbar Toolbar2 
-            Height          =   330
-            Left            =   210
-            TabIndex        =   29
-            Top             =   240
-            Width           =   1545
-            _ExtentX        =   2725
-            _ExtentY        =   582
-            ButtonWidth     =   609
-            ButtonHeight    =   582
-            AllowCustomize  =   0   'False
-            Style           =   1
-            _Version        =   393216
-            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   3
-               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Grabación Fichero"
-               EndProperty
-               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Abono Remesa"
-               EndProperty
-               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Devolución"
-               EndProperty
-            EndProperty
-         End
-      End
-      Begin VB.Frame Frame2 
-         Height          =   705
-         Left            =   240
-         TabIndex        =   21
-         Top             =   180
-         Width           =   3585
-         Begin MSComctlLib.Toolbar Toolbar1 
-            Height          =   330
-            Left            =   180
-            TabIndex        =   1
-            Top             =   240
-            Width           =   3135
-            _ExtentX        =   5530
-            _ExtentY        =   582
-            ButtonWidth     =   609
-            ButtonHeight    =   582
-            AllowCustomize  =   0   'False
-            Style           =   1
-            _Version        =   393216
-            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   10
-               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Nuevo"
-                  Object.Tag             =   "2"
-               EndProperty
-               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Modificar"
-                  Object.Tag             =   "2"
-               EndProperty
-               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Eliminar"
-                  Object.Tag             =   "2"
-                  Object.Width           =   1e-4
-               EndProperty
-               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Style           =   3
-               EndProperty
-               BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Buscar"
-               EndProperty
-               BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Ver Todos"
-                  Object.Tag             =   "0"
-               EndProperty
-               BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Style           =   3
-               EndProperty
-               BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Object.ToolTipText     =   "Imprimir"
-               EndProperty
-               BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Enabled         =   0   'False
-                  Object.Visible         =   0   'False
-                  Object.ToolTipText     =   "Salir"
-               EndProperty
-               BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-                  Enabled         =   0   'False
-                  Object.Visible         =   0   'False
-                  Style           =   3
-               EndProperty
-            EndProperty
-         End
-      End
-      Begin MSComctlLib.ListView lw1 
-         Height          =   7305
-         Left            =   240
-         TabIndex        =   22
-         Top             =   990
-         Width           =   15525
-         _ExtentX        =   27384
-         _ExtentY        =   12885
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   0
-      End
-      Begin MSComctlLib.Toolbar ToolbarAyuda 
-         Height          =   390
-         Left            =   15270
-         TabIndex        =   23
-         Top             =   210
-         Width           =   405
-         _ExtentX        =   714
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ayuda"
-            EndProperty
-         EndProperty
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   1
-         Left            =   14670
-         TabIndex        =   0
-         Top             =   7860
-         Width           =   975
-      End
+   Begin MSComDlg.CommonDialog cd1 
+      Left            =   6930
+      Top             =   150
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
    End
 End
 Attribute VB_Name = "frmTESRemesas"
@@ -1910,6 +1913,7 @@ Dim Img As Image
         .Buttons(1).Image = 47
         .Buttons(2).Image = 37
         .Buttons(3).Image = 45
+        .Buttons(4).Image = 41
     End With
     
     
@@ -2474,8 +2478,6 @@ Private Sub HacerToolBar2(Boton As Integer)
                 End If
             End If
                         
-                        
-            
             frmTESRemesasDev.Opcion = 9
             frmTESRemesasDev.SubTipo = 1
             If Not lw1.SelectedItem Is Nothing Then
@@ -2489,8 +2491,79 @@ Private Sub HacerToolBar2(Boton As Integer)
             If HaHabidoCambios Then CargaList
         
          
+        Case 4 ' ELIMINACION DE REMESA Y VENCIMIENTOS (LO UTILIZA REGAIXO PARA ELIMINAR FACTURACION AJENA)
+            If Me.lw1.SelectedItem Is Nothing Then Exit Sub
+            
+            If Asc(lw1.SelectedItem.SubItems(8)) > Asc("B") Then
+                MsgBox "Remesa abonada, no podemos eliminar remesa y vencimientos.", vbExclamation
+                Exit Sub
+            End If
+            
+            BorrarRemesaVtos
+                    
+         
     End Select
 End Sub
+
+Private Sub BorrarRemesaVtos()
+Dim SQL As String
+
+    NumRegElim = 0
+    SQL = "Select count(*) from cobros where codrem=" & lw1.SelectedItem.Text
+    SQL = SQL & " AND anyorem =" & lw1.SelectedItem.SubItems(1)
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not miRsAux.EOF Then NumRegElim = DBLet(miRsAux.Fields(0), "N")
+    miRsAux.Close
+    Set miRsAux = Nothing
+    
+    SQL = "Va a borrar la remesa y los vencimientos para: "
+    SQL = SQL & vbCrLf & " --------------------------------------------------------------------"
+    SQL = SQL & vbCrLf & "Código: " & lw1.SelectedItem.Text
+    SQL = SQL & vbCrLf & "Año: " & lw1.SelectedItem.SubItems(1)
+    SQL = SQL & vbCrLf & "Banco: " & lw1.SelectedItem.SubItems(4) & " " & lw1.SelectedItem.SubItems(5)
+    SQL = SQL & vbCrLf & "Situación: " & lw1.SelectedItem.SubItems(3)
+    SQL = SQL & vbCrLf & "Importe: " & Format(lw1.SelectedItem.SubItems(7), FormatoImporte)
+    SQL = SQL & vbCrLf & "Vencimientos: " & NumRegElim
+    SQL = SQL & vbCrLf & vbCrLf & "                         ¿Continuar?"
+    NumRegElim = 0
+    If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    
+    
+    SQL = "El proceso es irreversible"
+    SQL = SQL & vbCrLf & "Desea continuar?"
+    
+    If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    
+    
+    
+    Screen.MousePointer = vbHourglass
+    If HacerEliminacionRemesaVtos Then
+        'Cargar datos
+        CargaList
+    End If
+    Screen.MousePointer = vbDefault
+    
+End Sub
+
+Private Function HacerEliminacionRemesaVtos() As Boolean
+
+    On Error GoTo EHacerEliminacionRemesaVtos
+
+    HacerEliminacionRemesaVtos = False
+
+    'Eliminamos los vencimientos asociados
+    Conn.Execute "DELETE FROM cobros where codrem=" & lw1.SelectedItem.Text & " AND anyorem =" & lw1.SelectedItem.SubItems(1)
+    
+    'Eliminamos la remesa
+    Conn.Execute "DELETE FROM remesas where codigo=" & lw1.SelectedItem.Text & " AND anyo =" & lw1.SelectedItem.SubItems(1)
+    
+    HacerEliminacionRemesaVtos = True
+    Exit Function
+EHacerEliminacionRemesaVtos:
+    MuestraError Err.Number, "Function: HacerEliminacionRemesaVtos"
+End Function
+
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -2908,10 +2981,10 @@ Dim colCtas As Collection
             SQL = SQL & " AND cobros.fecfactu <= '" & Format(txtFecha(1).Text, FormatoFecha) & "'"
         
         'Codigo factura
-        If txtnumfac(0).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu >= '" & txtnumfac(0).Text & "'"
-        If txtnumfac(1).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu <= '" & txtnumfac(1).Text & "'"
+        If txtNumFac(0).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu >= '" & txtNumFac(0).Text & "'"
+        If txtNumFac(1).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu <= '" & txtNumFac(1).Text & "'"
     
     Else
         'Fecha factura
@@ -3121,7 +3194,7 @@ Dim colCtas As Collection
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub UltimoBancoRem(Leer As Boolean, Txt As TextBox)
+Private Sub UltimoBancoRem(leer As Boolean, Txt As TextBox)
 Dim NF As Integer
 Dim cad As String
 Dim Cad2 As String
@@ -3131,7 +3204,7 @@ On Error GoTo EUltimoBancoRem
 
     cad = App.Path & "\control.dat"
 
-    If Leer Then
+    If leer Then
         If Dir(cad) <> "" Then
             NF = FreeFile
             Open cad For Input As #NF
@@ -3323,7 +3396,7 @@ End Sub
 
 
 Private Sub txtNumFac_GotFocus(Index As Integer)
-    ConseguirFoco txtnumfac(Index), 3
+    ConseguirFoco txtNumFac(Index), 3
 End Sub
 
 Private Sub txtNumFac_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3341,12 +3414,12 @@ Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
-    txtnumfac(Index).Text = UCase(Trim(txtnumfac(Index).Text))
+    txtNumFac(Index).Text = UCase(Trim(txtNumFac(Index).Text))
     
     
     Select Case Index
         Case 0, 1 'numero de factura
-            PonerFormatoEntero txtnumfac(Index)
+            PonerFormatoEntero txtNumFac(Index)
     End Select
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no

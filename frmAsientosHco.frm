@@ -3513,7 +3513,6 @@ End Sub
 
 Private Sub ToolbarAux_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim LINASI As Long
-Dim Ampliacion As String
 
 
     'Fuerzo que se vean las lineas
@@ -3544,6 +3543,7 @@ Dim Ampliacion As String
             
             ' Llamamos a un formulario para introducir los importes e importarlo al asiento
             NumAsiPre = ""
+            Ampliacion = ""
             
             frmAsiLinAdd.TotalLineas = 0
             frmAsiLinAdd.Show vbModal
@@ -3561,7 +3561,7 @@ Dim Ampliacion As String
                 If Not miRsAux.EOF Then LINASI = DBLet(miRsAux.Fields(0), "N")
                 miRsAux.Close
                 
-                SQL = "SELECT cta,nomdocum,tmpconext.timported, tmpconext.timporteh,pos ,ccost, ctacontr, codconce, numdocum FROM tmpconext, asipre_lineas where codusu =" & vUsu.Codigo
+                SQL = "SELECT cta,nomdocum,tmpconext.timported, tmpconext.timporteh,pos ,ccost, ctacontr, codconce, numdocum, asipre_lineas.ampconce FROM tmpconext, asipre_lineas where codusu =" & vUsu.Codigo
                 SQL = SQL & " and asipre_lineas.numaspre = " & DBSet(NumAsiPre, "N") & " and asipre_lineas.linlapre = tmpconext.pos ORDER BY pos"
                 miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 SQL = ""
@@ -3570,7 +3570,7 @@ Dim Ampliacion As String
                     'numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost
                     SQL = SQL & ", (" & Data1.Recordset!NumDiari & "," & DBSet(Data1.Recordset!FechaEnt, "F") & "," & Data1.Recordset!NumAsien
                     SQL = SQL & "," & LINASI & ",'" & miRsAux!Cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
-                    SQL = SQL & "," & DBSet(Ampliacion, "T") & "," & DBSet(miRsAux!timported, "N", "S") & "," & DBSet(miRsAux!timporteH, "N", "S")
+                    SQL = SQL & "," & DBSet(miRsAux!Ampconce & " " & Ampliacion, "T") & "," & DBSet(miRsAux!timported, "N", "S") & "," & DBSet(miRsAux!timporteH, "N", "S")
                     SQL = SQL & "," & DBSet(miRsAux!ctacontr, "T")
                     If vParam.autocoste Then
                         SQL = SQL & "," & DBSet(miRsAux!CCost, "T") & ")"

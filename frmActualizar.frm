@@ -2486,14 +2486,21 @@ Dim PrimeraContrapartida As String
         Cad3 = "cuentarr"
         Cad2 = DevuelveDesdeBD("cuentare", "tiposiva", "codigiva", RsIvas!codigiva, "N", Cad3)
         If Cad2 <> "" Then
+        
             SQL = Mes & ",'" & Cad2 & "'," & DocConcAmp
             Cad2 = CadenaImporte(False, RsIvas!Impoiva, Importe0)
             SQL = SQL & "," & Cad2 & ","
             SQL = SQL & "NULL,'" & RF!codmacta & "','FRACLI',0)"
-'            If Not Importe0 Then
+            'dependiendo de si ContabilizarAptIva0 = 1 se contabiliza o no el iva
+            If Importe0 Then
+                If vParam.ContabApteIva0 Then
+                    Conn.Execute cad & SQL
+                    Mes = Mes + 1
+                End If
+            Else
                 Conn.Execute cad & SQL
                 Mes = Mes + 1
-'            End If
+            End If
             
             'La de recargo  1-----------------
             If Not IsNull(RsIvas!ImpoRec) Then
@@ -2547,11 +2554,14 @@ Dim PrimeraContrapartida As String
     
     
     A_Donde = "Leyendo lineas factura"
-    SQL = "Select factcli_lineas.* , cuentas.codmacta FROM factcli_lineas,Cuentas "
+'    SQL = "Select factcli_lineas.* , cuentas.codmacta FROM factcli_lineas,Cuentas "
+    SQL = "Select cuentas.codmacta, factcli_lineas.codccost, sum(factcli_lineas.baseimpo) baseimpo FROM factcli_lineas,Cuentas "
     SQL = SQL & " WHERE numserie='" & NUmSerie
     SQL = SQL & "' AND numfactu= " & NumFac
     SQL = SQL & " AND anofactu=" & NumDiari
     SQL = SQL & " AND factcli_lineas.codmacta = Cuentas.codmacta"
+    SQL = SQL & " group by 1,2 "
+    SQL = SQL & " order by 1,2 "
     RF.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     'Para cada linea insertamos
     Cad2 = ""
@@ -2817,10 +2827,19 @@ Dim TipoDIva As Byte
             Cad2 = CadenaImporte(True, RsIvas!Impoiva, Importe0)
             SQL = SQL & "," & Cad2 & ","
             SQL = SQL & "NULL,'" & RF!codmacta & "','FRAPRO',0)"
-'            If Not Importe0 Then
-            If Not EsImportacion Then
-                Conn.Execute cad & SQL
-                Mes = Mes + 1
+            
+            If Importe0 Then
+                If vParam.ContabApteIva0 Then
+                    If Not EsImportacion Then
+                        Conn.Execute cad & SQL
+                        Mes = Mes + 1
+                    End If
+                End If
+            Else
+                If Not EsImportacion Then
+                    Conn.Execute cad & SQL
+                    Mes = Mes + 1
+                End If
             End If
             
             'La de recargo  1-----------------
@@ -2908,9 +2927,12 @@ Dim TipoDIva As Byte
     
     
     A_Donde = "Leyendo lineas factura"
-    SQL = "Select factpro_lineas.*  FROM factpro_lineas "
+'    SQL = "Select factpro_lineas.*  FROM factpro_lineas "
+    SQL = "Select factpro_lineas.codmacta, factpro_lineas.codccost, sum(factpro_lineas.baseimpo) baseimpo  FROM factpro_lineas "
     SQL = SQL & " WHERE numregis= " & NumFac
     SQL = SQL & " AND anofactu=" & NumDiari
+    SQL = SQL & " GROUP BY 1,2 "
+    SQL = SQL & " ORDER BY 1,2 "
     RF.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     'Para cada linea insertamos
     A_Donde = "Procesando lineas"

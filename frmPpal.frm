@@ -1112,6 +1112,7 @@ Private Sub AbrirFormularios(Accion As Long)
         
         Case 605 ' transferencia abonos
         Case 606 ' compensaciones
+            frmTESCompensaciones.Show vbModal
         Case 607 ' compensar cliente
             frmTESCompensaAboCli.Show vbModal
         Case 608 ' reclamaciones

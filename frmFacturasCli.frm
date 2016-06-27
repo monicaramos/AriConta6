@@ -3187,10 +3187,9 @@ Dim RS As ADODB.Recordset
 
     On Error GoTo eCobrosContabilizados
 
-    SQL = "select numasien, fechaent from cobros where numserie = " & DBSet(Serie, "T")
-    SQL = SQL & " and numfactu = " & DBSet(FACTURA, "N")
+    SQL = "select numasien, fechaent from hlinapu where numserie = " & DBSet(Serie, "T")
+    SQL = SQL & " and numfaccl = " & DBSet(FACTURA, "N")
     SQL = SQL & " and fecfactu = " & DBSet(FecFactu, "F")
-    SQL = SQL & " and not numasien is null "
     
     CadResult = ""
     
@@ -7032,11 +7031,11 @@ Dim Contador As Integer
     Else
         Set IT = lw1.ListItems.Add()
 
-        IT.Text = Me.Adodc1.Recordset!Orden '"Nuevo " & Contador
+        IT.Text = Me.adodc1.Recordset!Orden '"Nuevo " & Contador
         
-        IT.SubItems(1) = Me.Adodc1.Recordset.Fields(5)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
+        IT.SubItems(1) = Me.adodc1.Recordset.Fields(5)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
         IT.SubItems(2) = vpaz
-        IT.SubItems(3) = Me.Adodc1.Recordset.Fields(0)
+        IT.SubItems(3) = Me.adodc1.Recordset.Fields(0)
         
         Set IT = Nothing
     End If

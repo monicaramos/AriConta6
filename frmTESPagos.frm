@@ -1832,7 +1832,7 @@ Begin VB.Form frmTESPagos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   600
+         Height          =   360
          Index           =   20
          Left            =   5760
          MaxLength       =   2
