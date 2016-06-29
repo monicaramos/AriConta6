@@ -1378,10 +1378,6 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub cmdImportar_Click(Index As Integer)
-    If Index = 1 Then
-        Unload Me
-        Exit Sub
-    End If
     Text12.Text = Trim(Text12.Text)
     If Text12.Text = "" Then
         MsgBox "Debes poner el nombre de archivo", vbExclamation
@@ -2857,11 +2853,11 @@ Private Sub PonerModo(vModo As Byte)
     Select Case vModo
     Case 0
         'Primer frame
-        Frame1.Visible = True
+        Frame1.Enabled = True
         Frame2.Visible = False
     Case 1
         Frame2.Visible = True
-        Frame1.Visible = False
+        Frame1.Enabled = False
     End Select
     Me.Height = Me.Height + 420
     Me.Width = Me.Width + 150
