@@ -1697,6 +1697,12 @@ Dim nomDocu As String
     cadParam = cadParam & "Titulo= """ & cad & """|"
     numParam = numParam + 1
         
+        
+    'Numero de digitos de ultimo nivel
+    cadParam = cadParam & "pDigUltNivel=" & vEmpresa.DigitosUltimoNivel & "|"
+    numParam = numParam + 1
+        
+        
     '------------------------------
     'Numero de niveles
     'Para cada nivel marcado veremos si tiene cuentas en la tmp

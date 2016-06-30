@@ -1647,7 +1647,8 @@ Dim RC As String
              Text1.Text = RC
              Text2.Text = SQL
              
-             If CuentaAnterior <> Text1.Text Then ConfirmarDatos True
+             'If CuentaAnterior <> Text1.Text Then
+             ConfirmarDatos True
              CuentaAnterior = Text1.Text
          Else
              MsgBox SQL, vbExclamation
@@ -1831,6 +1832,10 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 1
             LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
+
+End Sub
+
+Private Sub txtDatos_Change()
 
 End Sub
 
@@ -2602,7 +2607,9 @@ Dim SQ As String
     If BloqueoManual(True, "norma43", "clave") Then
         InsertarHcoBanco
         BloqueoManual False, "norma43", ""
-        Command2(0).Enabled = False
+       ' Command2(0).Enabled = False
+        PonerModo 0
+        Text1_LostFocus
     Else
         MsgBox "Tabla bloqueada por otro usuario.", vbExclamation
     End If
