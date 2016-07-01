@@ -1472,25 +1472,19 @@ Private Sub Form_Load()
 End Sub
 
 
-Private Sub LeerDatosCombo(leer As Boolean)
+Private Sub LeerDatosCombo(Leer As Boolean)
 Dim Cad2 As String
 
     On Error GoTo ELe
-    SQL = App.Path & "\control.dat"
-    If leer Then
+    If Leer Then
     
         Combo3(1).ListIndex = 0
-        I = RecuperaValor(CadenaControl, 6)
+        I = vControl.UltAccesoBDs  'RecuperaValor(CadenaControl, 6)
         Combo3(1).ListIndex = I
     Else
         'GUARDAR
-        SQL = App.Path & "\control.dat"
-        If Dir(SQL, vbArchive) <> "" Then
-            I = FreeFile
-            Open SQL For Output As #I
-            
-            Print #I, InsertaValor(CadenaControl, 6, Combo3(1).ListIndex)
-            Close #I
+        vControl.UltAccesoBDs = Combo3(1).ListIndex
+        vControl.Grabar
             
             CadenaControl = InsertaValor(CadenaControl, 6, Combo3(1).ListIndex)
             

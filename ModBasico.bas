@@ -6,8 +6,8 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Dim camp As String
     Dim Mens As String
     Dim difer As Integer
-    Dim i As Integer
-    Dim K As Integer
+    Dim I As Integer
+    Dim k As Integer
     Dim posi As Integer
     Dim posi2 As Integer
     Dim fil As Integer
@@ -46,11 +46,11 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
         camp = Left(tots, posi - 1)
         tots = Right(tots, Len(tots) - posi) 'lleve el camp actual
         'For k = 0 To 5
-        For K = 0 To 4
+        For k = 0 To 4
           posi2 = InStr(camp, "|") '1ª posició del |
-          A(K, fil) = Left(camp, posi2 - 1)
+          A(k, fil) = Left(camp, posi2 - 1)
           camp = Right(camp, Len(camp) - posi2) 'lleve l'argument actual
-        Next K 'quan acabe el for tinc en A el camp actual
+        Next k 'quan acabe el for tinc en A el camp actual
         
         'només incremente el nº de la columna si no es un boto
         If A(2, fil) <> "B" Then C = C + 1
@@ -306,9 +306,9 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Wend
 
     'No permitir canviar tamany de columnes
-    For i = 0 To grid.Columns.Count - 1
-         grid.Columns(i).AllowSizing = False
-    Next i
+    For I = 0 To grid.Columns.Count - 1
+         grid.Columns(I).AllowSizing = False
+    Next I
 
 '    If grid.Width - TotalAncho <> difer Then
 '        mens = "Es recomana que el total d'amples de les columnes per a este DataGrid siga de "
@@ -405,7 +405,7 @@ End Function
 Public Function PonerFormatoEntero(ByRef T As TextBox) As Boolean
 'Comprueba que el valor del textbox es un entero y le pone el formato
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 Dim Formato As String
 On Error GoTo EPonerFormato
 
@@ -416,14 +416,14 @@ On Error GoTo EPonerFormato
     Set mTag = New CTag
     mTag.Cargar T
     If mTag.Cargado Then
-       Cad = mTag.Nombre 'descripcion del campo
+       cad = mTag.Nombre 'descripcion del campo
        Formato = mTag.Formato
     End If
     Set mTag = Nothing
 
     If Not EsEntero(T.Text) Then
         PonerFormatoEntero = False
-        MsgBox "El campo " & Cad & " tiene que ser numérico.", vbExclamation
+        MsgBox "El campo " & cad & " tiene que ser numérico.", vbExclamation
         PonFoco T
     Else
          'T.Text = Format(T.Text, Formato)
@@ -496,7 +496,7 @@ End Function
 Public Function FormatoCampo2(ByRef objec As Object) As String
 'Devuelve el formato del campo en el TAg: "0000"
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EFormatoCampo2
 
@@ -513,7 +513,7 @@ End Function
 
 Public Function TipoCamp(ByRef objec As Object) As String
 Dim mTag As CTag
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo ETipoCamp
 
@@ -534,14 +534,14 @@ Public Function ContieneCaracterBusqueda(CADENA As String) As Boolean
 ' >,>,>=,: , ....
 'si encuentra algun caracter de busqueda devuelve TRUE y sale
 Dim B As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim Ch As String
 
     'For i = 1 To Len(cadena)
-    i = 1
+    I = 1
     B = False
     Do
-        Ch = Mid(CADENA, i, 1)
+        Ch = Mid(CADENA, I, 1)
         Select Case Ch
             Case "<", ">", ":", "="
                 B = True
@@ -551,8 +551,8 @@ Dim Ch As String
                 B = False
         End Select
     'Next i
-        i = i + 1
-    Loop Until (B = True) Or (i > Len(CADENA))
+        I = I + 1
+    Loop Until (B = True) Or (I > Len(CADENA))
     ContieneCaracterBusqueda = B
 End Function
 

@@ -10642,8 +10642,6 @@ Private Sub CargalistaCuentas()
     
 End Sub
 
-
-
 Private Sub CargaGrupo()
 
     On Error GoTo ECargaGrupo
@@ -10668,8 +10666,6 @@ Private Sub CargaGrupo()
 ECargaGrupo:
     MuestraError Err.Number, "CargaGrupo"
 End Sub
-
-
 
 Private Function ComprobarEfectosBorrar() As Boolean
 Dim J As Integer

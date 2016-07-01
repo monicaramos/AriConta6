@@ -2981,10 +2981,10 @@ Dim colCtas As Collection
             SQL = SQL & " AND cobros.fecfactu <= '" & Format(txtFecha(1).Text, FormatoFecha) & "'"
         
         'Codigo factura
-        If txtnumfac(0).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu >= '" & txtnumfac(0).Text & "'"
-        If txtnumfac(1).Text <> "" Then _
-            SQL = SQL & " AND cobros.numfactu <= '" & txtnumfac(1).Text & "'"
+        If txtNumFac(0).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu >= '" & txtNumFac(0).Text & "'"
+        If txtNumFac(1).Text <> "" Then _
+            SQL = SQL & " AND cobros.numfactu <= '" & txtNumFac(1).Text & "'"
     
     Else
         'Fecha factura
@@ -3194,34 +3194,34 @@ Dim colCtas As Collection
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub UltimoBancoRem(leer As Boolean, Txt As TextBox)
-Dim NF As Integer
-Dim cad As String
-Dim Cad2 As String
-
-On Error GoTo EUltimoBancoRem
-
-
-    cad = App.Path & "\control.dat"
-
-    If leer Then
-        If Dir(cad) <> "" Then
-            NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
-            Close #NF
-            cad = Trim(cad)
-            CadenaControl = cad
-            'El primer pipe es el usuario
-            Txt.Text = RecuperaValor(cad, 7)
-        End If
-    Else 'Escribir
-        NF = FreeFile
-        Open cad For Output As #NF
-        Cad2 = Txt
-        Print #NF, InsertaValor(CadenaControl, 7, Cad2)
-        Close #NF
-    End If
+Private Sub UltimoBancoRem(Leer As Boolean, Txt As TextBox)
+'Dim NF As Integer
+'Dim cad As String
+'Dim Cad2 As String
+'
+'On Error GoTo EUltimoBancoRem
+'
+'
+'    cad = App.Path & "\control.dat"
+'
+'    If Leer Then
+'        If Dir(cad) <> "" Then
+'            NF = FreeFile
+'            Open cad For Input As #NF
+'            Line Input #NF, cad
+'            Close #NF
+'            cad = Trim(cad)
+'            CadenaControl = cad
+'            'El primer pipe es el usuario
+'            Txt.Text = RecuperaValor(cad, 7)
+'        End If
+'    Else 'Escribir
+'        NF = FreeFile
+'        Open cad For Output As #NF
+'        Cad2 = Txt
+'        Print #NF, InsertaValor(CadenaControl, 7, Cad2)
+'        Close #NF
+'    End If
 EUltimoBancoRem:
     Err.Clear
 End Sub
@@ -3396,7 +3396,7 @@ End Sub
 
 
 Private Sub txtNumFac_GotFocus(Index As Integer)
-    ConseguirFoco txtnumfac(Index), 3
+    ConseguirFoco txtNumFac(Index), 3
 End Sub
 
 Private Sub txtNumFac_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3414,12 +3414,12 @@ Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
-    txtnumfac(Index).Text = UCase(Trim(txtnumfac(Index).Text))
+    txtNumFac(Index).Text = UCase(Trim(txtNumFac(Index).Text))
     
     
     Select Case Index
         Case 0, 1 'numero de factura
-            PonerFormatoEntero txtnumfac(Index)
+            PonerFormatoEntero txtNumFac(Index)
     End Select
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no

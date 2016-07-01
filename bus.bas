@@ -2,7 +2,7 @@ Attribute VB_Name = "bus"
 Option Explicit
 
 
-Global I&, J&, K&                             ' Contadores
+Global I&, J&, k&                             ' Contadores
 Global Msg$, MsgErr$, NumErr&                 ' Variables de control de error
 Global CONT%, Opc%, Skn$, SknDir$             ' Otros contadores
 Public Tmp%, m_hMod&
@@ -18,7 +18,7 @@ Public vUsu As Usuario  'Datos usuario
 Public vEmpresa As Cempresa 'Los datos de la empresa
 Public vParam As Cparametros  'Los parametros
 Public vParamT As CparametrosT  'Los parametros
-Public vConfig As Configuracion
+Public vControl As Control2 ' Clase de control.dat
 Public vLog As cLOG   'Log de acciones
 
 Private Procesador64bits As Boolean
@@ -129,8 +129,6 @@ Public HaHabidoCambios As Boolean
 Public Sub Main()
 
 
-
-
 Dim cad As String
 Dim NF As Integer
 
@@ -152,7 +150,8 @@ Dim PrimeraBD As String
        End If
        
        '++
-       CadenaDesdeOtroForm = UltimaEmpresa
+       CadenaDesdeOtroForm = vControl.UltEmpre 'ultima empresa
+       vUsu.CadenaConexion = vControl.UltEmpre
        '++
        
        If CadenaDesdeOtroForm = "" Then
@@ -197,55 +196,6 @@ Dim PrimeraBD As String
         
         Screen.MousePointer = vbHourglass
 End Sub
-
-Public Function UltimaEmpresa() As String
-Dim cad As String
-Dim NF As Integer
-Dim C1 As String
-
-    C1 = ""
-    cad = App.Path & "\control.dat"
-    If Dir(cad) <> "" Then
-        NF = FreeFile
-        Open cad For Input As #NF
-        Line Input #NF, cad
-        Close #NF
-        cad = Trim(cad)
-        If cad <> "" Then
-            'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
-            
-            C1 = RecuperaValor(cad, 2)
-        End If
-    End If
-    vUsu.CadenaConexion = C1
-    UltimaEmpresa = C1
-
-End Function
-
-
-Public Function UltimoBancoRem() As String
-Dim cad As String
-Dim NF As Integer
-Dim C1 As String
-
-    C1 = ""
-    cad = App.Path & "\control.dat"
-    If Dir(cad) <> "" Then
-        NF = FreeFile
-        Open cad For Input As #NF
-        Line Input #NF, cad
-        Close #NF
-        cad = Trim(cad)
-        If cad <> "" Then
-            'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
-            
-            C1 = RecuperaValor(cad, 7)
-        End If
-    End If
-    vUsu.CadenaConexion = C1
-    UltimoBancoRem = C1
-
-End Function
 
 
 Public Function LeerEmpresaParametros()
@@ -375,7 +325,7 @@ On Error GoTo EAbrirConexion
     'Conn.CursorLocation = adUseClient   'Si ponemos este hay opciones k no van ej select con rs!campo
     Conn.CursorLocation = adUseServer   'Si ponemos esta alguns errores de Conn no se muestran correctamente
     
-    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE= Ariconta6"
+    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE=" & vControl.ODBC
     If BBDD <> "" Then cad = cad & ";DATABASE= " & BBDD
     cad = cad & ";UID="
     cad = cad & ";PWD="

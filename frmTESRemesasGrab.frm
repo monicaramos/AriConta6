@@ -772,7 +772,8 @@ Private Sub cmdRemeTipo1_Click(Index As Integer)
         'Generar diskete
         CrearDisco
         
-        UltimoComboReferencia False
+        vControl.UltReferRem = CStr(cmbReferencia.ListIndex)
+        vControl.Grabar
         
     End Select
     
@@ -853,7 +854,7 @@ Dim W As Integer
     Text1(9).Text = Format(Now, "dd/mm/yyyy")
     Text1(18).Text = Text1(9).Text
     
-    Me.cmbReferencia.ListIndex = UltimoComboReferencia(True)
+    Me.cmbReferencia.ListIndex = vControl.UltReferRem
     
     Text7(0).Text = UCase(vEmpresa.nomempre)
     
@@ -884,7 +885,6 @@ Private Sub Form_Unload(Cancel As Integer)
     Set RS = Nothing
     Set miRsAux = Nothing
     If Opcion = 7 Then
-'        UltimoComboReferencia False
         'La seleccion cobro o vencimiento
         CheckValueGuardar "FCob", Me.optSepaXML(1).Value   'seimpre tendremos true
     End If
@@ -1028,36 +1028,6 @@ End Function
 
 
 
-Private Function UltimoComboReferencia(leer As Boolean) As Integer
-    UltimoComboReferencia = 0
-    On Error GoTo ELeerRef
-    SQL = App.Path & "\control.dat"
-    If leer Then
-        UltimoComboReferencia = 2
-        If Dir(SQL, vbArchive) <> "" Then
-            I = FreeFile
-            Open SQL For Input As #I
-            Line Input #I, SQL
-            Close #I
-            If RecuperaValor(SQL, 8) <> "" Then UltimoComboReferencia = RecuperaValor(SQL, 8)
-        End If
-        
-    Else
-        I = FreeFile
-        Open SQL For Output As #I
-        CadenaControl = InsertaValor(CadenaControl, 8, CStr(cmbReferencia.ListIndex))
-        Print #I, CadenaControl
-        Close #I
-    End If
-    Exit Function
-ELeerRef:
-    Err.Clear
-End Function
-
-
-
-
-
 Private Sub EliminarEnRecepcionDocumentos()
 Dim CtaPte As Boolean
 Dim J As Integer
@@ -1163,13 +1133,13 @@ EEliminarEnRecepcionDocumentos:
 End Sub
 
 
-Private Sub SituarComboReferencia(leer As Boolean)
+Private Sub SituarComboReferencia(Leer As Boolean)
 Dim NF As Integer
     
     On Error GoTo eSituarComboReferencia
     
     SQL = App.Path & "\cboremref.dat"
-    If leer Then
+    If Leer Then
         I = 2
         If Dir(SQL, vbArchive) <> "" Then
             NF = FreeFile

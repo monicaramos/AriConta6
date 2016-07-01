@@ -190,7 +190,6 @@ Dim cerrar As Boolean
 End Sub
 
 
-
 Private Sub Combo1_LostFocus()
     Text1(0).Text = Combo1.Text
 End Sub
@@ -202,7 +201,25 @@ Private Sub Form_Activate()
         
         espera 0.5
         Me.Refresh
-         
+        
+        Set vControl = New Control2
+        If vControl.Leer = 1 Then
+            
+            vControl.ODBC = "Ariconta6"
+            vControl.UltUsu = "root"
+            vControl.UltEmpre = "ariconta1"
+            vControl.Ancho1 = 4360
+            vControl.Ancho2 = 1399
+            vControl.Ancho3 = 3000
+            vControl.UltAccesoBDs = 0
+            vControl.UltReferRem = 0
+
+            vControl.Grabar
+
+            End
+            Exit Sub
+        End If
+        
          'Abrimos conexion para comprobar el usuario
          'Luego, en funcion del nivel de usuario que tenga cerraremos la conexion
          'y la abriremos con usuario-codigo ajustado a su nivel
@@ -211,15 +228,12 @@ Private Sub Form_Activate()
              End
         End If
          
-        CargarCadenaControl
-         
-         
         'Gestionar el nombredel PC para la asignacion de PC en el entorno de red
         CodPC = GestionaPC2
         CadenaDesdeOtroForm = ""
          
          'Leemos el ultimo usuario conectado
-         UltimoUsuario True
+        Text1(0).Text = vControl.UltUsu
          
          CargaCombo
          PosicionarCombo2 Combo1, Text1(0)
@@ -295,7 +309,8 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 '    NumeroEmpresaMemorizar False
-    UltimoUsuario False
+    vControl.UltUsu = Combo1.Text 'Text1(0).Text
+    vControl.Grabar
 End Sub
 
 
@@ -334,7 +349,7 @@ Dim Ok As Byte
     
     
     
-    If vUsu.leer(Text1(0).Text) = 0 Then
+    If vUsu.Leer(Text1(0).Text) = 0 Then
         If vUsu.Nivel < 0 Then
             'NO tiene autorizacion de ningun nivel. Es menos 1
             Ok = 3
@@ -374,8 +389,6 @@ Dim Ok As Byte
         Me.Refresh
         espera 0.2
         Screen.MousePointer = vbHourglass
-        
-        
         
         HacerAccionesBD
         Unload Me
@@ -449,42 +462,10 @@ Private Sub PonerVisible(Visible As Boolean)
     Combo1.Visible = Visible
 End Sub
 
-Private Sub UltimoUsuario(leer As Boolean)
-Dim NF As Integer
-Dim cad As String
-Dim Cad2 As String
-
-On Error GoTo EUltimoUsuario
-
-
-    cad = App.Path & "\control.dat"
-    
-    If leer Then
-        If Dir(cad) <> "" Then
-            NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
-            Close #NF
-            cad = Trim(cad)
-            CadenaControl = cad
-            'El primer pipe es el usuario
-            Text1(0).Text = RecuperaValor(cad, 1)
-        End If
-    Else 'Escribir
-        NF = FreeFile
-        Open cad For Output As #NF
-        Cad2 = Text1(0).Text
-        Print #NF, InsertaValor(CadenaControl, 1, Cad2)
-        Close #NF
-    End If
-EUltimoUsuario:
-    Err.Clear
-End Sub
-
 
 'Lo que haremos aqui es ver, o guardar, el ultimo numero de empresa
 'a la que ha entrado, y el usuario
-Private Sub NumeroEmpresaMemorizar(leer As Boolean)
+Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
 Dim cad As String
 On Error GoTo ENumeroEmpresaMemorizar
@@ -494,7 +475,7 @@ On Error GoTo ENumeroEmpresaMemorizar
     
     
     
-    If leer Then
+    If Leer Then
         If Dir(cad) <> "" Then
             NF = FreeFile
             Open cad For Input As #NF
@@ -593,38 +574,5 @@ Dim miRsAux As ADODB.Recordset
     miRsAux.Close
     Set miRsAux = Nothing
     
-End Sub
-
-
-
-Private Sub CargarCadenaControl()
-Dim NF As Integer
-Dim cad As String
-Dim Cad2 As String
-
-On Error GoTo ECargarCadenaControl
-
-
-    cad = App.Path & "\control.dat"
-    
-    If Dir(cad) <> "" Then
-        NF = FreeFile
-        Open cad For Input As #NF
-        Line Input #NF, cad
-        Close #NF
-        cad = Trim(cad)
-        CadenaControl = cad
-    Else
-        NF = FreeFile
-        Open cad For Output As #NF
-        Cad2 = "|ariconta1|4360|1399|3000|2|||"
-        CadenaControl = Cad2
-        Print #NF, Cad2
-        Close #NF
-    End If
-    
-ECargarCadenaControl:
-    Err.Clear
-
 End Sub
 

@@ -2157,7 +2157,7 @@ On Error GoTo ENumeroEmpresaMemorizar
             
                 'El tercer pipe, si tiene es el ancho col1
                 cad = AnchoLogin
-                C1 = RecuperaValor(cad, 3)
+                C1 = vControl.Ancho1
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2166,7 +2166,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 ListView2.ColumnHeaders(1).Width = NF
                 
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(cad, 4)
+                C1 = vControl.Ancho2
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2176,7 +2176,7 @@ On Error GoTo ENumeroEmpresaMemorizar
             
             
                 'El quinto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(cad, 5)
+                C1 = vControl.Ancho3
                 
                 'DAVID
                 'LO hablamos con calma
@@ -2196,18 +2196,12 @@ On Error GoTo ENumeroEmpresaMemorizar
             Exit Sub
         End If
     End If
-    cad = App.Path & "\control.dat"
+    
     If Leer Then
-        If Dir(cad) <> "" Then
-            NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
-            Close #NF
-            cad = Trim(cad)
-            If cad <> "" Then
+        If Not vControl Is Nothing Then
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = RecuperaValor(cad, 2)
+                C1 = vControl.UltEmpre
                 'el segundo es el
                 If C1 <> "" Then
                     For NF = 1 To Me.ListView2.ListItems.Count
@@ -2220,7 +2214,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = RecuperaValor(cad, 3)
+                C1 = vControl.Ancho1
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2228,7 +2222,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 ListView2.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(cad, 4)
+                C1 = vControl.Ancho2
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2236,7 +2230,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 ListView2.ColumnHeaders(2).Width = NF
                 'El quinto pipe si tiene es el ancho de col3
-                C1 = RecuperaValor(cad, 5)
+                C1 = vControl.Ancho3
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -2247,31 +2241,164 @@ On Error GoTo ENumeroEmpresaMemorizar
                 vUsu.LeerFiltros "ariconta", 301 'asientos
                 vUsu.LeerFiltros "ariconta", 401 'facturas de cliente
                 
-            
-            End If
         End If
     Else 'Escribir
-        NF = FreeFile
-        Open cad For Output As #NF
+'        cad = Cad2
+        vControl.UltEmpre = ListView2.SelectedItem.ToolTipText
+        vControl.Ancho1 = Int(Round(ListView2.ColumnHeaders(1).Width, 2))
+        vControl.Ancho2 = Int(Round(ListView2.ColumnHeaders(2).Width, 2))
+        vControl.Ancho3 = Int(Round(ListView2.ColumnHeaders(3).Width, 2))
         
-        Cad2 = CadenaControl
+        vControl.Grabar
         
-        Cad2 = InsertaValor(Cad2, 2, ListView2.SelectedItem.ToolTipText)
-        Cad2 = InsertaValor(Cad2, 3, Int(Round(ListView2.ColumnHeaders(1).Width, 2)))
-        Cad2 = InsertaValor(Cad2, 4, Int(Round(ListView2.ColumnHeaders(2).Width, 2)))
-        Cad2 = InsertaValor(Cad2, 5, Int(Round(ListView2.ColumnHeaders(3).Width, 2)))
-        
-        CadenaControl = Cad2
-        
-        cad = Cad2
+        vUsu.CadenaConexion = vControl.UltEmpre
         
         AnchoLogin = cad
-        Print #NF, Cad2
-        Close #NF
     End If
 ENumeroEmpresaMemorizar:
     Err.Clear
 End Sub
+
+'Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
+'Dim NF As Integer
+'Dim C1 As String
+'Dim cad As String
+'Dim Cad2 As String
+'
+'
+'On Error GoTo ENumeroEmpresaMemorizar
+'
+'    If Leer Then
+'        If CadenaDesdeOtroForm <> "" Then
+'            'Ya estabamos trabajando con la aplicacion
+'
+'            If Not (vEmpresa Is Nothing) Then
+'                 For NF = 1 To Me.ListView2.ListItems.Count
+'                    If ListView2.ListItems(NF).Text = vEmpresa.nomempre Then
+'                        Set ListView2.SelectedItem = ListView2.ListItems(NF)
+'                        ListView2.SelectedItem.EnsureVisible
+'                        Exit For
+'                    End If
+'                Next NF
+'            End If
+'
+'                'El tercer pipe, si tiene es el ancho col1
+'                cad = AnchoLogin
+'                C1 = RecuperaValor(cad, 3)
+'                If Val(C1) > 0 Then
+'                    NF = Val(C1)
+'                Else
+'                    NF = 4360
+'                End If
+'                ListView2.ColumnHeaders(1).Width = NF
+'
+'                'El cuarto pipe si tiene es el ancho de col2
+'                C1 = RecuperaValor(cad, 4)
+'                If Val(C1) > 0 Then
+'                    NF = Val(C1)
+'                Else
+'                    NF = 1400
+'                End If
+'                ListView2.ColumnHeaders(2).Width = NF
+'
+'
+'                'El quinto pipe si tiene es el ancho de col2
+'                C1 = RecuperaValor(cad, 5)
+'
+'                'DAVID
+'                'LO hablamos con calma
+'                C1 = 3000
+'                If Val(C1) > 0 Then
+'                    NF = Val(C1)
+'                Else
+'                    NF = 1400
+'                End If
+'                ListView2.ColumnHeaders(3).Width = NF
+'
+'                vUsu.LeerFiltros "ariconta", 301 'asientos
+'                vUsu.LeerFiltros "ariconta", 401 'facturas de cliente
+'
+'
+'            CadenaDesdeOtroForm = ""
+'            Exit Sub
+'        End If
+'    End If
+'    cad = App.Path & "\control.dat"
+'    If Leer Then
+'        If Dir(cad) <> "" Then
+'            NF = FreeFile
+'            Open cad For Input As #NF
+'            Line Input #NF, cad
+'            Close #NF
+'            cad = Trim(cad)
+'            If cad <> "" Then
+'                'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
+'
+'                C1 = RecuperaValor(cad, 2)
+'                'el segundo es el
+'                If C1 <> "" Then
+'                    For NF = 1 To Me.ListView2.ListItems.Count
+'                        If ListView2.ListItems(NF).Text = C1 Then
+'                            Set ListView2.SelectedItem = ListView2.ListItems(NF)
+'                            ListView2.SelectedItem.EnsureVisible
+'                            Exit For
+'                        End If
+'                    Next NF
+'                End If
+'
+'                'El tercer pipe, si tiene es el ancho col1
+'                C1 = RecuperaValor(cad, 3)
+'                If Val(C1) > 0 Then
+'                    NF = Val(C1)
+'                Else
+'                    NF = 4360
+'                End If
+'                ListView2.ColumnHeaders(1).Width = NF
+'                'El cuarto pipe si tiene es el ancho de col2
+'                C1 = RecuperaValor(cad, 4)
+'                If Val(C1) > 0 Then
+'                    NF = Val(C1)
+'                Else
+'                    NF = 1400
+'                End If
+'                ListView2.ColumnHeaders(2).Width = NF
+'                'El quinto pipe si tiene es el ancho de col3
+'                C1 = RecuperaValor(cad, 5)
+'                If Val(C1) > 0 Then
+'                    NF = Val(C1)
+'                Else
+'                    NF = 1400
+'                End If
+'                ListView2.ColumnHeaders(3).Width = NF
+'
+'                vUsu.LeerFiltros "ariconta", 301 'asientos
+'                vUsu.LeerFiltros "ariconta", 401 'facturas de cliente
+'
+'
+'            End If
+'        End If
+'    Else 'Escribir
+'        NF = FreeFile
+'        Open cad For Output As #NF
+'
+'        Cad2 = CadenaControl
+'
+'        Cad2 = InsertaValor(Cad2, 2, ListView2.SelectedItem.ToolTipText)
+'        Cad2 = InsertaValor(Cad2, 3, Int(Round(ListView2.ColumnHeaders(1).Width, 2)))
+'        Cad2 = InsertaValor(Cad2, 4, Int(Round(ListView2.ColumnHeaders(2).Width, 2)))
+'        Cad2 = InsertaValor(Cad2, 5, Int(Round(ListView2.ColumnHeaders(3).Width, 2)))
+'
+'        CadenaControl = Cad2
+'
+'        cad = Cad2
+'
+'        AnchoLogin = cad
+'        Print #NF, Cad2
+'        Close #NF
+'    End If
+'ENumeroEmpresaMemorizar:
+'    Err.Clear
+'End Sub
 
 
 

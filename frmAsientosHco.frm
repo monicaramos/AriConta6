@@ -4299,8 +4299,8 @@ Dim cad As String
         ToolbarAux.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2) And Not SoloImprimir
         ToolbarAux.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) And Not SoloImprimir
         ToolbarAux.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) And Not SoloImprimir
-        ToolbarAux.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) And DesdeNorma43 = 0 And Not SoloImprimir
-        ToolbarAux.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) And DesdeNorma43 = 0 And Not SoloImprimir
+        ToolbarAux.Buttons(5).Enabled = DBLet(RS!Ver, "N") And ((Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) Or (Modo = 5)) And DesdeNorma43 = 0 And Not SoloImprimir
+        ToolbarAux.Buttons(6).Enabled = DBLet(RS!Ver, "N") And ((Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) Or (Modo = 5)) And DesdeNorma43 = 0 And Not SoloImprimir
         ToolbarAux.Buttons(7).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2) And DesdeNorma43 = 0 And Not SoloImprimir
         
         ToolbarAux0.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2 And Me.Data1.Recordset.RecordCount > 0) And DesdeNorma43 = 0 And Not SoloImprimir

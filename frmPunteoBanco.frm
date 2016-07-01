@@ -1835,10 +1835,6 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 
 End Sub
 
-Private Sub txtDatos_Change()
-
-End Sub
-
 Private Sub txtfec_GotFocus(Index As Integer)
     PonFoco txtFec(Index)
     FechaAnterior = txtFec(Index).Text
