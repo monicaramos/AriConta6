@@ -1488,7 +1488,6 @@ Dim Cad2 As String
             
             CadenaControl = InsertaValor(CadenaControl, 6, Combo3(1).ListIndex)
             
-        End If
     End If
     Exit Sub
 ELe:

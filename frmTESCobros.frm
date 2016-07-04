@@ -3796,7 +3796,6 @@ Private Sub cboFiltro_Click()
     CargaList 0, False 'CargaGrid 0, False
     CargaGrid 1, False
     
-    
     HacerBusqueda2
 End Sub
 
@@ -5060,9 +5059,10 @@ Dim vCadena As String
 
     CadenaDesdeOtroForm = ""
     
-    vCadena = "" '"(coalesce(Cobros.ImpVenci, 0) + coalesce(Cobros.Gastos, 0) - coalesce(Cobros.impcobro, 0) <> 0)"
+    vCadena = cadFiltro  '"(coalesce(Cobros.ImpVenci, 0) + coalesce(Cobros.Gastos, 0) - coalesce(Cobros.impcobro, 0) <> 0)"
     
     frmTESVerCobrosPagos.vSQL = vCadena
+    If CadB <> "" Then frmTESVerCobrosPagos.vSQL = frmTESVerCobrosPagos.vSQL & " and " & CadB
     frmTESVerCobrosPagos.OrdenarEfecto = False
     frmTESVerCobrosPagos.Regresar = True
     frmTESVerCobrosPagos.Cobros = True
@@ -5217,9 +5217,9 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
     End If
     
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.Visible = B
+        CmdRegresar.Visible = B
     Else
-        cmdRegresar.Visible = False
+        CmdRegresar.Visible = False
     End If
     
     FrameRemesa.Enabled = Kmodo = 1
@@ -6775,7 +6775,7 @@ Private Sub CargarColumnas()
 
 End Sub
 
-Private Sub txtAux1_GotFocus(Index As Integer)
+Private Sub txtaux1_GotFocus(Index As Integer)
     ConseguirFoco txtaux1(Index), Modo
 End Sub
 
@@ -6785,7 +6785,7 @@ Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integ
 End Sub
 
 '++
-Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux1_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         Select Case Index
             Case 6:  KEYImage KeyAscii, 2 ' concepto de devolucion

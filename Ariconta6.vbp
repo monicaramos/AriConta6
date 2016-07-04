@@ -191,6 +191,7 @@ Form=frmTESPagosPdtesList.frm
 Form=frmTESRealizarPagos.frm
 Form=frmTESRefTalonPagos.frm
 Form=frmTESCompensaciones.frm
+Form=frmTESRemesas2.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
