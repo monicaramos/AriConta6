@@ -422,8 +422,6 @@ Dim ModificarVto As Boolean  'No pone el impcobrado, pone vto el total que queda
     Dim LCob As Collection
     Dim LPag As Collection
     
-    
-    
     'COmprobaciones
     'Que hay seleccionado algun vencimiento
     SQL = ""
@@ -493,10 +491,6 @@ Dim ModificarVto As Boolean  'No pone el impcobrado, pone vto el total que queda
         End If
         
     End If
-    
-
-    
-    
     
     Set vCP = New Ctipoformapago
     
@@ -889,7 +883,7 @@ Dim CargaEnListview As Boolean
     Else
         'En SQL va el codmacta
         SQL = " and nrodocum is null and pagos.codmacta ='" & SQL & "'"
-        SQL = " WHERE (1=1) " & SQL 'AND estacaja =0
+        SQL = " WHERE impefect - coalesce(imppagad,0) <> 0 " & SQL 'AND estacaja =0
         SQL = "select numfactu,fecfactu,numorden,impefect,imppagad,pagos.codmacta as codmacta,nomprove as nommacta  FROM pagos " & SQL
     End If
     
@@ -1162,7 +1156,11 @@ Dim FrasPro As String
                     '   1.- lo que tengo que insertar en linapu
                     '   2.- El select prparado para eliminar el cobro / pago
                     '       Si compensa, habra una C al principio
+                    '   3.- Para buscar la factura
                     Ampliacion = "|" & CadenaUpdate & " WHERE `numserie`='" & .Text & "' and numfactu=" & .SubItems(1)
+                    Ampliacion = Ampliacion & " and `fecfactu`='" & Format(.SubItems(2), FormatoFecha) & "' and `numorden`=" & .SubItems(3) & "|"
+                    '
+                    Ampliacion = Ampliacion & " WHERE `numserie`='" & .Text & "' and numfactu=" & .SubItems(1)
                     Ampliacion = Ampliacion & " and `fecfactu`='" & Format(.SubItems(2), FormatoFecha) & "' and `numorden`=" & .SubItems(3) & "|"
             
                     CCli.Add SQL & Ampliacion
@@ -1301,7 +1299,11 @@ Dim FrasPro As String
                     'Habran dos pipes.
                     '   1.- lo que tengo que insertar en linapu
                     '   2.- El select prparado para eliminar el cobro / pago
-                    Ampliacion = "|" & CadenaUpdate & " WHERE `ctaprove`='" & .Tag & "' and `numfactu`='" & DevNombreSQL(.SubItems(1))
+                    '   3.- el where para buscar la factura
+                    Ampliacion = "|" & CadenaUpdate & " WHERE `codmacta`='" & .Tag & "' and `numfactu`='" & DevNombreSQL(.SubItems(1))
+                    Ampliacion = Ampliacion & "' and `fecfactu`='" & Format(.SubItems(2), FormatoFecha) & "' and `numorden`=" & .SubItems(3) & "|"
+                    '
+                    Ampliacion = Ampliacion & " WHERE `codmacta`='" & .Tag & "' and `numfactu`='" & DevNombreSQL(.SubItems(1))
                     Ampliacion = Ampliacion & "' and `fecfactu`='" & Format(.SubItems(2), FormatoFecha) & "' and `numorden`=" & .SubItems(3) & "|"
                     CPro.Add SQL & Ampliacion
                     

@@ -1893,7 +1893,7 @@ Dim Img As Image
     Me.imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For I = 0 To 5
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
     
     ' Botonera Principal
@@ -3214,9 +3214,7 @@ Dim colCtas As Collection
                 'lo que yo hacia
                 DividiVencimentosPorEntidadBancaria
                 PonerVtosRemesa SQL, True
-                
             Else
-
                 SQL = SQL & VencimientosPorEntidadBancaria
                 PonerVtosRemesa SQL, True
                 

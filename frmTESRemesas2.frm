@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmTESRemesas2 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Remesas"
@@ -51,7 +51,6 @@ Begin VB.Form frmTESRemesas2
          Height          =   375
          Index           =   2
          Left            =   5160
-         Picture         =   "frmTESRemesas22.frx":0000
          Style           =   1  'Graphical
          TabIndex        =   8
          ToolTipText     =   "Eliminar"
@@ -62,7 +61,6 @@ Begin VB.Form frmTESRemesas2
          Height          =   375
          Index           =   1
          Left            =   4680
-         Picture         =   "frmTESRemesas22.frx":014A
          Style           =   1  'Graphical
          TabIndex        =   7
          ToolTipText     =   "Modificar"
@@ -73,7 +71,6 @@ Begin VB.Form frmTESRemesas2
          Height          =   375
          Index           =   0
          Left            =   4200
-         Picture         =   "frmTESRemesas22.frx":06D4
          Style           =   1  'Graphical
          TabIndex        =   6
          ToolTipText     =   "Insertar"
@@ -1593,7 +1590,7 @@ Dim D As String
                 MsgBox D, vbExclamation
                 txtAux1(0).Text = ""
                 txtAux1(1).Text = ""
-                Ponerfoco txtAux1(0)
+                PonFoco txtAux1(0)
             End If
         Else
             txtAux1(1).Text = ""
@@ -1667,11 +1664,11 @@ Dim vRem As Integer
     
     While Not RS.EOF
     
-        Imp1 = RS!impvenci - DBLet(RS!impcobro, "N") + DBLet(RS!Gastos, "N")
+        Imp1 = RS!ImpVenci - DBLet(RS!impcobro, "N") + DBLet(RS!Gastos, "N")
         If Not IsNull(RS!CodRem) Then
             If RS!CodRem = vRem And RS!AnyoRem = AnoRem Then
                 'Si es esta remesa, y la situacion
-                If RS!siturem = "B" Then Imp1 = RS!impvenci + DBLet(RS!Gastos, "N")
+                If RS!siturem = "B" Then Imp1 = RS!ImpVenci + DBLet(RS!Gastos, "N")
             End If
         End If
         'Los que sean CERO no los pinto
@@ -1680,7 +1677,7 @@ Dim vRem As Integer
                 ItmX.Text = RS!NUmSerie
                 ItmX.SubItems(1) = Format(RS!codfaccl, "00000000")
                 'Enero 2011
-                ItmX.SubItems(2) = Format(RS!fecvenci, "dd/mm/yyyy")
+                ItmX.SubItems(2) = Format(RS!FecVenci, "dd/mm/yyyy")
                 ItmX.SubItems(3) = RS!numorden
                 ItmX.SubItems(4) = RS!Nommacta
                 
@@ -1692,7 +1689,7 @@ Dim vRem As Integer
                 
                 'Fecvenci
                 'Por si ordena por fecha
-                ItmX.SubItems(8) = Format(RS!fecvenci, "yyyymmdd")
+                ItmX.SubItems(8) = Format(RS!FecVenci, "yyyymmdd")
                 
                 'Fecha factura
                 ItmX.SubItems(10) = Format(RS!fecfaccl, "dd/mm/yyyy")
@@ -1872,7 +1869,7 @@ Dim Eliminados As String
     
     While Not RS.EOF
     
-        Impor = RS!impvenci - DBLet(RS!impcobro, "N") + DBLet(RS!Gastos, "N")
+        Impor = RS!ImpVenci - DBLet(RS!impcobro, "N") + DBLet(RS!Gastos, "N")
         'Cad = "·" & Format(RS!codbanco, "0000") & Format(RS!codsucur, "0000") & "#"
         Cad = "·" & Format(RS!codbanco, "0000") & "#"
         
@@ -1902,7 +1899,7 @@ Dim Eliminados As String
                 ItmX.Text = RS!NUmSerie
                 ItmX.SubItems(1) = Format(RS!codfaccl, "00000000")
                 'Enero 2011
-                ItmX.SubItems(2) = Format(RS!fecvenci, "dd/mm/yyyy")
+                ItmX.SubItems(2) = Format(RS!FecVenci, "dd/mm/yyyy")
                 ItmX.SubItems(3) = RS!numorden
                 ItmX.SubItems(4) = RS!Nommacta
                 
@@ -1914,7 +1911,7 @@ Dim Eliminados As String
                 
                 'Fecvenci
                 'Por si ordena por fecha
-                ItmX.SubItems(8) = Format(RS!fecvenci, "yyyymmdd")
+                ItmX.SubItems(8) = Format(RS!FecVenci, "yyyymmdd")
                 
                 'Fecha factura
                 ItmX.SubItems(10) = Format(RS!fecfaccl, "dd/mm/yyyy")
@@ -2275,14 +2272,14 @@ Dim EsSepa As Boolean
             Itm.Bold = True
             Itm.ForeColor = vbRed
         End If
-        ImporteQueda = ImporteQueda + miRsAux!impvenci
+        ImporteQueda = ImporteQueda + miRsAux!ImpVenci
         Itm.SubItems(5) = Format(ImporteQueda, FormatoImporte)
         
         'Para la ordenacion
         'Por si ordena por fecha
         'ItmX.SubItems(6) = Format(RS!fecfaccl, "yyyymmdd")
         'Por si ordena por importe
-        Itm.SubItems(7) = Format(miRsAux!impvenci * 100, "0000000000")
+        Itm.SubItems(7) = Format(miRsAux!ImpVenci * 100, "0000000000")
         
         
         
