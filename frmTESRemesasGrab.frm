@@ -45,6 +45,23 @@ Begin VB.Form frmTESRemesasGrab
          TabIndex        =   10
          Top             =   1320
          Width           =   7425
+         Begin VB.CheckBox chkAnticipoCredito 
+            Caption         =   "Anticipo Crédito"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Left            =   3690
+            TabIndex        =   29
+            Top             =   2460
+            Width           =   2745
+         End
          Begin VB.OptionButton optSepaXML 
             Caption         =   "Fecha vencimiento del recibo"
             BeginProperty Font 
@@ -684,7 +701,7 @@ Dim FCobro As String
             If optSepaXML(1).Value Then FCobro = ""  'Ha selccionado por vencimiento
         
             SQL = Mid(Text7(1).Text & "   ", 1, 3) & "|" & Mid(Text7(0).Text & Space(40), 1, 40) & "|"
-            If GrabarDisketteNorma19(App.Path & "\tmpRem.ari", Text3(0).Text & "|" & Text3(1).Text & "|", Text1(18).Text, SQL, Me.cmbReferencia.ListIndex, FCobro, True, chkSEPA_GraboNIF(0).Value = 1, chkSEPA_GraboNIF(1).Value = 1, cboTipoRemesa.ListIndex = 0) Then
+            If GrabarDisketteNorma19(App.Path & "\tmpRem.ari", Text3(0).Text & "|" & Text3(1).Text & "|", Text1(18).Text, SQL, Me.cmbReferencia.ListIndex, FCobro, True, chkSEPA_GraboNIF(0).Value = 1, chkSEPA_GraboNIF(1).Value = 1, cboTipoRemesa.ListIndex = 0, chkAnticipoCredito.Value = 1) Then
                 SQL = App.Path & "\tmpRem.ari"
                 'Copio el disquete
                 B = CopiarArchivo

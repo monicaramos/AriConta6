@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016062409123426170RE10000362016</MsgId>
-   <CreDtTm>2016-06-24T09:12:34</CreDtTm>
-   <NbOfTxs>4</NbOfTxs>
-   <CtrlSum>505.30</CtrlSum>
+<MsgId>PRE2016070709330847270RE10000392016</MsgId>
+   <CreDtTm>2016-07-07T09:33:08</CreDtTm>
+   <NbOfTxs>7</NbOfTxs>
+   <CtrlSum>1838.95</CtrlSum>
    <InitgPty>
      <Nm>Ariadna Software, S.L.</Nm>
      <Id>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000362016 24/06/16B96470190</PmtInfId>
+   <PmtInfId>RE000392016 07/07/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-06-24</ReqdColltnDt>
+   <ReqdColltnDt>2016-07-10</ReqdColltnDt>
    <Cdtr>
       <Nm>Ariadna Software, S.L.</Nm>
       <PstlAdr>
@@ -43,12 +43,12 @@
    </Cdtr>
    <CdtrAcct>
       <Id>
-         <IBAN>ES6421001864930200004908</IBAN>
+         <IBAN>ES6600810204010001438853</IBAN>
       </Id>
    </CdtrAcct>
    <CdtrAgt>
       <FinInstnId>
-         <BIC>CAIXESBBXXX</BIC>
+         <BIC>BSABESBBXXX</BIC>
       </FinInstnId>
    </CdtrAgt>
    <CdtrSchmeId>
@@ -63,58 +63,304 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000024 A  0360016720160531001   </EndToEndId>
+          <EndToEndId>430000237 A  0360016120160515001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">35.33</InstdAmt>
+      <InstdAmt Ccy="EUR">96.07</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
-            <MndtId>F46026282</MndtId>
-            <DtOfSgntr>2014-01-24</DtOfSgntr>
+            <MndtId>766800001567</MndtId>
+            <DtOfSgntr>2014-02-27</DtOfSgntr>
          </MndtRltdInf>
       </DrctDbtTx>
       <DbtrAgt>
          <FinInstnId>
-            <BIC>CCRIES2AXXX</BIC>
+            <BIC>CAHMESMMXXX</BIC>
          </FinInstnId>
       </DbtrAgt>
       <Dbtr>
-         <Nm>COOP. V. SAN PEDRO APOSTOL</Nm>
+         <Nm>JOSE MORALES, S.L.</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-              <AdrLine>Plaza Hispanidad, 4</AdrLine>
-              <AdrLine>MOIXENT   46640     VALENCIA</AdrLine>
+              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
+              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <PrvtId>
                <Othr>
-                   <Id>F46026282</Id>
-                   <Issr>NIF</Issr>
+                   <Id>766800001567</Id>
                </Othr>
             </PrvtId>
          </Id>
       </Dbtr>
       <DbtrAcct>
          <Id>
-            <IBAN>ES4030582287541021004157</IBAN>
+            <IBAN>ES4320388715766800001567</IBAN>
          </Id>
       </DbtrAcct>
       <Purp>
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>FACTURA  A-3600167 de Fecha 31 may 2016</Ustrd>
+         <Ustrd>FACTURA  A-3600161 de Fecha 15 may 2016</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000011 A  0360016620160531001   </EndToEndId>
+          <EndToEndId>430000237 A  0360021620160630001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">141.33</InstdAmt>
+      <InstdAmt Ccy="EUR">780.45</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
-            <MndtId>F46026621</MndtId>
-            <DtOfSgntr>2014-01-10</DtOfSgntr>
+            <MndtId>766800001567</MndtId>
+            <DtOfSgntr>2014-02-27</DtOfSgntr>
          </MndtRltdInf>
       </DrctDbtTx>
       <DbtrAgt>
          <FinInstnId>
+            <BIC>CAHMESMMXXX</BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>JOSE MORALES, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
+              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>766800001567</Id>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4320388715766800001567</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  A-3600216 de Fecha 30 jun 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000237 M  0360029420160615001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">235.95</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>766800001567</MndtId>
+            <DtOfSgntr>2014-02-27</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>CAHMESMMXXX</BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>JOSE MORALES, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
+              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>766800001567</Id>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4320388715766800001567</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600294 de Fecha 15 jun 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000237 A  0360018220160531001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">202.07</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>766800001567</MndtId>
+            <DtOfSgntr>2014-02-27</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>CAHMESMMXXX</BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>JOSE MORALES, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
+              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>766800001567</Id>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4320388715766800001567</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  A-3600182 de Fecha 31 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000237 M  0360027120160601001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">187.55</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>766800001567</MndtId>
+            <DtOfSgntr>2014-02-27</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>CAHMESMMXXX</BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>JOSE MORALES, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
+              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>766800001567</Id>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES4320388715766800001567</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600271 de Fecha 01 jun 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000147 A  0360017320160531001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">70.66</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>216000651183</MndtId>
+            <DtOfSgntr>2014-01-22</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>CAHMESMMXXX</BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>TEINSA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Carrer Les Moreres Parcela 48-A</AdrLine>
+              <AdrLine>XIRIVELLA   46950     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>216000651183</Id>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6520385825216000651183</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  A-3600173 de Fecha 31 may 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+   <DrctDbtTxInf>
+      <PmtId>
+          <EndToEndId>430000147 M  0360025820160601001   </EndToEndId>
+      </PmtId>
+      <InstdAmt Ccy="EUR">266.20</InstdAmt>
+      <DrctDbtTx>
+         <MndtRltdInf>
+            <MndtId>216000651183</MndtId>
+            <DtOfSgntr>2014-01-22</DtOfSgntr>
+         </MndtRltdInf>
+      </DrctDbtTx>
+      <DbtrAgt>
+         <FinInstnId>
+            <BIC>CAHMESMMXXX</BIC>
+         </FinInstnId>
+      </DbtrAgt>
+      <Dbtr>
+         <Nm>TEINSA, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+              <AdrLine>Carrer Les Moreres Parcela 48-A</AdrLine>
+              <AdrLine>XIRIVELLA   46950     VALENCIA</AdrLine>
+         </PstlAdr>
+         <Id>
+            <PrvtId>
+               <Othr>
+                   <Id>216000651183</Id>
+               </Othr>
+            </PrvtId>
+         </Id>
+      </Dbtr>
+      <DbtrAcct>
+         <Id>
+            <IBAN>ES6520385825216000651183</IBAN>
+         </Id>
+      </DbtrAcct>
+      <Purp>
+         <Cd>TRAD</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>FACTURA  M-3600258 de Fecha 01 jun 2016</Ustrd>
+      </RmtInf>
+   </DrctDbtTxInf>
+</PmtInf>
+</CstmrDrctDbtInitn></Document>

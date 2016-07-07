@@ -5603,12 +5603,9 @@ Dim I As Integer
                         txtAux2(12).Text = ""
                     End If
                     
-                    ' si hay retencion se marca como que hay que aplicarle retencion
-                    If Text1(7).Text = "" Then
-                        chkAux(0).Value = 0
-                    Else
-                        chkAux(0).Value = 1
-                    End If
+                    ' antes si hay retencion se marca como que hay que aplicarle retencion
+                    ' si  Text1(7).Text = ""  se marcaba como 0 ahora siempre como 1
+                    chkAux(0).Value = 1
                     
                     If Limpia Then
                         PonFoco txtAux(5)
@@ -7453,6 +7450,9 @@ Dim TipoRetencion As Integer
     Set RS = Nothing
     
     PorcRet = ImporteFormateado(Text1(7).Text)
+    
+    If PorcRet = 0 Then Basereten = 0
+    
     If PorcRet = 0 Then
         Imporeten = 0
     Else
@@ -7604,7 +7604,7 @@ Dim Sql4 As String
     
     Linea = DevuelveValor("select tipforpa from formapago where codforpa = " & DBSet(Text1(5), "N"))
     
-    If FP.leer(Linea) Then
+    If FP.Leer(Linea) Then
         Set Mc = Nothing
         Set FP = Nothing
     End If

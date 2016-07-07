@@ -74,7 +74,7 @@ End Function
 
 
 
-Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As String, FecPre As String, TipoReferenciaCliente As Byte, Sufijo As String, FechaCobro As String, SEPA_EmpresasGraboNIF As Boolean, Norma19_15 As Boolean, DatosBanco As String, NifEmpresa As String) As Boolean
+Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As String, FecPre As String, TipoReferenciaCliente As Byte, Sufijo As String, FechaCobro As String, SEPA_EmpresasGraboNIF As Boolean, Norma19_15 As Boolean, DatosBanco As String, NifEmpresa As String, esAnticipoCredito As Boolean) As Boolean
     Dim ValorEnOpcionales As Boolean
     '-- Genera_Remesa: Esta función genera la remesa indicada, en el fichero correspondiente
     
@@ -95,8 +95,6 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
     'Dim IdNorma As String  '1914 o 1915
     
     On Error GoTo Err_Remesa19sepa
-    
-    
     
     
 
@@ -120,8 +118,6 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
     Else
         SQL = SQL & "'" & Format(FechaCobro, FormatoFecha) & "'"
     End If
-
-
 
     
     SQL = SQL & " as fecvenci,impvenci,ctabanc1,cobros.entidad"
@@ -148,9 +144,14 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                         
             Print #NFic, "<GrpHdr>"
             
+            If esAnticipoCredito Then
+                SQL = "FSDD"
+            Else
+                SQL = "PRE"
+            End If
             
-
-            SQL = "PRE" & Format(Now, "yyyymmddhhnnss")
+            SQL = SQL & Format(Now, "yyyymmddhhnnss")
+            
             'Los milisegundos
             SQL = SQL & Format((Timer - Int(Timer)) * 10000, "0000") & "0"
             'Idententificacion propia
@@ -691,7 +692,7 @@ Dim EsPersonaJuridica2 As Boolean
             Aux = miRsAux!ctaprove
 
         Else
-            Im = Abs(miRsAux!ImpVenci + DBLet(miRsAux!Gastos, "N")) - DBLet(miRsAux!impcobro, "N")
+            Im = Abs(miRsAux!ImpVenci + DBLet(miRsAux!Gastos, "N")) - DBLet(miRsAux!Impcobro, "N")
             Aux = miRsAux!codmacta
         End If
         
