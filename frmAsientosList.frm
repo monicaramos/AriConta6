@@ -794,10 +794,10 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Asientos Diario"
 
-    For i = 0 To 1
-        Me.imgAsientos(i).Picture = frmPpal.imgIcoForms.ListImages(29).Picture
-        Me.imgDiario(i).Picture = frmPpal.imgIcoForms.ListImages(29).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgAsientos(I).Picture = frmPpal.imgIcoForms.ListImages(29).Picture
+        Me.imgDiario(I).Picture = frmPpal.imgIcoForms.ListImages(29).Picture
+    Next I
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -871,10 +871,10 @@ Private Sub txtAsientos_KeyDown(Index As Integer, KeyCode As Integer, Shift As I
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgAsientos"
-        imgAsientos_Click indice
+        imgAsientos_Click Indice
     End Select
     
 End Sub
@@ -884,7 +884,7 @@ Private Sub txtAsientos_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAsientos_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtAsientos(Index).Text = Trim(txtAsientos(Index).Text)
     
@@ -911,8 +911,8 @@ Private Sub AccionesCSV()
     SQL = SQL & " WHERE asipre.numaspre = asipre_lineas.numaspre and asipre_lineas.codmacta = cuentas.codmacta "
     
     If cadselect <> "" Then SQL = SQL & " AND " & cadselect
-    i = 1
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    SQL = SQL & " ORDER BY " & I
         
     'LLamoa a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text

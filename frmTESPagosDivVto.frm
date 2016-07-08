@@ -479,15 +479,16 @@ Dim Dias As Integer
         SQL = "INSERT INTO pagos (numorden,impefect,fecultpa,imppagad,emitdocum,"
         SQL = SQL & "numserie,numfactu,fecfactu,codmacta,codforpa,fecefect,ctabanc1,entidad,oficina,control,cuentaba,"
         SQL = SQL & "text1csb,text2csb,"
-        SQL = SQL & "observa,nomprove,domprove,pobprove,cpprove,proprove,codpais,nifprove,iban) "
+        SQL = SQL & "observa,nomprove,domprove,pobprove,cpprove,proprove,codpais,nifprove,iban,codusu) "
         'Valores
         SQL = SQL & " SELECT " & k & "," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
         SQL = SQL & "numserie,numfactu,fecfactu,codmacta,codforpa,"
         SQL = SQL & DBSet(vFecVenci, "F") & ","
         SQL = SQL & "ctabanc1,entidad,oficina,control,cuentaba,text1csb,text2csb,"
         'text83csb`,
-        SQL = SQL & "observa,nomprove,domprove,pobprove,cpprove,proprove,codpais,nifprove,iban FROM "
-        SQL = SQL & " pagos WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+        SQL = SQL & "observa,nomprove,domprove,pobprove,cpprove,proprove,codpais,nifprove,iban "
+        SQL = SQL & "," & DBSet(vUsu.Id, "N")
+        SQL = SQL & " FROM pagos WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
         SQL = SQL & " and codmacta = "
     

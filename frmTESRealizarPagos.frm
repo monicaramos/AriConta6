@@ -5,13 +5,13 @@ Begin VB.Form frmTESRealizarPagos
    ClientHeight    =   8625
    ClientLeft      =   120
    ClientTop       =   345
-   ClientWidth     =   15240
+   ClientWidth     =   17520
    Icon            =   "frmTESRealizarPagos.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8625
-   ScaleWidth      =   15240
+   ScaleWidth      =   17520
    StartUpPosition =   2  'CenterScreen
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   750
@@ -44,14 +44,31 @@ Begin VB.Form frmTESRealizarPagos
       Left            =   0
       TabIndex        =   6
       Top             =   0
-      Width           =   14985
+      Width           =   17235
       Begin VB.Frame FrameRemesar 
          BorderStyle     =   0  'None
          Height          =   1905
          Left            =   120
          TabIndex        =   13
-         Top             =   240
-         Width           =   14685
+         Top             =   210
+         Width           =   16935
+         Begin VB.CheckBox chkSoloBancoPrev 
+            Caption         =   "Sólo Banco previsto"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Left            =   11430
+            TabIndex        =   35
+            Top             =   630
+            Width           =   2325
+         End
          Begin VB.CheckBox chkImprimir 
             Caption         =   "Imprimir Recibos"
             Enabled         =   0   'False
@@ -65,10 +82,10 @@ Begin VB.Form frmTESRealizarPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   11460
+            Left            =   11430
             TabIndex        =   32
-            Top             =   1560
-            Width           =   2565
+            Top             =   330
+            Width           =   2325
          End
          Begin VB.TextBox Text3 
             Alignment       =   1  'Right Justify
@@ -237,9 +254,9 @@ Begin VB.Form frmTESRealizarPagos
             EndProperty
             Height          =   255
             Index           =   0
-            Left            =   11460
+            Left            =   13770
             TabIndex        =   22
-            Top             =   960
+            Top             =   1230
             Width           =   2175
          End
          Begin VB.CheckBox chkPorFechaVenci 
@@ -254,9 +271,9 @@ Begin VB.Form frmTESRealizarPagos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   11460
+            Left            =   13770
             TabIndex        =   21
-            Top             =   660
+            Top             =   930
             Width           =   2865
          End
          Begin VB.CheckBox chkContrapar 
@@ -272,9 +289,9 @@ Begin VB.Form frmTESRealizarPagos
             EndProperty
             Height          =   255
             Index           =   0
-            Left            =   11460
+            Left            =   13770
             TabIndex        =   20
-            Top             =   360
+            Top             =   630
             Width           =   2745
          End
          Begin VB.CheckBox chkAsiento 
@@ -290,9 +307,9 @@ Begin VB.Form frmTESRealizarPagos
             EndProperty
             Height          =   255
             Index           =   0
-            Left            =   11460
+            Left            =   13770
             TabIndex        =   19
-            Top             =   60
+            Top             =   330
             Width           =   2385
          End
          Begin VB.TextBox txtDCta 
@@ -336,9 +353,9 @@ Begin VB.Form frmTESRealizarPagos
          End
          Begin MSComctlLib.Toolbar ToolbarAyuda 
             Height          =   390
-            Left            =   14280
+            Left            =   16590
             TabIndex        =   33
-            Top             =   30
+            Top             =   300
             Width           =   405
             _ExtentX        =   714
             _ExtentY        =   688
@@ -502,27 +519,27 @@ Begin VB.Form frmTESRealizarPagos
          Begin VB.Image Image1 
             Height          =   240
             Index           =   1
-            Left            =   13920
+            Left            =   16230
             ToolTipText     =   "AYUDA"
-            Top             =   90
+            Top             =   360
             Width           =   240
          End
          Begin VB.Image imgCheck 
             Height          =   240
             Index           =   1
-            Left            =   14430
+            Left            =   16530
             Picture         =   "frmTESRealizarPagos.frx":72FE
             ToolTipText     =   "Seleccionar todos"
-            Top             =   1590
+            Top             =   1560
             Width           =   240
          End
          Begin VB.Image imgCheck 
             Height          =   240
             Index           =   0
-            Left            =   14070
+            Left            =   16170
             Picture         =   "frmTESRealizarPagos.frx":7448
             ToolTipText     =   "Quitar seleccion"
-            Top             =   1590
+            Top             =   1560
             Width           =   240
          End
          Begin VB.Label Label3 
@@ -569,7 +586,7 @@ Begin VB.Form frmTESRealizarPagos
       Left            =   360
       TabIndex        =   8
       Top             =   7740
-      Width           =   14415
+      Width           =   16935
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Contabilizar"
          BeginProperty Font 
@@ -716,11 +733,11 @@ Begin VB.Form frmTESRealizarPagos
    End
    Begin MSComctlLib.ListView ListView1 
       Height          =   5025
-      Left            =   30
+      Left            =   60
       TabIndex        =   7
-      Top             =   2520
-      Width           =   14925
-      _ExtentX        =   26326
+      Top             =   2460
+      Width           =   17205
+      _ExtentX        =   30348
       _ExtentY        =   8864
       View            =   3
       LabelEdit       =   1
@@ -830,7 +847,7 @@ Dim impo As Currency
 Dim riesgo As Currency
 
 Dim ImpSeleccionado As Currency
-Dim i As Integer
+Dim I As Integer
 Private PrimeraVez As Boolean
 Dim RiesTalPag As Currency
 Private FechaAsiento As Date
@@ -846,6 +863,8 @@ Dim CampoOrden As String
 Dim Orden As Boolean
 Dim Campo2 As Integer
 Dim CtaAnt As String
+Dim CtaAntBan As String
+
 
 
 Dim FrasMarcadas As Collection
@@ -904,12 +923,12 @@ Dim Vencimientos As Integer
 
     'Por si acaso, lo compurebo ahora, aunque dentro de cmdGenerar2 tb esta
     cad = ""
-    For i = 1 To Me.ListView1.ListItems.Count
-        If ListView1.ListItems(i).Checked Then
+    For I = 1 To Me.ListView1.ListItems.Count
+        If ListView1.ListItems(I).Checked Then
             cad = cad & "1"
             Exit For
         End If
-    Next i
+    Next I
     If cad = "" Then
         MsgBox "Deberias selecionar algún vencimiento", vbExclamation
         Exit Sub
@@ -978,12 +997,12 @@ Dim F2 As Date
 Dim TipoAnt As Integer
     
     cad = ""
-    For i = 1 To Me.ListView1.ListItems.Count
-        If ListView1.ListItems(i).Checked Then
+    For I = 1 To Me.ListView1.ListItems.Count
+        If ListView1.ListItems(I).Checked Then
             cad = cad & "1"
             Exit For
         End If
-    Next i
+    Next I
     If cad = "" Then
         MsgBox "Deberias selecionar algún vencimiento", vbExclamation
         Exit Sub
@@ -1039,10 +1058,10 @@ Dim TipoAnt As Integer
         Else
             If Me.chkPorFechaVenci.Value Then
                 riesgo = 0
-                For i = 1 To Me.ListView1.ListItems.Count
-                    If ListView1.ListItems(i).Checked Then
+                For I = 1 To Me.ListView1.ListItems.Count
+                    If ListView1.ListItems(I).Checked Then
                         
-                        Fecha = ListView1.ListItems(i).SubItems(3)
+                        Fecha = ListView1.ListItems(I).SubItems(3)
                         If riesgo = 0 Then
                             F2 = Fecha
                             riesgo = 1
@@ -1055,7 +1074,7 @@ Dim TipoAnt As Integer
                         End If
                     End If
         
-                Next i
+                Next I
             End If
         End If
             
@@ -1094,26 +1113,26 @@ Dim TipoAnt As Integer
     If Not Cobros Then
         If Combo1.ItemData(Combo1.ListIndex) = 3 Then
             cad = ""
-            For i = 1 To Me.ListView1.ListItems.Count
-                If ListView1.ListItems(i).Checked Then
-                    If Me.ListView1.ListItems(i).ForeColor = vbRed Then
+            For I = 1 To Me.ListView1.ListItems.Count
+                If ListView1.ListItems(I).Checked Then
+                    If Me.ListView1.ListItems(I).ForeColor = vbRed Then
                         cad = cad & "1"
                         Exit For
                     End If
                 End If
-            Next i
+            Next I
         
             If cad <> "" Then
                 'Significa que ha marcado alguno de los vencimientos que emitiero documento. Veremos si estan todos marcados
                 cad = ""
-                For i = 1 To Me.ListView1.ListItems.Count
-                    If Not ListView1.ListItems(i).Checked Then
-                        If Me.ListView1.ListItems(i).ForeColor = vbRed Then
+                For I = 1 To Me.ListView1.ListItems.Count
+                    If Not ListView1.ListItems(I).Checked Then
+                        If Me.ListView1.ListItems(I).ForeColor = vbRed Then
                             cad = cad & "1"
                             Exit For
                         End If
                     End If
-                Next i
+                Next I
                 
                 If cad <> "" Then
                     cad = "Ha seleccionado vencimientos que emitió documento, pero no estan todos seleccionados." & vbCrLf
@@ -1127,13 +1146,13 @@ Dim TipoAnt As Integer
     
     cad = "Desea contabilizar los vencimientos seleccionados?"
     If Combo1.ItemData(Combo1.ListIndex) = 1 Then
-        i = 0
+        I = 0
         If Not Cobros Then
-            If Not ContabTransfer Then i = 1
+            If Not ContabTransfer Then I = 1
         Else
-            If Not ContabTransfer And SegundoParametro <> "" Then i = 1
+            If Not ContabTransfer And SegundoParametro <> "" Then I = 1
         End If
-        If i = 1 Then
+        If I = 1 Then
             'Estamos creando la transferencia o el pago domiciliado
             cad = RecuperaValor(Me.vTextos, 5)
             If cad = "" Then
@@ -1179,14 +1198,14 @@ Dim TipoAnt As Integer
           CadInsert = "insert into tmppagos2 (codusu,numserie,numfactu,fecfactu,numorden,fecefect,reftalonpag,bancotalonpag,codmacta) values "
           CadValues = ""
 
-          For i = 1 To Me.ListView1.ListItems.Count
-            If ListView1.ListItems(i).Checked Then
-                CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(ListView1.ListItems(i).Text, "T") & "," & DBSet(Val(ListView1.ListItems(i).SubItems(1)), "N") & ","
-                CadValues = CadValues & DBSet(ListView1.ListItems(i).SubItems(2), "F") & "," & DBSet(ListView1.ListItems(i).SubItems(4), "N") & ","
-                CadValues = CadValues & DBSet(ListView1.ListItems(i).SubItems(3), "F") & ","
-                CadValues = CadValues & ValorNulo & "," & ValorNulo & "," & DBSet(ListView1.ListItems(i).Tag, "T") & "),"
+          For I = 1 To Me.ListView1.ListItems.Count
+            If ListView1.ListItems(I).Checked Then
+                CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(ListView1.ListItems(I).Text, "T") & "," & DBSet(Val(ListView1.ListItems(I).SubItems(1)), "N") & ","
+                CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(2), "F") & "," & DBSet(ListView1.ListItems(I).SubItems(4), "N") & ","
+                CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(3), "F") & ","
+                CadValues = CadValues & ValorNulo & "," & ValorNulo & "," & DBSet(ListView1.ListItems(I).Tag, "T") & "),"
             End If
-          Next i
+          Next I
           
           If CadValues <> "" Then
               Conn.Execute CadInsert & Mid(CadValues, 1, Len(CadValues) - 1)
@@ -1205,11 +1224,11 @@ Dim TipoAnt As Integer
     cad = ""
     cad = Combo1.ItemData(Combo1.ListIndex) 'RecuperaValor(vTextos, 3)
     If cad = "" Then
-        i = -1
+        I = -1
     Else
-        i = Val(cad)
+        I = Val(cad)
     End If
-    If vp.Leer(i) = 1 Then
+    If vp.Leer(I) = 1 Then
         'ERROR GRAVE LEYENDO LA FORMA DE PAGO
         Screen.MousePointer = vbDefault
         Set vp = Nothing
@@ -1255,9 +1274,9 @@ Dim TipoAnt As Integer
         Else
             SubItemVto = 2
         End If
-        For i = 1 To Me.ListView1.ListItems.Count
-            If ListView1.ListItems(i).Checked Then
-                Fecha = ListView1.ListItems(i).SubItems(SubItemVto)
+        For I = 1 To Me.ListView1.ListItems.Count
+            If ListView1.ListItems(I).Checked Then
+                Fecha = ListView1.ListItems(I).SubItems(SubItemVto)
                 riesgo = 0
                 If Fecha < vParam.fechaini Or Fecha > F2 Then
                     riesgo = 1
@@ -1275,7 +1294,7 @@ Dim TipoAnt As Integer
                     End If
                 End If
             End If
-        Next i
+        Next I
     
         If cad <> "" Then
             cad = "Las siguientes fechas están fuera de ejercicio (actual y siguiente):" & vbCrLf & vbCrLf & cad
@@ -1314,15 +1333,15 @@ Dim TipoAnt As Integer
         Conn.CommitTrans
               
         'Tenemos k borrar los listview
-        For i = (ListView1.ListItems.Count) To 1 Step -1
-            If ListView1.ListItems(i).Checked Then
+        For I = (ListView1.ListItems.Count) To 1 Step -1
+            If ListView1.ListItems(I).Checked Then
 '--
 '               EliminarCobroPago I
               
-               ListView1.ListItems.Remove i
+               ListView1.ListItems.Remove I
                 
             End If
-        Next i
+        Next I
         '-----------------------------------------------------------
 '--
 '        'Ahora actualizamos los registros que estan en tmpactualziar
@@ -1429,9 +1448,9 @@ Dim EsCobroTarjetaNavarres As Boolean
     'Vamos a proceder a la impresion de los recibos
     
     cad = ""
-    For i = 1 To Me.ListView1.ListItems.Count
-        If ListView1.ListItems(i).Checked Then cad = cad & "1"
-    Next i
+    For I = 1 To Me.ListView1.ListItems.Count
+        If ListView1.ListItems(I).Checked Then cad = cad & "1"
+    Next I
     If cad = "" Then
         MsgBox "Deberias selecionar algun vencimiento.", vbExclamation
         Exit Sub
@@ -1488,14 +1507,14 @@ Dim EsCobroTarjetaNavarres As Boolean
             'Para los pagares. Vere si alguno de los VTOs esta ya
             If Combo1.ItemData(Combo1.ListIndex) = 3 Then
                 cad = ""
-                For i = 1 To Me.ListView1.ListItems.Count
-                    If ListView1.ListItems(i).Checked Then
-                        If Me.ListView1.ListItems(i).ForeColor = vbRed Then
+                For I = 1 To Me.ListView1.ListItems.Count
+                    If ListView1.ListItems(I).Checked Then
+                        If Me.ListView1.ListItems(I).ForeColor = vbRed Then
                             'Ese vto YA esta en otra "documentos de pagares"
-                            cad = cad & "    - " & Me.ListView1.ListItems(i).SubItems(4) & " " & Me.ListView1.ListItems(i).SubItems(8) & vbCrLf
+                            cad = cad & "    - " & Me.ListView1.ListItems(I).SubItems(4) & " " & Me.ListView1.ListItems(I).SubItems(8) & vbCrLf
                         End If
                     End If
-                Next i
+                Next I
                 
                 If cad <> "" Then
                     cad = "Los siguientes vencimientos fueron pagados en un documento anterior" & vbCrLf & vbCrLf & cad
@@ -1548,15 +1567,15 @@ Dim EsCobroTarjetaNavarres As Boolean
                         SubItemVto = InStr(1, DescripcionTransferencia, "-")
                         DescripcionTransferencia = Trim(Mid(DescripcionTransferencia, 1, SubItemVto - 1))
                         
-                        For i = 1 To Me.ListView1.ListItems.Count
-                            If ListView1.ListItems(i).Checked Then
+                        For I = 1 To Me.ListView1.ListItems.Count
+                            If ListView1.ListItems(I).Checked Then
                                 cad = "UPDATE spagop SET emitdocum=1"
                                 cad = cad & ",ctabanc1 = '" & DescripcionTransferencia & "'"
                                 If NomFile <> "" Then cad = cad & ", referencia = '" & NomFile & "' "
                                 'Marzo 2013. Fecha vto
                                 cad = cad & ",fecefect = '" & Format(FechaAsiento, FormatoFecha) & "'"
                                 
-                                With ListView1.ListItems(i)
+                                With ListView1.ListItems(I)
                                     cad = cad & " WHERE numfactu = '" & .Text
                                     cad = cad & "' and fecfactu = '" & Format(.SubItems(1), FormatoFecha)
                                     cad = cad & "' and numorden = " & .SubItems(3)
@@ -1565,7 +1584,7 @@ Dim EsCobroTarjetaNavarres As Boolean
                                 Conn.Execute cad
                             End If
                         
-                        Next i
+                        Next I
                         
                         
                     End If
@@ -1657,10 +1676,10 @@ Private Sub Combo1_Validate(Cancel As Boolean)
     
     Else
          'If Tipo = 1 And OrdenarEfecto And Not Cobros Then cmdGenerar.Caption = "Transferencia"
-         i = 0
+         I = 0
          If Combo1.ItemData(Combo1.ListIndex) = 1 And Me.SegundoParametro <> "" Then
              If Not ContabTransfer Then
-                 i = 1
+                 I = 1
                  cad = RecuperaValor(vTextos, 5) 'Dira si es PAGO DOMICILIADO
                  If cad <> "" Then
                      If vParamT.PagosConfirmingCaixa Then
@@ -1682,8 +1701,8 @@ Private Sub Combo1_Validate(Cancel As Boolean)
              End If
          End If
          
-         Me.chkPorFechaVenci.Visible = i = 0
-         chkGenerico(0).Visible = i = 0
+         Me.chkPorFechaVenci.Visible = I = 0
+         chkGenerico(0).Visible = I = 0
 '         Me.chkVtoCuenta(0).Visible = I = 0
          
         '++
@@ -1694,10 +1713,10 @@ Private Sub Combo1_Validate(Cancel As Boolean)
             End If
         End If
         
-        i = 0
-        If Cobros And (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then i = 1
-        Me.mnBarra1.Visible = i = 1
-        Me.mnNumero.Visible = i = 1
+        I = 0
+        If Cobros And (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then I = 1
+        Me.mnbarra1.Visible = I = 1
+        Me.mnNumero.Visible = I = 1
         
         'check de impresion de documento
         '++
@@ -1797,12 +1816,12 @@ Private Sub Form_Load()
     PrimeraVez = True
     Limpiar Me
     Me.Icon = frmPpal.Icon
-    For i = 0 To imgFecha.Count - 1
-        Me.imgFecha(i).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Next i
-    For i = 0 To imgCuentas.Count - 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To imgFecha.Count - 1
+        Me.imgFecha(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Next I
+    For I = 0 To imgCuentas.Count - 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     
     CargaCombo
@@ -1847,7 +1866,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Resize()
-Dim i As Integer
+Dim I As Integer
 Dim H As Integer
 
     If Me.WindowState = 1 Then Exit Sub  'Minimizar
@@ -1867,15 +1886,15 @@ Dim H As Integer
     'Las columnas
     H = ListView1.Tag
     ListView1.Tag = ListView1.Width - ListView1.Tag - 320 'Del margen
-    For i = 1 To Me.ListView1.ColumnHeaders.Count
-        If InStr(1, ListView1.ColumnHeaders(i).Tag, "%") Then
-            cad = (Val(ListView1.ColumnHeaders(i).Tag) * (Val(ListView1.Tag)) / 100)
+    For I = 1 To Me.ListView1.ColumnHeaders.Count
+        If InStr(1, ListView1.ColumnHeaders(I).Tag, "%") Then
+            cad = (Val(ListView1.ColumnHeaders(I).Tag) * (Val(ListView1.Tag)) / 100)
         Else
             'Si no es de % es valor fijo
-            cad = Val(ListView1.ColumnHeaders(i).Tag)
+            cad = Val(ListView1.ColumnHeaders(I).Tag)
         End If
-        Me.ListView1.ColumnHeaders(i).Width = Val(cad)
-    Next i
+        Me.ListView1.ColumnHeaders(I).Width = Val(cad)
+    Next I
     ListView1.Tag = H
 End Sub
 
@@ -1886,7 +1905,7 @@ Dim Columnas As String
 Dim ancho As String
 Dim ALIGN As String
 Dim NCols As Integer
-Dim i As Integer
+Dim I As Integer
 
     ListView1.ColumnHeaders.Clear
    If Cobros Then
@@ -1915,16 +1934,16 @@ Dim i As Integer
         ListView1.Tag = 2200  'La suma de los valores fijos. Para k ajuste los campos k pueden crecer
    End If
         
-   For i = 1 To NCols
-        cad = RecuperaValor(Columnas, i)
+   For I = 1 To NCols
+        cad = RecuperaValor(Columnas, I)
         If cad <> "" Then
             Set ColX = ListView1.ColumnHeaders.Add()
             ColX.Text = cad
             'ANCHO
-            cad = RecuperaValor(ancho, i)
+            cad = RecuperaValor(ancho, I)
             ColX.Tag = cad
             'align
-            cad = Mid(ALIGN, i, 1)
+            cad = Mid(ALIGN, I, 1)
             If cad = "L" Then
                 'NADA. Es valor x defecto
             Else
@@ -1936,21 +1955,21 @@ Dim i As Integer
                 End If
             End If
         End If
-    Next i
+    Next I
 
 End Sub
 
 
 Private Sub GuardarMarcados()
-Dim i As Long
+Dim I As Long
     
     Set FrasMarcadas = New Collection
 
-    For i = 1 To Me.ListView1.ListItems.Count
-        If ListView1.ListItems(i).Checked Then
-            FrasMarcadas.Add ListView1.ListItems(i).Text & "|" & ListView1.ListItems(i).SubItems(1) & "|" & ListView1.ListItems(i).SubItems(2) & "|" & ListView1.ListItems(i).SubItems(4) & "|" & ListView1.ListItems(i).Tag & "|"
+    For I = 1 To Me.ListView1.ListItems.Count
+        If ListView1.ListItems(I).Checked Then
+            FrasMarcadas.Add ListView1.ListItems(I).Text & "|" & ListView1.ListItems(I).SubItems(1) & "|" & ListView1.ListItems(I).SubItems(2) & "|" & ListView1.ListItems(I).SubItems(4) & "|" & ListView1.ListItems(I).Tag & "|"
         End If
-    Next i
+    Next I
 
 End Sub
  
@@ -2048,9 +2067,9 @@ Dim ImpAux As Currency
     ItmX.SubItems(8) = Format(vImporte, FormatoImporte)
     vImporte = vImporte + RS!ImpVenci
     
-    If Not IsNull(RS!Impcobro) Then
-        ItmX.SubItems(9) = Format(RS!Impcobro, FormatoImporte)
-        impo = vImporte - RS!Impcobro
+    If Not IsNull(RS!impcobro) Then
+        ItmX.SubItems(9) = Format(RS!impcobro, FormatoImporte)
+        impo = vImporte - RS!impcobro
         ItmX.SubItems(10) = Format(impo, FormatoImporte)
     Else
         impo = vImporte
@@ -2068,7 +2087,7 @@ Dim ImpAux As Currency
     
     ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
 '            If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
-            If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!Impcobro, "N")
+            If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!impcobro, "N")
     End If
     
     If RS!tipoformapago = vbTarjeta Then
@@ -2168,11 +2187,23 @@ Dim cad As String
     vSQL = vSQL & " ((formapago.tipforpa in (" & vbTalon & "," & vbPagare & ") and pagos.nrodocum is null) or not formapago.tipforpa in (" & vbTalon & "," & vbPagare & "))"
 
     
+    ' si está marcado los de solo el banco previsto
+    If chkSoloBancoPrev.Value = 1 Then
+        If txtCta(4).Text <> "" Then
+            If vSQL <> "" Then vSQL = vSQL & " AND "
+            vSQL = vSQL & " pagos.ctabanc1 = " & DBSet(txtCta(4).Text, "T")
+        End If
+    End If
+    
+    
+    
     ' no entran a jugar los recibos
-    If vSQL <> "" Then vSQL = vSQL & " and formapago.tipforpa <> " & vbTransferencia
+    If vSQL <> "" Then vSQL = vSQL & " and "
+    vSQL = vSQL & " formapago.tipforpa <> " & vbTransferencia
     
     ' solo los pendientes de cobro
-    If vSQL <> "" Then vSQL = vSQL & " and (coalesce(impefect,0) - coalesce(imppagad,0)) <> 0 "
+    If vSQL <> "" Then vSQL = vSQL & " and "
+    vSQL = vSQL & " (coalesce(impefect,0) - coalesce(imppagad,0)) <> 0 "
     
     
     ' pagos
@@ -2212,6 +2243,8 @@ End Sub
 
 Private Sub InsertaItemPago()
 Dim J As Byte
+
+
      
      Set ItmX = ListView1.ListItems.Add()
      
@@ -2264,14 +2297,14 @@ Dim J As Byte
      End If
      
      ' nuevo si está marcada lo miramos
-     For i = 1 To FrasMarcadas.Count
-        cad = FrasMarcadas.Item(i)
-        If RecuperaValor(cad, 1) = RS!NUmSerie And RecuperaValor(cad, 2) = RS!NumFactu And RecuperaValor(cad, 3) = RS!FecFactu And RecuperaValor(cad, 4) = RS!numorden And RecuperaValor(cad, 5) = RS!codmacta Then
+     For I = 1 To FrasMarcadas.Count
+        cad = FrasMarcadas.Item(I)
+        If RecuperaValor(cad, 1) = RS!NUmSerie And CStr(RecuperaValor(cad, 2)) = CStr(RS!NumFactu) And CStr(RecuperaValor(cad, 3)) = CStr(RS!FecFactu) And RecuperaValor(cad, 4) = RS!numorden And RecuperaValor(cad, 5) = RS!codmacta Then
             ItmX.Checked = True
-            FrasMarcadas.Remove i
+'            FrasMarcadas.Remove I
         End If
-     Next i
-    
+     Next I
+     
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -2333,8 +2366,8 @@ End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
     Fecha = Now
-    If Text3(i).Text <> "" Then
-        If IsDate(Text3(i).Text) Then Fecha = CDate(Text3(i).Text)
+    If Text3(I).Text <> "" Then
+        If IsDate(Text3(I).Text) Then Fecha = CDate(Text3(I).Text)
     End If
     cad = ""
     Set frmC = New frmCal
@@ -2363,8 +2396,8 @@ Private Sub imgTraerRestoDatosCliProv_Click()
     'Auqi
     Set RS = New ADODB.Recordset
     cad = ""
-    For i = 1 To Me.ListView1.ListItems.Count
-        With Me.ListView1.ListItems(i)
+    For I = 1 To Me.ListView1.ListItems.Count
+        With Me.ListView1.ListItems(I)
             If Cobros Then
                 '                 RS!NUmSerie
                 cad = cad & ", ('" & .Text & "'," & .SubItems(1) & ",'"
@@ -2409,15 +2442,15 @@ Private Sub imgTraerRestoDatosCliProv_Click()
     
     'Hacemos un conteo
     Set RS = New ADODB.Recordset
-    i = 0
+    I = 0
     RS.Open "SELECT Count(*) " & cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
-        i = DBLet(RS.Fields(0), "N")
+        I = DBLet(RS.Fields(0), "N")
     End If
     RS.Close
     
-    If i > 0 Then
-        If MsgBox("Se van a añadir " & i & " vencimiento(s) a la lista.    Continuar?", vbQuestion + vbYesNo) <> vbYes Then i = 0
+    If I > 0 Then
+        If MsgBox("Se van a añadir " & I & " vencimiento(s) a la lista.    Continuar?", vbQuestion + vbYesNo) <> vbYes Then I = 0
     Else
         MsgBox "No existen mas vencimientos para añadir", vbExclamation
     End If
@@ -2426,7 +2459,7 @@ Private Sub imgTraerRestoDatosCliProv_Click()
     
     
     
-    If i > 0 Then
+    If I > 0 Then
         If Cobros Then
             cad = " cuentas.nommacta,cuentas.codmacta,stipoformapago.tipoformapago " & cad
             cad = "SELECT scobro.*, sforpa.nomforpa, stipoformapago.descformapago, stipoformapago.siglas, " & cad
@@ -2488,16 +2521,16 @@ End Sub
 
 
 Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-    i = ColD(0)
-    impo = ImporteFormateado(Item.SubItems(i))
+    I = ColD(0)
+    impo = ImporteFormateado(Item.SubItems(I))
     
     If Item.Checked Then
         Set ListView1.SelectedItem = Item
-        i = 1
+        I = 1
     Else
-        i = -1
+        I = -1
     End If
-    ImpSeleccionado = ImpSeleccionado + (i * impo)
+    ImpSeleccionado = ImpSeleccionado + (I * impo)
     Text2(2).Text = Format(ImpSeleccionado, FormatoImporte)
     
 End Sub
@@ -2512,11 +2545,11 @@ Private Sub SeleccionarTodos(Seleccionar As Boolean)
 Dim J As Integer
     J = ColD(0)
     ImpSeleccionado = 0
-    For i = 1 To Me.ListView1.ListItems.Count
-        ListView1.ListItems(i).Checked = Seleccionar
-        impo = ImporteFormateado(ListView1.ListItems(i).SubItems(J))
+    For I = 1 To Me.ListView1.ListItems.Count
+        ListView1.ListItems(I).Checked = Seleccionar
+        impo = ImporteFormateado(ListView1.ListItems(I).SubItems(J))
         ImpSeleccionado = ImpSeleccionado + impo
-    Next i
+    Next I
     If Not Seleccionar Then ImpSeleccionado = 0
     Text2(2).Text = Format(ImpSeleccionado, FormatoImporte)
 End Sub
@@ -2622,13 +2655,13 @@ Dim Poblacion As String
 
 
     Contador = 0
-    For i = 1 To ListView1.ListItems.Count
-        If ListView1.ListItems(i).Checked Then
+    For I = 1 To ListView1.ListItems.Count
+        If ListView1.ListItems(I).Checked Then
             'Lo insertamos tres veces
             If Cobros Then
-                RellenarCadenaSQLRecibo i, Poblacion
+                RellenarCadenaSQLRecibo I, Poblacion
             Else
-                RellenarCadenaSQLReciboPagos i
+                RellenarCadenaSQLReciboPagos I
             End If
             'Lo rellenamos por triplicado    'VER ESTO
             'For J = 1 To 3
@@ -2636,7 +2669,7 @@ Dim Poblacion As String
                 Conn.Execute SQL & Contador & "," & cad
             'Next J
         End If
-    Next i
+    Next I
     GenerarRecibos2 = True
 EGenerarRecibos:
     If Err.Number <> 0 Then
@@ -3018,22 +3051,22 @@ Dim vGasto As Currency
             'Fecha de contabilizacion
             If Me.chkPorFechaVenci.Value Then
                 
-                i = 0
+                I = 0
                 
                 'Meto la fecha VTO
                 If FechaContab < vParam.fechaini Then
-                    i = 1
+                    I = 1
                 Else
                     If FechaContab > FechaFinEjercicios Then
-                        i = 1
+                        I = 1
                     Else
-                        If FechaContab < vParamT.fechaAmbito Then i = 1
+                        If FechaContab < vParamT.fechaAmbito Then I = 1
                     End If
                 End If
                 
                 
                 
-                If i = 1 Then FechaContab = CDate(Text3(0).Text)
+                If I = 1 Then FechaContab = CDate(Text3(0).Text)
                 
                 
             Else
@@ -3061,10 +3094,10 @@ Dim vGasto As Currency
             End If
             'Dinerito
             'riesgo es GASTO
-            i = ColD(0)
-            impo = ImporteFormateado(ListView1.ListItems(J).SubItems(i))
+            I = ColD(0)
+            impo = ImporteFormateado(ListView1.ListItems(J).SubItems(I))
             If Cobros Then
-                riesgo = ImporteFormateado(ListView1.ListItems(J).SubItems(i - 2))
+                riesgo = ImporteFormateado(ListView1.ListItems(J).SubItems(I - 2))
             Else
                 riesgo = 0
             End If
@@ -3464,8 +3497,8 @@ On Error GoTo ERealizarTransferencias
     
     impo = 0
     
-    For i = 1 To ListView1.ListItems.Count
-        With ListView1.ListItems(i)
+    For I = 1 To ListView1.ListItems.Count
+        With ListView1.ListItems(I)
             If Not Cobros Then
                 'TRANSFERENCIAS A PROVEEDORES
                 cad = "UPDATE spagop SET transfer= "
@@ -3497,7 +3530,7 @@ On Error GoTo ERealizarTransferencias
             End If
             Conn.Execute cad
         End With
-    Next i
+    Next I
         
     If impo > 0 Then RealizarTransferencias = True
         
@@ -3546,6 +3579,7 @@ End Sub
 Private Sub txtCta_GotFocus(Index As Integer)
     ConseguirFoco txtCta(Index), 3
     If Index = 5 Then CtaAnt = txtCta(Index)
+    If Index = 4 Then CtaAntBan = txtCta(Index)
 End Sub
 
 Private Sub txtCta_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -3561,7 +3595,7 @@ Dim SQL As String
         Case 4 ' cuenta de banco
             txtCta(Index).Text = Trim(txtCta(Index).Text)
             DevfrmCCtas = txtCta(Index).Text
-            i = 0
+            I = 0
             If DevfrmCCtas <> "" Then
                 If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
                     DevfrmCCtas = DevuelveDesdeBD("codmacta", "bancos", "codmacta", DevfrmCCtas, "T")
@@ -3574,7 +3608,7 @@ Dim SQL As String
                     DevfrmCCtas = ""
                     SQL = ""
                 End If
-                i = 1
+                I = 1
             Else
                 SQL = ""
             End If
@@ -3582,15 +3616,20 @@ Dim SQL As String
             
             txtCta(Index).Text = DevfrmCCtas
             txtDCta(Index).Text = SQL
-            If DevfrmCCtas = "" And i = 1 Then
+            If DevfrmCCtas = "" And I = 1 Then
                 PonFoco txtCta(Index)
             Else
                 Text3(1).Tag = txtCta(Index).Text
             End If
         
+        
+            If CtaAntBan <> txtCta(4).Text Then CargaList
+        
+        
+        
         Case 5 ' cuenta cliente
             DevfrmCCtas = Trim(txtCta(Index).Text)
-            i = 0
+            I = 0
             If DevfrmCCtas <> "" Then
                 If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
                     
@@ -3601,14 +3640,14 @@ Dim SQL As String
                         SQL = ""
                     End If
                 End If
-                i = 1
+                I = 1
             Else
                 SQL = ""
             End If
             
             txtCta(Index).Text = DevfrmCCtas
             txtDCta(Index).Text = SQL
-            If DevfrmCCtas = "" And i = 1 Then
+            If DevfrmCCtas = "" And I = 1 Then
                 PonFoco txtCta(Index)
             Else
                 Me.CodmactaUnica = txtCta(Index)
@@ -4299,9 +4338,9 @@ Dim J As Integer
     SQL = "'##########','" & vEmpresa.nomempre & "','#############','######','##########','##########'," & SQL
     If Not miRsAux.EOF Then
         SQL = ""
-        For i = 1 To 6
-            SQL = SQL & DBLet(miRsAux.Fields(i), "T") & " "
-        Next i
+        For I = 1 To 6
+            SQL = SQL & DBLet(miRsAux.Fields(I), "T") & " "
+        Next I
         SQL = Trim(SQL)
         SQL = "'" & DBLet(miRsAux!nifempre, "T") & "','" & DevNombreSQL(vEmpresa.nomempre) & "','" & DevNombreSQL(SQL) & "'"
         SQL = SQL & ",'" & DBLet(miRsAux!codpos, "T") & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "','" & DevNombreSQL(DBLet(miRsAux!Poblacion, "T")) & "'"
@@ -4359,15 +4398,15 @@ Dim J As Integer
     DescripcionTransferencia = "|"
     'Veremos cuantos proveedores distintos hay y cuales son
     Set ListaProveedores = New Collection
-    For i = 1 To ListView1.ListItems.Count
-        If ListView1.ListItems(i).Checked Then
-            cad = "|" & ListView1.ListItems(i).Tag & "|"
+    For I = 1 To ListView1.ListItems.Count
+        If ListView1.ListItems(I).Checked Then
+            cad = "|" & ListView1.ListItems(I).Tag & "|"
             If InStr(1, DescripcionTransferencia, cad) = 0 Then
-                DescripcionTransferencia = DescripcionTransferencia & ListView1.ListItems(i).Tag & "|"
-                ListaProveedores.Add ListView1.ListItems(i).Tag
+                DescripcionTransferencia = DescripcionTransferencia & ListView1.ListItems(I).Tag & "|"
+                ListaProveedores.Add ListView1.ListItems(I).Tag
             End If
         End If
-    Next i
+    Next I
    
    
    Set Mc = New Contadores
@@ -4432,8 +4471,8 @@ Dim FVto As Date
     
     'La fecha de vencimiento debe coger la MAYOR de todas
     FVto = "01/01/1900"
-    For i = 1 To ListView1.ListItems.Count
-        With ListView1.ListItems(i)
+    For I = 1 To ListView1.ListItems.Count
+        With ListView1.ListItems(I)
             If .Checked Then
                 If .Tag = Cta Then
                     If CDate(.SubItems(2)) > FVto Then FVto = CDate(.SubItems(2))
@@ -4446,8 +4485,8 @@ Dim FVto As Date
     SubItemVto = 0 'Si vale uno es que ya hemos cojido los datos del proveedor
     SQL = ""
     Set ColVtosQuePago = New Collection
-    For i = 1 To ListView1.ListItems.Count
-        With ListView1.ListItems(i)
+    For I = 1 To ListView1.ListItems.Count
+        With ListView1.ListItems(I)
             If .Checked Then
                 If .Tag = Cta Then
                     Importe = ImporteFormateado(.SubItems(8))
@@ -4511,7 +4550,7 @@ Dim FVto As Date
                 End If
             End If
         End With
-    Next i
+    Next I
                 
     'OBSERVACIONES1, observaciones 2 e importe en aux
     '------------------
@@ -4522,20 +4561,20 @@ Dim FVto As Date
     
     'Los vencimientos
     SQL = ""
-    For i = 1 To ColVtosQuePago.Count
+    For I = 1 To ColVtosQuePago.Count
         'Codigo fra. Reservamos 10 espacios
         
-        Aux = Mid(RecuperaValor(CStr(ColVtosQuePago.Item(i)), 1) & Space(10), 1, 10) & " "
+        Aux = Mid(RecuperaValor(CStr(ColVtosQuePago.Item(I)), 1) & Space(10), 1, 10) & " "
     
 
-        Aux = Aux & Mid(Format(RecuperaValor(CStr(ColVtosQuePago.Item(i)), 2), "dd/mm/yyyy") & Space(10), 1, 10) & "   "
+        Aux = Aux & Mid(Format(RecuperaValor(CStr(ColVtosQuePago.Item(I)), 2), "dd/mm/yyyy") & Space(10), 1, 10) & "   "
         
         'Antes marzo 2015
         'Para HEREBELCA
         'If vParam.TieneOperacionesAseguradas Then
-            Aux = Aux & Format(RecuperaValor(CStr(ColVtosQuePago.Item(i)), 4), "dd/mm/yyyy") & "   "
+            Aux = Aux & Format(RecuperaValor(CStr(ColVtosQuePago.Item(I)), 4), "dd/mm/yyyy") & "   "
              'Solo reservo pocos espacios, muy justos
-            Aux = Aux & Right(Space(13) & RecuperaValor(CStr(ColVtosQuePago.Item(i)), 5), 13) & " "
+            Aux = Aux & Right(Space(13) & RecuperaValor(CStr(ColVtosQuePago.Item(I)), 5), 13) & " "
         'Else
         '    'Solo reservo pocos espacios, muy justos
         '    AUX = AUX & Right(Space(13) & RecuperaValor(CStr(ColVtosQuePago.Item(I)), 5), 19) & " "
@@ -4544,7 +4583,7 @@ Dim FVto As Date
        
         If SQL <> "" Then SQL = SQL & vbCrLf
         SQL = SQL & Aux
-    Next i
+    Next I
     
     cad = cad & ",'" & DevNombreSQL(SQL) & "'," & TransformaComasPuntos(CStr(Importe)) & ")"
         
@@ -4659,24 +4698,24 @@ Dim SQL As String
     miRsAux.Open SQL, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     
     SQL = ""
-    For i = 1 To Me.ListView1.ListItems.Count
+    For I = 1 To Me.ListView1.ListItems.Count
         NumRegElim = NumRegElim + 1
-        If ListView1.ListItems(i).Checked Then
+        If ListView1.ListItems(I).Checked Then
  
-            impo = ImporteFormateado(ListView1.ListItems(i).SubItems(6))
+            impo = ImporteFormateado(ListView1.ListItems(I).SubItems(6))
             If impo > 0 Then
                 
                 
-                If BuscarVtoPago(ListView1.ListItems(i)) Then
+                If BuscarVtoPago(ListView1.ListItems(I)) Then
                     SQL = SQL & cad
                     '`codusu`,`nombanco`,`cuentabanco`"  estan en cad
                     
                     'Resto de datos--->
                     '"`ctaprove`,`numfactu`,`fecfactu`,`numorden`,`fecefect`,"
 
-                    SQL = SQL & "'" & DevNombreSQL(ListView1.ListItems(i).Tag) & "','" & DevNombreSQL(ListView1.ListItems(i).Text) & "',"
-                    SQL = SQL & "'" & Format(ListView1.ListItems(i).SubItems(1), FormatoFecha) & "'," & DevNombreSQL(ListView1.ListItems(i).SubItems(3)) & ","
-                    SQL = SQL & "'" & Format(ListView1.ListItems(i).SubItems(2), FormatoFecha) & "',"
+                    SQL = SQL & "'" & DevNombreSQL(ListView1.ListItems(I).Tag) & "','" & DevNombreSQL(ListView1.ListItems(I).Text) & "',"
+                    SQL = SQL & "'" & Format(ListView1.ListItems(I).SubItems(1), FormatoFecha) & "'," & DevNombreSQL(ListView1.ListItems(I).SubItems(3)) & ","
+                    SQL = SQL & "'" & Format(ListView1.ListItems(I).SubItems(2), FormatoFecha) & "',"
                     
                     'cad = cad & " `impefect`,`ctabanc1`,
                     SQL = SQL & TransformaComasPuntos(CStr(impo)) & ",'"
@@ -4696,20 +4735,20 @@ Dim SQL As String
                     End If
                     
                     'cad = cad & " `nomprove`"
-                    SQL = SQL & ",'" & DevNombreSQL(ListView1.ListItems(i).SubItems(4)) & "') "
+                    SQL = SQL & ",'" & DevNombreSQL(ListView1.ListItems(I).SubItems(4)) & "') "
                     NumRegElim = NumRegElim + 1
                     
                     
                 Else
                     'NO HA ENCONTRADO EL VTO
-                    MsgBox "Vto no encontrado: " & i, vbExclamation
+                    MsgBox "Vto no encontrado: " & I, vbExclamation
                 End If
 
                 
             End If
         End If
         
-    Next i
+    Next I
     
     
     'Cadena insercion
@@ -4777,18 +4816,18 @@ Private Sub ActualizarGastosCobrosTarjetasTipoNavarres()
     
     
     
-    For i = 1 To Me.ListView1.ListItems.Count
-          If ListView1.ListItems(i).Checked Then
+    For I = 1 To Me.ListView1.ListItems.Count
+          If ListView1.ListItems(I).Checked Then
               cad = "UPDATE scobro SET "
-              cad = cad & " gastos = " & TransformaComasPuntos(ImporteFormateado(ListView1.ListItems(i).SubItems(8)))
+              cad = cad & " gastos = " & TransformaComasPuntos(ImporteFormateado(ListView1.ListItems(I).SubItems(8)))
               cad = cad & " ,obs =trim(concat(coalesce(obs,''),' ','" & DescripcionTransferencia & "')) "
-              cad = cad & " WHERE numserie = '" & ListView1.ListItems(i).Text
-              cad = cad & "' AND codfaccl = " & Val(ListView1.ListItems(i).SubItems(1))
-              cad = cad & " AND fecfaccl = '" & Format(ListView1.ListItems(i).SubItems(2), FormatoFecha)
-              cad = cad & "' AND numorden = " & Val(ListView1.ListItems(i).SubItems(4))
+              cad = cad & " WHERE numserie = '" & ListView1.ListItems(I).Text
+              cad = cad & "' AND codfaccl = " & Val(ListView1.ListItems(I).SubItems(1))
+              cad = cad & " AND fecfaccl = '" & Format(ListView1.ListItems(I).SubItems(2), FormatoFecha)
+              cad = cad & "' AND numorden = " & Val(ListView1.ListItems(I).SubItems(4))
               Ejecuta cad
           End If
-    Next i
+    Next I
 
     cad = "1"
     If Fecha <= vParam.fechafin Then cad = "2"
@@ -4820,10 +4859,10 @@ Dim Fin As Boolean
     If RS.EOF Then
         cad = "NINGUN VENCIMIENTO"
     Else
-    For i = 1 To Me.ListView1.ListItems.Count
+    For I = 1 To Me.ListView1.ListItems.Count
         Fin = False
         RS.MoveFirst
-        With ListView1.ListItems(i)
+        With ListView1.ListItems(I)
             
             While Not Fin
                 'Buscamos el registro... DEBERIA ESTAR

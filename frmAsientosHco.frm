@@ -2710,7 +2710,7 @@ Private Sub frmAsi_DatoSeleccionado(CadenaSeleccion As String)
 Dim CadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "numasien = " & RecuperaValor(CadenaSeleccion, 1) & " and fechaent = " & DBSet(RecuperaValor(CadenaSeleccion, 2), "F") & " and numdiari = " & RecuperaValor(CadenaSeleccion, 3)
+        CadB = "numasien = " & RecuperaValor(CadenaSeleccion, 2) & " and fechaent = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "F") & " and numdiari = " & RecuperaValor(CadenaSeleccion, 3)
         
         'Se muestran en el mismo form
         CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
@@ -3016,6 +3016,7 @@ Dim cWhere1 As String
     
      Set frmAsi = New frmAsientosHcoPrev
      
+     frmAsi.DatosADevolverBusqueda = "0|1|2|"
      frmAsi.cWhere = cWhere
      frmAsi.Show vbModal
      

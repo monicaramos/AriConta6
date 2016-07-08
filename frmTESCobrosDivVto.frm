@@ -307,9 +307,9 @@ Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
-Dim Cad As String
+Dim cad As String
 Dim CONT As Long
-Dim i As Integer
+Dim I As Integer
 Dim TotalRegistros As Long
 
 Dim Importe As Currency
@@ -354,7 +354,7 @@ Dim vImpvto As Currency
 Dim vVtos As Integer
 Dim vTotal As Currency
 Dim J As Integer
-Dim K As Integer
+Dim k As Integer
 Dim ImportePagado As Currency
 Dim vFecVenci As Date
 Dim FecVenci As Date
@@ -439,13 +439,13 @@ Dim Dias As Integer
         '           1.- cadenaSQL numfac,numsere,fecfac
         '           2.- Numero vto
         '           3.- Importe maximo
-        i = -1
+        I = -1
         RC = "Select max(numorden) from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         RS.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RS.EOF Then
             SQL = "Error. Vencimiento NO encontrado: " & CadenaDesdeOtroForm
         Else
-            i = RS.Fields(0) '+ 1
+            I = RS.Fields(0) '+ 1
         End If
         RS.Close
         Set RS = Nothing
@@ -468,7 +468,7 @@ Dim Dias As Integer
     vFecVenci = FecVenci
     'OK.  a desdoblar
     vTotal = 0
-    K = i + 1
+    k = I + 1
     For J = 1 To vVtos - 1
     
         vTotal = vTotal + vImpvto
@@ -480,21 +480,23 @@ Dim Dias As Integer
         SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,"
         SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,"
         SQL = SQL & "`text33csb`,`text41csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
-        SQL = SQL & "`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban) "
+        SQL = SQL & "`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban, codusu) "
         'Valores
-        SQL = SQL & " SELECT " & K & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
+        SQL = SQL & " SELECT " & k & ",NULL," & TransformaComasPuntos(CStr(vImpvto)) & ",NULL,NULL,0,"
         SQL = SQL & "NULL,NULL,NULL,NULL,"
         SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,"
         SQL = SQL & DBSet(vFecVenci, "F") & ","
         SQL = SQL & "`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,`text33csb`,`text41csb`,"
         'text83csb`,
-        SQL = SQL & "`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban FROM "
+        SQL = SQL & "`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban "
+        SQL = SQL & "," & DBSet(vUsu.Id, "N")
+        SQL = SQL & " FROM "
         SQL = SQL & " cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
     
         Conn.Execute SQL
     
-        K = K + 1
+        k = k + 1
     
     Next J
     
@@ -515,7 +517,7 @@ Dim Dias As Integer
         SQL = "update cobros set impvenci = impvenci + " & DBSet(Importe - vTotal, "N")
         
         SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        SQL = SQL & " AND numorden = " & DBSet(K - 1, "N")
+        SQL = SQL & " AND numorden = " & DBSet(k - 1, "N")
         
         Conn.Execute SQL
     End If
@@ -538,7 +540,7 @@ ecmdDivVto:
         Conn.RollbackTrans
     Else
         Conn.CommitTrans
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & K & "|"
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & k & "|"
         MsgBox "Proceso realizado correctamente", vbExclamation
         Unload Me
     End If
@@ -585,11 +587,11 @@ Dim Img As Image
     Me.Width = W + 300
     Me.Height = H + 400
     
-    i = Opcion
-    If Opcion = 13 Or i = 43 Or i = 44 Then i = 11
+    I = Opcion
+    If Opcion = 13 Or I = 43 Or I = 44 Then I = 11
     
     'Aseguradas
-    Me.cmdCancelar(i).Cancel = True
+    Me.cmdCancelar(I).Cancel = True
     
 End Sub
 
@@ -627,7 +629,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub txtcodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim B As Boolean
 
     'Quitar espacios en blanco por los lados

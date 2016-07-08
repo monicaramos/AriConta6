@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmAsientosHcoPrev 
@@ -8,15 +8,119 @@ Begin VB.Form frmAsientosHcoPrev
    ClientHeight    =   7125
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   9975
+   ClientWidth     =   17145
    Icon            =   "frmAsientosHcoPrev.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7125
-   ScaleWidth      =   9975
+   ScaleWidth      =   17145
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   7
+      Left            =   9990
+      MaxLength       =   15
+      TabIndex        =   5
+      Tag             =   "Ampliacion|T|S|||hlinapu|ampconce|||"
+      Top             =   4920
+      Width           =   1515
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   6
+      Left            =   8400
+      MaxLength       =   15
+      TabIndex        =   4
+      Tag             =   "Documento|T|S|||hlinapu|numdocum|||"
+      Top             =   4920
+      Width           =   1515
+   End
+   Begin VB.TextBox txtAux2 
+      BackColor       =   &H80000018&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   5
+      Left            =   4380
+      Locked          =   -1  'True
+      TabIndex        =   18
+      Text            =   "Text2"
+      Top             =   4920
+      Width           =   3975
+   End
+   Begin VB.CommandButton cmdAux 
+      Appearance      =   0  'Flat
+      Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Index           =   1
+      Left            =   4140
+      TabIndex        =   17
+      ToolTipText     =   "Buscar cuenta"
+      Top             =   4920
+      Visible         =   0   'False
+      Width           =   195
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   5
+      Left            =   3390
+      MaxLength       =   10
+      TabIndex        =   3
+      Tag             =   "Cta Contable|T|N|||hlinapu|codmacta|||"
+      Top             =   4920
+      Width           =   705
+   End
    Begin VB.CommandButton cmdAux 
       Appearance      =   0  'Flat
       Caption         =   "+"
@@ -31,10 +135,10 @@ Begin VB.Form frmAsientosHcoPrev
       EndProperty
       Height          =   315
       Index           =   0
-      Left            =   2310
-      TabIndex        =   13
+      Left            =   1530
+      TabIndex        =   16
       ToolTipText     =   "Buscar cuenta"
-      Top             =   4920
+      Top             =   4950
       Visible         =   0   'False
       Width           =   195
    End
@@ -53,9 +157,10 @@ Begin VB.Form frmAsientosHcoPrev
       EndProperty
       Height          =   350
       Index           =   4
-      Left            =   5610
+      Left            =   13050
       MaxLength       =   30
-      TabIndex        =   12
+      TabIndex        =   7
+      Tag             =   "Imp.Haber|N|S|||hlinapu|timporteH|##,###,##0.00||"
       Top             =   4920
       Width           =   1395
    End
@@ -74,9 +179,10 @@ Begin VB.Form frmAsientosHcoPrev
       EndProperty
       Height          =   350
       Index           =   3
-      Left            =   4050
+      Left            =   11550
       MaxLength       =   10
-      TabIndex        =   11
+      TabIndex        =   6
+      Tag             =   "Imp.Debe|N|S|||hlinapu|timporteD|##,###,##0.00||"
       Top             =   4920
       Width           =   1395
    End
@@ -94,23 +200,23 @@ Begin VB.Form frmAsientosHcoPrev
       EndProperty
       Height          =   350
       Index           =   2
-      Left            =   2580
+      Left            =   2640
       MaxLength       =   10
       TabIndex        =   2
       Tag             =   "Diario|N|N|0||hlinapu|numdiari|#0|S|"
       Top             =   4920
-      Width           =   1395
+      Width           =   705
    End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   120
-      TabIndex        =   9
+      TabIndex        =   14
       Top             =   90
       Width           =   1545
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   15
          Top             =   180
          Width           =   1065
          _ExtentX        =   1879
@@ -144,10 +250,10 @@ Begin VB.Form frmAsientosHcoPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7530
-      TabIndex        =   3
+      Left            =   14760
+      TabIndex        =   8
       Tag             =   "   "
-      Top             =   6360
+      Top             =   6390
       Visible         =   0   'False
       Width           =   1035
    End
@@ -164,9 +270,9 @@ Begin VB.Form frmAsientosHcoPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8700
-      TabIndex        =   4
-      Top             =   6360
+      Left            =   15930
+      TabIndex        =   9
+      Top             =   6390
       Visible         =   0   'False
       Width           =   1095
    End
@@ -184,12 +290,12 @@ Begin VB.Form frmAsientosHcoPrev
       EndProperty
       Height          =   350
       Index           =   1
-      Left            =   900
+      Left            =   210
       MaxLength       =   7
-      TabIndex        =   1
+      TabIndex        =   0
       Tag             =   "Fecha entrada|F|N|||hlinapu|fechaent|dd/mm/yyyy|S|"
       Top             =   4920
-      Width           =   1395
+      Width           =   1275
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -205,9 +311,9 @@ Begin VB.Form frmAsientosHcoPrev
       EndProperty
       Height          =   350
       Index           =   0
-      Left            =   60
+      Left            =   1770
       MaxLength       =   3
-      TabIndex        =   0
+      TabIndex        =   1
       Tag             =   "Nº asiento|N|S|0||hlinapu|numasien|######0|S|"
       Top             =   4920
       Width           =   800
@@ -216,10 +322,10 @@ Begin VB.Form frmAsientosHcoPrev
       Bindings        =   "frmAsientosHcoPrev.frx":000C
       Height          =   5295
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   12
       Top             =   870
-      Width           =   9675
-      _ExtentX        =   17066
+      Width           =   16875
+      _ExtentX        =   29766
       _ExtentY        =   9340
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -294,9 +400,9 @@ Begin VB.Form frmAsientosHcoPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8700
-      TabIndex        =   8
-      Top             =   6360
+      Left            =   15930
+      TabIndex        =   13
+      Top             =   6420
       Visible         =   0   'False
       Width           =   1095
    End
@@ -304,7 +410,7 @@ Begin VB.Form frmAsientosHcoPrev
       Height          =   555
       Index           =   1
       Left            =   120
-      TabIndex        =   5
+      TabIndex        =   10
       Top             =   6360
       Width           =   2985
       Begin VB.Label lblIndicador 
@@ -321,7 +427,7 @@ Begin VB.Form frmAsientosHcoPrev
          EndProperty
          Height          =   255
          Left            =   45
-         TabIndex        =   6
+         TabIndex        =   11
          Top             =   180
          Width           =   2895
       End
@@ -478,6 +584,8 @@ Public CadenaTots As String
 
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
+Private WithEvents frmCta As frmColCtas
+Attribute frmCta.VB_VarHelpID = -1
 
 Private CadB As String
 
@@ -493,8 +601,8 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim I As Integer
 Dim vTag1 As CTag
 Dim vTag3 As CTag
 
@@ -511,16 +619,17 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).BackColor = vbWhite
+    Next I
     
-    For i = 0 To 2 'txtAux.Count - 1
-        txtaux(i).Visible = Not B
-    Next i
-    txtaux(3).Visible = False
-    txtaux(4).Visible = False
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).Visible = Not B
+    Next I
     cmdAux(0).Visible = Not B
+    cmdAux(1).Visible = Not B
+    
+    txtaux2(5).Visible = Not B
     
     cmdAceptar.Visible = Not B
     cmdCancelar.Visible = Not B
@@ -573,9 +682,9 @@ Private Sub BotonAnyadir()
     End If
     txtaux(0).Text = NumF
     FormateaCampo txtaux(0)
-    For i = 1 To txtaux.Count - 1
-        txtaux(i).Text = ""
-    Next i
+    For I = 1 To txtaux.Count - 1
+        txtaux(I).Text = ""
+    Next I
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -594,22 +703,23 @@ Private Sub BotonBuscar()
     CargaGrid "hlinapu.numdiari is null "
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).Text = ""
-    Next i
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).Text = ""
+    Next I
+    txtaux2(5).Text = ""
     LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
-    PonFoco txtaux(0)
+    PonFoco txtaux(1)
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -643,10 +753,12 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To 2
-        txtaux(i).Top = alto
-    Next i
+    For I = 0 To 7
+        txtaux(I).Top = alto
+    Next I
+    txtaux2(5).Top = alto
     cmdAux(0).Top = alto
+    cmdAux(1).Top = alto
     
     ' ### [Monica] 12/09/2006
 End Sub
@@ -661,11 +773,11 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Variant ' Integer
+    Dim I As Variant ' Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda(Me)
+            CadB = ObtenerBusqueda2(Me)
             If CadB <> "" Then
                 CargaGrid CadB
                 PonerModo 2
@@ -686,6 +798,14 @@ Private Sub cmdAux_Click(Index As Integer)
             frmF.Show vbModal
             Set frmF = Nothing
             PonFoco txtaux(1)
+        Case 1 'cuentas
+            Set frmCta = New frmColCtas
+            frmCta.DatosADevolverBusqueda = "0|1"
+            frmCta.ConfigurarBalances = 3
+            frmCta.Show vbModal
+            Set frmCta = Nothing
+        
+        
     End Select
 End Sub
 
@@ -705,7 +825,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -714,16 +834,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             cad = cad & Adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -799,7 +919,10 @@ Private Sub Form_Load()
     End With
     
     
-    CadenaConsulta = "select numasien, fechaent, numdiari, sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu where (1=1) "
+    CadenaConsulta = "select hlinapu.fechaent, hlinapu.numasien, hlinapu.numdiari, hlinapu.codmacta, cuentas.nommacta, "
+    CadenaConsulta = CadenaConsulta & " hlinapu.numdocum, hlinapu.ampconce,  timported, timporteh  "
+    CadenaConsulta = CadenaConsulta & " from hlinapu inner join cuentas on hlinapu.codmacta = cuentas.codmacta "
+    CadenaConsulta = CadenaConsulta & " where  (1=1)  "
     If cWhere <> "" Then CadenaConsulta = CadenaConsulta & " and " & cWhere
     CadB = ""
     CargaGrid
@@ -814,6 +937,10 @@ If Modo = 4 Then TerminaBloquear
     Set vTag3 = Nothing
 End Sub
 
+Private Sub frmCta_DatoSeleccionado(CadenaSeleccion As String)
+    txtaux(5).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtaux2(5).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
     txtaux(1).Text = Format(vFecha, "dd/mm/yyyy")
@@ -837,41 +964,40 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        sql = CadenaConsulta & " and " & vSQL
+        SQL = CadenaConsulta & " and " & vSQL
     Else
-        sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
-    sql = sql & " group by 1,2,3 "
     
     '********************* canviar el ORDER BY *********************++
     If CampoOrden = "" Then
-        sql = sql & " ORDER BY numasien, fechaent, numdiari "
+        SQL = SQL & " ORDER BY fechaent desc, numasien desc, numdiari "
     Else
-        sql = sql & " order by " & CampoOrden & " " & TipoOrden
+        SQL = SQL & " order by " & CampoOrden & " " & TipoOrden
     End If
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, sql, PrimeraVez
-    
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
     
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Fecha|1695|;S|cmdAux(0)|B|||;S|txtAux(2)|T|Diario|980|;S|txtAux(3)|T|Debe|2500|;S|txtAux(4)|T|Haber|2500|;"
+    tots = "S|txtAux(1)|T|Fecha|1495|;S|cmdAux(0)|B|||;S|txtAux(0)|T|Código|1405|;S|txtAux(2)|T|D|600|;"
+    tots = tots & "S|txtAux(5)|T|Cuenta|1495|;S|cmdAux(1)|B|||;S|txtAux2(5)|T|Titulo|3605|;"
+    tots = tots & "S|txtAux(6)|T|Documento|1500|;S|txtAux(7)|T|Ampliación|2800|;"
+    tots = tots & "S|txtAux(3)|T|Debe|1700|;S|txtAux(4)|T|Haber|1700|;"
     
     arregla tots, DataGrid1, Me
     
     DataGrid1.ScrollBars = dbgAutomatic
     
     DataGrid1.Columns(0).Alignment = dbgLeft
-    DataGrid1.Columns(3).Alignment = dbgRight
-    DataGrid1.Columns(3).NumberFormat = "###,###,###,##0.00"
-    DataGrid1.Columns(4).Alignment = dbgRight
-    DataGrid1.Columns(4).NumberFormat = "###,###,###,##0.00"
+    DataGrid1.Columns(7).Alignment = dbgRight
+    DataGrid1.Columns(8).Alignment = dbgRight
     
     DataGrid1.RowHeight = 350
 
@@ -883,7 +1009,8 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-Dim sql As String
+Dim SQL As String
+Dim RC As String
 
     If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
@@ -896,6 +1023,38 @@ Dim sql As String
             
         Case 2 ' diario
             PonerFormatoEntero txtaux(Index)
+        Case 5
+    
+            If Not IsNumeric(txtaux(Index).Text) Then
+                If InStr(1, txtaux(Index).Text, "+") = 0 Then MsgBox "La cuenta debe ser numérica: " & txtaux(Index).Text, vbExclamation
+                txtaux(Index).Text = ""
+                txtaux2(Index).Text = ""
+                Exit Sub
+            End If
+
+            RC = txtaux(Index).Text
+            If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
+                txtaux(Index) = RC
+                txtaux2(Index).Text = SQL
+            Else
+                MsgBox SQL, vbExclamation
+                txtaux(Index).Text = ""
+                txtaux2(Index).Text = ""
+                PonFoco txtaux(Index)
+            End If
+        
+        Case 3, 4
+            'LOS IMPORTES
+            If Not EsNumerico(txtaux(Index).Text) Then
+                MsgBox "Importes deben ser numéricos.", vbExclamation
+                On Error Resume Next
+                txtaux(Index).Text = ""
+                PonFoco txtaux(Index)
+                Exit Sub
+            End If
+            
+            'Es numerico
+            SQL = TransformaPuntosComas(txtaux(Index).Text)
         
     End Select
     
@@ -904,7 +1063,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -934,14 +1093,14 @@ Dim cadReg As String
 End Sub
 
 
-' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-Private Sub DataGrid1_GotFocus()
-  WheelHook DataGrid1
-End Sub
-
-Private Sub DataGrid1_LostFocus()
-  WheelUnHook
-End Sub
+'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
+'Private Sub DataGrid1_GotFocus()
+'  WheelHook DataGrid1
+'End Sub
+'
+'Private Sub DataGrid1_LostFocus()
+'  WheelUnHook
+'End Sub
 
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii

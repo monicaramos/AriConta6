@@ -358,65 +358,67 @@ Begin VB.Form frmTESPagos
       Tab(0).Control(17).Enabled=   0   'False
       Tab(0).Control(18)=   "Label1(10)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text1(21)"
+      Tab(0).Control(19)=   "Text1(32)"
       Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Text1(20)"
+      Tab(0).Control(20)=   "Text1(21)"
       Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Combo1"
+      Tab(0).Control(21)=   "Text1(20)"
       Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text1(19)"
+      Tab(0).Control(22)=   "Combo1"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "Text1(26)"
+      Tab(0).Control(23)=   "Text1(19)"
       Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "Text1(31)"
+      Tab(0).Control(24)=   "Text1(26)"
       Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "Text1(30)"
+      Tab(0).Control(25)=   "Text1(31)"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "Text1(29)"
+      Tab(0).Control(26)=   "Text1(30)"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "Text1(28)"
+      Tab(0).Control(27)=   "Text1(29)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Text2(0)"
+      Tab(0).Control(28)=   "Text1(28)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Text1(4)"
+      Tab(0).Control(29)=   "Text2(0)"
       Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "Text2(1)"
+      Tab(0).Control(30)=   "Text1(4)"
       Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "Text1(0)"
+      Tab(0).Control(31)=   "Text2(1)"
       Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "Text1(5)"
+      Tab(0).Control(32)=   "Text1(0)"
       Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "Text1(6)"
+      Tab(0).Control(33)=   "Text1(5)"
       Tab(0).Control(33).Enabled=   0   'False
-      Tab(0).Control(34)=   "Text2(2)"
+      Tab(0).Control(34)=   "Text1(6)"
       Tab(0).Control(34).Enabled=   0   'False
-      Tab(0).Control(35)=   "Text1(9)"
+      Tab(0).Control(35)=   "Text2(2)"
       Tab(0).Control(35).Enabled=   0   'False
-      Tab(0).Control(36)=   "Text2(3)"
+      Tab(0).Control(36)=   "Text1(9)"
       Tab(0).Control(36).Enabled=   0   'False
-      Tab(0).Control(37)=   "Text1(10)"
+      Tab(0).Control(37)=   "Text2(3)"
       Tab(0).Control(37).Enabled=   0   'False
-      Tab(0).Control(38)=   "Text1(17)"
+      Tab(0).Control(38)=   "Text1(10)"
       Tab(0).Control(38).Enabled=   0   'False
-      Tab(0).Control(39)=   "frameContene"
+      Tab(0).Control(39)=   "Text1(17)"
       Tab(0).Control(39).Enabled=   0   'False
-      Tab(0).Control(40)=   "txtPendiente"
+      Tab(0).Control(40)=   "frameContene"
       Tab(0).Control(40).Enabled=   0   'False
-      Tab(0).Control(41)=   "Text1(12)"
+      Tab(0).Control(41)=   "txtPendiente"
       Tab(0).Control(41).Enabled=   0   'False
-      Tab(0).Control(42)=   "Text1(11)"
+      Tab(0).Control(42)=   "Text1(12)"
       Tab(0).Control(42).Enabled=   0   'False
-      Tab(0).Control(43)=   "Text1(7)"
+      Tab(0).Control(43)=   "Text1(11)"
       Tab(0).Control(43).Enabled=   0   'False
-      Tab(0).Control(44)=   "Text1(8)"
+      Tab(0).Control(44)=   "Text1(7)"
       Tab(0).Control(44).Enabled=   0   'False
-      Tab(0).Control(45)=   "FrameRemesa"
+      Tab(0).Control(45)=   "Text1(8)"
       Tab(0).Control(45).Enabled=   0   'False
-      Tab(0).Control(46)=   "SSTab2"
+      Tab(0).Control(46)=   "FrameRemesa"
       Tab(0).Control(46).Enabled=   0   'False
-      Tab(0).Control(47)=   "FrameDatosFiscales"
+      Tab(0).Control(47)=   "SSTab2"
       Tab(0).Control(47).Enabled=   0   'False
-      Tab(0).ControlCount=   48
+      Tab(0).Control(48)=   "FrameDatosFiscales"
+      Tab(0).Control(48).Enabled=   0   'False
+      Tab(0).ControlCount=   49
       Begin VB.Frame FrameDatosFiscales 
          Caption         =   "DATOS FISCALES"
          BeginProperty Font 
@@ -1863,6 +1865,26 @@ Begin VB.Form frmTESPagos
          Top             =   720
          Width           =   1335
       End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   32
+         Left            =   13860
+         MaxLength       =   30
+         TabIndex        =   108
+         Tag             =   "Usuario|N|S|||pagos|codusu|####0||"
+         Top             =   2850
+         Width           =   1365
+      End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          Caption         =   "Situación"
@@ -2622,7 +2644,7 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtAux(5)
+            PonFoco txtaux(5)
             
             
     End Select
@@ -2695,6 +2717,10 @@ Private Sub BotonAnyadir()
     
     Combo1.ListIndex = 0
     Text2(3).Text = Combo1.Text
+    
+    'añadimos el codusu
+    Text1(32).Text = vUsu.Id
+    
     '###A mano
     PonFoco Text1(13)
 End Sub
@@ -3127,7 +3153,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -4642,7 +4668,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 
@@ -4675,42 +4701,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
-    If txtAux(Index).Text = "" Then Exit Sub
+    If txtaux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtAux(5)
+                PonFoco txtaux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtAux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
-                txtAux(Index).Text = ""
-                PonerFoco txtAux(Index)
+            If Not EsFechaOK(txtaux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
+                txtaux(Index).Text = ""
+                PonerFoco txtaux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtAux(Index)
+            PonerFormatoEntero txtaux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtAux(Index) = ImporteSinFormato(txtAux(Index))
+             txtaux(Index) = ImporteSinFormato(txtaux(Index))
             
         Case 10 'tipo
-            txtAux(Index).Text = UCase(txtAux(Index).Text)
+            txtaux(Index).Text = UCase(txtaux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtAux(12).Text
+            RC = txtaux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtAux(12).Text = RC
+                txtaux(12).Text = RC
             End If
         
     End Select
