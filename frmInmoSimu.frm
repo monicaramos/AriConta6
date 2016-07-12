@@ -759,7 +759,6 @@ Dim cad As String, cadTipo As String 'tipo cliente
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
     Select Case Index
         Case 0, 1 'Tipos de concepto de inmovilizado

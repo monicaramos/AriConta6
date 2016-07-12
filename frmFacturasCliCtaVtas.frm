@@ -802,9 +802,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -905,9 +905,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Relación de Clientes por Cta Ventas"
      
-    For i = 0 To 3
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 3
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -1031,7 +1031,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1083,7 +1083,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
                     End If
                 End If
                     
-                    'If txtCta(1).Text = "" Then 'ANTES solo lo hacia si el texto estaba vacio
                 If Hasta >= 0 Then
                     txtCuentas(Hasta).Text = txtCuentas(Index).Text
                     txtNCuentas(Hasta).Text = txtNCuentas(Index).Text
@@ -1095,18 +1094,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     End Select
 End Sub
 
 Private Sub AccionesCSV()
 Dim SQL2 As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Total As Currency
 Dim TotalAnt As Currency
 
@@ -1128,36 +1127,36 @@ Dim TotalAnt As Currency
             SQL = SQL & " group by 1,2"
             SQL = SQL & " order by 1,2"
             
-            Set Rs = New ADODB.Recordset
-            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not Rs.EOF
-                Total = DevuelveValor("select sum(imponible) from tmpfaclin where codusu = " & vUsu.Codigo & " and ctabase = " & DBSet(Rs!CtaBase, "T"))
-                TotalAnt = DevuelveValor("select sum(imponibleant) from tmpfaclin where codusu = " & vUsu.Codigo & " and ctabase = " & DBSet(Rs!CtaBase, "T"))
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not RS.EOF
+                Total = DevuelveValor("select sum(imponible) from tmpfaclin where codusu = " & vUsu.Codigo & " and ctabase = " & DBSet(RS!CtaBase, "T"))
+                TotalAnt = DevuelveValor("select sum(imponibleant) from tmpfaclin where codusu = " & vUsu.Codigo & " and ctabase = " & DBSet(RS!CtaBase, "T"))
             
             
                 If Total <> 0 Then
-                    SQL2 = "update tmpfaclin set iva = " & DBSet(Round(DBLet(Rs!Importe) * 100 / Total, 2), "N")
+                    SQL2 = "update tmpfaclin set iva = " & DBSet(Round(DBLet(RS!Importe) * 100 / Total, 2), "N")
                     If TotalAnt <> 0 Then
-                        SQL2 = SQL2 & ", porcrec = " & DBSet(Round(DBLet(Rs!Anterior) * 100 / TotalAnt, 2), "N")
+                        SQL2 = SQL2 & ", porcrec = " & DBSet(Round(DBLet(RS!Anterior) * 100 / TotalAnt, 2), "N")
                     Else
                         SQL2 = SQL2 & ", porcrec = 0"
                     End If
                 Else
                     SQL2 = "update tmpfaclin set iva = 0 "
                     If TotalAnt <> 0 Then
-                        SQL2 = SQL2 & ", porcrec = " & DBSet(Round(DBLet(Rs!Anterior) * 100 / TotalAnt, 2), "N")
+                        SQL2 = SQL2 & ", porcrec = " & DBSet(Round(DBLet(RS!Anterior) * 100 / TotalAnt, 2), "N")
                     Else
                         SQL2 = SQL2 & ", porcrec = 0"
                     End If
                 End If
                 
-                SQL2 = SQL2 & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and ctabase = " & DBSet(Rs!CtaBase, "T") & " and cta = " & DBSet(Rs!Cta, "T")
+                SQL2 = SQL2 & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and ctabase = " & DBSet(RS!CtaBase, "T") & " and cta = " & DBSet(RS!Cta, "T")
                 
                 Conn.Execute SQL2
             
-                Rs.MoveNext
+                RS.MoveNext
             Wend
-            Set Rs = Nothing
+            Set RS = Nothing
             
             SQL = "Select  tmpfaclin.ctabase CtaBase, cuentas.nommacta Titulo, tmpfaclin.cta Cliente, ccc.nommacta TituloCli, sum(tmpfaclin.imponibleant) ImporteAnt, porcrec PorcAnt, sum(tmpfaclin.imponible) Importe, iva Porc"
             SQL = SQL & " FROM  (tmpfaclin inner join cuentas on tmpfaclin.ctabase = cuentas.codmacta) inner join cuentas ccc on tmpfaclin.cta = ccc.codmacta "
@@ -1178,24 +1177,24 @@ Dim TotalAnt As Currency
             SQL = SQL & " ORDER BY 1,2"
         
         
-            Set Rs = New ADODB.Recordset
-            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not Rs.EOF
-                Total = DevuelveValor("select sum(imponible) from tmpfaclin where codusu = " & vUsu.Codigo & " and ctabase = " & DBSet(Rs!CtaBase, "T"))
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not RS.EOF
+                Total = DevuelveValor("select sum(imponible) from tmpfaclin where codusu = " & vUsu.Codigo & " and ctabase = " & DBSet(RS!CtaBase, "T"))
                 
                 If Total <> 0 Then
-                    SQL2 = "update tmpfaclin set iva = " & DBSet(Round(DBLet(Rs!Importe) * 100 / Total, 2), "N")
+                    SQL2 = "update tmpfaclin set iva = " & DBSet(Round(DBLet(RS!Importe) * 100 / Total, 2), "N")
                 Else
                     SQL2 = "update tmpfaclin set iva = 0 "
                 End If
                 
-                SQL2 = SQL2 & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and ctabase = " & DBSet(Rs!CtaBase, "T") & " and cta = " & DBSet(Rs!Cta, "T")
+                SQL2 = SQL2 & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and ctabase = " & DBSet(RS!CtaBase, "T") & " and cta = " & DBSet(RS!Cta, "T")
                 
                 Conn.Execute SQL2
             
-                Rs.MoveNext
+                RS.MoveNext
             Wend
-            Set Rs = Nothing
+            Set RS = Nothing
             
             
             SQL = "Select  tmpfaclin.ctabase CtaBase, cuentas.nommacta Titulo, tmpfaclin.cta Cliente, ccc.nommacta TituloCli, sum(tmpfaclin.imponible) Importe, iva Porc "
@@ -1249,13 +1248,13 @@ End Sub
 
 Private Function CargarTemporal() As Boolean
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo eCargarTemporal
 
     CargarTemporal = False
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
 
     'Preparando tablas informe
     SQL = "DELETE from tmpfaclin where codusu =" & vUsu.Codigo
@@ -1345,7 +1344,7 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False

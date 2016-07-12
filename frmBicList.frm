@@ -549,9 +549,9 @@ Private Sub Form_Load()
     Me.Caption = "Bic-Swift"
     optVarios(0).Value = True
 
-    For i = 0 To 1
-        Me.imgBic(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgBic(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -625,10 +625,10 @@ Private Sub txtBic_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgBic"
-        ImgBic_Click indice
+        ImgBic_Click Indice
     End Select
     
 End Sub
@@ -638,7 +638,7 @@ Private Sub txtBic_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtBic_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtBic(Index).Text = Trim(txtBic(Index).Text)
     
@@ -652,7 +652,6 @@ Dim Cad As String, cadTipo As String 'tipo cliente
             If txtBic(Index).Text <> "" Then txtBic(Index).Text = Format(txtBic(Index).Text, "0000")
     End Select
 
-'    PierdeFocoBic Me.txtBic(Index), Me.lblBic(Index)
 End Sub
 
 
@@ -661,9 +660,9 @@ Private Sub AccionesCSV()
     'Monto el SQL
     SQL = "Select  entidad as codigo ,nombre as descripcion, bic FROM bics "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
-    i = 1
-    If optVarios(1).Value Then i = 2 'nombre
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    If optVarios(1).Value Then I = 2 'nombre
+    SQL = SQL & " ORDER BY " & I
         
     'LLamoa a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text

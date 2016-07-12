@@ -494,9 +494,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Asientos Predefinidos"
 
-    For i = 0 To 1
-        Me.imgAsiPre(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgAsiPre(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -570,10 +570,10 @@ Private Sub txtAsiPre_KeyDown(Index As Integer, KeyCode As Integer, Shift As Int
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgAsiPre"
-        ImgAsiPre_Click indice
+        ImgAsiPre_Click Indice
     End Select
     
 End Sub
@@ -583,7 +583,7 @@ Private Sub txtasipre_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAsiPre_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtAsiPre(Index).Text = Trim(txtAsiPre(Index).Text)
     
@@ -597,7 +597,6 @@ Dim Cad As String, cadTipo As String 'tipo cliente
             If txtAsiPre(Index).Text <> "" Then txtAsiPre(Index).Text = Format(txtAsiPre(Index).Text, "000")
     End Select
 
-'    PierdeFocoConcepto Me.txtConcepto(Index), Me.lblConcepto(Index)
 End Sub
 
 
@@ -610,8 +609,8 @@ Private Sub AccionesCSV()
     SQL = SQL & " WHERE asipre.numaspre = asipre_lineas.numaspre and asipre_lineas.codmacta = cuentas.codmacta "
     
     If cadselect <> "" Then SQL = SQL & " AND " & cadselect
-    i = 1
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    SQL = SQL & " ORDER BY " & I
         
     'LLamoa a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text

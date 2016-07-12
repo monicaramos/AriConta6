@@ -803,8 +803,8 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim I As Integer
 
 Dim FechaAnt As String
 Dim Ok As Boolean
@@ -829,15 +829,15 @@ Dim B As Boolean
     
     Frame2.Enabled = (Modo = 2)
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Visible = (Modo = 1)
-        txtAux(i).Enabled = (Modo = 1)
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Visible = (Modo = 1)
+        txtAux(I).Enabled = (Modo = 1)
+    Next I
     
-    For i = 2 To 3
-        txtAux(i).Visible = (Modo = 1 Or Modo = 4)
-        txtAux(i).Enabled = (Modo = 1 Or Modo = 4)
-    Next i
+    For I = 2 To 3
+        txtAux(I).Visible = (Modo = 1 Or Modo = 4)
+        txtAux(I).Enabled = (Modo = 1 Or Modo = 4)
+    Next I
     
     
     btnBuscar(0).Visible = (Modo <> 2)
@@ -905,9 +905,9 @@ Private Sub BotonBuscar()
     CargaGrid "tmpcobros.codusu is null"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     
     LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
     PonFoco txtAux(0)
@@ -915,13 +915,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -937,14 +937,6 @@ Private Sub BotonModificar()
     txtAux(2).Text = DataGrid1.Columns(2).Text
     txtAux(3).Text = DataGrid1.Columns(3).Text
     
-    
-    ' ***** canviar-ho pel nom del camp del combo *********
-'    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
-    ' *****************************************************
-
-    'PosicionarCombo Me.Combo1(0), i
-    'PosicionarCombo Me.Combo1(1), i
-
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
@@ -957,12 +949,12 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
-    For i = 0 To Me.btnBuscar.Count - 1
-        btnBuscar(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
+    For I = 0 To Me.btnBuscar.Count - 1
+        btnBuscar(I).Top = alto
+    Next I
     ' ### [Monica] 12/09/2006
     
 End Sub
@@ -1021,7 +1013,7 @@ Private Sub btnBuscar_Click(Index As Integer)
         
             Set frmC = New frmCal
             
-            indice = Index
+            Indice = Index
             
             esq = btnBuscar(Index).Left
             dalt = btnBuscar(Index).Top
@@ -1063,7 +1055,7 @@ Private Sub Check1_Click()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As String
+    Dim I As String
     Dim NReg As Long
     Dim SQL As String
     Dim SQL2 As String
@@ -1090,10 +1082,10 @@ Private Sub cmdAceptar_Click()
                 
 '                    FechaAnt = txtAux(2).Text
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(1)
+                    I = adodc1.Recordset.Fields(1)
                     PonerModo 2
                     CargaGrid "" 'CadB
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " ='" & i & "'")
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " ='" & I & "'")
                     PonerFocoGrid Me.DataGrid1
                     
                     
@@ -1122,8 +1114,8 @@ Private Sub CmdContinuar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1151,7 +1143,7 @@ End Sub
 
 
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
-Dim Cad As String
+Dim cad As String
 
     If adodc1.Recordset Is Nothing Then Exit Sub
     If adodc1.Recordset.EOF Then Exit Sub
@@ -1261,7 +1253,7 @@ Private Sub Frame2_Click()
 End Sub
 
 
-Private Sub Frame2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub Frame2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Frame2.Enabled = True
 End Sub
 
@@ -1277,7 +1269,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -1295,7 +1287,7 @@ Private Sub imgppal_Click(Index As Integer)
     Select Case Index
     Case 0
         'FECHA FACTURA
-        indice = 1
+        Indice = 1
         
         Set frmF = New frmCal
         frmF.Fecha = Now
@@ -1335,7 +1327,7 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim SQL2 As String, Sql3 As String
     Dim mTag As CTag
     Dim Im As Currency
@@ -1356,21 +1348,21 @@ Private Sub Text1_LostFocus(Index As Integer)
                 Exit Sub
             End If
             If Index = 15 Then
-                i = 2
+                I = 2
             Else
                 If Index = 16 Then
-                    i = 10
+                    I = 10
                 Else
-                    i = 4
+                    I = 4
                 End If
             End If
-            SQL = Mid("0000000000", 1, i)
+            SQL = Mid("0000000000", 1, I)
             Text1(Index).Text = Format(Text1(Index).Text, SQL)
             
             'IBAN
             SQL = ""
-            For i = 13 To 16
-                SQL = SQL & Text1(i).Text
+            For I = 13 To 16
+                SQL = SQL & Text1(I).Text
             Next
             
             Sql3 = SQL
@@ -1485,9 +1477,9 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYImage(KeyAscii As Integer, indice As Integer)
+Private Sub KEYImage(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    Image1_Click (indice)
+    Image1_Click (Indice)
 End Sub
 
 Private Sub Text1_GotFocus(Index As Integer)
@@ -1512,16 +1504,13 @@ Private Sub CargaGrid(Optional vSQL As String)
     Dim tots As String
     Dim SQL2 As String
     
-'    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
         SQL = CadenaConsulta & " AND " & vSQL
     Else
         SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-'        Sql = Sql & " ORDER BY tmpcobros.nroorden"
     SQL = SQL & " " & Ordenacion
-    '**************************************************************++
     
     
     CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
@@ -1637,22 +1626,22 @@ Dim Index As Integer
                     B = False
                 End If
                 If Index = 15 Then
-                    i = 2
+                    I = 2
                 Else
                     If Index = 16 Then
-                        i = 10
+                        I = 10
                     Else
-                        i = 4
+                        I = 4
                     End If
                 End If
-                SQL = Mid("0000000000", 1, i)
+                SQL = Mid("0000000000", 1, I)
                 Text1(Index).Text = Format(Text1(Index).Text, SQL)
             Next Index
             'IBAN
     
             SQL = ""
-            For i = 13 To 16
-                SQL = SQL & Text1(i).Text
+            For I = 13 To 16
+                SQL = SQL & Text1(I).Text
             Next
             
             Sql3 = SQL
@@ -1721,7 +1710,6 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
        If KeyAscii = 13 Then 'ENTER
             PonerFormatoEntero txtAux(Index)
             If Modo = 4 Then
-                '050509 cmdAceptar_Click 'ModificarExistencia
                 cmdAceptar_Click
                 'ModificarLinea
 
@@ -1732,10 +1720,6 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
                 cmdAceptar.SetFocus
             End If
             
-            '050509
-'                    If ModoLineas = 1 Then
-'                        cmdAceptar.SetFocus
-'                    End If
        ElseIf KeyAscii = 27 Then
             cmdCancelar_Click 'ESC
        End If

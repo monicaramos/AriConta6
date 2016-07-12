@@ -1033,11 +1033,6 @@ Private Sub chkPunteo_Click()
 End Sub
 
 Private Sub Form_Activate()
-   ' If Cuenta <> "" Then
-   '     Cuenta = ""
-   '     cmdAceptar.SetFocus
-   ' End If
-   
    If Text3(2).Text = "" Then PonFoco Text3(2)
    
    Screen.MousePointer = vbDefault
@@ -1384,8 +1379,6 @@ Private Sub CargaGrid()
     End If
     SQL = SQL & " AND cta = '" & Text3(2).Text & "' ORDER BY POS"
     
-    'Si Text3(2).text=""
-    
     adodc1.RecordSource = SQL
     adodc1.Refresh
     
@@ -1599,7 +1592,6 @@ Dim cad As String
     
     cad = "1300|1150|2005|3714|1500|820|1950|1950|1950|350|"  '0|0|0|"
     'tieneanalitica
-    'If vParam.autocoste Then Cad = Replace(Cad, "|0|", "|820|")
     Me.LabelCab(5).Visible = (vParam.autocoste)
     
     

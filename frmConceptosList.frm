@@ -552,9 +552,9 @@ Private Sub Form_Load()
     Me.Caption = "Conceptos"
     optVarios(0).Value = True
 
-    For i = 0 To 1
-        Me.imgConcepto(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgConcepto(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
 End Sub
@@ -569,7 +569,7 @@ Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
     SQL = CadenaSeleccion
 End Sub
 
-Private Sub ImgConcepto_Click(Index As Integer)
+Private Sub imgConcepto_Click(Index As Integer)
     SQL = ""
     AbiertoOtroFormEnListado = True
     Set frmCon = New frmConceptos
@@ -633,10 +633,10 @@ Private Sub txtConcepto_KeyDown(Index As Integer, KeyCode As Integer, Shift As I
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgConcepto"
-        ImgConcepto_Click indice
+        imgConcepto_Click Indice
     End Select
     
 End Sub
@@ -646,7 +646,7 @@ Private Sub txtConcepto_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtConcepto_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
     
@@ -660,7 +660,6 @@ Dim Cad As String, cadTipo As String 'tipo cliente
             If txtConcepto(Index).Text <> "" Then txtConcepto(Index).Text = Format(txtConcepto(Index).Text, "000")
     End Select
 
-'    PierdeFocoConcepto Me.txtConcepto(Index), Me.lblConcepto(Index)
 End Sub
 
 
@@ -669,9 +668,9 @@ Private Sub AccionesCSV()
     'Monto el SQL
     SQL = "Select  codconce as codigo ,nomconce as descripcion FROM conceptos "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
-    i = 1
-    If optVarios(1).Value Then i = 2 'nombre
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    If optVarios(1).Value Then I = 2 'nombre
+    SQL = SQL & " ORDER BY " & I
         
     
     If Not HayRegParaInforme("conceptos", cadselect) Then Exit Sub

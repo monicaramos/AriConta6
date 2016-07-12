@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmAsiLinAdd 
@@ -403,19 +403,14 @@ Private Sub cmdCancelar_Click()
    
 End Sub
 
-
-
-
-
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 '    KEYpress KeyAscii
 End Sub
 
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Data1.Recordset.EOF And gridCargado And Modo = 4 Then
+    If Not data1.Recordset.EOF And gridCargado And Modo = 4 Then
        CargaTxtAux True, True
-       'txtAux.SelStart = Len(Me.txtAux.Text)
        
        txtAux(0).SetFocus
        
@@ -462,8 +457,6 @@ Private Sub Form_Load()
     LimpiarCampos   'Limpia los campos TextBox
     PrimeraVez = True
     
-'    TerminaBloquear
-    
     BorrarDatos
     
     CargaGrid
@@ -483,11 +476,11 @@ On Error GoTo ECarga
     cad = "select cta,nommacta, pos ,ccost ,ampconce,timported, timporteh"
     cad = cad & " from tmpconext,cuentas  where tmpconext.cta=cuentas.codmacta AND codusu=" & vUsu.Codigo & " ORDER BY pos"
 
-    Data1.ConnectionString = Conn
-    Data1.RecordSource = cad
-    Data1.CursorType = adOpenDynamic
-    Data1.LockType = adLockPessimistic
-    Data1.Refresh
+    data1.ConnectionString = Conn
+    data1.RecordSource = cad
+    data1.CursorType = adOpenDynamic
+    data1.LockType = adLockPessimistic
+    data1.Refresh
    
     PrimeraVez = False
     
@@ -550,10 +543,10 @@ Dim alto As Single
     Else
         DeseleccionaGrid Me.DataGrid1
         If Limpiar Then 'Vaciar los textBox (Vamos a Insertar)
-                txtAux(0).Text = DBLet(Data1.Recordset!timported)
+                txtAux(0).Text = DBLet(data1.Recordset!timported)
                 txtAux(0).Locked = False
                 
-                txtAux(1).Text = DBLet(Data1.Recordset!timporteH)
+                txtAux(1).Text = DBLet(data1.Recordset!timporteH)
                 txtAux(1).Locked = False
         End If
 
@@ -587,8 +580,6 @@ Dim alto As Single
     If Visible Then
         txtAux(0).TabIndex = 2
         txtAux(1).TabIndex = 3
-      '  txtAux.SelStart = 0
-       ' txtAux.SelLength = Len(txtAux.Text)
     Else
         txtAux(0).TabIndex = 5
         txtAux(1).TabIndex = 6
@@ -608,7 +599,7 @@ End Sub
 Private Sub mnOpciones1_Click(Index As Integer)
     If Index = 0 Then
         PreguntarAmplia = True
-        If Data1.Recordset.RecordCount > 0 Then
+        If data1.Recordset.RecordCount > 0 Then
             If MsgBox("Ya existen datos. Volver a cargarlos?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
             Text1.Text = ""
             PreguntarAmplia = False
@@ -667,13 +658,8 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-
-
-
 Private Sub Text1_LostFocus()
     If Trim(Text1.Text) = "" And PreguntarAmplia Then
-'        If MsgBox("No ha puesto valor para la ampliacion de concepto. ¿ Continuar ? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
-'        Exit Sub
     End If
     PasoPorAmpliacion = True
     BotonModificar
@@ -711,7 +697,6 @@ On Error GoTo EKeyD
                 PasarSigReg
                 Me.txtAux(Index).SelStart = 0
                 Me.txtAux(Index).SelLength = Len(Me.txtAux(Index).Text)
-                'txtaux.Refresh
     End Select
 EKeyD:
     If Err.Number <> 0 Then Err.Clear
@@ -720,7 +705,6 @@ End Sub
 
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
 
-'    KEYpress KeyAscii
 
    If KeyAscii = 13 Then 'ENTER
         If Index = 0 And ComprobarCero(txtAux(0).Text) = 0 Then
@@ -778,7 +762,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte
+Dim I As Byte
 Dim B As Boolean
        
     Modo = Kmodo
@@ -801,7 +785,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-    If Data1.Recordset.EOF Then Exit Sub
+    If data1.Recordset.EOF Then Exit Sub
     
     If Not PasoPorAmpliacion Then
         PasoPorAmpliacion = True
@@ -839,10 +823,10 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If DataGrid1.Bookmark < Data1.Recordset.RecordCount Then
+    If DataGrid1.Bookmark < data1.Recordset.RecordCount Then
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
         PonFoco Me.txtAux(0)
-    ElseIf DataGrid1.Bookmark = Data1.Recordset.RecordCount Then
+    ElseIf DataGrid1.Bookmark = data1.Recordset.RecordCount Then
        PonleFoco cmdAceptar
     End If
 
@@ -857,14 +841,14 @@ Dim NumReg As Long
         
         If ActualizarExistencia() Then
             
-            NumReg = Data1.Recordset.AbsolutePosition
+            NumReg = data1.Recordset.AbsolutePosition
             CargaGrid
             
                     
-            If NumReg < Data1.Recordset.RecordCount Then
-                Data1.Recordset.Move NumReg - 1
+            If NumReg < data1.Recordset.RecordCount Then
+                data1.Recordset.Move NumReg - 1
             Else
-                Data1.Recordset.MoveLast
+                data1.Recordset.MoveLast
             End If
         End If
 
@@ -882,7 +866,7 @@ End Function
 
 Private Function ActualizarExistencia() As Boolean
 'Actualiza la cantidad de stock Inventariada (Existencia Real en Almacen)
-Dim sql As String
+Dim SQL As String
 Dim Debe As Currency
 Dim Haber As Currency
 
@@ -892,18 +876,18 @@ Dim Haber As Currency
     Debe = TransformaPuntosComas(ComprobarCero(txtAux(0).Text))
     Haber = TransformaPuntosComas(ComprobarCero(txtAux(1).Text))
     
-        sql = "UPDATE tmpconext  Set timported = " & DBSet(Debe, "N", "S")
-        sql = sql & ", timporteh = " & DBSet(Haber, "N", "S")
-        sql = sql & " WHERE cta = '" & Data1.Recordset!Cta & "' AND "
-        sql = sql & " pos =" & Data1.Recordset!Pos & " AND codusu =" & vUsu.Codigo
-        Conn.Execute sql
+        SQL = "UPDATE tmpconext  Set timported = " & DBSet(Debe, "N", "S")
+        SQL = SQL & ", timporteh = " & DBSet(Haber, "N", "S")
+        SQL = SQL & " WHERE cta = '" & data1.Recordset!Cta & "' AND "
+        SQL = SQL & " pos =" & data1.Recordset!Pos & " AND codusu =" & vUsu.Codigo
+        Conn.Execute SQL
         
         
         
 EActualizar:
     If Err.Number <> 0 Then
         'Hay error , almacenamos y salimos
-         MuestraError Err.Number, sql, Err.Description
+         MuestraError Err.Number, SQL, Err.Description
          ActualizarExistencia = False
     Else
         ActualizarExistencia = True

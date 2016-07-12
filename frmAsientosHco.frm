@@ -2152,7 +2152,6 @@ Private Sub cmdAux_Click(Index As Integer)
             End If
 
     End Select
-'    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
 
 Private Sub LlamaContraPar()
@@ -2165,24 +2164,24 @@ Private Sub LlamaContraPar()
 End Sub
 
 Private Sub cmdSaldoHco_Click(Index As Integer)
-Dim Cta As String
+Dim cta As String
     If Modo = 5 And ModoLineas > 0 Then
         If txtAux(4).Text = "" Then
             MsgBox "Seleccione una cuenta", vbExclamation
             Exit Sub
         End If
         SQL = txtAux(4).Text
-        Cta = txtAux2(4).Text
+        cta = txtAux2(4).Text
     Else
         If AdoAux(1).Recordset.EOF Then
             MsgBox "Ningún registro activo.", vbExclamation
             Exit Sub
         End If
         SQL = AdoAux(1).Recordset!codmacta
-        Cta = DBLet(AdoAux(1).Recordset!Nommacta)
+        cta = DBLet(AdoAux(1).Recordset!Nommacta)
     End If
     If Index = 0 Then
-        SaldoHistorico SQL, "", Cta, False
+        SaldoHistorico SQL, "", cta, False
     Else
         If VieneDeDesactualizar Then
             MsgBox "Acaba de desactualizar asientos. No puede hacer consulta desde aqui.", vbExclamation
@@ -2231,7 +2230,6 @@ Private Sub Form_Activate()
         
         PonerModo CInt(Modo)
         VieneDeDesactualizar = B
-'        CargaGrid 1, (Modo = 2)
         If Modo <> 2 Then
             
             If ASIENTO <> "" Then
@@ -2258,9 +2256,6 @@ Private Sub Form_Activate()
                 'Ponemos en marcha, la maquinaria. Desde variable DATOS extraemos
                 If DesdeNorma43 = 1 Then
                     BotonAnyadirLinea 1, True
-                Else
-                    'Es TIPO 2. Es decir lo dejamos modificando lineas
-'                    BotonModificarLinea 1
                 End If
             End If
         
@@ -2839,7 +2834,6 @@ Private Sub frmUtil_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub imgppal_Click(Index As Integer)
-'    If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
     
     If (Modo = 2 Or Modo = 5 Or Modo = 0) And (Index <> 2) Then Exit Sub
     
@@ -3048,7 +3042,6 @@ Private Sub PonerCadenaBusqueda()
         Exit Sub
     Else
         PonerModo 2
-        'Data1.Recordset.MoveLast
         Data1.Recordset.MoveFirst
         PonerCampos
     End If
@@ -3178,7 +3171,6 @@ Private Sub BotonEliminar(EliminarDesdeActualizar As Boolean)
 Error2:
         Screen.MousePointer = vbDefault
         If Not EliminarDesdeActualizar Then
-'            If Not Data1.Recordset.EOF Then DesBloqAsien
         Else
            If VieneDeDesactualizar Then
                 PulsadoSalir = True
@@ -3244,8 +3236,6 @@ Dim Mc As Contadores
                 PonerModo 2
                 PonerCampos
                 PonFoco Text1(0)
-'                DesBloqAsien
-                ' *******************************************
                 
         Case 5 'LLÍNIES
             TerminaBloquear
@@ -3278,7 +3268,6 @@ Private Function DatosOK() As Boolean
 Dim B As Boolean
 Dim SQL As String
 Dim cad As String
-'Dim Datos As String
 
     On Error GoTo EDatosOK
 
@@ -3394,7 +3383,6 @@ Dim RC As Byte
                 SQL = "mal"
             Else
                 RC = FechaCorrecta2(CDate(Text1(1).Text))
-                'Text1(1).Text = Format(Text1(1).Text, "dd/mm/yyyy")
                 SQL = ""
                 If RC > 1 Then
                     If RC = 2 Then
@@ -3475,7 +3463,6 @@ End Sub
 '************* LLINIES: ****************************
 Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
 '-- pon el bloqueo aqui
-    'If BLOQUEADesdeFormulario2(Me, Data1, 1) Then
     Select Case Button.Index
         Case 1
             BotonAnyadirLinea Index, True
@@ -3485,7 +3472,6 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
             BotonEliminarLinea Index
         Case Else
     End Select
-    'End If
 End Sub
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
@@ -3568,9 +3554,8 @@ Dim LINASI As Long
                 SQL = ""
                 While Not miRsAux.EOF
                     LINASI = LINASI + 1
-                    'numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost
                     SQL = SQL & ", (" & Data1.Recordset!NumDiari & "," & DBSet(Data1.Recordset!FechaEnt, "F") & "," & Data1.Recordset!NumAsien
-                    SQL = SQL & "," & LINASI & ",'" & miRsAux!Cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
+                    SQL = SQL & "," & LINASI & ",'" & miRsAux!cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
                     SQL = SQL & "," & DBSet(miRsAux!Ampconce & " " & Ampliacion, "T") & "," & DBSet(miRsAux!timported, "N", "S") & "," & DBSet(miRsAux!timporteH, "N", "S")
                     SQL = SQL & "," & DBSet(miRsAux!ctacontr, "T")
                     If vParam.autocoste Then
@@ -3730,10 +3715,6 @@ Dim I As Integer
     NumTabMto = Index
     PonerModo 5, Index
 
-    ' *** bloquejar la clau primaria de la capçalera ***
-'    BloquearTxt Text1(0), True
-    ' **************************************************
-
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case Index
         Case 1: vTabla = "hlinapu"
@@ -3808,9 +3789,6 @@ Private Sub BotonModificarLinea(Index As Integer)
 
     NumTabMto = Index
     PonerModo 5, Index
-    ' *** bloqueje la clau primaria de la capçalera ***
-'    BloquearTxt Text1(0), True
-    ' *********************************
 
     Select Case Index
         Case 0, 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
@@ -4060,9 +4038,6 @@ Dim tots As String
     CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     
-    'DataGridAux(Index).Enabled = b
-'    PrimeraVez = False
-    
     Select Case Index
         
         Case 1 'lineas de asiento
@@ -4256,21 +4231,6 @@ Private Sub LimpiarCamposFrame(Index As Integer)
 End Sub
 ' ***********************************************
 
-
-'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGridAux_GotFocus(Index As Integer)
-'  WheelHook DataGridAux(Index)
-'End Sub
-'Private Sub DataGridAux_LostFocus(Index As Integer)
-'  WheelUnHook
-'End Sub
-
-
-
-
-'**************************************************************************
-'**************************************************************************
-'**************************************************************************
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
 Dim RS As ADODB.Recordset
@@ -4700,30 +4660,6 @@ End Sub
 
 Private Sub HacerToolBar(Boton As Integer)
 
-    'Si viene desde hco solo podemos MODIFCAR, ELIMINAR, LINEAS, ACTUALIZAR,SALIR
-    
-    
-'    If VieneDeDesactualizar Then
-'        I = Boton
-'        SQL = ""
-'        If I < 6 Then
-'            SQL = "NO"
-'        Else
-'            If I > 15 Then
-'                SQL = "NO"
-'            Else
-'                'INSERTAR, pero no estamos en edicion lineas
-'                If I = 6 And Modo <> 5 Then
-'                    SQL = "NO"
-'                End If
-'            End If
-'        End If
-'        If SQL <> "" Then
-'            MsgBox "Esta modificando el asiento de historico. Finalice primero este proceso.", vbExclamation
-'            Exit Sub
-'        End If
-'    End If
-    
     Select Case Boton
         Case 1
             BotonAnyadir
@@ -4860,7 +4796,6 @@ Private Function AmbitoDeFecha(DesbloqueAsiento As Boolean) As Boolean
             AmbitoDeFecha = True
         End If
     
-'        If DesbloqueAsiento Then DesBloqAsien
 End Function
 
 
@@ -5266,7 +5201,6 @@ If Trim(Text2(2).Text) = "" Then
 Else
     MsgBox "Asiento descuadrado.", vbExclamation
     ActualizarASiento = False
-'    DesBloqAsien
 End If
 End Function
 
@@ -5397,7 +5331,6 @@ Dim L As Long
     cd1.CancelError = False
     
     If cd1.FileName = "" Then
-'        Unload Me
         InsertarDesdeFichero = False
         Exit Function
     End If
@@ -5405,7 +5338,6 @@ Dim L As Long
     If FileLen(cd1.FileName) / 1000 > 1024 Then
         MsgBox "No se permite insertar ficheros de tamaño superior a 1 M", vbExclamation
         InsertarDesdeFichero = False
-'        Unload Me
         Exit Function
     End If
     
@@ -5720,8 +5652,6 @@ Dim CadFac As String
         
         SePuedeModificarAsiento = False
       
-'        If Me.AdoAux(1).Recordset.EOF Then Exit Function
-        
         'Primero comprobamos si esta cerrado el ejercicio
         varFecOk = FechaCorrecta2(AdoAux(1).Recordset!FechaEnt)
         If varFecOk >= 2 Then

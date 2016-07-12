@@ -545,9 +545,9 @@ Private Sub Form_Load()
     Me.Caption = "Bancos"
     optVarios(0).Value = True
 
-    For i = 0 To 1
-        Me.imgBanco(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgBanco(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -621,10 +621,10 @@ Private Sub txtBanco_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgBanco"
-        Imgbanco_Click indice
+        Imgbanco_Click Indice
     End Select
     
 End Sub
@@ -634,7 +634,7 @@ Private Sub txtBanco_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtBanco_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -662,7 +662,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtBanco(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -717,9 +716,9 @@ Private Sub AccionesCSV()
     SQL = SQL & " concat(bancos.iban, ' ', right(concat('0000',bancos.entidad),4),' ', right(concat('0000',bancos.oficina),4),' ',  bancos.control,' ', bancos.ctabanco) as CCC, ccoste.nomccost  as CentroCoste "
     SQL = SQL & " FROM bancos left join ccoste on bancos.codccost = ccoste.codccost "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
-    i = 1
-    If optVarios(1).Value Then i = 2 'nombre
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    If optVarios(1).Value Then I = 2 'nombre
+    SQL = SQL & " ORDER BY " & I
         
     'LLamoa a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text

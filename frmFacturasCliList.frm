@@ -633,7 +633,7 @@ Option Explicit
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
 
-Public NumSerie As String
+Public NUmSerie As String
 Public NumFactu As String
 Public FecFactu As String
 
@@ -643,9 +643,9 @@ Private WithEvents frmCont As frmContadores
 Attribute frmCont.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As Boolean
 
@@ -738,13 +738,13 @@ Private Sub Form_Load()
     Me.txtTipoSalida(1).Enabled = False
     Me.PushButton2(0).Enabled = False
 
-    For i = 0 To 1
-        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
-    If NumSerie <> "" Then
-        txtSerie(0).Text = NumSerie
-        txtSerie(1).Text = NumSerie
+    If NUmSerie <> "" Then
+        txtSerie(0).Text = NUmSerie
+        txtSerie(1).Text = NUmSerie
         txtSerie_LostFocus (0)
         txtSerie_LostFocus (1)
         txtNumFactu(0).Text = NumFactu
@@ -861,12 +861,12 @@ Private Sub txtNumFactu_KeyDown(Index As Integer, KeyCode As Integer, Shift As I
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgDiario"
-        imgSerie_Click indice
+        imgSerie_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
@@ -876,20 +876,18 @@ Private Sub txtNumFactu_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtNumFactu_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtNumFactu(Index).Text = Trim(txtNumFactu(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
     If Not IsNumeric(txtNumFactu(Index).Text) Then
         If InStr(1, txtNumFactu(Index).Text, "+") = 0 Then MsgBox "El número de factua debe ser numérico: " & txtSerie(Index).Text, vbExclamation
         txtNumFactu(Index).Text = ""
         Exit Sub
     End If
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -903,7 +901,7 @@ Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String

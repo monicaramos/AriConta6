@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmbic 
@@ -482,7 +482,7 @@ Dim Modo As Byte
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
-Dim i As Integer
+Dim I As Integer
     Modo = vModo
     
     B = (Modo = 2)
@@ -494,12 +494,12 @@ Dim i As Integer
     
     B = (Modo = 0 Or Modo = 2)
     
-    txtaux(0).Visible = Not B
-    txtaux(1).Visible = Not B
-    txtaux(2).Visible = Not B
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).BackColor = vbWhite
-    Next i
+    txtAux(0).Visible = Not B
+    txtAux(1).Visible = Not B
+    txtAux(2).Visible = Not B
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
+    Next I
     'Prueba
     
     cmdAceptar.Visible = Not B
@@ -510,7 +510,7 @@ Dim i As Integer
     If DatosADevolverBusqueda <> "" Then
         cmdRegresar.Visible = B
     End If
-    txtaux(0).Enabled = (Modo <> 4)
+    txtAux(0).Enabled = (Modo <> 4)
 
     PonerModoUsuarioGnral Modo, "ariconta"
 
@@ -522,7 +522,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -541,9 +541,9 @@ Private Sub BotonAnyadir()
     lblIndicador.Caption = "INSERTANDO"
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If adodc1.Recordset.RecordCount > 0 Then
+    If Adodc1.Recordset.RecordCount > 0 Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
    
@@ -553,12 +553,12 @@ Private Sub BotonAnyadir()
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
     End If
     
-    txtaux(0).Text = "": txtaux(1).Text = "": txtaux(2).Text = ""
+    txtAux(0).Text = "": txtAux(1).Text = "": txtAux(2).Text = ""
     
     '++
     LLamaLineas anc, 3
     
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
     
     
 End Sub
@@ -572,13 +572,13 @@ End Sub
 Private Sub BotonBuscar()
     CargaGrid "entidad = -1"
     'Buscar
-    txtaux(0).Text = ""
-    txtaux(1).Text = ""
-    txtaux(2).Text = ""
+    txtAux(0).Text = ""
+    txtAux(1).Text = ""
+    txtAux(2).Text = ""
     
     LLamaLineas DataGrid1.Top + 250, 1
     
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
     
     
 End Sub
@@ -587,18 +587,18 @@ Private Sub BotonModificar()
     '---------
     'MODIFICAR
     '----------
-    Dim Cad As String
+    Dim cad As String
     Dim anc As Single
-    Dim i As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    Dim I As Integer
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     Me.lblIndicador.Caption = "MODIFICAR"
     DeseleccionaGrid
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -609,14 +609,14 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = DataGrid1.Columns(2).Text
-    i = adodc1.Recordset!Entidad
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
+    I = Adodc1.Recordset!Entidad
    
     LLamaLineas anc, 4
     
-    PonFoco txtaux(1)
+    PonFoco txtAux(1)
    
     Screen.MousePointer = vbDefault
 End Sub
@@ -624,29 +624,29 @@ End Sub
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     'Fijamos el ancho
-    txtaux(0).Top = alto
-    txtaux(1).Top = alto
-    txtaux(2).Top = alto
+    txtAux(0).Top = alto
+    txtAux(1).Top = alto
+    txtAux(2).Top = alto
 End Sub
 
 Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
     If Not SepuedeBorrar Then Exit Sub
     '### a mano
     SQL = "Seguro que desea eliminar el BIC del banco:"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Nombre: " & Adodc1.Recordset.Fields(1)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
     
         'Hay que eliminar
-        SQL = "Delete from bics where entidad=" & adodc1.Recordset!Entidad
+        SQL = "Delete from bics where entidad=" & Adodc1.Recordset!Entidad
         Conn.Execute SQL
         CargaGrid ""
-        adodc1.Recordset.Cancel
+        Adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -655,11 +655,11 @@ Error2:
 End Sub
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
-  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, adodc1
+  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, Adodc1
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim CadB As String
 Select Case Modo
     Case 1
@@ -674,7 +674,6 @@ Select Case Modo
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
-                'MsgBox "Registro insertado.", vbInformation
                 CargaGrid
                 BotonAnyadir
             End If
@@ -685,10 +684,10 @@ Select Case Modo
             '-----------------------------------------
             'Hacemos insertar
              If ModificaDesdeFormulario(Me) Then
-                i = adodc1.Recordset.Fields(0)
+                I = Adodc1.Recordset.Fields(0)
                 PonerModo 0
                 CargaGrid
-                adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
             End If
         End If
     End Select
@@ -703,7 +702,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
         
     End Select
     PonerModo 0
@@ -712,16 +711,16 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-    Dim Cad As String
+    Dim cad As String
     
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro a devolver.", vbExclamation
         Exit Sub
     End If
     
-    Cad = adodc1.Recordset.Fields(0) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Adodc1.Recordset.Fields(0) & "|"
+    cad = cad & Adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -854,57 +853,57 @@ End Sub
 Private Sub CargaGrid(Optional SQL As String)
     Dim J As Integer
     Dim TotalAncho As Integer
-    Dim i As Integer
+    Dim I As Integer
     
-    adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = Conn
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
     Else
         SQL = CadenaConsulta
     End If
     SQL = SQL & " ORDER BY entidad"
-    adodc1.RecordSource = SQL
-    adodc1.CursorType = adOpenDynamic
-    adodc1.LockType = adLockOptimistic
-    adodc1.Refresh
+    Adodc1.RecordSource = SQL
+    Adodc1.CursorType = adOpenDynamic
+    Adodc1.LockType = adLockOptimistic
+    Adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 350
     
     
     'Nombre producto
-    i = 0
-        DataGrid1.Columns(i).Caption = "Entidad"
-        DataGrid1.Columns(i).Width = 1100
-        DataGrid1.Columns(i).NumberFormat = "0000"
+    I = 0
+        DataGrid1.Columns(I).Caption = "Entidad"
+        DataGrid1.Columns(I).Width = 1100
+        DataGrid1.Columns(I).NumberFormat = "0000"
         
     
     'Leemos del vector en 2
-    i = 1
-        DataGrid1.Columns(i).Caption = "Nombre"
-        DataGrid1.Columns(i).Width = 7430
-        TotalAncho = TotalAncho + DataGrid1.Columns(i).Width
+    I = 1
+        DataGrid1.Columns(I).Caption = "Nombre"
+        DataGrid1.Columns(I).Width = 7430
+        TotalAncho = TotalAncho + DataGrid1.Columns(I).Width
     
-    i = 2
-        DataGrid1.Columns(i).Caption = "BIC"
-        DataGrid1.Columns(i).Width = 1800
-        TotalAncho = TotalAncho + DataGrid1.Columns(i).Width
+    I = 2
+        DataGrid1.Columns(I).Caption = "BIC"
+        DataGrid1.Columns(I).Width = 1800
+        TotalAncho = TotalAncho + DataGrid1.Columns(I).Width
         
         'Fiajamos el cadancho
     If Not CadAncho Then
         'La primera vez fijamos el ancho y alto de  los txtaux
-        txtaux(0).Width = DataGrid1.Columns(0).Width - 60
-        txtaux(1).Width = DataGrid1.Columns(1).Width - 60
-        txtaux(2).Width = DataGrid1.Columns(2).Width - 60
-        txtaux(0).Left = DataGrid1.Left + 340
-        txtaux(1).Left = txtaux(0).Left + txtaux(0).Width + 45
-        txtaux(2).Left = txtaux(1).Left + txtaux(1).Width + 45
+        txtAux(0).Width = DataGrid1.Columns(0).Width - 60
+        txtAux(1).Width = DataGrid1.Columns(1).Width - 60
+        txtAux(2).Width = DataGrid1.Columns(2).Width - 60
+        txtAux(0).Left = DataGrid1.Left + 340
+        txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
+        txtAux(2).Left = txtAux(1).Left + txtAux(1).Width + 45
         CadAncho = True
     End If
     'Habilitamos modificar y eliminar
     If vUsu.Nivel < 2 Then
-        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
-        Toolbar1.Buttons(8).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(8).Enabled = Not Adodc1.Recordset.EOF
     End If
 End Sub
 
@@ -916,7 +915,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -929,17 +928,17 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
 
-    txtaux(Index).Text = Trim(txtaux(Index).Text)
-    If txtaux(Index).Text = "" Then Exit Sub
+    txtAux(Index).Text = Trim(txtAux(Index).Text)
+    If txtAux(Index).Text = "" Then Exit Sub
     If Modo = 1 Then Exit Sub 'Busquedas
     If Index = 0 Then
-        If Not IsNumeric(txtaux(0).Text) Then
+        If Not IsNumeric(txtAux(0).Text) Then
             MsgBox "Código entidad tiene que ser numérico", vbExclamation
             Exit Sub
         End If
-        txtaux(0).Text = Format(txtaux(0).Text, "000")
+        txtAux(0).Text = Format(txtAux(0).Text, "000")
     End If
 End Sub
 
@@ -951,18 +950,18 @@ Dim B As Boolean
     If Not B Then Exit Function
 
 
-    If Len(Me.txtaux(2).Text) <> 11 Then
+    If Len(Me.txtAux(2).Text) <> 11 Then
         MsgBox "El campo BIC es de 11 caracteres", vbExclamation
-        PonFoco Me.txtaux(2)
+        PonFoco Me.txtAux(2)
         B = False
     End If
     If Modo = 3 Then
         'Estamos insertando
-         Datos = DevuelveDesdeBD("nombre", "bics", "entidad", txtaux(0).Text, "N")
+         Datos = DevuelveDesdeBD("nombre", "bics", "entidad", txtAux(0).Text, "N")
          If Datos <> "" Then
-            MsgBox "Ya existe la entidad  : " & txtaux(0).Text & " - " & Datos, vbExclamation
+            MsgBox "Ya existe la entidad  : " & txtAux(0).Text & " - " & Datos, vbExclamation
             B = False
-            PonFoco Me.txtaux(0)
+            PonFoco Me.txtAux(0)
         End If
     End If
 DatosOK = B
@@ -977,10 +976,7 @@ End Sub
 
 
 Private Function SepuedeBorrar() As Boolean
-'Dim SQL As String
     SepuedeBorrar = False
- '   SQL = DevuelveDesdeBD("agente", "scobro", "agente", Adodc1.Recordset!Codigo, "N")
- '   If SQL <> "" Then
     If vUsu.Nivel > 0 Then
         MsgBox "NO tiene permiso", vbExclamation
         Exit Function
@@ -1010,8 +1006,6 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-
-
 ' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
 Private Sub DataGrid1_GotFocus()
   WheelHook DataGrid1
@@ -1021,30 +1015,30 @@ Private Sub DataGrid1_LostFocus()
 End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim RS As ADODB.Recordset
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 

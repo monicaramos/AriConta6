@@ -852,9 +852,9 @@ Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
 
@@ -959,9 +959,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Extracto de Cuentas"
 
-    For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     PrimeraVez = True
      
@@ -1088,18 +1088,18 @@ Private Sub txtCuentas_KeyDown(Index As Integer, KeyCode As Integer, Shift As In
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -1146,7 +1146,6 @@ Dim Hasta As Integer
             End If
     End Select
 
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -1265,7 +1264,7 @@ Private Function CargaTemporal2() As Boolean
 Dim SQL As String
 Dim SQL2 As String
 Dim Sql3 As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Rs3 As ADODB.Recordset
 Dim B As Boolean
@@ -1309,16 +1308,16 @@ Dim B As Boolean
 
     B = True
 
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF And B
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF And B
     
-        B = (CargaDatosConExt(Rs!codmacta, txtFecha(0).Text, txtFecha(1).Text, cadselect, Rs.Fields(3).Value) = 0)
+        B = (CargaDatosConExt(RS!codmacta, txtFecha(0).Text, txtFecha(1).Text, cadselect, RS.Fields(3).Value) = 0)
    
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
     CargaTemporal2 = B
     
@@ -1333,7 +1332,7 @@ Private Function CargaTemporal() As Boolean
 Dim SQL As String
 Dim SQL2 As String
 Dim Sql3 As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Rs3 As ADODB.Recordset
 
@@ -1377,19 +1376,19 @@ Dim Rs3 As ADODB.Recordset
         ' ACUMULADOS
         SQL = "select cta from tmpconextcab where codusu = " & vUsu.Codigo
         
-        Set Rs = New ADODB.Recordset
-        Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        While Not Rs.EOF
+        While Not RS.EOF
             'Acumulados anteriores al periodo
-            SQL2 = "select sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu where codmacta = " & DBSet(Rs!Cta, "T")
+            SQL2 = "select sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu where codmacta = " & DBSet(RS!Cta, "T")
             SQL2 = SQL2 & " and fechaent >= " & DBSet(vParam.fechaini, "F") & " and fechaent < " & DBSet(txtFecha(0).Text, "F")
             
             Set Rs2 = New ADODB.Recordset
             Rs2.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             'Acumulados totales
-            Sql3 = "select sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu where codmacta = " & DBSet(Rs!Cta, "T")
+            Sql3 = "select sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) from hlinapu where codmacta = " & DBSet(RS!Cta, "T")
             Sql3 = Sql3 & " and fechaent >= " & DBSet(vParam.fechaini, "F") & " and fechaent <= " & DBSet(vParam.fechafin, "F")
             
             Set Rs3 = New ADODB.Recordset
@@ -1401,7 +1400,7 @@ Dim Rs3 As ADODB.Recordset
             SQL2 = SQL2 & " , acumtotD = " & DBSet(Rs3.Fields(0).Value, "N")
             SQL2 = SQL2 & " , acumtotH = " & DBSet(Rs3.Fields(1).Value, "N")
             SQL2 = SQL2 & " , acumtotT = " & DBSet(DBLet(Rs3.Fields(0).Value, "N") - DBLet(Rs3.Fields(1).Value, "N"), "N")
-            SQL2 = SQL2 & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and cuenta = " & DBSet(Rs!Cta, "T")
+            SQL2 = SQL2 & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and cuenta = " & DBSet(RS!Cta, "T")
             
             Conn.Execute SQL2
             
@@ -1411,7 +1410,7 @@ Dim Rs3 As ADODB.Recordset
             SQL2 = SQL2 & " @saldo:= @saldo + (coalesce(hlinapu.timported,0) - coalesce(hlinapu.timporteh,0)) s1, "
             SQL2 = SQL2 & " if(punteada=1,'SI','') punteada, ctacontr, codccost "
             SQL2 = SQL2 & " from hlinapu, (select @saldo:=" & DBSet(DBLet(Rs2.Fields(0).Value, "N") - DBLet(Rs2.Fields(1).Value, "N"), "N") & ") r, (select @Pos:=0) p "
-            SQL2 = SQL2 & " where codmacta = " & DBSet(Rs!Cta, "T")
+            SQL2 = SQL2 & " where codmacta = " & DBSet(RS!Cta, "T")
             If cadselect <> "" Then SQL2 = SQL2 & " and " & cadselect
             
             Select Case Combo1.ListIndex
@@ -1431,9 +1430,9 @@ Dim Rs3 As ADODB.Recordset
             
             
             
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Set Rs = Nothing
+        Set RS = Nothing
     End If
 
     

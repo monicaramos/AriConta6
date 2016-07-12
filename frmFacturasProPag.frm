@@ -1105,10 +1105,6 @@ Private Sub cmdCancelar_Click()
             Unload Me
     End Select
     
-'    PonerModo 2
-'
-'    PonerFocoGrid Me.DataGrid1
-'    If Err.Number <> 0 Then Err.Clear
 End Sub
 
 Private Sub CmdContinuar_Click()
@@ -1384,7 +1380,6 @@ Private Sub Text1_LostFocus(Index As Integer)
                         If Mid(Text1(29).Text, 3, 2) <> SQL Then
                             
                             MsgBox "Codigo IBAN distinto del calculado [" & SQL2 & SQL & "]", vbExclamation
-                            'Text1(29).Text = "ES" & SQL
                         End If
                     Text1(29).Text = SQL2 & SQL & Sql3
                     End If
@@ -1516,7 +1511,6 @@ Private Sub CargaGrid(Optional vSQL As String)
         SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-'        Sql = Sql & " ORDER BY tmppagos.nroorden"
     SQL = SQL & " " & Ordenacion
     '**************************************************************++
     

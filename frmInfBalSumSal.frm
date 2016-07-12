@@ -1523,16 +1523,6 @@ Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
 End Sub
 
 
-''++
-'Private Sub txtcta_KeyPress(Index As Integer, KeyAscii As Integer)
-'    If KeyAscii = teclaBuscar Then
-'        LanzaFormAyuda "imgCuentas", Index
-'    Else
-'        KEYpress KeyAscii
-'    End If
-'End Sub
-
-
 Private Sub txtCta_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
@@ -1762,11 +1752,6 @@ Dim RC As String
 Dim RC2 As String
 
     MontaSQL = False
-    
-'    If Not PonerDesdeHasta("hlinapu.fechaent", "F", Me.txtFecha(0), Me.lblFecha(0), Me.txtFecha(1), Me.lblFecha(1), "pDHFecha=""") Then Exit Function
-
-'    If Not PonerDesdeHasta("hlinapu.codmacta", "CTA", Me.txtCta(0), Me.lblCuentas(0), Me.txtCta(1), Me.lblCuentas(1), "pDHCuentas=""") Then Exit Function
-    
     MontaSQL = True
            
 End Function
@@ -1980,18 +1965,7 @@ Dim J As Integer
     QuitarSaldos2 = 0   'No hay k kitar
     CONT = 0
     
-    '[Monica]29/10/2014: quitamos los chkQuitaCierre de David, los consideramos siempre como madrcados
-    
-'    If Me.chkQuitaCierre(0).Value And Me.chkQuitaCierre(1).Value Then
         CONT = 1  'Ambos
-'    Else
-'        If Me.chkQuitaCierre(0).Value Then
-'            Cont = 2
-'        Else
-'            If Me.chkQuitaCierre(1).Value Then Cont = 3
-'        End If
-'    End If
-'    If Me.chkQuitaCierre(0).Value Or Me.chkQuitaCierre(1).Value Then
         'Si el mes contiene el cierre, entonces adelante
         If Month(vParam.fechafin) = Me.cmbFecha(IndiceCombo + 1).ListIndex + 1 Then
             'Si estamos en ejercicios cerrados seguro que hay asiento de cierre y p y g
@@ -1999,7 +1973,6 @@ Dim J As Integer
                 Agrupa = HayAsientoCierre((Me.cmbFecha(IndiceCombo + 1).ListIndex + 1), CInt(txtAno(IndiceCombo + 1).Text))
                 If Agrupa Then QuitarSaldos2 = CONT
         End If
-'    End If
     
     'Agruparemos si esta seleccionado el chekc de agrupar y esta seleccionado
     'ultimo nivel y hay moivmientos para agrupar
@@ -2014,12 +1987,6 @@ Dim J As Integer
     
     'Para los balances de ejercicios siguientes existe la opcion
     ' de que si la cuenta esta en el grupo gto o grupo venta, resetear el importe a 0
-    
-' ya no tenemos el check
-'    Resetea6y7 = False
-'    If Me.chkResetea6y7.visible Then
-'        If Me.chkResetea6y7.Value = 1 Then Resetea6y7 = True
-'    End If
     
     Resetea6y7 = CDate("01/" & cmbFecha(0).ListIndex + 1 & "/" & txtAno(0).Text) > vParam.fechafin
     
@@ -2076,8 +2043,6 @@ Dim J As Integer
         ' y dejaremos k lo pulse
         ' Si lo pulsa cancelaremos y no saldremos
         PulsadoCancelar = False
-'        Me.frameBalance.Enabled = False
-        'Me.cmdCancelarAccion.Visible = True
         Me.cmdCancelarAccion.Visible = Legalizacion = ""
         HanPulsadoSalir = False
         Me.Refresh
@@ -2102,15 +2067,11 @@ Dim J As Integer
             C1 = C1 + 1
             RS.MoveNext
         Wend
-        'Debug.Print "PreCargarCierre: " & Abs(PreCargarCierre) & "  Reg: " & C1 & "   Tiempo: " & Round(Timer - t1, 4)
-        
-        
         
         If PreCargarCierre Then CerrarPrecargaPerdidasyGanancias
         
         'Reestablecemos
         PonleFoco cmdCancelar
-'        Me.frameBalance.Enabled = True
         Me.cmdCancelar.Visible = True
         Me.cmdCancelarAccion.Visible = False
         HanPulsadoSalir = True
@@ -2389,7 +2350,6 @@ End Function
 Private Function HayAsientoCierre(Mes As Byte, Anyo As Integer, Optional Contabilidad As String) As Boolean
 Dim C As String
     HayAsientoCierre = False
-    'C = "01/" & CStr(Me.cmbFecha(1).ListIndex + 1) & "/" & txtAno(1).Text
     C = "01/" & CStr(Mes) & "/" & Anyo
     'Si la fecha es menor k la fecha de inicio de ejercicio entonces SI k hay asiento de cierre
     If CDate(C) < vParam.fechaini Then

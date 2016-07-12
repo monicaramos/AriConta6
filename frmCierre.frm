@@ -1846,13 +1846,6 @@ Dim ImporteTotal As Currency
 Dim ImportePyG As Currency
 
 
-
-
-
-
-
-
-
 Private Sub cmdCancel_Click(Index As Integer)
     Unload Me
 End Sub
@@ -1922,15 +1915,6 @@ Dim Ok As Boolean
     
     'Mensaje de lineas en introduccion de asientos
     Ok = True
-'--
-'    If IntroduccionDeApuntes(True) Then
-'        Ok = False
-'        SQL = "Hay asientos en la introducción de apuntes del ejercicio en curso."
-'        MsgBox SQL, vbExclamation
-'
-'    End If
-    
-    
     Screen.MousePointer = vbHourglass
     
 
@@ -2172,15 +2156,6 @@ On Error GoTo EDescierre
     
     'Mensaje de lineas en introduccion de asientos
     Ok = True
-'--
-'    If IntroduccionDeApuntes(False) Then
-'        Ok = False
-'        SQL = "Hay asientos en la introducción de apuntes del ejercicio siguiente."
-'        MsgBox SQL, vbExclamation
-'        Exit Sub
-'    End If
-    
-    
     
    'BLOQUEAMOS LA BD
    If Not Bloquear_DesbloquearBD(True) Then
@@ -2199,14 +2174,7 @@ On Error GoTo EDescierre
     If Ok Then
         Label19.Caption = "Eliminar asientos"
         Label19.Refresh
-        'NO se pueden hacer mas transacciones
-        'Conn.BeginTrans
         Ok = HacerDescierre
-        'If Ok Then
-        '    Conn.BeginTrans
-        'Else
-        '    Conn.RollbackTrans
-        'End If
     End If
     
     'Desbloqueamos BD
@@ -2388,9 +2356,6 @@ Dim Ok As Boolean
     
     If Ok Then
     
-'        If Not DatosOK Then Exit Sub
-        
-        
         'Exportacion a PDF
         If optTipoSal(3).Value + optTipoSal(2).Value + optTipoSal(1).Value Then
             If Not EliminarDocum(optTipoSal(2).Value) Then Exit Sub
@@ -2398,8 +2363,6 @@ Dim Ok As Boolean
         
         
         InicializarVbles True
-        
-'        If Not MontaSQL Then Exit Sub
         
         If Not HayRegParaInforme("tmphistoapu", "tmphistoapu.codusu = " & vUsu.Codigo) Then Exit Sub
         
@@ -2734,7 +2697,6 @@ Dim RA As Recordset
            RA.MoveNext
            
            If (MaxAsiento Mod 50) = 0 Then
-                'Me.Refresh
                 DoEvents
                 Me.Refresh
                 espera 0.01
@@ -3064,14 +3026,6 @@ Dim Ok As Boolean
     cmdCierreEjercicio.Enabled = Ok
 End Sub
 
-
-
-
-
-
-
-
-
 Private Sub frmD_DatoSeleccionado(CadenaSeleccion As String)
     txtDiario(I).Text = RecuperaValor(CadenaSeleccion, 1)
     txtDescDiario(I).Text = RecuperaValor(CadenaSeleccion, 2)
@@ -3084,10 +3038,6 @@ Private Sub Image1_Click(Index As Integer)
     frmD.Show vbModal
     Set frmD = Nothing
 End Sub
-
-
-
-
 
 Private Sub Option2_Click(Index As Integer)
 Dim vFecha As String
@@ -3112,8 +3062,7 @@ Dim vFecha As String
     End If
 
     If TieneInmovilizado Then
-'    If False Then
-        Me.frameamort.Visible = (Opcion = 1)
+        Me.FrameAmort.Visible = (Opcion = 1)
         
         vFecha = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", 1, "N")
         Text1(15).Text = Format(vFecha, "dd/mm/yyyy")
@@ -3659,34 +3608,14 @@ On Error GoTo EHacerElCierre
         SQL = "UPDATE contadores SET contado2 = 1 WHERE tiporegi='0'"
         Conn.Execute SQL
         
-        
-        'NUEVO. Para que los proveedores no se mezclen facturas. El contador
-        
-'?????????????????? PREGUNTAR A MANOLO
-        
-'        If Year(vParam.fechaini) <> Year(vParam.fechafin) Then
-'            I = Year(DateAdd("yyyy", 1, vParam.fechafin))
-'            If I > 0 Then
-'                If I > 2010 Then
-'                    SQL = "3"
-'                Else
-'                    SQL = "2"
-'                End If
-'                SQL = SQL & Mid(CStr(I), 4, 1)
-'                SQL = SQL & "00000"
-'
-'                SQL = "UPDATE contadores SET contado2 = " & SQL & " WHERE tiporegi='1'"
-'                If Not EjecutaSQL(SQL) Then MsgBox "Error updateando contador proveeedores: " & vbCrLf & SQL, vbExclamation
-'            End If
-'        End If
     End If
     
     HacerElCierre = True
     
 EHacerElCierre:
     If Err.Number <> 0 Then MuestraError Err.Number
-    vParam.leer
-    If vEmpresa.TieneTesoreria Then vParamT.leer
+    vParam.Leer
+    If vEmpresa.TieneTesoreria Then vParamT.Leer
     Set RS = Nothing
 End Function
 
@@ -4345,9 +4274,6 @@ On Error GoTo EHacerDescierre
         'SQL = "UPDATE Contadores SET contado1 = " & MaxAsien - 1 & " WHERE tiporegi ='0'"
         'EjecutaSQL SQL
     End If
-'    'Los borramos de hco
-'    SQL = "DELETE from Contadoreshco WHERE anoregis = " & Year(vParam.fechaini)
-'    EjecutaSQL SQL
     
     HacerDescierre = True
     Exit Function
@@ -4694,7 +4620,6 @@ Dim CONT As Long
         End If
             
             
-            
         'Sigueinte subgrupoo
         RS.MoveNext
     Wend
@@ -4705,16 +4630,8 @@ Dim CONT As Long
     If CuentaSaldo <> "" Then SaldarCuenta8y9 CuentaSaldo
     ImporteTotal = 0
     
-    
-    
-    
-
-    
-    
     GenerarASiento8y9 = 2
 
-    
-    
    Exit Function
 EASiento8y9:
     Set RS = Nothing

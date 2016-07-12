@@ -866,7 +866,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
             Aux = Trim(Control.Text)
             If UCase(Aux) = "NULL" Then
                 Carga = mTag.Cargar(Control)
-                If Carga Then
+                If Carga And mTag.Columna <> "" Then
 
                     SQL = mTag.tabla & "." & mTag.Columna & " is NULL"
                     SQL = "(" & SQL & ")"
@@ -2519,8 +2519,8 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, Opcion A
                     Next I
                 
                 Case 3 'para los TXTAUX
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For I = 0 To .txtaux.Count - 1
+                        With .txtaux(I)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = 0 'tamaño infinito
@@ -2541,8 +2541,8 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, Opcion A
                         End With
                     Next I
                 Case 3 'para los txtAux
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For I = 0 To .txtaux.Count - 1
+                        With .txtaux(I)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0

@@ -898,7 +898,6 @@ Dim cad As String, cadTipo As String 'tipo cliente
             If txtAsientos(Index).Text <> "" Then txtAsientos(Index).Text = Format(txtAsientos(Index).Text, "000")
     End Select
 
-'    PierdeFocoConcepto Me.txtConcepto(Index), Me.lblConcepto(Index)
 End Sub
 
 

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmCtasAgrupadas 
@@ -521,7 +521,7 @@ Dim Modo As Byte
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
-Dim i As Integer
+Dim I As Integer
 
     Modo = vModo
 
@@ -534,13 +534,13 @@ Dim i As Integer
     
     B = (Modo = 0 Or Modo = 2)
         
-    txtaux(0).Visible = Not B
-    txtaux2(0).Visible = Not B
+    txtAux(0).Visible = Not B
+    txtAux2(0).Visible = Not B
     cmdAux(0).Visible = Not B
     
-    For i = 0 To txtaux.Count - 1
-        txtaux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
+    Next I
     
     'Prueba
     
@@ -553,7 +553,7 @@ Dim i As Integer
     If DatosADevolverBusqueda <> "" Then
         cmdRegresar.Visible = B
     End If
-    txtaux(0).Enabled = (Modo <> 4)
+    txtAux(0).Enabled = (Modo <> 4)
     
     PonerModoUsuarioGnral Modo, "ariconta"
     
@@ -594,13 +594,13 @@ Private Sub BotonAnyadir()
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
     End If
     
-    txtaux(0).Text = ""
-    txtaux2(0).Text = ""
+    txtAux(0).Text = ""
+    txtAux2(0).Text = ""
     LLamaLineas anc, 3
     
     
     'Ponemos el foco
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 
 End Sub
 
@@ -613,19 +613,19 @@ End Sub
 Private Sub BotonBuscar()
     CargaGrid "ctaagrupadas.codmacta = -1"
     'Buscar
-    txtaux(0).Text = ""
-    txtaux2(0).Text = ""
+    txtAux(0).Text = ""
+    txtAux2(0).Text = ""
     LLamaLineas DataGrid1.Top + 250, 1
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
     '---------
     'MODIFICAR
     '----------
-    Dim Cad As String
+    Dim cad As String
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
@@ -638,8 +638,8 @@ Private Sub BotonModificar()
     Me.lblIndicador.Caption = "MODIFICAR"
     DeseleccionaGrid
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -650,14 +650,14 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    i = adodc1.Recordset!TipoConce
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    I = adodc1.Recordset!TipoConce
   
     LLamaLineas anc, 4
    
     'Como es modificar
-    PonFoco txtaux(1)
+    PonFoco txtAux(1)
    
     Screen.MousePointer = vbDefault
 End Sub
@@ -665,8 +665,8 @@ End Sub
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     'Fijamos el ancho
-    txtaux(0).Top = alto
-    txtaux2(0).Top = alto
+    txtAux(0).Top = alto
+    txtAux2(0).Top = alto
     cmdAux(0).Top = alto
 End Sub
 
@@ -702,7 +702,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim CadB As String
     Select Case Modo
     Case 1
@@ -717,7 +717,6 @@ Dim CadB As String
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
-                'MsgBox "Registro insertado.", vbInformation
                 CargaGrid
                 BotonAnyadir
             End If
@@ -728,10 +727,10 @@ Dim CadB As String
                 '-----------------------------------------
                 'Hacemos insertar
                 If ModificaDesdeFormulario(Me) Then
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 0
                     CargaGrid
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                 End If
             End If
     End Select
@@ -755,7 +754,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro a devolver.", vbExclamation
@@ -763,9 +762,9 @@ Dim Cad As String
     End If
     
     
-    Cad = adodc1.Recordset.Fields(0) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = adodc1.Recordset.Fields(0) & "|"
+    cad = cad & adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -889,19 +888,19 @@ End Sub
 'El SQL es propio de cada tabla
 Private Function SugerirCodigoSiguiente() As String
     Dim SQL As String
-    Dim Rs As ADODB.Recordset
+    Dim RS As ADODB.Recordset
     
     SQL = "Select Max(codconce) from conceptos where codconce<900"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, , , adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, , , adCmdText
     SQL = "1"
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            SQL = CStr(Rs.Fields(0) + 1)
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            SQL = CStr(RS.Fields(0) + 1)
         End If
     End If
-    Rs.Close
+    RS.Close
     SugerirCodigoSiguiente = SQL
 End Function
 
@@ -931,7 +930,7 @@ Dim tots As String
 
     Dim J As Integer
     Dim TotalAncho As Integer
-    Dim i As Integer
+    Dim I As Integer
     
     adodc1.ConnectionString = Conn
     If SQL <> "" Then
@@ -968,7 +967,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -984,20 +983,20 @@ Dim SQL As String
 Dim RC As String
 Dim cadMen As String
 
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
 
-    txtaux(Index).Text = Trim(txtaux(Index).Text)
-    If txtaux(Index).Text = "" Then Exit Sub
+    txtAux(Index).Text = Trim(txtAux(Index).Text)
+    If txtAux(Index).Text = "" Then Exit Sub
     If Modo = 1 Then Exit Sub 'Busquedas
         
-    If Len(txtaux(0).Text) = DigitosNivel(vEmpresa.numnivel - 1) Then
-        cadMen = PonerNombreDeCod(txtaux(0), "cuentas", "nommacta", "codmacta", "T")
+    If Len(txtAux(0).Text) = DigitosNivel(vEmpresa.numnivel - 1) Then
+        cadMen = PonerNombreDeCod(txtAux(0), "cuentas", "nommacta", "codmacta", "T")
         If cadMen = "" Then
             'NO EXISTE LA CUENTA
-            cadMen = "No existe la cuenta " & txtaux(0).Text
+            cadMen = "No existe la cuenta " & txtAux(0).Text
             cadMen = cadMen & " ¿Desea crearla?"
             If MsgBox(cadMen, vbQuestion + vbYesNoCancel + vbDefaultButton2) = vbYes Then
-                CadenaDesdeOtroForm = txtaux(0).Text
+                CadenaDesdeOtroForm = txtAux(0).Text
                 cmdAux(0).Tag = Index
                 Set frmC = New frmColCtas
                 frmC.DatosADevolverBusqueda = "0|1|"
@@ -1005,11 +1004,11 @@ Dim cadMen As String
                 frmC.Show vbModal
                 Set frmC = Nothing
             End If
-            PonFoco txtaux(0)
+            PonFoco txtAux(0)
         End If
     Else
         MsgBox "Cuenta de nivel incorrecto. Reintroduzca.", vbExclamation
-        PonFoco txtaux(0)
+        PonFoco txtAux(0)
     End If
 
 
@@ -1024,9 +1023,9 @@ If Not B Then Exit Function
 
 If Modo = 3 Then
     'Estamos insertando
-     Datos = DevuelveDesdeBD("codmacta", "ctaagrupadas", "codmacta", txtaux(0).Text, "T")
+     Datos = DevuelveDesdeBD("codmacta", "ctaagrupadas", "codmacta", txtAux(0).Text, "T")
      If Datos <> "" Then
-        MsgBox "Ya existe la cuenta : " & txtaux(0).Text, vbExclamation
+        MsgBox "Ya existe la cuenta : " & txtAux(0).Text, vbExclamation
         B = False
     End If
 End If
@@ -1079,30 +1078,27 @@ End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim RS As ADODB.Recordset
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
         Toolbar1.Buttons(2).Enabled = False
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        
-'        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 
@@ -1114,10 +1110,9 @@ Private Sub cmdAux_Click(Index As Integer)
         Case 0
             cmdAux(0).Tag = 0
             LlamaContraPar
-            PonFoco txtaux(0)
+            PonFoco txtAux(0)
 
     End Select
-'    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
 
 Private Sub LlamaContraPar()
@@ -1134,7 +1129,7 @@ Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
 Dim vFe As String
     
     'Cuenta normal
-    txtaux(0).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtaux2(0).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 

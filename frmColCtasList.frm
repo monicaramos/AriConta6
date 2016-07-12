@@ -788,9 +788,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
@@ -872,9 +872,9 @@ Private Sub Form_Load()
     Me.Caption = "Cuentas"
     optVarios(0).Value = True
 
-    For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -955,10 +955,10 @@ Private Sub txtCuentas_KeyDown(Index As Integer, KeyCode As Integer, Shift As In
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     End Select
     
 End Sub
@@ -968,7 +968,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -996,7 +996,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtCuentas(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -1028,7 +1027,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
                     
                 End If
                     
-                    'If txtCta(1).Text = "" Then 'ANTES solo lo hacia si el texto estaba vacio
                 If Hasta >= 0 Then
                     txtCuentas(Hasta).Text = txtCuentas(Index).Text
                     txtNCuentas(Hasta).Text = txtNCuentas(Index).Text
@@ -1055,9 +1053,9 @@ Dim SQL2 As String
     
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
     
-    i = 1
-    If optVarios(1).Value Then i = 2 'nombre
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    If optVarios(1).Value Then I = 2 'nombre
+    SQL = SQL & " ORDER BY " & I
         
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
@@ -1126,23 +1124,23 @@ Dim RC2 As String
     RC = ""
     RC2 = ""
     If Option1(0).Value Then
-        For i = 1 To Check1.Count - 2  'El 10 k es el ultimo nivel no lo quiero
-            If Check1(i).Visible Then
-                If Check1(i).Value = 1 Then
+        For I = 1 To Check1.Count - 2  'El 10 k es el ultimo nivel no lo quiero
+            If Check1(I).Visible Then
+                If Check1(I).Value = 1 Then
                     SQL = ""
                     SQL2 = ""
-                    J = DigitosNivel(i)
-                    For Cont = 1 To J
+                    J = DigitosNivel(I)
+                    For CONT = 1 To J
                         SQL = SQL & "?"
                         SQL2 = SQL2 & "_"
-                    Next Cont
+                    Next CONT
                     If RC <> "" Then RC = RC & " OR "
                     RC = RC & " ({cuentas.codmacta} like '" & SQL & "')"
                     If RC2 <> "" Then RC2 = RC2 & " OR "
                     RC2 = RC2 & " (cuentas.codmacta like '" & SQL2 & "')"
                 End If
             End If
-        Next i
+        Next I
         If Check1(10).Value Then
             If RC <> "" Then RC = RC & " OR "
             RC = RC & " {cuentas.apudirec}=""S"""
@@ -1180,26 +1178,26 @@ Dim RC2 As String
 End Function
 
 Private Sub PonerNiveles()
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
 
     Frame2.Visible = True
     Combo2.Clear
     Check1(10).Visible = True
-    For i = 1 To vEmpresa.numnivel - 1
-        J = DigitosNivel(i)
-        Cad = "Digitos: " & J
-        Check1(i).Visible = True
-        Me.Check1(i).Caption = Cad
+    For I = 1 To vEmpresa.numnivel - 1
+        J = DigitosNivel(I)
+        cad = "Digitos: " & J
+        Check1(I).Visible = True
+        Me.Check1(I).Caption = cad
         
         
-        Combo2.AddItem "Nivel :   " & i
+        Combo2.AddItem "Nivel :   " & I
         Combo2.ItemData(Combo2.NewIndex) = J
-    Next i
-    For i = vEmpresa.numnivel To 9
-        Check1(i).Visible = False
-    Next i
+    Next I
+    For I = vEmpresa.numnivel To 9
+        Check1(I).Visible = False
+    Next I
     
 End Sub
 

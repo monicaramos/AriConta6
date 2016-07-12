@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInfDiarioOficial 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   5745
@@ -878,12 +878,12 @@ Attribute frmCon.VB_VarHelpID = -1
 Private frmCtas As frmCtasAgrupadas
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
 Dim FechaIncioEjercicio As Date
 Dim FechaFinEjercicio As Date
@@ -892,7 +892,7 @@ Dim PulsadoCancelar As Boolean
 
 Dim HanPulsadoSalir As Boolean
 Dim Importe As Currency
-Dim Cont As Long
+Dim CONT As Long
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -915,16 +915,16 @@ End Sub
 
 Private Sub Check1_Click(Index As Integer)
 Dim Valor As Byte
-Dim i As Integer
+Dim I As Integer
     
     Valor = Check1(Index).Value
     
     If Valor = 1 Then
-        For i = 1 To Check1.Count
-            If Check1(i).Visible Then
-                If i <> Index Then Check1(i).Value = 0
+        For I = 1 To Check1.Count
+            If Check1(I).Visible Then
+                If I <> Index Then Check1(I).Value = 0
             End If
-        Next i
+        Next I
 '        Check1(Index).Value = Valor
     End If
 
@@ -1061,9 +1061,9 @@ Private Sub Form_Load()
         txtAno(0).Text = Year(RecuperaValor(Legalizacion, 2)) - 1
         txtAno(1).Text = Year(RecuperaValor(Legalizacion, 3)) - 1
             
-        For i = 1 To 10
-            If RecuperaValor(Legalizacion, 4) = Check1(i).Tag Then Check1(i).Value = 1
-        Next i
+        For I = 1 To 10
+            If RecuperaValor(Legalizacion, 4) = Check1(I).Tag Then Check1(I).Value = 1
+        Next I
     
     Else
         'Fecha informe
@@ -1193,27 +1193,13 @@ Private Sub txtAno_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     KEYdown KeyCode
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
-
-
-''++
-'Private Sub txtcta_KeyPress(Index As Integer, KeyAscii As Integer)
-'    If KeyAscii = teclaBuscar Then
-'        LanzaFormAyuda "imgCuentas", Index
-'    Else
-'        KEYpress KeyAscii
-'    End If
-'End Sub
-
-
-
-
 
 Private Sub AccionesCSV()
     
@@ -1346,23 +1332,23 @@ Private Function DatosOK() As Boolean
     'Si el mes es mayor o igual k el de inicio, significa k la feha
     'de inicio de aquel ejercicio fue la misma k ahora pero de aquel año
     'si no significa k fue la misma de ahora pero del año anterior
-    i = cmbFecha(0).ListIndex + 1
-    If i >= Month(vParam.fechaini) Then
-        Cont = Val(txtAno(0).Text)
+    I = cmbFecha(0).ListIndex + 1
+    If I >= Month(vParam.fechaini) Then
+        CONT = Val(txtAno(0).Text)
     Else
-        Cont = Val(txtAno(0).Text) - 1
+        CONT = Val(txtAno(0).Text) - 1
     End If
-    Cad = Day(vParam.fechaini) & "/" & Month(vParam.fechaini) & "/" & Cont
-    FechaIncioEjercicio = CDate(Cad)
+    cad = Day(vParam.fechaini) & "/" & Month(vParam.fechaini) & "/" & CONT
+    FechaIncioEjercicio = CDate(cad)
     
-    i = cmbFecha(1).ListIndex + 1
-    If i <= Month(vParam.fechafin) Then
-        Cont = Val(txtAno(1).Text)
+    I = cmbFecha(1).ListIndex + 1
+    If I <= Month(vParam.fechafin) Then
+        CONT = Val(txtAno(1).Text)
     Else
-        Cont = Val(txtAno(1).Text) + 1
+        CONT = Val(txtAno(1).Text) + 1
     End If
-    Cad = Day(vParam.fechafin) & "/" & Month(vParam.fechafin) & "/" & Cont
-    FechaFinEjercicio = CDate(Cad)
+    cad = Day(vParam.fechafin) & "/" & Month(vParam.fechafin) & "/" & CONT
+    FechaFinEjercicio = CDate(cad)
 
     
     
@@ -1389,13 +1375,13 @@ Private Function DatosOK() As Boolean
     End If
     
     'Solo un nivel seleccionado
-    Cont = 0
-    For i = 1 To 10
-        If Check1(i).Visible = True Then
-            If Check1(i).Value Then Cont = Cont + 1
+    CONT = 0
+    For I = 1 To 10
+        If Check1(I).Visible = True Then
+            If Check1(I).Value Then CONT = CONT + 1
         End If
-    Next i
-    If Cont <> 1 Then
+    Next I
+    If CONT <> 1 Then
         MsgBox "Seleccione uno, y solo uno, de los niveles para mostrar el informe", vbExclamation
         Exit Function
     End If
@@ -1413,11 +1399,11 @@ Dim J As Integer
 
 QueCombosFechaCargar "0|1|"
 
-For i = 1 To vEmpresa.numnivel - 1
-    J = DigitosNivel(i)
-    Check1(i).Visible = True
-    Check1(i).Caption = "Digitos: " & J
-Next i
+For I = 1 To vEmpresa.numnivel - 1
+    J = DigitosNivel(I)
+    Check1(I).Visible = True
+    Check1(I).Caption = "Digitos: " & J
+Next I
 
 
 
@@ -1431,20 +1417,20 @@ Dim L As Integer
 
 L = 1
 Do
-    Cad = RecuperaValor(Lista, L)
-    If Cad <> "" Then
-        i = Val(Cad)
-        With cmbFecha(i)
+    cad = RecuperaValor(Lista, L)
+    If cad <> "" Then
+        I = Val(cad)
+        With cmbFecha(I)
             .Clear
-            For Cont = 1 To 12
-                RC = "25/" & Cont & "/2002"
+            For CONT = 1 To 12
+                RC = "25/" & CONT & "/2002"
                 RC = Format(RC, "mmmm") 'Devuelve el mes
                 .AddItem RC
-            Next Cont
+            Next CONT
         End With
     End If
     L = L + 1
-Loop Until Cad = ""
+Loop Until cad = ""
 End Sub
 
 
@@ -1483,13 +1469,13 @@ Dim C As String
             C = "Select count(*) from " & Contabilidad
             C = C & " hlinapu where (codconce=960 or codconce = 980) and fechaent>='" & Format(vParam.fechaini, FormatoFecha)
             C = C & "' AND fechaent <='" & Format(vParam.fechafin, FormatoFecha) & "'"
-            Rs.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not Rs.EOF Then
-                If Not IsNull(Rs.Fields(0)) Then
-                    If Rs.Fields(0) > 0 Then HayAsientoCierre = True
+            RS.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not RS.EOF Then
+                If Not IsNull(RS.Fields(0)) Then
+                    If RS.Fields(0) > 0 Then HayAsientoCierre = True
                 End If
             End If
-            Rs.Close
+            RS.Close
         End If
     End If
 End Function
@@ -1498,43 +1484,43 @@ End Function
 
 
 Private Function TieneCuentasEnTmpBalance(DigitosNivel As String) As Boolean
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim C As String
 
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     TieneCuentasEnTmpBalance = False
     C = Mid("__________", 1, CInt(DigitosNivel))
     C = "Select count(*) from tmpbalancesumas  where cta like '" & C & "'"
     C = C & " AND codusu = " & vUsu.Codigo
-    Rs.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            If Rs.Fields(0) > 0 Then TieneCuentasEnTmpBalance = True
+    RS.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            If RS.Fields(0) > 0 Then TieneCuentasEnTmpBalance = True
         End If
     End If
-    Rs.Close
+    RS.Close
 End Function
 
 Private Sub PonerNiveles()
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
 
     Frame2.Visible = True
-    For i = 1 To vEmpresa.numnivel - 1
-        J = DigitosNivel(i)
-        Cad = "Digitos: " & J
-        Check1(i).Visible = True
-        Check1(i).Tag = J
-        Me.Check1(i).Caption = Cad
-        Me.Check1(i).Value = 0
-    Next i
+    For I = 1 To vEmpresa.numnivel - 1
+        J = DigitosNivel(I)
+        cad = "Digitos: " & J
+        Check1(I).Visible = True
+        Check1(I).Tag = J
+        Me.Check1(I).Caption = cad
+        Me.Check1(I).Value = 0
+    Next I
     Check1(10).Tag = vEmpresa.DigitosUltimoNivel
     Check1(10).Visible = True
     Me.Check1(10).Value = 0
-    For i = vEmpresa.numnivel To 9
-        Check1(i).Visible = False
-    Next i
+    For I = vEmpresa.numnivel To 9
+        Check1(I).Visible = False
+    Next I
     
     
 End Sub
@@ -1588,25 +1574,25 @@ Dim I2 As Currency
     
         
     'Comprobamos k nivel
-    For i = 1 To Me.Check1.Count
-        If Check1(i).Visible Then
-            If Check1(i).Value Then
-                Cont = i
+    For I = 1 To Me.Check1.Count
+        If Check1(I).Visible Then
+            If Check1(I).Value Then
+                CONT = I
                 Exit For
             End If
         End If
-    Next i
+    Next I
     
     
-    i = Cont
-    FijaValoresLibroResumen FechaIncioEjercicio, FechaFinEjercicio, i, False, txtNumRes(0).Text
+    I = CONT
+    FijaValoresLibroResumen FechaIncioEjercicio, FechaFinEjercicio, I, False, txtNumRes(0).Text
     
     Importe = 0
     I2 = 0
     If txtAno(0).Text = txtAno(1).Text Then
-        i = CInt(Val(txtAno(0).Text))
-        For Cont = cmbFecha(0).ListIndex + 1 To cmbFecha(1).ListIndex + 1
-           Label2(25).Caption = "Fecha: " & Cont & " / " & i
+        I = CInt(Val(txtAno(0).Text))
+        For CONT = cmbFecha(0).ListIndex + 1 To cmbFecha(1).ListIndex + 1
+           Label2(25).Caption = "Fecha: " & CONT & " / " & I
            Label2(25).Refresh
            
            DoEvents
@@ -1614,56 +1600,56 @@ Dim I2 As Currency
            
            
            'Si ha puesto ACUMULADOS ANTERIORES
-           If Cont = cmbFecha(0).ListIndex + 1 Then
+           If CONT = cmbFecha(0).ListIndex + 1 Then
                 If txtNumRes(3).Text <> "" Then Importe = CCur(TransformaPuntosComas(txtNumRes(3).Text))
                 If txtNumRes(4).Text <> "" Then I2 = CCur(TransformaPuntosComas(txtNumRes(4).Text))
            End If
-           ProcesaLibroResumen Cont, i, Importe, I2
+           ProcesaLibroResumen CONT, I, Importe, I2
            Importe = 0
            I2 = 0
-        Next Cont
+        Next CONT
     Else
         'Años partidos
         'El primer tramo de hasta fin de años
-        i = CInt(Val(txtAno(0).Text))
-        For Cont = cmbFecha(0).ListIndex + 1 To 12
-           Label2(25).Caption = "Fecha: " & Cont & " / " & i
+        I = CInt(Val(txtAno(0).Text))
+        For CONT = cmbFecha(0).ListIndex + 1 To 12
+           Label2(25).Caption = "Fecha: " & CONT & " / " & I
            Label2(25).Refresh
            
            DoEvents
            If PulsadoCancelar Then Exit Function
            
-           If Cont = cmbFecha(0).ListIndex + 1 Then
+           If CONT = cmbFecha(0).ListIndex + 1 Then
                 If txtNumRes(3).Text <> "" Then Importe = CCur(txtNumRes(3).Text)
                 If txtNumRes(4).Text <> "" Then I2 = CCur(txtNumRes(4).Text)
            End If
-           ProcesaLibroResumen Cont, i, Importe, I2
+           ProcesaLibroResumen CONT, I, Importe, I2
            Importe = 0: I2 = 0
-        Next Cont
+        Next CONT
         'Años siguiente
-        i = CInt(Val(txtAno(1).Text))
-        For Cont = 1 To cmbFecha(1).ListIndex + 1
-           Label2(25).Caption = "Fecha: " & Cont & " / " & i
+        I = CInt(Val(txtAno(1).Text))
+        For CONT = 1 To cmbFecha(1).ListIndex + 1
+           Label2(25).Caption = "Fecha: " & CONT & " / " & I
            Label2(25).Refresh
            
            DoEvents
            If PulsadoCancelar Then Exit Function
            
-           ProcesaLibroResumen Cont, i, Importe, I2
-        Next Cont
+           ProcesaLibroResumen CONT, I, Importe, I2
+        Next CONT
     End If
     
     'Vemos si ha generado datos
     Set miRsAux = New ADODB.Recordset
     SQL = "Select count(*) from tmpdirioresum where codusu =" & vUsu.Codigo
-    Cont = 0
+    CONT = 0
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not miRsAux.EOF Then
-        If Not IsNull(miRsAux.Fields(0)) Then Cont = miRsAux.Fields(0)
+        If Not IsNull(miRsAux.Fields(0)) Then CONT = miRsAux.Fields(0)
     End If
     miRsAux.Close
     Set miRsAux = Nothing
-    If Cont = 0 Then
+    If CONT = 0 Then
         MsgBox "Ningun dato generado para estos valores.", vbExclamation
         Exit Function
     End If

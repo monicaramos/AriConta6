@@ -619,17 +619,17 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).BackColor = vbWhite
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
     Next I
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Visible = Not B
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Visible = Not B
     Next I
     cmdAux(0).Visible = Not B
     cmdAux(1).Visible = Not B
     
-    txtaux2(5).Visible = Not B
+    txtAux2(5).Visible = Not B
     
     cmdAceptar.Visible = Not B
     cmdCancelar.Visible = Not B
@@ -670,9 +670,6 @@ Private Sub BotonAnyadir()
     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
         NumF = NuevoCodigo
     End If
-    '********************************************************************
-    'Situamos el grid al final
-'    AnyadirLinea DataGrid1, Adodc1
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
@@ -680,16 +677,16 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    txtaux(0).Text = NumF
-    FormateaCampo txtaux(0)
-    For I = 1 To txtaux.Count - 1
-        txtaux(I).Text = ""
+    txtAux(0).Text = NumF
+    FormateaCampo txtAux(0)
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
     Next I
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -703,12 +700,12 @@ Private Sub BotonBuscar()
     CargaGrid "hlinapu.numdiari is null "
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Text = ""
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
     Next I
-    txtaux2(5).Text = ""
+    txtAux2(5).Text = ""
     LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
-    PonFoco txtaux(1)
+    PonFoco txtAux(1)
 End Sub
 
 Private Sub BotonModificar()
@@ -730,21 +727,14 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = DataGrid1.Columns(2).Text
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
     
-    ' ***** canviar-ho pel nom del camp del combo *********
-'    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
-    ' *****************************************************
-
-    'PosicionarCombo Me.Combo1(0), i
-    'PosicionarCombo Me.Combo1(1), i
-
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonFoco txtaux(1)
+    PonFoco txtAux(1)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -754,9 +744,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     
     'Fijamos el ancho
     For I = 0 To 7
-        txtaux(I).Top = alto
+        txtAux(I).Top = alto
     Next I
-    txtaux2(5).Top = alto
+    txtAux2(5).Top = alto
     cmdAux(0).Top = alto
     cmdAux(1).Top = alto
     
@@ -781,7 +771,6 @@ Private Sub cmdAceptar_Click()
             If CadB <> "" Then
                 CargaGrid CadB
                 PonerModo 2
-'                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
             End If
             
@@ -794,10 +783,10 @@ Private Sub cmdAux_Click(Index As Integer)
             'FECHA
             Set frmF = New frmCal
             frmF.Fecha = Now
-            If txtaux(1).Text <> "" Then frmF.Fecha = CDate(txtaux(1).Text)
+            If txtAux(1).Text <> "" Then frmF.Fecha = CDate(txtAux(1).Text)
             frmF.Show vbModal
             Set frmF = Nothing
-            PonFoco txtaux(1)
+            PonFoco txtAux(1)
         Case 1 'cuentas
             Set frmCta = New frmColCtas
             frmCta.DatosADevolverBusqueda = "0|1"
@@ -865,7 +854,7 @@ Dim cad As String
     Me.Refresh
     Screen.MousePointer = vbHourglass
     
-    CampoOrden = RecuperaValor(txtaux(ColIndex).Tag, 7)
+    CampoOrden = RecuperaValor(txtAux(ColIndex).Tag, 7)
     
     Select Case TipoOrden
         Case "ASC"
@@ -930,7 +919,6 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-'    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
 If Modo = 4 Then TerminaBloquear
     Screen.MousePointer = vbDefault
     Set vTag1 = Nothing
@@ -938,12 +926,12 @@ If Modo = 4 Then TerminaBloquear
 End Sub
 
 Private Sub frmCta_DatoSeleccionado(CadenaSeleccion As String)
-    txtaux(5).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtaux2(5).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtAux(5).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtAux2(5).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-    txtaux(1).Text = Format(vFecha, "dd/mm/yyyy")
+    txtAux(1).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -1004,7 +992,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1012,49 +1000,49 @@ Private Sub txtAux_LostFocus(Index As Integer)
 Dim SQL As String
 Dim RC As String
 
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 0  ' numasien
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
             
         Case 1 ' fecfactu
-            PonerFormatoFecha txtaux(Index)
+            PonerFormatoFecha txtAux(Index)
             
         Case 2 ' diario
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         Case 5
     
-            If Not IsNumeric(txtaux(Index).Text) Then
-                If InStr(1, txtaux(Index).Text, "+") = 0 Then MsgBox "La cuenta debe ser numérica: " & txtaux(Index).Text, vbExclamation
-                txtaux(Index).Text = ""
-                txtaux2(Index).Text = ""
+            If Not IsNumeric(txtAux(Index).Text) Then
+                If InStr(1, txtAux(Index).Text, "+") = 0 Then MsgBox "La cuenta debe ser numérica: " & txtAux(Index).Text, vbExclamation
+                txtAux(Index).Text = ""
+                txtAux2(Index).Text = ""
                 Exit Sub
             End If
 
-            RC = txtaux(Index).Text
+            RC = txtAux(Index).Text
             If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
-                txtaux(Index) = RC
-                txtaux2(Index).Text = SQL
+                txtAux(Index) = RC
+                txtAux2(Index).Text = SQL
             Else
                 MsgBox SQL, vbExclamation
-                txtaux(Index).Text = ""
-                txtaux2(Index).Text = ""
-                PonFoco txtaux(Index)
+                txtAux(Index).Text = ""
+                txtAux2(Index).Text = ""
+                PonFoco txtAux(Index)
             End If
         
         Case 3, 4
             'LOS IMPORTES
-            If Not EsNumerico(txtaux(Index).Text) Then
+            If Not EsNumerico(txtAux(Index).Text) Then
                 MsgBox "Importes deben ser numéricos.", vbExclamation
                 On Error Resume Next
-                txtaux(Index).Text = ""
-                PonFoco txtaux(Index)
+                txtAux(Index).Text = ""
+                PonFoco txtAux(Index)
                 Exit Sub
             End If
             
             'Es numerico
-            SQL = TransformaPuntosComas(txtaux(Index).Text)
+            SQL = TransformaPuntosComas(txtAux(Index).Text)
         
     End Select
     
@@ -1092,15 +1080,6 @@ Dim cadReg As String
     End If
 End Sub
 
-
-'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGrid1_GotFocus()
-'  WheelHook DataGrid1
-'End Sub
-'
-'Private Sub DataGrid1_LostFocus()
-'  WheelUnHook
-'End Sub
 
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii

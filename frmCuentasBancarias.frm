@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmCuentasBancarias 
@@ -577,7 +577,6 @@ Dim B As Boolean
     
     cmdAceptar.Visible = Not B
     cmdCancelar.Visible = Not B
-    'DataGrid1.Enabled = b
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
@@ -596,7 +595,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.Adodc1)
+        cadReg = PonerContRegistros(Me.adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -612,9 +611,9 @@ Private Sub BotonAnyadir()
     
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If Not Adodc1.Recordset.EOF Then
+    If Not adodc1.Recordset.EOF Then
         DataGrid1.HoldFields
-        Adodc1.Recordset.MoveLast
+        adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
     
@@ -656,18 +655,16 @@ Private Sub BotonModificar()
     '---------
     'MODIFICAR
     '----------
-    Dim Cad As String
+    Dim cad As String
     Dim anc As Single
-    Dim i As Integer
-    If Adodc1.Recordset.EOF Then Exit Sub
-    'If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
-
+    Dim I As Integer
+    If adodc1.Recordset.EOF Then Exit Sub
 
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -704,23 +701,23 @@ Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
  
     If Not SepuedeBorrar Then Exit Sub
     
     
     '### a mano
     SQL = "Seguro que desea eliminar la linea :"
-    SQL = SQL & vbCrLf & "Cuenta: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Cta bancaria: " & Adodc1.Recordset.Fields(2) & " - " & Adodc1.Recordset.Fields(3) & " - ** - " & Adodc1.Recordset.Fields(5)
+    SQL = SQL & vbCrLf & "Cuenta: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Cta bancaria: " & adodc1.Recordset.Fields(2) & " - " & adodc1.Recordset.Fields(3) & " - ** - " & adodc1.Recordset.Fields(5)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from bancos where codmacta = '" & Adodc1.Recordset!codmacta & "'"
+        SQL = "Delete from bancos where codmacta = '" & adodc1.Recordset!codmacta & "'"
         Conn.Execute SQL
         espera 0.5
         CargaGrid ""
-        Adodc1.Recordset.Cancel
+        adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -758,7 +755,7 @@ End Function
 
 Private Function ComprobandoEliminar(tabla As String, desca As String) As Boolean
 
-    SQL = DevuelveDesdeBD(desca, tabla, desca, Adodc1.Recordset.Fields(0), "T")
+    SQL = DevuelveDesdeBD(desca, tabla, desca, adodc1.Recordset.Fields(0), "T")
     If SQL = "" Then
         ComprobandoEliminar = True
     Else
@@ -769,7 +766,7 @@ End Function
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim CadB As String
 Select Case Modo
     Case 1
@@ -785,7 +782,6 @@ Select Case Modo
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
                 Conn.Execute "commit"
-                'MsgBox "Registro insertado.", vbInformation
                 CargaGrid
                 BotonAnyadir
             End If
@@ -797,10 +793,10 @@ Select Case Modo
                 'Hacemos insertar
                 If ModificaDesdeFormulario(Me) Then
                     Conn.Execute "commit"
-                    i = Adodc1.Recordset.AbsolutePosition
+                    I = adodc1.Recordset.AbsolutePosition
                     PonerModo 0
                     CargaGrid
-                    Adodc1.Recordset.Move i - 1
+                    adodc1.Recordset.Move I - 1
                     lblIndicador.Caption = ""
                 End If
             End If
@@ -816,7 +812,7 @@ Select Case Modo
     Case 3
         DataGrid1.AllowAddNew = False
         'CargaGrid
-        If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
 End Select
 PonerModo 0
 lblIndicador.Caption = ""
@@ -832,16 +828,16 @@ Private Sub cmdCta_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
-If Adodc1.Recordset.EOF Then
+If adodc1.Recordset.EOF Then
     MsgBox "Ningún registro a devolver.", vbExclamation
     Exit Sub
 End If
 
-Cad = Adodc1.Recordset.Fields(0) & "|"
-Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
-RaiseEvent DatoSeleccionado(Cad)
+cad = adodc1.Recordset.Fields(0) & "|"
+cad = cad & adodc1.Recordset.Fields(1) & "|"
+RaiseEvent DatoSeleccionado(cad)
 Unload Me
 End Sub
 
@@ -980,58 +976,58 @@ End Sub
 Private Sub CargaGrid(Optional vSQL As String)
     Dim J As Integer
     Dim TotalAncho As Integer
-    Dim i As Integer
+    Dim I As Integer
     
-    Adodc1.ConnectionString = Conn
+    adodc1.ConnectionString = Conn
     PonerSQL
     If vSQL <> "" Then SQL = SQL & " AND " & vSQL
     SQL = SQL & " ORDER BY bancos.codmacta"
-    Adodc1.RecordSource = SQL
-    Adodc1.CursorType = adOpenDynamic
-    Adodc1.LockType = adLockOptimistic
-    Adodc1.Refresh
+    adodc1.RecordSource = SQL
+    adodc1.CursorType = adOpenDynamic
+    adodc1.LockType = adLockOptimistic
+    adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 290
     
     
     'Cuenta contable
-    i = 0
-        DataGrid1.Columns(i).Caption = "Cuenta"
-        DataGrid1.Columns(i).Width = 1100
+    I = 0
+        DataGrid1.Columns(I).Caption = "Cuenta"
+        DataGrid1.Columns(I).Width = 1100
     
     'Descripcion NOMMACTA
-    i = 1
-        DataGrid1.Columns(i).Caption = "Descripción"
-        DataGrid1.Columns(i).Width = 3200
-        TotalAncho = TotalAncho + DataGrid1.Columns(i).Width
+    I = 1
+        DataGrid1.Columns(I).Caption = "Descripción"
+        DataGrid1.Columns(I).Width = 3200
+        TotalAncho = TotalAncho + DataGrid1.Columns(I).Width
     
     'Entidad
-    i = 2
-        DataGrid1.Columns(i).Caption = "Entidad"
-        DataGrid1.Columns(i).Width = 800
-        DataGrid1.Columns(i).NumberFormat = "0000"
+    I = 2
+        DataGrid1.Columns(I).Caption = "Entidad"
+        DataGrid1.Columns(I).Width = 800
+        DataGrid1.Columns(I).NumberFormat = "0000"
         
-    i = 3
-        DataGrid1.Columns(i).Caption = "Oficina"
-        DataGrid1.Columns(i).Width = 900
-        DataGrid1.Columns(i).NumberFormat = "0000"
+    I = 3
+        DataGrid1.Columns(I).Caption = "Oficina"
+        DataGrid1.Columns(I).Width = 900
+        DataGrid1.Columns(I).NumberFormat = "0000"
         
     'Codigo control
-    i = 4
-        DataGrid1.Columns(i).Caption = "Ctr"
-        DataGrid1.Columns(i).Width = 400
+    I = 4
+        DataGrid1.Columns(I).Caption = "Ctr"
+        DataGrid1.Columns(I).Width = 400
         
     'Cueta bancaria
-    i = 5
-        DataGrid1.Columns(i).Caption = "Cuenta bancaria"
-        DataGrid1.Columns(i).Width = 1500
-        DataGrid1.Columns(i).NumberFormat = "0000000000"
+    I = 5
+        DataGrid1.Columns(I).Caption = "Cuenta bancaria"
+        DataGrid1.Columns(I).Width = 1500
+        DataGrid1.Columns(I).NumberFormat = "0000000000"
     
         
-    For i = 0 To 3
-        DataGrid1.Columns(i).AllowSizing = False
-    Next i
+    For I = 0 To 3
+        DataGrid1.Columns(I).AllowSizing = False
+    Next I
         
         'Fiajamos el cadancho
     If Not CadAncho Then
@@ -1052,8 +1048,8 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
     'Habilitamos modificar y eliminar
     If vUsu.Nivel < 2 Then
-        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
-        Toolbar1.Buttons(8).Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(8).Enabled = Not adodc1.Recordset.EOF
     End If
 End Sub
 
@@ -1151,8 +1147,8 @@ Private Sub PonerSQL()
 End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim RS As ADODB.Recordset
+Dim cad As String
     
     
 End Sub

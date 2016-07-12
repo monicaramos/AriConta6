@@ -491,15 +491,15 @@ End Function
 
 
 
-Private Function CargaAcumuladosTotales(ByRef Cta As String, Optional DesdeCCoste As Boolean) As Boolean
+Private Function CargaAcumuladosTotales(ByRef cta As String, Optional DesdeCCoste As Boolean) As Boolean
     CargaAcumuladosTotales = False
     If DesdeCCoste Then
         SQL = "SELECT Sum(perD) AS SumaDetimporteD, Sum(perH) AS SumaDetimporteH"
-        SQL = SQL & " from tmplinccexplo where codccost='" & Cta & "'"
+        SQL = SQL & " from tmplinccexplo where codccost='" & cta & "'"
         SQL = SQL & " and codusu = " & DBSet(vUsu.Codigo, "N")
     Else
         SQL = "SELECT Sum(timporteD) AS SumaDetimporteD, Sum(timporteH) AS SumaDetimporteH"
-        SQL = SQL & " from hlinapu where codmacta='" & Cta & "'"
+        SQL = SQL & " from hlinapu where codmacta='" & cta & "'"
     End If
     SQL = SQL & " AND fechaent >=  '" & Format(vParam.fechaini, FormatoFecha) & "'"
     Set RT = New ADODB.Recordset
@@ -520,23 +520,23 @@ Private Function CargaAcumuladosTotales(ByRef Cta As String, Optional DesdeCCost
     SQL = SQL & ", acumtotH= " & TransformaComasPuntos(CStr(ImpH)) 'Format(ImpH, "#,###,##0.00")
     ImpD = ImpD - ImpH
     SQL = SQL & ", acumtotT= " & TransformaComasPuntos(CStr(ImpD)) 'Format(ImpD, "#,###,##0.00")
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & Cta & "'"
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & cta & "'"
     Conn.Execute SQL
     CargaAcumuladosTotales = True
 End Function
 
 
-Private Function CargaAcumuladosAnteriores(ByRef Cta As String, ByRef FI As Date, ByRef ACUM As Double, Optional DesdeCCoste As Boolean) As Boolean
+Private Function CargaAcumuladosAnteriores(ByRef cta As String, ByRef FI As Date, ByRef ACUM As Double, Optional DesdeCCoste As Boolean) As Boolean
 Dim F1 As Date
 
     CargaAcumuladosAnteriores = False
     If DesdeCCoste Then
         SQL = "SELECT Sum(perD) AS SumaDetimporteD, Sum(perH) AS SumaDetimporteH"
-        SQL = SQL & " from tmplinccexplo where codccost='" & Cta & "'"
+        SQL = SQL & " from tmplinccexplo where codccost='" & cta & "'"
         SQL = SQL & " and codusu = " & DBSet(vUsu.Codigo, "N")
     Else
         SQL = "SELECT Sum(timporteD) AS SumaDetimporteD, Sum(timporteH) AS SumaDetimporteH"
-        SQL = SQL & " from hlinapu where codmacta='" & Cta & "'"
+        SQL = SQL & " from hlinapu where codmacta='" & cta & "'"
     End If
     F1 = vParam.fechaini
 
@@ -563,7 +563,7 @@ Dim F1 As Date
     SQL = "UPDATE tmpconextcab SET acumantD= " & TransformaComasPuntos(CStr(ImpD))
     SQL = SQL & ", acumantH= " & TransformaComasPuntos(CStr(ImpH))
     SQL = SQL & ", acumantT= " & TransformaComasPuntos(CStr(ACUM))
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & Cta & "'"
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & cta & "'"
     Conn.Execute SQL
     Set RT = Nothing
     CargaAcumuladosAnteriores = True
@@ -571,7 +571,7 @@ End Function
 
 
 
-Private Function CargaTablaTemporalConExt(Cta As String, vSele As String, ByRef ACUM As Double) As Boolean
+Private Function CargaTablaTemporalConExt(cta As String, vSele As String, ByRef ACUM As Double) As Boolean
 Dim Aux As Currency
 Dim ImporteD As String
 Dim ImporteH As String
@@ -593,7 +593,7 @@ CargaTablaTemporalConExt = False
 
 'Conn.Execute "Delete from tmpconext where codusu =" & vUsu.Codigo
 Set RT = New ADODB.Recordset
-SQL = "Select * from hlinapu where codmacta='" & Cta & "'"
+SQL = "Select * from hlinapu where codmacta='" & cta & "'"
 SQL = SQL & " AND " & vSele & " ORDER BY fechaent,numasien"
 RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
@@ -630,7 +630,7 @@ While Not RT.EOF
         ImporteD = ""
     End If
     RC = RC & "," & TransformaComasPuntos(CStr(ACUM)) & ",'" & ImporteD & "',"
-    RC = RC & DBSet(RT!Numdocum, "T") & "," & DBSet(RT!Ampconce, "T") & ",'" & Cta & "',"
+    RC = RC & DBSet(RT!Numdocum, "T") & "," & DBSet(RT!Ampconce, "T") & ",'" & cta & "',"
 '    If IsNull(RT!ctacontr) Then
 '        RC = RC & "NULL"
 '    Else
@@ -672,7 +672,7 @@ End If
     SQL = SQL & ", acumperH= " & TransformaComasPuntos(CStr(ImpH))
     ImpD = ImpD - ImpH
     SQL = SQL & ", acumperT= " & TransformaComasPuntos(CStr(ImpD))
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & Cta & "'"
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & cta & "'"
     Conn.Execute SQL
 
     CargaTablaTemporalConExt = True
@@ -688,7 +688,7 @@ Etmpconext:
 End Function
 
 
-Private Function CargaTablaTemporalConExtCC(Cta As String, vSele As String, ByRef ACUM As Double) As Boolean
+Private Function CargaTablaTemporalConExtCC(cta As String, vSele As String, ByRef ACUM As Double) As Boolean
 Dim Aux As Currency
 Dim ImporteD As String
 Dim ImporteH As String
@@ -709,7 +709,7 @@ On Error GoTo Etmpconext
     
     'Conn.Execute "Delete from tmpconext where codusu =" & vUsu.Codigo
     Set RT = New ADODB.Recordset
-    SQL = "Select * from tmplinccexplo where codccost='" & Cta & "'"
+    SQL = "Select * from tmplinccexplo where codccost='" & cta & "'"
     SQL = SQL & " and codusu = " & vUsu.Codigo
     SQL = SQL & " AND " & vSele & " ORDER BY fechaent,numasien"
     RT.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -747,7 +747,7 @@ On Error GoTo Etmpconext
             ImporteD = ""
         End If
         RC = RC & "," & TransformaComasPuntos(CStr(ACUM)) & ",'" & ImporteD & "',"
-        RC = RC & DBSet(RT!DOCUM, "T") & "," & DBSet(RT!Ampconce, "T") & ",'" & Cta & "',"
+        RC = RC & DBSet(RT!DOCUM, "T") & "," & DBSet(RT!Ampconce, "T") & ",'" & cta & "',"
     '    If IsNull(RT!ctacontr) Then
     '        RC = RC & "NULL"
     '    Else
@@ -789,7 +789,7 @@ On Error GoTo Etmpconext
     SQL = SQL & ", acumperH= " & TransformaComasPuntos(CStr(ImpH))
     ImpD = ImpD - ImpH
     SQL = SQL & ", acumperT= " & TransformaComasPuntos(CStr(ImpD))
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & Cta & "'"
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & cta & "'"
     Conn.Execute SQL
     
     CargaTablaTemporalConExtCC = True
@@ -840,7 +840,7 @@ Dim Nregs As Long
     While Not RS.EOF
 '        IncrementarProgres pb2, 1
         
-        SQL2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(RS!Cta, "T")
+        SQL2 = "select ccoste.codccost, subccost, porccost from ccoste inner join ccoste_lineas on ccoste.codccost = ccoste_lineas.codccost where ccoste.codccost =  " & DBSet(RS!cta, "T")
 
         ImporteTot = 0
         UltSubCC = ""
@@ -900,7 +900,7 @@ Dim Nregs As Long
         End If
 
         SQL = "delete from tmpconext where codusu = " & vUsu.Codigo
-        SQL = SQL & " and cta = " & DBSet(RS!Cta, "T")
+        SQL = SQL & " and cta = " & DBSet(RS!cta, "T")
         SQL = SQL & " and fechaent = " & DBSet(RS!FechaEnt, "F")
         SQL = SQL & " and numdiari = " & DBSet(RS!NumDiari, "N")
         SQL = SQL & " and numasien = " & DBSet(RS!NumAsien, "N")
@@ -933,7 +933,7 @@ End Function
 '--------------------------------------------------------
 '  BALANCE DE SUMAS Y SALDOS
 '--------------------------------------------------------
-Public Sub CargaBalanceNuevo(ByRef Cta As String, NomCuenta As String, ConApertura As Boolean, ByRef FechaInicioPeriodo As Date, ByRef FechaFinPeriodo As Date, F_Ini As Date, F_Fin As Date, EjerciCerrados As Boolean, QuitarCierre As Byte, vContabili As Integer, DesdeBalancesConfigurados As Boolean, Resetea6y7 As Boolean, RecordSetPrecargado As Boolean)
+Public Sub CargaBalanceNuevo(ByRef cta As String, NomCuenta As String, ConApertura As Boolean, ByRef FechaInicioPeriodo As Date, ByRef FechaFinPeriodo As Date, F_Ini As Date, F_Fin As Date, EjerciCerrados As Boolean, QuitarCierre As Byte, vContabili As Integer, DesdeBalancesConfigurados As Boolean, Resetea6y7 As Boolean, RecordSetPrecargado As Boolean)
 'FechInicioEsMesInicio ->  QUiere decir que si el mes incio que he puesto coincide
 '                          con la fecha incio entoces,  no calcularemos anteriores
 '                          y si ademas desglosamos la apertura, se la restaremos a
@@ -962,8 +962,8 @@ Dim CalcularImporteAnterior As Boolean
     M2 = Month(FechaFinPeriodo)
     A1 = Year(FechaInicioPeriodo)
     A2 = Year(FechaFinPeriodo)
-    vCta = Cta
-    vDig = Len(Cta)
+    vCta = cta
+    vDig = Len(cta)
     
     'Agosto2014
     FIniPeriodo = FechaInicioPeriodo
@@ -1006,15 +1006,15 @@ Dim CalcularImporteAnterior As Boolean
     If Not EjerciCerrados Then
         If vParam.fechafin < F_Ini Then
             If Resetea6y7 Then
-                If Mid(Cta, 1, 1) = vParam.grupogto Or Mid(Cta, 1, 1) = vParam.grupovta Then
+                If Mid(cta, 1, 1) = vParam.grupogto Or Mid(cta, 1, 1) = vParam.grupovta Then
                     CalcularImporteAnterior = False
                 Else
                     CalcularImporteAnterior = True
                     If vParam.grupoord <> "" Then
-                        If Mid(Cta, 1, 1) = vParam.grupoord Then
+                        If Mid(cta, 1, 1) = vParam.grupoord Then
                             CalcularImporteAnterior = False
                             If vParam.Automocion <> "" Then
-                                If Mid(Cta, 1, Len(vParam.Automocion)) = vParam.Automocion Then CalcularImporteAnterior = True
+                                If Mid(cta, 1, Len(vParam.Automocion)) = vParam.Automocion Then CalcularImporteAnterior = True
                             End If
                         End If
                     End If
@@ -1545,7 +1545,7 @@ End Sub
 
 '--->  OPCION  0.- Con anterior y movimientos     1.- Solo SALDO
 'El ctaSQL es para no tener que copiar el SQL de insertar
-Public Sub CuentaExplotacion(ByRef Cta As String, ByRef Titulo As String, ByRef Mes As Integer, ByRef Anyo As Integer, ByRef Contador As Long, Opcion As Byte, ByRef CtaSQL As String, Cerrados As Boolean, ByRef FecIni As Date, ByRef FecFin As Date, QuitarSaldos As Boolean, Contabi As Integer)
+Public Sub CuentaExplotacion(ByRef cta As String, ByRef Titulo As String, ByRef Mes As Integer, ByRef Anyo As Integer, ByRef Contador As Long, Opcion As Byte, ByRef CtaSQL As String, Cerrados As Boolean, ByRef FecIni As Date, ByRef FecFin As Date, QuitarSaldos As Boolean, Contabi As Integer)
 'Dim ImAcD As Double     acumulado
 'Dim ImAcH As Double
 'Dim ImPerD As Double    periodo
@@ -1558,10 +1558,10 @@ Public Sub CuentaExplotacion(ByRef Cta As String, ByRef Titulo As String, ByRef 
 
     M1 = Mes
     A1 = Anyo
-    vCta = Cta
+    vCta = cta
     Contabilidad = Contabi
     
-    Aux = "'" & Cta & "'," & Contador & ",'" & DevNombreSQL(Titulo) & "',"
+    Aux = "'" & cta & "'," & Contador & ",'" & DevNombreSQL(Titulo) & "',"
     
     Set RT = New ADODB.Recordset
     If QuitarSaldos Then
@@ -2842,7 +2842,7 @@ Dim R As ADODB.Recordset
     
 End Sub
 
-Private Function CargaAcumuladosTotalesCerrados(ByRef Cta As String) As Boolean
+Private Function CargaAcumuladosTotalesCerrados(ByRef cta As String) As Boolean
     CargaAcumuladosTotalesCerrados = False
     ImpD = 0
     ImpH = 0
@@ -2850,7 +2850,7 @@ Private Function CargaAcumuladosTotalesCerrados(ByRef Cta As String) As Boolean
     SQL = SQL & ", acumtotH= " & TransformaComasPuntos(CStr(ImpH)) 'Format(ImpH, "#,###,##0.00")
     ImpD = ImpD - ImpH
     SQL = SQL & ", acumtotT= " & TransformaComasPuntos(CStr(ImpD)) 'Format(ImpD, "#,###,##0.00")
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & Cta & "'"
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND cta='" & cta & "'"
     Conn.Execute SQL
     CargaAcumuladosTotalesCerrados = True
 End Function
@@ -3724,7 +3724,7 @@ Dim Fin As Boolean
                 'Antes de cambiarlo de orden
                 'Codigo = "'" & miRsAux!Cta & "','" & miRsAux!Cuenta & "'" & ImporteASQL(ImAcD) & ImporteASQL(ImAcH)
                 'Ahora. Lo mismo sera en la de abajo
-                Codigo = "'" & miRsAux!Cta & "','" & DevNombreSQL(miRsAux!Cuenta) & "'" & ImporteASQL(ImAcH) & ImporteASQL(ImAcD)
+                Codigo = "'" & miRsAux!cta & "','" & DevNombreSQL(miRsAux!Cuenta) & "'" & ImporteASQL(ImAcH) & ImporteASQL(ImAcD)
                 miRsAux.MoveNext
             End If
             Aux = Aux & Codigo & ","
@@ -3736,7 +3736,7 @@ Dim Fin As Boolean
             Else
                 ImAcD = DBLet(RT!Importe1, "N")
                 ImAcH = DBLet(RT!importe2, "N")
-                Codigo = "'" & RT!Cta & "','" & DevNombreSQL(RT!Cuenta) & "'" & ImporteASQL(ImAcH) & ImporteASQL(ImAcD)
+                Codigo = "'" & RT!cta & "','" & DevNombreSQL(RT!Cuenta) & "'" & ImporteASQL(ImAcH) & ImporteASQL(ImAcD)
                 RT.MoveNext
             End If
             Aux = Aux & Codigo & ")"
@@ -4881,7 +4881,7 @@ Dim importeCierreH As Currency
     
     
     ' Nueva tabla para el informe apaisado de meses
-    Dim K As Integer
+    Dim k As Integer
     Dim K1 As Integer
     Dim Anyo As Integer
     Dim Mes As Integer
@@ -4901,19 +4901,19 @@ Dim importeCierreH As Currency
 
 
     If Year(vParam.fechaini) = Year(vParam.fechafin) Then ' año natural
-        For K = 1 To 12
-            SQL = SQL & Format(Year(FechaInicio), "0000") & Format(K, "00") & ","
-        Next K
+        For k = 1 To 12
+            SQL = SQL & Format(Year(FechaInicio), "0000") & Format(k, "00") & ","
+        Next k
     Else
         Anyo = Year(FechaInicio)
-        For K = 1 To 12
-            K1 = Month(FechaInicio - 1 + K)
+        For k = 1 To 12
+            K1 = Month(FechaInicio - 1 + k)
             If K1 > 12 Then
                 K1 = K1 - 12
                 Anyo = Year(FechaInicio) + 1
             End If
             Mes = Format(Anyo, "0000") & Format(K1, "00")
-        Next K
+        Next k
         SQL = SQL & DBSet(Mes, "N") & ","
     End If
     SQL = SQL & "0,0,0,0,0,0,0,0,0,0,0,0)"
@@ -5506,13 +5506,13 @@ On Error GoTo ECargaBalanceInicioEjercicio
             SQL = "Select cta from tmpbalancesumas where codusu = " & vUsu.Codigo & " and cta like '" & String(M1, "_") & "' GROUP BY 1"
             RT.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RT.EOF
-                RsBalPerGan.Find "codmacta = '" & RT!Cta & "'", , adSearchForward, 1
+                RsBalPerGan.Find "codmacta = '" & RT!cta & "'", , adSearchForward, 1
                 If RsBalPerGan.EOF Then
                     SQL = "###"
                 Else
                     SQL = DevNombreSQL(RsBalPerGan!Nommacta)
                 End If
-                SQL = "UPDATE tmpbalancesumas set nomcta = '" & SQL & "' WHERE cta = '" & RT!Cta & "' and codusu = " & vUsu.Codigo
+                SQL = "UPDATE tmpbalancesumas set nomcta = '" & SQL & "' WHERE cta = '" & RT!cta & "' and codusu = " & vUsu.Codigo
                 Conn.Execute SQL
                 RT.MoveNext
             Wend
@@ -5786,14 +5786,14 @@ End Function
 '******************************************************
 '**************  TESORERIA
 '******************************************************
-Public Function DevuelveLaCtaBanco(ByRef Cta As String) As String
+Public Function DevuelveLaCtaBanco(ByRef cta As String) As String
 Dim RS As ADODB.Recordset
     
     DevuelveLaCtaBanco = "|||||"
     Set RS = New ADODB.Recordset
-    RS.Open "Select entidad,oficina,control,cuentaba,iban from cuentas where codmacta ='" & Cta & "'", Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open "Select iban from cuentas where codmacta ='" & cta & "'", Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
-        If DBLet(RS!Entidad, "N") > 0 Then DevuelveLaCtaBanco = Format(DBLet(RS!Entidad, "T"), "0000") & "|" & Format(DBLet(RS!Oficina, "T"), "0000") & "|" & DBLet(RS!Control, "T") & "|" & DBLet(RS!Cuentaba, "T") & "|" & UCase(DBLet(RS!IBAN, "T")) & "|"
+        If DBLet(RS!IBAN, "T") <> "" Then DevuelveLaCtaBanco = UCase(DBLet(RS!IBAN, "T")) & "|"
     End If
         
     RS.Close
