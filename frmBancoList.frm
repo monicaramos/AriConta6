@@ -713,7 +713,7 @@ Private Sub AccionesCSV()
     
     'Monto el SQL
     SQL = "Select bancos.codmacta as codigo, bancos.descripcion as descripcion, bancos.ctaingreso as CtaIngresos, bancos.ctagastos as CtaGastos, bancos.sufijoem as sufijoem, bancos.idcedente as cedente,"
-    SQL = SQL & " concat(bancos.iban, ' ', right(concat('0000',bancos.entidad),4),' ', right(concat('0000',bancos.oficina),4),' ',  bancos.control,' ', bancos.ctabanco) as CCC, ccoste.nomccost  as CentroCoste "
+    SQL = SQL & " bancos.iban as IBAN, ccoste.nomccost  as CentroCoste "
     SQL = SQL & " FROM bancos left join ccoste on bancos.codccost = ccoste.codccost "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
     I = 1

@@ -478,7 +478,7 @@ Dim Dias As Integer
     
         SQL = "INSERT INTO cobros (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
         SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,"
-        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,"
+        SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,"
         SQL = SQL & "`text33csb`,`text41csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,"
         SQL = SQL & "`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban, codusu) "
         'Valores
@@ -486,7 +486,7 @@ Dim Dias As Integer
         SQL = SQL & "NULL,NULL,NULL,NULL,"
         SQL = SQL & "`numserie`,`numfactu`,`fecfactu`,`codmacta`,`codforpa`,"
         SQL = SQL & DBSet(vFecVenci, "F") & ","
-        SQL = SQL & "`ctabanc1`,`entidad`,`oficina`,`control`,`cuentaba`,`text33csb`,`text41csb`,"
+        SQL = SQL & "`ctabanc1`,`text33csb`,`text41csb`,"
         'text83csb`,
         SQL = SQL & "`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`observa`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,`codpais`,`nifclien`,iban "
         SQL = SQL & "," & DBSet(vUsu.Id, "N")

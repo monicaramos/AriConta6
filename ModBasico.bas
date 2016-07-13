@@ -797,7 +797,7 @@ End Sub
 
 Public Sub AyudaFPago(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
 
-    frmBas.CadenaTots = "S|txtAux(0)|T|Código|805|;S|txtAux(1)|T|Descripción|4295|;S|txtAux(2)|T|Entidad|1900|;"
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|805|;S|txtAux(1)|T|Descripción|4295|;S|txtAux(2)|T|Tipo Pago|1900|;"
     frmBas.CadenaConsulta = "SELECT formapago.codforpa, formapago.nomforpa, tipofpago.descformapago "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM formapago ,tipofpago "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE formapago.tipforpa = tipofpago.tipoformapago "

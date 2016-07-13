@@ -512,9 +512,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Impresión de Balances"
 
-    For i = 0 To 1
-        Me.imgBalan(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgBalan(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     txtBalan(0).Text = Format(NumBalan, "000")
     txtBalan(1).Text = Format(NumBalan, "000")
@@ -584,10 +584,10 @@ Private Sub txtBalan_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgBalan"
-        ImgBalan_Click indice
+        ImgBalan_Click Indice
     End Select
     
 End Sub
@@ -597,7 +597,7 @@ Private Sub txtBalan_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtBalan_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -677,7 +677,7 @@ Private Sub AccionesCSV()
     
     'Monto el SQL
     SQL = "Select balances.numbalan as codigo, balances.descripcion as descripcion, Balans.ctaingreso as CtaIngresos, Balans.ctagastos as CtaGastos, Balans.sufijoem as sufijoem, Balans.idcedente as cedente,"
-    SQL = SQL & " concat(Balans.iban, ' ', right(concat('0000',Balans.entidad),4),' ', right(concat('0000',Balans.oficina),4),' ',  Balans.control,' ', Balans.ctaBalan) as CCC, ccoste.nomccost  as CentroCoste "
+    SQL = SQL & " Balans.iban as IBAN, ccoste.nomccost  as CentroCoste "
     SQL = SQL & " FROM Balans left join ccoste on Balans.codccost = ccoste.codccost "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
         

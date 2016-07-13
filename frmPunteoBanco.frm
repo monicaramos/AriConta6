@@ -2506,9 +2506,9 @@ End Sub
 
 Private Sub FijarCtaContable(ByRef Lin As String)
     SQL = "Select codmacta from bancos"
-    SQL = SQL & " where Entidad = " & Mid(Lin, 3, 4)
-    SQL = SQL & " AND oficina = " & Mid(Lin, 7, 4)
-    SQL = SQL & " AND cuentaba = '" & Mid(Lin, 11, 10) & "'"
+    SQL = SQL & " where mid(iban,5,4) = " & Mid(Lin, 3, 4) ' entidad
+    SQL = SQL & " AND mid(iban,9,4) = " & Mid(Lin, 7, 4) ' oficina
+    SQL = SQL & " AND mid(iban,15,10) = '" & Mid(Lin, 11, 10) & "'" ' cuentaba
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Cta = ""

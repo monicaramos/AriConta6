@@ -936,92 +936,7 @@ Private Sub chkGenerico_Click(Index As Integer)
     If chkGenerico(Index).Value = 0 Then
         chkGenerico(Index).FontBold = False
         chkGenerico(Index).Tag = ""
-    Else
-        CadenaDesdeOtroForm = ""
-        frmTESListado.Opcion = 20
-        frmTESListado.Show vbModal
-        If CadenaDesdeOtroForm <> "" Then
-            chkGenerico(Index).Tag = CadenaDesdeOtroForm
-            chkGenerico(Index).ToolTipText = CadenaDesdeOtroForm
-            chkGenerico(Index).FontBold = True
-        Else
-            'NO HA SELCCIONADO LA CUENTA
-            chkGenerico(Index).ToolTipText = ""
-            chkGenerico(Index).Value = 0
-        End If
     End If
-End Sub
-
-Private Sub cmdContabilizarTransfer_Click()
-Dim Vencimientos As Integer
-
-
-    'Por si acaso, lo compurebo ahora, aunque dentro de cmdGenerar2 tb esta
-    cad = ""
-    For I = 1 To Me.ListView1.ListItems.Count
-        If ListView1.ListItems(I).Checked Then
-            cad = cad & "1"
-            Exit For
-        End If
-    Next I
-    If cad = "" Then
-        MsgBox "Deberias selecionar algún vencimiento", vbExclamation
-        Exit Sub
-    End If
-
-    GastosTransferencia = 0
-    CadenaDesdeOtroForm = "FECHA:" & Text3(0).Text & Space(20)
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "ID. transferencia: " & SegundoParametro & vbCrLf & vbCrLf
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text3(1).Text & vbCrLf
-    frmTESListado.Opcion = 35
-    frmTESListado.Show vbModal
-
-    If CadenaDesdeOtroForm = "" Then Exit Sub
-    
-    GastosTransferencia = ImporteFormateado(CadenaDesdeOtroForm)
-    If GastosTransferencia <> 0 Then
-        cad = DevuelveDesdeBD("ctagastos", "ctabancaria", "codmacta", Text3(1).Tag, "T")
-        If cad = "" Then
-            MsgBox "Falta configurar la cuenta de gastos del banco:" & RS!codmacta, vbExclamation
-            Exit Sub
-        End If
-        
-        
-        
-        cad = ""
-        'No puede tener la marca de asiento por pago
-        If chkAsiento(1).Value = 1 Then cad = "-Desmarcar asiento por pago" & vbCrLf
-        'No puede tener la marca de asiento por pago
-        If chkContrapar(1).Value = 0 Then cad = cad & "-Marque agrupar apunte bancario"
-        If cad <> "" Then
-            MsgBox cad, vbExclamation
-            Exit Sub
-        End If
-        
-        
-        'Para los cobros el importe sera negativo
-        GastosTransferencia = -GastosTransferencia
-        
-    End If
-    
-
-
-'    Text3(0).Text = Text4.Text
-    Vencimientos = ListView1.ListItems.Count
-    'Pongo en cuenta generica el valor que tengo en esta
-    chkGenerico(0).Value = chkGenerico(1).Value
-    chkGenerico(0).Tag = chkGenerico(1).Tag
-    
-    'Copiaremos los datos sobre los campos que
-    ' ya hacen la contabilizacion
-    Generar2
-    If ListView1.ListItems.Count = Vencimientos Then
-        'Ha pasado algo
-        
-    Else
-        Unload Me
-    End If
-    GastosTransferencia = 0
 End Sub
 
 
@@ -1483,7 +1398,7 @@ Private Sub Combo1_Validate(Cancel As Boolean)
         
         I = 0
         If (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then I = 1
-        Me.mnBarra1.Visible = I = 1
+        Me.mnbarra1.Visible = I = 1
         Me.mnNumero.Visible = I = 1
     
         CargaList

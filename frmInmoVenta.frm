@@ -1231,8 +1231,8 @@ Private Sub Form_Load()
 
     
     imgElto(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    imgCta(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    imgCta(1).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgcta(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    imgcta(1).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     imgCCost(2).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     imgCon(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
@@ -1364,7 +1364,7 @@ Private Sub frmBa_DatoSeleccionado(CadenaSeleccion As String)
     If I = 1 Then
         'Cuenta bancaria
         txtCta(3).Text = RecuperaValor(CadenaSeleccion, 1)
-        txtDescta(3).Text = RecuperaValor(CadenaSeleccion, 2)
+        txtDesCta(3).Text = RecuperaValor(CadenaSeleccion, 2)
     End If
 End Sub
 
@@ -1376,7 +1376,7 @@ End Sub
 
 Private Sub frmCt_DatoSeleccionado(CadenaSeleccion As String)
     txtCta(I).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtDescta(I).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtDesCta(I).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
@@ -1531,9 +1531,9 @@ Private Sub Option1_Click(Index As Integer)
         Text8(2).Text = ""
         Text8(3).Text = ""
         txtCta(3).Text = ""
-        txtDescta(3).Text = ""
+        txtDesCta(3).Text = ""
         txtCta(1).Text = ""
-        txtDescta(1).Text = ""
+        txtDesCta(1).Text = ""
         txtDpto(0).Text = ""
         txtDesdpto(0).Text = ""
         txtCodCCost(2).Text = ""
@@ -1759,19 +1759,19 @@ Dim SQL As String
 With txtCta(Index)
     .Text = Trim(.Text)
     If .Text = "" Then
-        txtDescta(Index).Text = ""
+        txtDesCta(Index).Text = ""
         Exit Sub
     End If
     ParametrosContabiliza = .Text
     If CuentaCorrectaUltimoNivel(ParametrosContabiliza, cad) Then
         .Text = ParametrosContabiliza
-        txtDescta(Index).Text = cad
+        txtDesCta(Index).Text = cad
         If Index = 3 Then
             cad = DevuelveDesdeBD("codmacta", "bancos", "codmacta", ParametrosContabiliza, "T")
             If cad = "" Then
                 MsgBox "Cuenta no asociada a ningun banco", vbExclamation
                 .Text = ""
-                txtDescta(Index).Text = ""
+                txtDesCta(Index).Text = ""
             End If
         Else
             If Index = 1 Then
@@ -1789,8 +1789,8 @@ With txtCta(Index)
                         If DBLet(RS!Forpa, "N") <> 0 Then Text8(0).Text = Format(DBLet(RS!Forpa, "N"), "000")
                         Text8(1).Text = DBLet(RS!nomforpa, "T")
                         txtCta(3).Text = DBLet(RS!CtaBanco, "T")
-                        txtDescta(3).Text = ""
-                        If txtCta(3).Text <> "" Then txtDescta(3).Text = DevuelveValor("select nommacta from cuentas where codmacta = " & DBSet(txtCta(3).Text, "T"))
+                        txtDesCta(3).Text = ""
+                        If txtCta(3).Text <> "" Then txtDesCta(3).Text = DevuelveValor("select nommacta from cuentas where codmacta = " & DBSet(txtCta(3).Text, "T"))
                     End If
                     Set RS = Nothing
                 Else
@@ -1798,14 +1798,14 @@ With txtCta(Index)
                     Text8(0).Text = ""
                     Text8(1).Text = ""
                     txtCta(3).Text = ""
-                    txtDescta(3).Text = ""
+                    txtDesCta(3).Text = ""
                 End If
             End If
         End If
     Else
         MsgBox cad, vbExclamation
         .Text = ""
-        txtDescta(Index).Text = ""
+        txtDesCta(Index).Text = ""
         .SetFocus
     End If
 
@@ -2488,7 +2488,7 @@ Dim textCSB As String
     If B Then
         
         CadInsert = "insert into cobros (numserie,numfactu,fecfactu,numorden,codmacta,codforpa,fecvenci,impvenci," & _
-                    "ctabanc1,entidad,oficina,control,cuentaba,fecultco,impcobro,emitdocum,recedocu,contdocu," & _
+                    "ctabanc1,fecultco,impcobro,emitdocum,recedocu,contdocu," & _
                     "text33csb,text41csb,ultimareclamacion,agente,departamento,transfer," & _
                     "nomclien,domclien,pobclien,cpclien,proclien,iban,codusu) values "
         CadValues = ""
@@ -2511,8 +2511,7 @@ Dim textCSB As String
                 
                 SQL = DBSet(mZ.TipoContador, "T") & "," & DBSet(mZ.Contador, "N") & "," & DBSet(Text4(0).Text, "F") & "," & DBSet(I, "N") & ","
                 SQL = SQL & DBSet(txtCta(1).Text, "T") & "," & DBSet(Text8(0).Text, "N") & "," & DBSet(RS!FecVenci, "F") & "," & DBSet(RS!ImpVenci, "N") & ","
-                SQL = SQL & DBSet(txtCta(3).Text, "T", "S") & "," & DBSet(RsCta!Entidad, "N", "S") & "," & DBSet(RsCta!Oficina, "N", "S") & "," & DBSet(RsCta!Control, "T", "S") & ","
-                SQL = SQL & DBSet(RsCta!Cuentaba, "T", "S") & ","
+                SQL = SQL & DBSet(txtCta(3).Text, "T", "S") & ","
                 
                 SQL = SQL & ValorNulo & "," & ValorNulo & ","
                 
@@ -2583,10 +2582,10 @@ On Error GoTo EEmiteFacturaVentaInmmovilizado
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = "INSERT INTO Usuarios.z347 (codusu, cliprov, nif, importe, razosoci, dirdatos, codposta, despobla) VALUES (" & vUsu.Codigo
     If RS.EOF Then
-        cad = cad & "," & DivMes & ",'nif'," & TransformaComasPuntos(ImporteSinFormato(Text5.Text)) & ",'" & DevNombreSQL(txtDescta(1).Text) & "','Direccion','codpos','Poblacion')"
+        cad = cad & "," & DivMes & ",'nif'," & TransformaComasPuntos(ImporteSinFormato(Text5.Text)) & ",'" & DevNombreSQL(txtDesCta(1).Text) & "','Direccion','codpos','Poblacion')"
     Else
         cad = cad & "," & DivMes & ",'"
-        cad = cad & DBLet(RS!nifdatos) & "'," & TransformaComasPuntos(ImporteSinFormato(Text5.Text)) & ",'" & DevNombreSQL(txtDescta(1).Text) & "','"
+        cad = cad & DBLet(RS!nifdatos) & "'," & TransformaComasPuntos(ImporteSinFormato(Text5.Text)) & ",'" & DevNombreSQL(txtDesCta(1).Text) & "','"
         cad = cad & DevNombreSQL(DBLet(RS!dirdatos)) & "','" & DBLet(RS!codposta) & "','"
         cad = cad & DevNombreSQL(DBLet(RS!desPobla)) & "')"
     End If

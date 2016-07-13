@@ -927,7 +927,6 @@ Dim nomDocu As String
             End If
             
             'Modelo de hacienda
-'            B2 = Modelo347(Combo5.ListIndex = 2, Year(CDate(txtFecha(1).Text)))
             B2 = Modelo347(False, Year(CDate(txtFecha(1).Text)))
             
             If B2 Then CopiarFicheroASalida False, txtTipoSalida(1).Text
@@ -946,8 +945,6 @@ Dim nomDocu As String
                 'La carta
                 cad = "¿ Desea imprimir también los proveedores ?"
                 If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then
-                    'Cad = " AND {ado1.cliprov} = 0"
-                    'ahora
                     cad = " AND {tmp347tot.cliprov} = " & Asc(0)
                     cadFormula = cadFormula & cad
                 Else
@@ -1403,10 +1400,10 @@ Dim CadResul As String
             End If
             Set RS = Nothing
         
-            If optProv(0).Value Then
+            If OptProv(0).Value Then
                 cad = "fecharec"
             Else
-                If optProv(1).Value Then
+                If OptProv(1).Value Then
                     cad = "fecfactu"
                 End If
             End If
@@ -1485,10 +1482,10 @@ Dim CadResul As String
             End If
             Set RS = Nothing
         
-            If optProv(0).Value Then
+            If OptProv(0).Value Then
                 cad = "fecharec"
             Else
-                If optProv(1).Value Then
+                If OptProv(1).Value Then
                     cad = "fecfactu"
                 End If
             End If
@@ -1869,10 +1866,10 @@ On Error GoTo EComprobarCuentas347
         RS.MoveNext
     Wend
     RS.Close
-    If optProv(0).Value Then
+    If OptProv(0).Value Then
         cad = "fecharec"
     Else
-        If optProv(1).Value Then
+        If OptProv(1).Value Then
             cad = "fecfactu"
 '        Else
 '            Cad = "fecliqpr"

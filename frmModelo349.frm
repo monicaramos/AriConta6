@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmModelo349 
    Appearance      =   0  'Flat
@@ -541,9 +541,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 Dim Tablas As String
@@ -553,7 +553,7 @@ Dim C2 As String
 
 Dim FechaI As String
 Dim FechaF As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Importe As Currency
 
 Dim V340()   'Llevara un str
@@ -599,7 +599,7 @@ Dim ConPro As Integer  'proveedores
 Dim indRPT As String
 Dim nomDocu As String
 
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     
     'Exportacion a PDF
@@ -631,7 +631,7 @@ Dim nomDocu As String
     If B Then
         If Me.optTipoSal(0).Value Then
             'Comprobamos si va mas de una empresa
-            Cad = vEmpresa.nomempre
+            cad = vEmpresa.nomempre
             If EmpresasSeleccionadas Then vEmpresa.nomempre = "CONSOLIDADO"
                 
             
@@ -659,7 +659,7 @@ Dim nomDocu As String
             ImprimeGeneral
 
 
-            vEmpresa.nomempre = Cad
+            vEmpresa.nomempre = cad
         Else
         
         
@@ -711,7 +711,6 @@ Private Sub Form_Load()
     
     
     CargarCombo
-'    cmbPeriodo(1).ListIndex = 0
     cmbPeriodo_Change (0)
      
     FrameSeccion.Enabled = vParam.EsMultiseccion
@@ -761,42 +760,42 @@ Private Sub CargarCombo()
     
     Me.cmbPeriodo(0).AddItem "Anual"
     
-    For i = 1 To 12
-        CadenaDesdeOtroForm = MonthName(i)
+    For I = 1 To 12
+        CadenaDesdeOtroForm = MonthName(I)
         CadenaDesdeOtroForm = UCase(Mid(CadenaDesdeOtroForm, 1, 1)) & LCase(Mid(CadenaDesdeOtroForm, 2))
         Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm
-    Next i
+    Next I
     
-    For i = 1 To 4
-        If i = 1 Or i = 3 Then
+    For I = 1 To 4
+        If I = 1 Or I = 3 Then
             CadenaDesdeOtroForm = "er"
         Else
             CadenaDesdeOtroForm = "º"
         End If
-        CadenaDesdeOtroForm = i & CadenaDesdeOtroForm & " "
+        CadenaDesdeOtroForm = I & CadenaDesdeOtroForm & " "
         Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm & " trimestre"
-    Next i
+    Next I
     
     
     
     'Leeremos ultimo valor liquidaco
     
     txtAno(0).Text = vParam.anofactu
-    i = vParam.perfactu + 1
+    I = vParam.perfactu + 1
     If vParam.periodos = 0 Then
         NumRegElim = 4
     Else
         NumRegElim = 12
     End If
         
-    If i > NumRegElim Then
-            i = 1
+    If I > NumRegElim Then
+            I = 1
             txtAno(0).Text = vParam.anofactu + 1
     End If
     If vParam.periodos = 0 Then
-        Me.cmbPeriodo(0).ListIndex = i + 12 - 1
+        Me.cmbPeriodo(0).ListIndex = I + 12 - 1
     Else
-        Me.cmbPeriodo(0).ListIndex = i - 1
+        Me.cmbPeriodo(0).ListIndex = I - 1
     End If
     
     CadenaDesdeOtroForm = ""
@@ -804,7 +803,7 @@ End Sub
 
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -813,13 +812,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tabla de codigos de iva
         Case 0
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = False
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = False
+            Next I
         Case 1
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = True
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = True
+            Next I
     End Select
     
     Screen.MousePointer = vbDefault
@@ -913,11 +912,11 @@ Dim nomDocu As String
     numParam = numParam + 1
     
     cadParam = cadParam & "Empresas= """
-    For i = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            cadParam = cadParam & Me.ListView1(1).ListItems(i).SubItems(1) & "  "
+    For I = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            cadParam = cadParam & Me.ListView1(1).ListItems(I).SubItems(1) & "  "
         End If
-    Next i
+    Next I
     cadParam = Trim(cadParam)
     
     cadParam = cadParam & """|"
@@ -965,29 +964,29 @@ eCargarTemporal:
     MuestraError Err.Number, "Cargar Temporal Resumen", Err.Description
 End Function
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
     
-    DatosOk = False
+    DatosOK = False
     
     If EmpresasSeleccionadas = 0 Then
         MsgBox "Seleccione una empresa", vbExclamation
         Exit Function
     End If
    
-    DatosOk = True
+    DatosOK = True
 
 
 End Function
 
 Private Function EmpresasSeleccionadas() As Integer
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 Dim NSel As Integer
 
     NSel = 0
-    For i = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then NSel = NSel + 1
-    Next i
+    For I = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then NSel = NSel + 1
+    Next I
     EmpresasSeleccionadas = NSel
 
 End Function
@@ -1000,7 +999,7 @@ End Sub
 Private Sub CargarListView(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -1022,31 +1021,31 @@ Dim SQL As String
     End If
     SQL = SQL & " ORDER BY codempre "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         
         If vParam.EsMultiseccion Then
-            If EsMultiseccion(DBLet(Rs!CONTA)) Then
+            If EsMultiseccion(DBLet(RS!CONTA)) Then
                 Set ItmX = ListView1(Index).ListItems.Add
                 
-                If DBLet(Rs!CONTA) = Conn.DefaultDatabase Then ItmX.Checked = True
-                ItmX.Text = Rs.Fields(0).Value
-                ItmX.SubItems(1) = Rs.Fields(1).Value
+                If DBLet(RS!CONTA) = Conn.DefaultDatabase Then ItmX.Checked = True
+                ItmX.Text = RS.Fields(0).Value
+                ItmX.SubItems(1) = RS.Fields(1).Value
             End If
         Else
             Set ItmX = ListView1(Index).ListItems.Add
             
             ItmX.Checked = True
-            ItmX.Text = Rs.Fields(0).Value
-            ItmX.SubItems(1) = Rs.Fields(1).Value
+            ItmX.Text = RS.Fields(0).Value
+            ItmX.SubItems(1) = RS.Fields(1).Value
         End If
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -1063,7 +1062,7 @@ Private Sub txtAnyo_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAnyo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtAno(Index).Text = Trim(txtAno(Index).Text)
     
@@ -1090,13 +1089,13 @@ Private Function CuardarComo340() As Boolean
     cd1.InitDir = Mid(App.Path, 1, 3)
     cd1.ShowSave
         
-    Cad = App.Path & "\tmp340.dat"
+    cad = App.Path & "\tmp340.dat"
     
     If cd1.FileTitle <> "" Then
         If Dir(cd1.FileName, vbArchive) <> "" Then
             If MsgBox("Ya existe: " & cd1.FileName & vbCrLf & "¿Sobreescribir?", vbQuestion + vbYesNo) = vbNo Then Exit Function
         End If
-        FileCopy Cad, cd1.FileName
+        FileCopy cad, cd1.FileName
         MsgBox Space(20) & "Copia efectuada correctamente" & Space(20), vbInformation
         CuardarComo340 = True
     End If
@@ -1109,16 +1108,16 @@ End Function
 
 Private Sub InsertaLog340()
 Dim C2 As String
-    Cad = Cad & " "
-    For i = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            Cad = Cad & Me.ListView1(1).ListItems(i).SubItems(1) & "  "
+    cad = cad & " "
+    For I = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            cad = cad & Me.ListView1(1).ListItems(I).SubItems(1) & "  "
         End If
-    Next i
-    Cad = Trim(Cad)
+    Next I
+    cad = Trim(cad)
     
     
-    vLog.Insertar 15, vUsu, Cad
+    vLog.Insertar 15, vUsu, cad
     
     
     
@@ -1128,26 +1127,26 @@ Dim C2 As String
     'Para guardarme un LOG de pagos declardaos
     'Ya que si luego modifican un apunte ...  perderiamos datos realmente.
     'ASi, con este log me que declaramos de efectivo
-    Cad = Format(Me.txtAno(0).Text, "0000") & "-"
+    cad = Format(Me.txtAno(0).Text, "0000") & "-"
     If vParam.periodos = 0 Then
         'TRIMESTRAL
-        Cad = Cad & Me.cmbPeriodo(0).ListIndex + 1 & "T"
+        cad = cad & Me.cmbPeriodo(0).ListIndex + 1 & "T"
     Else
         'MENSUAL
-        Cad = Cad & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
+        cad = cad & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
     End If
                        
-    Cad = " SELECT  now() fecha, codusu,'" & Cad & "',nifdeclarado,razosoci,fechaexp,base,totiva  "
-    Cad = Cad & " FROM tmp340 where codusu =" & vUsu.Codigo & " and clavelibro='Z'"
+    cad = " SELECT  now() fecha, codusu,'" & cad & "',nifdeclarado,razosoci,fechaexp,base,totiva  "
+    cad = cad & " FROM tmp340 where codusu =" & vUsu.Codigo & " and clavelibro='Z'"
     
-    Cad = "INSERT INTO slog340 " & Cad
-    If Not EjecutaSQL(Cad) Then MsgBox "Error insertando LOG. Consulte soporte técnico", vbExclamation
+    cad = "INSERT INTO slog340 " & cad
+    If Not EjecutaSQL(cad) Then MsgBox "Error insertando LOG. Consulte soporte técnico", vbExclamation
     
 End Sub
 
 
 Private Function ComprobarCuentas349(ByRef C1 As Integer, ByRef C2 As Integer) As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim Trim(3) As Currency
 'Contadores para facturas de abono
 
@@ -1173,10 +1172,10 @@ Dim Trim(3) As Currency
     Tablas = Tablas & " VALUES (" & vUsu.Codigo
          
     Set miRsAux = New ADODB.Recordset
-    For i = 1 To ListView1(1).ListItems.Count
-        If ListView1(1).ListItems(i).Checked Then
+    For I = 1 To ListView1(1).ListItems.Count
+        If ListView1(1).ListItems(I).Checked Then
     
-            If Not ComprobarCuentas349_DOS("ariconta" & ListView1(1).ListItems(i).Text, C1, C2) Then
+            If Not ComprobarCuentas349_DOS("ariconta" & ListView1(1).ListItems(I).Text, C1, C2) Then
                 Set miRsAux = Nothing
                 Exit Function
             End If
@@ -1187,41 +1186,41 @@ Dim Trim(3) As Currency
           SQL = SQL & "tmp347.pais despobla from tmp347 where codusu=" & vUsu.Codigo
           SQL = SQL & " group by cliprov,nif "
           
-          Set Rs = New ADODB.Recordset
-          Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-          While Not Rs.EOF
+          Set RS = New ADODB.Recordset
+          RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+          While Not RS.EOF
                If ExisteEntrada Then
-                    Importe = Importe + Rs!Suma
+                    Importe = Importe + RS!Suma
                     SQL = "UPDATE tmp347tot SET importe=" & TransformaComasPuntos(CStr(Importe))
-                    SQL = SQL & " WHERE codusu =" & vUsu.Codigo & " AND cliprov =" & Rs!cliprov
-                    SQL = SQL & " AND nif = '" & Rs!NIF & "';"
+                    SQL = SQL & " WHERE codusu =" & vUsu.Codigo & " AND cliprov =" & RS!cliprov
+                    SQL = SQL & " AND nif = '" & RS!NIF & "';"
                Else
                     
-                    SQL = "," & Rs!cliprov & ",'" & Rs!NIF & "'," & TransformaComasPuntos(CStr(Rs!Suma))
-                    SQL = SQL & ",'" & DevNombreSQL(DBLet(Rs!razosoci)) & "','" & DevNombreSQL(DBLet(Rs!dirdatos)) & "','" & Rs!codposta & "','" & DevNombreSQL(DBLet(Rs!desPobla)) & "')"
+                    SQL = "," & RS!cliprov & ",'" & RS!NIF & "'," & TransformaComasPuntos(CStr(RS!Suma))
+                    SQL = SQL & ",'" & DevNombreSQL(DBLet(RS!razosoci)) & "','" & DevNombreSQL(DBLet(RS!dirdatos)) & "','" & RS!codposta & "','" & DevNombreSQL(DBLet(RS!desPobla)) & "')"
                     SQL = Tablas & SQL
                End If
                Conn.Execute SQL
-               Rs.MoveNext
+               RS.MoveNext
           Wend
-          Rs.Close
+          RS.Close
        End If
-    Next i
+    Next I
     
     
         
     'Comprobamos si hay datos
     SQL = "Select count(*) FROM tmp347tot where codusu = " & vUsu.Codigo
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Cont = 0
+    CONT = 0
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
-            Cont = miRsAux.Fields(0)
+            CONT = miRsAux.Fields(0)
         End If
     End If
     miRsAux.Close
     
-    If Cont = 0 Then
+    If CONT = 0 Then
         If optTipoSal(0).Value Then
             'Listado
             MsgBox "Ningún dato se ha generado con esos valores", vbExclamation
@@ -1237,7 +1236,7 @@ Dim Trim(3) As Currency
 End Function
 
 Private Function ComprobarCuentas349_DOS(Contabilidad As String, ByRef ContadorCli As Integer, ByRef ContadorPro As Integer) As Boolean
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Importe As Currency
 
 On Error GoTo EComprobarCuentas349
@@ -1257,45 +1256,45 @@ On Error GoTo EComprobarCuentas349
     SQL = SQL & " group by factcli.codmacta,factcli.nifdatos "
 
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif, razosoci, dirdatos, codposta, importe)  VALUES (" & vUsu.Codigo & ",0,'"
     
-    While Not Rs.EOF
+    While Not RS.EOF
         'Antes 20 Abril
         'Importe = RS!s1 + RS!s2 + RS!s3
-        Importe = Rs!s1
-        Cad = Rs!codmacta & "','" & Rs!nifdatos & "'," & DBSet(Rs!nommacta, "T") & "," & DBSet(Rs!dirdatos, "T") & "," & DBSet(Rs!CodPobla, "T") & "," & TransformaComasPuntos(CStr(Importe))
-        Cad = SQL & Cad & ")"
-        Conn.Execute Cad
+        Importe = RS!s1
+        cad = RS!codmacta & "','" & RS!nifdatos & "'," & DBSet(RS!Nommacta, "T") & "," & DBSet(RS!dirdatos, "T") & "," & DBSet(RS!CodPobla, "T") & "," & TransformaComasPuntos(CStr(Importe))
+        cad = SQL & cad & ")"
+        Conn.Execute cad
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
-    Cad = "factpro.fecharec"
+    cad = "factpro.fecharec"
     SQL = "SELECT factpro.codmacta,factpro.nifdatos,factpro.nommacta,factpro.dirdatos,factpro.codpobla,sum(baseimpo)as s1 from " & Contabilidad & ".factpro," & Contabilidad & ".factpro_totales  where "
     SQL = SQL & " factpro.numserie = factpro_totales.numserie and factpro.numregis = factpro_totales.numregis and factpro.anofactu=factpro_totales.anofactu "
-    SQL = SQL & " AND " & Cad & " >='" & Format(FechaI, FormatoFecha) & "'"
-    SQL = SQL & " AND " & Cad & " <='" & Format(FechaF, FormatoFecha) & "'"
+    SQL = SQL & " AND " & cad & " >='" & Format(FechaI, FormatoFecha) & "'"
+    SQL = SQL & " AND " & cad & " <='" & Format(FechaF, FormatoFecha) & "'"
     'Extranjero
     SQL = SQL & " AND factpro.codopera = 1"
     SQL = SQL & " group by factpro.codmacta,factpro.nifdatos "
     
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif, razosoci, dirdatos, codposta, importe)  VALUES (" & vUsu.Codigo & ",1,'"
-    While Not Rs.EOF
+    While Not RS.EOF
         'Antes 20 Abril
         'Importe = RS!s1 + RS!s2 + RS!s3
-        Importe = Rs!s1
-        Cad = Rs!codmacta & "','" & Rs!nifdatos & "'," & DBSet(Rs!nommacta, "T") & "," & DBSet(Rs!dirdatos, "T") & "," & DBSet(Rs!CodPobla, "T") & "," & TransformaComasPuntos(CStr(Importe))
-        Cad = SQL & Cad & ")"
-        Conn.Execute Cad
+        Importe = RS!s1
+        cad = RS!codmacta & "','" & RS!nifdatos & "'," & DBSet(RS!Nommacta, "T") & "," & DBSet(RS!dirdatos, "T") & "," & DBSet(RS!CodPobla, "T") & "," & TransformaComasPuntos(CStr(Importe))
+        cad = SQL & cad & ")"
+        Conn.Execute cad
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
     
@@ -1304,24 +1303,24 @@ On Error GoTo EComprobarCuentas349
     
     
     RC = ""
-    Cad = ""
+    cad = ""
     'Comprobaremos k el nif no es nulo, ni el codppos de las cuentas a tratar
     SQL = "Select cta from tmp347 where (nif is null or nif = '') and codusu = " & vUsu.Codigo
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    i = 0
-    While Not Rs.EOF
-        i = i + 1
-        Cad = Cad & Rs.Fields(0) & "       "
-        If i = 3 Then
-            Cad = Cad & vbCrLf
-            i = 0
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    I = 0
+    While Not RS.EOF
+        I = I + 1
+        cad = cad & RS.Fields(0) & "       "
+        If I = 3 Then
+            cad = cad & vbCrLf
+            I = 0
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
-    If Cad <> "" Then
-        RC = "Cuentas con NIF sin valor: " & vbCrLf & vbCrLf & Cad
+    If cad <> "" Then
+        RC = "Cuentas con NIF sin valor: " & vbCrLf & vbCrLf & cad
     End If
     
     
@@ -1342,8 +1341,6 @@ On Error GoTo EComprobarCuentas349
     
     
     SQL = "SELECT  numserie,numfactu,fecfactu,totfaccl,nif,factcli.codmacta,nommacta,totbases baseimpo  from " & Contabilidad & ".factcli,"
-    'La tmp es la de la empresa local
-    'SQL = SQL & Contabilidad & ".tmp347  where "
     SQL = SQL & "tmp347  where "
     SQL = SQL & " tmp347.cta= factcli.codmacta"
     SQL = SQL & " AND fecfactu >='" & Format(FechaI, FormatoFecha) & "'"
@@ -1363,28 +1360,27 @@ On Error GoTo EComprobarCuentas349
     
     
     'Nº Empresa
-    i = Val(Mid(Contabilidad, 6))
+    I = Val(Mid(Contabilidad, 6))
 
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
         ContadorCli = ContadorCli + 1
-        'INSERT INTO ztmpfaclin (codusu, codigo, Numfac,fecha "
         
-        SQL = ContadorCli & ",'" & Rs!NumSerie & Format(Rs!NumFactu, "0000000000") & "','" & Format(Rs!FecFactu, FormatoFecha) & "','"
+        SQL = ContadorCli & ",'" & RS!NUmSerie & Format(RS!NumFactu, "0000000000") & "','" & Format(RS!FecFactu, FormatoFecha) & "','"
         ', cta,  NIF, IVA,  Total   .- IVA= numero empresa
-        Importe = Rs!Baseimpo
-        SQL = SQL & Rs!codmacta & "','" & Rs!NIF & "'," & i & "," & TransformaComasPuntos(CStr(Importe))
+        Importe = RS!Baseimpo
+        SQL = SQL & RS!codmacta & "','" & RS!NIF & "'," & I & "," & TransformaComasPuntos(CStr(Importe))
         
         
-        SQL = SQL & ",'" & DevNombreSQL(Rs!nommacta)
+        SQL = SQL & ",'" & DevNombreSQL(RS!Nommacta)
         SQL = RC & SQL & "')"
     
         
         Conn.Execute SQL
     
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
  
     'PROVEEDORES
@@ -1415,31 +1411,30 @@ On Error GoTo EComprobarCuentas349
     
     
     
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
         ContadorPro = ContadorPro + 1
-        'INSERT INTO ztmpfaclin (codusu, codigo, Numfac,fecha "
         
-        SQL = ContadorPro & ",'" & Format(Rs!NumRegis, "0000000000") & "','" & Format(Rs!fecharec, FormatoFecha) & "','"
+        SQL = ContadorPro & ",'" & Format(RS!NumRegis, "0000000000") & "','" & Format(RS!fecharec, FormatoFecha) & "','"
         ', cta,  NIF, IVA,  Total   .- IVA= numero empresa    cta=cod factura
         
         'Abril 2006. Busco la base, no el total factura
-        Importe = Rs!Baseimpo
-        SQL = SQL & Mid(Rs!NumFactu, 1, 10) & "','" & Rs!NIF & "'," & i & "," & TransformaComasPuntos(CStr(Importe))
+        Importe = RS!Baseimpo
+        SQL = SQL & Mid(RS!NumFactu, 1, 10) & "','" & RS!NIF & "'," & I & "," & TransformaComasPuntos(CStr(Importe))
         
         
         
-        SQL = SQL & ",'" & Format(Rs!FecFactu, FormatoFecha) & "','" & DevNombreSQL(Rs!nommacta)
+        SQL = SQL & ",'" & Format(RS!FecFactu, FormatoFecha) & "','" & DevNombreSQL(RS!Nommacta)
         SQL = RC & SQL & "')"
     
         
         Conn.Execute SQL
     
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
-    Set Rs = Nothing
+    Set RS = Nothing
     ComprobarCuentas349_DOS = True
     Exit Function
 EComprobarCuentas349:
@@ -1473,7 +1468,7 @@ ECopiarFichero347:
 End Sub
 
 Private Function ExisteEntrada() As Boolean
-    SQL = "Select importe from tmp347tot  where codusu = " & vUsu.Codigo & " and cliprov =" & Rs!cliprov & " AND nif ='" & Rs!NIF & "';"
+    SQL = "Select importe from tmp347tot  where codusu = " & vUsu.Codigo & " and cliprov =" & RS!cliprov & " AND nif ='" & RS!NIF & "';"
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         ExisteEntrada = True

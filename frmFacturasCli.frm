@@ -3089,16 +3089,12 @@ Dim RS As ADODB.Recordset
         ' Insertamos
         If Not ExisteAlgunCobro(Text1(2).Text, Text1(0).Text, FecFactuAnt, False) Then
     
-            SQL = "select ccc.ctabanco,ccc.entidad,ccc.oficina,ccc.control,ccc.cuentaba,ccc.iban, ddd.nommacta "
+            SQL = "select ccc.ctabanco,ccc.iban, ddd.nommacta "
             SQL = SQL & " from cuentas ccc, cuentas ddd "
             SQL = SQL & " where ccc.codmacta = " & DBSet(Text1(4).Text, "T")
             SQL = SQL & " and ccc.ctabanco = ddd.codmacta "
             
             CtaBanco = ""
-            Entidad = ""
-            Oficina = ""
-            Control = ""
-            Cuentaba = ""
             IBAN = ""
             NomBanco = ""
             Set RS = New ADODB.Recordset
@@ -3106,18 +3102,14 @@ Dim RS As ADODB.Recordset
             
             If Not RS.EOF Then
                 CtaBanco = DBLet(RS.Fields(0))
-                Entidad = DBLet(RS.Fields(1))
-                Oficina = DBLet(RS.Fields(2))
-                Control = DBLet(RS.Fields(3))
-                Cuentaba = DBLet(RS.Fields(4))
-                IBAN = DBLet(RS.Fields(5))
-                NomBanco = DBLet(RS.Fields(6))
+                IBAN = DBLet(RS.Fields(1))
+                NomBanco = DBLet(RS.Fields(2))
             End If
         
             TipForpa = DevuelveValor("select formapago.tipforpa from formapago where codforpa = " & DBSet(Text1(5).Text, "N"))
             
             Set frmCob = frmFacturasCliCob
-            frmCob.CodigoActual = CtaBanco & "|" & Entidad & "|" & Oficina & "|" & Control & "|" & Cuentaba & "|" & IBAN & "|" & TipForpa & "|" & NomBanco & "|"
+            frmCob.CodigoActual = CtaBanco & "|" & "|" & "|" & "|" & "|" & IBAN & "|" & TipForpa & "|" & NomBanco & "|"
             frmCob.Show vbModal
             Set frmCob = Nothing
     
@@ -3252,10 +3244,6 @@ Dim SQL As String
         SQL = SQL & ", fecvenci = " & DBSet(RS1!FecVenci, "F")
         SQL = SQL & ", impvenci = " & DBSet(RS1!ImpVenci, "N")
         SQL = SQL & ", ctabanc1 = " & DBSet(CtaBanco, "T", "S")
-        SQL = SQL & ", entidad = " & DBSet(Entidad, "N", "S")
-        SQL = SQL & ", oficina = " & DBSet(Oficina, "N", "S")
-        SQL = SQL & ", control = " & DBSet(Control, "T", "S")
-        SQL = SQL & ", cuentaba = " & DBSet(Cuentaba, "T", "S")
         SQL = SQL & ", fecfactu = " & DBSet(Text1(1).Text, "F")
         
         If Cobrado Then
@@ -7786,7 +7774,7 @@ Dim SQL As String
     InsertaCobros = False
         
     CadInsert = "insert into cobros (numserie,numfactu,fecfactu,numorden,codmacta,codforpa,fecvenci,impvenci," & _
-                "ctabanc1,entidad,oficina,control,cuentaba,fecultco,impcobro,emitdocum,recedocu,contdocu," & _
+                "ctabanc1,fecultco,impcobro,emitdocum,recedocu,contdocu," & _
                 "text33csb,text41csb,ultimareclamacion,agente,departamento,transfer," & _
                 "nomclien,domclien,pobclien,cpclien,proclien,iban,nifclien,codpais,situacion, codusu) values "
     CadValues = ""
@@ -7796,8 +7784,7 @@ Dim SQL As String
         
         SQL = DBSet(Text1(2).Text, "T") & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Text1(1).Text, "F") & "," & DBSet(I, "N") & ","
         SQL = SQL & DBSet(Text1(4).Text, "T") & "," & DBSet(Text1(5).Text, "N") & "," & DBSet(RS1!FecVenci, "F") & "," & DBSet(RS1!ImpVenci, "N") & ","
-        SQL = SQL & DBSet(CtaBanco, "T", "S") & "," & DBSet(Entidad, "N", "S") & "," & DBSet(Oficina, "N", "S") & "," & DBSet(Control, "T", "S") & ","
-        SQL = SQL & DBSet(Cuentaba, "T", "S") & ","
+        SQL = SQL & DBSet(CtaBanco, "T", "S") & ","
         
         If Cobrado Then
             SQL = SQL & DBSet(FechaCobro, "F") & "," & DBSet(RS1!ImpVenci, "N") & ","

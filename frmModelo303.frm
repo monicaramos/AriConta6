@@ -1209,8 +1209,6 @@ Dim RS As ADODB.Recordset
     'DE estos dos NO hay text
     '---------------------
     'Op no sujetas o con conversion del sujeto pasivo
-    'Cad = Cad & String(17, "0")
-'    DevuelveImporte 47, 0  'cuota
     SQL = "select  sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 12 "
     
     Set RS = New ADODB.Recordset
@@ -1222,13 +1220,10 @@ Dim RS As ADODB.Recordset
     End If
     
     'Diferencia antes de aplicar las
-'    DevuelveImporte 29, 0  'base
     DevuelveImporte ImpTotal, 0
      
     
     'Atribuible a la admon del estado
-'    DevuelveImporte 31, 3  '%
-'    DevuelveImporte 30, 0  'base
     DevuelveImporte 31, 0  '%
     DevuelveImporte ImpTotal * (-1), 0
 
@@ -1241,19 +1236,14 @@ Dim RS As ADODB.Recordset
     cad = cad & String(17, "0")
     
     'Campo13. Resultado
-'    DevuelveImporte 36, 0
     DevuelveImporte ImpTotal - ImpCompensa, 0
 
     'Campo14. A deducor
-'    DevuelveImporte 36, 0
     DevuelveImporte ImpTotal - ImpCompensa, 0
 
     'Campo15. Resultado de la liquidacion
-'    DevuelveImporte 36, 0
     DevuelveImporte ImpTotal - ImpCompensa, 0
 
-
-   
 End Sub
 
 
@@ -1301,9 +1291,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'Adquisiciones intra
-'--
-'    DevuelveImporte 9, 0  'base
-'    DevuelveImporte 11, 0  'cuota
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 10 "
     
     Set RS = New ADODB.Recordset
@@ -1395,9 +1382,6 @@ Dim RS As ADODB.Recordset
     TotalProve = 0
     
 '    'operaciones interiores
-'--
-'    DevuelveImporte 21, 0
-'    DevuelveImporte 22, 0
 
     '[Monica]24/06/2016: en las facturas de proveedores faltaba añadir las fras de ISP, he añadido el 12
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente in ( 2, 12 )  "
@@ -1421,9 +1405,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'operaciones interiores BIENES INVERSION
-'--
-'    DevuelveImporte 38, 0
-'    DevuelveImporte 39, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 30 "
     
     Set RS = New ADODB.Recordset
@@ -1445,9 +1426,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'importaciones
-'--
-'    DevuelveImporte 23, 0
-'    DevuelveImporte 24, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 32 "
     
     Set RS = New ADODB.Recordset
@@ -1468,10 +1446,7 @@ Dim RS As ADODB.Recordset
     End If
     Set RS = Nothing
     
-'??????
     'importaciones BIEN INVERSION
-'    DevuelveImporte 40, 0
-'    DevuelveImporte 41, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 34 "
     
     Set RS = New ADODB.Recordset
@@ -1495,9 +1470,6 @@ Dim RS As ADODB.Recordset
     
     
     'adqisiciones intracom
-'--
-'    DevuelveImporte 25, 0
-'    DevuelveImporte 26, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 36 "
     
     Set RS = New ADODB.Recordset
@@ -1519,9 +1491,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'adqisiciones intracom BIEN INVERSION
-'--
-'    DevuelveImporte 42, 0
-'    DevuelveImporte 43, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 38 "
     
     Set RS = New ADODB.Recordset
@@ -1567,17 +1536,11 @@ Dim RS As ADODB.Recordset
     
     Set RS = Nothing
     
-'--
-'    DevuelveImporte 27, 0  'Regularizacion inversiones
-'    DevuelveImporte 44, 0  'Regularizacion por aplicacion del porcentaje def de prorrata
-
     DevuelveImporte 0, 0  'Regularizacion inversiones
     DevuelveImporte 0, 0  'Regularizacion por aplicacion del porcentaje def de prorrata
 
     
     'total a deducir
-'--
-'    DevuelveImporte 34, 0  'cuota
     DevuelveImporte TotalProve, 0
     
     
@@ -1631,7 +1594,6 @@ Dim Resul As String
         If modelo = 4 Then
             Aux = Aux & String(16, "0")  '15 enteros 2 decima  17-1
         Else
-            'Aux = Aux & "000000000000"
             Aux = Aux & String(10, "0")   '11 enteros 2 decimales  13-1
         End If
     End Select
@@ -2056,19 +2018,17 @@ Private Function GeneraLasLiquidaciones() As Boolean
     SQL = SQL & " AND bases = 0"
     Conn.Execute SQL
     
-'    If Me.chkIVAdetallado.Value = 1 Then
-        'Insertamos en Usuarios para el posible informe
-        SQL = "INSERT INTO tmpimpbalan (codusu, Pasivo, codigo, descripcion, linea, importe1, importe2, negrita) "
-        SQL = SQL & " SELECT codusu, Pasivo, codigo, descripcion, linea, importe1, importe2, negrita FROM tmpimpbalance "
-        SQL = SQL & " WHERE codusu=" & vUsu.Codigo
-        Conn.Execute SQL
+   'Insertamos en Usuarios para el posible informe
+    SQL = "INSERT INTO tmpimpbalan (codusu, Pasivo, codigo, descripcion, linea, importe1, importe2, negrita) "
+    SQL = SQL & " SELECT codusu, Pasivo, codigo, descripcion, linea, importe1, importe2, negrita FROM tmpimpbalance "
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo
+    Conn.Execute SQL
         
-'    End If
     
     GeneraLasLiquidaciones = True
 End Function
 
-Private Sub ModeloIva(leer As Boolean)
+Private Sub ModeloIva(Leer As Boolean)
 
 On Error GoTo EModeloIva
 EModeloIva:

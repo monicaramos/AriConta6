@@ -475,7 +475,7 @@ Begin VB.Form frmTESCobros
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3435
-         Left            =   300
+         Left            =   270
          TabIndex        =   125
          Top             =   1140
          Visible         =   0   'False
@@ -4618,60 +4618,6 @@ Private Sub imgSerie_Click()
     
 End Sub
 
-Private Sub mnBuscar_Click()
-
-    Dim NF As Integer
-    Dim cad As String
-    Dim Entidad As String
-    Dim BIC As String
-    
-    cad = "C:\Documents and Settings\David\Escritorio\bic.txt"
-    NF = FreeFile
-    Open cad For Input As #NF
-    While Not EOF(NF)
-        Line Input #NF, cad
-        
-        'sbic(entidad,Nombre,bic)
-        cad = Trim(cad)
-        
-        Entidad = Right(cad, 4)
-        cad = Mid(cad, 1, Len(cad) - 4)
-        
-        BIC = Mid(cad, 1, 11)
-        cad = Trim(Mid(cad, 12))
-        
-        NombreSQL cad
-        cad = "INSERT INTO sbic(entidad,Nombre,bic) VALUES (" & Entidad & ",'" & cad & "','" & BIC & "')"
-        Conn.Execute cad
-        
-        
-    Wend
-    Close (NF)
-
-
-    BotonBuscar
-End Sub
-
-Private Sub mnEliminar_Click()
-    BotonEliminar
-End Sub
-
-Private Sub mnModificar_Click()
-    BotonModificar
-End Sub
-
-Private Sub mnNuevo_Click()
-BotonAnyadir
-End Sub
-
-Private Sub mnSalir_Click()
-Screen.MousePointer = vbHourglass
-Unload Me
-End Sub
-
-Private Sub mnVerTodos_Click()
-BotonVerTodos
-End Sub
 
 
 '### A mano
@@ -4728,7 +4674,7 @@ Private Sub Text1_LostFocus(Index As Integer)
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
     
-    If Not (Index = 4 Or Index = 10 Or Index = 9) Then
+    If Not (Index = 4 Or Index = 9 Or Index = 10 Or Index = 26 Or Index = 28 Or Index = 29 Or Index = 30 Or Index = 31) Then
         If Modo < 2 Then Exit Sub
     End If
     'Campo con valor
@@ -4756,7 +4702,7 @@ Private Sub Text1_LostFocus(Index As Integer)
             If Modo > 2 And Index = 4 Then
                 SQL = ""
                 Valor = DevuelveLaCtaBanco(DevfrmCCtas)
-                If Len(Valor) = 5 Then Valor = ""
+                If Len(Valor) = 1 Then Valor = ""
                 If CStr(Valor) <> "" Then
                     If SQL <> "" Then
                         If MsgBox("Poner Cuenta bancaria de la registro del cliente: " & Replace(CStr(Valor), "|", " - ") & "?", vbQuestion + vbYesNo) = vbYes Then SQL = ""
@@ -5668,7 +5614,7 @@ Dim impo As Currency
     frmTESParciales.Cobro = True
     frmTESParciales.Vto = Text1(13).Text & "|" & Text1(1).Text & "|" & Text1(2).Text & "|" & Text1(3).Text & "|" & Text1(5).Text & "|"
     frmTESParciales.Importes = Text1(6).Text & "|" & Text1(16).Text & "|" & Text1(8).Text & "|"
-    frmTESParciales.cta = Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(9).Text & "|" & Text2(2).Text & "|"
+    frmTESParciales.Cta = Text1(4).Text & "|" & Text2(0).Text & "|" & Text1(9).Text & "|" & Text2(2).Text & "|"
     frmTESParciales.FormaPago = Val(vTipForpa)
     frmTESParciales.Show vbModal
     If CadenaDesdeOtroForm <> "" Then

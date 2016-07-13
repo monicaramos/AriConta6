@@ -552,9 +552,9 @@ Private Sub Form_Load()
     Me.Caption = "Tipos de IVA"
     optVarios(0).Value = True
 
-    For i = 0 To 1
-        Me.imgIVA(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgiva(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
@@ -630,10 +630,10 @@ Private Sub txtIVA_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgIVA"
-        imgiva_Click indice
+        imgiva_Click Indice
     End Select
     
 End Sub
@@ -643,7 +643,7 @@ Private Sub txtiva_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtIVA_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtIVA(Index).Text = Trim(txtIVA(Index).Text)
     
@@ -657,7 +657,6 @@ Dim Cad As String, cadTipo As String 'tipo cliente
             If txtIVA(Index).Text <> "" Then txtIVA(Index).Text = Format(txtIVA(Index).Text, "000")
     End Select
 
-'    PierdeFocoConcepto Me.txtIVA(Index), Me.lblIVA(Index)
 End Sub
 
 
@@ -666,9 +665,9 @@ Private Sub AccionesCSV()
     'Monto el SQL
     SQL = "Select  codigiva as codigo ,nombriva as descripcion, porceiva as porcentaje, porcerec as recargo,  CASE tipodiva WHEN 0 THEN 'IVA' WHEN 1 THEN 'IGIC' WHEN 2 THEN 'BIEN DE INVERSION' WHEN 3 THEN 'R.E.A' WHEN 4 THEN 'NO DEDUCIBLE' END as TipoIva FROM tiposiva "
     If cadselect <> "" Then SQL = SQL & " WHERE " & cadselect
-    i = 1
-    If optVarios(1).Value Then i = 2 'nombre
-    SQL = SQL & " ORDER BY " & i
+    I = 1
+    If optVarios(1).Value Then I = 2 'nombre
+    SQL = SQL & " ORDER BY " & I
         
     'LLamoa a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text

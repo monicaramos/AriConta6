@@ -903,21 +903,12 @@ Private Sub Form_Load()
     FramePeriodo.Enabled = (Me.cmbPeriodo(0).ListIndex = 0)
     FramePeriodo.Visible = (Me.cmbPeriodo(0).ListIndex = 0)
     
-'    txtFecha(0).Text = vParam.fechaini
-'    txtFecha(1).Text = vParam.fechafin
-'    If Not vParam.FecEjerAct Then
-'        txtFecha(1).Text = Format(DateAdd("yyyy", 1, vParam.fechafin), "dd/mm/yyyy")
-'    End If
-    
     CargarFechas
     
     
     
     txtFecha(2).Text = Format(vFecha2, "dd/mm/yyyy")
      
-'    PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
-    
-    
     
 End Sub
 
@@ -954,7 +945,6 @@ End Sub
 Private Sub PonerPeriodoPresentacion303()
 
     cmbPeriodo(0).Clear
-'    Me.cmbPeriodo(0).AddItem "Manual"
     If vParam.periodos = 0 Then
         'Liquidacion TRIMESTRAL
         
@@ -1122,9 +1112,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'Adquisiciones intra
-'--
-'    DevuelveImporte 9, 0  'base
-'    DevuelveImporte 11, 0  'cuota
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 10 "
     
     Set RS = New ADODB.Recordset
@@ -1174,12 +1161,6 @@ Dim RS As ADODB.Recordset
     
     
     'Los recargos
-'--
-'    For i = 0 To 2
-'        DevuelveImporte ((3 * i) + 12), 0
-'        DevuelveImporte (i * 3) + 13, 3
-'        DevuelveImporte ((i * 3)) + 14, 0
-'    Next i
     SQL = "select iva,  bases, ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 1 "
     SQL = SQL & " order by 1 "
     
@@ -1212,8 +1193,6 @@ Dim RS As ADODB.Recordset
     
 
     'total
-'--
-'    DevuelveImporte 33, 0
     DevuelveImporte TotalClien, 0
     
     '------------------------------------------------------------------------
@@ -1222,9 +1201,6 @@ Dim RS As ADODB.Recordset
     TotalProve = 0
     
 '    'operaciones interiores
-'--
-'    DevuelveImporte 21, 0
-'    DevuelveImporte 22, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 2 "
     
     Set RS = New ADODB.Recordset
@@ -1246,9 +1222,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'operaciones interiores BIENES INVERSION
-'--
-'    DevuelveImporte 38, 0
-'    DevuelveImporte 39, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 30 "
     
     Set RS = New ADODB.Recordset
@@ -1270,9 +1243,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'importaciones
-'--
-'    DevuelveImporte 23, 0
-'    DevuelveImporte 24, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 32 "
     
     Set RS = New ADODB.Recordset
@@ -1293,10 +1263,7 @@ Dim RS As ADODB.Recordset
     End If
     Set RS = Nothing
     
-'??????
     'importaciones BIEN INVERSION
-'    DevuelveImporte 40, 0
-'    DevuelveImporte 41, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 34 "
     
     Set RS = New ADODB.Recordset
@@ -1320,9 +1287,6 @@ Dim RS As ADODB.Recordset
     
     
     'adqisiciones intracom
-'--
-'    DevuelveImporte 25, 0
-'    DevuelveImporte 26, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 36 "
     
     Set RS = New ADODB.Recordset
@@ -1344,9 +1308,6 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'adqisiciones intracom BIEN INVERSION
-'--
-'    DevuelveImporte 42, 0
-'    DevuelveImporte 43, 0
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 38 "
     
     Set RS = New ADODB.Recordset
@@ -1371,8 +1332,6 @@ Dim RS As ADODB.Recordset
     DevuelveImporte 0, 0
     DevuelveImporte 0, 0
 
-'--
-'    DevuelveImporte 28, 0  'Regimen especial
     SQL = "select sum(bases) bases, sum(ivas) ivas from tmpliquidaiva where codusu = " & DBSet(vUsu.Codigo, "N") & " and cliente = 42 "
     
     Set RS = New ADODB.Recordset
@@ -1392,23 +1351,16 @@ Dim RS As ADODB.Recordset
     
     Set RS = Nothing
     
-'--
-'    DevuelveImporte 27, 0  'Regularizacion inversiones
-'    DevuelveImporte 44, 0  'Regularizacion por aplicacion del porcentaje def de prorrata
 
     DevuelveImporte 0, 0  'Regularizacion inversiones
     DevuelveImporte 0, 0  'Regularizacion por aplicacion del porcentaje def de prorrata
 
     
     'total a deducir
-'--
-'    DevuelveImporte 34, 0  'cuota
     DevuelveImporte TotalProve, 0
     
     
     'Diferencia
-'--
-'    DevuelveImporte 29, 0  'base
     DevuelveImporte TotalClien - TotalProve, 0  'Regularizacion inversiones
     
     ImpTotal = TotalClien - TotalProve
@@ -1456,7 +1408,6 @@ Dim Resul As String
         If modelo = 4 Then
             Aux = Aux & String(16, "0")  '15 enteros 2 decima  17-1
         Else
-            'Aux = Aux & "000000000000"
             Aux = Aux & String(10, "0")   '11 enteros 2 decimales  13-1
         End If
     End Select
@@ -1723,7 +1674,6 @@ Dim SQL As String
     'Los encabezados
     ListView1(Index).ColumnHeaders.Clear
 
- '   ListView1.ColumnHeaders.Add , , "Tipo", 650
     ListView1(Index).ColumnHeaders.Add , , "Código", 600
     ListView1(Index).ColumnHeaders.Add , , "Descripción", 3200
     

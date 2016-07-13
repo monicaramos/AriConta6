@@ -1894,8 +1894,6 @@ Dim Aux
             If nx.Checked Then RecursivoBD nx.Child
         End If
         If Not nx.Checked Then InsertaBD nx.Tag
-        'aux = nx.Root
-        'aux = nx.Parent
         Set nx = nx.Next
     Wend
     
@@ -1922,10 +1920,8 @@ Private Sub CargaCombo()
     Combo2.AddItem "Administrador"
     Combo2.ItemData(Combo2.NewIndex) = 1
     
-'    If vUsu.Login = "root" Then
-        Combo2.AddItem "Superusuario"
-        Combo2.ItemData(Combo2.NewIndex) = 0
-'    End If
+    Combo2.AddItem "Superusuario"
+    Combo2.ItemData(Combo2.NewIndex) = 0
 
     'skin
     Combo5.Clear

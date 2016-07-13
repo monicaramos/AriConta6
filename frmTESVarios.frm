@@ -22,624 +22,22 @@ Begin VB.Form frmTESVarios
       _ExtentY        =   847
       _Version        =   393216
    End
-   Begin VB.Frame FrameRemesa2 
-      Height          =   8295
-      Left            =   0
-      TabIndex        =   44
-      Top             =   0
-      Width           =   5775
-      Begin VB.CheckBox chkComensaAbonos 
-         Caption         =   "Compensar abonos"
-         Height          =   255
-         Left            =   240
-         TabIndex        =   59
-         Top             =   6360
-         Width           =   2415
-      End
-      Begin VB.CheckBox chkAgruparRemesaPorEntidad 
-         Caption         =   "Distribuir recibos por entidad"
-         Height          =   255
-         Left            =   2880
-         TabIndex        =   349
-         Top             =   6360
-         Width           =   2655
-      End
-      Begin VB.TextBox txtImporte 
-         Height          =   285
-         Index           =   7
-         Left            =   3720
-         TabIndex        =   54
-         Text            =   "Text10"
-         Top             =   3840
-         Width           =   975
-      End
-      Begin VB.TextBox txtImporte 
-         Height          =   285
-         Index           =   6
-         Left            =   2160
-         TabIndex        =   53
-         Text            =   "Text10"
-         Top             =   3840
-         Width           =   975
-      End
-      Begin VB.Frame FrameBancoRemesa 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   735
-         Left            =   120
-         TabIndex        =   261
-         Top             =   6720
-         Visible         =   0   'False
-         Width           =   5295
-         Begin VB.TextBox txtCta 
-            Height          =   285
-            Index           =   3
-            Left            =   120
-            TabIndex        =   60
-            Text            =   "Text2"
-            Top             =   240
-            Width           =   1335
-         End
-         Begin VB.TextBox txtDescCta 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   3
-            Left            =   1920
-            TabIndex        =   262
-            Text            =   "Text2"
-            Top             =   240
-            Width           =   3255
-         End
-         Begin VB.Image imgCuentas 
-            Height          =   240
-            Index           =   3
-            Left            =   1560
-            Top             =   240
-            Width           =   240
-         End
-      End
-      Begin VB.ComboBox cmbRemesa 
-         Height          =   315
-         Left            =   1920
-         Style           =   2  'Dropdown List
-         TabIndex        =   58
-         Top             =   5880
-         Width           =   1695
-      End
-      Begin VB.TextBox txtCtaNormal 
-         Height          =   285
-         Index           =   4
-         Left            =   1080
-         TabIndex        =   56
-         Text            =   "Text9"
-         Top             =   5160
-         Width           =   1095
-      End
-      Begin VB.TextBox txtDCtaNormal 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   4
-         Left            =   2280
-         TabIndex        =   237
-         Text            =   "Text9"
-         Top             =   5160
-         Width           =   3015
-      End
-      Begin VB.TextBox txtCtaNormal 
-         Height          =   285
-         Index           =   3
-         Left            =   1080
-         TabIndex        =   55
-         Text            =   "Text9"
-         Top             =   4755
-         Width           =   1095
-      End
-      Begin VB.TextBox txtDCtaNormal 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   3
-         Left            =   2280
-         TabIndex        =   235
-         Text            =   "Text9"
-         Top             =   4755
-         Width           =   3015
-      End
-      Begin VB.TextBox txtnumfac 
-         Height          =   285
-         Index           =   1
-         Left            =   3720
-         TabIndex        =   52
-         Text            =   "Text10"
-         Top             =   3120
-         Width           =   1095
-      End
-      Begin VB.TextBox txtnumfac 
-         Height          =   285
-         Index           =   0
-         Left            =   2160
-         TabIndex        =   51
-         Text            =   "Text10"
-         Top             =   3120
-         Width           =   1095
-      End
-      Begin VB.TextBox txtSerie 
-         Height          =   285
-         Index           =   1
-         Left            =   3720
-         TabIndex        =   50
-         Text            =   "Text10"
-         Top             =   2400
-         Width           =   495
-      End
-      Begin VB.TextBox txtSerie 
-         Height          =   285
-         Index           =   0
-         Left            =   2160
-         TabIndex        =   49
-         Text            =   "Text10"
-         Top             =   2400
-         Width           =   495
-      End
-      Begin VB.TextBox Text1 
-         Height          =   285
-         Index           =   22
-         Left            =   2160
-         TabIndex        =   47
-         Text            =   "Text1"
-         Top             =   1680
-         Width           =   1095
-      End
-      Begin VB.TextBox Text1 
-         Height          =   285
-         Index           =   21
-         Left            =   3720
-         TabIndex        =   48
-         Text            =   "Text1"
-         Top             =   1680
-         Width           =   1095
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         ForeColor       =   &H80000015&
-         Height          =   285
-         Index           =   4
-         Left            =   2400
-         TabIndex        =   73
-         Text            =   "Text2"
-         Top             =   4320
-         Visible         =   0   'False
-         Width           =   3015
-      End
-      Begin VB.TextBox txtRemesa 
-         Height          =   285
-         Left            =   4080
-         TabIndex        =   70
-         Text            =   "Text2"
-         Top             =   5880
-         Visible         =   0   'False
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "Cancelar"
-         Height          =   375
-         Index           =   4
-         Left            =   4440
-         TabIndex        =   62
-         Top             =   7680
-         Width           =   1095
-      End
-      Begin VB.TextBox Text1 
-         Height          =   285
-         Index           =   8
-         Left            =   240
-         TabIndex        =   57
-         Text            =   "Text1"
-         Top             =   5880
-         Width           =   1095
-      End
-      Begin VB.TextBox Text1 
-         Height          =   285
-         Index           =   7
-         Left            =   3720
-         TabIndex        =   46
-         Text            =   "Text1"
-         Top             =   960
-         Width           =   1095
-      End
-      Begin VB.TextBox Text1 
-         Height          =   285
-         Index           =   6
-         Left            =   2160
-         TabIndex        =   45
-         Text            =   "Text1"
-         Top             =   960
-         Width           =   1095
-      End
-      Begin VB.CommandButton cmdRemesas 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3240
-         TabIndex        =   61
-         Top             =   7680
-         Width           =   1095
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Importe Vto."
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   40
-         Left            =   240
-         TabIndex        =   330
-         Top             =   3600
-         Width           =   1620
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   39
-         Left            =   3720
-         TabIndex        =   329
-         Top             =   3600
-         Width           =   465
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   38
-         Left            =   2160
-         TabIndex        =   328
-         Top             =   3600
-         Width           =   465
-      End
-      Begin VB.Image imgCtaNorma 
-         Height          =   240
-         Index           =   4
-         Left            =   840
-         Top             =   5175
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   22
-         Left            =   240
-         TabIndex        =   236
-         Top             =   5205
-         Width           =   465
-      End
-      Begin VB.Image imgCtaNorma 
-         Height          =   240
-         Index           =   3
-         Left            =   840
-         Top             =   4800
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   21
-         Left            =   240
-         TabIndex        =   234
-         Top             =   4800
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Cuenta"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   23
-         Left            =   120
-         TabIndex        =   233
-         Top             =   4440
-         Width           =   900
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   20
-         Left            =   2160
-         TabIndex        =   231
-         Top             =   2880
-         Width           =   465
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   19
-         Left            =   3720
-         TabIndex        =   230
-         Top             =   2880
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Numero factura"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   21
-         Left            =   240
-         TabIndex        =   229
-         Top             =   2880
-         Width           =   1620
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   18
-         Left            =   2160
-         TabIndex        =   228
-         Top             =   2160
-         Width           =   465
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   17
-         Left            =   3720
-         TabIndex        =   227
-         Top             =   2160
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Serie"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   20
-         Left            =   240
-         TabIndex        =   226
-         Top             =   2160
-         Width           =   1620
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   16
-         Left            =   2160
-         TabIndex        =   225
-         Top             =   1440
-         Width           =   465
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   22
-         Left            =   2880
-         Top             =   1440
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   15
-         Left            =   3720
-         TabIndex        =   224
-         Top             =   1440
-         Width           =   420
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   21
-         Left            =   4200
-         Top             =   1440
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   19
-         Left            =   240
-         TabIndex        =   223
-         Top             =   1440
-         Width           =   1620
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Nº Remesa"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   10
-         Left            =   4080
-         TabIndex        =   69
-         Top             =   5640
-         Visible         =   0   'False
-         Width           =   1140
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Tipo de remesa"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   11
-         Left            =   1920
-         TabIndex        =   68
-         Top             =   5640
-         Width           =   1620
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Fecha remesa"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   9
-         Left            =   240
-         TabIndex        =   67
-         Top             =   5640
-         Width           =   660
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   8
-         Left            =   960
-         Top             =   5640
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Fecha vencimiento"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   8
-         Left            =   240
-         TabIndex        =   66
-         Top             =   720
-         Width           =   1620
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   7
-         Left            =   4200
-         Top             =   720
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   5
-         Left            =   3720
-         TabIndex        =   65
-         Top             =   720
-         Width           =   420
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   6
-         Left            =   2880
-         Top             =   720
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   4
-         Left            =   2160
-         TabIndex        =   64
-         Top             =   720
-         Width           =   465
-      End
-      Begin VB.Label Label5 
-         Alignment       =   2  'Center
-         Caption         =   "R E M E S A S"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   375
-         Index           =   0
-         Left            =   120
-         TabIndex        =   63
-         Top             =   240
-         Width           =   5295
-      End
-   End
    Begin VB.Frame FrameDevlucionRe 
       Height          =   7245
-      Left            =   3090
-      TabIndex        =   109
+      Left            =   0
+      TabIndex        =   81
       Top             =   0
       Width           =   5835
       Begin VB.Frame FrameDevDesdeVto 
          Height          =   1215
          Left            =   120
-         TabIndex        =   319
+         TabIndex        =   275
          Top             =   600
          Width           =   5655
          Begin VB.TextBox txtNumero 
             Height          =   285
             Left            =   3960
-            TabIndex        =   90
+            TabIndex        =   62
             Text            =   "Text10"
             Top             =   720
             Width           =   375
@@ -648,7 +46,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   4
             Left            =   2160
-            TabIndex        =   88
+            TabIndex        =   60
             Text            =   "Text10"
             Top             =   720
             Width           =   495
@@ -657,7 +55,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   4
             Left            =   2760
-            TabIndex        =   89
+            TabIndex        =   61
             Text            =   "Text10"
             Top             =   720
             Width           =   1095
@@ -668,7 +66,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   11
             Left            =   2400
-            TabIndex        =   320
+            TabIndex        =   276
             Text            =   "Text9"
             Top             =   240
             Width           =   3135
@@ -677,7 +75,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   11
             Left            =   1080
-            TabIndex        =   87
+            TabIndex        =   59
             Text            =   "Text9"
             Top             =   240
             Width           =   1335
@@ -703,7 +101,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   38
             Left            =   600
-            TabIndex        =   322
+            TabIndex        =   278
             Top             =   720
             Width           =   1065
          End
@@ -729,7 +127,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   37
             Left            =   120
-            TabIndex        =   321
+            TabIndex        =   277
             Top             =   240
             Width           =   900
          End
@@ -739,7 +137,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   5
          Left            =   3840
-         TabIndex        =   101
+         TabIndex        =   73
          Text            =   "Text4"
          Top             =   3480
          Width           =   1095
@@ -748,7 +146,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Agrupa apunte banco"
          Height          =   255
          Left            =   240
-         TabIndex        =   106
+         TabIndex        =   78
          Top             =   6360
          Width           =   1935
       End
@@ -757,7 +155,7 @@ Begin VB.Form frmTESVarios
          Index           =   1
          Left            =   2160
          Style           =   2  'Dropdown List
-         TabIndex        =   105
+         TabIndex        =   77
          Tag             =   "Ampliacion debe/CLIENTES|N|N|0||stipoformapago|ampdecli|||"
          Top             =   6000
          Width           =   2820
@@ -767,7 +165,7 @@ Begin VB.Form frmTESVarios
          Index           =   0
          Left            =   2160
          Style           =   2  'Dropdown List
-         TabIndex        =   103
+         TabIndex        =   75
          Tag             =   "Ampliacion debe/CLIENTES|N|N|0||stipoformapago|ampdecli|||"
          Top             =   4920
          Width           =   2820
@@ -776,7 +174,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   2
          Left            =   2160
-         TabIndex        =   104
+         TabIndex        =   76
          Text            =   "Text10"
          Top             =   5520
          Width           =   495
@@ -787,7 +185,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   2
          Left            =   2760
-         TabIndex        =   241
+         TabIndex        =   199
          Text            =   "Text9"
          Top             =   5520
          Width           =   2895
@@ -796,7 +194,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   2160
-         TabIndex        =   102
+         TabIndex        =   74
          Text            =   "Text10"
          Top             =   4440
          Width           =   495
@@ -807,7 +205,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   2760
-         TabIndex        =   239
+         TabIndex        =   197
          Text            =   "Text9"
          Top             =   4440
          Width           =   2895
@@ -817,13 +215,13 @@ Begin VB.Form frmTESVarios
          Caption         =   "Frame2"
          Height          =   1035
          Left            =   120
-         TabIndex        =   176
+         TabIndex        =   148
          Top             =   600
          Width           =   5535
          Begin VB.TextBox Text8 
             Height          =   285
             Left            =   150
-            TabIndex        =   91
+            TabIndex        =   63
             Text            =   "Text8"
             Top             =   420
             Width           =   5295
@@ -850,7 +248,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   10
             Left            =   120
-            TabIndex        =   177
+            TabIndex        =   149
             Top             =   180
             Width           =   615
          End
@@ -859,7 +257,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Contabilizar gasto remesa"
          Height          =   255
          Left            =   960
-         TabIndex        =   100
+         TabIndex        =   72
          Top             =   3510
          Width           =   2295
       End
@@ -868,7 +266,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   2
          Left            =   960
-         TabIndex        =   97
+         TabIndex        =   69
          Top             =   3015
          Width           =   2175
       End
@@ -877,7 +275,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   2
          Left            =   4200
-         TabIndex        =   99
+         TabIndex        =   71
          Text            =   "Text4"
          Top             =   3000
          Visible         =   0   'False
@@ -888,7 +286,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   1
          Left            =   960
-         TabIndex        =   96
+         TabIndex        =   68
          Top             =   2640
          Width           =   1215
       End
@@ -897,7 +295,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   0
          Left            =   960
-         TabIndex        =   95
+         TabIndex        =   67
          Top             =   2280
          Value           =   -1  'True
          Width           =   1455
@@ -907,7 +305,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   9
          Left            =   4560
-         TabIndex        =   108
+         TabIndex        =   80
          Top             =   6720
          Width           =   1095
       End
@@ -915,7 +313,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   6
          Left            =   4410
-         TabIndex        =   93
+         TabIndex        =   65
          Text            =   "Text3"
          Top             =   915
          Width           =   855
@@ -924,7 +322,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   5
          Left            =   2400
-         TabIndex        =   92
+         TabIndex        =   64
          Text            =   "Text3"
          Top             =   915
          Width           =   855
@@ -933,7 +331,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   11
          Left            =   1230
-         TabIndex        =   94
+         TabIndex        =   66
          Text            =   "Text1"
          Top             =   1920
          Width           =   1095
@@ -943,7 +341,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   3840
-         TabIndex        =   98
+         TabIndex        =   70
          Text            =   "Text4"
          Top             =   2400
          Width           =   1095
@@ -952,7 +350,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Devolucion"
          Height          =   375
          Left            =   3360
-         TabIndex        =   107
+         TabIndex        =   79
          Top             =   6720
          Width           =   1095
       End
@@ -972,7 +370,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   17
          Left            =   5040
-         TabIndex        =   318
+         TabIndex        =   274
          Top             =   3570
          Width           =   555
       End
@@ -992,7 +390,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   14
          Left            =   240
-         TabIndex        =   244
+         TabIndex        =   202
          Top             =   5520
          Width           =   510
       End
@@ -1012,7 +410,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   13
          Left            =   240
-         TabIndex        =   243
+         TabIndex        =   201
          Top             =   4440
          Width           =   585
       End
@@ -1021,7 +419,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   10
          Left            =   960
-         TabIndex        =   242
+         TabIndex        =   200
          Top             =   5550
          Width           =   750
       End
@@ -1037,7 +435,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   9
          Left            =   960
-         TabIndex        =   240
+         TabIndex        =   198
          Top             =   4440
          Width           =   750
       End
@@ -1064,7 +462,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   12
          Left            =   120
-         TabIndex        =   238
+         TabIndex        =   196
          Top             =   4080
          Width           =   1800
       End
@@ -1090,7 +488,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   9
          Left            =   5040
-         TabIndex        =   175
+         TabIndex        =   147
          Top             =   2400
          Width           =   555
       End
@@ -1110,7 +508,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   8
          Left            =   3240
-         TabIndex        =   173
+         TabIndex        =   145
          Top             =   3045
          Visible         =   0   'False
          Width           =   915
@@ -1131,7 +529,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   3
          Left            =   360
-         TabIndex        =   115
+         TabIndex        =   87
          Top             =   120
          Width           =   5175
       End
@@ -1141,7 +539,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   6
          Left            =   3810
-         TabIndex        =   114
+         TabIndex        =   86
          Top             =   930
          Width           =   495
       End
@@ -1150,7 +548,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   5
          Left            =   1770
-         TabIndex        =   113
+         TabIndex        =   85
          Top             =   930
          Width           =   495
       End
@@ -1170,7 +568,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   5
          Left            =   240
-         TabIndex        =   112
+         TabIndex        =   84
          Top             =   960
          Width           =   690
       End
@@ -1190,7 +588,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   4
          Left            =   240
-         TabIndex        =   111
+         TabIndex        =   83
          Top             =   1920
          Width           =   615
       End
@@ -1217,7 +615,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   3
          Left            =   3240
-         TabIndex        =   110
+         TabIndex        =   82
          Top             =   2400
          Width           =   630
       End
@@ -1232,14 +630,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameReclamaEmail 
       Height          =   6975
       Left            =   3450
-      TabIndex        =   340
+      TabIndex        =   293
       Top             =   0
       Width           =   10335
       Begin VB.CommandButton cmdEliminarReclama 
          Height          =   375
          Left            =   1200
          Style           =   1  'Graphical
-         TabIndex        =   348
+         TabIndex        =   301
          ToolTipText     =   "Eliminar"
          Top             =   6360
          Width           =   375
@@ -1257,7 +655,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   375
          Left            =   7560
-         TabIndex        =   347
+         TabIndex        =   300
          Top             =   6360
          Width           =   1215
       End
@@ -1275,7 +673,7 @@ Begin VB.Form frmTESVarios
          Height          =   240
          Index           =   1
          Left            =   8760
-         TabIndex        =   345
+         TabIndex        =   298
          Top             =   450
          Width           =   1365
       End
@@ -1293,7 +691,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   0
          Left            =   7230
-         TabIndex        =   344
+         TabIndex        =   297
          Top             =   480
          Value           =   -1  'True
          Width           =   1335
@@ -1312,14 +710,14 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   31
          Left            =   9000
-         TabIndex        =   341
+         TabIndex        =   294
          Top             =   6360
          Width           =   1095
       End
       Begin MSComctlLib.ListView ListView6 
          Height          =   5295
          Left            =   240
-         TabIndex        =   342
+         TabIndex        =   295
          Top             =   840
          Width           =   9855
          _ExtentX        =   17383
@@ -1390,7 +788,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   44
          Left            =   6300
-         TabIndex        =   346
+         TabIndex        =   299
          Top             =   420
          Width           =   750
       End
@@ -1408,7 +806,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   343
+         TabIndex        =   296
          Top             =   360
          Width           =   4935
       End
@@ -1425,7 +823,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   9
          Left            =   1800
-         TabIndex        =   310
+         TabIndex        =   266
          Text            =   "Text2"
          Top             =   1680
          Width           =   3255
@@ -1443,7 +841,7 @@ Begin VB.Form frmTESVarios
          BorderStyle     =   0  'None
          Height          =   495
          Left            =   120
-         TabIndex        =   258
+         TabIndex        =   216
          Top             =   3840
          Width           =   5055
          Begin VB.TextBox txtDescCta 
@@ -1452,7 +850,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   2
             Left            =   2880
-            TabIndex        =   259
+            TabIndex        =   217
             Text            =   "Text2"
             Top             =   120
             Width           =   2175
@@ -1481,7 +879,7 @@ Begin VB.Form frmTESVarios
             Height          =   255
             Index           =   26
             Left            =   0
-            TabIndex        =   260
+            TabIndex        =   218
             Top             =   120
             Width           =   1335
          End
@@ -1497,7 +895,7 @@ Begin VB.Form frmTESVarios
          BorderStyle     =   0  'None
          Height          =   495
          Left            =   120
-         TabIndex        =   256
+         TabIndex        =   214
          Top             =   3360
          Width           =   5055
          Begin VB.TextBox txtImporte 
@@ -1526,7 +924,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   16
             Left            =   0
-            TabIndex        =   257
+            TabIndex        =   215
             Top             =   120
             Width           =   1005
          End
@@ -1575,7 +973,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   1560
-         TabIndex        =   71
+         TabIndex        =   44
          Text            =   "Text2"
          Top             =   4440
          Width           =   3495
@@ -1666,7 +1064,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   35
          Left            =   120
-         TabIndex        =   311
+         TabIndex        =   267
          Top             =   1440
          Width           =   780
       End
@@ -1685,7 +1083,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   22
          Left            =   120
-         TabIndex        =   232
+         TabIndex        =   195
          Top             =   4920
          Width           =   1620
       End
@@ -1834,14 +1232,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameModiRemeTal 
       Height          =   3015
       Left            =   0
-      TabIndex        =   301
+      TabIndex        =   257
       Top             =   0
       Width           =   5775
       Begin VB.CommandButton cmdModRemTal 
          Caption         =   "Modificar"
          Height          =   375
          Left            =   3240
-         TabIndex        =   304
+         TabIndex        =   260
          Top             =   2400
          Width           =   1095
       End
@@ -1850,7 +1248,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   25
          Left            =   4440
-         TabIndex        =   305
+         TabIndex        =   261
          Top             =   2400
          Width           =   1095
       End
@@ -1860,7 +1258,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   8
          Left            =   2040
-         TabIndex        =   307
+         TabIndex        =   263
          Text            =   "Text2"
          Top             =   1800
          Width           =   3495
@@ -1869,7 +1267,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   8
          Left            =   480
-         TabIndex        =   303
+         TabIndex        =   259
          Text            =   "Text2"
          Top             =   1800
          Width           =   1335
@@ -1878,7 +1276,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   27
          Left            =   480
-         TabIndex        =   302
+         TabIndex        =   258
          Text            =   "Text1"
          Top             =   1080
          Width           =   1095
@@ -1899,7 +1297,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   10
          Left            =   240
-         TabIndex        =   309
+         TabIndex        =   265
          Top             =   240
          Width           =   5295
       End
@@ -1932,7 +1330,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   33
          Left            =   480
-         TabIndex        =   306
+         TabIndex        =   262
          Top             =   840
          Width           =   660
       End
@@ -1951,7 +1349,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   34
          Left            =   480
-         TabIndex        =   308
+         TabIndex        =   264
          Top             =   1560
          Width           =   1200
       End
@@ -1959,7 +1357,7 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrImprimeRecibos 
       Height          =   7215
       Left            =   0
-      TabIndex        =   277
+      TabIndex        =   233
       Top             =   0
       Visible         =   0   'False
       Width           =   6015
@@ -1967,7 +1365,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Aceptar"
          Height          =   375
          Left            =   3480
-         TabIndex        =   275
+         TabIndex        =   231
          Top             =   6600
          Width           =   1095
       End
@@ -1976,7 +1374,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   24
          Left            =   4680
-         TabIndex        =   276
+         TabIndex        =   232
          Top             =   6600
          Width           =   1095
       End
@@ -1987,7 +1385,7 @@ Begin VB.Form frmTESVarios
          Index           =   1
          Left            =   2880
          Locked          =   -1  'True
-         TabIndex        =   297
+         TabIndex        =   253
          Text            =   "Text10"
          Top             =   5880
          Width           =   2895
@@ -1999,7 +1397,7 @@ Begin VB.Form frmTESVarios
          Index           =   0
          Left            =   2880
          Locked          =   -1  'True
-         TabIndex        =   296
+         TabIndex        =   252
          Text            =   "Text10"
          Top             =   5520
          Width           =   2895
@@ -2008,7 +1406,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   2160
-         TabIndex        =   274
+         TabIndex        =   230
          Text            =   "Text10"
          Top             =   5880
          Width           =   615
@@ -2017,7 +1415,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   2160
-         TabIndex        =   273
+         TabIndex        =   229
          Text            =   "Text10"
          Top             =   5520
          Width           =   615
@@ -2028,7 +1426,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   7
          Left            =   2760
-         TabIndex        =   291
+         TabIndex        =   247
          Text            =   "Text9"
          Top             =   4275
          Width           =   3015
@@ -2037,7 +1435,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   7
          Left            =   1560
-         TabIndex        =   271
+         TabIndex        =   227
          Text            =   "Text9"
          Top             =   4275
          Width           =   1095
@@ -2048,7 +1446,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   8
          Left            =   2760
-         TabIndex        =   290
+         TabIndex        =   246
          Text            =   "Text9"
          Top             =   4680
          Width           =   3015
@@ -2057,7 +1455,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   8
          Left            =   1560
-         TabIndex        =   272
+         TabIndex        =   228
          Text            =   "Text9"
          Top             =   4680
          Width           =   1095
@@ -2067,7 +1465,7 @@ Begin VB.Form frmTESVarios
          Index           =   3
          Left            =   2520
          MaxLength       =   1
-         TabIndex        =   267
+         TabIndex        =   223
          Text            =   "Text10"
          Top             =   2640
          Width           =   495
@@ -2077,7 +1475,7 @@ Begin VB.Form frmTESVarios
          Index           =   2
          Left            =   4080
          MaxLength       =   3
-         TabIndex        =   268
+         TabIndex        =   224
          Text            =   "Text10"
          Top             =   2640
          Width           =   495
@@ -2086,7 +1484,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   3
          Left            =   2520
-         TabIndex        =   269
+         TabIndex        =   225
          Text            =   "Text10"
          Top             =   3480
          Width           =   1095
@@ -2095,7 +1493,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   2
          Left            =   4080
-         TabIndex        =   270
+         TabIndex        =   226
          Text            =   "Text10"
          Top             =   3480
          Width           =   1095
@@ -2104,7 +1502,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   25
          Left            =   2520
-         TabIndex        =   263
+         TabIndex        =   219
          Text            =   "Text1"
          Top             =   1080
          Width           =   1095
@@ -2113,7 +1511,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   24
          Left            =   4080
-         TabIndex        =   264
+         TabIndex        =   220
          Text            =   "Text1"
          Top             =   1080
          Width           =   1095
@@ -2122,7 +1520,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   23
          Left            =   4080
-         TabIndex        =   266
+         TabIndex        =   222
          Text            =   "Text1"
          Top             =   1920
          Width           =   1095
@@ -2131,7 +1529,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   20
          Left            =   2520
-         TabIndex        =   265
+         TabIndex        =   221
          Text            =   "Text1"
          Top             =   1920
          Width           =   1095
@@ -2165,7 +1563,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   32
          Left            =   240
-         TabIndex        =   300
+         TabIndex        =   256
          Top             =   5280
          Width           =   1260
       End
@@ -2174,7 +1572,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   35
          Left            =   1200
-         TabIndex        =   299
+         TabIndex        =   255
          Top             =   5520
          Width           =   465
       End
@@ -2183,7 +1581,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   34
          Left            =   1200
-         TabIndex        =   298
+         TabIndex        =   254
          Top             =   5925
          Width           =   465
       End
@@ -2203,7 +1601,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   9
          Left            =   360
-         TabIndex        =   295
+         TabIndex        =   251
          Top             =   240
          Width           =   5295
       End
@@ -2222,7 +1620,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   31
          Left            =   240
-         TabIndex        =   294
+         TabIndex        =   250
          Top             =   3960
          Width           =   900
       End
@@ -2231,7 +1629,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   33
          Left            =   720
-         TabIndex        =   293
+         TabIndex        =   249
          Top             =   4320
          Width           =   465
       End
@@ -2247,7 +1645,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   32
          Left            =   720
-         TabIndex        =   292
+         TabIndex        =   248
          Top             =   4725
          Width           =   465
       End
@@ -2273,7 +1671,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   30
          Left            =   240
-         TabIndex        =   289
+         TabIndex        =   245
          Top             =   2400
          Width           =   1620
       End
@@ -2282,7 +1680,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   31
          Left            =   4080
-         TabIndex        =   288
+         TabIndex        =   244
          Top             =   2400
          Width           =   420
       End
@@ -2291,7 +1689,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   30
          Left            =   2520
-         TabIndex        =   287
+         TabIndex        =   243
          Top             =   2400
          Width           =   465
       End
@@ -2310,7 +1708,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   29
          Left            =   240
-         TabIndex        =   286
+         TabIndex        =   242
          Top             =   3240
          Width           =   1620
       End
@@ -2319,7 +1717,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   29
          Left            =   4080
-         TabIndex        =   285
+         TabIndex        =   241
          Top             =   3240
          Width           =   420
       End
@@ -2328,7 +1726,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   28
          Left            =   2520
-         TabIndex        =   284
+         TabIndex        =   240
          Top             =   3240
          Width           =   465
       End
@@ -2337,7 +1735,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   27
          Left            =   2520
-         TabIndex        =   283
+         TabIndex        =   239
          Top             =   840
          Width           =   465
       End
@@ -2353,7 +1751,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   26
          Left            =   4080
-         TabIndex        =   282
+         TabIndex        =   238
          Top             =   840
          Width           =   420
       End
@@ -2379,7 +1777,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   28
          Left            =   240
-         TabIndex        =   281
+         TabIndex        =   237
          Top             =   840
          Width           =   1620
       End
@@ -2398,7 +1796,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   27
          Left            =   240
-         TabIndex        =   280
+         TabIndex        =   236
          Top             =   1680
          Width           =   1620
       End
@@ -2414,7 +1812,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   25
          Left            =   4080
-         TabIndex        =   279
+         TabIndex        =   235
          Top             =   1680
          Width           =   420
       End
@@ -2430,7 +1828,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   24
          Left            =   2520
-         TabIndex        =   278
+         TabIndex        =   234
          Top             =   1680
          Width           =   465
       End
@@ -2439,7 +1837,7 @@ Begin VB.Form frmTESVarios
       BorderStyle     =   0  'None
       Height          =   3795
       Left            =   0
-      TabIndex        =   120
+      TabIndex        =   92
       Top             =   0
       Width           =   5475
       Begin VB.CommandButton cmdCancelar 
@@ -2447,7 +1845,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   11
          Left            =   3960
-         TabIndex        =   128
+         TabIndex        =   100
          Top             =   3360
          Visible         =   0   'False
          Width           =   1095
@@ -2467,7 +1865,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00800000&
          Height          =   915
          Left            =   240
-         TabIndex        =   123
+         TabIndex        =   95
          Top             =   120
          Width           =   4695
       End
@@ -2492,7 +1890,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   255
          Left            =   1080
-         TabIndex        =   127
+         TabIndex        =   99
          Top             =   1200
          Width           =   3795
       End
@@ -2512,7 +1910,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00000040&
          Height          =   195
          Left            =   120
-         TabIndex        =   126
+         TabIndex        =   98
          Top             =   2640
          Width           =   2610
       End
@@ -2532,7 +1930,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00000040&
          Height          =   195
          Left            =   3240
-         TabIndex        =   125
+         TabIndex        =   97
          Top             =   2640
          Width           =   1620
       End
@@ -2551,7 +1949,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00FFFFFF&
          Height          =   1725
          Left            =   3960
-         TabIndex        =   124
+         TabIndex        =   96
          Top             =   0
          Width           =   1350
       End
@@ -2571,7 +1969,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00000040&
          Height          =   195
          Left            =   780
-         TabIndex        =   122
+         TabIndex        =   94
          Top             =   3000
          Width           =   1650
       End
@@ -2591,7 +1989,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00000040&
          Height          =   195
          Left            =   3240
-         TabIndex        =   121
+         TabIndex        =   93
          Top             =   3000
          Width           =   1560
       End
@@ -2599,13 +1997,13 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameImpagados 
       Height          =   3495
       Left            =   0
-      TabIndex        =   116
+      TabIndex        =   88
       Top             =   0
       Width           =   5175
       Begin MSComctlLib.ListView ListView1 
          Height          =   2415
          Left            =   1440
-         TabIndex        =   119
+         TabIndex        =   91
          Top             =   240
          Width           =   3615
          _ExtentX        =   6376
@@ -2646,7 +2044,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   10
          Left            =   3840
-         TabIndex        =   118
+         TabIndex        =   90
          Top             =   2880
          Width           =   1095
       End
@@ -2666,7 +2064,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   6
          Left            =   120
-         TabIndex        =   117
+         TabIndex        =   89
          Top             =   240
          Width           =   1125
       End
@@ -2674,14 +2072,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameContabilizarGasto 
       Height          =   3855
       Left            =   0
-      TabIndex        =   191
+      TabIndex        =   163
       Top             =   0
       Width           =   7935
       Begin VB.CommandButton cmdContabiliGasto 
          Caption         =   "Contabilizar"
          Height          =   375
          Left            =   5280
-         TabIndex        =   206
+         TabIndex        =   178
          Top             =   3240
          Width           =   1095
       End
@@ -2691,7 +2089,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   960
-         TabIndex        =   215
+         TabIndex        =   187
          Text            =   "Text9"
          Top             =   3240
          Width           =   3015
@@ -2700,7 +2098,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   120
-         TabIndex        =   200
+         TabIndex        =   172
          Text            =   "Text10"
          Top             =   3240
          Width           =   735
@@ -2711,7 +2109,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   6
          Left            =   4680
-         TabIndex        =   212
+         TabIndex        =   184
          Text            =   "Text2"
          Top             =   1080
          Width           =   3015
@@ -2720,7 +2118,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   6
          Left            =   3360
-         TabIndex        =   195
+         TabIndex        =   167
          Text            =   "Text2"
          Top             =   1080
          Width           =   1215
@@ -2731,7 +2129,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   4440
-         TabIndex        =   210
+         TabIndex        =   182
          Text            =   "Text9"
          Top             =   1800
          Width           =   3255
@@ -2740,7 +2138,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   3840
-         TabIndex        =   197
+         TabIndex        =   169
          Text            =   "Text10"
          Top             =   1800
          Width           =   495
@@ -2749,7 +2147,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Left            =   4560
          MaxLength       =   35
-         TabIndex        =   199
+         TabIndex        =   171
          Text            =   "Text9"
          Top             =   2520
          Width           =   3135
@@ -2759,7 +2157,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   19
          Left            =   6600
-         TabIndex        =   207
+         TabIndex        =   179
          Top             =   3240
          Width           =   1095
       End
@@ -2769,7 +2167,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   1320
-         TabIndex        =   205
+         TabIndex        =   177
          Text            =   "Text9"
          Top             =   2520
          Width           =   3015
@@ -2778,7 +2176,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   120
-         TabIndex        =   198
+         TabIndex        =   170
          Text            =   "Text9"
          Top             =   2520
          Width           =   1095
@@ -2788,7 +2186,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   3
          Left            =   1680
-         TabIndex        =   194
+         TabIndex        =   166
          Text            =   "Text4"
          Top             =   1080
          Width           =   1095
@@ -2799,7 +2197,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   720
-         TabIndex        =   202
+         TabIndex        =   174
          Text            =   "Text9"
          Top             =   1800
          Width           =   3015
@@ -2808,7 +2206,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   120
-         TabIndex        =   196
+         TabIndex        =   168
          Text            =   "Text9"
          Top             =   1800
          Width           =   495
@@ -2817,7 +2215,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   19
          Left            =   120
-         TabIndex        =   193
+         TabIndex        =   165
          Text            =   "Text1"
          Top             =   1080
          Width           =   1095
@@ -2841,7 +2239,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   14
          Left            =   120
-         TabIndex        =   214
+         TabIndex        =   186
          Top             =   3000
          Width           =   1215
       End
@@ -2856,7 +2254,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Cuenta banco"
          Height          =   255
          Left            =   3360
-         TabIndex        =   213
+         TabIndex        =   185
          Top             =   840
          Width           =   1215
       End
@@ -2872,7 +2270,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   7
          Left            =   1680
-         TabIndex        =   211
+         TabIndex        =   183
          Top             =   840
          Width           =   750
       End
@@ -2881,7 +2279,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   6
          Left            =   3840
-         TabIndex        =   209
+         TabIndex        =   181
          Top             =   1560
          Width           =   750
       End
@@ -2897,7 +2295,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   13
          Left            =   4560
-         TabIndex        =   208
+         TabIndex        =   180
          Top             =   2280
          Width           =   765
       End
@@ -2906,7 +2304,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   12
          Left            =   120
-         TabIndex        =   204
+         TabIndex        =   176
          Top             =   2280
          Width           =   585
       End
@@ -2915,7 +2313,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   5
          Left            =   120
-         TabIndex        =   203
+         TabIndex        =   175
          Top             =   1560
          Width           =   750
       End
@@ -2931,7 +2329,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   4
          Left            =   120
-         TabIndex        =   201
+         TabIndex        =   173
          Top             =   840
          Width           =   750
       End
@@ -2951,7 +2349,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   8
          Left            =   1320
-         TabIndex        =   192
+         TabIndex        =   164
          Top             =   240
          Width           =   5175
       End
@@ -2960,7 +2358,7 @@ Begin VB.Form frmTESVarios
       BorderStyle     =   0  'None
       Height          =   5415
       Left            =   0
-      TabIndex        =   216
+      TabIndex        =   188
       Top             =   0
       Width           =   5535
       Begin VB.CommandButton cmdCancelar 
@@ -2968,7 +2366,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   20
          Left            =   4320
-         TabIndex        =   220
+         TabIndex        =   192
          Top             =   4800
          Width           =   1095
       End
@@ -2977,14 +2375,14 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   0
          Left            =   3240
-         TabIndex        =   217
+         TabIndex        =   189
          Top             =   4800
          Width           =   975
       End
       Begin MSComctlLib.ListView lwE 
          Height          =   3615
          Left            =   120
-         TabIndex        =   218
+         TabIndex        =   190
          Top             =   840
          Width           =   5295
          _ExtentX        =   9340
@@ -3029,7 +2427,7 @@ Begin VB.Form frmTESVarios
          Height          =   495
          Index           =   8
          Left            =   120
-         TabIndex        =   219
+         TabIndex        =   191
          Top             =   240
          Width           =   5295
       End
@@ -3037,7 +2435,7 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameSelecGastos 
       Height          =   7335
       Left            =   0
-      TabIndex        =   185
+      TabIndex        =   157
       Top             =   0
       Width           =   6255
       Begin VB.CommandButton cmdCancelar 
@@ -3045,7 +2443,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   18
          Left            =   3360
-         TabIndex        =   190
+         TabIndex        =   162
          Top             =   6840
          Visible         =   0   'False
          Width           =   1095
@@ -3054,14 +2452,14 @@ Begin VB.Form frmTESVarios
          Caption         =   "Seguir"
          Height          =   375
          Left            =   4680
-         TabIndex        =   189
+         TabIndex        =   161
          Top             =   6840
          Width           =   1455
       End
       Begin MSComctlLib.ListView ListView4 
          Height          =   6135
          Left            =   120
-         TabIndex        =   187
+         TabIndex        =   159
          Top             =   600
          Width           =   6015
          _ExtentX        =   10610
@@ -3115,7 +2513,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Label11"
          Height          =   255
          Left            =   1440
-         TabIndex        =   188
+         TabIndex        =   160
          Top             =   6840
          Width           =   2535
       End
@@ -3134,7 +2532,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   7
          Left            =   120
-         TabIndex        =   186
+         TabIndex        =   158
          Top             =   240
          Width           =   6015
       End
@@ -3142,7 +2540,7 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameAgregarCuentas 
       Height          =   6015
       Left            =   0
-      TabIndex        =   246
+      TabIndex        =   204
       Top             =   0
       Width           =   6015
       Begin VB.CommandButton cmdInsertaCta 
@@ -3158,7 +2556,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   315
          Left            =   5400
-         TabIndex        =   250
+         TabIndex        =   208
          Top             =   1080
          Width           =   315
       End
@@ -3177,7 +2575,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   5
          Left            =   1560
-         TabIndex        =   251
+         TabIndex        =   209
          Text            =   "Text9"
          Top             =   1080
          Width           =   3735
@@ -3195,7 +2593,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   5
          Left            =   120
-         TabIndex        =   249
+         TabIndex        =   207
          Text            =   "Text9"
          Top             =   1080
          Width           =   1365
@@ -3213,7 +2611,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   375
          Left            =   3360
-         TabIndex        =   252
+         TabIndex        =   210
          Top             =   5400
          Width           =   1095
       End
@@ -3231,7 +2629,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   21
          Left            =   4680
-         TabIndex        =   254
+         TabIndex        =   212
          Top             =   5400
          Width           =   1095
       End
@@ -3249,7 +2647,7 @@ Begin VB.Form frmTESVarios
          Left            =   120
          Sorted          =   -1  'True
          Style           =   1  'Checkbox
-         TabIndex        =   248
+         TabIndex        =   206
          Top             =   1560
          Width           =   5655
       End
@@ -3275,7 +2673,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   23
          Left            =   600
-         TabIndex        =   255
+         TabIndex        =   213
          Top             =   5400
          Width           =   1470
       End
@@ -3300,7 +2698,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   25
          Left            =   120
-         TabIndex        =   253
+         TabIndex        =   211
          Top             =   720
          Width           =   735
       End
@@ -3328,7 +2726,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   15
          Left            =   480
-         TabIndex        =   247
+         TabIndex        =   205
          Top             =   240
          Width           =   4935
       End
@@ -3336,14 +2734,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameContabilRem2 
       Height          =   4215
       Left            =   0
-      TabIndex        =   74
+      TabIndex        =   46
       Top             =   0
       Width           =   5535
       Begin VB.CheckBox chkAgrupaCancelacion 
          Caption         =   "Agrupa cancelacion"
          Height          =   255
          Left            =   240
-         TabIndex        =   323
+         TabIndex        =   279
          Top             =   3120
          Width           =   2535
       End
@@ -3354,7 +2752,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   2160
-         TabIndex        =   315
+         TabIndex        =   271
          Text            =   "Text3"
          Top             =   1920
          Width           =   1455
@@ -3365,7 +2763,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   2160
-         TabIndex        =   314
+         TabIndex        =   270
          Text            =   "Text3"
          Top             =   1440
          Width           =   3135
@@ -3374,7 +2772,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Contabilizar"
          Height          =   375
          Left            =   2880
-         TabIndex        =   80
+         TabIndex        =   52
          Top             =   3600
          Width           =   1215
       End
@@ -3383,7 +2781,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   3840
-         TabIndex        =   79
+         TabIndex        =   51
          Text            =   "Text4"
          Top             =   2640
          Width           =   1095
@@ -3392,7 +2790,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   10
          Left            =   1320
-         TabIndex        =   78
+         TabIndex        =   50
          Text            =   "Text1"
          Top             =   2640
          Width           =   1095
@@ -3401,7 +2799,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   4
          Left            =   3840
-         TabIndex        =   77
+         TabIndex        =   49
          Text            =   "Text3"
          Top             =   960
          Width           =   855
@@ -3410,7 +2808,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   3
          Left            =   2040
-         TabIndex        =   76
+         TabIndex        =   48
          Text            =   "Text3"
          Top             =   960
          Width           =   855
@@ -3420,7 +2818,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   8
          Left            =   4200
-         TabIndex        =   82
+         TabIndex        =   54
          Top             =   3600
          Width           =   1095
       End
@@ -3429,7 +2827,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   8
          Left            =   1440
-         TabIndex        =   317
+         TabIndex        =   273
          Top             =   1920
          Width           =   615
       End
@@ -3438,7 +2836,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   7
          Left            =   1440
-         TabIndex        =   316
+         TabIndex        =   272
          Top             =   1440
          Width           =   495
       End
@@ -3465,7 +2863,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   2
          Left            =   2760
-         TabIndex        =   86
+         TabIndex        =   58
          Top             =   2640
          Width           =   885
       End
@@ -3492,7 +2890,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   1
          Left            =   240
-         TabIndex        =   85
+         TabIndex        =   57
          Top             =   2640
          Width           =   615
       End
@@ -3512,7 +2910,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   21
          Left            =   240
-         TabIndex        =   84
+         TabIndex        =   56
          Top             =   960
          Width           =   690
       End
@@ -3521,7 +2919,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   4
          Left            =   1440
-         TabIndex        =   83
+         TabIndex        =   55
          Top             =   960
          Width           =   495
       End
@@ -3531,7 +2929,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   3
          Left            =   3120
-         TabIndex        =   81
+         TabIndex        =   53
          Top             =   960
          Width           =   495
       End
@@ -3551,7 +2949,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   2
          Left            =   120
-         TabIndex        =   75
+         TabIndex        =   47
          Top             =   240
          Width           =   5175
       End
@@ -3559,13 +2957,13 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameElimVtos 
       Height          =   4455
       Left            =   0
-      TabIndex        =   129
+      TabIndex        =   101
       Top             =   0
       Width           =   12015
       Begin MSComctlLib.ListView ListView2 
          Height          =   3015
          Left            =   120
-         TabIndex        =   133
+         TabIndex        =   105
          Top             =   840
          Width           =   11655
          _ExtentX        =   20558
@@ -3637,7 +3035,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Eliminar"
          Height          =   375
          Left            =   9600
-         TabIndex        =   132
+         TabIndex        =   104
          Top             =   3960
          Width           =   975
       End
@@ -3646,7 +3044,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   12
          Left            =   10680
-         TabIndex        =   131
+         TabIndex        =   103
          Top             =   3960
          Width           =   1095
       End
@@ -3666,7 +3064,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   4
          Left            =   240
-         TabIndex        =   130
+         TabIndex        =   102
          Top             =   240
          Width           =   5895
       End
@@ -3680,7 +3078,7 @@ Begin VB.Form frmTESVarios
       Begin VB.Frame FrameDocPorveedor 
          Height          =   1095
          Left            =   120
-         TabIndex        =   324
+         TabIndex        =   280
          Top             =   3840
          Width           =   4815
          Begin VB.TextBox txtTexto 
@@ -3707,7 +3105,7 @@ Begin VB.Form frmTESVarios
             Height          =   315
             Index           =   37
             Left            =   240
-            TabIndex        =   327
+            TabIndex        =   283
             Top             =   720
             Width           =   825
          End
@@ -3716,7 +3114,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   36
             Left            =   240
-            TabIndex        =   326
+            TabIndex        =   282
             Top             =   240
             Width           =   825
          End
@@ -3735,7 +3133,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   39
             Left            =   0
-            TabIndex        =   325
+            TabIndex        =   281
             Top             =   0
             Width           =   1500
          End
@@ -3755,7 +3153,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   10
          Left            =   2040
-         TabIndex        =   312
+         TabIndex        =   268
          Text            =   "Text2"
          Top             =   1920
          Width           =   3015
@@ -3804,7 +3202,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   1800
-         TabIndex        =   72
+         TabIndex        =   45
          Text            =   "Text2"
          Top             =   5040
          Width           =   3135
@@ -3888,7 +3286,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   36
          Left            =   120
-         TabIndex        =   313
+         TabIndex        =   269
          Top             =   1680
          Width           =   900
       End
@@ -3914,7 +3312,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   24
          Left            =   120
-         TabIndex        =   245
+         TabIndex        =   203
          Top             =   5520
          Width           =   1620
       End
@@ -4064,14 +3462,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameElimnaHcoReme 
       Height          =   2535
       Left            =   0
-      TabIndex        =   178
+      TabIndex        =   150
       Top             =   0
       Width           =   3975
       Begin VB.CommandButton cmdEliminaHco 
          Caption         =   "Eliminar"
          Height          =   375
          Left            =   1440
-         TabIndex        =   182
+         TabIndex        =   154
          Top             =   1920
          Width           =   1095
       End
@@ -4080,7 +3478,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   17
          Left            =   2640
-         TabIndex        =   183
+         TabIndex        =   155
          Top             =   1920
          Width           =   1095
       End
@@ -4088,7 +3486,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   17
          Left            =   1710
-         TabIndex        =   179
+         TabIndex        =   151
          Text            =   "Text1"
          Top             =   960
          Width           =   1095
@@ -4096,7 +3494,7 @@ Begin VB.Form frmTESVarios
       Begin VB.Label Label10 
          Height          =   255
          Left            =   120
-         TabIndex        =   184
+         TabIndex        =   156
          Top             =   1320
          Width           =   3615
       End
@@ -4116,7 +3514,7 @@ Begin VB.Form frmTESVarios
          Height          =   240
          Index           =   6
          Left            =   240
-         TabIndex        =   181
+         TabIndex        =   153
          Top             =   480
          Width           =   3105
       End
@@ -4143,7 +3541,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   11
          Left            =   720
-         TabIndex        =   180
+         TabIndex        =   152
          Top             =   960
          Width           =   615
       End
@@ -4151,7 +3549,7 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameRecaudacionEjecutiva 
       Height          =   7815
       Left            =   0
-      TabIndex        =   331
+      TabIndex        =   284
       Top             =   0
       Visible         =   0   'False
       Width           =   12735
@@ -4159,7 +3557,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   9600
-         TabIndex        =   335
+         TabIndex        =   288
          Top             =   7320
          Width           =   975
       End
@@ -4168,14 +3566,14 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   29
          Left            =   10680
-         TabIndex        =   332
+         TabIndex        =   285
          Top             =   7320
          Width           =   1095
       End
       Begin MSComctlLib.ListView ListView5 
          Height          =   6495
          Left            =   120
-         TabIndex        =   334
+         TabIndex        =   287
          Top             =   720
          Width           =   12375
          _ExtentX        =   21828
@@ -4271,7 +3669,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   11
          Left            =   3120
-         TabIndex        =   333
+         TabIndex        =   286
          Top             =   240
          Width           =   5115
       End
@@ -4279,14 +3677,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameTransfer 
       Height          =   5895
       Left            =   0
-      TabIndex        =   154
+      TabIndex        =   126
       Top             =   0
       Width           =   5295
       Begin VB.CheckBox chkPagoDom 
          Caption         =   "Pago en fecha introducida"
          Height          =   255
          Left            =   2280
-         TabIndex        =   160
+         TabIndex        =   132
          Top             =   3480
          Width           =   2655
       End
@@ -4296,7 +3694,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   12
          Left            =   2160
-         TabIndex        =   350
+         TabIndex        =   302
          Text            =   "Text9"
          Top             =   1800
          Width           =   3015
@@ -4305,7 +3703,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   12
          Left            =   960
-         TabIndex        =   157
+         TabIndex        =   129
          Text            =   "Text9"
          Top             =   1800
          Width           =   1095
@@ -4314,14 +3712,14 @@ Begin VB.Form frmTESVarios
          Height          =   315
          Left            =   2400
          Style           =   2  'Dropdown List
-         TabIndex        =   161
+         TabIndex        =   133
          Top             =   3480
          Width           =   1935
       End
       Begin VB.TextBox Text6 
          Height          =   285
          Left            =   960
-         TabIndex        =   162
+         TabIndex        =   134
          Text            =   "Text6"
          Top             =   4320
          Width           =   3975
@@ -4330,7 +3728,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   16
          Left            =   2280
-         TabIndex        =   156
+         TabIndex        =   128
          Text            =   "Text1"
          Top             =   1200
          Width           =   1095
@@ -4339,7 +3737,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   15
          Left            =   960
-         TabIndex        =   155
+         TabIndex        =   127
          Text            =   "Text1"
          Top             =   1200
          Width           =   1095
@@ -4348,7 +3746,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   14
          Left            =   960
-         TabIndex        =   159
+         TabIndex        =   131
          Text            =   "Text1"
          Top             =   3480
          Width           =   1095
@@ -4357,7 +3755,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   5
          Left            =   960
-         TabIndex        =   158
+         TabIndex        =   130
          Text            =   "Text2"
          Top             =   2640
          Width           =   1215
@@ -4368,7 +3766,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   5
          Left            =   2400
-         TabIndex        =   165
+         TabIndex        =   137
          Text            =   "Text2"
          Top             =   2640
          Width           =   2535
@@ -4378,7 +3776,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   15
          Left            =   3960
-         TabIndex        =   164
+         TabIndex        =   136
          Top             =   5280
          Width           =   1095
       End
@@ -4386,7 +3784,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Aceptar"
          Height          =   375
          Left            =   2790
-         TabIndex        =   163
+         TabIndex        =   135
          Top             =   5280
          Width           =   1095
       End
@@ -4405,7 +3803,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   45
          Left            =   120
-         TabIndex        =   351
+         TabIndex        =   303
          Top             =   1560
          Width           =   1335
       End
@@ -4438,7 +3836,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   43
          Left            =   2400
-         TabIndex        =   339
+         TabIndex        =   292
          Top             =   3240
          Width           =   1500
       End
@@ -4457,7 +3855,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   15
          Left            =   240
-         TabIndex        =   172
+         TabIndex        =   144
          Top             =   4080
          Width           =   1815
       End
@@ -4476,7 +3874,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   7
          Left            =   120
-         TabIndex        =   171
+         TabIndex        =   143
          Top             =   120
          Width           =   4935
       End
@@ -4485,7 +3883,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   11
          Left            =   960
-         TabIndex        =   170
+         TabIndex        =   142
          Top             =   960
          Width           =   465
       End
@@ -4501,7 +3899,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   10
          Left            =   2280
-         TabIndex        =   169
+         TabIndex        =   141
          Top             =   960
          Width           =   420
       End
@@ -4527,7 +3925,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   18
          Left            =   120
-         TabIndex        =   168
+         TabIndex        =   140
          Top             =   720
          Width           =   1620
       End
@@ -4553,7 +3951,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   17
          Left            =   240
-         TabIndex        =   167
+         TabIndex        =   139
          Top             =   3240
          Width           =   1020
       End
@@ -4579,7 +3977,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   16
          Left            =   120
-         TabIndex        =   166
+         TabIndex        =   138
          Top             =   2280
          Width           =   1815
       End
@@ -4587,14 +3985,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameDeuda 
       Height          =   7335
       Left            =   0
-      TabIndex        =   134
+      TabIndex        =   106
       Top             =   0
       Width           =   6495
       Begin VB.CommandButton cmdCancelarDeuda 
          Caption         =   "CANCELAR"
          Height          =   375
          Left            =   5040
-         TabIndex        =   174
+         TabIndex        =   146
          Top             =   6840
          Visible         =   0   'False
          Width           =   1215
@@ -4603,14 +4001,14 @@ Begin VB.Form frmTESVarios
          BorderStyle     =   0  'None
          Height          =   975
          Left            =   240
-         TabIndex        =   150
+         TabIndex        =   122
          Top             =   600
          Width           =   6135
          Begin VB.TextBox txtCtaNormal 
             Height          =   285
             Index           =   2
             Left            =   1680
-            TabIndex        =   138
+            TabIndex        =   110
             Text            =   "Text9"
             Top             =   600
             Width           =   1095
@@ -4621,7 +4019,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   2
             Left            =   2880
-            TabIndex        =   222
+            TabIndex        =   194
             Text            =   "Text9"
             Top             =   600
             Width           =   3015
@@ -4630,7 +4028,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   1
             Left            =   1680
-            TabIndex        =   137
+            TabIndex        =   109
             Text            =   "Text9"
             Top             =   120
             Width           =   1095
@@ -4641,7 +4039,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   1
             Left            =   2880
-            TabIndex        =   221
+            TabIndex        =   193
             Text            =   "Text9"
             Top             =   120
             Width           =   3015
@@ -4665,7 +4063,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   9
             Left            =   720
-            TabIndex        =   153
+            TabIndex        =   125
             Top             =   600
             Width           =   420
          End
@@ -4674,7 +4072,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   8
             Left            =   720
-            TabIndex        =   152
+            TabIndex        =   124
             Top             =   120
             Width           =   465
          End
@@ -4693,7 +4091,7 @@ Begin VB.Form frmTESVarios
             Height          =   255
             Index           =   14
             Left            =   0
-            TabIndex        =   151
+            TabIndex        =   123
             Top             =   120
             Width           =   1575
          End
@@ -4702,7 +4100,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   13
          Left            =   3960
-         TabIndex        =   140
+         TabIndex        =   112
          Text            =   "Text1"
          Top             =   1920
          Width           =   1095
@@ -4711,7 +4109,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   12
          Left            =   2400
-         TabIndex        =   139
+         TabIndex        =   111
          Text            =   "Text1"
          Top             =   1920
          Width           =   1095
@@ -4720,7 +4118,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3840
-         TabIndex        =   142
+         TabIndex        =   114
          Top             =   6840
          Width           =   1095
       End
@@ -4729,7 +4127,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   13
          Left            =   5040
-         TabIndex        =   143
+         TabIndex        =   115
          Top             =   6840
          Width           =   1095
       End
@@ -4738,7 +4136,7 @@ Begin VB.Form frmTESVarios
          Enabled         =   0   'False
          Height          =   285
          Left            =   2040
-         TabIndex        =   144
+         TabIndex        =   116
          Text            =   "Text5"
          Top             =   1080
          Width           =   4095
@@ -4746,7 +4144,7 @@ Begin VB.Form frmTESVarios
       Begin VB.TextBox Text4 
          Height          =   285
          Left            =   240
-         TabIndex        =   136
+         TabIndex        =   108
          Text            =   "Text4"
          Top             =   1080
          Width           =   1695
@@ -4754,7 +4152,7 @@ Begin VB.Form frmTESVarios
       Begin MSComctlLib.ListView ListView3 
          Height          =   1815
          Left            =   2400
-         TabIndex        =   141
+         TabIndex        =   113
          Top             =   4800
          Width           =   3855
          _ExtentX        =   6800
@@ -4779,7 +4177,7 @@ Begin VB.Form frmTESVarios
       Begin MSComctlLib.ListView lwtipopago 
          Height          =   2295
          Left            =   2400
-         TabIndex        =   338
+         TabIndex        =   291
          Top             =   2400
          Width           =   3855
          _ExtentX        =   6800
@@ -4844,7 +4242,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   42
          Left            =   240
-         TabIndex        =   337
+         TabIndex        =   290
          Top             =   2400
          Width           =   1230
       End
@@ -4863,7 +4261,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   41
          Left            =   360
-         TabIndex        =   336
+         TabIndex        =   289
          Top             =   4800
          Width           =   3060
       End
@@ -4882,7 +4280,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   13
          Left            =   240
-         TabIndex        =   149
+         TabIndex        =   121
          Top             =   840
          Width           =   540
       End
@@ -4891,7 +4289,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   7
          Left            =   2400
-         TabIndex        =   148
+         TabIndex        =   120
          Top             =   1680
          Width           =   465
       End
@@ -4907,7 +4305,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   6
          Left            =   3960
-         TabIndex        =   147
+         TabIndex        =   119
          Top             =   1680
          Width           =   420
       End
@@ -4933,7 +4331,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   12
          Left            =   240
-         TabIndex        =   146
+         TabIndex        =   118
          Top             =   1680
          Width           =   1800
       End
@@ -4947,7 +4345,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Label9"
          Height          =   255
          Left            =   120
-         TabIndex        =   145
+         TabIndex        =   117
          Top             =   6960
          Width           =   4095
       End
@@ -4967,7 +4365,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   5
          Left            =   960
-         TabIndex        =   135
+         TabIndex        =   107
          Top             =   120
          Width           =   4335
       End
@@ -5062,8 +4460,6 @@ Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmBa As frmBanco
 Attribute frmBa.VB_VarHelpID = -1
 
-Private WithEvents frmRe As frmTESColRemesas
-Attribute frmRe.VB_VarHelpID = -1
 Private WithEvents frmCCtas As frmColCtas
 Attribute frmCCtas.VB_VarHelpID = -1
 Private WithEvents frmB As frmBasico
@@ -5094,15 +4490,6 @@ End Sub
 
 Private Sub cboTipoRemesa_KeyPress(KeyAscii As Integer)
      KEYpress KeyAscii
-End Sub
-
-Private Sub chkAgruparRemesaPorEntidad_Click()
-    FrameBancoRemesa.Visible = chkAgruparRemesaPorEntidad.Value = 1
-    If chkAgruparRemesaPorEntidad.Value = 1 Then
-        If vParamT.RemesasPorEntidad Then
-            If Me.txtCta(3).Text <> "" And Me.txtDescCta(3) = "" Then txtCta_LostFocus 3
-        End If
-    End If
 End Sub
 
 Private Sub chkComensaAbonos_KeyPress(KeyAscii As Integer)
@@ -6886,478 +6273,6 @@ End Sub
 '
 '
 '
-Private Sub NuevaRem()
-
-Dim Forpa As String
-Dim cad As String
-Dim Impor As Currency
-Dim colCtas As Collection
-'--monica
-''Algunas conideraciones
-'
-'    If SubTipo <> vbTipoPagoRemesa Then
-'        'Para talones y pagares obligado la cuenta bancaria
-'        If txtCta(3).Text = "" Then
-'            MsgBox "Indique la cuenta bancaria", vbExclamation
-'            Exit Sub
-'        End If
-'    End If
-'
-'
-'    'Fecha remesa tiene k tener valor
-'    If Text1(8).Text = "" Then
-'        MsgBox "Fecha de remesa debe tener valor", vbExclamation
-'        PonerFoco Text1(8)
-'        Exit Sub
-'    End If
-'
-'
-'
-'    'VEMOS SI LA FECHA ESTA DENTRO DEL EJERCICIO
-'    If FechaCorrecta2(CDate(Text1(8).Text), True) > 1 Then
-'        PonerFoco Text1(8)
-'        Exit Sub
-'    End If
-'
-'    'Para talones pagares, vemos si esta configurado en parametros
-'    If SubTipo <> vbTipoPagoRemesa Then
-'        If Me.cmbRemesa.ListIndex = 0 Then
-'            SQL = "contapagarepte"
-'        Else
-'            SQL = "contatalonpte"
-'        End If
-'        SQL = DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1")
-'        If SQL = "" Then SQL = "0"
-'        If SQL = "0" Then
-'            MsgBox "Falta configurar la opción en parametros", vbExclamation
-'            Exit Sub
-'        End If
-'    End If
-'
-'    'mayo 2015
-'     If SubTipo = vbTipoPagoRemesa Then
-'        If vParamT.RemesasPorEntidad Then
-'            If chkAgruparRemesaPorEntidad.Value = 1 Then
-'                'Si agrupa pro entidad, necesit el banco por defacto
-'                If txtCta(3).Text = "" Then
-'                    MsgBox "Si agrupa por entidad debe indicar el banco por defecto", vbExclamation
-'                    Exit Sub
-'                End If
-'            End If
-'        End If
-'    End If
-'    'A partir de la fecha generemos leemos k remesa corresponde
-'    SQL = "select max(codigo) from remesas where anyo=" & Year(CDate(Text1(8).Text))
-'    Set miRsAux = New ADODB.Recordset
-'    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-'    NumRegElim = 0
-'    If Not miRsAux.EOF Then
-'        NumRegElim = DBLet(miRsAux.Fields(0), "N")
-'    End If
-'    miRsAux.Close
-'
-'    NumRegElim = NumRegElim + 1
-'    txtRemesa.Text = NumRegElim
-'
-'
-'    If SubTipo = vbTipoPagoRemesa Then
-'        SQL = " sforpa.tipforpa = " & vbTipoPagoRemesa
-'    Else
-'        If Me.cmbRemesa.ListIndex = 0 Then
-'            SQL = " talon = 0"
-'        Else
-'            SQL = " talon = 1"
-'        End If
-'
-'    End If
-'
-'    If SubTipo = vbTipoPagoRemesa Then
-'        'Del efecto
-'        If Text1(6).Text <> "" Then SQL = SQL & " AND scobro.fecvenci >= '" & Format(Text1(6).Text, FormatoFecha) & "'"
-'        If Text1(7).Text <> "" Then SQL = SQL & " AND scobro.fecvenci <= '" & Format(Text1(7).Text, FormatoFecha) & "'"
-'    Else
-'        'de la recepcion de factura
-'        If Text1(6).Text <> "" Then SQL = SQL & " AND fechavto >= '" & Format(Text1(6).Text, FormatoFecha) & "'"
-'        If Text1(7).Text <> "" Then SQL = SQL & " AND fechavto <= '" & Format(Text1(7).Text, FormatoFecha) & "'"
-'    End If
-'
-'
-'
-'    'Si ha puesto importe desde Hasta
-'    If txtImporte(6).Text <> "" Then SQL = SQL & " AND impvenci >= " & TransformaComasPuntos(ImporteFormateado(txtImporte(6).Text))
-'    If txtImporte(7).Text <> "" Then SQL = SQL & " AND impvenci <= " & TransformaComasPuntos(ImporteFormateado(txtImporte(7).Text))
-'
-'
-'
-'    'Desde hasta cuenta
-'    If SubTipo = vbTipoPagoRemesa Then
-'        If Me.txtCtaNormal(3).Text <> "" Then SQL = SQL & " AND scobro.codmacta >= '" & txtCtaNormal(3).Text & "'"
-'        If Me.txtCtaNormal(4).Text <> "" Then SQL = SQL & " AND scobro.codmacta <= '" & txtCtaNormal(4).Text & "'"
-'        'El importe
-'        SQL = SQL & " AND impvenci > 0"
-'
-'
-'
-'        'MODIFICACION DE 2 DICIEMBRE del 05
-'        '------------------------------------
-'        'Hay un campo que indicara si el vto se remesa o NO
-'        SQL = SQL & " AND noremesar=0"
-'
-'
-'        'Si esta en situacion juridica TAMPOCO se remesa
-'        SQL = SQL & " AND situacionjuri=0"
-'
-'        'JUNIO 2010
-'        'Si tiene algio  cobrado NO dejo remesar
-'        SQL = SQL & " AND impcobro is null"
-'
-'
-'    End If
-'
-'
-'    'Marzo 2015
-'    'Comprobar
-'
-'
-'
-'
-'
-'
-'    'Modificacion 28 Abril 06
-'    '------------------------
-'    ' Es para acotar mas el conjunto de recibos a remesar
-'    'Serie
-'    If SubTipo = vbTipoPagoRemesa Then
-'        If txtSerie(0).Text <> "" Then _
-'            SQL = SQL & " AND scobro.numserie >= '" & txtSerie(0).Text & "'"
-'        If txtSerie(1).Text <> "" Then _
-'            SQL = SQL & " AND scobro.numserie <= '" & txtSerie(1).Text & "'"
-'
-'        'Fecha factura
-'        If Text1(22).Text <> "" Then _
-'            SQL = SQL & " AND scobro.fecfaccl >= '" & Format(Text1(22).Text, FormatoFecha) & "'"
-'        If Text1(21).Text <> "" Then _
-'            SQL = SQL & " AND scobro.fecfaccl <= '" & Format(Text1(21).Text, FormatoFecha) & "'"
-'
-'        'Codigo factura
-'        If txtnumfac(0).Text <> "" Then _
-'            SQL = SQL & " AND scobro.codfaccl >= '" & txtnumfac(0).Text & "'"
-'        If txtnumfac(1).Text <> "" Then _
-'            SQL = SQL & " AND scobro.codfaccl <= '" & txtnumfac(1).Text & "'"
-'
-'
-'    Else
-'        'Fecha factura
-'        If Text1(22).Text <> "" Then SQL = SQL & " AND fecharec >= '" & Format(Text1(22).Text, FormatoFecha) & "'"
-'        If Text1(21).Text <> "" Then SQL = SQL & " AND fecharec <= '" & Format(Text1(21).Text, FormatoFecha) & "'"
-'
-'    End If
-'
-'
-'    Screen.MousePointer = vbHourglass
-'    Set RS = New ADODB.Recordset
-'
-'    'Marzo 2015
-'    'Ver si entre los desde hastas hay importes negativos... ABONOS
-'
-'    If SubTipo = vbTipoPagoRemesa Then
-'
-'        'Vemos las cuentas que vamos a girar . Sacaremos codmacta
-'        cad = SQL
-'        cad = "scobro.codmacta=cuentas.codmacta AND (siturem is null) AND " & cad
-'        cad = cad & " AND scobro.codforpa = sforpa.codforpa ORDER BY codmacta,codfaccl "
-'        cad = "Select distinct scobro.codmacta FROM scobro,cuentas,sforpa WHERE " & cad
-'        RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        Set colCtas = New Collection
-'        While Not RS.EOF
-'            colCtas.Add CStr(RS!codmacta)
-'            RS.MoveNext
-'        Wend
-'        RS.Close
-'
-'
-'        'Ahora veremos los negativos, de las cuentas que vamos a girar
-'        'Sol el select de los negativos , sin numserie ni na de na
-'        cad = "impvenci < 0"
-'        cad = "scobro.codmacta=cuentas.codmacta AND (siturem is null) AND " & cad
-'        cad = cad & " AND scobro.codforpa = sforpa.codforpa  "
-'        cad = "Select scobro.codmacta,nommacta,numserie,codfaccl,impvenci FROM scobro,cuentas,sforpa WHERE " & cad
-'
-'
-'        If colCtas.Count > 0 Then
-'            cad = cad & " AND scobro.codmacta IN ("
-'            For I = 1 To colCtas.Count
-'                If I > 1 Then cad = cad & ","
-'                cad = cad & "'" & colCtas.Item(I) & "'"
-'            Next
-'            cad = cad & ") ORDER BY codmacta,codfaccl"
-'
-'            'Seguimos
-'
-'
-'            Set colCtas = Nothing
-'            RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'
-'            cad = ""
-'            I = 0
-'            Set colCtas = New Collection
-'            While Not RS.EOF
-'                If I < 15 Then
-'                    cad = cad & vbCrLf & RS!codmacta & " " & RS!Nommacta & "  " & RS!NUmSerie & Format(RS!codfaccl, "000000") & "   -> " & Format(RS!ImpVenci, FormatoImporte)
-'                End If
-'                I = I + 1
-'                colCtas.Add CStr(RS!codmacta)
-'                RS.MoveNext
-'            Wend
-'            RS.Close
-'
-'            If cad <> "" Then
-'
-'
-'                If Me.chkComensaAbonos.Value = 0 Then
-'
-'                    If I >= 15 Then cad = cad & vbCrLf & "....  y " & I & " vencimientos más"
-'                    cad = "Clientes con abonos. " & vbCrLf & cad & " ¿Continuar?"
-'                    If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then
-'                        Set RS = Nothing
-'                        Set colCtas = Nothing
-'                        Exit Sub
-'                    End If
-'
-'                Else
-'                    '-------------------------------------------------------------------------
-'                    For I = 1 To colCtas.Count
-'                        CadenaDesdeOtroForm = colCtas.Item(I)
-'                        frmTESListado.Opcion = 36
-'                        frmTESListado.Show vbModal
-'
-'                    Next
-'                    CadenaDesdeOtroForm = ""
-'
-'                    'Actualice BD
-'                    Screen.MousePointer = vbHourglass
-'                    espera 1
-'                    Screen.MousePointer = vbHourglass
-'                    Conn.Execute "commit"
-'                    espera 1
-'
-'                End If
-'            End If 'colcount
-'        End If
-'        Set colCtas = Nothing
-'    End If
-'
-'
-'    'Que la cuenta NO este bloqueada
-'    I = 0
-'    If SubTipo = vbTipoPagoRemesa Then
-'        cad = " FROM scobro,sforpa,cuentas WHERE scobro.codforpa = sforpa.codforpa AND (siturem is null) AND "
-'        cad = cad & " scobro.codmacta=cuentas.codmacta AND (not (fecbloq is null) and fecbloq < '" & Format(CDate(Text1(8).Text), FormatoFecha) & "') AND "
-'        cad = "Select scobro.codmacta,nommacta,fecbloq" & cad & SQL & " GROUP BY 1 ORDER BY 1"
-'
-'    Else
-'        cad = "select cuentas.codmacta,nommacta from "
-'        cad = cad & "scarecepdoc,cuentas where scarecepdoc.codmacta=cuentas.codmacta"
-'        cad = cad & " AND (not (fecbloq is null) and fecbloq < '" & Format(CDate(Text1(8).Text), FormatoFecha) & "') "
-'        cad = cad & " AND " & SQL & " GROUP by 1"
-'    End If
-'
-'
-'    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    If Not RS.EOF Then
-'        cad = ""
-'        I = 1
-'        While Not RS.EOF
-'            cad = cad & RS!codmacta & " - " & RS!Nommacta & " : " & RS!FecBloq & vbCrLf
-'            RS.MoveNext
-'        Wend
-'    End If
-'
-'    RS.Close
-'
-'    If I > 0 Then
-'        cad = "Las siguientes cuentas estan bloquedas." & vbCrLf & String(60, "-") & vbCrLf & cad
-'        MsgBox cad, vbExclamation
-'        Screen.MousePointer = vbDefault
-'
-'        Exit Sub
-'    End If
-'
-'
-'
-'
-'
-'    If SubTipo = vbTipoPagoRemesa Then
-'        'Efectos bancario
-'
-'        cad = " FROM scobro,sforpa,cuentas WHERE scobro.codforpa = sforpa.codforpa AND (siturem is null) AND "
-'        cad = cad & " scobro.codmacta=cuentas.codmacta AND "
-'
-'    Else
-'
-'        'Talon / Pagare
-'        cad = " FROM scarecepdoc,cuentas where scarecepdoc.codmacta=cuentas.codmacta AND"
-'    End If
-'    'Hacemos un conteo
-'    RS.Open "SELECT Count(*) " & cad & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'    If Not RS.EOF Then
-'        I = DBLet(RS.Fields(0), "N")
-'    End If
-'    RS.Close
-'    cad = cad & SQL
-'
-'
-'
-'    If I > 0 Then
-'        If SubTipo <> vbTipoPagoRemesa Then
-'            'Para talones y pagares comprobaremos que
-'            'si esta configurado para contabilizar contra cta puente
-'            'entonces tiene la marca
-'            'PAGARE. Ver si tiene cta puente pagare
-'            If Me.cmbRemesa.ListIndex = 0 Then
-'                If Not vParamT.PagaresCtaPuente Then I = 0
-'            Else
-'                If Not vParamT.TalonesCtaPuente Then I = 0
-'            End If
-'            If I = 0 Then
-'                'NO contabilizaq contra cuenta puente
-'
-'            Else
-'                'Comrpobaremos que todos los vtos estan en contabilizados.
-'                'Por eso la marca
-'
-'                SQL = "(select numserie,codfaccl,fecfaccl,numorden " & cad & ")"
-'                SQL = "select distinct(id) from slirecepdoc where (numserie,numfaccl,fecfaccl,numvenci) in " & SQL
-'                RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'                SQL = ""
-'                While Not RS.EOF
-'                    SQL = SQL & ", " & RS!ID
-'                    RS.MoveNext
-'                Wend
-'                RS.Close
-'                'Ya tengo el numero de las recepciones
-'                If SQL = "" Then
-'                    'ummmmmmmm, n deberia haber pasado
-'
-'                Else
-'                    SQL = "(" & Mid(SQL, 3) & ")"
-'                    SQL = "SELECT * from scarecepdoc where Contabilizada=0 and codigo in " & SQL
-'                    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-'                    SQL = ""
-'                    While Not RS.EOF
-'                        SQL = SQL & vbCrLf & Format(RS!Codigo, "0000") & "         " & RS!codmacta & "    " & Format(RS!fecharec, "dd/mm/yyyy") & "   " & RS!numeroref
-'                        RS.MoveNext
-'                    Wend
-'                    RS.Close
-'                    If SQL <> "" Then
-'                        'Hay taloes / pagares que estan recepcionados y o estan contabilizados
-'                        SQL = String(70, "-") & SQL
-'                        SQL = vbCrLf & "Codigo      Cuenta            Fecha         Referencia " & vbCrLf & SQL
-'                        SQL = "Hay talones / pagares que estan recepcionados pero no estan contabilizados" & vbCrLf & vbCrLf & SQL
-'                        MsgBox SQL, vbExclamation
-'                        Set RS = Nothing
-'                        Screen.MousePointer = vbDefault
-'                        Exit Sub
-'                    End If
-'                End If
-'
-'            End If
-'        End If
-'        I = 1  'Para que siga por abajo
-'
-'    End If
-'
-'
-'
-'    'La suma
-'    If I > 0 Then
-'        SQL = "select sum(impvenci),sum(impcobro),sum(gastos) " & cad
-'        Impor = 0
-'        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        If Not RS.EOF Then Impor = DBLet(RS.Fields(0), "N") - DBLet(RS.Fields(1), "N") + DBLet(RS.Fields(2), "N")
-'        RS.Close
-'        If Impor = 0 Then I = 0
-'    End If
-'
-'
-'    Set RS = Nothing
-'
-'    If I = 0 Then
-'        MsgBox "Ningun dato a remesar con esos valores", vbExclamation
-'    Else
-'
-'
-'        'Preparamos algunas cosillas
-'        'Aqui guardaremos cuanto llevamos a cada banco
-'        SQL = "Delete from tmpCierre1 where codusu =" & vUsu.Codigo
-'        Conn.Execute SQL
-'
-'        'Si son talones o pagares NO hay reajuste en bancos
-'        'Con lo cual cargare la tabla con el banco
-'
-'        If SubTipo <> vbTipoPagoRemesa Then
-'            ' Metermos cta banco, nºremesa . El resto no necesito
-'            SQL = "INSERT INTO tmpcierre1 (codusu, cta, nomcta, acumPerD) VALUES ("
-'            SQL = SQL & vUsu.Codigo & ",'" & txtCta(3).Text & "','"
-'            'ANTES
-'            'SQL = SQL & DevNombreSQL(Me.txtDescCta(3).Text) & "'," & TransformaComasPuntos(CStr(Impor)) & ")"
-'            'AHora.
-'            SQL = SQL & txtRemesa.Text & "',0)"
-'            Conn.Execute SQL
-'        Else
-'            If Not chkAgruparRemesaPorEntidad.Visible Then Me.chkAgruparRemesaPorEntidad.Value = 0
-'            SQL = cad 'Le paso el SELECT
-'            If Me.chkAgruparRemesaPorEntidad.Value = 1 Then DividiVencimentosPorEntidadBancaria
-'
-'        End If
-'
-'
-'        'Lo qu vamos a hacer es , primero bloquear la opcioin de remesar
-'        If BloqueoManual(True, "Remesas", "Remesas") Then
-'
-'            Me.Visible = False
-'
-'            If SubTipo = vbTipoPagoRemesa Then
-'                'REMESA NORMAL Y CORRIENTE
-'                'La de efectos de toda la vida
-'                'Mostraremos el otro form, el de remesas
-'
-'                frmTESRemesas.Opcion = 0
-'                frmTESRemesas.vSQL = CStr(cad)
-'
-'                If chkAgruparRemesaPorEntidad.Value = 1 Then
-'                    cad = txtCta(3).Text
-'                Else
-'                    cad = ""
-'                End If
-'                cad = txtRemesa.Text & "|" & Year(CDate(Text1(8).Text)) & "|" & Text1(8).Text & "|" & cad & "|"
-'                frmTESRemesas.vRemesa = cad
-'
-'                frmTESRemesas.ImporteRemesa = Impor
-'                frmTESRemesas.Show vbModal
-'
-'
-'
-'            Else
-'                'Remesas de talones y pagares
-'                frmRemeTalPag.vRemesa = "" 'NUEVA
-'                frmRemeTalPag.SQL = cad
-'                frmRemeTalPag.Talon = cmbRemesa.ListIndex = 1 '0 pagare   1 talon
-'                frmRemeTalPag.Text1(0).Text = Me.txtCta(3).Text & " - " & txtDescCta(3).Text
-'                frmRemeTalPag.Text1(1).Text = Text1(8).Text
-'                frmRemeTalPag.Show vbModal
-'            End If
-'            'Desbloqueamos
-'            BloqueoManual False, "Remesas", ""
-'            Unload Me
-'        Else
-'            MsgBox "Otro usuario esta generando remesas", vbExclamation
-'        End If
-'
-'    End If
-'
-'    Screen.MousePointer = vbDefault
-End Sub
 
 
 
@@ -7716,8 +6631,6 @@ Private Sub cmdRemesas_Click()
     
     If SubTipo <> vbTipoPagoRemesa Then
         NuevaRemTalPag
-    Else
-        NuevaRem
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -7925,12 +6838,6 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         Select Case Opcion
-        Case 4
-            If SubTipo <> vbTipoPagoRemesa Then
-                PonerFoco Me.cmbRemesa
-            Else
-                PonerFoco Text1(6)
-            End If
         Case 12
             'Elimiar efectos
             CargaRemesas
@@ -8008,7 +6915,6 @@ Dim W As Integer
     
     FrameCobros.Visible = False
     Framepagos.Visible = False
-    FrameRemesa2.Visible = False
     FrameContabilRem2.Visible = False
     FrameDevlucionRe.Visible = False
     FrameImpagados.Visible = False
@@ -8079,59 +6985,6 @@ Dim W As Integer
         W = Framepagos.Width
         I = LeerGuardarOrdenacion(True, False, I)
         Me.optOrdPag(I).Value = True
-    Case 4
-        
-        Caption = "Remesas"
-        'Si es remesa el combo solo tendra "efecto"
-        Me.cmbRemesa.Clear
-        chkComensaAbonos.Visible = False
-        If SubTipo = vbTipoPagoRemesa Then
-            cmbRemesa.AddItem "Efectos"
-            Cancelado = True
-            Me.Label2(19).Caption = "Fecha factura"
-            FrameBancoRemesa.Caption = "Banco por defecto"
-            
-            
-            If vParamT.RemesasPorEntidad Then LeerGuardarBancoDefectoEntidad True
-            chkComensaAbonos.Visible = True
-        Else
-            Cancelado = False
-            cmbRemesa.AddItem "Pagarés"
-            cmbRemesa.AddItem "Talones"
-            Me.Label2(19).Caption = "Fecha recepcion"
-            FrameBancoRemesa.Caption = "Banco remesar"
-        End If
-        
-        
-        chkAgruparRemesaPorEntidad.Visible = vParamT.RemesasPorEntidad And SubTipo = vbTipoPagoRemesa
-        
-        Me.FrameBancoRemesa.Visible = Not (SubTipo = vbTipoPagoRemesa)
-        
-        'Datos que tampoco vamos a mostrar
-        '-----------------------------
-        
-    
-        For W = 0 To 1
-            Me.Label2(20 + W).Visible = Cancelado
-            Me.Label2(22 + W).Visible = Cancelado
-            txtSerie(W).Visible = Cancelado
-            txtnumfac(W).Visible = Cancelado
-            txtDCtaNormal(W + 3).Visible = Cancelado
-            txtCtaNormal(W + 3).Visible = Cancelado
-            imgCtaNorma(W + 3).Visible = Cancelado
-        Next W
-        For W = 17 To 22
-            Label1(W).Visible = Cancelado
-        Next
-        
-        '----------------------------
-        
-        CargaList
-        PonerValoresDefectoRemesas
-        FrameRemesa2.Visible = True
-        H = FrameRemesa2.Height
-        W = FrameRemesa2.Width
-        
     Case 8, 22, 23
         'Utilizare el mismo FRAM para
         '   8.- Contabilizar / Abono remesa
@@ -8631,19 +7484,6 @@ Private Sub imgFra_Click()
         CadenaDesdeOtroForm = ""
 End Sub
 
-Private Sub imgRem_Click(Index As Integer)
-'--monica
-'    I = Index
-'    Set frmRe = New frmColRemesas2
-'    frmRe.Tipo = SubTipo  'Para abrir efectos o talonesypagares
-'    frmRe.DatosADevolverBusqueda = "1|"
-'    frmRe.Show vbModal
-'    Set frmRe = Nothing
-'    'Por si ha puesto los datos
-'    CamposRemesaAbono
-    
-End Sub
-
 Private Sub ListView2_DblClick()
   '  Stop
   '  For NumRegElim = 1 To ListView2.ColumnHeaders.Count: Debug.Print ListView2.ColumnHeaders(NumRegElim).Text & ": " & ListView2.ColumnHeaders(NumRegElim).Width: Next NumRegElim
@@ -8907,37 +7747,6 @@ Dim DevfrmCCtas As String
 End Sub
 
 
-Private Sub PonerValoresDefectoRemesas()
-Dim F As Date
-    
-    'Fecha remesa.. hoy
-    Text1(8).Text = Format(Now, "dd/mm/yyyy")
-    
-    'Tipo. Por defecto siempre efecto
-    Me.cmbRemesa.ListIndex = 0
-    
-    'Ahora vemos la fecha mas alta de remesas
-    SQL = "select max(fecfin) from remesas "
-    Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    F = CDate("01/01/2000")
-    NumRegElim = 0
-    If Not miRsAux.EOF Then
-        If Not IsNull(miRsAux.Fields(0)) Then
-            F = miRsAux.Fields(0)
-            NumRegElim = 1
-        End If
-    End If
-    miRsAux.Close
-    Set miRsAux = Nothing
-    
-    If NumRegElim = 0 Then
-        Text1(6).Text = ""
-    Else
-        Text1(6).Text = Format(F, "dd/mm/yyyy")
-    End If
-    Text1(7).Text = Format(DateAdd("d", -1, Now), "dd/mm/yyyy")
-End Sub
 
 Private Function CopiarArchivo() As Boolean
 On Error GoTo ECopiarArchivo
