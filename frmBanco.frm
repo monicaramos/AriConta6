@@ -1542,13 +1542,14 @@ Private Sub Text1_LostFocus(Index As Integer)
     'Si queremos hacer algo ..
     Select Case Index
         Case 0, 2, 3, 6, 24, 25
+            If Text1(Index).Text = "" Then Exit Sub
+            
             If Index = 2 Then
                 Text1(Index).Text = UCase(Text1(Index).Text)
             Else
                 Text1(Index).Text = Format(Text1(Index).Text, "0000")
             End If
             If Modo = 1 Then Exit Sub
-            If Text1(Index).Text = "" Then Exit Sub
         
             If Index <> 2 Then
                 If Not EsNumerico(Text1(Index).Text) Then

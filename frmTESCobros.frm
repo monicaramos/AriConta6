@@ -3829,10 +3829,6 @@ Private Sub cmdAceptar_Click()
     Case 4
         'Modificar
         If DatosOK Then
-            '-----------------------------------------
-'                Cad = DameClavesADODCForm(Me, Me.Data1)
-'
-'                If ModificaDesdeFormularioClaves(Me, Cad) Then
              If ModificaDesdeFormulario2(Me, 1) Then
                 'TerminaBloquear
                 DesBloqueaRegistroForm Me.Text1(0)
@@ -3864,15 +3860,11 @@ Private Sub cmdAceptar_Click()
                 ModificarLinea
                                     
                 '**** parte de contabilizacion de la factura
-                '--DesBloqueaRegistroForm Me.Text1(0)
                 TerminaBloquear
                 
             
                 'LOG
                 vLog.Insertar 5, vUsu, Text1(2).Text & Text1(0).Text & " " & Text1(1).Text
-                'Creo que no hace falta volver a situar el datagrid
-                'If SituarData1(0) Then
-                
                 PosicionarData
                 
         End Select
@@ -3907,7 +3899,6 @@ Private Sub cmdAux_Click(Index As Integer)
             Set frmDev = Nothing
             
     End Select
-'    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
 
 
@@ -4319,7 +4310,6 @@ Dim I As Integer
     Me.SSTab1.Tab = 0
     Me.Icon = frmPpal.Icon
     LimpiarCampos
-    'FrameSeguro.Visible = vParamT.TieneOperacionesAseguradas
     Me.SSTab2.TabEnabled(2) = vParamT.TieneOperacionesAseguradas
     
     'Recaudacion ejecutiva
@@ -4642,7 +4632,6 @@ End Sub
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 24 Then
         'Despues de la fecha prorroga va el btn
-        'PonerFocoGral Me.cmdAceptar
         PonleFoco Me.cmdAceptar
     Else
         KEYpress KeyAscii
@@ -5041,7 +5030,6 @@ If Data1.Recordset.RecordCount <= 0 Then
 
     Else
         PonerModo 2
-        'Data1.Recordset.MoveLast
         Data1.Recordset.MoveFirst
         PonerCampos
 End If
@@ -5125,7 +5113,6 @@ Private Sub PonerCampos()
     
     
     'Cargamos el LINEAS
-'    DataGridAux(0).Enabled = False
     CargaList 0, True
     CargaGrid 1, True
 
@@ -5419,15 +5406,9 @@ Dim Tipo As Integer
     If vParamT.TieneOperacionesAseguradas Then
         B = Me.Text1(23).Text <> "" Or Me.Text1(22).Text <> "" Or Me.Text1(21).Text <> ""
         If B Then
-'            'Tiene valores en fechas de riesgo/aviso/siniestro
-'            If Me.lblAsegurado.Visible Then
-'                'ok. el cliente tiene operaciones aseguradas
-'
-'            Else
-                MsgBox "No debe indicar fechas de operaciones aseguradas" & vbCrLf & "-Falta pago/prorroga/aviso siniestro" & vbCrLf & " Si no esta asegurado", vbExclamation
-                PonerFoco Me.Text1(23)
-                Exit Function
-'            End If
+             MsgBox "No debe indicar fechas de operaciones aseguradas" & vbCrLf & "-Falta pago/prorroga/aviso siniestro" & vbCrLf & " Si no esta asegurado", vbExclamation
+             PonerFoco Me.Text1(23)
+             Exit Function
         End If
     End If
     
@@ -5765,14 +5746,6 @@ Dim cad As String
     cad = cad & " ORDER BY hlinapu.numserie, hlinapu.numfaccl, hlinapu.fecfactu, hlinapu.numorden, hlinapu.fechaent, hlinapu.numasien "
     
     
-'    Cad = Cad & PonerOrdenFiltro
-    
-'    If CampoOrden = "" Then CampoOrden = "remesas.fecremesa" '"remesas.codigo"
-'    Cad = Cad & " ORDER BY " & CampoOrden ' remesas.anyo desc,
-'    If Orden Then Cad = Cad & " DESC"
-    
-    
-    
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lwCobros.ListItems.Add()
@@ -5826,7 +5799,6 @@ Dim tots As String
             'si es visible|control|tipo campo|nombre campo|ancho control|
             tots = "N||||0|;N||||0|;N||||0|;N||||0|;S|txtaux1(5)|T|Fecha|1255|;S|txtaux1(6)|T|Código|1005|;S|cmdAux(2)|B|||;"
             tots = tots & "S|txtaux1(8)|T|Descripción|5055|;"
-            'tots = tots & "S|txtaux1(7)|T|Observación|5005|;"
             tots = tots & "N||||0|;S|txtaux1(7)|T|Tipo |1500|;"
             tots = tots & "S|txtaux1(9)|T|Remesa|1000|;"
             tots = tots & "S|txtaux1(10)|T|Año|1000|;"
@@ -6179,7 +6151,6 @@ Dim Eliminar As Boolean
         ' *** si n'hi han tabs sense datagrid ***
         If Index = 3 Then CargaFrame 3, True
         ' ***************************************
-'        If BLOQUEADesdeFormulario2(Me, data1, 1) Then BotonModificar
         ' *** si n'hi han tabs ***
         SituarTab (NumTabMto)
         ' ************************
@@ -6357,9 +6328,6 @@ Private Sub BotonModificarLinea(Index As Integer)
 
     NumTabMto = Index
     PonerModo 5, Index
-    ' *** bloqueje la clau primaria de la capçalera ***
-'    BloquearTxt Text1(0), True
-    ' *********************************
 
     Select Case Index
         Case 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***

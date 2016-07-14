@@ -1250,8 +1250,6 @@ Dim Sql1 As String
     Else
     
     
-'    If CadenaDesdeOtroForm = "OK" Then
-    
         'Aumentamos los importes punteados
         Importe = CCur(ListView1.SelectedItem.SubItems(1))
         De = De + Importe
@@ -1647,7 +1645,6 @@ Dim RC As String
              Text1.Text = RC
              Text2.Text = SQL
              
-             'If CuentaAnterior <> Text1.Text Then
              ConfirmarDatos True
              CuentaAnterior = Text1.Text
          Else
@@ -2378,7 +2375,6 @@ Dim ContadorRegistrosBanco As Integer
         Fecha = Fecha & vbCrLf
                 
         'ANTES
-        'NF = InStr(1, Fichero, "|22") 'Es el fin de la primera linea
         NF = InStr(1, Fichero, "|") 'Es el fin de la primera linea
         
         'Primara linea, la de la cuenta
@@ -2434,7 +2430,6 @@ Dim ContadorRegistrosBanco As Integer
         'ANTES 25 Noviembre
         'Se trabaja al reves
         'Signo del saldo
-        'If Mid(LINEA, 33, 1) = "2" Then Saldo = Saldo * -1
         If Mid(Linea, 33, 1) = "1" Then Saldo = Saldo * -1
         
         NF = InStr(1, Fichero, "|") 'Es el fin de la primera linea
@@ -2472,7 +2467,6 @@ Dim ContadorRegistrosBanco As Integer
                         Ampliacion = ProcesaAmpliacion2(Linea)
                         If Not InsertarRegistro(Ampliacion, ContadorMYSQL, ContadorRegistrosBanco) Then Exit Sub
                         RegistroInsertado = True
-                        'txtDatos.Text = txtDatos.Text & vbCrLf & vbCrLf
                     End If
                     
                     
@@ -2603,7 +2597,6 @@ Dim SQ As String
     If BloqueoManual(True, "norma43", "clave") Then
         InsertarHcoBanco
         BloqueoManual False, "norma43", ""
-       ' Command2(0).Enabled = False
         PonerModo 0
         Text1_LostFocus
     Else

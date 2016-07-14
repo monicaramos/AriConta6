@@ -318,12 +318,6 @@ Wend
 Close #NE
 End Sub
 
-
-
-
-
-
-
 Private Sub cmdSalir_Click()
     Unload Me
 End Sub
@@ -435,9 +429,6 @@ Dim B As Boolean
     Me.frame1Asiento.Visible = B
     Me.Animation1.Visible = B
 End Sub
-
-
-
 
 
 Private Function ActualizaAsiento() As Boolean
@@ -853,11 +844,11 @@ End Function
 
 
 Private Function CalcularSaldos() As Boolean
-    Dim i As Integer
+    Dim I As Integer
     CalcularSaldos = False
-    For i = vEmpresa.numnivel To 1 Step -1
-        If Not CalcularSaldos1Nivel(i) Then Exit Function
-    Next i
+    For I = vEmpresa.numnivel To 1 Step -1
+        If Not CalcularSaldos1Nivel(I) Then Exit Function
+    Next I
     CalcularSaldos = True
 End Function
 
@@ -869,24 +860,24 @@ Private Function CalcularSaldos1Nivel(Nivel As Integer) As Boolean
     Dim TD As String
     Dim TH As String
     Dim Cta As String
-    Dim i As Integer
+    Dim I As Integer
     
     
     CalcularSaldos1Nivel = False
-    i = DigitosNivel(Nivel)
-    If i < 0 Then Exit Function
+    I = DigitosNivel(Nivel)
+    If I < 0 Then Exit Function
     
-    Cta = Mid(Cuenta, 1, i)
+    Cta = Mid(Cuenta, 1, I)
     SQL = "Select Impmesde,impmesha from hsaldos where "
     SQL = SQL & " Codmacta = '" & Cta & "' AND Anopsald = " & Anyo & " AND mespsald = " & Mes
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RS.EOF Then
-        i = 0   'Nuevo
+        I = 0   'Nuevo
         ImpD = 0
         ImpH = 0
     Else
-        i = 1
+        I = 1
         ImpD = RS.Fields(0)
         ImpH = RS.Fields(1)
     End If
@@ -898,7 +889,7 @@ Private Function CalcularSaldos1Nivel(Nivel As Integer) As Boolean
     
     TD = TransformaComasPuntos(CStr(ImpD))
     TH = TransformaComasPuntos(CStr(ImpH))
-    If i = 0 Then
+    If I = 0 Then
         'Nueva insercion
         SQL = "INSERT INTO hsaldos VALUES('" & Cta & "'," & Anyo & "," & Mes & "," & TD & "," & TH & ")"
         Else
@@ -922,11 +913,7 @@ Private Function CalcularSaldosAnal() As Boolean
 End Function
 
 Private Function CalcularSaldosAnalDesactualizar() As Boolean
-    'Dim i As Integer
-    'CalcularSaldosAnalDesactualizar = False
-    'For i = vEmpresa.numnivel To 1 Step -1
     CalcularSaldosAnalDesactualizar = CalcularSaldos1NivelAnalDesactualizar(vEmpresa.numnivel)
-
 End Function
 
 Private Function CalcularSaldos1NivelAnal(Nivel As Integer) As Boolean
@@ -935,25 +922,25 @@ Private Function CalcularSaldos1NivelAnal(Nivel As Integer) As Boolean
     Dim TD As String
     Dim TH As String
     Dim Cta As String
-    Dim i As Integer
+    Dim I As Integer
     
     
     CalcularSaldos1NivelAnal = False
-    i = DigitosNivel(Nivel)
-    If i < 0 Then Exit Function
+    I = DigitosNivel(Nivel)
+    If I < 0 Then Exit Function
     
-    Cta = Mid(Cuenta, 1, i)
+    Cta = Mid(Cuenta, 1, I)
     SQL = "Select debccost,habccost from hsaldosanal where "
     SQL = SQL & " codccost='" & CCost & "' AND"
     SQL = SQL & " Codmacta = '" & Cta & "' AND anoccost = " & Anyo & " AND mesccost = " & Mes
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RS.EOF Then
-        i = 0   'Nuevo
+        I = 0   'Nuevo
         ImpD = 0
         ImpH = 0
     Else
-        i = 1
+        I = 1
         ImpD = RS.Fields(0)
         ImpH = RS.Fields(1)
     End If
@@ -963,7 +950,7 @@ Private Function CalcularSaldos1NivelAnal(Nivel As Integer) As Boolean
     ImpH = ImpH + ImporteH
     TD = TransformaComasPuntos(CStr(ImpD))
     TH = TransformaComasPuntos(CStr(ImpH))
-    If i = 0 Then
+    If I = 0 Then
         'Nueva insercion
         SQL = "INSERT INTO hsaldosanal(codccost,codmacta,anoccost,mesccost,debccost,habccost)"
         SQL = SQL & " VALUES('" & CCost & "','" & Cta & "'," & Anyo & "," & Mes & "," & TD & "," & TH & ")"
@@ -984,13 +971,13 @@ Private Function CalcularSaldos1NivelAnalDesactualizar(Nivel As Integer) As Bool
     Dim TD As String
     Dim TH As String
     Dim Cta As String
-    Dim i As Integer
+    Dim I As Integer
     
     CalcularSaldos1NivelAnalDesactualizar = False
-    i = DigitosNivel(Nivel)
-    If i < 0 Then Exit Function
+    I = DigitosNivel(Nivel)
+    If I < 0 Then Exit Function
     
-    Cta = Mid(Cuenta, 1, i)
+    Cta = Mid(Cuenta, 1, I)
     SQL = "Select debccost,habccost from hsaldosanal where "
     SQL = SQL & " codccost='" & CCost & "' AND"
     SQL = SQL & " Codmacta = '" & Cta & "' AND anoccost = " & Anyo & " AND mesccost = " & Mes
@@ -1001,7 +988,7 @@ Private Function CalcularSaldos1NivelAnalDesactualizar(Nivel As Integer) As Bool
         RS.Close
         Exit Function
     Else
-        i = 1
+        I = 1
         ImpD = RS.Fields(0)
         ImpH = RS.Fields(1)
     End If
@@ -1022,9 +1009,6 @@ Private Function CalcularSaldos1NivelAnalDesactualizar(Nivel As Integer) As Bool
     Conn.Execute SQL
     CalcularSaldos1NivelAnalDesactualizar = True
 End Function
-
-
-
 
 Private Function BorrarASiento(EnHistorico As Boolean) As Boolean
     BorrarASiento = False
@@ -1075,12 +1059,11 @@ End Sub
 ' se generaran desde TESORERIA.
 'YA los hemos metido en tmoactualziar
 Private Function ObtenerRegistrosParaActualizar() As Boolean
-Dim Cad As String
+Dim cad As String
     Label1.Caption = "Prepara proceso."
     Label1.Refresh
     ObtenerRegistrosParaActualizar = False
     'Borramos temporal
-    'Conn.Execute "Delete From tmpactualizarError where codusu = " & vUsu.Codigo
     
     Set RS = New ADODB.Recordset
     RS.Open "Select count(*) from tmpActualizar WHERE codusu =" & vUsu.Codigo, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -1125,14 +1108,14 @@ Dim Cad As String
         NumDiari = RS!NumDiari
         'No esta bloqueado
         'Comprobamos que esta cuadrado
-        Cad = RegistroCuadrado
-        If Cad <> "" Then
-            InsertaError Cad
+        cad = RegistroCuadrado
+        If cad <> "" Then
+            InsertaError cad
             'Borramos de tmpactualizar
-            Cad = "delete from tmpactualizar where codusu =" & vUsu.Codigo
-            Cad = Cad & " AND numdiari =" & RS!NumDiari & " AND numasien =" & RS!NumAsien
-            Cad = Cad & " AND fechaent ='" & Format(RS!FechaEnt, FormatoFecha) & "'"
-            Conn.Execute Cad
+            cad = "delete from tmpactualizar where codusu =" & vUsu.Codigo
+            cad = cad & " AND numdiari =" & RS!NumDiari & " AND numasien =" & RS!NumAsien
+            cad = cad & " AND fechaent ='" & Format(RS!FechaEnt, FormatoFecha) & "'"
+            Conn.Execute cad
         End If
         
 

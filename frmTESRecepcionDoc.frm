@@ -17,6 +17,24 @@ Begin VB.Form frmTESRecepcionDoc
    ScaleWidth      =   10035
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   270
+      Left            =   8040
+      TabIndex        =   42
+      Top             =   630
+      Visible         =   0   'False
+      Width           =   1785
+   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   210
@@ -163,7 +181,7 @@ Begin VB.Form frmTESRecepcionDoc
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   360
       Left            =   8130
       TabIndex        =   32
       Text            =   "Text1"
@@ -184,7 +202,7 @@ Begin VB.Form frmTESRecepcionDoc
       Height          =   255
       Left            =   7890
       TabIndex        =   31
-      Tag             =   "C|N|N|||scarecepdoc|LlevadoBanco|||"
+      Tag             =   "C|N|N|||talones|LlevadoBanco|||"
       Top             =   1260
       Width           =   1785
    End
@@ -202,7 +220,7 @@ Begin VB.Form frmTESRecepcionDoc
       Height          =   255
       Left            =   5880
       TabIndex        =   4
-      Tag             =   "C|N|N|||scarecepdoc|Contabilizada|||"
+      Tag             =   "C|N|N|||talones|Contabilizada|||"
       Top             =   1260
       Width           =   1905
    End
@@ -221,7 +239,7 @@ Begin VB.Form frmTESRecepcionDoc
       Left            =   4290
       MaxLength       =   30
       TabIndex        =   3
-      Tag             =   "Fecha vencimiento|F|N|||scarecepdoc|fechavto|dd/mm/yyyy||"
+      Tag             =   "Fecha vencimiento|F|N|||talones|fechavto|dd/mm/yyyy||"
       Text            =   "commor"
       Top             =   1200
       Width           =   1365
@@ -241,7 +259,7 @@ Begin VB.Form frmTESRecepcionDoc
       Index           =   5
       Left            =   6210
       TabIndex        =   8
-      Tag             =   "Importe|N|N|0||scarecepdoc|importe|#,##0.00||"
+      Tag             =   "Importe|N|N|0||talones|importe|#,##0.00||"
       Text            =   "Text1"
       Top             =   2550
       Width           =   1515
@@ -260,7 +278,7 @@ Begin VB.Form frmTESRecepcionDoc
       Index           =   3
       Left            =   4290
       TabIndex        =   6
-      Tag             =   "Banco|T|N|||scarecepdoc|banco|||"
+      Tag             =   "Banco|T|N|||talones|banco|||"
       Text            =   "Text1"
       Top             =   1860
       Width           =   5415
@@ -281,7 +299,7 @@ Begin VB.Form frmTESRecepcionDoc
       List            =   "frmTESRecepcionDoc.frx":0016
       Style           =   2  'Dropdown List
       TabIndex        =   1
-      Tag             =   "Talon|N|N|0||scarecepdoc|talon|||"
+      Tag             =   "Talon|N|N|0||talones|talon|||"
       Top             =   1200
       Width           =   1545
    End
@@ -300,7 +318,7 @@ Begin VB.Form frmTESRecepcionDoc
       Index           =   4
       Left            =   240
       TabIndex        =   0
-      Tag             =   "Codigo|N|S|0||scarecepdoc|codigo||S|"
+      Tag             =   "Codigo|N|S|0||talones|codigo||S|"
       Text            =   "Text1"
       Top             =   1200
       Width           =   795
@@ -339,7 +357,7 @@ Begin VB.Form frmTESRecepcionDoc
       Left            =   240
       MaxLength       =   30
       TabIndex        =   7
-      Tag             =   "Cliente|T|N|||scarecepdoc|codmacta|||"
+      Tag             =   "Cliente|T|N|||talones|codmacta|||"
       Text            =   "commor"
       Top             =   2520
       Width           =   1365
@@ -359,7 +377,7 @@ Begin VB.Form frmTESRecepcionDoc
       Left            =   2730
       MaxLength       =   30
       TabIndex        =   2
-      Tag             =   "Fecha recepcion|F|N|||scarecepdoc|fecharec|dd/mm/yyyy||"
+      Tag             =   "Fecha recepcion|F|N|||talones|fecharec|dd/mm/yyyy||"
       Text            =   "commor"
       Top             =   1200
       Width           =   1425
@@ -569,7 +587,7 @@ Begin VB.Form frmTESRecepcionDoc
       Index           =   0
       Left            =   240
       TabIndex        =   5
-      Tag             =   "Referencia|T|N|||scarecepdoc|numeroref|||"
+      Tag             =   "Referencia|T|N|||talones|numeroref|||"
       Text            =   "Text1"
       Top             =   1860
       Width           =   3375
@@ -1037,7 +1055,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 
-Private Const IdPrograma = 707
+Private Const IdPrograma = 611
 
 
 
@@ -1046,8 +1064,6 @@ Private WithEvents frmCCtas As frmColCtas
 Attribute frmCCtas.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
-Private WithEvents frmB As frmBuscaGrid
-Attribute frmB.VB_VarHelpID = -1
 
 '-----------------------------
 'Se distinguen varios modos
@@ -1102,16 +1118,21 @@ End Sub
 
 
 
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
 
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+End Sub
 
 Private Sub Check1_KeyPress(KeyAscii As Integer)
-    KeyPressGral KeyAscii
+    KEYpress KeyAscii
 End Sub
 
 
 
 Private Sub Check2_KeyPress(KeyAscii As Integer)
-    KeyPressGral KeyAscii
+    KEYpress KeyAscii
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -1174,27 +1195,28 @@ Dim Im As Currency
 
         CadenaDesdeOtroForm = ""
         'Todos los cobros pendientes de este
-        SQL = " scobro.codmacta = '" & Text1(2).Text & "' AND ( impcobro =0 or impcobro is null)"
+        SQL = " cobros.codmacta = '" & Text1(2).Text & "' AND ( impcobro =0 or impcobro is null)"
         
         'MODIFICADO Agosto 2009
-        SQL = " scobro.codmacta = '" & Text1(2).Text & "' AND estacaja=0 AND ( tiporem is null or tiporem>1)"
+        SQL = " cobros.codmacta = '" & Text1(2).Text & "' AND estacaja=0 AND ( tiporem is null or tiporem>1)"
         
         'Docu recibido NO
         SQL = SQL & " AND recedocu = 0" 'por si acoaso
         
-        frmVerCobrosPagos.ImporteGastosTarjeta_ = Im
-        frmVerCobrosPagos.vSQL = SQL
-        frmVerCobrosPagos.OrdenarEfecto = False
-        frmVerCobrosPagos.Regresar = True
-        frmVerCobrosPagos.Cobros = True
-        frmVerCobrosPagos.DesdeRecepcionTalones = True 'Para que muestre el boton de dividir vencimiento
-        frmVerCobrosPagos.Show vbModal
+        frmTESVerCobrosPagos.ImporteGastosTarjeta_ = Im
+        frmTESVerCobrosPagos.vSQL = SQL
+        frmTESVerCobrosPagos.OrdenarEfecto = False
+        frmTESVerCobrosPagos.Regresar = True
+        frmTESVerCobrosPagos.Cobros = True
+        frmTESVerCobrosPagos.DesdeRecepcionTalones = True 'Para que muestre el boton de dividir vencimiento
+        frmTESVerCobrosPagos.Show vbModal
+        
         If CadenaDesdeOtroForm <> "" Then
-                'Devuelve:  M|2700266|25/06/2008|1|
-               SQL = " AND numserie = '" & RecuperaValor(CadenaDesdeOtroForm, 1) & "' AND codfaccl = " & RecuperaValor(CadenaDesdeOtroForm, 2)
-               SQL = SQL & " and fecfaccl ='" & Format(RecuperaValor(CadenaDesdeOtroForm, 3), FormatoFecha) & "' AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 4)
-               'El SQL es de todo el modulo
-               PonerCamposVencimiento True
+             'Devuelve:  M|2700266|25/06/2008|1|
+            SQL = " AND numserie = '" & RecuperaValor(CadenaDesdeOtroForm, 1) & "' AND numfactu = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+            SQL = SQL & " and fecfactu ='" & Format(RecuperaValor(CadenaDesdeOtroForm, 3), FormatoFecha) & "' AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 4)
+            'El SQL es de todo el modulo
+            PonerCamposVencimiento True
         End If
 End Sub
 
@@ -1552,7 +1574,7 @@ End Sub
 
 
 Private Sub Combo1_KeyPress(KeyAscii As Integer)
-    KeyPressGral KeyAscii
+    KEYpress KeyAscii
 End Sub
 
 Private Sub Form_Activate()
@@ -1578,24 +1600,39 @@ Private Sub Form_Load()
     PrimeraVez = True
     CadAncho = False
 
-    ' ICONITOS DE LA BARRA
+
     With Me.Toolbar1
-        
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 1
-        .Buttons(2).Image = 2
-        .Buttons(6).Image = 3
-        .Buttons(7).Image = 4
-        .Buttons(8).Image = 5
-        .Buttons(10).Image = 10
-        .Buttons(11).Image = 17
-        .Buttons(13).Image = 16
-        .Buttons(14).Image = 15
-        .Buttons(16).Image = 6
-        .Buttons(17).Image = 7
-        .Buttons(18).Image = 8
-        .Buttons(19).Image = 9
+        .Buttons(1).Image = 3
+        .Buttons(2).Image = 4
+        .Buttons(3).Image = 5
+        .Buttons(5).Image = 1
+        .Buttons(6).Image = 2
+        .Buttons(8).Image = 16
     End With
+
+
+
+'    ' ICONITOS DE LA BARRA
+'    With Me.Toolbar1
+'
+'        .ImageList = frmPpal.imgListComun
+'        .Buttons(1).Image = 1
+'        .Buttons(2).Image = 2
+'        .Buttons(6).Image = 3
+'        .Buttons(7).Image = 4
+'        .Buttons(8).Image = 5
+'        .Buttons(10).Image = 10
+'        .Buttons(11).Image = 17
+'        .Buttons(13).Image = 16
+'        .Buttons(14).Image = 15
+'        .Buttons(16).Image = 6
+'        .Buttons(17).Image = 7
+'        .Buttons(18).Image = 8
+'        .Buttons(19).Image = 9
+'    End With
     
     
     ' Botonera Principal
@@ -1666,7 +1703,7 @@ Private Sub Form_Load()
 
 
     '## A mano
-    NombreTabla = "scarecepdoc"
+    NombreTabla = "talones"
     Ordenacion = " ORDER BY codigo"
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -1913,8 +1950,7 @@ Dim EntrarEnSelect As Boolean
                 Text5.Text = ""
             End If
         Case 5
-
-            FormatTextImporte Text1(Index)
+            PonerFormatoDecimal Text1(Index), 3
             If Text1(Index).Text = "" Then Ponerfoco Text1(Index)
         End Select
     End If
@@ -1923,42 +1959,42 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-        Dim Cad As String
-        'Llamamos a al form
-        '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(4), 7, "Cod:")
-        Cad = Cad & "T|if(talon=0,""P"",""T"")|T|5·"
-        Cad = Cad & ParaGrid(Text1(1), 15, "Fecha Vto")
-        Cad = Cad & ParaGrid(Text1(0), 25, "Referencia")
-        Cad = Cad & ParaGrid(Text1(3), 14, "Banco")
-        Cad = Cad & "Cta|cuentas.codmacta|T|12·"
-        Cad = Cad & "Titulo|nommacta|T|22·"
-        If Cad <> "" Then
-            Screen.MousePointer = vbHourglass
-            Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
-            frmB.vTabla = NombreTabla & ",cuentas"
-            Cad = NombreTabla & ".codmacta =cuentas.codmacta"
-            If CadB <> "" Then Cad = Cad & " AND " & CadB
-            frmB.vSQL = Cad
-            HaDevueltoDatos = False
-            '###A mano
-            frmB.vDevuelve = "0|"
-            frmB.vTitulo = "Recepcion documentos"
-            frmB.vSelElem = 0
-            '#
-            frmB.Show vbModal
-            Set frmB = Nothing
-            'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-            'tendremos que cerrar el form lanzando el evento
-            If HaDevueltoDatos Then
-                'If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                    cmdRegresar_Click
-            Else   'de ha devuelto datos, es decir NO ha devuelto datos
-               ' Text1(kCampo).SetFocus
-            End If
-        End If
+'        Dim Cad As String
+'        'Llamamos a al form
+'        '##A mano
+'        Cad = ""
+'        Cad = Cad & ParaGrid(Text1(4), 7, "Cod:")
+'        Cad = Cad & "T|if(talon=0,""P"",""T"")|T|5·"
+'        Cad = Cad & ParaGrid(Text1(1), 15, "Fecha Vto")
+'        Cad = Cad & ParaGrid(Text1(0), 25, "Referencia")
+'        Cad = Cad & ParaGrid(Text1(3), 14, "Banco")
+'        Cad = Cad & "Cta|cuentas.codmacta|T|12·"
+'        Cad = Cad & "Titulo|nommacta|T|22·"
+'        If Cad <> "" Then
+'            Screen.MousePointer = vbHourglass
+'            Set frmB = New frmBuscaGrid
+'            frmB.vCampos = Cad
+'            frmB.vTabla = NombreTabla & ",cuentas"
+'            Cad = NombreTabla & ".codmacta =cuentas.codmacta"
+'            If CadB <> "" Then Cad = Cad & " AND " & CadB
+'            frmB.vSQL = Cad
+'            HaDevueltoDatos = False
+'            '###A mano
+'            frmB.vDevuelve = "0|"
+'            frmB.vTitulo = "Recepcion documentos"
+'            frmB.vSelElem = 0
+'            '#
+'            frmB.Show vbModal
+'            Set frmB = Nothing
+'            'Si ha puesto valores y tenemos que es formulario de busqueda entonces
+'            'tendremos que cerrar el form lanzando el evento
+'            If HaDevueltoDatos Then
+'                'If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                    cmdRegresar_Click
+'            Else   'de ha devuelto datos, es decir NO ha devuelto datos
+'               ' Text1(kCampo).SetFocus
+'            End If
+'        End If
 End Sub
 
 Private Sub PonerCadenaBusqueda(Insertando As Boolean)
@@ -2232,9 +2268,9 @@ Private Sub HacerToolBar(Boton As Integer)
         I = 1
         If Combo1.ListIndex = 0 Then
             'PAGARE. Ver si tiene cta puente pagare
-            If vParam.PagaresCtaPuente Then I = 0
+            If vParamT.PagaresCtaPuente Then I = 0
         Else
-            If vParam.TalonesCtaPuente Then I = 0
+            If vParamT.TalonesCtaPuente Then I = 0
         End If
         If I = 1 Then
             MsgBox "Falta configurar en parametros", vbExclamation
@@ -2282,8 +2318,8 @@ Private Sub HacerToolBar(Boton As Integer)
         
     Case 13
         'Imprimir
-        frmListado.Opcion = 24
-        frmListado.Show vbModal
+'        frmListado.Opcion = 24
+'        frmListado.Show vbModal
     Case 14
         'SALIR
         If Modo < 3 Then mnSalir_Click
@@ -2765,7 +2801,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
             End If
             
         Case 4
-            FormatTextImporte txtaux(Index)
+            PonerFormatoDecimal txtaux(Index), 3
             If txtaux(Index).Text = "" Then
                 Ponerfoco txtaux(Index)
             Else
@@ -3184,9 +3220,9 @@ Private Sub HacerContabilizacion(ImporteCoincide As Integer)
     
     
     
-    
-    frmListado.Opcion = 23
-    frmListado.Show vbModal
+'--monica
+'    frmListado.Opcion = 23
+'    frmListado.Show vbModal
 
 
 
@@ -3197,8 +3233,10 @@ Private Sub HacerContabilizacion(ImporteCoincide As Integer)
         If CadAncho Then
             Conn.CommitTrans
             'Ahora actualizamos los registros que estan en tmpactualziar
-            frmActualizar2.OpcionActualizar = 20
-            frmActualizar2.Show vbModal
+            
+'-- lo he quitado pero hya q añadirlo
+'            frmActualizar2.OpcionActualizar = 20
+'            frmActualizar2.Show vbModal
 
 
             'Espera
@@ -3248,9 +3286,9 @@ Private Function HacerDES_Contabilizacion_(ImporteCoincide As Integer) As Boolea
     
     
     
-    
-    frmListado.Opcion = 34
-    frmListado.Show vbModal
+'-- añadirlo
+'    frmListado.Opcion = 34
+'    frmListado.Show vbModal
 
 
 
@@ -3261,8 +3299,9 @@ Private Function HacerDES_Contabilizacion_(ImporteCoincide As Integer) As Boolea
         If CadAncho Then
             Conn.CommitTrans
             'Ahora actualizamos los registros que estan en tmpactualziar
-            frmActualizar2.OpcionActualizar = 20
-            frmActualizar2.Show vbModal
+'--añadirlo
+'            frmActualizar2.OpcionActualizar = 20
+'            frmActualizar2.Show vbModal
 
 
             HacerDES_Contabilizacion_ = True
@@ -3312,9 +3351,9 @@ Dim TieneCtaPte As Boolean
     If SQL = "1" Then
         'ESTA LLEVADA A BANCO
         If Combo1.ListIndex = 1 Then
-            TieneCtaPte = vParam.TalonesCtaPuente
+            TieneCtaPte = vParamT.TalonesCtaPuente
         Else
-            TieneCtaPte = vParam.PagaresCtaPuente
+            TieneCtaPte = vParamT.PagaresCtaPuente
         End If
         If Check1.Value = 0 And TieneCtaPte Then
             'Hay un error y no esta marcada como contabilziada

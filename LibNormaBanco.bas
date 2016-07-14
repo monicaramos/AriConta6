@@ -248,196 +248,6 @@ Private Function ComprobarCampoReferenciaRemesaNorma19(Remesa As String) As Bool
 End Function
 
 
-
-Public Function comprobarCuentasBancariasPagos(Transferencia As String, Pagos As Boolean) As Boolean
-Dim CC As String
-Dim IBAN As String
-On Error GoTo EcomprobarCuentasBancariasPagos
-
-    comprobarCuentasBancariasPagos = False
-    If Pagos Then
-        SQL = "select * from spagop where transfer = " & Transferencia
-    Else
-        'ABONOS
-        'numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci,
-        'ctabanc1, codbanco, codsucur, digcontr, cuentaba,
-        'ctabanc2, fecultco, impcobro, emitdocum, recedocu, contdocu,
-        'ultimareclamacion, agente, departamento, codrem, anyorem, siturem, gastos,
-        'Devuelto, situacionjuri, noremesar, obs, transfer)
-        SQL = "Select numserie, codfaccl, fecfaccl, numorden, codmacta as ctaprove, "
-        SQL = SQL & "codbanco as entidad,codsucur as oficina,cuentaba,digcontr as CC"
-        SQL = SQL & " FROM scobro where transfer=" & Transferencia
-        
-    End If
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Registro = ""
-    NF = 0
-    While Not miRsAux.EOF
-
-        If DBLet(IsNull(miRsAux!Entidad), "T") = "" Or DBLet(miRsAux!Oficina, "T") = "" Then
-            'Ya esta mal
-            SQL = ""
-        Else
-            If IsNull(miRsAux!Cuentaba) Or IsNull(miRsAux!CC) Then
-                'mal tb
-                SQL = ""
-            Else
-                'TIENE DATOS
-                SQL = "D"
-            End If
-        End If
-    
-        If SQL = "" Then
-             If Pagos Then
-                Registro = Registro & miRsAux!ctaprove & " - " & miRsAux!NumFactu & " : " & miRsAux!FecFactu & "-" & miRsAux!numorden
-             Else
-                Registro = Registro & miRsAux!ctaprove & " - " & miRsAux!NUmSerie & Format(miRsAux!codfaccl, "00000000") & " : " & miRsAux!fecfaccl & "-" & miRsAux!numorden
-             End If
-             If NF < 2 Then
-                Registro = Registro & "         "
-                NF = NF + 1
-             Else
-                Registro = Registro & vbCrLf
-                NF = 0
-            End If
-    
-        End If
-    
-    
-        miRsAux.MoveNext
-    Wend
-    miRsAux.Close
-    If Registro <> "" Then
-        SQL = "Los siguientes vencimientos no tienen la cuenta bancaria con todos los datos." & vbCrLf & Registro
-        MsgBox SQL, vbExclamation
-        Exit Function
-    End If
-    
-    
-    'Si llega aqui es que todos tienen DATOS
-    If Pagos Then
-        SQL = "select entidad,oficina,cuentaba,cc,iban from spagop where transfer = " & Transferencia
-        SQL = SQL & " GROUP BY entidad,oficina,cuentaba,cc"
-    Else
-        SQL = "SELECT codbanco as entidad,codsucur as oficina,cuentaba,digcontr as CC,iban"
-        SQL = SQL & " FROM scobro where transfer=" & Transferencia
-        SQL = SQL & " GROUP BY entidad,oficina,cuentaba,cc"
-    End If
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Registro = ""
-    While Not miRsAux.EOF
-                SQL = Format(miRsAux!Entidad, "0000")  ' Código de entidad receptora
-                SQL = SQL & Format(miRsAux!Oficina, "0000") ' Código de oficina receptora
-                
-                SQL = SQL & Format(miRsAux!Cuentaba, "0000000000") ' Código de cuenta
-                
-                CC = Format(miRsAux!CC, "00") ' Dígitos de control
-                
-                'Este lo mando.
-                IBAN = Mid(SQL, 1, 8) & CC & Mid(SQL, 9)
-                
-                SQL = CodigoDeControl(SQL)
-                If SQL <> CC Then
-                    
-                    SQL = " - " & Format(miRsAux!CC, "00") & "- " & Format(miRsAux!Cuentaba, "0000000000") & " --> CC. correcto:" & SQL
-                    SQL = Format(miRsAux!Entidad, "0000") & " - " & Format(miRsAux!Oficina, "0000") & SQL
-                    Registro = Registro & SQL & vbCrLf
-                End If
-                
-                
-                'Noviembre 2013
-                'IBAN
-                If vParamT.NuevasNormasSEPA Then
-                        SQL = "ES"
-                        If DBLet(miRsAux!IBAN, "T") <> "" Then SQL = Mid(miRsAux!IBAN, 1, 2)
-                    
-                
-                        If Not DevuelveIBAN2(SQL, IBAN, IBAN) Then
-                            
-                            SQL = "Error calculo"
-                        Else
-                            SQL = SQL & IBAN
-                            If DBLet(miRsAux!IBAN, "T") <> SQL Then
-                                SQL = "Error IBAN. Calculado " & SQL & " / " & DBLet(miRsAux!IBAN, "T")
-                            Else
-                                'OK
-                                SQL = ""
-                            End If
-                        End If
-                        
-                        If SQL <> "" Then
-                            SQL = SQL & " - " & Format(miRsAux!CC, "00") & "- " & Format(miRsAux!Cuentaba, "0000000000")
-                            SQL = Format(miRsAux!Entidad, "0000") & " - " & Format(miRsAux!Oficina, "0000") & SQL
-                            Registro = Registro & "Error obteniendo IBAN: " & SQL & vbCrLf
-                        End If
-                End If
-                
-                
-                miRsAux.MoveNext
-    Wend
-    miRsAux.Close
-    
-    If Registro <> "" Then
-        SQL = "Generando diskette." & vbCrLf & vbCrLf
-        SQL = SQL & "Las siguientes cuentas no son correctas.:" & vbCrLf & Registro
-        SQL = SQL & vbCrLf & "¿Desea continuar?"
-        If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Function
-    End If
-    
-    comprobarCuentasBancariasPagos = True
-    Exit Function
-EcomprobarCuentasBancariasPagos:
-    MuestraError Err.Number, "comprobar Cuentas Bancarias pagos"
-End Function
-
-'Public Function CodigoDeControl(ByVal strBanOfiCuenta As String) As String
-'
-'Dim conPesos
-'Dim lngPrimerCodigo As Long, lngSegundoCodigo As Long
-'Dim I As Long, J As Long
-'conPesos = "06030709100508040201"
-'J = 1
-'lngPrimerCodigo = 0
-'lngSegundoCodigo = 0
-'
-'' Banco(4) + Oficina(4) nos dará el primer dígito de control
-'For I = 8 To 1 Step -1
-'  lngPrimerCodigo = lngPrimerCodigo + (Mid$(strBanOfiCuenta, I, 1) * Mid$(conPesos, J, 2))
-'  J = J + 2
-'Next I
-'
-'J = 1 ' reiniciar el contador de pesos
-'
-'' Número de cuenta nos dará el segundo digito de control
-'For I = 18 To 9 Step -1
-'  lngSegundoCodigo = lngSegundoCodigo + (Mid$(strBanOfiCuenta, I, 1) * Mid$(conPesos, J, 2))
-'  J = J + 2
-'Next I
-'
-'
-'' ajustar el primer dígito de control
-'lngPrimerCodigo = 11 - (lngPrimerCodigo Mod 11)
-'If lngPrimerCodigo = 11 Then
-'    lngPrimerCodigo = 0
-'ElseIf lngPrimerCodigo = 10 Then
-'    lngPrimerCodigo = 1
-'End If
-'
-'
-'' ajustar el segundo dígito de control
-'lngSegundoCodigo = 11 - (lngSegundoCodigo Mod 11)
-'If lngSegundoCodigo = 11 Then
-'    lngSegundoCodigo = 0
-'ElseIf lngSegundoCodigo = 10 Then
-'    lngSegundoCodigo = 1
-'End If
-'
-'' convertirlos en cadenas y concatenarlos
-'CodigoDeControl = Format(lngPrimerCodigo) & Format(lngSegundoCodigo)
-'
-'End Function
-'
-
 'Modificacion noviembre 2012
 'El fichero(en alzira) viene en formato WRI
 'es decir el salto de linea no es el mismo. Por lo tanto
@@ -478,12 +288,9 @@ Dim B As Boolean
             'Normal.
             LinFichero.Add Registro
             While Not EOF(NF)
-                
                 Line Input #NF, Registro
                 LinFichero.Add Registro
             Wend
-            
-            
         Else
             'El fichero NO va separado correctamente(tipo alzira nuevo WRI)
             Do
@@ -523,10 +330,7 @@ Dim B As Boolean
     Case 4
         'Cerrar
         Set LinFichero = Nothing
-        
     End Select
-        
-
 
 End Sub
 

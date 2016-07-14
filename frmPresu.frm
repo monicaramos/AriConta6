@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmPresu 
@@ -565,9 +565,9 @@ Dim B As Boolean
     
     cmdAux(0).Visible = Not B
     
-    For i = 0 To txtAux.Count - 1
-        If i <> 1 Then txtAux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtAux.Count - 1
+        If I <> 1 Then txtAux(I).BackColor = vbWhite
+    Next I
     
     Toolbar1.Buttons(1).Enabled = B
     Toolbar1.Buttons(2).Enabled = B
@@ -591,7 +591,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.Adodc1)
+        cadReg = PonerContRegistros(Me.adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -607,9 +607,9 @@ Private Sub BotonAnyadir()
 
          'Situamos el grid al final
          DataGrid1.AllowAddNew = True
-         If Not Adodc1.Recordset.EOF Then
+         If Not adodc1.Recordset.EOF Then
              DataGrid1.HoldFields
-             Adodc1.Recordset.MoveLast
+             adodc1.Recordset.MoveLast
              DataGrid1.Row = DataGrid1.Row + 1
          End If
         
@@ -637,8 +637,8 @@ Private Sub BotonAnyadir()
         frmGen.Opcion = 0
         frmGen.Caption = "Inserción de Presupuestos"
         If Not Quitar Then
-            frmGen.txtCta(0) = Adodc1.Recordset(0).Value
-            frmGen.txtDesCta(0) = Adodc1.Recordset(1).Value
+            frmGen.txtCta(0) = adodc1.Recordset(0).Value
+            frmGen.txtDesCta(0) = adodc1.Recordset(1).Value
         End If
         frmGen.Modo = 0 'insertar
         frmGen.Show vbModal
@@ -697,13 +697,13 @@ Private Sub BotonModificar()
     '---------
     'MODIFICAR
     '----------
-    Dim Cad As String
+    Dim cad As String
     Dim anc As Single
-    Dim i As Integer
-    If Adodc1.Recordset.EOF Then Exit Sub
+    Dim I As Integer
+    If adodc1.Recordset.EOF Then Exit Sub
 
     If Agrupado Then
-        If Adodc1.Recordset.Fields(3) < Year(vParam.fechaini) Then
+        If adodc1.Recordset.Fields(3) < Year(vParam.fechaini) Then
             MsgBox "No se permite modificar de ejercicios cerrados.", vbExclamation
             Exit Sub
         End If
@@ -717,8 +717,8 @@ Private Sub BotonModificar()
     If Not Agrupado Then
     
         If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-            i = DataGrid1.Bookmark - DataGrid1.FirstRow
-            DataGrid1.Scroll 0, i
+            I = DataGrid1.Bookmark - DataGrid1.FirstRow
+            DataGrid1.Scroll 0, I
             DataGrid1.Refresh
         End If
         
@@ -731,14 +731,14 @@ Private Sub BotonModificar()
          anc = FijarVariableAnc(DataGrid1)
          
          
-         Cad = ""
-         For i = 0 To 1
-             Cad = Cad & DataGrid1.Columns(i).Text & "|"
-         Next i
+         cad = ""
+         For I = 0 To 1
+             cad = cad & DataGrid1.Columns(I).Text & "|"
+         Next I
          'Llamamos al form
-         For i = 0 To txtAux.Count - 1
-             txtAux(i).Text = DataGrid1.Columns(i).Text
-         Next i
+         For I = 0 To txtAux.Count - 1
+             txtAux(I).Text = DataGrid1.Columns(I).Text
+         Next I
          LLamaLineas anc, 4
         
         'Como es modificar
@@ -751,9 +751,9 @@ Private Sub BotonModificar()
         frmGen.Opcion = 0
         frmGen.Modo = 1 'modificar
         frmGen.Caption = "Modificacion de Presupuestos"
-        frmGen.txtCta(0) = Adodc1.Recordset(0).Value
-        frmGen.txtDesCta(0) = Adodc1.Recordset(1).Value
-        frmGen.Ejercicio = Adodc1.Recordset.Fields(3).Value
+        frmGen.txtCta(0) = adodc1.Recordset(0).Value
+        frmGen.txtDesCta(0) = adodc1.Recordset(1).Value
+        frmGen.Ejercicio = adodc1.Recordset.Fields(3).Value
         frmGen.Show vbModal
     
     End If
@@ -783,29 +783,29 @@ Dim vFecFin As String
 
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
     SQL = "Seguro que desea eliminar la linea de presupuesto:" & vbCrLf
-    SQL = SQL & vbCrLf & "Cuenta: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Cuenta: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
     
     If Not Agrupado Then
-        SQL = SQL & vbCrLf & "Año       : " & Adodc1.Recordset.Fields(2)
-        SQL = SQL & vbCrLf & "Mes  : " & Adodc1.Recordset.Fields(3)
+        SQL = SQL & vbCrLf & "Año       : " & adodc1.Recordset.Fields(2)
+        SQL = SQL & vbCrLf & "Mes  : " & adodc1.Recordset.Fields(3)
     Else
-        SQL = SQL & vbCrLf & "Período   : " & Adodc1.Recordset.Fields(2)
+        SQL = SQL & vbCrLf & "Período   : " & adodc1.Recordset.Fields(2)
     End If
     
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from presupuestos where codmacta='" & Trim(Adodc1.Recordset.Fields(0)) & "'"
+        SQL = "Delete from presupuestos where codmacta='" & Trim(adodc1.Recordset.Fields(0)) & "'"
         If Not Agrupado Then
-            SQL = SQL & " and anopresu =" & Adodc1.Recordset!anopresu
-            SQL = SQL & " and mespresu = " & Adodc1.Recordset!mespresu & " ;"
+            SQL = SQL & " and anopresu =" & adodc1.Recordset!anopresu
+            SQL = SQL & " and mespresu = " & adodc1.Recordset!mespresu & " ;"
         Else
-            vFecIni = Adodc1.Recordset.Fields(2) & "-" & Format(Month(vParam.fechaini), "00") & "-01"
+            vFecIni = adodc1.Recordset.Fields(2) & "-" & Format(Month(vParam.fechaini), "00") & "-01"
             vFecFin = DateAdd("d", -1, DateAdd("yyyy", 1, vFecIni))
         
             SQL = SQL & " and date(concat(anopresu,'-',right(concat('00',mespresu),2),'-01')) between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
@@ -813,7 +813,7 @@ Dim vFecFin As String
         Conn.Execute SQL
         CargarTemporal
         CargaGrid CadB
-        Adodc1.Recordset.Cancel
+        adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -837,7 +837,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Select Case Modo
     Case 1
         'HacerBusqueda
@@ -858,7 +858,7 @@ Select Case Modo
         End If
 
     Case 3
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             If InsertarDesdeForm(Me) Then
@@ -871,7 +871,7 @@ Select Case Modo
     
     Case 4
         'Modificar
-        If DatosOk Then
+        If DatosOK Then
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
@@ -884,15 +884,14 @@ Select Case Modo
 End Sub
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "codmacta = '" & Adodc1.Recordset.Fields(0) & "' and anopresu = " & Adodc1.Recordset.Fields(2) & " and mespresu = " & Adodc1.Recordset.Fields(3)
+    cad = "codmacta = '" & adodc1.Recordset.Fields(0) & "' and anopresu = " & adodc1.Recordset.Fields(2) & " and mespresu = " & adodc1.Recordset.Fields(3)
     ' ***************************************
     CargaGrid CadB
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
-    'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarDataMULTI(Adodc1, Cad, Indicador, True) Then
+    If SituarDataMULTI(adodc1, cad, Indicador, True) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -929,7 +928,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             If Not Agrupado Then DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
     End Select
     
     PonerModo 0
@@ -998,9 +997,6 @@ Private Sub Form_Load()
     CargaFiltros
     
     Set miTag = New CTag
-    '## A mano
-    'Vemos como esta guardado el valor del check
-'    chkVistaPrevia.Value = CheckValueLeer(Name)
     
     PonerModo 0
     CadAncho = False
@@ -1025,7 +1021,7 @@ Dim MesI As Integer
 Dim MesF As Integer
 Dim vImp As Currency
 
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo eCargarTemporal
 
@@ -1048,36 +1044,36 @@ Dim Rs As ADODB.Recordset
     
     SQL = "select distinct codmacta from presupuestos order by 1"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     CadValues = ""
     J = 0
-    While Not Rs.EOF
-        For i = AnyoMin To AnyoMax
+    While Not RS.EOF
+        For I = AnyoMin To AnyoMax
             If EjerciciosPartidos Then
                 SQL2 = "select count(*) "
                 SQL2 = SQL2 & " from presupuestos "
-                SQL2 = SQL2 & " Where codmacta = " & DBSet(Rs!codmacta, "T")
-                SQL2 = SQL2 & " and ((anopresu = " & DBSet(i, "N") & " and mespresu >=" & DBSet(MesI, "N") & ") or "
-                SQL2 = SQL2 & "  (anopresu = " & DBSet(i + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
+                SQL2 = SQL2 & " Where codmacta = " & DBSet(RS!codmacta, "T")
+                SQL2 = SQL2 & " and ((anopresu = " & DBSet(I, "N") & " and mespresu >=" & DBSet(MesI, "N") & ") or "
+                SQL2 = SQL2 & "  (anopresu = " & DBSet(I + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
                 
                 
                 SQL = "select sum(coalesce(imppresu,0)) "
                 SQL = SQL & " from presupuestos "
-                SQL = SQL & " Where codmacta = " & DBSet(Rs!codmacta, "T")
-                SQL = SQL & " and ((anopresu = " & DBSet(i, "N") & " and mespresu >=" & DBSet(MesI, "N") & ") or "
-                SQL = SQL & " (anopresu = " & DBSet(i + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
+                SQL = SQL & " Where codmacta = " & DBSet(RS!codmacta, "T")
+                SQL = SQL & " and ((anopresu = " & DBSet(I, "N") & " and mespresu >=" & DBSet(MesI, "N") & ") or "
+                SQL = SQL & " (anopresu = " & DBSet(I + 1, "N") & " and mespresu <= " & DBSet(MesF, "N") & "))"
             Else
                 SQL2 = "select count(*) "
                 SQL2 = SQL2 & " from presupuestos "
-                SQL2 = SQL2 & " Where codmacta = " & DBSet(Rs!codmacta, "T")
-                SQL2 = SQL2 & " and anopresu = " & DBSet(i, "N")
+                SQL2 = SQL2 & " Where codmacta = " & DBSet(RS!codmacta, "T")
+                SQL2 = SQL2 & " and anopresu = " & DBSet(I, "N")
                 
                 SQL = "select sum(coalesce(imppresu,0)) "
                 SQL = SQL & " from presupuestos "
-                SQL = SQL & " Where codmacta = " & DBSet(Rs!codmacta, "T")
-                SQL = SQL & " and anopresu = " & DBSet(i, "N")
+                SQL = SQL & " Where codmacta = " & DBSet(RS!codmacta, "T")
+                SQL = SQL & " and anopresu = " & DBSet(I, "N")
             End If
             
             If TotalRegistros(SQL2) <> 0 Then
@@ -1086,18 +1082,18 @@ Dim Rs As ADODB.Recordset
                 
                 Dim Ejer As String
                 If EjerciciosPartidos Then
-                    Ejer = Format(i, "0000") & "-" & Mid(Format(i + 1, "0000"), 3, 2)
+                    Ejer = Format(I, "0000") & "-" & Mid(Format(I + 1, "0000"), 3, 2)
                 Else
-                    Ejer = Format(i, "0000")
+                    Ejer = Format(I, "0000")
                 End If
                 
-                CadValues = CadValues & "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(J, "N") & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Ejer, "T") & "," & DBSet(i, "N") & "," & DBSet(vImp, "N") & "),"
+                CadValues = CadValues & "(" & DBSet(vUsu.Codigo, "N") & "," & DBSet(J, "N") & "," & DBSet(RS!codmacta, "T") & "," & DBSet(Ejer, "T") & "," & DBSet(I, "N") & "," & DBSet(vImp, "N") & "),"
             End If
-        Next i
+        Next I
     
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Set Rs = Nothing
+    Set RS = Nothing
     
     If CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
@@ -1185,11 +1181,11 @@ End Sub
 Private Sub CargaGrid(Optional vSQL As String)
 Dim J As Integer
 Dim TotalAncho As Integer
-Dim i As Integer
+Dim I As Integer
 Dim tots As String
     
     Text1.Text = ""
-    Adodc1.ConnectionString = Conn
+    adodc1.ConnectionString = Conn
     
     
     If Not Agrupado Then
@@ -1216,7 +1212,6 @@ Dim tots As String
         txtAux(4).Tag = "Importe|N|N|||tmppresu1|importe|###,###,##0.00|N|"
        
     
-'        Sql = Sql & " GROUP BY 1,2,3    "
         SQL = SQL & " ORDER BY 1,2,3 "
     Else
         
@@ -1230,7 +1225,7 @@ Dim tots As String
 
     
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, True 'PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, True 'PrimeraVez
     
     If Agrupado Then
         ' *******************canviar els noms i si fa falta la cantitat********************
@@ -1336,9 +1331,9 @@ End Sub
 
 
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    cmdAux_Click (indice)
+    cmdAux_Click (Indice)
 End Sub
 
 
@@ -1400,7 +1395,7 @@ Dim Valor As Currency
 End Sub
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 Dim B As Boolean
 B = CompForm(Me)
 If Not B Then Exit Function
@@ -1409,7 +1404,7 @@ If Modo = 1 Then
     'Estamos insertando
     
 End If
-DatosOk = B
+DatosOK = B
 End Function
 
 Private Sub DeseleccionaGrid()
@@ -1455,30 +1450,30 @@ End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim RS As ADODB.Recordset
+Dim cad As String
     
     On Error Resume Next
 
-    Cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
-    Cad = Cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 

@@ -1122,8 +1122,8 @@ Private Sub AbrirFormularios(Accion As Long)
             frmTESRemesas.Show vbModal
         Case 610 ' Informe Impagados
             frmTESCobrosDevList.Show vbModal
-        Case 707 ' Recepción Talón-Pagaré
-'            frmTESRecepcionDoc.Show vbModal
+        Case 611 ' Recepción Talón-Pagaré
+            frmTESRecepcionDoc.Show vbModal
         Case 708 ' Remesas Talón-Pagaré
         Case 709 ' Abono remesa
         Case 710 ' Devoluciones
@@ -1265,7 +1265,7 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
         
         Case 10 ' arimailges.exe
             Dim Lanza As String
-            Dim Aux As String
+            Dim AUX As String
             
             
             Lanza = vParam.MailSoporte & "||"
@@ -1281,8 +1281,8 @@ Private Sub AbrirFormulariosAyuda(Accion As Long)
             'El/los adjuntos
             Lanza = Lanza & "|"
             
-            Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
-            Shell Aux, vbNormalFocus
+            AUX = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
+            Shell AUX, vbNormalFocus
         
         Case 12 ' Informacion de la base de datos
             If CargarInformacionBBDD Then
@@ -1378,7 +1378,7 @@ Dim RS As ADODB.Recordset
     
     NroRegistrosTotSig = DevuelveValor(SQL)
     
-    i = 3
+    I = 3
     
     SQL = "select * from contadores where not tiporegi in ('0','1')"
     
@@ -1405,11 +1405,11 @@ Dim RS As ADODB.Recordset
             Porcen2 = Round(NroRegistrosSig * 100 / NroRegistrosTotSig, 2)
         End If
     
-        CadValues = "(" & vUsu.Codigo & "," & DBSet(i, "N") & "," & DBSet(RS!nomregis, "T") & "," & DBSet(NroRegistros, "N") & "," & DBSet(Porcen1, "N") & ","
+        CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & "," & DBSet(RS!nomregis, "T") & "," & DBSet(NroRegistros, "N") & "," & DBSet(Porcen1, "N") & ","
         CadValues = CadValues & DBSet(NroRegistrosSig, "N") & "," & DBSet(Porcen2, "N") & ")"
         Conn.Execute SQL2 & CadValues
         
-        i = i + 1
+        I = I + 1
     
         RS.MoveNext
     Wend
@@ -1417,14 +1417,14 @@ Dim RS As ADODB.Recordset
     Set RS = Nothing
     
     'facturas de proveedor
-    i = i + 1
+    I = I + 1
     
     SQL = "select count(*) from factpro where fecharec between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     NroRegistros = DevuelveValor(SQL)
     SQL = "select count(*) from factpro where fecharec between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
     NroRegistrosSig = DevuelveValor(SQL)
     
-    CadValues = "(" & vUsu.Codigo & "," & DBSet(i, "N") & ",'Facturas Proveedores'," & DBSet(NroRegistros, "N") & ",0,"
+    CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & ",'Facturas Proveedores'," & DBSet(NroRegistros, "N") & ",0,"
     CadValues = CadValues & DBSet(NroRegistrosSig, "N") & ",0)"
     
     Conn.Execute SQL2 & CadValues
@@ -1465,19 +1465,19 @@ Private Sub MenuComoEstaba(ByRef TW1 As TreeView, aplicacion As String)
 Dim N As Node
 Dim SQL As String
 
-    For i = 1 To TW1.Nodes.Count
+    For I = 1 To TW1.Nodes.Count
         If aplicacion = "introcon" Then
-            TW1.Nodes(i).Expanded = True
+            TW1.Nodes(I).Expanded = True
         Else
-            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(i), "T") & " and aplicacion = '" & aplicacion & "')"
+            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
     
             If DevuelveValor(SQL) = 0 Then
-                TW1.Nodes(i).Expanded = False
+                TW1.Nodes(I).Expanded = False
             Else
-                TW1.Nodes(i).Expanded = True
+                TW1.Nodes(I).Expanded = True
             End If
         End If
-    Next i
+    Next I
 
 End Sub
 
@@ -1491,7 +1491,7 @@ Dim SQL As String
 End Sub
 
 Private Sub CargaShortCuts(Seleccionado As Long)
-Dim Aux As String
+Dim AUX As String
 Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim CadAux As String
@@ -1499,19 +1499,19 @@ Dim CadAux As String
  
     'Para cada usuario, y a partir del menu del que disponga
     Set miRsAux = New ADODB.Recordset
-    Aux = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
-    Aux = Aux & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
+    AUX = "Select menus.imagen, menus.codigo, menus.descripcion from menus_usuarios inner join menus on menus_usuarios.codigo = menus.codigo and menus_usuarios.aplicacion = menus.aplicacion "
+    AUX = AUX & " WHERE codusu =" & vUsu.Id & " AND menus.aplicacion='ariconta' and menus_usuarios.ver = 1 and menus.imagen <> 0 and menus_usuarios.vericono = 1 "
     
     
     If Not vEmpresa.TieneTesoreria Then
         
-        Aux = Aux & " and tipo = 0"
+        AUX = AUX & " and tipo = 0"
     
     End If
     
     If Not vEmpresa.TieneContabilidad Then
     
-        Aux = Aux & " and tipo = 2"
+        AUX = AUX & " and tipo = 2"
     
     
     End If
@@ -1519,7 +1519,7 @@ Dim CadAux As String
     
     If Reorganizar Then Me.ListView1.Arrange = lvwAutoTop
     
-    miRsAux.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     AnchoListview = 0
     ListView1.ListItems.Clear
     While Not miRsAux.EOF
@@ -1536,18 +1536,18 @@ Dim CadAux As String
     Set miRsAux = Nothing
 
     If Not Reorganizar Then
-        For i = 1 To ListView1.ListItems.Count
+        For I = 1 To ListView1.ListItems.Count
             Set RS = New ADODB.Recordset
             
-            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(i).Text, "T") & ")"
+            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If Not RS.EOF Then
-                Me.ListView1.ListItems(i).Left = DBLet(RS.Fields(0).Value)
-                Me.ListView1.ListItems(i).Top = DBLet(RS.Fields(1).Value)
+                Me.ListView1.ListItems(I).Left = DBLet(RS.Fields(0).Value)
+                Me.ListView1.ListItems(I).Top = DBLet(RS.Fields(1).Value)
             End If
             Set RS = Nothing
-        Next i
+        Next I
     Else
         Reorganizar = False
         Me.ListView1.Arrange = lvwNone
@@ -1680,7 +1680,7 @@ End Sub
 
 
 Private Sub ListView2_Click()
-Dim cad As String
+Dim Cad As String
 
     CambiarEmpresa
     
@@ -1791,15 +1791,15 @@ End Sub
 
 Private Sub mnUsuariosActivos_Click()
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad(False)
     If CadenaDesdeOtroForm <> "" Then
-        i = 1
+        I = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
+            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
             If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
-            i = i + 1
+            I = I + 1
         Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
@@ -1902,7 +1902,7 @@ End Sub
 
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim cad As String
+Dim Cad As String
 '
 '    On Error Resume Next
 '    For Each T In Me
@@ -1923,7 +1923,7 @@ Dim cad As String
 End Sub
 
 Private Sub PonerDatosVisiblesForm()
-Dim cad As String
+Dim Cad As String
 '    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
 '    Cad = Cad & ", " & Format(Now, "d")
 '    Cad = Cad & " de " & Format(Now, "mmmm")
@@ -1996,7 +1996,7 @@ End Sub
 
 '''ICONOS
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -2052,7 +2052,7 @@ Private Sub BuscaEmpresas()
 Dim Prohibidas As String
 Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -2067,12 +2067,12 @@ Set RS = New ADODB.Recordset
 RS.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
 While Not RS.EOF
-    cad = "|" & RS!codempre & "|"
-    If InStr(1, Prohibidas, cad) = 0 Then
-        cad = RS!nomempre
+    Cad = "|" & RS!codempre & "|"
+    If InStr(1, Prohibidas, Cad) = 0 Then
+        Cad = RS!nomempre
         Set ItmX = ListView2.ListItems.Add()
         
-        ItmX.Text = cad
+        ItmX.Text = Cad
         ItmX.SubItems(1) = RS!nomresum
         
         ' sacamos las fechas de inicio y fin
@@ -2085,8 +2085,8 @@ While Not RS.EOF
         Set Rs2 = Nothing
         
             
-        cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
-        ItmX.Tag = cad
+        Cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        ItmX.Tag = Cad
         ItmX.ToolTipText = RS!CONTA
         
         
@@ -2111,21 +2111,21 @@ End Sub
 
 Private Function DevuelveProhibidas() As String
 Dim RS As ADODB.Recordset
-Dim cad As String
-Dim i As Integer
+Dim Cad As String
+Dim I As Integer
     On Error GoTo EDevuelveProhibidas
     DevuelveProhibidas = ""
     Set RS = New ADODB.Recordset
-    i = vUsu.Codigo Mod 1000
-    RS.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & i, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    cad = ""
+    I = vUsu.Codigo Mod 1000
+    RS.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Cad = ""
     While Not RS.EOF
-        cad = cad & RS.Fields(1) & "|"
+        Cad = Cad & RS.Fields(1) & "|"
         RS.MoveNext
     Wend
-    If cad <> "" Then cad = "|" & cad
+    If Cad <> "" Then Cad = "|" & Cad
     RS.Close
-    DevuelveProhibidas = cad
+    DevuelveProhibidas = Cad
 EDevuelveProhibidas:
     Err.Clear
     Set RS = Nothing
@@ -2135,8 +2135,8 @@ End Function
 
 Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
-Dim C1 As String
-Dim cad As String
+Dim c1 As String
+Dim Cad As String
 Dim Cad2 As String
 
 
@@ -2157,19 +2157,19 @@ On Error GoTo ENumeroEmpresaMemorizar
             End If
             
                 'El tercer pipe, si tiene es el ancho col1
-                cad = AnchoLogin
-                C1 = vControl.Ancho1
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                Cad = AnchoLogin
+                c1 = vControl.Ancho1
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 4360
                 End If
                 ListView2.ColumnHeaders(1).Width = NF
                 
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = vControl.Ancho2
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = vControl.Ancho2
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 1400
                 End If
@@ -2177,13 +2177,13 @@ On Error GoTo ENumeroEmpresaMemorizar
             
             
                 'El quinto pipe si tiene es el ancho de col2
-                C1 = vControl.Ancho3
+                c1 = vControl.Ancho3
                 
                 'DAVID
                 'LO hablamos con calma
-                C1 = 3000
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = 3000
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 1400
                 End If
@@ -2202,11 +2202,11 @@ On Error GoTo ENumeroEmpresaMemorizar
         If Not vControl Is Nothing Then
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = vControl.UltEmpre
+                c1 = vControl.UltEmpre
                 'el segundo es el
-                If C1 <> "" Then
+                If c1 <> "" Then
                     For NF = 1 To Me.ListView2.ListItems.Count
-                        If ListView2.ListItems(NF).Text = C1 Then
+                        If ListView2.ListItems(NF).Text = c1 Then
                             Set ListView2.SelectedItem = ListView2.ListItems(NF)
                             ListView2.SelectedItem.EnsureVisible
                             Exit For
@@ -2215,25 +2215,25 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = vControl.Ancho1
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = vControl.Ancho1
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 4360
                 End If
                 ListView2.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = vControl.Ancho2
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = vControl.Ancho2
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 1400
                 End If
                 ListView2.ColumnHeaders(2).Width = NF
                 'El quinto pipe si tiene es el ancho de col3
-                C1 = vControl.Ancho3
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = vControl.Ancho3
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 1400
                 End If
@@ -2254,7 +2254,7 @@ On Error GoTo ENumeroEmpresaMemorizar
         
         vUsu.CadenaConexion = vControl.UltEmpre
         
-        AnchoLogin = cad
+        AnchoLogin = Cad
     End If
 ENumeroEmpresaMemorizar:
     Err.Clear

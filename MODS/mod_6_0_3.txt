@@ -1,0 +1,11 @@
+# talones y pagares
+alter table `ariconta1`.`talones_facturas` 
+	change `id` `codigo` int (11)  DEFAULT '0' NOT NULL , 
+	change `numfaccl` `numfactu` int (11)  DEFAULT '0' NOT NULL , 
+	change `fecfaccl` `fecfactu` date  DEFAULT '0000-00-00' NOT NULL , 
+	change `numvenci` `numorden` smallint (6)  DEFAULT '0' NOT NULL 
+;
+
+alter table `ariconta1`.`talones_facturas` 
+	add foreign key `FK_talones_facturas`(`codigo`) references `talones` (`codigo`) on delete restrict  on update cascade 
+;

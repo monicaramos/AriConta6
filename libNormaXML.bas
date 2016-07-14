@@ -426,7 +426,7 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 Print #NFic, "      <DbtrAcct>"
                 Print #NFic, "         <Id>"
                 
-                SQL = IBAN_Destino(True)   'Hay que poner TRUE aunque sea cobro
+                SQL = IBAN_Destino   'Hay que poner TRUE aunque sea cobro
                 Print #NFic, "            <IBAN>" & SQL & "</IBAN>"
                 Print #NFic, "         </Id>"
                 Print #NFic, "      </DbtrAcct>"
@@ -477,22 +477,12 @@ End Function
 
 
 
-Private Function IBAN_Destino(Cobros As Boolean) As String
-    If Cobros Then
-        IBAN_Destino = FrmtStr(DBLet(miRsAux!IBAN, "T"), 4) ' ES00
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Entidad, "0000") ' Código de entidad receptora
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Oficina, "0000") ' Código de oficina receptora
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Control, "00") ' Dígitos de control
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Cuentaba, "0000000000") ' Código de cuenta
-    Else
-        
-        'entidad oficina CC cuentaba
-        IBAN_Destino = FrmtStr(DBLet(miRsAux!IBAN, "T"), 4) ' ES00
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Entidad, "0000") ' Código de entidad receptora
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Oficina, "0000") ' Código de oficina receptora
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!CC, "00") ' Dígitos de control
-        IBAN_Destino = IBAN_Destino & Format(miRsAux!Cuentaba, "0000000000") ' Código de cuenta
-    End If
+Private Function IBAN_Destino() As String
+    IBAN_Destino = FrmtStr(DBLet(miRsAux!IBAN, "T"), 4) ' ES00
+    IBAN_Destino = IBAN_Destino & Mid(DBLet(miRsAux!IBAN, "T"), 5, 4) ' Código de entidad receptora
+    IBAN_Destino = IBAN_Destino & Mid(DBLet(miRsAux!IBAN, "T"), 9, 4) ' Código de oficina receptora
+    IBAN_Destino = IBAN_Destino & Mid(DBLet(miRsAux!IBAN, "T"), 13, 2) ' Dígitos de control
+    IBAN_Destino = IBAN_Destino & Mid(DBLet(miRsAux!IBAN, "T"), 15, 10) ' Código de cuenta
 End Function
 
 

@@ -1112,7 +1112,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtCuentas(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -1144,7 +1143,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
                     
                 End If
                     
-                    'If txtCta(1).Text = "" Then 'ANTES solo lo hacia si el texto estaba vacio
                 If Hasta >= 0 Then
                     txtCuentas(Hasta).Text = txtCuentas(Index).Text
                     txtNCuentas(Hasta).Text = txtNCuentas(Index).Text

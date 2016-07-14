@@ -5278,7 +5278,7 @@ Dim TipoFicheroDevolucion As Byte
         SQL = ""
         If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
         If txtSerie(4).Text <> "" Then SQL = SQL & " AND numserie = '" & txtSerie(4).Text & "'"
-        If txtnumfac(4).Text <> "" Then SQL = SQL & " AND codfaccl = " & txtnumfac(4).Text
+        If txtNumFac(4).Text <> "" Then SQL = SQL & " AND codfaccl = " & txtNumFac(4).Text
         If txtNumero.Text <> "" Then SQL = SQL & " AND numorden = " & txtNumero.Text
         SQL = Mid(SQL, 5)
         
@@ -5850,8 +5850,8 @@ Dim C As String
 
     
     CuentasCC = "codfaccl"
-    If txtnumfac(3).Text <> "" Then C = C & " AND " & CuentasCC & " >= " & txtnumfac(3).Text
-    If txtnumfac(2).Text <> "" Then C = C & " AND " & CuentasCC & " <= " & txtnumfac(2).Text
+    If txtNumFac(3).Text <> "" Then C = C & " AND " & CuentasCC & " >= " & txtNumFac(3).Text
+    If txtNumFac(2).Text <> "" Then C = C & " AND " & CuentasCC & " <= " & txtNumFac(2).Text
     
     
     CuentasCC = "scobro.codmacta"
@@ -7477,7 +7477,7 @@ Private Sub imgFra_Click()
         If CadenaDesdeOtroForm <> "" Then
 
             txtSerie(4).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
-            txtnumfac(4).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
+            txtNumFac(4).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
             Me.txtNumero.Text = RecuperaValor(CadenaDesdeOtroForm, 4)
             PonerFoco Text1(11)
         End If
@@ -8703,7 +8703,7 @@ End Sub
 
 
 Private Sub txtNumFac_GotFocus(Index As Integer)
-    ObtenerFoco txtnumfac(Index)
+    ObtenerFoco txtNumFac(Index)
 End Sub
 
 Private Sub txtNumFac_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -8711,12 +8711,12 @@ Private Sub txtNumFac_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtNumFac_LostFocus(Index As Integer)
-    txtnumfac(Index).Text = Trim(txtnumfac(Index).Text)
-    If txtnumfac(Index).Text = "" Then Exit Sub
-    If Not IsNumeric(txtnumfac(Index).Text) Then
+    txtNumFac(Index).Text = Trim(txtNumFac(Index).Text)
+    If txtNumFac(Index).Text = "" Then Exit Sub
+    If Not IsNumeric(txtNumFac(Index).Text) Then
         MsgBox "Campo numerico.", vbExclamation
-        If Index = 4 Then txtnumfac(Index).Text = ""
-        PonerFoco txtnumfac(Index)
+        If Index = 4 Then txtNumFac(Index).Text = ""
+        PonerFoco txtNumFac(Index)
     End If
 End Sub
 
@@ -9467,95 +9467,6 @@ Private Sub ReclamacionGargarList()
 End Sub
 
 
-
-
-Private Sub DividiVencimentosPorEntidadBancaria()
-
-    Set miRsAux = New ADODB.Recordset
-    
-    Conn.Execute "DELETE FROM tmp347 WHERE codusu = " & vUsu.Codigo
-    '                                                               POR SI TUVIERAN MISMO BANCO, <> cta contable
-    NumeroDocumento = "select oficina,entidad from ctabancaria where not sufijoem is null "
-    NumeroDocumento = NumeroDocumento & " and entidad >0  and codmacta<>'" & Me.txtCta(3).Text & "' group by 1,2"
-    miRsAux.Open NumeroDocumento, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    NumeroDocumento = ""
-    While Not miRsAux.EOF
-        NumeroDocumento = NumeroDocumento & ", (" & miRsAux!Entidad & ")"
-        miRsAux.MoveNext
-    Wend
-    miRsAux.Close
-    
-    If NumeroDocumento = "" Then
-        NumeroDocumento = "(-1,-1)"
-    Else
-        NumeroDocumento = Mid(NumeroDocumento, 2) 'quitamos la primera coma
-    End If
-    
-    NumeroDocumento = " (codbanco) in (" & NumeroDocumento & ")"
-    
-    'Agrupamos los vencimientos por entidad,oficina menos los del banco por defecto
-    CuentasCC = "select codbanco,sum(impvenci + coalesce(gastos,0)) " & SQL
-    CuentasCC = CuentasCC & " AND " & NumeroDocumento & " GROUP BY 1"
-    miRsAux.Open CuentasCC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not miRsAux.EOF
-        CuentasCC = "insert into `tmpcierre1` (`codusu`,`cta`,`nomcta`,`acumPerD`) VALUES (" & vUsu.Codigo & ","
-        CuentasCC = CuentasCC & miRsAux.Fields(0) & ",0," & TransformaComasPuntos(CStr(miRsAux.Fields(1))) & ")"
-        Conn.Execute CuentasCC
-        
-         miRsAux.MoveNext
-    Wend
-    miRsAux.Close
-    
-    'Los del banco por defecto, y lo que no tenemos banco, es decir, el resto
-    '------------------------------------------------------------------------------
-    CuentasCC = SQL & " AND NOT " & NumeroDocumento & " GROUP BY 1,2"
-    'Vere la entidad y la oficina del PPAL
-    NumeroDocumento = DevuelveDesdeBD("concat(entidad,',',oficina)", "ctabancaria", "codmacta", txtCta(3).Text, "T")
-    NumeroDocumento = "Select " & NumeroDocumento & ",sum(impvenci + coalesce(gastos,0)) " & CuentasCC
-    miRsAux.Open NumeroDocumento, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not miRsAux.EOF
-        CuentasCC = "insert into `tmpcierre1` (`codusu`,`cta`,`nomcta`,`acumPerD`) VALUES (" & vUsu.Codigo & ","
-        CuentasCC = CuentasCC & miRsAux.Fields(0) & "," & miRsAux.Fields(1) & "," & TransformaComasPuntos(CStr(miRsAux.Fields(2))) & ")"
-        Conn.Execute CuentasCC
-        miRsAux.MoveNext
-    Wend
-    miRsAux.Close
-    espera 1
-    
-    
-    'Pongo codmacta y nombanco como corresponde
-    CuentasCC = "Select * from tmpcierre1 where codusu =" & vUsu.Codigo
-    miRsAux.Open CuentasCC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not miRsAux.EOF
-        NumeroDocumento = "nommacta"
-        CuentasCC = "ctabancaria.codmacta=cuentas.codmacta AND ctabancaria.entidad = " & miRsAux!Cta & " AND 1 "    'ctabancaria.oficina "
-        CuentasCC = DevuelveDesdeBD("ctabancaria.codmacta", "ctabancaria,cuentas", CuentasCC, "1", "N", NumeroDocumento)  'miRsAux!nomcta
-        If CuentasCC <> "" Then
-            CuentasCC = "UPDATE tmpcierre1 SET cta = '" & CuentasCC & "',nomcta ='" & DevNombreSQL(NumeroDocumento)
-            CuentasCC = CuentasCC & "' WHERE Cta = " & miRsAux!Cta & " AND nomcta =" & miRsAux!nomcta
-            Conn.Execute CuentasCC
-            
-        End If
-        miRsAux.MoveNext
-    Wend
-    miRsAux.Close
-    
-    'Por si quiere borrar alguno de los repartios que hace
-    'Por si casao luego BORRAN la remesa a generar para ese banco, es decir , no uqieren llevarlo ahora
-    CuentasCC = "insert into tmp347(codusu,cta) select codusu,cta from tmpcierre1 WHERE codusu =" & vUsu.Codigo
-    Conn.Execute CuentasCC
-    
-eDividir:
-    If Err.Number <> 0 Then
-        MuestraError Err.Number, Err.Description
-        
-        
-    End If
-    NumeroDocumento = ""
-    CuentasCC = ""
-    Set miRsAux = Nothing
-    Set RS = Nothing
-End Sub
 
 
 

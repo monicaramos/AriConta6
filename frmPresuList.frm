@@ -629,12 +629,12 @@ Attribute frmCon.VB_VarHelpID = -1
 Private frmCtas As frmCtasAgrupadas
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
 Dim FechaIncioEjercicio As Date
 Dim FechaFinEjercicio As Date
@@ -754,9 +754,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Presupuestos sobre Cuentas"
 
-    For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     PrimeraVez = True
      
@@ -864,10 +864,10 @@ Private Sub txtCta_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     End Select
     
 End Sub
@@ -883,7 +883,7 @@ End Sub
 
 
 Private Sub txtCta_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -910,7 +910,6 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 0, 1 'Cuentas
-            'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtcta(Index), "T")
             
             RC = txtCta(Index).Text
             If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
@@ -930,7 +929,6 @@ Dim Hasta As Integer
             End If
     End Select
 
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -1025,20 +1023,20 @@ Dim L As Integer
 
 L = 1
 Do
-    Cad = RecuperaValor(Lista, L)
-    If Cad <> "" Then
-        i = Val(Cad)
-        With cmbFecha(i)
+    cad = RecuperaValor(Lista, L)
+    If cad <> "" Then
+        I = Val(cad)
+        With cmbFecha(I)
             .Clear
-            For Cont = 1 To 12
-                RC = "25/" & Cont & "/2002"
+            For CONT = 1 To 12
+                RC = "25/" & CONT & "/2002"
                 RC = Format(RC, "mmmm") 'Devuelve el mes
                 .AddItem RC
-            Next Cont
+            Next CONT
         End With
     End If
     L = L + 1
-Loop Until Cad = ""
+Loop Until cad = ""
 End Sub
 
 
@@ -1130,15 +1128,15 @@ Dim EjerciciosPartidos As Boolean
     If cadselect <> "" Then SQL2 = SQL2 & " and " & cadselect
     SQL2 = SQL2 & " order by 1,2,3,4"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        CtaAnt = DBLet(Rs!codmacta)
-        NomAnt = DBLet(Rs!nommacta)
-        Campana = DBLet(Rs!anopresu)
+    Set RS = New ADODB.Recordset
+    RS.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        CtaAnt = DBLet(RS!codmacta)
+        NomAnt = DBLet(RS!Nommacta)
+        Campana = DBLet(RS!anopresu)
     
     
-        If DBLet(Rs!mespresu) < Month(vParam.fechaini) Then
+        If DBLet(RS!mespresu) < Month(vParam.fechaini) Then
             Campana = Campana - 1
         End If
         CampanaAnt = Campana
@@ -1160,10 +1158,10 @@ Dim EjerciciosPartidos As Boolean
         
         HayReg = False
         
-        While Not Rs.EOF
+        While Not RS.EOF
             HayReg = True
             
-            If CtaAnt <> DBLet(Rs!codmacta) Or CampanaAnt <> Campana Then
+            If CtaAnt <> DBLet(RS!codmacta) Or CampanaAnt <> Campana Then
                 SQL = "insert into tmpevolsal (codusu, codmacta, nommacta, apertura, "
                 SQL = SQL & "importemes1, importemes2, importemes3, importemes4, importemes5, importemes6, importemes7, importemes8, importemes9, importemes10, importemes11, importemes12) values ("
                 SQL = SQL & vUsu.Codigo & "," & DBSet(CtaAnt, "T") & "," & DBSet(NomAnt, "T") & "," & DBSet(CampanaAnt, "N") & ","
@@ -1185,14 +1183,14 @@ Dim EjerciciosPartidos As Boolean
                 imp11 = 0
                 imp12 = 0
                 
-                If CtaAnt = DBLet(Rs!codmacta) Then
+                If CtaAnt = DBLet(RS!codmacta) Then
                     CampanaAnt = Campana
                 Else
-                    CtaAnt = DBLet(Rs!codmacta)
-                    NomAnt = DBLet(Rs!nommacta)
-                    Campana = DBLet(Rs!anopresu)
+                    CtaAnt = DBLet(RS!codmacta)
+                    NomAnt = DBLet(RS!Nommacta)
+                    Campana = DBLet(RS!anopresu)
                     
-                    If DBLet(Rs!mespresu) < Month(vParam.fechaini) Then
+                    If DBLet(RS!mespresu) < Month(vParam.fechaini) Then
                         Campana = Campana - 1
                     End If
                 End If
@@ -1200,17 +1198,17 @@ Dim EjerciciosPartidos As Boolean
             End If
                 
             If EjerciciosPartidos Then
-                If DBLet(Rs!mespresu) < Month(vParam.fechaini) And DBLet(Rs!anopresu) - 1 = Campana Then
-                    i = Rs!mespresu - Month(vParam.fechaini) + 12 + 1
+                If DBLet(RS!mespresu) < Month(vParam.fechaini) And DBLet(RS!anopresu) - 1 = Campana Then
+                    I = RS!mespresu - Month(vParam.fechaini) + 12 + 1
                 Else
-                    If DBLet(Rs!anopresu) = Campana And DBLet(Rs!mespresu) >= Month(vParam.fechaini) Then
-                        i = Rs!mespresu - Month(vParam.fechaini) + 1
+                    If DBLet(RS!anopresu) = Campana And DBLet(RS!mespresu) >= Month(vParam.fechaini) Then
+                        I = RS!mespresu - Month(vParam.fechaini) + 1
                     Else
-                        Campana = DBLet(Rs!anopresu)
-                        If DBLet(Rs!mespresu) < Month(vParam.fechaini) Then
-                            i = Rs!mespresu - Month(vParam.fechaini) + 12 + 1
+                        Campana = DBLet(RS!anopresu)
+                        If DBLet(RS!mespresu) < Month(vParam.fechaini) Then
+                            I = RS!mespresu - Month(vParam.fechaini) + 12 + 1
                         Else
-                            i = Rs!mespresu - Month(vParam.fechaini) + 1
+                            I = RS!mespresu - Month(vParam.fechaini) + 1
                         End If
                         SQL = "insert into tmpevolsal (codusu, codmacta, nommacta, apertura, "
                         SQL = SQL & "importemes1, importemes2, importemes3, importemes4, importemes5, importemes6, importemes7, importemes8, importemes9, importemes10, importemes11, importemes12) values ("
@@ -1233,11 +1231,11 @@ Dim EjerciciosPartidos As Boolean
                         imp11 = 0
                         imp12 = 0
                         
-                        CtaAnt = DBLet(Rs!codmacta)
-                        NomAnt = DBLet(Rs!nommacta)
-                        Campana = DBLet(Rs!anopresu)
+                        CtaAnt = DBLet(RS!codmacta)
+                        NomAnt = DBLet(RS!Nommacta)
+                        Campana = DBLet(RS!anopresu)
                         
-                        If DBLet(Rs!mespresu) < Month(vParam.fechaini) Then
+                        If DBLet(RS!mespresu) < Month(vParam.fechaini) Then
                             Campana = Campana - 1
                         End If
                         CampanaAnt = Campana
@@ -1245,10 +1243,10 @@ Dim EjerciciosPartidos As Boolean
                    End If
                 End If
             Else
-                Campana = DBLet(Rs!anopresu)
-                i = Rs!mespresu
+                Campana = DBLet(RS!anopresu)
+                I = RS!mespresu
                 
-                If CtaAnt <> DBLet(Rs!codmacta) Or CampanaAnt <> Campana Then
+                If CtaAnt <> DBLet(RS!codmacta) Or CampanaAnt <> Campana Then
                     SQL = "insert into tmpevolsal (codusu, codmacta, nommacta, apertura, "
                     SQL = SQL & "importemes1, importemes2, importemes3, importemes4, importemes5, importemes6, importemes7, importemes8, importemes9, importemes10, importemes11, importemes12) values ("
                     SQL = SQL & vUsu.Codigo & "," & DBSet(CtaAnt, "T") & "," & DBSet(NomAnt, "T") & "," & DBSet(CampanaAnt, "N") & ","
@@ -1270,14 +1268,14 @@ Dim EjerciciosPartidos As Boolean
                     imp11 = 0
                     imp12 = 0
                     
-                    If CtaAnt = DBLet(Rs!codmacta) Then
+                    If CtaAnt = DBLet(RS!codmacta) Then
                         CampanaAnt = Campana
                     Else
-                        CtaAnt = DBLet(Rs!codmacta)
-                        NomAnt = DBLet(Rs!nommacta)
-                        Campana = DBLet(Rs!anopresu)
+                        CtaAnt = DBLet(RS!codmacta)
+                        NomAnt = DBLet(RS!Nommacta)
+                        Campana = DBLet(RS!anopresu)
                         
-                        If DBLet(Rs!mespresu) < Month(vParam.fechaini) Then
+                        If DBLet(RS!mespresu) < Month(vParam.fechaini) Then
                             Campana = Campana - 1
                         End If
                     End If
@@ -1288,34 +1286,34 @@ Dim EjerciciosPartidos As Boolean
                 
             End If
             
-            Select Case i
+            Select Case I
                 Case 1
-                    imp1 = DBLet(Rs!imppresu, "N")
+                    imp1 = DBLet(RS!imppresu, "N")
                 Case 2
-                    Imp2 = DBLet(Rs!imppresu, "N")
+                    Imp2 = DBLet(RS!imppresu, "N")
                 Case 3
-                    imp3 = DBLet(Rs!imppresu, "N")
+                    imp3 = DBLet(RS!imppresu, "N")
                 Case 4
-                    imp4 = DBLet(Rs!imppresu, "N")
+                    imp4 = DBLet(RS!imppresu, "N")
                 Case 5
-                    imp5 = DBLet(Rs!imppresu, "N")
+                    imp5 = DBLet(RS!imppresu, "N")
                 Case 6
-                    imp6 = DBLet(Rs!imppresu, "N")
+                    imp6 = DBLet(RS!imppresu, "N")
                 Case 7
-                    imp7 = DBLet(Rs!imppresu, "N")
+                    imp7 = DBLet(RS!imppresu, "N")
                 Case 8
-                    imp8 = DBLet(Rs!imppresu, "N")
+                    imp8 = DBLet(RS!imppresu, "N")
                 Case 9
-                    imp9 = DBLet(Rs!imppresu, "N")
+                    imp9 = DBLet(RS!imppresu, "N")
                 Case 10
-                    imp10 = DBLet(Rs!imppresu, "N")
+                    imp10 = DBLet(RS!imppresu, "N")
                 Case 11
-                    imp11 = DBLet(Rs!imppresu, "N")
+                    imp11 = DBLet(RS!imppresu, "N")
                 Case 12
-                    imp12 = DBLet(Rs!imppresu, "N")
+                    imp12 = DBLet(RS!imppresu, "N")
             End Select
             
-            Rs.MoveNext
+            RS.MoveNext
     
         Wend
         If HayReg Then
@@ -1329,7 +1327,7 @@ Dim EjerciciosPartidos As Boolean
             Conn.Execute SQL2
         End If
     
-        Set Rs = Nothing
+        Set RS = Nothing
     End If
 
 

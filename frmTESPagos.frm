@@ -2598,7 +2598,7 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtAux(5)
+            PonFoco txtaux(5)
             
             
     End Select
@@ -3102,12 +3102,14 @@ Dim cad As String
 End Sub
 
 
+
+
 Private Sub frmC_Selec(vFecha As Date)
     Text1(CInt(imgFecha(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -3266,61 +3268,6 @@ Private Sub imgSerie_Click()
         PonFoco Text1(1)
     
     
-End Sub
-
-Private Sub mnBuscar_Click()
-
-    Dim NF As Integer
-    Dim cad As String
-    Dim Entidad As String
-    Dim BIC As String
-    
-    cad = "C:\Documents and Settings\David\Escritorio\bic.txt"
-    NF = FreeFile
-    Open cad For Input As #NF
-    While Not EOF(NF)
-        Line Input #NF, cad
-        
-        'sbic(entidad,Nombre,bic)
-        cad = Trim(cad)
-        
-        Entidad = Right(cad, 4)
-        cad = Mid(cad, 1, Len(cad) - 4)
-        
-        BIC = Mid(cad, 1, 11)
-        cad = Trim(Mid(cad, 12))
-        
-        NombreSQL cad
-        cad = "INSERT INTO sbic(entidad,Nombre,bic) VALUES (" & Entidad & ",'" & cad & "','" & BIC & "')"
-        Conn.Execute cad
-        
-        
-    Wend
-    Close (NF)
-
-
-    BotonBuscar
-End Sub
-
-Private Sub mnEliminar_Click()
-    BotonEliminar
-End Sub
-
-Private Sub mnModificar_Click()
-    BotonModificar
-End Sub
-
-Private Sub mnNuevo_Click()
-BotonAnyadir
-End Sub
-
-Private Sub mnSalir_Click()
-Screen.MousePointer = vbHourglass
-Unload Me
-End Sub
-
-Private Sub mnVerTodos_Click()
-BotonVerTodos
 End Sub
 
 
@@ -4669,7 +4616,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 
@@ -4702,42 +4649,42 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
     
-    If txtAux(Index).Text = "" Then Exit Sub
+    If txtaux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtAux(5)
+                PonFoco txtaux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtAux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
-                txtAux(Index).Text = ""
-                PonerFoco txtAux(Index)
+            If Not EsFechaOK(txtaux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
+                txtaux(Index).Text = ""
+                PonerFoco txtaux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtAux(Index)
+            PonerFormatoEntero txtaux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
 '            PonerFormatoDecimal txtAux(Index), 1
-             txtAux(Index) = ImporteSinFormato(txtAux(Index))
+             txtaux(Index) = ImporteSinFormato(txtaux(Index))
             
         Case 10 'tipo
-            txtAux(Index).Text = UCase(txtAux(Index).Text)
+            txtaux(Index).Text = UCase(txtaux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtAux(12).Text
+            RC = txtaux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtAux(12).Text = RC
+                txtaux(12).Text = RC
             End If
         
     End Select

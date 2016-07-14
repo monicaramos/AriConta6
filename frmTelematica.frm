@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmTelematica 
    BorderStyle     =   1  'Fixed Single
@@ -1219,8 +1219,8 @@ Private frmSit As frmInfBalances
 
 Dim PrimeraVez As Boolean
 Dim SQL As String
-Dim Cad As String
-Dim Cont As Integer
+Dim cad As String
+Dim CONT As Integer
 Private Contador As Byte
 
 
@@ -1235,18 +1235,11 @@ Private Sub Command1_Click(Index As Integer)
         Exit Sub
     End If
     
-'--
-'    If vUsu.Nivel > 2 Then
-'        MsgBox "No tiene permisos", vbExclamation
-'        Exit Sub
-'    End If
-    
-    
     If txtpath.Text = "" Then
         If MsgBox("No tiene el programa de legalización del registro mercantil" & vbCrLf & "¿Continuar?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
 
     End If
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
 
         
@@ -1287,14 +1280,14 @@ Private Sub Form_Load()
         Label2(5).ForeColor = &H800000
         Caption = "Presentación cuentas"
        
-        Cont = 3300
+        CONT = 3300
     Case 1
         Caption = "Presentacion telemática de libros formato digital"
         Text3(0).Text = Format(DateAdd("yyyy", -1, vParam.fechaini), "dd/mm/yyyy")
         Text3(2).Text = Format(DateAdd("yyyy", -1, vParam.fechafin), "dd/mm/yyyy")
         Me.FrameLegalizacion.Visible = True
         PonerNiveles
-        Cont = 8655 '7320
+        CONT = 8655 '7320
     End Select
     
     ' La Ayuda
@@ -1361,8 +1354,8 @@ Private Sub Image2_Click(Index As Integer)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-    For Cont = 0 To Me.chkLibro.Count - 1
-        chkLibro(Cont).Value = Index
+    For CONT = 0 To Me.chkLibro.Count - 1
+        chkLibro(CONT).Value = Index
     Next
 End Sub
 
@@ -1392,9 +1385,9 @@ Private Sub Text3_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    Image2_Click (indice)
+    Image2_Click (Indice)
 End Sub
 '++
 
@@ -1453,7 +1446,7 @@ Private Sub PonerPath()
     txtpath.Tag = ""    'CARPETA
     
     'Buscaremos el archivo en dos sitios, en Archivos de programa o en Program FIles
-    Cad = "C:\Archivos de Programa\Adhoc\"
+    cad = "C:\Archivos de Programa\Adhoc\"
     If Opcion = 0 Then
         CadenaDesdeOtroForm = "D2\"
         SQL = "D2.exe"
@@ -1463,21 +1456,21 @@ Private Sub PonerPath()
     End If
     
     
-    If Dir(Cad & CadenaDesdeOtroForm & SQL, vbArchive) <> "" Then
+    If Dir(cad & CadenaDesdeOtroForm & SQL, vbArchive) <> "" Then
         'Esta aqui el archivo
-        txtpath.Text = Cad & CadenaDesdeOtroForm & SQL
-        txtpath.Tag = Cad & CadenaDesdeOtroForm
+        txtpath.Text = cad & CadenaDesdeOtroForm & SQL
+        txtpath.Tag = cad & CadenaDesdeOtroForm
     Else
-        Cad = "C:\Program Files\Adhoc\"
-        If Dir(Cad & CadenaDesdeOtroForm & SQL, vbArchive) <> "" Then
-            txtpath.Text = Cad & CadenaDesdeOtroForm & SQL
-            txtpath.Tag = Cad & CadenaDesdeOtroForm
+        cad = "C:\Program Files\Adhoc\"
+        If Dir(cad & CadenaDesdeOtroForm & SQL, vbArchive) <> "" Then
+            txtpath.Text = cad & CadenaDesdeOtroForm & SQL
+            txtpath.Tag = cad & CadenaDesdeOtroForm
             
         Else
-            Cad = "C:\Program Files (x86)\Adhoc\"
-            If Dir(Cad & CadenaDesdeOtroForm & SQL, vbArchive) <> "" Then
-                txtpath.Text = Cad & CadenaDesdeOtroForm & SQL
-                txtpath.Tag = Cad & CadenaDesdeOtroForm
+            cad = "C:\Program Files (x86)\Adhoc\"
+            If Dir(cad & CadenaDesdeOtroForm & SQL, vbArchive) <> "" Then
+                txtpath.Text = cad & CadenaDesdeOtroForm & SQL
+                txtpath.Tag = cad & CadenaDesdeOtroForm
             End If
         End If
     End If
@@ -1489,15 +1482,15 @@ Private Sub PonerPath()
     
     Exit Sub
 EPonerPath:
-    MuestraError Err.Number, "Poner PATH defecto" & vbCrLf & Cad
+    MuestraError Err.Number, "Poner PATH defecto" & vbCrLf & cad
 End Sub
 
 
 
 
 
-Private Function DatosOk() As Boolean
-    DatosOk = False
+Private Function DatosOK() As Boolean
+    DatosOK = False
 
         '----------------------------------------------------------------
         '            Comunes
@@ -1512,13 +1505,13 @@ Private Function DatosOk() As Boolean
         End If
         
         
-        Cont = 0
+        CONT = 0
         For NumRegElim = 1 To 5
             txtDatos(NumRegElim).Text = Trim(txtDatos(NumRegElim).Text)
-            If txtDatos(NumRegElim).Text = "" Then Cont = Cont + 1
+            If txtDatos(NumRegElim).Text = "" Then CONT = CONT + 1
         Next NumRegElim
         
-        If Cont > 0 Then
+        If CONT > 0 Then
             SQL = "Existen campos sin rellenar. ¿Desea continuar igualmente?"
             If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
         End If
@@ -1528,14 +1521,14 @@ Private Function DatosOk() As Boolean
     If Opcion = 0 Then
         'Solo Cuentas
         'Vemos si tiene los balances configurados 3 y 4  'Abreviados
-        Cad = DevuelveDesdeBD("nombalan", "balances", "numbalan", 3)
-        If Cad = "" Then
+        cad = DevuelveDesdeBD("nombalan", "balances", "numbalan", 3)
+        If cad = "" Then
             MsgBox "Falta balance perdidas y ganancias abreviado "
             Exit Function
         End If
         
-        Cad = DevuelveDesdeBD("nombalan", "balances", "numbalan", 4)
-        If Cad = "" Then
+        cad = DevuelveDesdeBD("nombalan", "balances", "numbalan", 4)
+        If cad = "" Then
             MsgBox "Falta balance situacion abreviado "
             Exit Function
         End If
@@ -1546,11 +1539,11 @@ Private Function DatosOk() As Boolean
         '----------------------------------------------------------------
         
        
-        Cont = 0
+        CONT = 0
         For NumRegElim = 0 To Me.chkLibro.Count - 1
-            If chkLibro(NumRegElim).Value = 1 Then Cont = Cont + 1
+            If chkLibro(NumRegElim).Value = 1 Then CONT = CONT + 1
         Next NumRegElim
-        If Cont = 0 Then
+        If CONT = 0 Then
             MsgBox "Seleccione algun libro para legalizar", vbExclamation
             Exit Function
         End If
@@ -1569,9 +1562,9 @@ Private Function DatosOk() As Boolean
         
         'Si presnta balances
         If chkLibro(1).Value = 1 Then
-            Cont = 0
+            CONT = 0
             For NumRegElim = 1 To 10
-                If Check2(NumRegElim).Value = 1 Then Cont = Cont + 1
+                If Check2(NumRegElim).Value = 1 Then CONT = CONT + 1
             Next NumRegElim
         End If
         
@@ -1601,7 +1594,7 @@ Private Function DatosOk() As Boolean
       End If
         
     End If
-    DatosOk = True
+    DatosOK = True
 End Function
 
 Private Function CompruebarCarpetaAgrupacion() As Boolean
@@ -1631,8 +1624,8 @@ Private Sub HacerPresentacionCuentas()
     SQL = txtpath.Tag & "Data\" & vEmpresa.nomresum & ".AE"   'Abreviada en euros
     
     If Dir(SQL, vbDirectory) <> "" Then
-        Cad = "Ya existen datos para la empresa: " & vEmpresa.nomresum & ".   ¿Desea continuar?"
-        If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+        cad = "Ya existen datos para la empresa: " & vEmpresa.nomresum & ".   ¿Desea continuar?"
+        If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         Kill SQL & "\*.*"
     Else
         MkDir SQL
@@ -1663,7 +1656,7 @@ End Sub
 Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
 
 '        'Cambiar numfac prov
-        Dim Rs As ADODB.Recordset
+        Dim RS As ADODB.Recordset
         Dim Cad2 As String
         Dim Valor As Currency
         Dim Anyo As String
@@ -1671,7 +1664,7 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
         
         On Error GoTo EGenerarDatosFicheros
         
-        Set Rs = New ADODB.Recordset
+        Set RS = New ADODB.Recordset
         
         GenerarDatosFicheros = False
         
@@ -1679,28 +1672,28 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
         ' Fichero Descripcion
         Me.lblIndicador.Caption = "Descripcion"
         Me.Refresh
-        Cont = FreeFile
-        Open vPath & "\DESC.TXT" For Output As #Cont
+        CONT = FreeFile
+        Open vPath & "\DESC.TXT" For Output As #CONT
         SQL = vEmpresa.nomempre & ". Generado: " & Format(Now, "dd/mm/yyyy hh:mm")
-        Print #Cont, SQL
-        Close #Cont
+        Print #CONT, SQL
+        Close #CONT
         
         
         'Fichero con los FIcheros k van
         Me.lblIndicador.Caption = "Fichero"
         Me.Refresh
-        Cont = FreeFile
-        Open vPath & "\FICHERO.TXT" For Output As #Cont
-        Print #Cont, "FICHERO.TXT"
-        Print #Cont, "DATOS.ASC"
-        Close #Cont
+        CONT = FreeFile
+        Open vPath & "\FICHERO.TXT" For Output As #CONT
+        Print #CONT, "FICHERO.TXT"
+        Print #CONT, "DATOS.ASC"
+        Close #CONT
                 
         'Los datos
         Me.lblIndicador.Caption = "Datos"
         Me.Refresh
         
-        Cont = FreeFile
-        Open vPath & "\DATOS.ASC" For Output As #Cont
+        CONT = FreeFile
+        Open vPath & "\DATOS.ASC" For Output As #CONT
         Anyo = Year(CDate(Text3(0).Text))
         
         'Cabecera
@@ -1714,17 +1707,17 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
         SQL = SQL & Mid(txtDatos(3) & "  ", 1, 2)   'Dos digitos cod pos
         
         'Nombre Empresa
-        Cad = txtDatos(1).Text
-        Cad = Mid(Cad & Space(50), 1, 50)
-        SQL = SQL & Cad
+        cad = txtDatos(1).Text
+        cad = Mid(cad & Space(50), 1, 50)
+        SQL = SQL & cad
         'Domicilia
-        Cad = txtDatos(2).Text
-        Cad = Mid(Cad & Space(40), 1, 40)
-        SQL = SQL & Cad
+        cad = txtDatos(2).Text
+        cad = Mid(cad & Space(40), 1, 40)
+        SQL = SQL & cad
         'Municipio
-        Cad = txtDatos(4).Text
-        Cad = Mid(Cad & Space(30), 1, 30)
-        SQL = SQL & Cad
+        cad = txtDatos(4).Text
+        cad = Mid(cad & Space(30), 1, 30)
+        SQL = SQL & cad
         
         SQL = SQL & Mid(txtDatos(3).Text & "     ", 1, 5)
         
@@ -1733,14 +1726,14 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
         SQL = SQL & "000"
         SQL = SQL & "000"
         'Actividad principal
-        Cad = ""
-        Cad = Mid(Cad & Space(80), 1, 80)
-        SQL = SQL & Cad
+        cad = ""
+        cad = Mid(cad & Space(80), 1, 80)
+        SQL = SQL & cad
 
         SQL = SQL & "0000000000"
         SQL = SQL & "00000"
 
-        Print #Cont, SQL
+        Print #CONT, SQL
     
     
         'Balance de sitaucion
@@ -1753,22 +1746,22 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
         Me.Refresh
         espera 1
         SQL = "select *  from Usuarios.ztmpimpbalan WHERE codusu=" & vUsu.Codigo & " AND not (libroCD is null)"
-        Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Cad2 = "00000000000000"
-        While Not Rs.EOF
+        While Not RS.EOF
             SQL = "2"
             SQL = SQL & txtDatos(0).Text
             SQL = SQL & Anyo
-            SQL = SQL & Rs!LibroCD
+            SQL = SQL & RS!LibroCD
             
             'Importe1
-            If IsNull(Rs!Importe1) Then
+            If IsNull(RS!Importe1) Then
                 Valor = 0
             Else
-                Valor = Rs!Importe1
+                Valor = RS!Importe1
             End If
             Valor = Valor * 100
-            Cad = CStr(Abs(Valor))
+            cad = CStr(Abs(Valor))
             If Valor > 0 Then
                 SQL = SQL & "+"
             Else
@@ -1778,18 +1771,18 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
                     SQL = SQL & " "
                 End If
             End If
-            Cad = Right(Cad2 & Cad, 15)
-            SQL = SQL & Cad
+            cad = Right(Cad2 & cad, 15)
+            SQL = SQL & cad
             
             'Importe anterior
             'Importe1
-            If IsNull(Rs!importe2) Then
+            If IsNull(RS!importe2) Then
                 Valor = 0
             Else
-                Valor = Rs!importe2
+                Valor = RS!importe2
             End If
             Valor = Valor * 100
-            Cad = CStr(Abs(Valor))
+            cad = CStr(Abs(Valor))
             If Valor > 0 Then
                 SQL = SQL & "+"
             Else
@@ -1799,14 +1792,14 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
                     SQL = SQL & " "
                 End If
             End If
-            Cad = Right(Cad2 & Cad, 15)
-            SQL = SQL & Cad
-            Print #Cont, SQL
+            cad = Right(Cad2 & cad, 15)
+            SQL = SQL & cad
+            Print #CONT, SQL
             
             'Siguiente
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         espera 1
         
         '^Perdidas y ganancias
@@ -1820,22 +1813,22 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
         espera 1
 
         SQL = "select *  from Usuarios.ztmpimpbalan WHERE codusu=" & vUsu.Codigo & " AND not (libroCD is null)"
-        Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Cad2 = "00000000000000"
-        While Not Rs.EOF
+        While Not RS.EOF
             SQL = "2"
             SQL = SQL & txtDatos(0).Text
             SQL = SQL & Anyo
-            SQL = SQL & Rs!LibroCD
+            SQL = SQL & RS!LibroCD
             
             'Importe1
-            If IsNull(Rs!Importe1) Then
+            If IsNull(RS!Importe1) Then
                 Valor = 0
             Else
-                Valor = Rs!Importe1
+                Valor = RS!Importe1
             End If
             Valor = Valor * 100
-            Cad = CStr(Abs(Valor))
+            cad = CStr(Abs(Valor))
             If Valor > 0 Then
                 SQL = SQL & "+"
             Else
@@ -1845,18 +1838,18 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
                     SQL = SQL & " "
                 End If
             End If
-            Cad = Right(Cad2 & Cad, 15)
-            SQL = SQL & Cad
+            cad = Right(Cad2 & cad, 15)
+            SQL = SQL & cad
             
             'Importe anterior
             'Importe2
-            If IsNull(Rs!importe2) Then
+            If IsNull(RS!importe2) Then
                 Valor = 0
             Else
-                Valor = Rs!importe2
+                Valor = RS!importe2
             End If
             Valor = Valor * 100
-            Cad = CStr(Abs(Valor))
+            cad = CStr(Abs(Valor))
             If Valor > 0 Then
                 SQL = SQL & "+"
             Else
@@ -1866,16 +1859,16 @@ Private Function GenerarDatosFicheros(ByVal vPath As String) As Boolean
                     SQL = SQL & " "
                 End If
             End If
-            Cad = Right(Cad2 & Cad, 15)
-            SQL = SQL & Cad
-            Print #Cont, SQL
+            cad = Right(Cad2 & cad, 15)
+            SQL = SQL & cad
+            Print #CONT, SQL
             
             'Siguiente
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         'Fi fichreo
-        Close #Cont
+        Close #CONT
         
         
         GenerarDatosFicheros = True
@@ -1896,19 +1889,19 @@ Private Sub PonerNiveles()
     Combo1.AddItem "Último"
     Combo1.ItemData(Combo1.NewIndex) = vEmpresa.DigitosUltimoNivel
     For NumRegElim = 1 To vEmpresa.numnivel - 1
-        Cont = DigitosNivel(CInt(NumRegElim))
-        Cad = "Digitos: " & Cont
+        CONT = DigitosNivel(CInt(NumRegElim))
+        cad = "Digitos: " & CONT
         Check2(NumRegElim).Visible = True
-        Check2(NumRegElim).Caption = Cad
-        Check2(NumRegElim).Tag = Cont
+        Check2(NumRegElim).Caption = cad
+        Check2(NumRegElim).Tag = CONT
         
                 
         Combo1.AddItem "Nivel :   " & NumRegElim
-        Combo1.ItemData(Combo1.NewIndex) = Cont
+        Combo1.ItemData(Combo1.NewIndex) = CONT
     Next NumRegElim
-    For Cont = NumRegElim To 9
-        Check2(Cont).Visible = False
-    Next Cont
+    For CONT = NumRegElim To 9
+        Check2(CONT).Visible = False
+    Next CONT
 End Sub
 
 
@@ -1926,8 +1919,8 @@ Private Sub HacerLegalizaLibros()
     SQL = txtpath.Tag & "Data\" & vEmpresa.nomresum    'Abreviada en euros
     
     If Dir(SQL, vbDirectory) <> "" Then
-        Cad = "Ya existen datos para la empresa: " & vEmpresa.nomresum & ".   ¿Desea continuar?"
-        If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+        cad = "Ya existen datos para la empresa: " & vEmpresa.nomresum & ".   ¿Desea continuar?"
+        If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         If Dir(SQL & "\*.*", vbArchive) <> "" Then Kill SQL & "\*.*"
     Else
         MkDir SQL
@@ -1938,8 +1931,8 @@ Private Sub HacerLegalizaLibros()
     Me.Refresh
     
     'Borramos todos los registros de businmov
-    Cad = "Delete from tmpfaclin WHERE codusu= " & vUsu.Codigo
-    Conn.Execute Cad
+    cad = "Delete from tmpfaclin WHERE codusu= " & vUsu.Codigo
+    Conn.Execute cad
     espera 1
     Me.Enabled = False
     If GenerarLibrosLegaliza(SQL) Then
@@ -1977,7 +1970,7 @@ Private Function GenerarLibrosLegaliza(ByVal vPath As String) As Boolean
 Dim CadenaLegaliza As String
 Dim F As Date
 Dim F2 As Date
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Incremento As Integer
 Dim Bucle As Byte
@@ -1990,11 +1983,11 @@ Dim NumeroPresentacion As Integer
     'Fichero con la descripcion de la empresa
     Me.lblIndicador.Caption = "Descripcion"
     Me.Refresh
-    Cont = FreeFile
-    Open vPath & "\DESC.TXT" For Output As #Cont
+    CONT = FreeFile
+    Open vPath & "\DESC.TXT" For Output As #CONT
     SQL = vEmpresa.nomempre & ". Generado: " & Format(Now, "dd/mm/yyyy hh:mm")
-    Print #Cont, SQL
-    Close #Cont
+    Print #CONT, SQL
+    Close #CONT
 
     CursorReloj
     
@@ -2246,13 +2239,6 @@ Dim NumeroPresentacion As Integer
    End If
   
   
-    
-
-
-
-
-
-
 
     'El ulttimo es el de sumas y saldos pq modifica las fechas
 
@@ -2289,14 +2275,14 @@ Dim NumeroPresentacion As Integer
                 CadenaLegaliza = CadenaLegaliza & Format(F2, "dd/mm/yyyy") & "|"
             End If
             'Debug.Print CadenaLegaliza
-            For i = 1 To 10
-                If Check2(i).Value = 1 Then
+            For I = 1 To 10
+                If Check2(I).Value = 1 Then
                     'Para el nivle
-                    Me.lblIndicador.Caption = "Balances. Fecha: " & F & "    Nivel: " & i
+                    Me.lblIndicador.Caption = "Balances. Fecha: " & F & "    Nivel: " & I
                     Me.lblIndicador.Refresh
                     CursorReloj
                     SQL = CadenaLegaliza
-                    SQL = SQL & i & "|"
+                    SQL = SQL & I & "|"
                     CadenaDesdeOtroForm = ""
                     
                     
@@ -2317,7 +2303,7 @@ Dim NumeroPresentacion As Integer
                     Me.Refresh
                     espera 0.5
                 End If  'Del check2(I)
-            Next i
+            Next I
             'Actualizamos fecha
             If NumRegElim > 1 Then
                 If optBalsum(1).Value Or optBalsum(3).Value Then
@@ -2347,11 +2333,9 @@ Dim NumeroPresentacion As Integer
         espera 1
         
         F = CDate(Text3(0).Text)
-        'F2 = DateAdd("yyyy", 1, F)  'mas 1 año
-        'F2 = DateAdd("d", -1, F2) 'menos un dia
    
         'Creamos la TAPA
-        CrearSeparadorTapa False, Cad, 0
+        CrearSeparadorTapa False, cad, 0
    
         If Dir(App.Path & "\Docum.pdf", vbArchive) <> "" Then
             Kill App.Path & "\Docum.pdf"
@@ -2371,8 +2355,8 @@ Dim NumeroPresentacion As Integer
         'cad = """" & App.path & "\pdftk.exe"" """ & App.path & "\temp\*.pdf"" cat output """ & App.path & "\Docum2.pdf"" verbose"
 
         MontaCadenaExe
-        If Cad = "" Then GoTo Salida
-        Shell Cad, vbMaximizedFocus
+        If cad = "" Then GoTo Salida
+        Shell cad, vbMaximizedFocus
         
         If Not CopiarDocum Then
             MsgBox "No se ha podido unificar los libros", vbExclamation
@@ -2391,7 +2375,7 @@ Dim NumeroPresentacion As Integer
         If Not CopiarArchivoLega(vPath, 100, NumeroPresentacion, F, F2) Then GoTo Salida
    End If
         
-    Cad = vPath 'Fijo el path para el ultimo fichero
+    cad = vPath 'Fijo el path para el ultimo fichero
     CreaDatosTXT
         
     GenerarLibrosLegaliza = True
@@ -2402,14 +2386,14 @@ End Function
 
 Private Sub MontaCadenaExe()
 Dim Fs, F
-    Cad = ""
+    cad = ""
     SQL = ""
     On Error GoTo eMontaCadenaExe
     Set Fs = CreateObject("Scripting.FileSystemObject")
     Set F = Fs.GetFolder(App.Path)
     SQL = F.ShortPath & "\pdftk.exe"
     SQL = SQL & " " & F.ShortPath & "\temp\*.pdf cat output " & F.ShortPath & "\Docum2.pdf verbose"
-    Cad = SQL
+    cad = SQL
     
 eMontaCadenaExe:
     If Err.Number <> 0 Then MuestraError Err.Number, "Sub: MontaCadenaExe"
@@ -2421,7 +2405,7 @@ End Sub
 'numero
 Private Function CopiarArchivoLega(vPa As String, Opcion As Byte, numero As Integer, F1 As Date, F2 As Date) As Boolean
 Dim Insertar As Boolean
-Dim i As Integer
+Dim I As Integer
 
     On Error GoTo eCopiarArchivoLega
     CopiarArchivoLega = False
@@ -2443,15 +2427,15 @@ Dim i As Integer
     'EN NIF tendremos la fecha final ejercicio si se cierra
         
         
-    Cad = ",'" & Format(F1, "ddmmyyyy") & "','" & Format(F2, "ddmmyyyy") & "',"
+    cad = ",'" & Format(F1, "ddmmyyyy") & "','" & Format(F2, "ddmmyyyy") & "',"
     If Me.chkAgrupar.Value Then
-        Cad = Cad & "'" & Format(DateAdd("d", -1, F1), "ddmmyyyy") & "')"
+        cad = cad & "'" & Format(DateAdd("d", -1, F1), "ddmmyyyy") & "')"
     Else
-        Cad = Cad & "NULL)"
+        cad = cad & "NULL)"
     End If
     
     'Le ponemos el numero en la BD tambien
-    Cad = "," & numero & Cad
+    cad = "," & numero & cad
     
     
     If Me.chkAgrupar.Value = 0 Then
@@ -2459,37 +2443,37 @@ Dim i As Integer
         Case 0
             'Diario
             SQL = "DIARIO_" & Format(numero, "000") & ".PDF"
-            Cad = "'DIARIO','Libro Diario'" & Cad
+            cad = "'DIARIO','Libro Diario'" & cad
         Case 1
             SQL = "MAYOR_" & Format(numero, "000") & ".PDF"
-            Cad = "'MAYOR','LIBRO MAYOR'" & Cad
+            cad = "'MAYOR','LIBRO MAYOR'" & cad
         Case 2, 8
             SQL = "INVENTAR_" & Format(numero, "000") & ".PDF"
             If Opcion = 2 Then
-                Cad = "'INVENTAR','Inventario inicial'" & Cad
+                cad = "'INVENTAR','Inventario inicial'" & cad
             Else
-                Cad = "'INVENTAR','Inventario final Cierre'" & Cad
+                cad = "'INVENTAR','Inventario final Cierre'" & cad
             End If
             
         Case 3
             SQL = "BAL_SUMS_" & Format(numero, "000") & ".PDF"
-            Cad = "'" & "BALAN_" & numero & "','Balance sumas saldos'" & Cad
+            cad = "'" & "BALAN_" & numero & "','Balance sumas saldos'" & cad
         Case 4
             SQL = "FAC_EMIT_" & Format(numero, "000") & ".PDF"
-            Cad = "'" & "FACLI" & numero & "','Facturas emitidas'" & Cad
+            cad = "'" & "FACLI" & numero & "','Facturas emitidas'" & cad
         Case 5
             SQL = "FAC_RECI_" & Format(numero, "000") & ".PDF"
-            Cad = "'" & "FAPRO" & numero & "','Facturas recibidas'" & Cad
+            cad = "'" & "FAPRO" & numero & "','Facturas recibidas'" & cad
             
         Case 6
             'Perdidas y ganancias
             SQL = "PER_GAN_" & Format(numero, "000") & ".PDF"
-            Cad = "'" & "PERGAN" & numero & "','Pérdidas y ganancias'" & Cad
+            cad = "'" & "PERGAN" & numero & "','Pérdidas y ganancias'" & cad
             
         Case 7
             'Situacion
             SQL = "BALANCES_" & Format(numero, "000") & ".PDF"
-            Cad = "'" & "BALANCES" & numero & "','Balance situacion'" & Cad
+            cad = "'" & "BALANCES" & numero & "','Balance situacion'" & cad
         End Select
         
     Else
@@ -2498,11 +2482,11 @@ Dim i As Integer
         Select Case Opcion
         Case 0
             SQL = "DIARIO_" & Format(numero, "000") & ".PDF"
-            Cad = "'DIARIO','Libro Diario'" & Cad
+            cad = "'DIARIO','Libro Diario'" & cad
         Case 100
             'Es el libro conjunto
             SQL = "INV_CUEN_" & Format(numero, "000") & ".PDF"
-            Cad = "'TODO','Inventario y cuentas anuales'" & Cad
+            cad = "'TODO','Inventario y cuentas anuales'" & cad
             
         Case Else
         
@@ -2518,10 +2502,10 @@ Dim i As Integer
     'Insertamos en tmpfaclin
     If Insertar Then
         Contador = Contador + 1
-        Cad = "INSERT INTO tmpfaclin (codusu, codigo, Numfac,Cliente, iva,Fecha, cta,nif) VALUES (" & vUsu.Codigo & "," & Contador & "," & Cad
-        Conn.Execute Cad
+        cad = "INSERT INTO tmpfaclin (codusu, codigo, Numfac,Cliente, iva,Fecha, cta,nif) VALUES (" & vUsu.Codigo & "," & Contador & "," & cad
+        Conn.Execute cad
         
-        Cad = vPa
+        cad = vPa
         If Not AnyadirNombresTxt Then Exit Function
         
         'Añadimos el nombre al fichero de Nombres.Txt
@@ -2583,11 +2567,11 @@ Private Function AnyadirNombresTxt() As Boolean
     
         On Error GoTo EAnyadirNombresTxt
         AnyadirNombresTxt = False
-        Cad = Cad & "\NOMBRES.TXT"
-        Cont = FreeFile
-        Open Cad For Append As #Cont
-        Print #Cont, SQL
-        Close #Cont
+        cad = cad & "\NOMBRES.TXT"
+        CONT = FreeFile
+        Open cad For Append As #CONT
+        Print #CONT, SQL
+        Close #CONT
         AnyadirNombresTxt = True
         Exit Function
 EAnyadirNombresTxt:
@@ -2596,59 +2580,59 @@ End Function
 
 'Generamos el archivo DATOS
 Private Sub CreaDatosTXT()
-Dim i As Integer
+Dim I As Integer
 Dim F As Date
 Dim TieneInventario As Boolean
 
-    Cad = Cad & "\DATOS.TXT"
-    Cont = FreeFile
-    Open Cad For Output As #Cont
+    cad = cad & "\DATOS.TXT"
+    CONT = FreeFile
+    Open cad For Output As #CONT
     
 'ESTRUCTURA DEL FICHERO
 '100VALENCIA
-    Print #Cont, "100" & "VALENCIA"
+    Print #CONT, "100" & "VALENCIA"
     
 'Fecha presentacion
     'Para la fecha presentacion
     F = CDate(Text3(0).Text)
     F = DateAdd("yyyy", 1, F)
-    i = Year(F)
-    If Month(F) > 3 Then i = i + 1
-    F = CDate("31/03/" & i)
-    Print #Cont, "101" & Format(F, "ddmmyyyy")
+    I = Year(F)
+    If Month(F) > 3 Then I = I + 1
+    F = CDate("31/03/" & I)
+    Print #CONT, "101" & Format(F, "ddmmyyyy")
     
 '102David
-    Print #Cont, "102" & txtDatos(1).Text
+    Print #CONT, "102" & txtDatos(1).Text
 '103Gandul
-    Print #Cont, "103"
+    Print #CONT, "103"
 '104Castells
-    Print #Cont, "104"
+    Print #CONT, "104"
     
 '10524348588Y
-    Print #Cont, "105" & txtDatos(0).Text
+    Print #CONT, "105" & txtDatos(0).Text
 '106Avd
-    Print #Cont, "106" & txtDatos(2).Text
+    Print #CONT, "106" & txtDatos(2).Text
 '107Valencia
-    Print #Cont, "107" & txtDatos(4).Text
+    Print #CONT, "107" & txtDatos(4).Text
 '10846016
-    Print #Cont, "108" & txtDatos(3).Text
+    Print #CONT, "108" & txtDatos(3).Text
 '401NO
-    Print #Cont, "401" & "NO"
+    Print #CONT, "401" & "NO"
 '10946
-    Print #Cont, "109" & "46"   'PRovincia
+    Print #CONT, "109" & "46"   'PRovincia
 '110fax
-    Print #Cont, "110"
+    Print #CONT, "110"
 '111654649836
-    Print #Cont, "111"
+    Print #CONT, "111"
 
 '2011
-    Print #Cont, "201"
+    Print #CONT, "201"
 '2041
-    Print #Cont, "204"
+    Print #CONT, "204"
 '2061
-    Print #Cont, "206"
+    Print #CONT, "206"
 '205REGISTRO MERCANTIL
-    Print #Cont, "205" & "REGISTRO MERCANTIL"
+    Print #CONT, "205" & "REGISTRO MERCANTIL"
 
 'AHora van Numerando los libros
 ' 00n   Libro
@@ -2696,9 +2680,9 @@ Dim TieneInventario As Boolean
 '0060531122001
 '006065KU5HZ3E73MXF1614EMF13JPAB
     
-        Cad = "Select * from tmpfaclin where codusu = " & vUsu.Codigo & " ORDER BY Codigo"
+        cad = "Select * from tmpfaclin where codusu = " & vUsu.Codigo & " ORDER BY Codigo"
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+        miRsAux.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
         NumRegElim = 0
         While Not miRsAux.EOF
             NumRegElim = NumRegElim + 1
@@ -2706,7 +2690,7 @@ Dim TieneInventario As Boolean
         Wend
         
         '501 Numero total de libros
-        Print #Cont, "501" & NumRegElim
+        Print #CONT, "501" & NumRegElim
         miRsAux.MoveFirst
         NumRegElim = 0
         TieneInventario = False
@@ -2721,50 +2705,50 @@ Dim TieneInventario As Boolean
                 '       06: FIRMA
                 
                 NumRegElim = NumRegElim + 1
-                Cad = Format(NumRegElim, "000")
+                cad = Format(NumRegElim, "000")
                 '1
-                SQL = Cad & "01" & miRsAux.Fields(5)
-                Print #Cont, SQL
+                SQL = cad & "01" & miRsAux.Fields(5)
+                Print #CONT, SQL
                 'Nº Libro. Para BALAN, si hay mas de uno
                 SQL = Mid(miRsAux.Fields(2), 1, 6)
                 
                 
                 Select Case SQL
                 Case "BALAN_"
-                    i = InStr(1, miRsAux.Fields(2), "_")
-                    SQL = Mid(miRsAux.Fields(2), i + 1)
-                    i = Val(SQL)
+                    I = InStr(1, miRsAux.Fields(2), "_")
+                    SQL = Mid(miRsAux.Fields(2), I + 1)
+                    I = Val(SQL)
                 Case "INVENT"
                         If TieneInventario Then
-                            i = 2
+                            I = 2
                         Else
-                            i = 1
+                            I = 1
                             TieneInventario = True
                         End If
                 
                 Case "DIARIO", "TODO"
-                    i = DBLet(miRsAux!iva, "N")
+                    I = DBLet(miRsAux!iva, "N")
                 
                 
                 Case Else
-                    i = 1
+                    I = 1
                     
                 End Select
                 
                 
                 
-                SQL = Cad & "02" & i
-                Print #Cont, SQL
+                SQL = cad & "02" & I
+                Print #CONT, SQL
                 '3
-                SQL = Cad & "03" & miRsAux.Fields(3).Value
-                Print #Cont, SQL
+                SQL = cad & "03" & miRsAux.Fields(3).Value
+                Print #CONT, SQL
                 '4
-                SQL = Cad & "04" & miRsAux.Fields(4).Value
-                Print #Cont, SQL
+                SQL = cad & "04" & miRsAux.Fields(4).Value
+                Print #CONT, SQL
                 '5
                 
-                SQL = Cad & "05" & DBLet(miRsAux!NIF, "T")
-                Print #Cont, SQL
+                SQL = cad & "05" & DBLet(miRsAux!NIF, "T")
+                Print #CONT, SQL
 
 
 
@@ -2773,7 +2757,7 @@ Dim TieneInventario As Boolean
         Wend
         miRsAux.Close
         
-        Close (Cont)
+        Close (CONT)
         Set miRsAux = Nothing
         
         
@@ -2782,14 +2766,14 @@ End Sub
 
 
 Private Function CrearSeparadorTapa(Separador As Boolean, Titul As String, numero As Integer) As Boolean
-    Cad = App.Path & "\Informes\"
+    cad = App.Path & "\Informes\"
     If Separador Then
         SQL = "Desc= """ & Titul & """|"
-        Cad = Cad & "separador.rpt"
+        cad = cad & "separador.rpt"
     Else
         SQL = DateAdd("d", -1, DateAdd("yyyy", 1, CDate(Text3(0).Text)))
         SQL = "Desc= """ & Text3(0).Text & " - " & SQL & """|"
-        Cad = Cad & "tapa.rpt"
+        cad = cad & "tapa.rpt"
             
     End If
     With frmVisReport
@@ -2798,7 +2782,7 @@ Private Function CrearSeparadorTapa(Separador As Boolean, Titul As String, numer
         .FormulaSeleccion = ""
         .NumeroParametros = 1
         .MostrarTree = False
-        .Informe = Cad
+        .Informe = cad
         .ExportarPDF = True
         .Show vbModal
     End With
@@ -2818,18 +2802,18 @@ End Function
 Private Function CopiarDocum() As Boolean
     
     CopiarDocum = False
-    Cont = 0
-    Cad = ""
+    CONT = 0
+    cad = ""
     lblIndicador.Caption = "Generando fichero Docu2.pdf  "
     Me.Refresh
     Do
-        Cad = Dir(App.Path & "\Docum2.pdf", vbArchive)
-        If Cad = "" Then
-            Cont = Cont + 1
-            If Cont > 10 Then
-                Cad = "Transcurrido 10 segundos no finaliza el proceso. ¿Salir?"
-                If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then
-                    Cad = ""
+        cad = Dir(App.Path & "\Docum2.pdf", vbArchive)
+        If cad = "" Then
+            CONT = CONT + 1
+            If CONT > 10 Then
+                cad = "Transcurrido 10 segundos no finaliza el proceso. ¿Salir?"
+                If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then
+                    cad = ""
                 Else
                     Exit Function
                 End If
@@ -2838,28 +2822,28 @@ Private Function CopiarDocum() As Boolean
             End If
         End If
                 
-    Loop Until Cad <> ""
+    Loop Until cad <> ""
     espera 1
 
     'Si llega aqui haremos tres intentos de copiar el archivo
     On Error Resume Next
-    Cont = 0
+    CONT = 0
     Do
-        lblIndicador.Caption = "Copia fichero Docu2.pdf  (" & Cont & ")"
+        lblIndicador.Caption = "Copia fichero Docu2.pdf  (" & CONT & ")"
         Me.Refresh
 
         FileCopy App.Path & "\Docum2.pdf", App.Path & "\Docum.pdf"
         If Err.Number <> 0 Then
             
             Err.Clear
-            Cont = Cont + 1
-            espera CInt((Cont * 2)) + 1
+            CONT = CONT + 1
+            espera CInt((CONT * 2)) + 1
         Else
-            Cont = 100
+            CONT = 100
         End If
-    Loop Until Cont > 3
+    Loop Until CONT > 3
     
-    If Cont = 100 Then
+    If CONT = 100 Then
         CopiarDocum = True
         lblIndicador.Caption = "Eliminando Docu2.pdf"
         Me.Refresh

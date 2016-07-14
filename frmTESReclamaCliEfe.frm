@@ -1928,7 +1928,7 @@ Private Sub Form_Load()
     Next I
     
     For I = 0 To 3
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
     ' La Ayuda
@@ -2564,13 +2564,10 @@ Dim Dpto As Long
             
             SQL = "INSERT INTO tmpcuentas (codusu, codmacta, nommacta,despobla,razosoci,dpto) VALUES (" & vUsu.Codigo & ",'" & RC & "','"
             SQL = SQL & DBLet(miRsAux!nifdatos, "T") & "','" 'En nommacta meto el NIF del cliente
-            If IsNull(miRsAux!Entidad) Then
-                'Puede que sean todos nulos
-                cad = DBLet(miRsAux!Oficina) & "   " & DBLet(miRsAux!Control, "T") & "    " & DBLet(miRsAux!Cuentaba, "T")
-                cad = Trim(cad)
-            Else
-                cad = DBLet(miRsAux!IBAN, "T") '& " " & Format(miRsAux!Entidad, "0000") & " " & Format(DBLet(miRsAux!Oficina, "N"), "0000") & "  " & Format(DBLet(miRsAux!Control, "N"), "00") & " " & Format(DBLet(miRsAux!Cuentaba, "N"), "0000000000")
-            End If
+                
+                
+            cad = DBLet(miRsAux!IBAN, "T")
+            
             cad = cad & "','"
             'El dpto si tiene
             cad = cad & DevNombreSQL(DevuelveDesdeBD("descripcion", "departamentos", "codmacta = '" & miRsAux!codmacta & "' AND dpto", CStr(Dpto)))

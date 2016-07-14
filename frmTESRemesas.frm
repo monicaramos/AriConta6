@@ -1919,7 +1919,7 @@ Dim Img As Image
     Me.imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For I = 0 To 5
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
     
     ' Botonera Principal
@@ -2800,7 +2800,7 @@ Dim ImporteTot As Currency
         Importe = Importe + miRsAux!ImpVenci
         
         'Si ya he cobrado algo
-        If Not IsNull(miRsAux!Impcobro) Then Importe = Importe - miRsAux!Impcobro
+        If Not IsNull(miRsAux!impcobro) Then Importe = Importe - miRsAux!impcobro
         
         IT.SubItems(6) = Format(Importe, FormatoImporte)
         
@@ -2816,7 +2816,7 @@ Dim ImporteTot As Currency
         If Me.chkAgruparRemesaPorEntidad Then
             Dim Banco As String
             
-            Banco = DevuelveValor("select codmacta from bancos where entidad = " & DBSet(miRsAux!Entidad, "N") & " and not sufijoem is null ")
+            Banco = DevuelveValor("select codmacta from bancos where iban = " & DBSet(Mid(miRsAux!IBAN, 5, 4), "N") & " and not sufijoem is null ")
             If Banco = "0" Then
                 IT.SubItems(7) = txtCuentas(2).Text
             Else
@@ -2984,7 +2984,7 @@ Dim Forpa As String
 Dim cad As String
 Dim Impor As Currency
 Dim colCtas As Collection
-Dim Sql2 As String
+Dim SQL2 As String
 
     If SubTipo = vbTipoPagoRemesa Then
         SQL = " formapago.tipforpa = " & vbTipoPagoRemesa
@@ -3068,16 +3068,16 @@ Dim Sql2 As String
     
         CadenaDesdeOtroForm = ""
     
-        Sql2 = SQL & " and not cobros.impcobro is null and cobros.impcobro <> 0 and cobros.codmacta=cuentas.codmacta AND (siturem is null) AND cobros.codforpa = formapago.codforpa "
+        SQL2 = SQL & " and not cobros.impcobro is null and cobros.impcobro <> 0 and cobros.codmacta=cuentas.codmacta AND (siturem is null) AND cobros.codforpa = formapago.codforpa "
         
-        Sql2 = "select cobros.* FROM cobros,cuentas,formapago  WHERE " & Sql2
+        SQL2 = "select cobros.* FROM cobros,cuentas,formapago  WHERE " & SQL2
         
-        If TotalRegistrosConsulta(Sql2) <> 0 Then
+        If TotalRegistrosConsulta(SQL2) <> 0 Then
         
             Set frmMens3 = New frmMensajes
             
             frmMens3.Opcion = 53
-            frmMens3.Parametros = Sql2
+            frmMens3.Parametros = SQL2
             frmMens3.Show vbModal
             
             Set frmMens = Nothing
@@ -3579,12 +3579,12 @@ Dim CuentasCC As String
     '                                                               POR SI TUVIERAN MISMO BANCO, <> cta contable
     
     
-    NumeroDocumento = "select oficina,entidad from bancos where not sufijoem is null "
-    NumeroDocumento = NumeroDocumento & " and entidad >0  and codmacta<>'" & Me.txtCuentas(2).Text & "' group by 1,2"
+    NumeroDocumento = "select mid(iban,5, 4)  from bancos where not sufijoem is null "
+    NumeroDocumento = NumeroDocumento & " and mid(iban,5, 4) > 0  and codmacta<>'" & Me.txtCuentas(2).Text & "' group by 1"
     miRsAux.Open NumeroDocumento, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumeroDocumento = ""
     While Not miRsAux.EOF
-        NumeroDocumento = NumeroDocumento & ", " & miRsAux!Entidad
+        NumeroDocumento = NumeroDocumento & ", " & miRsAux.Fields(0)
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -3595,10 +3595,10 @@ Dim CuentasCC As String
         NumeroDocumento = Mid(NumeroDocumento, 2) 'quitamos la primera coma
     End If
     
-    NumeroDocumento = " (cobros.entidad) in (" & NumeroDocumento & ")"
+    NumeroDocumento = " (mid(cobros.iban,5, 4)) in (" & NumeroDocumento & ")"
     
     'Agrupamos los vencimientos por entidad,oficina menos los del banco por defecto
-    CuentasCC = "select cobros.entidad,sum(impvenci + coalesce(gastos,0)) " & SQL     'FALTA### VER impcobro
+    CuentasCC = "select mid(cobros.iban,5, 4) ,sum(impvenci + coalesce(gastos,0)) " & SQL     'FALTA### VER impcobro
     CuentasCC = CuentasCC & " AND " & NumeroDocumento & " GROUP BY 1"
     miRsAux.Open CuentasCC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -3612,9 +3612,9 @@ Dim CuentasCC As String
     
     'Los del banco por defecto, y lo que no tenemos banco, es decir, el resto
     '------------------------------------------------------------------------------
-    CuentasCC = SQL & " AND ( NOT " & NumeroDocumento & " OR cobros.entidad is null) GROUP BY 1"
+    CuentasCC = SQL & " AND ( NOT " & NumeroDocumento & " OR cobros.iban is null) GROUP BY 1"
     'Vere la entidad y la oficina del PPAL
-    NumeroDocumento = DevuelveDesdeBD("entidad", "bancos", "codmacta", txtCuentas(2).Text, "T")
+    NumeroDocumento = DevuelveDesdeBD("mid(cobros.iban,5, 4)", "bancos", "codmacta", txtCuentas(2).Text, "T")
     NumeroDocumento = "Select " & NumeroDocumento & ",sum(impvenci + coalesce(gastos,0)) " & CuentasCC      'FALTA### VER impcobro
     miRsAux.Open NumeroDocumento, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -3632,7 +3632,7 @@ Dim CuentasCC As String
     miRsAux.Open CuentasCC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         NumeroDocumento = "nommacta"
-        CuentasCC = "bancos.codmacta=cuentas.codmacta AND sufijoem<>''  AND bancos.entidad = " & miRsAux!Cta & " AND 1 "    'ctabancaria.oficina "
+        CuentasCC = "bancos.codmacta=cuentas.codmacta AND sufijoem<>''  AND mid(bancos.iban,5,4) = " & miRsAux!Cta & " AND 1 "    'ctabancaria.oficina "
         CuentasCC = DevuelveDesdeBD("bancos.codmacta", "bancos,cuentas", CuentasCC, "1", "N", NumeroDocumento)  'miRsAux!nomcta
         If CuentasCC <> "" Then
             CuentasCC = "UPDATE tmpcierre1 SET cta = '" & CuentasCC & "',nomcta ='" & DevNombreSQL(NumeroDocumento)

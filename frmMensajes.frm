@@ -39,158 +39,6 @@ Begin VB.Form frmMensajes
       _ExtentY        =   847
       _Version        =   393216
    End
-   Begin VB.Frame FrameImpCta 
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   1935
-      Left            =   0
-      TabIndex        =   115
-      Top             =   0
-      Width           =   6495
-      Begin VB.CheckBox chkCrear 
-         Caption         =   "Crear cuentas si no existen"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Left            =   3600
-         TabIndex        =   129
-         Top             =   360
-         Width           =   2415
-      End
-      Begin VB.CommandButton cmdImpCta 
-         Caption         =   "Salir"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   1
-         Left            =   4920
-         TabIndex        =   118
-         Top             =   1320
-         Width           =   1095
-      End
-      Begin VB.TextBox txtImpCta 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   360
-         TabIndex        =   117
-         Text            =   "Text2"
-         Top             =   720
-         Width           =   5655
-      End
-      Begin VB.CommandButton cmdImpCta 
-         Caption         =   "Aceptar"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   0
-         Left            =   3720
-         TabIndex        =   116
-         Top             =   1320
-         Width           =   1095
-      End
-      Begin VB.Image ImageAyudaImpcta 
-         Height          =   240
-         Left            =   2640
-         Picture         =   "frmMensajes.frx":000C
-         Top             =   360
-         Width           =   240
-      End
-      Begin VB.Label lblImpCta 
-         Caption         =   "Label3"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   1080
-         TabIndex        =   121
-         Top             =   1320
-         Width           =   1335
-      End
-      Begin VB.Label lblimpCta2 
-         Caption         =   "Lineas"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   360
-         TabIndex        =   120
-         Top             =   1320
-         Width           =   615
-      End
-      Begin VB.Image Image4 
-         Height          =   240
-         Index           =   0
-         Left            =   2280
-         Picture         =   "frmMensajes.frx":0A0E
-         Top             =   360
-         Width           =   240
-      End
-      Begin VB.Label lblDescFich 
-         Caption         =   "Fichero con datos fiscales"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   360
-         TabIndex        =   119
-         Top             =   360
-         Width           =   2055
-      End
-   End
    Begin VB.Frame FrameeMPRESAS 
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -309,7 +157,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   4455
       Left            =   0
-      TabIndex        =   142
+      TabIndex        =   134
       Top             =   0
       Width           =   5775
       Begin VB.Frame FrameImportarFechas 
@@ -324,7 +172,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   1455
          Left            =   120
-         TabIndex        =   147
+         TabIndex        =   139
          Top             =   1560
          Width           =   5535
          Begin VB.TextBox Text8 
@@ -339,7 +187,7 @@ Begin VB.Form frmMensajes
             EndProperty
             Height          =   285
             Left            =   120
-            TabIndex        =   152
+            TabIndex        =   144
             Text            =   "Text8"
             Top             =   600
             Width           =   5295
@@ -347,7 +195,7 @@ Begin VB.Form frmMensajes
          Begin VB.Image Image5 
             Height          =   240
             Left            =   840
-            Picture         =   "frmMensajes.frx":1410
+            Picture         =   "frmMensajes.frx":000C
             Top             =   360
             Width           =   240
          End
@@ -364,7 +212,7 @@ Begin VB.Form frmMensajes
             EndProperty
             Height          =   255
             Left            =   120
-            TabIndex        =   153
+            TabIndex        =   145
             Top             =   360
             Width           =   735
          End
@@ -382,7 +230,7 @@ Begin VB.Form frmMensajes
          Height          =   285
          Index           =   3
          Left            =   4200
-         TabIndex        =   150
+         TabIndex        =   142
          Text            =   "Text7"
          Top             =   2160
          Width           =   1095
@@ -400,7 +248,7 @@ Begin VB.Form frmMensajes
          Height          =   285
          Index           =   2
          Left            =   1320
-         TabIndex        =   148
+         TabIndex        =   140
          Text            =   "Text7"
          Top             =   2160
          Width           =   1095
@@ -418,7 +266,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   146
+         TabIndex        =   138
          Top             =   3960
          Width           =   2535
       End
@@ -436,7 +284,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   1
          Left            =   4320
-         TabIndex        =   145
+         TabIndex        =   137
          Top             =   3840
          Width           =   1095
       End
@@ -454,7 +302,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   0
          Left            =   3000
-         TabIndex        =   144
+         TabIndex        =   136
          Top             =   3840
          Width           =   1095
       End
@@ -479,7 +327,7 @@ Begin VB.Form frmMensajes
          Height          =   735
          Index           =   1
          Left            =   240
-         TabIndex        =   156
+         TabIndex        =   148
          Top             =   840
          Width           =   5415
       End
@@ -496,7 +344,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   154
+         TabIndex        =   146
          Top             =   3240
          Width           =   5295
       End
@@ -514,7 +362,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   3
          Left            =   3240
-         TabIndex        =   151
+         TabIndex        =   143
          Top             =   2160
          Width           =   1095
       End
@@ -532,7 +380,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   2
          Left            =   360
-         TabIndex        =   149
+         TabIndex        =   141
          Top             =   2160
          Width           =   1095
       End
@@ -551,7 +399,7 @@ Begin VB.Form frmMensajes
          Height          =   495
          Index           =   0
          Left            =   240
-         TabIndex        =   143
+         TabIndex        =   135
          Top             =   240
          Width           =   5295
       End
@@ -568,7 +416,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   3615
       Left            =   0
-      TabIndex        =   130
+      TabIndex        =   122
       Top             =   0
       Width           =   4575
       Begin VB.TextBox Text7 
@@ -586,7 +434,7 @@ Begin VB.Form frmMensajes
          Index           =   3
          Left            =   3120
          PasswordChar    =   "*"
-         TabIndex        =   134
+         TabIndex        =   126
          Text            =   "Text7"
          Top             =   2400
          Width           =   1215
@@ -606,7 +454,7 @@ Begin VB.Form frmMensajes
          Index           =   2
          Left            =   3120
          PasswordChar    =   "*"
-         TabIndex        =   133
+         TabIndex        =   125
          Text            =   "Text7"
          Top             =   1680
          Width           =   1215
@@ -626,7 +474,7 @@ Begin VB.Form frmMensajes
          Index           =   1
          Left            =   240
          PasswordChar    =   "*"
-         TabIndex        =   132
+         TabIndex        =   124
          Text            =   "Text7"
          Top             =   1680
          Width           =   1335
@@ -646,7 +494,7 @@ Begin VB.Form frmMensajes
          Height          =   285
          Index           =   0
          Left            =   240
-         TabIndex        =   131
+         TabIndex        =   123
          Text            =   "Text7"
          Top             =   960
          Width           =   4095
@@ -665,7 +513,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   1
          Left            =   3240
-         TabIndex        =   136
+         TabIndex        =   128
          Top             =   3000
          Width           =   1095
       End
@@ -683,7 +531,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   0
          Left            =   2040
-         TabIndex        =   135
+         TabIndex        =   127
          Top             =   3000
          Width           =   1095
       End
@@ -703,7 +551,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   141
+         TabIndex        =   133
          Top             =   240
          Width           =   4335
       End
@@ -721,7 +569,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   3
          Left            =   3120
-         TabIndex        =   140
+         TabIndex        =   132
          Top             =   2160
          Width           =   975
       End
@@ -739,7 +587,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   2
          Left            =   3120
-         TabIndex        =   139
+         TabIndex        =   131
          Top             =   1440
          Width           =   1695
       End
@@ -757,7 +605,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   138
+         TabIndex        =   130
          Top             =   1440
          Width           =   2295
       End
@@ -775,7 +623,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   137
+         TabIndex        =   129
          Top             =   720
          Width           =   975
       End
@@ -1222,7 +1070,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   7455
       Left            =   0
-      TabIndex        =   190
+      TabIndex        =   182
       Top             =   0
       Visible         =   0   'False
       Width           =   11415
@@ -1240,7 +1088,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   3
          Left            =   5520
-         TabIndex        =   201
+         TabIndex        =   193
          Top             =   3480
          Width           =   375
       End
@@ -1258,7 +1106,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   2
          Left            =   5520
-         TabIndex        =   200
+         TabIndex        =   192
          Top             =   3000
          Width           =   375
       End
@@ -1276,7 +1124,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   1
          Left            =   5520
-         TabIndex        =   199
+         TabIndex        =   191
          Top             =   1920
          Width           =   375
       End
@@ -1294,7 +1142,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   0
          Left            =   5520
-         TabIndex        =   196
+         TabIndex        =   188
          Top             =   1440
          Width           =   375
       End
@@ -1303,7 +1151,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   1
          Left            =   9840
-         TabIndex        =   194
+         TabIndex        =   186
          Top             =   6840
          Width           =   1335
       End
@@ -1311,7 +1159,7 @@ Begin VB.Form frmMensajes
          Height          =   5775
          Index           =   0
          Left            =   210
-         TabIndex        =   192
+         TabIndex        =   184
          Top             =   840
          Width           =   4935
          _ExtentX        =   8705
@@ -1353,7 +1201,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   0
          Left            =   8400
-         TabIndex        =   191
+         TabIndex        =   183
          Top             =   6840
          Width           =   1335
       End
@@ -1361,7 +1209,7 @@ Begin VB.Form frmMensajes
          Height          =   5775
          Index           =   1
          Left            =   6240
-         TabIndex        =   193
+         TabIndex        =   185
          Top             =   840
          Width           =   4935
          _ExtentX        =   8705
@@ -1413,7 +1261,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   1
          Left            =   10050
-         TabIndex        =   198
+         TabIndex        =   190
          Top             =   600
          Width           =   1125
       End
@@ -1431,7 +1279,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   197
+         TabIndex        =   189
          Top             =   600
          Width           =   1095
       End
@@ -1450,7 +1298,7 @@ Begin VB.Form frmMensajes
          Height          =   495
          Index           =   2
          Left            =   2880
-         TabIndex        =   195
+         TabIndex        =   187
          Top             =   240
          Width           =   5295
       End
@@ -1458,21 +1306,21 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameCobros 
       Height          =   6720
       Left            =   0
-      TabIndex        =   233
+      TabIndex        =   225
       Top             =   -30
       Width           =   13410
       Begin VB.CommandButton CmdSalir 
          Caption         =   "Salir"
          Height          =   375
          Left            =   12000
-         TabIndex        =   234
+         TabIndex        =   226
          Top             =   6000
          Width           =   1215
       End
       Begin MSComctlLib.ListView ListView5 
          Height          =   4905
          Left            =   225
-         TabIndex        =   235
+         TabIndex        =   227
          Top             =   1005
          Width           =   13035
          _ExtentX        =   22992
@@ -1510,7 +1358,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   236
+         TabIndex        =   228
          Top             =   390
          Width           =   10185
       End
@@ -1528,7 +1376,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   5535
       Left            =   0
-      TabIndex        =   246
+      TabIndex        =   238
       Top             =   0
       Width           =   9795
       Begin VB.CommandButton Command1 
@@ -1536,7 +1384,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   3
          Left            =   8370
-         TabIndex        =   247
+         TabIndex        =   239
          Top             =   4770
          Width           =   1095
       End
@@ -1553,15 +1401,15 @@ Begin VB.Form frmMensajes
          BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
             NumListImages   =   3
             BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":1E12
+               Picture         =   "frmMensajes.frx":0A0E
                Key             =   ""
             EndProperty
             BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":7604
+               Picture         =   "frmMensajes.frx":6200
                Key             =   ""
             EndProperty
             BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":8016
+               Picture         =   "frmMensajes.frx":6C12
                Key             =   ""
             EndProperty
          EndProperty
@@ -1569,7 +1417,7 @@ Begin VB.Form frmMensajes
       Begin MSComctlLib.ListView ListView9 
          Height          =   3735
          Left            =   180
-         TabIndex        =   248
+         TabIndex        =   240
          Top             =   840
          Width           =   9315
          _ExtentX        =   16431
@@ -1632,7 +1480,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   405
          Left            =   210
-         TabIndex        =   249
+         TabIndex        =   241
          Top             =   240
          Width           =   9195
       End
@@ -1650,7 +1498,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   5535
       Left            =   0
-      TabIndex        =   242
+      TabIndex        =   234
       Top             =   0
       Width           =   8865
       Begin VB.CommandButton Command1 
@@ -1658,7 +1506,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   2
          Left            =   7620
-         TabIndex        =   244
+         TabIndex        =   236
          Top             =   4800
          Width           =   1095
       End
@@ -1675,15 +1523,15 @@ Begin VB.Form frmMensajes
          BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
             NumListImages   =   3
             BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":8468
+               Picture         =   "frmMensajes.frx":7064
                Key             =   ""
             EndProperty
             BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":DC5A
+               Picture         =   "frmMensajes.frx":C856
                Key             =   ""
             EndProperty
             BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":E66C
+               Picture         =   "frmMensajes.frx":D268
                Key             =   ""
             EndProperty
          EndProperty
@@ -1691,7 +1539,7 @@ Begin VB.Form frmMensajes
       Begin MSComctlLib.ProgressBar ProgressBar2 
          Height          =   375
          Left            =   120
-         TabIndex        =   243
+         TabIndex        =   235
          Top             =   4800
          Visible         =   0   'False
          Width           =   3615
@@ -1703,7 +1551,7 @@ Begin VB.Form frmMensajes
       Begin MSComctlLib.ListView ListView8 
          Height          =   3735
          Left            =   120
-         TabIndex        =   245
+         TabIndex        =   237
          Top             =   840
          Width           =   8625
          _ExtentX        =   15214
@@ -1782,15 +1630,15 @@ Begin VB.Form frmMensajes
          BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
             NumListImages   =   3
             BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":EABE
+               Picture         =   "frmMensajes.frx":D6BA
                Key             =   ""
             EndProperty
             BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":142B0
+               Picture         =   "frmMensajes.frx":12EAC
                Key             =   ""
             EndProperty
             BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":14CC2
+               Picture         =   "frmMensajes.frx":138BE
                Key             =   ""
             EndProperty
          EndProperty
@@ -1917,14 +1765,14 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameRecibos 
       Height          =   6720
       Left            =   0
-      TabIndex        =   255
+      TabIndex        =   247
       Top             =   0
       Width           =   8670
       Begin VB.CommandButton CmdAcepRecibos 
          Caption         =   "Continuar"
          Height          =   375
          Left            =   5160
-         TabIndex        =   257
+         TabIndex        =   249
          Top             =   6060
          Width           =   1455
       End
@@ -1932,14 +1780,14 @@ Begin VB.Form frmMensajes
          Caption         =   "Cancelar"
          Height          =   375
          Left            =   6750
-         TabIndex        =   256
+         TabIndex        =   248
          Top             =   6060
          Width           =   1365
       End
       Begin MSComctlLib.ListView ListView11 
          Height          =   4905
          Left            =   225
-         TabIndex        =   258
+         TabIndex        =   250
          Top             =   1005
          Width           =   8025
          _ExtentX        =   14155
@@ -1978,7 +1826,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   259
+         TabIndex        =   251
          Top             =   390
          Width           =   8025
       End
@@ -1986,14 +1834,14 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameBancosRemesas 
       Height          =   6720
       Left            =   0
-      TabIndex        =   250
+      TabIndex        =   242
       Top             =   0
       Width           =   8670
       Begin VB.CommandButton CmdCancelBancoRem 
          Caption         =   "Cancelar"
          Height          =   375
          Left            =   6750
-         TabIndex        =   252
+         TabIndex        =   244
          Top             =   6060
          Width           =   1365
       End
@@ -2001,14 +1849,14 @@ Begin VB.Form frmMensajes
          Caption         =   "Aceptar"
          Height          =   375
          Left            =   5160
-         TabIndex        =   251
+         TabIndex        =   243
          Top             =   6060
          Width           =   1455
       End
       Begin MSComctlLib.ListView ListView10 
          Height          =   4905
          Left            =   225
-         TabIndex        =   253
+         TabIndex        =   245
          Top             =   1005
          Width           =   8025
          _ExtentX        =   14155
@@ -2038,7 +1886,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   5
          Left            =   7620
-         Picture         =   "frmMensajes.frx":15114
+         Picture         =   "frmMensajes.frx":13D10
          ToolTipText     =   "Quitar al Debe"
          Top             =   720
          Width           =   240
@@ -2047,7 +1895,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   4
          Left            =   7980
-         Picture         =   "frmMensajes.frx":1525E
+         Picture         =   "frmMensajes.frx":13E5A
          ToolTipText     =   "Puntear al Debe"
          Top             =   720
          Width           =   240
@@ -2066,7 +1914,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   254
+         TabIndex        =   246
          Top             =   390
          Width           =   8025
       End
@@ -2074,14 +1922,14 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameAsientoLiquida 
       Height          =   6720
       Left            =   0
-      TabIndex        =   237
+      TabIndex        =   229
       Top             =   0
       Width           =   12270
       Begin VB.CommandButton CmdContabilizar 
          Caption         =   "Contabilizar"
          Height          =   375
          Left            =   9060
-         TabIndex        =   241
+         TabIndex        =   233
          Top             =   6000
          Width           =   1455
       End
@@ -2089,14 +1937,14 @@ Begin VB.Form frmMensajes
          Caption         =   "Salir"
          Height          =   375
          Left            =   10650
-         TabIndex        =   238
+         TabIndex        =   230
          Top             =   6000
          Width           =   1365
       End
       Begin MSComctlLib.ListView ListView7 
          Height          =   4905
          Left            =   225
-         TabIndex        =   239
+         TabIndex        =   231
          Top             =   1005
          Width           =   11835
          _ExtentX        =   20876
@@ -2134,7 +1982,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   240
+         TabIndex        =   232
          Top             =   390
          Width           =   10185
       End
@@ -2158,7 +2006,7 @@ Begin VB.Form frmMensajes
          Caption         =   "Se resta "
          Height          =   255
          Left            =   1650
-         TabIndex        =   155
+         TabIndex        =   147
          Top             =   2640
          Width           =   2535
       End
@@ -2228,7 +2076,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image Image3 
          Height          =   240
          Left            =   1290
-         Picture         =   "frmMensajes.frx":153A8
+         Picture         =   "frmMensajes.frx":13FA4
          Top             =   1920
          Width           =   240
       End
@@ -2422,21 +2270,21 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameShowProcess 
       Height          =   6720
       Left            =   0
-      TabIndex        =   229
+      TabIndex        =   221
       Top             =   0
       Width           =   10950
       Begin VB.CommandButton CmdRegresar 
          Caption         =   "Salir"
          Height          =   375
          Left            =   9240
-         TabIndex        =   230
+         TabIndex        =   222
          Top             =   6120
          Width           =   1215
       End
       Begin MSComctlLib.ListView ListView4 
          Height          =   4905
          Left            =   225
-         TabIndex        =   231
+         TabIndex        =   223
          Top             =   1005
          Width           =   10395
          _ExtentX        =   18336
@@ -2474,7 +2322,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   255
          Left            =   240
-         TabIndex        =   232
+         TabIndex        =   224
          Top             =   390
          Width           =   10185
       End
@@ -2482,21 +2330,21 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameInformeBBDD 
       Height          =   6720
       Left            =   0
-      TabIndex        =   219
+      TabIndex        =   211
       Top             =   0
       Width           =   10950
       Begin VB.CommandButton cmdCancel 
          Caption         =   "Salir"
          Height          =   375
          Left            =   9240
-         TabIndex        =   220
+         TabIndex        =   212
          Top             =   6120
          Width           =   1215
       End
       Begin MSComctlLib.ListView ListView3 
          Height          =   4905
          Left            =   225
-         TabIndex        =   221
+         TabIndex        =   213
          Top             =   1005
          Width           =   10395
          _ExtentX        =   18336
@@ -2535,7 +2383,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   285
          Left            =   8370
-         TabIndex        =   228
+         TabIndex        =   220
          Top             =   660
          Width           =   795
       End
@@ -2553,7 +2401,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   285
          Left            =   9240
-         TabIndex        =   227
+         TabIndex        =   219
          Top             =   660
          Width           =   1005
       End
@@ -2571,7 +2419,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   285
          Left            =   5040
-         TabIndex        =   226
+         TabIndex        =   218
          Top             =   660
          Width           =   795
       End
@@ -2589,7 +2437,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   285
          Left            =   5910
-         TabIndex        =   225
+         TabIndex        =   217
          Top             =   660
          Width           =   1005
       End
@@ -2607,7 +2455,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   285
          Left            =   6960
-         TabIndex        =   224
+         TabIndex        =   216
          Top             =   300
          Width           =   3435
       End
@@ -2625,7 +2473,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   285
          Left            =   3210
-         TabIndex        =   223
+         TabIndex        =   215
          Top             =   300
          Width           =   3705
       End
@@ -2633,7 +2481,7 @@ Begin VB.Form frmMensajes
          Caption         =   "Concepto"
          Height          =   255
          Left            =   270
-         TabIndex        =   222
+         TabIndex        =   214
          Top             =   660
          Width           =   2355
       End
@@ -2641,14 +2489,14 @@ Begin VB.Form frmMensajes
    Begin VB.Frame FrameIconosVisibles 
       Height          =   6720
       Left            =   0
-      TabIndex        =   214
+      TabIndex        =   206
       Top             =   -60
       Width           =   7050
       Begin VB.CommandButton cmdAcepIconos 
          Caption         =   "Aceptar"
          Height          =   375
          Left            =   4080
-         TabIndex        =   217
+         TabIndex        =   209
          Top             =   6060
          Width           =   1215
       End
@@ -2656,14 +2504,14 @@ Begin VB.Form frmMensajes
          Caption         =   "Cancelar"
          Height          =   375
          Left            =   5520
-         TabIndex        =   216
+         TabIndex        =   208
          Top             =   6060
          Width           =   1215
       End
       Begin MSComctlLib.ListView ListView6 
          Height          =   5235
          Left            =   225
-         TabIndex        =   215
+         TabIndex        =   207
          Top             =   675
          Width           =   6525
          _ExtentX        =   11509
@@ -2713,7 +2561,7 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   270
-         TabIndex        =   218
+         TabIndex        =   210
          Top             =   270
          Width           =   5145
       End
@@ -2721,7 +2569,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   6480
-         Picture         =   "frmMensajes.frx":15DAA
+         Picture         =   "frmMensajes.frx":149A6
          Top             =   330
          Width           =   240
       End
@@ -2729,7 +2577,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   6120
-         Picture         =   "frmMensajes.frx":15EF4
+         Picture         =   "frmMensajes.frx":14AF0
          Top             =   330
          Width           =   240
       End
@@ -2746,7 +2594,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   3795
       Left            =   30
-      TabIndex        =   157
+      TabIndex        =   149
       Top             =   0
       Width           =   6495
       Begin VB.TextBox txtImporteP 
@@ -2756,7 +2604,7 @@ Begin VB.Form frmMensajes
          Index           =   8
          Left            =   4380
          Locked          =   -1  'True
-         TabIndex        =   173
+         TabIndex        =   165
          Text            =   "Text9"
          Top             =   2160
          Width           =   1695
@@ -2768,7 +2616,7 @@ Begin VB.Form frmMensajes
          Index           =   7
          Left            =   2730
          Locked          =   -1  'True
-         TabIndex        =   172
+         TabIndex        =   164
          Text            =   "Text9"
          Top             =   2160
          Width           =   1575
@@ -2780,7 +2628,7 @@ Begin VB.Form frmMensajes
          Index           =   6
          Left            =   810
          Locked          =   -1  'True
-         TabIndex        =   171
+         TabIndex        =   163
          Text            =   "Text9"
          Top             =   2160
          Width           =   1755
@@ -2792,7 +2640,7 @@ Begin VB.Form frmMensajes
          Index           =   5
          Left            =   4380
          Locked          =   -1  'True
-         TabIndex        =   168
+         TabIndex        =   160
          Text            =   "Text9"
          Top             =   1680
          Width           =   1695
@@ -2804,7 +2652,7 @@ Begin VB.Form frmMensajes
          Index           =   4
          Left            =   2730
          Locked          =   -1  'True
-         TabIndex        =   167
+         TabIndex        =   159
          Text            =   "Text9"
          Top             =   1680
          Width           =   1575
@@ -2816,7 +2664,7 @@ Begin VB.Form frmMensajes
          Index           =   3
          Left            =   810
          Locked          =   -1  'True
-         TabIndex        =   166
+         TabIndex        =   158
          Text            =   "Text9"
          Top             =   1680
          Width           =   1755
@@ -2828,7 +2676,7 @@ Begin VB.Form frmMensajes
          Index           =   2
          Left            =   4380
          Locked          =   -1  'True
-         TabIndex        =   165
+         TabIndex        =   157
          Text            =   "Text9"
          Top             =   1200
          Width           =   1695
@@ -2840,7 +2688,7 @@ Begin VB.Form frmMensajes
          Index           =   1
          Left            =   2730
          Locked          =   -1  'True
-         TabIndex        =   164
+         TabIndex        =   156
          Text            =   "Text9"
          Top             =   1200
          Width           =   1575
@@ -2852,7 +2700,7 @@ Begin VB.Form frmMensajes
          Index           =   0
          Left            =   810
          Locked          =   -1  'True
-         TabIndex        =   163
+         TabIndex        =   155
          Text            =   "Text9"
          Top             =   1200
          Width           =   1755
@@ -2861,7 +2709,7 @@ Begin VB.Form frmMensajes
          Caption         =   "Cerrar"
          Height          =   375
          Left            =   4950
-         TabIndex        =   158
+         TabIndex        =   150
          Top             =   2880
          Width           =   1095
       End
@@ -2878,7 +2726,7 @@ Begin VB.Form frmMensajes
          Height          =   195
          Index           =   15
          Left            =   120
-         TabIndex        =   170
+         TabIndex        =   162
          Top             =   1680
          Width           =   930
       End
@@ -2888,7 +2736,7 @@ Begin VB.Form frmMensajes
          Height          =   195
          Index           =   14
          Left            =   120
-         TabIndex        =   169
+         TabIndex        =   161
          Top             =   1200
          Width           =   930
       End
@@ -2898,7 +2746,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   13
          Left            =   5490
-         TabIndex        =   162
+         TabIndex        =   154
          Top             =   840
          Width           =   510
       End
@@ -2908,7 +2756,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   12
          Left            =   2730
-         TabIndex        =   161
+         TabIndex        =   153
          Top             =   840
          Width           =   1140
       End
@@ -2917,7 +2765,7 @@ Begin VB.Form frmMensajes
          Height          =   195
          Index           =   11
          Left            =   810
-         TabIndex        =   160
+         TabIndex        =   152
          Top             =   840
          Width           =   930
       End
@@ -2936,7 +2784,7 @@ Begin VB.Form frmMensajes
          Height          =   435
          Index           =   1
          Left            =   120
-         TabIndex        =   159
+         TabIndex        =   151
          Top             =   240
          Width           =   3615
       End
@@ -2970,7 +2818,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   495
          Left            =   120
-         TabIndex        =   125
+         TabIndex        =   118
          Top             =   3330
          Width           =   5625
          Begin VB.TextBox txtsaldo 
@@ -2979,7 +2827,7 @@ Begin VB.Form frmMensajes
             Index           =   9
             Left            =   3780
             Locked          =   -1  'True
-            TabIndex        =   127
+            TabIndex        =   120
             Text            =   "Text1"
             Top             =   120
             Width           =   1815
@@ -2990,7 +2838,7 @@ Begin VB.Form frmMensajes
             Index           =   8
             Left            =   1860
             Locked          =   -1  'True
-            TabIndex        =   126
+            TabIndex        =   119
             Text            =   "Text1"
             Top             =   120
             Width           =   1815
@@ -3010,7 +2858,7 @@ Begin VB.Form frmMensajes
             Height          =   255
             Index           =   1
             Left            =   0
-            TabIndex        =   128
+            TabIndex        =   121
             Top             =   120
             Width           =   1755
          End
@@ -3021,7 +2869,7 @@ Begin VB.Form frmMensajes
          Index           =   7
          Left            =   1980
          Locked          =   -1  'True
-         TabIndex        =   123
+         TabIndex        =   116
          Text            =   "Text1"
          Top             =   2970
          Width           =   1815
@@ -3032,7 +2880,7 @@ Begin VB.Form frmMensajes
          Index           =   6
          Left            =   3900
          Locked          =   -1  'True
-         TabIndex        =   122
+         TabIndex        =   115
          Text            =   "Text1"
          Top             =   2970
          Width           =   1815
@@ -3116,7 +2964,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   5820
-         Picture         =   "frmMensajes.frx":1603E
+         Picture         =   "frmMensajes.frx":14C3A
          Top             =   1605
          Width           =   240
       End
@@ -3124,7 +2972,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   5820
-         Picture         =   "frmMensajes.frx":16A40
+         Picture         =   "frmMensajes.frx":1563C
          Top             =   2070
          Width           =   240
       End
@@ -3140,7 +2988,7 @@ Begin VB.Form frmMensajes
          Height          =   255
          Index           =   0
          Left            =   120
-         TabIndex        =   124
+         TabIndex        =   117
          Top             =   2970
          Width           =   1335
       End
@@ -3233,7 +3081,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   6105
       Left            =   0
-      TabIndex        =   184
+      TabIndex        =   176
       Top             =   0
       Width           =   9375
       Begin VB.TextBox Text1 
@@ -3242,9 +3090,9 @@ Begin VB.Form frmMensajes
          Left            =   1440
          Locked          =   -1  'True
          MultiLine       =   -1  'True
-         TabIndex        =   189
+         TabIndex        =   181
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":17442
+         Text            =   "frmMensajes.frx":1603E
          Top             =   720
          Width           =   7665
       End
@@ -3254,9 +3102,9 @@ Begin VB.Form frmMensajes
          Left            =   360
          Locked          =   -1  'True
          MultiLine       =   -1  'True
-         TabIndex        =   188
+         TabIndex        =   180
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":17448
+         Text            =   "frmMensajes.frx":16044
          Top             =   720
          Width           =   1005
       End
@@ -3264,7 +3112,7 @@ Begin VB.Form frmMensajes
          Caption         =   "Cerrar"
          Height          =   375
          Left            =   7920
-         TabIndex        =   187
+         TabIndex        =   179
          Top             =   5460
          Width           =   1215
       End
@@ -3275,9 +3123,9 @@ Begin VB.Form frmMensajes
          Locked          =   -1  'True
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   185
+         TabIndex        =   177
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":1744E
+         Text            =   "frmMensajes.frx":1604A
          Top             =   1320
          Width           =   8775
       End
@@ -3296,7 +3144,7 @@ Begin VB.Form frmMensajes
          Height          =   225
          Index           =   19
          Left            =   360
-         TabIndex        =   186
+         TabIndex        =   178
          Top             =   360
          Width           =   5010
       End
@@ -3313,7 +3161,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   3375
       Left            =   0
-      TabIndex        =   174
+      TabIndex        =   166
       Top             =   0
       Width           =   7455
       Begin VB.TextBox Text9 
@@ -3330,7 +3178,7 @@ Begin VB.Form frmMensajes
          Index           =   2
          Left            =   5040
          MaxLength       =   1
-         TabIndex        =   181
+         TabIndex        =   173
          Text            =   "G"
          Top             =   2097
          Width           =   375
@@ -3349,7 +3197,7 @@ Begin VB.Form frmMensajes
          Index           =   1
          Left            =   1920
          MaxLength       =   1
-         TabIndex        =   180
+         TabIndex        =   172
          Text            =   "F"
          Top             =   2097
          Width           =   375
@@ -3367,7 +3215,7 @@ Begin VB.Form frmMensajes
          Height          =   320
          Index           =   0
          Left            =   240
-         TabIndex        =   179
+         TabIndex        =   171
          Top             =   1320
          Width           =   6735
       End
@@ -3385,7 +3233,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   1
          Left            =   5880
-         TabIndex        =   176
+         TabIndex        =   168
          Top             =   2760
          Width           =   1215
       End
@@ -3403,7 +3251,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   0
          Left            =   4560
-         TabIndex        =   175
+         TabIndex        =   167
          Top             =   2760
          Width           =   1215
       End
@@ -3422,7 +3270,7 @@ Begin VB.Form frmMensajes
          Height          =   195
          Index           =   18
          Left            =   2880
-         TabIndex        =   183
+         TabIndex        =   175
          Top             =   2160
          Width           =   2130
       End
@@ -3440,7 +3288,7 @@ Begin VB.Form frmMensajes
          Height          =   195
          Index           =   17
          Left            =   240
-         TabIndex        =   182
+         TabIndex        =   174
          Top             =   2160
          Width           =   1530
       End
@@ -3448,7 +3296,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   960
-         Picture         =   "frmMensajes.frx":17454
+         Picture         =   "frmMensajes.frx":16050
          Top             =   1080
          Width           =   240
       End
@@ -3466,7 +3314,7 @@ Begin VB.Form frmMensajes
          Height          =   195
          Index           =   16
          Left            =   240
-         TabIndex        =   178
+         TabIndex        =   170
          Top             =   1080
          Width           =   930
       End
@@ -3485,7 +3333,7 @@ Begin VB.Form frmMensajes
          Height          =   435
          Index           =   2
          Left            =   240
-         TabIndex        =   177
+         TabIndex        =   169
          Top             =   360
          Width           =   6495
       End
@@ -3522,7 +3370,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          TabIndex        =   88
          Tag             =   "#Despedida"
-         Text            =   "frmMensajes.frx":17E56
+         Text            =   "frmMensajes.frx":16A52
          Top             =   4860
          Width           =   3075
       End
@@ -3584,7 +3432,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   86
          Tag             =   "#Parrafo4"
-         Text            =   "frmMensajes.frx":17E5C
+         Text            =   "frmMensajes.frx":16A58
          Top             =   4860
          Width           =   3135
       End
@@ -3606,7 +3454,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   87
          Tag             =   "#Parrafo5"
-         Text            =   "frmMensajes.frx":17E62
+         Text            =   "frmMensajes.frx":16A5E
          Top             =   4860
          Width           =   3135
       End
@@ -3628,7 +3476,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   85
          Tag             =   "#Parrafo3"
-         Text            =   "frmMensajes.frx":17E68
+         Text            =   "frmMensajes.frx":16A64
          Top             =   2580
          Width           =   3135
       End
@@ -3650,7 +3498,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   84
          Tag             =   "#Parrafo2"
-         Text            =   "frmMensajes.frx":17F65
+         Text            =   "frmMensajes.frx":16B61
          Top             =   2580
          Width           =   3135
       End
@@ -3672,7 +3520,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   83
          Tag             =   "#Parrafo1"
-         Text            =   "frmMensajes.frx":17F6B
+         Text            =   "frmMensajes.frx":16B67
          Top             =   2580
          Width           =   3135
       End
@@ -3928,7 +3776,7 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   4455
       Left            =   0
-      TabIndex        =   205
+      TabIndex        =   197
       Top             =   0
       Width           =   6375
       Begin VB.CommandButton CmdAyuda2 
@@ -3944,7 +3792,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Left            =   1290
-         TabIndex        =   207
+         TabIndex        =   199
          Top             =   0
          Width           =   1365
       End
@@ -3961,7 +3809,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Left            =   0
-         TabIndex        =   206
+         TabIndex        =   198
          Top             =   0
          Width           =   1275
       End
@@ -3980,7 +3828,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   3555
          Left            =   0
-         TabIndex        =   208
+         TabIndex        =   200
          Top             =   390
          Width           =   6225
          Begin VB.TextBox Text10 
@@ -3992,8 +3840,8 @@ Begin VB.Form frmMensajes
             Left            =   330
             Locked          =   -1  'True
             MultiLine       =   -1  'True
-            TabIndex        =   210
-            Text            =   "frmMensajes.frx":17F71
+            TabIndex        =   202
+            Text            =   "frmMensajes.frx":16B6D
             Top             =   840
             Width           =   6015
          End
@@ -4012,7 +3860,7 @@ Begin VB.Form frmMensajes
             ForeColor       =   &H00800000&
             Height          =   405
             Left            =   330
-            TabIndex        =   209
+            TabIndex        =   201
             Top             =   270
             Width           =   5865
          End
@@ -4032,7 +3880,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   3555
          Left            =   0
-         TabIndex        =   211
+         TabIndex        =   203
          Top             =   420
          Width           =   6225
          Begin VB.TextBox Text11 
@@ -4045,7 +3893,7 @@ Begin VB.Form frmMensajes
             Locked          =   -1  'True
             MultiLine       =   -1  'True
             ScrollBars      =   2  'Vertical
-            TabIndex        =   213
+            TabIndex        =   205
             Top             =   750
             Width           =   5715
          End
@@ -4064,7 +3912,7 @@ Begin VB.Form frmMensajes
             ForeColor       =   &H00800000&
             Height          =   405
             Left            =   330
-            TabIndex        =   212
+            TabIndex        =   204
             Top             =   270
             Width           =   5805
          End
@@ -4110,7 +3958,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   103
-         Text            =   "frmMensajes.frx":17FE4
+         Text            =   "frmMensajes.frx":16BE0
          Top             =   900
          Width           =   4365
       End
@@ -4121,7 +3969,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   102
-         Text            =   "frmMensajes.frx":17FEA
+         Text            =   "frmMensajes.frx":16BE6
          Top             =   900
          Width           =   4125
       End
@@ -4341,14 +4189,14 @@ Begin VB.Form frmMensajes
       EndProperty
       Height          =   4935
       Left            =   240
-      TabIndex        =   202
+      TabIndex        =   194
       Top             =   0
       Visible         =   0   'False
       Width           =   5775
       Begin MSComctlLib.TreeView TreeView1 
          Height          =   4215
          Left            =   120
-         TabIndex        =   203
+         TabIndex        =   195
          Top             =   600
          Width           =   4575
          _ExtentX        =   8070
@@ -4374,7 +4222,7 @@ Begin VB.Form frmMensajes
          Height          =   375
          Index           =   1
          Left            =   120
-         TabIndex        =   204
+         TabIndex        =   196
          Top             =   240
          Width           =   4935
       End
@@ -4382,7 +4230,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   4920
-         Picture         =   "frmMensajes.frx":17FF0
+         Picture         =   "frmMensajes.frx":16BEC
          ToolTipText     =   "Quitar seleccion"
          Top             =   720
          Width           =   240
@@ -4391,7 +4239,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   4920
-         Picture         =   "frmMensajes.frx":1813A
+         Picture         =   "frmMensajes.frx":16D36
          ToolTipText     =   "Todos"
          Top             =   1080
          Width           =   240
@@ -4505,7 +4353,6 @@ Public Opcion As Byte
     '11- Carta modelo 347
     '12- Asientos con saltos y/o repetidos
     
-    '13- Importar datos fiscales de las cuentas
     
     '15- Cambio Password
     
@@ -4978,51 +4825,6 @@ Private Sub cmdEmpresa_Click(Index As Integer)
     Unload Me
 End Sub
 
-Private Sub cmdImpCta_Click(Index As Integer)
-Dim cad As String
-
-    If Index = 1 Then
-        Unload Me
-        Exit Sub
-    End If
-
-    txtImpCta.Text = Trim(txtImpCta.Text)
-    
-    If txtImpCta.Text = "" Then Exit Sub
-    
-    If Dir(txtImpCta.Text) = "" Then
-        MsgBox "El fichero: " & txtImpCta.Text & " NO existe.", vbExclamation
-        Exit Sub
-    End If
-    
-    cad = "Seguro que desa continuar con la importación de los datos fiscales?"
-    If MsgBox(cad, vbQuestion + vbYesNoCancel + vbDefaultButton2) <> vbYes Then Exit Sub
-    
-    Screen.MousePointer = vbHourglass
-    'Ya esta preparado comprobemos k podemos abrir la conexion
-
-        lblimpCta2.Caption = "Lineas"
-        lblImpCta.Caption = "0"
-        Errores = ""
-        NE = 0
-        Ok = 0
-        Me.Refresh
-        CadenaDesdeOtroForm = ""
-        'La contabilidad existe
-        HacerImportacion
-        'Si hay errores
-        If NE > 0 Then
-            Errores = Ok & " lineas pasadas con exito." & vbCrLf & vbCrLf & Errores
-            ImprimeFichero
-        Else
-            MsgBox Ok & " lineas pasadas con exito", vbInformation
-        End If
-        CadenaDesdeOtroForm = ""
-    Screen.MousePointer = vbDefault
-    lblimpCta2.Caption = ""
-    lblImpCta.Caption = ""
-End Sub
-
 Private Sub cmdImportarFacuras_Click(Index As Integer)
     If Index = 1 Then
         Unload Me
@@ -5195,14 +4997,13 @@ Dim W, H
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.FrameAmort.Visible = False
+    Me.frameamort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
     Me.FrameCarta347.Visible = False
     Me.frameSaltos.Visible = False
     frameBalance.Visible = False
-    FrameImpCta.Visible = False
     Me.FrameCambioPWD.Visible = False
     framaLlevarFacturas.Visible = False
     Me.FrameImpPunteo.Visible = False
@@ -5238,9 +5039,9 @@ Dim W, H
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.FrameAmort.Width
-        H = Me.FrameAmort.Height + 200
-        Me.FrameAmort.Visible = True
+        W = Me.frameamort.Width
+        H = Me.frameamort.Height + 200
+        Me.frameamort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
@@ -5297,15 +5098,6 @@ Dim W, H
         Text5.Text = ""
         Text6.Text = ""
         cmdCabError(1).Cancel = True
-    Case 13
-        Me.Caption = "Importar datos fiscales de las cuentas"
-        W = Me.FrameImpCta.Width
-        H = Me.FrameImpCta.Height + 450
-        Me.FrameImpCta.Visible = True
-        cmdImpCta(1).Cancel = True
-        txtImpCta.Text = ""
-        Me.lblImpCta.Caption = ""
-        Me.lblimpCta2.Caption = ""
     Case 15
         'Cambio password usuario
         Me.Caption = "Cambio password"
@@ -5658,7 +5450,7 @@ Private Sub Image4_Click(Index As Integer)
         Case 20
             Text9(0).Text = .FileName
         Case Else
-            txtImpCta.Text = .FileName
+        
         End Select
     End With
     
@@ -5675,29 +5467,6 @@ Private Sub Image6_Click(Index As Integer)
     MsgBox Image6(Index).ToolTipText, vbInformation
 End Sub
 
-Private Sub ImageAyudaImpcta_Click()
-    'Ejemplo
-    '43000001|SECUVE, S.L.|RIU VERT  N§ 7|46600|ALZIRA|VALENCIA|B97301808|
-    SQL = "Formato para la importación de datos fiscales. " & vbCrLf & vbCrLf & vbCrLf
-    SQL = SQL & "El fichero vendrá con cada campo separados por PIPES." & vbCrLf
-    SQL = SQL & "Codigo cta contable |" & vbCrLf
-    SQL = SQL & "Descripcion |" & vbCrLf
-    SQL = SQL & "Direccion |" & vbCrLf
-    SQL = SQL & "Cod. Postal |" & vbCrLf
-    SQL = SQL & "Poblacion |" & vbCrLf
-    SQL = SQL & "Provincia |" & vbCrLf
-    SQL = SQL & "NIF|" & vbCrLf
-    SQL = SQL & "Cta bancaria:   ENTIDAD|" & vbCrLf
-    SQL = SQL & "Cta bancaria:   OFICINA|" & vbCrLf
-    SQL = SQL & "Cta bancaria:   CC|" & vbCrLf
-    SQL = SQL & "Cta bancaria:   CUENTA|" & vbCrLf
-    SQL = SQL & "347:    0.- No    1.- Si|" & vbCrLf
-    'Enero 2009
-    SQL = SQL & "Forma pago|" & vbCrLf
-    SQL = SQL & "Cta banco tesoreria|" & vbCrLf
-    ' forpa y
-    MsgBox SQL, vbInformation
-End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
     For NE = 1 To TreeView1.Nodes.Count
@@ -6031,226 +5800,6 @@ Dim cerrar As Boolean
     KEYpressGnral KeyAscii, 0, cerrar
     If cerrar Then Unload Me
 End Sub
-
-
-
-
-
-'------------- IMportar datos fiscales
-
-
-Private Sub HacerImportacion()
-Dim NF As Integer
-Dim Linea As String
-
-    On Error GoTo EHacere
-    
-
-
-    'Abrimos el fichero
-    NF = FreeFile
-    Open txtImpCta.Text For Input As #NF
-    
-  
-    
-    'Vamos linea a linea
-    While Not EOF(NF)
-        Line Input #NF, Linea
-        Linea = Trim(Linea)
-        If Linea <> "" Then
-            If ProcesarLinea(Linea) Then Ok = Ok + 1
-        End If
-        lblImpCta.Caption = CStr(NE + Ok)
-        lblImpCta.Refresh
-    Wend
-    
-    'Cerramos
-    Close (NF)
-    
-    Exit Sub
-EHacere:
-    MsgBox Err.Description, vbExclamation
-End Sub
-
-
-
-
-
-Private Function ProcesarLinea(Linea As String) As Boolean
-'Dim Valores(6) As String
-Dim Valores(13) As String    'ENero 2009. Dos campos msa. Total camppos=14. Vector(13)
-Dim I As Integer
-Dim cad As String
-Dim Crear As Boolean
-
-    On Error GoTo EProcesarLinea
-    ProcesarLinea = False
-    
-    
-    'Orden en el k llegan
-    For I = 0 To 13
-        Valores(I) = RecuperaValor(Linea, I + 1)
-    Next I
-    
-    'TRIM
-    For I = 0 To 13
-        Valores(I) = Trim(Valores(I))
-    Next I
-    
-    'Comprobaciones
-    '-----------------
-    If Valores(0) = "" Or Valores(1) = "" Or Valores(6) = "" Then
-        'Ni cta, ni nombre cta, ni NIF pueden ser nulos
-        AnyadeErrores "Valores nulos ", Linea
-        Exit Function
-    End If
-    
-    'Cuenta NO puede ser numerica
-    If Not IsNumeric(Valores(0)) Then
-        AnyadeErrores "Cuenta: " & Valores(0), "No Numerica"
-        Exit Function
-    End If
-    
-    
-    
-    For I = 7 To 10
-        If Valores(I) <> "" Then
-            If Not IsNumeric(Valores(I)) Then
-                AnyadeErrores "Cuenta bancaria", "CCC(" & I & "):   " & Valores(I)
-                Exit Function
-            End If
-        End If
-    Next I
-    
-    
-    'Enero 2009
-    'Si pone cta banco por defecto, comprobaremos que la lingitud es la correcta
-    If Valores(13) <> "" Then
-        If Len(Valores(13)) <> vEmpresa.DigitosUltimoNivel Then
-            AnyadeErrores "Longitud cta banco tesoreria distinto ultimo nivel", Valores(13)
-            Exit Function
-        End If
-    End If
-    'Vemos si existe
-    'Vemos si existe
-    Crear = False
-    If Not ExisteCuenta(Valores(0)) Then
-        If Me.chkCrear.Value = 0 Then
-            AnyadeErrores "Cuenta: " & Valores(0), "No existe"
-            Exit Function
-        Else
-            Crear = True
-        End If
-    End If
-    
-    'Controlamos valores de Multibase para los textos, y las ' para la insercion
-    For I = 1 To 5 'Sin NIF ni codmacta, 6 y 0 respectivamente
-        If I <> 3 Then
-            cad = RevisaCaracterMultibase(Valores(I))
-            NombreSQL cad
-            Valores(I) = cad
-        End If
-    Next I
-    
-    
-    
-    
-    '
-    
-    
-     If Crear Then
-        I = DigitosNivel(vEmpresa.numnivel - 1)
-        cad = Mid(Valores(0), 1, I)
-        If cad <> CadenaDesdeOtroForm Then
-            If Not CreaSubcuentas(Valores(0), I, "IMPORTACION AUTOMATICA") Then
-                AnyadeErrores "Cuenta: " & Valores(0), "GENERANDO SUBNIVELES"
-                Exit Function
-            End If
-            CadenaDesdeOtroForm = cad
-        End If
-    End If
-    
-    'Montamos el SQL
-        'Montamos el SQL
-    If Crear Then
-        cad = "INSERT INTO Cuentas (codmacta,nommacta,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,"
-        'NUEVO
-        cad = cad & "entidad,oficina,CC,cuentaba,"
-        cad = cad & "model347,apudirec,forpa ,ctabanco"
-        cad = cad & ") VALUES ("
-        cad = cad & "'" & Valores(0) & "',"
-        cad = cad & "'" & Valores(1) & "',"
-        cad = cad & "'" & Valores(1) & "',"
-        cad = cad & "'" & Valores(2) & "',"
-        cad = cad & "'" & Valores(3) & "',"
-        cad = cad & "'" & Valores(4) & "',"
-        cad = cad & "'" & Valores(5) & "',"
-        cad = cad & "'" & Valores(6) & "',"
-        For I = 7 To 10
-            If Valores(I) = "" Then
-                cad = cad & "NULL,"
-            Else
-                cad = cad & "'" & Valores(I) & "',"
-            End If
-        Next I
-        If Valores(11) = "1" Then
-            cad = cad & "1"
-        Else
-            cad = cad & "0"
-        End If
-        
-        cad = cad & ",'S'"
-        'Enerom2009
-        'forpa ,ctabanco
-        For I = 12 To 13
-            If Valores(I) = "" Then
-                cad = cad & ",NULL"
-            Else
-                cad = cad & ",'" & Valores(I) & "'"
-            End If
-        Next
-        
-        'Final
-        cad = cad & ")"
-    
-    Else
-        cad = "UPDATE Cuentas SET "
-        cad = cad & " nommacta = '" & Valores(1) & "',"
-        cad = cad & " razosoci = '" & Valores(1) & "',"
-        cad = cad & " dirdatos = '" & Valores(2) & "',"
-        cad = cad & " codposta = '" & Valores(3) & "',"
-        cad = cad & " despobla = '" & Valores(4) & "',"
-        cad = cad & " desprovi = '" & Valores(5) & "',"
-        cad = cad & " nifdatos = '" & Valores(6) & "',"
-        'model347
-        cad = cad & " model347 = "
-        If Valores(11) = "1" Then
-            cad = cad & "1"
-        Else
-            cad = cad & "0"
-        End If
-        
-        'CCC
-        cad = cad & ", entidad =" & ValorSQL(Valores(7))
-        cad = cad & ", oficina =" & ValorSQL(Valores(8))
-        cad = cad & ", CC =" & ValorSQL(Valores(9))
-        cad = cad & ", cuentaba =" & ValorSQL(Valores(10))
-            
-        'Enero 2009
-        cad = cad & ", forpa  =" & ValorSQL(Valores(12))
-        cad = cad & ", ctabanco =" & ValorSQL(Valores(13))
-            
-        cad = cad & " WHERE codmacta ='" & Valores(0) & "'"
-    End If
-   
-    If Not EjecutaSQL2(cad) Then Exit Function
-    ProcesarLinea = True
-    Exit Function
-EProcesarLinea:
-    AnyadeErrores "Linea: " & Linea, Err.Description
-    Err.Clear
-    
-End Function
 
 Private Function ValorSQL(ByRef C As String) As String
     If C = "" Then

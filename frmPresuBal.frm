@@ -758,12 +758,12 @@ Attribute frmCon.VB_VarHelpID = -1
 Private frmCtas As frmCtasAgrupadas
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
 Dim FechaIncioEjercicio As Date
 Dim FechaFinEjercicio As Date
@@ -851,8 +851,8 @@ Private Sub cmdAccion_Click(Index As Integer)
     RC = "Ejercicio: " & vFecIni & " " & vFecFin & RC
     CadenaDesdeOtroForm = ""
     
-    For Cont = 1 To 10
-        If Check1(Cont).Value = 1 Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "- " & Cont
+    For CONT = 1 To 10
+        If Check1(CONT).Value = 1 Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "- " & CONT
     Next
 
     RC = RC & " Digitos: " & Mid(CadenaDesdeOtroForm, 2)
@@ -864,9 +864,9 @@ Private Sub cmdAccion_Click(Index As Integer)
 
 
     RC = ""
-    For Cont = 1 To 9
-        If Check1(Cont).Value = 1 Then
-            If RC = "" Then RC = Cont
+    For CONT = 1 To 9
+        If Check1(CONT).Value = 1 Then
+            If RC = "" Then RC = CONT
         End If
     Next
     If RC = "" Then RC = "11"
@@ -909,7 +909,7 @@ End Sub
 Public Function GeneraBalancePresupuestario() As Boolean
 Dim Aux As String
 Dim Importe As Currency
-Dim AUX2 As String
+Dim aux2 As String
 Dim vMes  As Integer
 Dim Cta As String
 
@@ -917,39 +917,29 @@ On Error GoTo EGeneraBalancePresupuestario
 
     GeneraBalancePresupuestario = False
     
-'    If Me.chkPreMensual.Value = 0 Then
     If Me.cmbFecha(0).ListIndex = 0 Then
         Aux = "select codmacta,sum(imppresu)  from presupuestos "
         If SQL <> "" Then Aux = Aux & " where " & SQL
         Aux = Aux & " group by codmacta"
         
-'--      'Para el otro
-'        Cad = "Select SUM(impmesde),SUM(impmesha) from hsaldos where anopsald=" & i
-'        Cad = Cad & " and codmacta = '"
-'++
-        Cad = "select sum(coalesce(timported,0)),sum(coalesce(timporteh,0)) from hlinapu where fechaent between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
-        Cad = Cad & " and codmacta = '"
+        cad = "select sum(coalesce(timported,0)),sum(coalesce(timporteh,0)) from hlinapu where fechaent between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
+        cad = cad & " and codmacta = '"
 
     Else
         Aux = "select codmacta,imppresu,mespresu, anopresu from presupuestos where " & SQL
         If cmbFecha(0).ListIndex <> 0 Then Aux = Aux & " and mespresu = " & cmbFecha(0).ListIndex 'txtMes(2).Text
         Aux = Aux & " ORDER BY codmacta,mespresu"
-'--      'para luego
-'        Cad = "Select impmesde,impmesha from hsaldos where anopsald=" & i
-'        If txtMes(2).Text <> "" Then Cad = Cad & " and mespsald = " & txtMes(2).Text
-'        Cad = Cad & " and codmacta = '"
-'++
-        Cad = "select sum(coalesce(timported,0)),sum(coalesce(timporteh,0)) from hlinapu where fechaent between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
-        If cmbFecha(0).ListIndex <> 0 Then Cad = Cad & " and month(fechaent)= " & cmbFecha(0).ListIndex  'txtMes(2).Text
-        Cad = Cad & " and codmacta = '"
+        cad = "select sum(coalesce(timported,0)),sum(coalesce(timporteh,0)) from hlinapu where fechaent between " & DBSet(vFecIni, "F") & " and " & DBSet(vFecFin, "F")
+        If cmbFecha(0).ListIndex <> 0 Then cad = cad & " and month(fechaent)= " & cmbFecha(0).ListIndex  'txtMes(2).Text
+        cad = cad & " and codmacta = '"
        
     End If
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Aux, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    RS.Open Aux, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If RS.EOF Then
         MsgBox "Ningún registro a mostrar.", vbExclamation
-        Rs.Close
+        RS.Close
         Exit Function
     End If
     
@@ -960,50 +950,49 @@ On Error GoTo EGeneraBalancePresupuestario
     SQL = "INSERT INTO tmppresu2 (codusu, codigo, cta, titulo,  mes, Presupuesto, realizado, anyo) VALUES ("
     SQL = SQL & vUsu.Codigo & ","
     
-    Cont = 0
+    CONT = 0
     Do
-        Cont = Cont + 1
-        Rs.MoveNext
-    Loop Until Rs.EOF
-    Rs.MoveFirst
+        CONT = CONT + 1
+        RS.MoveNext
+    Loop Until RS.EOF
+    RS.MoveFirst
     
     'Ponemos el PB4
-    pb4.Max = Cont + 1
+    pb4.Max = CONT + 1
     pb4.Value = 0
-    If Cont > 3 Then pb4.Visible = True
+    If CONT > 3 Then pb4.Visible = True
     Cta = ""
-    Cont = 1   'Contador
-    While Not Rs.EOF
+    CONT = 1   'Contador
+    While Not RS.EOF
         If Me.cmbFecha(0).ListIndex > 0 Then
-'        If Me.chkPreMensual.Value = 1 Then
-            If Cta <> Rs!codmacta Then
+            If Cta <> RS!codmacta Then
                 vMes = 1
-                Cta = Rs!codmacta
+                Cta = RS!codmacta
             End If
             
-            If Rs!mespresu > vMes Then
-                For i = vMes To Rs!mespresu - 1
+            If RS!mespresu > vMes Then
+                For I = vMes To RS!mespresu - 1
                 
-                    Aux = Rs!codmacta  'Aqui pondremos el nombre
+                    Aux = RS!codmacta  'Aqui pondremos el nombre
                     Aux = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Aux, "T")
-                    Aux = Cont & ",'" & Rs!codmacta & "','" & DevNombreSQL(Aux) & "',"
-                    Aux = Aux & i
+                    Aux = CONT & ",'" & RS!codmacta & "','" & DevNombreSQL(Aux) & "',"
+                    Aux = Aux & I
              
                     Aux = Aux & ",0,"
                     
-                    AUX2 = Cad & Rs!codmacta & "'"
-                    AUX2 = AUX2 & " AND month(fechaent) =" & i
+                    aux2 = cad & RS!codmacta & "'"
+                    aux2 = aux2 & " AND month(fechaent) =" & I
                     
-                    Importe = ImporteBalancePresupuestario(AUX2)
+                    Importe = ImporteBalancePresupuestario(aux2)
                     
                     Aux = Aux & TransformaComasPuntos(CStr(Importe)) & ","
-                    Aux = Aux & DBSet(Rs!anopresu, "N") & ")"
+                    Aux = Aux & DBSet(RS!anopresu, "N") & ")"
                     
                     If Importe <> 0 Then
                         Conn.Execute SQL & Aux
-                        Cont = Cont + 1
+                        CONT = CONT + 1
                     End If
-                Next i
+                Next I
             End If
             
         End If
@@ -1011,58 +1000,54 @@ On Error GoTo EGeneraBalancePresupuestario
         
     
     
-        Aux = Rs!codmacta  'Aqui pondremos el nombre
+        Aux = RS!codmacta  'Aqui pondremos el nombre
         Aux = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Aux, "T")
-        Aux = Cont & ",'" & Rs!codmacta & "','" & DevNombreSQL(Aux) & "',"
-'        If Me.chkPreMensual.Value = 0 Then
+        Aux = CONT & ",'" & RS!codmacta & "','" & DevNombreSQL(Aux) & "',"
         If Me.cmbFecha(0).ListIndex = 0 Then
             Aux = Aux & "0"
         Else
-            Aux = Aux & Rs!mespresu
+            Aux = Aux & RS!mespresu
         End If
-        Aux = Aux & "," & TransformaComasPuntos(CStr(Rs.Fields(1))) & ","
+        Aux = Aux & "," & TransformaComasPuntos(CStr(RS.Fields(1))) & ","
         
         'SQL
-        AUX2 = Cad & Rs!codmacta & "'"
-'        If Me.chkPreMensual.Value = 1 Then
+        aux2 = cad & RS!codmacta & "'"
         If Me.cmbFecha(0).ListIndex > 0 Then
-            AUX2 = AUX2 & " AND month(fechaent) =" & Rs!mespresu
+            aux2 = aux2 & " AND month(fechaent) =" & RS!mespresu
             'AUmento el mes
-            vMes = Rs!mespresu + 1
+            vMes = RS!mespresu + 1
         End If
         
         
-        Importe = ImporteBalancePresupuestario(AUX2)
+        Importe = ImporteBalancePresupuestario(aux2)
         'Debug.Print Importe
         Aux = Aux & TransformaComasPuntos(CStr(Importe)) & ","
 '        If Me.chkPreMensual.Value = 0 Then
         If Me.cmbFecha(0).ListIndex = 0 Then
             Aux = Aux & "0)"
         Else
-            Aux = Aux & DBSet(Rs!anopresu, "N") & ")"
+            Aux = Aux & DBSet(RS!anopresu, "N") & ")"
         End If
         Conn.Execute SQL & Aux
         
         'Sig
         pb4.Value = pb4.Value + 1
-        Cont = Cont + 1
-        Rs.MoveNext
+        CONT = CONT + 1
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
         '2013  Junio
     ' QUitaremos si asi lo pide, el saldo de la apertura
-    ' Curiosamente, las 6 y 7  NO tienen apertura(perdi y ganacias)
     RC = "" 'Por si quitamos el apunte de apertura. Guardare las cuentas para buscarlas despues en la apertura
-'    If chkQuitarApertura.Value = 1 Then
         Aux = "SELECT cta from tmppresu2 WHERE codusu = " & vUsu.Codigo & " GROUP BY 1"
-        Rs.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not Rs.EOF
-            RC = RC & ", '" & Rs!Cta & "'"
-            Rs.MoveNext
+        RS.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RS.EOF
+            RC = RC & ", '" & RS!Cta & "'"
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         
         
         
@@ -1071,25 +1056,25 @@ On Error GoTo EGeneraBalancePresupuestario
             RC = Mid(RC, 2)
             Aux = " AND codmacta IN (" & RC & ")"
             
-            Cad = "SELECT codmacta cta,sum(coalesce(timported,0))-sum(coalesce(timporteh,0)) as importe"
-            Cad = Cad & " from hlinapu where codconce=970 and fechaent='" & Format(vParam.fechaini, FormatoFecha) & "'"
-            Cad = Cad & Aux
-            Cad = Cad & " GROUP BY 1"
-            Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not Rs.EOF
-                Cad = "UPDATE tmppresu2 SET realizado=realizado-" & TransformaComasPuntos(CStr(Rs!Importe))
+            cad = "SELECT codmacta cta,sum(coalesce(timported,0))-sum(coalesce(timporteh,0)) as importe"
+            cad = cad & " from hlinapu where codconce=970 and fechaent='" & Format(vParam.fechaini, FormatoFecha) & "'"
+            cad = cad & Aux
+            cad = cad & " GROUP BY 1"
+            RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not RS.EOF
+                cad = "UPDATE tmppresu2 SET realizado=realizado-" & TransformaComasPuntos(CStr(RS!Importe))
                 
-                Cad = Cad & " WHERE codusu = " & vUsu.Codigo & " AND cta = '" & Rs!Cta & "' AND mes = "
+                cad = cad & " WHERE codusu = " & vUsu.Codigo & " AND cta = '" & RS!Cta & "' AND mes = "
 '                If Me.chkPreMensual.Value = 1 Then
                 If Me.cmbFecha(0).ListIndex > 0 Then
-                    Cad = Cad & " 1"
+                    cad = cad & " 1"
                 Else
-                    Cad = Cad & " 0"
+                    cad = cad & " 0"
                 End If
-                Conn.Execute Cad
-                Rs.MoveNext
+                Conn.Execute cad
+                RS.MoveNext
             Wend
-            Rs.Close
+            RS.Close
                 
             
             
@@ -1106,15 +1091,15 @@ On Error GoTo EGeneraBalancePresupuestario
  
         'SUBNIVEL
         Aux = ""
-        For i = 1 To 9
-            If Check1(i).Value = 1 Then
+        For I = 1 To 9
+            If Check1(I).Value = 1 Then
                 
                 Aux = DevuelveDesdeBD("count(*)", "tmppresu2", "codusu", CStr(vUsu.Codigo))
-                Cont = Val(Aux)
+                CONT = Val(Aux)
                 
                 '@rownum:=@rownum+1 AS rownum      (SELECT @rownum:=0) r
-                Aux = "Select " & vUsu.Codigo & " us,@rownum:=@rownum+1 AS rownum,substring(cta,1," & i & ") as cta2,mes,sum(presupuesto),sum(realizado)"
-                Aux = Aux & " FROM tmppresu2,(SELECT @rownum:=" & Cont & ") r WHERE codusu = " & vUsu.Codigo
+                Aux = "Select " & vUsu.Codigo & " us,@rownum:=@rownum+1 AS rownum,substring(cta,1," & I & ") as cta2,mes,sum(presupuesto),sum(realizado)"
+                Aux = Aux & " FROM tmppresu2,(SELECT @rownum:=" & CONT & ") r WHERE codusu = " & vUsu.Codigo
                 
                 Aux = Aux & " AND length(cta)=" & vEmpresa.DigitosUltimoNivel
                 
@@ -1127,16 +1112,16 @@ On Error GoTo EGeneraBalancePresupuestario
 
                 
                 Aux = "SELECT cta from tmppresu2 WHERE codusu = " & vUsu.Codigo & " GROUP BY 1"
-                Rs.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                While Not Rs.EOF
+                RS.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                While Not RS.EOF
                     'Actualizo el nommacta
-                    Aux = Rs!Cta  'Aqui pondremos el nombre
+                    Aux = RS!Cta  'Aqui pondremos el nombre
                     Aux = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Aux, "T")
-                    Aux = "UPDATE tmppresu2  SET titulo = '" & DevNombreSQL(Aux) & "' WHERE codusu = " & vUsu.Codigo & " AND Cta = '" & Rs!Cta & "'"
+                    Aux = "UPDATE tmppresu2  SET titulo = '" & DevNombreSQL(Aux) & "' WHERE codusu = " & vUsu.Codigo & " AND Cta = '" & RS!Cta & "'"
                     Conn.Execute Aux
-                    Rs.MoveNext
+                    RS.MoveNext
                 Wend
-                Rs.Close
+                RS.Close
                 
                 
                 
@@ -1150,12 +1135,12 @@ On Error GoTo EGeneraBalancePresupuestario
         End If
         
     
-    Set Rs = Nothing
+    Set RS = Nothing
     GeneraBalancePresupuestario = True
     Exit Function
 EGeneraBalancePresupuestario:
     MuestraError Err.Number, "Generar balance presupuestario"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -1173,7 +1158,7 @@ Private Sub cmdCancelarAccion_Click()
 End Sub
 
 Private Sub Form_Activate()
-Dim Cont As Integer
+Dim CONT As Integer
 
     If PrimeraVez Then
         PrimeraVez = False
@@ -1207,9 +1192,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Balance Presupuestario"
 
-    For i = 6 To 7
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 6 To 7
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
     
     PrimeraVez = True
      
@@ -1306,17 +1291,17 @@ Private Sub txtCta_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     End Select
     
 End Sub
 
 
 Private Sub txtCta_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -1343,7 +1328,6 @@ Dim Hasta As Integer
 
     Select Case Index
         Case 6, 7 'Cuentas
-            'lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtcta(Index), "T")
             
             RC = txtCta(Index).Text
             If CuentaCorrectaUltimoNivelSIN(RC, SQL) Then
@@ -1363,7 +1347,6 @@ Dim Hasta As Integer
             End If
     End Select
 
-'    PierdeFocoTiposDiario Me.txtTiposDiario(Index), Me.lblTiposDiario(Index)
 End Sub
 
 
@@ -1394,33 +1377,31 @@ Dim nomDocu As String
     '------------------------------
     'Numero de niveles
     'Para cada nivel marcado veremos si tiene cuentas en la tmp
-    Cont = 0
+    CONT = 0
     UltimoNivel = 0
-    For i = 1 To 10
-        If Check1(i).Visible Then
-'                If Check2(I).Value = 1 Then Cont = Cont + 1
-            If Check1(i).Value = 1 Then
-                If i = 10 Then
-                    Cad = vEmpresa.DigitosUltimoNivel
+    For I = 1 To 10
+        If Check1(I).Visible Then
+            If Check1(I).Value = 1 Then
+                If I = 10 Then
+                    cad = vEmpresa.DigitosUltimoNivel
                 Else
-                    Cad = CStr(DigitosNivel(i))
+                    cad = CStr(DigitosNivel(I))
                 End If
             End If
         End If
-    Next i
-    Cad = "numeroniveles= " & Cont & "|"
-    SQL = SQL & Cad
+    Next I
+    cad = "numeroniveles= " & CONT & "|"
+    SQL = SQL & cad
     'Otro parametro mas
-    Cad = "vUltimoNivel= " & UltimoNivel & "|"
+    cad = "vUltimoNivel= " & UltimoNivel & "|"
     
-    cadParam = cadParam & Cad
+    cadParam = cadParam & cad
     numParam = numParam + 2
 
     
     vMostrarTree = False
     conSubRPT = False
         
-'    If chkPreMensual = 1 Then
     If cmbFecha(0).ListIndex > 0 Then
         indRPT = "1103-00"
     Else
@@ -1452,11 +1433,10 @@ Private Function DatosOK() As Boolean
     If Not ComprobarCuentas(6, 7) Then Exit Function
     
     SQL = ""
-    For i = 1 To Me.Check1.Count
-        If Me.Check1(i).Value Then SQL = SQL & "&"
-    Next i
+    For I = 1 To Me.Check1.Count
+        If Me.Check1(I).Value Then SQL = SQL & "&"
+    Next I
     If Len(SQL) <> 1 Then
-        'If chkPreMensual.Value = 1 Then
         If cmbFecha(0).ListIndex > 0 Then
             MsgBox "Seleccione uno, y solo uno, de los niveles contables.", vbExclamation
             Exit Function
@@ -1473,11 +1453,11 @@ Dim J As Integer
 
     QueCombosFechaCargar "0|"
     
-    For i = 1 To vEmpresa.numnivel - 1
-        J = DigitosNivel(i)
-        Check1(i).Visible = True
-        Check1(i).Caption = "Digitos: " & J
-    Next i
+    For I = 1 To vEmpresa.numnivel - 1
+        J = DigitosNivel(I)
+        Check1(I).Visible = True
+        Check1(I).Caption = "Digitos: " & J
+    Next I
 
 End Sub
 
@@ -1507,7 +1487,6 @@ End Function
 Private Function HayAsientoCierre(Mes As Byte, Anyo As Integer, Optional Contabilidad As String) As Boolean
 Dim C As String
     HayAsientoCierre = False
-    'C = "01/" & CStr(Me.cmbFecha(1).ListIndex + 1) & "/" & txtAno(1).Text
     C = "01/" & CStr(Mes) & "/" & Anyo
     'Si la fecha es menor k la fecha de inicio de ejercicio entonces SI k hay asiento de cierre
     If CDate(C) < vParam.fechaini Then
@@ -1520,13 +1499,13 @@ Dim C As String
             C = "Select count(*) from " & Contabilidad
             C = C & " hlinapu where (codconce=960 or codconce = 980) and fechaent>='" & Format(vParam.fechaini, FormatoFecha)
             C = C & "' AND fechaent <='" & Format(vParam.fechafin, FormatoFecha) & "'"
-            Rs.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not Rs.EOF Then
-                If Not IsNull(Rs.Fields(0)) Then
-                    If Rs.Fields(0) > 0 Then HayAsientoCierre = True
+            RS.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not RS.EOF Then
+                If Not IsNull(RS.Fields(0)) Then
+                    If RS.Fields(0) > 0 Then HayAsientoCierre = True
                 End If
             End If
-            Rs.Close
+            RS.Close
         End If
     End If
 End Function
@@ -1534,40 +1513,40 @@ End Function
 
 
 Private Function TieneCuentasEnTmpBalance(DigitosNivel As String) As Boolean
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim C As String
 
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     TieneCuentasEnTmpBalance = False
     C = Mid("__________", 1, CInt(DigitosNivel))
     C = "Select count(*) from tmpbalancesumas  where cta like '" & C & "'"
     C = C & " AND codusu = " & vUsu.Codigo
-    Rs.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            If Rs.Fields(0) > 0 Then TieneCuentasEnTmpBalance = True
+    RS.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            If RS.Fields(0) > 0 Then TieneCuentasEnTmpBalance = True
         End If
     End If
-    Rs.Close
+    RS.Close
 End Function
 
 Private Sub PonerNiveles()
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
 
     Frame2.Visible = True
     Check1(10).Visible = True
-    For i = 1 To vEmpresa.numnivel - 1
-        J = DigitosNivel(i)
-        Cad = "Digitos: " & J
-        Check1(i).Visible = True
-        Me.Check1(i).Caption = Cad
-    Next i
+    For I = 1 To vEmpresa.numnivel - 1
+        J = DigitosNivel(I)
+        cad = "Digitos: " & J
+        Check1(I).Visible = True
+        Me.Check1(I).Caption = cad
+    Next I
     
-    For i = vEmpresa.numnivel To 9
-        Check1(i).Visible = False
-    Next i
+    For I = vEmpresa.numnivel To 9
+        Check1(I).Visible = False
+    Next I
     
     
 End Sub
@@ -1582,20 +1561,20 @@ Dim L As Integer
 
 L = 1
 Do
-    Cad = RecuperaValor(Lista, L)
-    If Cad <> "" Then
-        i = Val(Cad)
-        With cmbFecha(i)
+    cad = RecuperaValor(Lista, L)
+    If cad <> "" Then
+        I = Val(cad)
+        With cmbFecha(I)
             .Clear
             RC = ""
             .AddItem RC
-            For Cont = 1 To 12
-                RC = "25/" & Cont & "/2002"
+            For CONT = 1 To 12
+                RC = "25/" & CONT & "/2002"
                 RC = Format(RC, "mmmm") 'Devuelve el mes
                 .AddItem RC
-            Next Cont
+            Next CONT
         End With
     End If
     L = L + 1
-Loop Until Cad = ""
+Loop Until cad = ""
 End Sub
