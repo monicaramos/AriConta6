@@ -855,7 +855,7 @@ End Sub
 
     
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
 Dim W As Integer
 Dim Img As Image
 
@@ -901,7 +901,7 @@ Dim Img As Image
     PrimeraVez = True
     CommitConexion  'Porque son listados. No hay nada dentro transaccion
     
-    h = FrameCompensaAbonosCliente.Height + 120
+    H = FrameCompensaAbonosCliente.Height + 120
     W = FrameCompensaAbonosCliente.Width
     
     FrameCompensaAbonosCliente.Visible = False
@@ -910,7 +910,7 @@ Dim Img As Image
     VerTodos = False
     
     Me.Width = W + 300
-    Me.Height = h + 400
+    Me.Height = H + 400
     
     Me.cmdCancelar(0).Cancel = True
     
@@ -918,8 +918,6 @@ Dim Img As Image
     
     Orden = True
     
-'    PonerFrameProgreso
-
 End Sub
 
 

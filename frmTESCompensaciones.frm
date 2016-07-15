@@ -1386,20 +1386,6 @@ End Function
 Private Function EstableceVtoQueTotaliza(Indice As Integer) As Integer
 
     EstableceVtoQueTotaliza = 0
-    'Primer PASO.
-    'Comprobaremos que NINGUN vto es menor que el total.
-    'Eso significa que podria desmarcar alguno
-'    For NumRegElim = 1 To Me.lw1(Indice).ListItems.Count
-'        If lw1(Indice).ListItems(NumRegElim).Checked Then
-'            Im = ImporteFormateado(lw1(Indice).ListItems(NumRegElim).SubItems(4))
-'            If Im < Abs(CCur(Text3(2).Tag)) Then
-'                    'SALIMOS. Hay vtos con imorte mayor al total
-'                    Exit Function
-'            End If
-'        End If
-'    Next
-
-
 
     'Vamos a buscar el vencimiento
     'Recorremos desde el final
@@ -1421,12 +1407,8 @@ Private Function EstableceVtoQueTotaliza(Indice As Integer) As Integer
 
 End Function
 
-
-
 Private Function ForzarVtoQueTotaliza(Indice As Integer) As Integer
     ForzarVtoQueTotaliza = 0
-
-
 
 
     'Vamos a forzar el vencimiento

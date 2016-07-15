@@ -2869,7 +2869,7 @@ Dim IT As ListItem
 
 Dim cadFiltro As String
 Dim I As Long
-Dim ancho As Integer
+Dim Ancho As Integer
 
 Private Mc As Contadores
 
@@ -3710,14 +3710,14 @@ End Sub
 
 Private Sub CargarColumnas()
 Dim Columnas As String
-Dim ancho As String
+Dim Ancho As String
 Dim Alinea As String
 Dim Formato As String
 Dim Ncol As Integer
 Dim C As ColumnHeader
 
     Columnas = "Linea|Tipo|Descripcion|Base|IVA|Recargo|"
-    ancho = "0|800|2450|1800|1800|1800|"
+    Ancho = "0|800|2450|1800|1800|1800|"
     'vwColumnRight =1  left=0   center=2
     Alinea = "0|0|0|1|1|1|"
     'Formatos
@@ -3731,7 +3731,7 @@ Dim C As ColumnHeader
     For NumRegElim = 1 To Ncol
          Set C = lw1.ColumnHeaders.Add()
          C.Text = RecuperaValor(Columnas, CInt(NumRegElim))
-         C.Width = RecuperaValor(ancho, CInt(NumRegElim))
+         C.Width = RecuperaValor(Ancho, CInt(NumRegElim))
          C.Alignment = Val(RecuperaValor(Alinea, CInt(NumRegElim)))
          C.Tag = RecuperaValor(Formato, CInt(NumRegElim))
     Next NumRegElim
@@ -6965,11 +6965,11 @@ Dim Contador As Integer
     Else
         Set IT = lw1.ListItems.Add()
 
-        IT.Text = Me.adodc1.Recordset!Orden '"Nuevo " & Contador
+        IT.Text = Me.Adodc1.Recordset!Orden '"Nuevo " & Contador
         
-        IT.SubItems(1) = Me.adodc1.Recordset.Fields(5)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
+        IT.SubItems(1) = Me.Adodc1.Recordset.Fields(5)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
         IT.SubItems(2) = vpaz
-        IT.SubItems(3) = Me.adodc1.Recordset.Fields(0)
+        IT.SubItems(3) = Me.Adodc1.Recordset.Fields(0)
         
         Set IT = Nothing
     End If
@@ -7133,9 +7133,9 @@ Dim Cerrado As Boolean
     I = Year(CDate(Text1(Indice).Text))
     If vParam.periodos = 0 Then
         'Trimestral
-        ancho = ((Month(CDate(Text1(Indice).Text)) - 1) \ 3) + 1
+        Ancho = ((Month(CDate(Text1(Indice).Text)) - 1) \ 3) + 1
         Else
-        ancho = Month(CDate((Text1(Indice).Text)))
+        Ancho = Month(CDate((Text1(Indice).Text)))
     End If
     Cerrado = False
     If I < vParam.anofactu Then
@@ -7143,7 +7143,7 @@ Dim Cerrado As Boolean
     Else
         If I = vParam.anofactu Then
             'El mismo año. Comprobamos los periodos
-            If vParam.perfactu >= ancho Then _
+            If vParam.perfactu >= Ancho Then _
                 Cerrado = True
         End If
     End If
@@ -7818,4 +7818,7 @@ Dim SQL As String
 eInsertaCobros:
     Mens = Mens & Err.Description
 End Function
+
+
+
 

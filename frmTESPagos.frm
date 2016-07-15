@@ -427,7 +427,7 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3525
-         Left            =   270
+         Left            =   300
          TabIndex        =   80
          Top             =   1080
          Visible         =   0   'False
@@ -1692,7 +1692,6 @@ Begin VB.Form frmTESPagos
          Left            =   1920
          MaxLength       =   4
          TabIndex        =   8
-         Tag             =   "Sucursal|N|S|0||pagos|oficina|0000||"
          Text            =   "0000"
          Top             =   1410
          Width           =   675
@@ -1773,7 +1772,6 @@ Begin VB.Form frmTESPagos
          Left            =   1140
          MaxLength       =   20
          TabIndex        =   7
-         Tag             =   "Entidad|N|S|0||pagos|entidad|0000||"
          Text            =   "0000"
          Top             =   1410
          Width           =   675
@@ -2507,8 +2505,6 @@ Private Sub cboFiltro_Click()
     
     LimpiarCampos
     CargaList 0, False 'CargaGrid 0, False
-    'CargaGrid 1, False
-    
     
     HacerBusqueda2
 End Sub
@@ -2552,10 +2548,6 @@ Private Sub cmdAceptar_Click()
     Case 4
         'Modificar
         If DatosOK Then
-            '-----------------------------------------
-'                Cad = DameClavesADODCForm(Me, Me.Data1)
-'
-'                If ModificaDesdeFormularioClaves(Me, Cad) Then
              If ModificaDesdeFormulario2(Me, 1) Then
                 'TerminaBloquear
                 DesBloqueaRegistroForm Me.Text1(0)
@@ -2602,7 +2594,6 @@ Private Sub cmdAux_Click(Index As Integer)
             
             
     End Select
-'    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
 
 
@@ -2662,7 +2653,6 @@ Private Sub BotonAnyadir()
     PonerModo 3
     
     CargaList 0, False 'CargaGrid 0, False
-'    CargaGrid 1, False
     
     
     'Escondemos el navegador y ponemos insertando
@@ -2684,7 +2674,6 @@ Private Sub BotonBuscar()
     If Modo <> 1 Then
         LimpiarCampos
         CargaList 0, False
-'        CargaGrid 1, False
         
         lblIndicador.Caption = "Búsqueda"
         PonerModo 1
@@ -2711,7 +2700,6 @@ Private Sub BotonVerTodos()
     
     LimpiarCampos
     CargaList 0, False
-'    CargaGrid 1, False
     
     HacerBusqueda2
     
@@ -2748,8 +2736,6 @@ Dim N As Byte
     '---------
     'MODIFICAR
     '----------
-    'Añadiremos el boton de aceptar y demas objetos para insertar
-   ' cmdAceptar.Caption = "Modificar"
     
     'Si se puede modificar entonces habilito todooos los campos
     PonerModo 4
@@ -2820,7 +2806,6 @@ Private Sub BotonEliminar()
         'Borro el elemento
         SQL = "Delete from pagos  WHERE numserie = '" & Data1.Recordset!NUmSerie & "' AND numfactu = " & Data1.Recordset!NumFactu
         SQL = SQL & " AND fecfactu = " & DBSet(Data1.Recordset!FecFactu, "F") & " AND numorden =" & Data1.Recordset!numorden
-'        DataGridAux(1).Enabled = False
         NumRegElim = Data1.Recordset.AbsolutePosition
         Conn.Execute SQL
 
@@ -2993,7 +2978,6 @@ Dim I As Integer
     Me.SSTab1.Tab = 0
     Me.Icon = frmPpal.Icon
     LimpiarCampos
-    'FrameSeguro.Visible = vParamT.TieneOperacionesAseguradas
     
     'Recaudacion ejecutiva
     
@@ -3065,12 +3049,6 @@ Dim cad As String
             cad = cad & " AND " & DevfrmCCtas
             DevfrmCCtas = cad
             If DevfrmCCtas = "" Then Exit Sub
-            '   Como la clave principal es unica, con poner el sql apuntando
-            '   al valor devuelto sobre la clave ppal es suficiente
-            'Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-            'If CadB <> "" Then CadB = CadB & " AND "
-            'CadB = CadB & Aux
-            'Se muestran en el mismo form
             CadenaConsulta = "select * from " & NombreTabla & " WHERE " & DevfrmCCtas & " " & Ordenacion
             PonerCadenaBusqueda
             Screen.MousePointer = vbDefault
@@ -3292,8 +3270,6 @@ End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 27 Then
-        'Despues de la fecha prorroga va el btn
-        'PonerFocoGral Me.cmdAceptar
         PonleFoco Me.cmdAceptar
     Else
         KEYpress KeyAscii
@@ -3591,8 +3567,6 @@ Private Sub HacerBusqueda2()
         ' **********************************************************************
     End If
     
-'    CargaDatosLW
-    
 
 End Sub
 
@@ -3630,7 +3604,6 @@ Private Sub MandaBusquedaPrevia(CadB As String)
         PonerDatoDevuelto CadenaDesdeOtroForm
         If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then cmdRegresar_Click
     Else   'de ha devuelto datos, es decir NO ha devuelto datos
-        ' Text1(kCampo).SetFocus
         PonerFoco Text1(kCampo)
     End If
 End Sub
@@ -3720,7 +3693,6 @@ Private Sub PonerCampos()
     
     
     'Cargamos el LINEAS
-'    DataGridAux(0).Enabled = False
     CargaList 0, True
     
     PonPendiente
@@ -3765,7 +3737,6 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
         Text1(28).MaxLength = 4
         Text1(29).MaxLength = 4
     ElseIf Modo = 4 Then
-'        Me.SSTab2.TabEnabled(2) = True
     End If
     
     'Modo buscar
@@ -4278,7 +4249,6 @@ Dim cad As String, Indicador As String
 
     cad = "(numserie=" & DBSet(Text1(13).Text, "T") & " and numfactu = " & DBSet(Text1(1).Text, "N") & " and fecfactu = " & DBSet(Text1(2).Text, "F") & " and numorden = " & DBSet(Text1(3).Text, "N") & ") "
     
-    ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     If SituarDataMULTI(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
@@ -4286,7 +4256,6 @@ Dim cad As String, Indicador As String
        LimpiarCampos
        PonerModo 0
     End If
-    ' ***********************************************************************************
 End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
@@ -4447,14 +4416,12 @@ Dim Eliminar As Boolean
   '      RecalcularTotales
         
         '**** parte de contabilizacion de la factura
-        '--DesBloqueaRegistroForm Me.Text1(0)
         TerminaBloquear
         
         
         'LOG
         vLog.Insertar 6, vUsu, Text1(2).Text & Text1(0).Text & " " & Text1(1).Text
         'Creo que no hace falta volver a situar el datagrid
-        'If SituarData1(0) Then
         If True Then
             lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
             
@@ -4467,9 +4434,9 @@ Dim Eliminar As Boolean
         
         
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
-        If Index <> 3 Then _
-'            CargaGrid Index, True
+        If Index <> 3 Then
         End If
+        
         ' ***************************************************
         If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
 '            PonerCampos
@@ -4477,8 +4444,6 @@ Dim Eliminar As Boolean
         End If
         ' *** si n'hi han tabs sense datagrid ***
         If Index = 3 Then CargaFrame 3, True
-        ' ***************************************
-'        If BLOQUEADesdeFormulario2(Me, data1, 1) Then BotonModificar
         ' *** si n'hi han tabs ***
         SituarTab (NumTabMto)
         ' ************************
@@ -4500,11 +4465,6 @@ End Sub
 Private Sub SituarTab(numTab As Integer)
     On Error Resume Next
     
-'    If numTab = 0 Then
-'        SSTab1.Tab = 2
-'    ElseIf numTab = 1 Then
-'        SSTab1.Tab = 1
-'    End If
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -4675,7 +4635,6 @@ Private Sub txtAux_LostFocus(Index As Integer)
         
         Case 9
            ' IMPORTE
-'            PonerFormatoDecimal txtAux(Index), 1
              txtaux(Index) = ImporteSinFormato(txtaux(Index))
             
         Case 10 'tipo

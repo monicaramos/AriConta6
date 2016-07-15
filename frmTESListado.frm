@@ -1069,9 +1069,6 @@ Dim Img As Image
         CONT = 0
         If H = 1 Then CONT = RecuperaValor(CadenaDesdeOtroForm, 6)
         FrameCambioFPCompensa.Visible = CONT > 0
-        'chkCompensaVto.Value = 0
-        'chkCompensaVto.Enabled = h = 1
-        'chkCompensaVto.Caption = RecuperaValor(CadenaDesdeOtroForm, 6)
         CadenaDesdeOtroForm = ""
         H = FrameCompensaciones.Height + 120
         W = FrameCompensaciones.Width
@@ -1468,9 +1465,6 @@ Private Sub PonerFrameProgressVisible(Optional TEXTO As String)
 End Sub
 
 
-
-
-
 'Para conceptos y diarios
 'Opcion: 0- Diario
 '        1- Conceptos
@@ -1480,78 +1474,6 @@ End Sub
 Private Sub LanzaBuscaGrid(Indice As Integer, OpcionGrid As Byte)
 
 
-'--monica
-'
-'    Select Case OpcionGrid
-'    Case 0
-'    'Diario
-'        DevfrmCCtas = "0"
-'        cad = "Número|numdiari|N|30·"
-'        cad = cad & "Descripción|desdiari|T|60·"
-'
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = cad
-'        frmB.vTabla = "Tiposdiario"
-'        frmB.vSQL = ""
-'
-'        '###A mano
-'        frmB.vDevuelve = "0|1|"
-'        frmB.vTitulo = "Diario"
-'        frmB.vSelElem = 0
-'        '#
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        If DevfrmCCtas <> "" Then
-'           Me.txtDiario(Indice) = RecuperaValor(DevfrmCCtas, 1)
-'           Me.txtDescDiario(Indice) = RecuperaValor(DevfrmCCtas, 2)
-'        End If
-' Case 1
-'        'Conceptos
-'        DevfrmCCtas = "0"
-'        cad = "Codigo|codconce|N|30·"
-'        cad = cad & "Descripción|nomconce|T|60·"
-'
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = cad
-'        frmB.vTabla = "Conceptos"
-'        frmB.vSQL = ""
-'
-'        '###A mano
-'        frmB.vDevuelve = "0|1|"
-'        frmB.vTitulo = "CONCEPTOS"
-'        frmB.vSelElem = 0
-'        '#
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        If DevfrmCCtas <> "" Then
-'           Me.txtConcpto(Indice) = RecuperaValor(DevfrmCCtas, 1)
-'           Me.txtDescConcepto(Indice) = RecuperaValor(DevfrmCCtas, 2)
-'        End If
-'
-'    Case 2
-'        'Centros de coste
-'        DevfrmCCtas = "0"
-'        cad = "Codigo|codccost|T|30·"
-'        cad = cad & "Descripción|nomccost|T|60·"
-'
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = cad
-'        frmB.vTabla = "cabccost"
-'        frmB.vSQL = ""
-'
-'        '###A mano
-'        frmB.vDevuelve = "0|1|"
-'        frmB.vTitulo = "Centros de coste"
-'        frmB.vSelElem = 0
-'        '#
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        If DevfrmCCtas <> "" Then
-'
-'           txtCCost(Indice) = RecuperaValor(DevfrmCCtas, 1)
-'           txtDescCCoste(Indice) = RecuperaValor(DevfrmCCtas, 2)
-'        End If
-'
 End Sub
 
                                        '                Para saber el index del listview
