@@ -3840,7 +3840,7 @@ Dim Tipo As Integer
     DevfrmCCtas = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", Text1(0).Text, "N")
     Tipo = CInt(DevfrmCCtas)
 
-    DevfrmCCtas = Trim(Text1(26).Text) & Trim(Text1(28).Text) & Mid(Trim(Text1(29).Text), 3, 2) & Trim(Text1(30).Text) & Trim(Text1(21).Text)
+    DevfrmCCtas = Trim(Text1(26).Text) & Trim(Text1(28).Text) & Text1(29).Text & Trim(Text1(30).Text) & Trim(Text1(21).Text)
     
     'AHora comprobare Si tiene cuenta bancaria, si es correcta
     B = False
@@ -3851,24 +3851,15 @@ Dim Tipo As Integer
     If B Then
         'Vale, hay campos y son numericos
         'La cuenta contable si digi control, si tiene valor, tiene que ser longitud 18
-        If Len(DevfrmCCtas) < 18 Then
+        If Len(DevfrmCCtas) < 20 Then
             MsgBox "Cuenta bancaria incorrecta", vbExclamation
             Exit Function
         End If
     End If
         
     If B Then
-        BuscaChekc = CodigoDeControl(DevfrmCCtas)
-        If BuscaChekc <> Mid(Text1(29).Text, 1, 2) Then
-            BuscaChekc = vbCrLf & "Código de control calculado: " & BuscaChekc & vbCrLf
-            BuscaChekc = "Error en la cuenta contable: " & vbCrLf & BuscaChekc & vbCrLf & "Codigo de control: " & Mid(Text1(29).Text, 1, 2) & vbCrLf & vbCrLf
-            
-            BuscaChekc = BuscaChekc & "Desea continuar?"
-            If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbNo Then Exit Function
-        End If
         'Compruebo EL IBAN
         'Meto el CC
-        DevfrmCCtas = Mid(DevfrmCCtas, 1, 8) & Mid(Text1(29).Text, 1, 2) & Mid(DevfrmCCtas, 9)
         BuscaChekc = ""
         If Me.Text1(10).Text <> "" Then BuscaChekc = Mid(Text1(10).Text, 1, 2)
             

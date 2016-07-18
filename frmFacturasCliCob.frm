@@ -812,7 +812,7 @@ Dim FechaAnt As String
 Dim Ok As Boolean
 Dim CadB1 As String
 Dim FILTRO As Byte
-Dim Sql As String
+Dim SQL As String
 Dim EsReciboBancario As Boolean
 
 Dim CadB2 As String
@@ -896,7 +896,7 @@ End Sub
 
 Private Sub BotonVerTodos()
 Dim SQL2 As String
-Dim Sql As String
+Dim SQL As String
 
     CargaGrid "" 'CadB
     PonerModo 2
@@ -965,7 +965,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -974,15 +974,15 @@ Dim temp As Boolean
         
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Cobro?"
-    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(1)
+    SQL = "¿Seguro que desea eliminar el Cobro?"
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        Sql = "Delete from tmpcobros where codusu=" & DBSet(vUsu.Codigo, "N") & " and numorden = " & adodc1.Recordset.Fields(1)
-        Conn.Execute Sql
+        SQL = "Delete from tmpcobros where codusu=" & DBSet(vUsu.Codigo, "N") & " and numorden = " & adodc1.Recordset.Fields(1)
+        Conn.Execute SQL
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1059,7 +1059,7 @@ End Sub
 Private Sub cmdAceptar_Click()
     Dim I As String
     Dim NReg As Long
-    Dim Sql As String
+    Dim SQL As String
     Dim SQL2 As String
     
     
@@ -1100,7 +1100,7 @@ Private Sub cmdCancelar_Click()
     On Error Resume Next
     
     Select Case Modo
-        Case 4 'modificar
+        Case 2, 4 'modificar
             TerminaBloquear
             ContinuarCobro = False
             Unload Me
@@ -1187,6 +1187,13 @@ Private Sub Form_Activate()
         End If
         
         ' cargamos los datos del banco
+        Text1(13).Text = ""
+        Text1(14).Text = ""
+        Text1(15).Text = ""
+        Text1(16).Text = ""
+        Text1(0).Text = ""
+        Text1(2).Text = ""
+        
         Text1(26).Text = RecuperaValor(CodigoActual, 1)
         Text1(29).Text = RecuperaValor(CodigoActual, 6)
         If Len(Text1(29).Text) = 24 Then
@@ -1370,7 +1377,7 @@ Private Sub Text1_LostFocus(Index As Integer)
             
                 If Text1(14).Text <> "" And Text1(15).Text <> "" And Text1(16).Text <> "" And Text1(0).Text <> "" And Text1(2).Text <> "" Then
                     ' comprobamos si es correcto
-                    Sql = Format(Text1(14).Text, "0000") & Format(Text1(15).Text, "0000") & Format(Text1(16).Text, "0000") & Format(Text1(0).Text, "0000") & Format(Text1(2).Text, "0000")
+                    SQL = Format(Text1(14).Text, "0000") & Format(Text1(15).Text, "0000") & Format(Text1(16).Text, "0000") & Format(Text1(0).Text, "0000") & Format(Text1(2).Text, "0000")
                 End If
             Else
                 If Mid(Text1(Index).Text, 1, 2) = "ES" Then
@@ -1379,12 +1386,12 @@ Private Sub Text1_LostFocus(Index As Integer)
             End If
             
             If Text1(13).Text <> "" And Text1(14).Text <> "" And Text1(15).Text <> "" And Text1(16).Text <> "" And Text1(0).Text <> "" And Text1(2).Text <> "" Then
-                Sql = Format(Text1(14).Text, "0000") & Format(Text1(15).Text, "0000") & Format(Text1(16).Text, "0000") & Format(Text1(0).Text, "0000") & Format(Text1(2).Text, "0000")
+                SQL = Format(Text1(14).Text, "0000") & Format(Text1(15).Text, "0000") & Format(Text1(16).Text, "0000") & Format(Text1(0).Text, "0000") & Format(Text1(2).Text, "0000")
         
                 SQL2 = CStr(Mid(Text1(13).Text, 1, 2))
-                If DevuelveIBAN2(CStr(SQL2), Sql, Sql) Then
-                    If Mid(Text1(13).Text, 3, 2) <> Sql Then
-                        MsgBox "Codigo IBAN distinto del calculado [" & SQL2 & Sql & "]", vbExclamation
+                If DevuelveIBAN2(CStr(SQL2), SQL, SQL) Then
+                    If Mid(Text1(13).Text, 3, 2) <> SQL Then
+                        MsgBox "Codigo IBAN distinto del calculado [" & SQL2 & SQL & "]", vbExclamation
                     End If
                 End If
             End If
@@ -1395,27 +1402,27 @@ Private Sub Text1_LostFocus(Index As Integer)
         Case 26
             If Text1(26).Text = "" Then Exit Sub
             
-            Sql = Text1(26).Text
-            If CuentaCorrectaUltimoNivel(Sql, SQL2) Then
-                Sql = DevuelveDesdeBD("codmacta", "bancos", "codmacta", Sql, "T")
-                If Sql = "" Then
+            SQL = Text1(26).Text
+            If CuentaCorrectaUltimoNivel(SQL, SQL2) Then
+                SQL = DevuelveDesdeBD("codmacta", "bancos", "codmacta", SQL, "T")
+                If SQL = "" Then
                     MsgBox "La cuenta NO pertenece a ningúna cta. bancaria", vbExclamation
                     SQL2 = ""
                 Else
                     'CORRECTO
                 End If
             Else
-                Sql = ""
+                SQL = ""
                 MsgBox SQL2, vbExclamation
                 SQL2 = ""
             End If
-            Text1(26).Text = Sql
+            Text1(26).Text = SQL
             Text2(1).Text = SQL2
-            If Sql = "" Then PonleFoco Text1(26)
+            If SQL = "" Then PonleFoco Text1(26)
              
              
         Case 1 '1 - fecha de cobro
-            Sql = ""
+            SQL = ""
             If Not EsFechaOK(Text1(Index)) Then
                 MsgBox "Fecha incorrecta", vbExclamation
                 PonFoco Text1(Index)
@@ -1481,20 +1488,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     Dim SQL2 As String
     
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " " & Ordenacion
+    SQL = SQL & " " & Ordenacion
     
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "N||||0|;S|txtAux(1)|T|Orden|1000|;S|txtAux(2)|T|Fecha Vto|2250|;S|btnBuscar(0)|B||195|;"
@@ -1529,7 +1536,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 Dim NroDig As Integer
 Dim Inicio As Long
@@ -1555,7 +1562,7 @@ End Function
 Private Function DatosOKContinuar() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim Sql3 As String
 Dim Mens As String
@@ -1574,10 +1581,10 @@ Dim Index As Integer
         PonleFoco Text1(26)
     Else
         If Text1(26).Text <> "" Then
-            Sql = Text1(26).Text
-            If CuentaCorrectaUltimoNivel(Sql, SQL2) Then
-                Sql = DevuelveDesdeBD("codmacta", "bancos", "codmacta", Sql, "T")
-                If Sql = "" Then
+            SQL = Text1(26).Text
+            If CuentaCorrectaUltimoNivel(SQL, SQL2) Then
+                SQL = DevuelveDesdeBD("codmacta", "bancos", "codmacta", SQL, "T")
+                If SQL = "" Then
                     MsgBox "La cuenta NO pertenece a ningúna cta. bancaria", vbExclamation
                     SQL2 = ""
                 Else
@@ -1585,13 +1592,13 @@ Dim Index As Integer
                     B = True
                 End If
             Else
-                Sql = ""
+                SQL = ""
                 MsgBox SQL2, vbExclamation
                 SQL2 = ""
             End If
-            Text1(26).Text = Sql
+            Text1(26).Text = SQL
             Text2(1).Text = SQL2
-            If Sql = "" Then
+            If SQL = "" Then
                 B = False
                 PonleFoco Text1(26)
             End If
@@ -1626,33 +1633,33 @@ Dim Index As Integer
             
             'IBAN
     
-            Sql = ""
+            SQL = ""
             For I = 14 To 16
-                Sql = Sql & Text1(I).Text
+                SQL = SQL & Text1(I).Text
             Next
-            Sql = Sql & Text1(0).Text & Text1(2).Text
+            SQL = SQL & Text1(0).Text & Text1(2).Text
             
-            Text1(29).Text = Text1(13).Text & Sql
+            Text1(29).Text = Text1(13).Text & SQL
             
             
-            Sql3 = Sql
+            Sql3 = SQL
             
-            If Len(Sql) = 20 Then
+            If Len(SQL) = 20 Then
                 'OK. Calculamos el IBAN
                 
                 If Text1(13).Text = "" Then
                     'NO ha puesto IBAN
-                    If DevuelveIBAN2("ES", Sql, Sql) Then Text1(13).Text = "ES" & Sql
+                    If DevuelveIBAN2("ES", SQL, SQL) Then Text1(13).Text = "ES" & SQL
                     Text1(29).Text = Text1(13).Text & Sql3
                 Else
                     SQL2 = CStr(Mid(Text1(13).Text, 1, 2))
-                    If DevuelveIBAN2(CStr(SQL2), Sql, Sql) Then
-                        If Mid(Text1(13).Text, 3, 2) <> Sql Then
+                    If DevuelveIBAN2(CStr(SQL2), SQL, SQL) Then
+                        If Mid(Text1(13).Text, 3, 2) <> SQL Then
                             
-                            Sql = "Calculado : " & SQL2 & Sql
-                            Sql = "Introducido: " & Me.Text1(13).Text & vbCrLf & Sql & vbCrLf
-                            Sql = "Error en codigo IBAN" & vbCrLf & Sql & "Continuar?"
-                            If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then
+                            SQL = "Calculado : " & SQL2 & SQL
+                            SQL = "Introducido: " & Me.Text1(13).Text & vbCrLf & SQL & vbCrLf
+                            SQL = "Error en codigo IBAN" & vbCrLf & SQL & "Continuar?"
+                            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then
                                 DatosOKContinuar = False
                                 Exit Function
                             End If

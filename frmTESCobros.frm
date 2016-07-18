@@ -477,7 +477,7 @@ Begin VB.Form frmTESCobros
          Height          =   3435
          Left            =   270
          TabIndex        =   125
-         Top             =   1140
+         Top             =   2400
          Visible         =   0   'False
          Width           =   9375
          Begin VB.TextBox Text2 
@@ -5328,7 +5328,7 @@ Dim Tipo As Integer
     DevfrmCCtas = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", Text1(0).Text, "N")
     Tipo = CInt(DevfrmCCtas)
     
-    DevfrmCCtas = Trim(Text1(26).Text) & Trim(Text1(28).Text) & Mid(Trim(Text1(29).Text), 3, 2) & Trim(Text1(30).Text) & Trim(Text1(31).Text)
+    DevfrmCCtas = Trim(Text1(26).Text) & Trim(Text1(28).Text) & Trim(Text1(29).Text) & Trim(Text1(30).Text) & Trim(Text1(31).Text)
     
     'Para preguntar por el Banco
     B = False
@@ -5339,7 +5339,7 @@ Dim Tipo As Integer
     If B Then
         'Vale, hay campos y son numericos
         'La cuenta contable si digi control, si tiene valor, tiene que ser longitud 18
-        If Len(DevfrmCCtas) < 18 Then
+        If Len(DevfrmCCtas) < 20 Then
             MsgBox "Cuenta bancaria incorrecta", vbExclamation
             Exit Function
         End If
