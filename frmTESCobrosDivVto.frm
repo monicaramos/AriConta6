@@ -645,7 +645,7 @@ Dim B As Boolean
             PonerFormatoEntero txtcodigo(Index)
             
             If txtcodigo(0).Text <> "" Then
-                txtcodigo(1).Text = Format(Round(ImporteSinFormato(txtcodigo(1).Text) / txtcodigo(0), 2), "###,###,##0.00")
+                txtcodigo(1).Text = Format(Round(ImporteSinFormato(ComprobarCero(txtcodigo(1).Text)) / txtcodigo(0), 2), "###,###,##0.00")
             End If
             
         Case 2 'FECHAS

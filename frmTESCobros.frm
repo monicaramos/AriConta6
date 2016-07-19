@@ -4068,7 +4068,7 @@ Dim N As Byte
         'Se puede modifcar la CC
         Dim T As TextBox
         For Each T In Text1
-            If T.Index < 28 Or T.Index > 31 Then
+            If (T.Index < 28 Or T.Index > 31) And T.Index <> 10 And T.Index <> 26 Then
                 T.Locked = True
                 T.BackColor = &H80000018
             End If
@@ -4085,11 +4085,11 @@ Dim N As Byte
         
         'Si es una remesa de talon/pagare tb dejare modificar el numero de talon pagare
         If Val(DBLet(Data1.Recordset!Tiporem)) > 1 Then
-            Text1(26).Locked = False
-            Text1(26).BackColor = vbWhite
+            Text1(27).Locked = False
+            Text1(27).BackColor = vbWhite
         End If
             
-        PonerFoco Text1(28)
+        PonerFoco Text1(10)
     Else
         PonerFoco Text1(6)
     End If
@@ -5515,8 +5515,8 @@ Private Function SePuedeEliminar2() As Byte
         DevfrmCCtas = "numserie='" & Data1.Recordset!NUmSerie
         DevfrmCCtas = DevfrmCCtas & "' AND fecfactu='" & Format(Data1.Recordset!FecFactu, FormatoFecha)
         DevfrmCCtas = DevfrmCCtas & "' AND numfactu=" & Data1.Recordset!NumFactu
-        DevfrmCCtas = DevfrmCCtas & " AND numvenci"
-        DevfrmCCtas = DevuelveDesdeBD("id", "talones_facturas", DevfrmCCtas, Data1.Recordset!numorden)
+        DevfrmCCtas = DevfrmCCtas & " AND numorden"
+        DevfrmCCtas = DevuelveDesdeBD("codigo", "talones_facturas", DevfrmCCtas, Data1.Recordset!numorden)
         If DevfrmCCtas <> "" Then
             DevfrmCCtas = "Esta en la recepcion de documentos. Numero: " & DevfrmCCtas
             MsgBox DevfrmCCtas, vbExclamation
@@ -5667,21 +5667,22 @@ Dim Im As Currency
         MsgBox "El cobro no tiene forma de pago. Revise.", vbExclamation
         Exit Sub
     End If
-    
+   
     
     frmTESCobrosDivVto.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
-
-            CadenaConsulta = "Select * from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1) 'CadenaConsulta
-            Data1.RecordSource = CadenaConsulta
-            Data1.Refresh
-            If Data1.Recordset.RecordCount <= 0 Then
-                MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
-            Else
-                DevfrmCCtas = ""
-                PonerCampos
-            End If
+        CadenaConsulta = "Select * from cobros WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1) 'CadenaConsulta
+        Data1.RecordSource = CadenaConsulta
+        Data1.Refresh
+        If Data1.Recordset.RecordCount <= 0 Then
+            MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
+        Else
+            DevfrmCCtas = ""
+            PonerCampos
+        End If
     End If
+    
+    
 End Sub
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)

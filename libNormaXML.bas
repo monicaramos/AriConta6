@@ -345,7 +345,7 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                         
                     Case 2
                         'Referencia en el VTO. No es Nula
-                        SQL = DBLet(miRsAux!referencia, "T")
+                        SQL = DBLet(miRsAux!Referencia, "T")
                         
                     End Select
                 End If
@@ -355,8 +355,6 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 SQL = "2009-10-31"
                 If Not IsNull(miRsAux!SEPA_FecFirma) Then SQL = Format(miRsAux!SEPA_FecFirma, "yyyy-mm-dd")
                 Print #NFic, "            <DtOfSgntr>" & SQL & "</DtOfSgntr>"
-                
-                
                 
                 Print #NFic, "         </MndtRltdInf>"
                 Print #NFic, "      </DrctDbtTx>"
@@ -412,7 +410,7 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
                 
                    Case 2
                        'Referencia en el VTO. No es Nula
-                       SQL = DBLet(miRsAux!referencia, "T")
+                       SQL = DBLet(miRsAux!Referencia, "T")
                    
                    End Select
 '??             End If
@@ -461,16 +459,26 @@ Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As 
     Close #NFic
         
     
-    
-    
     Exit Function
 Err_Remesa19sepa:
+
     MsgBox "Err: " & Err.Number & vbCrLf & _
         Err.Description, vbCritical, "Grabación del diskette de Remesa SEPA"
         
-
+    CerrarFichero NFic
 End Function
 
+
+
+Private Sub CerrarFichero(NFile As Integer)
+
+    On Error Resume Next
+    
+    Close #NFile
+    
+    Err.Clear
+
+End Sub
 
 
 
