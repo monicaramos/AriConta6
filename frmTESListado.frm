@@ -1227,7 +1227,7 @@ Attribute frmCCos.VB_VarHelpID = -1
 Private WithEvents frmCon As frmConceptos
 Attribute frmCon.VB_VarHelpID = -1
 
-Dim SQL As String
+Dim Sql As String
 Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
@@ -1340,32 +1340,32 @@ Dim Im As Currency
 
     'Dividira el vto en dos. En uno dejara el importe que solicita y en el otro el resto
     'Los gastos s quedarian en uno asi como el cobrado si diera lugar
-    SQL = ""
-    If txtImporte(1).Text = "" Then SQL = "Ponga el importe" & vbCrLf
+    Sql = ""
+    If txtImporte(1).Text = "" Then Sql = "Ponga el importe" & vbCrLf
     
     RC = RecuperaValor(CadenaDesdeOtroForm, 3)
     Importe = CCur(RC)
     Im = ImporteFormateado(txtImporte(1).Text)
     If Im = 0 Then
-        SQL = "Importe no puede ser cero"
+        Sql = "Importe no puede ser cero"
     Else
         If Importe > 0 Then
             'Vencimiento normal
-            If Im > Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
+            If Im > Importe Then Sql = "Importe superior al máximo permitido(" & Importe & ")"
             
         Else
             'ABONO
             If Im > 0 Then
-                SQL = "Es un abono. Importes negativos"
+                Sql = "Es un abono. Importes negativos"
             Else
-                If Im < Importe Then SQL = "Importe superior al máximo permitido(" & Importe & ")"
+                If Im < Importe Then Sql = "Importe superior al máximo permitido(" & Importe & ")"
             End If
         End If
         
     End If
     
     
-    If SQL = "" Then
+    If Sql = "" Then
         Set RS = New ADODB.Recordset
         
         
@@ -1377,7 +1377,7 @@ Dim Im As Currency
         RC = "Select max(numorden) from scobro WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
         RS.Open RC, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RS.EOF Then
-            SQL = "Error. Vencimiento NO encontrado: " & CadenaDesdeOtroForm
+            Sql = "Error. Vencimiento NO encontrado: " & CadenaDesdeOtroForm
         Else
             I = RS.Fields(0) + 1
         End If
@@ -1386,47 +1386,47 @@ Dim Im As Currency
         
     End If
     
-    If SQL <> "" Then
-        MsgBox SQL, vbExclamation
+    If Sql <> "" Then
+        MsgBox Sql, vbExclamation
         PonFoco txtImporte(1)
         Exit Sub
         
     Else
-        SQL = "¿Desea desdoblar el vencimiento con uno de : " & Im & " euros?"
-        If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        Sql = "¿Desea desdoblar el vencimiento con uno de : " & Im & " euros?"
+        If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     End If
     
     
     'OK.  a desdoblar
-    SQL = "INSERT INTO scobro (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
-    SQL = SQL & "`tiporem`,`codrem`,`anyorem`,`siturem`,reftalonpag,"
-    SQL = SQL & "`numserie`,`codfaccl`,`fecfaccl`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,`text83csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban) "
+    Sql = "INSERT INTO scobro (`numorden`,`gastos`,impvenci,`fecultco`,`impcobro`,`recedocu`,"
+    Sql = Sql & "`tiporem`,`codrem`,`anyorem`,`siturem`,reftalonpag,"
+    Sql = Sql & "`numserie`,`codfaccl`,`fecfaccl`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,`text83csb`,`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban) "
     'Valores
-    SQL = SQL & " SELECT " & I & ",NULL," & TransformaComasPuntos(CStr(Im)) & ",NULL,NULL,0,"
-    SQL = SQL & "NULL,NULL,NULL,NULL,NULL,"
-    SQL = SQL & "`numserie`,`codfaccl`,`fecfaccl`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,"
+    Sql = Sql & " SELECT " & I & ",NULL," & TransformaComasPuntos(CStr(Im)) & ",NULL,NULL,0,"
+    Sql = Sql & "NULL,NULL,NULL,NULL,NULL,"
+    Sql = Sql & "`numserie`,`codfaccl`,`fecfaccl`,`codmacta`,`codforpa`,`fecvenci`,`ctabanc1`,`codbanco`,`codsucur`,`digcontr`,`cuentaba`,`ctabanc2`,`text33csb`,`text41csb`,`text42csb`,`text43csb`,`text51csb`,`text52csb`,`text53csb`,`text61csb`,`text62csb`,`text63csb`,`text71csb`,`text72csb`,`text73csb`,`text81csb`,`text82csb`,"
     'text83csb`,
-    SQL = SQL & "'Div vto." & Format(Now, "dd/mm/yyyy hh:nn") & "'"
-    SQL = SQL & ",`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban FROM "
-    SQL = SQL & " scobro WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-    SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+    Sql = Sql & "'Div vto." & Format(Now, "dd/mm/yyyy hh:nn") & "'"
+    Sql = Sql & ",`ultimareclamacion`,`agente`,`departamento`,`Devuelto`,`situacionjuri`,`noremesar`,`obs`,`nomclien`,`domclien`,`pobclien`,`cpclien`,`proclien`,iban FROM "
+    Sql = Sql & " scobro WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+    Sql = Sql & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
     Conn.BeginTrans
     
     'Hacemos
     CONT = 1
-    If Ejecuta(SQL) Then
+    If Ejecuta(Sql) Then
         'Hemos insertado. AHora updateamos el impvenci del que se queda
         If Im < 0 Then
             'Abonos
-            SQL = "UPDATE scobro SET impvenci= impvenci + " & TransformaComasPuntos(CStr(Abs(Im)))
+            Sql = "UPDATE scobro SET impvenci= impvenci + " & TransformaComasPuntos(CStr(Abs(Im)))
         Else
             'normal
-            SQL = "UPDATE scobro SET impvenci= impvenci - " & TransformaComasPuntos(CStr(Im))
+            Sql = "UPDATE scobro SET impvenci= impvenci - " & TransformaComasPuntos(CStr(Im))
         End If
         
-        SQL = SQL & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
-        SQL = SQL & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
-        If Ejecuta(SQL) Then CONT = 0 'TODO BIEN ******
+        Sql = Sql & " WHERE " & RecuperaValor(CadenaDesdeOtroForm, 1)
+        Sql = Sql & " AND numorden = " & RecuperaValor(CadenaDesdeOtroForm, 2)
+        If Ejecuta(Sql) Then CONT = 0 'TODO BIEN ******
     End If
     'Si mal, volvemos
     If CONT = 1 Then
@@ -1456,7 +1456,7 @@ Private Sub cmdRecepDocu_Click()
             MsgBox "Cuentas " & Label4(55).Caption & " requerida", vbExclamation
             Exit Sub
         End If
-        SQL = ""
+        Sql = ""
         If vParam.autocoste Then
             RC = Mid(txtCta(14).Text, 1, 1)
             If RC = 6 Or RC = 7 Then
@@ -1464,14 +1464,11 @@ Private Sub cmdRecepDocu_Click()
                     MsgBox "Centro de coste requerido", vbExclamation
                     Exit Sub
                 Else
-                    SQL = txtCCost(0).Text
+                    Sql = txtCCost(0).Text
                 End If
             End If
-            
-                
         End If
-        txtCCost(0).Text = SQL
-        
+        txtCCost(0).Text = Sql
     Else
         txtCCost(0).Text = ""
         Me.txtCta(14).Text = ""
@@ -1606,8 +1603,8 @@ Dim Img As Image
         'Cuenta beneficios gastos paras las diferencias si existieran
         'Si el total del talon es el total de las lineas entonces no mostrara los
         'datos del total. 0: igual   1  Mayor     2 Menor
-        SQL = RecuperaValor(CadenaDesdeOtroForm, 2)
-        I = CInt(SQL)
+        Sql = RecuperaValor(CadenaDesdeOtroForm, 2)
+        I = CInt(Sql)
 '        If CInt(SQL) > 0 Then
 '            I = 1
 '        Else
@@ -1625,13 +1622,13 @@ Dim Img As Image
         
         
         If I > 0 Then
-            SQL = "Beneficios"
+            Sql = "Beneficios"
         Else
-            SQL = "Pérdidas"
+            Sql = "Pérdidas"
         End If
         
-        If Opcion = 34 Then SQL = SQL & "(Deshacer apunte)"
-        Label4(55).Caption = SQL
+        If Opcion = 34 Then Sql = Sql & "(Deshacer apunte)"
+        Label4(55).Caption = Sql
 
         
 
@@ -1654,8 +1651,8 @@ Dim Img As Image
         
         
         
-        SQL = RecuperaValor(CadenaDesdeOtroForm, 1)
-        I = CInt(SQL)
+        Sql = RecuperaValor(CadenaDesdeOtroForm, 1)
+        I = CInt(Sql)
         If FP.Leer(I) = 0 Then
             If Opcion = 23 Then
                 'Normal
@@ -1682,13 +1679,13 @@ Dim Img As Image
         
         H = 0
         If I = vbTalon Then
-            SQL = "taloncta"
+            Sql = "taloncta"
         Else
-            SQL = "pagarecta"
+            Sql = "pagarecta"
         End If
         
-        SQL = DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1")
-        If Len(SQL) = vEmpresa.DigitosUltimoNivel Then
+        Sql = DevuelveDesdeBD(Sql, "paramtesor", "codigo", "1")
+        If Len(Sql) = vEmpresa.DigitosUltimoNivel Then
             chkAgruparCtaPuente(0).Visible = True
             H = 1 '
         
@@ -1769,7 +1766,7 @@ Dim I As Integer
 End Sub
 
 Private Sub frmBa_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    Sql = CadenaSeleccion
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
@@ -1840,15 +1837,15 @@ Private Sub imgCCoste_Click(Index As Integer)
 End Sub
 
 Private Sub imgConcepto_Click(Index As Integer)
-    SQL = ""
+    Sql = ""
     AbiertoOtroFormEnListado = True
     Set frmCon = New frmConceptos
     frmCon.DatosADevolverBusqueda = True
     frmCon.Show vbModal
     Set frmCon = Nothing
-    If SQL <> "" Then
-        Me.txtConcepto(Index).Text = RecuperaValor(SQL, 1)
-        Me.txtNConcepto(Index).Text = RecuperaValor(SQL, 2)
+    If Sql <> "" Then
+        Me.txtConcepto(Index).Text = RecuperaValor(Sql, 1)
+        Me.txtNConcepto(Index).Text = RecuperaValor(Sql, 2)
     Else
         QuitarPulsacionMas Me.txtConcepto(Index)
     End If
@@ -1858,14 +1855,14 @@ Private Sub imgConcepto_Click(Index As Integer)
 End Sub
 
 Private Sub imgCtaBanc_Click(Index As Integer)
-    SQL = ""
+    Sql = ""
     Set frmBa = New frmBanco
     frmBa.DatosADevolverBusqueda = "OK"
     frmBa.Show vbModal
     Set frmBa = Nothing
-    If SQL <> "" Then
-        txtCtaBanc(Index).Text = RecuperaValor(SQL, 1)
-        Me.txtDescBanc(Index).Text = RecuperaValor(SQL, 2)
+    If Sql <> "" Then
+        txtCtaBanc(Index).Text = RecuperaValor(Sql, 1)
+        Me.txtDescBanc(Index).Text = RecuperaValor(Sql, 2)
     End If
 End Sub
 
@@ -1913,20 +1910,20 @@ Private Sub txtCCost_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCCost_LostFocus(Index As Integer)
-    SQL = ""
+    Sql = ""
     txtCCost(Index).Text = Trim(txtCCost(Index).Text)
     If txtCCost(Index).Text <> "" Then
         
 
             txtConcpto(Index).Text = Val(txtConcpto(Index).Text)
-            SQL = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCCost(Index).Text, "T")
-            If SQL = "" Then
+            Sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCCost(Index).Text, "T")
+            If Sql = "" Then
                 MsgBox "No existe el centro de coste: " & Me.txtCCost(Index).Text, vbExclamation
                 Me.txtCCost(Index).Text = ""
             End If
         If txtCCost(Index).Text = "" Then SubSetFocus txtCCost(Index)
     End If
-    Me.txtDescCCoste(Index).Text = SQL
+    Me.txtDescCCoste(Index).Text = Sql
 End Sub
 
 Private Sub txtConcepto_GotFocus(Index As Integer)
@@ -1956,10 +1953,10 @@ Dim cad As String, cadTipo As String 'tipo cliente
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
-    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
     Select Case Index
-        Case 0, 1 'CONCEPTOS
+        Case 2, 3 'CONCEPTOS
             txtNConcepto(Index).Text = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtConcepto(Index), "N")
             If txtConcepto(Index).Text <> "" Then txtConcepto(Index).Text = Format(txtConcepto(Index).Text, "000")
     End Select
@@ -1976,7 +1973,7 @@ End Sub
 
 Private Sub txtDiario_LostFocus(Index As Integer)
     
-    SQL = ""
+    Sql = ""
     txtDiario(Index).Text = Trim(txtDiario(Index).Text)
     If txtDiario(Index).Text <> "" Then
         
@@ -1986,16 +1983,16 @@ Private Sub txtDiario_LostFocus(Index As Integer)
             SubSetFocus txtDiario(Index)
         Else
             txtDiario(Index).Text = Val(txtDiario(Index).Text)
-            SQL = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtDiario(Index).Text, "N")
+            Sql = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtDiario(Index).Text, "N")
             
-            If SQL = "" Then
+            If Sql = "" Then
                 MsgBox "No existe el diario: " & Me.txtDiario(Index).Text, vbExclamation
                 Me.txtDiario(Index).Text = ""
                 PonFoco txtDiario(Index)
             End If
         End If
     End If
-    Me.txtDescDiario(Index).Text = SQL
+    Me.txtDescDiario(Index).Text = Sql
      
 End Sub
 
@@ -2060,22 +2057,22 @@ Private Sub txtCtaBanc_LostFocus(Index As Integer)
     End If
     
     cad = txtCtaBanc(Index).Text
-    I = CuentaCorrectaUltimoNivelSIN(cad, SQL)
+    I = CuentaCorrectaUltimoNivelSIN(cad, Sql)
     If I = 0 Then
         MsgBox "NO existe la cuenta: " & txtCtaBanc(Index).Text, vbExclamation
-        SQL = ""
+        Sql = ""
         cad = ""
     Else
         cad = DevuelveDesdeBD("codmacta", "bancos", "codmacta", cad, "T")
         If cad = "" Then
             MsgBox "Cuenta no asoaciada a ningun banco", vbExclamation
-            SQL = ""
+            Sql = ""
             I = 0
         End If
     End If
     
     txtCtaBanc(Index).Text = cad
-    Me.txtDescBanc(Index).Text = SQL
+    Me.txtDescBanc(Index).Text = Sql
     If I = 0 Then PonFoco txtCtaBanc(Index)
     
 End Sub
@@ -2093,9 +2090,9 @@ Private Sub txtFPago_LostFocus(Index As Integer)
     If ComprobarCampoENlazado(txtFPago(Index), txtDescFPago(Index), "N") > 0 Then
         If txtFPago(Index).Text <> "" Then
             'Tiene valor.
-            SQL = DevuelveDesdeBD("nomforpa", "formapago", "codforpa", txtFPago(Index).Text, "N")
-            If SQL = "" Then SQL = "Codigo no encontrado"
-            txtDescFPago(Index).Text = SQL
+            Sql = DevuelveDesdeBD("nomforpa", "formapago", "codforpa", txtFPago(Index).Text, "N")
+            If Sql = "" Then Sql = "Codigo no encontrado"
+            txtDescFPago(Index).Text = Sql
         Else
             'Era un error
             SubSetFocus txtFPago(Index)
@@ -2260,18 +2257,18 @@ Dim B As Byte
         'NO hace falta que sean de ultimo nivel
         Cta = (txtCta(Index).Text)
                                 '********
-        B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
+        B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
         If B = 0 Then
             MsgBox "NO existe la cuenta: " & txtCta(Index).Text, vbExclamation
             txtCta(Index).Text = ""
             DtxtCta(Index).Text = ""
         Else
             txtCta(Index).Text = Cta
-            DtxtCta(Index).Text = SQL
+            DtxtCta(Index).Text = Sql
             If B = 1 Then
                 DtxtCta(Index).Tag = ""
             Else
-                DtxtCta(Index).Tag = SQL
+                DtxtCta(Index).Tag = Sql
             End If
             
             
@@ -2288,20 +2285,20 @@ Dim B As Byte
     Case Else
         'DE ULTIMO NIVEL
         Cta = (txtCta(Index).Text)
-        If CuentaCorrectaUltimoNivel(Cta, SQL) Then
+        If CuentaCorrectaUltimoNivel(Cta, Sql) Then
             txtCta(Index).Text = Cta
-            DtxtCta(Index).Text = SQL
+            DtxtCta(Index).Text = Sql
             
             
         Else
-            MsgBox SQL, vbExclamation
+            MsgBox Sql, vbExclamation
             txtCta(Index).Text = ""
             DtxtCta(Index).Text = ""
             txtCta(Index).SetFocus
         End If
         
     End Select
-    txtCta(6).Tag = txtCta(6).Text
+    txtCta(Index).Tag = txtCta(Index).Text
 End Sub
 
 

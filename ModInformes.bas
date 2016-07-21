@@ -640,7 +640,7 @@ Dim SubTipo As String 'F: fecha   N: numero   T: texto  H: HORA
         'Campos fecha
         SubTipo = "F"
     
-    Case "CONC", "TDIA", "BIC", "AGE", "COI", "INM", "FRA"
+    Case "CONC", "TDIA", "BIC", "AGE", "COI", "INM", "FRA", "COD"
         'concepto
         SubTipo = "N"
         

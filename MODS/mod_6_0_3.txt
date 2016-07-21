@@ -9,3 +9,9 @@ alter table `ariconta1`.`talones_facturas`
 alter table `ariconta1`.`talones_facturas` 
 	add foreign key `FK_talones_facturas`(`codigo`) references `talones` (`codigo`) on delete restrict  on update cascade 
 ;
+
+#impresion de documentos
+insert into `ariconta1`.`scryst` (`codigo`,`descripcion`,`informe`) values ( '0611-00','Informe Recepcion Documentos','TalonPag.rpt')
+;
+insert into `ariconta1`.`scryst` (`codigo`,`descripcion`,`informe`) values ( '0611-01','Justificante Recepcion Documentos','TalonPagConfRec.rpt')
+;

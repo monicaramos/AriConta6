@@ -5128,14 +5128,10 @@ Dim RS As ADODB.Recordset
                             Set RS = New ADODB.Recordset
                             RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                             If Not RS.EOF Then
-                                If DBLet(RS.Fields(0).Value, "T") = 0 Then
-                                    Combo1(0).ListIndex = 0
+                                If DBLet(RS.Fields(0).Value, "T") <> "" Then
+                                    PosicionarCombo Combo1(0), Asc(DBLet(RS.Fields(0).Value, "T"))
                                 Else
-                                    If DBLet(RS.Fields(0).Value, "T") <> "" Then
-                                        PosicionarCombo Combo1(0), Asc(DBLet(RS.Fields(0).Value, "T"))
-                                    Else
-                                        Combo1(0).ListIndex = 0
-                                    End If
+                                    Combo1(0).ListIndex = 0
                                 End If
                             End If
                             Set RS = Nothing

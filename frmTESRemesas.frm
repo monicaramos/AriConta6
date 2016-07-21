@@ -1919,7 +1919,7 @@ Dim Img As Image
     Me.imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For I = 0 To 5
-        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
     
     ' Botonera Principal
@@ -1974,7 +1974,6 @@ Dim Img As Image
     
     Orden = True
     CampoOrden = "remesas.fecremesa"
-    CargaCombo
     
     If Tipo = 1 Then
         SubTipo = vbTipoPagoRemesa
@@ -2972,10 +2971,6 @@ Dim C As String
     If C <> "" Then C = " AND " & C
     PonerOrdenFiltro = C
 End Function
-
-Private Sub CargaCombo()
-    
-End Sub
 
 
 Private Sub NuevaRem()

@@ -2087,6 +2087,7 @@ Private Sub cmdAceptar_Click()
 '                    DesBloqAsien   'Desbloqueamos el asiento
                     TerminaBloquear
                     
+                    AsientoConExtModificado = 1
                 Else
                     PonerCampos
                 End If
@@ -2102,7 +2103,10 @@ Private Sub cmdAceptar_Click()
                     ModificarLinea
                     PosicionarData
             End Select
+            
+            AsientoConExtModificado = 1
     End Select
+    
     Screen.MousePointer = vbDefault
     
 Error1:
@@ -2164,24 +2168,24 @@ Private Sub LlamaContraPar()
 End Sub
 
 Private Sub cmdSaldoHco_Click(Index As Integer)
-Dim cta As String
+Dim Cta As String
     If Modo = 5 And ModoLineas > 0 Then
         If txtAux(4).Text = "" Then
             MsgBox "Seleccione una cuenta", vbExclamation
             Exit Sub
         End If
         SQL = txtAux(4).Text
-        cta = txtAux2(4).Text
+        Cta = txtAux2(4).Text
     Else
         If AdoAux(1).Recordset.EOF Then
             MsgBox "Ningún registro activo.", vbExclamation
             Exit Sub
         End If
         SQL = AdoAux(1).Recordset!codmacta
-        cta = DBLet(AdoAux(1).Recordset!Nommacta)
+        Cta = DBLet(AdoAux(1).Recordset!Nommacta)
     End If
     If Index = 0 Then
-        SaldoHistorico SQL, "", cta, False
+        SaldoHistorico SQL, "", Cta, False
     Else
         If VieneDeDesactualizar Then
             MsgBox "Acaba de desactualizar asientos. No puede hacer consulta desde aqui.", vbExclamation
@@ -2462,14 +2466,14 @@ End Sub
 
 Private Sub CargarColumnas()
 Dim Columnas As String
-Dim ancho As String
+Dim Ancho As String
 Dim Alinea As String
 Dim Formato As String
 Dim Ncol As Integer
 Dim C As ColumnHeader
 
     Columnas = "Código|Nombre|Documento|Id|Tipo|"
-    ancho = "1000|5450|0|0|0|"
+    Ancho = "1000|5450|0|0|0|"
     'vwColumnRight =1  left=0   center=2
     Alinea = "0|0|0|0|0|"
     'Formatos
@@ -2483,7 +2487,7 @@ Dim C As ColumnHeader
     For NumRegElim = 1 To Ncol
          Set C = lw1.ColumnHeaders.Add()
          C.Text = RecuperaValor(Columnas, CInt(NumRegElim))
-         C.Width = RecuperaValor(ancho, CInt(NumRegElim))
+         C.Width = RecuperaValor(Ancho, CInt(NumRegElim))
          C.Alignment = Val(RecuperaValor(Alinea, CInt(NumRegElim)))
          C.Tag = RecuperaValor(Formato, CInt(NumRegElim))
     Next NumRegElim
@@ -2548,6 +2552,10 @@ Dim B As Boolean
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.Visible = B
     cmdAceptar.Visible = B
+    
+    If ASIENTO <> "" Then
+        cmdRegresar.Visible = Not B
+    End If
        
     PonerOpcionesMenuGeneral Me
     PonerModoUsuarioGnral Modo, "ariconta"
@@ -3025,7 +3033,9 @@ Dim cad As String
 Dim Aux As String
 Dim I As Integer
 Dim J As Integer
-
+    
+    Unload Me
+    
 End Sub
 
 
@@ -3555,7 +3565,7 @@ Dim LINASI As Long
                 While Not miRsAux.EOF
                     LINASI = LINASI + 1
                     SQL = SQL & ", (" & Data1.Recordset!NumDiari & "," & DBSet(Data1.Recordset!FechaEnt, "F") & "," & Data1.Recordset!NumAsien
-                    SQL = SQL & "," & LINASI & ",'" & miRsAux!cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
+                    SQL = SQL & "," & LINASI & ",'" & miRsAux!Cta & "'," & DBSet(miRsAux!Numdocum, "T") & "," & DBSet(miRsAux!codconce, "N")
                     SQL = SQL & "," & DBSet(miRsAux!Ampconce & " " & Ampliacion, "T") & "," & DBSet(miRsAux!timported, "N", "S") & "," & DBSet(miRsAux!timporteH, "N", "S")
                     SQL = SQL & "," & DBSet(miRsAux!ctacontr, "T")
                     If vParam.autocoste Then
