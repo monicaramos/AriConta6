@@ -1919,7 +1919,7 @@ Dim Img As Image
     Me.imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For I = 0 To 5
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
     
     ' Botonera Principal
@@ -2211,7 +2211,7 @@ Dim temp As Boolean
     On Error GoTo Error2
     'Ciertas comprobaciones
     
-    
+    If Me.lw1.SelectedItem Is Nothing Then Exit Sub
     If Me.lw1.SelectedItem = "" Then Exit Sub
         
     If Not SepuedeBorrar Then Exit Sub
@@ -3211,6 +3211,9 @@ Dim SQL2 As String
         MsgBox cad, vbExclamation
         Screen.MousePointer = vbDefault
         
+        ModoInsertar = False
+        cmdAceptar(0).Caption = "&Aceptar"
+        
         Exit Sub
     End If
     
@@ -3232,8 +3235,6 @@ Dim SQL2 As String
     
     
     If I > 0 Then
-        If SubTipo <> vbTipoPagoRemesa Then
-        End If
         I = 1  'Para que siga por abajo
     End If
     
@@ -3254,6 +3255,10 @@ Dim SQL2 As String
     
     If I = 0 Then
         MsgBox "Ningun dato a remesar con esos valores", vbExclamation
+        
+        ModoInsertar = False
+        cmdAceptar(0).Caption = "&Aceptar"
+        
     Else
          
          

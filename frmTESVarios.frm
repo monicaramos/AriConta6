@@ -15,6 +15,176 @@ Begin VB.Form frmTESVarios
    ScaleWidth      =   12855
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameModiRemeTal 
+      Height          =   3015
+      Left            =   30
+      TabIndex        =   257
+      Top             =   60
+      Width           =   6765
+      Begin VB.CommandButton cmdModRemTal 
+         Caption         =   "Modificar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   4080
+         TabIndex        =   260
+         Top             =   2400
+         Width           =   1095
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "Salir"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   25
+         Left            =   5280
+         TabIndex        =   261
+         Top             =   2400
+         Width           =   1095
+      End
+      Begin VB.TextBox txtDescCta 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   8
+         Left            =   2040
+         TabIndex        =   262
+         Text            =   "Text2"
+         Top             =   1800
+         Width           =   4335
+      End
+      Begin VB.TextBox txtCta 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   8
+         Left            =   480
+         TabIndex        =   259
+         Text            =   "Text2"
+         Top             =   1800
+         Width           =   1485
+      End
+      Begin VB.TextBox Text1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   27
+         Left            =   480
+         TabIndex        =   258
+         Text            =   "Text1"
+         Top             =   1080
+         Width           =   1485
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Banco"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   1
+         Left            =   510
+         TabIndex        =   303
+         Top             =   1530
+         Width           =   840
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   18
+         Left            =   510
+         TabIndex        =   302
+         Top             =   780
+         Width           =   840
+      End
+      Begin VB.Label Label5 
+         Alignment       =   2  'Center
+         Caption         =   "Modificar remesa"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Index           =   10
+         Left            =   240
+         TabIndex        =   263
+         Top             =   240
+         Width           =   5295
+      End
+      Begin VB.Image imgCuentas 
+         Height          =   240
+         Index           =   8
+         Left            =   1710
+         Top             =   1530
+         Width           =   240
+      End
+      Begin VB.Image Image1 
+         Height          =   240
+         Index           =   27
+         Left            =   1680
+         Top             =   810
+         Width           =   240
+      End
+   End
    Begin MSComDlg.CommonDialog cd1 
       Left            =   6240
       Top             =   4800
@@ -24,14 +194,14 @@ Begin VB.Form frmTESVarios
    End
    Begin VB.Frame FrameDevlucionRe 
       Height          =   7245
-      Left            =   0
+      Left            =   2970
       TabIndex        =   81
-      Top             =   0
+      Top             =   30
       Width           =   5835
       Begin VB.Frame FrameDevDesdeVto 
          Height          =   1215
          Left            =   120
-         TabIndex        =   275
+         TabIndex        =   273
          Top             =   600
          Width           =   5655
          Begin VB.TextBox txtNumero 
@@ -66,7 +236,7 @@ Begin VB.Form frmTESVarios
             Height          =   285
             Index           =   11
             Left            =   2400
-            TabIndex        =   276
+            TabIndex        =   274
             Text            =   "Text9"
             Top             =   240
             Width           =   3135
@@ -101,7 +271,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   38
             Left            =   600
-            TabIndex        =   278
+            TabIndex        =   276
             Top             =   720
             Width           =   1065
          End
@@ -127,7 +297,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   37
             Left            =   120
-            TabIndex        =   277
+            TabIndex        =   275
             Top             =   240
             Width           =   900
          End
@@ -370,7 +540,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   17
          Left            =   5040
-         TabIndex        =   274
+         TabIndex        =   272
          Top             =   3570
          Width           =   555
       End
@@ -630,14 +800,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameReclamaEmail 
       Height          =   6975
       Left            =   3450
-      TabIndex        =   293
+      TabIndex        =   291
       Top             =   0
       Width           =   10335
       Begin VB.CommandButton cmdEliminarReclama 
          Height          =   375
          Left            =   1200
          Style           =   1  'Graphical
-         TabIndex        =   301
+         TabIndex        =   299
          ToolTipText     =   "Eliminar"
          Top             =   6360
          Width           =   375
@@ -655,7 +825,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   375
          Left            =   7560
-         TabIndex        =   300
+         TabIndex        =   298
          Top             =   6360
          Width           =   1215
       End
@@ -673,7 +843,7 @@ Begin VB.Form frmTESVarios
          Height          =   240
          Index           =   1
          Left            =   8760
-         TabIndex        =   298
+         TabIndex        =   296
          Top             =   450
          Width           =   1365
       End
@@ -691,7 +861,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   0
          Left            =   7230
-         TabIndex        =   297
+         TabIndex        =   295
          Top             =   480
          Value           =   -1  'True
          Width           =   1335
@@ -710,14 +880,14 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   31
          Left            =   9000
-         TabIndex        =   294
+         TabIndex        =   292
          Top             =   6360
          Width           =   1095
       End
       Begin MSComctlLib.ListView ListView6 
          Height          =   5295
          Left            =   240
-         TabIndex        =   295
+         TabIndex        =   293
          Top             =   840
          Width           =   9855
          _ExtentX        =   17383
@@ -788,7 +958,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   44
          Left            =   6300
-         TabIndex        =   299
+         TabIndex        =   297
          Top             =   420
          Width           =   750
       End
@@ -806,7 +976,7 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   296
+         TabIndex        =   294
          Top             =   360
          Width           =   4935
       End
@@ -823,7 +993,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   9
          Left            =   1800
-         TabIndex        =   266
+         TabIndex        =   264
          Text            =   "Text2"
          Top             =   1680
          Width           =   3255
@@ -1064,7 +1234,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   35
          Left            =   120
-         TabIndex        =   267
+         TabIndex        =   265
          Top             =   1440
          Width           =   780
       End
@@ -1108,6 +1278,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   375
+         Index           =   0
          Left            =   120
          TabIndex        =   21
          Top             =   240
@@ -1227,131 +1398,6 @@ Begin VB.Form frmTESVarios
          TabIndex        =   15
          Top             =   4440
          Width           =   1140
-      End
-   End
-   Begin VB.Frame FrameModiRemeTal 
-      Height          =   3015
-      Left            =   0
-      TabIndex        =   257
-      Top             =   0
-      Width           =   5775
-      Begin VB.CommandButton cmdModRemTal 
-         Caption         =   "Modificar"
-         Height          =   375
-         Left            =   3240
-         TabIndex        =   260
-         Top             =   2400
-         Width           =   1095
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "Salir"
-         Height          =   375
-         Index           =   25
-         Left            =   4440
-         TabIndex        =   261
-         Top             =   2400
-         Width           =   1095
-      End
-      Begin VB.TextBox txtDescCta 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   8
-         Left            =   2040
-         TabIndex        =   263
-         Text            =   "Text2"
-         Top             =   1800
-         Width           =   3495
-      End
-      Begin VB.TextBox txtCta 
-         Height          =   285
-         Index           =   8
-         Left            =   480
-         TabIndex        =   259
-         Text            =   "Text2"
-         Top             =   1800
-         Width           =   1335
-      End
-      Begin VB.TextBox Text1 
-         Height          =   285
-         Index           =   27
-         Left            =   480
-         TabIndex        =   258
-         Text            =   "Text1"
-         Top             =   1080
-         Width           =   1095
-      End
-      Begin VB.Label Label5 
-         Alignment       =   2  'Center
-         Caption         =   "Modificar remesa"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   375
-         Index           =   10
-         Left            =   240
-         TabIndex        =   265
-         Top             =   240
-         Width           =   5295
-      End
-      Begin VB.Image imgCuentas 
-         Height          =   240
-         Index           =   8
-         Left            =   1200
-         Top             =   1560
-         Width           =   240
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   27
-         Left            =   1200
-         Top             =   840
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Fecha remesa"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   33
-         Left            =   480
-         TabIndex        =   262
-         Top             =   840
-         Width           =   660
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Banco"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   34
-         Left            =   480
-         TabIndex        =   264
-         Top             =   1560
-         Width           =   1200
       End
    End
    Begin VB.Frame FrImprimeRecibos 
@@ -2741,7 +2787,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "Agrupa cancelacion"
          Height          =   255
          Left            =   240
-         TabIndex        =   279
+         TabIndex        =   277
          Top             =   3120
          Width           =   2535
       End
@@ -2752,7 +2798,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   2160
-         TabIndex        =   271
+         TabIndex        =   269
          Text            =   "Text3"
          Top             =   1920
          Width           =   1455
@@ -2763,7 +2809,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   0
          Left            =   2160
-         TabIndex        =   270
+         TabIndex        =   268
          Text            =   "Text3"
          Top             =   1440
          Width           =   3135
@@ -2827,7 +2873,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   8
          Left            =   1440
-         TabIndex        =   273
+         TabIndex        =   271
          Top             =   1920
          Width           =   615
       End
@@ -2836,7 +2882,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   7
          Left            =   1440
-         TabIndex        =   272
+         TabIndex        =   270
          Top             =   1440
          Width           =   495
       End
@@ -3078,7 +3124,7 @@ Begin VB.Form frmTESVarios
       Begin VB.Frame FrameDocPorveedor 
          Height          =   1095
          Left            =   120
-         TabIndex        =   280
+         TabIndex        =   278
          Top             =   3840
          Width           =   4815
          Begin VB.TextBox txtTexto 
@@ -3105,7 +3151,7 @@ Begin VB.Form frmTESVarios
             Height          =   315
             Index           =   37
             Left            =   240
-            TabIndex        =   283
+            TabIndex        =   281
             Top             =   720
             Width           =   825
          End
@@ -3114,7 +3160,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   36
             Left            =   240
-            TabIndex        =   282
+            TabIndex        =   280
             Top             =   240
             Width           =   825
          End
@@ -3133,7 +3179,7 @@ Begin VB.Form frmTESVarios
             Height          =   195
             Index           =   39
             Left            =   0
-            TabIndex        =   281
+            TabIndex        =   279
             Top             =   0
             Width           =   1500
          End
@@ -3153,7 +3199,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   10
          Left            =   2040
-         TabIndex        =   268
+         TabIndex        =   266
          Text            =   "Text2"
          Top             =   1920
          Width           =   3015
@@ -3286,7 +3332,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   36
          Left            =   120
-         TabIndex        =   269
+         TabIndex        =   267
          Top             =   1680
          Width           =   900
       End
@@ -3549,7 +3595,7 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameRecaudacionEjecutiva 
       Height          =   7815
       Left            =   0
-      TabIndex        =   284
+      TabIndex        =   282
       Top             =   0
       Visible         =   0   'False
       Width           =   12735
@@ -3557,7 +3603,7 @@ Begin VB.Form frmTESVarios
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   9600
-         TabIndex        =   288
+         TabIndex        =   286
          Top             =   7320
          Width           =   975
       End
@@ -3566,14 +3612,14 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   29
          Left            =   10680
-         TabIndex        =   285
+         TabIndex        =   283
          Top             =   7320
          Width           =   1095
       End
       Begin MSComctlLib.ListView ListView5 
          Height          =   6495
          Left            =   120
-         TabIndex        =   287
+         TabIndex        =   285
          Top             =   720
          Width           =   12375
          _ExtentX        =   21828
@@ -3669,7 +3715,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   11
          Left            =   3120
-         TabIndex        =   286
+         TabIndex        =   284
          Top             =   240
          Width           =   5115
       End
@@ -3694,7 +3740,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   12
          Left            =   2160
-         TabIndex        =   302
+         TabIndex        =   300
          Text            =   "Text9"
          Top             =   1800
          Width           =   3015
@@ -3803,7 +3849,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   45
          Left            =   120
-         TabIndex        =   303
+         TabIndex        =   301
          Top             =   1560
          Width           =   1335
       End
@@ -3836,7 +3882,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   43
          Left            =   2400
-         TabIndex        =   292
+         TabIndex        =   290
          Top             =   3240
          Width           =   1500
       End
@@ -4177,7 +4223,7 @@ Begin VB.Form frmTESVarios
       Begin MSComctlLib.ListView lwtipopago 
          Height          =   2295
          Left            =   2400
-         TabIndex        =   291
+         TabIndex        =   289
          Top             =   2400
          Width           =   3855
          _ExtentX        =   6800
@@ -4242,7 +4288,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   42
          Left            =   240
-         TabIndex        =   290
+         TabIndex        =   288
          Top             =   2400
          Width           =   1230
       End
@@ -4261,7 +4307,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   41
          Left            =   360
-         TabIndex        =   289
+         TabIndex        =   287
          Top             =   4800
          Width           =   3060
       End
@@ -5278,7 +5324,7 @@ Dim TipoFicheroDevolucion As Byte
         SQL = ""
         If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
         If txtSerie(4).Text <> "" Then SQL = SQL & " AND numserie = '" & txtSerie(4).Text & "'"
-        If txtNumFac(4).Text <> "" Then SQL = SQL & " AND codfaccl = " & txtNumFac(4).Text
+        If txtnumfac(4).Text <> "" Then SQL = SQL & " AND codfaccl = " & txtnumfac(4).Text
         If txtNumero.Text <> "" Then SQL = SQL & " AND numorden = " & txtNumero.Text
         SQL = Mid(SQL, 5)
         
@@ -5850,8 +5896,8 @@ Dim C As String
 
     
     CuentasCC = "codfaccl"
-    If txtNumFac(3).Text <> "" Then C = C & " AND " & CuentasCC & " >= " & txtNumFac(3).Text
-    If txtNumFac(2).Text <> "" Then C = C & " AND " & CuentasCC & " <= " & txtNumFac(2).Text
+    If txtnumfac(3).Text <> "" Then C = C & " AND " & CuentasCC & " >= " & txtnumfac(3).Text
+    If txtnumfac(2).Text <> "" Then C = C & " AND " & CuentasCC & " <= " & txtnumfac(2).Text
     
     
     CuentasCC = "scobro.codmacta"
@@ -6900,6 +6946,9 @@ Dim W As Integer
     CargaImagenesAyudas imgRem, 1, "Seleccionar remesa"
     CargaImagenesAyudas imgFP, 1, "Seleccionar Forma de pago"
     CargaImagenesAyudas imgConcepto, 1, "Concepto"
+    CargaImagenesAyudas Image1, 2
+
+
 '    CargaImagenesAyudas ImageAyuda, 3
 
     Me.imgEliminarCta.Picture = frmPpal.ImaListBotoneras32.ListImages(5).Picture
@@ -7477,7 +7526,7 @@ Private Sub imgFra_Click()
         If CadenaDesdeOtroForm <> "" Then
 
             txtSerie(4).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
-            txtNumFac(4).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
+            txtnumfac(4).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
             Me.txtNumero.Text = RecuperaValor(CadenaDesdeOtroForm, 4)
             PonerFoco Text1(11)
         End If
@@ -8703,7 +8752,7 @@ End Sub
 
 
 Private Sub txtNumFac_GotFocus(Index As Integer)
-    ObtenerFoco txtNumFac(Index)
+    ObtenerFoco txtnumfac(Index)
 End Sub
 
 Private Sub txtNumFac_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -8711,12 +8760,12 @@ Private Sub txtNumFac_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtNumFac_LostFocus(Index As Integer)
-    txtNumFac(Index).Text = Trim(txtNumFac(Index).Text)
-    If txtNumFac(Index).Text = "" Then Exit Sub
-    If Not IsNumeric(txtNumFac(Index).Text) Then
+    txtnumfac(Index).Text = Trim(txtnumfac(Index).Text)
+    If txtnumfac(Index).Text = "" Then Exit Sub
+    If Not IsNumeric(txtnumfac(Index).Text) Then
         MsgBox "Campo numerico.", vbExclamation
-        If Index = 4 Then txtNumFac(Index).Text = ""
-        PonerFoco txtNumFac(Index)
+        If Index = 4 Then txtnumfac(Index).Text = ""
+        PonerFoco txtnumfac(Index)
     End If
 End Sub
 

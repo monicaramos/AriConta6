@@ -196,6 +196,7 @@ Form=frmTESRemesasTP.frm
 Form=frmTESRemesasTPList.frm
 Form=frmTESRemesasTPCont.frm
 Form=frmTESRemesasTPDev.frm
+Form=frmTESNorma57.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""
