@@ -1421,7 +1421,7 @@ Private Sub Combo1_Validate(Cancel As Boolean)
         
         I = 0
         If Cobros And (Combo1.ItemData(Combo1.ListIndex) = 2 Or Combo1.ItemData(Combo1.ListIndex) = 3) Then I = 1
-        Me.mnbarra1.Visible = I = 1
+        Me.mnBarra1.Visible = I = 1
         Me.mnNumero.Visible = I = 1
         
         'check de impresion de documento
@@ -1608,7 +1608,7 @@ End Sub
 Private Sub CargaColumnas()
 Dim ColX As ColumnHeader
 Dim Columnas As String
-Dim ancho As String
+Dim Ancho As String
 Dim ALIGN As String
 Dim NCols As Integer
 Dim I As Integer
@@ -1617,7 +1617,7 @@ Dim I As Integer
    If Cobros Then
         NCols = 13 '11
         Columnas = "Serie|Factura|F.Factura|F. VTO|Nº|CLIENTE|Tipo|Importe|Gasto|Cobrado|Pendiente|"
-        ancho = "800|10%|12%|12%|520|23%|840|12%|8%|11%|12%|0%|0%|"
+        Ancho = "800|10%|12%|12%|520|23%|840|12%|8%|11%|12%|0%|0%|"
         ALIGN = "LLLLLLLDDDDDD"
         
         
@@ -1628,14 +1628,14 @@ Dim I As Integer
                 ''Si es un talon o pagare entonces añadire un campo mas
                 NCols = NCols + 1
                 Columnas = Columnas & "Nº Documento|"
-                ancho = ancho & "2500|"
+                Ancho = Ancho & "2500|"
                 ALIGN = ALIGN & "L"
             End If
         End If
    Else
         NCols = 12
         Columnas = "Serie|Factura|F. Fact|F. VTO|Nº|PROVEEDOR|Tipo|Importe|Pagado|Pendiente|"
-        ancho = "800|15%|12%|12%|400|26%|800|12%|12%|12%|0%|0%|"
+        Ancho = "800|15%|12%|12%|400|26%|800|12%|12%|12%|0%|0%|"
         ALIGN = "LLLLLLLDDDDD"
         ListView1.Tag = 2200  'La suma de los valores fijos. Para k ajuste los campos k pueden crecer
    End If
@@ -1646,7 +1646,7 @@ Dim I As Integer
             Set ColX = ListView1.ColumnHeaders.Add()
             ColX.Text = cad
             'ANCHO
-            cad = RecuperaValor(ancho, I)
+            cad = RecuperaValor(Ancho, I)
             ColX.Tag = cad
             'align
             cad = Mid(ALIGN, I, 1)
@@ -1999,7 +1999,7 @@ Dim J As Byte
          For J = 1 To ListView1.ColumnHeaders.Count - 1
              ItmX.ListSubItems(J).ForeColor = vbRed
          Next J
-         If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
+         If DBLet(RS!Referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
      End If
      
      ' nuevo si está marcada lo miramos
@@ -3952,48 +3952,13 @@ Dim ImporteInterno As Currency
                     End If
                     Aux = Aux & Ampliacion
                 End If
-                Aux = Aux & ",'CONTAB',0)"
+                Aux = Aux & ",'PAGOS',0)"
                 Aux = SQL & Aux
                 Ejecuta Aux
             Next Conce
         End If
     End If
     
-    
-    'Para desbloquear el apunte
-    Debe = False
-    If Cabecera > 2 Then
-        Debe = True
-    End If
-    If Debe Then
-        SQL = "UPDATE hcabapu SET bloqactu = 0 WHERE numdiari ="
-        If Cobros Then
-            Ampliacion = vp.diaricli
-        Else
-            Ampliacion = vp.diaripro
-        End If
-        
-        SQL = SQL & Ampliacion & " AND Fechaent = '" & Format(FechaAsiento, FormatoFecha) & "' AND Numasien = " & m.Contador
-        
-        
-        'MODIFICACION 29 Junio 05
-        ' NO lo pongo a bloqactu =0 ya que despues voy a pasarlos a HISTORICO apuntes
-        'Conn.Execute SQL
-        '------------------------------------------
-    
-'        SQL = "INSERT INTO tmpactualizar (numdiari, fechaent, numasien, codusu) VALUES ("
-        If Cobros Then
-            Ampliacion = vp.diaricli
-        Else
-            Ampliacion = vp.diaripro
-        End If
-        
-'        SQL = SQL & Ampliacion & ",'" & Format(Text1.Text, FormatoFecha) & "'," & m.Contador
-'        SQL = SQL & "," & vUsu.Codigo & ")"
-'        Conn.Execute SQL
-        InsertaTmpActualizar m.Contador, Ampliacion, CDate(FechaAsiento)
-        
-    End If
     
 End Function
 

@@ -667,7 +667,7 @@ End Sub
 Private Sub CargaColumnas()
 Dim ColX As ColumnHeader
 Dim Columnas As String
-Dim ancho As String
+Dim Ancho As String
 Dim ALIGN As String
 Dim NCols As Integer
 Dim I As Integer
@@ -676,7 +676,7 @@ Dim I As Integer
    If Cobros Then
         NCols = 11
         Columnas = "Serie|Factura|F.Factura|F. VTO|Nº|CLIENTE|Tipo|Importe|Gasto|Cobrado|Pendiente|"
-        ancho = "800|10%|12%|12%|520|23%|840|12%|8%|11%|12%|"
+        Ancho = "800|10%|12%|12%|520|23%|840|12%|8%|11%|12%|"
         ALIGN = "LLLLLLLDDDD"
         
         
@@ -686,13 +686,13 @@ Dim I As Integer
             ''Si es un talon o pagare entonces añadire un campo mas
             NCols = NCols + 1
             Columnas = Columnas & "Nº Documento|"
-            ancho = ancho & "2500|"
+            Ancho = Ancho & "2500|"
             ALIGN = ALIGN & "L"
         End If
    Else
         NCols = 10
         Columnas = "Serie|Nº Factura|F. Fact|F. VTO|Nº|PROVEEDOR|Tipo|Importe|Pagado|Pendiente|"
-        ancho = "800|12%|11%|11%|400|25%|800|12%|11%|12%|"
+        Ancho = "800|12%|11%|11%|400|25%|800|12%|11%|12%|"
         ALIGN = "LLLLLLLDDD"
         ListView1.Tag = 1600  'La suma de los valores fijos. Para k ajuste los campos k pueden crecer
     End If
@@ -703,7 +703,7 @@ Dim I As Integer
             Set ColX = ListView1.ColumnHeaders.Add()
             ColX.Text = cad
             'ANCHO
-            cad = RecuperaValor(ancho, I)
+            cad = RecuperaValor(Ancho, I)
             ColX.Tag = cad
             'align
             cad = Mid(ALIGN, I, 1)
@@ -808,7 +808,7 @@ Dim Inserta As Boolean
             
         ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
             If Not OrdenarEfecto And Not SeVeRiesgoTalPag Then
-                    If RS!recedocu = 1 Then Inserta = False
+                If RS!recedocu = 1 Then Inserta = False
             End If
         End If
         
@@ -866,7 +866,7 @@ Dim ImpAux As Currency
     
     ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
         If OrdenarEfecto Then
-            If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
+            'If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
         End If
         If SeVeRiesgoTalPag Then
             If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!impcobro, "N")
@@ -1012,7 +1012,7 @@ Dim J As Byte
         For J = 1 To ListView1.ColumnHeaders.Count - 1
             ItmX.ListSubItems(J).ForeColor = vbRed
         Next J
-        If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
+        If DBLet(RS!Referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
     End If
 
 

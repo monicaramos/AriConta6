@@ -280,7 +280,15 @@ Dim Obs As String
         SQL = SQL & "'COBROS',0,"
         
         '###FALTA1
-        SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ")"
+'        SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ")"
+        
+        'los datos de la factura (solo en el apunte del cliente)
+        Dim TipForpa As Byte
+        TipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", RS!codforpa, "N")
+        
+        SQL = SQL & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFactu, "N") & "," & DBSet(RS!FecFactu, "F") & "," & DBSet(RS!numorden, "N") & "," & DBSet(TipForpa, "N") & ","
+        SQL = SQL & TipoRemesa & "," & Codigo & "," & Anyo & ")"
+
         
 
         If Not Ejecuta(SQL) Then Exit Function
@@ -414,7 +422,6 @@ Dim Obs As String
             SQL = SQL & "'COBROS',0,"
             
             'los datos de la factura (solo en el apunte del cliente)
-            Dim TipForpa As Byte
             TipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", RS!codforpa, "N")
             
             SQL = SQL & DBSet(RS!NUmSerie, "T") & "," & DBSet(RS!NumFactu, "N") & "," & DBSet(RS!FecFactu, "F") & "," & DBSet(RS!numorden, "N") & "," & DBSet(TipForpa, "N") & ","

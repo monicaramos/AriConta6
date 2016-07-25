@@ -1570,7 +1570,7 @@ End Sub
 Private Sub CargaColumnas()
 Dim ColX As ColumnHeader
 Dim Columnas As String
-Dim ancho As String
+Dim Ancho As String
 Dim ALIGN As String
 Dim NCols As Integer
 Dim I As Integer
@@ -1578,7 +1578,7 @@ Dim I As Integer
     ListView1.ColumnHeaders.Clear
     NCols = 13 '11
     Columnas = "Serie|Factura|F.Factura|F. VTO|Nº|CLIENTE|Tipo|Importe|Gasto|Cobrado|Pendiente|"
-    ancho = "800|10%|12%|12%|520|23%|840|12%|8%|11%|12%|0%|0%|"
+    Ancho = "800|10%|12%|12%|520|23%|840|12%|8%|11%|12%|0%|0%|"
     ALIGN = "LLLLLLLDDDDDD"
     
     
@@ -1589,7 +1589,7 @@ Dim I As Integer
             ''Si es un talon o pagare entonces añadire un campo mas
             NCols = NCols + 1
             Columnas = Columnas & "Nº Documento|"
-            ancho = ancho & "2500|"
+            Ancho = Ancho & "2500|"
             ALIGN = ALIGN & "L"
         End If
     End If
@@ -1599,7 +1599,7 @@ Dim I As Integer
             Set ColX = ListView1.ColumnHeaders.Add()
             ColX.Text = cad
             'ANCHO
-            cad = RecuperaValor(ancho, I)
+            cad = RecuperaValor(Ancho, I)
             ColX.Tag = cad
             'align
             cad = Mid(ALIGN, I, 1)
@@ -1954,7 +1954,7 @@ Dim J As Byte
             For J = 1 To ListView1.ColumnHeaders.Count - 1
                 ItmX.ListSubItems(J).ForeColor = vbRed
             Next J
-            If DBLet(RS!referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
+            If DBLet(RS!Referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
         End If
        
 End Sub
@@ -2793,8 +2793,6 @@ Dim LineaUltima As Integer
     AgrupaCuenta = False
     CampoFecha = "numfactura"
     GastosTransDescontados = False 'por lo que pueda pasar
-    
-    
     
     
     'Si va agrupado por cta
@@ -3797,38 +3795,11 @@ Dim ImporteInterno As Currency
                     End If
                     Aux = Aux & Ampliacion
                 End If
-                Aux = Aux & ",'CONTAB',0)"
+                Aux = Aux & ",'COBROS',0)"
                 Aux = SQL & Aux
                 Ejecuta Aux
             Next Conce
         End If
-    End If
-    
-    
-    'Para desbloquear el apunte
-    Debe = False
-    If Cabecera > 2 Then
-            Debe = True
-    End If
-    If Debe Then
-        SQL = "UPDATE hcabapu SET bloqactu = 0 WHERE numdiari ="
-        If Cobros Then
-            Ampliacion = vp.diaricli
-        Else
-            Ampliacion = vp.diaripro
-        End If
-        
-        SQL = SQL & Ampliacion & " AND Fechaent = '" & Format(FechaAsiento, FormatoFecha) & "' AND Numasien = " & m.Contador
-        
-        
-        If Cobros Then
-            Ampliacion = vp.diaricli
-        Else
-            Ampliacion = vp.diaripro
-        End If
-        
-        InsertaTmpActualizar m.Contador, Ampliacion, CDate(FechaAsiento)
-        
     End If
     
     

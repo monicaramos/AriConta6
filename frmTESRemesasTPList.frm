@@ -933,12 +933,12 @@ Dim SqlValues As String
     
     cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, codrem, anyorem "
     cad = cad & " from cobros "
-    cad = cad & " where (1=1) "
+    cad = cad & " where cobros.tiporem <> 1 "
     If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "cobros"), "codigo", "codrem"), "anyo", "anyorem")
     cad = cad & " union "
     cad = cad & " select " & vUsu.Codigo & ",hlinapu.numserie, hlinapu.numfaccl numfactu, hlinapu.fecfactu, hlinapu.numorden, cobros.fecvenci, cobros.codmacta, cobros.nomclien, cobros.iban, hlinapu.gastodev, coalesce(hlinapu.timported,0) - coalesce(hlinapu.timporteh,0) importe, 1 devol, hlinapu.codrem, hlinapu.anyorem "
     cad = cad & " from cobros inner join hlinapu on cobros.numserie = hlinapu.numserie and cobros.numfactu = hlinapu.numfaccl and cobros.fecfactu = hlinapu.fecfactu and cobros.numorden = hlinapu.numorden "
-    cad = cad & " where (1=1) and hlinapu.esdevolucion = 1 "
+    cad = cad & " where hlinapu.tiporem <> 1 and hlinapu.esdevolucion = 1 "
     If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "hlinapu"), "codigo", "codrem"), "anyo", "anyorem")
     
     Conn.Execute SqlInsert & cad
