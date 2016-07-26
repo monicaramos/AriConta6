@@ -90,11 +90,11 @@ Begin VB.Form frmTESNorma57
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   9300
+         Left            =   9210
          TabIndex        =   7
          Top             =   5970
          Visible         =   0   'False
-         Width           =   1215
+         Width           =   1095
       End
       Begin VB.CommandButton cmdCancelar 
          Caption         =   "&Cancelar"
@@ -109,10 +109,10 @@ Begin VB.Form frmTESNorma57
          EndProperty
          Height          =   375
          Index           =   42
-         Left            =   10620
+         Left            =   10530
          TabIndex        =   5
          Top             =   5970
-         Width           =   975
+         Width           =   1095
       End
       Begin MSComctlLib.ListView lwNorma57Importar 
          Height          =   2175
@@ -451,7 +451,14 @@ Private Function ComprobarObjeto(ByRef T As TextBox) As Boolean
 End Function
 
 
+Private Sub cmdCancelar_Click(Index As Integer)
+    Unload Me
+End Sub
+
 Private Sub cmdContabilizarNorma57_Click()
+Dim frmTESRealCob As frmTESRealizarCobros
+
+
     SQL = ""
     If Me.lwNorma57Importar(0).ListItems.Count = 0 Then SQL = SQL & "-Ningun vencimiento desde el fichero" & vbCrLf
     If Me.txtCtaBanc(5).Text = "" Then SQL = SQL & "-Cuenta bancaria" & vbCrLf
@@ -470,54 +477,32 @@ Private Sub cmdContabilizarNorma57_Click()
     ' ventanilla que devuelve el banco y contabilizamos en funcion de esa fecha
             
             
-    cad = Format(Now, "dd/mm/yyyy") & "|" & Me.txtCtaBanc(5).Text & " - " & Me.txtDescBanc(5).Text & "|0|"  'efectivo
+    cad = Format(Now, "dd/mm/yyyy") & "|" & Me.txtCtaBanc(5).Text & "|" & Me.txtDescBanc(5).Text & "|0|"  'efectivo
 
+    Set frmTESRealCob = New frmTESRealizarCobros
 
-    With frmTESVerCobrosPagos
+    With frmTESRealCob
         .ImporteGastosTarjeta_ = 0
-        .OrdenacionEfectos = 3
-        .vSQL = SQL
+        '--.OrdenacionEfectos = 3
+        .vSQL2 = SQL
         .OrdenarEfecto = True
         .Regresar = False
         .ContabTransfer = False
         .Cobros = True
-        .Tipo = 0
+        '.Tipo = 0
         .SegundoParametro = ""
         'Los textos
         .vTextos = cad
         .CodmactaUnica = ""
-
+        .VieneDesdeNorma57 = True
         .Show vbModal
     End With
         
+    Set frmTESRealCob = Nothing
         
-'
-'    Conn.BeginTrans
-'
-'    'Si hay que generar la
-'
-'    If HacerNuevaContabilizacion Then
-'        Conn.CommitTrans
-'
-'        'Tenemos k borrar los listview
-'        For I = (lwNorma57Importar(0).ListItems.Count) To 1 Step -1
-'            If lwNorma57Importar(0).ListItems(I).Checked Then
-'               lwNorma57Importar(0).ListItems.Remove I
-'
-'            End If
-'        Next I
-'    Else
-'        TirarAtrasTransaccion
-'    End If
-    
     'Borro haya cancelado o no
     LimpiarDelProceso
 End Sub
-
-
-
-
-
 
 Private Sub cmdNoram57Fich_Click()
 
@@ -556,10 +541,6 @@ Private Sub cmdNoram57Fich_Click()
     Screen.MousePointer = vbDefault
 End Sub
 
-
-
-
-
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
@@ -567,9 +548,6 @@ Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 End Sub
 
-
-
-    
 Private Sub Form_Load()
 Dim H As Integer
 Dim W As Integer
@@ -707,7 +685,7 @@ Private Sub txtCtaBanc_LostFocus(Index As Integer)
         SQL = ""
         cad = ""
     Else
-        cad = DevuelveDesdeBD("codmacta", "ctabancaria", "codmacta", cad, "T")
+        cad = DevuelveDesdeBD("codmacta", "bancos", "codmacta", cad, "T")
         If cad = "" Then
             MsgBox "Cuenta no asoaciada a ningun banco", vbExclamation
             SQL = ""
@@ -1113,7 +1091,7 @@ Dim IT As ListItem
             Set IT = Me.lwNorma57Importar(0).ListItems.Add(, "C" & Format(miRsAux!Linliapu, "0000"))
             IT.Text = miRsAux!CCost
             IT.SubItems(1) = miRsAux!Pos
-            IT.SubItems(2) = Format(miRsAux!Nomdocum, "dd/mm/yyyy")
+            IT.SubItems(2) = Format(miRsAux!nomdocum, "dd/mm/yyyy")
             IT.SubItems(3) = miRsAux!Linliapu
             If IsNull(miRsAux!Nommacta) Then
                 SQL = "ERRROR GRAVE"
