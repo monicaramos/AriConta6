@@ -180,3 +180,4 @@ frmTESNorma57 = 156, 156, 814, 679, , 130, 130, 788, 653, C
 frmTESTransferencias = 208, 208, 843, 731, , 182, 182, 817, 705, C
 frmTESTransferenciasGrab = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 frmTESTransferenciasCont = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmTESTransferenciasList = 52, 52, 700, 575, , 26, 26, 674, 549, C

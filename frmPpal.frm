@@ -1132,7 +1132,7 @@ Private Sub AbrirFormularios(Accion As Long)
             frmTESNorma57.Show vbModal
             
         Case 614 ' transferencia abonos
-            frmTESTransferencias.Tipo = 1
+            frmTESTransferencias.TipoTrans = 1
             frmTESTransferencias.Show vbModal
             
         Case 709 ' Abono remesa
@@ -1148,7 +1148,7 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 804 ' Realizar Pago
             frmTESRealizarPagos.Show vbModal
         Case 805 ' Transferencias
-            frmTESTransferencias.Tipo = 0 ' de pagos
+            frmTESTransferencias.TipoTrans = 0 ' de pagos
             frmTESTransferencias.Show vbModal
         Case 806 ' Pagos domiciliados
         Case 807 ' Gastos Fijos

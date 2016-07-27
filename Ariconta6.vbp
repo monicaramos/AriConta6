@@ -200,6 +200,7 @@ Form=frmTESNorma57.frm
 Form=frmTESTransferencias.frm
 Form=frmTESTransferenciasGrab.frm
 Form=frmTESTransferenciasCont.frm
+Form=frmTESTransferenciasList.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

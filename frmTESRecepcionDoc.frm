@@ -239,7 +239,7 @@ Begin VB.Form frmTESRecepcionDoc
       Tag             =   "Fecha vencimiento|F|N|||talones|fechavto|dd/mm/yyyy||"
       Text            =   "commor"
       Top             =   1200
-      Width           =   1365
+      Width           =   1485
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
@@ -831,12 +831,12 @@ Begin VB.Form frmTESRecepcionDoc
       Left            =   4320
       TabIndex        =   30
       Top             =   930
-      Width           =   930
+      Width           =   1155
    End
    Begin VB.Image imgppal 
       Height          =   240
       Index           =   1
-      Left            =   5400
+      Left            =   5520
       Picture         =   "frmTESRecepcionDoc.frx":003E
       Top             =   930
       Width           =   240
@@ -2262,7 +2262,7 @@ Private Function MontaSQLCarga(Enlaza As Boolean) As String
     Dim SQL As String
     SQL = "SELECT numserie,numfactu,fecfactu,numorden,importe From talones_facturas WHERE codigo = "
     If Enlaza Then
-        SQL = SQL & Data1.Recordset!Codigo
+        SQL = SQL & Text1(4).Text ' Data1.Recordset!Codigo
     Else
         SQL = SQL & "-1"
     End If

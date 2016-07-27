@@ -32,203 +32,6 @@ Begin VB.Form frmTESRemesas
       Top             =   -60
       Visible         =   0   'False
       Width           =   15855
-      Begin VB.Frame FrameModRem 
-         Caption         =   "Datos Remesa"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   11.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   3735
-         Left            =   120
-         TabIndex        =   62
-         Top             =   60
-         Width           =   15645
-         Begin VB.TextBox txtFecha 
-            Alignment       =   2  'Center
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   5
-            Left            =   5370
-            TabIndex        =   64
-            Tag             =   "Fecha Reclamación|F|N|||reclama|fecreclama|dd/mm/yyyy||"
-            Text            =   "99/99/9999"
-            Top             =   2130
-            Width           =   1245
-         End
-         Begin VB.TextBox Text2 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Left            =   6690
-            MaxLength       =   50
-            TabIndex        =   65
-            Tag             =   "Descripción|T|N|||remesas|descripción|||"
-            Top             =   2130
-            Width           =   5025
-         End
-         Begin VB.TextBox txtNCuentas 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   3
-            Left            =   1740
-            TabIndex        =   66
-            Text            =   "Text2"
-            Top             =   2130
-            Width           =   3525
-         End
-         Begin VB.TextBox txtCuentas 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   3
-            Left            =   360
-            TabIndex        =   63
-            Text            =   "Text2"
-            Top             =   2130
-            Width           =   1335
-         End
-         Begin VB.Label Label3 
-            Caption         =   "Remesa"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   -1  'True
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00800000&
-            Height          =   375
-            Index           =   12
-            Left            =   360
-            TabIndex        =   71
-            Top             =   750
-            Width           =   8940
-         End
-         Begin VB.Label lblFecha1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   0
-            Left            =   2580
-            TabIndex        =   70
-            Top             =   3990
-            Width           =   4095
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Fecha"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   4
-            Left            =   5370
-            TabIndex        =   69
-            Top             =   1860
-            Width           =   795
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   5
-            Left            =   6330
-            Top             =   1860
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Descripción"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   3
-            Left            =   6690
-            TabIndex        =   68
-            Top             =   1860
-            Width           =   1245
-         End
-         Begin VB.Image imgCuentas 
-            Height          =   240
-            Index           =   3
-            Left            =   2340
-            Top             =   1860
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Banco"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   2
-            Left            =   360
-            TabIndex        =   67
-            Top             =   1860
-            Width           =   1845
-         End
-      End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H00FFFFFF&
@@ -248,6 +51,211 @@ Begin VB.Form frmTESRemesas
          Tag             =   "Importe|N|N|||reclama|importes|||"
          Top             =   4200
          Width           =   1815
+      End
+      Begin VB.Frame Frame4 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame4"
+         Height          =   4515
+         Left            =   150
+         TabIndex        =   26
+         Top             =   3840
+         Width           =   11655
+         Begin MSComctlLib.ListView lwCobros 
+            Height          =   4095
+            Left            =   0
+            TabIndex        =   27
+            Top             =   360
+            Width           =   11655
+            _ExtentX        =   20558
+            _ExtentY        =   7223
+            View            =   3
+            LabelEdit       =   1
+            LabelWrap       =   -1  'True
+            HideSelection   =   -1  'True
+            Checkboxes      =   -1  'True
+            FullRowSelect   =   -1  'True
+            _Version        =   393217
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BorderStyle     =   1
+            Appearance      =   1
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            NumItems        =   8
+            BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Text            =   "Tipo"
+               Object.Width           =   1410
+            EndProperty
+            BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   1
+               Text            =   "Factura"
+               Object.Width           =   2116
+            EndProperty
+            BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   2
+               Text            =   "Fecha"
+               Object.Width           =   2381
+            EndProperty
+            BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   3
+               Text            =   "Vto"
+               Object.Width           =   1234
+            EndProperty
+            BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   4
+               Text            =   "Fecha Vto"
+               Object.Width           =   2381
+            EndProperty
+            BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   5
+               Text            =   "Forma pago"
+               Object.Width           =   6174
+            EndProperty
+            BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Alignment       =   1
+               SubItemIndex    =   6
+               Text            =   "Importe"
+               Object.Width           =   3590
+            EndProperty
+            BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   7
+               Text            =   "ENTIDAD"
+               Object.Width           =   0
+            EndProperty
+         End
+         Begin VB.Image imgCheck 
+            Height          =   240
+            Index           =   1
+            Left            =   11310
+            Picture         =   "frmTESRemesas.frx":000C
+            ToolTipText     =   "Puntear al Debe"
+            Top             =   30
+            Width           =   240
+         End
+         Begin VB.Image imgCheck 
+            Height          =   240
+            Index           =   0
+            Left            =   10950
+            Picture         =   "frmTESRemesas.frx":0156
+            ToolTipText     =   "Quitar al Debe"
+            Top             =   30
+            Width           =   240
+         End
+      End
+      Begin VB.Frame Frame3 
+         Height          =   555
+         Left            =   180
+         TabIndex        =   24
+         Top             =   8340
+         Width           =   1755
+         Begin VB.Label lblIndicador 
+            Alignment       =   2  'Center
+            Caption         =   "Label2"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Left            =   240
+            TabIndex        =   25
+            Top             =   210
+            Width           =   1200
+         End
+      End
+      Begin VB.CommandButton cmdAceptar 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   13170
+         TabIndex        =   17
+         Top             =   8460
+         Width           =   1155
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   14430
+         TabIndex        =   18
+         Top             =   8460
+         Width           =   1095
+      End
+      Begin MSAdodcLib.Adodc Data1 
+         Height          =   330
+         Left            =   7950
+         Top             =   150
+         Visible         =   0   'False
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   582
+         ConnectMode     =   0
+         CursorLocation  =   3
+         IsolationLevel  =   -1
+         ConnectionTimeout=   15
+         CommandTimeout  =   30
+         CursorType      =   3
+         LockType        =   3
+         CommandType     =   8
+         CursorOptions   =   0
+         CacheSize       =   50
+         MaxRecords      =   0
+         BOFAction       =   0
+         EOFAction       =   0
+         ConnectStringType=   1
+         Appearance      =   1
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         Orientation     =   0
+         Enabled         =   -1
+         Connect         =   ""
+         OLEDBString     =   ""
+         OLEDBFile       =   ""
+         DataSourceName  =   ""
+         OtherAttributes =   ""
+         UserName        =   ""
+         Password        =   ""
+         RecordSource    =   ""
+         Caption         =   "Adodc1"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         _Version        =   393216
       End
       Begin VB.Frame FrameCreaRem 
          Caption         =   "Selección"
@@ -1157,34 +1165,25 @@ Begin VB.Form frmTESRemesas
             Width           =   690
          End
       End
-      Begin VB.Frame Frame4 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame4"
-         Height          =   4515
-         Left            =   150
-         TabIndex        =   26
-         Top             =   3840
-         Width           =   11655
-         Begin MSComctlLib.ListView lwCobros 
-            Height          =   4095
-            Left            =   0
-            TabIndex        =   27
-            Top             =   360
-            Width           =   11655
-            _ExtentX        =   20558
-            _ExtentY        =   7223
-            View            =   3
-            LabelEdit       =   1
-            LabelWrap       =   -1  'True
-            HideSelection   =   -1  'True
-            Checkboxes      =   -1  'True
-            FullRowSelect   =   -1  'True
-            _Version        =   393217
-            ForeColor       =   -2147483640
-            BackColor       =   -2147483643
-            BorderStyle     =   1
-            Appearance      =   1
-            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+      Begin VB.Frame FrameModRem 
+         Caption         =   "Datos Remesa"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   11.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   3735
+         Left            =   120
+         TabIndex        =   62
+         Top             =   60
+         Width           =   15645
+         Begin VB.TextBox txtFecha 
+            Alignment       =   2  'Center
+            BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
                Charset         =   0
@@ -1193,76 +1192,91 @@ Begin VB.Form frmTESRemesas
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            NumItems        =   8
-            BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               Text            =   "Tipo"
-               Object.Width           =   1410
-            EndProperty
-            BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   1
-               Text            =   "Factura"
-               Object.Width           =   2116
-            EndProperty
-            BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   2
-               Text            =   "Fecha"
-               Object.Width           =   2381
-            EndProperty
-            BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   3
-               Text            =   "Vto"
-               Object.Width           =   1234
-            EndProperty
-            BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   4
-               Text            =   "Fecha Vto"
-               Object.Width           =   2381
-            EndProperty
-            BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   5
-               Text            =   "Forma pago"
-               Object.Width           =   6174
-            EndProperty
-            BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               Alignment       =   1
-               SubItemIndex    =   6
-               Text            =   "Importe"
-               Object.Width           =   3590
-            EndProperty
-            BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   7
-               Text            =   "ENTIDAD"
-               Object.Width           =   0
-            EndProperty
+            Height          =   360
+            Index           =   5
+            Left            =   5370
+            TabIndex        =   64
+            Tag             =   "Fecha Reclamación|F|N|||reclama|fecreclama|dd/mm/yyyy||"
+            Text            =   "99/99/9999"
+            Top             =   2130
+            Width           =   1245
          End
-         Begin VB.Image imgCheck 
-            Height          =   240
-            Index           =   1
-            Left            =   11310
-            Picture         =   "frmTESRemesas.frx":000C
-            ToolTipText     =   "Puntear al Debe"
-            Top             =   30
-            Width           =   240
+         Begin VB.TextBox Text2 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Left            =   6690
+            MaxLength       =   50
+            TabIndex        =   65
+            Tag             =   "Descripción|T|N|||remesas|descripción|||"
+            Top             =   2130
+            Width           =   5025
          End
-         Begin VB.Image imgCheck 
-            Height          =   240
-            Index           =   0
-            Left            =   10950
-            Picture         =   "frmTESRemesas.frx":0156
-            ToolTipText     =   "Quitar al Debe"
-            Top             =   30
-            Width           =   240
+         Begin VB.TextBox txtNCuentas 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   3
+            Left            =   1740
+            TabIndex        =   66
+            Text            =   "Text2"
+            Top             =   2130
+            Width           =   3525
          End
-      End
-      Begin VB.Frame Frame3 
-         Height          =   555
-         Left            =   180
-         TabIndex        =   24
-         Top             =   8340
-         Width           =   1755
-         Begin VB.Label lblIndicador 
-            Alignment       =   2  'Center
-            Caption         =   "Label2"
+         Begin VB.TextBox txtCuentas 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   3
+            Left            =   360
+            TabIndex        =   63
+            Text            =   "Text2"
+            Top             =   2130
+            Width           =   1335
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Remesa"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   -1  'True
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00800000&
+            Height          =   375
+            Index           =   12
+            Left            =   360
+            TabIndex        =   71
+            Top             =   750
+            Width           =   8940
+         End
+         Begin VB.Label lblFecha1 
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -1273,94 +1287,80 @@ Begin VB.Form frmTESRemesas
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   240
-            TabIndex        =   25
-            Top             =   210
-            Width           =   1200
+            Index           =   0
+            Left            =   2580
+            TabIndex        =   70
+            Top             =   3990
+            Width           =   4095
          End
-      End
-      Begin VB.CommandButton cmdAceptar 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   0
-         Left            =   13170
-         TabIndex        =   17
-         Top             =   8460
-         Width           =   1155
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   0
-         Left            =   14430
-         TabIndex        =   18
-         Top             =   8460
-         Width           =   1095
-      End
-      Begin MSAdodcLib.Adodc Data1 
-         Height          =   330
-         Left            =   7950
-         Top             =   150
-         Visible         =   0   'False
-         Width           =   2055
-         _ExtentX        =   3625
-         _ExtentY        =   582
-         ConnectMode     =   0
-         CursorLocation  =   3
-         IsolationLevel  =   -1
-         ConnectionTimeout=   15
-         CommandTimeout  =   30
-         CursorType      =   3
-         LockType        =   3
-         CommandType     =   8
-         CursorOptions   =   0
-         CacheSize       =   50
-         MaxRecords      =   0
-         BOFAction       =   0
-         EOFAction       =   0
-         ConnectStringType=   1
-         Appearance      =   1
-         BackColor       =   -2147483643
-         ForeColor       =   -2147483640
-         Orientation     =   0
-         Enabled         =   -1
-         Connect         =   ""
-         OLEDBString     =   ""
-         OLEDBFile       =   ""
-         DataSourceName  =   ""
-         OtherAttributes =   ""
-         UserName        =   ""
-         Password        =   ""
-         RecordSource    =   ""
-         Caption         =   "Adodc1"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         _Version        =   393216
+         Begin VB.Label Label1 
+            Caption         =   "Fecha"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   4
+            Left            =   5370
+            TabIndex        =   69
+            Top             =   1860
+            Width           =   795
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   5
+            Left            =   6330
+            Top             =   1860
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Descripción"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   6690
+            TabIndex        =   68
+            Top             =   1860
+            Width           =   1245
+         End
+         Begin VB.Image imgCuentas 
+            Height          =   240
+            Index           =   3
+            Left            =   2340
+            Top             =   1860
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Banco"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   2
+            Left            =   360
+            TabIndex        =   67
+            Top             =   1860
+            Width           =   1845
+         End
       End
       Begin VB.Label Label2 
          Alignment       =   2  'Center
@@ -1752,7 +1752,7 @@ Dim B As Boolean
         Else
             SQL = "select count(*) from bancos where codmacta = " & DBSet(txtCuentas(2).Text, "T") & " and not sufijoem is null and sufijoem <> ''"
             If TotalRegistros(SQL) = 0 Then
-                MsgBox "El banco no tiene Sufijo OEM. Reintroduzca.", vbExclamation
+                MsgBox "El banco no tiene Sufijo Adeudos. Reintroduzca.", vbExclamation
                 PonleFoco txtCuentas(2)
                 Exit Function
             End If
@@ -2454,12 +2454,9 @@ Private Sub HacerToolBar2(Boton As Integer)
         
         
             CadenaDesdeOtroForm = ""
-'            If Val(adodc1.Recordset!Tiporem) = 1 Then
-            If True Then
-                If Asc(UCase(lw1.SelectedItem.SubItems(8))) > Asc("B") Then CadenaDesdeOtroForm = "No se puede modificar una remesa " & lw1.SelectedItem.SubItems(3)
-            Else
-                If Asc(UCase(lw1.SelectedItem.SubItems(8))) <> Asc("F") Then CadenaDesdeOtroForm = "Debe estar en cancelacion cliente"
-            End If
+            
+            If Asc(UCase(lw1.SelectedItem.SubItems(8))) > Asc("B") Then CadenaDesdeOtroForm = "No se puede modificar una remesa " & lw1.SelectedItem.SubItems(3)
+            
             If CadenaDesdeOtroForm <> "" Then
                 MsgBox CadenaDesdeOtroForm, vbExclamation
                 Exit Sub
