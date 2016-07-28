@@ -224,11 +224,11 @@ Private Function ComprobarCampoReferenciaRemesaNorma19(Remesa As String) As Bool
     SQL = ""
     NF = 0
     While Not miRsAux.EOF
-        If DBLet(miRsAux!referencia, "T") = "" Then
+        If DBLet(miRsAux!Referencia, "T") = "" Then
             Registro = Registro & miRsAux!codmacta & " - " & miRsAux!NUmSerie & "/" & miRsAux!NumFactu & "-" & miRsAux!numorden & vbCrLf
             NF = NF + 1
         Else
-            If Len(miRsAux!referencia) > 12 Then SQL = SQL & miRsAux!codmacta & " - " & miRsAux!NUmSerie & "/" & miRsAux!NumFactu & "-" & miRsAux!numorden & "(" & miRsAux!referencia & ")" & vbCrLf
+            If Len(miRsAux!Referencia) > 12 Then SQL = SQL & miRsAux!codmacta & " - " & miRsAux!NUmSerie & "/" & miRsAux!NumFactu & "-" & miRsAux!numorden & "(" & miRsAux!Referencia & ")" & vbCrLf
             
         End If
         miRsAux.MoveNext
@@ -624,7 +624,7 @@ Dim SumaComprobacion As Currency
 Dim impo As Currency
 Dim Fin As Boolean
 Dim B As Boolean
-Dim Aux As String
+Dim AUX As String
 Dim C2 As String
 Dim bol As Boolean
 
@@ -644,14 +644,14 @@ Dim bol As Boolean
     
     B = InStr(1, Registro, vbCrLf) > 0
     If B > 0 Then
-        Aux = vbCrLf 'separaremos por este
+        AUX = vbCrLf 'separaremos por este
     Else
         B = InStr(1, Registro, vbCr) > 0
         If B Then
-            Aux = vbCr
+            AUX = vbCr
         Else
             B = InStr(1, Registro, vbLf)
-            If B Then Aux = vbLf
+            If B Then AUX = vbLf
         End If
     End If
     
@@ -663,13 +663,13 @@ Dim bol As Boolean
     If B Then
         'TRAE TODO en una unica linea. Separaremos por el vbcr o vbcrlf
         Do
-                NumRegElim = InStr(1, Registro, Aux)
+                NumRegElim = InStr(1, Registro, AUX)
                 If NumRegElim = 0 Then
                     
                 Else
 
                     SQL = Mid(Registro, 1, NumRegElim - 1)
-                    NumRegElim = NumRegElim + Len(Aux)
+                    NumRegElim = NumRegElim + Len(AUX)
                     Registro = Mid(Registro, NumRegElim)  'quito el separador
                     
                     
@@ -846,7 +846,7 @@ End Sub
 '   2- Caixa confirming
 Private Function CopiarEnDisquette(TipoFichero As Byte) As Boolean
 Dim I As Integer
-Dim cad As String
+Dim Cad As String
 
 On Error Resume Next
 
@@ -866,10 +866,10 @@ On Error Resume Next
  '       Next I
  '   Else
         If AuxD = "" Then
-            cad = Format(Now, "ddmmyyhhnn")
-            cad = App.Path & "\" & cad & ".txt"
+            Cad = Format(Now, "ddmmyyhhnn")
+            Cad = App.Path & "\" & Cad & ".txt"
         Else
-            cad = AuxD
+            Cad = AuxD
         End If
         'If Es34 Then
         '    FileCopy App.Path & "\norma34.txt", Cad
@@ -878,42 +878,494 @@ On Error Resume Next
         'End If
         Select Case TipoFichero
         Case 0
-            FileCopy App.Path & "\norma34.txt", cad
+            FileCopy App.Path & "\norma34.txt", Cad
         Case 1
-            FileCopy App.Path & "\norma34.txt", cad
+            FileCopy App.Path & "\norma34.txt", Cad
         Case 2
             If vParamT.PagosConfirmingCaixa Then
-                FileCopy App.Path & "\normaCaixa.txt", cad
+                FileCopy App.Path & "\normaCaixa.txt", Cad
             Else
-                FileCopy App.Path & "\norma68.txt", cad
+                FileCopy App.Path & "\norma68.txt", Cad
             End If
             
         End Select
         If Err.Number <> 0 Then
             MsgBox "Error creando copia fichero. Consulte soporte técnico." & vbCrLf & Err.Description, vbCritical
         Else
-            MsgBox "El fichero esta guardado como: " & cad, vbInformation
+            MsgBox "El fichero esta guardado como: " & Cad, vbInformation
         End If
             
     'End If
 End Function
 
+Public Function GeneraFicheroNorma34(CIF As String, Fecha As Date, CuentaPropia As String, ConceptoTransferencia As String, vNumeroTransferencia As Integer, ByRef ConceptoTr As String, Pagos As Boolean) As Boolean
+    
+    
+    If vParamT.NuevasNormasSEPA Then
+        If vParamT.NormasFormatoXML Then
+            GeneraFicheroNorma34 = GeneraFicheroNorma34SEPA_XML(CIF, Fecha, CuentaPropia, CLng(vNumeroTransferencia), Pagos, ConceptoTransferencia)
+        Else
+            GeneraFicheroNorma34 = GeneraFicheroNorma34SEPA(CIF, Fecha, CuentaPropia, CLng(vNumeroTransferencia), Pagos, ConceptoTransferencia)
+        End If
+    Else
+        
+        GeneraFicheroNorma34 = GeneraFicheroNorma34_(CIF, Fecha, CuentaPropia, ConceptoTransferencia, vNumeroTransferencia, ConceptoTr, Pagos)
+    End If
+
+End Function
 
 
+Public Function GeneraFicheroNorma34SEPA_XML(CIF As String, Fecha As Date, CuentaPropia2 As String, NumeroTransferencia As Long, Pagos As Boolean, ConceptoTr As String) As Boolean
+Dim Regs As Integer
+Dim Importe As Currency
+Dim Im As Currency
+Dim Cad As String
+Dim AUX As String
+Dim SufijoOEM As String
+Dim NFic As Integer
+Dim EsPersonaJuridica2 As Boolean
 
+    On Error GoTo EGen3
+    GeneraFicheroNorma34SEPA_XML = False
+    
+    NFic = -1
+    
+    
+    'Cargamos la cuenta
+    Cad = "Select * from bancos where codmacta='" & CuentaPropia2 & "'"
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If miRsAux.EOF Then
+        Cad = ""
+    Else
+        If IsNull(miRsAux!IBAN) Then
+            Cad = ""
+        Else
+            SufijoOEM = "000" ''Sufijo3414
+            Cad = miRsAux!IBAN
+            If DBLet(miRsAux!Sufijo3414, "T") <> "" Then SufijoOEM = Right("000" & miRsAux!Sufijo3414, 3)
+            CuentaPropia2 = Cad
+        End If
+        
+        
+    End If
+    miRsAux.Close
+  
+    If Cad = "" Then
+        MsgBox "Error leyendo datos para: " & CuentaPropia2, vbExclamation
+        Exit Function
+    End If
+    
+    NFic = FreeFile
+    Open App.Path & "\norma34.txt" For Output As NFic
+    
+    
+    Print #NFic, "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>"
+    Print #NFic, "<Document xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""urn:iso:std:iso:20022:tech:xsd:pain.001.001.03"">"
+    Print #NFic, "<CstmrCdtTrfInitn>"
+    Print #NFic, "   <GrpHdr>"
+    Cad = "TRAN" & IIf(Pagos, "PAG", "ABO") & Format(NumeroTransferencia, "000000") & "F" & Format(Now, "yyyymmddThhnnss")
+    Print #NFic, "      <MsgId>" & Cad & "</MsgId>"
+    Print #NFic, "      <CreDtTm>" & Format(Now, "yyyy-mm-ddThh:nn:ss") & "</CreDtTm>"
+    
+    
+    If Pagos Then
+        AUX = "ImpEfect - coalesce(imppagad ,0)"
+        Cad = "spagop"
+    Else
+        AUX = "abs(impvenci + coalesce(Gastos, 0) - coalesce(impcobro, 0))"
+        Cad = "scobro"
+    End If
+    Cad = "Select count(*),sum(" & AUX & ") FROM " & Cad & " WHERE transfer = " & NumeroTransferencia
+    AUX = "0|0|"
+    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not miRsAux.EOF Then
+        If Not IsNull(miRsAux.Fields(1)) Then AUX = miRsAux.Fields(0) & "|" & Format(miRsAux.Fields(1), "#.00") & "|"
+    End If
+    miRsAux.Close
+    
+    Print #NFic, "      <NbOfTxs>" & RecuperaValor(AUX, 1) & "</NbOfTxs>"
+    Print #NFic, "      <CtrlSum>" & TransformaComasPuntos(RecuperaValor(AUX, 2)) & "</CtrlSum>"
+    Print #NFic, "      <InitgPty>"
+    Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
+    Print #NFic, "         <Id>"
+    Cad = Mid(CIF, 1, 1)
+    
+    EsPersonaJuridica2 = Not IsNumeric(Cad)
+
+    
+    
+    
+    Cad = "PrvtId"
+    If EsPersonaJuridica2 Then Cad = "OrgId"
+    
+    Print #NFic, "           <" & Cad & ">"
+    Print #NFic, "               <Othr>"
+    Print #NFic, "                  <Id>" & CIF & SufijoOEM & "</Id>"
+    Print #NFic, "               </Othr>"
+    Print #NFic, "           </" & Cad & ">"
+    
+    Print #NFic, "         </Id>"
+    Print #NFic, "      </InitgPty>"
+    Print #NFic, "   </GrpHdr>"
+
+    Print #NFic, "   <PmtInf>"
+    
+    Print #NFic, "      <PmtInfId>" & Format(Now, "yyyymmddhhnnss") & CIF & "</PmtInfId>"
+    Print #NFic, "      <PmtMtd>TRF</PmtMtd>"
+    Print #NFic, "      <ReqdExctnDt>" & Format(Fecha, "yyyy-mm-dd") & "</ReqdExctnDt>"
+    Print #NFic, "      <Dbtr>"
+    
+     'Nombre
+    miRsAux.Open "Select siglasvia ,direccion ,numero ,codpobla,pobempre,provempre,provincia from empresa2"
+    Cad = Cad & FrmtStr(vEmpresa.nomempre, 70)
+    If miRsAux.EOF Then Err.Raise 513, , "Error obteniendo datos empresa(empresa2)"
+    
+    Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
+    Print #NFic, "         <PstlAdr>"
+    Print #NFic, "            <Ctry>ES</Ctry>"
+
+    Cad = DBLet(miRsAux!siglasvia, "T") & " " & miRsAux!Direccion & " " & DBLet(miRsAux!numero, "T") & " "
+    Cad = Cad & Trim(DBLet(miRsAux!CodPobla, "T") & " " & miRsAux!pobempre) & " "
+    Cad = Cad & DBLet(miRsAux!provincia, "T")
+    miRsAux.Close
+    Print #NFic, "            <AdrLine>" & XML(Trim(Cad)) & "</AdrLine>"
+    
+    Print #NFic, "         </PstlAdr>"
+    Print #NFic, "         <Id>"
+    
+    AUX = "PrvtId"
+    If EsPersonaJuridica2 Then AUX = "OrgId"
+   
+    
+    Print #NFic, "            <" & AUX & ">"
+    
+    Print #NFic, "               <Othr>"
+    Print #NFic, "                  <Id>" & CIF & SufijoOEM & "</Id>"
+    Print #NFic, "               </Othr>"
+    Print #NFic, "            </" & AUX & ">"
+    Print #NFic, "         </Id>"
+    Print #NFic, "    </Dbtr>"
+    
+    
+    Print #NFic, "    <DbtrAcct>"
+    Print #NFic, "       <Id>"
+    Print #NFic, "          <IBAN>" & Trim(CuentaPropia2) & "</IBAN>"
+    Print #NFic, "       </Id>"
+    Print #NFic, "       <Ccy>EUR</Ccy>"
+    Print #NFic, "    </DbtrAcct>"
+    Print #NFic, "    <DbtrAgt>"
+    Print #NFic, "       <FinInstnId>"
+    
+    Cad = Mid(CuentaPropia2, 5, 4)
+    Cad = DevuelveDesdeBD("bic", "bics", "entidad", Cad)
+    Print #NFic, "          <BIC>" & Trim(Cad) & "</BIC>"
+    Print #NFic, "       </FinInstnId>"
+    Print #NFic, "    </DbtrAgt>"
+    
+    
+    
+    
+    'Para ello abrimos la tabla tmpNorma34
+    If Pagos Then
+        Cad = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,desprovi,pais,cuentas.despobla,bic,nifdatos from spagop"
+        Cad = Cad & " left join sbic on spagop.entidad=sbic.entidad INNER JOIN cuentas ON"
+        Cad = Cad & " codmacta=ctaprove WHERE transfer =" & NumeroTransferencia
+    Else
+        'ABONOS
+         '
+        Cad = "Select mid(cobros.iban,5,4) as entidad,mid(cobros.iban,9,4) as oficina,mid(cobro.iban,15,10) cuentaba,mid(cobros.iban,13,2) as CC,cobros.iban"
+        Cad = Cad & ",nomclien nommacta,dirdatos,codposta,despobla,impvenci,cobros.codmacta,codpais,Gastos,impcobro,desprovi"
+        Cad = Cad & " ,NUmSerie,numfactu,fecfactu,numorden,text33csb,text41csb,bic,nifclien nifdatos from cobros"
+        Cad = Cad & " LEFT JOIN bics on mid(cobros.iban,5,4)=bics.entidad "
+        Cad = Cad & " WHERE transfer =" & NumeroTransferencia
+    End If
+    miRsAux.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Regs = 0
+    While Not miRsAux.EOF
+        Print #NFic, "   <CdtTrfTxInf>"
+        Print #NFic, "      <PmtId>"
+        
+         
+        If Pagos Then
+            'numfactu fecfactu numorden
+            AUX = FrmtStr(miRsAux!NumFactu, 10)
+            AUX = AUX & Format(miRsAux!FecFactu, "yyyymmdd") & Format(miRsAux!numorden, "000")
+        
+        Else
+            'fecfaccl
+            AUX = FrmtStr(miRsAux!NUmSerie, 3) & Format(miRsAux!NumFactu, "00000000")
+            AUX = AUX & Format(miRsAux!FecFactu, "yyyymmdd") & Format(miRsAux!numorden, "000")
+        End If
+        
+        Print #NFic, "         <EndToEndId>" & AUX & "</EndToEndId>"
+        Print #NFic, "      </PmtId>"
+        Print #NFic, "      <PmtTpInf>"
+        If Pagos Then
+            Im = DBLet(miRsAux!imppagad, "N")
+            Im = miRsAux!ImpEfect - Im
+            AUX = miRsAux!ctaprove
+
+        Else
+            Im = Abs(miRsAux!ImpVenci + DBLet(miRsAux!Gastos, "N")) - DBLet(miRsAux!impcobro, "N")
+            AUX = miRsAux!codmacta
+        End If
+        
+        'Persona fisica o juridica
+        Cad = Mid(miRsAux!nifdatos, 1, 1)
+        EsPersonaJuridica2 = Not IsNumeric(Cad)
+        'Como da problemas Cajamar, siempre ponemos Perosna juridica. Veremos
+        EsPersonaJuridica2 = True
+        
+        
+        Importe = Importe + Im
+        Regs = Regs + 1
+        
+        Print #NFic, "          <SvcLvl><Cd>SEPA</Cd></SvcLvl>"
+        'Print #NFic, "          <LclInstrm><Cd>SDCL</Cd></LclInstrm>"
+        If ConceptoTr = "1" Then
+            AUX = "SALA"
+        ElseIf ConceptoTr = "0" Then
+            AUX = "PENS"
+        Else
+            AUX = "TRAD"
+        End If
+        Print #NFic, "          <CtgyPurp><Cd>" & AUX & "</Cd></CtgyPurp>"
+        Print #NFic, "       </PmtTpInf>"
+        Print #NFic, "       <Amt>"
+        Cad = Format(Im, "#.00")
+        Print #NFic, "          <InstdAmt Ccy=""EUR"">" & TransformaComasPuntos(Cad) & "</InstdAmt>"
+        Print #NFic, "       </Amt>"
+        Print #NFic, "       <CdtrAgt>"
+        Print #NFic, "          <FinInstnId>"
+        Cad = DBLet(miRsAux!BIC, "T")
+        If Cad = "" Then Err.Raise 513, , "No existe BIC: " & miRsAux!Nommacta & vbCrLf & "Entidad: " & miRsAux!Entidad
+        Print #NFic, "             <BIC>" & DBLet(miRsAux!BIC, "T") & "</BIC>"
+        Print #NFic, "          </FinInstnId>"
+        Print #NFic, "       </CdtrAgt>"
+        Print #NFic, "       <Cdtr>"
+        Print #NFic, "          <Nm>" & XML(miRsAux!Nommacta) & "</Nm>"
+        
+        
+        'Como cajamar da problemas, lo quitamos para todos
+        'Print #NFic, "          <PstlAdr>"
+        '
+        'Cad = "ES"
+        'If Not IsNull(miRsAux!PAIS) Then Cad = Mid(miRsAux!PAIS, 1, 2)
+        'Print #NFic, "              <Ctry>" & Cad & "</Ctry>"
+        '
+        'If Not IsNull(miRsAux!dirdatos) Then Print #NFic, "              <AdrLine>" & XML(miRsAux!dirdatos) & "</AdrLine>"
+        'Cad = XML(Trim(DBLet(miRsAux!codposta, "T") & " " & DBLet(miRsAux!despobla, "T")))
+        'If Cad <> "" Then Print #NFic, "              <AdrLine>" & Cad & "</AdrLine>"
+        'If Not IsNull(miRsAux!desprovi) Then Print #NFic, "              <AdrLine>" & XML(miRsAux!desprovi) & "</AdrLine>"
+        'Print #NFic, "           </PstlAdr>"
+        
+        
+        
+        Print #NFic, "           <Id>"
+        AUX = "PrvtId"
+        If EsPersonaJuridica2 Then AUX = "OrgId"
+      
+        Print #NFic, "               <" & AUX & ">"
+        Print #NFic, "                  <Othr>"
+        Print #NFic, "                     <Id>" & miRsAux!nifdatos & "</Id>"
+        'Da problemas.... con Cajamar
+        'Print #NFic, "                     <Issr>NIF</Issr>"
+        Print #NFic, "                  </Othr>"
+        Print #NFic, "               </" & AUX & ">"
+        Print #NFic, "           </Id>"
+        Print #NFic, "        </Cdtr>"
+        Print #NFic, "        <CdtrAcct>"
+        Print #NFic, "           <Id>"
+        Print #NFic, "              <IBAN>" & IBAN_Destino(False) & "</IBAN>"
+        Print #NFic, "           </Id>"
+        Print #NFic, "        </CdtrAcct>"
+        Print #NFic, "      <Purp>"
+        
+        If ConceptoTr = "1" Then
+            AUX = "SALA"
+        ElseIf ConceptoTr = "0" Then
+            AUX = "PENS"
+        Else
+            AUX = "TRAD"
+        End If
+        
+        Print #NFic, "         <Cd>" & AUX & "</Cd>"
+        Print #NFic, "      </Purp>"
+        Print #NFic, "      <RmtInf>"
+        'Print #NFic, "      <Ustrd>ESTE ES EL CONCEPTO, POR TANTO NO SE SI SERA EL TEXTO QUE IRA DONDE TIENE QUE IR, O EN OTRO LADAO... A SABER. LO QUE ESTA CLARO ES QUE VA.</Ustrd>
+        
+        If Pagos Then
+            ''`text1csb` `text2csb`
+            AUX = DBLet(miRsAux!text1csb, "T") & " " & DBLet(miRsAux!text2csb, "T")
+        Else
+            '`text33csb` `text41csb`
+            AUX = DBLet(miRsAux!text33csb, "T") & " " & DBLet(miRsAux!text41csb, "T")
+        End If
+        If Trim(AUX) = "" Then AUX = miRsAux!Nommacta
+        Print #NFic, "         <Ustrd>" & XML(Trim(AUX)) & "</Ustrd>"
+        Print #NFic, "      </RmtInf>"
+        Print #NFic, "   </CdtTrfTxInf>"
+ 
+       
+    
+            
+        miRsAux.MoveNext
+    Wend
+    Print #NFic, "   </PmtInf>"
+    Print #NFic, "</CstmrCdtTrfInitn></Document>"
+    
+    
+    miRsAux.Close
+    Set miRsAux = Nothing
+    Close (NFic)
+    NFic = -1
+    If Regs > 0 Then GeneraFicheroNorma34SEPA_XML = True
+    Exit Function
+EGen3:
+    MuestraError Err.Number, Err.Description
+    Set miRsAux = Nothing
+    If NFic > 0 Then Close (NFic)
+End Function
+
+Public Function comprobarCuentasBancariasPagos(Transferencia As String, Anyo As String, Pagos As Boolean) As Boolean
+Dim CC As String
+Dim IBAN As String
+On Error GoTo EcomprobarCuentasBancariasPagos
+
+    comprobarCuentasBancariasPagos = False
+    If Pagos Then
+        SQL = "select * from pagos where transfer = " & Transferencia
+    Else
+        'ABONOS
+        SQL = "Select * "
+        SQL = SQL & " FROM cobros where transfer=" & Transferencia
+        SQL = SQL & " and anyorem = " & DBSet(Anyo, "N")
+    End If
+    
+    
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Registro = ""
+    NF = 0
+    While Not miRsAux.EOF
+
+        If DBLet(miRsAux!IBAN, "T") = "" Or Len(DBLet(miRsAux!IBAN, "T")) <> 24 Then
+            SQL = ""
+        Else
+            SQL = "D"
+        End If
+
+    
+        If SQL = "" Then
+             Registro = Registro & miRsAux!codmacta & " - " & miRsAux!NUmSerie & "/" & miRsAux!NumFactu & "-" & miRsAux!numorden
+             If NF < 2 Then
+                Registro = Registro & "         "
+                NF = NF + 1
+             Else
+                Registro = Registro & vbCrLf
+                NF = 0
+            End If
+    
+        End If
+    
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    If Registro <> "" Then
+        SQL = "Los siguientes vencimientos no tienen la cuenta bancaria con todos los datos." & vbCrLf & Registro
+        MsgBox SQL, vbExclamation
+        Exit Function
+    End If
+    
+    
+    'Si llega aqui es que todos tienen DATOS
+    If Pagos Then
+        SQL = "select iban from pagos where transfer = " & Transferencia
+        SQL = SQL & " GROUP BY mid(iban,5,4),mid(iban,9,4),mid(iban,15,10),mid(iban,13,2)"
+    Else
+        SQL = "SELECT iban"
+        SQL = SQL & " FROM cobros where transfer=" & Transferencia
+        SQL = SQL & " GROUP BY mid(iban,5,4),mid(iban,9,4),mid(iban,15,10),mid(iban,13,2)"
+    End If
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Registro = ""
+    While Not miRsAux.EOF
+                SQL = Mid(miRsAux!IBAN, 5, 4) ' Código de entidad receptora
+                SQL = SQL & Mid(miRsAux!IBAN, 9, 4) ' Código de oficina receptora
+                
+                SQL = SQL & Mid(miRsAux!IBAN, 15, 10) ' Código de cuenta
+                
+                CC = Mid(miRsAux!IBAN, 13, 2) ' Dígitos de control
+                
+                'Este lo mando.
+                IBAN = Mid(SQL, 1, 8) & CC & Mid(SQL, 9)
+                
+                SQL = CodigoDeControl(SQL)
+                If SQL <> CC Then
+                    
+                    SQL = " - " & Mid(miRsAux!IBAN, 13, 2) & "- " & Mid(miRsAux!IBAN, 15, 10) & " --> CC. correcto:" & SQL
+                    SQL = Mid(miRsAux!IBAN, 5, 4) & " - " & Mid(miRsAux!IBAN, 9, 4) & SQL
+                    Registro = Registro & SQL & vbCrLf
+                End If
+                
+                
+                'Noviembre 2013
+                'IBAN
+                If vParam.NuevasNormasSEPA Then
+                        SQL = "ES"
+                        If DBLet(miRsAux!IBAN, "T") <> "" Then SQL = Mid(miRsAux!IBAN, 1, 2)
+                    
+                
+                        If Not DevuelveIBAN2(SQL, IBAN, IBAN) Then
+                            
+                            SQL = "Error calculo"
+                        Else
+                            SQL = SQL & IBAN
+                            If Mid(DBLet(miRsAux!IBAN, "T"), 1, 4) <> SQL Then
+                                SQL = "Error IBAN. Calculado " & SQL & " / " & Mid(DBLet(miRsAux!IBAN, "T"), 1, 4)
+                            Else
+                                'OK
+                                SQL = ""
+                            End If
+                        End If
+                        
+                        If SQL <> "" Then
+                            SQL = SQL & " - " & Mid(miRsAux!IBAN, 13, 2) & "- " & Mid(miRsAux!IBAN, 15, 10) & " --> CC. correcto:" & SQL
+                            SQL = Mid(miRsAux!IBAN, 5, 4) & " - " & Mid(miRsAux!IBAN, 9, 4) & SQL
+                            Registro = Registro & "Error obteniendo IBAN: " & SQL & vbCrLf
+                        End If
+                End If
+                
+                
+                miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    If Registro <> "" Then
+        SQL = "Generando diskette." & vbCrLf & vbCrLf
+        SQL = SQL & "Las siguientes cuentas no son correctas.:" & vbCrLf & Registro
+        SQL = SQL & vbCrLf & "¿Desea continuar?"
+        If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Function
+    End If
+    
+    comprobarCuentasBancariasPagos = True
+    Exit Function
+EcomprobarCuentasBancariasPagos:
+    MuestraError Err.Number, "comprobar Cuentas Bancarias pagos"
+End Function
 
 
 
 Private Function RellenaABlancos(CADENA As String, PorLaDerecha As Boolean, Longitud As Integer) As String
-Dim cad As String
+Dim Cad As String
     
-    cad = Space(Longitud)
+    Cad = Space(Longitud)
     If PorLaDerecha Then
-        cad = CADENA & cad
-        RellenaABlancos = Left(cad, Longitud)
+        Cad = CADENA & Cad
+        RellenaABlancos = Left(Cad, Longitud)
     Else
-        cad = cad & CADENA
-        RellenaABlancos = Right(cad, Longitud)
+        Cad = Cad & CADENA
+        RellenaABlancos = Right(Cad, Longitud)
     End If
     
 End Function
@@ -921,15 +1373,15 @@ End Function
 
 
 Private Function RellenaAceros(CADENA As String, PorLaDerecha As Boolean, Longitud As Integer) As String
-Dim cad As String
+Dim Cad As String
     
-    cad = Mid("00000000000000000000", 1, Longitud)
+    Cad = Mid("00000000000000000000", 1, Longitud)
     If PorLaDerecha Then
-        cad = CADENA & cad
-        RellenaAceros = Left(cad, Longitud)
+        Cad = CADENA & Cad
+        RellenaAceros = Left(Cad, Longitud)
     Else
-        cad = cad & CADENA
-        RellenaAceros = Right(cad, Longitud)
+        Cad = Cad & CADENA
+        RellenaAceros = Right(Cad, Longitud)
     End If
     
 End Function
@@ -951,8 +1403,8 @@ Dim CodigoOrdenante As String
 Dim Importe As Currency
 Dim Im As Currency
 Dim RS As ADODB.Recordset
-Dim Aux As String
-Dim cad As String
+Dim AUX As String
+Dim Cad As String
 
 
     On Error GoTo EGen
@@ -962,22 +1414,22 @@ Dim cad As String
     
     
     'Cargamos la cuenta
-    cad = "Select * from ctabancaria where codmacta='" & CuentaPropia & "'"
+    Cad = "Select * from ctabancaria where codmacta='" & CuentaPropia & "'"
     Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Aux = Right("    " & CIF, 9)
-    Aux = Mid(CIF & Space(10), 1, 9)
+    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    AUX = Right("    " & CIF, 9)
+    AUX = Mid(CIF & Space(10), 1, 9)
     If RS.EOF Then
-        cad = ""
+        Cad = ""
     Else
         If IsNull(RS!Entidad) Then
-            cad = ""
+            Cad = ""
         Else
             
-            CodigoOrdenante = Format(RS!Entidad, "0000") & Format(DBLet(RS!Oficina, "N"), "0000") & Format(DBLet(RS!Control, "N"), "00") & Format(DBLet(RS!CtaBanco, "T"), "0000000000")
+            CodigoOrdenante = Format(RS!Entidad, "0000") & Format(DBLet(RS!oficina, "N"), "0000") & Format(DBLet(RS!Control, "N"), "00") & Format(DBLet(RS!CtaBanco, "T"), "0000000000")
             
-            If Not DevuelveIBAN2("ES", CodigoOrdenante, cad) Then cad = ""
-            CuentaPropia = "ES" & cad & CodigoOrdenante
+            If Not DevuelveIBAN2("ES", CodigoOrdenante, Cad) Then Cad = ""
+            CuentaPropia = "ES" & Cad & CodigoOrdenante
                         
             'Esta variable NO se utiliza. La cojo "prestada"
             'Guardare el numero de contrato de CAIXACONFIRMING
@@ -994,7 +1446,7 @@ Dim cad As String
     End If
     RS.Close
     Set RS = Nothing
-    If cad = "" Then
+    If Cad = "" Then
         MsgBox "Error leyendo datos para: " & CuentaPropia, vbExclamation
         Exit Function
     End If
@@ -1010,26 +1462,26 @@ Dim cad As String
     '---------------------------------------------------
     'Si el banco tiene puesto si ID de norma34 entonces
     'la pongo aquin. Lo he cargado antes sobre la variable AUX
-    CodigoOrdenante = Left(Aux & "          ", 10)  'CIF EMPRESA
+    CodigoOrdenante = Left(AUX & "          ", 10)  'CIF EMPRESA
   
     Set RS = New ADODB.Recordset
     
     'CABECERA
     'UNo
-    Aux = "0156" & CodigoOrdenante & Space(12) & "001" & Format(Fecha, "ddmmyy") & Space(6)
-    Aux = Aux & ConceptoTr_ & "1" & "EUR" & Space(9)   'Ya esta. Ya he utlizado la variable ConceptoTr_. Nada mas
-    Print #NFich, Aux
+    AUX = "0156" & CodigoOrdenante & Space(12) & "001" & Format(Fecha, "ddmmyy") & Space(6)
+    AUX = AUX & ConceptoTr_ & "1" & "EUR" & Space(9)   'Ya esta. Ya he utlizado la variable ConceptoTr_. Nada mas
+    Print #NFich, AUX
     'Nombre
-    Aux = "0156" & CodigoOrdenante & Space(12) & "002" & FrmtStr(vEmpresa.nomempre, 36) & Space(7)
-    Print #NFich, Aux
+    AUX = "0156" & CodigoOrdenante & Space(12) & "002" & FrmtStr(vEmpresa.nomempre, 36) & Space(7)
+    Print #NFich, AUX
     
     'Registros obligatorios  3 4
-    Aux = "Select pobempre, provempre from empresa2"
-    RS.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    AUX = "Select pobempre, provempre from empresa2"
+    RS.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUEDE SER EOF
     For Regs = 0 To 1
-        Aux = "0156" & CodigoOrdenante & Space(12) & Format(Regs + 3, "000") & FrmtStr(DBLet(RS.Fields(Regs), "T"), 36) & Space(7)
-        Print #NFich, Aux
+        AUX = "0156" & CodigoOrdenante & Space(12) & Format(Regs + 3, "000") & FrmtStr(DBLet(RS.Fields(Regs), "T"), 36) & Space(7)
+        Print #NFich, AUX
     Next
     RS.Close
     
@@ -1039,9 +1491,9 @@ Dim cad As String
     'Imprimimos las lineas
     'Para ello abrimos la tabla tmpNorma34
     
-    Aux = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,despobla,nifdatos,razosoci,desprovi,pais from spagop,cuentas"
-    Aux = Aux & " where codmacta=ctaprove and transfer =" & NumeroTransferencia
-    RS.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    AUX = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,despobla,nifdatos,razosoci,desprovi,pais from spagop,cuentas"
+    AUX = AUX & " where codmacta=ctaprove and transfer =" & NumeroTransferencia
+    RS.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Importe = 0
     If RS.EOF Then
         'No hayningun registro
@@ -1054,44 +1506,44 @@ Dim cad As String
                 '*********************************************************
                 Im = DBLet(RS!imppagad, "N")
                 Im = RS!ImpEfect - Im
-                Aux = RellenaABlancos(RS!nifdatos, True, 12)
+                AUX = RellenaABlancos(RS!nifdatos, True, 12)
                 
                     
                 'Reg 010
-                Aux = "0656" & CodigoOrdenante & Aux & "010"
-                Aux = Aux & RellenaAceros(CStr(Im * 100), False, 12)
-                Aux = Aux & FrmtStr(DBLet(RS!Entidad, "N"), 4) & FrmtStr(DBLet(RS!Oficina, "N"), 4)
-                Aux = Aux & FrmtStr(DBLet(RS!Cuentaba, "N"), 10) & "1" & "9" & "  " & FrmtStr(DBLet(RS!CC, "N"), 2)
-                Aux = Aux & "N" & "C" & "EUR  "
-                Print #NFich, Aux
+                AUX = "0656" & CodigoOrdenante & AUX & "010"
+                AUX = AUX & RellenaAceros(CStr(Im * 100), False, 12)
+                AUX = AUX & FrmtStr(DBLet(RS!Entidad, "N"), 4) & FrmtStr(DBLet(RS!oficina, "N"), 4)
+                AUX = AUX & FrmtStr(DBLet(RS!cuentaba, "N"), 10) & "1" & "9" & "  " & FrmtStr(DBLet(RS!CC, "N"), 2)
+                AUX = AUX & "N" & "C" & "EUR  "
+                Print #NFich, AUX
                 
         
            
            
                 
                 'OBligaorio 011   Nombre
-                Aux = RellenaABlancos(RS!nifdatos, True, 12)
-                Aux = "0656" & CodigoOrdenante & Aux & "011"
-                Aux = Aux & FrmtStr(DBLet(RS!razosoci, "T"), 36) & Space(7)
-                Print #NFich, Aux
+                AUX = RellenaABlancos(RS!nifdatos, True, 12)
+                AUX = "0656" & CodigoOrdenante & AUX & "011"
+                AUX = AUX & FrmtStr(DBLet(RS!razosoci, "T"), 36) & Space(7)
+                Print #NFich, AUX
            
                 'OBligaorio 012   direccion
-                Aux = RellenaABlancos(RS!nifdatos, True, 12)
-                Aux = "0656" & CodigoOrdenante & Aux & "012"
-                Aux = Aux & FrmtStr(DBLet(RS!dirdatos, "T"), 36) & Space(7)
-                Print #NFich, Aux
+                AUX = RellenaABlancos(RS!nifdatos, True, 12)
+                AUX = "0656" & CodigoOrdenante & AUX & "012"
+                AUX = AUX & FrmtStr(DBLet(RS!dirdatos, "T"), 36) & Space(7)
+                Print #NFich, AUX
            
                 'OBligaorio 014   cpos provi
-                Aux = RellenaABlancos(RS!nifdatos, True, 12)
-                Aux = "0656" & CodigoOrdenante & Aux & "014"
-                Aux = Aux & FrmtStr(DBLet(RS!codposta, "N"), 5) & FrmtStr(DBLet(RS!desPobla, "T"), 31) & Space(7)
-                Print #NFich, Aux
+                AUX = RellenaABlancos(RS!nifdatos, True, 12)
+                AUX = "0656" & CodigoOrdenante & AUX & "014"
+                AUX = AUX & FrmtStr(DBLet(RS!codposta, "N"), 5) & FrmtStr(DBLet(RS!desPobla, "T"), 31) & Space(7)
+                Print #NFich, AUX
                 
                 'OBligaorio 016   ID factura
-                Aux = RellenaABlancos(RS!nifdatos, True, 12)
-                Aux = "0656" & CodigoOrdenante & Aux & "016"
-                Aux = Aux & "T" & Format(RS!FecFactu, "ddmmyy") & FrmtStr(RS!NumFactu, 15) & Format(RS!fecefect, "ddmmyy") & Space(15)
-                Print #NFich, Aux
+                AUX = RellenaABlancos(RS!nifdatos, True, 12)
+                AUX = "0656" & CodigoOrdenante & AUX & "016"
+                AUX = AUX & "T" & Format(RS!FecFactu, "ddmmyy") & FrmtStr(RS!NumFactu, 15) & Format(RS!fecefect, "ddmmyy") & Space(15)
+                Print #NFich, AUX
            
                  
         
@@ -1101,14 +1553,14 @@ Dim cad As String
                RS.MoveNext
         Wend
         'Imprimimos totales
-        Aux = "08" & "56"
-        Aux = Aux & CodigoOrdenante    'llevara tb la ID del socio
-        Aux = Aux & Space(15)
-        Aux = Aux & RellenaAceros(CStr(Int(Round(Importe * 100, 2))), False, 12)
-        Aux = Aux & RellenaAceros(CStr((Regs)), False, 8)
-        Aux = Aux & RellenaAceros(CStr((Regs * 5) + 4 + 1), False, 10)    '4 de cabecera + uno de totales
-        Aux = RellenaABlancos(Aux, True, 72)
-        Print #NFich, Aux
+        AUX = "08" & "56"
+        AUX = AUX & CodigoOrdenante    'llevara tb la ID del socio
+        AUX = AUX & Space(15)
+        AUX = AUX & RellenaAceros(CStr(Int(Round(Importe * 100, 2))), False, 12)
+        AUX = AUX & RellenaAceros(CStr((Regs)), False, 8)
+        AUX = AUX & RellenaAceros(CStr((Regs * 5) + 4 + 1), False, 10)    '4 de cabecera + uno de totales
+        AUX = RellenaABlancos(AUX, True, 72)
+        Print #NFich, AUX
         
         
     End If
@@ -1250,60 +1702,60 @@ End Function
 '   2. Total deudor
 '   3. Total general
 Private Sub ImprimiSEPA_ProveedorFecha2(TipoRegistro As Byte, IdDeudorAcreedor As String, Fecha As Date, Registros003 As Integer, Suma As Currency, NumeroLineasTotalesSinCabceraPresentador As Integer, IdNorma As String)
-Dim cad As String
+Dim Cad As String
 
     Select Case TipoRegistro
     Case 0
         'Cabecera de ACREEDOR-FECHA
-        cad = "02" & IdNorma & "002"   '19143-> Podria ser 19154 ver pdf
-        cad = cad & IdDeudorAcreedor
+        Cad = "02" & IdNorma & "002"   '19143-> Podria ser 19154 ver pdf
+        Cad = Cad & IdDeudorAcreedor
         
         'Fecha cobro
-        cad = cad & Format(miRsAux!FecVenci, "yyyymmdd")
+        Cad = Cad & Format(miRsAux!FecVenci, "yyyymmdd")
         
         'Nomprove
-        cad = cad & DatosBasicosDelAcreedor
+        Cad = Cad & DatosBasicosDelAcreedor
         'EN SQL llevamos el IBAN completo del acredor, es decir, de la empresa presentardora que le deben los deudores
-        cad = cad & SQL & Space(10)  'El iban son 24 y dejan hasta 34 psociones
+        Cad = Cad & SQL & Space(10)  'El iban son 24 y dejan hasta 34 psociones
         '
-        cad = cad & Space(301)
+        Cad = Cad & Space(301)
         
     Case 1
         'total x fecha -deudor
-        cad = "04"
-        cad = cad & IdDeudorAcreedor
+        Cad = "04"
+        Cad = Cad & IdDeudorAcreedor
 
         'Fecha cobro
-        cad = cad & Format(Fecha, "yyyymmdd")
+        Cad = Cad & Format(Fecha, "yyyymmdd")
 
-        cad = cad & Right(String(17, "0") & (Suma * 100), 17) ' Suma total de registros
-        cad = cad & Format(Registros003, "00000000")
-        cad = cad & Format(NumeroLineasTotalesSinCabceraPresentador + 2, "0000000000") ' +cabecera y pie
-        cad = cad & FrmtStr(" ", 520) ' LIBRE
+        Cad = Cad & Right(String(17, "0") & (Suma * 100), 17) ' Suma total de registros
+        Cad = Cad & Format(Registros003, "00000000")
+        Cad = Cad & Format(NumeroLineasTotalesSinCabceraPresentador + 2, "0000000000") ' +cabecera y pie
+        Cad = Cad & FrmtStr(" ", 520) ' LIBRE
 
         
         
     Case 2
         'total deudor
-        cad = "05"
-        cad = cad & IdDeudorAcreedor
+        Cad = "05"
+        Cad = Cad & IdDeudorAcreedor
 
-        cad = cad & Right(String(17, "0") & (Suma * 100), 17) ' Suma total de registros
-        cad = cad & Format(Registros003, "00000000")
-        cad = cad & Format(NumeroLineasTotalesSinCabceraPresentador + 2, "0000000000") '
-        cad = cad & FrmtStr(" ", 528) ' LIBRE
+        Cad = Cad & Right(String(17, "0") & (Suma * 100), 17) ' Suma total de registros
+        Cad = Cad & Format(Registros003, "00000000")
+        Cad = Cad & Format(NumeroLineasTotalesSinCabceraPresentador + 2, "0000000000") '
+        Cad = Cad & FrmtStr(" ", 528) ' LIBRE
       
     Case 3
         'total general
-        cad = "99"
-        cad = cad & Right(String(17, "0") & (Suma * 100), 17) ' Suma total de registros
-        cad = cad & Format(Registros003, "00000000")
-        cad = cad & Format(NumeroLineasTotalesSinCabceraPresentador + 2, "0000000000") ' +cabecera y pie
-        cad = cad & FrmtStr(" ", 563) ' LIBRE
+        Cad = "99"
+        Cad = Cad & Right(String(17, "0") & (Suma * 100), 17) ' Suma total de registros
+        Cad = Cad & Format(Registros003, "00000000")
+        Cad = Cad & Format(NumeroLineasTotalesSinCabceraPresentador + 2, "0000000000") ' +cabecera y pie
+        Cad = Cad & FrmtStr(" ", 563) ' LIBRE
       
     End Select
         
-    Print #NF, cad
+    Print #NF, Cad
         
         
 End Sub

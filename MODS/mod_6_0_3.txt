@@ -27,3 +27,5 @@ alter table `ariconta1`.`transferencias`
 ;
 alter table `ariconta1`.`transferencias` change `anyotrans` `anyo` int (7)   NOT NULL 
 ;
+alter table `ariconta1`.`transferencias` change `situacion` `situacion` char (1)   NOT NULL 
+;
