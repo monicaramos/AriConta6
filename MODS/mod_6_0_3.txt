@@ -29,3 +29,5 @@ alter table `ariconta1`.`transferencias` change `anyotrans` `anyo` int (7)   NOT
 ;
 alter table `ariconta1`.`transferencias` change `situacion` `situacion` char (1)   NOT NULL 
 ;
+#Impresion de abono transferencias
+insert into ariconta1.`scryst` (`codigo`,`descripcion`,`informe`) values ( '0614-00','Informe Transferencias de Abono','Transferencias.rpt')

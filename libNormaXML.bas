@@ -73,6 +73,320 @@ Dim C As Integer
 End Function
 
 
+Public Function GeneraFicheroNorma34SEPA_XML(CIF As String, Fecha As Date, CuentaPropia2 As String, NumeroTransferencia As Long, Pagos As Boolean, ConceptoTr As String, Anyo As String) As Boolean
+Dim Regs As Integer
+Dim Importe As Currency
+Dim Im As Currency
+Dim cad As String
+Dim Aux As String
+Dim SufijoOEM As String
+Dim NFic As Integer
+Dim EsPersonaJuridica2 As Boolean
+
+    On Error GoTo EGen3
+    GeneraFicheroNorma34SEPA_XML = False
+    
+'    NFic = -1
+    
+    
+    'Cargamos la cuenta
+    cad = "Select * from bancos where codmacta='" & CuentaPropia2 & "'"
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If miRsAux.EOF Then
+        cad = ""
+    Else
+        If IsNull(miRsAux!IBAN) Then
+            cad = ""
+        Else
+            SufijoOEM = "000" ''Sufijo3414
+            cad = miRsAux!IBAN
+            If DBLet(miRsAux!Sufijo3414, "T") <> "" Then SufijoOEM = Right("000" & miRsAux!Sufijo3414, 3)
+            CuentaPropia2 = cad
+        End If
+        
+        
+    End If
+    miRsAux.Close
+  
+    If cad = "" Then
+        MsgBox "Error leyendo datos para: " & CuentaPropia2, vbExclamation
+        Exit Function
+    End If
+    
+    NFic = FreeFile
+    Open App.Path & "\norma34.txt" For Output As #NFic
+    
+    
+    Print #NFic, "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>"
+    Print #NFic, "<Document xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""urn:iso:std:iso:20022:tech:xsd:pain.001.001.03"">"
+    Print #NFic, "<CstmrCdtTrfInitn>"
+    Print #NFic, "   <GrpHdr>"
+    cad = "TRAN" & IIf(Pagos, "PAG", "ABO") & Format(NumeroTransferencia, "000000") & "F" & Format(Now, "yyyymmddThhnnss")
+    Print #NFic, "      <MsgId>" & cad & "</MsgId>"
+    Print #NFic, "      <CreDtTm>" & Format(Now, "yyyy-mm-ddThh:nn:ss") & "</CreDtTm>"
+    
+    
+    If Pagos Then
+        Aux = "ImpEfect - coalesce(imppagad ,0)"
+        cad = "pagos"
+    Else
+        Aux = "abs(impvenci + coalesce(Gastos, 0) - coalesce(impcobro, 0))"
+        cad = "cobros"
+    End If
+    cad = "Select count(*),sum(" & Aux & ") FROM " & cad & " WHERE transfer = " & NumeroTransferencia & " and  anyorem = " & DBSet(Anyo, "N")
+    Aux = "0|0|"
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not miRsAux.EOF Then
+        If Not IsNull(miRsAux.Fields(1)) Then Aux = miRsAux.Fields(0) & "|" & Format(miRsAux.Fields(1), "#.00") & "|"
+    End If
+    miRsAux.Close
+    
+    Print #NFic, "      <NbOfTxs>" & RecuperaValor(Aux, 1) & "</NbOfTxs>"
+    Print #NFic, "      <CtrlSum>" & TransformaComasPuntos(RecuperaValor(Aux, 2)) & "</CtrlSum>"
+    Print #NFic, "      <InitgPty>"
+    Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
+    Print #NFic, "         <Id>"
+    cad = Mid(CIF, 1, 1)
+    
+    EsPersonaJuridica2 = Not IsNumeric(cad)
+
+    
+    
+    
+    cad = "PrvtId"
+    If EsPersonaJuridica2 Then cad = "OrgId"
+    
+    Print #NFic, "           <" & cad & ">"
+    Print #NFic, "               <Othr>"
+    Print #NFic, "                  <Id>" & CIF & SufijoOEM & "</Id>"
+    Print #NFic, "               </Othr>"
+    Print #NFic, "           </" & cad & ">"
+    
+    Print #NFic, "         </Id>"
+    Print #NFic, "      </InitgPty>"
+    Print #NFic, "   </GrpHdr>"
+
+    Print #NFic, "   <PmtInf>"
+    
+    Print #NFic, "      <PmtInfId>" & Format(Now, "yyyymmddhhnnss") & CIF & "</PmtInfId>"
+    Print #NFic, "      <PmtMtd>TRF</PmtMtd>"
+    Print #NFic, "      <ReqdExctnDt>" & Format(Fecha, "yyyy-mm-dd") & "</ReqdExctnDt>"
+    Print #NFic, "      <Dbtr>"
+    
+     'Nombre
+    miRsAux.Open "Select siglasvia ,direccion ,numero ,codpobla,pobempre,provempre,provincia from empresa2"
+    cad = cad & FrmtStr(vEmpresa.nomempre, 70)
+    If miRsAux.EOF Then Err.Raise 513, , "Error obteniendo datos empresa(empresa2)"
+    
+    Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
+    Print #NFic, "         <PstlAdr>"
+    Print #NFic, "            <Ctry>ES</Ctry>"
+
+    cad = DBLet(miRsAux!siglasvia, "T") & " " & miRsAux!Direccion & " " & DBLet(miRsAux!numero, "T") & " "
+    cad = cad & Trim(DBLet(miRsAux!CodPobla, "T") & " " & miRsAux!pobempre) & " "
+    cad = cad & DBLet(miRsAux!provincia, "T")
+    miRsAux.Close
+    Print #NFic, "            <AdrLine>" & XML(Trim(cad)) & "</AdrLine>"
+    
+    Print #NFic, "         </PstlAdr>"
+    Print #NFic, "         <Id>"
+    
+    Aux = "PrvtId"
+    If EsPersonaJuridica2 Then Aux = "OrgId"
+   
+    
+    Print #NFic, "            <" & Aux & ">"
+    
+    Print #NFic, "               <Othr>"
+    Print #NFic, "                  <Id>" & CIF & SufijoOEM & "</Id>"
+    Print #NFic, "               </Othr>"
+    Print #NFic, "            </" & Aux & ">"
+    Print #NFic, "         </Id>"
+    Print #NFic, "    </Dbtr>"
+    
+    
+    Print #NFic, "    <DbtrAcct>"
+    Print #NFic, "       <Id>"
+    Print #NFic, "          <IBAN>" & Trim(CuentaPropia2) & "</IBAN>"
+    Print #NFic, "       </Id>"
+    Print #NFic, "       <Ccy>EUR</Ccy>"
+    Print #NFic, "    </DbtrAcct>"
+    Print #NFic, "    <DbtrAgt>"
+    Print #NFic, "       <FinInstnId>"
+    
+    cad = Mid(CuentaPropia2, 5, 4)
+    cad = DevuelveDesdeBD("bic", "bics", "entidad", cad)
+    Print #NFic, "          <BIC>" & Trim(cad) & "</BIC>"
+    Print #NFic, "       </FinInstnId>"
+    Print #NFic, "    </DbtrAgt>"
+    
+    
+    
+    'Para ello abrimos la tabla tmpNorma34
+    If Pagos Then
+        cad = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,desprovi,pais,cuentas.despobla,bic,nifdatos from spagop"
+        cad = cad & " left join sbic on spagop.entidad=sbic.entidad INNER JOIN cuentas ON"
+        cad = cad & " codmacta=ctaprove WHERE transfer =" & NumeroTransferencia
+    Else
+        'ABONOS
+         '
+        cad = "Select mid(cobros.iban,5,4) as entidad,mid(cobros.iban,9,4) as oficina,mid(cobros.iban,15,10) cuentaba,mid(cobros.iban,13,2) as CC,cobros.iban"
+        cad = cad & ",nomclien nommacta,domclien dirdatos,cpclien codposta,pobclien despobla,impvenci,cobros.codmacta,codpais,Gastos,impcobro,proclien desprovi"
+        cad = cad & " ,NUmSerie,numfactu,fecfactu,numorden,text33csb,text41csb,bic,nifclien nifdatos from cobros"
+        cad = cad & " LEFT JOIN bics on mid(cobros.iban,5,4)=bics.entidad "
+        cad = cad & " WHERE transfer =" & NumeroTransferencia & " and anyorem = " & DBSet(Anyo, "N")
+    End If
+    miRsAux.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Regs = 0
+    While Not miRsAux.EOF
+        Print #NFic, "   <CdtTrfTxInf>"
+        Print #NFic, "      <PmtId>"
+        
+         
+        If Pagos Then
+            'numfactu fecfactu numorden
+            Aux = FrmtStr(miRsAux!NumFactu, 10)
+            Aux = Aux & Format(miRsAux!FecFactu, "yyyymmdd") & Format(miRsAux!numorden, "000")
+        
+        Else
+            'fecfaccl
+            Aux = FrmtStr(miRsAux!NUmSerie, 3) & Format(miRsAux!NumFactu, "00000000")
+            Aux = Aux & Format(miRsAux!FecFactu, "yyyymmdd") & Format(miRsAux!numorden, "000")
+        End If
+        
+        Print #NFic, "         <EndToEndId>" & Aux & "</EndToEndId>"
+        Print #NFic, "      </PmtId>"
+        Print #NFic, "      <PmtTpInf>"
+        If Pagos Then
+            Im = DBLet(miRsAux!imppagad, "N")
+            Im = miRsAux!ImpEfect - Im
+            Aux = miRsAux!ctaprove
+
+        Else
+            Im = Abs(miRsAux!ImpVenci + DBLet(miRsAux!Gastos, "N")) - DBLet(miRsAux!impcobro, "N")
+            Aux = miRsAux!codmacta
+        End If
+        
+        'Persona fisica o juridica
+        cad = Mid(miRsAux!nifdatos, 1, 1)
+        EsPersonaJuridica2 = Not IsNumeric(cad)
+        'Como da problemas Cajamar, siempre ponemos Perosna juridica. Veremos
+        EsPersonaJuridica2 = True
+        
+        
+        Importe = Importe + Im
+        Regs = Regs + 1
+        
+        Print #NFic, "          <SvcLvl><Cd>SEPA</Cd></SvcLvl>"
+        'Print #NFic, "          <LclInstrm><Cd>SDCL</Cd></LclInstrm>"
+        If ConceptoTr = "1" Then
+            Aux = "SALA"
+        ElseIf ConceptoTr = "0" Then
+            Aux = "PENS"
+        Else
+            Aux = "TRAD"
+        End If
+        Print #NFic, "          <CtgyPurp><Cd>" & Aux & "</Cd></CtgyPurp>"
+        Print #NFic, "       </PmtTpInf>"
+        Print #NFic, "       <Amt>"
+        cad = Format(Im, "#.00")
+        Print #NFic, "          <InstdAmt Ccy=""EUR"">" & TransformaComasPuntos(cad) & "</InstdAmt>"
+        Print #NFic, "       </Amt>"
+        Print #NFic, "       <CdtrAgt>"
+        Print #NFic, "          <FinInstnId>"
+        cad = DBLet(miRsAux!BIC, "T")
+        If cad = "" Then Err.Raise 513, , "No existe BIC: " & miRsAux!Nommacta & vbCrLf & "Entidad: " & miRsAux!Entidad
+        Print #NFic, "             <BIC>" & DBLet(miRsAux!BIC, "T") & "</BIC>"
+        Print #NFic, "          </FinInstnId>"
+        Print #NFic, "       </CdtrAgt>"
+        Print #NFic, "       <Cdtr>"
+        Print #NFic, "          <Nm>" & XML(miRsAux!Nommacta) & "</Nm>"
+        
+        
+        'Como cajamar da problemas, lo quitamos para todos
+        'Print #NFic, "          <PstlAdr>"
+        '
+        'Cad = "ES"
+        'If Not IsNull(miRsAux!PAIS) Then Cad = Mid(miRsAux!PAIS, 1, 2)
+        'Print #NFic, "              <Ctry>" & Cad & "</Ctry>"
+        '
+        'If Not IsNull(miRsAux!dirdatos) Then Print #NFic, "              <AdrLine>" & XML(miRsAux!dirdatos) & "</AdrLine>"
+        'Cad = XML(Trim(DBLet(miRsAux!codposta, "T") & " " & DBLet(miRsAux!despobla, "T")))
+        'If Cad <> "" Then Print #NFic, "              <AdrLine>" & Cad & "</AdrLine>"
+        'If Not IsNull(miRsAux!desprovi) Then Print #NFic, "              <AdrLine>" & XML(miRsAux!desprovi) & "</AdrLine>"
+        'Print #NFic, "           </PstlAdr>"
+        
+        
+        
+        Print #NFic, "           <Id>"
+        Aux = "PrvtId"
+        If EsPersonaJuridica2 Then Aux = "OrgId"
+      
+        Print #NFic, "               <" & Aux & ">"
+        Print #NFic, "                  <Othr>"
+        Print #NFic, "                     <Id>" & miRsAux!nifdatos & "</Id>"
+        'Da problemas.... con Cajamar
+        'Print #NFic, "                     <Issr>NIF</Issr>"
+        Print #NFic, "                  </Othr>"
+        Print #NFic, "               </" & Aux & ">"
+        Print #NFic, "           </Id>"
+        Print #NFic, "        </Cdtr>"
+        Print #NFic, "        <CdtrAcct>"
+        Print #NFic, "           <Id>"
+        Print #NFic, "              <IBAN>" & IBAN_Destino & "</IBAN>"
+        Print #NFic, "           </Id>"
+        Print #NFic, "        </CdtrAcct>"
+        Print #NFic, "      <Purp>"
+        
+        If ConceptoTr = "1" Then
+            Aux = "SALA"
+        ElseIf ConceptoTr = "0" Then
+            Aux = "PENS"
+        Else
+            Aux = "TRAD"
+        End If
+        
+        Print #NFic, "         <Cd>" & Aux & "</Cd>"
+        Print #NFic, "      </Purp>"
+        Print #NFic, "      <RmtInf>"
+        'Print #NFic, "      <Ustrd>ESTE ES EL CONCEPTO, POR TANTO NO SE SI SERA EL TEXTO QUE IRA DONDE TIENE QUE IR, O EN OTRO LADAO... A SABER. LO QUE ESTA CLARO ES QUE VA.</Ustrd>
+        
+        If Pagos Then
+            ''`text1csb` `text2csb`
+            Aux = DBLet(miRsAux!text1csb, "T") & " " & DBLet(miRsAux!text2csb, "T")
+        Else
+            '`text33csb` `text41csb`
+            Aux = DBLet(miRsAux!text33csb, "T") & " " & DBLet(miRsAux!text41csb, "T")
+        End If
+        If Trim(Aux) = "" Then Aux = miRsAux!Nommacta
+        Print #NFic, "         <Ustrd>" & XML(Trim(Aux)) & "</Ustrd>"
+        Print #NFic, "      </RmtInf>"
+        Print #NFic, "   </CdtTrfTxInf>"
+ 
+       
+    
+            
+        miRsAux.MoveNext
+    Wend
+    Print #NFic, "   </PmtInf>"
+    Print #NFic, "</CstmrCdtTrfInitn></Document>"
+    
+    
+    miRsAux.Close
+    Set miRsAux = Nothing
+    Close (NFic)
+    NFic = -1
+    If Regs > 0 Then GeneraFicheroNorma34SEPA_XML = True
+    Exit Function
+EGen3:
+    MuestraError Err.Number, Err.Description
+    Set miRsAux = Nothing
+'    If NFic > 0 Then Close (NFic)
+    CerrarFichero NFic
+    
+End Function
+
 
 Public Function GrabarDisketteNorma19_SEPA_XML(NomFichero As String, Remesa_ As String, FecPre As String, TipoReferenciaCliente As Byte, Sufijo As String, FechaCobro As String, SEPA_EmpresasGraboNIF As Boolean, Norma19_15 As Boolean, DatosBanco As String, NifEmpresa As String, esAnticipoCredito As Boolean) As Boolean
     Dim ValorEnOpcionales As Boolean
@@ -470,11 +784,11 @@ End Function
 
 
 
-Private Sub CerrarFichero(NFile As Integer)
+Private Sub CerrarFichero(nFile As Integer)
 
     On Error Resume Next
     
-    Close #NFile
+    Close #nFile
     
     Err.Clear
 

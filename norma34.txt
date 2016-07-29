@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
+<CstmrCdtTrfInitn>
+   <GrpHdr>
+      <MsgId>TRANABO000001F20160729T151155</MsgId>
+      <CreDtTm>2016-07-29T15:11:55</CreDtTm>
+      <NbOfTxs>2</NbOfTxs>
+      <CtrlSum>13.50</CtrlSum>
+      <InitgPty>
+         <Nm>Ariadna Software, S.L.</Nm>
+         <Id>
+           <OrgId>
+               <Othr>
+                  <Id>B96470190000</Id>
+               </Othr>
+           </OrgId>
+         </Id>
+      </InitgPty>
+   </GrpHdr>
+   <PmtInf>
+      <PmtInfId>20160729151155B96470190</PmtInfId>
+      <PmtMtd>TRF</PmtMtd>
+      <ReqdExctnDt>2016-07-29</ReqdExctnDt>
+      <Dbtr>
+         <Nm>Ariadna Software, S.L.</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+            <AdrLine>Pasaje Ventura Feliu 13  Valencia</AdrLine>
+         </PstlAdr>
+         <Id>
+            <OrgId>
+               <Othr>
+                  <Id>B96470190000</Id>
+               </Othr>
+            </OrgId>
+         </Id>
+    </Dbtr>
+    <DbtrAcct>
+       <Id>
+          <IBAN>ES2521001864930200004908</IBAN>
+       </Id>
+       <Ccy>EUR</Ccy>
+    </DbtrAcct>
+    <DbtrAgt>
+       <FinInstnId>
+          <BIC>CAIXESBBXXX</BIC>
+       </FinInstnId>
+    </DbtrAgt>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>A  0000252520160728001</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">3.25</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>F46026696</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES1030582267072710000069</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>A  0000252620160728001</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">10.25</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>F46026696</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES1030582267072710000069</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   </PmtInf>
+</CstmrCdtTrfInitn></Document>

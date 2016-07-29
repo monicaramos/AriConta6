@@ -318,6 +318,7 @@ Case "T"
         Ch = Mid(vCad, I, 1)
         Select Case Ch
             Case "a" To "z"
+            Case "è", "é", "í" 'Añade Laura: 16/03/06
             Case "A" To "Z"
             Case "0" To "9"
             'QUITAR#### o no.
@@ -330,6 +331,7 @@ Case "T"
             Case Else
                 Error = True
                 Exit For
+                
         End Select
     Next I
 Case "F"
@@ -862,7 +864,7 @@ Dim Nregs As Long
                 SQL = SQL & "0," & DBSet(ImporteLinea, "N") & ",0,"
             End If
 
-            SQL = SQL & DBSet(RS!punteada, "N") & "," & DBSet(RS!Nomdocum, "T") & "," & DBSet(RS!Ampconce, "T") & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(RS!contra, "T") & "," & DBSet(RS!CCost, "T") & ",1)"
+            SQL = SQL & DBSet(RS!punteada, "N") & "," & DBSet(RS!nomdocum, "T") & "," & DBSet(RS!Ampconce, "T") & "," & DBSet(Rs2!subccost, "T") & "," & DBSet(RS!contra, "T") & "," & DBSet(RS!CCost, "T") & ",1)"
 
             Conn.Execute SQL
 

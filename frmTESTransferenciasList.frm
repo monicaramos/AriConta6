@@ -832,8 +832,12 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "select transferencias.anyo Año, transferencias.codigo, transferencias.codmacta Cuenta, cuentas.nommacta Nombre, transferencias.fecha Fecha,  "
-    SQL = SQL & " transferencias.descripcion, CASE transferencias.situacion WHEN 0 THEN 'ABIERTO' WHEN 1 THEN 'GRABADO SOPORTE' WHEN 2 THEN 'CONTABILIZADO' END Situacion, "
+    SQL = "Select transferencias.codigo,transferencias.anyo, transferencias.fecha, "
+    'CASE situacion WHEN 0 THEN 'ABIERTA' WHEN 1 THEN 'GENERADO FICHERO' WHEN 2 THEN 'CONTABILIZADA' END as descsituacion,"
+    SQL = SQL & " wtiposituacionrem.descsituacion Situacion, "
+    SQL = SQL & " CASE concepto WHEN 0 THEN 'PENSION' WHEN 1 THEN 'NOMINA' WHEN 9 THEN 'ORDINARIA' END as Concepto, "
+    SQL = SQL & " transferencias.codmacta Cuenta ,cuentas.nommacta Nombre,"
+    SQL = SQL & " transferencias.descripcion, Importe "
     If Me.Check1(0).Value = 1 Then
         SQL = SQL & "cobros.numserie, cobros.numfactu Factura, cobros.fecfactu Fecha, cobros.fecvenci FVencim, cobros.codmacta Cuenta, aaa.nommacta Descripcion, cobros.iban, cobros.impvenci Importe"
         SQL = SQL & " from transferencias, cuentas, usuarios.wtiposituacionrem, cuentas aaa, tmpcobros2 "
@@ -841,16 +845,18 @@ Dim SQL2 As String
         SQL = SQL & "transferencias.importe "
         SQL = SQL & " from transferencias, cuentas "
     End If
+    
     SQL = SQL & " where " & cadselect
     
     SQL = SQL & " and transferencias.codmacta = cuentas.codmacta  "
+    SQL = SQL & " and transferencias.situacion  = wtiposituacionrem.situacio  "
     
     If Me.Check1(0).Value = 1 Then
         SQL = SQL & " and tmpcobros2.codusu = " & vUsu.Codigo
         SQL = SQL & " and tmpcobros2.codmacta = aaa.codmacta and transferencias.anyo = tmpcobros2.anyorem and transferencias.codigo = tmpcobros2.codrem "
     End If
     
-    SQL = SQL & " ORDER BY 1 desc, 2 "
+    SQL = SQL & " ORDER BY 2 desc, 1 "
         
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
@@ -865,7 +871,7 @@ Dim nomDocu As String
     vMostrarTree = False
     conSubRPT = True
         
-    indRPT = "0609-00" '"ConsExtrac.rpt"
+    indRPT = "0614-00" '"Transferencias.rpt"
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
@@ -931,15 +937,10 @@ Dim SqlValues As String
     
     SqlInsert = "insert into tmpcobros2 (codusu,numserie,numfactu,fecfactu,numorden,fecvenci,codmacta,cliente,iban,gastos,impvenci,esdevol,codrem,anyorem)  "
     
-    cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, codrem, anyorem "
+    cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, transfer, anyorem "
     cad = cad & " from cobros "
-    cad = cad & " where transferencias.tipotrans = 1 "
-    If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "transferencias", "cobros"), "codigo", "codrem"), "anyo", "anyorem")
-    cad = cad & " union "
-    cad = cad & " select " & vUsu.Codigo & ",hlinapu.numserie, hlinapu.numfaccl numfactu, hlinapu.fecfactu, hlinapu.numorden, cobros.fecvenci, cobros.codmacta, cobros.nomclien, cobros.iban, hlinapu.gastodev, coalesce(hlinapu.timported,0) - coalesce(hlinapu.timporteh,0) importe, 1 devol, hlinapu.codrem, hlinapu.anyorem "
-    cad = cad & " from cobros inner join hlinapu on cobros.numserie = hlinapu.numserie and cobros.numfactu = hlinapu.numfaccl and cobros.fecfactu = hlinapu.fecfactu and cobros.numorden = hlinapu.numorden "
-    cad = cad & " where hlinapu.tiporem = 1 and hlinapu.esdevolucion = 1 "
-    If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "remesas", "hlinapu"), "codigo", "codrem"), "anyo", "anyorem")
+    cad = cad & " where (1=1) "
+    If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "transferencias", "cobros"), "codigo", "transfer"), "anyo", "anyorem")
     
     Conn.Execute SqlInsert & cad
     
