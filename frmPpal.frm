@@ -100,6 +100,7 @@ Begin VB.Form frmPpal
       LabelWrap       =   -1  'True
       HideSelection   =   -1  'True
       OLEDropMode     =   1
+      GridLines       =   -1  'True
       _Version        =   393217
       Icons           =   "ImageList4"
       ForeColor       =   -2147483640
@@ -923,8 +924,8 @@ Private Sub Form_Unload(Cancel As Integer)
     ActualizarItems vUsu.Id, Me.ListView1, "ariconta"
     
     NumeroEmpresaMemorizar False
-
-    
+    On Error Resume Next
+    Set Conn = Nothing
 End Sub
 
 Private Sub Image1_Click()
@@ -1113,6 +1114,7 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 606 ' compensaciones
             frmTESCompensaciones.Show vbModal
         Case 607 ' compensar cliente
+            CadenaDesdeOtroForm = ""
             frmTESCompensaAboCli.Show vbModal
         Case 608 ' reclamaciones
             frmTESReclamaCli.Show vbModal
@@ -1618,15 +1620,32 @@ End Sub
 Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim RefrescarDatos As Boolean   'Porque a movido iconos fuera de los margenes
 Dim SQL As String
-    
+
     If IconoSeleccionado Then
+        RefrescarDatos = False
         
+        
+        Dim HaDesplazado As Boolean
+        HaDesplazado = False
+        For J = 1 To ListView1.ListItems.Count
+               ' Debug.Print "Item" & I & " : " & ListView1.ListItems(j).Left
+                If ListView1.ListItems(J).Left < 0 Then
+                    ListView1.ListItems(J).Left = 0
+                    RefrescarDatos = True
+                    HaDesplazado = True
+                End If
+        Next
 
-
-
-        'DAVID
-        ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", X, Y, RefrescarDatos
+        
+        'If Not RefrescarDatos Then
+            ActualizarItemCuadricula vUsu.Id, Me.ListView1, "ariconta", X, Y, RefrescarDatos
+        'End If
+        'If HaDesplazado Then Stop
         If RefrescarDatos Then
+         '   ListView1.ListItems.Clear
+         '   Debug.Print ListView1.Width
+         '   ListView1.Refresh
+            ListView1.PictureAlignment = lvwTopLeft
             ListView1.Arrange = lvwAutoTop
             ListView1.Refresh
             ListView1.Arrange = lvwNone
@@ -2129,7 +2148,7 @@ Dim I As Integer
     DevuelveProhibidas = ""
     Set RS = New ADODB.Recordset
     I = vUsu.Codigo Mod 1000
-    RS.Open "Select * from usuarios.usuarioempresa WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open "Select * from usuarios.usuarioempresasariconta WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     cad = ""
     While Not RS.EOF
         cad = cad & RS.Fields(1) & "|"

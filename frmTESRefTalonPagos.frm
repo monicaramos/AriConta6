@@ -659,7 +659,6 @@ Private Sub cmdAceptar_Click()
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
-'                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
                         If Not adodc1.Recordset.EOF Then
                             adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
                         End If
@@ -750,7 +749,6 @@ Screen.MousePointer = vbHourglass
 
 Ordenacion = "ORDER BY " & DataGrid1.Columns(0).DataField
 
-'ColIndexAnt = ColIndex
 CargaGrid CadB
 
 Screen.MousePointer = vbDefault
@@ -847,14 +845,13 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub CargaGrid(Optional vSQL As String)
+Private Sub CargaGrid(Optional vSql As String)
     Dim SQL As String
     Dim tots As String
     Dim SQL2 As String
     
-'    adodc1.ConnectionString = Conn
-    If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+    If vSql <> "" Then
+        SQL = CadenaConsulta & " AND " & vSql
     Else
         SQL = CadenaConsulta
     End If
@@ -949,7 +946,6 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 7 Then ' estoy introduciendo la lectura
        If KeyAscii = 13 Then 'ENTER
             If Modo = 4 Then
-                '050509 cmdAceptar_Click 'ModificarExistencia
                 RefAnt = txtAux(6)
                 BancoAnt = txtAux(7)
                 
@@ -965,10 +961,6 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
                 cmdAceptar.SetFocus
             End If
             
-            '050509
-'                    If ModoLineas = 1 Then
-'                        cmdAceptar.SetFocus
-'                    End If
        ElseIf KeyAscii = 27 Then
             cmdCancelar_Click 'ESC
        End If

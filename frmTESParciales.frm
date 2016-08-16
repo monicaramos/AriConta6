@@ -843,7 +843,6 @@ Private Sub Form_Activate()
             
         CargarListView
     
-'        TipForpa = DevuelveValor("select tipforpa from formapago where codforpa = " & DBSet(FormaPago, "N"))
         PosicionarCombo Combo1, FormaPago
     
     End If
@@ -1035,7 +1034,6 @@ Dim CtaBancoGastos As String
     Im = ImporteFormateado(Text2(0).Text)
     'If Im < 0 Then
     If Im = 0 Then
-        'MsgBox "importes negativos", vbExclamation
         MsgBox "importes CERO", vbExclamation
         Exit Function
     End If
@@ -1382,7 +1380,6 @@ Dim Sql5 As String
         Gastos = ImporteFormateado(Text2(1).Text)
     End If
     
-'++
     DescuentaImporteDevolucion = False
     If Gastos > 0 Then
         Sql5 = txtCta(1)
@@ -1397,7 +1394,6 @@ Dim Sql5 As String
     If DescuentaImporteDevolucion Then
         Importe = impo - Gastos
     End If
-'++
     
     cad = "2,'" & txtCta(1).Text & "','" & Numdocum & "'," & Conce & ",'" & Ampliacion & "',"
     'Importe cliente
@@ -1515,8 +1511,6 @@ Dim Sql5 As String
     Else
         SQL = FP.diaripro
     End If
-'--
-'    InsertaTmpActualizar Mc.Contador, SQL, Text3(0).Text
     
     'Actualizamos VTO
     ' o lo eliminamos. Segun sea el importe que falte

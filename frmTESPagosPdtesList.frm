@@ -1249,7 +1249,7 @@ Private Sub Form_Load()
     Next I
     
     For I = 0 To 3
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
     ' La Ayuda
@@ -1264,7 +1264,7 @@ Private Sub Form_Load()
     Me.optVarios(0).Value = True
     
     optVarios_Click (0)
-    
+        
     Combo1.ListIndex = 0
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
@@ -1276,7 +1276,10 @@ Private Sub Form_Load()
     
 End Sub
 
-
+Private Sub optVarios_Click(Index As Integer)
+'    Check1(1).Enabled = optVarios(1).Value
+'    If Not Check1(1).Enabled Then Check1(1).Value = 0
+End Sub
 
 Private Sub frmConta_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
@@ -1372,11 +1375,6 @@ Private Sub optTipoSal_Click(Index As Integer)
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), Index
 End Sub
 
-Private Sub optVarios_Click(Index As Integer)
-'    Check1(1).Enabled = optVarios(1).Value
-'    If Not Check1(1).Enabled Then Check1(1).Value = 0
-End Sub
-
 Private Sub optVarios_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -1460,7 +1458,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     Select Case Index
         Case 0, 1 'cuentas
-'            lblCuentas(Index).Caption = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", txtCuentas(Index), "T")
             Cta = (txtCuentas(Index).Text)
                                     '********
             B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
@@ -1492,7 +1489,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
                     
                 End If
                     
-                    'If txtCta(1).Text = "" Then 'ANTES solo lo hacia si el texto estaba vacio
                 If Hasta >= 0 Then
                     txtCuentas(Hasta).Text = txtCuentas(Index).Text
                     txtNCuentas(Hasta).Text = txtNCuentas(Index).Text

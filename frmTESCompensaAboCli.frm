@@ -1069,8 +1069,8 @@ Dim SQL As String
     
     VerTodos = True
     
-    SQL = "select distinct cobros.codmacta, cuentas.nommacta from cobros inner join cuentas on cobros.codmacta = cuentas.codmacta where (1=1) "
-    If Cuentas <> "" Then SQL = SQL & " and cuentas.codmacta in (" & Cuentas & ")"
+    SQL = "select distinct cobros.codmacta, cobros.nomclien from cobros  where (1=1) "
+    If Cuentas <> "" Then SQL = SQL & " and cobros.codmacta in (" & Cuentas & ")"
     If Me.Check1(0).Value Then SQL = SQL & " and impvenci + coalesce(gastos,0) - coalesce(impcobro,0) < 0"
     If Limpiar Then SQL = SQL & " and cobros.codmacta is null"
     

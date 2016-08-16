@@ -894,7 +894,7 @@ Dim ImporteQueda As Currency
 Dim vRemesa As String
 Dim ValoresDevolucionRemesa As String
 Dim ImporteRemesa As Currency
-Dim vSQL As String
+Dim vSql As String
 Dim OpcionAnt As Integer
 
 Dim Remesa As Long
@@ -1112,7 +1112,7 @@ Dim TipoFicheroDevolucion As Byte
     'Agrupa el apunte del banco
     SQL = SQL & Abs(chkAgrupadevol2.Value) & "|"
     
-    vSQL = CadenaVencimiento
+    vSql = CadenaVencimiento
     
     DevolverRemesa
 
@@ -1195,11 +1195,11 @@ Dim CtaBan As String
     End If
         
     
-    vSQL = "DELETE FROM tmpfaclin WHERE codusu =" & vUsu.Codigo
-    Conn.Execute vSQL
+    vSql = "DELETE FROM tmpfaclin WHERE codusu =" & vUsu.Codigo
+    Conn.Execute vSql
     '                                               numero        serie     vto
-    vSQL = "INSERT INTO tmpfaclin (codusu, codigo, Numfac, Fecha, numserie, NIF,  "
-    vSQL = vSQL & "Imponible,  ImpIVA,total,cta,cliente,ctabase) VALUES (" & vUsu.Codigo & ","
+    vSql = "INSERT INTO tmpfaclin (codusu, codigo, Numfac, Fecha, numserie, NIF,  "
+    vSql = vSql & "Imponible,  ImpIVA,total,cta,cliente,ctabase) VALUES (" & vUsu.Codigo & ","
     For jj = 1 To lwCobros.ListItems.Count
         If Me.lwCobros.ListItems(jj).Checked Then
                                         'cdofaccl
@@ -1235,7 +1235,7 @@ Dim CtaBan As String
                 cad = cad & Mid(CmbDevol.Text, 1, 4)
             End If
             cad = cad & "')"
-            cad = vSQL & cad
+            cad = vSql & cad
             If Not Ejecuta(cad) Then Exit Function
             
             CtaBan = RecuperaValor(vRemesa, 3)
@@ -1894,11 +1894,11 @@ Dim TipoFicheroDevolucion As Byte
     
     lwCobros.ListItems.Clear
     
-    vSQL = ""
+    vSql = ""
     Select Case Opcion
         Case 9
-            vSQL = " AND codrem =" & DBSet(Text3(5).Text, "N")
-            vSQL = vSQL & " AND anyorem =" & DBSet(Text3(6).Text, "N")
+            vSql = " AND codrem =" & DBSet(Text3(5).Text, "N")
+            vSql = vSql & " AND anyorem =" & DBSet(Text3(6).Text, "N")
         Case 16
             'Si que existe el fichero
             TipoFicheroDevolucion = EsFicheroDevolucionSEPA2(Text8.Text)
@@ -1937,17 +1937,17 @@ Dim TipoFicheroDevolucion As Byte
             
         
         Case 28
-            vSQL = " and (codrem,anyorem) in (select codrem, anyorem from cobros where codmacta = " & DBSet(txtCtaNormal(11).Text, "T") & " and siturem ='Q' and not codrem is null) "
+            vSql = " and (codrem,anyorem) in (select codrem, anyorem from cobros where codmacta = " & DBSet(txtCtaNormal(11).Text, "T") & " and siturem ='Q' and not codrem is null) "
     End Select
     
     
     If Opcion <> 16 Then
-        vSQL = "Select cobros.* from cobros where (1=1)" & vSQL
+        vSql = "Select cobros.* from cobros where (1=1)" & vSql
         
-        vSQL = vSQL & " ORDER BY numserie,numfactu"
+        vSql = vSql & " ORDER BY numserie,numfactu"
         Set miRsAux = New ADODB.Recordset
         lwCobros.ListItems.Clear
-        miRsAux.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        miRsAux.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         jj = 1
         While Not miRsAux.EOF
             Set Itm = lwCobros.ListItems.Add(, "C" & jj)
@@ -2013,7 +2013,7 @@ End Sub
 
 
 
-Private Sub PonerVtosRemesa(vSQL As String, Modificar As Boolean)
+Private Sub PonerVtosRemesa(vSql As String, Modificar As Boolean)
 Dim IT
 Dim ImporteTot As Currency
 Dim cad As String
@@ -2029,7 +2029,7 @@ Dim Importe As Currency
     Set lwCobros.SmallIcons = frmPpal.imgListComun16
     Set miRsAux = New ADODB.Recordset
     
-    cad = "Select cobros.*,nomforpa " & vSQL
+    cad = "Select cobros.*,nomforpa " & vSql
     cad = cad & " ORDER BY fecvenci"
     
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2257,8 +2257,6 @@ Private Sub CamposRemesaAbono()
         SQL = SQL & " and anyo=" & Text3(4).Text & " and codigo=" & Text3(3).Text
         RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
-'            Me.txtTexto(0).Text = RS!Nommacta
-'            Me.txtTexto(1).Text = Format(RS!Importe, FormatoImporte)
         End If
         RS.Close
         Set RS = Nothing

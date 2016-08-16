@@ -213,7 +213,8 @@ Private Sub Form_Activate()
             vControl.Ancho3 = 3000
             vControl.UltAccesoBDs = 0
             vControl.UltReferRem = 0
-
+            vControl.PassworBD = "aritel"
+            vControl.UsuarioBD = vControl.UltUsu
             vControl.Grabar
 
             End
@@ -337,7 +338,12 @@ Private Sub Text1_LostFocus(Index As Integer)
         
     
 End Sub
+Private Sub PLabel(TEXTO As String)
 
+    Me.Label1(2).Caption = TEXTO
+    Label1(2).Refresh
+    espera 0.8
+End Sub
 
 
 Private Sub Validar()
@@ -345,6 +351,7 @@ Dim NuevoUsu As Usuario
 Dim Ok As Byte
 
     'Validaremos el usuario y despues el password
+    PLabel "Creando"
     Set vUsu = New Usuario
     
     
@@ -390,64 +397,68 @@ Dim Ok As Byte
         espera 0.2
         Screen.MousePointer = vbHourglass
         
+        
+        PLabel "Acciones BD"
         HacerAccionesBD
+        PLabel "Cerrando"
         Unload Me
+        
     End If
 
 End Sub
 
 Private Sub HacerAccionesBD()
-Dim SQL As String
+Dim Sql As String
     
     T1 = Timer
     
     'Limpiamos datos blanace
-    SQL = "DELETE from Usuarios.ztmpbalancesumas where codusu= " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "DELETE from Usuarios.ztmpbalancesumas where codusu= " & vUsu.Codigo
+    Conn.Execute Sql
     Label1(2).Caption = Label1(2).Caption & "."
     Label1(2).Refresh
 
-    SQL = "DELETE from Usuarios.ztmpconextcab where codusu= " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "DELETE from Usuarios.ztmpconextcab where codusu= " & vUsu.Codigo
+    Conn.Execute Sql
     Label1(2).Caption = Label1(2).Caption & "."
     Label1(2).Refresh
 
-    SQL = "DELETE from usuarios.ztmpconext where codusu= " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "DELETE from usuarios.ztmpconext where codusu= " & vUsu.Codigo
+    Conn.Execute Sql
     Label1(2).Caption = Label1(2).Caption & "."
     Me.Refresh
     
-    SQL = "DELETE from Usuarios.zcuentas where codusu= " & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "DELETE from Usuarios.zcuentas where codusu= " & vUsu.Codigo
+    Conn.Execute Sql
     Label1(2).Caption = Label1(2).Caption & "."
     Label1(2).Refresh
 
-    SQL = "DELETE from usuarios.ztmplibrodiario where codusu= " & vUsu.Codigo
+    Sql = "DELETE from usuarios.ztmplibrodiario where codusu= " & vUsu.Codigo
     Label1(2).Caption = Label1(2).Caption & "."
     Label1(2).Refresh
-    Conn.Execute SQL
+    Conn.Execute Sql
     
-    SQL = "DELETE from usuarios.zdirioresum where codusu= " & vUsu.Codigo
+    Sql = "DELETE from usuarios.zdirioresum where codusu= " & vUsu.Codigo
     Label1(2).Caption = Label1(2).Caption & "."
-    Conn.Execute SQL
+    Conn.Execute Sql
     
     
-    SQL = "DELETE from usuarios.zhistoapu where codusu= " & vUsu.Codigo
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
-    Conn.Execute SQL
-    
-    SQL = "DELETE from usuarios.ztmpctaexplotacion where codusu= " & vUsu.Codigo
+    Sql = "DELETE from usuarios.zhistoapu where codusu= " & vUsu.Codigo
     Label1(2).Caption = Label1(2).Caption & "."
     Label1(2).Refresh
-    Conn.Execute SQL
+    Conn.Execute Sql
+    
+    Sql = "DELETE from usuarios.ztmpctaexplotacion where codusu= " & vUsu.Codigo
+    Label1(2).Caption = Label1(2).Caption & "."
+    Label1(2).Refresh
+    Conn.Execute Sql
     
     
     Me.Refresh
     T1 = Timer - T1
     If T1 < 1 Then espera 0.7
     
-    Label1(2).Visible = False
+    Label1(2).Caption = ""
     Me.Refresh
     espera 0.2
 End Sub

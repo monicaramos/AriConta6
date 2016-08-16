@@ -276,8 +276,13 @@ Dim NomImpre As String
     Text1(0).Text = NumCopias2
        
     For I = 1 To mrpt.Database.Tables.Count
-      If mrpt.Database.Tables(I).ConnectionProperties.Item("DSN") = "Ariconta6" Then
-            mrpt.Database.Tables(I).SetLogOnInfo "Ariconta6", "ariconta" & vEmpresa.codempre
+        
+      'En esta linea redireccionamos el ODBC. Si fuera lento podriamos estudiar No redirecciona si ODBC=Ariconta
+      'Esto solo se ejcuta la primera vez
+      If I = 1 Then mrpt.Database.Tables(I).ConnectBufferString = "DSN=" & vControl.ODBC & ";;User ID=root;;UseDSNProperties=0"
+        
+      If mrpt.Database.Tables(I).ConnectionProperties.Item("DSN") = vControl.ODBC Then
+            mrpt.Database.Tables(I).SetLogOnInfo vControl.ODBC, "ariconta" & vEmpresa.codempre
             If InStr(1, mrpt.Database.Tables(I).Name, "_cmd") = 0 And InStr(1, mrpt.Database.Tables(I).Name, "_alias") = 0 Then
                     mrpt.Database.Tables(I).Location = "ariconta" & vEmpresa.codempre & "." & mrpt.Database.Tables(I).Name
             Else
@@ -525,8 +530,9 @@ Dim I As Byte
                 Set smrpt = mrpt.OpenSubreport(crxSubreportObject.SubreportName)
                 For I = 1 To smrpt.Database.Tables.Count 'para cada tabla
                     '------ Añade Laura: 09/06/2005
-                    If smrpt.Database.Tables(I).ConnectionProperties.Item("DSN") = "Ariconta6" Then
-                        smrpt.Database.Tables(I).SetLogOnInfo "Ariconta6", "ariconta" & vEmpresa.codempre
+                    
+                    If smrpt.Database.Tables(I).ConnectionProperties.Item("DSN") = vControl.ODBC Then
+                        smrpt.Database.Tables(I).SetLogOnInfo vControl.ODBC, "ariconta" & vEmpresa.codempre
                         If (InStr(1, smrpt.Database.Tables(I).Name, "_cmd") = 0) And (InStr(1, smrpt.Database.Tables(I).Name, "_alias") = 0) Then
                            smrpt.Database.Tables(I).Location = "ariconta" & vEmpresa.codempre & "." & smrpt.Database.Tables(I).Name
                         Else

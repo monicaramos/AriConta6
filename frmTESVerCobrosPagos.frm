@@ -374,7 +374,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public vSQL As String
+Public Situacion As Byte
+Public vSql As String
 Public Cobros As Boolean
 Public OrdenarEfecto As Boolean
 Public Regresar As Boolean
@@ -613,7 +614,7 @@ Private Sub Form_Load()
     
     I = 0
     If Cobros And (Tipo = 2 Or Tipo = 3) Then I = 1
-    Me.mnBarra1.Visible = I = 1
+    Me.mnbarra1.Visible = I = 1
     Me.mnNumero.Visible = I = 1
     'Efectuar cobros
     Me.cmdRegresar.Visible = Regresar
@@ -763,8 +764,6 @@ On Error GoTo ECargando
     
 ECargando:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
-    'Text2(0).Text = Format(Vencido, FormatoImporte)
-    'Text2(1).Text = Format(Importe, FormatoImporte)
     Text2(0).Text = Format(Importe, FormatoImporte)
     Text2(1).Text = Format(Vencido, FormatoImporte)
     
@@ -791,24 +790,28 @@ Dim Inserta As Boolean
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RS.EOF
         Inserta = True
-        If RS!tipoformapago = vbTipoPagoRemesa Then
-            If Not OrdenarEfecto Then
-             
-                If Not SeVeRiesgo Then
-                ' por lo de mc añado la condicion And DBLet(RS!siturem, "T") >= "B"
-                    If DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") >= "B" Then
-                        Inserta = False
-                        'Stop
+        '[Monica]16/08/2016: solo en el caso de pendientes de cobro no lo veo todo,  situacion = 0
+        '                    nuevo parametro de situacion
+        If Situacion = 0 Then
+            If RS!tipoformapago = vbTipoPagoRemesa Then
+                If Not OrdenarEfecto Then
+                 
+                    If Not SeVeRiesgo Then
+                    ' por lo de mc añado la condicion And DBLet(RS!siturem, "T") > "B"
+                        If DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") > "B" Then
+                            Inserta = False
+                            'Stop
+                        End If
+                    ' añadido lo que pide Mc de que se vean las remesas que tengan situacion B
+                    Else
+                        If (DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") > "B") Then Inserta = False
                     End If
-                ' añadido lo que pide Mc de que se vean las remesas que tengan situacion B
-                Else
-                    If (DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") > "B") Then Inserta = False
                 End If
-            End If
-            
-        ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
-            If Not OrdenarEfecto And Not SeVeRiesgoTalPag Then
-                If RS!recedocu = 1 Then Inserta = False
+                
+            ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
+                If Not OrdenarEfecto And Not SeVeRiesgoTalPag Then
+                    If RS!recedocu = 1 Then Inserta = False
+                End If
             End If
         End If
         
@@ -928,7 +931,7 @@ Dim cad As String
         cad = cad & " pagos, formapago, tipofpago"
         cad = cad & " Where formapago.tipforpa = tipofpago.tipoformapago"
         cad = cad & " AND pagos.codforpa = formapago.codforpa"
-        If vSQL <> "" Then cad = cad & " AND " & vSQL
+        If vSql <> "" Then cad = cad & " AND " & vSql
     
     Else
         'cobros
@@ -936,7 +939,7 @@ Dim cad As String
         cad = cad & " cobros.nomclien nommacta,cobros.codmacta,tipofpago.tipoformapago, "
         cad = cad & " coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0) imppdte "
         cad = cad & " FROM (cobros INNER JOIN formapago ON cobros.codforpa = formapago.codforpa) INNER JOIN tipofpago ON formapago.tipforpa = tipofpago.tipoformapago "
-        If vSQL <> "" Then cad = cad & " WHERE " & vSQL
+        If vSql <> "" Then cad = cad & " WHERE " & vSql
     End If
     'SQL pedido
     DevSQL = cad

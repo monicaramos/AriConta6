@@ -1337,9 +1337,6 @@ Private Sub BotonModificar()
     'MODIFICAR
     '----------
  
-    'Añadiremos el boton de aceptar y demas objetos para insertar
-'    cmdCancelar.Caption = "Cancelar"
-'    cmdAceptar.Caption = "&Modificar"
     PonerModo 4
 
 
@@ -1356,15 +1353,6 @@ Dim Importe As Currency
 Dim Ok As Boolean
     If Data1.Recordset.EOF Then Exit Sub
     
-    
-    'Marzo 2010. Ya comrpueba en puederealizaraccion si tiene vtos asociados
-'    If Not adodc1.Recordset.EOF Then
-'        If Not (Check1.Value = 1 And Check2.Value = 1) Then
-'            MsgBox "Elimine primero los vencimientos asociados al documento", vbExclamation
-'            Exit Sub
-'        End If
-'    End If
-
     
     SQL = DevuelveDesdeBD("Contabilizada", "talones", "codigo", Text1(4).Text)
     If SQL = "1" Then
@@ -1463,42 +1451,14 @@ Dim Ok As Boolean
     
 End Sub
 
-
-
-
 Private Sub cmdRegresar_Click()
 Dim cad As String
 Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
-'If Data1.Recordset.EOF Then
-'    MsgBox "Ningún registro devuelto.", vbExclamation
-'    Exit Sub
-'End If
-'
-'Cad = ""
-'i = 0
-'Do
-'    j = i + 1
-'    i = InStr(j, DatosADevolverBusqueda, "|")
-'    If i > 0 Then
-'        AUX = Mid(DatosADevolverBusqueda, j, i - j)
-'        j = Val(AUX)
-'        Cad = Cad & Text1(j).Text & "|"
-'    End If
-'Loop Until i = 0
-'RaiseEvent DatoSeleccionado(Cad)
 Unload Me
 End Sub
-
-
-
-
-
-
-
-
 
 Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
@@ -1512,9 +1472,6 @@ Dim B As Boolean
         PrimeraVez = False
         PonerModo 0
         CargaGrid False
-        
-
-        
         
     End If
     Screen.MousePointer = vbDefault
@@ -1608,17 +1565,9 @@ Private Sub LimpiarCampos()
     lblIndicador.Caption = ""
 End Sub
 
-
-'Private Sub Form_Resize()
-'If Me.WindowState <> 0 Then Exit Sub
-'If Me.Width < 11610 Then Me.Width = 11610
-'End Sub
-
 Private Sub Form_Unload(Cancel As Integer)
     CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
 End Sub
-
-
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
     Dim CadB As String
@@ -1656,22 +1605,6 @@ End Sub
 Private Sub frmF_Selec(vFecha As Date)
     Text1(I).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
-
-
-
-'Private Sub Image1_Click(Index As Integer)
-'    Select Case Index
-'    Case 0
-'        'Cta contrapartida
-'
-'    Case 1
-'
-'    Case 2
-'
-'    Case 3
-'
-'    End Select
-'End Sub
 
 Private Sub imgppal_Click(Index As Integer)
     If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
@@ -1775,7 +1708,6 @@ Dim EntrarEnSelect As Boolean
     End If
     
     'Si estamos insertando o modificando o buscando
-    'If Index = 2 Then Stop
     EntrarEnSelect = False
     If Modo = 3 Or Modo = 4 Then
         EntrarEnSelect = True
@@ -1793,13 +1725,6 @@ Dim EntrarEnSelect As Boolean
         End If
         Select Case Index
         Case 0
-'            'Tipo diario
-'            If Not EsNumerico(Text1(Index).Text) Then
-'                Text1(Index).Text = ""
-'                PonerFoco Text1(Index)
-'            End If
-
-
         
             
         Case 1, 6
@@ -1855,7 +1780,6 @@ Private Sub PonerCadenaBusqueda(Insertando As Boolean)
         Exit Sub
         Else
             PonerModo 2
-            'Data1.Recordset.MoveLast
             Data1.Recordset.MoveFirst
             PonerCampos
     End If
@@ -1953,13 +1877,6 @@ Private Sub PonerModo(Kmodo As Integer)
    
     'MODIFICAR Y ELIMINAR DISPONIBLES TB CUANDO EL MODO ES 5
 
-    'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
-'    If DatosADevolverBusqueda <> "" Then
-'        cmdRegresar.Visible = (Modo = 2)
-'    Else
-'        cmdRegresar.Visible = False
-'    End If
-    '
     Text1(4).Enabled = (Modo = 1)
     Text1(2).Enabled = (Modo = 3 Or Modo = 1) 'Solo insertar
     B = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
@@ -2278,25 +2195,6 @@ Private Sub AnyadirLinea()
    
     cmdAux_Click 0
     
-'   'Situamos el grid al final
-'    DataGrid1.AllowAddNew = True
-'    If Adodc1.Recordset.RecordCount > 0 Then
-'        DataGrid1.HoldFields
-'        Adodc1.Recordset.MoveLast
-'        DataGrid1.Row = DataGrid1.Row + 1
-'    End If
-'    anc = DataGrid1.Top
-'    If DataGrid1.Row < 0 Then
-'        anc = anc + 220
-'        Else
-'        anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 15
-'    End If
-'    cmdAceptar.Caption = "Aceptar"
-'    LLamaLineas anc, 1, True
-'
-'    'Ponemos el foco
-'    PonerFoco txtaux(0)
-'
 End Sub
 
 Private Sub EliminarLineaFactura()
@@ -2308,52 +2206,10 @@ Dim Importe As Currency
     
     cmdAux_Click (0)
     
-   
-'    SQL = "Va a eliminar la linea: "
-'    SQL = SQL & Adodc1.Recordset!NUmSerie & Adodc1.Recordset!NumFactu & "  / " & Adodc1.Recordset!numorden
-'    SQL = SQL & vbCrLf & vbCrLf & "     Desea continuar? "
-'    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
-'        NumRegElim = Adodc1.Recordset.AbsolutePosition
-'
-'
-'        'Obtengo el importe del vto
-'        SQL = MontaSQLDelVto(False)
-'        SQL = SQL & " AND 1 " 'Para hacer un truqiot
-'        SQL = DevuelveDesdeBD("impcobro", "cobros", SQL, "1")
-'        If SQL = "" Then SQL = "0"
-'        Importe = CCur(SQL)
-'        If Importe <> Adodc1.Recordset!Importe Then
-'            'TODO EL IMPORTE estaba en la linea. Fecultco a NULL
-'            I = 1
-'            Importe = Importe - Adodc1.Recordset!Importe
-'        Else
-'            I = 0
-'        End If
-'
-'        SQL = "Delete from talones_facturas"
-'        SQL = SQL & " WHERE codigo =" & Data1.Recordset!Codigo
-'        SQL = SQL & " AND " & MontaSQLDelVto(False)
-'        SQL = Replace(SQL, "codfactu", "numfactu")  'Me paso por gilipolla
-'        SQL = Replace(SQL, "numorden", "numorden")  'idem, por no llamar igual a los campos
-'        DataGrid1.Enabled = False
-'        Conn.Execute SQL
-'
-'        'Updateo en scbro reestableciendo los valores
-'
-'        SQL = "UPDATE cobros SET recedocu=0,reftalonpag = NULL"
-'        If I = 0 Then
-'            SQL = SQL & ", impcobro = NULL, fecultco = NULL"
-'        Else
-'            SQL = SQL & ", impcobro = " & TransformaComasPuntos(CStr(Importe))  'NO somos capace sde ver cual fue la utlima fecha de amortizacion
-'        End If
-'        SQL = SQL & ", obs = NULL"
-'        SQL = SQL & " WHERE " & MontaSQLDelVto(False)
-'        If Not EjecutarSQL(SQL) Then MsgBox "Error actualizadno scobro", vbExclamation
-'
-        CargaGrid True
-        DataGrid1.Enabled = True
-        PosicionaLineas CInt(NumRegElim)
-'    End If
+  
+    CargaGrid True
+    DataGrid1.Enabled = True
+    PosicionaLineas CInt(NumRegElim)
 End Sub
 
 Private Sub PosicionaLineas(Pos As Integer)
@@ -2367,18 +2223,6 @@ Private Sub PosicionaLineas(Pos As Integer)
 EPosicionaLineas:
     Err.Clear
 End Sub
-
-
-
-
-'------------------------------------------------------------
-'------------------------------------------------------------
-'------------------------------------------------------------
-'------------------------------------------------------------
-'------------------------------------------------------------
-
-
-
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte, Limpiar As Boolean)
     Dim B As Boolean
@@ -2495,31 +2339,6 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     End If
 End Sub
 
-
-''Desplegaremos su formulario asociado
-'Private Function PulsadoMas(Index As Integer, KeyAscii) As Boolean
-'    Select Case Index
-'    Case 0
-'        'Voy a poner la modificacion del "+"
-'        'Es que quiere que le mostremos su formulario de regresar
-'        txtaux(0).Text = ""
-'        cmdAux_Click 0
-'        PulsadoMas = True
-'    Case 3
-'        txtaux(0).Text = ""
-'        Image1_Click 0
-'        PulsadoMas = True
-'    Case 4
-'        txtaux(4).Text = ""
-'        Image1_Click 1
-'        PulsadoMas = True
-'
-'    End Select
-'
-'End Function
-
-
-
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
         KeyAscii = 0
@@ -2528,13 +2347,8 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
         If KeyAscii = 112 Then
         
         End If
-        'If KeyAscii = 43 Then
-        '    If PulsadoMas(Index, KeyAscii) Then KeyAscii = 0
-        'End If
     End If
 End Sub
-
-
 
 Private Sub txtaux_KeyUp(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Modo <> 1 Then
@@ -2772,20 +2586,6 @@ Dim Importe As Currency
         SQL = SQL & Format((txtAux(2).Text), FormatoFecha) & "'," & txtAux(3).Text & ","
         SQL = SQL & TransformaComasPuntos(ImporteFormateado(txtAux(4).Text)) & ",0)"
     Else
-    
-        'MODIFICAR
-'        SQL = "UPDATE linapu SET "
-'        SQL = SQL & " codmacta = '" & txtAux(0).Text & "',"
-'        SQL = SQL & " numdocum = '" & DevNombreSQL(txtAux(2).Text) & "',"
-'        SQL = SQL & " codconce = " & txtAux(4).Text & ","
-'        SQL = SQL & " ampconce = '" & DevNombreSQL(txtAux(5).Text) & "',"
-''        If txtaux(6).Text = "" Then
-'          SQL = SQL & " timporteD = " & ValorNulo & "," & " timporteH = " & TransformaComasPuntos(txtaux(7).Text) & ","
-'        SQL = SQL & " WHERE linapu.linliapu = " & Linliapu
-'        SQL = SQL & " AND linapu.numdiari=" & Data1.Recordset!numdiari
-'        SQL = SQL & " AND linapu.fechaent='" & Format(Data1.Recordset!fechaent, FormatoFecha)
-'        SQL = SQL & "' AND linapu.numasien=" & Data1.Recordset!Numasien & ";"
-'
     End If
     Conn.Execute SQL
     
@@ -3020,17 +2820,11 @@ Private Sub HacerContabilizacion(ImporteCoincide As Integer)
         If CadAncho Then
             Conn.CommitTrans
             'Ahora actualizamos los registros que estan en tmpactualziar
-            
-'-- lo he quitado pero hya q añadirlo
-'            frmActualizar2.OpcionActualizar = 20
-'            frmActualizar2.Show vbModal
-
 
             'Espera
             espera 0.2
             If SituarData1(True) Then PonerCampos
             
-
         Else
             TirarAtrasTransaccion
         End If
@@ -3080,13 +2874,7 @@ Private Function HacerDES_Contabilizacion_(ImporteCoincide As Integer) As Boolea
         CadAncho = EliminarCancelacionTALONPAGARE(Combo1.ListIndex = 1, CInt(Text1(4).Text), CDate(Text1(1).Text), CadenaDesdeOtroForm)
         If CadAncho Then
             Conn.CommitTrans
-            'Ahora actualizamos los registros que estan en tmpactualziar
-'--añadirlo
-'            frmActualizar2.OpcionActualizar = 20
-'            frmActualizar2.Show vbModal
-
             HacerDES_Contabilizacion_ = True
-            
         Else
             TirarAtrasTransaccion
         End If

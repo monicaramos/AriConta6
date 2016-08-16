@@ -32,6 +32,12 @@ Private mvarAncho3 As String 'Variable local
 Private mvarUltaccesoBDs As String 'Variable local
 Private mvarUltreferrem As String 'Variable local
 
+
+Private mvarUsuarioBD As String 'Variable local
+Private mvarPassworBD As String 'Variable local
+
+
+
 '--------
 'Private mvarPedirPasswd As Boolean
 
@@ -186,6 +192,43 @@ Public Property Get UltReferRem() As String
 End Property
 
 
+
+Public Property Get UsuarioBD() As String
+'se usa cuando se asigna un valor a la propiedad, en el
+'lado derecho de la asignacion
+'Syntax: Debug.Print X.password
+     UsuarioBD = mvarUsuarioBD
+End Property
+
+
+Public Property Let UsuarioBD(ByVal vData As String)
+'se usa cuando se asigna un valor a la propiedad, en el
+'lado derecho de la asignacion
+'Syntax: Debug.Print X.password
+     mvarUsuarioBD = vData
+End Property
+
+
+Public Property Get PassworBD() As String
+'se usa cuando se asigna un valor a la propiedad, en el
+'lado derecho de la asignacion
+'Syntax: Debug.Print X.password
+     PassworBD = mvarPassworBD
+End Property
+
+
+
+Public Property Let PassworBD(ByVal vData As String)
+'se usa cuando se asigna un valor a la propiedad, en el
+'lado derecho de la asignacion
+'Syntax: Debug.Print X.password
+     mvarPassworBD = vData
+End Property
+
+
+
+
+
 '//////////////////////////////////////////////////////
 '             LEER  Y  GUARDAR
 '//////////////////////////////////////////////////////
@@ -214,7 +257,7 @@ Public Function Leer() As Byte
     Do While Not EOF(nFile) ' Repite el bucle hasta el final del archivo.
         Line Input #nFile, Lin
         Select Case Lin
-           Case "[ODBC]", "[ultusu]", "[ultempre]", "[ancho1]", "[ancho2]", "[ancho3]", "[ultaccesoBDs]", "[ultreferrem]"
+           Case "[ODBC]", "[ultusu]", "[ultempre]", "[ancho1]", "[ancho2]", "[ancho3]", "[ultaccesoBDs]", "[ultreferrem]", "[usuBD]", "[passBD]"
                
                ValParam = ""
                NomParam = Lin
@@ -229,6 +272,11 @@ Public Function Leer() As Byte
                     Case "[ancho3]": mvarAncho3 = ValParam
                     Case "[ultaccesoBDs]": mvarUltaccesoBDs = ValParam
                     Case "[ultreferrem]": mvarUltreferrem = ValParam
+                    Case "[passBD]": mvarPassworBD = ValParam
+                    Case "[usuBD]": mvarUsuarioBD = ValParam
+                    
+                     
+                    
                 End Select
             Case Else
                 If ValParam = "" Then
@@ -239,6 +287,11 @@ Public Function Leer() As Byte
         End Select
     Loop
     Close #nFile    ' Cierra el archivo.
+    
+    
+    'El password y el usuario van "encriptados". Los ponemos
+    Desencripta (True)
+    Desencripta (False)
     
     Leer = 0
     Exit Function
@@ -287,6 +340,14 @@ Public Function Grabar() As Byte
     Print #nFile, "[ultreferrem]"
     Print #nFile, mvarUltreferrem
     Print #nFile, "<-------->"
+    Print #nFile, "[usuBD]"
+    Print #nFile, Encripta(mvarUsuarioBD)
+    Print #nFile, "<-------->"
+    Print #nFile, "[passBD]"
+    Print #nFile, Encripta(mvarPassworBD)
+    Print #nFile, "<-------->"
+    
+    
     
 ' "[ODBC]", "[ultusu]", "[ultempre]", "[ancho1]", "[ancho2]", "[ancho3]", "[ultaccesoBDs]", "[ultreferrem]"
     Close #nFile
@@ -298,4 +359,65 @@ Err1:
     Grabar = 1
 End Function
 
+
+
+
+
+
+
+
+
+
+
+
+
+Private Sub Desencripta(ElPassword As Boolean)
+Dim C As String
+Dim I As Integer
+
+If ElPassword Then
+    C = mvarPassworBD
+    Else
+    C = mvarUsuarioBD
+End If
+Mens = ""
+For I = 1 To Len(C)
+    If (I Mod 2) <> 0 Then
+        'Solo valen los caracteres impares
+        NF = Asc(Mid(C, I, 1))
+        NF = NF + 1
+        Mens = Mens & Chr(NF)
+    End If
+Next I
+
+If ElPassword Then
+    mvarPassworBD = Mens
+    Else
+    mvarUsuarioBD = Mens
+End If
+
+End Sub
+
+
+
+Private Function Encripta(ByRef C As String) As String
+Dim I As Integer
+
+
+Mens = ""
+Randomize
+For I = 1 To Len(C)
+        'Solo valen los caracteres impares
+        NF = Asc(Mid(C, I, 1))
+        NF = NF - 1
+        Mens = Mens & Chr(NF)
+        'Y el aleatorio , entre 48 y 122  <- 74 ->
+        NF = Int((74 * Rnd)) ' Genera valores aleatorios entre 0y74.
+        NF = NF + 48
+        Mens = Mens & Chr(NF)
+Next I
+
+Encripta = Mens
+
+End Function
 

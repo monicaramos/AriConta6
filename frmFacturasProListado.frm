@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacturasProListado 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   9585
+   ClientHeight    =   10080
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   11685
@@ -10,7 +10,7 @@ Begin VB.Form frmFacturasProListado
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9585
+   ScaleHeight     =   10080
    ScaleWidth      =   11685
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -28,7 +28,7 @@ Begin VB.Form frmFacturasProListado
       Height          =   2655
       Left            =   7140
       TabIndex        =   45
-      Top             =   6300
+      Top             =   6750
       Width           =   4455
       Begin VB.OptionButton optVarios 
          Caption         =   "Nº Registro"
@@ -132,7 +132,7 @@ Begin VB.Form frmFacturasProListado
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   6225
+      Height          =   6705
       Left            =   120
       TabIndex        =   22
       Top             =   0
@@ -681,11 +681,31 @@ Begin VB.Form frmFacturasProListado
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   6225
+      Height          =   6705
       Left            =   7140
       TabIndex        =   38
       Top             =   0
       Width           =   4455
+      Begin VB.ComboBox Combo1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         ItemData        =   "frmFacturasProListado.frx":0116
+         Left            =   150
+         List            =   "frmFacturasProListado.frx":0118
+         Style           =   2  'Dropdown List
+         TabIndex        =   57
+         Top             =   2370
+         Width           =   4110
+      End
       Begin VB.CheckBox Check1 
          Caption         =   "Sustituye Factura por Fecha"
          BeginProperty Font 
@@ -701,7 +721,7 @@ Begin VB.Form frmFacturasProListado
          Index           =   2
          Left            =   180
          TabIndex        =   50
-         Top             =   1980
+         Top             =   1770
          Width           =   3915
       End
       Begin VB.CheckBox Check1 
@@ -719,7 +739,7 @@ Begin VB.Form frmFacturasProListado
          Index           =   0
          Left            =   180
          TabIndex        =   49
-         Top             =   1530
+         Top             =   1380
          Width           =   3075
       End
       Begin VB.TextBox txtFecha 
@@ -756,7 +776,7 @@ Begin VB.Form frmFacturasProListado
          Left            =   1350
          TabIndex        =   10
          Tag             =   "imgConcepto"
-         Top             =   960
+         Top             =   900
          Width           =   1485
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
@@ -780,9 +800,9 @@ Begin VB.Form frmFacturasProListado
       Begin MSComctlLib.ListView ListView1 
          Height          =   3360
          Index           =   1
-         Left            =   210
+         Left            =   150
          TabIndex        =   43
-         Top             =   2670
+         Top             =   3180
          Width           =   4035
          _ExtentX        =   7117
          _ExtentY        =   5927
@@ -806,22 +826,39 @@ Begin VB.Form frmFacturasProListado
          EndProperty
          NumItems        =   0
       End
+      Begin VB.Label Label2 
+         Caption         =   "Tipo Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   150
+         TabIndex        =   58
+         Top             =   2070
+         Width           =   1380
+      End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   0
-         Left            =   3570
-         Picture         =   "frmFacturasProListado.frx":0116
+         Left            =   3510
+         Picture         =   "frmFacturasProListado.frx":011A
          ToolTipText     =   "Quitar al Debe"
-         Top             =   2310
+         Top             =   2820
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   1
-         Left            =   3930
-         Picture         =   "frmFacturasProListado.frx":0260
+         Left            =   3870
+         Picture         =   "frmFacturasProListado.frx":0264
          ToolTipText     =   "Puntear al Debe"
-         Top             =   2310
+         Top             =   2820
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -837,16 +874,16 @@ Begin VB.Form frmFacturasProListado
          EndProperty
          Height          =   255
          Index           =   15
-         Left            =   210
+         Left            =   150
          TabIndex        =   44
-         Top             =   2370
+         Top             =   2880
          Width           =   870
       End
       Begin VB.Image ImgFec 
          Height          =   240
          Index           =   2
          Left            =   1020
-         Picture         =   "frmFacturasProListado.frx":03AA
+         Picture         =   "frmFacturasProListado.frx":03AE
          Top             =   450
          Width           =   240
       End
@@ -883,7 +920,7 @@ Begin VB.Form frmFacturasProListado
          Index           =   12
          Left            =   150
          TabIndex        =   40
-         Top             =   1020
+         Top             =   960
          Width           =   870
       End
    End
@@ -902,7 +939,7 @@ Begin VB.Form frmFacturasProListado
       Height          =   375
       Left            =   10410
       TabIndex        =   13
-      Top             =   9090
+      Top             =   9540
       Width           =   1215
    End
    Begin VB.CommandButton cmdAccion 
@@ -919,7 +956,7 @@ Begin VB.Form frmFacturasProListado
       Index           =   1
       Left            =   8850
       TabIndex        =   11
-      Top             =   9090
+      Top             =   9540
       Width           =   1455
    End
    Begin VB.CommandButton cmdAccion 
@@ -937,7 +974,7 @@ Begin VB.Form frmFacturasProListado
       Index           =   0
       Left            =   120
       TabIndex        =   12
-      Top             =   9030
+      Top             =   9480
       Width           =   1335
    End
    Begin VB.Frame FrameTipoSalida 
@@ -954,7 +991,7 @@ Begin VB.Form frmFacturasProListado
       Height          =   2655
       Left            =   120
       TabIndex        =   14
-      Top             =   6300
+      Top             =   6750
       Width           =   6915
       Begin VB.CommandButton PushButtonImpr 
          Caption         =   "Propiedades"
@@ -1153,9 +1190,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 Dim PrimeraVez As Boolean
@@ -1198,8 +1235,6 @@ Private Sub cmdAccion_Click(Index As Integer)
     tabla = "(" & tabla & ") inner join formapago on factpro.codforpa = formapago.codforpa "
     tabla = "(" & tabla & ") inner join tipofpago on formapago.tipforpa = tipofpago.tipoformapago "
     tabla = "(" & tabla & ") inner join usuarios.wtipopera aa on factpro.codopera = aa.codigo "
-    
-    
     
     If Not MontaSQL Then Exit Sub
     
@@ -1264,13 +1299,13 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Listado de Facturas de Proveedores"
 
-    For i = 0 To 1
-        Me.imgSerie(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgSerie(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
-    For i = 0 To 1
-        Me.imgCuentas(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     ' La Ayuda
     With Me.ToolbarAyuda
@@ -1303,6 +1338,10 @@ Private Sub Form_Load()
         txtFecha(1).Text = RecuperaValor(Legalizacion, 3)
     End If
     
+    CargarCombo
+    'todos
+    Combo1(0).ListIndex = 0
+   
     
 End Sub
 
@@ -1324,7 +1363,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -1333,13 +1372,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tabla de codigos de iva
         Case 0
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = False
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = False
+            Next I
         Case 1
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = True
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = True
+            Next I
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1476,7 +1515,7 @@ Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCuentas_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1573,14 +1612,14 @@ Private Sub txtNumFactu_KeyDown(Index As Integer, KeyCode As Integer, Shift As I
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgDiario"
-        imgSerie_Click indice
+        imgSerie_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     Case "imgCuentas"
-        imgCuentas_Click indice
+        imgCuentas_Click Indice
     End Select
 End Sub
 
@@ -1589,7 +1628,7 @@ Private Sub txtNumFactu_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtNumFactu_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtNumFactu(Index).Text = Trim(txtNumFactu(Index).Text)
     
@@ -1619,7 +1658,7 @@ Private Sub txtSerie_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtSerie_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
@@ -1742,7 +1781,7 @@ Dim SQL As String
 Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
-Dim i As Integer
+Dim I As Integer
 
 
     MontaSQL = False
@@ -1759,17 +1798,25 @@ Dim i As Integer
     If Not PonerDesdeHasta("factpro.Numregis", "REG", Me.txtNumFactu(0), Me.txtNumFactu(0), Me.txtNumFactu(1), Me.txtNumFactu(1), "pDHFactura=""") Then Exit Function
     If Not PonerDesdeHasta("factpro.codmacta", "CTA", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
             
+            
     If txtNIF.Text <> "" Then
-        If Not AnyadirAFormula(cadselect, "factpro.nifdatos = "" & txtnif.text & """) Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "{factpro.nifdatos} = "" & txtnif.text & """) Then Exit Function
+        If Not AnyadirAFormula(cadselect, "factpro.nifdatos = " & DBSet(txtNIF.Text, "T")) Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "{factpro.nifdatos} = """ & Trim(txtNIF.Text) & "") Then Exit Function
+    End If
+    
+    If Me.Combo1(0).ListIndex > 0 Then ' en todos y en -1 no hacemos nada
+        If Not AnyadirAFormula(cadselect, "factpro.codconce340 = " & DBSet(Chr(Combo1(0).ItemData(Combo1(0).ListIndex)), "T")) Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "{factpro.codconce340} = """ & Chr(Combo1(0).ItemData(Combo1(0).ListIndex)) & "") Then Exit Function
     End If
             
+            
+            
     SQL = ""
-    For i = 1 To Me.ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            SQL = SQL & Me.ListView1(1).ListItems(i).Text & ","
+    For I = 1 To Me.ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            SQL = SQL & Me.ListView1(1).ListItems(I).Text & ","
         End If
-    Next i
+    Next I
     
     If SQL <> "" Then
         ' quitamos la ultima coma
@@ -1780,11 +1827,6 @@ Dim i As Integer
     Else
         If Not AnyadirAFormula(cadselect, "factpro_totales.codigiva is null") Then Exit Function
         If Not AnyadirAFormula(cadFormula, "isnull({factpro_totales.codigiva})") Then Exit Function
-    End If
-    
-    If txtNIF.Text <> "" Then
-        If Not AnyadirAFormula(cadselect, "cuentas.nifdatos = " & DBSet(txtNIF.Text, "T")) Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "{cuentas.nifdatos} = """ & Trim(txtNIF.Text) & "") Then Exit Function
     End If
     
     
@@ -1844,7 +1886,7 @@ End Sub
 Private Sub CargarListView(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -1860,19 +1902,19 @@ Dim SQL As String
     SQL = SQL & " FROM tiposiva "
     SQL = SQL & " ORDER BY codigiva "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         Set ItmX = ListView1(Index).ListItems.Add
         
         ItmX.Checked = True
-        ItmX.Text = Rs.Fields(0).Value
-        ItmX.SubItems(1) = Rs.Fields(1).Value
-        Rs.MoveNext
+        ItmX.Text = RS.Fields(0).Value
+        ItmX.SubItems(1) = RS.Fields(1).Value
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -1880,4 +1922,33 @@ ECargarList:
     End If
 End Sub
 
+
+Private Sub CargarCombo()
+Dim RS As ADODB.Recordset
+Dim SQL As String
+Dim J As Long
+
+    For I = 1 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
+
+    'Tipo de factura
+    Set RS = New ADODB.Recordset
+    SQL = "SELECT * FROM usuarios.wconce340 ORDER BY codigo"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    Combo1(0).AddItem "Todos"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = Asc(1)
+    
+    I = 0
+    While Not RS.EOF
+        Combo1(0).AddItem RS!Descripcion
+        Combo1(0).ItemData(Combo1(0).NewIndex) = Asc(RS!Codigo)
+        I = I + 1
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+
+End Sub
 

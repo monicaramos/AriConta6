@@ -1007,7 +1007,6 @@ Dim Img As Image
     Orden = True
     
     CargaCombo
-'    PonerFrameProgreso
 
 End Sub
 
@@ -1241,7 +1240,6 @@ Dim I As Integer
     
     Limpiar Me   'Mètode general: Neteja els controls TextBox
     lblIndicador.Caption = ""
-'    Me.chkAbonos(0).Value = 0
     
     Combo1.ListIndex = -1
     

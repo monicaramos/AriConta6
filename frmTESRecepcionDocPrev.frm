@@ -510,12 +510,12 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).BackColor = vbWhite
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
     Next I
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Visible = Not B
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Visible = Not B
     Next I
     
     cmdAceptar.Visible = Not B
@@ -559,7 +559,6 @@ Private Sub BotonAnyadir()
     End If
     '********************************************************************
     'Situamos el grid al final
-'    AnyadirLinea DataGrid1, Adodc1
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
@@ -567,16 +566,16 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    txtaux(0).Text = NumF
-    FormateaCampo txtaux(0)
-    For I = 1 To txtaux.Count - 1
-        txtaux(I).Text = ""
+    txtAux(0).Text = NumF
+    FormateaCampo txtAux(0)
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
     Next I
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -590,11 +589,11 @@ Private Sub BotonBuscar()
     CargaGrid "factcli.numserie is null "
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Text = ""
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
     Next I
     LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
-    PonFoco txtaux(0)
+    PonFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -616,15 +615,15 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = DataGrid1.Columns(2).Text
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
     
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonFoco txtaux(1)
+    PonFoco txtAux(1)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -633,8 +632,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Top = alto
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
     Next I
     ' ### [Monica] 12/09/2006
 End Sub
@@ -720,7 +719,7 @@ Dim cad As String
     Me.Refresh
     Screen.MousePointer = vbHourglass
     
-    CampoOrden = RecuperaValor(txtaux(ColIndex).Tag, 7)
+    CampoOrden = RecuperaValor(txtAux(ColIndex).Tag, 7)
     
     Select Case TipoOrden
         Case "ASC"
@@ -807,12 +806,12 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub CargaGrid(Optional vSQL As String)
+Private Sub CargaGrid(Optional vSql As String)
     Dim SQL As String
     Dim tots As String
     
-    If vSQL <> "" Then
-        SQL = CadenaConsulta & " where " & vSQL
+    If vSql <> "" Then
+        SQL = CadenaConsulta & " where " & vSql
     Else
         SQL = CadenaConsulta
     End If
@@ -843,24 +842,24 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim RC As String
 
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 0 ' numfactu
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
             
         Case 2, 3 ' fecfactu
-            PonerFormatoFecha txtaux(Index)
+            PonerFormatoFecha txtAux(Index)
         
         Case 5 ' importe
-            PonerFormatoDecimal txtaux(Index), 1
+            PonerFormatoDecimal txtAux(Index), 1
     End Select
     
 End Sub

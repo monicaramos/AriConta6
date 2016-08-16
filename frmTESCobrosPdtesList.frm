@@ -1688,7 +1688,7 @@ Private Sub Form_Load()
     Next I
     
     For I = 0 To 3
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
     ' La Ayuda
@@ -1889,9 +1889,6 @@ Private Sub PushButtonImpr_Click()
     frmPpal.cd1.ShowPrinter
     PonerDatosPorDefectoImpresion Me, True
 End Sub
-
-
-
 
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)

@@ -1486,7 +1486,7 @@ Private Const IdPrograma = 612
 
 
 Public Tipo As Integer
-Public vSQL As String
+Public vSql As String
 Public Opcion As Byte      ' 0.- Nueva remesa    1.- Modifcar remesa
                            ' 2.- Devolucion remesa
 Public vRemesa As String   ' nºremesa|fecha remesa
@@ -2811,12 +2811,12 @@ Private Sub PonerFrameProgressVisible(Optional TEXTO As String)
 End Sub
 
 
-Private Sub CargarDatos(vSQL As String, Modificar As Boolean)
+Private Sub CargarDatos(vSql As String, Modificar As Boolean)
     Dim IT
     
     lwCobros.ListItems.Clear
     
-    SQL = "Select * from talones,cuentas where talones.codmacta = cuentas.codmacta AND " & vSQL
+    SQL = "Select * from talones,cuentas where talones.codmacta = cuentas.codmacta AND " & vSql
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lwCobros.ListItems.Add()
@@ -2879,8 +2879,6 @@ Dim AnyoRem As Integer
              IT.SubItems(2) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
              IT.SubItems(3) = miRsAux!numorden
              IT.SubItems(4) = Format(miRsAux!FecVenci, "dd/mm/yyyy")
-            ' IT.SubItems(5) = miRsAux!codmacta
-            ' IT.SubItems(6) = miRsAux!Nommacta
              'Lo debe cojer de impcobro
              IT.SubItems(7) = Format(miRsAux!impcobro, FormatoImporte)
              
@@ -3612,9 +3610,6 @@ Dim Impor As Currency
             ' Metermos cta banco, nºremesa . El resto no necesito
             SQL = "INSERT INTO tmpcierre1 (codusu, cta, nomcta, acumPerD) VALUES ("
             SQL = SQL & vUsu.Codigo & ",'" & txtCuentas(2).Text & "','"
-            'ANTES
-            'SQL = SQL & DevNombreSQL(Me.txtDescCta(3).Text) & "'," & TransformaComasPuntos(CStr(Impor)) & ")"
-            'AHora.
             SQL = SQL & txtRemesa.Tag & "',0)"
             Conn.Execute SQL
         End If
@@ -3625,16 +3620,6 @@ Dim Impor As Currency
 '            Me.Visible = False
             
             CargarDatos cad, True
-            
-
-'            'Remesas de talones y pagares
-'            frmRemeTalPag.vRemesa = "" 'NUEVA
-'            frmRemeTalPag.SQL = Cad
-'            frmRemeTalPag.Talon = cmbRemesa.ListIndex = 1 '0 pagare   1 talon
-'            frmRemeTalPag.Text1(0).Text = Me.txtCta(3).Text & " - " & txtDescCta(3).Text
-'            frmRemeTalPag.Text1(1).Text = Text1(8).Text
-'            frmRemeTalPag.Show vbModal
-
             'Desbloqueamos
             BloqueoManual False, "Remesas", ""
             

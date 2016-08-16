@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacturasCliListado 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   9585
+   ClientHeight    =   10350
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   11685
@@ -10,7 +10,7 @@ Begin VB.Form frmFacturasCliListado
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9585
+   ScaleHeight     =   10350
    ScaleWidth      =   11685
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -28,7 +28,7 @@ Begin VB.Form frmFacturasCliListado
       Height          =   2655
       Left            =   7140
       TabIndex        =   49
-      Top             =   6300
+      Top             =   6960
       Width           =   4455
       Begin VB.OptionButton optVarios 
          Caption         =   "Cliente"
@@ -96,7 +96,7 @@ Begin VB.Form frmFacturasCliListado
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   6225
+      Height          =   6885
       Left            =   120
       TabIndex        =   22
       Top             =   0
@@ -193,7 +193,7 @@ Begin VB.Form frmFacturasCliListado
          MaxLength       =   10
          TabIndex        =   8
          Tag             =   "imgConcepto"
-         Top             =   5700
+         Top             =   5850
          Width           =   1455
       End
       Begin VB.TextBox txtCuentas 
@@ -366,7 +366,7 @@ Begin VB.Form frmFacturasCliListado
          Index           =   14
          Left            =   270
          TabIndex        =   46
-         Top             =   5730
+         Top             =   5880
          Width           =   960
       End
       Begin VB.Label Label3 
@@ -713,11 +713,31 @@ Begin VB.Form frmFacturasCliListado
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   6225
+      Height          =   6885
       Left            =   7140
       TabIndex        =   42
       Top             =   0
       Width           =   4455
+      Begin VB.ComboBox Combo1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         ItemData        =   "frmFacturasCliListado.frx":0116
+         Left            =   150
+         List            =   "frmFacturasCliListado.frx":0118
+         Style           =   2  'Dropdown List
+         TabIndex        =   58
+         Top             =   2160
+         Width           =   4200
+      End
       Begin VB.CheckBox Check1 
          Caption         =   "Sustituye cuenta por NIF"
          BeginProperty Font 
@@ -794,9 +814,9 @@ Begin VB.Form frmFacturasCliListado
       Begin MSComctlLib.ListView ListView1 
          Height          =   3660
          Index           =   1
-         Left            =   210
+         Left            =   180
          TabIndex        =   47
-         Top             =   2280
+         Top             =   3090
          Width           =   4035
          _ExtentX        =   7117
          _ExtentY        =   6456
@@ -820,22 +840,39 @@ Begin VB.Form frmFacturasCliListado
          EndProperty
          NumItems        =   0
       End
+      Begin VB.Label Label2 
+         Caption         =   "Tipo Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   180
+         TabIndex        =   59
+         Top             =   1860
+         Width           =   1380
+      End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   0
-         Left            =   3570
-         Picture         =   "frmFacturasCliListado.frx":0116
+         Left            =   3540
+         Picture         =   "frmFacturasCliListado.frx":011A
          ToolTipText     =   "Quitar al Debe"
-         Top             =   1920
+         Top             =   2730
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   1
-         Left            =   3930
-         Picture         =   "frmFacturasCliListado.frx":0260
+         Left            =   3900
+         Picture         =   "frmFacturasCliListado.frx":0264
          ToolTipText     =   "Puntear al Debe"
-         Top             =   1920
+         Top             =   2730
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -851,16 +888,16 @@ Begin VB.Form frmFacturasCliListado
          EndProperty
          Height          =   255
          Index           =   15
-         Left            =   210
+         Left            =   180
          TabIndex        =   48
-         Top             =   1980
+         Top             =   2790
          Width           =   870
       End
       Begin VB.Image ImgFec 
          Height          =   240
          Index           =   2
          Left            =   1020
-         Picture         =   "frmFacturasCliListado.frx":03AA
+         Picture         =   "frmFacturasCliListado.frx":03AE
          Top             =   450
          Width           =   240
       End
@@ -916,7 +953,7 @@ Begin VB.Form frmFacturasCliListado
       Height          =   375
       Left            =   10410
       TabIndex        =   13
-      Top             =   9090
+      Top             =   9750
       Width           =   1215
    End
    Begin VB.CommandButton cmdAccion 
@@ -933,7 +970,7 @@ Begin VB.Form frmFacturasCliListado
       Index           =   1
       Left            =   8850
       TabIndex        =   11
-      Top             =   9090
+      Top             =   9750
       Width           =   1455
    End
    Begin VB.CommandButton cmdAccion 
@@ -951,7 +988,7 @@ Begin VB.Form frmFacturasCliListado
       Index           =   0
       Left            =   120
       TabIndex        =   12
-      Top             =   9030
+      Top             =   9690
       Width           =   1335
    End
    Begin VB.Frame FrameTipoSalida 
@@ -968,7 +1005,7 @@ Begin VB.Form frmFacturasCliListado
       Height          =   2655
       Left            =   120
       TabIndex        =   14
-      Top             =   6300
+      Top             =   6960
       Width           =   6915
       Begin VB.CommandButton PushButtonImpr 
          Caption         =   "Propiedades"
@@ -1216,6 +1253,7 @@ Private Sub cmdAccion_Click(Index As Integer)
     tabla = "(" & tabla & ") inner join usuarios.wtipopera aa on factcli.codopera = aa.codigo "
     
     
+    
     If Not MontaSQL Then Exit Sub
     
     If Not HayRegParaInforme(tabla, cadselect) Then Exit Sub
@@ -1318,6 +1356,10 @@ Private Sub Form_Load()
         txtFecha(1).Text = RecuperaValor(Legalizacion, 3)
     End If
     
+    
+    CargarCombo
+    'todos
+    Combo1(0).ListIndex = 0
 End Sub
 
 
@@ -1699,9 +1741,14 @@ Dim nomDocu As String
     cadParam = cadParam & "pFecha=""" & txtFecha(2).Text & """|"
     numParam = numParam + 1
     
-    cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
-    cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
-    numParam = numParam + 2
+    If txtFecha(0).Text <> "" Then
+        cadParam = cadParam & "pFecDes=Date(" & Year(txtFecha(0).Text) & "," & Month(txtFecha(0).Text) & "," & Day(txtFecha(0).Text) & ")|"
+        numParam = numParam + 1
+    End If
+    If txtFecha(1).Text <> "" Then
+        cadParam = cadParam & "pFecHas=Date(" & Year(txtFecha(1).Text) & "," & Month(txtFecha(1).Text) & "," & Day(txtFecha(1).Text) & ")|"
+        numParam = numParam + 1
+    End If
     
     ImprimeGeneral
     
@@ -1779,9 +1826,15 @@ Dim I As Integer
     End If
     
     If txtNIF.Text <> "" Then
-        If Not AnyadirAFormula(cadselect, "cuentas.nifdatos = " & DBSet(txtNIF.Text, "T")) Then Exit Function
-        If Not AnyadirAFormula(cadFormula, "{cuentas.nifdatos} = """ & Trim(txtNIF.Text) & "") Then Exit Function
+        If Not AnyadirAFormula(cadselect, "factcli.nifdatos = " & DBSet(txtNIF.Text, "T")) Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "{factcli.nifdatos} = """ & Trim(txtNIF.Text) & "") Then Exit Function
     End If
+    
+    If Me.Combo1(0).ListIndex > 0 Then ' en todos y en -1 no hacemos nada
+        If Not AnyadirAFormula(cadselect, "factcli.codconce340 = " & DBSet(Chr(Combo1(0).ItemData(Combo1(0).ListIndex)), "T")) Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "{factcli.codconce340} = """ & Chr(Combo1(0).ItemData(Combo1(0).ListIndex)) & "") Then Exit Function
+    End If
+    
     
     If cadFormula <> "" Then cadFormula = "(" & cadFormula & ")"
     If cadselect <> "" Then cadselect = "(" & cadselect & ")"
@@ -1873,4 +1926,33 @@ ECargarList:
     End If
 End Sub
 
+
+Private Sub CargarCombo()
+Dim RS As ADODB.Recordset
+Dim SQL As String
+Dim J As Long
+
+    For I = 1 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
+
+    'Tipo de factura
+    Set RS = New ADODB.Recordset
+    SQL = "SELECT * FROM usuarios.wconce340 ORDER BY codigo"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    Combo1(0).AddItem "Todos"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = Asc(1)
+    
+    I = 0
+    While Not RS.EOF
+        Combo1(0).AddItem RS!Descripcion
+        Combo1(0).ItemData(Combo1(0).NewIndex) = Asc(RS!Codigo)
+        I = I + 1
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+
+End Sub
 

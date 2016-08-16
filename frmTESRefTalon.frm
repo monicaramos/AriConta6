@@ -813,12 +813,6 @@ Private Sub mnModificar_Click()
     
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
-    ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
-    ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
-    'El registre de codi 0 no es pot Modificar ni Eliminar
-    'If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCampo(txtAux(0))) Then Exit Sub
-    
-    
     'Preparamos para modificar
     '-------------------------
     If BLOQUEADesdeFormulario2(Me, adodc1, 1) Then BotonModificar
@@ -837,14 +831,14 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub CargaGrid(Optional vSQL As String)
+Private Sub CargaGrid(Optional vSql As String)
     Dim SQL As String
     Dim tots As String
     Dim SQL2 As String
     
 '    adodc1.ConnectionString = Conn
-    If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+    If vSql <> "" Then
+        SQL = CadenaConsulta & " AND " & vSql
     Else
         SQL = CadenaConsulta
     End If
@@ -929,7 +923,6 @@ End Function
 
 Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneral Me
-'    PonerOpcionesMenuGeneralNew Me
 End Sub
 
 
@@ -939,7 +932,6 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 7 Then ' estoy introduciendo la lectura
        If KeyAscii = 13 Then 'ENTER
             If Modo = 4 Then
-                '050509 cmdAceptar_Click 'ModificarExistencia
                 RefAnt = txtAux(6)
                 BancoAnt = txtAux(7)
                 
@@ -955,10 +947,6 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
                 cmdAceptar.SetFocus
             End If
             
-            '050509
-'                    If ModoLineas = 1 Then
-'                        cmdAceptar.SetFocus
-'                    End If
        ElseIf KeyAscii = 27 Then
             cmdCancelar_Click 'ESC
        End If

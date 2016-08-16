@@ -2350,7 +2350,7 @@ Dim I As Integer
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 33
+        .Buttons(1).Image = 48
     End With
 
 

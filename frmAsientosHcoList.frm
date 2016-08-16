@@ -776,9 +776,9 @@ Private WithEvents frmDia As frmTiposDiario
 Attribute frmDia.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As Boolean
 
@@ -873,9 +873,9 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Impresión de Diario"
 
-    For i = 0 To 1
-        Me.imgDiario(i).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgDiario(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
      
     txtFecha(2).Text = Format(Now, "dd/mm/yyyy")
     txtTitulo(0).Text = "DIARIO"
@@ -889,6 +889,9 @@ Private Sub Form_Load()
         txtDiario_LostFocus (1)
         txtFecha(0).Text = FechaEnt
         txtFecha(1).Text = FechaEnt
+    Else
+        txtFecha(0).Text = Format(vParam.fechaini, "dd/mm/yyyy")
+        txtFecha(1).Text = Format(vParam.fechafin, "dd/mm/yyyy")
     End If
      
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
@@ -1014,12 +1017,12 @@ Private Sub txtDiario_KeyDown(Index As Integer, KeyCode As Integer, Shift As Int
 End Sub
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgDiario"
-        imgDiario_Click indice
+        imgDiario_Click Indice
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
@@ -1029,7 +1032,7 @@ Private Sub txtDiario_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtDiario_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtDiario(Index).Text = Trim(txtDiario(Index).Text)
     
@@ -1053,7 +1056,7 @@ Private Sub txtAsiento_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAsiento_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String

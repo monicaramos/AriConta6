@@ -373,77 +373,381 @@ Begin VB.Form frmTESCobros
       Tab(0).Control(24).Enabled=   0   'False
       Tab(0).Control(25)=   "Label1(10)"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "FrameDatosFiscales"
+      Tab(0).Control(26)=   "Combo1"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "Combo1"
+      Tab(0).Control(27)=   "Text1(19)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Text1(19)"
+      Tab(0).Control(28)=   "Text1(26)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Text1(26)"
+      Tab(0).Control(29)=   "Text1(31)"
       Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "Text1(31)"
+      Tab(0).Control(30)=   "Text1(30)"
       Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "Text1(30)"
+      Tab(0).Control(31)=   "Text1(29)"
       Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "Text1(29)"
+      Tab(0).Control(32)=   "Text1(28)"
       Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "Text1(28)"
+      Tab(0).Control(33)=   "Text2(0)"
       Tab(0).Control(33).Enabled=   0   'False
-      Tab(0).Control(34)=   "Text2(0)"
+      Tab(0).Control(34)=   "Text1(4)"
       Tab(0).Control(34).Enabled=   0   'False
-      Tab(0).Control(35)=   "Text1(4)"
+      Tab(0).Control(35)=   "Text2(1)"
       Tab(0).Control(35).Enabled=   0   'False
-      Tab(0).Control(36)=   "Text2(1)"
+      Tab(0).Control(36)=   "Text1(0)"
       Tab(0).Control(36).Enabled=   0   'False
-      Tab(0).Control(37)=   "Text1(0)"
+      Tab(0).Control(37)=   "Text1(5)"
       Tab(0).Control(37).Enabled=   0   'False
-      Tab(0).Control(38)=   "Text1(5)"
+      Tab(0).Control(38)=   "Text1(6)"
       Tab(0).Control(38).Enabled=   0   'False
-      Tab(0).Control(39)=   "Text1(6)"
+      Tab(0).Control(39)=   "Text2(2)"
       Tab(0).Control(39).Enabled=   0   'False
-      Tab(0).Control(40)=   "Text2(2)"
+      Tab(0).Control(40)=   "Text1(9)"
       Tab(0).Control(40).Enabled=   0   'False
-      Tab(0).Control(41)=   "Text1(9)"
+      Tab(0).Control(41)=   "Text2(3)"
       Tab(0).Control(41).Enabled=   0   'False
-      Tab(0).Control(42)=   "Text2(3)"
+      Tab(0).Control(42)=   "Text1(10)"
       Tab(0).Control(42).Enabled=   0   'False
-      Tab(0).Control(43)=   "Text1(10)"
+      Tab(0).Control(43)=   "Text1(33)"
       Tab(0).Control(43).Enabled=   0   'False
-      Tab(0).Control(44)=   "Text1(33)"
+      Tab(0).Control(44)=   "Text2(4)"
       Tab(0).Control(44).Enabled=   0   'False
-      Tab(0).Control(45)=   "Text2(4)"
+      Tab(0).Control(45)=   "Text1(32)"
       Tab(0).Control(45).Enabled=   0   'False
-      Tab(0).Control(46)=   "Text1(32)"
+      Tab(0).Control(46)=   "Text1(16)"
       Tab(0).Control(46).Enabled=   0   'False
-      Tab(0).Control(47)=   "Text1(16)"
+      Tab(0).Control(47)=   "Text1(17)"
       Tab(0).Control(47).Enabled=   0   'False
-      Tab(0).Control(48)=   "Text1(17)"
+      Tab(0).Control(48)=   "frameContene"
       Tab(0).Control(48).Enabled=   0   'False
-      Tab(0).Control(49)=   "frameContene"
+      Tab(0).Control(49)=   "Text2(5)"
       Tab(0).Control(49).Enabled=   0   'False
-      Tab(0).Control(50)=   "Text2(5)"
+      Tab(0).Control(50)=   "Text1(34)"
       Tab(0).Control(50).Enabled=   0   'False
-      Tab(0).Control(51)=   "Text1(34)"
+      Tab(0).Control(51)=   "txtPendiente"
       Tab(0).Control(51).Enabled=   0   'False
-      Tab(0).Control(52)=   "txtPendiente"
+      Tab(0).Control(52)=   "Text1(12)"
       Tab(0).Control(52).Enabled=   0   'False
-      Tab(0).Control(53)=   "Text1(12)"
+      Tab(0).Control(53)=   "Text1(11)"
       Tab(0).Control(53).Enabled=   0   'False
-      Tab(0).Control(54)=   "Text1(11)"
+      Tab(0).Control(54)=   "Text1(7)"
       Tab(0).Control(54).Enabled=   0   'False
-      Tab(0).Control(55)=   "Text1(7)"
+      Tab(0).Control(55)=   "Text1(8)"
       Tab(0).Control(55).Enabled=   0   'False
-      Tab(0).Control(56)=   "Text1(8)"
+      Tab(0).Control(56)=   "FrameRemesa"
       Tab(0).Control(56).Enabled=   0   'False
-      Tab(0).Control(57)=   "FrameRemesa"
+      Tab(0).Control(57)=   "Check1(2)"
       Tab(0).Control(57).Enabled=   0   'False
-      Tab(0).Control(58)=   "Check1(2)"
+      Tab(0).Control(58)=   "SSTab2"
       Tab(0).Control(58).Enabled=   0   'False
-      Tab(0).Control(59)=   "SSTab2"
+      Tab(0).Control(59)=   "Check1(4)"
       Tab(0).Control(59).Enabled=   0   'False
-      Tab(0).Control(60)=   "Check1(4)"
+      Tab(0).Control(60)=   "FrameDatosFiscales"
       Tab(0).Control(60).Enabled=   0   'False
       Tab(0).ControlCount=   61
+      Begin VB.Frame FrameDatosFiscales 
+         Caption         =   "DATOS FISCALES"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   3435
+         Left            =   270
+         TabIndex        =   125
+         Top             =   1110
+         Visible         =   0   'False
+         Width           =   9375
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   36
+            Left            =   2040
+            Locked          =   -1  'True
+            TabIndex        =   133
+            Text            =   "Text4"
+            Top             =   2250
+            Width           =   3345
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   36
+            Left            =   1470
+            TabIndex        =   131
+            Tag             =   "País|T|S|||cobros|codpais|||"
+            Top             =   2250
+            Width           =   465
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   37
+            Left            =   1470
+            TabIndex        =   132
+            Tag             =   "Nif|T|S|||cobros|nifclien|||"
+            Top             =   2820
+            Width           =   1350
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   38
+            Left            =   1470
+            TabIndex        =   130
+            Tag             =   "Provincia|T|S|||cobros|proclien|||"
+            Top             =   1770
+            Width           =   7800
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   39
+            Left            =   4020
+            TabIndex        =   129
+            Tag             =   "Poblacion|T|S|||cobros|pobclien|||"
+            Top             =   1320
+            Width           =   5250
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   40
+            Left            =   1470
+            TabIndex        =   128
+            Tag             =   "CP|T|S|||cobros|cpclien|||"
+            Top             =   1290
+            Width           =   1320
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   41
+            Left            =   1470
+            TabIndex        =   127
+            Tag             =   "Dirección|T|S|||cobros|domclien|||"
+            Top             =   840
+            Width           =   7800
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   42
+            Left            =   1470
+            TabIndex        =   126
+            Tag             =   "Nombre|T|S|||cobros|nomclien|||"
+            Top             =   390
+            Width           =   7800
+         End
+         Begin VB.Image imgppal 
+            Height          =   240
+            Index           =   1
+            Left            =   1170
+            Top             =   2280
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "País"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   28
+            Left            =   300
+            TabIndex        =   140
+            Top             =   2310
+            Width           =   555
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Provincia"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   29
+            Left            =   300
+            TabIndex        =   139
+            Top             =   1830
+            Width           =   1395
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Población"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   30
+            Left            =   3000
+            TabIndex        =   138
+            Top             =   1350
+            Width           =   1545
+         End
+         Begin VB.Label Label1 
+            Caption         =   "NIF"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   31
+            Left            =   300
+            TabIndex        =   137
+            Top             =   2880
+            Width           =   1065
+         End
+         Begin VB.Label Label1 
+            Caption         =   "C.Postal"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   32
+            Left            =   300
+            TabIndex        =   136
+            Top             =   1350
+            Width           =   855
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Dirección"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   36
+            Left            =   300
+            TabIndex        =   135
+            Top             =   900
+            Width           =   1545
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Nombre"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000000&
+            Height          =   255
+            Index           =   37
+            Left            =   300
+            TabIndex        =   134
+            Top             =   450
+            Width           =   1545
+         End
+      End
       Begin VB.CheckBox Check1 
          Caption         =   "NO remesar"
          BeginProperty Font 
@@ -2624,310 +2928,6 @@ Begin VB.Form frmTESCobros
          Top             =   720
          Width           =   2175
       End
-      Begin VB.Frame FrameDatosFiscales 
-         Caption         =   "DATOS FISCALES"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   3435
-         Left            =   270
-         TabIndex        =   125
-         Top             =   1110
-         Visible         =   0   'False
-         Width           =   9375
-         Begin VB.TextBox Text2 
-            BackColor       =   &H80000018&
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   36
-            Left            =   2040
-            Locked          =   -1  'True
-            TabIndex        =   133
-            Text            =   "Text4"
-            Top             =   2250
-            Width           =   3345
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   36
-            Left            =   1470
-            TabIndex        =   131
-            Tag             =   "País|T|S|||cobros|codpais|||"
-            Top             =   2250
-            Width           =   465
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   37
-            Left            =   1470
-            TabIndex        =   132
-            Tag             =   "Nif|T|S|||cobros|nifclien|||"
-            Top             =   2820
-            Width           =   1350
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   38
-            Left            =   1470
-            TabIndex        =   130
-            Tag             =   "Provincia|T|S|||cobros|proclien|||"
-            Top             =   1770
-            Width           =   7800
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   39
-            Left            =   4020
-            TabIndex        =   129
-            Tag             =   "Poblacion|T|S|||cobros|pobclien|||"
-            Top             =   1320
-            Width           =   5250
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   40
-            Left            =   1470
-            TabIndex        =   128
-            Tag             =   "CP|T|S|||cobros|cpclien|||"
-            Top             =   1290
-            Width           =   1320
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   41
-            Left            =   1470
-            TabIndex        =   127
-            Tag             =   "Dirección|T|S|||cobros|domclien|||"
-            Top             =   840
-            Width           =   7800
-         End
-         Begin VB.TextBox Text1 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   42
-            Left            =   1470
-            TabIndex        =   126
-            Tag             =   "Nombre|T|S|||cobros|nomclien|||"
-            Top             =   390
-            Width           =   7800
-         End
-         Begin VB.Image imgppal 
-            Height          =   240
-            Index           =   1
-            Left            =   1170
-            Top             =   2280
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "País"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   28
-            Left            =   300
-            TabIndex        =   140
-            Top             =   2310
-            Width           =   555
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Provincia"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   29
-            Left            =   300
-            TabIndex        =   139
-            Top             =   1830
-            Width           =   1395
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Población"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   30
-            Left            =   3000
-            TabIndex        =   138
-            Top             =   1350
-            Width           =   1545
-         End
-         Begin VB.Label Label1 
-            Caption         =   "NIF"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   31
-            Left            =   300
-            TabIndex        =   137
-            Top             =   2880
-            Width           =   1065
-         End
-         Begin VB.Label Label1 
-            Caption         =   "C.Postal"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   32
-            Left            =   300
-            TabIndex        =   136
-            Top             =   1350
-            Width           =   855
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Dirección"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   36
-            Left            =   300
-            TabIndex        =   135
-            Top             =   900
-            Width           =   1545
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Nombre"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   255
-            Index           =   37
-            Left            =   300
-            TabIndex        =   134
-            Top             =   450
-            Width           =   1545
-         End
-      End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          Caption         =   "Situación"
@@ -3889,7 +3889,7 @@ Private Sub cmdAux_Click(Index As Integer)
             frmDia.Show vbModal
             Set frmDia = Nothing
             
-            PonFoco txtaux(5)
+            PonFoco txtAux(5)
             
         Case 2 ' cocnepto de devolucion
             Set frmDev = New frmBasico
@@ -4430,7 +4430,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-    txtaux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
+    txtAux(CInt(cmdAux(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -4994,17 +4994,25 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 Dim vCadena As String
+Dim frmTESVerCobPag As frmTESVerCobrosPagos
+
 
     CadenaDesdeOtroForm = ""
     
     vCadena = cadFiltro  '"(coalesce(Cobros.ImpVenci, 0) + coalesce(Cobros.Gastos, 0) - coalesce(Cobros.impcobro, 0) <> 0)"
     
-    frmTESVerCobrosPagos.vSQL = vCadena
-    If CadB <> "" Then frmTESVerCobrosPagos.vSQL = frmTESVerCobrosPagos.vSQL & " and " & CadB
-    frmTESVerCobrosPagos.OrdenarEfecto = False
-    frmTESVerCobrosPagos.Regresar = True
-    frmTESVerCobrosPagos.Cobros = True
-    frmTESVerCobrosPagos.Show vbModal
+    Set frmTESVerCobPag = New frmTESVerCobrosPagos
+    
+    
+    frmTESVerCobPag.Situacion = 1
+    frmTESVerCobPag.vSql = vCadena
+    If CadB <> "" Then frmTESVerCobPag.vSql = frmTESVerCobPag.vSql & " and " & CadB
+    frmTESVerCobPag.OrdenarEfecto = False
+    frmTESVerCobPag.Regresar = True
+    frmTESVerCobPag.Cobros = True
+    frmTESVerCobPag.Show vbModal
+    
+    Set frmTESVerCobPag = Nothing
     
     If CadenaDesdeOtroForm <> "" Then
         PonerDatoDevuelto CadenaDesdeOtroForm
@@ -5655,13 +5663,13 @@ Dim Im As Currency
     'Ok, Ahora pongo los labels
     frmTESCobrosDivVto.Opcion = 27
     frmTESCobrosDivVto.Label4(56).Caption = Text2(0).Text
-    frmTESCobrosDivVto.txtcodigo(2).Text = Text1(5).Text
+    frmTESCobrosDivVto.txtCodigo(2).Text = Text1(5).Text
     
     frmTESCobrosDivVto.Label4(57).Caption = Data1.Recordset!NUmSerie & Format(Data1.Recordset!NumFactu, "000000") & " / " & Data1.Recordset!numorden & "      de " & Format(Data1.Recordset!FecFactu, "dd/mm/yyyy")
     
     'Si ya ha cobrado algo...
     Im = DBLet(Data1.Recordset!impcobro, "N")
-    If Im > 0 Then frmTESCobrosDivVto.txtcodigo(1).Text = txtPendiente.Text
+    If Im > 0 Then frmTESCobrosDivVto.txtCodigo(1).Text = txtPendiente.Text
     
     If Text1(0).Text = "" Then
         MsgBox "El cobro no tiene forma de pago. Revise.", vbExclamation
@@ -5937,9 +5945,9 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'hlinapu
-            For jj = 5 To txtaux.Count - 1
-                txtaux(jj).Visible = B
-                txtaux(jj).Top = alto
+            For jj = 5 To txtAux.Count - 1
+                txtAux(jj).Visible = B
+                txtAux(jj).Top = alto
             Next jj
         
         Case 1 'lineas de factura
@@ -6286,18 +6294,18 @@ Dim I As Integer
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 0 'lineas de cobros realizados
                     If Limpia Then
-                        For I = 0 To txtaux.Count - 1
-                            txtaux(I).Text = ""
+                        For I = 0 To txtAux.Count - 1
+                            txtAux(I).Text = ""
                         Next I
                     End If
-                    txtaux(0).Text = Text1(13).Text 'serie
-                    txtaux(1).Text = Text1(1).Text 'numfactu
-                    txtaux(2).Text = Text1(2).Text 'fecha
-                    txtaux(3).Text = Text1(3).Text 'nro vencimiento
+                    txtAux(0).Text = Text1(13).Text 'serie
+                    txtAux(1).Text = Text1(1).Text 'numfactu
+                    txtAux(2).Text = Text1(2).Text 'fecha
+                    txtAux(3).Text = Text1(3).Text 'nro vencimiento
                     
-                    txtaux(4).Text = Format(NumF, "0000") 'linea contador
+                    txtAux(4).Text = Format(NumF, "0000") 'linea contador
                     
-                    PonFoco txtaux(5)
+                    PonFoco txtAux(5)
             
             End Select
 
@@ -6460,8 +6468,8 @@ Dim cad As String
                     Limp = True
 
                     If Limp Then
-                        For I = 0 To txtaux.Count - 1
-                            txtaux(I).Text = ""
+                        For I = 0 To txtAux.Count - 1
+                            txtAux(I).Text = ""
                         Next I
                     End If
                     ModoLineas = 0
@@ -6573,7 +6581,7 @@ EDatosOKLlin:
 End Function
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -6606,41 +6614,41 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Dim Importe As Currency
         
         
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
-    If txtaux(Index).Text = "" Then Exit Sub
+    If txtAux(Index).Text = "" Then Exit Sub
     
     Select Case Index
         Case 5 ' diario
-            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtaux(5), "N")
+            RC = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtAux(5), "N")
             If RC = "" Then
                 MsgBox "No existe el tipo de diario. Reintroduzca.", vbExclamation
-                PonFoco txtaux(5)
+                PonFoco txtAux(5)
             End If
                 
         Case 6, 11 ' fecha
-            If Not EsFechaOK(txtaux(Index)) Then
-                MsgBox "Fecha incorrecta: " & txtaux(Index).Text, vbExclamation
-                txtaux(Index).Text = ""
-                PonerFoco txtaux(Index)
+            If Not EsFechaOK(txtAux(Index)) Then
+                MsgBox "Fecha incorrecta: " & txtAux(Index).Text, vbExclamation
+                txtAux(Index).Text = ""
+                PonerFoco txtAux(Index)
             End If
             
         Case 7 ' asiento
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         
         Case 8 ' usuario
         
         Case 9
            ' IMPORTE
-             txtaux(Index) = ImporteSinFormato(txtaux(Index))
+             txtAux(Index) = ImporteSinFormato(txtAux(Index))
             
         Case 10 'tipo
-            txtaux(Index).Text = UCase(txtaux(Index).Text)
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
         
         Case 12 ' cuenta de cobro
-            RC = txtaux(12).Text
+            RC = txtAux(12).Text
             If CuentaCorrectaUltimoNivel(RC, "") Then
-                txtaux(12).Text = RC
+                txtAux(12).Text = RC
             End If
         
     End Select

@@ -802,7 +802,7 @@ Private Sub Form_Load()
     Next I
     
     For I = 0 To 1
-        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
     ' La Ayuda
@@ -815,9 +815,7 @@ Private Sub Form_Load()
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
     
-    
-'    optVarios(0).Value = True
-    
+   
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
@@ -993,7 +991,6 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
                     
                 End If
                     
-                    'If txtCta(1).Text = "" Then 'ANTES solo lo hacia si el texto estaba vacio
                 If Hasta >= 0 Then
                     txtCuentas(Hasta).Text = txtCuentas(Index).Text
                     txtNCuentas(Hasta).Text = txtNCuentas(Index).Text

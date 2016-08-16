@@ -1096,9 +1096,6 @@ Dim TipoAnt As Integer
     'Se lo tengo que pasar a la contabilizacion, con lo cual tendre que grabar
     'el nº de talon pagare en reftalonpag
 
-'        If Tipo = vbTalon Or Tipo = vbPagare Then
-'        If Combo1.ListIndex >= 0 Then Tipo = Combo1.ItemData(Combo1.ListIndex)
-
         If Combo1.ItemData(Combo1.ListIndex) = vbTalon Or Combo1.ItemData(Combo1.ListIndex) = vbPagare Then
         
         
@@ -1247,18 +1244,9 @@ Dim TipoAnt As Integer
         'Tenemos k borrar los listview
         For I = (ListView1.ListItems.Count) To 1 Step -1
             If ListView1.ListItems(I).Checked Then
-'--
-'               EliminarCobroPago I
-              
                ListView1.ListItems.Remove I
-                
             End If
         Next I
-        '-----------------------------------------------------------
-'--
-'        'Ahora actualizamos los registros que estan en tmpactualziar
-'        frmTESActualizar.OpcionActualizar = 20
-'        frmTESActualizar.Show vbModal
     Else
         TirarAtrasTransaccion
     End If
@@ -1266,14 +1254,6 @@ Dim TipoAnt As Integer
 
     ImpSeleccionado = 0
     Text2(2).Text = Format(ImpSeleccionado, FormatoImporte)
-'    If cad = "" Then GeneraLaContabilizacionFecha
-'
-'    Else
-'        'La normal, lo que habia
-'        GeneraLaContabilizacion
-'
-'    End If
-        
     If chkImprimir.Value Then Imprimir2
     
         
@@ -1830,7 +1810,6 @@ Dim ImpAux As Currency
         cad = FrasMarcadas.Item(I)
         If RecuperaValor(cad, 1) = RS!NUmSerie And RecuperaValor(cad, 2) = RS!NumFactu And RecuperaValor(cad, 3) = RS!FecFactu And RecuperaValor(cad, 4) = RS!numorden And RecuperaValor(cad, 5) = RS!codmacta Then
             ItmX.Checked = True
-'            FrasMarcadas.Remove I
         End If
      Next I
     
