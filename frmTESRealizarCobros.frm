@@ -1729,7 +1729,7 @@ Dim ImpAux As Currency
     ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
     ItmX.SubItems(3) = Format(RS!FecVenci, "dd/mm/yyyy")
     ItmX.SubItems(4) = RS!numorden
-    ItmX.SubItems(5) = RS!Nommacta
+    ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
     ItmX.SubItems(6) = RS!siglas
     
     ItmX.SubItems(7) = Format(RS!ImpVenci, FormatoImporte)
@@ -1893,7 +1893,7 @@ Dim vSql As String
     
     'cobros
     cad = "SELECT cobros.*, formapago.nomforpa, tipofpago.descformapago, tipofpago.siglas, "
-    cad = cad & " cuentas.nommacta,cuentas.codmacta,tipofpago.tipoformapago, "
+    cad = cad & " cobros.nomclien nommacta,cuentas.codmacta,tipofpago.tipoformapago, "
     cad = cad & " coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0) imppdte "
     cad = cad & " FROM ((cobros INNER JOIN formapago ON cobros.codforpa = formapago.codforpa) INNER JOIN tipofpago ON formapago.tipforpa = tipofpago.tipoformapago) INNER JOIN cuentas ON cobros.codmacta = cuentas.codmacta"
     If vSql <> "" Then cad = cad & " WHERE " & vSql

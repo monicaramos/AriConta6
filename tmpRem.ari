@@ -2,12 +2,12 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016072912174789450RE10000432016</MsgId>
-   <CreDtTm>2016-07-29T12:17:47</CreDtTm>
-   <NbOfTxs>2</NbOfTxs>
-   <CtrlSum>166.73</CtrlSum>
+<MsgId>PRE2016081713220546480RE10000482016</MsgId>
+   <CreDtTm>2016-08-17T13:22:05</CreDtTm>
+   <NbOfTxs>1</NbOfTxs>
+   <CtrlSum>1000.00</CtrlSum>
    <InitgPty>
-     <Nm>Ariadna Software, S.L.</Nm>
+     <Nm>PRUEBASSSSSS</Nm>
      <Id>
         <OrgId>
            <Othr>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000432016 29/07/16B96470190</PmtInfId>
+   <PmtInfId>RE000482016 17/08/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,9 +33,9 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-07-29</ReqdColltnDt>
+   <ReqdColltnDt>2016-08-17</ReqdColltnDt>
    <Cdtr>
-      <Nm>Ariadna Software, S.L.</Nm>
+      <Nm>PRUEBASSSSSS</Nm>
       <PstlAdr>
           <Ctry>ES</Ctry>
           <AdrLine>Pasaje Ventura Feliu 13 I. En 2</AdrLine>
@@ -43,7 +43,7 @@
    </Cdtr>
    <CdtrAcct>
       <Id>
-         <IBAN>ES2521001864930200004908</IBAN>
+         <IBAN>ES6421001864930200004908</IBAN>
       </Id>
    </CdtrAcct>
    <CdtrAgt>
@@ -63,88 +63,45 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000237 A  0360016120160515001   </EndToEndId>
+          <EndToEndId>430000001 A  0000121220160818001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">96.07</InstdAmt>
+      <InstdAmt Ccy="EUR">1000.00</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
-            <MndtId>766800001567</MndtId>
-            <DtOfSgntr>2014-02-27</DtOfSgntr>
+            <MndtId>072710000069</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
          </MndtRltdInf>
       </DrctDbtTx>
       <DbtrAgt>
          <FinInstnId>
-            <BIC>CAHMESMMXXX</BIC>
+            <BIC>CCRIES2AXXX</BIC>
          </FinInstnId>
       </DbtrAgt>
       <Dbtr>
-         <Nm>JOSE MORALES, S.L.</Nm>
+         <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
-              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
+              <AdrLine>Daniel Sanjuan, 11</AdrLine>
+              <AdrLine>POBLA DEL DUC   46840     VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <PrvtId>
                <Othr>
-                   <Id>766800001567</Id>
+                   <Id>072710000069</Id>
                </Othr>
             </PrvtId>
          </Id>
       </Dbtr>
       <DbtrAcct>
          <Id>
-            <IBAN>ES4320388715766800001567</IBAN>
+            <IBAN>ES1030582267072710000069</IBAN>
          </Id>
       </DbtrAcct>
       <Purp>
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>FACTURA  A-3600161 de Fecha 15 may 2016</Ustrd>
-      </RmtInf>
-   </DrctDbtTxInf>
-   <DrctDbtTxInf>
-      <PmtId>
-          <EndToEndId>430000147 A  0360017320160531001   </EndToEndId>
-      </PmtId>
-      <InstdAmt Ccy="EUR">70.66</InstdAmt>
-      <DrctDbtTx>
-         <MndtRltdInf>
-            <MndtId>216000651183</MndtId>
-            <DtOfSgntr>2014-01-22</DtOfSgntr>
-         </MndtRltdInf>
-      </DrctDbtTx>
-      <DbtrAgt>
-         <FinInstnId>
-            <BIC>CAHMESMMXXX</BIC>
-         </FinInstnId>
-      </DbtrAgt>
-      <Dbtr>
-         <Nm>TEINSA, S.L.</Nm>
-         <PstlAdr>
-            <Ctry>ES</Ctry>
-              <AdrLine>Carrer Les Moreres Parcela 48-A</AdrLine>
-              <AdrLine>XIRIVELLA   46950     VALENCIA</AdrLine>
-         </PstlAdr>
-         <Id>
-            <PrvtId>
-               <Othr>
-                   <Id>216000651183</Id>
-               </Othr>
-            </PrvtId>
-         </Id>
-      </Dbtr>
-      <DbtrAcct>
-         <Id>
-            <IBAN>ES6520385825216000651183</IBAN>
-         </Id>
-      </DbtrAcct>
-      <Purp>
-         <Cd>TRAD</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>FACTURA  A-3600173 de Fecha 31 may 2016</Ustrd>
+         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
 </PmtInf>

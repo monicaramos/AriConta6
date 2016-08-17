@@ -1662,7 +1662,7 @@ Private frmMens As frmMensajes
 
 Dim SQL As String
 Dim RC As String
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim PrimeraVez As Boolean
 
 Dim cad As String
@@ -1741,10 +1741,10 @@ Private Sub cmdAceptar_Click(Index As Integer)
                     If Not ModoInsertar Then
                         ModoInsertar = True
                         cmdAceptar(0).Caption = "C&onfirmar"
-                        If SubTipo <> vbTipoPagoRemesa Then
-                            'NuevaRemTalPag
-                        Else
+                        If TipoTrans = 1 Then ' transferencia de abonos
                             NuevaTransf
+                        Else
+                            NuevaTransfPagos
                         End If
                     Else
                         If GenerarTransferencia(0) Then
@@ -1871,7 +1871,7 @@ eInsertar:
 End Sub
 
 Private Function InsertarLineas() As Boolean
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim CadValues As String
 Dim CadInsert As String
 
@@ -2286,7 +2286,7 @@ End Sub
 
 Private Function ModificarCobros() As Boolean
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim FecUltCob As String
 Dim Importe As Currency
@@ -2300,10 +2300,10 @@ Dim NumLinea As Integer
     SQL = "select * from cobros where transfer = " & lw1.ListItems(lw1.SelectedItem.Index).Text
     SQL = SQL & " and anyorem = " & lw1.ListItems(lw1.SelectedItem.Index).SubItems(1)
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         
         ' antes lo sumaba de los cobros_realizados
         ' ahora lo dejo todo a nulo
@@ -2323,13 +2323,13 @@ Dim NumLinea As Integer
         SQL = SQL & ", anyorem = " & ValorNulo
         SQL = SQL & ", siturem = " & ValorNulo
         SQL = SQL & ", situacion = 0 "
-        SQL = SQL & " where numserie = " & DBSet(Rs!NUmSerie, "T") & " and "
-        SQL = SQL & " numfactu = " & DBSet(Rs!NumFactu, "N") & " and fecfactu = " & DBSet(Rs!FecFactu, "F") & " and "
-        SQL = SQL & " numorden = " & DBSet(Rs!numorden, "N")
+        SQL = SQL & " where numserie = " & DBSet(RS!NUmSerie, "T") & " and "
+        SQL = SQL & " numfactu = " & DBSet(RS!NumFactu, "N") & " and fecfactu = " & DBSet(RS!FecFactu, "F") & " and "
+        SQL = SQL & " numorden = " & DBSet(RS!numorden, "N")
                     
         Conn.Execute SQL
     
-        Rs.MoveNext
+        RS.MoveNext
     Wend
 
     SQL = "delete from transferencias where codigo = " & lw1.ListItems(lw1.SelectedItem.Index).Text
@@ -2337,7 +2337,7 @@ Dim NumLinea As Integer
     
     Conn.Execute SQL
 
-    Set Rs = Nothing
+    Set RS = Nothing
     ModificarCobros = True
     Conn.CommitTrans
     Exit Function
@@ -2523,6 +2523,7 @@ Private Sub HacerToolBar2(Boton As Integer)
             CadenaDesdeOtroForm = ""
             
             frmTESTransferenciasCont.Opcion = 8
+            frmTESTransferenciasCont.Cobros = (TipoTrans = 1)
             frmTESTransferenciasCont.NumeroDocumento = lw1.SelectedItem.Text & "|" & lw1.SelectedItem.SubItems(1) & "|" & lw1.SelectedItem.SubItems(4) & "|" & lw1.SelectedItem.SubItems(5) & "|" & lw1.SelectedItem.SubItems(8) & "|"
             frmTESTransferenciasCont.Show vbModal
          
@@ -2536,7 +2537,7 @@ End Sub
 Private Function GeneraNormaBancaria() As Boolean
 Dim B As Boolean
 Dim NumF As String
-Dim Nif As String
+Dim NIF As String
 
     On Error GoTo EGeneraNormaBancaria
     GeneraNormaBancaria = False
@@ -2547,7 +2548,7 @@ Dim Nif As String
         MsgBox "La empresa no tiene NIF. No puede generar fichero norma bancaria", vbExclamation
         Exit Function
     Else
-        Nif = NumF
+        NIF = NumF
     End If
     
     
@@ -2568,7 +2569,7 @@ Dim Nif As String
    
     Set miRsAux = Nothing
         'B = GeneraFicheroNorma34(NIF, Adodc1.Recordset!Fecha, Adodc1.Recordset!codmacta, "9", Adodc1.Recordset!Codigo, Adodc1.Recordset!descripcion, TipoDeFrm <> 0)
-    B = GeneraFicheroNorma34(Nif, lw1.SelectedItem.SubItems(2), lw1.SelectedItem.SubItems(5), CStr(lw1.SelectedItem.SubItems(11)), lw1.SelectedItem.Text, lw1.SelectedItem.SubItems(7), False, lw1.SelectedItem.SubItems(1))
+    B = GeneraFicheroNorma34(NIF, lw1.SelectedItem.SubItems(2), lw1.SelectedItem.SubItems(5), CStr(lw1.SelectedItem.SubItems(11)), lw1.SelectedItem.Text, lw1.SelectedItem.SubItems(7), False, lw1.SelectedItem.SubItems(1))
     
     If B Then
         If cd1.FileName <> "" Then cd1.FileName = ""
@@ -2584,8 +2585,21 @@ Dim Nif As String
             
             CadenaDesdeOtroForm = "OK"
             
-            Nif = "update transferencias set situacion = 'B' where codigo = " & DBSet(lw1.SelectedItem.Text, "N") & " and anyo = " & DBSet(lw1.SelectedItem.SubItems(1), "N")
-            Conn.Execute Nif
+            NIF = "update transferencias set situacion = 'B' where codigo = " & DBSet(lw1.SelectedItem.Text, "N") & " and anyo = " & DBSet(lw1.SelectedItem.SubItems(1), "N")
+'            Conn.Execute NIF
+            
+            
+            ' Marcamos todos los cobros como cobrados
+            If Ejecuta(NIF) Then CadenaDesdeOtroForm = "OK"
+            
+            
+            
+            If CadenaDesdeOtroForm = "OK" Then
+            
+                Set miRsAux = New ADODB.Recordset
+                If Not UpdatearCobrosTransferencia Then MsgBox "Error updateando cobros remesa", vbExclamation
+                Set miRsAux = Nothing
+            End If
             
         End If
     Else
@@ -2597,6 +2611,51 @@ Dim Nif As String
 EGeneraNormaBancaria:
     MuestraError Err.Number, "Genera Fichero Norma34"
 End Function
+
+
+Private Function UpdatearCobrosTransferencia() As Boolean
+Dim Im As Currency
+    On Error GoTo EUpdatearCobrosTransferencia
+    UpdatearCobrosTransferencia = False
+    
+    SQL = "Select * from cobros WHERE transfer=" & DBSet(lw1.SelectedItem.Text, "N")
+    SQL = SQL & " AND anyorem =" & DBSet(lw1.SelectedItem.SubItems(1), "N")
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not miRsAux.EOF Then
+            While Not miRsAux.EOF
+                SQL = "UPDATE cobros SET fecultco = '" & Format(lw1.SelectedItem.SubItems(2), FormatoFecha) & "', impcobro = "
+                Im = miRsAux!ImpVenci
+                If Not IsNull(miRsAux!Gastos) Then Im = Im + miRsAux!Gastos
+                SQL = SQL & TransformaComasPuntos(CStr(Im))
+                
+                SQL = SQL & " ,siturem = 'B'"
+                
+                
+                'WHERE
+                SQL = SQL & " WHERE numserie='" & miRsAux!NUmSerie
+                SQL = SQL & "' AND  numfactu =  " & miRsAux!NumFactu
+                SQL = SQL & "  AND  fecfactu =  '" & Format(miRsAux!FecFactu, FormatoFecha)
+                SQL = SQL & "' AND  numorden =  " & miRsAux!numorden
+                'Muevo siguiente
+                miRsAux.MoveNext
+                
+                'Ejecuto SQL
+                If Not Ejecuta(SQL) Then MsgBox "Error: " & SQL, vbExclamation
+            Wend
+    End If
+    miRsAux.Close
+                    
+                    
+                    
+    UpdatearCobrosTransferencia = True
+    Exit Function
+EUpdatearCobrosTransferencia:
+    
+End Function
+
+
+
+
 
 Private Function ComprobarNifDatosProveedor() As Boolean
 Dim SQL As String
@@ -2861,6 +2920,72 @@ Dim ImporteTot As Currency
 End Sub
 
 
+Private Sub PonerVtosTransferenciaPagos(vSql As String, Modificar As Boolean)
+Dim IT
+Dim ImporteTot As Currency
+
+    lwCobros.ListItems.Clear
+    If Modificar Then Text1(4).Text = ""
+    
+    ImporteTot = 0
+    
+    
+'    Set Me.lwCobros.SmallIcons = frmPpal.ImgListviews
+    Set lwCobros.SmallIcons = frmPpal.imgListComun16
+    
+    
+    Set miRsAux = New ADODB.Recordset
+    
+    cad = "Select pagos.*,nomforpa " & vSql
+    cad = cad & " ORDER BY fecefect"
+    
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        Set IT = lwCobros.ListItems.Add()
+        IT.Text = miRsAux!NUmSerie
+        IT.SubItems(1) = Format(miRsAux!NumFactu, "0000000")
+        IT.SubItems(2) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
+        IT.SubItems(3) = miRsAux!numorden
+        IT.SubItems(4) = miRsAux!Fecefect
+        IT.SubItems(5) = miRsAux!nomforpa
+    
+        IT.Checked = True
+    
+        Importe = 0
+        Importe = Importe + miRsAux!Impefect
+        
+        'Si ya he cobrado algo
+        If Not IsNull(miRsAux!imppagad) Then Importe = Importe - miRsAux!imppagad
+        
+        IT.SubItems(6) = Format(Importe, FormatoImporte)
+        
+        ImporteTot = ImporteTot + Importe
+
+        IT.Tag = Abs(Importe)  'siempre valor absoluto
+            
+'        If DBLet(miRsAux!Devuelto, "N") = 1 Then
+'            IT.SmallIcon = 42
+'        End If
+            
+        If Modificar Then
+            IT.SubItems(7) = txtCuentas(3).Text
+        Else
+            IT.SubItems(7) = txtCuentas(2).Text
+        End If
+        
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    
+    Text1(4).Text = Format(ImporteTot, "###,###,##0.00")
+    
+
+End Sub
+
+
+
+
 Private Sub SQLVtosSeleccionadosCompensacion(ByRef RegistroDestino As Long, SinDestino As Boolean)
 Dim Insertar As Boolean
     SQL = ""
@@ -2885,7 +3010,7 @@ End Sub
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cad As String
     
     On Error Resume Next
@@ -2893,26 +3018,26 @@ Dim cad As String
     cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
     cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not Rs.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N")
-        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 2)
+    If Not RS.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N")
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2)
         
         Toolbar1.Buttons(5).Enabled = False 'DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2) And DesdeNorma43 = 0
-        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N")
+        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N")
         
-        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N")
+        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N")
     
-        Toolbar2.Buttons(1).Enabled = DBLet(Rs!especial, "N") And Not (lw1.SelectedItem Is Nothing)
-        Toolbar2.Buttons(2).Enabled = DBLet(Rs!especial, "N") And Not (lw1.SelectedItem Is Nothing)
-        Toolbar2.Buttons(3).Enabled = DBLet(Rs!especial, "N") 'And Not (lw1.SelectedItem Is Nothing)
+        Toolbar2.Buttons(1).Enabled = DBLet(RS!especial, "N") And Not (lw1.SelectedItem Is Nothing)
+        Toolbar2.Buttons(2).Enabled = DBLet(RS!especial, "N") And Not (lw1.SelectedItem Is Nothing)
+        Toolbar2.Buttons(3).Enabled = DBLet(RS!especial, "N") 'And Not (lw1.SelectedItem Is Nothing)
     End If
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 End Sub
 
@@ -2977,7 +3102,7 @@ Dim IT
         IT.SubItems(8) = Format(miRsAux!Importe, "###,###,##0.00")
         IT.SubItems(9) = miRsAux!Situacion
         IT.SubItems(10) = miRsAux!TipoTrans
-        IT.SubItems(11) = miRsAux!concepto
+        IT.SubItems(11) = miRsAux!Concepto
         
         miRsAux.MoveNext
     Wend
@@ -3013,6 +3138,8 @@ Dim Impor As Currency
 Dim SQL2 As String
 
     SQL = " (1=1) "
+    
+    
     
     'Del vto
     If txtFecha(2).Text <> "" Then SQL = SQL & " AND cobros.fecvenci >= '" & Format(txtFecha(2).Text, FormatoFecha) & "'"
@@ -3083,7 +3210,7 @@ Dim SQL2 As String
         
      
     Screen.MousePointer = vbHourglass
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
         
     
@@ -3096,17 +3223,17 @@ Dim SQL2 As String
         
     
     
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
         cad = ""
         I = 1
-        While Not Rs.EOF
-            cad = cad & Rs!codmacta & " - " & Rs!Nommacta & " : " & Rs!FecBloq & vbCrLf
-            Rs.MoveNext
+        While Not RS.EOF
+            cad = cad & RS!codmacta & " - " & RS!Nommacta & " : " & RS!FecBloq & vbCrLf
+            RS.MoveNext
         Wend
     End If
 
-    Rs.Close
+    RS.Close
     
     If I > 0 Then
         cad = "Las siguientes cuentas estan bloqueadas." & vbCrLf & String(60, "-") & vbCrLf & cad
@@ -3124,11 +3251,11 @@ Dim SQL2 As String
     cad = cad & " cobros.codmacta=cuentas.codmacta AND situacion = 0 and "
     
     'Hacemos un conteo
-    Rs.Open "SELECT Count(*) " & cad & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        I = DBLet(Rs.Fields(0), "N")
+    RS.Open "SELECT Count(*) " & cad & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        I = DBLet(RS.Fields(0), "N")
     End If
-    Rs.Close
+    RS.Close
     cad = cad & SQL
     
     
@@ -3143,14 +3270,14 @@ Dim SQL2 As String
     If I > 0 Then
         SQL = "select sum(impvenci),sum(impcobro),sum(gastos) " & cad
         Impor = 0
-        Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then Impor = DBLet(Rs.Fields(0), "N") - DBLet(Rs.Fields(1), "N") + DBLet(Rs.Fields(2), "N")
-        Rs.Close
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then Impor = DBLet(RS.Fields(0), "N") - DBLet(RS.Fields(1), "N") + DBLet(RS.Fields(2), "N")
+        RS.Close
         If Impor = 0 Then I = 0
     End If
         
 
-    Set Rs = Nothing
+    Set RS = Nothing
     
     If I = 0 Then
         MsgBox "Ningun dato a transferir con esos valores", vbExclamation
@@ -3183,6 +3310,190 @@ Dim SQL2 As String
     
     Screen.MousePointer = vbDefault
 End Sub
+
+
+Private Sub NuevaTransfPagos()
+
+Dim Forpa As String
+Dim cad As String
+Dim Impor As Currency
+Dim SQL2 As String
+
+    SQL = "formapago.tipforpa = " & vbTransferencia
+    
+    'Del vto
+    If txtFecha(2).Text <> "" Then SQL = SQL & " AND pagos.fecefect >= '" & Format(txtFecha(2).Text, FormatoFecha) & "'"
+    If txtFecha(3).Text <> "" Then SQL = SQL & " AND pagos.fecefect <= '" & Format(txtFecha(3).Text, FormatoFecha) & "'"
+   
+    
+    'Si ha puesto importe desde Hasta
+    If txtImporte(0).Text <> "" Then SQL = SQL & " AND impefect >= " & TransformaComasPuntos(ImporteFormateado(txtImporte(0).Text))
+    If txtImporte(1).Text <> "" Then SQL = SQL & " AND impefect <= " & TransformaComasPuntos(ImporteFormateado(txtImporte(1).Text))
+    
+    
+    'Desde hasta cuenta
+    If Me.txtCuentas(0).Text <> "" Then SQL = SQL & " AND pagos.codmacta >= '" & txtCuentas(0).Text & "'"
+    If Me.txtCuentas(1).Text <> "" Then SQL = SQL & " AND pagos.codmacta <= '" & txtCuentas(1).Text & "'"
+    
+    'El importe
+    SQL = SQL & " AND (impefect - coalesce(imppagad,0)) > 0"
+    
+
+    'serie
+    If txtSerie(0).Text <> "" Then _
+        SQL = SQL & " AND pagos.numserie >= '" & txtSerie(0).Text & "'"
+    If txtSerie(1).Text <> "" Then _
+        SQL = SQL & " AND pagos.numserie <= '" & txtSerie(1).Text & "'"
+    
+    'Fecha factura
+    If txtFecha(0).Text <> "" Then _
+        SQL = SQL & " AND pagos.fecfactu >= '" & Format(txtFecha(0).Text, FormatoFecha) & "'"
+    If txtFecha(1).Text <> "" Then _
+        SQL = SQL & " AND pagos.fecfactu <= '" & Format(txtFecha(1).Text, FormatoFecha) & "'"
+    
+    'Codigo factura
+    If txtNumFac(0).Text <> "" Then _
+        SQL = SQL & " AND pagos.numfactu >= '" & txtNumFac(0).Text & "'"
+    If txtNumFac(1).Text <> "" Then _
+        SQL = SQL & " AND pagos.numfactu <= '" & txtNumFac(1).Text & "'"
+    
+    
+    SQL = SQL & " and situacion = 0 "
+     
+    ' si hay pagos con imppagad <> 0 damos aviso y no los incluimos
+    
+    
+    
+    CadenaDesdeOtroForm = ""
+
+    SQL2 = SQL & " and not pagos.imppagad is null and pagos.imppagad <> 0 and pagos.codmacta=cuentas.codmacta AND (nrodocum is null) AND pagos.codforpa = formapago.codforpa "
+   
+    
+    SQL2 = "select pagos.* FROM pagos,cuentas,formapago  WHERE " & SQL2
+    
+    If TotalRegistrosConsulta(SQL2) <> 0 Then
+    
+        Set frmMens3 = New frmMensajes
+        
+        frmMens3.Opcion = 53
+        frmMens3.Parametros = SQL2
+        frmMens3.Show vbModal
+        
+        Set frmMens = Nothing
+        
+        If CadenaDesdeOtroForm <> "OK" Then
+            cmdCancelar_Click (0)
+        End If
+    
+    End If
+    
+    SQL = SQL & " and (pagos.imppagad is null or pagos.imppagad = 0)"
+        
+     
+    Screen.MousePointer = vbHourglass
+    Set RS = New ADODB.Recordset
+    
+        
+    
+    'Que la cuenta NO este bloqueada
+    I = 0
+    
+    cad = " FROM pagos,formapago,cuentas WHERE pagos.codforpa = formapago.codforpa AND nrodocum is null AND situacion = 0 and "
+    cad = cad & " pagos.codmacta=cuentas.codmacta AND (not (fecbloq is null) and fecbloq < '" & Format(CDate(txtFecha(4).Text), FormatoFecha) & "') AND "
+    cad = "Select pagos.codmacta,nommacta,fecbloq" & cad & SQL & " GROUP BY 1 ORDER BY 1"
+        
+    
+    
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        cad = ""
+        I = 1
+        While Not RS.EOF
+            cad = cad & RS!codmacta & " - " & RS!Nommacta & " : " & RS!FecBloq & vbCrLf
+            RS.MoveNext
+        Wend
+    End If
+
+    RS.Close
+    
+    If I > 0 Then
+        cad = "Las siguientes cuentas estan bloqueadas." & vbCrLf & String(60, "-") & vbCrLf & cad
+        MsgBox cad, vbExclamation
+        Screen.MousePointer = vbDefault
+        
+        ModoInsertar = False
+        cmdAceptar(0).Caption = "&Aceptar"
+        
+        Exit Sub
+    End If
+    
+    
+    cad = " FROM pagos,formapago,cuentas WHERE pagos.codforpa = formapago.codforpa AND nrodocum is null AND "
+    cad = cad & " pagos.codmacta=cuentas.codmacta AND situacion = 0 and "
+    
+    'Hacemos un conteo
+    RS.Open "SELECT Count(*) " & cad & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        I = DBLet(RS.Fields(0), "N")
+    End If
+    RS.Close
+    cad = cad & SQL
+    
+    
+    
+    If I > 0 Then
+        I = 1  'Para que siga por abajo
+    End If
+    
+    
+
+    'La suma
+    If I > 0 Then
+        SQL = "select sum(impefect),sum(imppagad) " & cad
+        Impor = 0
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then Impor = DBLet(RS.Fields(0), "N") - DBLet(RS.Fields(1), "N")
+        RS.Close
+        If Impor = 0 Then I = 0
+    End If
+        
+
+    Set RS = Nothing
+    
+    If I = 0 Then
+        MsgBox "Ningun dato a transferir con esos valores", vbExclamation
+        
+        ModoInsertar = False
+        cmdAceptar(0).Caption = "&Aceptar"
+        
+    Else
+         
+        'Preparamos algunas cosillas
+        'Aqui guardaremos cuanto llevamos a cada banco
+        SQL = "Delete from tmpCierre1 where codusu =" & vUsu.Codigo
+        Conn.Execute SQL
+        
+        CadenaDesdeOtroForm = ""
+        
+        SQL = cad 'Le paso el SELECT
+        
+        PonerVtosTransferenciaPagos SQL, False
+        
+        Dim CadAux As String
+        
+        CadAux = "INSERT INTO tmpcierre1 (codusu, cta, nomcta, acumPerD) VALUES (" & vUsu.Codigo
+        CadAux = CadAux & ",'" & txtCuentas(2).Text & "','" & txtNCuentas(2).Text & "'," & DBSet(Text1(4).Text, "N") & ")"
+        If Not Ejecuta(CadAux) Then Exit Sub
+        
+        CadenaDesdeOtroForm = "'" & Trim(txtCuentas(2).Text) & "'"
+                
+    End If
+    
+    Screen.MousePointer = vbDefault
+End Sub
+
+
+
 
 
 Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
@@ -3436,7 +3747,7 @@ End Function
 Private Function GenerarTransferencia(Opcion As Integer) As Boolean
 Dim C As String
 Dim NumeroRemesa As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim J As Integer
 Dim I As Integer
 Dim ImporteQueda As Currency
@@ -3490,30 +3801,30 @@ Dim ImporteQueda As Currency
     Conn.BeginTrans
     
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     cad = "Select * from tmpcierre1 where codusu =" & vUsu.Codigo
     If CadenaDesdeOtroForm <> "" Then cad = cad & " and cta in (" & CadenaDesdeOtroForm & ")"
     
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Rs.EOF Then
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If RS.EOF Then
         MsgBox "Error grave. Datos temporales vacios", vbExclamation
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         Exit Function
     End If
     
     
     Set miRsAux = New ADODB.Recordset
     
-    'Para ver si existe la remesa... pero esto no tendria k pasar
+    'Para ver si existe la transferencia... pero esto no tendria k pasar
     '------------------------------------------------------------
     
     Label2.Caption = ""
     Label2.Visible = True
     
-    While Not Rs.EOF
+    While Not RS.EOF
     
-        Label2.Caption = "Generando remesa " & NumeroRemesa & " del banco " & Rs!Cta
+        Label2.Caption = "Generando transferencia " & NumeroRemesa & " del banco " & RS!Cta
         Me.Refresh
         DoEvents
     
@@ -3521,9 +3832,9 @@ Dim ImporteQueda As Currency
         If Opcion = 0 Then
             'Ahora insertamos la remesa
             cad = "INSERT INTO transferencias (tipotrans, codigo, anyo, fecha,situacion,codmacta,descripcion,subtipo,concepto) "
-            cad = cad & " VALUES (1, "
+            cad = cad & " VALUES (" & DBSet(TipoTrans, "N") & ", "
             cad = cad & NumeroRemesa & "," & Year(CDate(txtFecha(4).Text)) & ",'" & Format(txtFecha(4).Text, FormatoFecha) & "','A','"
-            cad = cad & Rs!Cta & "','" & DevNombreSQL(txtRemesa.Text) & "',1," & DBSet(cboConcepto2.ItemData(cboConcepto.ListIndex), "N") & ")"
+            cad = cad & RS!Cta & "','" & DevNombreSQL(txtRemesa.Text) & "',1," & DBSet(cboConcepto2.ItemData(cboConcepto.ListIndex), "N") & ")"
             Conn.Execute cad
             
         Else
@@ -3542,62 +3853,114 @@ Dim ImporteQueda As Currency
             cad = cad & " AND anyo =" & Year(CDate(txtFecha(4).Text))
             If Not Ejecuta(cad) Then Exit Function
             
-            cad = "UPDATE cobros SET siturem=NULL, transfer=NULL, anyorem=NULL ,tiporem =NULL "
-            cad = cad & " ,fecultco=NULL, impcobro = NULL "
-            cad = cad & " WHERE transfer = " & NumeroRemesa
-            cad = cad & " AND anyorem=" & Year(CDate(txtFecha(4).Text)) & " AND tiporem = 1"
-            If Not Ejecuta(cad) Then Exit Function
+            
+            If TipoTrans = 1 Then ' transferencias de abonos
+                cad = "UPDATE cobros SET siturem=NULL, transfer=NULL, anyorem=NULL ,tiporem =NULL "
+                cad = cad & " ,fecultco=NULL, impcobro = NULL "
+                cad = cad & " WHERE transfer = " & NumeroRemesa
+                cad = cad & " AND anyorem=" & Year(CDate(txtFecha(4).Text)) & " AND tiporem = 1"
+                If Not Ejecuta(cad) Then Exit Function
+            Else
+                ' transferencias de pagos
+                cad = "UPDATE pagos SET situdocum=NULL,nrodocum=NULL,anyodocum=NULL "
+                cad = cad & " ,fecultco=NULL, imppagad = NULL "
+                cad = cad & " WHERE nrodocum = " & NumeroRemesa
+                cad = cad & " AND anyodocum=" & Year(CDate(txtFecha(4).Text))
+                If Not Ejecuta(cad) Then Exit Function
+            
+            End If
         End If
         
         'Ahora cambiamos los cobros y les ponemos la remesa
-        cad = "UPDATE cobros SET siturem = 'A', transfer= " & NumeroRemesa & ", anyorem =" & Year(CDate(txtFecha(4).Text))
+        If TipoTrans = 1 Then ' transferencias de abonos
+            cad = "UPDATE cobros SET siturem = 'A', transfer= " & NumeroRemesa & ", anyorem =" & Year(CDate(txtFecha(4).Text))
         
-        'Para cada cobro UPDATE
-        For J = 1 To lwCobros.ListItems.Count
-           With lwCobros.ListItems(J)
-                If .Checked And .SubItems(7) = Rs!Cta Then   ' si el subitem es del banco
-                    C = " WHERE numserie = '" & .Text & "' and numfactu = "
-                    C = C & Val(.SubItems(1)) & " and fecfactu ='" & Format(.SubItems(2), FormatoFecha)
-                    C = C & "' AND numorden =" & .SubItems(3)
-                
-                    C = cad & C
-                    Conn.Execute C
-                Else
-                    'Stop
+            'Para cada cobro UPDATE
+            For J = 1 To lwCobros.ListItems.Count
+               With lwCobros.ListItems(J)
+                    If .Checked And .SubItems(7) = RS!Cta Then   ' si el subitem es del banco
+                        C = " WHERE numserie = '" & .Text & "' and numfactu = "
+                        C = C & Val(.SubItems(1)) & " and fecfactu ='" & Format(.SubItems(2), FormatoFecha)
+                        C = C & "' AND numorden =" & .SubItems(3)
+                    
+                        C = cad & C
+                        Conn.Execute C
+                    Else
+                        'Stop
+                    End If
+               End With
+            Next J
+            espera 0.5
+            
+            
+            'Hacemos un select sum para el importe
+            cad = "Select sum(impvenci),sum(coalesce(impcobro,0)),sum(coalesce(gastos,0)) from cobros "
+            cad = cad & " WHERE transfer=" & NumeroRemesa
+            cad = cad & " AND anyorem =" & Year(CDate(txtFecha(4).Text))
+            
+            miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            C = "0"
+            If Not miRsAux.EOF Then
+                If Not IsNull(miRsAux.Fields(0)) Then
+                                   'Impvenci                               impcobro                      gastos
+                    ImporteQueda = DBLet(miRsAux.Fields(0), "N") - DBLet(miRsAux.Fields(1), "N") + DBLet(miRsAux.Fields(2), "N")
+                    C = TransformaComasPuntos(CStr(ImporteQueda))
                 End If
-           End With
-        Next J
-        espera 0.5
-        
-        
-        'Hacemos un select sum para el importe
-        cad = "Select sum(impvenci),sum(coalesce(impcobro,0)),sum(coalesce(gastos,0)) from cobros "
-        cad = cad & " WHERE transfer=" & NumeroRemesa
-        cad = cad & " AND anyorem =" & Year(CDate(txtFecha(4).Text))
-        
-        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        C = "0"
-        If Not miRsAux.EOF Then
-            If Not IsNull(miRsAux.Fields(0)) Then
-                               'Impvenci                               impcobro                      gastos
-                ImporteQueda = DBLet(miRsAux.Fields(0), "N") - DBLet(miRsAux.Fields(1), "N") + DBLet(miRsAux.Fields(2), "N")
-                C = TransformaComasPuntos(CStr(ImporteQueda))
             End If
+            miRsAux.Close
+            
+        Else ' transferencias de pagos
+        
+            cad = "UPDATE pagos SET situdocum = 'A', nrodocum= " & NumeroRemesa & ", anyodocum =" & Year(CDate(txtFecha(4).Text))
+        
+            'Para cada cobro UPDATE
+            For J = 1 To lwCobros.ListItems.Count
+               With lwCobros.ListItems(J)
+                    If .Checked And .SubItems(7) = RS!Cta Then   ' si el subitem es del banco
+                        C = " WHERE numserie = '" & .Text & "' and numfactu = "
+                        C = C & DBSet(.SubItems(1), "T") & " and fecfactu ='" & Format(.SubItems(2), FormatoFecha)
+                        C = C & "' AND numorden =" & .SubItems(3)
+                    
+                        C = cad & C
+                        Conn.Execute C
+                    Else
+                        'Stop
+                    End If
+               End With
+            Next J
+            espera 0.5
+            
+            
+            'Hacemos un select sum para el importe
+            cad = "Select sum(impefect),sum(coalesce(imppagad,0)) from pagos "
+            cad = cad & " WHERE nrodocum=" & NumeroRemesa
+            cad = cad & " AND anyodocum =" & Year(CDate(txtFecha(4).Text))
+            
+            miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            C = "0"
+            If Not miRsAux.EOF Then
+                If Not IsNull(miRsAux.Fields(0)) Then
+                                   'Impvenci                               impcobro
+                    ImporteQueda = DBLet(miRsAux.Fields(0), "N") - DBLet(miRsAux.Fields(1), "N")
+                    C = TransformaComasPuntos(CStr(ImporteQueda))
+                End If
+            End If
+            miRsAux.Close
+        
         End If
-        miRsAux.Close
         
         cad = "UPDATE transferencias SET importe=" & C
         cad = cad & " WHERE codigo=" & NumeroRemesa
         cad = cad & " AND anyo =" & Year(CDate(txtFecha(4).Text))
-        cad = cad & " AND tipotrans = 1"
+        cad = cad & " AND tipotrans = " & DBSet(TipoTrans, "N")
         Conn.Execute cad
         
         NumeroRemesa = NumeroRemesa + 1
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
     Set miRsAux = Nothing
     

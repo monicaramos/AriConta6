@@ -207,6 +207,7 @@ Public SubTipo As Byte
 Public NumeroDocumento As String
 Public vTextos As String
 
+Public Cobros As Boolean
     
 Public ImporteGastosTarjeta_ As Currency   'Para cuando viene de recepciondocumentos pondre el importe que le falta
     
@@ -232,7 +233,6 @@ Dim impo As Currency
 Dim riesgo As Currency
 Dim Tipo As Integer
 Dim ContabTransfer As Boolean
-Dim Cobros As Boolean
 Dim Fecha As Date
 Dim FechaAsiento As Date
 Private vp As Ctipoformapago
@@ -426,10 +426,11 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             HaHabidoCambios = True
             
             
-            SQL = "UPDATE transferencia SET"
+            SQL = "UPDATE transferencias SET"
             SQL = SQL & " situacion= 'Q'"
-            SQL = SQL & " WHERE codigo=" & RS!Codigo
-            SQL = SQL & " and anyo=" & RS!Anyo
+            SQL = SQL & " WHERE codigo=" & RecuperaValor(NumeroDocumento, 1)
+            SQL = SQL & " and anyo=" & RecuperaValor(NumeroDocumento, 2)
+            
 
             If Not Ejecuta(SQL) Then MsgBox "Error actualizando tabla transferencias.", vbExclamation
             
@@ -437,7 +438,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             'Ahora actualizamos los registros que estan en tmpactualziar
             Screen.MousePointer = vbDefault
             'Cerramos
-            RS.Close
+            'RS.Close
             Unload Me
             Exit Sub
         Else
@@ -503,13 +504,37 @@ Dim ContabilizacionEspecialNorma19 As Boolean
 End Sub
 
 Private Function HacerNuevaContabilizacion() As Boolean
+
+
+
     On Error GoTo EHacer
     HacerNuevaContabilizacion = False
     
     Tipo = 1
+    
     ContabTransfer = True
     
-    GastosTransferencia = DBSet(txtImporte(0).Text, "N") * (-1)
+    GastosTransferencia = DBSet(txtImporte(0).Text, "N")
+    
+    
+    'Si el parametro dice k van todos en el mismo asiento, pues eso, todos en el mismo asiento
+    'Primero leemos la forma de pago, el tipo perdon
+    Set vp = New Ctipoformapago
+    
+    Dim cad As String
+    
+    
+    'en vtextos, en el 3 tenemos la forpa
+    If vp.Leer(vbTransferencia) = 1 Then
+        'ERROR GRAVE LEYENDO LA FORMA DE PAGO
+        Screen.MousePointer = vbDefault
+        Set vp = Nothing
+        End
+    End If
+    
+    
+    
+    
     
     
     
@@ -592,7 +617,7 @@ Dim cad As String
         'Serie factura |FECHAfactura|
         'Neuvo febrero 2008 Serie factura |FECHAfactura|numvto|
 '        If Cobros Then
-            C = C & DBLet(RS!NUmSerie, "T") & DBLet(RS!NumFactu, "N") & "|" & DBLet(RS!FecFactu, "F") & "|" & DBLet(RS!numorden, "N")
+            C = C & DBLet(RS!NUmSerie, "T") & "|" & DBLet(RS!NumFactu, "N") & "|" & DBLet(RS!FecFactu, "F") & "|" & DBLet(RS!numorden, "N")
 '        Else
 '            C = C & DevNombreSQL(ListView1.ListItems(J).Text) & "|" & ListView1.ListItems(J).SubItems(1) & "|" & ListView1.ListItems(J).SubItems(3)
 '        End If
@@ -665,14 +690,13 @@ Dim GastosTransDescontados As Boolean
 Dim LineaUltima As Integer
 
 Dim cad As String
-Dim Fecha As Date
 
     'Valores por defecto
     ContraPartidaPorLinea = True
     UnAsientoPorCuenta = False
     PonerCuentaGenerica = False
     AgrupaCuenta = False
-    CampoFecha = "numfac"
+    CampoFecha = "fecha" '"numfac"
     GastosTransDescontados = False 'por lo que pueda pasar
     
     'Si va agrupado por cta
@@ -764,9 +788,6 @@ Dim Fecha As Date
         End If 'de aseinto por cuenta
         
         
-        
-        
-        
         'Si tengo que cerrar el asiento anterior
         If CierraAsiento Then
             'Tirar atras el RS
@@ -816,12 +837,8 @@ Dim Fecha As Date
                 End If
             End If
             
-            
             riesgo = 0
-            
         End If
-    
-    
         
     
         'Para el cobro /pago  que tendremos en la fila actual del recordset
@@ -1063,8 +1080,6 @@ Dim W As Integer
     
     'Cago los iconos
     CargaImagenesAyudas Me.Image1, 2
-    
-    
     
     FrameContabilRem2.Visible = False
     
@@ -1771,8 +1786,8 @@ Dim TipForpa As Byte
             
             If Cabecera = 1 And Not VienedeGastos Then
             
-                TipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", RS!codforpa, "N")
-
+                '--TipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", RS!codforpa, "N")
+                TipForpa = vbTransferencia
             
                 ' nuevos campos de la factura
                 'numSerie , numfacpr, FecFactu, numorden, TipForpa, reftalonpag, bancotalonpag
@@ -1817,32 +1832,32 @@ Dim TipForpa As Byte
     
     If Debe Then
         '++monica
-        If Cobros And Cabecera = 1 And Not VienedeGastos Then
-        
-            Dim Situacion As Byte
-            
-            Situacion = 1
-
-            SQL = "update cobros set impcobro = coalesce(impcobro,0) + " & DBSet(ImporteInterno, "N")
-            SQL = SQL & " ,fecultco = " & DBSet(FechaAsiento, "F")
-            SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
-            SQL = SQL & " where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")
-            SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " and numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
-
-            Conn.Execute SQL
-
-        ' en tmppendientes metemos la clave primaria de cobros_recibidos y el importe en letra
-                                                          'importe=nro factura,   codforpa=linea de cobros_realizados
-            SQL = "insert into tmppendientes (codusu,serie_cta,importe,fecha,numorden, observa) values ("
-            SQL = SQL & vUsu.Codigo & "," & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & "," 'numserie
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," 'numfactu
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & "," 'fecfactu
-            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," 'numorden
-            SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(ImporteInterno))), "T") & ") "
-            
-            Conn.Execute SQL
-
-        End If
+'        If Cobros And Cabecera = 1 And Not VienedeGastos Then
+'
+'            Dim Situacion As Byte
+'
+'            Situacion = 1
+'
+'            SQL = "update cobros set impcobro = coalesce(impcobro,0) + " & DBSet(ImporteInterno, "N")
+'            SQL = SQL & " ,fecultco = " & DBSet(FechaAsiento, "F")
+'            SQL = SQL & ", situacion = " & DBSet(Situacion, "N")
+'            SQL = SQL & " where numserie = " & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & " and numfactu = " & DBSet(RecuperaValor(RS1!Cliente, 2), "N")
+'            SQL = SQL & " and fecfactu = " & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & " and numorden = " & DBSet(RecuperaValor(RS1!Cliente, 4), "N")
+'
+'            Conn.Execute SQL
+'
+'        ' en tmppendientes metemos la clave primaria de cobros_recibidos y el importe en letra
+'                                                          'importe=nro factura,   codforpa=linea de cobros_realizados
+'            SQL = "insert into tmppendientes (codusu,serie_cta,importe,fecha,numorden, observa) values ("
+'            SQL = SQL & vUsu.Codigo & "," & DBSet(RecuperaValor(RS1!Cliente, 1), "T") & "," 'numserie
+'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 2), "N") & "," 'numfactu
+'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 3), "F") & "," 'fecfactu
+'            SQL = SQL & DBSet(RecuperaValor(RS1!Cliente, 4), "N") & "," 'numorden
+'            SQL = SQL & DBSet(EscribeImporteLetra(ImporteFormateado(CStr(ImporteInterno))), "T") & ") "
+'
+'            Conn.Execute SQL
+'
+'        End If
     
     End If
     
