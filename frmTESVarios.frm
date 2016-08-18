@@ -15,6 +15,199 @@ Begin VB.Form frmTESVarios
    ScaleWidth      =   12855
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameAgregarCuentas 
+      Height          =   6015
+      Left            =   0
+      TabIndex        =   204
+      Top             =   0
+      Width           =   6015
+      Begin VB.CommandButton cmdInsertaCta 
+         Caption         =   "+"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Left            =   5400
+         TabIndex        =   208
+         Top             =   1080
+         Width           =   315
+      End
+      Begin VB.TextBox txtDCtaNormal 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   5
+         Left            =   1560
+         TabIndex        =   209
+         Text            =   "Text9"
+         Top             =   1080
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCtaNormal 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   5
+         Left            =   120
+         TabIndex        =   207
+         Text            =   "Text9"
+         Top             =   1080
+         Width           =   1365
+      End
+      Begin VB.CommandButton cmdAceptarCtas 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   3360
+         TabIndex        =   210
+         Top             =   5400
+         Width           =   1095
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   21
+         Left            =   4680
+         TabIndex        =   212
+         Top             =   5400
+         Width           =   1095
+      End
+      Begin VB.ListBox List1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   3420
+         Left            =   120
+         Sorted          =   -1  'True
+         TabIndex        =   206
+         Top             =   1560
+         Width           =   5655
+      End
+      Begin VB.Image imgCtaNorma 
+         Height          =   240
+         Index           =   6
+         Left            =   1230
+         ToolTipText     =   "Cuentas agrupadas"
+         Top             =   720
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Eliminar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   23
+         Left            =   600
+         TabIndex        =   213
+         Top             =   5400
+         Width           =   1470
+      End
+      Begin VB.Image imgEliminarCta 
+         Height          =   240
+         Left            =   240
+         Top             =   5400
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cuenta "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   255
+         Index           =   25
+         Left            =   120
+         TabIndex        =   211
+         Top             =   720
+         Width           =   735
+      End
+      Begin VB.Image imgCtaNorma 
+         Height          =   240
+         Index           =   5
+         Left            =   870
+         ToolTipText     =   "Cuentas individuales"
+         Top             =   720
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Alignment       =   2  'Center
+         Caption         =   "AGREGAR CUENTAS"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Index           =   15
+         Left            =   480
+         TabIndex        =   205
+         Top             =   240
+         Width           =   4935
+      End
+   End
    Begin VB.Frame FrameModiRemeTal 
       Height          =   3015
       Left            =   30
@@ -2583,200 +2776,6 @@ Begin VB.Form frmTESVarios
          Width           =   6015
       End
    End
-   Begin VB.Frame FrameAgregarCuentas 
-      Height          =   6015
-      Left            =   0
-      TabIndex        =   204
-      Top             =   0
-      Width           =   6015
-      Begin VB.CommandButton cmdInsertaCta 
-         Caption         =   "+"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   315
-         Left            =   5400
-         TabIndex        =   208
-         Top             =   1080
-         Width           =   315
-      End
-      Begin VB.TextBox txtDCtaNormal 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   5
-         Left            =   1560
-         TabIndex        =   209
-         Text            =   "Text9"
-         Top             =   1080
-         Width           =   3735
-      End
-      Begin VB.TextBox txtCtaNormal 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   5
-         Left            =   120
-         TabIndex        =   207
-         Text            =   "Text9"
-         Top             =   1080
-         Width           =   1365
-      End
-      Begin VB.CommandButton cmdAceptarCtas 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   3360
-         TabIndex        =   210
-         Top             =   5400
-         Width           =   1095
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   21
-         Left            =   4680
-         TabIndex        =   212
-         Top             =   5400
-         Width           =   1095
-      End
-      Begin VB.ListBox List1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   3570
-         Left            =   120
-         Sorted          =   -1  'True
-         Style           =   1  'Checkbox
-         TabIndex        =   206
-         Top             =   1560
-         Width           =   5655
-      End
-      Begin VB.Image imgCtaNorma 
-         Height          =   240
-         Index           =   6
-         Left            =   1230
-         ToolTipText     =   "Cuentas agrupadas"
-         Top             =   720
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Eliminar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   23
-         Left            =   600
-         TabIndex        =   213
-         Top             =   5400
-         Width           =   1470
-      End
-      Begin VB.Image imgEliminarCta 
-         Height          =   240
-         Left            =   240
-         Top             =   5400
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Cuenta "
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   255
-         Index           =   25
-         Left            =   120
-         TabIndex        =   211
-         Top             =   720
-         Width           =   735
-      End
-      Begin VB.Image imgCtaNorma 
-         Height          =   240
-         Index           =   5
-         Left            =   870
-         ToolTipText     =   "Cuentas individuales"
-         Top             =   720
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         Alignment       =   2  'Center
-         Caption         =   "AGREGAR CUENTAS"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   375
-         Index           =   15
-         Left            =   480
-         TabIndex        =   205
-         Top             =   240
-         Width           =   4935
-      End
-   End
    Begin VB.Frame FrameContabilRem2 
       Height          =   4215
       Left            =   0
@@ -4514,8 +4513,8 @@ Private WithEvents frmP As frmFormaPago
 Attribute frmP.VB_VarHelpID = -1
 
 
-Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim RS As ADODB.Recordset
+Dim SQL As String
 Dim I As Integer
 Dim IT As ListItem  'Comun
 Dim PrimeraVez As Boolean
@@ -4659,36 +4658,36 @@ Dim Importe As Currency
 
 '
     'Llegados a este punto montaremos el sql
-    Sql = ""
+    SQL = ""
     
     If Text1(0).Text <> "" Then
-        If Sql <> "" Then Sql = Sql & " AND "
-        Sql = Sql & " scobro.fecvenci >= '" & Format(Text1(0).Text, FormatoFecha) & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " scobro.fecvenci >= '" & Format(Text1(0).Text, FormatoFecha) & "'"
     End If
         
         
     If Text1(1).Text <> "" Then
-        If Sql <> "" Then Sql = Sql & " AND "
-        Sql = Sql & " scobro.fecvenci <= '" & Format(Text1(1).Text, FormatoFecha) & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " scobro.fecvenci <= '" & Format(Text1(1).Text, FormatoFecha) & "'"
     End If
     
     
     
     'Forma de pago
-    If Sql <> "" Then Sql = Sql & " AND "
-    Sql = Sql & " sforpa.tipforpa = " & SubTipo
+    If SQL <> "" Then SQL = SQL & " AND "
+    SQL = SQL & " sforpa.tipforpa = " & SubTipo
 
 
 
     If Me.txtCtaNormal(9).Text <> "" Then
         'Los de un cliente solamente
-        If Sql <> "" Then Sql = Sql & " AND "
-        Sql = Sql & " scobro.codmacta = '" & txtCtaNormal(9).Text & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " scobro.codmacta = '" & txtCtaNormal(9).Text & "'"
     End If
 
     'Si son talones o pagares, NO deben estar remesados
     If SubTipo = vbTalon Or SubTipo = vbPagare Then
-        Sql = Sql & " AND (codrem is null )"
+        SQL = SQL & " AND (codrem is null )"
     End If
 
     'Para contabilizar transferecias efectuadas por los cobros.
@@ -4700,14 +4699,14 @@ Dim Importe As Currency
     Screen.MousePointer = vbHourglass
     cad = " FROM scobro,sforpa WHERE scobro.codforpa = sforpa.codforpa AND "
     'Hacemos un conteo
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     I = 0
-    Rs.Open "SELECT Count(*) " & cad & Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        I = DBLet(Rs.Fields(0), "N")
+    RS.Open "SELECT Count(*) " & cad & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        I = DBLet(RS.Fields(0), "N")
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
     'Si es talon o pagare vere si esta en parametros lo de contabiliza contra cuenta puente
@@ -4729,7 +4728,7 @@ Dim Importe As Currency
             
             
             'Si esta recibido el documento NO dejo contabilizarlo
-            Sql = Sql & " AND scobro.recedocu = 0"
+            SQL = SQL & " AND scobro.recedocu = 0"
             
             
         End If
@@ -4759,7 +4758,7 @@ Dim Importe As Currency
             With frmTESVerCobrosPagos
                 .ImporteGastosTarjeta_ = Importe
                 .OrdenacionEfectos = CByte(I)
-                .vSql = Sql
+                .vSql = SQL
                 .OrdenarEfecto = True
                 .Regresar = False
                 .ContabTransfer = False
@@ -4809,8 +4808,8 @@ Private Sub cmdContabiliGasto_Click()
     '---------------------------------------------
     
     'Borro primero la tmp
-    Sql = "DELETE FROM tmpactualizar where codusu =" & vUsu.Codigo
-    If Not Ejecuta(Sql) Then Exit Sub
+    SQL = "DELETE FROM tmpactualizar where codusu =" & vUsu.Codigo
+    If Not Ejecuta(SQL) Then Exit Sub
 
     
     Conn.BeginTrans
@@ -4840,17 +4839,17 @@ Dim ContabilizacionEspecialNorma19 As Boolean
 
 'Dim ImporteEnRecepcion As Currency
 'Dim TalonPagareBeneficios As String
-    Sql = ""
+    SQL = ""
     If Text3(3).Text = "" Or Text3(4).Text = "" Then
-        Sql = "Ponga una remesa."
+        SQL = "Ponga una remesa."
     Else
-        If Not IsNumeric(Text3(3).Text) Or Not IsNumeric(Text3(4).Text) Then Sql = "La remesa debe ser numérica"
+        If Not IsNumeric(Text3(3).Text) Or Not IsNumeric(Text3(4).Text) Then SQL = "La remesa debe ser numérica"
     End If
     
-    If Text1(10).Text = "" Then Sql = "Ponga la fecha de abono"
+    If Text1(10).Text = "" Then SQL = "Ponga la fecha de abono"
     
-    If Sql <> "" Then
-        MsgBox Sql, vbExclamation
+    If SQL <> "" Then
+        MsgBox SQL, vbExclamation
         Exit Sub
     End If
     
@@ -4859,21 +4858,21 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     
     
     'Ahora miramos la remesa. En que sitaucion , y de que tipo es
-    Sql = "Select * from remesas where codigo =" & Text3(3).Text
-    Sql = Sql & " AND anyo =" & Text3(4).Text
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select * from remesas where codigo =" & Text3(3).Text
+    SQL = SQL & " AND anyo =" & Text3(4).Text
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    If Rs.EOF Then
+    If RS.EOF Then
         MsgBox "Ninguna remesa con esos valores", vbExclamation
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         Exit Sub
 
     End If
     
     'Tiene valor
-    Sql = ""
+    SQL = ""
     B = AdelanteConLaRemesa()
     ContabilizacionEspecialNorma19 = False
     If B Then
@@ -4883,21 +4882,21 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             'Se podrian agrupar los IFs, pero asi de momento me entero mas
         
             'Para RECIBOS BANCARIOS SOLO
-            If DBLet(Rs!Tiporem, "N") = 1 Then
+            If DBLet(RS!Tiporem, "N") = 1 Then
                 If vParamT.Norma19xFechaVto Then
-                    If Not IsNull(Rs!Tipo) Then
-                        If Rs!Tipo = 0 Then
+                    If Not IsNull(RS!Tipo) Then
+                        If RS!Tipo = 0 Then
                             'NORMA 19
                             'Contbiliza por fecha VTO
                             'Comprobaremos que toooodos estan en fecha ejercicio
-                            Sql = ComprobacionFechasRemesaN19PorVto
-                            If Sql <> "" Then Sql = "-Comprobando fechas remesas N19" & vbCrLf & Sql
+                            SQL = ComprobacionFechasRemesaN19PorVto
+                            If SQL <> "" Then SQL = "-Comprobando fechas remesas N19" & vbCrLf & SQL
                             
                             
-                            If txtImporte(0).Text <> "" Then Sql = Sql & vbCrLf & "N19 no permite gastos bancario"
+                            If txtImporte(0).Text <> "" Then SQL = SQL & vbCrLf & "N19 no permite gastos bancario"
                             
                             
-                            If Sql <> "" Then
+                            If SQL <> "" Then
                                 B = False
                             Else
                                 ContabilizacionEspecialNorma19 = True
@@ -4911,31 +4910,31 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     End If
 
     If Not B Then
-        If Sql = "" Then Sql = "Error y punto"
-        Rs.Close
-        Set Rs = Nothing
-        MsgBox Sql, vbExclamation
+        If SQL = "" Then SQL = "Error y punto"
+        RS.Close
+        Set RS = Nothing
+        MsgBox SQL, vbExclamation
         Exit Sub
     End If
-    Sql = "Select scobro.codmacta,nommacta,fecbloq from scobro,cuentas where scobro.codmacta = cuentas.codmacta"
-    Sql = Sql & " and  codrem =" & Text3(3).Text
-    Sql = Sql & " AND anyorem =" & Text3(4).Text
-    Sql = Sql & " AND fecbloq <='" & Format(Text1(10).Text, FormatoFecha) & "' GROUP BY 1"
+    SQL = "Select scobro.codmacta,nommacta,fecbloq from scobro,cuentas where scobro.codmacta = cuentas.codmacta"
+    SQL = SQL & " and  codrem =" & Text3(3).Text
+    SQL = SQL & " AND anyorem =" & Text3(4).Text
+    SQL = SQL & " AND fecbloq <='" & Format(Text1(10).Text, FormatoFecha) & "' GROUP BY 1"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
     While Not miRsAux.EOF
-        Sql = Sql & miRsAux!codmacta & Space(10) & miRsAux!FecBloq & Space(10) & miRsAux!Nommacta & vbCrLf
+        SQL = SQL & miRsAux!codmacta & Space(10) & miRsAux!FecBloq & Space(10) & miRsAux!Nommacta & vbCrLf
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     Set miRsAux = Nothing
-    If Sql <> "" Then
+    If SQL <> "" Then
         CC = "Cuenta          Fec. bloqueo           Nombre" & vbCrLf & String(80, "-") & vbCrLf
-        CC = "Cuentas bloqueadas" & vbCrLf & vbCrLf & CC & Sql
+        CC = "Cuentas bloqueadas" & vbCrLf & vbCrLf & CC & SQL
         MsgBox CC, vbExclamation
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         Exit Sub
     End If
        
@@ -4950,38 +4949,38 @@ Dim ContabilizacionEspecialNorma19 As Boolean
         CC = ""
         If vParam.autocoste Then CC = "codccost"
             
-        Sql = DevuelveDesdeBD("ctagastos", "ctabancaria", "codmacta", Rs!codmacta, "T", CC)
-        If Sql = "" Then
-            MsgBox "Falta configurar la cuenta de gastos del banco:" & Rs!codmacta, vbExclamation
-            Set Rs = Nothing
+        SQL = DevuelveDesdeBD("ctagastos", "ctabancaria", "codmacta", RS!codmacta, "T", CC)
+        If SQL = "" Then
+            MsgBox "Falta configurar la cuenta de gastos del banco:" & RS!codmacta, vbExclamation
+            Set RS = Nothing
             Exit Sub
         End If
         
         If vParam.autocoste Then
             If CC = "" Then
-                MsgBox "Necesita asignar centro de coste a la cuenta de gastos del banco: " & Rs!codmacta, vbExclamation
-                Set Rs = Nothing
+                MsgBox "Necesita asignar centro de coste a la cuenta de gastos del banco: " & RS!codmacta, vbExclamation
+                Set RS = Nothing
                 Exit Sub
             End If
         End If
         
-        Sql = Sql & "|" & CC & "|"
+        SQL = SQL & "|" & CC & "|"
         
         
         'Añado, si tiene, la cuenta de ingresos
-        CC = DevuelveDesdeBD("ctaingreso", "ctabancaria", "codmacta", Rs!codmacta, "T")
+        CC = DevuelveDesdeBD("ctaingreso", "ctabancaria", "codmacta", RS!codmacta, "T")
         If CC = "" Then
             If Importe > 0 Then
-                MsgBox "Falta configurar la cuenta de ingresos del banco:" & Rs!codmacta, vbExclamation
-                Set Rs = Nothing
+                MsgBox "Falta configurar la cuenta de ingresos del banco:" & RS!codmacta, vbExclamation
+                Set RS = Nothing
                 Exit Sub
             End If
         End If
         
-        Sql = Sql & CC & "|"   'La
+        SQL = SQL & CC & "|"   'La
         
 
-    Sql = Rs!codmacta & "|" & Sql
+    SQL = RS!codmacta & "|" & SQL
     
     
     'Contab. remesa. Si es talon/pagare vamos a comprobar si hay diferencias entre el importe del documento
@@ -5000,10 +4999,10 @@ Dim ContabilizacionEspecialNorma19 As Boolean
         Case 23
             CC = "Procede a realizar la confirmacion de"
         End Select
-        CC = CC & " la remesa: " & Rs!Codigo & " / " & Rs!Anyo & vbCrLf & vbCrLf
+        CC = CC & " la remesa: " & RS!Codigo & " / " & RS!Anyo & vbCrLf & vbCrLf
         CC = CC & Space(30) & "¿Continuar?"
         If SubTipo = 2 Then
-            If Val(Rs!Tiporem) = 3 Then
+            If Val(RS!Tiporem) = 3 Then
                 CC = "Talón" & vbCrLf & CC
             Else
                 CC = "Pagaré" & vbCrLf & CC
@@ -5036,12 +5035,12 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             'Utiliza Morales
             'Es para contabilizar los recibos por fecha de vto
             
-            B = ContabNorma19PorFechaVto(Rs!Codigo, Rs!Anyo, Sql)
+            B = ContabNorma19PorFechaVto(RS!Codigo, RS!Anyo, SQL)
         Else
             'Toooodas las demas opciones estan aqui
         
                                     'Efecto(1),pagare(2),talon(3)
-            B = ContabilizarRecordsetRemesa(Rs!Tiporem, DBLet(Rs!Tipo, "N") = 0, Rs!Codigo, Rs!Anyo, Sql, CDate(Text1(10).Text), Importe)
+            B = ContabilizarRecordsetRemesa(RS!Tiporem, DBLet(RS!Tipo, "N") = 0, RS!Codigo, RS!Anyo, SQL, CDate(Text1(10).Text), Importe)
         
         End If
         
@@ -5051,12 +5050,12 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             Conn.CommitTrans
             'AQUI updateamos el registro pq es una tabla myisam
             'y no debemos meterla en la transaccion
-            Sql = "UPDATE remesas SET"
-            Sql = Sql & " situacion= 'Q'"
-            Sql = Sql & " WHERE codigo=" & Rs!Codigo
-            Sql = Sql & " and anyo=" & Rs!Anyo
+            SQL = "UPDATE remesas SET"
+            SQL = SQL & " situacion= 'Q'"
+            SQL = SQL & " WHERE codigo=" & RS!Codigo
+            SQL = SQL & " and anyo=" & RS!Anyo
 
-            If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla remesa.", vbExclamation
+            If Not Ejecuta(SQL) Then MsgBox "Error actualizando tabla remesa.", vbExclamation
             
             
             'Ahora actualizamos los registros que estan en tmpactualziar
@@ -5064,7 +5063,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             frmTESActualizar.Show vbModal
             Screen.MousePointer = vbDefault
             'Cerramos
-            Rs.Close
+            RS.Close
             Unload Me
             Exit Sub
         Else
@@ -5092,7 +5091,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
                 
                 'para la 23 NO deberiamos llegar. Ese proceso lo hemos eliminado
                 If Opt = 0 Then
-                    B = RemesasCancelacionEfectos(Rs!Codigo, Rs!Anyo, Sql, CDate(Text1(10).Text), Importe, AgrupaCance)
+                    B = RemesasCancelacionEfectos(RS!Codigo, RS!Anyo, SQL, CDate(Text1(10).Text), Importe, AgrupaCance)
                 Else
                     B = False
                     MsgBox " NO deberia haber entrado con confirmacion remesas", vbExclamation
@@ -5117,7 +5116,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             frmTESActualizar.Show vbModal
             Screen.MousePointer = vbDefault
             'Cerramos
-            Rs.Close
+            RS.Close
             Unload Me
             Exit Sub
             
@@ -5129,8 +5128,8 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     
     
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -5141,20 +5140,20 @@ Private Function AdelanteConLaRemesa() As Boolean
 Dim C As String
 
     AdelanteConLaRemesa = False
-    Sql = ""
+    SQL = ""
     
     'Efectos eliminados
-    If Rs!Situacion = "Z" Or Rs!Situacion = "Y" Then Sql = "Efectos eliminados"
+    If RS!Situacion = "Z" Or RS!Situacion = "Y" Then SQL = "Efectos eliminados"
     
     'abierta sin llevar a banco. Esto solo es valido para las de efectos
     If SubTipo = 1 Then
-        If Rs!Situacion = "A" Then Sql = "Remesa abierta. Sin llevar al banco."
+        If RS!Situacion = "A" Then SQL = "Remesa abierta. Sin llevar al banco."
     
     End If
     'Ya contabilizada
-    If Rs!Situacion = "Q" Then Sql = "Remesa abonada."
+    If RS!Situacion = "Q" Then SQL = "Remesa abonada."
     
-    If Sql <> "" Then Exit Function
+    If SQL <> "" Then Exit Function
     
     
     
@@ -5169,12 +5168,12 @@ Dim C As String
             'hay distinciones entre remesas. Para podrer abonar una remesa esta tiene que estar cancelada
             
         Else
-            If Rs!Tiporem = 2 And vParamT.PagaresCtaPuente Then
-                If Rs!Situacion <> "F" Then Sql = "La remesa NO puede abonarse. Falta cancelación "
+            If RS!Tiporem = 2 And vParamT.PagaresCtaPuente Then
+                If RS!Situacion <> "F" Then SQL = "La remesa NO puede abonarse. Falta cancelación "
             End If
             
-            If Rs!Tiporem = 3 And vParamT.TalonesCtaPuente Then
-                If Rs!Situacion <> "F" Then Sql = "La remesa NO puede abonarse. Falta cancelación "
+            If RS!Tiporem = 3 And vParamT.TalonesCtaPuente Then
+                If RS!Situacion <> "F" Then SQL = "La remesa NO puede abonarse. Falta cancelación "
             End If
         End If
         
@@ -5196,14 +5195,14 @@ Dim C As String
             'Cancelacion cliente
             'Para los efectos, tiene que estar generado soporte. Para talones/pagares no es obligado
             If SubTipo = 1 Then
-                If Rs!Situacion <> "B" Then Sql = "Para cancelar la remesa deberia esta en situación 'Soporte generado'"
+                If RS!Situacion <> "B" Then SQL = "Para cancelar la remesa deberia esta en situación 'Soporte generado'"
             Else
-                If Rs!Situacion = "F" Then Sql = "Remesa YA cancelada"
+                If RS!Situacion = "F" Then SQL = "Remesa YA cancelada"
             End If
         Else
             'Febrero 2009
             'No hay confirmacion
-            Sql = "Opción de confirmacion NO es válida"
+            SQL = "Opción de confirmacion NO es válida"
             'Confirmacion
             'If Rs!situacion <> "F" Then SQL = "Para confirmar la remesa esta deberia estar 'Cancelacion cliente'"
        End If
@@ -5211,31 +5210,31 @@ Dim C As String
        
        'Si hasta aqui esta bien:
        'Compruebo que tiene configurado en parametros
-       If Sql = "" Then
+       If SQL = "" Then
             'Comprobamos si esta bien configurada
             '
             If SubTipo = 1 Then
                     If Opcion = 22 Then
                         'SQL = "4310"
-                        Sql = "RemesaCancelacion"
+                        SQL = "RemesaCancelacion"
                     Else
-                        Sql = "RemesaConfirmacion"
+                        SQL = "RemesaConfirmacion"
                     End If
-                    Sql = DevuelveDesdeBD(Sql, "paramtesor", "codigo", "1")
-                    If Sql = "" Then
-                        Sql = "Falta configurar parámetros cuentas confirmación/cancelación remesa. "
+                    SQL = DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1")
+                    If SQL = "" Then
+                        SQL = "Falta configurar parámetros cuentas confirmación/cancelación remesa. "
                     Else
                         'OK. Esta configurado
-                        Sql = ""
+                        SQL = ""
                     End If
                     
             Else
                 'talones pagares
                 'Veremos si esta configurado(y bien configurado) para el proceso
-                If Rs!Tiporem = 2 Then
+                If RS!Tiporem = 2 Then
                     'Pagare
                     C = "contapagarepte"
-                ElseIf Rs!Tiporem = 3 Then
+                ElseIf RS!Tiporem = 3 Then
                     'Talones
                     C = "contatalonpte"
                 Else
@@ -5244,21 +5243,21 @@ Dim C As String
                     
                 End If
                 If C = "" Then
-                    Sql = "Error validando tipo de remesa"
+                    SQL = "Error validando tipo de remesa"
                     
                 Else
                     C = DevuelveDesdeBD(C, "paramtesor", "codigo", 1)
                     If C = "" Then C = "0"
                     If Val(C) = 0 Then
-                        Sql = "Falta configurar la aplicacion para las remesas de talones / pagares"
+                        SQL = "Falta configurar la aplicacion para las remesas de talones / pagares"
                     Else
-                        Sql = ""
+                        SQL = ""
                     End If
                 End If
             End If
        End If
     End If
-    AdelanteConLaRemesa = Sql = ""
+    AdelanteConLaRemesa = SQL = ""
     
 End Function
 
@@ -5293,22 +5292,22 @@ Dim TipoFicheroDevolucion As Byte
         If TipoFicheroDevolucion > 0 Then
             If TipoFicheroDevolucion = 2 Then
                 'SEPA xml
-                ProcesaFicheroDevolucionSEPA_XML Text8, Sql
+                ProcesaFicheroDevolucionSEPA_XML Text8, SQL
             Else
-                ProcesaCabeceraFicheroDevolucionSEPA Text8, Sql
+                ProcesaCabeceraFicheroDevolucionSEPA Text8, SQL
             End If
         Else
             'Texto normal
-            ProcesaCabeceraFicheroDevolucion Text8.Text, Sql
+            ProcesaCabeceraFicheroDevolucion Text8.Text, SQL
         End If
-        If Sql = "" Then Exit Sub
+        If SQL = "" Then Exit Sub
         
         
     
         
-        MultiRemesaDevuelta = Sql
-        Text3(5).Text = RecuperaValor(Sql, 1)
-        Text3(6).Text = RecuperaValor(Sql, 2)
+        MultiRemesaDevuelta = SQL
+        Text3(5).Text = RecuperaValor(SQL, 1)
+        Text3(6).Text = RecuperaValor(SQL, 2)
         
     End If
     If Opcion = 28 Then
@@ -5319,47 +5318,47 @@ Dim TipoFicheroDevolucion As Byte
         End If
     
         'Desde el Vto
-        Set Rs = New ADODB.Recordset
+        Set RS = New ADODB.Recordset
         
-        Sql = ""
-        If Me.txtCtaNormal(11).Text <> "" Then Sql = Sql & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
-        If txtSerie(4).Text <> "" Then Sql = Sql & " AND numserie = '" & txtSerie(4).Text & "'"
-        If txtNumFac(4).Text <> "" Then Sql = Sql & " AND codfaccl = " & txtNumFac(4).Text
-        If txtNumero.Text <> "" Then Sql = Sql & " AND numorden = " & txtNumero.Text
-        Sql = Mid(Sql, 5)
+        SQL = ""
+        If Me.txtCtaNormal(11).Text <> "" Then SQL = SQL & " AND codmacta='" & Me.txtCtaNormal(11).Text & "'"
+        If txtSerie(4).Text <> "" Then SQL = SQL & " AND numserie = '" & txtSerie(4).Text & "'"
+        If txtNumFac(4).Text <> "" Then SQL = SQL & " AND codfaccl = " & txtNumFac(4).Text
+        If txtNumero.Text <> "" Then SQL = SQL & " AND numorden = " & txtNumero.Text
+        SQL = Mid(SQL, 5)
         
         
-        Sql = "Select codrem,anyorem,NUmSerie,codfaccl,numorden from scobro where " & Sql
-        Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Rs.EOF Then
-            Sql = "Ninguna pertence a ninguna remesa "
-            MsgBox Sql, vbExclamation
-            Rs.Close
+        SQL = "Select codrem,anyorem,NUmSerie,codfaccl,numorden from scobro where " & SQL
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If RS.EOF Then
+            SQL = "Ninguna pertence a ninguna remesa "
+            MsgBox SQL, vbExclamation
+            RS.Close
             Exit Sub
         End If
-        Text3(5).Text = DBLet(Rs!CodRem, "T")
-        Text3(6).Text = DBLet(Rs!AnyoRem, "T")
-        CadenaVencimiento = Rs!NUmSerie & "|" & Rs!codfaccl & "|" & Rs!numorden & "|"
-        Rs.Close
-        Set Rs = Nothing
+        Text3(5).Text = DBLet(RS!CodRem, "T")
+        Text3(6).Text = DBLet(RS!AnyoRem, "T")
+        CadenaVencimiento = RS!NUmSerie & "|" & RS!codfaccl & "|" & RS!numorden & "|"
+        RS.Close
+        Set RS = Nothing
     End If
     
     
-    Sql = ""
+    SQL = ""
     If Text3(5).Text = "" Or Text3(6).Text = "" Then
         If Opcion = 9 Then
-            Sql = "Ponga una remesa."
+            SQL = "Ponga una remesa."
         Else
-            Sql = "ERROR leyendo remesa"
+            SQL = "ERROR leyendo remesa"
         End If
     Else
-        If Not IsNumeric(Text3(5).Text) Or Not IsNumeric(Text3(6).Text) Then Sql = "La remesa debe ser numérica"
+        If Not IsNumeric(Text3(5).Text) Or Not IsNumeric(Text3(6).Text) Then SQL = "La remesa debe ser numérica"
     End If
     
-    If Text1(11).Text = "" Then Sql = "Ponga la fecha de abono"
+    If Text1(11).Text = "" Then SQL = "Ponga la fecha de abono"
     
-    If Sql <> "" Then
-        MsgBox Sql, vbExclamation
+    If SQL <> "" Then
+        MsgBox SQL, vbExclamation
         Exit Sub
     End If
     
@@ -5397,21 +5396,21 @@ Dim TipoFicheroDevolucion As Byte
     End If
     
     'Comprobamos los conceptos y ampliaciones
-    Sql = ""
+    SQL = ""
     If txtConcepto(1).Text <> "" Then
-        If txtDConcpeto(1).Text = "" Then Sql = "Concepto cliente"
+        If txtDConcpeto(1).Text = "" Then SQL = "Concepto cliente"
     End If
     If txtConcepto(2).Text <> "" Then
-        If txtDConcpeto(2).Text = "" Then Sql = "Concepto banco"
+        If txtDConcpeto(2).Text = "" Then SQL = "Concepto banco"
     End If
     
     
-    If Sql = "" Then
-        If Combo2(0).ListIndex = -1 Or Combo2(1).ListIndex = -1 Then Sql = "Ampliacion concepto incorrecta"
+    If SQL = "" Then
+        If Combo2(0).ListIndex = -1 Or Combo2(1).ListIndex = -1 Then SQL = "Ampliacion concepto incorrecta"
     End If
     
-    If Sql <> "" Then
-        MsgBox Sql, vbExclamation
+    If SQL <> "" Then
+        MsgBox SQL, vbExclamation
         Exit Sub
     End If
     
@@ -5432,48 +5431,48 @@ Dim TipoFicheroDevolucion As Byte
         End If
     End If
     'Ahora miramos la remesa. En que sitaucion , y de que tipo es
-    Sql = "Select * from remesas where codigo =" & Text3(5).Text
-    Sql = Sql & " AND anyo =" & Text3(6).Text
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Rs.EOF Then
-        Sql = "Ninguna remesa con esos valores."
-        If Opcion = 16 Then Sql = Sql & "  Remesa: " & Text3(5).Text & " / " & Text3(6).Text
-        MsgBox Sql, vbExclamation
-        Rs.Close
-        Set Rs = Nothing
+    SQL = "Select * from remesas where codigo =" & Text3(5).Text
+    SQL = SQL & " AND anyo =" & Text3(6).Text
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If RS.EOF Then
+        SQL = "Ninguna remesa con esos valores."
+        If Opcion = 16 Then SQL = SQL & "  Remesa: " & Text3(5).Text & " / " & Text3(6).Text
+        MsgBox SQL, vbExclamation
+        RS.Close
+        Set RS = Nothing
         Exit Sub
     End If
     
     
     'Tiene valor
-    If Rs!Situacion = "A" Then
+    If RS!Situacion = "A" Then
         MsgBox "Remesa abierta. Sin llevar al banco.", vbExclamation
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         Exit Sub
     End If
     
     
     
-    If Asc(Rs!Situacion) < Asc("Q") Then
+    If Asc(RS!Situacion) < Asc("Q") Then
         MsgBox "Remesa sin contabilizar.", vbExclamation
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         Exit Sub
     End If
     
     
     
     
-    Sql = Rs!Codigo & "|" & Rs!Anyo & "|" & Rs!codmacta & "|" & Text1(11).Text & "|"
+    SQL = RS!Codigo & "|" & RS!Anyo & "|" & RS!codmacta & "|" & Text1(11).Text & "|"
     
     
     Importe = TextoAimporte(txtImporte(1).Text)   ''Levara el gasto por recibo
-    If Me.optDevRem(1).Value Or Me.optDevRem(2).Value Then Sql = Sql & "%"
-    Sql = Sql & "|"
-    If Me.optDevRem(2).Value Then Sql = Sql & TextoAimporte(txtImporte(2).Text)
-    Sql = Sql & "|"
+    If Me.optDevRem(1).Value Or Me.optDevRem(2).Value Then SQL = SQL & "%"
+    SQL = SQL & "|"
+    If Me.optDevRem(2).Value Then SQL = SQL & TextoAimporte(txtImporte(2).Text)
+    SQL = SQL & "|"
     
     
     'SQL llevara hasta ahora
@@ -5484,17 +5483,17 @@ Dim TipoFicheroDevolucion As Byte
     'Si contabilizamos el gasto, o pro contra vendra como factura bancaria desde otro lugar(norma34 p.e.)
     If GastoDevolGral = 0 Then
         'NO HAY GASTO
-        Sql = Sql & "0|"
+        SQL = SQL & "0|"
     Else
-        Sql = Sql & CStr(GastoDevolGral) & "|"
+        SQL = SQL & CStr(GastoDevolGral) & "|"
         If Me.chkDevolRemesa2.Value = 1 Then
             'Voy a contabiñizar los gastos.
             'Vere si tiene CC
             If vParam.autocoste Then
-                If DevuelveDesdeBD("codccost", "ctabancaria", "codmacta", Rs!codmacta, "T") = "" Then
-                    MsgBox "Va a contabilizar los gastos pero no esta configurado el Centro de coste para el banco: " & Rs!codmacta, vbExclamation
-                    Rs.Close
-                    Set Rs = Nothing
+                If DevuelveDesdeBD("codccost", "ctabancaria", "codmacta", RS!codmacta, "T") = "" Then
+                    MsgBox "Va a contabilizar los gastos pero no esta configurado el Centro de coste para el banco: " & RS!codmacta, vbExclamation
+                    RS.Close
+                    Set RS = Nothing
                     Exit Sub
                 End If
             End If
@@ -5503,43 +5502,43 @@ Dim TipoFicheroDevolucion As Byte
     
     'Depues del gasto
     'Añadire el fichero, si es autmatico
-    If Opcion = 16 Then Sql = Sql & Text8.Text
-    Sql = Sql & "|"
+    If Opcion = 16 Then SQL = SQL & Text8.Text
+    SQL = SQL & "|"
     'Nov 2012. En las devoluciones puede ser que el fichero traiga mas de una devolucion
     If Opcion = 16 Then
         If Text8.Text <> "" Then
             'Tengo que subsituir | por #
             MultiRemesaDevuelta = Replace(MultiRemesaDevuelta, "|", "#")
-            Sql = Sql & MultiRemesaDevuelta
+            SQL = SQL & MultiRemesaDevuelta
         End If
     End If
-    Sql = Sql & "|"
+    SQL = SQL & "|"
     
 
     
     'Cierro aqui
-    Rs.Close
+    RS.Close
     
     'Bloqueamos la devolucion
     BloqueoManual True, "Devolrem", vUsu.Codigo
     'Hacemos la devolucion
     frmTESRemesas.Opcion = 2
-    frmTESRemesas.vRemesa = Sql
+    frmTESRemesas.vRemesa = SQL
     frmTESRemesas.ImporteRemesa = Importe 'Utilizamos esta variable para indicar el gasto a cargar por recibo
     
     '28Marzo2007
     'Para la contabilizacion de la devolucion
     'Client
-    Sql = txtConcepto(1).Text & "|" & Combo2(0).ListIndex & "|"
+    SQL = txtConcepto(1).Text & "|" & Combo2(0).ListIndex & "|"
     'y el banco
-    Sql = Sql & txtConcepto(2).Text & "|" & Combo2(1).ListIndex & "|"
+    SQL = SQL & txtConcepto(2).Text & "|" & Combo2(1).ListIndex & "|"
     'Noviembre 2009
     'Agrupa el apunte del banco
-    Sql = Sql & Abs(chkAgrupadevol2.Value) & "|"
+    SQL = SQL & Abs(chkAgrupadevol2.Value) & "|"
     
     
     
-    frmTESRemesas.ValoresDevolucionRemesa = Sql
+    frmTESRemesas.ValoresDevolucionRemesa = SQL
     'Si es desde el vto, para que lo busque
     frmTESRemesas.vSql = CadenaVencimiento
     
@@ -5567,12 +5566,12 @@ Dim Agrupar As Boolean
 Dim Seguir As Boolean
 Dim CtaPuente As Boolean
 
-    Sql = ""
+    SQL = ""
     For I = 1 To ListView2.ListItems.Count
-        If ListView2.ListItems(I).Checked Then Sql = Sql & "1"
+        If ListView2.ListItems(I).Checked Then SQL = SQL & "1"
     Next I
     
-    If Sql = "" Then
+    If SQL = "" Then
         MsgBox "Seleccione alguna remesa para eliminar los vencimientos", vbExclamation
         Exit Sub
     End If
@@ -5621,8 +5620,8 @@ Dim CtaPuente As Boolean
     
     
     If CtaPuente Then
-            Sql = Forpa.diaricli & "|" & Forpa.condecli & "|" & Forpa.conhacli & "|"
-            frmTESPedirConceptos.Intercambio = Sql
+            SQL = Forpa.diaricli & "|" & Forpa.condecli & "|" & Forpa.conhacli & "|"
+            frmTESPedirConceptos.Intercambio = SQL
             frmTESPedirConceptos.Opcion = 0 'Eliminar efectos
             frmTESPedirConceptos.Show vbModal
             
@@ -5643,8 +5642,8 @@ Dim CtaPuente As Boolean
         
 
             'Elimino tmpactualizar
-            Sql = "DELETE FROM tmpactualizar where codusu =" & vUsu.Codigo
-            Ejecuta Sql
+            SQL = "DELETE FROM tmpactualizar where codusu =" & vUsu.Codigo
+            Ejecuta SQL
 
         
             Set IT = ListView2.ListItems(I)
@@ -5704,28 +5703,28 @@ Private Sub cmdEliminaHco_Click()
     
     
     'Comprobaciones
-    Set Rs = New ADODB.Recordset
-    Sql = "Select count(*) from remesas where fecremesa <='" & Format(Text1(17).Text, FormatoFecha) & "' AND tiporem "
+    Set RS = New ADODB.Recordset
+    SQL = "Select count(*) from remesas where fecremesa <='" & Format(Text1(17).Text, FormatoFecha) & "' AND tiporem "
     'Tipo remesa
     If SubTipo = vbTipoPagoRemesa Then
-        Sql = Sql & " = 1 " 'EFECTOS
+        SQL = SQL & " = 1 " 'EFECTOS
     Else
-        Sql = Sql & " <> 1 " 'Talones y pagares
+        SQL = SQL & " <> 1 " 'Talones y pagares
     End If
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 0
-    If Not Rs.EOF Then I = DBLet(Rs.Fields(0), "N")
-    Rs.Close
+    If Not RS.EOF Then I = DBLet(RS.Fields(0), "N")
+    RS.Close
     If I = 0 Then
         MsgBox "Ninguna remesa anterior a la fecha seleccionada", vbExclamation
         Exit Sub
     End If
     
     
-    Rs.Open Sql & " AND (situacion<'Y' or situacion=NULL)", Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL & " AND (situacion<'Y' or situacion=NULL)", Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 0
-    If Not Rs.EOF Then I = DBLet(Rs.Fields(0), "N")
-    Rs.Close
+    If Not RS.EOF Then I = DBLet(RS.Fields(0), "N")
+    RS.Close
     
     If I <> 0 Then
         MsgBox "Hay rememesas que no se pueden eliminar", vbExclamation
@@ -5735,91 +5734,91 @@ Private Sub cmdEliminaHco_Click()
     'Comprobare que hay remesas en situacion Y
     ' y NO tienen vencimientos, y las updateare a Z
     '------------------------------------------------
-    Sql = Replace(Sql, "count(*)", "*")
-    Rs.Open Sql & " AND situacion='Y' ", Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = Replace(SQL, "count(*)", "*")
+    RS.Open SQL & " AND situacion='Y' ", Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CuentasCC = ""
-    While Not Rs.EOF
-        CuentasCC = CuentasCC & "codrem = " & Rs!Codigo & " AND anyorem = " & Rs!Anyo & "|"
-        Rs.MoveNext
+    While Not RS.EOF
+        CuentasCC = CuentasCC & "codrem = " & RS!Codigo & " AND anyorem = " & RS!Anyo & "|"
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     While CuentasCC <> ""
         I = InStr(1, CuentasCC, "|")
         If I = 0 Then
             CuentasCC = ""
         Else
-            Sql = Mid(CuentasCC, 1, I - 1)
+            SQL = Mid(CuentasCC, 1, I - 1)
             CuentasCC = Mid(CuentasCC, I + 1)
             
-            Rs.Open "Select count(*) from scobro where " & Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS.Open "Select count(*) from scobro where " & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             I = 0
-            If Not Rs.EOF Then I = DBLet(Rs.Fields(0), "N")
-            Rs.Close
+            If Not RS.EOF Then I = DBLet(RS.Fields(0), "N")
+            RS.Close
             If I = 0 Then
-                Sql = Replace(Sql, "codrem", "codigo")
-                Sql = Replace(Sql, "anyorem", "anyo")
-                Sql = "UPDATE remesas set situacion='Z' WHERE " & Sql
-                Conn.Execute Sql
+                SQL = Replace(SQL, "codrem", "codigo")
+                SQL = Replace(SQL, "anyorem", "anyo")
+                SQL = "UPDATE remesas set situacion='Z' WHERE " & SQL
+                Conn.Execute SQL
             End If
         End If
     Wend
     
     Screen.MousePointer = vbHourglass
     I = 0
-    Sql = "Select * from remesas where fecremesa <='" & Format(Text1(17).Text, FormatoFecha) & "'"
-    Sql = Sql & " AND situacion='Z'  AND tiporem "
+    SQL = "Select * from remesas where fecremesa <='" & Format(Text1(17).Text, FormatoFecha) & "'"
+    SQL = SQL & " AND situacion='Z'  AND tiporem "
     If SubTipo = vbTipoPagoRemesa Then
-        Sql = Sql & " = 1 " 'EFECTOS
+        SQL = SQL & " = 1 " 'EFECTOS
     Else
-        Sql = Sql & " <> 1 " 'Talones y pagares
+        SQL = SQL & " <> 1 " 'Talones y pagares
     End If
-    Sql = Sql & " order by codigo,anyo"
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = "Select count(*) from scobro where "
+    SQL = SQL & " order by codigo,anyo"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select count(*) from scobro where "
     Set miRsAux = New ADODB.Recordset
-    While Not Rs.EOF
-        Label10.Caption = "Comprobando: " & Rs!Codigo & " - " & Rs!Anyo
+    While Not RS.EOF
+        Label10.Caption = "Comprobando: " & RS!Codigo & " - " & RS!Anyo
         Label10.Refresh
         
-        miRsAux.Open Sql & " codrem =" & Rs!Codigo & " AND anyorem =" & Rs!Anyo, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open SQL & " codrem =" & RS!Codigo & " AND anyorem =" & RS!Anyo, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         I = 0
         If Not miRsAux.EOF Then I = DBLet(miRsAux.Fields(0), "N")
         miRsAux.Close
         If I > 0 Then
             MsgBox "Efectos sin eliminar.  " & Label10.Caption, vbExclamation
-            Rs.Close
+            RS.Close
             Label10.Caption = ""
             Screen.MousePointer = vbDefault
             Exit Sub
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Sql = Rs.Source
-    Rs.Close
+    SQL = RS.Source
+    RS.Close
     
     
     
     
     'Llegados aqui... a borrar
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 0
-    While Not Rs.EOF
+    While Not RS.EOF
         I = I + 1
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Sql = "¿Seguro que desea eliminar los datos selecionados. (Historico remesas. Total: " & I & ")"
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then
+    RS.Close
+    SQL = "¿Seguro que desea eliminar los datos selecionados. (Historico remesas. Total: " & I & ")"
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then
         Screen.MousePointer = vbDefault
         Label10.Caption = ""
         Exit Sub
     End If
     Label10.Caption = "Eliminado datos."
     Me.Refresh
-    Sql = " delete from remesas where fecremesa <='" & Format(Text1(17).Text, FormatoFecha) & "'"
-    Sql = Sql & " AND situacion='Z'"
-    Conn.Execute Sql
+    SQL = " delete from remesas where fecremesa <='" & Format(Text1(17).Text, FormatoFecha) & "'"
+    SQL = SQL & " AND situacion='Z'"
+    Conn.Execute SQL
     
     
     If SubTipo <> vbTipoPagoRemesa Then
@@ -5832,18 +5831,18 @@ Private Sub cmdEliminaHco_Click()
 End Sub
 
 Private Sub cmdEliminarReclama_Click()
-    Sql = ""
+    SQL = ""
     For I = 1 To Me.ListView6.ListItems.Count
-        If Me.ListView6.ListItems(I).Checked Then Sql = Sql & "X"
+        If Me.ListView6.ListItems(I).Checked Then SQL = SQL & "X"
     Next
     
-    If Sql = "" Then Exit Sub
-    Sql = "Desea quitar de la reclamacion las cuentas seleccionadas(" & Len(Sql) & ") ?"
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-        Sql = "DELETE FROM  tmpentrefechas WHERE codUsu = " & vUsu.Codigo & " AND fechaadq = '"
+    If SQL = "" Then Exit Sub
+    SQL = "Desea quitar de la reclamacion las cuentas seleccionadas(" & Len(SQL) & ") ?"
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+        SQL = "DELETE FROM  tmpentrefechas WHERE codUsu = " & vUsu.Codigo & " AND fechaadq = '"
         For I = Me.ListView6.ListItems.Count To 1 Step -1
             If ListView6.ListItems(I).Checked Then
-                CuentasCC = Sql & ListView6.ListItems(I).Text & "'"
+                CuentasCC = SQL & ListView6.ListItems(I).Text & "'"
                 Conn.Execute CuentasCC
                 ListView6.ListItems.Remove I
             End If
@@ -5854,23 +5853,23 @@ End Sub
 Private Sub cmdEmpresa_Click(Index As Integer)
     CadenaDesdeOtroForm = ""
     If Index = 0 Then
-        Sql = ""
+        SQL = ""
         CuentasCC = ""
         For I = 1 To lwE.ListItems.Count
             If Me.lwE.ListItems(I).Checked Then
-                Sql = Sql & Me.lwE.ListItems(I).Text & "|"
+                SQL = SQL & Me.lwE.ListItems(I).Text & "|"
                 CuentasCC = CuentasCC & "1" 'Contador
             End If
         Next I
-        CadenaDesdeOtroForm = Len(CuentasCC) & "|" & Sql
+        CadenaDesdeOtroForm = Len(CuentasCC) & "|" & SQL
         'Vemos las conta
-        Sql = ""
+        SQL = ""
         For I = 1 To lwE.ListItems.Count
             If Me.lwE.ListItems(I).Checked Then
-                Sql = Sql & Me.lwE.ListItems(I).Tag & "|"
+                SQL = SQL & Me.lwE.ListItems(I).Tag & "|"
             End If
         Next I
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & Sql
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & SQL
     End If
     Unload Me
 
@@ -5909,15 +5908,15 @@ Dim C As String
     If txtFP(1).Text <> "" Then C = C & " AND " & CuentasCC & " <= " & txtFP(1).Text
     
     If C <> "" Then
-        Sql = Mid(C, 5)
+        SQL = Mid(C, 5)
     Else
-        Sql = ""
+        SQL = ""
     End If
 
     'TROZO FINAL SQL
     C = "SELECT count(*) "
     C = C & " FROM ((scobro INNER JOIN sforpa ON scobro.codforpa = sforpa.codforpa) INNER JOIN stipoformapago ON sforpa.tipforpa = stipoformapago.tipoformapago) INNER JOIN cuentas ON scobro.codmacta = cuentas.codmacta"
-    If Sql <> "" Then C = C & " WHERE " & Sql
+    If SQL <> "" Then C = C & " WHERE " & SQL
     
     
     Set miRsAux = New ADODB.Recordset
@@ -5948,8 +5947,8 @@ Private Sub cmdInsertaCta_Click()
         MsgBox "Ya la ha añadido", vbExclamation
     Else
         CuentasCC = CuentasCC & txtCtaNormal(5).Text & "|"
-        Sql = txtCtaNormal(5).Text & "      " & txtDCtaNormal(5).Text
-        List1.AddItem Sql
+        SQL = txtCtaNormal(5).Text & "      " & txtDCtaNormal(5).Text
+        List1.AddItem SQL
         txtCtaNormal(5).Text = ""
         txtDCtaNormal(5).Text = ""
     End If
@@ -5975,15 +5974,15 @@ Dim F As Date
             If ListView4.ListItems(I).Checked Then
                 If CDate(ListView4.ListItems(I).SubItems(1)) <> F Then
                     NumRegElim = NumRegElim + 1
-                    Sql = "'GASTO'," & NumRegElim & ",'" & Format(F, FormatoFecha) & "','GASTOS PENDIENTES',NULL,"
+                    SQL = "'GASTO'," & NumRegElim & ",'" & Format(F, FormatoFecha) & "','GASTOS PENDIENTES',NULL,"
                     'HAY GASTOS
                     If ITot > 0 Then
-                        Sql = Sql & "NULL," & TransformaComasPuntos(CStr(ITot))
+                        SQL = SQL & "NULL," & TransformaComasPuntos(CStr(ITot))
                     Else
-                        Sql = Sql & TransformaComasPuntos(CStr(Abs(ITot))) & ",NULL"
+                        SQL = SQL & TransformaComasPuntos(CStr(Abs(ITot))) & ",NULL"
                     End If
-                    Sql = RC & Sql & ")"
-                    Conn.Execute Sql
+                    SQL = RC & SQL & ")"
+                    Conn.Execute SQL
                     'Reasignamos
                     F = CDate(ListView4.ListItems(I).SubItems(1))
                     ITot = ImporteFormateado(ListView4.ListItems(I).SubItems(2))
@@ -5997,15 +5996,15 @@ Dim F As Date
                 
         If ITot <> 0 Then
                 NumRegElim = NumRegElim + 1
-                Sql = "'GASTO'," & NumRegElim & ",'" & Format(F, FormatoFecha) & "','GASTOS PENDIENTES',NULL,"
+                SQL = "'GASTO'," & NumRegElim & ",'" & Format(F, FormatoFecha) & "','GASTOS PENDIENTES',NULL,"
                 'HAY GASTOS
                 If ITot > 0 Then
-                    Sql = Sql & "NULL," & TransformaComasPuntos(CStr(ITot))
+                    SQL = SQL & "NULL," & TransformaComasPuntos(CStr(ITot))
                 Else
-                    Sql = Sql & TransformaComasPuntos(CStr(Abs(ITot))) & ",NULL"
+                    SQL = SQL & TransformaComasPuntos(CStr(Abs(ITot))) & ",NULL"
                 End If
-                Sql = RC & Sql & ")"
-                Conn.Execute Sql
+                SQL = RC & SQL & ")"
+                Conn.Execute SQL
         End If
 
     Else
@@ -6019,18 +6018,18 @@ Dim F As Date
                 If ListView4.ListItems(I).Checked Then
                     
                     NumRegElim = NumRegElim + 1
-                    Sql = "'GASTO'," & NumRegElim & ",'" & Format(ListView4.ListItems(I).SubItems(1), FormatoFecha) & "','"
-                    Sql = Sql & DevNombreSQL(ListView4.ListItems(I).Text) & "',NULL,"
+                    SQL = "'GASTO'," & NumRegElim & ",'" & Format(ListView4.ListItems(I).SubItems(1), FormatoFecha) & "','"
+                    SQL = SQL & DevNombreSQL(ListView4.ListItems(I).Text) & "',NULL,"
                     I1 = ImporteFormateado(ListView4.ListItems(I).SubItems(2))
                     If I1 <> 0 Then
                         If I1 > 0 Then
-                            Sql = Sql & "NULL," & TransformaComasPuntos(CStr(I1))
+                            SQL = SQL & "NULL," & TransformaComasPuntos(CStr(I1))
                         Else
-                            Sql = Sql & TransformaComasPuntos(CStr(Abs(I1))) & ",NULL"
+                            SQL = SQL & TransformaComasPuntos(CStr(Abs(I1))) & ",NULL"
                         End If
-                        Sql = Sql & ")"
-                        Sql = RC & Sql
-                        Conn.Execute Sql
+                        SQL = SQL & ")"
+                        SQL = RC & SQL
+                        Conn.Execute SQL
                     End If
                 End If
             Next I
@@ -6048,11 +6047,11 @@ End Sub
 
 Private Sub cmdModRemTal_Click()
     If Text1(27).Text = "" And Me.txtCta(8).Text = "" Then Exit Sub
-    Sql = ""
-    If Text1(27).Text <> "" Then Sql = Sql & vbCrLf & "Fecha: " & Text1(27).Text
-    If txtCta(8).Text <> "" Then Sql = Sql & vbCrLf & "Cuenta: " & txtCta(8).Text & " " & txtDescCta(8).Text
-    Sql = "Desea actualizar a los valores indicados?"
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    SQL = ""
+    If Text1(27).Text <> "" Then SQL = SQL & vbCrLf & "Fecha: " & Text1(27).Text
+    If txtCta(8).Text <> "" Then SQL = SQL & vbCrLf & "Cuenta: " & txtCta(8).Text & " " & txtDescCta(8).Text
+    SQL = "Desea actualizar a los valores indicados?"
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     CadenaDesdeOtroForm = Text1(27).Text & "|" & Me.txtCta(8).Text & "|"
     Unload Me
 End Sub
@@ -6087,41 +6086,41 @@ Dim Forpa As Integer
     
     
     'Llegados a este punto montaremos el sql
-    Sql = ""
+    SQL = ""
     
     If Text1(3).Text <> "" Then
-        If Sql <> "" Then Sql = Sql & " AND "
-        Sql = Sql & " spagop.fecefect >= '" & Format(Text1(3).Text, FormatoFecha) & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " spagop.fecefect >= '" & Format(Text1(3).Text, FormatoFecha) & "'"
     End If
         
         
     If Text1(4).Text <> "" Then
-        If Sql <> "" Then Sql = Sql & " AND "
-        Sql = Sql & " spagop.fecefect <= '" & Format(Text1(4).Text, FormatoFecha) & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " spagop.fecefect <= '" & Format(Text1(4).Text, FormatoFecha) & "'"
     End If
     
     
-    If Sql <> "" Then Sql = Sql & " AND "
-    Sql = Sql & " sforpa.tipforpa = " & SubTipo
+    If SQL <> "" Then SQL = SQL & " AND "
+    SQL = SQL & " sforpa.tipforpa = " & SubTipo
 
     'Si pone proveedor
     If txtCtaNormal(10).Text <> "" Then
-        If Sql <> "" Then Sql = Sql & " AND "
-        Sql = Sql & " spagop.ctaprove = '" & Me.txtCtaNormal(10).Text & "'"
+        If SQL <> "" Then SQL = SQL & " AND "
+        SQL = SQL & " spagop.ctaprove = '" & Me.txtCtaNormal(10).Text & "'"
     End If
     
     
     Screen.MousePointer = vbHourglass
     cad = " FROM spagop,sforpa WHERE spagop.codforpa = sforpa.codforpa AND "
     'Hacemos un conteo
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     I = 0
-    Rs.Open "SELECT Count(*) " & cad & Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        I = DBLet(Rs.Fields(0), "N")
+    RS.Open "SELECT Count(*) " & cad & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        I = DBLet(RS.Fields(0), "N")
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
     If I = 0 Then
@@ -6152,7 +6151,7 @@ Dim Forpa As Integer
             'Hay datos, abriremos el forumalrio para k seleccione
             'los pagos que queremos hacer
             With frmTESVerCobrosPagos
-                .vSql = Sql
+                .vSql = SQL
                 .OrdenarEfecto = True
                 .Regresar = False
                 .Cobros = False
@@ -6192,27 +6191,27 @@ Private Sub cmdPorNIF_Click()
             Exit Sub
         End If
     End If
-    Sql = ""
+    SQL = ""
     For I = 1 To ListView3.ListItems.Count
         If ListView3.ListItems(I).Checked Then
-            Sql = "O"
+            SQL = "O"
             Exit For
         End If
     Next I
-    If Sql = "" Then
+    If SQL = "" Then
         MsgBox "Seleccione al menos una empresa", vbExclamation
         Exit Sub
     End If
     
     'Tipos de pago
-    Sql = ""
+    SQL = ""
     For I = 1 To lwtipopago.ListItems.Count
         If lwtipopago.ListItems(I).Checked Then
-            Sql = "O"
+            SQL = "O"
             Exit For
         End If
     Next I
-    If Sql = "" Then
+    If SQL = "" Then
         MsgBox "Seleccione al menos un tipo de pago", vbExclamation
         Exit Sub
     End If
@@ -6232,13 +6231,13 @@ Private Sub cmdPorNIF_Click()
     '-----------------------------------------------------------------------------
     Label9.Caption = "Preparando tablas"
     Label9.Refresh
-    Sql = "Delete from tmp347 where codusu =" & vUsu.Codigo
-    Conn.Execute Sql
-    Sql = "Delete from Usuarios.ztesoreriacomun where codusu =" & vUsu.Codigo
-    Conn.Execute Sql
+    SQL = "Delete from tmp347 where codusu =" & vUsu.Codigo
+    Conn.Execute SQL
+    SQL = "Delete from Usuarios.ztesoreriacomun where codusu =" & vUsu.Codigo
+    Conn.Execute SQL
     'tmpfaclin  ... sera para cuando es mas de uno
-    Sql = "Delete from tmpfaclin where codusu =" & vUsu.Codigo
-    Conn.Execute Sql
+    SQL = "Delete from tmpfaclin where codusu =" & vUsu.Codigo
+    Conn.Execute SQL
     
     
     
@@ -6248,7 +6247,7 @@ Private Sub cmdPorNIF_Click()
     
     
     'AHORA INSERTO EN LAS TABLA tmpcta las cuentas que tienen ese NIF , para cada empresa seleccionada
-    Sql = ""
+    SQL = ""
     Screen.MousePointer = vbHourglass
     If Opcion = 13 Then
         '------------------------------------------
@@ -6259,10 +6258,10 @@ Private Sub cmdPorNIF_Click()
                 Label9.Caption = "Obteniendo tabla1: " & ListView3.ListItems(I).Text
                 Label9.Refresh
                 
-                Sql = "Select " & vUsu.Codigo & "," & Mid(ListView3.ListItems(I).Key, 2) & ",codmacta,nifdatos"
-                Sql = "INSERT INTO tmp347 (codusu, cliprov, cta, nif) " & Sql
-                Sql = Sql & " FROM Conta" & ListView3.ListItems(I).Tag & ".cuentas WHERE nifdatos = '" & Text4.Text & "' ORDER BY codmacta"
-                If Not Ejecuta(Sql) Then Exit Sub
+                SQL = "Select " & vUsu.Codigo & "," & Mid(ListView3.ListItems(I).Key, 2) & ",codmacta,nifdatos"
+                SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif) " & SQL
+                SQL = SQL & " FROM Conta" & ListView3.ListItems(I).Tag & ".cuentas WHERE nifdatos = '" & Text4.Text & "' ORDER BY codmacta"
+                If Not Ejecuta(SQL) Then Exit Sub
                 DoEvents
             End If
         Next I
@@ -6279,25 +6278,25 @@ Private Sub cmdPorNIF_Click()
     
         
         
-    If Sql <> "" Then
+    If SQL <> "" Then
         If GeneraCobrosPagosNIF Then
         
         
-            Sql = ""
+            SQL = ""
             For I = 1 To Me.ListView3.ListItems.Count
-                If Me.ListView3.ListItems(I).Checked Then Sql = Sql & "1"
+                If Me.ListView3.ListItems(I).Checked Then SQL = SQL & "1"
             Next
-            If Len(Sql) > 1 Then
-                Sql = "0"
+            If Len(SQL) > 1 Then
+                SQL = "0"
             Else
-                Sql = "1"
+                SQL = "1"
             End If
-            Sql = "SoloUnaEmpresa= " & Sql & "|"
+            SQL = "SoloUnaEmpresa= " & SQL & "|"
 
         
             With frmImprimir
                 
-                .OtrosParametros = Sql & "Cuenta= """"|"
+                .OtrosParametros = SQL & "Cuenta= """"|"
                 .NumeroParametros = 2
                 .FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
                 .SoloImprimir = False
@@ -6559,29 +6558,29 @@ Dim Im As Currency
     On Error GoTo EUpdatearCobrosRemesa
     UpdatearCobrosRemesa = False
     
-    Sql = "Select * from scobro WHERE codrem=" & Text3(0).Text
-    Sql = Sql & " AND anyorem =" & Text3(1).Text
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select * from scobro WHERE codrem=" & Text3(0).Text
+    SQL = SQL & " AND anyorem =" & Text3(1).Text
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
             While Not miRsAux.EOF
-                Sql = "UPDATE scobro SET fecultco = '" & Format(Text1(9).Text, FormatoFecha) & "', impcobro = "
+                SQL = "UPDATE scobro SET fecultco = '" & Format(Text1(9).Text, FormatoFecha) & "', impcobro = "
                 Im = miRsAux!ImpVenci
                 If Not IsNull(miRsAux!Gastos) Then Im = Im + miRsAux!Gastos
-                Sql = Sql & TransformaComasPuntos(CStr(Im))
+                SQL = SQL & TransformaComasPuntos(CStr(Im))
                 
-                Sql = Sql & " ,siturem = 'B'"
+                SQL = SQL & " ,siturem = 'B'"
                 
                 
                 'WHERE
-                Sql = Sql & " WHERE numserie='" & miRsAux!NUmSerie
-                Sql = Sql & "' AND  codfaccl =  " & miRsAux!codfaccl
-                Sql = Sql & "  AND  fecfaccl =  '" & Format(miRsAux!fecfaccl, FormatoFecha)
-                Sql = Sql & "' AND  numorden =  " & miRsAux!numorden
+                SQL = SQL & " WHERE numserie='" & miRsAux!NUmSerie
+                SQL = SQL & "' AND  codfaccl =  " & miRsAux!codfaccl
+                SQL = SQL & "  AND  fecfaccl =  '" & Format(miRsAux!fecfaccl, FormatoFecha)
+                SQL = SQL & "' AND  numorden =  " & miRsAux!numorden
                 'Muevo siguiente
                 miRsAux.MoveNext
                 
                 'Ejecuto SQL
-                If Not Ejecuta(Sql) Then MsgBox "Error: " & Sql, vbExclamation
+                If Not Ejecuta(SQL) Then MsgBox "Error: " & SQL, vbExclamation
             Wend
     End If
     miRsAux.Close
@@ -6598,13 +6597,13 @@ Private Sub cmdRecaudaEjec_Click()
 
     'Comprobaciones
     CuentasCC = ""
-    Sql = ""
+    SQL = ""
     For I = 1 To Me.ListView5.ListItems.Count
         If Me.ListView5.ListItems(I).Checked Then
             If Me.ListView5.ListItems(I).ForeColor = vbRed Then
                 CuentasCC = CuentasCC & "A"
             Else
-                Sql = Sql & "A"
+                SQL = SQL & "A"
             End If
         End If
     Next I
@@ -6614,7 +6613,7 @@ Private Sub cmdRecaudaEjec_Click()
         Exit Sub
     End If
     
-    If Len(Sql) = 0 Then
+    If Len(SQL) = 0 Then
         MsgBox "Seleccione los vencimientos ", vbExclamation
         Exit Sub
     End If
@@ -6622,48 +6621,48 @@ Private Sub cmdRecaudaEjec_Click()
     
     
     'OK vamos con la generacion del fichero
-    Sql = ""
+    SQL = ""
     For I = 1 To Me.ListView5.ListItems.Count
         With ListView5.ListItems(I)
             If .Checked Then
                 '(numserie,codfaccl,fecfaccl,numorden)
-                Sql = Sql & ", ('" & .Text & "',"
-                Sql = Sql & .SubItems(1) & ",'" & Format(.SubItems(2), FormatoFecha)
-                Sql = Sql & "'," & .SubItems(3) & ")"
+                SQL = SQL & ", ('" & .Text & "',"
+                SQL = SQL & .SubItems(1) & ",'" & Format(.SubItems(2), FormatoFecha)
+                SQL = SQL & "'," & .SubItems(3) & ")"
                 
             End If
         End With
     Next I
-    Sql = Mid(Sql, 2) 'quitamos la primera coma
-    If GeneraFicheroRecaudacionEjecutiva(Sql) Then Unload Me
+    SQL = Mid(SQL, 2) 'quitamos la primera coma
+    If GeneraFicheroRecaudacionEjecutiva(SQL) Then Unload Me
     
 End Sub
 
 Private Sub cmdReclamas_Click()
     
     'Borraremos los que tienen mail erroneo
-    Set Rs = New ADODB.Recordset
-    Sql = "SELECT fechaadq FROM  tmpentrefechas,cuentas WHERE fechaadq=codmacta  "
-    Sql = Sql & " AND codUsu = " & vUsu.Codigo & " AND "
-    Sql = Sql & " coalesce(maidatos,'')='' GROUP BY fechaadq  "
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
-    While Not Rs.EOF
-        Sql = Sql & ", '" & Rs!fechaadq & "'"
-        Rs.MoveNext
+    Set RS = New ADODB.Recordset
+    SQL = "SELECT fechaadq FROM  tmpentrefechas,cuentas WHERE fechaadq=codmacta  "
+    SQL = SQL & " AND codUsu = " & vUsu.Codigo & " AND "
+    SQL = SQL & " coalesce(maidatos,'')='' GROUP BY fechaadq  "
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
+    While Not RS.EOF
+        SQL = SQL & ", '" & RS!fechaadq & "'"
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
-    If Sql <> "" Then
-        Sql = "DELETE FROM  tmpentrefechas WHERE codUsu = " & vUsu.Codigo & " AND  fechaadq IN (" & Mid(Sql, 2) & ")"
-        Conn.Execute Sql
+    If SQL <> "" Then
+        SQL = "DELETE FROM  tmpentrefechas WHERE codUsu = " & vUsu.Codigo & " AND  fechaadq IN (" & Mid(SQL, 2) & ")"
+        Conn.Execute SQL
     End If
         
         
-    Sql = DevuelveDesdeBD("count(*)", "tmpentrefechas", "codusu", CStr(vUsu.Codigo))
-    If Val(Sql) = 0 Then
+    SQL = DevuelveDesdeBD("count(*)", "tmpentrefechas", "codusu", CStr(vUsu.Codigo))
+    If Val(SQL) = 0 Then
         MsgBox "Ninguna reclamacion a enviar", vbExclamation
     Else
         CadenaDesdeOtroForm = "OK"
@@ -6858,19 +6857,19 @@ End Sub
 
 Private Function SugerirCodigoSiguienteTransferencia() As String
     
-    Sql = "Select Max(codigo) from stransfer"
-    If SubTipo = 0 Then Sql = Sql & "cob"
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, , , adCmdText
-    Sql = "1"
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            Sql = CStr(Rs.Fields(0) + 1)
+    SQL = "Select Max(codigo) from stransfer"
+    If SubTipo = 0 Then SQL = SQL & "cob"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, , , adCmdText
+    SQL = "1"
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            SQL = CStr(RS.Fields(0) + 1)
         End If
     End If
-    Rs.Close
-    Set Rs = Nothing
-    SugerirCodigoSiguienteTransferencia = Sql
+    RS.Close
+    Set RS = Nothing
+    SugerirCodigoSiguienteTransferencia = SQL
 End Function
 
 
@@ -7051,23 +7050,23 @@ Dim W As Integer
         chkAgrupaCancelacion.Visible = False
         
         If Opcion = 8 Then
-            Sql = "Abono remesa"
+            SQL = "Abono remesa"
             CuentasCC = "Contabilizar"
         Else
         
             If Opcion = 22 Then
             
-                Sql = DevuelveDesdeBD("RemesaCancelacion", "paramtesor", "codigo", "1", "N")
-                chkAgrupaCancelacion.Visible = Len(Sql) = vEmpresa.DigitosUltimoNivel
-                Sql = "Cancelacion cliente"
+                SQL = DevuelveDesdeBD("RemesaCancelacion", "paramtesor", "codigo", "1", "N")
+                chkAgrupaCancelacion.Visible = Len(SQL) = vEmpresa.DigitosUltimoNivel
+                SQL = "Cancelacion cliente"
                 CuentasCC = "Can. cliente"
             Else
-                Sql = "Confirmacion remesa"
+                SQL = "Confirmacion remesa"
                 CuentasCC = "Confirmar"
             End If
             
         End If
-        Label5(2).Caption = Sql
+        Label5(2).Caption = SQL
         cmdContabRemesa.Caption = CuentasCC
         CuentasCC = ""
         'Los gastos solo van en la contabilizacion
@@ -7258,7 +7257,7 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-    Sql = RecuperaValor(CadenaDevuelta, 1)
+    SQL = RecuperaValor(CadenaDevuelta, 1)
 End Sub
 
 
@@ -7279,7 +7278,7 @@ Private Sub Form_Unload(Cancel As Integer)
         
     End If
 
-    Set Rs = Nothing
+    Set RS = Nothing
     Set miRsAux = Nothing
         
     
@@ -7298,7 +7297,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
-    Sql = RecuperaValor(CadenaSeleccion, 1)
+    SQL = RecuperaValor(CadenaSeleccion, 1)
 End Sub
 
 Private Sub frmP_DatoSeleccionado(CadenaSeleccion As String)
@@ -7350,42 +7349,42 @@ End Sub
 
 Private Sub Image3_Click()
         Set frmCCtas = New frmColCtas
-        Sql = ""
+        SQL = ""
         frmCCtas.DatosADevolverBusqueda = "0"
         frmCCtas.Show vbModal
         Set frmCCtas = Nothing
-        If Sql <> "" Then
+        If SQL <> "" Then
             'TEngo cuenta contable
-            Text5.Text = Sql
-            Sql = "nommacta"
-            Text4.Text = DevuelveDesdeBD("nifdatos", "cuentas", "codmacta", Text5.Text, "T", Sql)
+            Text5.Text = SQL
+            SQL = "nommacta"
+            Text4.Text = DevuelveDesdeBD("nifdatos", "cuentas", "codmacta", Text5.Text, "T", SQL)
             If Text4.Text = "" Then
                 Text5.Text = ""
                 MsgBox "La cuenta no tiene NIF.", vbExclamation
             Else
-                Text5.Text = Sql
+                Text5.Text = SQL
             End If
         End If
 
 End Sub
 
 Private Sub Image4_Click()
-    Sql = ""
+    SQL = ""
     cd1.ShowOpen
-    If cd1.FileName <> "" Then Sql = cd1.FileName
-    If Sql <> "" Then
-        If Dir(Sql, vbArchive) = "" Then
+    If cd1.FileName <> "" Then SQL = cd1.FileName
+    If SQL <> "" Then
+        If Dir(SQL, vbArchive) = "" Then
             MsgBox "Fichero NO existe", vbExclamation
-            Sql = ""
+            SQL = ""
         End If
     End If
-    If Sql <> "" Then Text8.Text = Sql
+    If SQL <> "" Then Text8.Text = SQL
 End Sub
 
 Private Sub imgCC_Click(Index As Integer)
     LanzaBuscaGrid 2
-    If Sql <> "" Then
-        txtCC(Index).Text = Sql
+    If SQL <> "" Then
+        txtCC(Index).Text = SQL
         txtCC_LostFocus Index
     End If
 End Sub
@@ -7422,11 +7421,11 @@ Private Sub imgcheckall_Click(Index As Integer)
     Cancelado = False
 End Sub
 
-Private Sub ImgConcepto_Click(Index As Integer)
+Private Sub imgConcepto_Click(Index As Integer)
   
     LanzaBuscaGrid 1
-    If Sql <> "" Then
-        txtConcepto(Index).Text = Sql
+    If SQL <> "" Then
+        txtConcepto(Index).Text = SQL
         txtConcepto_LostFocus Index
     End If
 End Sub
@@ -7436,23 +7435,23 @@ Private Sub imgCtaNorma_Click(Index As Integer)
         If Index <> 6 Then
 
                Set frmCCtas = New frmColCtas
-               Sql = ""
+               SQL = ""
                frmCCtas.DatosADevolverBusqueda = "0"
                frmCCtas.Show vbModal
                
                Set frmCCtas = Nothing
-               If Sql <> "" Then
-                   txtCtaNormal(Index).Text = Sql
+               If SQL <> "" Then
+                   txtCtaNormal(Index).Text = SQL
                    txtCtaNormal_LostFocus Index
                End If
             
         Else
         
             'Para las cuentas agrupadas
-            Sql = ""
+            SQL = ""
             LanzaBuscaGrid 3
-            If Sql <> "" Then
-                If MsgBox("Va a insetar las cuentas del grupo de tesoreria: " & Sql & vbCrLf & "¿Continuar?", vbQuestion + vbYesNo) = vbYes Then
+            If SQL <> "" Then
+                If MsgBox("Va a insetar las cuentas del grupo de tesoreria: " & SQL & vbCrLf & "¿Continuar?", vbQuestion + vbYesNo) = vbYes Then
                     Screen.MousePointer = vbHourglass
                     Set miRsAux = New ADODB.Recordset
                     CargaGrupo
@@ -7478,8 +7477,8 @@ End Sub
 Private Sub imgDiario_Click(Index As Integer)
   
     LanzaBuscaGrid 0
-    If Sql <> "" Then
-        txtDiario(Index).Text = Sql
+    If SQL <> "" Then
+        txtDiario(Index).Text = SQL
         txtDiario_LostFocus Index
     End If
 End Sub
@@ -7487,15 +7486,15 @@ End Sub
 Private Sub imgEliminarCta_Click()
     If List1.SelCount = 0 Then Exit Sub
     
-    Sql = "Desea quitar la(s) cuenta(s): " & vbCrLf
+    SQL = "Desea quitar la(s) cuenta(s): " & vbCrLf
     For I = 0 To List1.ListCount - 1
-        If List1.Selected(I) Then Sql = Sql & List1.List(I) & vbCrLf
+        If List1.Selected(I) Then SQL = SQL & List1.List(I) & vbCrLf
     Next I
-    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         For I = List1.ListCount - 1 To 0 Step -1
             If List1.Selected(I) Then
-                Sql = Trim(Mid(List1.List(I), 1, vEmpresa.DigitosUltimoNivel + 2))
-                NumRegElim = InStr(1, CuentasCC, Sql)
+                SQL = Trim(Mid(List1.List(I), 1, vEmpresa.DigitosUltimoNivel + 2))
+                NumRegElim = InStr(1, CuentasCC, SQL)
                 If NumRegElim > 0 Then CuentasCC = Mid(CuentasCC, 1, NumRegElim - 1) & Mid(CuentasCC, NumRegElim + vEmpresa.DigitosUltimoNivel + 1) 'para que quite el pipe final
                 List1.RemoveItem I
             End If
@@ -7516,9 +7515,9 @@ End Sub
 
 Private Sub imgFra_Click()
         CadenaDesdeOtroForm = ""
-        Sql = ""
-        If txtCtaNormal(11).Text <> "" Then Sql = "scobro.codmacta = '" & txtCtaNormal(11).Text & "'"
-        frmTESVerCobrosPagos.vSql = Sql
+        SQL = ""
+        If txtCtaNormal(11).Text <> "" Then SQL = "scobro.codmacta = '" & txtCtaNormal(11).Text & "'"
+        frmTESVerCobrosPagos.vSql = SQL
         frmTESVerCobrosPagos.OrdenarEfecto = False
         frmTESVerCobrosPagos.Regresar = True
         frmTESVerCobrosPagos.Cobros = True
@@ -7602,8 +7601,8 @@ Private Sub CargaList()
     
 
 
-        Sql = DevuelveDesdeBD("descformapago", "stipoformapago", "tipoformapago", CStr(SubTipo), "N")
-        Text2(Opcion).Text = Sql
+        SQL = DevuelveDesdeBD("descformapago", "stipoformapago", "tipoformapago", CStr(SubTipo), "N")
+        Text2(Opcion).Text = SQL
                 
         
 End Sub
@@ -7655,14 +7654,14 @@ Private Sub Text4_LostFocus()
         Exit Sub
     End If
     
-    Sql = DevuelveDesdeBD("nommacta", "cuentas", "nifdatos", Text4.Text, "T")
-    If Sql = "" Then
+    SQL = DevuelveDesdeBD("nommacta", "cuentas", "nifdatos", Text4.Text, "T")
+    If SQL = "" Then
         MsgBox "NIF no encontrado", vbExclamation
         Text5.Text = ""
         PonerFoco Text4
     End If
     
-    Text5.Text = Sql
+    Text5.Text = SQL
     
 End Sub
 
@@ -7700,18 +7699,18 @@ End Sub
 
 Private Sub txtCC_LostFocus(Index As Integer)
     txtCC(Index).Text = Trim(txtCC(Index).Text)
-    Sql = ""
+    SQL = ""
     I = 0
     If txtCC(Index).Text <> "" Then
             
-        Sql = DevuelveDesdeBD("nomccost", "cabccost", "codccost", txtCC(Index).Text, "T")
-        If Sql = "" Then
+        SQL = DevuelveDesdeBD("nomccost", "cabccost", "codccost", txtCC(Index).Text, "T")
+        If SQL = "" Then
             MsgBox "Concepto no existe", vbExclamation
             I = 1
         End If
 
     End If
-    Me.txtDCC(Index).Text = Sql
+    Me.txtDCC(Index).Text = SQL
     If I = 1 Then
         txtCC(Index).Text = ""
         PonerFoco txtCC(Index)
@@ -7730,7 +7729,7 @@ End Sub
 Private Sub txtConcepto_LostFocus(Index As Integer)
     'Lost focus
     txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
-    Sql = ""
+    SQL = ""
     I = 0
     If txtConcepto(Index).Text <> "" Then
         If Not IsNumeric(txtConcepto(Index).Text) Then
@@ -7738,14 +7737,14 @@ Private Sub txtConcepto_LostFocus(Index As Integer)
             I = 1
         Else
             
-            Sql = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtConcepto(Index).Text, "N")
-            If Sql = "" Then
+            SQL = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtConcepto(Index).Text, "N")
+            If SQL = "" Then
                 MsgBox "Concepto no existe", vbExclamation
                 I = 1
             End If
         End If
     End If
-    Me.txtDConcpeto(Index).Text = Sql
+    Me.txtDConcpeto(Index).Text = SQL
     If I = 1 Then
         txtConcepto(Index).Text = ""
         PonerFoco txtConcepto(Index)
@@ -7768,25 +7767,25 @@ Dim DevfrmCCtas As String
         DevfrmCCtas = txtCta(Index).Text
         I = 0
         If DevfrmCCtas <> "" Then
-            If CuentaCorrectaUltimoNivel(DevfrmCCtas, Sql) Then
+            If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
                 DevfrmCCtas = DevuelveDesdeBD("codmacta", "ctabancaria", "codmacta", DevfrmCCtas, "T")
                 If DevfrmCCtas = "" Then
-                    Sql = ""
+                    SQL = ""
                     MsgBox "La cuenta contable no esta asociada a ninguna cuenta bancaria", vbExclamation
                 End If
             Else
-                MsgBox Sql, vbExclamation
+                MsgBox SQL, vbExclamation
                 DevfrmCCtas = ""
-                Sql = ""
+                SQL = ""
             End If
             I = 1
         Else
-            Sql = ""
+            SQL = ""
         End If
         
         
         txtCta(Index).Text = DevfrmCCtas
-        txtDescCta(Index).Text = Sql
+        txtDescCta(Index).Text = SQL
         If DevfrmCCtas = "" And I = 1 Then
 
             PonerFoco txtCta(Index)
@@ -7811,7 +7810,7 @@ On Error GoTo ECopiarArchivo
             Kill cd1.FileName
         End If
         'Hacemos la copia
-        FileCopy Sql, cd1.FileName
+        FileCopy SQL, cd1.FileName
         CopiarArchivo = True
     End If
     
@@ -7841,23 +7840,23 @@ Dim DevfrmCCtas As String
         DevfrmCCtas = Trim(txtCtaNormal(Index).Text)
         I = 0
         If DevfrmCCtas <> "" Then
-            If CuentaCorrectaUltimoNivel(DevfrmCCtas, Sql) Then
+            If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
                 
             Else
-                MsgBox Sql, vbExclamation
+                MsgBox SQL, vbExclamation
                 If Index < 3 Or Index = 9 Or Index = 10 Or Index = 11 Then
                     DevfrmCCtas = ""
-                    Sql = ""
+                    SQL = ""
                 End If
             End If
             I = 1
         Else
-            Sql = ""
+            SQL = ""
         End If
         
         
         txtCtaNormal(Index).Text = DevfrmCCtas
-        txtDCtaNormal(Index).Text = Sql
+        txtDCtaNormal(Index).Text = SQL
         If DevfrmCCtas = "" And I = 1 Then
             PonerFoco txtCtaNormal(Index)
         End If
@@ -7867,8 +7866,8 @@ Dim DevfrmCCtas As String
         If Index = 10 Then
             FrameDocPorveedor.Visible = False
             If SubTipo = 2 Or SubTipo = 3 Then
-                FrameDocPorveedor.Visible = Sql <> ""
-                If Sql = "" Then
+                FrameDocPorveedor.Visible = SQL <> ""
+                If SQL = "" Then
                     txtTexto(2).Text = ""
                     txtTexto(3).Text = ""
                 End If
@@ -7888,7 +7887,7 @@ End Sub
 Private Sub txtDiario_LostFocus(Index As Integer)
     'Lost focus
     txtDiario(Index).Text = Trim(txtDiario(Index).Text)
-    Sql = ""
+    SQL = ""
     I = 0
     If txtDiario(Index).Text <> "" Then
         If Not IsNumeric(txtDiario(Index).Text) Then
@@ -7896,14 +7895,14 @@ Private Sub txtDiario_LostFocus(Index As Integer)
             I = 1
         Else
             
-            Sql = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtDiario(Index).Text, "N")
-            If Sql = "" Then
+            SQL = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtDiario(Index).Text, "N")
+            If SQL = "" Then
                 MsgBox "Diario no existe", vbExclamation
                 I = 1
             End If
         End If
     End If
-    Me.txtDDiario(Index).Text = Sql
+    Me.txtDDiario(Index).Text = SQL
     If I = 1 Then
         txtDiario(Index).Text = ""
         PonerFoco txtDiario(Index)
@@ -7923,18 +7922,18 @@ Private Sub txtFP_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtFP_LostFocus(Index As Integer)
-    Sql = ""
+    SQL = ""
     txtFP(Index).Text = Trim(txtFP(Index).Text)
     If txtFP(Index).Text <> "" Then
         If Not IsNumeric(txtFP(Index).Text) Then
             MsgBox "Campo debe ser numerico: " & txtFP(Index).Text, vbExclamation
             txtFP(Index).Text = ""
         Else
-            Sql = DevuelveDesdeBD("nomforpa", "sforpa", "codforpa", txtFP(Index).Text)
-            If Sql = "" Then Sql = "NO existe la forma de pago"
+            SQL = DevuelveDesdeBD("nomforpa", "sforpa", "codforpa", txtFP(Index).Text)
+            If SQL = "" Then SQL = "NO existe la forma de pago"
         End If
     End If
-    Me.txtFPDesc(Index).Text = Sql
+    Me.txtFPDesc(Index).Text = SQL
 End Sub
 
 Private Sub txtImporte_GotFocus(Index As Integer)
@@ -7978,21 +7977,21 @@ End Sub
 
 Private Sub CargaImpagados()
 
-    Sql = "Select fechadev,gastodev from sefecdev  WHERE numserie='" & RecuperaValor(CadenaDesdeOtroForm, 1)
-    Sql = Sql & "' AND  codfaccl =  " & RecuperaValor(CadenaDesdeOtroForm, 2)
-    Sql = Sql & "  AND  fecfaccl =  '" & Format(RecuperaValor(CadenaDesdeOtroForm, 3), FormatoFecha)
-    Sql = Sql & "' AND  numorden =  " & RecuperaValor(CadenaDesdeOtroForm, 4)
-    Sql = Sql & " order by fechadev"
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    SQL = "Select fechadev,gastodev from sefecdev  WHERE numserie='" & RecuperaValor(CadenaDesdeOtroForm, 1)
+    SQL = SQL & "' AND  codfaccl =  " & RecuperaValor(CadenaDesdeOtroForm, 2)
+    SQL = SQL & "  AND  fecfaccl =  '" & Format(RecuperaValor(CadenaDesdeOtroForm, 3), FormatoFecha)
+    SQL = SQL & "' AND  numorden =  " & RecuperaValor(CadenaDesdeOtroForm, 4)
+    SQL = SQL & " order by fechadev"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
         Set IT = ListView1.ListItems.Add
-        IT.Text = Format(Rs!fechadev, "dd/mm/yyyy")
-        IT.SubItems(1) = Format(Rs!gastodev, FormatoImporte)
-        Rs.MoveNext
+        IT.Text = Format(RS!fechadev, "dd/mm/yyyy")
+        IT.SubItems(1) = Format(RS!gastodev, FormatoImporte)
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 End Sub
 
 
@@ -8033,88 +8032,88 @@ Dim Dias As Integer
     If SubT = 1 Or SubT = 3 Then
         'Efectos
         '
-        Sql = "Select codigo,anyo, fecremesa,"
+        SQL = "Select codigo,anyo, fecremesa,"
         If SubT = 3 Then
-            Sql = Sql & " tiporemesa2.descripciont "
+            SQL = SQL & " tiporemesa2.descripciont "
         Else
-            Sql = Sql & " tiporemesa."
+            SQL = SQL & " tiporemesa."
         End If
-        Sql = Sql & "descripcion,descsituacion,remesas.codmacta,nommacta,remesadiasmenor, remesadiasmayor, "
-        Sql = Sql & "Importe , remesas.descripcion as Desc1, remesas.Tipo,situacion,Tiporem from cuentas,tiposituacionrem,ctabancaria,"
-        Sql = Sql & "remesas left join tiporemesa"
-        If SubT = 3 Then Sql = Sql & "2" 'Para que carge, en lugar de norma19 norma52 etc que carge efectos, talon, pagare
-        Sql = Sql & " on remesas.tipo"
-        If SubT = 3 Then Sql = Sql & "rem"
-        Sql = Sql & "=tiporemesa"
-        If SubT = 3 Then Sql = Sql & "2" 'Para que carge, en lugar de norma19 norma52 etc que carge efectos, talon, pagare
-        Sql = Sql & ".tipo where remesas.codmacta=cuentas.codmacta and situacio=situacion and ctabancaria.codmacta=remesas.codmacta"
-        Sql = Sql & " AND tiporem = 1 "   'Efectos
+        SQL = SQL & "descripcion,descsituacion,remesas.codmacta,nommacta,remesadiasmenor, remesadiasmayor, "
+        SQL = SQL & "Importe , remesas.descripcion as Desc1, remesas.Tipo,situacion,Tiporem from cuentas,tiposituacionrem,ctabancaria,"
+        SQL = SQL & "remesas left join tiporemesa"
+        If SubT = 3 Then SQL = SQL & "2" 'Para que carge, en lugar de norma19 norma52 etc que carge efectos, talon, pagare
+        SQL = SQL & " on remesas.tipo"
+        If SubT = 3 Then SQL = SQL & "rem"
+        SQL = SQL & "=tiporemesa"
+        If SubT = 3 Then SQL = SQL & "2" 'Para que carge, en lugar de norma19 norma52 etc que carge efectos, talon, pagare
+        SQL = SQL & ".tipo where remesas.codmacta=cuentas.codmacta and situacio=situacion and ctabancaria.codmacta=remesas.codmacta"
+        SQL = SQL & " AND tiporem = 1 "   'Efectos
         'Solo borrare las contabilizadas o pendientes de eliminar tooodos los efectos
-        Sql = Sql & " AND (situacion ='Q' or situacion ='Y')"
+        SQL = SQL & " AND (situacion ='Q' or situacion ='Y')"
                 
         
     Else
         'Talones Remesesas
-        Sql = "Select codigo,anyo, fecremesa,tiporemesa2.descripciont descripcion,descsituacion,remesas.codmacta,nommacta,talondias,pagaredias, "
-        Sql = Sql & "Importe , remesas.descripcion as Desc1, remesas.Tipo,situacion,Tiporem from cuentas,tiposituacionrem,ctabancaria,"
-        Sql = Sql & "remesas left join tiporemesa2 on remesas.tiporem=tiporemesa2.tipo "
-        Sql = Sql & "where remesas.codmacta=cuentas.codmacta and situacio=situacion and ctabancaria.codmacta=remesas.codmacta"
-        Sql = Sql & " AND tiporem > 1 "   'Pagares remesas
+        SQL = "Select codigo,anyo, fecremesa,tiporemesa2.descripciont descripcion,descsituacion,remesas.codmacta,nommacta,talondias,pagaredias, "
+        SQL = SQL & "Importe , remesas.descripcion as Desc1, remesas.Tipo,situacion,Tiporem from cuentas,tiposituacionrem,ctabancaria,"
+        SQL = SQL & "remesas left join tiporemesa2 on remesas.tiporem=tiporemesa2.tipo "
+        SQL = SQL & "where remesas.codmacta=cuentas.codmacta and situacio=situacion and ctabancaria.codmacta=remesas.codmacta"
+        SQL = SQL & " AND tiporem > 1 "   'Pagares remesas
        'Solo borrare las contabilizadas o pendientes de eliminar tooodos los efectos
-        Sql = Sql & " AND (situacion ='Q' or situacion ='Y')"
+        SQL = SQL & " AND (situacion ='Q' or situacion ='Y')"
     
     End If
     
-    Sql = Sql & " ORDER BY anyo,codigo"   'Solo borrare las contabilizadas
-    Set Rs = New ADODB.Recordset
+    SQL = SQL & " ORDER BY anyo,codigo"   'Solo borrare las contabilizadas
+    Set RS = New ADODB.Recordset
     
     
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
         'Ver los dias
         If SubT = 1 Or SubT = 3 Then
             'Efectos recibos
-            Dias = DBLet(Rs!remesadiasmenor, "N")
-            I = DBLet(Rs!remesadiasmayor, "N")
+            Dias = DBLet(RS!remesadiasmenor, "N")
+            I = DBLet(RS!remesadiasmayor, "N")
             If I < Dias And I > 0 Then Dias = I
         Else
-            If Rs!Tiporem = 2 Then
+            If RS!Tiporem = 2 Then
                 'Pagare
-                Dias = DBLet(Rs!pagaredias, "N")
+                Dias = DBLet(RS!pagaredias, "N")
             Else
                 'talon
-                Dias = DBLet(Rs!talondias, "N")
+                Dias = DBLet(RS!talondias, "N")
             End If
             
         End If
-        F = Rs!fecremesa
+        F = RS!fecremesa
         
         If SubT = 2 Then
             'If RS!Codigo > 159 Then Stop
-            Sql = "anyorem=" & Rs!Anyo & " AND codrem "
-            Sql = DevuelveDesdeBD("min(fecvenci)", "scobro", Sql, Rs!Codigo, "N")
-            If Sql <> "" Then
-                If CDate(Sql) > F Then F = Sql
+            SQL = "anyorem=" & RS!Anyo & " AND codrem "
+            SQL = DevuelveDesdeBD("min(fecvenci)", "scobro", SQL, RS!Codigo, "N")
+            If SQL <> "" Then
+                If CDate(SQL) > F Then F = SQL
             End If
         End If
         
         F = DateAdd("d", Dias, F)
         If F < Now Then
             Set IT = ListView2.ListItems.Add
-            IT.Text = Rs!Anyo
-            IT.SubItems(1) = Rs!Codigo
-            IT.SubItems(2) = Rs!Descripcion
-            IT.SubItems(3) = Rs!fecremesa
-            IT.SubItems(4) = Rs!codmacta
-            IT.SubItems(5) = Rs!Nommacta
-            IT.SubItems(6) = Format(Rs!Importe, FormatoImporte)
-            IT.SubItems(7) = Rs!Desc1
-            IT.Tag = Rs!Tiporem
+            IT.Text = RS!Anyo
+            IT.SubItems(1) = RS!Codigo
+            IT.SubItems(2) = RS!Descripcion
+            IT.SubItems(3) = RS!fecremesa
+            IT.SubItems(4) = RS!codmacta
+            IT.SubItems(5) = RS!Nommacta
+            IT.SubItems(6) = Format(RS!Importe, FormatoImporte)
+            IT.SubItems(7) = RS!Desc1
+            IT.Tag = RS!Tiporem
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Exit Sub
 EC:
@@ -8160,36 +8159,36 @@ Dim QueTipoPago As String
 'observa2, opcion) VALUES
     GeneraCobrosPagosNIF = False
     L = 1
-    Sql = "Select * from tmp347 where codusu =" & vUsu.Codigo & " ORDER BY cliprov,cta"
-    Set Rs = New ADODB.Recordset
+    SQL = "Select * from tmp347 where codusu =" & vUsu.Codigo & " ORDER BY cliprov,cta"
+    Set RS = New ADODB.Recordset
     Set miRsAux = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    While Not Rs.EOF
+    While Not RS.EOF
         If Cancelado Then
-            Rs.Close
+            RS.Close
             Exit Function
         End If
         'Los labels
-        Label9.Caption = "Nif: " & Rs!Nif & " - " & Rs!Cta
+        Label9.Caption = "Nif: " & RS!NIF & " - " & RS!Cta
         Label9.Refresh
         
         'SQL insert
-        Sql = "INSERT INTO Usuarios.ztesoreriacomun (codusu,texto1, codigo,texto2,  texto3,texto4, texto5,fecha1,fecha2,"   'texto5, texto6,
-        Sql = Sql & " importe1, importe2,opcion"
-        Sql = Sql & ") VALUES ("
+        SQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu,texto1, codigo,texto2,  texto3,texto4, texto5,fecha1,fecha2,"   'texto5, texto6,
+        SQL = SQL & " importe1, importe2,opcion"
+        SQL = SQL & ") VALUES ("
         'NIF      Nombre
-        Sql = Sql & vUsu.Codigo & ",'" & Rs!Nif & "',"
+        SQL = SQL & vUsu.Codigo & ",'" & RS!NIF & "',"
         
         
         '-------
-        Empre = DameEmpresa(CStr(Rs!cliprov))
+        Empre = DameEmpresa(CStr(RS!cliprov))
         
         'COBROS
-        cad = "Select fecfaccl,numserie,codfaccl, numorden,impvenci,impcobro,gastos,fecvenci,nommacta from conta" & Rs!cliprov & ".scobro as c1,"
-        cad = cad & "conta" & Rs!cliprov & ".cuentas as c2 "
-        If QueTipoPago <> "" Then cad = cad & ", conta" & Rs!cliprov & ".sforpa as sforpa"
-        cad = cad & " where c1.codmacta = c2.codmacta AND c1.codmacta='" & Rs!Cta & "'"
+        cad = "Select fecfaccl,numserie,codfaccl, numorden,impvenci,impcobro,gastos,fecvenci,nommacta from conta" & RS!cliprov & ".scobro as c1,"
+        cad = cad & "conta" & RS!cliprov & ".cuentas as c2 "
+        If QueTipoPago <> "" Then cad = cad & ", conta" & RS!cliprov & ".sforpa as sforpa"
+        cad = cad & " where c1.codmacta = c2.codmacta AND c1.codmacta='" & RS!Cta & "'"
         If QueTipoPago <> "" Then cad = cad & " AND c1.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
         'Fechas
         If Text1(12).Text <> "" Then cad = cad & " AND fecvenci >='" & Format(Text1(12).Text, FormatoFecha) & "'"
@@ -8207,7 +8206,7 @@ Dim QueTipoPago As String
             '                    empresa
             cad = L & ",'" & Empre & "','"
             cad = cad & miRsAux!NUmSerie & "/" & Format(miRsAux!codfaccl, "0000000000") & " : " & miRsAux!numorden & "','"
-            cad = cad & Rs!Cta & "','"
+            cad = cad & RS!Cta & "','"
             cad = cad & DevNombreSQL(miRsAux!Nommacta) & "','"
             'texto4: fecha
             cad = cad & Format(miRsAux!fecfaccl, FormatoFecha) & "','"
@@ -8231,7 +8230,7 @@ Dim QueTipoPago As String
             cad = cad & ",0)"
             
             'Ejecutamos
-            cad = Sql & cad
+            cad = SQL & cad
             Ejecuta cad
             
             L = L + 1
@@ -8241,9 +8240,9 @@ Dim QueTipoPago As String
         miRsAux.Close
         
         'PAGOS
-        cad = "Select numfactu,numorden,fecfactu,imppagad,fecefect,impefect,nommacta from conta" & Rs!cliprov & ".spagop ,conta" & Rs!cliprov & ".cuentas "
-        If QueTipoPago <> "" Then cad = cad & ", conta" & Rs!cliprov & ".sforpa as sforpa"
-        cad = cad & " where ctaprove = codmacta AND ctaprove='" & Rs!Cta & "'"
+        cad = "Select numfactu,numorden,fecfactu,imppagad,fecefect,impefect,nommacta from conta" & RS!cliprov & ".spagop ,conta" & RS!cliprov & ".cuentas "
+        If QueTipoPago <> "" Then cad = cad & ", conta" & RS!cliprov & ".sforpa as sforpa"
+        cad = cad & " where ctaprove = codmacta AND ctaprove='" & RS!Cta & "'"
         If QueTipoPago <> "" Then cad = cad & " AND spagop.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
         
         
@@ -8262,7 +8261,7 @@ Dim QueTipoPago As String
             '                    empresa
             cad = L & ",'" & Empre & "','"
             cad = cad & DevNombreSQL(miRsAux!NumFactu) & " : " & miRsAux!numorden & "','"
-            cad = cad & Rs!Cta & "','"
+            cad = cad & RS!Cta & "','"
             cad = cad & DevNombreSQL(miRsAux!Nommacta) & "','"
             ' fecha1 y 2
             cad = cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
@@ -8281,7 +8280,7 @@ Dim QueTipoPago As String
             
             
             'Ejecutamos
-            cad = Sql & cad
+            cad = SQL & cad
             Ejecuta cad
             
             L = L + 1
@@ -8293,22 +8292,22 @@ Dim QueTipoPago As String
         
         
         'SIGUIENTE CUENTA
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     cad = "DELETE FROM usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo & " AND importe1+importe2=0"
     Conn.Execute cad
     
     cad = "select count(*) from usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     L = 0
-    If Not Rs.EOF Then
-        L = DBLet(Rs.Fields(0), "N")
+    If Not RS.EOF Then
+        L = DBLet(RS.Fields(0), "N")
     End If
-    Rs.Close
+    RS.Close
     
-    Set Rs = Nothing
+    Set RS = Nothing
     Set miRsAux = Nothing
     
     If L = 0 Then
@@ -8342,9 +8341,9 @@ Private Sub cargaTipoPagos()
     'FALTARA VER LO DE QUITAR EMPRESAS NO PERMITIDAS
  
     lwtipopago.ListItems.Clear
-    Sql = "select tipoformapago,descformapago,siglas from stipoformapago order by tipoformapago"
+    SQL = "select tipoformapago,descformapago,siglas from stipoformapago order by tipoformapago"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lwtipopago.ListItems.Add
         IT.Key = "C" & miRsAux!tipoformapago
@@ -8365,20 +8364,20 @@ End Sub
 
 Private Sub CargaCtasparaAgruparNIF()
     I = 0
-    Sql = "select cuentas.codmacta,nifdatos from scobro,cuentas where scobro.codmacta=cuentas.codmacta"
-    Sql = Sql & " and not (nifdatos is null)  "
-    If txtCtaNormal(1).Text <> "" Then Sql = Sql & " and cuentas.codmacta >= '" & txtCtaNormal(1).Text & "'"
-    If txtCtaNormal(2).Text <> "" Then Sql = Sql & " and cuentas.codmacta <= '" & txtCtaNormal(2).Text & "'"
-    Sql = Sql & " group by  codmacta,nifdatos"
+    SQL = "select cuentas.codmacta,nifdatos from scobro,cuentas where scobro.codmacta=cuentas.codmacta"
+    SQL = SQL & " and not (nifdatos is null)  "
+    If txtCtaNormal(1).Text <> "" Then SQL = SQL & " and cuentas.codmacta >= '" & txtCtaNormal(1).Text & "'"
+    If txtCtaNormal(2).Text <> "" Then SQL = SQL & " and cuentas.codmacta <= '" & txtCtaNormal(2).Text & "'"
+    SQL = SQL & " group by  codmacta,nifdatos"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not miRsAux.EOF
         If Cancelado Then
             miRsAux.Close
             Exit Sub
         End If
-        Sql = "INSERT INTO tmpfaclin (codusu, codigo, NIF) VALUES (" & vUsu.Codigo & "," & I & ",'" & miRsAux!nifdatos & "')"
-        Ejecuta Sql
+        SQL = "INSERT INTO tmpfaclin (codusu, codigo, NIF) VALUES (" & vUsu.Codigo & "," & I & ",'" & miRsAux!nifdatos & "')"
+        Ejecuta SQL
         miRsAux.MoveNext
         DoEvents
         I = I + 1
@@ -8386,21 +8385,21 @@ Private Sub CargaCtasparaAgruparNIF()
     miRsAux.Close
     If Cancelado Then Exit Sub
     'AHora los nifs en los pagos
-    Sql = "select cuentas.codmacta,nifdatos from spagop,cuentas where ctaprove=cuentas.codmacta"
-    Sql = Sql & " and not (nifdatos is null) "
-    If txtCtaNormal(1).Text <> "" Then Sql = Sql & " and cuentas.codmacta >= '" & txtCtaNormal(1).Text & "'"
-    If txtCtaNormal(2).Text <> "" Then Sql = Sql & " and cuentas.codmacta <= '" & txtCtaNormal(2).Text & "'"
+    SQL = "select cuentas.codmacta,nifdatos from spagop,cuentas where ctaprove=cuentas.codmacta"
+    SQL = SQL & " and not (nifdatos is null) "
+    If txtCtaNormal(1).Text <> "" Then SQL = SQL & " and cuentas.codmacta >= '" & txtCtaNormal(1).Text & "'"
+    If txtCtaNormal(2).Text <> "" Then SQL = SQL & " and cuentas.codmacta <= '" & txtCtaNormal(2).Text & "'"
     
-    Sql = Sql & " group by  codmacta,nifdatos"
+    SQL = SQL & " group by  codmacta,nifdatos"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not miRsAux.EOF
         If Cancelado Then
             miRsAux.Close
             Exit Sub
         End If
-        Sql = "INSERT INTO tmpfaclin (codusu, codigo, NIF) VALUES (" & vUsu.Codigo & "," & I & ",'" & miRsAux!nifdatos & "')"
-        Ejecuta Sql
+        SQL = "INSERT INTO tmpfaclin (codusu, codigo, NIF) VALUES (" & vUsu.Codigo & "," & I & ",'" & miRsAux!nifdatos & "')"
+        Ejecuta SQL
         miRsAux.MoveNext
         I = I + 1
         DoEvents
@@ -8411,10 +8410,10 @@ Private Sub CargaCtasparaAgruparNIF()
     
     'Ahora cargaremos la tabla tmp347 que tendra las cuentas
     'Para cada NIF generaremos sus datos, con las empresas
-    Sql = "Select nif from tmpfaclin where codusu =" & vUsu.Codigo & " group by nif"
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select nif from tmpfaclin where codusu =" & vUsu.Codigo & " group by nif"
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Label9.Caption = "Nif: " & miRsAux!Nif
+        Label9.Caption = "Nif: " & miRsAux!NIF
         Label9.Refresh
 
         For I = 1 To ListView3.ListItems.Count
@@ -8423,10 +8422,10 @@ Private Sub CargaCtasparaAgruparNIF()
                     miRsAux.Close
                     Exit Sub
                 End If
-                Sql = "Select " & vUsu.Codigo & "," & Mid(ListView3.ListItems(I).Key, 2) & ",codmacta,'" & miRsAux!Nif & "'"
-                Sql = "INSERT INTO tmp347 (codusu, cliprov, cta, nif) " & Sql
-                Sql = Sql & " FROM Conta" & ListView3.ListItems(I).Tag & ".cuentas WHERE nifdatos = '" & miRsAux!Nif & "' ORDER BY codmacta"
-                If Not Ejecuta(Sql) Then Exit Sub
+                SQL = "Select " & vUsu.Codigo & "," & Mid(ListView3.ListItems(I).Key, 2) & ",codmacta,'" & miRsAux!NIF & "'"
+                SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif) " & SQL
+                SQL = SQL & " FROM Conta" & ListView3.ListItems(I).Tag & ".cuentas WHERE nifdatos = '" & miRsAux!NIF & "' ORDER BY codmacta"
+                If Not Ejecuta(SQL) Then Exit Sub
             
                 DoEvents
             
@@ -8482,13 +8481,13 @@ Private Sub CargaDatosContabilizarGastos()
     txtDCtaNormal(0).Text = RecuperaValor(CadenaDesdeOtroForm, 6)
     Text9.Text = RecuperaValor(CadenaDesdeOtroForm, 2)
     'Fecha e Importe
-    Sql = RecuperaValor(CadenaDesdeOtroForm, 7)
-    I = InStr(8, Sql, " ")
-    Text1(19).Text = Trim(Mid(Sql, 1, I))
-    txtImporte(3).Text = Trim(Mid(Sql, I))
+    SQL = RecuperaValor(CadenaDesdeOtroForm, 7)
+    I = InStr(8, SQL, " ")
+    Text1(19).Text = Trim(Mid(SQL, 1, I))
+    txtImporte(3).Text = Trim(Mid(SQL, I))
     'ASignaremos cadenadesdeotroform el valor para hacer el UPDATE del registro SI se contabiliza
-    Sql = RecuperaValor(CadenaDesdeOtroForm, 1) & "|"
-    CadenaDesdeOtroForm = Sql & Text1(19).Text & "|" & Text9.Text & "|"
+    SQL = RecuperaValor(CadenaDesdeOtroForm, 1) & "|"
+    CadenaDesdeOtroForm = SQL & Text1(19).Text & "|" & Text9.Text & "|"
     
     VisibleCC
 End Sub
@@ -8497,9 +8496,9 @@ Private Sub PonerCuentasCC()
 
     CuentasCC = ""
     If vParam.autocoste Then
-        Sql = "Select * from parametros"
+        SQL = "Select * from parametros"
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         'NO PUEDE SER EOF
         CuentasCC = "|" & miRsAux!grupogto & "|" & miRsAux!grupovta & "|"
         miRsAux.Close
@@ -8514,8 +8513,8 @@ Dim B As Boolean
     B = False
     If vParam.autocoste Then
         If txtCtaNormal(0).Text <> "" Then
-                Sql = "|" & Mid(txtCtaNormal(0).Text, 1, 1) & "|"
-                If InStr(1, CuentasCC, Sql) > 0 Then B = True
+                SQL = "|" & Mid(txtCtaNormal(0).Text, 1, 1) & "|"
+                If InStr(1, CuentasCC, SQL) > 0 Then B = True
         End If
     End If
     Label1(14).Visible = B
@@ -8613,12 +8612,12 @@ Dim Importe As Currency
     
     
     'Insertamos la cabera
-    Sql = "INSERT INTO cabapu (numdiari, fechaent, numasien, bloqactu, numaspre, obsdiari) VALUES ("
-    Sql = Sql & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador
-    Sql = Sql & ", 1, NULL, '"
-    Sql = Sql & "Gasto fijo : " & RecuperaValor(CadenaDesdeOtroForm, 1) & " - " & DevNombreSQL(RecuperaValor(CadenaDesdeOtroForm, 3)) & vbCrLf
-    Sql = Sql & "Generado desde Tesoreria el " & Format(Now, "dd/mm/yyyy") & " por " & DevNombreSQL(vUsu.Nombre) & "');"
-    If Not Ejecuta(Sql) Then Exit Function
+    SQL = "INSERT INTO cabapu (numdiari, fechaent, numasien, bloqactu, numaspre, obsdiari) VALUES ("
+    SQL = SQL & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador
+    SQL = SQL & ", 1, NULL, '"
+    SQL = SQL & "Gasto fijo : " & RecuperaValor(CadenaDesdeOtroForm, 1) & " - " & DevNombreSQL(RecuperaValor(CadenaDesdeOtroForm, 3)) & vbCrLf
+    SQL = SQL & "Generado desde Tesoreria el " & Format(Now, "dd/mm/yyyy") & " por " & DevNombreSQL(vUsu.Nombre) & "');"
+    If Not Ejecuta(SQL) Then Exit Function
     
     If InStr(1, txtImporte(3).Text, ",") > 0 Then
         'Texto formateado
@@ -8629,41 +8628,41 @@ Dim Importe As Currency
     I = 1
     Do
         'Lineas de apuntes .
-         Sql = "INSERT INTO linapu (numdiari, fechaent, numasien, linliapu, "
-         Sql = Sql & "codmacta, numdocum, codconce, ampconce,timporteD,"
-         Sql = Sql & " timporteH, ctacontr, codccost,idcontab, punteada) "
-         Sql = Sql & "VALUES (" & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & "," & I & ",'"
+         SQL = "INSERT INTO linapu (numdiari, fechaent, numasien, linliapu, "
+         SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
+         SQL = SQL & " timporteH, ctacontr, codccost,idcontab, punteada) "
+         SQL = SQL & "VALUES (" & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & "," & I & ",'"
          
          'Cuenta
          If I = 1 Then
-            Sql = Sql & txtCtaNormal(0).Text
+            SQL = SQL & txtCtaNormal(0).Text
          Else
-            Sql = Sql & txtCta(6).Text
+            SQL = SQL & txtCta(6).Text
         End If
-        Sql = Sql & "','" & Format(Val(RecuperaValor(CadenaDesdeOtroForm, 1)), "000000000") & "'," & txtConcepto(0).Text & ",'"
+        SQL = SQL & "','" & Format(Val(RecuperaValor(CadenaDesdeOtroForm, 1)), "000000000") & "'," & txtConcepto(0).Text & ",'"
         
         'Ampliacion
-        Sql = Sql & DevNombreSQL(Mid(txtDConcpeto(0).Text & " " & Text9.Text, 1, 30)) & "',"
+        SQL = SQL & DevNombreSQL(Mid(txtDConcpeto(0).Text & " " & Text9.Text, 1, 30)) & "',"
                         
         If I = 1 Then
-            Sql = Sql & TransformaComasPuntos(CStr(Importe)) & ",NULL,'"
+            SQL = SQL & TransformaComasPuntos(CStr(Importe)) & ",NULL,'"
             'Contrapar
-            Sql = Sql & txtCta(6).Text
+            SQL = SQL & txtCta(6).Text
         Else
-            Sql = Sql & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",'"
+            SQL = SQL & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",'"
             'Contrpar
-            Sql = Sql & txtCtaNormal(0).Text
+            SQL = SQL & txtCtaNormal(0).Text
         End If
         
         'Solo para la line NO banco
         If I = 1 And txtCC(0).Visible Then
-            Sql = Sql & "','" & txtCC(0).Text & "'"
+            SQL = SQL & "','" & txtCC(0).Text & "'"
         Else
-            Sql = Sql & "',NULL"
+            SQL = SQL & "',NULL"
         End If
-        Sql = Sql & ",'CONTAB',0)"
+        SQL = SQL & ",'CONTAB',0)"
         
-        If Not Ejecuta(Sql) Then Exit Function
+        If Not Ejecuta(SQL) Then Exit Function
         I = I + 1
     Loop Until I > 2  'Una para el banoc, otra para la cuenta
    
@@ -8677,11 +8676,11 @@ Dim Importe As Currency
 
     'AHora actualizamos el gasto
     FechaAbono = RecuperaValor(CadenaDesdeOtroForm, 2)
-    Sql = "UPDATE sgastfijd SET"
-    Sql = Sql & " contabilizado=1"
-    Sql = Sql & " WHERE codigo=" & RecuperaValor(CadenaDesdeOtroForm, 1)
-    Sql = Sql & " and fecha='" & Format(FechaAbono, FormatoFecha) & "'"
-    Conn.Execute Sql
+    SQL = "UPDATE sgastfijd SET"
+    SQL = SQL & " contabilizado=1"
+    SQL = SQL & " WHERE codigo=" & RecuperaValor(CadenaDesdeOtroForm, 1)
+    SQL = SQL & " and fecha='" & Format(FechaAbono, FormatoFecha) & "'"
+    Conn.Execute SQL
 
 
     
@@ -8704,49 +8703,49 @@ On Error GoTo Ecargaempresas
 
     VerEmresasProhibidas Prohibidas
     
-    Sql = "Select * from Usuarios.Empresas where tesor=1 order by codempre"
+    SQL = "Select * from Usuarios.Empresas where tesor=1 order by codempre"
     Set lwE.SmallIcons = frmMantenusu.ImageList1
     lwE.ListItems.Clear
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     I = -1
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-        Sql = "|" & Rs!codempre & "|"
-        If InStr(1, Prohibidas, Sql) = 0 Then
-            Set IT = lwE.ListItems.Add(, , Rs!nomempre, , 3)
-            IT.Tag = Rs!codempre
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
+        SQL = "|" & RS!codempre & "|"
+        If InStr(1, Prohibidas, SQL) = 0 Then
+            Set IT = lwE.ListItems.Add(, , RS!nomempre, , 3)
+            IT.Tag = RS!codempre
             If IT.Tag = vEmpresa.codempre Then
                 IT.Checked = True
                 I = IT.Index
             End If
-            IT.ToolTipText = Rs!CONTA
+            IT.ToolTipText = RS!CONTA
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     If I > 0 Then Set lwE.SelectedItem = lwE.ListItems(I)
 Ecargaempresas:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos empresas"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 Private Sub VerEmresasProhibidas(ByRef VarProhibidas As String)
 
 On Error GoTo EVerEmresasProhibidas
     VarProhibidas = "|"
-    Sql = "Select codempre from Usuarios.usuarioempresasariconta WHERE codusu = " & (vUsu.Codigo Mod 1000)
-    Sql = Sql & " order by codempre"
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-          VarProhibidas = VarProhibidas & Rs!codempre & "|"
-          Rs.MoveNext
+    SQL = "Select codempre from Usuarios.usuarioempresasariconta WHERE codusu = " & (vUsu.Codigo Mod 1000)
+    SQL = SQL & " order by codempre"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not RS.EOF
+          VarProhibidas = VarProhibidas & RS!codempre & "|"
+          RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     Exit Sub
 EVerEmresasProhibidas:
     MuestraError Err.Number, Err.Description & vbCrLf & " Consulte soporte técnico"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -8854,11 +8853,11 @@ Private Sub CargalistaCuentas()
         Do
             I = InStr(1, CadenaDesdeOtroForm, "|")
             If I > 0 Then
-                Sql = Mid(CadenaDesdeOtroForm, 1, I - 1)
+                SQL = Mid(CadenaDesdeOtroForm, 1, I - 1)
                 CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, I + 1)
-                CuentaCorrectaUltimoNivel Sql, CuentasCC
-                Sql = Sql & "      " & CuentasCC
-                List1.AddItem Sql
+                CuentaCorrectaUltimoNivel SQL, CuentasCC
+                SQL = SQL & "      " & CuentasCC
+                List1.AddItem SQL
             End If
         Loop Until I = 0
         CadenaDesdeOtroForm = ""
@@ -8866,8 +8865,8 @@ Private Sub CargalistaCuentas()
         'Genero Cuentas CC  (por no declarar mas variables vamos)
         CuentasCC = ""
         For I = 0 To List1.ListCount - 1
-            Sql = Mid(List1.List(I), 1, vEmpresa.DigitosUltimoNivel)
-            CuentasCC = CuentasCC & Sql & "|"
+            SQL = Mid(List1.List(I), 1, vEmpresa.DigitosUltimoNivel)
+            CuentasCC = CuentasCC & SQL & "|"
         Next I
     Else
         CuentasCC = ""
@@ -8879,17 +8878,17 @@ Private Sub CargaGrupo()
 
     On Error GoTo ECargaGrupo
     
-    Sql = "Select codmacta,nommacta FROM cuentas where grupotesoreria ='" & DevNombreSQL(Sql) & "'"
-    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select codmacta,nommacta FROM cuentas where grupotesoreria ='" & DevNombreSQL(SQL) & "'"
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 0
     While Not miRsAux.EOF
-        Sql = miRsAux!codmacta
-        If InStr(1, CuentasCC, Sql & "|") > 0 Then
+        SQL = miRsAux!codmacta
+        If InStr(1, CuentasCC, SQL & "|") > 0 Then
             I = 1
         Else
-            CuentasCC = CuentasCC & Sql & "|"
-            Sql = Sql & "      " & miRsAux!Nommacta
-            List1.AddItem Sql
+            CuentasCC = CuentasCC & SQL & "|"
+            SQL = SQL & "      " & miRsAux!Nommacta
+            List1.AddItem SQL
         End If
         miRsAux.MoveNext
     Wend
@@ -8925,14 +8924,14 @@ Dim Tipopago As Byte
                 If Tipopago = 3 Then
                     'Sobre talones
                     'SQL = "100000000,talondias,talondias"
-                    Sql = "talondias"
+                    SQL = "talondias"
                 ElseIf Tipopago = 2 Then
                     'SQL = "100000000,pagaredias,pagaredias"
-                    Sql = "pagaredias"
+                    SQL = "pagaredias"
                 Else
                     'Efectos.
                     'SQL = "remesariesgo,remesadiasmenor,remesadiasmayor"
-                    Sql = "remesadiasmenor"
+                    SQL = "remesadiasmenor"
                 End If
    
                     
@@ -8951,33 +8950,33 @@ Dim Tipopago As Byte
 ''                    SQL = "remesadiasmenor"
 ''                End If
                     
-                Sql = "select " & Sql & " from remesas r,ctabancaria b where r.codmacta=b.codmacta and codigo=" & ListView2.ListItems(J).SubItems(1) & " AND anyo = " & ListView2.ListItems(J).Text
-                miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                SQL = "select " & SQL & " from remesas r,ctabancaria b where r.codmacta=b.codmacta and codigo=" & ListView2.ListItems(J).SubItems(1) & " AND anyo = " & ListView2.ListItems(J).Text
+                miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
                 If miRsAux.EOF Then
-                    Sql = "Error grave datos banco" & vbCrLf & Sql
+                    SQL = "Error grave datos banco" & vbCrLf & SQL
                 Else
-                    Sql = ""
+                    SQL = ""
                     Dias = DBLet(miRsAux.Fields(0), "N")
                 End If
                 
                 miRsAux.Close
                 
-                If Sql <> "" Then
-                    MsgBox Sql, vbExclamation
+                If SQL <> "" Then
+                    MsgBox SQL, vbExclamation
                     Exit Function
                 End If
                 
-                Sql = "Select fecvenci from scobro WHERE codrem=" & ListView2.ListItems(J).SubItems(1)
-                Sql = Sql & " AND anyorem = " & ListView2.ListItems(J).Text
-                miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                SQL = "Select fecvenci from scobro WHERE codrem=" & ListView2.ListItems(J).SubItems(1)
+                SQL = SQL & " AND anyorem = " & ListView2.ListItems(J).Text
+                miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                Sql = ""
+                SQL = ""
                 If miRsAux.EOF Then
                     'NO hay ningun vencimiento menor.
-                    Sql = "UPDATE remesas Set situacion=""Z"" where codigo =" & ListView2.ListItems(J).SubItems(1)
-                    Sql = Sql & " AND anyo= " & ListView2.ListItems(J).Text
-                    EjecutarSQL Sql
+                    SQL = "UPDATE remesas Set situacion=""Z"" where codigo =" & ListView2.ListItems(J).SubItems(1)
+                    SQL = SQL & " AND anyo= " & ListView2.ListItems(J).Text
+                    EjecutarSQL SQL
                     
                     
                     
@@ -8985,7 +8984,7 @@ Dim Tipopago As Byte
                     While Not miRsAux.EOF
                         NumRegElim = DateDiff("d", miRsAux!FecVenci, Now)
                         
-                        If NumRegElim > Dias Then Sql = "OK"
+                        If NumRegElim > Dias Then SQL = "OK"
                         miRsAux.MoveNext
                     Wend
                     
@@ -8999,7 +8998,7 @@ Dim Tipopago As Byte
                 
                 
                 
-                If Sql = "OK" Then
+                If SQL = "OK" Then
                     ComprobarEfectosBorrar = True
                     Exit Function
                 End If
@@ -9076,7 +9075,7 @@ End Function
 
 
 
-Private Function DiferenciaEnImportes(indice As Integer) As Boolean
+Private Function DiferenciaEnImportes(Indice As Integer) As Boolean
 Dim RB As ADODB.Recordset
 Dim C As String
 Dim Impor As Currency
@@ -9084,8 +9083,8 @@ Dim Codigo As Integer
 
     C = "select scobro.impvenci,l.importe,id from slirecepdoc l left join  scobro  on l.numserie=scobro.numserie and"
     C = C & " l.numfaccl=scobro.codfaccl and   l.fecfaccl=scobro.fecfaccl and l.numvenci=scobro.numorden"
-    C = C & " WHERE anyorem = " & ListView2.ListItems(indice).Text
-    C = C & " AND codrem = " & ListView2.ListItems(indice).SubItems(1) & " ORDER BY ID"
+    C = C & " WHERE anyorem = " & ListView2.ListItems(Indice).Text
+    C = C & " AND codrem = " & ListView2.ListItems(Indice).SubItems(1) & " ORDER BY ID"
     
     Set RB = New ADODB.Recordset
     RB.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -9128,7 +9127,7 @@ End Function
 'Cuando eliminamos un pagare/talon en los cuales el importe del talon
 'no se corresponde con el de los vencimientos, entonces el program
 'debe intentar que se eliminen todos a la vez
-Private Function ComprobarTodosVencidos(indice As Integer) As Boolean
+Private Function ComprobarTodosVencidos(Indice As Integer) As Boolean
 Dim RV As ADODB.Recordset
 Dim C As String
 Dim Dias As Integer
@@ -9143,7 +9142,7 @@ Dim Dias As Integer
               
                     
         C = "select " & C & " from remesas r,ctabancaria b where r.codmacta=b.codmacta and codigo="
-        C = C & ListView2.ListItems(indice).SubItems(1) & " AND anyo = " & ListView2.ListItems(indice).Text
+        C = C & ListView2.ListItems(Indice).SubItems(1) & " AND anyo = " & ListView2.ListItems(Indice).Text
         RV.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Dias = DBLet(RV.Fields(0), "N")
         RV.Close
@@ -9151,8 +9150,8 @@ Dim Dias As Integer
 
         C = "select fecvenci from slirecepdoc l left join  scobro  on l.numserie=scobro.numserie and"
         C = C & " l.numfaccl=scobro.codfaccl and   l.fecfaccl=scobro.fecfaccl and l.numvenci=scobro.numorden"
-        C = C & " WHERE anyorem= " & ListView2.ListItems(indice).Text
-        C = C & " AND codrem = " & ListView2.ListItems(indice).SubItems(1)
+        C = C & " WHERE anyorem= " & ListView2.ListItems(Indice).Text
+        C = C & " AND codrem = " & ListView2.ListItems(Indice).SubItems(1)
         
         RV.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         C = ""
@@ -9181,16 +9180,16 @@ Private Sub CamposRemesaAbono()
    
    If Text3(3) <> "" And Text3(4).Text <> "" Then
         
-        Set Rs = New ADODB.Recordset
-        Sql = "select importe,nommacta from remesas,cuentas where remesas.codmacta=cuentas.codmacta "
-        Sql = Sql & " and anyo=" & Text3(4).Text & " and codigo=" & Text3(3).Text
-        Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
-            Me.txtTexto(0).Text = Rs!Nommacta
-            Me.txtTexto(1).Text = Format(Rs!Importe, FormatoImporte)
+        Set RS = New ADODB.Recordset
+        SQL = "select importe,nommacta from remesas,cuentas where remesas.codmacta=cuentas.codmacta "
+        SQL = SQL & " and anyo=" & Text3(4).Text & " and codigo=" & Text3(3).Text
+        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
+            Me.txtTexto(0).Text = RS!Nommacta
+            Me.txtTexto(1).Text = Format(RS!Importe, FormatoImporte)
         End If
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
     End If
     
 End Sub
@@ -9212,46 +9211,46 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         J = 0
         For I = 0 To 1
             ' contatalonpte
-            Sql = "pagarecta"
-            If I = 1 Then Sql = "contatalonpte"
-            CtaPte = (DevuelveDesdeBD(Sql, "paramtesor", "codigo", "1") = "1")
+            SQL = "pagarecta"
+            If I = 1 Then SQL = "contatalonpte"
+            CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
             
             'Repetiremos el proceso dos veces
-            Sql = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            Sql = Sql & " AND   talon = " & I
-            Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not Rs.EOF
+            SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
+            SQL = SQL & " AND   talon = " & I
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not RS.EOF
                     'Si lleva cta puente habra que ver si esta contbilizada
                     J = 0
                     If CtaPte Then
-                        If Val(Rs!Contabilizada) = 0 Then
+                        If Val(RS!Contabilizada) = 0 Then
                             'Veo si tiene lineas. S
-                            Sql = DevuelveDesdeBD("count(*)", "slirecepdoc", "id", CStr(Rs!Codigo))
-                            If Sql = "" Then Sql = "0"
-                            If Val(Sql) > 0 Then
-                                CuentasCC = CuentasCC & Rs!Codigo & " - No contabilizada" & vbCrLf
+                            SQL = DevuelveDesdeBD("count(*)", "slirecepdoc", "id", CStr(RS!Codigo))
+                            If SQL = "" Then SQL = "0"
+                            If Val(SQL) > 0 Then
+                                CuentasCC = CuentasCC & RS!Codigo & " - No contabilizada" & vbCrLf
                                 J = 1
                             End If
                         End If
                     End If
                     If J = 0 Then
                         'Si va benee
-                        If Val(DBLet(Rs!llevadobanco, "N")) = 0 Then
-                            Sql = DevuelveDesdeBD("count(*)", "slirecepdoc", "id", CStr(Rs!Codigo))
-                            If Sql = "" Then Sql = "0"
-                            If Val(Sql) > 0 Then
-                                CuentasCC = CuentasCC & Rs!Codigo & " - Sin llevar a banco" & vbCrLf
+                        If Val(DBLet(RS!llevadobanco, "N")) = 0 Then
+                            SQL = DevuelveDesdeBD("count(*)", "slirecepdoc", "id", CStr(RS!Codigo))
+                            If SQL = "" Then SQL = "0"
+                            If Val(SQL) > 0 Then
+                                CuentasCC = CuentasCC & RS!Codigo & " - Sin llevar a banco" & vbCrLf
                                 J = 1
                             End If
                     
                         End If
                     End If
                     'Esta la borraremos
-                    If J = 0 Then CualesEliminar = CualesEliminar & ", " & Rs!Codigo
+                    If J = 0 Then CualesEliminar = CualesEliminar & ", " & RS!Codigo
                     
-                    Rs.MoveNext
+                    RS.MoveNext
             Wend
-            Rs.Close
+            RS.Close
             
             
             
@@ -9275,24 +9274,24 @@ On Error GoTo EEliminarEnRecepcionDocumentos
         'Si k hay para borrar
         CualesEliminar = Mid(CualesEliminar, 2)
         J = 1
-        Sql = "X"
+        SQL = "X"
         Do
             I = InStr(J, CualesEliminar, ",")
             If I > 0 Then
                 J = I + 1
-                Sql = Sql & "X"
+                SQL = SQL & "X"
             End If
         Loop Until I = 0
         
-        Sql = "Va a eliminar " & Len(Sql) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
+        SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
         If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
-        Sql = Sql & vbCrLf & CuentasCC
-        If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-            Sql = "DELETE from slirecepdoc where id in (" & CualesEliminar & ")"
-            Conn.Execute Sql
+        SQL = SQL & vbCrLf & CuentasCC
+        If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "DELETE from slirecepdoc where id in (" & CualesEliminar & ")"
+            Conn.Execute SQL
             
-            Sql = "DELETE from scarecepdoc where codigo in (" & CualesEliminar & ")"
-            Conn.Execute Sql
+            SQL = "DELETE from scarecepdoc where codigo in (" & CualesEliminar & ")"
+            Conn.Execute SQL
     
         End If
 
@@ -9332,8 +9331,8 @@ Private Function ComprobacionFechasRemesaN19PorVto() As String
 Dim Aux As String
 
     ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & Rs!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("min(fecvenci)", "scobro", Aux, Rs!Codigo)
+    Aux = "anyorem = " & RS!Anyo & " AND codrem "
+    Aux = DevuelveDesdeBD("min(fecvenci)", "scobro", Aux, RS!Codigo)
     If Aux = "" Then
         ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
     Else
@@ -9344,8 +9343,8 @@ Dim Aux As String
     If ComprobacionFechasRemesaN19PorVto <> "" Then Exit Function
     
     ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & Rs!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("max(fecvenci)", "scobro", Aux, Rs!Codigo)
+    Aux = "anyorem = " & RS!Anyo & " AND codrem "
+    Aux = DevuelveDesdeBD("max(fecvenci)", "scobro", Aux, RS!Codigo)
     If Aux = "" Then
         ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
         Exit Function
@@ -9363,74 +9362,74 @@ Dim Importe As Currency
 
 
     On Error GoTo eCargarVtosRecaudaEjecutiva
-    Sql = "Select numserie,codfaccl,fecfaccl,numorden,fecvenci,impvenci,gastos,impcobro,scobro.codmacta,nommacta,nifdatos"
-    Sql = Sql & ",dirdatos,codposta,despobla,desprovi,codbanco ,codsucur,digcontr,scobro.cuentaba"
-    Sql = Sql & NumeroDocumento
-    Sql = Sql & " ORDER BY numserie,codfaccl,numorden"
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select numserie,codfaccl,fecfaccl,numorden,fecvenci,impvenci,gastos,impcobro,scobro.codmacta,nommacta,nifdatos"
+    SQL = SQL & ",dirdatos,codposta,despobla,desprovi,codbanco ,codsucur,digcontr,scobro.cuentaba"
+    SQL = SQL & NumeroDocumento
+    SQL = SQL & " ORDER BY numserie,codfaccl,numorden"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Me.ListView5.ListItems.Clear
     
-    While Not Rs.EOF
+    While Not RS.EOF
         
         
         'If RS!codfaccl = 13188 Then Stop
         
         Set IT = ListView5.ListItems.Add
-        IT.Text = Rs!NUmSerie
-        IT.SubItems(1) = Format(Rs!codfaccl, "000000")
-        IT.SubItems(2) = Format(Rs!fecfaccl, "dd/mm/yyyy")
-        IT.SubItems(3) = Format(Rs!numorden, "00")
-        IT.SubItems(4) = Format(Rs!FecVenci, "dd/mm/yyyy")
+        IT.Text = RS!NUmSerie
+        IT.SubItems(1) = Format(RS!codfaccl, "000000")
+        IT.SubItems(2) = Format(RS!fecfaccl, "dd/mm/yyyy")
+        IT.SubItems(3) = Format(RS!numorden, "00")
+        IT.SubItems(4) = Format(RS!FecVenci, "dd/mm/yyyy")
         
-        Importe = DBLet(Rs!Gastos, "N")
-        Importe = Importe - DBLet(Rs!impcobro, "N")
+        Importe = DBLet(RS!Gastos, "N")
+        Importe = Importe - DBLet(RS!impcobro, "N")
          
         
-        IT.SubItems(5) = Format(Rs!ImpVenci - Importe, FormatoImporte)
+        IT.SubItems(5) = Format(RS!ImpVenci - Importe, FormatoImporte)
         If Importe <> 0 Then IT.ListSubItems(5).ForeColor = vbBlue   'marcamos con Azul el lw wn importe que tienen gastos y/o parcial
      
     
-        IT.SubItems(6) = Rs!codmacta
-        IT.SubItems(7) = Trim(Rs!Nommacta)   'NOMBRE OBLIGADO
+        IT.SubItems(6) = RS!codmacta
+        IT.SubItems(7) = Trim(RS!Nommacta)   'NOMBRE OBLIGADO
         
         'direc
-        IT.SubItems(8) = Trim(DBLet(Rs!nifdatos, "N"))
-        IT.SubItems(10) = Trim(DBLet(Rs!dirdatos, "N"))
-        IT.SubItems(11) = Right("     " & DBLet(Rs!codposta), 5) & " " & Trim(DBLet(Rs!desPobla, "N"))
+        IT.SubItems(8) = Trim(DBLet(RS!nifdatos, "N"))
+        IT.SubItems(10) = Trim(DBLet(RS!dirdatos, "N"))
+        IT.SubItems(11) = Right("     " & DBLet(RS!codposta), 5) & " " & Trim(DBLet(RS!desPobla, "N"))
         
         
         
         'codbanco ,codsucur,digcontr,cuentaba
-        If DBLet(Rs!codbanco, "N") = 0 Then
-            Sql = "----"
+        If DBLet(RS!codbanco, "N") = 0 Then
+            SQL = "----"
         Else
-            Sql = Format(Rs!codbanco, "0000")
+            SQL = Format(RS!codbanco, "0000")
         End If
-        CuentasCC = Sql & " "
-        If DBLet(Rs!codsucur, "N") = 0 Then
-            Sql = "----"
+        CuentasCC = SQL & " "
+        If DBLet(RS!codsucur, "N") = 0 Then
+            SQL = "----"
         Else
-            Sql = Format(Rs!codsucur, "0000")
+            SQL = Format(RS!codsucur, "0000")
         End If
-        CuentasCC = CuentasCC & " " & Sql
+        CuentasCC = CuentasCC & " " & SQL
         'CC,cuentaba
-        If Trim(DBLet(Rs!digcontr, "T")) = "" Then
-            Sql = "--"
+        If Trim(DBLet(RS!digcontr, "T")) = "" Then
+            SQL = "--"
         Else
-            If Not IsNumeric(Rs!digcontr) Then
-                Sql = "--"
+            If Not IsNumeric(RS!digcontr) Then
+                SQL = "--"
             Else
-                Sql = Right("--" & Rs!digcontr, 2)
+                SQL = Right("--" & RS!digcontr, 2)
             End If
         End If
-        CuentasCC = CuentasCC & " " & Sql
-        If DBLet(Rs!Cuentaba, "N") = 0 Then
-            Sql = "----------"
+        CuentasCC = CuentasCC & " " & SQL
+        If DBLet(RS!Cuentaba, "N") = 0 Then
+            SQL = "----------"
         Else
-            Sql = Format(Rs!Cuentaba, "0000000000")
+            SQL = Format(RS!Cuentaba, "0000000000")
         End If
-        CuentasCC = CuentasCC & " " & Sql
+        CuentasCC = CuentasCC & " " & SQL
                 
         IT.SubItems(9) = CuentasCC
         IT.ToolTipText = IT.SubItems(7)
@@ -9466,10 +9465,10 @@ Dim Importe As Currency
             IT.Bold = True
             IT.ForeColor = vbRed
         End If
-        Rs.MoveNext
+        RS.MoveNext
         
     Wend
-    Rs.Close
+    RS.Close
     
     
     
@@ -9478,7 +9477,7 @@ eCargarVtosRecaudaEjecutiva:
         MuestraError Err.Number, Err.Description
         cmdRecaudaEjec.Enabled = False
     End If
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -9489,29 +9488,29 @@ End Sub
 Private Sub ReclamacionGargarList()
     ListView6.ListItems.Clear
     
-    Sql = "SELECT fechaadq,maidatos,razosoci,nommacta FROM  tmpentrefechas,cuentas WHERE fechaadq=codmacta  "
-    Sql = Sql & " AND codUsu = " & vUsu.Codigo & " AND "
+    SQL = "SELECT fechaadq,maidatos,razosoci,nommacta FROM  tmpentrefechas,cuentas WHERE fechaadq=codmacta  "
+    SQL = SQL & " AND codUsu = " & vUsu.Codigo & " AND "
     If Me.optReclama(0).Value Then
         'Sin email
-        Sql = Sql & " coalesce(maidatos,'')='' "
+        SQL = SQL & " coalesce(maidatos,'')='' "
         ListView6.Checkboxes = False
     Else
-        Sql = Sql & " maidatos<>'' "
+        SQL = SQL & " maidatos<>'' "
         ListView6.Checkboxes = True
     End If
-    Sql = Sql & " GROUP BY fechaadq  "
+    SQL = SQL & " GROUP BY fechaadq  "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
         Set IT = ListView6.ListItems.Add
-        IT.Text = Rs!fechaadq
-        IT.SubItems(1) = Rs!Nommacta
-        IT.SubItems(2) = DBLet(Rs!maidatos, "T")
-        Rs.MoveNext
+        IT.Text = RS!fechaadq
+        IT.SubItems(1) = RS!Nommacta
+        IT.SubItems(2) = DBLet(RS!maidatos, "T")
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 End Sub
 
@@ -9523,26 +9522,26 @@ Private Sub LeerGuardarBancoDefectoEntidad(Leer As Boolean)
 On Error GoTo eLeerGuardarBancoDefectoEntidad
 
     I = -1
-    Sql = App.Path & "\BancRemEn.xdf"
+    SQL = App.Path & "\BancRemEn.xdf"
     If Leer Then
         txtCta(3).Text = ""
-        If Dir(Sql, vbArchive) <> "" Then
+        If Dir(SQL, vbArchive) <> "" Then
             I = FreeFile
-            Open Sql For Input As #I
+            Open SQL For Input As #I
             If Not EOF(I) Then
-                Line Input #I, Sql
-                txtCta(3).Text = Sql
-                txtCta(3).Tag = Sql
+                Line Input #I, SQL
+                txtCta(3).Text = SQL
+                txtCta(3).Tag = SQL
             End If
         End If
     
     Else
         'Guardar
         If Me.txtCta(3).Text = "" Then
-            If Dir(Sql, vbArchive) <> "" Then Kill Sql
+            If Dir(SQL, vbArchive) <> "" Then Kill SQL
         Else
             I = FreeFile
-            Open Sql For Output As #I
+            Open SQL For Output As #I
             Print #I, txtCta(3).Text
             
         End If

@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANABO000002F20160817T125515</MsgId>
-      <CreDtTm>2016-08-17T12:55:15</CreDtTm>
+      <MsgId>TRANPAG000003F20160818T140512</MsgId>
+      <CreDtTm>2016-08-18T14:05:12</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>100.25</CtrlSum>
+      <CtrlSum>27.55</CtrlSum>
       <InitgPty>
          <Nm>PRUEBASSSSSS</Nm>
          <Id>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20160817125515B96470190</PmtInfId>
+      <PmtInfId>20160818140512B96470190</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-08-17</ReqdExctnDt>
+      <ReqdExctnDt>2016-08-18</ReqdExctnDt>
       <Dbtr>
          <Nm>PRUEBASSSSSS</Nm>
          <PstlAdr>
@@ -48,40 +48,40 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>A  0025252520160817001</EndToEndId>
+         <EndToEndId>32975     20160516001</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>TRAD</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">100.25</InstdAmt>
+          <InstdAmt Ccy="EUR">27.55</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
+             <BIC>BSCHESMMXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
+          <Nm>REGISTRO MERCANTIL DE VALENCIA</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>F46026696</Id>
+                     <Id>E97727168</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES1030582267072710000069</IBAN>
+              <IBAN>ES6500490172442110674696</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+         <Ustrd>Factura 32975 de Fecha 06/07/2016</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

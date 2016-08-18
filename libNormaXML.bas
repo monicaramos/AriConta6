@@ -115,7 +115,10 @@ Dim EsPersonaJuridica2 As Boolean
     End If
     
     NFic = FreeFile
+    CerrarFichero NFic
     Open App.Path & "\norma34.txt" For Output As #NFic
+    
+    
     
     
     Print #NFic, "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>"
@@ -130,11 +133,12 @@ Dim EsPersonaJuridica2 As Boolean
     If Pagos Then
         Aux = "ImpEfect - coalesce(imppagad ,0)"
         cad = "pagos"
+        cad = "Select count(*),sum(" & Aux & ") FROM " & cad & " WHERE nrodocum = " & NumeroTransferencia & " and  anyodocum = " & DBSet(Anyo, "N")
     Else
         Aux = "abs(impvenci + coalesce(Gastos, 0) - coalesce(impcobro, 0))"
         cad = "cobros"
+        cad = "Select count(*),sum(" & Aux & ") FROM " & cad & " WHERE transfer = " & NumeroTransferencia & " and  anyorem = " & DBSet(Anyo, "N")
     End If
-    cad = "Select count(*),sum(" & Aux & ") FROM " & cad & " WHERE transfer = " & NumeroTransferencia & " and  anyorem = " & DBSet(Anyo, "N")
     Aux = "0|0|"
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
@@ -225,9 +229,13 @@ Dim EsPersonaJuridica2 As Boolean
     
     'Para ello abrimos la tabla tmpNorma34
     If Pagos Then
-        cad = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,desprovi,pais,cuentas.despobla,bic,nifdatos from spagop"
-        cad = cad & " left join sbic on spagop.entidad=sbic.entidad INNER JOIN cuentas ON"
-        cad = cad & " codmacta=ctaprove WHERE transfer =" & NumeroTransferencia
+'        cad = "Select pagos.*,nommacta,dirdatos,codposta,dirdatos,desprovi,pais,cuentas.despobla,bic,nifdatos from pagos "
+        cad = "Select mid(pagos.iban,5,4) as entidad,mid(pagos.iban,9,4) as oficina,mid(pagos.iban,15,10) cuentaba,mid(pagos.iban,13,2) as CC,pagos.iban, "
+        cad = cad & "nomprove nommacta,domprove dirdatos,cpprove codposta,pobprove despobla,impefect,pagos.codmacta,codpais,0 Gastos,imppagad,proprove desprovi"
+        cad = cad & " ,NUmSerie,numfactu,fecfactu,numorden,text1csb,text2csb,bic,nifprove nifdatos from pagos"
+        
+        cad = cad & " left join bics on mid(pagos.iban,5,4)=bics.entidad "
+        cad = cad & " WHERE nrodocum =" & NumeroTransferencia & " and anyodocum = " & DBSet(Anyo, "N")
     Else
         'ABONOS
          '
@@ -261,7 +269,7 @@ Dim EsPersonaJuridica2 As Boolean
         If Pagos Then
             Im = DBLet(miRsAux!imppagad, "N")
             Im = miRsAux!ImpEfect - Im
-            Aux = miRsAux!ctaprove
+            Aux = miRsAux!codmacta
 
         Else
             Im = Abs(miRsAux!ImpVenci + DBLet(miRsAux!Gastos, "N")) - DBLet(miRsAux!impcobro, "N")
@@ -375,10 +383,14 @@ Dim EsPersonaJuridica2 As Boolean
     
     miRsAux.Close
     Set miRsAux = Nothing
-    Close (NFic)
+    
+    Close #NFic
+    
     NFic = -1
+    
     If Regs > 0 Then GeneraFicheroNorma34SEPA_XML = True
     Exit Function
+    
 EGen3:
     MuestraError Err.Number, Err.Description
     Set miRsAux = Nothing

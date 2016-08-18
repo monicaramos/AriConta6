@@ -358,63 +358,113 @@ Begin VB.Form frmTESPagos
       Tab(0).Control(17).Enabled=   0   'False
       Tab(0).Control(18)=   "Label1(10)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text1(20)"
+      Tab(0).Control(19)=   "Label1(17)"
       Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Combo1"
+      Tab(0).Control(20)=   "Label1(16)"
       Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Text1(19)"
+      Tab(0).Control(21)=   "Text1(32)"
       Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text1(26)"
+      Tab(0).Control(22)=   "Text1(20)"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "Text1(21)"
+      Tab(0).Control(23)=   "Combo1"
       Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "Text1(30)"
+      Tab(0).Control(24)=   "Text1(19)"
       Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "Text1(29)"
+      Tab(0).Control(25)=   "Text1(26)"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "Text1(28)"
+      Tab(0).Control(26)=   "Text1(21)"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "Text2(0)"
+      Tab(0).Control(27)=   "Text1(30)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Text1(4)"
+      Tab(0).Control(28)=   "Text1(29)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Text2(1)"
+      Tab(0).Control(29)=   "Text1(28)"
       Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "Text1(0)"
+      Tab(0).Control(30)=   "Text2(0)"
       Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "Text1(5)"
+      Tab(0).Control(31)=   "Text1(4)"
       Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "Text1(6)"
+      Tab(0).Control(32)=   "Text2(1)"
       Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "Text2(2)"
+      Tab(0).Control(33)=   "Text1(0)"
       Tab(0).Control(33).Enabled=   0   'False
-      Tab(0).Control(34)=   "Text1(9)"
+      Tab(0).Control(34)=   "Text1(5)"
       Tab(0).Control(34).Enabled=   0   'False
-      Tab(0).Control(35)=   "Text2(3)"
+      Tab(0).Control(35)=   "Text1(6)"
       Tab(0).Control(35).Enabled=   0   'False
-      Tab(0).Control(36)=   "Text1(10)"
+      Tab(0).Control(36)=   "Text2(2)"
       Tab(0).Control(36).Enabled=   0   'False
-      Tab(0).Control(37)=   "Text1(17)"
+      Tab(0).Control(37)=   "Text1(9)"
       Tab(0).Control(37).Enabled=   0   'False
-      Tab(0).Control(38)=   "frameContene"
+      Tab(0).Control(38)=   "Text2(3)"
       Tab(0).Control(38).Enabled=   0   'False
-      Tab(0).Control(39)=   "txtPendiente"
+      Tab(0).Control(39)=   "Text1(10)"
       Tab(0).Control(39).Enabled=   0   'False
-      Tab(0).Control(40)=   "Text1(12)"
+      Tab(0).Control(40)=   "Text1(17)"
       Tab(0).Control(40).Enabled=   0   'False
-      Tab(0).Control(41)=   "Text1(11)"
+      Tab(0).Control(41)=   "frameContene"
       Tab(0).Control(41).Enabled=   0   'False
-      Tab(0).Control(42)=   "Text1(7)"
+      Tab(0).Control(42)=   "txtPendiente"
       Tab(0).Control(42).Enabled=   0   'False
-      Tab(0).Control(43)=   "Text1(8)"
+      Tab(0).Control(43)=   "Text1(12)"
       Tab(0).Control(43).Enabled=   0   'False
-      Tab(0).Control(44)=   "FrameRemesa"
+      Tab(0).Control(44)=   "Text1(11)"
       Tab(0).Control(44).Enabled=   0   'False
-      Tab(0).Control(45)=   "SSTab2"
+      Tab(0).Control(45)=   "Text1(7)"
       Tab(0).Control(45).Enabled=   0   'False
-      Tab(0).Control(46)=   "FrameDatosFiscales"
+      Tab(0).Control(46)=   "Text1(8)"
       Tab(0).Control(46).Enabled=   0   'False
-      Tab(0).ControlCount=   47
+      Tab(0).Control(47)=   "FrameRemesa"
+      Tab(0).Control(47).Enabled=   0   'False
+      Tab(0).Control(48)=   "SSTab2"
+      Tab(0).Control(48).Enabled=   0   'False
+      Tab(0).Control(49)=   "FrameDatosFiscales"
+      Tab(0).Control(49).Enabled=   0   'False
+      Tab(0).Control(50)=   "cboSituRem"
+      Tab(0).Control(50).Enabled=   0   'False
+      Tab(0).Control(51)=   "Text1(31)"
+      Tab(0).Control(51).Enabled=   0   'False
+      Tab(0).ControlCount=   52
+      Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   31
+         Left            =   13830
+         MaxLength       =   4
+         TabIndex        =   108
+         Tag             =   "Año remesa|N|S|0||pagos|anyodocum|||"
+         Text            =   "Text"
+         Top             =   3420
+         Width           =   1395
+      End
+      Begin VB.ComboBox cboSituRem 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         ItemData        =   "frmTESPagos.frx":006C
+         Left            =   9780
+         List            =   "frmTESPagos.frx":006E
+         Style           =   2  'Dropdown List
+         TabIndex        =   107
+         Top             =   4200
+         Width           =   2805
+      End
       Begin VB.Frame FrameDatosFiscales 
          Caption         =   "DATOS FISCALES"
          BeginProperty Font 
@@ -740,7 +790,7 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          TabCaption(0)   =   "Pagos Realizados"
-         TabPicture(0)   =   "frmTESPagos.frx":006C
+         TabPicture(0)   =   "frmTESPagos.frx":0070
          Tab(0).ControlEnabled=   -1  'True
          Tab(0).Control(0)=   "FrameAux0"
          Tab(0).Control(0).Enabled=   0   'False
@@ -1285,9 +1335,9 @@ Begin VB.Form frmTESPagos
          Caption         =   "Frame3"
          Enabled         =   0   'False
          Height          =   525
-         Left            =   12390
+         Left            =   9690
          TabIndex        =   43
-         Top             =   3390
+         Top             =   3360
          Width           =   3015
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -1301,7 +1351,7 @@ Begin VB.Form frmTESPagos
             EndProperty
             Height          =   360
             Index           =   27
-            Left            =   1440
+            Left            =   1230
             MaxLength       =   10
             TabIndex        =   22
             Tag             =   "Nro Documento|N|S|0||pagos|nrodocum|0000000000||"
@@ -1320,9 +1370,9 @@ Begin VB.Form frmTESPagos
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   195
+            Height          =   285
             Index           =   19
-            Left            =   120
+            Left            =   60
             TabIndex        =   103
             Top             =   90
             Width           =   1260
@@ -1431,9 +1481,9 @@ Begin VB.Form frmTESPagos
       Begin VB.Frame frameContene 
          BorderStyle     =   0  'None
          Height          =   555
-         Left            =   9870
+         Left            =   12900
          TabIndex        =   45
-         Top             =   3360
+         Top             =   4200
          Width           =   2235
          Begin VB.CheckBox Check1 
             Caption         =   "Documento emitido"
@@ -1448,10 +1498,10 @@ Begin VB.Form frmTESPagos
             EndProperty
             Height          =   255
             Index           =   0
-            Left            =   30
+            Left            =   60
             TabIndex        =   21
             Tag             =   "Emitido|N|S|||pagos|emitdocum|||"
-            Top             =   120
+            Top             =   90
             Width           =   2505
          End
       End
@@ -1472,7 +1522,7 @@ Begin VB.Form frmTESPagos
          ScrollBars      =   2  'Vertical
          TabIndex        =   15
          Tag             =   "obs|T|S|||pagos|observa|||"
-         Text            =   "frmTESPagos.frx":0088
+         Text            =   "frmTESPagos.frx":008C
          Top             =   4080
          Width           =   9225
       End
@@ -1808,9 +1858,9 @@ Begin VB.Form frmTESPagos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         ItemData        =   "frmTESPagos.frx":008E
+         ItemData        =   "frmTESPagos.frx":0092
          Left            =   5190
-         List            =   "frmTESPagos.frx":009B
+         List            =   "frmTESPagos.frx":009F
          Style           =   2  'Dropdown List
          TabIndex        =   23
          Tag             =   "Situación|N|N|||pagos|situacion|||"
@@ -1836,6 +1886,62 @@ Begin VB.Form frmTESPagos
          Tag             =   "Usuario|N|S|||pagos|codusu|####0||"
          Top             =   2850
          Width           =   1365
+      End
+      Begin VB.TextBox Text1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   32
+         Left            =   11130
+         MaxLength       =   4
+         TabIndex        =   111
+         Tag             =   "Situacion|T|S|||pagos|situdocum|||"
+         Text            =   "Text1"
+         Top             =   4200
+         Width           =   885
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Año"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   16
+         Left            =   13020
+         TabIndex        =   110
+         Top             =   3450
+         Width           =   540
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Situación"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   17
+         Left            =   9720
+         TabIndex        =   109
+         Top             =   3900
+         Width           =   1080
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
@@ -1867,7 +1973,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   2
          Left            =   13710
-         Picture         =   "frmTESPagos.frx":00D2
+         Picture         =   "frmTESPagos.frx":00D6
          Top             =   1410
          Width           =   240
       End
@@ -1875,7 +1981,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   1
          Left            =   10890
-         Picture         =   "frmTESPagos.frx":015D
+         Picture         =   "frmTESPagos.frx":0161
          Top             =   1410
          Width           =   240
       End
@@ -2259,7 +2365,7 @@ Begin VB.Form frmTESPagos
          Height          =   240
          Index           =   0
          Left            =   3780
-         Picture         =   "frmTESPagos.frx":01E8
+         Picture         =   "frmTESPagos.frx":01EC
          Top             =   0
          Width           =   240
       End
@@ -2511,6 +2617,20 @@ End Sub
 
 
 
+Private Sub cboSituRem_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub cboSituRem_Validate(Cancel As Boolean)
+    If (Modo = 1 Or Modo = 3 Or Modo = 4) Then
+        If cboSituRem.ListIndex = 0 Then
+            Text1(32).Text = ""
+        Else
+            If cboSituRem.ListIndex <> -1 Then Text1(32).Text = Chr(cboSituRem.ItemData(cboSituRem.ListIndex))
+        End If
+    End If
+
+End Sub
 Private Sub Check1_Click(Index As Integer)
     If Modo = 1 Then
         'Buscqueda
@@ -2665,6 +2785,7 @@ Private Sub BotonAnyadir()
     'añadimos el codusu
     Text1(20).Text = vUsu.Id
     
+    cboSituRem.ListIndex = -1
     '###A mano
     PonFoco Text1(13)
 End Sub
@@ -3593,8 +3714,8 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
     CadenaDesdeOtroForm = ""
     
-    frmTESVerCobrosPagos.vSQL = cadFiltro
-    If CadB <> "" Then frmTESVerCobrosPagos.vSQL = frmTESVerCobrosPagos.vSQL & " and " & CadB
+    frmTESVerCobrosPagos.vSql = cadFiltro
+    If CadB <> "" Then frmTESVerCobrosPagos.vSql = frmTESVerCobrosPagos.vSql & " and " & CadB
     frmTESVerCobrosPagos.OrdenarEfecto = False
     frmTESVerCobrosPagos.Regresar = True
     frmTESVerCobrosPagos.Cobros = False
@@ -3653,6 +3774,15 @@ Private Sub PonerCampos()
     Text2(1).Text = PonerNombreDeCod(Text1(0), "formapago", "nomforpa", "codforpa", "N")
     
     vTipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", Text1(0).Text, "N")
+    
+    If Text1(32).Text = "" Then
+        cboSituRem.ListIndex = -1
+    Else
+        PosicionarCombo cboSituRem, Asc(Text1(32).Text)
+    End If
+    
+    cboSituRem_Validate False
+    
     
     
     ' situamos los campos del iban
@@ -3801,6 +3931,8 @@ Private Sub PonerModo(Kmodo As Integer, Optional indFrame As Integer)
         Text1(I).Locked = B
     Next I
     
+    cboSituRem.Locked = B
+
     frameContene.Enabled = Not B
     
     For I = 0 To 2
@@ -3825,6 +3957,14 @@ Dim B As Boolean
 Dim Tipo As Integer
 
     DatosOK = False
+    
+    If cboSituRem.ListIndex = 0 Or cboSituRem.ListIndex = -1 Then
+        Text1(32).Text = ""
+    Else
+        Text1(32).Text = Chr(cboSituRem.ItemData(cboSituRem.ListIndex))
+    End If
+    
+    
     
     B = CompForm2(Me, 1)
     If Not B Then Exit Function
@@ -4075,13 +4215,13 @@ Dim Im As Currency
     'Ok, Ahora pongo los labels
     frmTESPagosDivVto.Opcion = 27
     frmTESPagosDivVto.Label4(56).Caption = Text2(0).Text
-    frmTESPagosDivVto.txtcodigo(2).Text = Text1(5).Text
+    frmTESPagosDivVto.txtCodigo(2).Text = Text1(5).Text
     
     frmTESPagosDivVto.Label4(57).Caption = Data1.Recordset!NUmSerie & Format(Data1.Recordset!NumFactu, "000000") & " / " & Data1.Recordset!numorden & "      de " & Format(Data1.Recordset!FecFactu, "dd/mm/yyyy")
     
     'Si ya ha cobrado algo...
     Im = DBLet(Data1.Recordset!imppagad, "N")
-    If Im > 0 Then frmTESPagosDivVto.txtcodigo(1).Text = txtPendiente.Text
+    If Im > 0 Then frmTESPagosDivVto.txtCodigo(1).Text = txtPendiente.Text
     
     If Text1(0).Text = "" Then
         MsgBox "El pago no tiene forma de pago. Revise.", vbExclamation
@@ -4337,8 +4477,29 @@ Dim J As Long
     Combo1.AddItem "Pagado"
     Combo1.ItemData(Combo1.NewIndex) = 1
 
-End Sub
 
+    
+    cboSituRem.Clear
+
+    cboSituRem.AddItem ""
+    cboSituRem.ItemData(cboSituRem.NewIndex) = Asc("NULL")
+
+
+    'Tipo de situacion de la transferencia
+    Set RS = New ADODB.Recordset
+    SQL = "SELECT * FROM usuarios.wtiposituacionrem ORDER BY situacio"
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    I = 0
+    While Not RS.EOF
+        cboSituRem.AddItem RS!descsituacion
+        cboSituRem.ItemData(cboSituRem.NewIndex) = Asc(RS!situacio)
+        I = I + 1
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+
+End Sub
 
 
 '************* LLINIES: ****************************

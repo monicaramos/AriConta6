@@ -298,10 +298,23 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     B = AdelanteConLaTransferencia()
     ContabilizacionEspecialNorma19 = False
     
-    SQL = "Select cobros.codmacta,nomclien,fecbloq from cobros,cuentas where cobros.codmacta = cuentas.codmacta"
-    SQL = SQL & " and transfer =" & RecuperaValor(NumeroDocumento, 1)
-    SQL = SQL & " AND anyorem =" & RecuperaValor(NumeroDocumento, 2)
-    SQL = SQL & " AND fecbloq <='" & Format(Text1(10).Text, FormatoFecha) & "' GROUP BY 1"
+    If Cobros Then
+    
+        SQL = "Select cobros.codmacta,nomclien,fecbloq from cobros,cuentas where cobros.codmacta = cuentas.codmacta"
+        SQL = SQL & " and transfer =" & RecuperaValor(NumeroDocumento, 1)
+        SQL = SQL & " AND anyorem =" & RecuperaValor(NumeroDocumento, 2)
+        SQL = SQL & " AND fecbloq <='" & Format(Text1(10).Text, FormatoFecha) & "' GROUP BY 1"
+        
+    Else
+        SQL = "Select pagos.codmacta,nomprove nomclien,fecbloq from pagos,cuentas where pagos.codmacta = cuentas.codmacta"
+        SQL = SQL & " and nrodocum =" & RecuperaValor(NumeroDocumento, 1)
+        SQL = SQL & " AND anyodocum =" & RecuperaValor(NumeroDocumento, 2)
+        SQL = SQL & " AND fecbloq <='" & Format(Text1(10).Text, FormatoFecha) & "' GROUP BY 1"
+    
+    
+    
+    End If
+        
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
@@ -324,43 +337,43 @@ Dim ContabilizacionEspecialNorma19 As Boolean
        
     'Bloqueariamos la opcion de modificar esa remesa
         
-        Importe = TextoAimporte(txtImporte(0).Text)
-  
-        'Tiene gastos. Falta ver si tiene la cuenta de gastos configurada. ASi como
-        'si es analitica, el CC asociado
-        CC = ""
-        If vParam.autocoste Then CC = "codccost"
-            
-        SQL = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", RS!codmacta, "T", CC)
-        If SQL = "" Then
-            MsgBox "Falta configurar la cuenta de gastos del banco:" & RS!codmacta, vbExclamation
+    Importe = TextoAimporte(txtImporte(0).Text)
+
+    'Tiene gastos. Falta ver si tiene la cuenta de gastos configurada. ASi como
+    'si es analitica, el CC asociado
+    CC = ""
+    If vParam.autocoste Then CC = "codccost"
+        
+    SQL = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", RS!codmacta, "T", CC)
+    If SQL = "" Then
+        MsgBox "Falta configurar la cuenta de gastos del banco:" & RS!codmacta, vbExclamation
+        Set RS = Nothing
+        Exit Sub
+    End If
+    
+    If vParam.autocoste Then
+        If CC = "" Then
+            MsgBox "Necesita asignar centro de coste a la cuenta de gastos del banco: " & RS!codmacta, vbExclamation
             Set RS = Nothing
             Exit Sub
         End If
-        
-        If vParam.autocoste Then
-            If CC = "" Then
-                MsgBox "Necesita asignar centro de coste a la cuenta de gastos del banco: " & RS!codmacta, vbExclamation
-                Set RS = Nothing
-                Exit Sub
-            End If
-        End If
-        
-        SQL = SQL & "|" & CC & "|"
-        
-        
-        'Añado, si tiene, la cuenta de ingresos
-        CC = DevuelveDesdeBD("ctaingreso", "bancos", "codmacta", RS!codmacta, "T")
-        If CC = "" Then
-            If Importe > 0 Then
-                MsgBox "Falta configurar la cuenta de ingresos del banco:" & RS!codmacta, vbExclamation
-                Set RS = Nothing
-                Exit Sub
-            End If
-        End If
-        
-        SQL = SQL & CC & "|"   'La
-        
+    End If
+    
+    SQL = SQL & "|" & CC & "|"
+      
+      
+      'Añado, si tiene, la cuenta de ingresos
+      CC = DevuelveDesdeBD("ctaingreso", "bancos", "codmacta", RS!codmacta, "T")
+      If CC = "" Then
+          If Importe > 0 Then
+              MsgBox "Falta configurar la cuenta de ingresos del banco:" & RS!codmacta, vbExclamation
+              Set RS = Nothing
+              Exit Sub
+          End If
+      End If
+      
+      SQL = SQL & CC & "|"   'La
+      
 
     SQL = RS!codmacta & "|" & SQL
     

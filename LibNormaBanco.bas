@@ -922,7 +922,7 @@ On Error GoTo EcomprobarCuentasBancariasPagos
 
     comprobarCuentasBancariasPagos = False
     If Pagos Then
-        SQL = "select * from pagos where transfer = " & Transferencia
+        SQL = "select * from pagos where nrodocum = " & Transferencia & " and anyodocum = " & DBSet(Anyo, "N")
     Else
         'ABONOS
         SQL = "Select * "
@@ -967,7 +967,7 @@ On Error GoTo EcomprobarCuentasBancariasPagos
     
     'Si llega aqui es que todos tienen DATOS
     If Pagos Then
-        SQL = "select iban from pagos where transfer = " & Transferencia
+        SQL = "select iban from pagos where nrodocum = " & Transferencia & " and anyodocum = " & DBSet(Anyo, "N")
         SQL = SQL & " GROUP BY mid(iban,5,4),mid(iban,9,4),mid(iban,15,10),mid(iban,13,2)"
     Else
         SQL = "SELECT iban"

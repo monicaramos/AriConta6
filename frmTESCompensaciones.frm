@@ -404,7 +404,7 @@ Private Const IdPrograma = 606
 Dim SQL As String   'Cadena de uso comun
 Dim Im As Currency
 Dim CampoAnterior As String
-
+Dim CadNif As String
 
 Dim vCP As Ctipoformapago
 
@@ -772,7 +772,10 @@ Dim NIF As String
             Else
                 ' Añadida esta parte donde según el nif del cliente me voy a buscar las ctas de proveedor con el mismo nif
                 NIF = DevuelveDesdeBD("nifdatos", "cuentas", "codmacta", C, "T")
+                CadNif = ""
                 If NIF <> "" Then
+                    CadNif = NIF
+
                     Text4.Tag = CuentasProveedorDelNif(NIF)
                     If Text4.Tag <> "" Then
                         CargarListView 1
@@ -792,8 +795,8 @@ Dim CadResult As String
 
     CuentasProveedorDelNif = ""
 
-    SQL = "select codmacta from cuentas where nifdatos = " & DBSet(NIF, "T")
-    SQL = SQL & " and apudirec = 'S' and mid(codmacta,1,2) in ('40','41')"
+    SQL = "select distinct codmacta from pagos where nifprove = " & DBSet(NIF, "T")
+    SQL = SQL & " and impefect - coalesce(imppagad,0) <> 0 "
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -882,7 +885,13 @@ Dim CargaEnListview As Boolean
         SQL = SQL & " and  codmacta ='" & Text1(Indice).Text & "'"
     Else
         'En SQL va el codmacta
+        CadNif = DevuelveDesdeBD("nifdatos", "cuentas", "codmacta", SQL, "T")
+        
         SQL = " and nrodocum is null and pagos.codmacta ='" & SQL & "'"
+        If CadNif <> "" Then
+            SQL = SQL & " and pagos.nifprove = " & DBSet(CadNif, "T")
+        End If
+        
         SQL = " WHERE impefect - coalesce(imppagad,0) <> 0 " & SQL 'AND estacaja =0
         SQL = "select numfactu,fecfactu,numorden,impefect,imppagad,pagos.codmacta as codmacta,nomprove as nommacta  FROM pagos " & SQL
     End If

@@ -636,7 +636,7 @@ Public Legalizacion As String
 
 Public numero As String
 Public Anyo As String
-
+Public Cobros As Boolean
 
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1

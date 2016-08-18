@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016081713220546480RE10000482016</MsgId>
-   <CreDtTm>2016-08-17T13:22:05</CreDtTm>
+<MsgId>PRE2016081813483597660RE10000492016</MsgId>
+   <CreDtTm>2016-08-18T13:48:35</CreDtTm>
    <NbOfTxs>1</NbOfTxs>
-   <CtrlSum>1000.00</CtrlSum>
+   <CtrlSum>70.66</CtrlSum>
    <InitgPty>
      <Nm>PRUEBASSSSSS</Nm>
      <Id>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000482016 17/08/16B96470190</PmtInfId>
+   <PmtInfId>RE000492016 18/08/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-08-17</ReqdColltnDt>
+   <ReqdColltnDt>2016-08-18</ReqdColltnDt>
    <Cdtr>
       <Nm>PRUEBASSSSSS</Nm>
       <PstlAdr>
@@ -63,45 +63,45 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000001 A  0000121220160818001   </EndToEndId>
+          <EndToEndId>430000130 A  0360022520160715001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">1000.00</InstdAmt>
+      <InstdAmt Ccy="EUR">70.66</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
-            <MndtId>072710000069</MndtId>
-            <DtOfSgntr>2009-10-31</DtOfSgntr>
+            <MndtId>440200061910</MndtId>
+            <DtOfSgntr>2014-01-21</DtOfSgntr>
          </MndtRltdInf>
       </DrctDbtTx>
       <DbtrAgt>
          <FinInstnId>
-            <BIC>CCRIES2AXXX</BIC>
+            <BIC>CAIXESBBXXX</BIC>
          </FinInstnId>
       </DbtrAgt>
       <Dbtr>
-         <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
+         <Nm>HERBELCA, S.L.</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-              <AdrLine>Daniel Sanjuan, 11</AdrLine>
-              <AdrLine>POBLA DEL DUC   46840     VALENCIA</AdrLine>
+              <AdrLine>Azagador de la Torre, 93</AdrLine>
+              <AdrLine>HORNO DE ALCEDO   46026     VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <PrvtId>
                <Othr>
-                   <Id>072710000069</Id>
+                   <Id>440200061910</Id>
                </Othr>
             </PrvtId>
          </Id>
       </Dbtr>
       <DbtrAcct>
          <Id>
-            <IBAN>ES1030582267072710000069</IBAN>
+            <IBAN>ES3521002736440200061910</IBAN>
          </Id>
       </DbtrAcct>
       <Purp>
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>VIT. DE LA POBLA DEL DUC, COOP</Ustrd>
+         <Ustrd>FACTURA  A-3600225 de Fecha 15 jul 2016</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
 </PmtInf>
