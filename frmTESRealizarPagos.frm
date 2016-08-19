@@ -788,7 +788,7 @@ Private Const IdPrograma = 804
 
 
 
-Public vSQL As String
+Public vSql As String
 Public Cobros As Boolean
 Public OrdenarEfecto As Boolean
 Public Regresar As Boolean
@@ -1115,7 +1115,7 @@ Dim TipoAnt As Integer
 
           For I = 1 To Me.ListView1.ListItems.Count
             If ListView1.ListItems(I).Checked Then
-                CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(ListView1.ListItems(I).Text, "T") & "," & DBSet(Val(ListView1.ListItems(I).SubItems(1)), "N") & ","
+                CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(ListView1.ListItems(I).Text, "T") & "," & DBSet(Val(ListView1.ListItems(I).SubItems(1)), "T") & ","
                 CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(2), "F") & "," & DBSet(ListView1.ListItems(I).SubItems(4), "N") & ","
                 CadValues = CadValues & DBSet(ListView1.ListItems(I).SubItems(3), "F") & ","
                 CadValues = CadValues & ValorNulo & "," & ValorNulo & "," & DBSet(ListView1.ListItems(I).Tag, "T") & "),"
@@ -1458,7 +1458,7 @@ Private Sub Form_Activate()
         'banco, en el fichero, me indica que realio el pago
         If Cobros And Combo1.ListIndex <> -1 Then
             If Combo1.ItemData(Combo1.ListIndex) = 0 Then
-                If InStr(1, vSQL, "from tmpconext  WHERE codusu") > 0 Then AjustarFechaVencimientoDesdeFicheroBancario
+                If InStr(1, vSql, "from tmpconext  WHERE codusu") > 0 Then AjustarFechaVencimientoDesdeFicheroBancario
             End If
         End If
         
@@ -1566,7 +1566,7 @@ Private Sub Form_Load()
     'Si en el select , en el SQL, viene un
     If Cobros And Combo1.ListIndex <> -1 Then
         If Combo1.ItemData(Combo1.ListIndex) = 0 Then
-            If InStr(1, vSQL, "from tmpconext  WHERE codusu") > 0 Then chkPorFechaVenci.Value = 1
+            If InStr(1, vSql, "from tmpconext  WHERE codusu") > 0 Then chkPorFechaVenci.Value = 1
         End If
     End If
 End Sub
@@ -1849,67 +1849,67 @@ End Sub
 Private Function DevSQL() As String
 Dim cad As String
 
-    vSQL = ""
+    vSql = ""
     'Llegados a este punto montaremos el sql
     
     If Text3(1).Text <> "" Then
-        If vSQL <> "" Then vSQL = vSQL & " AND "
-        vSQL = vSQL & " pagos.fecefect >= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+        If vSql <> "" Then vSql = vSql & " AND "
+        vSql = vSql & " pagos.fecefect >= '" & Format(Text3(1).Text, FormatoFecha) & "'"
     End If
         
         
     If Text3(2).Text <> "" Then
-        If vSQL <> "" Then vSQL = vSQL & " AND "
-        vSQL = vSQL & " pagos.fecefect <= '" & Format(Text3(2).Text, FormatoFecha) & "'"
+        If vSql <> "" Then vSql = vSql & " AND "
+        vSql = vSql & " pagos.fecefect <= '" & Format(Text3(2).Text, FormatoFecha) & "'"
     End If
 
     
     'Forma de pago
     If Me.txtCta(5).Text <> "" Then
         'Los de un cliente solamente
-        If vSQL <> "" Then vSQL = vSQL & " AND "
-        vSQL = vSQL & " pagos.codmacta = '" & txtCta(5).Text & "'"
+        If vSql <> "" Then vSql = vSql & " AND "
+        vSql = vSql & " pagos.codmacta = '" & txtCta(5).Text & "'"
         
         '++
         If Me.chkVerPendiente.Value = 0 Then
             If Combo1.ListIndex <> -1 Then
                 If Combo1.ItemData(Combo1.ListIndex) >= 0 Then
-                    If vSQL <> "" Then vSQL = vSQL & " and "
-                    vSQL = vSQL & " formapago.tipforpa = " & Combo1.ItemData(Combo1.ListIndex)
+                    If vSql <> "" Then vSql = vSql & " and "
+                    vSql = vSql & " formapago.tipforpa = " & Combo1.ItemData(Combo1.ListIndex)
                 End If
             End If
         End If
     Else
         If Combo1.ListIndex > 0 Then
             If Combo1.ItemData(Combo1.ListIndex) >= 0 Then
-                If vSQL <> "" Then vSQL = vSQL & " AND "
-                vSQL = vSQL & " formapago.tipforpa = " & Combo1.ItemData(Combo1.ListIndex)    'SubTipo
+                If vSql <> "" Then vSql = vSql & " AND "
+                vSql = vSql & " formapago.tipforpa = " & Combo1.ItemData(Combo1.ListIndex)    'SubTipo
             
             End If
         End If
     End If
 
-    If vSQL <> "" Then vSQL = vSQL & " AND "
-    vSQL = vSQL & " ((formapago.tipforpa in (" & vbTalon & "," & vbPagare & ") and pagos.nrodocum is null) or not formapago.tipforpa in (" & vbTalon & "," & vbPagare & "))"
+    If vSql <> "" Then vSql = vSql & " AND "
+    vSql = vSql & " ((formapago.tipforpa in (" & vbTalon & "," & vbPagare & ") and pagos.nrodocum is null) or not formapago.tipforpa in (" & vbTalon & "," & vbPagare & "))"
 
     
     ' si está marcado los de solo el banco previsto
     If chkSoloBancoPrev.Value = 1 Then
         If txtCta(4).Text <> "" Then
-            If vSQL <> "" Then vSQL = vSQL & " AND "
-            vSQL = vSQL & " pagos.ctabanc1 = " & DBSet(txtCta(4).Text, "T")
+            If vSql <> "" Then vSql = vSql & " AND "
+            vSql = vSql & " pagos.ctabanc1 = " & DBSet(txtCta(4).Text, "T")
         End If
     End If
     
     
     
     ' no entran a jugar los recibos
-    If vSQL <> "" Then vSQL = vSQL & " and "
-    vSQL = vSQL & " formapago.tipforpa <> " & vbTransferencia
+    If vSql <> "" Then vSql = vSql & " and "
+    vSql = vSql & " formapago.tipforpa <> " & vbTransferencia
     
     ' solo los pendientes de cobro
-    If vSQL <> "" Then vSQL = vSQL & " and "
-    vSQL = vSQL & " (coalesce(impefect,0) - coalesce(imppagad,0)) <> 0 "
+    If vSql <> "" Then vSql = vSql & " and "
+    vSql = vSql & " (coalesce(impefect,0) - coalesce(imppagad,0)) <> 0 "
     
     
     ' pagos
@@ -1918,7 +1918,7 @@ Dim cad As String
     cad = cad & " FROM pagos , formapago, tipofpago"
     cad = cad & " Where  formapago.tipforpa = tipofpago.tipoformapago"
     cad = cad & " AND pagos.codforpa = formapago.codforpa"
-    If vSQL <> "" Then cad = cad & " AND " & vSQL
+    If vSql <> "" Then cad = cad & " AND " & vSql
     
     'SQL pedido
     DevSQL = cad
@@ -1960,7 +1960,7 @@ Dim J As Byte
      ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
      ItmX.SubItems(3) = Format(RS!fecefect, "dd/mm/yyyy")
      ItmX.SubItems(4) = RS!numorden
-     ItmX.SubItems(5) = DBLet(RS!Nomprove, "T")
+     ItmX.SubItems(5) = DBLet(RS!nomprove, "T")
      ItmX.SubItems(6) = DBLet(RS!siglas, "T")
      ItmX.SubItems(7) = Format(RS!ImpEfect, FormatoImporte)
      If Not IsNull(RS!imppagad) Then
@@ -4406,7 +4406,7 @@ Dim Fin As Boolean
                 'Buscamos el registro... DEBERIA ESTAR
                 If RS!CCost = .Text Then
                     If RS!Pos = .SubItems(1) Then
-                        If Format(RS!Nomdocum, "dd/mm/yyyy") = .SubItems(2) Then
+                        If Format(RS!nomdocum, "dd/mm/yyyy") = .SubItems(2) Then
                             If RS!NumDiari = .SubItems(4) Then
                                 'Le pongo como fecha de vto la fecha del cobro del fichero
                                 Fin = True

@@ -1,5 +1,4 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTESRemesasTPList 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   5340
@@ -48,24 +47,6 @@ Begin VB.Form frmTESRemesasTPList
          Top             =   750
          Width           =   3075
       End
-      Begin MSComctlLib.Toolbar ToolbarAyuda 
-         Height          =   390
-         Left            =   3750
-         TabIndex        =   31
-         Top             =   210
-         Width           =   405
-         _ExtentX        =   714
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ayuda"
-            EndProperty
-         EndProperty
-      End
    End
    Begin VB.Frame Frame1 
       Caption         =   "Ordenación"
@@ -97,7 +78,7 @@ Begin VB.Form frmTESRemesasTPList
          Height          =   240
          Index           =   3
          Left            =   390
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   1920
          Width           =   3555
       End
@@ -115,7 +96,7 @@ Begin VB.Form frmTESRemesasTPList
          Height          =   240
          Index           =   2
          Left            =   390
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   990
          Width           =   3045
       End

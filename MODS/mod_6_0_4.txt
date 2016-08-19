@@ -3,3 +3,15 @@ alter table `ariconta1`.`pagos`
 	add column `situdocum` char (1)   NULL  COMMENT 'Situacion transferencia' after `codusu`, 
 	add column `anyodocum` smallint (4)   NULL  COMMENT 'Año Transferencia' after `situdocum`
 ;
+
+# informe de transferencias de pagos
+insert into `ariconta1`.`scryst` (`codigo`,`descripcion`,`informe`) values ( '0805-00','Informe Transferencias de Pago','TransferenciasPag.rpt')
+;
+
+alter table `ariconta1`.`tmppagos2` change `numfactu` `numfactu` varchar (10)   NOT NULL 
+;
+
+alter table `ariconta1`.`tmppagos2` 
+	add column `nrodocum` int (10) UNSIGNED   NULL  after `proveedor`, 
+	add column `anyodocum` smallint (4)   NULL  after `nrodocum`
+;

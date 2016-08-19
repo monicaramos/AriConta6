@@ -281,7 +281,11 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     'Ahora miramos la remesa. En que sitaucion , y de que tipo es
     SQL = "Select * from transferencias where codigo =" & RecuperaValor(NumeroDocumento, 1)
     SQL = SQL & " AND anyo =" & RecuperaValor(NumeroDocumento, 2)
-    SQL = SQL & " and tipotrans = 1 "
+    If Cobros Then
+        SQL = SQL & " and tipotrans = 1 "
+    Else
+        SQL = SQL & " and tipotrans = 0 "
+    End If
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
@@ -596,8 +600,11 @@ Dim cad As String
     'Fechas fin ejercicios
     FechaFinEjercicios = DateAdd("yyyy", 1, vParam.fechafin)
 
-
-    Sql1 = "select * from cobros where transfer = " & DBSet(RecuperaValor(NumeroDocumento, 1), "N") & " and anyorem = " & RecuperaValor(NumeroDocumento, 2)
+    If Cobros Then
+        Sql1 = "select * from cobros where transfer = " & DBSet(RecuperaValor(NumeroDocumento, 1), "N") & " and anyorem = " & RecuperaValor(NumeroDocumento, 2)
+    Else
+        Sql1 = "select * from pagos where nrodocum = " & DBSet(RecuperaValor(NumeroDocumento, 1), "N") & " and anyodocum = " & RecuperaValor(NumeroDocumento, 2)
+    End If
     Set RS = New ADODB.Recordset
     RS.Open Sql1, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
@@ -606,7 +613,7 @@ Dim cad As String
      'NUEVO. Febrero 2010.
      'Llevar serie, fecha y NUMORDEN
      'codusu,j,FechaPosibleVto,FechaVto,Cta,SerieFactura|Fechafac|numorden|,ctacobro,IMpoorte,gastos)
-    Aux = "INSERT INTO tmpfaclin (codusu, codigo, Fecha,Numfac, cta, Cliente, NIF, Imponible,  Total) "
+    Aux = "INSERT INTO tmpfaclin (codusu, codigo, Fecha,Numfactura, cta, Cliente, NIF, Imponible,  Total) "
     Aux = Aux & "VALUES (" & vUsu.Codigo & ","
     
     J = 0
@@ -615,7 +622,12 @@ Dim cad As String
             
         C = J & ",'"
         'Si la fecha de contabilizacion esta fuera de ejercicios
-        FechaContab = DBLet(RS!FecVenci, "F")
+        If Cobros Then
+            FechaContab = DBLet(RS!FecVenci, "F")
+        Else
+            FechaContab = DBLet(RS!Fecefect, "F")
+        End If
+            
 
         C = C & Format(FechaContab, FormatoFecha) & "','"
         
@@ -629,21 +641,33 @@ Dim cad As String
         C = C & DBLet(RS!codmacta, "T") & "','"
         'Serie factura |FECHAfactura|
         'Neuvo febrero 2008 Serie factura |FECHAfactura|numvto|
-'        If Cobros Then
+        If Cobros Then
             C = C & DBLet(RS!NUmSerie, "T") & "|" & DBLet(RS!NumFactu, "N") & "|" & DBLet(RS!FecFactu, "F") & "|" & DBLet(RS!numorden, "N")
+        Else
+            C = C & DBLet(RS!NUmSerie, "T") & "|" & DBLet(RS!NumFactu, "T") & "|" & DBLet(RS!FecFactu, "F") & "|" & DBLet(RS!numorden, "N")
+        End If
 '        Else
 '            C = C & DevNombreSQL(ListView1.ListItems(J).Text) & "|" & ListView1.ListItems(J).SubItems(1) & "|" & ListView1.ListItems(J).SubItems(3)
 '        End If
         C = C & "|','',"
-        
+        '###AQUI
         
         'Dinerito
         'riesgo es GASTO
-        impo = DBLet(RS!ImpVenci, "N")
-        riesgo = ImporteFormateado(DBLet(RS!Gastos, "N"))
+        If Cobros Then
+            impo = DBLet(RS!ImpVenci, "N")
+        Else
+            impo = DBLet(RS!Impefect, "N")
+        End If
+        
+        If Cobros Then
+            riesgo = ImporteFormateado(DBLet(RS!Gastos, "N"))
+        Else
+            riesgo = 0
+        End If
         impo = impo - riesgo
         C = C & TransformaComasPuntos(CStr(impo)) & "," & TransformaComasPuntos(CStr(riesgo)) & ")"
-
+        
 
         'Lo meto en la BD
         C = Aux & C
@@ -656,6 +680,8 @@ Dim cad As String
     
     'Gastos contabilizacion transferencia
     If GastosTransferencia <> 0 Then
+            J = J + 1
+    
             'aqui ira los gastos asociados a la transferencia
             'Hay que ver los lados
             
@@ -705,11 +731,11 @@ Dim LineaUltima As Integer
 Dim cad As String
 
     'Valores por defecto
-    ContraPartidaPorLinea = True
+    ContraPartidaPorLinea = False
     UnAsientoPorCuenta = False
     PonerCuentaGenerica = False
     AgrupaCuenta = False
-    CampoFecha = "fecha" '"numfac"
+    CampoFecha = "numfactura" '"numfac"
     GastosTransDescontados = False 'por lo que pueda pasar
     
     'Si va agrupado por cta
@@ -735,7 +761,7 @@ Dim cad As String
     'EL SQL lo empezamos aquin
     SQL = CampoCuenta & " AS cliprov,"
     'Selecciona
-    SQL = "select count(*) as numvtos,codigo,numfac,fecha,cliente," & SQL & "sum(imponible) as importe,sum(total) as gastos from tmpfaclin"
+    SQL = "select count(*) as numvtos,codigo,numfactura,fecha,cliente," & SQL & "sum(imponible) as importe,sum(total) as gastos from tmpfaclin"
     SQL = SQL & " where codusu =" & vUsu.Codigo & " GROUP BY "
     cad = ""
     If AgrupaCuenta Then
@@ -1426,7 +1452,11 @@ Dim TipForpa As Byte
         SQL = SQL & "Generado desde Tesorería el " & Format(Now, "dd/mm/yyyy hh:mm") & " por " & vUsu.Nombre
         
         SQL = SQL & "',"
-        SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilizar Cobros'"
+        If Cobros Then
+            SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilizar Transf.Abonos'"
+        Else
+            SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Contabilizar Transf.Pagos'"
+        End If
 
         
         SQL = SQL & ")"
@@ -1438,7 +1468,11 @@ Dim TipForpa As Byte
             'Comparten el principio
              SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
              SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
-             SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada, numserie, numfaccl, fecfactu, numorden, tipforpa, reftalonpag, bancotalonpag) "
+             If Cobros Then
+                SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada, numserie, numfaccl, fecfactu, numorden, tipforpa, reftalonpag, bancotalonpag) "
+             Else
+                SQL = SQL & " timporteH, codccost, ctacontr, idcontab, punteada, numserie, numfacpr, fecfactu, numorden, tipforpa, reftalonpag, bancotalonpag) "
+             End If
              SQL = SQL & "VALUES (" & Ampliacion & ",'" & Format(FechaAsiento, FormatoFecha) & "'," & m.Contador & "," & NumLine & ",'"
              
              '1:  Asiento para el VTO
@@ -1792,12 +1826,16 @@ Dim TipForpa As Byte
             'Trozo comun
             '------------------------
             'IdContab
-            SQL = SQL & "'COBROS',"
+            If Cobros Then
+                SQL = SQL & "'COBROS',"
+            Else
+                SQL = SQL & "'PAGOS',"
+            End If
             
             'Punteado
             SQL = SQL & "0,"
             
-            If Cabecera = 1 And Not VienedeGastos Then
+            If Cabecera = 1 And Mid(RS1!Cliente, 1, 3) <> "TRA" Then
             
                 '--TipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", RS!codforpa, "N")
                 TipForpa = vbTransferencia
