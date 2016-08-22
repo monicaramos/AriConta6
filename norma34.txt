@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000003F20160818T140512</MsgId>
-      <CreDtTm>2016-08-18T14:05:12</CreDtTm>
+      <MsgId>TRANABO000004F20160822T102442</MsgId>
+      <CreDtTm>2016-08-22T10:24:42</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>27.55</CtrlSum>
+      <CtrlSum>1887.60</CtrlSum>
       <InitgPty>
          <Nm>PRUEBASSSSSS</Nm>
          <Id>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20160818140512B96470190</PmtInfId>
+      <PmtInfId>20160822102442B96470190</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-08-18</ReqdExctnDt>
+      <ReqdExctnDt>2016-08-22</ReqdExctnDt>
       <Dbtr>
          <Nm>PRUEBASSSSSS</Nm>
          <PstlAdr>
@@ -48,40 +48,40 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>32975     20160516001</EndToEndId>
+         <EndToEndId>A  0360024020160730001</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>TRAD</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">27.55</InstdAmt>
+          <InstdAmt Ccy="EUR">1887.60</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>BSCHESMMXXX</BIC>
+             <BIC>CCRIES2AXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>REGISTRO MERCANTIL DE VALENCIA</Nm>
+          <Nm>COOP. COMARCAL LA VALL D ALBAIDA</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>E97727168</Id>
+                     <Id>F97345896</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES6500490172442110674696</IBAN>
+              <IBAN>ES3530582269132710000159</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Factura 32975 de Fecha 06/07/2016</Ustrd>
+         <Ustrd>FACTURA  A-3600240 de Fecha 30 jul 2016</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>
