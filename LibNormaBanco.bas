@@ -1101,7 +1101,7 @@ Dim cad As String
     
     
     'Cargamos la cuenta
-    cad = "Select * from ctabancaria where codmacta='" & CuentaPropia & "'"
+    cad = "Select * from bancos where codmacta='" & CuentaPropia & "'"
     Set RS = New ADODB.Recordset
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Aux = Right("    " & CIF, 9)
@@ -1178,7 +1178,7 @@ Dim cad As String
     'Imprimimos las lineas
     'Para ello abrimos la tabla tmpNorma34
     
-    Aux = "Select spagop.*,nommacta,dirdatos,codposta,dirdatos,despobla,nifdatos,razosoci,desprovi,pais from spagop,cuentas"
+    Aux = "Select pagos.*,nomprove nommacta,domprove dirdatos,cpprove codposta,dirdatos,despobla,nifdatos,razosoci,desprovi,pais from pagos,cuentas"
     Aux = Aux & " where codmacta=ctaprove and transfer =" & NumeroTransferencia
     RS.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Importe = 0

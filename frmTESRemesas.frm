@@ -1594,7 +1594,7 @@ Private Const IdPrograma = 609
 
 
 Public Tipo As Integer
-Public vSQL As String
+Public vSql As String
 Public Opcion As Byte      ' 0.- Nueva remesa    1.- Modifcar remesa
                            ' 2.- Devolucion remesa
 Public vRemesa As String   ' nºremesa|fecha remesa
@@ -1728,6 +1728,7 @@ Private Sub cmdAceptar_Click(Index As Integer)
                         
                         cmdAceptar(0).Caption = "C&onfirmar"
                     Else
+                        
                         If GenerarRemesa(1) Then
                             'Refrescamos los datos en el lw de remesas
                             'MsgBox "Remesa modificada correctamente.", vbExclamation
@@ -2381,6 +2382,8 @@ Dim SQL As String
     
     LimpiarCampos
     
+    CadenaDesdeOtroForm = ""
+    
     Modo = 4
     PonerModo Modo
 
@@ -2432,12 +2435,23 @@ Dim B As Boolean
         
         Me.FrameModRem.Visible = False
         Me.FrameModRem.Enabled = False
+        
+        lwCobros.Enabled = True
+        imgCheck(0).Enabled = True
+        imgCheck(1).Enabled = True
+    
     Else
+        
         Me.FrameCreaRem.Visible = False
         Me.FrameCreaRem.Enabled = False
         
         Me.FrameModRem.Visible = True
         Me.FrameModRem.Enabled = True
+        
+        lwCobros.Enabled = False
+        imgCheck(0).Enabled = False
+        imgCheck(1).Enabled = False
+        
     End If
     
     
@@ -2762,7 +2776,7 @@ Private Sub PonerFrameProgressVisible(Optional TEXTO As String)
 End Sub
 
 
-Private Sub PonerVtosRemesa(vSQL As String, Modificar As Boolean)
+Private Sub PonerVtosRemesa(vSql As String, Modificar As Boolean)
 Dim IT
 Dim ImporteTot As Currency
 
@@ -2778,7 +2792,7 @@ Dim ImporteTot As Currency
     
     Set miRsAux = New ADODB.Recordset
     
-    cad = "Select cobros.*,nomforpa " & vSQL
+    cad = "Select cobros.*,nomforpa " & vSql
     cad = cad & " ORDER BY fecvenci"
     
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2797,7 +2811,9 @@ Dim ImporteTot As Currency
         Importe = Importe + miRsAux!ImpVenci
         
         'Si ya he cobrado algo
-        If Not IsNull(miRsAux!impcobro) Then Importe = Importe - miRsAux!impcobro
+        If Not Modificar Then ' si estoy modificando una remesa sacaré el importe del efecto (fallará cuando hay cobros parciales)
+            If Not IsNull(miRsAux!impcobro) Then Importe = Importe - miRsAux!impcobro
+        End If
         
         IT.SubItems(6) = Format(Importe, FormatoImporte)
         
@@ -2837,7 +2853,12 @@ Dim ImporteTot As Currency
     miRsAux.Close
     Set miRsAux = Nothing
     
-    Text1(4).Text = Format(ImporteTot, "###,###,##0.00")
+    If Not Modificar Then
+        Text1(4).Text = Format(ImporteTot, "###,###,##0.00")
+    Else
+        Text1(4).Text = Format(lw1.SelectedItem.SubItems(7), "###,###,##0.00")
+        Label2.Caption = ""
+    End If
     
 
 End Sub
@@ -3733,7 +3754,6 @@ Dim ImporteQueda As Currency
     
     Conn.BeginTrans
     
-    
     Set RS = New ADODB.Recordset
     cad = "Select * from tmpcierre1 where codusu =" & vUsu.Codigo
     If CadenaDesdeOtroForm <> "" Then cad = cad & " and cta in (" & CadenaDesdeOtroForm & ")"
@@ -3745,7 +3765,7 @@ Dim ImporteQueda As Currency
         Set RS = Nothing
         Exit Function
     End If
-    
+        
     
     Set miRsAux = New ADODB.Recordset
     
@@ -3794,7 +3814,11 @@ Dim ImporteQueda As Currency
         
         
         'Ahora cambiamos los cobros y les ponemos la remesa
-        cad = "UPDATE  cobros SET siturem= 'A',codrem= " & NumeroRemesa & ", anyorem =" & Year(CDate(txtFecha(4).Text)) & ","
+        If Opcion = 0 Then
+            cad = "UPDATE  cobros SET siturem= 'A',codrem= " & NumeroRemesa & ", anyorem =" & Year(CDate(txtFecha(4).Text)) & ","
+        Else
+            cad = "UPDATE  cobros SET siturem= 'A',codrem= " & NumeroRemesa & ", anyorem =" & Year(CDate(txtFecha(5).Text)) & ","
+        End If
         cad = cad & " tiporem = 1"
         
         
@@ -3816,29 +3840,31 @@ Dim ImporteQueda As Currency
         Next J
         espera 0.5
         
-        
-        'Hacemos un select sum para el importe
-        cad = "Select sum(impvenci),sum(coalesce(impcobro,0)),sum(coalesce(gastos,0)) from cobros "
-        cad = cad & " WHERE codrem=" & NumeroRemesa
-        cad = cad & " AND anyorem =" & Year(CDate(txtFecha(4).Text))
-        cad = cad & " AND tiporem = 1"
-        
-        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        C = "0"
-        If Not miRsAux.EOF Then
-            If Not IsNull(miRsAux.Fields(0)) Then
-                               'Impvenci                               impcobro                      gastos
-                ImporteQueda = DBLet(miRsAux.Fields(0), "N") - DBLet(miRsAux.Fields(1), "N") + DBLet(miRsAux.Fields(2), "N")
-                C = TransformaComasPuntos(CStr(ImporteQueda))
+        If Opcion = 0 Then
+            'Hacemos un select sum para el importe
+            cad = "Select sum(impvenci),sum(coalesce(impcobro,0)),sum(coalesce(gastos,0)) from cobros "
+            cad = cad & " WHERE codrem=" & NumeroRemesa
+            cad = cad & " AND anyorem =" & Year(CDate(txtFecha(4).Text))
+            cad = cad & " AND tiporem = 1"
+            
+            miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            C = "0"
+            If Not miRsAux.EOF Then
+                If Not IsNull(miRsAux.Fields(0)) Then
+                                   'Impvenci                               impcobro                      gastos
+                    ImporteQueda = DBLet(miRsAux.Fields(0), "N") - DBLet(miRsAux.Fields(1), "N") + DBLet(miRsAux.Fields(2), "N")
+                    C = TransformaComasPuntos(CStr(ImporteQueda))
+                End If
             End If
+            miRsAux.Close
+            
+            cad = "UPDATE Remesas SET importe=" & C
+            cad = cad & " WHERE codigo=" & NumeroRemesa
+            cad = cad & " AND anyo =" & Year(CDate(txtFecha(4).Text))
+            cad = cad & " AND tiporem = 1"
+            Conn.Execute cad
+            
         End If
-        miRsAux.Close
-        
-        cad = "UPDATE Remesas SET importe=" & C
-        cad = cad & " WHERE codigo=" & NumeroRemesa
-        cad = cad & " AND anyo =" & Year(CDate(txtFecha(4).Text))
-        cad = cad & " AND tiporem = 1"
-        Conn.Execute cad
         
         NumeroRemesa = NumeroRemesa + 1
         

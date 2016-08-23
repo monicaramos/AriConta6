@@ -4532,6 +4532,9 @@ Public Opcion As Byte
      '54- Cobros pendientes en recepcion de documentos (talones/pagares)
      '55- Facturas Transferencias de abonos
      '56- Facturas Transferencias de pagos
+     
+     '57- Facturas de compensaciones
+     '58- Facturas de compensaciones proveedor
     
 Public Parametros As String
     '1.- Vendran empipados: Cuenta, PunteadoD, punteadoH, pdteD,PdteH
@@ -5341,6 +5344,8 @@ Private Sub Form_Activate()
             CargarFacturasTransfPagos
         Case 57
             CargarFacturasCompensaciones
+        Case 58
+            CargarFacturasCompensacionesPro
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -5363,7 +5368,7 @@ Dim W, H
     PrimeraVez = True
     Me.frameSaldosHco.Visible = False
     Me.frameCalculoSaldos.Visible = False
-    Me.FrameAmort.Visible = False
+    Me.frameamort.Visible = False
     Me.FrameeMPRESAS.Visible = False
     Me.frameAcercaDE.Visible = False
     Me.frameCtasBalance.Visible = False
@@ -5416,9 +5421,9 @@ Dim W, H
         Command2.Enabled = True
     Case 3
         Me.Caption = "Información tipo amortización"
-        W = Me.FrameAmort.Width
-        H = Me.FrameAmort.Height + 200
-        Me.FrameAmort.Visible = True
+        W = Me.frameamort.Width
+        H = Me.frameamort.Height + 200
+        Me.frameamort.Visible = True
     Case 4
         Me.Caption = "Seleccion"
         W = Me.FrameeMPRESAS.Width
@@ -5665,7 +5670,7 @@ Dim W, H
         CampoOrden = "fecfactu"
     
     Case 57 ' facturas de compensaciones
-        Me.Caption = "Facturas de Compensación"
+        Me.Caption = "Facturas de Compensación Cliente"
         Me.Label30.Caption = "Compensación " & RecuperaValor(Parametros, 1) & " de " & RecuperaValor(Parametros, 2)
         Me.FrameReclamaciones.Visible = True
         W = Me.FrameReclamaciones.Width
@@ -5674,9 +5679,18 @@ Dim W, H
         Orden = True
         CampoOrden = "fecfactu"
     
+    Case 58 ' facturas de compensaciones proveedor
+        Me.Caption = "Facturas de Compensación Proveedor"
+        Me.Label30.Caption = "Compensación " & RecuperaValor(Parametros, 1) & " de " & RecuperaValor(Parametros, 2)
+        Me.FrameReclamaciones.Visible = True
+        W = Me.FrameReclamaciones.Width
+        H = Me.FrameReclamaciones.Height + 300
     
+        Orden = True
+        CampoOrden = "fecfactu"
     
     End Select
+    
     Me.Width = W + 120
     Me.Height = H + 120
 End Sub
@@ -8456,4 +8470,77 @@ ECargarFacturas:
     Errores = ""
     Set RS = Nothing
 End Sub
+
+
+Private Sub CargarFacturasCompensacionesPro()
+Dim IT As ListItem
+Dim TotalArray  As Long
+Dim SERVER As String
+Dim EquipoConBD As Boolean
+Dim cad As String
+Dim Equipo As String
+Dim Pos As Long
+
+    On Error GoTo ECargarFacturas
+    
+    Set ListView9.SmallIcons = frmPpal.imgListComun16
+    
+    ListView9.ColumnHeaders.Clear
+    ListView9.ListItems.Clear
+    
+    
+    ListView9.ColumnHeaders.Add , , "Serie", 800.2522
+    ListView9.ColumnHeaders.Add , , "Factura", 1500.2522
+    ListView9.ColumnHeaders.Add , , "Fecha", 1750.2522
+    ListView9.ColumnHeaders.Add , , "Vto", 700.2522
+    ListView9.ColumnHeaders.Add , , "Fecha Efecto", 1750.2522
+    ListView9.ColumnHeaders.Add , , "Importe", 2500.2522, 1
+    
+    Set RS = New ADODB.Recordset
+    
+    cad = "select compensapro_facturas.numserie, compensapro_facturas.numfactu, compensapro_facturas.fecfactu, compensapro_facturas.numorden, compensapro_facturas.fecefect, compensapro_facturas.impefect  importe "
+    cad = cad & " from compensapro_facturas "
+    cad = cad & " where compensapro_facturas.codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
+    
+    If CampoOrden = "" Then CampoOrden = "fecfactu"
+    cad = cad & " ORDER BY " & CampoOrden
+    If Orden Then cad = cad & " DESC"
+    
+    
+    RS.Open cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    cad = ""
+    While Not RS.EOF
+                    
+        Set IT = ListView9.ListItems.Add
+        
+        IT.Text = DBLet(RS.Fields(0))
+        IT.SubItems(1) = DBLet(RS.Fields(1))
+        IT.SubItems(2) = DBLet(RS.Fields(2))
+        IT.SubItems(3) = DBLet(RS.Fields(3))
+        IT.SubItems(4) = DBLet(RS.Fields(4))
+        
+        
+        'importe
+        If DBLet(RS.Fields(5), "N") <> 0 Then
+            IT.SubItems(5) = Format(DBLet(RS.Fields(5)), "###,###,##0.00")
+        Else
+            IT.SubItems(5) = " "
+        End If
+        
+        
+        RS.MoveNext
+    Wend
+    NumRegElim = 0
+    RS.Close
+    Set RS = Nothing
+    
+    Exit Sub
+    
+ECargarFacturas:
+    MuestraError Err.Number, Err.Description
+    Errores = ""
+    Set RS = Nothing
+End Sub
+
+
 

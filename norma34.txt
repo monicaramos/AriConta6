@@ -2,8 +2,8 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANABO000004F20160822T102442</MsgId>
-      <CreDtTm>2016-08-22T10:24:42</CreDtTm>
+      <MsgId>TRANABO000006F20160823T124941</MsgId>
+      <CreDtTm>2016-08-23T12:49:41</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
       <CtrlSum>1887.60</CtrlSum>
       <InitgPty>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20160822102442B96470190</PmtInfId>
+      <PmtInfId>20160823124941B96470190</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-08-22</ReqdExctnDt>
+      <ReqdExctnDt>2016-08-23</ReqdExctnDt>
       <Dbtr>
          <Nm>PRUEBASSSSSS</Nm>
          <PstlAdr>
@@ -52,7 +52,7 @@
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>TRAD</Cd></CtgyPurp>
+          <CtgyPurp><Cd>PENS</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
           <InstdAmt Ccy="EUR">1887.60</InstdAmt>
@@ -78,7 +78,7 @@
            </Id>
         </CdtrAcct>
       <Purp>
-         <Cd>TRAD</Cd>
+         <Cd>PENS</Cd>
       </Purp>
       <RmtInf>
          <Ustrd>FACTURA  A-3600240 de Fecha 30 jul 2016</Ustrd>
