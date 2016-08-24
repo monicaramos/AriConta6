@@ -618,6 +618,9 @@ Public Legalizacion As String
 Public numero As String
 Public Anyo As String
 Public EsTransfAbonos As Boolean
+Public TipoTransfPagos As Byte ' 0= transferencias de pagos
+                               ' 1= transferencias de pagos domiciliados
+                               ' 2= transferencias de confirming
 
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
@@ -627,7 +630,7 @@ Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
 Private SQL As String
-Dim cad As String
+Dim Cad As String
 Dim RC As String
 Dim I As Integer
 Dim IndCodigo As Integer
@@ -722,7 +725,19 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
-    Me.Caption = "Listado de Transferencias"
+    If EsTransfAbonos Or TipoTransfPagos = 0 Then
+        Me.Caption = "Listado de Transferencias"
+        Label3(8).Caption = "Nro.Transferencia"
+    Else
+        If TipoTransfPagos = 1 Then
+            Me.Caption = "Listado de Pagos Domiciliados"
+            Label3(8).Caption = "Nro.Pago Domiciliado"
+        Else
+            Me.Caption = "Listado de Confirmings"
+            Label3(8).Caption = "Nro.Confirming"
+        End If
+    End If
+        
     
     PrimeraVez = True
      
@@ -796,7 +811,7 @@ End Sub
 
 
 Private Sub txtNum_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -907,6 +922,17 @@ Dim nomDocu As String
     cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
     numParam = numParam + 1
     
+    Select Case TipoTransfPagos
+        Case 0
+            cadParam = cadParam & "pTitulo=""Transferencias Pagos""|"
+        Case 1
+            cadParam = cadParam & "pTitulo=""Pagos Domiciliados""|"
+        Case 2
+            cadParam = cadParam & "pTitulo=""Confirming""|"
+    End Select
+    numParam = numParam + 1
+    
+    
     'ordenacion
     If optVarios(0).Value Then cadParam = cadParam & "pOrden=0|"
     If optVarios(1).Value Then cadParam = cadParam & "pOrden=1|"
@@ -931,6 +957,9 @@ Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
 Dim Tipo As Byte
+Dim Subtipo As Byte ' 0 = pagos
+                    ' 1 = pagos domiciliados
+                    ' 2 = confirming
 
     MontaSQL = False
     
@@ -943,10 +972,16 @@ Dim Tipo As Byte
         Tipo = 0
     End If
     
-    If Check1(0).Value Then CargarTemporal
     
     If Not AnyadirAFormula(cadselect, "transferencias.tipotrans = " & Tipo) Then Exit Function
     If Not AnyadirAFormula(cadFormula, "{transferencias.tipotrans} = " & Tipo) Then Exit Function
+    
+    If Tipo = 0 Then
+        If Not AnyadirAFormula(cadselect, "transferencias.subtipo = " & TipoTransfPagos) Then Exit Function
+        If Not AnyadirAFormula(cadFormula, "{transferencias.subtipo} = " & TipoTransfPagos) Then Exit Function
+    End If
+    
+    If Check1(0).Value Then CargarTemporal
     
     
     MontaSQL = True
@@ -954,7 +989,7 @@ Dim Tipo As Byte
 End Function
 
 Private Function CargarTemporal() As Boolean
-Dim cad As String
+Dim Cad As String
 Dim SqlInsert As String
 Dim SqlValues As String
 
@@ -964,31 +999,33 @@ Dim SqlValues As String
 
     If EsTransfAbonos Then
 
-        cad = "delete from tmpcobros2 where codusu= " & DBSet(vUsu.Codigo, "N")
-        Conn.Execute cad
+        Cad = "delete from tmpcobros2 where codusu= " & DBSet(vUsu.Codigo, "N")
+        Conn.Execute Cad
         
         SqlInsert = "insert into tmpcobros2 (codusu,numserie,numfactu,fecfactu,numorden,fecvenci,codmacta,cliente,iban,gastos,impvenci,esdevol,codrem,anyorem)  "
         
-        cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, transfer, anyorem "
-        cad = cad & " from cobros "
-        cad = cad & " where (1=1) "
-        If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "transferencias", "cobros"), "codigo", "transfer"), "anyo", "anyorem")
+        Cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, transfer, anyorem "
+        Cad = Cad & " from cobros "
+        Cad = Cad & " where (transfer,anyorem) in (select codigo, anyo from transferencias where (1=1) "
+        If cadselect <> "" Then Cad = Cad & " and " & cadselect
+        Cad = Cad & ")"
         
-        Conn.Execute SqlInsert & cad
+        Conn.Execute SqlInsert & Cad
         
     Else
         
-        cad = "delete from tmppagos2 where codusu= " & DBSet(vUsu.Codigo, "N")
-        Conn.Execute cad
+        Cad = "delete from tmppagos2 where codusu= " & DBSet(vUsu.Codigo, "N")
+        Conn.Execute Cad
         
         SqlInsert = "insert into tmppagos2 (codusu,numserie,numfactu,fecfactu,numorden,fecefect,codmacta,proveedor,iban,impefect,nrodocum,anyodocum)  "
         
-        cad = "select " & vUsu.Codigo & ", pagos.numserie, pagos.numfactu, pagos.fecfactu, pagos.numorden, pagos.fecefect, pagos.codmacta, pagos.nomprove, pagos.iban, pagos.impefect importe, nrodocum, anyodocum "
-        cad = cad & " from pagos "
-        cad = cad & " where (1=1) "
-        If cadselect <> "" Then cad = cad & " and " & Replace(Replace(Replace(cadselect, "transferencias", "pagos"), "codigo", "nrodocum"), "anyo", "anyodocum")
+        Cad = "select " & vUsu.Codigo & ", pagos.numserie, pagos.numfactu, pagos.fecfactu, pagos.numorden, pagos.fecefect, pagos.codmacta, pagos.nomprove, pagos.iban, pagos.impefect importe, nrodocum, anyodocum "
+        Cad = Cad & " from pagos "
+        Cad = Cad & " where (nrodocum,anyodocum) in (select codigo, anyo from transferencias where (1=1) "
+        If cadselect <> "" Then Cad = Cad & " and " & cadselect
+        Cad = Cad & ") "
         
-        Conn.Execute SqlInsert & cad
+        Conn.Execute SqlInsert & Cad
     
     End If
         

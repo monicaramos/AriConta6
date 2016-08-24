@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANABO000006F20160823T124941</MsgId>
-      <CreDtTm>2016-08-23T12:49:41</CreDtTm>
+      <MsgId>TRANPAG000009F20160824T115009</MsgId>
+      <CreDtTm>2016-08-24T11:50:09</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>1887.60</CtrlSum>
+      <CtrlSum>12.09</CtrlSum>
       <InitgPty>
          <Nm>PRUEBASSSSSS</Nm>
          <Id>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20160823124941B96470190</PmtInfId>
+      <PmtInfId>20160824115009B96470190</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-08-23</ReqdExctnDt>
+      <ReqdExctnDt>2016-08-24</ReqdExctnDt>
       <Dbtr>
          <Nm>PRUEBASSSSSS</Nm>
          <PstlAdr>
@@ -48,40 +48,40 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>A  0360024020160730001</EndToEndId>
+         <EndToEndId>55418329  20160804001</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>PENS</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">1887.60</InstdAmt>
+          <InstdAmt Ccy="EUR">12.09</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
+             <BIC>CAHMESMMXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>COOP. COMARCAL LA VALL D ALBAIDA</Nm>
+          <Nm>1 1 INTERNET ESPA A, S.L.U.</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>F97345896</Id>
+                     <Id>B85049435</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES3530582269132710000159</IBAN>
+              <IBAN>ES8220382525252525252525</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>PENS</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>FACTURA  A-3600240 de Fecha 30 jul 2016</Ustrd>
+         <Ustrd>Factura num.  55418329-04/08/2016 Vto a fecha  09/08/2016</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

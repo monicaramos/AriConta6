@@ -195,7 +195,7 @@ Public Opcion As Byte
         
     
     
-Public SubTipo As Byte
+Public Subtipo As Byte
 
     'Para la opcion 22
     '   Remesas cancelacion cliente.
@@ -208,6 +208,10 @@ Public NumeroDocumento As String
 Public vTextos As String
 
 Public Cobros As Boolean
+Public TipoTrans As Byte ' 0=transferencia de abonos
+                         ' 1=transferencias de pagos
+                         ' 2=pagos domiciliados
+                         ' 3=confirming
     
 Public ImporteGastosTarjeta_ As Currency   'Para cuando viene de recepciondocumentos pondre el importe que le falta
     
@@ -222,7 +226,7 @@ Private WithEvents frmP As frmFormaPago
 Attribute frmP.VB_VarHelpID = -1
 
 
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim I As Integer
 Dim IT As ListItem  'Comun
@@ -246,7 +250,7 @@ Private GastosTransferencia As Currency
 Private Sub cmdCancelar_Click(Index As Integer)
     If Index = 21 Or Index = 25 Or Index = 31 Then CadenaDesdeOtroForm = "" 'ME garantizo =""
     If Index = 31 Then
-        If MsgBox("¿Cancelar el proceso?", vbQuestion + vbYesNo) = vbYes Then SubTipo = 0
+        If MsgBox("¿Cancelar el proceso?", vbQuestion + vbYesNo) = vbYes Then Subtipo = 0
     End If
     Unload Me
 End Sub
@@ -286,13 +290,20 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     Else
         SQL = SQL & " and tipotrans = 0 "
     End If
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    If RS.EOF Then
-        MsgBox "Ninguna transferencia con esos valores", vbExclamation
-        RS.Close
-        Set RS = Nothing
+    If Rs.EOF Then
+        Select Case TipoTrans
+            Case 0, 1
+                MsgBox "Ninguna transferencia con esos valores", vbExclamation
+            Case 2
+                MsgBox "Ningún pago domiciliado con esos valores", vbExclamation
+            Case 3
+                MsgBox "Ningún confirming con esos valores", vbExclamation
+        End Select
+        Rs.Close
+        Set Rs = Nothing
         Exit Sub
 
     End If
@@ -332,8 +343,8 @@ Dim ContabilizacionEspecialNorma19 As Boolean
         CC = "Cuenta          Fec. bloqueo           Nombre" & vbCrLf & String(80, "-") & vbCrLf
         CC = "Cuentas bloqueadas" & vbCrLf & vbCrLf & CC & SQL
         MsgBox CC, vbExclamation
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         Exit Sub
     End If
        
@@ -348,17 +359,17 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     CC = ""
     If vParam.autocoste Then CC = "codccost"
         
-    SQL = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", RS!codmacta, "T", CC)
+    SQL = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", Rs!codmacta, "T", CC)
     If SQL = "" Then
-        MsgBox "Falta configurar la cuenta de gastos del banco:" & RS!codmacta, vbExclamation
-        Set RS = Nothing
+        MsgBox "Falta configurar la cuenta de gastos del banco:" & Rs!codmacta, vbExclamation
+        Set Rs = Nothing
         Exit Sub
     End If
     
     If vParam.autocoste Then
         If CC = "" Then
-            MsgBox "Necesita asignar centro de coste a la cuenta de gastos del banco: " & RS!codmacta, vbExclamation
-            Set RS = Nothing
+            MsgBox "Necesita asignar centro de coste a la cuenta de gastos del banco: " & Rs!codmacta, vbExclamation
+            Set Rs = Nothing
             Exit Sub
         End If
     End If
@@ -367,11 +378,11 @@ Dim ContabilizacionEspecialNorma19 As Boolean
       
       
       'Añado, si tiene, la cuenta de ingresos
-      CC = DevuelveDesdeBD("ctaingreso", "bancos", "codmacta", RS!codmacta, "T")
+      CC = DevuelveDesdeBD("ctaingreso", "bancos", "codmacta", Rs!codmacta, "T")
       If CC = "" Then
           If Importe > 0 Then
-              MsgBox "Falta configurar la cuenta de ingresos del banco:" & RS!codmacta, vbExclamation
-              Set RS = Nothing
+              MsgBox "Falta configurar la cuenta de ingresos del banco:" & Rs!codmacta, vbExclamation
+              Set Rs = Nothing
               Exit Sub
           End If
       End If
@@ -379,7 +390,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
       SQL = SQL & CC & "|"   'La
       
 
-    SQL = RS!codmacta & "|" & SQL
+    SQL = Rs!codmacta & "|" & SQL
     
     
     'Contab. remesa. Si es talon/pagare vamos a comprobar si hay diferencias entre el importe del documento
@@ -398,10 +409,17 @@ Dim ContabilizacionEspecialNorma19 As Boolean
         Case 23
             CC = "Procede a realizar la confirmacion de"
         End Select
-        CC = CC & " la transferencia: " & RS!Codigo & " / " & RS!Anyo & vbCrLf & vbCrLf
+        Select Case TipoTrans
+            Case 0, 1
+                CC = CC & " la transferencia: " & Rs!Codigo & " / " & Rs!Anyo & vbCrLf & vbCrLf
+            Case 2
+                CC = CC & " el pago domiciliado: " & Rs!Codigo & " / " & Rs!Anyo & vbCrLf & vbCrLf
+            Case 3
+                CC = CC & " el confirming: " & Rs!Codigo & " / " & Rs!Anyo & vbCrLf & vbCrLf
+        End Select
         CC = CC & Space(30) & "¿Continuar?"
-        If SubTipo = 2 Then
-            If Val(RS!Tiporem) = 3 Then
+        If Subtipo = 2 Then
+            If Val(Rs!Tiporem) = 3 Then
                 CC = "Talón" & vbCrLf & CC
             Else
                 CC = "Pagaré" & vbCrLf & CC
@@ -483,7 +501,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
         Conn.BeginTrans
       
         'Cancelacion /confirmacion cliente
-        If SubTipo = 1 Then
+        If Subtipo = 1 Then
             'EFECTOS
             If Opcion <= 23 Then
             
@@ -496,7 +514,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
                 
                 'para la 23 NO deberiamos llegar. Ese proceso lo hemos eliminado
                 If Opt = 0 Then
-                    B = RemesasCancelacionEfectos(RS!Codigo, RS!Anyo, SQL, CDate(Text1(10).Text), Importe, AgrupaCance)
+                    B = RemesasCancelacionEfectos(Rs!Codigo, Rs!Anyo, SQL, CDate(Text1(10).Text), Importe, AgrupaCance)
                 Else
                     B = False
                     MsgBox " NO deberia haber entrado con confirmacion remesas", vbExclamation
@@ -519,7 +537,7 @@ Dim ContabilizacionEspecialNorma19 As Boolean
             'Ahora actualizamos los registros que estan en tmpactualziar
             Screen.MousePointer = vbDefault
             'Cerramos
-            RS.Close
+            Rs.Close
             Unload Me
             Exit Sub
             
@@ -531,8 +549,8 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     
     
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -558,7 +576,7 @@ Private Function HacerNuevaContabilizacion() As Boolean
     'Primero leemos la forma de pago, el tipo perdon
     Set vp = New Ctipoformapago
     
-    Dim cad As String
+    Dim Cad As String
     
     
     'en vtextos, en el 3 tenemos la forpa
@@ -597,15 +615,15 @@ End Function
 
 Private Function InsertarPagosEnTemporal2() As Boolean
 Dim C As String
-Dim Aux As String
+Dim AUX As String
 Dim J As Long
 Dim FechaContab As Date
 Dim FechaFinEjercicios As Date
 Dim vGasto As Currency
 
 Dim Sql1 As String
-Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Rs As ADODB.Recordset
+Dim Cad As String
 
     InsertarPagosEnTemporal2 = False
     
@@ -621,27 +639,27 @@ Dim cad As String
     Else
         Sql1 = "select * from pagos where nrodocum = " & DBSet(RecuperaValor(NumeroDocumento, 1), "N") & " and anyodocum = " & RecuperaValor(NumeroDocumento, 2)
     End If
-    Set RS = New ADODB.Recordset
-    RS.Open Sql1, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql1, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
 
      'codusu,j,FechaPosibleVto,FechaVto,Cta,SerieFactura|Fechafac|,ctacobro,IMpoorte,gastos)
      'NUEVO. Febrero 2010.
      'Llevar serie, fecha y NUMORDEN
      'codusu,j,FechaPosibleVto,FechaVto,Cta,SerieFactura|Fechafac|numorden|,ctacobro,IMpoorte,gastos)
-    Aux = "INSERT INTO tmpfaclin (codusu, codigo, Fecha,Numfactura, cta, Cliente, NIF, Imponible,  Total) "
-    Aux = Aux & "VALUES (" & vUsu.Codigo & ","
+    AUX = "INSERT INTO tmpfaclin (codusu, codigo, Fecha,Numfactura, cta, Cliente, NIF, Imponible,  Total) "
+    AUX = AUX & "VALUES (" & vUsu.Codigo & ","
     
     J = 0
-    While Not RS.EOF
+    While Not Rs.EOF
         J = J + 1
             
         C = J & ",'"
         'Si la fecha de contabilizacion esta fuera de ejercicios
         If Cobros Then
-            FechaContab = DBLet(RS!FecVenci, "F")
+            FechaContab = DBLet(Rs!FecVenci, "F")
         Else
-            FechaContab = DBLet(RS!fecefect, "F")
+            FechaContab = DBLet(Rs!fecefect, "F")
         End If
             
 
@@ -654,13 +672,13 @@ Dim cad As String
         'MEto la fecha de contabilizaccion
         C = C & Format(FechaContab, FormatoFecha) & "','"
         'Cuenta contable
-        C = C & DBLet(RS!codmacta, "T") & "','"
+        C = C & DBLet(Rs!codmacta, "T") & "','"
         'Serie factura |FECHAfactura|
         'Neuvo febrero 2008 Serie factura |FECHAfactura|numvto|
         If Cobros Then
-            C = C & DBLet(RS!NUmSerie, "T") & "|" & DBLet(RS!NumFactu, "N") & "|" & DBLet(RS!FecFactu, "F") & "|" & DBLet(RS!numorden, "N")
+            C = C & DBLet(Rs!NUmSerie, "T") & "|" & DBLet(Rs!NumFactu, "N") & "|" & DBLet(Rs!FecFactu, "F") & "|" & DBLet(Rs!numorden, "N")
         Else
-            C = C & DBLet(RS!NUmSerie, "T") & "|" & DBLet(RS!NumFactu, "T") & "|" & DBLet(RS!FecFactu, "F") & "|" & DBLet(RS!numorden, "N")
+            C = C & DBLet(Rs!NUmSerie, "T") & "|" & DBLet(Rs!NumFactu, "T") & "|" & DBLet(Rs!FecFactu, "F") & "|" & DBLet(Rs!numorden, "N")
         End If
 '        Else
 '            C = C & DevNombreSQL(ListView1.ListItems(J).Text) & "|" & ListView1.ListItems(J).SubItems(1) & "|" & ListView1.ListItems(J).SubItems(3)
@@ -671,13 +689,13 @@ Dim cad As String
         'Dinerito
         'riesgo es GASTO
         If Cobros Then
-            impo = DBLet(RS!ImpVenci, "N")
+            impo = DBLet(Rs!ImpVenci, "N")
         Else
-            impo = DBLet(RS!ImpEfect, "N")
+            impo = DBLet(Rs!ImpEfect, "N")
         End If
         
         If Cobros Then
-            riesgo = ImporteFormateado(DBLet(RS!Gastos, "N"))
+            riesgo = ImporteFormateado(DBLet(Rs!Gastos, "N"))
         Else
             riesgo = 0
         End If
@@ -686,10 +704,10 @@ Dim cad As String
         
 
         'Lo meto en la BD
-        C = Aux & C
+        C = AUX & C
         Conn.Execute C
     
-        RS.MoveNext
+        Rs.MoveNext
     
     Wend
 
@@ -702,19 +720,19 @@ Dim cad As String
             'Hay que ver los lados
             
             'Cad = DevuelveDesdeBD("ctagastostarj", "ctabancaria", "codmacta", Text3(1).Tag, "T")
-            cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", RecuperaValor(NumeroDocumento, 4), "T")
+            Cad = DevuelveDesdeBD("ctagastos", "bancos", "codmacta", RecuperaValor(NumeroDocumento, 4), "T")
             
             FechaContab = CDate(Text1(10).Text)
             C = "'" & Format(FechaContab, FormatoFecha) & "'"
             C = C & "," & C
-            C = J & "," & C & ",'" & cad & "','"
+            C = J & "," & C & ",'" & Cad & "','"
             'Serie factura |FECHAfactura| ----> pondre: "gastos" | fecha contab
-            C = C & "TRA" & Format(RecuperaValor(NumeroDocumento, 1), "0000000") & "|" & FechaContab & "|','" & cad & "',"
+            C = C & "TRA" & Format(RecuperaValor(NumeroDocumento, 1), "0000000") & "|" & FechaContab & "|','" & Cad & "',"
             'Dinerito
             'riesgo es GASTO
             impo = GastosTransferencia
             C = C & TransformaComasPuntos(CStr(impo)) & ",0)"
-            C = Aux & C
+            C = AUX & C
             Conn.Execute C
         
     End If
@@ -732,7 +750,7 @@ Dim ContraPartidaPorLinea As Boolean
 Dim UnAsientoPorCuenta As Boolean
 Dim PonerCuentaGenerica As Boolean
 Dim AgrupaCuenta As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim MiCon As Contadores
 Dim CampoCuenta As String
 Dim CampoFecha As String
@@ -744,7 +762,7 @@ Dim NumVtos As Integer
 Dim GastosTransDescontados As Boolean
 Dim LineaUltima As Integer
 
-Dim cad As String
+Dim Cad As String
 
     'Valores por defecto
     ContraPartidaPorLinea = False
@@ -779,24 +797,24 @@ Dim cad As String
     'Selecciona
     SQL = "select count(*) as numvtos,codigo,numfactura,fecha,cliente," & SQL & "sum(imponible) as importe,sum(total) as gastos from tmpfaclin"
     SQL = SQL & " where codusu =" & vUsu.Codigo & " GROUP BY "
-    cad = ""
+    Cad = ""
     If AgrupaCuenta Then
        If PonerCuentaGenerica Then
-            cad = "nif" 'La columna NIF lleva los datos de la cuenta generica
+            Cad = "nif" 'La columna NIF lleva los datos de la cuenta generica
         Else
-            cad = "cta"
+            Cad = "cta"
         End If
         'Como estamos agrupando por cuenta, marcaremos tb la fecha
         'Ya que si tienen fechas distintas son apuntes distintos
-        cad = cad & "," & CampoFecha
+        Cad = Cad & "," & CampoFecha
     End If
     
     'Si no agrupo por nada agrupare por codigo(es decir como si no agrupara)
-    If cad = "" Then cad = "codigo"
+    If Cad = "" Then Cad = "codigo"
     
     'La ordenacion
-    cad = cad & " ORDER BY " & CampoFecha
-    If Not PonerCuentaGenerica Then cad = cad & ",cta"
+    Cad = Cad & " ORDER BY " & CampoFecha
+    If Not PonerCuentaGenerica Then Cad = Cad & ",cta"
         
     
     'Tanto si agrupamos por cuenta (Generica o no)
@@ -805,24 +823,24 @@ Dim cad As String
     'Es decir. Que si agrupo no tengo que ir moviendome por el recodset mirando a ver si
     'las cuentas son iguales.
     'Ya que al hacer group by ya lo estaran
-    cad = SQL & cad
-    Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Cad = SQL & Cad
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad, Conn, adOpenKeyset, adLockPessimistic, adCmdText
     'Inicializamos variables
     Fecha = CDate("01/01/1900")
     GeneraAsiento = False
-    While Not RS.EOF
+    While Not Rs.EOF
         'Comprobaciones iniciales
         If UnAsientoPorCuenta Then
             'Para cada linea ira su asiento
             GeneraAsiento = True
             CierraAsiento = True
             If Fecha < CDate("01/01/1950") Then CierraAsiento = False
-            Fecha = CDate(RS.Fields(CampoFecha))
+            Fecha = CDate(Rs.Fields(CampoFecha))
         Else
             'Veremos en funcion de la fecha
             GeneraAsiento = False
-            If CDate(RS.Fields(CampoFecha)) = Fecha Then
+            If CDate(Rs.Fields(CampoFecha)) = Fecha Then
                 'Estamos en la misma fecha. Luego sera el mismo asiento
                 'Excepto que asi no lo digan las variables
                 If Not PonerCuentaGenerica Then
@@ -838,7 +856,7 @@ Dim cad As String
                 CierraAsiento = True
                 If Fecha < CDate("01/01/1950") Then CierraAsiento = False
         
-                Fecha = CDate(RS.Fields(CampoFecha))
+                Fecha = CDate(Rs.Fields(CampoFecha))
             End If
         End If 'de aseinto por cuenta
         
@@ -847,25 +865,25 @@ Dim cad As String
         If CierraAsiento Then
             'Tirar atras el RS
             If Not ContraPartidaPorLinea Then
-                RS.MovePrevious
-                Fecha = CDate(RS.Fields(CampoFecha))  'Para la fecha de asiento
+                Rs.MovePrevious
+                Fecha = CDate(Rs.Fields(CampoFecha))  'Para la fecha de asiento
                 impo = ImpBanco
                 'Generamos las lineas de apunte que faltan
-                InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
                 
                 'Inserto para que actalice             3: Opcion para INSERT INTO tmpactualizar
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
                 
                 'Reestauramos variables
                 NumVtos = 0
                 'Ponemos la variable
                 CierraAsiento = False
                 'Volvemos el RS al sitio
-                RS.MoveNext
-                Fecha = CDate(RS.Fields(CampoFecha))
+                Rs.MoveNext
+                Fecha = CDate(Rs.Fields(CampoFecha))
             Else
                 'Inserto para que actalice             3: Opcion para INSERT INTO tmpactualizar
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
             End If
         End If
  
@@ -876,7 +894,7 @@ Dim cad As String
             MiCon.ConseguirContador "0", Fecha <= vParam.fechafin, True
                         
             'Genero la cabecera
-            InsertarEnAsientosDesdeTemp RS, MiCon, 0, NumLinea, NumVtos
+            InsertarEnAsientosDesdeTemp Rs, MiCon, 0, NumLinea, NumVtos
             
             NumLinea = 1
             ImpBanco = 0
@@ -897,38 +915,38 @@ Dim cad As String
         
     
         'Para el cobro /pago  que tendremos en la fila actual del recordset
-        impo = RS!Importe
-        InsertarEnAsientosDesdeTemp RS, MiCon, 1, NumLinea, RS!NumVtos
+        impo = Rs!Importe
+        InsertarEnAsientosDesdeTemp Rs, MiCon, 1, NumLinea, Rs!NumVtos
     
         If Cobros Then
-            riesgo = riesgo + RS!Gastos
+            riesgo = riesgo + Rs!Gastos
         Else
             riesgo = 0
         End If
-        ImpBanco = ImpBanco + RS!Importe
+        ImpBanco = ImpBanco + Rs!Importe
         NumLinea = NumLinea + 1
         
         'Si tengo que generar la contrapartida
         If ContraPartidaPorLinea Then
-            NumVtos = RS!NumVtos
-            InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+            NumVtos = Rs!NumVtos
+            InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
             NumLinea = NumLinea + 1
             ImpBanco = 0
             riesgo = 0
         Else
-            NumVtos = NumVtos + RS!NumVtos
+            NumVtos = NumVtos + Rs!NumVtos
         End If
         
         'Nos movemos
-        RS.MoveNext
+        Rs.MoveNext
         
         
-        If RS.EOF Then
+        If Rs.EOF Then
             
             If Not ContraPartidaPorLinea Then
                 
                 'Era la ultima linea.
-                RS.MovePrevious
+                Rs.MovePrevious
                 
                 LineaUltima = NumLinea
                 
@@ -939,7 +957,7 @@ Dim cad As String
                     If Not GastosTransDescontados Then NumLinea = 1
                 End If
                 impo = ImpBanco
-                InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
     
                 If GastosTransferencia <> 0 Then
                     If Not GastosTransDescontados Then
@@ -947,25 +965,25 @@ Dim cad As String
                 
                         impo = GastosTransferencia
                         
-                        InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, NumVtos
+                        InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, NumVtos
                     End If
                 End If
     
     
                 'CIERRO EL APUNTE
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
                 
                 'Y vuelvo a ponerlo ande tocaba. Para que se salga del bucle
-                RS.MoveNext
+                Rs.MoveNext
                 
             Else
                 'Cada linea de asiento tiene su banco
                 'Faltara insertarlo en tmpactualizar
-                InsertarEnAsientosDesdeTemp RS, MiCon, 3, NumLinea, NumVtos
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 3, NumLinea, NumVtos
             End If
         End If
     Wend
-    RS.Close
+    Rs.Close
     
     
     
@@ -986,19 +1004,19 @@ Dim cad As String
         AgrupaCuenta = False
         
         
-        cad = " select sum(imponible-total),'" & CStr(ImporteGastosTarjeta_) & "' as cliprov, 'LLEV.BANCO||' as cliente"
-        cad = cad & " from tmpfaclin WHERE codusu = " & vUsu.Codigo & " group by codusu"
-        RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Cad = " select sum(imponible-total),'" & CStr(ImporteGastosTarjeta_) & "' as cliprov, 'LLEV.BANCO||' as cliente"
+        Cad = Cad & " from tmpfaclin WHERE codusu = " & vUsu.Codigo & " group by codusu"
+        Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Err.Number = 0 Then
-            If Not RS.EOF Then
-                impo = RS.Fields(0)
+            If Not Rs.EOF Then
+                impo = Rs.Fields(0)
                 NumLinea = NumLinea + 1
-                InsertarEnAsientosDesdeTemp RS, MiCon, 1, NumLinea, 1
+                InsertarEnAsientosDesdeTemp Rs, MiCon, 1, NumLinea, 1
                 
                 If Err.Number = 0 Then
                 
                     NumLinea = NumLinea + 1
-                    InsertarEnAsientosDesdeTemp RS, MiCon, 2, NumLinea, 1
+                    InsertarEnAsientosDesdeTemp Rs, MiCon, 2, NumLinea, 1
                     
                     If Err.Number <> 0 Then
                         MuestraError Err.Number, "Cuadre llevar banco"
@@ -1009,7 +1027,7 @@ Dim cad As String
                     AgrupaCuenta = True
                 End If
             End If
-            RS.Close
+            Rs.Close
         Else
             AgrupaCuenta = True
         End If
@@ -1025,7 +1043,7 @@ Dim cad As String
         End If
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
 End Sub
@@ -1041,34 +1059,34 @@ End Sub
 '   que si la fechas estan fuera de ejercicios o de ambito
 '   y si hay cuentas bloquedas
 Private Function ComprobarCuentasBloquedasYFechasVencimientos() As Boolean
-Dim cad As String
+Dim Cad As String
 
     ComprobarCuentasBloquedasYFechasVencimientos = False
     On Error GoTo EComprobarCuentasBloquedasYFechasVencimientos
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
 
-    cad = "select codmacta,nommacta,numfac,fecha,fecbloq,cliente from tmpfaclin,cuentas where codusu=" & vUsu.Codigo & " and cta=codmacta and not (fecbloq is null )"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    cad = ""
-    While Not RS.EOF
-        If CDate(RS!NumFac) > RS!FecBloq Then cad = cad & RS!codmacta & "    " & RS!FecBloq & "     " & Format(RS!NumFac, "dd/mm/yyyy") & Space(15) & RecuperaValor(RS!Cliente, 1) & vbCrLf
-        RS.MoveNext
+    Cad = "select codmacta,nommacta,numfac,fecha,fecbloq,cliente from tmpfaclin,cuentas where codusu=" & vUsu.Codigo & " and cta=codmacta and not (fecbloq is null )"
+    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = ""
+    While Not Rs.EOF
+        If CDate(Rs!NumFac) > Rs!FecBloq Then Cad = Cad & Rs!codmacta & "    " & Rs!FecBloq & "     " & Format(Rs!NumFac, "dd/mm/yyyy") & Space(15) & RecuperaValor(Rs!Cliente, 1) & vbCrLf
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 
-    If cad <> "" Then
-        cad = vbCrLf & String(90, "-") & vbCrLf & cad
-        cad = "Cta           Fec. Bloq            Fecha contab         Factura" & cad
-        cad = "Cuentas bloqueadas: " & vbCrLf & vbCrLf & vbCrLf & cad
-        MsgBox cad, vbExclamation
+    If Cad <> "" Then
+        Cad = vbCrLf & String(90, "-") & vbCrLf & Cad
+        Cad = "Cta           Fec. Bloq            Fecha contab         Factura" & Cad
+        Cad = "Cuentas bloqueadas: " & vbCrLf & vbCrLf & vbCrLf & Cad
+        MsgBox Cad, vbExclamation
     Else
         ComprobarCuentasBloquedasYFechasVencimientos = True
     End If
 EComprobarCuentasBloquedasYFechasVencimientos:
     If Err.Number <> 0 Then MuestraError Err.Number
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -1084,11 +1102,28 @@ Dim C As String
     AdelanteConLaTransferencia = False
     SQL = ""
     
-    If RS!Situacion = "A" Then SQL = "Transferencia abierta. Sin llevar al banco."
+    If Rs!Situacion = "A" Then
+        Select Case TipoTrans
+            Case 0, 1
+                SQL = "Transferencia abierta. Sin llevar al banco."
+            Case 2
+                SQL = "Pago domiciliado abierto. Sin llevar al banco."
+            Case 3
+                SQL = "Confirming abierto. Sin llevar al banco."
+        End Select
+    End If
     
     'Ya contabilizada
-    If RS!Situacion = "Q" Then SQL = "Transferencia abonada."
-    
+    If Rs!Situacion = "Q" Then
+        Select Case TipoTrans
+            Case 0, 1
+                SQL = "Transferencia abonada."
+            Case 2
+                SQL = "Pago domiciliado abonado."
+            Case 3
+                SQL = "Confirming abonado."
+        End Select
+    End If
     If SQL <> "" Then Exit Function
     
     
@@ -1099,17 +1134,17 @@ End Function
 Private Function SugerirCodigoSiguienteTransferencia() As String
     
     SQL = "Select Max(codigo) from stransfer"
-    If SubTipo = 0 Then SQL = SQL & "cob"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, , , adCmdText
+    If Subtipo = 0 Then SQL = SQL & "cob"
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, , , adCmdText
     SQL = "1"
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then
-            SQL = CStr(RS.Fields(0) + 1)
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then
+            SQL = CStr(Rs.Fields(0) + 1)
         End If
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     SugerirCodigoSiguienteTransferencia = SQL
 End Function
 
@@ -1158,9 +1193,19 @@ Dim W As Integer
             If Cobros Then
                 Me.Caption = "Abono transferencia"
             Else
-                Me.Caption = "Contabilización transferencia"
+                Select Case TipoTrans
+                    Case 0, 1
+                        Me.Caption = "Contabilización Transferencia"
+                        Label5(2).Caption = "Transferencia : "
+                    Case 2
+                        Me.Caption = "Contabilización Pago Domiciliado"
+                        Label5(2).Caption = "Pago Domiciliado : "
+                    Case 3
+                        Me.Caption = "Contabilización Confirming"
+                        Label5(2).Caption = "Confirming : "
+                End Select
             End If
-            Label5(2).Caption = "Transferencia : " & RecuperaValor(NumeroDocumento, 1) & "/" & RecuperaValor(NumeroDocumento, 2) & vbCrLf & " Banco : " & RecuperaValor(NumeroDocumento, 4) & vbCrLf & " Importe: " & RecuperaValor(NumeroDocumento, 5)
+            Label5(2).Caption = Label5(2).Caption & RecuperaValor(NumeroDocumento, 1) & "/" & RecuperaValor(NumeroDocumento, 2) & vbCrLf & " Banco : " & RecuperaValor(NumeroDocumento, 4) & vbCrLf & " Importe: " & RecuperaValor(NumeroDocumento, 5)
         End If
         
         CuentasCC = ""
@@ -1300,140 +1345,8 @@ Private Sub PonerCuentasCC()
     End If
 End Sub
 
-Private Sub EliminarEnRecepcionDocumentos()
-Dim CtaPte As Boolean
-Dim J As Integer
-Dim CualesEliminar As String
-On Error GoTo EEliminarEnRecepcionDocumentos
-
-    'Comprobaremos si hay datos
-    
-        'Si no lleva cuenta puente, no hace falta que este contabilizada
-        'Es decir. Solo mirare contabilizados si llevo ctapuente
-        CuentasCC = ""
-        CualesEliminar = ""
-        J = 0
-        For I = 0 To 1
-            ' contatalonpte
-            SQL = "pagarecta"
-            If I = 1 Then SQL = "contatalonpte"
-            CtaPte = (DevuelveDesdeBD(SQL, "paramtesor", "codigo", "1") = "1")
-            
-            'Repetiremos el proceso dos veces
-            SQL = "Select * from scarecepdoc where fechavto<='" & Format(Text1(17).Text, FormatoFecha) & "'"
-            SQL = SQL & " AND   talon = " & I
-            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                    'Si lleva cta puente habra que ver si esta contbilizada
-                    J = 0
-                    If CtaPte Then
-                        If Val(RS!Contabilizada) = 0 Then
-                            'Veo si tiene lineas. S
-                            SQL = DevuelveDesdeBD("count(*)", "slirecepdoc", "id", CStr(RS!Codigo))
-                            If SQL = "" Then SQL = "0"
-                            If Val(SQL) > 0 Then
-                                CuentasCC = CuentasCC & RS!Codigo & " - No contabilizada" & vbCrLf
-                                J = 1
-                            End If
-                        End If
-                    End If
-                    If J = 0 Then
-                        'Si va benee
-                        If Val(DBLet(RS!llevadobanco, "N")) = 0 Then
-                            SQL = DevuelveDesdeBD("count(*)", "slirecepdoc", "id", CStr(RS!Codigo))
-                            If SQL = "" Then SQL = "0"
-                            If Val(SQL) > 0 Then
-                                CuentasCC = CuentasCC & RS!Codigo & " - Sin llevar a banco" & vbCrLf
-                                J = 1
-                            End If
-                    
-                        End If
-                    End If
-                    'Esta la borraremos
-                    If J = 0 Then CualesEliminar = CualesEliminar & ", " & RS!Codigo
-                    
-                    RS.MoveNext
-            Wend
-            RS.Close
-            
-            
-            
-        Next I
-        
-        
-
-        
-        If CualesEliminar = "" Then
-            'No borraremos ninguna
-            If CuentasCC <> "" Then
-                CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
-                MsgBox CuentasCC, vbExclamation
-                
-            End If
-            Exit Sub
-        End If
-            
-        
-        
-        'Si k hay para borrar
-        CualesEliminar = Mid(CualesEliminar, 2)
-        J = 1
-        SQL = "X"
-        Do
-            I = InStr(J, CualesEliminar, ",")
-            If I > 0 Then
-                J = I + 1
-                SQL = SQL & "X"
-            End If
-        Loop Until I = 0
-        
-        SQL = "Va a eliminar " & Len(SQL) & " registros de la recepcion de documentos." & vbCrLf & vbCrLf & vbCrLf
-        If CuentasCC <> "" Then CuentasCC = "No se puede eliminar de la recepcion de documentos los siguientes registros: " & vbCrLf & vbCrLf & CuentasCC
-        SQL = SQL & vbCrLf & CuentasCC
-        If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-            SQL = "DELETE from slirecepdoc where id in (" & CualesEliminar & ")"
-            Conn.Execute SQL
-            
-            SQL = "DELETE from scarecepdoc where codigo in (" & CualesEliminar & ")"
-            Conn.Execute SQL
-    
-        End If
-
-    Exit Sub
-EEliminarEnRecepcionDocumentos:
-    MuestraError Err.Number, Err.Description
-End Sub
 
 
-
-
-Private Function ComprobacionFechasRemesaN19PorVto() As String
-Dim Aux As String
-
-    ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & RS!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("min(fecvenci)", "cobros", Aux, RS!Codigo)
-    If Aux = "" Then
-        ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
-    Else
-        If CDate(Aux) < vParam.fechaini Then
-            ComprobacionFechasRemesaN19PorVto = "Vtos con fecha menor que inicio de ejercicio"
-        End If
-    End If
-    If ComprobacionFechasRemesaN19PorVto <> "" Then Exit Function
-    
-    ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & RS!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("max(fecvenci)", "cobros", Aux, RS!Codigo)
-    If Aux = "" Then
-        ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
-        Exit Function
-    End If
-    If CDate(Aux) > DateAdd("yyyy", 1, vParam.fechafin) Then ComprobacionFechasRemesaN19PorVto = "Vtos con fecha mayor que fin de ejercicio"
-    
-    
-    
-End Function
 
 
 Private Function InsertarEnAsientosDesdeTemp(ByRef RS1 As ADODB.Recordset, ByRef m As Contadores, Cabecera As Byte, ByRef NumLine As Integer, NumVtos As Integer, Optional VienedeGastos As Boolean)
@@ -1443,7 +1356,7 @@ Dim Debe As Boolean
 Dim Conce As Integer
 Dim TipoAmpliacion As Integer
 Dim PonerContrPartida As Boolean
-Dim Aux As String
+Dim AUX As String
 Dim ImporteInterno As Currency
 Dim TipForpa As Byte
     
@@ -1643,10 +1556,10 @@ Dim TipForpa As Byte
                 End If
                 
                  'Le concatenamos el texto del concepto para el asiento -ampliacion
-                 Aux = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(Conce)) & " "
+                 AUX = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(Conce)) & " "
                  'Para la ampliacion de nºtal + ctrapar NO pongo la ampliacion del concepto
-                 If TipoAmpliacion = 5 Then Aux = ""
-                 Ampliacion = Aux & Ampliacion
+                 If TipoAmpliacion = 5 Then AUX = ""
+                 Ampliacion = AUX & Ampliacion
                  If Len(Ampliacion) > 30 Then Ampliacion = Mid(Ampliacion, 1, 30)
                 
                  SQL = SQL & "'" & DevNombreSQL(Ampliacion) & "',"
@@ -1813,11 +1726,11 @@ Dim TipForpa As Byte
                         End If
                     End If
                     
-                     Aux = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(Conce))
-                     Aux = Aux & " "
+                     AUX = DevuelveDesdeBD("nomconce", "conceptos", "codconce", CStr(Conce))
+                     AUX = AUX & " "
                      'Para la ampliacion de nºtal + ctrapar NO pongo la ampliacion del concepto
-                     If TipoAmpliacion = 5 Then Aux = ""
-                     Ampliacion = Trim(Aux & Ampliacion)
+                     If TipoAmpliacion = 5 Then AUX = ""
+                     Ampliacion = Trim(AUX & Ampliacion)
                      If Len(Ampliacion) > 30 Then Ampliacion = Mid(Ampliacion, 1, 30)
                     
                      SQL = SQL & "'" & DevNombreSQL(Ampliacion) & "',"
@@ -1856,7 +1769,12 @@ Dim TipForpa As Byte
             If Cabecera = 1 And Mid(RS1!Cliente, 1, 3) <> "TRA" Then
             
                 '--TipForpa = DevuelveDesdeBD("tipforpa", "formapago", "codforpa", RS!codforpa, "N")
-                TipForpa = vbTransferencia
+                Select Case TipoTrans
+                    Case 0, 1
+                        TipForpa = vbTransferencia
+                    Case 2, 3
+                        TipForpa = vbConfirming
+                End Select
             
                 ' nuevos campos de la factura
                 'numSerie , numfacpr, FecFactu, numorden, TipForpa, reftalonpag, bancotalonpag
@@ -1953,27 +1871,27 @@ Dim TipForpa As Byte
             'linea,numdocum,codconce  amconce
             For Conce = 1 To 2
                 NumLine = NumLine + 1
-                Aux = NumLine & ",'"
+                AUX = NumLine & ",'"
                 If Conce = 1 Then
-                    Aux = Aux & RecuperaValor(NumeroDocumento, 4)
+                    AUX = AUX & RecuperaValor(NumeroDocumento, 4)
                 Else
-                    Aux = Aux & Ampliacion
+                    AUX = AUX & Ampliacion
                 End If
-                Aux = Aux & "',''," & vp.condecli & ",'" & DevNombreSQL(DevuelveDesdeBD("nomconce", "conceptos", "codconce", vp.condecli)) & "',"
+                AUX = AUX & "',''," & vp.condecli & ",'" & DevNombreSQL(DevuelveDesdeBD("nomconce", "conceptos", "codconce", vp.condecli)) & "',"
                 If Conce = 1 Then
-                    Aux = Aux & TransformaComasPuntos(CStr(riesgo)) & ",NULL"
+                    AUX = AUX & TransformaComasPuntos(CStr(riesgo)) & ",NULL"
                 Else
-                    Aux = Aux & "NULL," & TransformaComasPuntos(CStr(riesgo))
+                    AUX = AUX & "NULL," & TransformaComasPuntos(CStr(riesgo))
                 End If
                 If Conce = 2 Then
-                    Aux = Aux & ",'" & RecuperaValor(NumeroDocumento, 4)
+                    AUX = AUX & ",'" & RecuperaValor(NumeroDocumento, 4)
                 Else
-                    Aux = Aux & ",'" & Ampliacion
+                    AUX = AUX & ",'" & Ampliacion
                 End If
-                Aux = Aux & "',"
+                AUX = AUX & "',"
                 'CC
                 If Conce = 1 Then
-                    Aux = Aux & "NULL"
+                    AUX = AUX & "NULL"
                 Else
                     If vParam.autocoste Then
                         Ampliacion = DevuelveDesdeBD("codccost", "bancos", "codmacta", RecuperaValor(NumeroDocumento, 4), "T")
@@ -1986,16 +1904,16 @@ Dim TipForpa As Byte
                         'NO LLEVA ANALITICA
                         Ampliacion = "NULL"
                     End If
-                    Aux = Aux & Ampliacion
+                    AUX = AUX & Ampliacion
                 End If
                 If Cobros Then
-                    Aux = Aux & ",'COBROS',0)"
+                    AUX = AUX & ",'COBROS',0)"
                 Else
-                    Aux = Aux & ",'PAGOS',0)"
+                    AUX = AUX & ",'PAGOS',0)"
                 End If
                 
-                Aux = SQL & Aux
-                Ejecuta Aux
+                AUX = SQL & AUX
+                Ejecuta AUX
             Next Conce
         End If
     End If
