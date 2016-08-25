@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInfCtaExplo 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   6285
@@ -924,12 +924,12 @@ Private WithEvents frmCon  As frmConceptos
 Attribute frmCon.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim vFecha As String
 
 Dim FechaIncioEjercicio As Date
@@ -965,9 +965,9 @@ Private Sub chkComparativo_Click()
     Frame1.Enabled = (chkComparativo.Value = 0)
     chkPorcentajes.Enabled = (chkComparativo.Value = 1)
     If Not Frame1.Enabled Then
-        For i = 0 To txtExplo.Count - 1
-            txtExplo(i).Text = ""
-        Next i
+        For I = 0 To txtExplo.Count - 1
+            txtExplo(I).Text = ""
+        Next I
         chkExplotacion.Value = 0
     Else
         chkPorcentajes.Value = 0
@@ -976,9 +976,9 @@ End Sub
 
 Private Sub chkCtaExplo_Click(Index As Integer)
     If chkCtaExplo(Index).Value = 1 Then
-        For i = 1 To 10
-            If i <> Index Then chkCtaExplo(i).Value = 0
-        Next i
+        For I = 1 To 10
+            If I <> Index Then chkCtaExplo(I).Value = 0
+        Next I
     End If
 End Sub
 
@@ -1076,9 +1076,9 @@ Private Sub Form_Load()
      
     CargarComboFecha
      
-    i = 0
-    txtAno(4).Text = Year(DateAdd("yyyy", i, Now))
-    cmbFecha(2).ListIndex = Month(DateAdd("yyyy", i, Now)) - 1
+    I = 0
+    txtAno(4).Text = Year(DateAdd("yyyy", I, Now))
+    cmbFecha(2).ListIndex = Month(DateAdd("yyyy", I, Now)) - 1
      
     txtFecha(7).Text = Format(Now, "dd/mm/yyyy")
     
@@ -1162,10 +1162,10 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
@@ -1176,7 +1176,7 @@ End Sub
 Private Sub AccionesCSV()
 Dim SQL2 As String
 Dim Tipo As Byte
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo eAccionesCSV
 
@@ -1193,12 +1193,12 @@ Dim Cad As String
     
         IncrementarProgres pb2, 1
         
-        Cad = "01/" & cmbFecha(2).ListIndex + 1 & "/" & txtAno(4).Text
+        cad = "01/" & cmbFecha(2).ListIndex + 1 & "/" & txtAno(4).Text
         
         SQL = "insert into tmpbalancesumas (codusu,cta,nomcta,acumAntD,acumAntH) "
         SQL = SQL & " select " & vUsu.Codigo & ", hlinapu.codmacta Cuenta , nommacta Titulo, sum(coalesce(timported,0)), sum(coalesce(timporteh,0)) "
         SQL = SQL & " from hlinapu left join cuentas on hlinapu.codmacta = cuentas.codmacta where hlinapu.codconce<>970 AND mid(hlinapu.codmacta,1,1) IN ('6','7') and hlinapu.fechaent >= '" & Format(Me.txtAno(4).Text, "0000") & "-" & Format(Month(vParam.fechaini), "00") & "-" & Format(Day(vParam.fechaini), "00") & "'"
-        SQL = SQL & " and hlinapu.fechaent < " & DBSet(Cad, "F")
+        SQL = SQL & " and hlinapu.fechaent < " & DBSet(cad, "F")
         SQL = SQL & " group by 1,2,3 "
         SQL = SQL & " order by 1,2,3 "
             
@@ -1207,19 +1207,19 @@ Dim Cad As String
         IncrementarProgres pb2, 1
         
         
-        i = DiasMes(cmbFecha(2).ListIndex + 1, txtAno(4).Text)
+        I = DiasMes(cmbFecha(2).ListIndex + 1, txtAno(4).Text)
         
         SQL = "update tmpbalancesumas set "
-        SQL = SQL & " acumperd = (select sum(coalesce(timported,0)) from hlinapu where fechaent between " & DBSet(Cad, "F") & " and "
-        SQL = SQL & " '" & txtAno(4).Text & "-" & Format(cmbFecha(2).ListIndex + 1, "00") & "-" & Format(i, "00") & "' and hlinapu.codmacta = tmpbalancesumas.cta)"
+        SQL = SQL & " acumperd = (select sum(coalesce(timported,0)) from hlinapu where fechaent between " & DBSet(cad, "F") & " and "
+        SQL = SQL & " '" & txtAno(4).Text & "-" & Format(cmbFecha(2).ListIndex + 1, "00") & "-" & Format(I, "00") & "' and hlinapu.codmacta = tmpbalancesumas.cta)"
         
         Conn.Execute SQL
         
         IncrementarProgres pb2, 1
         
         SQL = "update tmpbalancesumas set "
-        SQL = SQL & " acumperh = (select sum(coalesce(timporteh,0)) from hlinapu where fechaent between " & DBSet(Cad, "F") & " and "
-        SQL = SQL & " '" & txtAno(4).Text & "-" & Format(cmbFecha(2).ListIndex + 1, "00") & "-" & Format(i, "00") & "' and hlinapu.codmacta = tmpbalancesumas.cta)"
+        SQL = SQL & " acumperh = (select sum(coalesce(timporteh,0)) from hlinapu where fechaent between " & DBSet(cad, "F") & " and "
+        SQL = SQL & " '" & txtAno(4).Text & "-" & Format(cmbFecha(2).ListIndex + 1, "00") & "-" & Format(I, "00") & "' and hlinapu.codmacta = tmpbalancesumas.cta)"
         
         Conn.Execute SQL
         
@@ -1301,16 +1301,16 @@ Dim nomDocu As String
     conSubRPT = False
         
     'Parametros
-    cadParam = cadParam & "Digitos=" & Cont & "|"
-    Cad = "01/" & cmbFecha(2).ListIndex + 1 & "/" & txtAno(4).Text
-    cadParam = cadParam & "FechaPeriodo=""" & Cad & """|"
+    cadParam = cadParam & "Digitos=" & CONT & "|"
+    cad = "01/" & cmbFecha(2).ListIndex + 1 & "/" & txtAno(4).Text
+    cadParam = cadParam & "FechaPeriodo=""" & cad & """|"
     
     numParam = numParam + 2
     'Existencias iniciales y finales
-    Cad = "InicioAcumulada=" & DBSet(txtExplo(0).Text, "N") & "|InicioPeriodo=" & DBSet(txtExplo(2).Text, "N")
-    cadParam = cadParam & Cad & "|"
-    Cad = "FinAcumulada=" & DBSet(txtExplo(1).Text, "N") & "|FinPeriodo=" & DBSet(txtExplo(3).Text, "N")
-    cadParam = cadParam & Cad & "|"
+    cad = "InicioAcumulada=" & DBSet(txtExplo(0).Text, "N") & "|InicioPeriodo=" & DBSet(txtExplo(2).Text, "N")
+    cadParam = cadParam & cad & "|"
+    cad = "FinAcumulada=" & DBSet(txtExplo(1).Text, "N") & "|FinPeriodo=" & DBSet(txtExplo(3).Text, "N")
+    cadParam = cadParam & cad & "|"
     numParam = numParam + 4
     
     
@@ -1361,8 +1361,8 @@ Dim Anyo As String
 
     MontaSQL = False
     
-    i = cmbFecha(2).ListIndex + 1
-    If i >= Month(vParam.fechaini) Then
+    I = cmbFecha(2).ListIndex + 1
+    If I >= Month(vParam.fechaini) Then
         Anyo = Val(txtAno(4).Text)
     Else
         Anyo = Val(txtAno(4).Text) - 1
@@ -1374,9 +1374,9 @@ Dim Anyo As String
     'Montamos la fecha de inicio del periodo solicitado
     cadFormula = cadFormula & " AND {hlinapu.fechaent} >= Date (" & Me.txtAno(4).Text & "," & Month(vParam.fechaini) & "," & Day(vParam.fechaini) & ") "
     cadselect = cadselect & " AND hlinapu.fechaent >= '" & Format(Me.txtAno(4).Text, "0000") & "-" & Format(Month(vParam.fechaini), "00") & "-" & Format(Day(vParam.fechaini), "00") & "'"
-    i = DiasMes(cmbFecha(2).ListIndex + 1, CInt(txtAno(4).Text))
-    cadFormula = cadFormula & " AND {hlinapu.fechaent} <= Date (" & Me.txtAno(4).Text & ", " & cmbFecha(2).ListIndex + 1 & "," & i & ")  "
-    cadselect = cadselect & " AND hlinapu.fechaent <= '" & Format(Me.txtAno(4).Text, "0000") & "-" & Format(cmbFecha(2).ListIndex + 1, "00") & "-" & Format(i, "00") & "'"
+    I = DiasMes(cmbFecha(2).ListIndex + 1, CInt(txtAno(4).Text))
+    cadFormula = cadFormula & " AND {hlinapu.fechaent} <= Date (" & Me.txtAno(4).Text & ", " & cmbFecha(2).ListIndex + 1 & "," & I & ")  "
+    cadselect = cadselect & " AND hlinapu.fechaent <= '" & Format(Me.txtAno(4).Text, "0000") & "-" & Format(cmbFecha(2).ListIndex + 1, "00") & "-" & Format(I, "00") & "'"
     
     If chkComparativo.Value = 1 Then
        Screen.MousePointer = vbHourglass
@@ -1397,7 +1397,7 @@ Dim FechaI As Date
 Dim FechaF As Date
 Dim FechaIAnt As Date
 Dim FechaFAnt As Date
-Dim i As Integer
+Dim I As Integer
 Dim CADENA As String
 Dim Digitos As Integer
 
@@ -1413,23 +1413,23 @@ Dim Digitos As Integer
 
     'Cargamos las fechas de calculo
     FechaI = CDate(Fecha)
-    i = DiasMes(cmbFecha(2).ListIndex + 1, CInt(txtAno(4).Text))
-    FechaF = CDate(i & "/" & cmbFecha(2).ListIndex + 1 & "/" & Me.txtAno(4).Text)
+    I = DiasMes(cmbFecha(2).ListIndex + 1, CInt(txtAno(4).Text))
+    FechaF = CDate(I & "/" & cmbFecha(2).ListIndex + 1 & "/" & Me.txtAno(4).Text)
     
     FechaIAnt = DateAdd("yyyy", -1, FechaI)
     FechaFAnt = DateAdd("yyyy", -1, FechaF)
     
-    For i = 1 To 10
-        If Me.chkCtaExplo(i).Visible Then
-            If Me.chkCtaExplo(i).Value = 1 Then
-                If i < 10 Then
-                    Digitos = DigitosNivel(i)
+    For I = 1 To 10
+        If Me.chkCtaExplo(I).Visible Then
+            If Me.chkCtaExplo(I).Value = 1 Then
+                If I < 10 Then
+                    Digitos = DigitosNivel(I)
                 Else
                     Digitos = vEmpresa.DigitosUltimoNivel
                 End If
             End If
         End If
-    Next i
+    Next I
     
     CADENA = String(Digitos, "_")
     
@@ -1519,6 +1519,23 @@ Private Sub txtAno_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     KEYdown KeyCode
 End Sub
 
+Private Sub txtAno_LostFocus(Index As Integer)
+    txtAno(Index).Text = Trim(txtAno(Index).Text)
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    txtAno(Index).Text = Trim(txtAno(Index).Text)
+    
+    If Not IsNumeric(txtAno(Index).Text) Then
+        MsgBox "El Año debe ser numérico: " & txtAno(Index).Text, vbExclamation
+        txtAno(Index).Text = ""
+        Exit Sub
+    End If
+
+End Sub
+
 Private Sub txtExplo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
@@ -1557,20 +1574,20 @@ Private Function DatosOK() As Boolean
     End If
     
     ' Uno y solo uno de los niveles tiene que estar marcado
-    Cad = ""
-    For i = 1 To 10
-        If Me.chkCtaExplo(i).Visible Then
-            If Me.chkCtaExplo(i).Value = 1 Then
-                If i < 10 Then
-                    Cont = DigitosNivel(i)
+    cad = ""
+    For I = 1 To 10
+        If Me.chkCtaExplo(I).Visible Then
+            If Me.chkCtaExplo(I).Value = 1 Then
+                If I < 10 Then
+                    CONT = DigitosNivel(I)
                 Else
-                    Cont = vEmpresa.DigitosUltimoNivel
+                    CONT = vEmpresa.DigitosUltimoNivel
                 End If
-                Cad = Cad & "1"
+                cad = cad & "1"
             End If
         End If
-    Next i
-    If Len(Cad) <> 1 Then
+    Next I
+    If Len(cad) <> 1 Then
         MsgBox "Seleccione uno(y solo uno) de los niveles para el informe.", vbExclamation
         Exit Function
     End If
@@ -1600,15 +1617,15 @@ Dim J As Integer
     
     
     'Y ademas deshabilitamos los niveles no utilizados por la aplicacion
-    For i = vEmpresa.numnivel To 9
-        Me.chkCtaExplo(i).Visible = False
-    Next i
+    For I = vEmpresa.numnivel To 9
+        Me.chkCtaExplo(I).Visible = False
+    Next I
     
-    For i = 1 To vEmpresa.numnivel - 1
-        J = DigitosNivel(i)
-        chkCtaExplo(i).Visible = True
-        chkCtaExplo(i).Caption = "Digitos: " & J
-    Next i
+    For I = 1 To vEmpresa.numnivel - 1
+        J = DigitosNivel(I)
+        chkCtaExplo(I).Visible = True
+        chkCtaExplo(I).Caption = "Digitos: " & J
+    Next I
 
 
 End Sub
@@ -1621,20 +1638,20 @@ Dim L As Integer
 
 L = 1
 Do
-    Cad = RecuperaValor(Lista, L)
-    If Cad <> "" Then
-        i = Val(Cad)
-        With cmbFecha(i)
+    cad = RecuperaValor(Lista, L)
+    If cad <> "" Then
+        I = Val(cad)
+        With cmbFecha(I)
             .Clear
-            For Cont = 1 To 12
-                RC = "25/" & Cont & "/2002"
+            For CONT = 1 To 12
+                RC = "25/" & CONT & "/2002"
                 RC = Format(RC, "mmmm") 'Devuelve el mes
                 .AddItem RC
-            Next Cont
+            Next CONT
         End With
     End If
     L = L + 1
-Loop Until Cad = ""
+Loop Until cad = ""
 End Sub
 
 
@@ -1674,13 +1691,13 @@ Dim C As String
             C = "Select count(*) from " & Contabilidad
             C = C & " hlinapu where (codconce=960 or codconce = 980) and fechaent>='" & Format(vParam.fechaini, FormatoFecha)
             C = C & "' AND fechaent <='" & Format(vParam.fechafin, FormatoFecha) & "'"
-            Rs.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not Rs.EOF Then
-                If Not IsNull(Rs.Fields(0)) Then
-                    If Rs.Fields(0) > 0 Then HayAsientoCierre = True
+            RS.Open C, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not RS.EOF Then
+                If Not IsNull(RS.Fields(0)) Then
+                    If RS.Fields(0) > 0 Then HayAsientoCierre = True
                 End If
             End If
-            Rs.Close
+            RS.Close
         End If
     End If
 End Function

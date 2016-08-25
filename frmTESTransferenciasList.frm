@@ -630,7 +630,7 @@ Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
 Dim I As Integer
 Dim IndCodigo As Integer
@@ -811,7 +811,7 @@ End Sub
 
 
 Private Sub txtNum_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim RC As String
 Dim Hasta As Integer
 
@@ -864,7 +864,11 @@ Dim SQL2 As String
         SQL = "Select transferencias.codigo,transferencias.anyo, transferencias.fecha, "
         'CASE situacion WHEN 0 THEN 'ABIERTA' WHEN 1 THEN 'GENERADO FICHERO' WHEN 2 THEN 'CONTABILIZADA' END as descsituacion,"
         SQL = SQL & " wtiposituacionrem.descsituacion Situacion, "
-        SQL = SQL & " CASE concepto WHEN 0 THEN 'PENSION' WHEN 1 THEN 'NOMINA' WHEN 9 THEN 'ORDINARIA' END as Concepto, "
+        If TipoTransfPagos = 0 Then
+            SQL = SQL & " CASE concepto WHEN 0 THEN 'PENSION' WHEN 1 THEN 'NOMINA' WHEN 9 THEN 'ORDINARIA' END as Concepto, "
+        Else
+            SQL = SQL & " if (concepto = 0,'Vencimiento','Fecha intro.') as Tipo, "
+        End If
         SQL = SQL & " transferencias.codmacta Cuenta ,cuentas.nommacta Nombre,"
         SQL = SQL & " transferencias.descripcion, Importe "
         If Me.Check1(0).Value = 1 Then
@@ -957,7 +961,7 @@ Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
 Dim Tipo As Byte
-Dim Subtipo As Byte ' 0 = pagos
+Dim SubTipo As Byte ' 0 = pagos
                     ' 1 = pagos domiciliados
                     ' 2 = confirming
 
@@ -989,7 +993,7 @@ Dim Subtipo As Byte ' 0 = pagos
 End Function
 
 Private Function CargarTemporal() As Boolean
-Dim Cad As String
+Dim cad As String
 Dim SqlInsert As String
 Dim SqlValues As String
 
@@ -999,33 +1003,33 @@ Dim SqlValues As String
 
     If EsTransfAbonos Then
 
-        Cad = "delete from tmpcobros2 where codusu= " & DBSet(vUsu.Codigo, "N")
-        Conn.Execute Cad
+        cad = "delete from tmpcobros2 where codusu= " & DBSet(vUsu.Codigo, "N")
+        Conn.Execute cad
         
         SqlInsert = "insert into tmpcobros2 (codusu,numserie,numfactu,fecfactu,numorden,fecvenci,codmacta,cliente,iban,gastos,impvenci,esdevol,codrem,anyorem)  "
         
-        Cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, transfer, anyorem "
-        Cad = Cad & " from cobros "
-        Cad = Cad & " where (transfer,anyorem) in (select codigo, anyo from transferencias where (1=1) "
-        If cadselect <> "" Then Cad = Cad & " and " & cadselect
-        Cad = Cad & ")"
+        cad = "select " & vUsu.Codigo & ",cobros.numserie, cobros.numfactu, cobros.fecfactu, cobros.numorden, cobros.fecvenci ,cobros.codmacta, cobros.nomclien, cobros.iban, cobros.gastos, cobros.impvenci importe, 0 esdevol, transfer, anyorem "
+        cad = cad & " from cobros "
+        cad = cad & " where (transfer,anyorem) in (select codigo, anyo from transferencias where (1=1) "
+        If cadselect <> "" Then cad = cad & " and " & cadselect
+        cad = cad & ")"
         
-        Conn.Execute SqlInsert & Cad
+        Conn.Execute SqlInsert & cad
         
     Else
         
-        Cad = "delete from tmppagos2 where codusu= " & DBSet(vUsu.Codigo, "N")
-        Conn.Execute Cad
+        cad = "delete from tmppagos2 where codusu= " & DBSet(vUsu.Codigo, "N")
+        Conn.Execute cad
         
         SqlInsert = "insert into tmppagos2 (codusu,numserie,numfactu,fecfactu,numorden,fecefect,codmacta,proveedor,iban,impefect,nrodocum,anyodocum)  "
         
-        Cad = "select " & vUsu.Codigo & ", pagos.numserie, pagos.numfactu, pagos.fecfactu, pagos.numorden, pagos.fecefect, pagos.codmacta, pagos.nomprove, pagos.iban, pagos.impefect importe, nrodocum, anyodocum "
-        Cad = Cad & " from pagos "
-        Cad = Cad & " where (nrodocum,anyodocum) in (select codigo, anyo from transferencias where (1=1) "
-        If cadselect <> "" Then Cad = Cad & " and " & cadselect
-        Cad = Cad & ") "
+        cad = "select " & vUsu.Codigo & ", pagos.numserie, pagos.numfactu, pagos.fecfactu, pagos.numorden, pagos.fecefect, pagos.codmacta, pagos.nomprove, pagos.iban, pagos.impefect importe, nrodocum, anyodocum "
+        cad = cad & " from pagos "
+        cad = cad & " where (nrodocum,anyodocum) in (select codigo, anyo from transferencias where (1=1) "
+        If cadselect <> "" Then cad = cad & " and " & cadselect
+        cad = cad & ") "
         
-        Conn.Execute SqlInsert & Cad
+        Conn.Execute SqlInsert & cad
     
     End If
         

@@ -1171,6 +1171,7 @@ Private Sub AbrirFormularios(Accion As Long)
         Case 902 ' Informe por cuenta
         Case 903 ' Situación Tesoreria
         
+        
         ' Analitica
         Case 1001 ' Centros de Coste
             frmCCCentroCoste.Show vbModal
@@ -1231,6 +1232,8 @@ Private Sub AbrirFormularios(Accion As Long)
             Telematica 0
         Case 1308 ' Presentación Telemática de Libros
             Telematica 1
+        Case 1309 ' memoria de Plazos de Pago
+            frmTESMemoriaPlazos.Show vbModal
         
         ' Utilidades
         Case 1401 ' Comprobar cuadre
