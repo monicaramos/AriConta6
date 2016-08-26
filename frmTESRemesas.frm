@@ -396,7 +396,7 @@ Begin VB.Form frmTESRemesas
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   195
+            Height          =   225
             Index           =   4
             Left            =   5370
             TabIndex        =   69

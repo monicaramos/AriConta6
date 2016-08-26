@@ -1157,6 +1157,8 @@ Private Sub AbrirFormularios(Accion As Long)
             frmTESTransferencias.Show vbModal
         
         Case 807 ' Gastos Fijos
+            frmTESGastosFijos.Show vbModal
+        
         Case 808 ' Memoria Pagos proveedores
         
         Case 809 ' Compensar proveedor

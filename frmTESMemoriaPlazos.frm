@@ -599,7 +599,7 @@ Private Sub Form_Load()
 
     
     For I = 0 To 1
-        Me.imgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+        Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
     ' La Ayuda
@@ -688,25 +688,6 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtDias_GotFocus(Index As Integer)
-    ConseguirFoco txtDias(Index), 3
-End Sub
-
-Private Sub txtDias_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If KeyCode = vbKeyAdd Then
-        KeyCode = 0
-        
-        LanzaFormAyuda txtDias(Index).Tag, Index
-    Else
-        KEYdown KeyCode
-    End If
-End Sub
-
-
-Private Sub txtDias_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
-
 
 Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
@@ -781,7 +762,7 @@ Dim Importe1 As Currency
 Dim Ratio1 As Currency
 
 Dim Valor2 As Currency
-Dim Importe2 As Currency
+Dim importe2 As Currency
 Dim Ratio2 As Currency
 
 Dim Valor1ant As Currency
@@ -863,10 +844,10 @@ Dim F2Ant As String
     Valor2 = DevuelveValor(vSql1)
     
     vSql1 = "select sum(b) from (" & vSql & ") aaa"
-    Importe2 = DevuelveValor(vSql1)
+    importe2 = DevuelveValor(vSql1)
     
     Ratio2 = 0
-    If Importe2 <> 0 Then Ratio2 = Round(Valor2 / Importe2, 2)
+    If importe2 <> 0 Then Ratio2 = Round(Valor2 / importe2, 2)
     
     ' ratio de operaciones pendientes de pago (anterior)
     vSql = "select round(datediff(" & DBSet(F2Ant, "F") & ",factpro.fecharec) * impefect,2) a, impefect b from factpro inner join pagos on factpro.numserie = pagos.numserie and factpro.numfactu = pagos.numfactu and factpro.fecfactu = pagos.fecfactu "
@@ -886,14 +867,14 @@ Dim F2Ant As String
     Conn.Execute SQL & SqlValues
     
     ' importe operaciones pendientes de pago
-    SqlValues = "5,'Total pagos pendientes'," & DBSet(Importe2, "N") & "," & DBSet(Importe2ant, "N") & ")"
+    SqlValues = "5,'Total pagos pendientes'," & DBSet(importe2, "N") & "," & DBSet(Importe2ant, "N") & ")"
     Conn.Execute SQL & SqlValues
     
     
     ' periodo medio de pago a proveedores
     PM = 0
     PMAnt = 0
-    If (Importe1 + Importe2) <> 0 Then PM = Round(((Ratio1 * Importe1) + (Ratio2 * Importe2)) / (Importe1 + Importe2), 2)
+    If (Importe1 + importe2) <> 0 Then PM = Round(((Ratio1 * Importe1) + (Ratio2 * importe2)) / (Importe1 + importe2), 2)
     If (Importe1ant + Importe2ant) <> 0 Then PMAnt = Round(((Ratio1ant * Importe1ant) + (Ratio2ant * Importe2ant)) / (Importe1ant + Importe2ant), 2)
     
     SqlValues = "1,'Periodo medio de pago a proveedores'," & DBSet(PM, "N") & "," & DBSet(PMAnt, "N") & ")"
@@ -926,22 +907,6 @@ Dim I As Integer
     
 End Function
 
-Private Sub txtDias_LostFocus(Index As Integer)
-    txtDias(Index).Text = Trim(txtDias(Index).Text)
-    
-    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
-    'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-
-    txtDias(Index).Text = Trim(txtDias(Index).Text)
-    
-    If Not IsNumeric(txtDias(Index).Text) Then
-        MsgBox "EL plazo debe ser numérico: " & txtDias(Index).Text, vbExclamation
-        txtDias(Index).Text = ""
-        Exit Sub
-    End If
-
-End Sub
 
 Private Sub txtfecha_LostFocus(Index As Integer)
     txtFecha(Index).Text = Trim(txtFecha(Index).Text)

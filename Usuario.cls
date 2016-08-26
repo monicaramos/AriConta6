@@ -36,6 +36,7 @@ Private mvarFiltroFactPro As Integer 'filtro de facturas de proveedores
 Private mvarFiltroPresup As Integer 'filtro de presupuestos
 Private mvarFiltroCobros As Integer 'filtro de cobros
 Private mvarFiltroPagos As Integer 'filtro de pagos
+Private mvarFiltroGastosFijos As Integer 'filtro de gastos fijos
 
 Private mvarFormulariosConPermisosEspeciales As String
 
@@ -280,11 +281,24 @@ Public Property Get FiltroPagos() As Integer
 End Property
 
 
+Public Property Let FiltroGastosFijos(ByVal vData As Integer)
+'se usa cuando se asigna un valor a una propiedad, en el lado izquierdo de la asignación.
+'Syntax: X.Nivel = 5
+    mvarFiltroGastosFijos = vData
+End Property
+
+
+Public Property Get FiltroGastosFijos() As Integer
+'se usa cuando se asigna un valor a una propiedad, en el lado derecho de la asignación.
+'Syntax: Debug.Print X.Nivel
+    FiltroGastosFijos = mvarFiltroGastosFijos
+End Property
 
 
 
-Public Function leer(ByVal vlogin As String) As Byte
-Attribute leer.VB_Description = "Lee un grupo de formas de cobro en función del código que se le ha pasado. Si devuelve 0 se ha conseguido leer el dato."
+
+Public Function Leer(ByVal vlogin As String) As Byte
+Attribute Leer.VB_Description = "Lee un grupo de formas de cobro en función del código que se le ha pasado. Si devuelve 0 se ha conseguido leer el dato."
 Dim I As Long
     On Error GoTo Err1
     SQL = "SELECT * FROM Usuarios.Usuarios WHERE login = '" & vlogin & "'"
@@ -292,7 +306,7 @@ Dim I As Long
     RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If RS.EOF Then
-        leer = 1
+        Leer = 1
     Else
         I = DevuelveAumentoPC
         mvarCodigo = Val(DBLet(RS!codusu)) + I
@@ -306,7 +320,7 @@ Dim I As Long
         mvarSkin = DBLet(RS!Skin)
         
         
-        leer = 0
+        Leer = 0
     End If
     RS.Close
     Exit Function
@@ -314,7 +328,7 @@ Err1:
     Mens = "Error: " & Err.Number & " : " & Err.Description
     MsgBox Mens, vbExclamation
     RS.Close
-    leer = 1
+    Leer = 1
 End Function
 
 Public Sub LeerFiltros(aplicacion As String, idPrg As Integer)
@@ -331,6 +345,7 @@ Dim RS As ADODB.Recordset
     mvarFiltroPresup = 0
     mvarFiltroCobros = 0
     mvarFiltroPagos = 0
+    mvarFiltroGastosFijos = 0
     
     
     SQL = "SELECT codigo, filtro FROM menus_usuarios WHERE aplicacion = " & DBSet(aplicacion, "T") & " and codusu = " & DBSet(mvarId, "N")
@@ -353,6 +368,8 @@ Dim RS As ADODB.Recordset
                 mvarFiltroCobros = DBLet(RS!FILTRO, "N")
             Case 801
                 mvarFiltroPagos = DBLet(RS!FILTRO, "N")
+            Case 807
+                mvarFiltroGastosFijos = DBLet(RS!FILTRO, "N")
         End Select
     End If
     
@@ -427,7 +444,8 @@ Public Sub ActualizarFiltro(aplicacion As String, idPrg As Integer, Valor As Int
             mvarFiltroCobros = Valor
         Case 801 ' cartera de pagos
             mvarFiltroPagos = Valor
-        
+        Case 807 ' cartera de pagos gastos fijos
+            mvarFiltroGastosFijos = Valor
     End Select
     
     Exit Sub
