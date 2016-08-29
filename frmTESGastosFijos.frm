@@ -8,13 +8,13 @@ Begin VB.Form frmTESGastosFijos
    ClientHeight    =   9120
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   11070
+   ClientWidth     =   8565
    Icon            =   "frmTESGastosFijos.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   9120
-   ScaleWidth      =   11070
+   ScaleWidth      =   8565
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
       Left            =   6930
@@ -29,12 +29,12 @@ Begin VB.Form frmTESGastosFijos
       Left            =   30
       TabIndex        =   1
       Top             =   30
-      Width           =   10965
+      Width           =   8475
       Begin VB.Frame FrameFiltro 
          Height          =   705
-         Left            =   7500
+         Left            =   4950
          TabIndex        =   11
-         Top             =   150
+         Top             =   210
          Width           =   2415
          Begin VB.ComboBox cboFiltro 
             BeginProperty Font 
@@ -104,7 +104,7 @@ Begin VB.Form frmTESGastosFijos
          EndProperty
          Height          =   375
          Index           =   0
-         Left            =   9450
+         Left            =   7020
          TabIndex        =   7
          Top             =   8430
          Width           =   1095
@@ -199,9 +199,9 @@ Begin VB.Form frmTESGastosFijos
       End
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
-         Left            =   10110
+         Left            =   7740
          TabIndex        =   4
-         Top             =   240
+         Top             =   330
          Width           =   405
          _ExtentX        =   714
          _ExtentY        =   688
@@ -220,8 +220,8 @@ Begin VB.Form frmTESGastosFijos
          Left            =   210
          TabIndex        =   8
          Top             =   4530
-         Width           =   10425
-         _ExtentX        =   18389
+         Width           =   7995
+         _ExtentX        =   14102
          _ExtentY        =   6429
          View            =   3
          LabelEdit       =   1
@@ -245,13 +245,13 @@ Begin VB.Form frmTESGastosFijos
          NumItems        =   0
       End
       Begin MSComctlLib.ListView lw1 
-         Height          =   2625
+         Height          =   2685
          Left            =   240
          TabIndex        =   3
          Top             =   1080
-         Width           =   10395
-         _ExtentX        =   18336
-         _ExtentY        =   4630
+         Width           =   8025
+         _ExtentX        =   14155
+         _ExtentY        =   4736
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -327,7 +327,7 @@ Private frmMens2 As frmMensajes
 Attribute frmMens2.VB_VarHelpID = -1
 Private frmMens As frmMensajes
 
-Dim SQL As String
+Dim Sql As String
 Dim RC As String
 Dim RS As Recordset
 Dim PrimeraVez As Boolean
@@ -402,13 +402,6 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        If Not Frame1.Visible Then
-            If CadenaDesdeOtroForm <> "" Then
-            Else
-'                PonFoco Text1(2)
-            End If
-            CadenaDesdeOtroForm = ""
-        End If
         
         cboFiltro.ListIndex = vUsu.FiltroGastosFijos
         
@@ -466,9 +459,7 @@ Dim Img As Image
     PrimeraVez = True
     CommitConexion  'Porque son listados. No hay nada dentro transaccion
     
-        
-    Me.Width = W + 300
-    Me.Height = H + 400
+
     
     Me.cmdCancelar(0).Cancel = True
     
@@ -487,7 +478,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    Sql = CadenaSeleccion
 End Sub
 
 
@@ -516,21 +507,17 @@ Dim Campo2 As Integer
     
     Select Case ColumnHeader
         Case "Código"
-            CampoOrden = "remesas.codigo"
-        Case "Fecha"
-            CampoOrden = "remesas.fecremesa"
-        Case "Cuenta"
-            CampoOrden = "remesas.codmacta"
+            CampoOrden = "gastosfijos.codigo"
+        Case "Descipción"
+            CampoOrden = "gastosfijos.descripcion"
+        Case "Cta.Prevista"
+            CampoOrden = "gastosfijos.ctaprevista"
         Case "Nombre"
-            CampoOrden = "cuentas.nommacta"
-        Case "Año"
-            CampoOrden = "remesas.anyo"
-        Case "Importe"
-            CampoOrden = "remesas.importe"
-        Case "Descripción"
-            CampoOrden = "remesas.descripcion"
-        Case "Situación"
-            CampoOrden = "descsituacion"
+            CampoOrden = "cuentas1.nommacta"
+        Case "Contrapartida"
+            CampoOrden = "gastosfijos.contrapar"
+        Case "Nombre C"
+            CampoOrden = "cuentas2.nommacta"
     End Select
     CargaList
 
@@ -558,7 +545,7 @@ Private Sub HacerToolBar(Boton As Integer)
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim SQL As String
+Dim Sql As String
     
     SepuedeBorrar = False
 
@@ -572,7 +559,12 @@ Dim SQL As String
 End Function
 
 
-
+Private Sub lw1_ItemClick(ByVal Item As MSComctlLib.ListItem)
+    If Not lw1.SelectedItem Is Nothing Then
+        Me.lblIndicador.Caption = lw1.SelectedItem.Index & " de " & Me.lw1.ListItems.Count
+        CargaList2
+    End If
+End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     HacerToolBar Button.Index
@@ -588,23 +580,25 @@ Private Sub BotonAnyadir()
     
     Set frmAux = Nothing
 
+    If CadenaDesdeOtroForm = "OK" Then CargaList
+
 End Sub
 
 
 Private Sub BotonEliminar()
-    SQL = "¿Seguro que desea eliminar el gasto?"
-    SQL = SQL & vbCrLf & "Código: " & lw1.SelectedItem.Text & " de " & lw1.SelectedItem.SubItems(1)
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    Sql = "¿Seguro que desea eliminar el gasto?"
+    Sql = Sql & vbCrLf & "Código: " & lw1.SelectedItem.Text & "  " & lw1.SelectedItem.SubItems(1)
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         
-        SQL = "DELETE FROM gastosfijos_recibos "
-        SQL = SQL & " where codigo = " & lw1.SelectedItem.Text
+        Sql = "DELETE FROM gastosfijos_recibos "
+        Sql = Sql & " where codigo = " & lw1.SelectedItem.Text
         
-        Conn.Execute SQL
+        Conn.Execute Sql
         
-        SQL = "DELETE FROM gastosfijos "
-        SQL = SQL & " where codigo = " & lw1.SelectedItem.Text
+        Sql = "DELETE FROM gastosfijos "
+        Sql = Sql & " where codigo = " & lw1.SelectedItem.Text
         
-        Conn.Execute SQL
+        Conn.Execute Sql
         
         
         CargaList
@@ -614,7 +608,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim SQL As String
+Dim Sql As String
     
  
     If lw1.SelectedItem Is Nothing Then Exit Sub
@@ -626,12 +620,13 @@ Dim SQL As String
     Set frmAux = New frmTESGastosFijos2
     
     frmAux.Opcion = 2
-    frmAux.Parametros = lw1.SelectedItem.Text & "|"
+    frmAux.Parametros = lw1.SelectedItem.Text & "|" & lw1.SelectedItem.SubItems(1) & "|" & lw1.SelectedItem.SubItems(2) & "|" & lw1.SelectedItem.SubItems(3) & "|" & lw1.SelectedItem.SubItems(4) & "|" & lw1.SelectedItem.SubItems(5) & "|"
     frmAux.Show vbModal
     
     Set frmAux = Nothing
     
-
+    If CadenaDesdeOtroForm = "OK" Then CargaList
+    
 End Sub
 
 
@@ -653,8 +648,10 @@ Private Sub ToolbarAux_ButtonClick(ByVal Button As MSComctlLib.Button)
             BotonModificarLinea
         Case 3
             BotonEliminarLinea
+        Case 4
+            BotonContabilizarLinea
     End Select
-
+    If CadenaDesdeOtroForm = "OK" Then CargaList
 End Sub
 
 Private Sub BotonAnyadirLinea()
@@ -662,7 +659,7 @@ Private Sub BotonAnyadirLinea()
     Set frmAux = New frmTESGastosFijos2
     
     frmAux.Opcion = 3
-    frmAux.Parametros = lw1.SelectedItem.Text & "|"
+    frmAux.Parametros = lw1.SelectedItem.Text & "|" & lw1.SelectedItem.SubItems(1) & "|"
     frmAux.Show vbModal
     
     Set frmAux = Nothing
@@ -672,10 +669,12 @@ End Sub
 
 Private Sub BotonModificarLinea()
 
+    If lw2.SelectedItem Is Nothing Then Exit Sub
+    
     Set frmAux = New frmTESGastosFijos2
     
     frmAux.Opcion = 4
-    frmAux.Parametros = lw1.SelectedItem.Text & "|" & lw1.SelectedItem.SubItems(1) & "|"
+    frmAux.Parametros = lw1.SelectedItem.Text & "|" & lw1.SelectedItem.SubItems(1) & "|" & lw2.SelectedItem.Text & "|" & lw2.SelectedItem.SubItems(1) & "|"
     frmAux.Show vbModal
     
     Set frmAux = Nothing
@@ -684,16 +683,36 @@ End Sub
 
 Private Sub BotonEliminarLinea()
 
-    SQL = "¿Seguro que desea eliminar la línea de gasto?"
-    SQL = SQL & vbCrLf & "Código: " & lw1.SelectedItem.Text & " de fecha " & lw2.SelectedItem.SubItems(1)
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-        SQL = "DELETE FROM gastosfijos_recibos "
-        SQL = SQL & " where codigo = " & lw1.SelectedItem.Text & " and fecha = " & DBSet(lw2.SelectedItem.SubItems(1), "F")
+    If lw2.SelectedItem Is Nothing Then Exit Sub
+
+    Sql = "¿Seguro que desea eliminar la línea de gasto?"
+    Sql = Sql & vbCrLf & "Código: " & lw1.SelectedItem.Text & " de fecha " & lw2.SelectedItem.Text
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+        Sql = "DELETE FROM gastosfijos_recibos "
+        Sql = Sql & " where codigo = " & lw1.SelectedItem.Text & " and fecha = " & DBSet(lw2.SelectedItem.Text, "F")
         
-        Conn.Execute SQL
+        Conn.Execute Sql
     End If
 
 End Sub
+
+
+Private Sub BotonContabilizarLinea()
+
+    If lw2.SelectedItem Is Nothing Then Exit Sub
+    
+    If lw2.SelectedItem.SubItems(2) = 1 Then Exit Sub
+    
+    Set frmAux = New frmTESGastosFijos2
+    
+    frmAux.Opcion = 5
+    frmAux.Parametros = lw1.SelectedItem.Text & "|" & lw1.SelectedItem.SubItems(1) & "|" & lw1.SelectedItem.SubItems(2) & lw1.SelectedItem.SubItems(4) & "|" & "|" & lw1.SelectedItem.SubItems(3) & "|" & lw1.SelectedItem.SubItems(5) & "|" & lw2.SelectedItem.Text & "|" & lw2.SelectedItem.SubItems(1) & "|"
+    frmAux.Show vbModal
+    
+    Set frmAux = Nothing
+
+End Sub
+
 
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
@@ -726,8 +745,8 @@ Dim cad As String
     
     If Not RS.EOF Then
         Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N")
-        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (lw1.ListItems.Count > 0)
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (lw1.ListItems.Count > 0)
         
         Toolbar1.Buttons(5).Enabled = False 'DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2) And DesdeNorma43 = 0
         Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N")
@@ -753,7 +772,7 @@ Dim IT
     Set Me.lw1.SmallIcons = frmPpal.ImgListviews
     Set miRsAux = New ADODB.Recordset
     
-    cad = "Select gastosfijos.codigo, gastosfijos.descripcion, gastosfijos.ctaprevista, cuentas1.nommacta, gastosfijos.contrapar, cuentas2.nommacta "
+    cad = "Select gastosfijos.codigo, gastosfijos.descripcion, gastosfijos.ctaprevista,  gastosfijos.contrapar, cuentas1.nommacta, cuentas2.nommacta "
     cad = cad & " from gastosfijos, cuentas cuentas1, cuentas cuentas2 "
     cad = cad & " where cuentas1.codmacta = gastosfijos.ctaprevista and cuentas2.codmacta = gastosfijos.contrapar "
     
@@ -763,12 +782,12 @@ Dim IT
     
     lw1.ColumnHeaders.Clear
     
-    lw1.ColumnHeaders.Add , , "Código", 950
-    lw1.ColumnHeaders.Add , , "Descripción", 2000
-    lw1.ColumnHeaders.Add , , "Cta.Prevista", 1550
-    lw1.ColumnHeaders.Add , , "Nombre", 2540
-    lw1.ColumnHeaders.Add , , "Contrapartida", 1550
-    lw1.ColumnHeaders.Add , , "Nombre", 2940
+    lw1.ColumnHeaders.Add , , "Código", 900
+    lw1.ColumnHeaders.Add , , "Descripción", 3600
+    lw1.ColumnHeaders.Add , , "Cta.Prevista", 1500
+    lw1.ColumnHeaders.Add , , "Contrapartida", 1700
+    lw1.ColumnHeaders.Add , , "Nombre", 0
+    lw1.ColumnHeaders.Add , , "Nombre Contrapartida", 0
     
     
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -776,19 +795,27 @@ Dim IT
         Set IT = lw1.ListItems.Add()
         IT.Text = DBLet(miRsAux!Codigo, "N")
         IT.SubItems(1) = miRsAux!Descripcion
-        IT.SubItems(2) = DBLet(miRsAux!ctaprevista, "T")
-        IT.SubItems(3) = DBLet(miRsAux.Fields(3), "T")
-        IT.ListSubItems(3).ToolTipText = DBLet(miRsAux.Fields(3), "T")
-        IT.SubItems(4) = miRsAux!contrapar
-        IT.SubItems(3) = DBLet(miRsAux.Fields(5), "T")
+        IT.SubItems(2) = DBLet(miRsAux!Ctaprevista, "T")
+        IT.ListSubItems(2).ToolTipText = DBLet(miRsAux.Fields(4), "T")
+        IT.SubItems(3) = DBLet(miRsAux!contrapar, "T")
         IT.ListSubItems(3).ToolTipText = DBLet(miRsAux.Fields(5), "T")
+        IT.SubItems(4) = DBLet(miRsAux.Fields(4), "T")
+        IT.SubItems(5) = DBLet(miRsAux.Fields(5), "T")
+        
         
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     Set miRsAux = Nothing
 
-    If lw1.ListItems.Count > 0 Then lw1.ListItems(1).EnsureVisible
+    If lw1.ListItems.Count > 0 Then
+'        lw1.SelectedItem = lw1.ListItems(1)
+'        lw1.SelectedItem.EnsureVisible
+
+        PonerFocoLw lw1
+        lw1_ItemClick lw1.SelectedItem
+        
+    End If
     CargaList2
     
     PonerModoUsuarioGnral Modo, "ariconta"
@@ -799,7 +826,16 @@ End Sub
 Private Sub CargaList2()
 Dim IT
 
+    lw2.ColumnHeaders.Clear
+    
+    lw2.ColumnHeaders.Add , , "Fecha", 1550
+    lw2.ColumnHeaders.Add , , "Importe", 3200, 1
+    lw2.ColumnHeaders.Add , , "Codigo", 0
+    
     lw2.ListItems.Clear
+
+    If lw1.SelectedItem Is Nothing Then Exit Sub
+
     Set Me.lw2.SmallIcons = frmPpal.ImgListviews
     Set miRsAux = New ADODB.Recordset
     
@@ -807,32 +843,32 @@ Dim IT
     cad = cad & " from gastosfijos_recibos "
     cad = cad & " where gastosfijos_recibos.codigo = " & lw1.SelectedItem.Text
     ' añadido el filtro
+    
+    CargarSqlFiltro
+    
+    
     If cadFiltro <> "" Then cad = cad & " and " & cadFiltro
     
     If CampoOrden2 = "" Then CampoOrden2 = "gastosfijos_recibos.fecha " 'gastos fijos
     cad = cad & " ORDER BY " & CampoOrden2 ' remesas.anyo desc,
-    If Orden Then cad = cad & " DESC"
-    
-    lw2.ColumnHeaders.Clear
-    
-    lw2.ColumnHeaders.Add , , "Fecha", 1550
-    lw2.ColumnHeaders.Add , , "Importe", 2000
-    lw2.ColumnHeaders.Add , , "Codigo", 0
+    If Orden2 Then cad = cad & " DESC"
     
     
     miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Set IT = lw1.ListItems.Add()
+        Set IT = lw2.ListItems.Add()
         IT.Text = DBLet(miRsAux!Fecha, "F")
-        IT.SubItems(1) = Format(miRsAux!Importe, "###,###,##0")
+        IT.SubItems(1) = Format(miRsAux!Importe, "###,###,##0.00")
         IT.SubItems(2) = DBLet(miRsAux!Codigo, "N")
+        
+        If DBLet(miRsAux!contabilizado, "N") = 1 Then IT.SmallIcon = 4
         
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     Set miRsAux = Nothing
 
-    
+    PonerFocoLw lw1
     PonerModoUsuarioGnral Modo, "ariconta"
     
 End Sub

@@ -776,7 +776,6 @@ Begin VB.Form frmTESCobros
          _ExtentX        =   26061
          _ExtentY        =   4366
          _Version        =   393216
-         Tab             =   1
          TabHeight       =   520
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
@@ -789,12 +788,13 @@ Begin VB.Form frmTESCobros
          EndProperty
          TabCaption(0)   =   "Cobros Realizados"
          TabPicture(0)   =   "frmTESCobros.frx":006C
-         Tab(0).ControlEnabled=   0   'False
+         Tab(0).ControlEnabled=   -1  'True
          Tab(0).Control(0)=   "FrameAux0"
+         Tab(0).Control(0).Enabled=   0   'False
          Tab(0).ControlCount=   1
          TabCaption(1)   =   "Devoluciones"
          TabPicture(1)   =   "frmTESCobros.frx":0088
-         Tab(1).ControlEnabled=   -1  'True
+         Tab(1).ControlEnabled=   0   'False
          Tab(1).Control(0)=   "FrameAux1"
          Tab(1).Control(0).Enabled=   0   'False
          Tab(1).ControlCount=   1
@@ -815,7 +815,7 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   2085
-            Left            =   -74850
+            Left            =   150
             TabIndex        =   109
             Top             =   330
             Width           =   14475
@@ -1548,7 +1548,7 @@ Begin VB.Form frmTESCobros
                Strikethrough   =   0   'False
             EndProperty
             Height          =   1995
-            Left            =   150
+            Left            =   -74850
             TabIndex        =   91
             Top             =   330
             Width           =   14295

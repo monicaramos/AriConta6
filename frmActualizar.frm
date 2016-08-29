@@ -2356,7 +2356,6 @@ Dim PrimeraContrapartida As String
         
         SQL = "UPDATE hcabapu SET "
         SQL = SQL & " fechaent = " & DBSet(Fecha, "F")
-        SQL = SQL & ", obsdiari = " & DBSet(RF!observa, "T", "N")
         SQL = SQL & " where numdiari = " & DBSet(DiarioFacturas, "N")
         SQL = SQL & " and fechaent = " & DBSet(FechaAnterior, "F")
         SQL = SQL & " and numasien = " & DBSet(NumAsiento, "N")
@@ -2658,7 +2657,6 @@ Dim TipoDIva As Byte
         
         SQL = "UPDATE hcabapu SET "
         SQL = SQL & " fechaent = " & DBSet(Fecha, "F")
-        SQL = SQL & ", obsdiari = " & DBSet(RF!observa, "T", "N")
         SQL = SQL & " where numdiari = " & DBSet(DiarioFacturas, "N")
         SQL = SQL & " and fechaent = " & DBSet(FechaAnterior, "F")
         SQL = SQL & " and numasien = " & DBSet(NumAsiento, "N")
