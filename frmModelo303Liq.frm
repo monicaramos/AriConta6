@@ -1715,7 +1715,7 @@ Dim SQL As String
 
 ECargarList:
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Cargar Tipo de Iva.", Err.Description
+        MuestraError Err.Number, "Cargar Empresas.", Err.Description
     End If
 End Sub
 

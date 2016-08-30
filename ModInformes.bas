@@ -81,7 +81,7 @@ End Function
 
 
 
-Public Function InformeConceptos(ByRef vSQL As String) As Boolean
+Public Function InformeConceptos(ByRef vSql As String) As Boolean
 
 On Error GoTo EGI_Conceptos
     InformeConceptos = False
@@ -90,7 +90,7 @@ On Error GoTo EGI_Conceptos
     cad = "INSERT INTO Usuarios.zconceptos (codusu, codconce, nomconce,tipoconce) VALUES ("
     cad = cad & vUsu.Codigo & ",'"
     Set RS = New ADODB.Recordset
-    RS.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RS.EOF
         SQL = cad & Format(RS.Fields(0), "000")
         SQL = SQL & "','" & RS.Fields(1) & "','" & RS.Fields(3) & "')"
@@ -111,7 +111,7 @@ End Function
 
 
 
-Public Function ListadoEstadisticas(ByRef vSQL As String) As Boolean
+Public Function ListadoEstadisticas(ByRef vSql As String) As Boolean
 On Error GoTo EListadoEstadisticas
     ListadoEstadisticas = False
     Conn.Execute "Delete from Usuarios.zestadinmo1 where codusu = " & vUsu.Codigo
@@ -122,7 +122,7 @@ On Error GoTo EListadoEstadisticas
     
     'Empezamos
     Set RS = New ADODB.Recordset
-    RS.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     I = 1
     While Not RS.EOF
         
@@ -149,7 +149,7 @@ End Function
 
 
 
-Public Function ListadoFichaInmo(ByRef vSQL As String) As Boolean
+Public Function ListadoFichaInmo(ByRef vSql As String) As Boolean
 On Error GoTo Err1
     ListadoFichaInmo = False
     Conn.Execute "Delete from Usuarios.zfichainmo where codusu = " & vUsu.Codigo
@@ -159,7 +159,7 @@ On Error GoTo Err1
     
     'Empezamos
     Set RS = New ADODB.Recordset
-    RS.Open vSQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     I = 1
     While Not RS.EOF
         SQL = RS!nominmov
@@ -188,7 +188,7 @@ End Function
 
 
 
-Public Function GenerarDatosCuentas(ByRef vSQL As String) As Boolean
+Public Function GenerarDatosCuentas(ByRef vSql As String) As Boolean
 On Error GoTo EGen
     GenerarDatosCuentas = False
     cad = "Delete FROM Usuarios.zCuentas where codusu =" & vUsu.Codigo
@@ -196,7 +196,7 @@ On Error GoTo EGen
     cad = "INSERT INTO Usuarios.zcuentas (codusu, codmacta, nommacta, razosoci,nifdatos, dirdatos, codposta, despobla, apudirec,model347) "
     cad = cad & " SELECT " & vUsu.Codigo & ",ctas.codmacta, ctas.nommacta, ctas.razosoci, ctas.nifdatos, ctas.dirdatos, ctas.codposta, ctas.despobla,ctas.apudirec,ctas.model347"
     cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas as ctas "
-    If vSQL <> "" Then cad = cad & " WHERE " & vSQL
+    If vSql <> "" Then cad = cad & " WHERE " & vSql
     Conn.Execute cad
     GenerarDatosCuentas = True
 EGen:
@@ -270,7 +270,7 @@ EGen:
 End Function
 
 
-Public Function IAsientosErrores(ByRef vSQL As String) As Boolean
+Public Function IAsientosErrores(ByRef vSql As String) As Boolean
 On Error GoTo EGen
     IAsientosErrores = False
     cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
@@ -282,7 +282,7 @@ On Error GoTo EGen
     cad = cad & " SELECT " & vUsu.Codigo
     cad = cad & ",linapue.numdiari, tiposdiario.desdiari, linapue.fechaent, linapue.numasien, linapue.linliapu, linapue.codmacta, cuentas.nommacta, linapue.numdocum, linapue.ampconce, linapue.timporteD, linapue.timporteH, linapue.codccost"
     cad = cad & " FROM (linapue LEFT JOIN tiposdiario ON linapue.numdiari = tiposdiario.numdiari) LEFT JOIN cuentas ON linapue.codmacta = cuentas.codmacta"
-    If vSQL <> "" Then cad = cad & " WHERE " & vSQL
+    If vSql <> "" Then cad = cad & " WHERE " & vSql
     
     
     
@@ -309,7 +309,7 @@ EGen:
 End Function
 
 
-Public Function IDiariosPendientes(ByRef vSQL As String) As Boolean
+Public Function IDiariosPendientes(ByRef vSql As String) As Boolean
 On Error GoTo EGen
     IDiariosPendientes = False
     cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
@@ -325,7 +325,7 @@ On Error GoTo EGen
     cad = cad & " tiposdiario_0  WHERE linapu_0.fechaent = cabapu_0.fechaent AND linapu_0.numasien = cabapu_0.numasien AND "
     cad = cad & " linapu_0.numdiari = cabapu_0.numdiari AND tiposdiario_0.numdiari = cabapu_0.numdiari AND"
     cad = cad & " tiposdiario_0.numdiari = linapu_0.numdiari AND cuentas_0.codmacta = linapu_0.codmacta"
-    If vSQL <> "" Then cad = cad & " AND " & vSQL
+    If vSql <> "" Then cad = cad & " AND " & vSql
     
     
     
@@ -354,7 +354,7 @@ End Function
 
 
 
-Public Function ITotalesCtaConcepto(ByRef vSQL As String, tabla As String) As Boolean
+Public Function ITotalesCtaConcepto(ByRef vSql As String, tabla As String) As Boolean
 On Error GoTo EGen
     ITotalesCtaConcepto = False
     cad = "Delete FROM Usuarios.ztotalctaconce  where codusu =" & vUsu.Codigo
@@ -367,7 +367,7 @@ On Error GoTo EGen
     cad = cad & " timporteD,timporteH, codconce"
     cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas ,"
     cad = cad & vUsu.CadenaConexion & "." & tabla & " WHERE cuentas.codmacta = " & tabla & ".codmacta"
-    If vSQL <> "" Then cad = cad & " AND " & vSQL
+    If vSql <> "" Then cad = cad & " AND " & vSql
     
     
     
@@ -405,7 +405,7 @@ EGen:
 End Function
 
 
-Public Function IAsientosPre(ByRef vSQL As String) As Boolean
+Public Function IAsientosPre(ByRef vSql As String) As Boolean
 On Error GoTo EGen
     IAsientosPre = False
     cad = "Delete FROM Usuarios.zasipre  where codusu =" & vUsu.Codigo
@@ -421,7 +421,7 @@ On Error GoTo EGen
     cad = cad & vUsu.CadenaConexion & ".asipre_lineas as t2,"
     cad = cad & vUsu.CadenaConexion & ".cuentas as t3 WHERE "
     cad = cad & " t1.numaspre=t2.numaspre AND t2.codmacta=t3.codmacta"
-    If vSQL <> "" Then cad = cad & " AND " & vSQL
+    If vSql <> "" Then cad = cad & " AND " & vSql
     
     
     Conn.Execute cad
@@ -435,7 +435,7 @@ End Function
 
 
 
-Public Function IHcoApuntes(ByRef vSQL As String, NumeroTabla As String) As Boolean
+Public Function IHcoApuntes(ByRef vSql As String, NumeroTabla As String) As Boolean
 On Error GoTo EGen
     IHcoApuntes = False
     cad = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
@@ -451,7 +451,7 @@ On Error GoTo EGen
     cad = cad & " WHERE hlinapu" & NumeroTabla & ".fechaent = hcabapu" & NumeroTabla & ".fechaent AND hlinapu" & NumeroTabla & ".numasien = hcabapu" & NumeroTabla & ".numasien AND"
     cad = cad & " hlinapu" & NumeroTabla & ".numdiari = hcabapu" & NumeroTabla & ".numdiari AND cuentas.codmacta = hlinapu" & NumeroTabla & ".codmacta AND tiposdiario.numdiari ="
     cad = cad & " hcabapu" & NumeroTabla & ".numdiari AND tiposdiario.numdiari = hlinapu" & NumeroTabla & ".numdiari"
-    If vSQL <> "" Then cad = cad & " AND " & vSQL
+    If vSql <> "" Then cad = cad & " AND " & vSql
     
     
     
@@ -502,7 +502,7 @@ End Function
 
 
 
-Public Function GeneraDatosHcoInmov(ByRef vSQL As String) As Boolean
+Public Function GeneraDatosHcoInmov(ByRef vSql As String) As Boolean
 
 On Error GoTo EGeneraDatosHcoInmov
     GeneraDatosHcoInmov = False
@@ -512,7 +512,7 @@ On Error GoTo EGeneraDatosHcoInmov
     Conn.Execute cad
     'Abrimos datos
     Set RS = New ADODB.Recordset
-    RS.Open vSQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open vSql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If RS.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
@@ -640,7 +640,7 @@ Dim SubTipo As String 'F: fecha   N: numero   T: texto  H: HORA
         'Campos fecha
         SubTipo = "F"
     
-    Case "CONC", "TDIA", "BIC", "AGE", "COI", "INM", "FRA", "COD"
+    Case "CONC", "TDIA", "BIC", "AGE", "COI", "INM", "FRA", "COD", "GTO"
         'concepto
         SubTipo = "N"
         

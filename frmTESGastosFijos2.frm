@@ -31,20 +31,20 @@ Begin VB.Form frmTESGastosFijos2
       Top             =   0
       Width           =   10395
       Begin VB.TextBox txtFecha 
+         Alignment       =   2  'Center
          Height          =   360
          Index           =   19
          Left            =   120
          TabIndex        =   46
          Text            =   "Text1"
          Top             =   1080
-         Width           =   1095
+         Width           =   1305
       End
       Begin VB.TextBox txtDiario 
          Height          =   360
          Index           =   0
          Left            =   120
          TabIndex        =   52
-         Text            =   "Text9"
          Top             =   1800
          Width           =   555
       End
@@ -55,7 +55,6 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   0
          Left            =   720
          TabIndex        =   45
-         Text            =   "Text9"
          Top             =   1800
          Width           =   3075
       End
@@ -113,7 +112,6 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   0
          Left            =   3840
          TabIndex        =   54
-         Text            =   "Text10"
          Top             =   1800
          Width           =   885
       End
@@ -124,7 +122,6 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   0
          Left            =   4800
          TabIndex        =   43
-         Text            =   "Text9"
          Top             =   1800
          Width           =   5175
       End
@@ -177,7 +174,6 @@ Begin VB.Form frmTESGastosFijos2
          Width           =   1335
       End
       Begin VB.Label Label3 
-         Caption         =   "Modificacion Gasto Fijo"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -201,14 +197,14 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   4
          Left            =   120
          TabIndex        =   61
-         Top             =   840
+         Top             =   810
          Width           =   750
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   19
-         Left            =   960
-         Top             =   840
+         Left            =   1140
+         Top             =   810
          Width           =   240
       End
       Begin VB.Label Label7 
@@ -217,8 +213,8 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   5
          Left            =   120
          TabIndex        =   59
-         Top             =   1560
-         Width           =   750
+         Top             =   1530
+         Width           =   630
       End
       Begin VB.Label Label1 
          Caption         =   "Cuenta"
@@ -226,7 +222,7 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   12
          Left            =   120
          TabIndex        =   57
-         Top             =   2280
+         Top             =   2250
          Width           =   765
       End
       Begin VB.Label Label1 
@@ -235,14 +231,14 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   13
          Left            =   4800
          TabIndex        =   55
-         Top             =   2280
+         Top             =   2250
          Width           =   1095
       End
       Begin VB.Image imgDiario 
          Height          =   240
          Index           =   0
-         Left            =   1050
-         Top             =   1560
+         Left            =   750
+         Top             =   1530
          Width           =   270
       End
       Begin VB.Label Label7 
@@ -251,7 +247,7 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   6
          Left            =   3840
          TabIndex        =   53
-         Top             =   1560
+         Top             =   1530
          Width           =   990
       End
       Begin VB.Label Label7 
@@ -260,14 +256,14 @@ Begin VB.Form frmTESGastosFijos2
          Index           =   7
          Left            =   1680
          TabIndex        =   51
-         Top             =   840
+         Top             =   810
          Width           =   960
       End
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   4
-         Left            =   4560
-         Top             =   840
+         Left            =   4830
+         Top             =   810
          Width           =   240
       End
       Begin VB.Label Label14 
@@ -275,37 +271,37 @@ Begin VB.Form frmTESGastosFijos2
          Height          =   255
          Left            =   3360
          TabIndex        =   49
-         Top             =   840
-         Width           =   1215
+         Top             =   810
+         Width           =   1425
       End
       Begin VB.Image imgConcepto 
          Height          =   240
          Index           =   0
-         Left            =   4920
-         Top             =   1560
+         Left            =   4890
+         Top             =   1530
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Centro de coste"
-         Height          =   195
+         Height          =   225
          Index           =   14
          Left            =   150
          TabIndex        =   47
-         Top             =   3090
-         Width           =   1875
+         Top             =   3060
+         Width           =   1725
       End
       Begin VB.Image imgCC 
          Height          =   240
          Index           =   0
-         Left            =   2070
-         Top             =   3090
+         Left            =   1890
+         Top             =   3060
          Width           =   240
       End
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   5
-         Left            =   1200
-         Top             =   2280
+         Left            =   1230
+         Top             =   2250
          Width           =   240
       End
    End
@@ -924,12 +920,13 @@ Attribute frmDi.VB_VarHelpID = -1
 Private PrimeraVez As Boolean
 
 Dim I As Integer
-Dim Sql As String
+Dim SQL As String
 Dim RS As Recordset
 Dim ItmX As ListItem
 Dim Errores As String
 Dim NE As Integer
 Dim Ok As Integer
+Dim vWhere As String
 
 Dim CampoOrden As String
 Dim Orden As Boolean
@@ -956,7 +953,7 @@ Dim Cta As String
             Else
                 Cta = (txtCuentas(0).Text)
                                     '********
-                B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
+                B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
                 If B = 0 Then
                     MsgBox "NO existe la cuenta: " & txtCuentas(0).Text, vbExclamation
                     PonFoco txtCuentas(0)
@@ -968,7 +965,7 @@ Dim Cta As String
             If txtCuentas(1).Text <> "" Then
                 Cta = (txtCuentas(1).Text)
                                     '********
-                B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
+                B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
                 If B = 0 Then
                     MsgBox "NO existe la cuenta: " & txtCuentas(1).Text, vbExclamation
                     PonFoco txtCuentas(1)
@@ -1037,7 +1034,7 @@ Private Sub cmdAceptarAltaCab_Click()
 End Sub
 
 Private Function InsertarModificarLinea() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eModificarGasto
     
@@ -1045,16 +1042,16 @@ Dim Sql As String
     
     If Opcion = 3 Then
     
-        Sql = "insert into gastosfijos_recibos(codigo,fecha,importe,contabilizado) values (" & DBSet(RecuperaValor(Parametros, 1), "N") & ","
-        Sql = Sql & DBSet(txtFecha(0).Text, "F") & "," & DBSet(Text1(4).Text, "N") & ",0)"
+        SQL = "insert into gastosfijos_recibos(codigo,fecha,importe,contabilizado) values (" & DBSet(RecuperaValor(Parametros, 1), "N") & ","
+        SQL = SQL & DBSet(txtFecha(0).Text, "F") & "," & DBSet(Text1(4).Text, "N") & ",0)"
     
     Else
-        Sql = "update gastosfijos_recibos set importe = " & DBSet(Text1(4).Text, "N")
-        Sql = Sql & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and fecha = " & DBSet(txtFecha(0).Text, "F")
+        SQL = "update gastosfijos_recibos set importe = " & DBSet(Text1(4).Text, "N")
+        SQL = SQL & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and fecha = " & DBSet(txtFecha(0).Text, "F")
     
     End If
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     
     InsertarModificarLinea = True
     Exit Function
@@ -1067,17 +1064,17 @@ End Function
 
 
 Private Function ModificarGasto() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eModificarGasto
     
     ModificarGasto = False
     
-    Sql = "update gastosfijos set descripcion = " & DBSet(Text1(8).Text, "T") & ", ctaprevista = " & DBSet(txtCuentas(2).Text, "T")
-    Sql = Sql & ", contrapar = " & DBSet(txtCuentas(3), "T")
-    Sql = Sql & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
+    SQL = "update gastosfijos set descripcion = " & DBSet(Text1(8).Text, "T") & ", ctaprevista = " & DBSet(txtCuentas(2).Text, "T")
+    SQL = SQL & ", contrapar = " & DBSet(txtCuentas(3), "T")
+    SQL = SQL & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     
     ModificarGasto = True
     Exit Function
@@ -1103,10 +1100,10 @@ Dim NumGasto As Long
     
     NumGasto = SugerirCodigoSiguiente
     
-    Sql = "insert into gastosfijos (codigo, descripcion ,ctaprevista,contrapar) values ( " & DBSet(NumGasto, "N") & ","
-    Sql = Sql & DBSet(Text1(1), "T") & "," & DBSet(txtCuentas(0).Text, "T") & "," & DBSet(txtCuentas(1).Text, "T") & ")"
+    SQL = "insert into gastosfijos (codigo, descripcion ,ctaprevista,contrapar) values ( " & DBSet(NumGasto, "N") & ","
+    SQL = SQL & DBSet(Text1(1), "T") & "," & DBSet(txtCuentas(0).Text, "T") & "," & DBSet(txtCuentas(1).Text, "T") & ")"
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     
     Select Case Combo1(0).ListIndex
         Case 0 ' mensual
@@ -1185,6 +1182,10 @@ Private Sub cmdContabiliGasto_Click()
     
     If ContabilizarGastoFijo Then
         Conn.CommitTrans
+        
+        MsgBox "Proceso realizado correctamente.", vbExclamation
+        CadenaDesdeOtroForm = "OK"
+        
         Unload Me
     Else
         TirarAtrasTransaccion
@@ -1209,15 +1210,15 @@ Dim Importe As Currency
     
     
     'Insertamos la cabera
-    Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion) VALUES ("
-    Sql = Sql & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador
-    Sql = Sql & ", '"
-    Sql = Sql & "Gasto fijo : " & RecuperaValor(Parametros, 1) & " - " & DevNombreSQL(RecuperaValor(Parametros, 3)) & vbCrLf
-    Sql = Sql & "Generado desde Tesoreria el " & Format(Now, "dd/mm/yyyy") & " por " & DevNombreSQL(vUsu.Nombre) & "',"
+    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion) VALUES ("
+    SQL = SQL & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador
+    SQL = SQL & ", '"
+    SQL = SQL & "Gasto fijo : " & RecuperaValor(Parametros, 1) & " - " & DevNombreSQL(RecuperaValor(Parametros, 2)) & vbCrLf
+    SQL = SQL & "Generado desde Tesoreria el " & Format(Now, "dd/mm/yyyy") & " por " & DevNombreSQL(vUsu.Nombre) & "',"
     
-    Sql = Sql & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Gastos Fijos');"
+    SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Gastos Fijos');"
     
-    If Not Ejecuta(Sql) Then Exit Function
+    If Not Ejecuta(SQL) Then Exit Function
     
     If InStr(1, Text1(3).Text, ",") > 0 Then
         'Texto formateado
@@ -1228,53 +1229,53 @@ Dim Importe As Currency
     I = 1
     Do
         'Lineas de apuntes .
-         Sql = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
-         Sql = Sql & "codmacta, numdocum, codconce, ampconce,timporteD,"
-         Sql = Sql & " timporteH, ctacontr, codccost,idcontab, punteada) "
-         Sql = Sql & "VALUES (" & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & "," & I & ",'"
+         SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
+         SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
+         SQL = SQL & " timporteH, ctacontr, codccost,idcontab, punteada) "
+         SQL = SQL & "VALUES (" & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & "," & I & ",'"
          
          'Cuenta
          If I = 1 Then
-            Sql = Sql & txtCuentas(5).Text
+            SQL = SQL & txtCuentas(5).Text
          Else
-            Sql = Sql & txtCuentas(4).Text
+            SQL = SQL & txtCuentas(4).Text
         End If
-        Sql = Sql & "','" & Format(Val(RecuperaValor(Parametros, 1)), "000000000") & "'," & txtConcepto(0).Text & ",'"
+        SQL = SQL & "','" & Format(Val(RecuperaValor(Parametros, 1)), "000000000") & "'," & txtConcepto(0).Text & ",'"
         
         'Ampliacion
-        Sql = Sql & DevNombreSQL(Mid(txtNConcepto(0).Text & " " & Text1(9).Text, 1, 30)) & "',"
+        SQL = SQL & DevNombreSQL(Mid(txtNConcepto(0).Text & " " & Text1(9).Text, 1, 30)) & "',"
                         
         If I = 1 Then
-            Sql = Sql & TransformaComasPuntos(CStr(Importe)) & ",NULL,'"
+            SQL = SQL & TransformaComasPuntos(CStr(Importe)) & ",NULL,'"
             'Contrapar
-            Sql = Sql & txtCuentas(4).Text
+            SQL = SQL & txtCuentas(4).Text
         Else
-            Sql = Sql & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",'"
+            SQL = SQL & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",'"
             'Contrpar
-            Sql = Sql & txtCuentas(5).Text
+            SQL = SQL & txtCuentas(5).Text
         End If
         
         'Solo para la line NO banco
         If I = 1 And txtCC(0).Visible Then
-            Sql = Sql & "','" & txtCC(0).Text & "'"
+            SQL = SQL & "','" & txtCC(0).Text & "'"
         Else
-            Sql = Sql & "',NULL"
+            SQL = SQL & "',NULL"
         End If
-        Sql = Sql & ",'CONTAB',0)"
+        SQL = SQL & ",'CONTAB',0)"
         
-        If Not Ejecuta(Sql) Then Exit Function
+        If Not Ejecuta(SQL) Then Exit Function
         I = I + 1
     Loop Until I > 2  'Una para el banoc, otra para la cuenta
    
     
 
     'AHora actualizamos el gasto
-    FechaAbono = RecuperaValor(CadenaDesdeOtroForm, 2)
-    Sql = "UPDATE gastosfijos_recibos SET"
-    Sql = Sql & " contabilizado=1"
-    Sql = Sql & " WHERE codigo=" & RecuperaValor(Parametros, 1)
-    Sql = Sql & " and fecha='" & Format(FechaAbono, FormatoFecha) & "'"
-    Conn.Execute Sql
+    FechaAbono = RecuperaValor(vWhere, 2)
+    SQL = "UPDATE gastosfijos_recibos SET"
+    SQL = SQL & " contabilizado=1"
+    SQL = SQL & " WHERE codigo=" & RecuperaValor(vWhere, 1)
+    SQL = SQL & " and fecha='" & Format(FechaAbono, FormatoFecha) & "'"
+    Conn.Execute SQL
 
 
     
@@ -1321,8 +1322,8 @@ Private Sub Form_Activate()
                 txtFecha(0).Text = RecuperaValor(Parametros, 3)
                 
                 txtFecha(0).Enabled = False
-                imgFec(0).Enabled = False
-                imgFec(0).Visible = False
+                ImgFec(0).Enabled = False
+                ImgFec(0).Visible = False
                 
                 
                 PonFoco Text1(4)
@@ -1337,13 +1338,11 @@ Private Sub Form_Activate()
                 txtNCuentas(5).Text = RecuperaValor(Parametros, 6)
                 Text1(9).Text = RecuperaValor(Parametros, 2)
                 'Fecha e Importe
-                Sql = RecuperaValor(Parametros, 7)
-                I = InStr(8, Sql, " ")
-                txtFecha(19).Text = Trim(Mid(Sql, 1, I))
-                Text1(3).Text = Trim(Mid(Sql, I))
+                txtFecha(19).Text = RecuperaValor(Parametros, 7)
+                Text1(3).Text = RecuperaValor(Parametros, 8)
                 'ASignaremos cadenadesdeotroform el valor para hacer el UPDATE del registro SI se contabiliza
-                Sql = RecuperaValor(CadenaDesdeOtroForm, 1) & "|"
-                CadenaDesdeOtroForm = Sql & Text1(19).Text & "|" & Text1(9).Text & "|"
+                vWhere = RecuperaValor(Parametros, 1) & "|"
+                vWhere = vWhere & txtFecha(19).Text & "|" & Text1(9).Text & "|"
                 
                 VisibleCC
             
@@ -1360,7 +1359,7 @@ Dim B As Boolean
     B = False
     If vParam.autocoste Then
         If txtCuentas(5).Text <> "" Then
-                Sql = "|" & Mid(txtNCuentas(5).Text, 1, 1) & "|"
+                SQL = "|" & Mid(txtNCuentas(5).Text, 1, 1) & "|"
                 
                 '###AQUI
                 'If InStr(1, CuentasCC, Sql) > 0 Then B = True
@@ -1377,21 +1376,21 @@ End Sub
 
 
 Private Function SugerirCodigoSiguiente() As String
-    Dim Sql As String
+    Dim SQL As String
     Dim RS As ADODB.Recordset
     
-    Sql = "Select Max(codigo) from gastosfijos"
+    SQL = "Select Max(codigo) from gastosfijos"
     
     Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, , , adCmdText
-    Sql = "1"
+    RS.Open SQL, Conn, , , adCmdText
+    SQL = "1"
     If Not RS.EOF Then
         If Not IsNull(RS.Fields(0)) Then
-            Sql = CStr(RS.Fields(0) + 1)
+            SQL = CStr(RS.Fields(0) + 1)
         End If
     End If
     RS.Close
-    SugerirCodigoSiguiente = Sql
+    SugerirCodigoSiguiente = SQL
 End Function
 
 
@@ -1416,10 +1415,12 @@ Dim W, H
     Me.imgCuentas(3).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Me.imgCuentas(4).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Me.imgCuentas(5).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Me.imgDiario(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Me.imgConcepto(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
-    Me.imgFec(0).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Me.imgFec(5).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
-    Me.imgFec(19).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Me.ImgFec(0).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Me.ImgFec(5).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
+    Me.ImgFec(19).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     
     
     
@@ -1457,9 +1458,9 @@ Dim W, H
         
     Case 5
         Me.Caption = "Contabilización Gasto Fijo"
-        W = Me.FrameModGastoFijo.Width
-        H = Me.FrameModGastoFijo.Height + 150
-        Me.FrameModGastoFijo.Visible = True
+        W = Me.FrameContabilizarGasto.Width
+        H = Me.FrameContabilizarGasto.Height + 150
+        Me.FrameContabilizarGasto.Visible = True
     
     
     End Select
@@ -1485,7 +1486,12 @@ Dim RC As Byte
     'Concepto
     txtConcepto(0).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNConcepto(0).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
 
+Private Sub frmDi_DatoSeleccionado(CadenaSeleccion As String)
+    'Diario
+    txtDiario(0).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtNDiario(0).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub imgCC_Click(Index As Integer)
@@ -1515,15 +1521,15 @@ Private Sub imgConcepto_Click(Index As Integer)
 End Sub
 
 Private Sub imgCuentas_Click(Index As Integer)
-    Sql = ""
+    SQL = ""
     AbiertoOtroFormEnListado = True
     Set frmCtas = New frmColCtas
     frmCtas.DatosADevolverBusqueda = True
     frmCtas.Show vbModal
     Set frmCtas = Nothing
-    If Sql <> "" Then
-        Me.txtCuentas(Index).Text = RecuperaValor(Sql, 1)
-        Me.txtNCuentas(Index).Text = RecuperaValor(Sql, 2)
+    If SQL <> "" Then
+        Me.txtCuentas(Index).Text = RecuperaValor(SQL, 1)
+        Me.txtNCuentas(Index).Text = RecuperaValor(SQL, 2)
     Else
         QuitarPulsacionMas Me.txtCuentas(Index)
     End If
@@ -1589,7 +1595,7 @@ Dim B As Byte
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
-    Sql = CadenaSeleccion
+    SQL = CadenaSeleccion
 End Sub
 
 
@@ -1604,18 +1610,18 @@ End Sub
 
 Private Sub txtCC_LostFocus(Index As Integer)
     txtCC(Index).Text = Trim(txtCC(Index).Text)
-    Sql = ""
+    SQL = ""
     I = 0
     If txtCC(Index).Text <> "" Then
             
-        Sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCC(Index).Text, "T")
-        If Sql = "" Then
+        SQL = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCC(Index).Text, "T")
+        If SQL = "" Then
             MsgBox "Concepto no existe", vbExclamation
             I = 1
         End If
 
     End If
-    Me.txtNCC(Index).Text = Sql
+    Me.txtNCC(Index).Text = SQL
     If I = 1 Then
         txtCC(Index).Text = ""
         PonFoco txtCC(Index)
@@ -1627,32 +1633,81 @@ Private Sub txtDiario_GotFocus(Index As Integer)
     ConseguirFoco txtDiario(Index), 3
 End Sub
 
+Private Sub txtDiario_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyAdd Then
+        KeyCode = 0
+        
+        LanzaFormAyuda txtDiario(Index).Tag, Index
+    End If
+End Sub
+
+
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
+    Select Case Nombre
+        Case "imgDiario"
+            imgDiario_Click Indice
+        Case "imgConcepto"
+            imgConcepto_Click Indice
+    End Select
+    
+End Sub
+
 Private Sub txtDiario_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 Private Sub txtDiario_LostFocus(Index As Integer)
-    txtDiario(Index).Text = Trim(txtDiario(Index).Text)
-    Sql = ""
-    I = 0
-    If txtDiario(Index).Text <> "" Then
-            
-        Sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtDiario(Index).Text, "T")
-        If Sql = "" Then
-            MsgBox "Diario no existe", vbExclamation
-            I = 1
-        End If
+Dim cad As String, cadTipo As String
 
-    End If
-    Me.txtNDiario(Index).Text = Sql
-    If I = 1 Then
-        txtDiario(Index).Text = ""
-        PonFoco txtDiario(Index)
-    End If
+    txtDiario(Index).Text = Trim(txtDiario(Index).Text)
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    Select Case Index
+        Case 0, 1 'TiposDiarioS
+            txtNDiario(Index).Text = DevuelveDesdeBD("desdiari", "tiposdiario", "numdiari", txtDiario(Index), "N")
+            If txtDiario(Index).Text <> "" Then txtDiario(Index).Text = Format(txtDiario(Index).Text, "000")
+    End Select
 
 End Sub
 
 
+Private Sub txtConcepto_GotFocus(Index As Integer)
+    ConseguirFoco txtConcepto(Index), 3
+End Sub
+
+Private Sub txtConcepto_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyAdd Then
+        KeyCode = 0
+        
+        LanzaFormAyuda txtConcepto(Index).Tag, Index
+    End If
+End Sub
+
+
+
+Private Sub txtConcepto_KeyPress(Index As Integer, KeyAscii As Integer)
+   ' KEYpressGnral KeyAscii
+End Sub
+
+Private Sub txtConcepto_LostFocus(Index As Integer)
+Dim cad As String, cadTipo As String 'tipo cliente
+
+    txtConcepto(Index).Text = Trim(txtConcepto(Index).Text)
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    Select Case Index
+        Case 0, 1 'CONCEPTOS
+            txtNConcepto(Index).Text = DevuelveDesdeBD("nomconce", "conceptos", "codconce", txtConcepto(Index), "N")
+            If txtConcepto(Index).Text <> "" Then txtConcepto(Index).Text = Format(txtConcepto(Index).Text, "000")
+    End Select
+
+End Sub
 
 
 
@@ -1680,7 +1735,7 @@ Private Sub txtCuentas_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     txtCuentas(Index).Text = Trim(txtCuentas(Index).Text)
@@ -1707,18 +1762,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
         Case 0, 1, 2, 3 'cuentas
             Cta = (txtCuentas(Index).Text)
                                     '********
-            B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
+            B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
             If B = 0 Then
                 MsgBox "NO existe la cuenta: " & txtCuentas(Index).Text, vbExclamation
                 txtCuentas(Index).Text = ""
                 txtNCuentas(Index).Text = ""
             Else
                 txtCuentas(Index).Text = Cta
-                txtNCuentas(Index).Text = Sql
+                txtNCuentas(Index).Text = SQL
                 If B = 1 Then
                     txtNCuentas(Index).Tag = ""
                 Else
-                    txtNCuentas(Index).Tag = Sql
+                    txtNCuentas(Index).Tag = SQL
                 End If
                 Hasta = -1
                 If Index = 6 Then
@@ -1774,7 +1829,7 @@ End Sub
 Private Sub EjecutarSQL()
     On Error Resume Next
     
-    Conn.Execute Sql
+    Conn.Execute SQL
     If Err.Number <> 0 Then
         If Conn.Errors(0).Number = 1062 Then
             Err.Clear
@@ -1793,7 +1848,7 @@ End Sub
 
 Private Sub CargarCombo()
 Dim RS As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim J As Long
     
     Combo1(0).Clear

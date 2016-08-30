@@ -1213,6 +1213,9 @@ Private Sub Form_Activate()
         
         Text1(1).Text = Format(Now, "dd/mm/yyyy")
         
+        Text1(1).Enabled = (Check1.Value = 1)
+        imgppal(0).Enabled = (Check1.Value = 1)
+        
         cmdRegresar.SetFocus
     End If
 End Sub
@@ -1487,13 +1490,13 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub CargaGrid(Optional vSQL As String)
+Private Sub CargaGrid(Optional vSql As String)
     Dim SQL As String
     Dim tots As String
     Dim SQL2 As String
     
-    If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+    If vSql <> "" Then
+        SQL = CadenaConsulta & " AND " & vSql
     Else
         SQL = CadenaConsulta
     End If

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmModelo340 
    Appearance      =   0  'Flat
@@ -585,9 +585,9 @@ Private WithEvents frmCtas As frmColCtas
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
@@ -630,7 +630,7 @@ End Sub
 
 
 Private Sub cmdAccion_Click(Index As Integer)
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     
     'Exportacion a PDF
@@ -643,7 +643,7 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     
     Screen.MousePointer = vbHourglass
-    If Modelo340(Me.ListView1(1), CInt(txtAno(0).Text), cmbPeriodo(0).ListIndex + 1, Cad, lbl340, False, Me.optTipoSal(1).Value = 1, V340(), UltimoPeriodoLiquidacion) Then
+    If Modelo340(Me.ListView1(1), CInt(txtAno(0).Text), cmbPeriodo(0).ListIndex + 1, cad, lbl340, False, Me.optTipoSal(1).Value = 1, V340(), UltimoPeriodoLiquidacion) Then
         lbl340.Caption = ""
         
         If Not optTipoSal(1).Value Then
@@ -665,17 +665,17 @@ Private Sub cmdAccion_Click(Index As Integer)
     
             '¡Anño periodo. Variable que se le pasa al mod340
             '
-            Cad = Format(Me.txtAno(0).Text, "0000") & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
+            cad = Format(Me.txtAno(0).Text, "0000") & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
             If vParam.periodos = 0 Then
                 'TRIMESTRAL
-                Cad = Cad & Me.cmbPeriodo(0).ListIndex + 1 & "T"
+                cad = cad & Me.cmbPeriodo(0).ListIndex + 1 & "T"
             Else
                 'MENSUAL
-                Cad = Cad & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
+                cad = cad & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
             End If
                                                     
                                                     'Guardar como
-            If GeneraFichero340(True, Cad, False) Then
+            If GeneraFichero340(True, cad, False) Then
                 'INSERTO EL LOG
                 If CuardarComo340 Then InsertaLog340
                     
@@ -748,19 +748,19 @@ Private Sub PonerPeriodoPresentacion340()
     cmbPeriodo(0).Clear
     If vParam.periodos = 0 Then
         'Liquidacion TRIMESTRAL
-        For i = 1 To 4
-            If i = 1 Or i = 3 Then
+        For I = 1 To 4
+            If I = 1 Or I = 3 Then
                 CadenaDesdeOtroForm = "er"
             Else
                 CadenaDesdeOtroForm = "º"
             End If
-            CadenaDesdeOtroForm = i & CadenaDesdeOtroForm & " "
+            CadenaDesdeOtroForm = I & CadenaDesdeOtroForm & " "
             Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm & " trimestre"
-        Next i
+        Next I
     Else
         'Liquidacion MENSUAL
-        For i = 1 To 12
-            CadenaDesdeOtroForm = MonthName(i)
+        For I = 1 To 12
+            CadenaDesdeOtroForm = MonthName(I)
             CadenaDesdeOtroForm = UCase(Mid(CadenaDesdeOtroForm, 1, 1)) & LCase(Mid(CadenaDesdeOtroForm, 2))
             Me.cmbPeriodo(0).AddItem CadenaDesdeOtroForm
         Next
@@ -770,18 +770,18 @@ Private Sub PonerPeriodoPresentacion340()
     'Leeremos ultimo valor liquidaco
     
     txtAno(0).Text = vParam.anofactu
-    i = vParam.perfactu + 1
+    I = vParam.perfactu + 1
     If vParam.periodos = 0 Then
         NumRegElim = 4
     Else
         NumRegElim = 12
     End If
         
-    If i > NumRegElim Then
-            i = 1
+    If I > NumRegElim Then
+            I = 1
             txtAno(0).Text = vParam.anofactu + 1
     End If
-    Me.cmbPeriodo(0).ListIndex = i - 1
+    Me.cmbPeriodo(0).ListIndex = I - 1
      
     
     CadenaDesdeOtroForm = ""
@@ -795,7 +795,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -804,13 +804,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' tabla de codigos de iva
         Case 0
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = False
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = False
+            Next I
         Case 1
-            For i = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(i).Checked = True
-            Next i
+            For I = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(I).Checked = True
+            Next I
     End Select
     
     Screen.MousePointer = vbDefault
@@ -891,10 +891,10 @@ End Sub
 
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
 End Sub
 
@@ -935,11 +935,11 @@ Dim nomDocu As String
     numParam = numParam + 1
     
     cadParam = cadParam & "Empresas= """
-    For i = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            cadParam = cadParam & Me.ListView1(1).ListItems(i).SubItems(1) & "  "
+    For I = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            cadParam = cadParam & Me.ListView1(1).ListItems(I).SubItems(1) & "  "
         End If
-    Next i
+    Next I
     cadParam = Trim(cadParam)
     
     cadParam = cadParam & """|"
@@ -1013,9 +1013,9 @@ Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
     End If
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
     
-    DatosOk = False
+    DatosOK = False
     
     If EmpresasSeleccionadas = 0 Then
         MsgBox "Seleccione una empresa", vbExclamation
@@ -1030,20 +1030,20 @@ Private Function DatosOk() As Boolean
     If cmbPeriodo(0).ListIndex = cmbPeriodo(0).ListCount - 1 Then UltimoPeriodoLiquidacion = True
     
    
-    DatosOk = True
+    DatosOK = True
 
 
 End Function
 
 Private Function EmpresasSeleccionadas() As Integer
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 Dim NSel As Integer
 
     NSel = 0
-    For i = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then NSel = NSel + 1
-    Next i
+    For I = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then NSel = NSel + 1
+    Next I
     EmpresasSeleccionadas = NSel
 
 End Function
@@ -1056,7 +1056,7 @@ End Sub
 Private Sub CargarListView(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -1078,35 +1078,35 @@ Dim SQL As String
     End If
     SQL = SQL & " ORDER BY codempre "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         
         If vParam.EsMultiseccion Then
-            If EsMultiseccion(DBLet(Rs!CONTA)) Then
+            If EsMultiseccion(DBLet(RS!CONTA)) Then
                 Set ItmX = ListView1(Index).ListItems.Add
                 
-                If DBLet(Rs!CONTA) = Conn.DefaultDatabase Then ItmX.Checked = True
-                ItmX.Text = Rs.Fields(0).Value
-                ItmX.SubItems(1) = Rs.Fields(1).Value
+                If DBLet(RS!CONTA) = Conn.DefaultDatabase Then ItmX.Checked = True
+                ItmX.Text = RS.Fields(0).Value
+                ItmX.SubItems(1) = RS.Fields(1).Value
             End If
         Else
             Set ItmX = ListView1(Index).ListItems.Add
             
             ItmX.Checked = True
-            ItmX.Text = Rs.Fields(0).Value
-            ItmX.SubItems(1) = Rs.Fields(1).Value
+            ItmX.Text = RS.Fields(0).Value
+            ItmX.SubItems(1) = RS.Fields(1).Value
         End If
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Cargar Tipo de Iva.", Err.Description
+        MuestraError Err.Number, "Cargar Empresas.", Err.Description
     End If
 End Sub
 
@@ -1119,7 +1119,7 @@ Private Sub txtAnyo_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAnyo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     txtAno(Index).Text = Trim(txtAno(Index).Text)
     
@@ -1146,13 +1146,13 @@ Private Function CuardarComo340() As Boolean
     cd1.InitDir = Mid(App.Path, 1, 3)
     cd1.ShowSave
         
-    Cad = App.Path & "\tmp340.dat"
+    cad = App.Path & "\tmp340.dat"
     
     If cd1.FileTitle <> "" Then
         If Dir(cd1.FileName, vbArchive) <> "" Then
             If MsgBox("Ya existe: " & cd1.FileName & vbCrLf & "¿Sobreescribir?", vbQuestion + vbYesNo) = vbNo Then Exit Function
         End If
-        FileCopy Cad, cd1.FileName
+        FileCopy cad, cd1.FileName
         MsgBox Space(20) & "Copia efectuada correctamente" & Space(20), vbInformation
         CuardarComo340 = True
     End If
@@ -1167,16 +1167,16 @@ Private Sub InsertaLog340()
 Dim C2 As String
     
     
-    Cad = Cad & " "
-    For i = 1 To ListView1(1).ListItems.Count
-        If Me.ListView1(1).ListItems(i).Checked Then
-            Cad = Cad & Me.ListView1(1).ListItems(i).SubItems(1) & "  "
+    cad = cad & " "
+    For I = 1 To ListView1(1).ListItems.Count
+        If Me.ListView1(1).ListItems(I).Checked Then
+            cad = cad & Me.ListView1(1).ListItems(I).SubItems(1) & "  "
         End If
-    Next i
-    Cad = Trim(Cad)
+    Next I
+    cad = Trim(cad)
     
     
-    vLog.Insertar 15, vUsu, Cad
+    vLog.Insertar 15, vUsu, cad
     
     'DICIMEBRE 2012
     'Diciembre 2012
@@ -1184,20 +1184,20 @@ Dim C2 As String
     'Para guardarme un LOG de pagos declardaos
     'Ya que si luego modifican un apunte ...  perderiamos datos realmente.
     'ASi, con este log me que declaramos de efectivo
-    Cad = Format(Me.txtAno(0).Text, "0000") & "-"
+    cad = Format(Me.txtAno(0).Text, "0000") & "-"
     If vParam.periodos = 0 Then
         'TRIMESTRAL
-        Cad = Cad & Me.cmbPeriodo(0).ListIndex + 1 & "T"
+        cad = cad & Me.cmbPeriodo(0).ListIndex + 1 & "T"
     Else
         'MENSUAL
-        Cad = Cad & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
+        cad = cad & Format(Me.cmbPeriodo(0).ListIndex + 1, "00")
     End If
                        
-    Cad = " SELECT  now() fecha, codusu,'" & Cad & "',nifdeclarado,razosoci,fechaexp,base,totiva  "
-    Cad = Cad & " FROM tmp340 where codusu =" & vUsu.Codigo & " and clavelibro='Z'"
+    cad = " SELECT  now() fecha, codusu,'" & cad & "',nifdeclarado,razosoci,fechaexp,base,totiva  "
+    cad = cad & " FROM tmp340 where codusu =" & vUsu.Codigo & " and clavelibro='Z'"
     
-    Cad = "INSERT INTO slog340 " & Cad
-    If Not EjecutaSQL(Cad) Then MsgBox "Error insertando LOG. Consulte soporte técnico", vbExclamation
+    cad = "INSERT INTO slog340 " & cad
+    If Not EjecutaSQL(cad) Then MsgBox "Error insertando LOG. Consulte soporte técnico", vbExclamation
     
     
     

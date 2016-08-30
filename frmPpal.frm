@@ -1174,6 +1174,8 @@ Private Sub AbrirFormularios(Accion As Long)
             frmTESTransferencias.Show vbModal
         
         Case 901 ' Informe por NIF
+            frmTESInfSituacionNIF.Show vbModal
+            
         Case 902 ' Informe por cuenta
         Case 903 ' Situación Tesoreria
         
@@ -1357,7 +1359,7 @@ End Sub
 
 
 Private Function CargarInformacionBBDD() As String
-Dim Sql As String
+Dim SQL As String
 Dim SQL2 As String
 Dim CadValues As String
 Dim NroRegistros As Long
@@ -1374,8 +1376,8 @@ Dim RS As ADODB.Recordset
     
     CargarInformacionBBDD = False
     
-    Sql = "delete from tmpinfbbdd where codusu = " & vUsu.Codigo
-    Conn.Execute Sql
+    SQL = "delete from tmpinfbbdd where codusu = " & vUsu.Codigo
+    Conn.Execute SQL
     
     FecIniSig = DateAdd("yyyy", 1, vParam.fechaini)
     FecFinSig = DateAdd("yyyy", 1, vParam.fechafin)
@@ -1383,57 +1385,57 @@ Dim RS As ADODB.Recordset
     SQL2 = "insert into tmpinfbbdd (codusu,posicion,concepto,nactual,poractual,nsiguiente,porsiguiente) values "
     
     'asientos
-    Sql = "select count(*) from hcabapu where fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
-    NroRegistros = DevuelveValor(Sql)
-    Sql = "select count(*) from hcabapu where fechaent between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
-    NroRegistrosSig = DevuelveValor(Sql)
+    SQL = "select count(*) from hcabapu where fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+    NroRegistros = DevuelveValor(SQL)
+    SQL = "select count(*) from hcabapu where fechaent between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
+    NroRegistrosSig = DevuelveValor(SQL)
     
     CadValues = "(" & vUsu.Codigo & ",1,'Asientos'," & DBSet(NroRegistros, "N") & ",0," & DBSet(NroRegistrosSig, "N") & ",0)"
     Conn.Execute SQL2 & CadValues
     
     'apuntes
-    Sql = "select count(*) from hlinapu where fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
-    NroRegistros = DevuelveValor(Sql)
-    Sql = "select count(*) from hlinapu where fechaent between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
-    NroRegistrosSig = DevuelveValor(Sql)
+    SQL = "select count(*) from hlinapu where fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+    NroRegistros = DevuelveValor(SQL)
+    SQL = "select count(*) from hlinapu where fechaent between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
+    NroRegistrosSig = DevuelveValor(SQL)
     
     CadValues = "(" & vUsu.Codigo & ",2,'Apuntes'," & DBSet(NroRegistros, "N") & ",0," & DBSet(NroRegistrosSig, "N") & ",0)"
     Conn.Execute SQL2 & CadValues
     
     'facturas de venta
-    Sql = "select count(*) from factcli where "
-    Sql = Sql & " fecfactu between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+    SQL = "select count(*) from factcli where "
+    SQL = SQL & " fecfactu between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     
-    NroRegistrosTot = DevuelveValor(Sql)
+    NroRegistrosTot = DevuelveValor(SQL)
     
     
-    Sql = "select count(*) from factcli where "
-    Sql = Sql & " fecfactu between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
+    SQL = "select count(*) from factcli where "
+    SQL = SQL & " fecfactu between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
     
-    NroRegistrosTotSig = DevuelveValor(Sql)
+    NroRegistrosTotSig = DevuelveValor(SQL)
     
     I = 3
     
-    Sql = "select * from contadores where not tiporegi in ('0','1')"
+    SQL = "select * from contadores where not tiporegi in ('0','1')"
     
     Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
     
-        Sql = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
-        Sql = Sql & " and fecfactu between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+        SQL = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
+        SQL = SQL & " and fecfactu between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     
-        NroRegistros = DevuelveValor(Sql)
+        NroRegistros = DevuelveValor(SQL)
         Porcen1 = 0
         If NroRegistrosTot <> 0 Then
             Porcen1 = Round(NroRegistros * 100 / NroRegistrosTot, 2)
         End If
         
-        Sql = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
-        Sql = Sql & " and fecfactu between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
+        SQL = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
+        SQL = SQL & " and fecfactu between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
         
-        NroRegistrosSig = DevuelveValor(Sql)
+        NroRegistrosSig = DevuelveValor(SQL)
         Porcen2 = 0
         If NroRegistrosTotSig <> 0 Then
             Porcen2 = Round(NroRegistrosSig * 100 / NroRegistrosTotSig, 2)
@@ -1453,10 +1455,10 @@ Dim RS As ADODB.Recordset
     'facturas de proveedor
     I = I + 1
     
-    Sql = "select count(*) from factpro where fecharec between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
-    NroRegistros = DevuelveValor(Sql)
-    Sql = "select count(*) from factpro where fecharec between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
-    NroRegistrosSig = DevuelveValor(Sql)
+    SQL = "select count(*) from factpro where fecharec between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+    NroRegistros = DevuelveValor(SQL)
+    SQL = "select count(*) from factpro where fecharec between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
+    NroRegistrosSig = DevuelveValor(SQL)
     
     CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & ",'Facturas Proveedores'," & DBSet(NroRegistros, "N") & ",0,"
     CadValues = CadValues & DBSet(NroRegistrosSig, "N") & ",0)"
@@ -1497,15 +1499,15 @@ End Sub
 'El usuarios si tiene maximizada unas cosas y minimiazadas otras se las guardaremos
 Private Sub MenuComoEstaba(ByRef TW1 As TreeView, aplicacion As String)
 Dim N As Node
-Dim Sql As String
+Dim SQL As String
 
     For I = 1 To TW1.Nodes.Count
         If aplicacion = "introcon" Then
             TW1.Nodes(I).Expanded = True
         Else
-            Sql = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
+            SQL = "select expandido from menus_usuarios where codusu = " & DBSet(vUsu.Id, "N") & " and  aplicacion = '" & aplicacion & "' and codigo in (select codigo from menus where descripcion = " & DBSet(Me.TreeView1.Nodes(I), "T") & " and aplicacion = '" & aplicacion & "')"
     
-            If DevuelveValor(Sql) = 0 Then
+            If DevuelveValor(SQL) = 0 Then
                 TW1.Nodes(I).Expanded = False
             Else
                 TW1.Nodes(I).Expanded = True
@@ -1516,18 +1518,18 @@ Dim Sql As String
 End Sub
 
 Private Sub OcultarHijos(Padre As String)
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "update menus_usuarios set ver = 0 where codusu = " & vUsu.Id & " and padre = " & DBSet(Padre, "N")
+    SQL = "update menus_usuarios set ver = 0 where codusu = " & vUsu.Id & " and padre = " & DBSet(Padre, "N")
 
-    Conn.Execute Sql
+    Conn.Execute SQL
     
 End Sub
 
 Private Sub CargaShortCuts(Seleccionado As Long)
 Dim Aux As String
 Dim RS As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim CadAux As String
  
  
@@ -1573,8 +1575,8 @@ Dim CadAux As String
         For I = 1 To ListView1.ListItems.Count
             Set RS = New ADODB.Recordset
             
-            Sql = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
-            RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If Not RS.EOF Then
                 Me.ListView1.ListItems(I).Left = DBLet(RS.Fields(0).Value)
@@ -1605,18 +1607,18 @@ Private Sub ListView1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-Dim Sql As String
+Dim SQL As String
 Dim RS As ADODB.Recordset
 
      If Button = 2 Then
         'PopupMenu mnPopUp
     Else
         If Not ListView1.SelectedItem Is Nothing Then
-            Sql = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
-            Sql = Sql & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
+            SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
+            SQL = SQL & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
             
             Set RS = New ADODB.Recordset
-            RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If Not RS.EOF Then
                 XAnt = RS.Fields(0)
@@ -1639,7 +1641,7 @@ End Sub
 
 Private Sub ListView1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim RefrescarDatos As Boolean   'Porque a movido iconos fuera de los margenes
-Dim Sql As String
+Dim SQL As String
 
     If IconoSeleccionado Then
         RefrescarDatos = False
@@ -1841,17 +1843,17 @@ End Sub
 
 
 Private Sub mnUsuariosActivos_Click()
-Dim Sql As String
+Dim SQL As String
 Dim I As Integer
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad(False)
     If CadenaDesdeOtroForm <> "" Then
         I = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            Sql = RecuperaValor(CadenaDesdeOtroForm, I)
-            If Sql <> "" Then Me.Tag = Me.Tag & "    - " & Sql & vbCrLf
+            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
+            If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
             I = I + 1
-        Loop Until Sql = ""
+        Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
         MsgBox "Ningun usuario, además de usted, conectado a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf, vbInformation
@@ -1860,7 +1862,7 @@ Dim I As Integer
 End Sub
 
 
-Private Sub AbrirListado(numero As Byte, Cerrado As Boolean)
+Private Sub AbrirListado(Numero As Byte, Cerrado As Boolean)
 '    Screen.MousePointer = vbHourglass
 '    frmListado.EjerciciosCerrados = Cerrado
 '    frmListado.Opcion = numero
@@ -2105,7 +2107,7 @@ Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim cad As String
 Dim ItmX As ListItem
-Dim Sql As String
+Dim SQL As String
 
 
 'Cargamos las prohibidas
@@ -2127,9 +2129,9 @@ While Not RS.EOF
         ItmX.SubItems(1) = RS!nomresum
         
         ' sacamos las fechas de inicio y fin
-        Sql = "select fechaini, fechafin from " & Trim(RS!CONTA) & ".parametros"
+        SQL = "select fechaini, fechafin from " & Trim(RS!CONTA) & ".parametros"
         Set Rs2 = New ADODB.Recordset
-        Rs2.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Rs2.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         If Not Rs2.EOF Then
             ItmX.SubItems(2) = Rs2!fechaini & " - " & Rs2!fechafin
         End If
