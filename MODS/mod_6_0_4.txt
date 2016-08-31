@@ -45,9 +45,16 @@ CREATE TABLE `ariconta1`.`compensapro_facturas` (
 # Impresion de compensaciones
 insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0809-00','Impresion de Compensaciones Prov','HerCompenPro.rpt')
 ;
+
 # Impresion de memorias de pagos
 insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '1309-00','Memorias Plazos de pago','MemoriaPagos.rpt')
 ;
+
 # Impresion de gastos Fijos
 insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0807-00','Gastos Fijos','GastosFijos.rpt')
 ;
+
+# Impresion de Situacion por NIF (Tesoreria)
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0901-00','Informe Situacion por NIF','SituacionNIF.rpt')
+;
+

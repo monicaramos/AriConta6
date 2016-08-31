@@ -1051,9 +1051,6 @@ End Sub
 Private Sub Check1_Click()
     Text1(1).Enabled = (Check1.Value = 1)
     imgppal(0).Enabled = (Check1.Value = 1)
-    
-    If Not Text1(1).Enabled Then Text1(1).Text = ""
-    
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -1209,6 +1206,7 @@ Private Sub Form_Activate()
         
         EsReciboBancario = (RecuperaValor(CodigoActual, 7) = 4)
         Me.Text2(1).Text = RecuperaValor(CodigoActual, 8)
+        
         Check1.Value = 0
         
         Text1(1).Text = Format(Now, "dd/mm/yyyy")
@@ -1302,7 +1300,7 @@ Private Sub Image1_Click(Index As Integer)
 End Sub
 
 Private Sub imgppal_Click(Index As Integer)
-    If (Modo = 2 Or Modo = 5 Or Modo = 0) And (Index <> 6) And (Index <> 8) Then Exit Sub
+    If (Modo = 5 Or Modo = 0) And (Index <> 6) And (Index <> 8) Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     

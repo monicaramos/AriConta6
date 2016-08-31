@@ -1174,9 +1174,13 @@ Private Sub AbrirFormularios(Accion As Long)
             frmTESTransferencias.Show vbModal
         
         Case 901 ' Informe por NIF
+            frmTESInfSituacionNIF.Tipo = 0
             frmTESInfSituacionNIF.Show vbModal
             
         Case 902 ' Informe por cuenta
+            frmTESInfSituacionNIF.Tipo = 1
+            frmTESInfSituacionNIF.Show vbModal
+        
         Case 903 ' Situación Tesoreria
         
         
@@ -1370,7 +1374,7 @@ Dim FecIniSig As Date
 Dim FecFinSig As Date
 Dim Porcen1 As Currency
 Dim Porcen2 As Currency
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo eCargarInformacionBBDD
     
@@ -1418,12 +1422,12 @@ Dim RS As ADODB.Recordset
     
     SQL = "select * from contadores where not tiporegi in ('0','1')"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
+    While Not Rs.EOF
     
-        SQL = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
+        SQL = "select count(*) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
         SQL = SQL & " and fecfactu between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     
         NroRegistros = DevuelveValor(SQL)
@@ -1432,7 +1436,7 @@ Dim RS As ADODB.Recordset
             Porcen1 = Round(NroRegistros * 100 / NroRegistrosTot, 2)
         End If
         
-        SQL = "select count(*) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
+        SQL = "select count(*) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
         SQL = SQL & " and fecfactu between " & DBSet(FecIniSig, "F") & " and " & DBSet(FecFinSig, "F")
         
         NroRegistrosSig = DevuelveValor(SQL)
@@ -1441,16 +1445,16 @@ Dim RS As ADODB.Recordset
             Porcen2 = Round(NroRegistrosSig * 100 / NroRegistrosTotSig, 2)
         End If
     
-        CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & "," & DBSet(RS!nomregis, "T") & "," & DBSet(NroRegistros, "N") & "," & DBSet(Porcen1, "N") & ","
+        CadValues = "(" & vUsu.Codigo & "," & DBSet(I, "N") & "," & DBSet(Rs!nomregis, "T") & "," & DBSet(NroRegistros, "N") & "," & DBSet(Porcen1, "N") & ","
         CadValues = CadValues & DBSet(NroRegistrosSig, "N") & "," & DBSet(Porcen2, "N") & ")"
         Conn.Execute SQL2 & CadValues
         
         I = I + 1
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     'facturas de proveedor
     I = I + 1
@@ -1528,7 +1532,7 @@ End Sub
 
 Private Sub CargaShortCuts(Seleccionado As Long)
 Dim Aux As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim CadAux As String
  
@@ -1573,16 +1577,16 @@ Dim CadAux As String
 
     If Not Reorganizar Then
         For I = 1 To ListView1.ListItems.Count
-            Set RS = New ADODB.Recordset
+            Set Rs = New ADODB.Recordset
             
             SQL = "select posx, posy from menus_usuarios where aplicacion = 'ariconta' and codusu = " & vUsu.Id & " and posx <> 0 and codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion = " & DBSet(ListView1.ListItems(I).Text, "T") & ")"
-            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            If Not RS.EOF Then
-                Me.ListView1.ListItems(I).Left = DBLet(RS.Fields(0).Value)
-                Me.ListView1.ListItems(I).Top = DBLet(RS.Fields(1).Value)
+            If Not Rs.EOF Then
+                Me.ListView1.ListItems(I).Left = DBLet(Rs.Fields(0).Value)
+                Me.ListView1.ListItems(I).Top = DBLet(Rs.Fields(1).Value)
             End If
-            Set RS = Nothing
+            Set Rs = Nothing
         Next I
     Else
         Reorganizar = False
@@ -1608,7 +1612,7 @@ End Sub
 
 Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
      If Button = 2 Then
         'PopupMenu mnPopUp
@@ -1617,14 +1621,14 @@ Dim RS As ADODB.Recordset
             SQL = "select posx, posy from menus_usuarios where codusu = " & vUsu.Id & " and aplicacion = 'ariconta' and "
             SQL = SQL & " codigo in (select codigo from menus where aplicacion = 'ariconta' and descripcion =  " & DBSet(ListView1.SelectedItem, "T") & ")"
             
-            Set RS = New ADODB.Recordset
-            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set Rs = New ADODB.Recordset
+            Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            If Not RS.EOF Then
-                XAnt = RS.Fields(0)
-                YAnt = RS.Fields(1)
+            If Not Rs.EOF Then
+                XAnt = Rs.Fields(0)
+                YAnt = Rs.Fields(1)
             End If
-            Set RS = Nothing
+            Set Rs = Nothing
             
         End If
     End If
@@ -1862,7 +1866,7 @@ Dim I As Integer
 End Sub
 
 
-Private Sub AbrirListado(Numero As Byte, Cerrado As Boolean)
+Private Sub AbrirListado(numero As Byte, Cerrado As Boolean)
 '    Screen.MousePointer = vbHourglass
 '    frmListado.EjerciciosCerrados = Cerrado
 '    frmListado.Opcion = numero
@@ -2103,7 +2107,7 @@ End Function
 
 Private Sub BuscaEmpresas()
 Dim Prohibidas As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim cad As String
 Dim ItmX As ListItem
@@ -2114,22 +2118,22 @@ Dim SQL As String
 Prohibidas = DevuelveProhibidas
 
 'Cargamos las empresas
-Set RS = New ADODB.Recordset
+Set Rs = New ADODB.Recordset
 
 '[Monica]11/04/2014: solo debe de salir las ariconta
-RS.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+Rs.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-While Not RS.EOF
-    cad = "|" & RS!codempre & "|"
+While Not Rs.EOF
+    cad = "|" & Rs!codempre & "|"
     If InStr(1, Prohibidas, cad) = 0 Then
-        cad = RS!nomempre
+        cad = Rs!nomempre
         Set ItmX = ListView2.ListItems.Add()
         
         ItmX.Text = cad
-        ItmX.SubItems(1) = RS!nomresum
+        ItmX.SubItems(1) = Rs!nomresum
         
         ' sacamos las fechas de inicio y fin
-        SQL = "select fechaini, fechafin from " & Trim(RS!CONTA) & ".parametros"
+        SQL = "select fechaini, fechafin from " & Trim(Rs!CONTA) & ".parametros"
         Set Rs2 = New ADODB.Recordset
         Rs2.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         If Not Rs2.EOF Then
@@ -2138,14 +2142,14 @@ While Not RS.EOF
         Set Rs2 = Nothing
         
             
-        cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        cad = Rs!CONTA & "|" & Rs!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
         ItmX.Tag = cad
-        ItmX.ToolTipText = RS!CONTA
+        ItmX.ToolTipText = Rs!CONTA
         
         
         'Si el codconta > 100 son empresas que viene del cambio del plan contable.
         'Atenuare su visibilidad
-        If RS!codempre > 100 Then
+        If Rs!codempre > 100 Then
             ItmX.ForeColor = &H808080
             ItmX.ListSubItems(1).ForeColor = &H808080
             ItmX.ListSubItems(2).ForeColor = &H808080
@@ -2156,32 +2160,32 @@ While Not RS.EOF
             ItmX.SmallIcon = 1
         End If
     End If
-    RS.MoveNext
+    Rs.MoveNext
 Wend
-RS.Close
+Rs.Close
 End Sub
 
 
 Private Function DevuelveProhibidas() As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String
 Dim I As Integer
     On Error GoTo EDevuelveProhibidas
     DevuelveProhibidas = ""
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     I = vUsu.Codigo Mod 1000
-    RS.Open "Select * from usuarios.usuarioempresasariconta WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open "Select * from usuarios.usuarioempresasariconta WHERE codusu =" & I, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     cad = ""
-    While Not RS.EOF
-        cad = cad & RS.Fields(1) & "|"
-        RS.MoveNext
+    While Not Rs.EOF
+        cad = cad & Rs.Fields(1) & "|"
+        Rs.MoveNext
     Wend
     If cad <> "" Then cad = "|" & cad
-    RS.Close
+    Rs.Close
     DevuelveProhibidas = cad
 EDevuelveProhibidas:
     Err.Clear
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 

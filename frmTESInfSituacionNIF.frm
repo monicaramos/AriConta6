@@ -5,14 +5,14 @@ Begin VB.Form frmTESInfSituacionNIF
    ClientHeight    =   6465
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   11520
+   ClientWidth     =   11865
    Icon            =   "frmTESInfSituacionNIF.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6465
-   ScaleWidth      =   11520
+   ScaleWidth      =   11865
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameConcepto 
@@ -31,6 +31,159 @@ Begin VB.Form frmTESInfSituacionNIF
       TabIndex        =   18
       Top             =   0
       Width           =   6945
+      Begin VB.Frame FrameCta 
+         BorderStyle     =   0  'None
+         Height          =   1335
+         Left            =   120
+         TabIndex        =   33
+         Top             =   330
+         Width           =   6675
+         Begin VB.TextBox txtCuentas 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   0
+            Left            =   1110
+            TabIndex        =   36
+            Tag             =   "imgConcepto"
+            Top             =   420
+            Width           =   1275
+         End
+         Begin VB.TextBox txtCuentas 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   1
+            Left            =   1110
+            TabIndex        =   38
+            Tag             =   "imgConcepto"
+            Top             =   840
+            Width           =   1275
+         End
+         Begin VB.TextBox txtNCuentas 
+            BackColor       =   &H80000018&
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   0
+            Left            =   2430
+            Locked          =   -1  'True
+            TabIndex        =   35
+            Top             =   420
+            Width           =   4155
+         End
+         Begin VB.TextBox txtNCuentas 
+            BackColor       =   &H80000018&
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   1
+            Left            =   2430
+            Locked          =   -1  'True
+            TabIndex        =   34
+            Top             =   840
+            Width           =   4155
+         End
+         Begin VB.Image imgCuentas 
+            Height          =   255
+            Index           =   0
+            Left            =   810
+            Top             =   420
+            Width           =   255
+         End
+         Begin VB.Image imgCuentas 
+            Height          =   255
+            Index           =   1
+            Left            =   810
+            Top             =   870
+            Width           =   255
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   9
+            Left            =   120
+            TabIndex        =   40
+            Top             =   810
+            Width           =   615
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   10
+            Left            =   120
+            TabIndex        =   39
+            Top             =   450
+            Width           =   690
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Cuenta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   -1  'True
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00800000&
+            Height          =   195
+            Index           =   1
+            Left            =   120
+            TabIndex        =   37
+            Top             =   120
+            Width           =   2370
+         End
+      End
       Begin VB.TextBox txtNIF 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -45,7 +198,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Height          =   360
          Index           =   0
          Left            =   1230
-         TabIndex        =   0
+         TabIndex        =   4
          Tag             =   "imgConcepto"
          Top             =   720
          Width           =   1275
@@ -84,9 +237,9 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   1
          Left            =   1230
          MaxLength       =   10
-         TabIndex        =   2
+         TabIndex        =   1
          Tag             =   "imgConcepto"
-         Top             =   2190
+         Top             =   2400
          Width           =   1305
       End
       Begin VB.TextBox txtFecha 
@@ -104,9 +257,9 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   0
          Left            =   1230
          MaxLength       =   10
-         TabIndex        =   1
+         TabIndex        =   0
          Tag             =   "imgConcepto"
-         Top             =   1770
+         Top             =   1980
          Width           =   1305
       End
       Begin VB.Label lblFecha 
@@ -207,14 +360,14 @@ Begin VB.Form frmTESInfSituacionNIF
          Height          =   240
          Index           =   1
          Left            =   960
-         Top             =   2190
+         Top             =   2400
          Width           =   240
       End
       Begin VB.Image ImgFec 
          Height          =   240
          Index           =   0
          Left            =   960
-         Top             =   1770
+         Top             =   1980
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -232,7 +385,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   16
          Left            =   270
          TabIndex        =   22
-         Top             =   2190
+         Top             =   2400
          Width           =   615
       End
       Begin VB.Label Label3 
@@ -250,7 +403,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   17
          Left            =   270
          TabIndex        =   21
-         Top             =   1800
+         Top             =   2010
          Width           =   690
       End
       Begin VB.Label Label3 
@@ -269,7 +422,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   18
          Left            =   270
          TabIndex        =   20
-         Top             =   1410
+         Top             =   1710
          Width           =   2280
       End
    End
@@ -474,7 +627,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   1
          Left            =   240
          TabIndex        =   28
-         Top             =   3330
+         Top             =   3540
          Width           =   3825
          _ExtentX        =   6747
          _ExtentY        =   3704
@@ -503,7 +656,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   0
          Left            =   240
          TabIndex        =   30
-         Top             =   720
+         Top             =   960
          Width           =   3825
          _ExtentX        =   6747
          _ExtentY        =   3757
@@ -527,13 +680,31 @@ Begin VB.Form frmTESInfSituacionNIF
          EndProperty
          NumItems        =   0
       End
+      Begin MSComctlLib.Toolbar ToolbarAyuda 
+         Height          =   390
+         Left            =   3660
+         TabIndex        =   41
+         Top             =   210
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   688
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ayuda"
+            EndProperty
+         EndProperty
+      End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   2
          Left            =   3420
          Picture         =   "frmTESInfSituacionNIF.frx":000C
          ToolTipText     =   "Quitar al Debe"
-         Top             =   360
+         Top             =   660
          Width           =   240
       End
       Begin VB.Image imgCheck 
@@ -542,7 +713,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Left            =   3780
          Picture         =   "frmTESInfSituacionNIF.frx":0156
          ToolTipText     =   "Puntear al Debe"
-         Top             =   360
+         Top             =   660
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -560,7 +731,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   0
          Left            =   210
          TabIndex        =   31
-         Top             =   390
+         Top             =   660
          Width           =   1920
       End
       Begin VB.Image imgCheck 
@@ -569,7 +740,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Left            =   3360
          Picture         =   "frmTESInfSituacionNIF.frx":02A0
          ToolTipText     =   "Quitar al Debe"
-         Top             =   2940
+         Top             =   3210
          Width           =   240
       End
       Begin VB.Image imgCheck 
@@ -578,7 +749,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Left            =   3720
          Picture         =   "frmTESInfSituacionNIF.frx":03EA
          ToolTipText     =   "Puntear al Debe"
-         Top             =   2940
+         Top             =   3210
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -596,7 +767,7 @@ Begin VB.Form frmTESInfSituacionNIF
          Index           =   15
          Left            =   240
          TabIndex        =   29
-         Top             =   3000
+         Top             =   3240
          Width           =   1110
       End
    End
@@ -614,7 +785,7 @@ Begin VB.Form frmTESInfSituacionNIF
       EndProperty
       Height          =   375
       Left            =   10200
-      TabIndex        =   5
+      TabIndex        =   3
       Top             =   5940
       Width           =   1215
    End
@@ -631,7 +802,7 @@ Begin VB.Form frmTESInfSituacionNIF
       Height          =   375
       Index           =   1
       Left            =   8640
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   5940
       Width           =   1455
    End
@@ -649,7 +820,7 @@ Begin VB.Form frmTESInfSituacionNIF
       Height          =   375
       Index           =   0
       Left            =   150
-      TabIndex        =   4
+      TabIndex        =   5
       Top             =   5910
       Width           =   1335
    End
@@ -678,7 +849,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Const IdPrograma = 807
+Private IdPrograma As Integer ' 901= informe por nif
+                              ' 902= informe por cuenta
 
 
 ' ***********************************************************************************************************
@@ -693,9 +865,9 @@ Private Const IdPrograma = 807
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
 ' ***********************************************************************************************************
-Public Numero As String
-Public Tipo As Byte ' 0=sin filtro de fechas
-                    ' 1=
+Public numero As String
+Public Tipo As Byte ' 0=Introduce el nif en D/H
+                    ' 1=Introduce la cuenta en D/H
 
 Private WithEvents frmCCtas As frmColCtas
 Attribute frmCCtas.VB_VarHelpID = -1
@@ -705,13 +877,14 @@ Private WithEvents frmGas As frmBasico
 Attribute frmGas.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
 Dim I As Integer
 Dim IndCodigo As Integer
 Dim tabla As String
 
 Dim PrimeraVez As Boolean
+Dim Cancelado As Boolean
 
 Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
@@ -731,6 +904,19 @@ Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     
 End Sub
 
+Private Function MontaSQL() As Boolean
+Dim SQL As String
+Dim SQL2 As String
+Dim RC As String
+Dim RC2 As String
+
+    MontaSQL = False
+    
+    If Not PonerDesdeHasta("cobros.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
+    If Not PonerDesdeHasta("cobros.codmacta", "N", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
+            
+    MontaSQL = True
+End Function
 
 
 Private Sub cmdAccion_Click(Index As Integer)
@@ -748,10 +934,11 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     tabla = " "
     
+    If Not MontaSQL Then Exit Sub
     
     If Not CargarTemporales Then Exit Sub
     
-    If Not HayRegParaInforme(tabla, cadselect) Then Exit Sub
+    If Not HayRegParaInforme("tmptesoreriacomun", "codusu = " & vUsu.Codigo) Then Exit Sub
     
     If optTipoSal(1).Value Then
         'EXPORTAR A CSV
@@ -780,7 +967,11 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        
+        If Tipo = 0 Then
+            PonFoco txtNIF(0)
+        Else
+            PonFoco txtCuentas(0)
+        End If
     End If
 End Sub
 
@@ -802,13 +993,33 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
         
     'Otras opciones
-    Me.Caption = "Informe de Situacion por NIF"
+    If Tipo = 0 Then
+        Me.Caption = "Informe de Situación por NIF"
+        IdPrograma = 901
+    Else
+        Me.Caption = "Informe de Situación por Cuenta"
+        IdPrograma = 902
+    End If
 
     Me.imgNIF(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For I = 0 To 1
         Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
+     
+    For I = 0 To 1
+        Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+    Next I
+    
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 26
+    End With
+    
+    
+    FrameCta.Visible = (Tipo = 1)
+    FrameCta.Enabled = (Tipo = 1)
      
     CargarListViewEmpresas 1
     CargarListViewTipoFPago 0
@@ -823,10 +1034,10 @@ End Sub
 Private Sub CargarListViewEmpresas(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Prohibidas As String
 Dim IT
-Dim AUX As String
+Dim Aux As String
     
     On Error GoTo ECargarList
 
@@ -837,30 +1048,30 @@ Dim AUX As String
     
 
 
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
 
     Prohibidas = DevuelveProhibidas
     
     ListView1(Index).ListItems.Clear
-    AUX = "Select * from Usuarios.empresasariconta where tesor>0"
+    Aux = "Select * from Usuarios.empresasariconta where tesor>0"
     
-    RS.Open AUX, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
     
-        AUX = "|" & RS!codempre & "|"
-        If InStr(1, Prohibidas, AUX) = 0 Then
+        Aux = "|" & Rs!codempre & "|"
+        If InStr(1, Prohibidas, Aux) = 0 Then
             Set IT = ListView1(Index).ListItems.Add
-            IT.Key = "C" & RS!codempre
-            If vEmpresa.codempre = RS!codempre Then IT.Checked = True
-            IT.Text = RS!nomempre
-            IT.Tag = RS!codempre
-            IT.ToolTipText = RS!CONTA
+            IT.Key = "C" & Rs!codempre
+            If vEmpresa.codempre = Rs!codempre Then IT.Checked = True
+            IT.Text = Rs!nomempre
+            IT.Tag = Rs!codempre
+            IT.ToolTipText = Rs!CONTA
         End If
-        RS.MoveNext
+        Rs.MoveNext
         
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -896,7 +1107,7 @@ End Function
 Private Sub CargarListViewTipoFPago(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -912,22 +1123,22 @@ Dim SQL As String
     SQL = SQL & " FROM tipofpago "
     SQL = SQL & " order by 2 "
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
+    While Not Rs.EOF
         Set ItmX = ListView1(Index).ListItems.Add
         
-        ItmX.Text = RS.Fields(0).Value
-        ItmX.SubItems(1) = RS.Fields(1).Value
+        ItmX.Text = Rs.Fields(0).Value
+        ItmX.SubItems(1) = Rs.Fields(1).Value
         
         ItmX.Checked = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -938,6 +1149,10 @@ End Sub
 
 
 
+
+Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
+    SQL = CadenaSeleccion
+End Sub
 
 Private Sub frmGas_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
@@ -986,12 +1201,31 @@ Dim TotalImporte As Currency
 
 End Sub
 
+
+Private Sub imgCuentas_Click(Index As Integer)
+    SQL = ""
+    AbiertoOtroFormEnListado = True
+    Set frmCCtas = New frmColCtas
+    frmCCtas.DatosADevolverBusqueda = True
+    frmCCtas.Show vbModal
+    Set frmCCtas = Nothing
+    If SQL <> "" Then
+        Me.txtCuentas(Index).Text = RecuperaValor(SQL, 1)
+        Me.txtNCuentas(Index).Text = RecuperaValor(SQL, 2)
+    Else
+        QuitarPulsacionMas Me.txtCuentas(Index)
+    End If
+    
+    PonFoco Me.txtCuentas(Index)
+    AbiertoOtroFormEnListado = False
+End Sub
+
 Private Sub imgFec_Click(Index As Integer)
     
     Screen.MousePointer = vbHourglass
     
     Select Case Index
-    Case 0, 1, 2, 3
+    Case 0, 1
         IndCodigo = Index
     
         'FECHA
@@ -1016,7 +1250,7 @@ Private Sub imgNIF_Click(Index As Integer)
     Set frmCCtas = Nothing
     If SQL <> "" Then
         'TEngo cuenta contable
-        txtNNIF(0).Text = SQL
+        txtNNIF(0).Text = RecuperaValor(SQL, 1)
         SQL = "nommacta"
         txtNIF(0).Text = DevuelveDesdeBD("nifdatos", "cuentas", "codmacta", txtNNIF(0).Text, "T", SQL)
         If txtNIF(0).Text = "" Then
@@ -1060,15 +1294,106 @@ Private Sub PushButtonImpr_Click()
     PonerDatosPorDefectoImpresion Me, True
 End Sub
 
-
-
-
-
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
             LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
+End Sub
+
+
+Private Sub txtCuentas_GotFocus(Index As Integer)
+    ConseguirFoco txtCuentas(Index), 3
+End Sub
+
+Private Sub txtCuentas_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyAdd Then
+        KeyCode = 0
+        
+        LanzaFormAyuda txtCuentas(Index).Tag, Index
+    Else
+        KEYdown KeyCode
+    End If
+End Sub
+
+
+Private Sub txtCuentas_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+    If Index = 1 And KeyAscii = 13 Then
+        PonFoco txtFecha(0)
+    End If
+End Sub
+
+Private Sub txtCuentas_LostFocus(Index As Integer)
+Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cta As String
+Dim B As Boolean
+Dim SQL As String
+Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
+
+    txtCuentas(Index).Text = Trim(txtCuentas(Index).Text)
+    
+    
+    If txtCuentas(Index).Text = "" Then
+        txtNCuentas(Index).Text = ""
+        Exit Sub
+    End If
+    
+    If Not IsNumeric(txtCuentas(Index).Text) Then
+        If InStr(1, txtCuentas(Index).Text, "+") = 0 Then MsgBox "La cuenta debe ser numérica: " & txtCuentas(Index).Text, vbExclamation
+        txtCuentas(Index).Text = ""
+        txtNCuentas(Index).Text = ""
+        Exit Sub
+    End If
+    
+    
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    Select Case Index
+        Case 0, 1 'cuentas
+            Cta = (txtCuentas(Index).Text)
+                                    '********
+            B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
+            If B = 0 Then
+                MsgBox "NO existe la cuenta: " & txtCuentas(Index).Text, vbExclamation
+                txtCuentas(Index).Text = ""
+                txtNCuentas(Index).Text = ""
+            Else
+                txtCuentas(Index).Text = Cta
+                txtNCuentas(Index).Text = SQL
+                If B = 1 Then
+                    txtNCuentas(Index).Tag = ""
+                Else
+                    txtNCuentas(Index).Tag = SQL
+                End If
+                Hasta = -1
+                If Index = 6 Then
+                    Hasta = 7
+                Else
+                    If Index = 0 Then
+                        Hasta = 1
+                    Else
+                        If Index = 5 Then
+                            Hasta = 4
+                        Else
+                            If Index = 23 Then Hasta = 24
+                        End If
+                    End If
+                    
+                End If
+                    
+            End If
+    
+    
+    End Select
+    
+End Sub
+
+
+Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
 End Sub
 
 Private Sub txtNIF_GotFocus(Index As Integer)
@@ -1085,19 +1410,19 @@ Private Sub txtNIF_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     End If
 End Sub
 
-
 Private Sub txtNIF_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 Private Sub txtNIF_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
 Dim SQL As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     txtNIF(Index).Text = Trim(txtNIF(Index).Text)
+    If txtNIF(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -1122,6 +1447,8 @@ Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
         imgFec_Click Indice
     Case "imgNIF"
         imgNIF_Click Indice
+    Case "imgCuentas"
+        imgCuentas_Click Indice
     End Select
 End Sub
 
@@ -1130,15 +1457,12 @@ Private Sub AccionesCSV()
 Dim SQL2 As String
 
     'Monto el SQL
-    SQL = "SELECT gastosfijos.codigo Codigo, gastosfijos.descripcion, gastosfijos.ctaprevista, cuentas1.nommacta Nombre, gastosfijos.contrapar Contrapar, cuentas2.nommacta NombreContr, "
-    SQL = SQL & " gastosfijos_recibos.fecha, gastosfijos_recibos.importe, gastosfijos_recibos.contabilizado Contab"
-    SQL = SQL & " FROM  ((gastosfijos INNER JOIN gastosfijos_recibos ON gastosfijos.codigo = gastosfijos_recibos.codigo) INNER JOIN cuentas cuentas1 ON gastosfijos.ctaprevista = cuentas1.codmacta) "
-    SQL = SQL & " INNER JOIN cuentas cuentas2 ON gastosfijos.contrapar = cuentas2.codmacta"
     
-    If cadselect <> "" Then SQL = SQL & " where " & cadselect
+    SQL = "SELECT `tmptesoreriacomun`.`texto1` Nif , `tmptesoreriacomun`.`texto2` Conta, `tmptesoreriacomun`.`opcion` BD, `tmptesoreriacomun`.`texto5` Nombre, `tmptesoreriacomun`.`texto3` NroFra, `tmptesoreriacomun`.`fecha1` FecFra, `tmptesoreriacomun`.`fecha2` FecVto, `tmptesoreriacomun`.`importe1` Gasto, `tmptesoreriacomun`.`importe2` Recibo"
+    SQL = SQL & " FROM   `tmptesoreriacomun` `tmptesoreriacomun`"
+    SQL = SQL & " WHERE `tmptesoreriacomun`.codusu = " & vUsu.Codigo
+    SQL = SQL & " ORDER BY `tmptesoreriacomun`.`texto1`, `tmptesoreriacomun`.`texto2`, `tmptesoreriacomun`.`opcion`, `tmptesoreriacomun`.`fecha1`"
     
-    SQL = SQL & " ORDER BY 1,7 "
-
     'LLamos a la funcion
     GeneraFicheroCSV SQL, txtTipoSalida(1).Text
     
@@ -1160,6 +1484,9 @@ Dim nomDocu As String
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
     cadNomRPT = nomDocu ' "GastosFijos.rpt"
+    
+    cadFormula = "{tmptesoreriacomun.codusu} = " & vUsu.Codigo
+    
     ImprimeGeneral
     
     If optTipoSal(1).Value Then CopiarFicheroASalida True, txtTipoSalida(1).Text
@@ -1180,7 +1507,7 @@ Dim SQL2 As String
 Dim RC As String
 Dim RC2 As String
 Dim I As Integer
-
+Dim B As Boolean
 
     CargarTemporales = False
     
@@ -1199,27 +1526,44 @@ Dim I As Integer
     
     '------------------------------------------
     'UNO SOLO
-    For I = 1 To ListView3.ListItems.Count
+    For I = 1 To ListView1(1).ListItems.Count
         If ListView1(1).ListItems(I).Checked Then
             If Cancelado Then Exit For
             Label9.Caption = "Obteniendo tabla1: " & ListView1(1).ListItems(I).Text
             Label9.Refresh
-            
-            SQL = "Select " & vUsu.Codigo & "," & Mid(ListView1(1).ListItems(I).Key, 2) & ",codmacta,nifdatos"
-            SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif) " & SQL
-            SQL = SQL & " FROM ariconta" & ListView1(1).ListItems(I).Tag & ".cuentas WHERE nifdatos = '" & txtNIF(0).Text & "' ORDER BY codmacta"
-            If Not Ejecuta(SQL) Then Exit Sub
             DoEvents
+           
+        
+            SQL = "INSERT INTO tmp347 (codusu, cliprov, cta, nif) "
+            
+            SQL = SQL & " select " & vUsu.Codigo & "," & Mid(ListView1(1).ListItems(I).Key, 2) & ", codmacta, nifdatos from "
+            SQL = SQL & "( "
+        
+            SQL = SQL & "select cobros.codmacta,nifclien nifdatos from ariconta" & ListView1(1).ListItems(I).Tag & ".cobros where not nifclien is null  "
+            If txtNIF(0).Text <> "" Then SQL = SQL & " and cobros.nifclien = " & DBSet(txtNIF(0), "T")
+            If txtCuentas(0).Text <> "" Then SQL = SQL & " and cobros.codmacta >= " & DBSet(txtCuentas(0), "T")
+            If txtCuentas(1).Text <> "" Then SQL = SQL & " and cobros.codmacta <= " & DBSet(txtCuentas(1), "T")
+            SQL = SQL & " group by  codmacta,nifclien"
+            SQL = SQL & " union "
+            SQL = SQL & "select pagos.codmacta,nifprove nifdatos from ariconta" & ListView1(1).ListItems(I).Tag & ".pagos where not nifprove is null"
+            If txtNIF(0).Text <> "" Then SQL = SQL & " and pagos.nifprove = " & DBSet(txtNIF(0), "T")
+            If txtCuentas(0).Text <> "" Then SQL = SQL & " and codmacta >= " & DBSet(txtCuentas(0), "T")
+            If txtCuentas(1).Text <> "" Then SQL = SQL & " and codmacta <= " & DBSet(txtCuentas(1), "T")
+            SQL = SQL & " group by  codmacta,nifprove"
+            
+            SQL = SQL & ") aaaaa "
+            SQL = SQL & " group by 3,4 "
+            
+            If Not Ejecuta(SQL) Then Exit Function
         End If
     Next I
             
     If SQL <> "" Then
         If GeneraCobrosPagosNIF Then
         
-        
             SQL = ""
-            For I = 1 To Me.ListView3.ListItems.Count
-                If Me.ListView3.ListItems(I).Checked Then SQL = SQL & "1"
+            For I = 1 To Me.ListView1(1).ListItems.Count
+                If Me.ListView1(1).ListItems(I).Checked Then SQL = SQL & "1"
             Next
             If Len(SQL) > 1 Then
                 SQL = "0"
@@ -1229,43 +1573,40 @@ Dim I As Integer
             SQL = "SoloUnaEmpresa= " & SQL & "|"
 
         
-            With frmImprimir
-                
-                .OtrosParametros = SQL & "Cuenta= """"|"
-                .NumeroParametros = 2
-                .FormulaSeleccion = "{ado.codusu}=" & vUsu.Codigo
-                .SoloImprimir = False
-                .Opcion = 25
-                .Show vbModal
-            End With
-        
         End If
     End If
+            
+    Label9.Caption = ""
+    Label9.Refresh
             
     CargarTemporales = True
     
 End Function
 
+
 Public Function GeneraCobrosPagosNIF() As Boolean
-Dim Cad As String
+Dim cad As String
 Dim L As Long
 Dim Empre As String
 Dim Importe  As Currency
-
+Dim Rs As ADODB.Recordset
 Dim QueTipoPago As String
+
+
+    On Error GoTo eGeneraCobrosPagosNIF
 
     'Guardaremos en la variable QueTipoPago que tipos de pago ha seleccionado
     'Si selecciona todos los tipos de pago NO pondremos el IN en el select
     QueTipoPago = ""
-    Cad = "" 'para saber si ha selccionado todos
+    cad = "" 'para saber si ha selccionado todos
     For L = 1 To Me.ListView1(0).ListItems.Count
         If ListView1(0).ListItems(L).Checked Then
             QueTipoPago = QueTipoPago & ", " & Me.ListView1(0).ListItems(L).Tag
         Else
-            Cad = "NO" 'No estan todos seleccionados
+            cad = "NO" 'No estan todos seleccionados
         End If
     Next
-    If Cad = "" Then
+    If cad = "" Then
         'Estan todos. No tiene sentido hacer el Select in
         QueTipoPago = ""
     Else
@@ -1283,17 +1624,17 @@ Dim QueTipoPago As String
     GeneraCobrosPagosNIF = False
     L = 1
     SQL = "Select * from tmp347 where codusu =" & vUsu.Codigo & " ORDER BY cliprov,cta"
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set miRsAux = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    While Not RS.EOF
+    While Not Rs.EOF
         If Cancelado Then
-            RS.Close
+            Rs.Close
             Exit Function
         End If
         'Los labels
-        Label9.Caption = "Nif: " & RS!NIF & " - " & RS!Cta
+        Label9.Caption = "Nif: " & Rs!NIF & " - " & Rs!Cta
         Label9.Refresh
         
         'SQL insert
@@ -1301,22 +1642,22 @@ Dim QueTipoPago As String
         SQL = SQL & " importe1, importe2,opcion"
         SQL = SQL & ") VALUES ("
         'NIF      Nombre
-        SQL = SQL & vUsu.Codigo & ",'" & RS!NIF & "',"
+        SQL = SQL & vUsu.Codigo & ",'" & Rs!NIF & "',"
         
         
         '-------
-        Empre = DameEmpresa(CStr(RS!cliprov))
+        Empre = DameEmpresa(CStr(Rs!cliprov))
         
         'COBROS
-        Cad = "Select fecfactu,numserie,numfactu, numorden,impvenci,impcobro,gastos,fecvenci,nommclien nommacta from ariconta" & RS!cliprov & ".cobros as c1,"
-        If QueTipoPago <> "" Then Cad = Cad & ", ariconta" & RS!cliprov & ".formapago as sforpa"
-        Cad = Cad & " where c1.nifclien='" & RS!NIF & "'"
-        If QueTipoPago <> "" Then Cad = Cad & " AND c1.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
+        cad = "Select fecfactu,numserie,numfactu, numorden,impvenci,impcobro,gastos,fecvenci,nomclien nommacta from ariconta" & Rs!cliprov & ".cobros as c1 "
+        If QueTipoPago <> "" Then cad = cad & ", ariconta" & Rs!cliprov & ".formapago as sforpa"
+        cad = cad & " where c1.nifclien='" & Rs!NIF & "'"
+        If QueTipoPago <> "" Then cad = cad & " AND c1.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
         'Fechas
-        If txtFecha(0).Text <> "" Then Cad = Cad & " AND fecvenci >='" & Format(txtFecha(0).Text, FormatoFecha) & "'"
-        If txtFecha(1).Text <> "" Then Cad = Cad & " AND fecvenci <='" & Format(txtFecha(1).Text, FormatoFecha) & "'"
+        If txtFecha(0).Text <> "" Then cad = cad & " AND fecvenci >='" & Format(txtFecha(0).Text, FormatoFecha) & "'"
+        If txtFecha(1).Text <> "" Then cad = cad & " AND fecvenci <='" & Format(txtFecha(1).Text, FormatoFecha) & "'"
         
-        miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             'Los label
             If Cancelado Then
@@ -1326,13 +1667,13 @@ Dim QueTipoPago As String
             
             'Insetamos codigo,  texto3
             '                    empresa
-            Cad = L & ",'" & Empre & "','"
-            Cad = Cad & miRsAux!NUmSerie & "/" & Format(miRsAux!NumFactu, "0000000000") & " : " & miRsAux!numorden & "','"
-            Cad = Cad & RS!Cta & "','"
-            Cad = Cad & DevNombreSQL(miRsAux!Nommacta) & "','"
+            cad = L & ",'" & Empre & "','"
+            cad = cad & miRsAux!NUmSerie & "/" & Format(miRsAux!NumFactu, "0000000000") & " : " & miRsAux!numorden & "','"
+            cad = cad & Rs!Cta & "','"
+            cad = cad & DevNombreSQL(miRsAux!Nommacta) & "','"
             'texto4: fecha
-            Cad = Cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
-            Cad = Cad & Format(miRsAux!FecVenci, FormatoFecha) & "',"
+            cad = cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
+            cad = cad & Format(miRsAux!FecVenci, FormatoFecha) & "',"
             
             
             'En importe1 estara el importe del cobro. En el 2 tb
@@ -1342,18 +1683,18 @@ Dim QueTipoPago As String
 
 
             Importe = DBLet(miRsAux!Gastos, "N")
-            Cad = Cad & TransformaComasPuntos(CStr(Importe))
+            cad = cad & TransformaComasPuntos(CStr(Importe))
             Importe = miRsAux!ImpVenci - DBLet(miRsAux!impcobro, "N")
-            Cad = Cad & "," & TransformaComasPuntos(CStr(Importe))
+            cad = cad & "," & TransformaComasPuntos(CStr(Importe))
            
             
             
             'un cero para importe 2  y un cero para la opcion
-            Cad = Cad & ",0)"
+            cad = cad & ",0)"
             
             'Ejecutamos
-            Cad = SQL & Cad
-            Ejecuta Cad
+            cad = SQL & cad
+            Ejecuta cad
             
             L = L + 1
             miRsAux.MoveNext
@@ -1362,16 +1703,16 @@ Dim QueTipoPago As String
         miRsAux.Close
         
         'PAGOS
-        Cad = "Select numfactu,numorden,fecfactu,imppagad,fecefect,impefect,nommacta from ariconta" & RS!cliprov & ".pagos ,ariconta" & RS!cliprov & ".cuentas "
-        If QueTipoPago <> "" Then Cad = Cad & ", ariconta" & RS!cliprov & ".formapago as sforpa"
-        Cad = Cad & " where ctaprove = codmacta AND ctaprove='" & RS!Cta & "'"
-        If QueTipoPago <> "" Then Cad = Cad & " AND spagop.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
+        cad = "Select numfactu,numorden,fecfactu,imppagad,fecefect,impefect,nomprove from ariconta" & Rs!cliprov & ".pagos "
+        If QueTipoPago <> "" Then cad = cad & ", ariconta" & Rs!cliprov & ".formapago as sforpa"
+        cad = cad & " where nifprove='" & Rs!NIF & "'"
+        If QueTipoPago <> "" Then cad = cad & " AND pagos.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
         
         
         'Fechas
-        If Text1(12).Text <> "" Then Cad = Cad & " AND fecefect >='" & Format(Text1(12).Text, FormatoFecha) & "'"
-        If Text1(13).Text <> "" Then Cad = Cad & " AND fecefect <='" & Format(Text1(13).Text, FormatoFecha) & "'"
-        miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If txtFecha(0).Text <> "" Then cad = cad & " AND fecefect >='" & Format(txtFecha(0).Text, FormatoFecha) & "'"
+        If txtFecha(1).Text <> "" Then cad = cad & " AND fecefect <='" & Format(txtFecha(1).Text, FormatoFecha) & "'"
+        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             'Los label
             If Cancelado Then
@@ -1381,29 +1722,29 @@ Dim QueTipoPago As String
             
             'Insetamos codigo,  texto3,t5
             '                    empresa
-            Cad = L & ",'" & Empre & "','"
-            Cad = Cad & DevNombreSQL(miRsAux!NumFactu) & " : " & miRsAux!numorden & "','"
-            Cad = Cad & RS!Cta & "','"
-            Cad = Cad & DevNombreSQL(miRsAux!Nommacta) & "','"
+            cad = L & ",'" & Empre & "','"
+            cad = cad & DevNombreSQL(miRsAux!NumFactu) & " : " & miRsAux!numorden & "','"
+            cad = cad & Rs!Cta & "','"
+            cad = cad & DevNombreSQL(miRsAux!Nommacta) & "','"
             ' fecha1 y 2
-            Cad = Cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
-            Cad = Cad & Format(miRsAux!fecefect, FormatoFecha) & "',"
+            cad = cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
+            cad = cad & Format(miRsAux!fecefect, FormatoFecha) & "',"
             
             
             'En importe1 estara el importe del cobro
             Importe = DBLet(miRsAux!imppagad, "N")
 
             Importe = miRsAux!ImpEfect - Importe
-            Cad = Cad & TransformaComasPuntos(CStr(0)) & "," & TransformaComasPuntos(CStr(-1 * Importe))
+            cad = cad & TransformaComasPuntos(CStr(0)) & "," & TransformaComasPuntos(CStr(-1 * Importe))
             
-            Cad = Cad & ",1)" '1: pago
+            cad = cad & ",1)" '1: pago
             
             
             
             
             'Ejecutamos
-            Cad = SQL & Cad
-            Ejecuta Cad
+            cad = SQL & cad
+            Ejecuta cad
             
             L = L + 1
             miRsAux.MoveNext
@@ -1414,22 +1755,22 @@ Dim QueTipoPago As String
         
         
         'SIGUIENTE CUENTA
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
-    Cad = "DELETE FROM tmptesoreriacomun where codusu = " & vUsu.Codigo & " AND importe1+importe2=0"
-    Conn.Execute Cad
+    cad = "DELETE FROM tmptesoreriacomun where codusu = " & vUsu.Codigo & " AND importe1+importe2=0"
+    Conn.Execute cad
     
-    Cad = "select count(*) from tmptesoreriacomun where codusu = " & vUsu.Codigo
-    RS.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select count(*) from tmptesoreriacomun where codusu = " & vUsu.Codigo
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     L = 0
-    If Not RS.EOF Then
-        L = DBLet(RS.Fields(0), "N")
+    If Not Rs.EOF Then
+        L = DBLet(Rs.Fields(0), "N")
     End If
-    RS.Close
+    Rs.Close
     
-    Set RS = Nothing
+    Set Rs = Nothing
     Set miRsAux = Nothing
     
     If L = 0 Then
@@ -1438,14 +1779,17 @@ Dim QueTipoPago As String
     Else
         GeneraCobrosPagosNIF = True
     End If
-        
+    Exit Function
+    
+eGeneraCobrosPagosNIF:
+    MuestraError Err.Number, "Genera Cobros/Pagos NIF", Err.Description
 End Function
 
 Private Function DameEmpresa(ByVal S As String) As String
     DameEmpresa = "NO ENCONTRADA"
-    For I = 1 To ListView1(0).ListItems.Count
-        If ListView1(0).ListItems(I).Tag = S Then
-            DameEmpresa = DevNombreSQL(ListView1(0).ListItems(I).Text)
+    For I = 1 To ListView1(1).ListItems.Count
+        If ListView1(1).ListItems(I).Tag = S Then
+            DameEmpresa = DevNombreSQL(ListView1(1).ListItems(I).Text)
             Exit For
         End If
     Next I
@@ -1483,9 +1827,11 @@ Private Function DatosOK() As Boolean
     
     DatosOK = False
     
-    If txtNIF(0).Text = "" Or txtNNIF(0).Text = "" Then
-        MsgBox "Introduzca el NIF", vbExclamation
-        Exit Function
+    If Tipo = 0 Then
+        If txtNIF(0).Text = "" Or txtNNIF(0).Text = "" Then
+            MsgBox "Introduzca el NIF", vbExclamation
+            Exit Function
+        End If
     End If
     
     SQL = ""
