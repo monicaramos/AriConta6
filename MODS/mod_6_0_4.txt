@@ -57,4 +57,6 @@ insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0807-00','Gast
 # Impresion de Situacion por NIF (Tesoreria)
 insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0901-00','Informe Situacion por NIF','SituacionNIF.rpt')
 ;
-
+# Impresion de Situacion por Cta (Tesoreria)
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0902-00','Informe Situacion por Cta','SituacionCta.rpt')
+;

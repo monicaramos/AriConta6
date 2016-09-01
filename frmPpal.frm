@@ -1174,12 +1174,10 @@ Private Sub AbrirFormularios(Accion As Long)
             frmTESTransferencias.Show vbModal
         
         Case 901 ' Informe por NIF
-            frmTESInfSituacionNIF.Tipo = 0
             frmTESInfSituacionNIF.Show vbModal
             
         Case 902 ' Informe por cuenta
-            frmTESInfSituacionNIF.Tipo = 1
-            frmTESInfSituacionNIF.Show vbModal
+            frmTESInfSituacionCta.Show vbModal
         
         Case 903 ' Situación Tesoreria
         
