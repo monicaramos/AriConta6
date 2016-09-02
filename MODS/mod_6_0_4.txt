@@ -60,3 +60,9 @@ insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0901-00','Info
 # Impresion de Situacion por Cta (Tesoreria)
 insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0902-00','Informe Situacion por Cta','SituacionCta.rpt')
 ;
+# Nro de ariges si no hay es 0
+alter table `parametros` change `hayariges` `nroariges` smallint (3) UNSIGNED  DEFAULT '0' NOT NULL 
+;
+# Impresion de Situacion
+insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0903-00','Informe de Situacion','SituacionTes.rpt')
+;

@@ -47,7 +47,7 @@ Private mvarConstructoras As Boolean
 
 'Modificacion del 28 de Octubre de 2003
 Private mvarContabilizaFactura As Boolean
-Private mvarHayAriges As Boolean
+Private mvarNroAriges As Integer
 
 'Private mvardiremail As String 'copia local
 'Private mvarSmtpHost As String 'copia local
@@ -287,18 +287,18 @@ End Property
 
 
 
-Public Property Let HayAriges(ByVal vData As Boolean)
+Public Property Let NroAriges(ByVal vData As Integer)
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado izquierdo de la asignacion
 'Syntax: X.contabil = 5
-     mvarHayAriges = vData
+     mvarNroAriges = vData
 End Property
 
-Public Property Get HayAriges() As Boolean
+Public Property Get NroAriges() As Integer
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado derecho de la asignacion
 'Syntax: Debug.Print X.contabil
-     HayAriges = mvarHayAriges
+     NroAriges = mvarNroAriges
 End Property
 
 
@@ -1151,13 +1151,13 @@ End Property
 
 
 '****   LEER  ***
-Public Function leer() As Byte
+Public Function Leer() As Byte
     On Error GoTo Err3
     SQL = "SELECT * FROM parametros"
     Set RS = New ADODB.Recordset
     RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic
     If RS.EOF Then
-        leer = 1
+        Leer = 1
         'ELSE
         Else
             mvarfechaini = RS!fechaini
@@ -1195,7 +1195,7 @@ Public Function leer() As Byte
             '++
             mvarPathAyuda = DBLet(RS!PathAyuda, "T")
             mvarFecEjerAct = DBLet(RS!FecEjerAct, "N")
-            mvarHayAriges = DBLet(RS!HayAriges, "N")
+            mvarNroAriges = DBLet(RS!NroAriges, "N")
             
             mvarWebSoporte = DBLet(RS!WebSoporte, "T")
             mvarMailSoporte = DBLet(RS!MailSoporte, "T")
@@ -1208,14 +1208,14 @@ Public Function leer() As Byte
             
             ParametrosNuevos
 
-            If ASignarConceptosFacturas Then leer = 0
+            If ASignarConceptosFacturas Then Leer = 0
     End If
 
     RS.Close
     
     
                     'Para que lea si hay bloqueo de cuentas
-    If leer = 0 Then ObtenerCuentasBloqueadas
+    If Leer = 0 Then ObtenerCuentasBloqueadas
     
     
     Set RS = Nothing
@@ -1228,7 +1228,7 @@ Err3:
     MsgBox Mens, vbExclamation
     On Error Resume Next
     CerrarRs RS
-    leer = 1
+    Leer = 1
     Err.Clear
 End Function
 

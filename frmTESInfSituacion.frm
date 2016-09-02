@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTESInfSituacion 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   6465
+   ClientHeight    =   6180
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   7290
@@ -11,7 +11,7 @@ Begin VB.Form frmTESInfSituacion
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6465
+   ScaleHeight     =   6180
    ScaleWidth      =   7290
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -26,7 +26,7 @@ Begin VB.Form frmTESInfSituacion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   3015
+      Height          =   2685
       Left            =   120
       TabIndex        =   16
       Top             =   30
@@ -73,7 +73,7 @@ Begin VB.Form frmTESInfSituacion
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   6270
-         TabIndex        =   22
+         TabIndex        =   20
          Top             =   270
          Width           =   405
          _ExtentX        =   714
@@ -102,7 +102,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   315
          Index           =   9
          Left            =   300
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   1140
          Width           =   615
       End
@@ -121,7 +121,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   195
          Index           =   18
          Left            =   270
-         TabIndex        =   23
+         TabIndex        =   21
          Top             =   750
          Width           =   2280
       End
@@ -147,7 +147,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   315
          Index           =   1
          Left            =   240
-         TabIndex        =   21
+         TabIndex        =   19
          Top             =   1650
          Width           =   1890
       End
@@ -164,7 +164,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   0
          Left            =   2580
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   3630
          Width           =   4095
       End
@@ -181,43 +181,9 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   4
          Left            =   2580
-         TabIndex        =   19
+         TabIndex        =   17
          Top             =   3990
          Width           =   4095
-      End
-      Begin VB.Label lblNumFactu 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   0
-         Left            =   2610
-         TabIndex        =   18
-         Top             =   2340
-         Width           =   4035
-      End
-      Begin VB.Label lblNumFactu 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   1
-         Left            =   2580
-         TabIndex        =   17
-         Top             =   2700
-         Width           =   4035
       End
    End
    Begin VB.Frame FrameTipoSalida 
@@ -234,7 +200,7 @@ Begin VB.Form frmTESInfSituacion
       Height          =   2655
       Left            =   150
       TabIndex        =   5
-      Top             =   3090
+      Top             =   2790
       Width           =   6915
       Begin VB.OptionButton optTipoSal 
          Caption         =   "Impresora"
@@ -415,7 +381,7 @@ Begin VB.Form frmTESInfSituacion
       Height          =   375
       Left            =   5850
       TabIndex        =   3
-      Top             =   5940
+      Top             =   5670
       Width           =   1215
    End
    Begin VB.CommandButton cmdAccion 
@@ -432,7 +398,7 @@ Begin VB.Form frmTESInfSituacion
       Index           =   1
       Left            =   4260
       TabIndex        =   2
-      Top             =   5940
+      Top             =   5670
       Width           =   1455
    End
    Begin VB.CommandButton cmdAccion 
@@ -450,8 +416,25 @@ Begin VB.Form frmTESInfSituacion
       Index           =   0
       Left            =   150
       TabIndex        =   4
-      Top             =   5910
+      Top             =   5640
       Width           =   1335
+   End
+   Begin VB.Label Label9 
+      Alignment       =   2  'Center
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   1560
+      TabIndex        =   23
+      Top             =   5700
+      Width           =   2520
    End
 End
 Attribute VB_Name = "frmTESInfSituacion"
@@ -482,7 +465,7 @@ Attribute frmCCtas.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
 
-Private SQL As String
+Private Sql As String
 Dim cad As String
 Dim RC As String
 Dim I As Integer
@@ -514,15 +497,13 @@ Public Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
 End Sub
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
-Dim SQL2 As String
+Dim Sql As String
+Dim Sql2 As String
 Dim RC As String
 Dim RC2 As String
 
     MontaSQL = False
     
-    If Not PonerDesdeHasta("cobros.FecFactu", "F", Me.txtFecha(0), Me.txtFecha(0), Me.txtFecha(1), Me.txtFecha(1), "pDHFecha=""") Then Exit Function
-    If Not PonerDesdeHasta("cobros.codmacta", "N", Me.txtCuentas(0), Me.txtNCuentas(0), Me.txtCuentas(1), Me.txtNCuentas(1), "pDHCuentas=""") Then Exit Function
             
     MontaSQL = True
 End Function
@@ -532,12 +513,10 @@ Private Sub cmdAccion_Click(Index As Integer)
 
     If Not DatosOK Then Exit Sub
     
-    
     'Exportacion a PDF
     If optTipoSal(3).Value + optTipoSal(2).Value + optTipoSal(1).Value Then
         If Not EliminarDocum(optTipoSal(2).Value) Then Exit Sub
     End If
-    
     
     InicializarVbles True
     
@@ -547,12 +526,11 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     If Not CargarTemporales Then Exit Sub
     
-    If Not HayRegParaInforme("tmptesoreriacomun", "codusu = " & vUsu.Codigo) Then Exit Sub
+    If Not HayRegParaInforme("tmpbalancesumas", "codusu = " & vUsu.Codigo) Then Exit Sub
     
     If optTipoSal(1).Value Then
         'EXPORTAR A CSV
         AccionesCSV
-    
     Else
         'Tanto a pdf,imprimiir, preevisualizar como email van COntral Crystal
     
@@ -702,17 +680,17 @@ End Sub
 
 
 Private Sub AccionesCSV()
-Dim SQL2 As String
+Dim Sql2 As String
 
     'Monto el SQL
     
-    SQL = "SELECT `tmptesoreriacomun`.`texto1` cuenta , `tmptesoreriacomun`.`texto2` Conta, `tmptesoreriacomun`.`opcion` BD, `tmptesoreriacomun`.`texto5` Nombre, `tmptesoreriacomun`.`texto3` NroFra, `tmptesoreriacomun`.`fecha1` FecFra, `tmptesoreriacomun`.`fecha2` FecVto, `tmptesoreriacomun`.`importe1` Gasto, `tmptesoreriacomun`.`importe2` Recibo"
-    SQL = SQL & " FROM   `tmptesoreriacomun` `tmptesoreriacomun`"
-    SQL = SQL & " WHERE `tmptesoreriacomun`.codusu = " & vUsu.Codigo
-    SQL = SQL & " ORDER BY `tmptesoreriacomun`.`texto1`, `tmptesoreriacomun`.`texto2`, `tmptesoreriacomun`.`opcion`, `tmptesoreriacomun`.`fecha1`"
+    Sql = "SELECT `tmptesoreriacomun`.`texto1` cuenta , `tmptesoreriacomun`.`texto2` Conta, `tmptesoreriacomun`.`opcion` BD, `tmptesoreriacomun`.`texto5` Nombre, `tmptesoreriacomun`.`texto3` NroFra, `tmptesoreriacomun`.`fecha1` FecFra, `tmptesoreriacomun`.`fecha2` FecVto, `tmptesoreriacomun`.`importe1` Gasto, `tmptesoreriacomun`.`importe2` Recibo"
+    Sql = Sql & " FROM   `tmptesoreriacomun` `tmptesoreriacomun`"
+    Sql = Sql & " WHERE `tmptesoreriacomun`.codusu = " & vUsu.Codigo
+    Sql = Sql & " ORDER BY `tmptesoreriacomun`.`texto1`, `tmptesoreriacomun`.`texto2`, `tmptesoreriacomun`.`opcion`, `tmptesoreriacomun`.`fecha1`"
     
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -731,9 +709,18 @@ Dim nomDocu As String
     
     If Not PonerParamRPT(indRPT, nomDocu) Then Exit Sub
     
-    cadNomRPT = nomDocu ' "GastosFijos.rpt"
+    cadNomRPT = nomDocu ' "SituacionTes.rpt"
     
-    cadFormula = "{tmptesoreriacomun.codusu} = " & vUsu.Codigo
+    cadParam = cadParam & "pFecha=""" & txtFecha(0).Text & """|"
+    numParam = numParam + 1
+    
+    cadParam = cadParam & "pDias=" & txtDias(0).Text & "|"
+    numParam = numParam + 1
+    
+    
+    
+    
+    cadFormula = "{tmpbalancesumas.codusu} = " & vUsu.Codigo
     
     ImprimeGeneral
     
@@ -750,28 +737,32 @@ End Sub
 
 
 Private Function CargarTemporales() As Boolean
-Dim SQL As String
-Dim SQL2 As String
+Dim Sql As String
+Dim Sql2 As String
 Dim I As Integer
 Dim B As Boolean
-Dim Rs As adodb.Recordset
-Dim Rs2 As adodb.Recordset
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
 Dim SqlInsert As String
 Dim SqlValues As String
+Dim TotalImp As Currency
 
     CargarTemporales = False
     
+    
+    On Error GoTo eCargarTemporales
+    
     Label9.Caption = "Preparando tablas"
     Label9.Refresh
-    SQL = "Delete from tmpbalancesumas where codusu =" & vUsu.Codigo
-    Conn.Execute SQL
+    Sql = "Delete from tmpbalancesumas where codusu =" & vUsu.Codigo
+    Conn.Execute Sql
                 
                 
     F2 = CDate(txtFecha(0).Text)
     F1 = DateAdd("d", CLng(txtDias(0).Text) * (-1), F2)
                 
                 
-    SQL = ""
+    Sql = ""
     Screen.MousePointer = vbHourglass
     
             
@@ -779,25 +770,25 @@ Dim SqlValues As String
     Label9.Refresh
             
     ' SITUACION DE LOS BANCOS
-    SQL = "select * from bancos order by codbanco "
+    Sql = "select * from bancos order by codmacta "
     
-    Set Rs = New adodb.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     SqlInsert = "insert into tmpbalancesumas (codusu,cta,nomcta,TotalD,TotalH) values "
     SqlValues = ""
     
     While Not Rs.EOF
-        Label9.Caption = "Cuenta: " & Rs!codmacta & "-" & Rs!Descripcion
+        Label9.Caption = "Banco: " & Rs!codmacta
         Label9.Refresh
         
         SqlValues = SqlValues & "(" & vUsu.Codigo & "," & DBSet(Rs!codmacta, "T") & "," & DBSet(Rs!Descripcion, "T") & ","
         
-        SQL2 = "select sum(coalesce(timporteD,0)), sum(coalesce(timporteh,0)) from hlinapu where codmacta = " & DBSet(Rs!codmacta, "T")
-        SQL2 = SQL2 & " and fechaent <= " & DBSet(F2, "F")
+        Sql2 = "select sum(coalesce(timporteD,0)), sum(coalesce(timporteh,0)) from hlinapu where codmacta = " & DBSet(Rs!codmacta, "T")
+        Sql2 = Sql2 & " and fechaent <= " & DBSet(F2, "F")
         
-        Set Rs2 = New adodb.Recordset
-        Rs2.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs2 = New ADODB.Recordset
+        Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not Rs2.EOF Then
             SqlValues = SqlValues & DBSet(Rs2.Fields(0).Value, "N") & "," & DBSet(Rs2.Fields(1).Value, "N") & "),"
@@ -814,7 +805,7 @@ Dim SqlValues As String
             
     If SqlValues <> "" Then
         SqlValues = Mid(SqlValues, 1, Len(SqlValues) - 1)
-        Conn.Execute SqlInsert, SqlValues
+        Conn.Execute SqlInsert & SqlValues
     End If
     
     'COBROS PENDIENTES
@@ -824,16 +815,16 @@ Dim SqlValues As String
             
     SqlValues = ""
             
-    SQL2 = "select impvenci + coalesce(gastos,0) - coalesce(impcobro,0) from cobros where impvenci + coalesce(gastos,0) - coalesce(impcobro,0) <> 0 "
-    SQL2 = SQL2 & " and fechaent between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
-    SQL2 = SQL2 & " and situjuri = 0"
+    Sql2 = "select sum(impvenci + coalesce(gastos,0) - coalesce(impcobro,0)) from cobros where impvenci + coalesce(gastos,0) - coalesce(impcobro,0) <> 0 "
+    Sql2 = Sql2 & " and fecvenci between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
+    Sql2 = Sql2 & " and situacionjuri = 0"
     
-    Set Rs2 = New adodb.Recordset
-    Rs2.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs2 = New ADODB.Recordset
+    Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs2.EOF Then
-        SqlValues = "(" & vUsu.Codigo & ",'COBROS'," & ValorNulo & "," & DBSet(Rs2.Fields(0).Value, "N") & "," & ValorNulo & ")"
+        SqlValues = "(" & vUsu.Codigo & ",'COBROS',''," & DBSet(Rs2.Fields(0).Value, "N") & ",0)"
     Else
-        SqlValues = "(" & vUsu.Codigo & ",'COBROS'," & ValorNulo & "," & DBSet(0, "N") & "," & ValorNulo & ")"
+        SqlValues = "(" & vUsu.Codigo & ",'COBROS',''," & DBSet(0, "N") & ",0)"
     End If
     Set Rs2 = Nothing
     
@@ -846,44 +837,436 @@ Dim SqlValues As String
             
     SqlValues = ""
             
-    SQL2 = "select impefect  - coalesce(imppagad,0) from pagos where impefect - coalesce(imppagad,0) <> 0 "
-    SQL2 = SQL2 & " and fecefect between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
+    Sql2 = "select sum(impefect  - coalesce(imppagad,0)) from pagos where impefect - coalesce(imppagad,0) <> 0 "
+    Sql2 = Sql2 & " and fecefect between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
     
-    Set Rs2 = New adodb.Recordset
-    Rs2.Open SQL2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs2 = New ADODB.Recordset
+    Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs2.EOF Then
-        SqlValues = "(" & vUsu.Codigo & ",'PAGOS'," & ValorNulo & "," & DBSet(Rs2.Fields(0).Value, "N") & "," & ValorNulo & ")"
+        SqlValues = "(" & vUsu.Codigo & ",'PAGOS','',0," & DBSet(Rs2.Fields(0).Value, "N") & ")"
     Else
-        SqlValues = "(" & vUsu.Codigo & ",'PAGOS'," & ValorNulo & "," & DBSet(0, "N") & "," & ValorNulo & ")"
+        SqlValues = "(" & vUsu.Codigo & ",'PAGOS','',0," & DBSet(0, "N") & ")"
     End If
     Set Rs2 = Nothing
     
     Conn.Execute SqlInsert & SqlValues
     
-    If vParam.HayAriges Then
+    If vParam.NroAriges > 0 Then
         ' CALCULO DE LOS ALBARANES CON IVA Y VTOS SEGUN LA FORMA DE PAGO
-       
-    
-    
+        If CargarTemporalFacturas Then
+            If CargarTemporalCobros Then
+                ' insertamos la facturacion pendiente
+            
+                Sql = "select sum(impvenci) from tmpcobros where codusu = " & DBSet(vUsu.Codigo, "N") & " and fecvenci between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
+                TotalImp = DevuelveValor(Sql)
+                
+                Sql = "insert into tmpbalancesumas (codusu,cta,nomcta,TotalD,TotalH) values "
+                Sql = Sql & "(" & vUsu.Codigo & ",'ALV',''," & DBSet(TotalImp, "N") & ",0)"
+                Conn.Execute Sql
+            
+            End If
+        End If
+        If CargarTemporalFacturasPROV Then
+            If CargarTemporalPagos Then
+                ' insertamos la facturacion pendiente
+            
+                Sql = "select sum(impvenci) from tmpcobros where codusu = " & DBSet(vUsu.Codigo, "N") & " and fecvenci between " & DBSet(F1, "F") & " and " & DBSet(F2, "F")
+                TotalImp = DevuelveValor(Sql)
+                
+                Sql = "insert into tmpbalancesumas (codusu,cta,nomcta,TotalD,TotalH) values "
+                Sql = Sql & "(" & vUsu.Codigo & ",'ALP','',0," & DBSet(TotalImp, "N") & ")"
+                Conn.Execute Sql
+            
+            End If
+        End If
+        
     End If
             
+    Label9.Caption = ""
+    Label9.Refresh
             
     CargarTemporales = True
+    Exit Function
     
+eCargarTemporales:
+    MuestraError Err.Number, "Cargar Temporales", Err.Description
 End Function
 
+Private Function CargarTemporalFacturas() As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim Base As Currency
+
+Dim TotalImp As Currency
+Dim SqlInsert As String
+Dim SqlValues As String
 
 
-Private Function DameEmpresa(ByVal S As String) As String
-    DameEmpresa = "NO ENCONTRADA"
-    For I = 1 To ListView1(1).ListItems.Count
-        If ListView1(1).ListItems(I).Tag = S Then
-            DameEmpresa = DevNombreSQL(ListView1(1).ListItems(I).Text)
-            Exit For
+    On Error GoTo eCargarTemporalFacturas
+
+    CargarTemporalFacturas = False
+
+    Sql = "delete from tmpconext where codusu = " & vUsu.Codigo
+    Conn.Execute Sql
+    
+                                                  '   cliente,  albaran, codtipom, codforpa, importe
+    SqlInsert = "insert into tmpconext ( codusu , pos,         timported, cta,     timporteh, saldo ) values "
+    
+    Sql = "select codclien, codtipom, numalbar, codforpa, dtoppago, dtognral from ariges" & vParam.NroAriges & ".scaalb where factursn = 1"
+    Sql = Sql & " order by 1,2,3,4"
+    
+    SqlValues = ""
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+    
+        Label9.Caption = "Albaran: " & DBLet(Rs!numalbar, "N")
+        Label9.Refresh
+    
+        TotalImp = 0
+    
+        Sql2 = "select tiposiva.porceiva, sum(slialb.importel) base from ariges" & vParam.NroAriges & ".slialb  slialb, ariges" & vParam.NroAriges & ".sartic sartic, tiposiva "
+        Sql2 = Sql2 & " where slialb.numalbar = " & DBSet(Rs!numalbar, "N")
+        Sql2 = Sql2 & " and slialb.codtipom = " & DBSet(Rs!codtipom, "T")
+        Sql2 = Sql2 & " and slialb.codartic = sartic.codartic and sartic.codigiva = tiposiva.codigiva "
+        Sql2 = Sql2 & " group by 1 "
+        Sql2 = Sql2 & " order by 1 "
+        
+        Set Rs2 = New ADODB.Recordset
+        Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs2.EOF
+            Base = DBLet(Rs2!Base, "N") * Round((1 - ((DBLet(Rs!dtoppago, "N") + DBLet(Rs!dtognral, "N")) / 100)), 2)
+        
+            TotalImp = TotalImp + Round(Base * (1 + (DBLet(Rs2!porceiva, "N") / 100)), 2)
+        
+            Rs2.MoveNext
+        Wend
+        Set Rs2 = Nothing
+        
+        SqlValues = SqlValues & "(" & vUsu.Codigo & "," & DBSet(Rs!codclien, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!codtipom, "T") & "," & DBSet(Rs!Codforpa, "N") & "," & DBSet(TotalImp, "N") & "),"
+        
+    
+        Rs.MoveNext
+    Wend
+    
+    If SqlValues <> "" Then
+        SqlValues = Mid(SqlValues, 1, Len(SqlValues) - 1)
+        Conn.Execute SqlInsert & SqlValues
+    End If
+    Set Rs = Nothing
+
+    CargarTemporalFacturas = True
+    Exit Function
+
+eCargarTemporalFacturas:
+    MuestraError Err.Number, "Cargar Temporal Facturas", Err.Description
+End Function
+
+Private Function CargarTemporalCobros() As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rsvenci As ADODB.Recordset
+Dim FecFactu As Date
+Dim FecVenci As Date
+Dim TotalFac As Currency
+Dim TotalImp As Currency
+Dim ImpVenci As Currency
+Dim I As Integer
+Dim cadvalues2 As String
+Dim SqlInsert As String
+Dim SqlValues As String
+
+
+    On Error GoTo eCargarTemporalCobros
+
+    CargarTemporalCobros = False
+
+    Sql = "delete from tmpcobros where codusu = " & vUsu.Codigo
+    Conn.Execute Sql
+    
+    SqlInsert = "insert into tmpcobros ( codusu , fecvenci, impvenci ) values "
+    
+              '   codforpa,          importe
+    Sql = "select timporteh codforpa, sum(saldo) totalfac from tmpconext where codusu = " & vUsu.Codigo
+    Sql = Sql & " group by 1"
+    Sql = Sql & " order by 1"
+    
+    cadvalues2 = ""
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+    
+        Label9.Caption = "FP.:" & DBSet(Rs!Codforpa, "N")
+        Label9.Refresh
+    
+        TotalImp = 0
+        
+        Sql = "SELECT numerove, primerve, restoven FROM ariges" & vParam.NroAriges & ".sforpa WHERE codforpa=" & DBSet(Rs!Codforpa, "N")
+        Set Rsvenci = New ADODB.Recordset
+        Rsvenci.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+        FecFactu = CDate(Format(Now, "dd/mm/yyyy")) '????
+        TotalFac = DBLet(Rs!TotalFac, "N")
+        
+        
+        If Not Rsvenci.EOF Then
+            If DBLet(Rsvenci!numerove, "N") > 0 Then
+                '-------- Primer Vencimiento
+                I = 1
+                'FECHA VTO
+                FecVenci = FecFactu
+                '=== Laura 23/01/2007
+                'FecVenci = FecVenci + CByte(DBLet(rsVenci!primerve, "N"))
+                FecVenci = DateAdd("d", DBLet(Rsvenci!primerve, "N"), FecVenci)
+                '===
+                
+                
+                '[Monica]03/07/2013: añado trim(codmacta)
+                cadvalues2 = cadvalues2 & "(" & vUsu.Codigo & "," & DBSet(FecVenci, "F") & ", "
+                
+                'IMPORTE del Vencimiento
+                If Rsvenci!numerove = 1 Then
+                    ImpVenci = DBLet(TotalFac, "N")
+                Else
+                    ImpVenci = Round(TotalFac / DBLet(Rsvenci!numerove, "N"), 2)
+                    'Comprobar que la suma de los vencimientos cuadra con el total de la factura
+                    If ImpVenci * Rsvenci!numerove <> TotalFac Then
+                        ImpVenci = Round(ImpVenci + (TotalFac - ImpVenci * DBLet(Rsvenci!numerove, "N")), 2)
+                    End If
+                End If
+                
+                cadvalues2 = cadvalues2 & DBSet(ImpVenci, "N") & "),"
+                
+            
+                'Resto Vencimientos
+                '--------------------------------------------------------------------
+                For I = 2 To Rsvenci!numerove
+                   'FECHA Resto Vencimientos
+                    '=== Laura 23/01/2007
+                    'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
+                    FecVenci = DateAdd("d", DBLet(Rsvenci!restoven, "N"), FecVenci)
+                    '===
+                        
+                    cadvalues2 = cadvalues2 & "(" & vUsu.Codigo & "," & DBSet(FecVenci, "F") & ", "
+                    
+                    'IMPORTE Resto de Vendimientos
+                    ImpVenci = Round(TotalFac / Rsvenci!numerove, 2)
+                    cadvalues2 = cadvalues2 & DBSet(ImpVenci, "N") & "),"
+                Next I
+            End If
         End If
-    Next I
-  
+        
+        Rs.MoveNext
+    Wend
+    
+    If cadvalues2 <> "" Then
+        cadvalues2 = Mid(cadvalues2, 1, Len(cadvalues2) - 1)
+        Conn.Execute SqlInsert & cadvalues2
+    End If
+    Set Rs = Nothing
+
+
+
+    CargarTemporalCobros = True
+    Exit Function
+
+eCargarTemporalCobros:
+    MuestraError Err.Number, "Cargar Temporal Cobros", Err.Description
 End Function
+
+
+
+Private Function CargarTemporalFacturasPROV() As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim SqlInsert As String
+Dim SqlValues As String
+Dim TotalImp As Currency
+Dim Base As Currency
+
+    On Error GoTo eCargarTemporalFacturas
+
+    CargarTemporalFacturasPROV = False
+
+    Sql = "delete from tmpconext where codusu = " & vUsu.Codigo
+    Conn.Execute Sql
+    
+                                                '  proveed,albaran, fechaalb codforpa, importe
+    SqlInsert = "insert into tmpconext ( codusu , pos ,    cta,     fechaent, timporteh, saldo ) values "
+    
+    Sql = "select codprove, numalbar, fechaalb, codforpa, dtoppago, dtognral from ariges" & vParam.NroAriges & ".scaalp "
+    Sql = Sql & " order by 1,2,3,4"
+    
+    SqlValues = ""
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+    
+        Label9.Caption = "Alb.Prov: " & DBLet(Rs!numalbar, "T")
+        Label9.Refresh
+    
+        TotalImp = 0
+    
+        Sql2 = "select tiposiva.porceiva, sum(slialp.importel) base from ariges" & vParam.NroAriges & ".slialp  slialp, ariges" & vParam.NroAriges & ".sartic sartic, tiposiva "
+        Sql2 = Sql2 & " where slialp.numalbar = " & DBSet(Rs!numalbar, "T")
+        Sql2 = Sql2 & " and slialp.codprove = " & DBSet(Rs!codprove, "N")
+        Sql2 = Sql2 & " and slialp.fechaalb = " & DBSet(Rs!fechaalb, "F")
+        Sql2 = Sql2 & " and slialp.codartic = sartic.codartic and sartic.codigiva = tiposiva.codigiva "
+        Sql2 = Sql2 & " group by 1 "
+        Sql2 = Sql2 & " order by 1 "
+        
+        Set Rs2 = New ADODB.Recordset
+        Rs2.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs2.EOF
+            Base = DBLet(Rs2!Base, "N") * Round((1 - ((DBLet(Rs!dtoppago, "N") + DBLet(Rs!dtognral, "N")) / 100)), 2)
+        
+            TotalImp = TotalImp + Round(Base * (1 + (DBLet(Rs2!porceiva, "N") / 100)), 2)
+        
+            Rs2.MoveNext
+        Wend
+        Set Rs2 = Nothing
+        
+        SqlValues = SqlValues & "(" & vUsu.Codigo & "," & DBSet(Rs!codprove, "N") & "," & DBSet(Rs!numalbar, "T") & "," & DBSet(Rs!fechaalb, "T") & "," & DBSet(Rs!Codforpa, "N") & "," & DBSet(TotalImp, "N") & "),"
+        
+    
+        Rs.MoveNext
+    Wend
+    
+    If SqlValues <> "" Then
+        SqlValues = Mid(SqlValues, 1, Len(SqlValues) - 1)
+        Conn.Execute SqlInsert & SqlValues
+    End If
+    Set Rs = Nothing
+
+    CargarTemporalFacturasPROV = True
+    Exit Function
+
+eCargarTemporalFacturas:
+    MuestraError Err.Number, "Cargar Temporal Facturas Proveedor", Err.Description
+End Function
+
+Private Function CargarTemporalPagos() As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rsvenci As ADODB.Recordset
+Dim FecFactu As Date
+Dim TotalFac As Currency
+Dim TotalImp As Currency
+Dim I As Integer
+Dim cadvalues2 As String
+Dim SqlInsert As String
+Dim SqlValues As String
+Dim FecVenci As Date
+Dim ImpVenci As Currency
+
+    On Error GoTo eCargarTemporalPagos
+
+    CargarTemporalPagos = False
+
+    Sql = "delete from tmpcobros where codusu = " & vUsu.Codigo
+    Conn.Execute Sql
+    
+    SqlInsert = "insert into tmpcobros ( codusu , fecvenci, impvenci ) values "
+    
+              '   codforpa,          importe
+    Sql = "select timporteh codforpa, sum(saldo) totalfac from tmpconext where codusu = " & vUsu.Codigo
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " order by 1"
+    
+    cadvalues2 = ""
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+    
+        Label9.Caption = "FP.:" & DBSet(Rs!Codforpa, "N")
+        Label9.Refresh
+    
+        TotalImp = 0
+        
+        Sql = "SELECT numerove, primerve, restoven FROM ariges" & vParam.NroAriges & ".sforpa WHERE codforpa=" & DBSet(Rs!Codforpa, "N")
+        Set Rsvenci = New ADODB.Recordset
+        Rsvenci.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+        FecFactu = CDate(Format(Now, "dd/mm/yyyy")) '????
+        TotalFac = DBLet(Rs!TotalFac, "N")
+        
+        
+        If Not Rsvenci.EOF Then
+            If DBLet(Rsvenci!numerove, "N") > 0 Then
+                '-------- Primer Vencimiento
+                I = 1
+                'FECHA VTO
+                FecVenci = FecFactu
+                '=== Laura 23/01/2007
+                'FecVenci = FecVenci + CByte(DBLet(rsVenci!primerve, "N"))
+                FecVenci = DateAdd("d", DBLet(Rsvenci!primerve, "N"), FecVenci)
+                '===
+                
+                
+                '[Monica]03/07/2013: añado trim(codmacta)
+                cadvalues2 = cadvalues2 & "(" & vUsu.Codigo & "," & DBSet(FecVenci, "F") & ", "
+                
+                'IMPORTE del Vencimiento
+                If Rsvenci!numerove = 1 Then
+                    ImpVenci = DBLet(TotalFac, "N")
+                Else
+                    ImpVenci = Round(TotalFac / Rsvenci!numerove, 2)
+                    'Comprobar que la suma de los vencimientos cuadra con el total de la factura
+                    If ImpVenci * Rsvenci!numerove <> TotalFac Then
+                        ImpVenci = Round(ImpVenci + (TotalFac - ImpVenci * Rsvenci!numerove), 2)
+                    End If
+                End If
+                
+                cadvalues2 = cadvalues2 & DBSet(ImpVenci, "N") & "),"
+                
+            
+                'Resto Vencimientos
+                '--------------------------------------------------------------------
+                For I = 2 To Rsvenci!numerove
+                   'FECHA Resto Vencimientos
+                    '=== Laura 23/01/2007
+                    'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
+                    FecVenci = DateAdd("d", DBLet(Rsvenci!restoven, "N"), FecVenci)
+                    '===
+                        
+                    cadvalues2 = cadvalues2 & "(" & vUsu.Codigo & "," & DBSet(FecVenci, "F") & ", "
+                    
+                    'IMPORTE Resto de Vencimientos
+                    ImpVenci = Round(TotalFac / Rsvenci!numerove, 2)
+                    cadvalues2 = cadvalues2 & DBSet(ImpVenci, "N") & "),"
+                Next I
+            End If
+        End If
+        
+        Rs.MoveNext
+    Wend
+    
+    If cadvalues2 <> "" Then
+        cadvalues2 = Mid(cadvalues2, 1, Len(cadvalues2) - 1)
+        Conn.Execute SqlInsert & cadvalues2
+    End If
+    Set Rs = Nothing
+
+    CargarTemporalPagos = True
+    Exit Function
+
+eCargarTemporalPagos:
+    MuestraError Err.Number, "Cargar Temporal Pagos", Err.Description
+End Function
+
+
+
+
 
 
 Private Function DatosOK() As Boolean
@@ -908,7 +1291,7 @@ Private Function DatosOK() As Boolean
 End Function
 
 
-Private Sub txtFecha_LostFocus(Index As Integer)
+Private Sub txtfecha_LostFocus(Index As Integer)
     txtFecha(Index).Text = Trim(txtFecha(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no

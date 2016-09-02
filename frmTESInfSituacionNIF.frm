@@ -835,15 +835,13 @@ Private Sub Form_Load()
         
     'Otras opciones
     Me.Caption = "Informe de Situación por NIF"
-    IdPrograma = 901
 
-    Me.imgNIF(0).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     
     For I = 0 To 1
         Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
-    For I = 0 To 1
+    For I = 0 To 0
         Me.imgCuentas(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next I
     
@@ -855,8 +853,6 @@ Private Sub Form_Load()
     
     vNIF = ""
     
-    FrameCta.Visible = (Tipo = 1)
-    FrameCta.Enabled = (Tipo = 1)
      
     CargarListViewEmpresas 1
     CargarListViewTipoFPago 0
@@ -871,7 +867,7 @@ End Sub
 Private Sub CargarListViewEmpresas(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Prohibidas As String
 Dim IT
 Dim Aux As String
@@ -885,30 +881,30 @@ Dim Aux As String
     
 
 
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
 
     Prohibidas = DevuelveProhibidas
     
     ListView1(Index).ListItems.Clear
     Aux = "Select * from Usuarios.empresasariconta where tesor>0"
     
-    Rs.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
     
-        Aux = "|" & Rs!codempre & "|"
+        Aux = "|" & RS!codempre & "|"
         If InStr(1, Prohibidas, Aux) = 0 Then
             Set IT = ListView1(Index).ListItems.Add
-            IT.Key = "C" & Rs!codempre
-            If vEmpresa.codempre = Rs!codempre Then IT.Checked = True
-            IT.Text = Rs!nomempre
-            IT.Tag = Rs!codempre
-            IT.ToolTipText = Rs!CONTA
+            IT.Key = "C" & RS!codempre
+            If vEmpresa.codempre = RS!codempre Then IT.Checked = True
+            IT.Text = RS!nomempre
+            IT.Tag = RS!codempre
+            IT.ToolTipText = RS!CONTA
         End If
-        Rs.MoveNext
+        RS.MoveNext
         
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -944,7 +940,7 @@ End Function
 Private Sub CargarListViewTipoFPago(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
 
@@ -960,22 +956,22 @@ Dim SQL As String
     SQL = SQL & " FROM tipofpago "
     SQL = SQL & " order by 2 "
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         Set ItmX = ListView1(Index).ListItems.Add
         
-        ItmX.Text = Rs.Fields(0).Value
-        ItmX.SubItems(1) = Rs.Fields(1).Value
+        ItmX.Text = RS.Fields(0).Value
+        ItmX.SubItems(1) = RS.Fields(1).Value
         
         ItmX.Checked = True
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -991,12 +987,6 @@ Private Sub frmCCtas_DatoSeleccionado(CadenaSeleccion As String)
     SQL = CadenaSeleccion
 End Sub
 
-Private Sub frmGas_DatoSeleccionado(CadenaSeleccion As String)
-    If CadenaSeleccion <> "" Then
-        vNIF.Text = RecuperaValor(CadenaSeleccion, 1)
-        txtNNIF(0).Text = RecuperaValor(CadenaSeleccion, 2)
-    End If
-End Sub
 
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -1217,7 +1207,7 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 End Sub
 
 
-Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtfecha_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1318,11 +1308,11 @@ Dim B As Boolean
             SQL = SQL & "( "
         
             SQL = SQL & "select cobros.codmacta,nifclien nifdatos from ariconta" & ListView1(1).ListItems(I).Tag & ".cobros where not nifclien is null  "
-            If vNIF.Text <> "" Then SQL = SQL & " and cobros.nifclien = " & DBSet(vNIF, "T")
+            If vNIF <> "" Then SQL = SQL & " and cobros.nifclien = " & DBSet(vNIF, "T")
             SQL = SQL & " group by  codmacta,nifclien"
             SQL = SQL & " union "
             SQL = SQL & "select pagos.codmacta,nifprove nifdatos from ariconta" & ListView1(1).ListItems(I).Tag & ".pagos where not nifprove is null"
-            If vNIF.Text <> "" Then SQL = SQL & " and pagos.nifprove = " & DBSet(vNIF, "T")
+            If vNIF <> "" Then SQL = SQL & " and pagos.nifprove = " & DBSet(vNIF, "T")
             SQL = SQL & " group by  codmacta,nifprove"
             
             SQL = SQL & ") aaaaa "
@@ -1363,7 +1353,7 @@ Dim cad As String
 Dim L As Long
 Dim Empre As String
 Dim Importe  As Currency
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim QueTipoPago As String
 
 
@@ -1398,17 +1388,17 @@ Dim QueTipoPago As String
     GeneraCobrosPagosNIF = False
     L = 1
     SQL = "Select * from tmp347 where codusu =" & vUsu.Codigo & " ORDER BY cliprov,nif"
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     Set miRsAux = New ADODB.Recordset
-    Rs.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    While Not Rs.EOF
+    While Not RS.EOF
         If Cancelado Then
-            Rs.Close
+            RS.Close
             Exit Function
         End If
         'Los labels
-        Label9.Caption = "Nif: " & Rs!NIF & " - " & Rs!Cta
+        Label9.Caption = "Nif: " & RS!NIF & " - " & RS!Cta
         Label9.Refresh
         
         'SQL insert
@@ -1416,16 +1406,16 @@ Dim QueTipoPago As String
         SQL = SQL & " importe1, importe2,opcion"
         SQL = SQL & ") VALUES ("
         'NIF      Nombre
-        SQL = SQL & vUsu.Codigo & ",'" & Rs!NIF & "',"
+        SQL = SQL & vUsu.Codigo & ",'" & RS!NIF & "',"
         
         
         '-------
-        Empre = DameEmpresa(CStr(Rs!cliprov))
+        Empre = DameEmpresa(CStr(RS!cliprov))
         
         'COBROS
-        cad = "Select fecfactu,numserie,numfactu, numorden,impvenci,impcobro,gastos,fecvenci,nomclien nommacta from ariconta" & Rs!cliprov & ".cobros as c1 "
-        If QueTipoPago <> "" Then cad = cad & ", ariconta" & Rs!cliprov & ".formapago as sforpa"
-        cad = cad & " where c1.nifclien='" & Rs!NIF & "'"
+        cad = "Select fecfactu,numserie,numfactu, numorden,impvenci,impcobro,gastos,fecvenci,nomclien nommacta from ariconta" & RS!cliprov & ".cobros as c1 "
+        If QueTipoPago <> "" Then cad = cad & ", ariconta" & RS!cliprov & ".formapago as sforpa"
+        cad = cad & " where c1.nifclien='" & RS!NIF & "'"
         If QueTipoPago <> "" Then cad = cad & " AND c1.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
         'Fechas
         If txtFecha(0).Text <> "" Then cad = cad & " AND fecvenci >='" & Format(txtFecha(0).Text, FormatoFecha) & "'"
@@ -1443,7 +1433,7 @@ Dim QueTipoPago As String
             '                    empresa
             cad = L & ",'" & Empre & "','"
             cad = cad & miRsAux!NUmSerie & "/" & Format(miRsAux!NumFactu, "0000000000") & " : " & miRsAux!numorden & "','"
-            cad = cad & Rs!Cta & "','"
+            cad = cad & RS!Cta & "','"
             cad = cad & DevNombreSQL(miRsAux!Nommacta) & "','"
             'texto4: fecha
             cad = cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
@@ -1477,9 +1467,9 @@ Dim QueTipoPago As String
         miRsAux.Close
         
         'PAGOS
-        cad = "Select numfactu,numorden,fecfactu,imppagad,fecefect,impefect,nomprove from ariconta" & Rs!cliprov & ".pagos "
-        If QueTipoPago <> "" Then cad = cad & ", ariconta" & Rs!cliprov & ".formapago as sforpa"
-        cad = cad & " where nifprove='" & Rs!NIF & "'"
+        cad = "Select numfactu,numorden,fecfactu,imppagad,fecefect,impefect,nomprove from ariconta" & RS!cliprov & ".pagos "
+        If QueTipoPago <> "" Then cad = cad & ", ariconta" & RS!cliprov & ".formapago as sforpa"
+        cad = cad & " where nifprove='" & RS!NIF & "'"
         If QueTipoPago <> "" Then cad = cad & " AND pagos.codforpa=sforpa.codforpa AND sforpa.tipforpa in (" & QueTipoPago & ")"
         
         
@@ -1498,7 +1488,7 @@ Dim QueTipoPago As String
             '                    empresa
             cad = L & ",'" & Empre & "','"
             cad = cad & DevNombreSQL(miRsAux!NumFactu) & " : " & miRsAux!numorden & "','"
-            cad = cad & Rs!Cta & "','"
+            cad = cad & RS!Cta & "','"
             cad = cad & DevNombreSQL(miRsAux!Nommacta) & "','"
             ' fecha1 y 2
             cad = cad & Format(miRsAux!FecFactu, FormatoFecha) & "','"
@@ -1529,22 +1519,22 @@ Dim QueTipoPago As String
         
         
         'SIGUIENTE CUENTA
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     cad = "DELETE FROM tmptesoreriacomun where codusu = " & vUsu.Codigo & " AND importe1+importe2=0"
     Conn.Execute cad
     
     cad = "select count(*) from tmptesoreriacomun where codusu = " & vUsu.Codigo
-    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     L = 0
-    If Not Rs.EOF Then
-        L = DBLet(Rs.Fields(0), "N")
+    If Not RS.EOF Then
+        L = DBLet(RS.Fields(0), "N")
     End If
-    Rs.Close
+    RS.Close
     
-    Set Rs = Nothing
+    Set RS = Nothing
     Set miRsAux = Nothing
     
     If L = 0 Then

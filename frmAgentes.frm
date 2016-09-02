@@ -501,7 +501,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.Adodc1)
+        cadReg = PonerContRegistros(Me.adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -520,9 +520,9 @@ Private Sub BotonAnyadir()
     lblIndicador.Caption = "INSERTANDO"
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If Adodc1.Recordset.RecordCount > 0 Then
+    If adodc1.Recordset.RecordCount > 0 Then
         DataGrid1.HoldFields
-        Adodc1.Recordset.MoveLast
+        adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
    
@@ -561,8 +561,8 @@ Private Sub BotonModificar()
     Dim cad As String
     Dim anc As Single
     Dim I As Integer
-    If Adodc1.Recordset.EOF Then Exit Sub
-    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
 
     
@@ -584,7 +584,7 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
-    I = Adodc1.Recordset!Codigo
+    I = adodc1.Recordset!Codigo
     LLamaLineas anc, 4
    
     'Como es modificar
@@ -604,20 +604,20 @@ Private Sub BotonEliminar()
 Dim SQL As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     If Not SepuedeBorrar Then Exit Sub
     '### a mano
     SQL = "Seguro que desea eliminar el agente:"
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
     
         'Hay que eliminar
-        SQL = "Delete from Agentes where codigo=" & Adodc1.Recordset!Codigo
+        SQL = "Delete from Agentes where codigo=" & adodc1.Recordset!Codigo
         Conn.Execute SQL
         CargaGrid ""
-        Adodc1.Recordset.Cancel
+        adodc1.Recordset.Cancel
     End If
     Exit Sub
 Error2:
@@ -626,7 +626,7 @@ Error2:
 End Sub
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
-  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, Adodc1
+  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, adodc1
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -656,10 +656,10 @@ Select Case Modo
                 '-----------------------------------------
                 'Hacemos insertar
                 If ModificaDesdeFormulario(Me) Then
-                    I = Adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 0
                     CargaGrid
-                    Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                 End If
             End If
     End Select
@@ -672,7 +672,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
             
         Case 1
             CargaGrid
@@ -685,13 +685,13 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim cad As String
 
-If Adodc1.Recordset.EOF Then
+If adodc1.Recordset.EOF Then
     MsgBox "Ningún registro a devolver.", vbExclamation
     Exit Sub
 End If
 
-cad = Adodc1.Recordset.Fields(0) & "|"
-cad = cad & Adodc1.Recordset.Fields(1) & "|"
+cad = adodc1.Recordset.Fields(0) & "|"
+cad = cad & adodc1.Recordset.Fields(1) & "|"
 RaiseEvent DatoSeleccionado(cad)
 Unload Me
 End Sub
@@ -855,17 +855,17 @@ Private Sub CargaGrid(Optional SQL As String)
     Dim TotalAncho As Integer
     Dim I As Integer
     
-    Adodc1.ConnectionString = Conn
+    adodc1.ConnectionString = Conn
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
     Else
         SQL = CadenaConsulta
     End If
     SQL = SQL & " ORDER BY codigo"
-    Adodc1.RecordSource = SQL
-    Adodc1.CursorType = adOpenDynamic
-    Adodc1.LockType = adLockOptimistic
-    Adodc1.Refresh
+    adodc1.RecordSource = SQL
+    adodc1.CursorType = adOpenDynamic
+    adodc1.LockType = adLockOptimistic
+    adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 350
@@ -962,7 +962,7 @@ End Sub
 Private Function SepuedeBorrar() As Boolean
 Dim SQL As String
     SepuedeBorrar = False
-    SQL = DevuelveDesdeBD("agente", "scobro", "agente", Adodc1.Recordset!Codigo, "N")
+    SQL = DevuelveDesdeBD("agente", "scobro", "agente", adodc1.Recordset!Codigo, "N")
     If SQL <> "" Then
         MsgBox "Existen cobros pendientes para este agente", vbExclamation
         Exit Function
@@ -1013,9 +1013,9 @@ Dim cad As String
     RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And Modo = 0 And Not vParam.HayAriges
-        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And Modo = 0 And Not vParam.HayAriges
-        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And Modo = 0 And Not vParam.HayAriges
+        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And Modo = 0 And vParam.NroAriges = 0
+        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And Modo = 0 And vParam.NroAriges = 0
+        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And Modo = 0 And vParam.NroAriges = 0
         
         Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And Modo = 0
         Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And Modo = 0
