@@ -8,14 +8,14 @@ Begin VB.Form frmLog
    ClientHeight    =   6465
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   12135
+   ClientWidth     =   16185
    Icon            =   "frmLog.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6465
-   ScaleWidth      =   12135
+   ScaleWidth      =   16185
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame2 
@@ -30,15 +30,15 @@ Begin VB.Form frmLog
          Strikethrough   =   0   'False
       EndProperty
       Height          =   4845
-      Left            =   8640
-      TabIndex        =   15
+      Left            =   10260
+      TabIndex        =   14
       Top             =   780
-      Width           =   3615
+      Width           =   5745
       Begin VB.TextBox Text2 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
          BeginProperty Font 
-            Name            =   "Verdana"
+            Name            =   "Courier New"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -48,12 +48,12 @@ Begin VB.Form frmLog
          EndProperty
          Height          =   4335
          Index           =   0
-         Left            =   240
+         Left            =   120
          MultiLine       =   -1  'True
-         TabIndex        =   16
+         TabIndex        =   15
          Tag             =   "Desc|T|N|||slog|descripcion||N|"
          Top             =   270
-         Width           =   3195
+         Width           =   5535
       End
    End
    Begin VB.Frame FrameBotonGnral 
@@ -61,14 +61,14 @@ Begin VB.Form frmLog
       Left            =   90
       TabIndex        =   10
       Top             =   60
-      Width           =   2805
+      Width           =   2475
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   240
          TabIndex        =   12
          Top             =   180
-         Width           =   2325
-         _ExtentX        =   4101
+         Width           =   2115
+         _ExtentX        =   3731
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -90,11 +90,15 @@ Begin VB.Form frmLog
                Object.Tag             =   "2"
             EndProperty
             BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
                Object.ToolTipText     =   "Eliminar"
                Object.Tag             =   "2"
                Object.Width           =   1e-4
             EndProperty
             BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
                Style           =   3
             EndProperty
             BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
@@ -172,7 +176,7 @@ Begin VB.Form frmLog
       TabIndex        =   1
       Tag             =   "Accion|N|N|||slog|accion||N|"
       Top             =   4920
-      Width           =   1215
+      Width           =   1415
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -222,8 +226,8 @@ Begin VB.Form frmLog
       Left            =   90
       TabIndex        =   9
       Top             =   870
-      Width           =   8475
-      _ExtentX        =   14949
+      Width           =   10050
+      _ExtentX        =   17727
       _ExtentY        =   8334
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -296,9 +300,9 @@ Begin VB.Form frmLog
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10890
+      Left            =   14970
       TabIndex        =   5
-      Top             =   5820
+      Top             =   5790
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -313,9 +317,9 @@ Begin VB.Form frmLog
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9690
+      Left            =   13800
       TabIndex        =   4
-      Top             =   5820
+      Top             =   5790
       Width           =   1035
    End
    Begin VB.CommandButton cmdRegresar 
@@ -330,9 +334,9 @@ Begin VB.Form frmLog
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10890
+      Left            =   14970
       TabIndex        =   8
-      Top             =   5820
+      Top             =   5790
       Visible         =   0   'False
       Width           =   1035
    End
@@ -410,9 +414,9 @@ Begin VB.Form frmLog
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   390
-      Left            =   11490
-      TabIndex        =   14
-      Top             =   150
+      Left            =   15540
+      TabIndex        =   13
+      Top             =   120
       Width           =   405
       _ExtentX        =   714
       _ExtentY        =   688
@@ -425,23 +429,6 @@ Begin VB.Form frmLog
             Object.ToolTipText     =   "Ayuda"
          EndProperty
       EndProperty
-   End
-   Begin VB.Label Label1 
-      Caption         =   "Descripción "
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   315
-      Left            =   8700
-      TabIndex        =   13
-      Top             =   900
-      Width           =   1395
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -551,7 +538,7 @@ Dim B As Boolean
     'PonerLongCampos
     
     PonerModoOpcionesMenu 'Activar opciones de menu según Modo
-    'PonerOpcionesMenu   'Activar opciones de menu según nivel de permisos del usuario
+    PonerModoUsuarioGnral Modo, "ariconta"
 End Sub
 
 
@@ -592,7 +579,7 @@ Private Sub BotonBuscar()
     CargaGrid "accion= -1"
     Limpiar Me
     Me.CboTipoSitu.ListIndex = -1
-    LLamaLineas DataGrid1.Top + 210, 1
+    LLamaLineas DataGrid1.Top + 230, 1
     PonerFoco txtAux(0)
 End Sub
 
@@ -605,7 +592,7 @@ Private Sub BotonVerTodos()
 On Error Resume Next
 
     CargaGrid ""
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
          MsgBox "No hay ningún registro en la tabla LOG", vbInformation
          Screen.MousePointer = vbDefault
           Exit Sub
@@ -747,10 +734,10 @@ On Error GoTo ECancelar
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'Modificar
             TerminaBloquear
-            Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+            Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End Select
     PonerModo 2
     DataGrid1.SetFocus
@@ -762,13 +749,13 @@ End Sub
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.Visible = True Then
     Else
-        If Not (Adodc1.Recordset Is Nothing) Then
-            If Not Adodc1.Recordset.EOF Then
-                CadenaDesdeOtroForm = "Fecha: " & Adodc1.Recordset!Fecha & vbCrLf
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Usuario / PC : " & Adodc1.Recordset!Usuario & " - " & Adodc1.Recordset!PC & vbCrLf
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Accion: " & Adodc1.Recordset!Titulo & vbCrLf & vbCrLf
+        If Not (adodc1.Recordset Is Nothing) Then
+            If Not adodc1.Recordset.EOF Then
+                CadenaDesdeOtroForm = "Fecha: " & adodc1.Recordset!Fecha & vbCrLf
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Usuario / PC : " & adodc1.Recordset!Usuario & " - " & adodc1.Recordset!PC & vbCrLf
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Accion: " & adodc1.Recordset!Titulo & vbCrLf & vbCrLf
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & Replace(Space(80), " ", "-") & vbCrLf
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Descripción:" & vbCrLf & Adodc1.Recordset!Descripcion
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Descripción:" & vbCrLf & adodc1.Recordset!Descripcion
                 MsgBox CadenaDesdeOtroForm, vbInformation
                 CadenaDesdeOtroForm = ""
             End If
@@ -783,10 +770,10 @@ End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     If PrimeraVez Then Exit Sub
-    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
         
-        Text2(0).Text = Adodc1.Recordset!Descripcion
+        Text2(0).Text = adodc1.Recordset!Descripcion
     End If
 End Sub
 
@@ -846,6 +833,8 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " where tmppresu1.codusu=" & vUsu.Codigo & " and slog.accion=tmppresu1.codigo"
     DataGrid1.Enabled = False
     CargaGrid
+    
+    PonerModoUsuarioGnral 0, "ariconta"
     
 End Sub
 
@@ -912,11 +901,11 @@ Dim tots As String
         SQL = CadenaConsulta
     End If
     SQL = SQL & " ORDER BY fecha desc"
-    Adodc1.ConnectionString = Conn
-    Adodc1.RecordSource = SQL
-    Adodc1.CursorType = adOpenDynamic
-    Adodc1.LockType = adLockPessimistic
-    Adodc1.Refresh
+    adodc1.ConnectionString = Conn
+    adodc1.RecordSource = SQL
+    adodc1.CursorType = adOpenDynamic
+    adodc1.LockType = adLockPessimistic
+    adodc1.Refresh
     DataGrid1.Enabled = B
 
     DataGrid1.ScrollBars = dbgAutomatic
@@ -924,17 +913,18 @@ Dim tots As String
 
    DataGrid1.Columns(1).Caption = "Accion"
    'Actualizar indicador
-   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
-        Text2(0).Text = Adodc1.Recordset.Fields(4)
+   If Not adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+        Text2(0).Text = adodc1.Recordset.Fields(4)
    Else
         Me.lblIndicador.Caption = ""
    End If
 
    Me.DataGrid1.Columns(4).Visible = False
    
-   Me.DataGrid1.Columns(2).Width = 1200
-   Me.DataGrid1.Columns(3).Width = 1800
+   Me.DataGrid1.Columns(1).Width = 4000
+   Me.DataGrid1.Columns(2).Width = 1400
+   Me.DataGrid1.Columns(3).Width = 1600
    
 End Sub
 
@@ -973,3 +963,38 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
             LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
+
+
+Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
+Dim Rs As ADODB.Recordset
+Dim cad As String
+    
+    On Error Resume Next
+
+    cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
+    cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    If Not Rs.EOF Then
+        Toolbar1.Buttons(1).Enabled = False
+        Toolbar1.Buttons(2).Enabled = False
+        Toolbar1.Buttons(3).Enabled = False
+        
+        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N")
+        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N")
+        
+        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N")
+        
+        
+        vUsu.LeerFiltros "ariconta", IdPrograma
+        
+        
+    End If
+    
+    Rs.Close
+    Set Rs = Nothing
+    
+End Sub
+

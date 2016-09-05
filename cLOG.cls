@@ -19,33 +19,36 @@ Option Explicit
 '
 '
 '
+'       1.- Modificar asiento
+'       2.- Eliminar asiento
+'       3.- Modificar Linea de asiento
+'       4.- Eliminar Linea de asiento
 
-'
-'       1.- Crear asiento manual
-'       2.- Modificar asiento
-'       3.- Eliminar asiento
+'       5,6,7,8      FRACLI
+'       9,10,11,12   FRAPRO
 
-'       4,5,6   FRACLI
-'       7,8,9   FRAPRO
+'       13.- Generar amortizacion
+'       14.- Deshacer amortizacion
 
-'       10.- Actualizar asientos
-'       11.- Contabilizar FRACLI
-'       12.- Contabilizar FRAPRO
+'       15.- Liquidacion de IVA
+'       16.- Deshacer Liquidacion
 
-'       13.- Realizar amortizacion
-'       14.- Deshacer  " "
-'       15.- 340 a fichero
-'       16.- Acciones del CC. En la descripcioin IRA lo que he heco
-'       17.- Punteo de extractos
-'       18.-  proceso cierre [RENUMERAR] [CIERRE]  [DESHACER]
+'       17.- proceso cierre [RENUMERAR]
+'       18.- proceso cierre [CIERRE]
+'       19.- proceso cierre [DESHACER]
 
-'       19.-  VARIOS.  Para quedar constancia pero no crear un "exproceso"
+'       20.- Traspaso de cuentas en apuntes"
+'       21.- Renumerar registro Proveedor
+'       22.- Aumentar dígitos contables
+
+'       23.- Eliminar cobros
+'       24.- Eliminar pagos
+
 
 Private Const AccionesRegistradas = 19
 Private mvarDatosDescripcion As String
 
 Dim Sql As String
-
 
 
 Public Property Let DatosDescripcion(ByVal vData As String)
@@ -75,8 +78,7 @@ Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion
     If Descripcion = "" Then
         Sql = Sql & "NULL)"
     Else
-        If Len(Descripcion) > 255 Then Descripcion = Mid(Descripcion, 1, 250) & "[MAS]"
-        Sql = Sql & "'" & DevNombreSQL(Descripcion) & "')"
+        Sql = Sql & DBSet(Descripcion, "T") & ")"
     End If
     Conn.Execute Sql
     
@@ -92,17 +94,20 @@ Private Function DimeAccion(N As Integer) As String
 Dim H As Integer
 Dim C As String
 
-    If N <= 9 Then
+    If N <= 12 Then
         'las 9 primeras son mantenimientos basicos
-        H = N Mod 3
+        H = N Mod 2
         If H = 1 Then
-            C = "Nuevo"
-        ElseIf H = 2 Then
             C = "Modificar"
-        Else
+        ElseIf H = 0 Then
             C = "Eliminar"
         End If
-        H = (N - 1) \ 3
+        
+        If ((N - 1) Mod 4) >= 2 Then
+            C = C & " Línea"
+        End If
+        
+        H = (N - 1) \ 4
         If H = 0 Then
             C = C & " Asiento"
         ElseIf H = 1 Then
@@ -112,51 +117,30 @@ Dim C As String
         End If
             
     Else
-        'El resto de acciones con un select case
-        'ACTUALIZACION (CONTABILIZACION)
-        If N <= 12 Then
-            C = "CONTAB "
-            If N = 10 Then
-                C = C & " Asiento"
-            ElseIf N = 11 Then
-                C = C & " Factura Cliente"
-            Else
-                C = C & " Factura Proveedor"
-            End If
-            
-            
-            
-            
-        Else
-            'Aqui iran yendo resto acciones
-            If N <= 16 Then
-                Select Case N
-                Case 13
-                    C = "Amortización"
-                Case 14
-                    C = "Deshacer Amortización"
-                Case 15
-                    C = "Mod340"
-'                Case 16
-'                    C = "ControlCC"
-                End Select
-        
-            Else
-                'n=17
-                If N = 17 Then
-                    C = "Punteo Extracto"
-                ElseIf N = 18 Then
-                    'Llevara la primera linea como que se ha hecho(
-                    '[CIERRE-RENUMERAR-DESHACER}
-                    C = "Proceso Cierre"
-                    
-                Else
-                    C = "VARIOS"
-                End If
-            End If
-        End If
-        
-        
+        'Aqui iran yendo resto acciones
+        Select Case N
+            Case 13
+                C = "Generar Amortización"
+            Case 14
+                C = "Deshacer Amortización"
+            Case 15
+                C = "Liquidación IVA"
+            Case 16
+                C = "Eliminar Liquidacion"
+            Case 17
+                C = "Proceso Cierre [RENUMERAR]"
+            Case 18
+                C = "Proceso Cierre [CIERRE]"
+            Case 19
+                C = "Proceso Cierre [DESHACER]"
+            Case 20
+                C = "Traspaso de cuentas en apuntes"
+            Case 21
+                C = "Renumerar registro Proveedor"
+            Case 22
+                C = "Aumentar dígitos contables"
+                
+        End Select
         
     End If
     DimeAccion = C
@@ -164,13 +148,13 @@ End Function
 
 
 Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
-Dim i As Integer
+Dim I As Integer
 
  On Error GoTo EDevuelveAcciones
-    For i = 1 To AccionesRegistradas
-        Sql = i & "|" & DimeAccion(i) & "|"
+    For I = 1 To AccionesRegistradas
+        Sql = I & "|" & DimeAccion(I) & "|"
         ListaAcciones.Add Sql
-    Next i
+    Next I
     
     DevuelveAcciones = True
     

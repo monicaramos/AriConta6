@@ -1948,6 +1948,12 @@ Dim Linliapu As Long
 Dim FicheroAEliminar As String
 Dim IndCodigo As Integer
 
+Dim CtaAnt As String
+Dim DebeAnt As String
+Dim HaberAnt As String
+
+
+
 Private Modo As Byte
 '*************** MODOS ********************
 '   0.-  Formulari net sense cap camp ple
@@ -3330,12 +3336,42 @@ End Sub
 Private Function Eliminar() As Boolean
 Dim vWhere As String
 Dim SQL As String
+Dim SqlAux As String
+Dim RS As ADODB.Recordset
+
     On Error GoTo FinEliminar
 
     Conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
     vWhere = " WHERE (numasien=" & Trim(Text1(0).Text) & " and fechaent = " & DBSet(Text1(1).Text, "F") & " and numdiari = " & DBSet(Text1(2).Text, "N") & ") "
         ' ***********************************************************************
+        
+        
+    'El LOG
+    SQL = "Nº Asiento : " & Data1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Fecha      : " & CStr(Data1.Recordset.Fields(1))
+    SQL = SQL & vbCrLf & "Diario     : " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
+    SQL = SQL & vbCrLf & RellenaABlancos("Cuenta", True, 10) & " " & RellenaABlancos("Debe", False, 14) & " " & RellenaABlancos("Haber", False, 14) & " "
+    SQL = SQL & vbCrLf & String(40, "-") & vbCrLf
+    
+    
+    SqlAux = "select * from hlinapu where numasien = " & DBSet(Data1.Recordset.Fields(2), "N")
+    SqlAux = SqlAux & " and fechaent = " & DBSet(Data1.Recordset.Fields(1), "F")
+    SqlAux = SqlAux & " and numdiari = " & DBSet(Text1(2).Text, "N")
+    
+    Set RS = New ADODB.Recordset
+    RS.Open SqlAux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        SQL = SQL & RellenaABlancos(DBLet(RS!codmacta, "T"), True, 10) & " " & RellenaABlancos(Format(DBLet(RS!timported, "N"), "###,###,##0.00"), False, 14) & " " & RellenaABlancos(Format(DBLet(RS!timporteH, "N"), "###,###,##0.00"), False, 14) & vbCrLf
+        RS.MoveNext
+    Wend
+    Set RS = Nothing
+    
+    vLog.Insertar 2, vUsu, SQL
+        
+        
+        
+        
         
     Conn.Execute "DELETE FROM hlinapu " & vWhere
     
@@ -3344,13 +3380,6 @@ Dim SQL As String
 '    ' *******************************
     Conn.Execute "Delete from " & NombreTabla & vWhere
        
-    'El LOG
-    SQL = "Nº Asiento   :   " & Data1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Fecha        :   " & CStr(Data1.Recordset.Fields(1))
-    SQL = SQL & vbCrLf & "Diario           :   " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
-    
-    
-    vLog.Insertar 3, vUsu, SQL
        
        
 FinEliminar:
@@ -3643,6 +3672,8 @@ Private Sub BotonEliminarLinea(Index As Integer)
 Dim SQL As String
 Dim vWhere As String
 Dim Eliminar As Boolean
+Dim SqlAux As String
+Dim RS As ADODB.Recordset
 
     On Error GoTo Error2
 
@@ -3671,6 +3702,33 @@ Dim Eliminar As Boolean
             SQL = SQL & vbCrLf & "Código: " & AdoAux(Index).Recordset!NumAsien & " - " & AdoAux(Index).Recordset!FechaEnt & " - " & AdoAux(Index).Recordset!NumDiari & " - " & AdoAux(Index).Recordset!Linliapu
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
+                
+                'El LOG
+                SQL = "Nº Asiento : " & Data1.Recordset.Fields(2)
+                SQL = SQL & vbCrLf & "Fecha      : " & CStr(Data1.Recordset.Fields(1))
+                SQL = SQL & vbCrLf & "Diario     : " & Text1(2).Text & " - " & Text4.Text
+                SQL = SQL & vbCrLf & "Línea      : " & DBSet(AdoAux(Index).Recordset!Linliapu, "N") & vbCrLf & vbCrLf
+                SQL = SQL & vbCrLf & RellenaABlancos("Cuenta", True, 10) & " " & RellenaABlancos("Debe", False, 14) & " " & RellenaABlancos("Haber", False, 14) & " "
+                SQL = SQL & vbCrLf & String(40, "-") & vbCrLf
+                
+                
+                SqlAux = "select * from hlinapu where numasien = " & DBSet(AdoAux(Index).Recordset!NumAsien, "N")
+                SqlAux = SqlAux & " and fechaent = " & DBSet(AdoAux(Index).Recordset!FechaEnt, "F")
+                SqlAux = SqlAux & " and numdiari = " & DBSet(AdoAux(Index).Recordset!NumDiari, "N")
+                SqlAux = SqlAux & " and linliapu = " & DBSet(AdoAux(Index).Recordset!Linliapu, "N")
+                 
+                Set RS = New ADODB.Recordset
+                RS.Open SqlAux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                While Not RS.EOF
+                    SQL = SQL & RellenaABlancos(DBLet(RS!codmacta, "T"), True, 10) & " " & RellenaABlancos(Format(DBLet(RS!timported, "N"), "###,###,##0.00"), False, 14) & " " & RellenaABlancos(Format(DBLet(RS!timporteH, "N"), "###,###,##0.00"), False, 14) & vbCrLf
+                    RS.MoveNext
+                Wend
+                Set RS = Nothing
+                
+                vLog.Insertar 4, vUsu, SQL
+                
+                
+                
                 SQL = "DELETE FROM hlinapu "
                 SQL = SQL & Replace(vWhere, "hcabapu", "hlinapu") & " and linliapu = " & DBLet(AdoAux(Index).Recordset!Linliapu, "N")
                 
@@ -3835,7 +3893,9 @@ Private Sub BotonModificarLinea(Index As Integer)
             txtAux(10).Text = DataGridAux(Index).Columns(11).Text 'importe al haber
             txtAux(11).Text = DataGridAux(Index).Columns(12).Text 'centro de coste
             
-            
+            CtaAnt = txtAux(4).Text
+            DebeAnt = txtAux(9).Text
+            HaberAnt = txtAux(10).Text
     End Select
 
     LLamaLineas Index, ModoLineas, anc
@@ -4175,12 +4235,28 @@ Dim cad As String
     End If
 End Sub
 
+Private Function CadCambios() As String
+Dim SQL As String
+
+    SQL = ""
+    
+    If CtaAnt <> txtAux(4).Text Then SQL = SQL & RellenaABlancos("Cuenta", True, 10) & " " & RellenaABlancos(CtaAnt, False, 14) & " " & RellenaABlancos(txtAux(4).Text, False, 14) & vbCrLf
+    If DebeAnt <> txtAux(9).Text Then SQL = SQL & RellenaABlancos("Debe", True, 10) & " " & RellenaABlancos(DebeAnt, False, 14) & " " & RellenaABlancos(txtAux(9).Text, False, 14) & vbCrLf
+    If HaberAnt <> txtAux(10).Text Then SQL = SQL & RellenaABlancos("Haber", True, 10) & " " & RellenaABlancos(HaberAnt, False, 14) & " " & RellenaABlancos(txtAux(10).Text, False, 14) & vbCrLf
+
+    CadCambios = SQL
+    
+End Function
+
 
 Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim v As Integer
 Dim cad As String
+Dim SQL As String
+Dim SQL2 As String
+
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -4192,6 +4268,21 @@ Dim cad As String
     If DatosOkLlin(nomframe) Then
         TerminaBloquear
         If ModificaDesdeFormulario2(Me, 2, nomframe) Then
+        
+            SQL2 = CadCambios
+            If SQL2 <> "" Then
+                SQL = "Nº Asiento : " & Data1.Recordset.Fields(2)
+                SQL = SQL & vbCrLf & "Fecha      : " & CStr(Data1.Recordset.Fields(1))
+                SQL = SQL & vbCrLf & "Diario     : " & Text1(2).Text & " - " & Text4.Text
+                SQL = SQL & vbCrLf & "Línea      : " & DBSet(AdoAux(1).Recordset!Linliapu, "N") & vbCrLf & vbCrLf
+                SQL = SQL & vbCrLf & RellenaABlancos("Campo", True, 10) & " " & RellenaABlancos("Valor anterior", False, 14) & " " & RellenaABlancos("Valor actual", False, 14) & " "
+                SQL = SQL & vbCrLf & String(40, "-") & vbCrLf
+                
+                SQL = SQL & SQL2
+        
+                vLog.Insertar 3, vUsu, SQL
+            End If
+        
             ' *** si cal que fer alguna cosa abas d'insertar ***
             If NumTabMto = 0 Then
             End If
@@ -4697,7 +4788,8 @@ Dim B1 As Boolean
 Dim VC As Contadores
 
     On Error GoTo EModificar
-     Modificar = False
+         
+        Modificar = False
      
         '-----------------------------------------------
         ' ABRIL 2006
@@ -4744,6 +4836,9 @@ Dim VC As Contadores
         Conn.BeginTrans
         'Comun
         
+        Conn.Execute "set foreign_key_checks = 0"
+        
+        
         SQL = " WHERE  numdiari=" & Data1.Recordset!NumDiari
         SQL = SQL & " AND fechaent='" & Format(Data1.Recordset!FechaEnt, FormatoFecha)
         SQL = SQL & "' AND numasien=" & Data1.Recordset!NumAsien
@@ -4768,8 +4863,25 @@ Dim VC As Contadores
 
         Conn.Execute "UPDATE hcabapu SET " & SQL
         
+        ' tema del log
+        If Data1.Recordset!FechaEnt <> CDate(Text1(1).Text) Then
+            SQL = "Nº Asiento : " & Data1.Recordset.Fields(2)
+            SQL = SQL & vbCrLf & "Fecha      : " & CStr(Data1.Recordset.Fields(1))
+            SQL = SQL & vbCrLf & "Diario     : " & Text1(2).Text & " - " & Text4.Text & vbCrLf & vbCrLf
+            
+            SQL = SQL & vbCrLf & "Nueva Fecha: " & Text1(1).Text
+            
+            vLog.Insertar 1, vUsu, SQL
+        
+        End If
+  
+  
+  
+  
+  
   
 EModificar:
+        Conn.Execute "set foreign_key_checks = 1"
         If Err.Number <> 0 Then
             MuestraError Err.Number
             Conn.RollbackTrans

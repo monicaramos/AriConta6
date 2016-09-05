@@ -66,3 +66,6 @@ alter table `parametros` change `hayariges` `nroariges` smallint (3) UNSIGNED  D
 # Impresion de Situacion
 insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0903-00','Informe de Situacion','SituacionTes.rpt')
 ;
+# Campo Descripcion del slog
+alter table `slog` change `descripcion` `descripcion` text   NULL  COLLATE latin1_swedish_ci 
+;

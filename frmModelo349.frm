@@ -1117,7 +1117,6 @@ Dim C2 As String
     cad = Trim(cad)
     
     
-    vLog.Insertar 15, vUsu, cad
     
     
     

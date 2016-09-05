@@ -500,6 +500,7 @@ Dim ImpTotal As Currency
 Dim ImpCompensa As Currency
 Dim Periodo As String
 Dim Consolidado As String
+Dim SqlLog As String
 
 Dim vFecha1 As String
 Dim vFecha2 As String
@@ -553,14 +554,20 @@ Dim B As Boolean
         Periodo = SQL & I & "|"
         
     
+        SqlLog = "Periodo : " & txtAno(0) & " / " & Me.cmbPeriodo(0).Text & vbCrLf
+        SqlLog = SqlLog & "Empresas : "
+        
+    
         'Empresas para consolidado
         Pregunta = True
         SQL = ""
         If EmpresasSeleccionadas = 1 Then
             B = False
             For I = 1 To Me.ListView1(1).ListItems.Count
-                If ListView1(1).ListItems(I).Checked Then
+            
+                SqlLog = SqlLog & "ariconta" & Me.ListView1(1).ListItems(I).Text & vbCrLf
                 
+                If ListView1(1).ListItems(I).Checked Then
                     
                     NumConta = Me.ListView1(1).ListItems(I).Text
                     
@@ -602,8 +609,11 @@ Dim B As Boolean
             SQL = "'Empresas seleccionadas:' + Chr(13) "
             B = False
             For I = 1 To Me.ListView1(1).ListItems.Count
-            
+                            
                 NumConta = Me.ListView1(1).ListItems(I).Text
+         
+                SqlLog = SqlLog & " ariconta" & NumConta & vbCrLf
+                
          
                 ImprimirAsientoContable
          
@@ -627,6 +637,9 @@ Dim B As Boolean
         End If
         
         If B Then
+            If SqlLog <> "" Then vLog.Insertar 15, vUsu, SqlLog
+        
+        
             MsgBox "Proceso realizado correctamente.", vbExclamation
             Unload Me
         End If
@@ -665,7 +678,6 @@ Dim I As Integer
     If vParam.periodos = 0 Then
         I = I + 12
     End If
-
 
     SQL = "insert into ariconta" & NumConta & ".liqiva (anoliqui,periodo,escomplem,importe,numdiari,numasien,fechaent) values ("
     SQL = SQL & DBSet(txtAno(0).Text, "N") & "," & DBSet(I, "N") & ",0," & DBSet(ImpLiqui, "N") & "," & DBSet(vParam.numdia303, "N") & "," & DBSet(NumAsiento, "N") & "," & DBSet(txtFecha(2).Text, "F") & ")"
@@ -735,6 +747,9 @@ Dim NumAsien As Long
     SQL = SQL & " order by pos "
     Conn.Execute SQL
     
+    
+    
+    SqlLog = SqlLog & "Asiento contable: " & DBSet(NumAsien, "N") & " - " & txtFecha(2).Text & " - " & vParam.numdia303 & vbCrLf
     
     
     B = ActualizarLiquidacion(True, NumAsien)

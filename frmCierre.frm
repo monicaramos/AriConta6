@@ -1837,7 +1837,7 @@ Private IdPrograma As Long
 Private PrimeraVez As Boolean
 Dim cad As String
 Dim Sql As String
-Dim RS As Recordset
+Dim Rs As Recordset
 
 Dim I As Integer
 Dim NumeroRegistros As Long
@@ -2022,7 +2022,7 @@ Private Function ComprobarAsientosDescuadrados() As Boolean
 Dim Sql As String
 Dim SqlInsert As String
 Dim HayReg As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     
     On Error GoTo eComprobarAsientosDescuadrados
@@ -2077,7 +2077,7 @@ Private Function ComprobarFacturasSinAsientos() As Boolean
 Dim Sql As String
 Dim SqlInsert As String
 Dim HayReg As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo eComprobarFacturasSinAsientos
 
@@ -2183,7 +2183,7 @@ On Error GoTo EDescierre
     Screen.MousePointer = vbHourglass
     
     cmdDescerrar.Enabled = False
-    cmdCancel(5).Enabled = False
+    CmdCancel(5).Enabled = False
     Me.Refresh
     
     Me.Refresh
@@ -2201,14 +2201,14 @@ On Error GoTo EDescierre
     If Ok Then
     
         
-        vLog.Insertar 18, vUsu, "Deshacer Cierre: " & DateAdd("d", 1, vParam.fechafin)
+        vLog.Insertar 19, vUsu, "Cierre: " & DateAdd("d", 1, vParam.fechafin)
         
     
     
         Unload Me
     Else
         cmdDescerrar.Enabled = False
-        cmdCancel(5).Enabled = False
+        CmdCancel(5).Enabled = False
     End If
     
     Screen.MousePointer = vbDefault
@@ -2252,8 +2252,10 @@ Dim Ok As Boolean
         Else
             Sql = "siguiente "
         End If
-        Sql = "[RENUMERAR]  Ejercicio " & Sql & Format(vParam.fechaini, "dd/mm/yyyy") & " - " & Format(vParam.fechafin, "dd/mm/yyyy")
-        vLog.Insertar 18, vUsu, Sql
+        
+        Sql = "Ejercicio " & Sql & Format(vParam.fechaini, "dd/mm/yyyy") & " - " & Format(vParam.fechafin, "dd/mm/yyyy")
+        
+        vLog.Insertar 17, vUsu, Sql
         Sql = ""
         
         
@@ -2349,9 +2351,6 @@ Dim Ok As Boolean
     End If
         
     
-    
-    
-    
     Me.Refresh
     Screen.MousePointer = vbHourglass
     If Ok Then
@@ -2378,7 +2377,6 @@ Dim Ok As Boolean
         If optTipoSal(3).Value + optTipoSal(2).Value + optTipoSal(1).Value Then
             If Not EliminarDocum(optTipoSal(2).Value) Then Exit Sub
         End If
-        
         
         InicializarVbles True
         
@@ -2407,7 +2405,7 @@ Dim Ok As Boolean
 End Sub
 
 Private Sub AccionesCSV()
-Dim SQL2 As String
+Dim Sql2 As String
 
     'Monto el SQL
     Sql = "Select  numasien Asiento, fechaent Fecha, numdiari Diario, codmacta Cuenta, nommacta Descripción, timported Debe, timporteh Haber "
@@ -2479,7 +2477,7 @@ Private Sub Form_Activate()
 If PrimeraVez Then
     PrimeraVez = False
     DoEvents
-    cmdCancel(Opcion).Cancel = True
+    CmdCancel(Opcion).Cancel = True
     Select Case Opcion
     Case 1, 4
         PonerDatosPyG
@@ -2814,8 +2812,8 @@ On Error GoTo EPreparacionAsientos
     pb1.Value = 3
     Sql = CadenaFechasActuralSiguiente(Option1(0).Value)
     Sql = "Select distinct(numasien) from hlinapu WHERE " & Sql
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql = CadenaFechasActuralSiguiente(Option1(0).Value)
     cad = " Set NumASien = NumASien + " & Suma
@@ -2852,7 +2850,7 @@ On Error GoTo EPreparacionAsientos
 EPreparacionAsientos:
     MuestraError Err.Number
     MsgBox "Error grave. Soporte técnico", vbExclamation
-    Set RS = Nothing
+    Set Rs = Nothing
 End Sub
 
 
@@ -2912,38 +2910,38 @@ Private Sub PonerDatosPyG()
     
     'Si ya hay un 960 en hcabapu, con esa fecha entonces es k ya esta hecho el cierre
     Sql = "Select numasien from hlinapu WHERE codconce=960 and fechaent>='" & Format(vParam.fechaini, FormatoFecha) & "'"
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        MsgBox "Ya se ha efectuado el asiento de Perdidas y ganancias : " & RS.Fields(0), vbExclamation
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        MsgBox "Ya se ha efectuado el asiento de Perdidas y ganancias : " & Rs.Fields(0), vbExclamation
         cmdCierreEjercicio.Enabled = False
     End If
-    RS.Close
+    Rs.Close
     
     
     'Si ya hay un 961 en hcabapu, con esa fecha entonces es k ya esta hecho el cierre
     If vParam.GranEmpresa Then
         Sql = "Select numasien from hlinapu WHERE codconce=961 and fechaent>='" & Format(vParam.fechaini, FormatoFecha) & "'"
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
-            MsgBox "Ya se ha efectuado el asiento de regularizacion : " & RS.Fields(0), vbExclamation
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
+            MsgBox "Ya se ha efectuado el asiento de regularizacion : " & Rs.Fields(0), vbExclamation
             cmdCierreEjercicio.Enabled = False
         End If
-        RS.Close
+        Rs.Close
     End If
     
     
     'Comprobamos k tampoc haya asiento 1 en ejercicio siguiente
     Sql = "Select numasien from hcabapu WHERE fechaent>'" & Format(vParam.fechafin, FormatoFecha)
     Sql = Sql & "' and numasien=1"
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         MsgBox "Ya existe el asiento numero 1 para el año siguiente.", vbExclamation
         cmdCierreEjercicio.Enabled = False
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Sub
 
 
@@ -2991,16 +2989,16 @@ Dim Ok As Boolean
     'Si es simulacion busco el numero de diario mas pequeño
     If Opcion = 4 Then
         Sql = "Select numdiari,desdiari from tiposdiario order by numdiari"
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
             For I = 0 To 3
-                txtDescDiario(I).Text = RS.Fields(1)
-                txtDiario(I).Text = RS.Fields(0)
+                txtDescDiario(I).Text = Rs.Fields(1)
+                txtDiario(I).Text = Rs.Fields(0)
             Next I
         End If
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         'Ponemos el control en simula
         If Not PrimeraVez Then cmdSimula(1).SetFocus
     End If
@@ -3015,32 +3013,32 @@ Dim Ok As Boolean
     cad = CadenaFechasActuralSiguiente(True)
     Sql = "Select numasien from hlinapu WHERE codconce=980"
     Sql = Sql & " AND " & cad
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        MsgBox "Ya se ha efectuado el asiento de cierre de ejercicio : " & RS.Fields(0), vbExclamation
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        MsgBox "Ya se ha efectuado el asiento de cierre de ejercicio : " & Rs.Fields(0), vbExclamation
         Ok = False
     Else
         Ok = True
     End If
-    RS.Close
+    Rs.Close
     
     'Apertura
     If Ok Then
             cad = CadenaFechasActuralSiguiente(False)
             Sql = "Select numasien from hlinapu WHERE codconce=980"
             Sql = Sql & " AND " & cad
-            Set RS = New ADODB.Recordset
-            RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not RS.EOF Then
-                MsgBox "Ya se ha efectuado el asiento de cierre de ejercicio : " & RS.Fields(0), vbExclamation
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not Rs.EOF Then
+                MsgBox "Ya se ha efectuado el asiento de cierre de ejercicio : " & Rs.Fields(0), vbExclamation
                 Ok = False
             Else
                 Ok = True
             End If
-            RS.Close
+            Rs.Close
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     cmdCierreEjercicio.Enabled = Ok
 End Sub
 
@@ -3068,9 +3066,9 @@ Dim vFecha As String
 
     cmdSimula(0).Visible = (Opcion = 4)
     cmdSimula(1).Visible = (Opcion = 4)
-    Me.cmdCancel(4).Visible = (Opcion = 4)
+    Me.CmdCancel(4).Visible = (Opcion = 4)
     Me.cmdCierreEjercicio.Visible = (Opcion = 1)
-    Me.cmdCancel(1).Visible = (Opcion = 1)
+    Me.CmdCancel(1).Visible = (Opcion = 1)
     Label6.Visible = (Opcion = 4)
     Label4.Visible = Not Label6.Visible
     If Opcion = 1 Then
@@ -3098,15 +3096,15 @@ Dim vFecha As String
         
         Sql = "select numdiari, desdiari from tiposdiario "
         If TotalRegistrosConsulta(Sql) = 1 Then
-            Set RS = New ADODB.Recordset
-            RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not RS.EOF Then
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not Rs.EOF Then
                 For I = 0 To txtDiario.Count - 1
-                    txtDiario(I).Text = DBLet(RS.Fields(0), "N")
-                    txtDescDiario(I).Text = DBLet(RS.Fields(1), "T")
+                    txtDiario(I).Text = DBLet(Rs.Fields(0), "N")
+                    txtDescDiario(I).Text = DBLet(Rs.Fields(1), "T")
                 Next I
             End If
-            Set RS = Nothing
+            Set Rs = Nothing
         End If
     End If
 
@@ -3304,7 +3302,7 @@ On Error GoTo ECuentas6y7
 
 
     Cuentas6y7 = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     'Para todas las cuentas de los grupos 6 y 7  ----> Vienen en parametros
     ' calculamos su saldo y si es distinto de 0 lo insertamos en linapu
@@ -3317,7 +3315,7 @@ On Error GoTo ECuentas6y7
         If Not Subgrupo(vParam.grupovta, "") Then Exit Function
     End If
         
-    Set RS = Nothing
+    Set Rs = Nothing
     Cuentas6y7 = True
     Exit Function
 ECuentas6y7:
@@ -3331,7 +3329,7 @@ On Error GoTo ECuentas9
 
 
     Cuentas9 = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     'Para todas las cuentas de los grupos 6 y 7  ----> Vienen en parametros
     ' calculamos su saldo y si es distinto de 0 lo insertamos en linapu
@@ -3341,7 +3339,7 @@ On Error GoTo ECuentas9
     
 
         
-    Set RS = Nothing
+    Set Rs = Nothing
     Cuentas9 = True
     Exit Function
 ECuentas9:
@@ -3393,48 +3391,48 @@ Dim vCta As String
     
     'Contador
     Sql = "Select sum(coalesce(timported,0))-sum(coalesce(timporteh,0)), " & cad
-    RS.Open Sql, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Rs.Open Sql, Conn, adOpenKeyset, adLockOptimistic, adCmdText
     NumeroRegistros = 0
-    If RS.EOF Then
-        RS.Close
+    If Rs.EOF Then
+        Rs.Close
         'Puede k asi este bien
         Subgrupo = True
         Exit Function
     End If
     
     'Contador
-    While Not RS.EOF
+    While Not Rs.EOF
         NumeroRegistros = NumeroRegistros + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     'Preparamos el SQL para la insercion de lineas de apunte
     'Montamos la cadena casi al completo
     CadenaLINAPU txtDiario(0).Text, vParam.fechafin, Text1(3).Text
     
-    RS.MoveFirst
+    Rs.MoveFirst
     CONT = 1
     AUX3 = "'" & Text1(1).Text & "'"
-    While Not RS.EOF
+    While Not Rs.EOF
     
-        Label3.Caption = RS.Fields(1)
+        Label3.Caption = Rs.Fields(1)
         Label3.Refresh
         I = Int((CONT / NumeroRegistros) * pb1.Max)
         pb1.Value = I
-        Importe = RS.Fields(0)
+        Importe = Rs.Fields(0)
         If Importe <> 0 Then
             If Opcion = 4 Then
-                cad = Sql & "," & MaxAsiento + CONT & ",'" & RS.Fields(1) & "','" & DevNombreSQL(RS.Fields(2)) & "','1','" & Text2(1).Text & "',"
+                cad = Sql & "," & MaxAsiento + CONT & ",'" & Rs.Fields(1) & "','" & DevNombreSQL(Rs.Fields(2)) & "','1','" & Text2(1).Text & "',"
             Else
-                cad = Sql & "," & MaxAsiento + CONT & ",'" & RS.Fields(1) & "','',960,'" & Text2(1).Text & "',"
+                cad = Sql & "," & MaxAsiento + CONT & ",'" & Rs.Fields(1) & "','',960,'" & Text2(1).Text & "',"
             End If
             InsertarLineasDeAsientos Importe, AUX3
         End If
         'Sig
         CONT = CONT + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     MaxAsiento = MaxAsiento + CONT - 1
     Subgrupo = True
 End Function
@@ -3500,16 +3498,16 @@ On Error GoTo ECua
         Sql = "select sum(timporteD),  sum(timporteH) from hlinapu "
         Sql = Sql & " where numdiari=" & txtDiario(0).Text
         Sql = Sql & " AND fechaent ='" & Format(vParam.fechafin, FormatoFecha) & "' AND numasien = " & Text1(3).Text & ""
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         Importe = 0
-        If Not RS.EOF Then
-            If Not IsNull(RS.Fields(0)) Then Importe = RS.Fields(0)
-            If Not IsNull(RS.Fields(1)) Then Importe = Importe - RS.Fields(1)
+        If Not Rs.EOF Then
+            If Not IsNull(Rs.Fields(0)) Then Importe = Rs.Fields(0)
+            If Not IsNull(Rs.Fields(1)) Then Importe = Importe - Rs.Fields(1)
             
         End If
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         
         If Importe <> 0 Then
             CadenaLINAPU txtDiario(0).Text, vParam.fechafin, Text1(3).Text
@@ -3536,13 +3534,12 @@ ECua:
 End Function
 
 
-
 Private Function HacerElCierre() As Boolean
 Dim Ok As Boolean
 On Error GoTo EHacerElCierre
     
     HacerElCierre = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Conn.Execute "Delete from tmpCierre"  ' no hace falta codusu pq solo puede haber trabajando uno a la vez
     
     Label10.Caption = "Leyendo datos"
@@ -3552,10 +3549,10 @@ On Error GoTo EHacerElCierre
     'Esta grabado el fichero tmpCierre con los importes
     'Fijamos la pb3
     Sql = "Select count(*) from tmpcierre where importe<>0"
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumeroRegistros = 0
-    If Not RS.EOF Then NumeroRegistros = DBLet(RS.Fields(0), "N")
-    RS.Close
+    If Not Rs.EOF Then NumeroRegistros = DBLet(Rs.Fields(0), "N")
+    Rs.Close
     If NumeroRegistros = 0 Then Exit Function
     NumeroRegistros = NumeroRegistros * 2   'Apertura y cierre
     
@@ -3587,7 +3584,6 @@ On Error GoTo EHacerElCierre
     Else
         Me.cmdCierreEjercicio.Enabled = False
         
-        
         'Ahora, en parametros cambias ciertas cosas tales como fechas ejercicio
         cad = Format(DateAdd("yyyy", 1, vParam.fechaini), FormatoFecha)
         Sql = "UPDATE parametros SET fechaini= '" & cad
@@ -3609,7 +3605,6 @@ On Error GoTo EHacerElCierre
             
         vParam.fechaini = DateAdd("yyyy", 1, vParam.fechaini)
        
-        
         'los contadores
         'UPDATEAMOS LOS CONTADORES
         'con los nuevos valores
@@ -3634,14 +3629,14 @@ EHacerElCierre:
     If Err.Number <> 0 Then MuestraError Err.Number
     vParam.Leer
     If vEmpresa.TieneTesoreria Then vParamT.Leer
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 Private Function SimulaCierreApertura() As Boolean
 
 
     SimulaCierreApertura = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Conn.Execute "Delete from tmpCierre"  ' no hace falta codusu pq solo puede haber trabajando uno a la vez
     
     Label10.Caption = "Leyendo datos"
@@ -3651,10 +3646,10 @@ Private Function SimulaCierreApertura() As Boolean
     'Esta grabado el fichero tmpCierre con los importes
     'Fijamos la pb3
     Sql = "Select count(*) from tmpcierre where importe<>0"
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumeroRegistros = 0
-    If Not RS.EOF Then NumeroRegistros = DBLet(RS.Fields(0), "N")
-    RS.Close
+    If Not Rs.EOF Then NumeroRegistros = DBLet(Rs.Fields(0), "N")
+    Rs.Close
     If NumeroRegistros = 0 Then Exit Function
     NumeroRegistros = NumeroRegistros * 2   'Apertura y cierre
     
@@ -3677,14 +3672,14 @@ End Function
 
 Private Function GeneraTmpCierre() As Boolean
 Dim Importe As Currency
-Dim vSQL As String
+Dim vSql As String
 Dim B As Boolean
 On Error GoTo EGeneraTmpCierre
 
 
     GeneraTmpCierre = False
     
-    cad = vSQL & " fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+    cad = vSql & " fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     cad = " from hlinapu where " & cad & " GROUP BY codmacta ORDER BY codmacta"
     
     
@@ -3838,16 +3833,16 @@ Dim Importe As Currency
 Dim Aux As String
     On Error GoTo EGeneraLineasCierre
     GeneraLineasCierre = False
-    RS.Open "SELECT * from tmpCierre WHERE importe <>0 ORDER By Cta", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open "SELECT * from tmpCierre WHERE importe <>0 ORDER By Cta", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     CONT = 1
     
     ' linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum,"
     ' codconce, ampconce, timporteD, codccost, timporteH, ctacontr, idcontab, punteada
     
     
-    While Not RS.EOF
-        cad = Sql & "," & CONT & ",'" & RS.Fields(1) & "','',980,'" & Text2(2).Text & "',"
-        Importe = RS.Fields(0)
+    While Not Rs.EOF
+        cad = Sql & "," & CONT & ",'" & Rs.Fields(1) & "','',980,'" & Text2(2).Text & "',"
+        Importe = Rs.Fields(0)
         If Importe < 0 Then
             Aux = "NULL,NULL," & TransformaComasPuntos(CStr(Abs(Importe)))
         Else
@@ -3863,9 +3858,9 @@ Dim Aux As String
         
         'Siguiente
         CONT = CONT + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     GeneraLineasCierre = True
     MaxAsiento = CONT - 1
     Exit Function
@@ -3901,16 +3896,16 @@ Dim Importe As Currency
 Dim Aux As String
     On Error GoTo EGeneraLineasApertura
     GeneraLineasApertura = False
-    RS.Open "SELECT * from tmpCierre WHERE importe <>0 ORDER BY Cta ", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open "SELECT * from tmpCierre WHERE importe <>0 ORDER BY Cta ", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     CONT = 1
     
     ' linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum,"
     ' codconce, ampconce, timporteD, codccost, timporteH, ctacontr, idcontab, punteada
     
     
-    While Not RS.EOF
-        cad = Sql & "," & CONT & ",'" & RS.Fields(1) & "','',970,'" & Text2(3).Text & "',"
-        Importe = RS.Fields(0)
+    While Not Rs.EOF
+        cad = Sql & "," & CONT & ",'" & Rs.Fields(1) & "','',970,'" & Text2(3).Text & "',"
+        Importe = Rs.Fields(0)
         Importe = Importe * -1
         If Importe < 0 Then
             Aux = "NULL,NULL," & TransformaComasPuntos(CStr(Abs(Importe)))
@@ -3927,9 +3922,9 @@ Dim Aux As String
         
         'Siguiente
         CONT = CONT + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     GeneraLineasApertura = True
     Exit Function
 EGeneraLineasApertura:
@@ -3965,13 +3960,13 @@ Private Function NoHayCierre(FechaCierre As Date) As Boolean
     NoHayCierre = True
     
     Sql = "Select numasien from hlinapu WHERE codconce=980 AND fechaent='" & Format(FechaCierre, FormatoFecha) & "'"
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then NoHayCierre = False
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then NoHayCierre = False
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 ENoHayCierre:
     MuestraError Err.Number, "Comprobar cierre anterior"
@@ -3988,20 +3983,20 @@ Dim Aux As String
     GeneraLineasSimulacionCierre = False
     cad = "select tmpcierre.*,nommacta from tmpcierre,cuentas where tmpcierre.cta=cuentas.codmacta"
     cad = cad & " AND importe <>0 ORDER By Cta"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     'Cont = 1
     CONT = 2
     'linliapu, codmacta, nommacta, numdocum, ampconce, timporteD, "
     'codccost,timporteH) VALUES ("
     
-    While Not RS.EOF
+    While Not Rs.EOF
         
-        Importe = RS.Fields(0)
+        Importe = Rs.Fields(0)
         If EsCierre Then
-            cad = Sql & "," & CONT & ",'" & RS.Fields(1) & "','" & DevNombreSQL(RS!Nommacta) & "','3','" & Text2(2).Text & "',"
+            cad = Sql & "," & CONT & ",'" & Rs.Fields(1) & "','" & DevNombreSQL(Rs!Nommacta) & "','3','" & Text2(2).Text & "',"
         Else
-            cad = Sql & "," & CONT & ",'" & RS.Fields(1) & "','" & DevNombreSQL(RS!Nommacta) & "','4','" & Text2(3).Text & "',"
+            cad = Sql & "," & CONT & ",'" & Rs.Fields(1) & "','" & DevNombreSQL(Rs!Nommacta) & "','4','" & Text2(3).Text & "',"
             Importe = Importe * -1
         End If
         
@@ -4019,9 +4014,9 @@ Dim Aux As String
         
         'Siguiente
         CONT = CONT + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     GeneraLineasSimulacionCierre = True
     MaxAsiento = CONT - 1
     Exit Function
@@ -4037,15 +4032,15 @@ Private Function ExisteAsientosDescerrar() As Boolean
     cad = CadenaFechasActuralSiguiente(True)
     Sql = "Select numasien from hlinapu WHERE codconce=970"
     Sql = Sql & " AND " & cad
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         ExisteAsientosDescerrar = True
     Else
         ExisteAsientosDescerrar = False
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -4054,14 +4049,14 @@ Private Function ExistenApuntesEjercicioAnterior() As Boolean
 'Tiene k existe el asiento de apertura del año siguient
     Sql = "Select count(*) from hlinapu WHERE "
     Sql = Sql & " Fechaent < '" & Format(vParam.fechaini, FormatoFecha) & "'"
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     ExistenApuntesEjercicioAnterior = False
-    If Not RS.EOF Then
-        If DBLet(RS.Fields(0), "N") > 0 Then ExistenApuntesEjercicioAnterior = True
+    If Not Rs.EOF Then
+        If DBLet(Rs.Fields(0), "N") > 0 Then ExistenApuntesEjercicioAnterior = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -4070,14 +4065,14 @@ Private Function ExistenApuntesEjercicioSiguiente() As Boolean
 'Tiene k existe el asiento de apertura del año siguient
     Sql = "Select count(*) from hlinapu WHERE "
     Sql = Sql & " Fechaent > '" & Format(vParam.fechafin, FormatoFecha) & "'"
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     ExistenApuntesEjercicioSiguiente = False
-    If Not RS.EOF Then
-        If DBLet(RS.Fields(0), "N") > 0 Then ExistenApuntesEjercicioSiguiente = True
+    If Not Rs.EOF Then
+        If DBLet(Rs.Fields(0), "N") > 0 Then ExistenApuntesEjercicioSiguiente = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -4087,7 +4082,7 @@ Private Function HacerDescierre() As Boolean
 Dim N As Long
 Dim MaxAsien As Long
 Dim Sql1 As String
-Dim SQL2 As String
+Dim Sql2 As String
 
 On Error GoTo EHacerDescierre
     HacerDescierre = False
@@ -4248,14 +4243,14 @@ On Error GoTo EHacerDescierre
     vParam.FechaActiva = DateAdd("yyyy", I, vParam.FechaActiva)
 
 
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     Sql = "SELECT tiporegi, nomregis, contado1, contado2 from Contadores order by tiporegi"
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Sql = ""
     
-    While Not RS.EOF
-        If DBLet(RS!tiporegi, "T") = "0" Then ' asientos
+    While Not Rs.EOF
+        If DBLet(Rs!tiporegi, "T") = "0" Then ' asientos
             Sql = "select max(numasien) from hlinapu where fechaent between  " & DBSet(vParam.fechaini, "F") & " and  " & DBSet(vParam.fechafin, "F")
             
             Sql1 = "select max(numasien) from hlinapu where fechaent > " & DBSet(vParam.fechafin, "F")
@@ -4263,28 +4258,28 @@ On Error GoTo EHacerDescierre
                 Sql1 = "select 1 from hlinapu "
             End If
         Else
-            If IsNumeric(DBLet(RS!tiporegi, "T")) Then ' facturas de proveedor
+            If IsNumeric(DBLet(Rs!tiporegi, "T")) Then ' facturas de proveedor
                 Sql = "select max(numregis) from factpro where fecharec between  " & DBSet(vParam.fechaini, "F") & " and  " & DBSet(vParam.fechafin, "F")
-                Sql = Sql & " and numserie = " & DBSet(RS!tiporegi, "T")
+                Sql = Sql & " and numserie = " & DBSet(Rs!tiporegi, "T")
                 Sql1 = "select max(numregis) from factpro where fecharec > " & DBSet(vParam.fechafin, "F")
-                Sql1 = Sql1 & " and numserie = " & DBSet(RS!tiporegi, "T")
+                Sql1 = Sql1 & " and numserie = " & DBSet(Rs!tiporegi, "T")
             Else ' facturas de cliente
                 Sql = "select max(numfactu) from factcli where fecfactu between  " & DBSet(vParam.fechaini, "F") & " and  " & DBSet(vParam.fechafin, "F")
-                Sql = Sql & " and numserie = " & DBSet(RS!tiporegi, "T")
+                Sql = Sql & " and numserie = " & DBSet(Rs!tiporegi, "T")
                 
                 Sql1 = "select max(numfactu) from factcli where fecfactu > " & DBSet(vParam.fechafin, "F")
-                Sql1 = Sql1 & " and numserie = " & DBSet(RS!tiporegi, "T")
+                Sql1 = Sql1 & " and numserie = " & DBSet(Rs!tiporegi, "T")
             End If
         End If
         
         'actualizamos
-        SQL2 = "update contadores set contado1 = " & DevuelveValor(Sql) & ",contado2 = " & DevuelveValor(Sql1)
-        SQL2 = SQL2 & " where tiporegi = " & DBSet(RS!tiporegi, "T")
-        Conn.Execute SQL2
+        Sql2 = "update contadores set contado1 = " & DevuelveValor(Sql) & ",contado2 = " & DevuelveValor(Sql1)
+        Sql2 = Sql2 & " where tiporegi = " & DBSet(Rs!tiporegi, "T")
+        Conn.Execute Sql2
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     
     'El contador de ejercicio actual es, MaxAsien
     If MaxAsien <> 0 Then
@@ -4360,7 +4355,7 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
 
     Conn.Execute "DELETE FROM tmpcierre1 where codusu =" & vUsu.Codigo
 
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     cad = "select " & vUsu.Codigo & ",codmacta,'T',sum(coalesce(timported,0))-sum(coalesce(timporteh,0)) from hlinapu"
     cad = cad & " WHERE (codmacta like '8__' or codmacta like '9__') AND "
@@ -4380,55 +4375,55 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
     'Veremos si hay null con lo cual esta mal y si no, updatearemos tmpcierre
     cad = "select cta,nommacta,cuentaba from tmpcierre1,cuentas where codusu = " & vUsu.Codigo & " and cta = codmacta"
   
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
     I = 0
-    While Not RS.EOF
-        If DBLet(RS!Cuentaba, "T") = "" Then
+    While Not Rs.EOF
+        If DBLet(Rs!Cuentaba, "T") = "" Then
             
             I = I + 1
-            cad = cad & "     " & RS!Cta
+            cad = cad & "     " & Rs!Cta
             If (I Mod 5) = 0 Then cad = cad & vbCrLf
         
         Else
         
             'ASi, tanto para la simulacion, como para el cierre ya se contra que cuentas saldan las del 8 9
-            Conn.Execute "UPDATE tmpcierre1 SET nomcta = '" & RS!Cuentaba & "' WHERE codusu = " & vUsu.Codigo & " and cta = '" & RS!Cta & "'"
+            Conn.Execute "UPDATE tmpcierre1 SET nomcta = '" & Rs!Cuentaba & "' WHERE codusu = " & vUsu.Codigo & " and cta = '" & Rs!Cta & "'"
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     If I > 0 Then
         cad = "Cuentas sin configurar el cierre: " & vbCrLf & vbCrLf & cad
         MsgBox cad, vbExclamation
-        Set RS = Nothing
+        Set Rs = Nothing
         Exit Function
     End If
     
     
     'OK tiene todas las cuentas configuradas
     cad = "Select tmpcierre1.nomcta, cuentas.codmacta from tmpcierre1 left join cuentas on tmpcierre1.codusu=" & vUsu.Codigo & " AND nomcta = cuentas.codmacta"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
     I = 0
-    While Not RS.EOF
+    While Not Rs.EOF
         
-        If IsNull(RS!codmacta) Then
+        If IsNull(Rs!codmacta) Then
             I = I + 1
-            cad = "    " & RS!nomcta
+            cad = "    " & Rs!nomcta
             If (I Mod 5) = 0 Then cad = cad & vbCrLf
         End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     If I > 0 Then
         cad = "Cuentas de cierre configurada, pero no existen: " & vbCrLf & vbCrLf & cad
         MsgBox cad, vbExclamation
-        Set RS = Nothing
+        Set Rs = Nothing
         Exit Function
     End If
     
@@ -4438,12 +4433,12 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
     
     
     ComprobarCierreCuentas8y9 = True
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     Exit Function
 EComprobarCierreCuentas8y9:
-    Set RS = Nothing
+    Set Rs = Nothing
     MuestraError Err.Number, "Comprobar Cierre Cuentas 8y9"
 End Function
 
@@ -4518,14 +4513,14 @@ Dim CONT As Long
     '                 830   1200002
     'Entonces cogeremos los saldos para estas cuentas y las iremos saldando
     'Cargaremos RT con los saldos a 3 digitos (como no ocupara mucho... NO problemo
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     Sql = "Select count(*) from tmpcierre1 where codusu = " & vUsu.Codigo
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumeroRegistros = 0
     
-    If Not RS.EOF Then NumeroRegistros = DBLet(RS.Fields(0), "N")
-    RS.Close
+    If Not Rs.EOF Then NumeroRegistros = DBLet(Rs.Fields(0), "N")
+    Rs.Close
     If NumeroRegistros = 0 Then
     
     
@@ -4535,7 +4530,7 @@ Dim CONT As Long
     
     
         'OK
-        Set RS = Nothing
+        Set Rs = Nothing
         GenerarASiento8y9 = 1
         Exit Function
     End If
@@ -4553,7 +4548,7 @@ Dim CONT As Long
     NumeroRegistros = NumeroRegistros + 1 'Para que no desborde
     
     Sql = "Select tmpcierre1.* from tmpcierre1 where  codusu = " & vUsu.Codigo & " ORDER BY nomcta,cta"
-    RS.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CuentaSaldo = ""
     MaxAsiento = 1
 
@@ -4565,20 +4560,20 @@ Dim CONT As Long
 
     Set RT = New ADODB.Recordset
     
-    While Not RS.EOF
-        If CuentaSaldo <> RS!nomcta Then
+    While Not Rs.EOF
+        If CuentaSaldo <> Rs!nomcta Then
             
                 'SALDAMOS
             If CuentaSaldo <> "" Then SaldarCuenta8y9 CuentaSaldo
  
-            CuentaSaldo = RS!nomcta   'Cuenta saldo
+            CuentaSaldo = Rs!nomcta   'Cuenta saldo
             ImporteTotal = 0
         End If
     
         
         
         'Progress y label
-        Label3.Caption = RS!Cta & " - " & RS!nomcta
+        Label3.Caption = Rs!Cta & " - " & Rs!nomcta
         Label3.Refresh
         CONT = CONT + 1
         I = Int((CONT / NumeroRegistros) * pb1.Max)
@@ -4587,7 +4582,7 @@ Dim CONT As Long
         
         
         'Selecciono todas las cuentas para el subgrupo de 3 digitos
-        cad = Mid(RS!Cta & "_______", 1, vEmpresa.DigitosUltimoNivel)
+        cad = Mid(Rs!Cta & "_______", 1, vEmpresa.DigitosUltimoNivel)
         cad = " WHERE hsaldos.codmacta=cuentas.codmacta AND hsaldos.codmacta like '" & cad & "' AND "
         cad = "select hsaldos.codmacta,sum(impmesde)-sum(impmesha) as miImporte,nommacta from hsaldos,cuentas" & cad
         If Year(vParam.fechaini) = Year(vParam.fechafin) Then
@@ -4624,26 +4619,26 @@ Dim CONT As Long
         RT.Close
         
         
-        Importe = RS!acumPerD   'Para combrobar que a ultimo nivel suma igual que a 3 digitos
+        Importe = Rs!acumPerD   'Para combrobar que a ultimo nivel suma igual que a 3 digitos
         
         If ImpComprobacion <> Importe Then
-            cad = "Error obteniendo saldos. " & vbCrLf & "Subgrupo: " & RS!Cta & vbCrLf
+            cad = "Error obteniendo saldos. " & vbCrLf & "Subgrupo: " & Rs!Cta & vbCrLf
             cad = cad & "Imp 3 digitos: " & Importe & vbCrLf & "Ultimo nivel: " & ImpComprobacion
             If Opcion <> 4 Then cad = cad & vbCrLf & vbCrLf & " No puede continuar con el cierre"
             MsgBox cad, vbExclamation
             If Opcion <> 4 Then
-                RS.Close
+                Rs.Close
                 Exit Function
             End If
         End If
             
             
         'Sigueinte subgrupoo
-        RS.MoveNext
+        Rs.MoveNext
     Wend
             
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Set RT = Nothing
     If CuentaSaldo <> "" Then SaldarCuenta8y9 CuentaSaldo
     ImporteTotal = 0
@@ -4652,7 +4647,7 @@ Dim CONT As Long
 
    Exit Function
 EASiento8y9:
-    Set RS = Nothing
+    Set Rs = Nothing
     MuestraError Err.Number, Err.Description
 End Function
 

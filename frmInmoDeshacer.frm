@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmInmoDeshacer 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Form1"
@@ -125,9 +125,9 @@ Private Const IdPrograma = 510
 
 
 Dim PrimeraVez As Boolean
-Dim Rs As Recordset
-Dim Cad As String
-Dim i As Byte
+Dim RS As Recordset
+Dim cad As String
+Dim I As Byte
 Dim B As Boolean
 Dim Importe As Currency
 '
@@ -140,20 +140,20 @@ Dim Mc As Contadores
 
 'Tipo de IVA
 Dim TipoIva As String
-Dim AUX2 As String
+Dim aux2 As String
 
 
 'Contador para las lineas de apuntes
-Dim Cont As Integer
+Dim CONT As Integer
 
 
 Private Sub cmdDeshaz_Click(Index As Integer)
     If Index = 1 Then
         'Hacemos deshacer
-        Cad = "¿Seguro que desea deshacer la última amortizacion con fecha: " & Format(UltAmor, "dd/mm/yyyy")
-        If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        cad = "¿Seguro que desea deshacer la última amortizacion con fecha: " & Format(UltAmor, "dd/mm/yyyy")
+        If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         Screen.MousePointer = vbHourglass
-        Set Rs = New ADODB.Recordset
+        Set RS = New ADODB.Recordset
         
         Me.Tag = Label13(6).Caption
         DeshacerUltimaAmortizacion
@@ -164,7 +164,7 @@ Private Sub cmdDeshaz_Click(Index As Integer)
 '            Me.cmdDeshaz(0).Caption = "Salir"
             Unload Me
         End If
-        Set Rs = Nothing
+        Set RS = Nothing
         Screen.MousePointer = vbDefault
     Else
         Unload Me
@@ -218,28 +218,28 @@ End Sub
 Private Function SugerirFechaNuevo() As String
 Dim RC As String
     RC = "tipoamor"
-    Cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
+    cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N", RC)
 
-    If Cad <> "" Then
-        Me.Tag = Cad   'Ultima actualizacion
+    If cad <> "" Then
+        Me.Tag = cad   'Ultima actualizacion
         Select Case Val(RC)
         Case 2
             'Semestral
-            i = 6
+            I = 6
             'Siempre es la ultima fecha de mes
         Case 3
             'Trimestral
-            i = 3
+            I = 3
         Case 4
             'Mensual
-            i = 1
+            I = 1
         Case Else
             'Anual
-            i = 12
+            I = 12
         End Select
         RC = PonFecha
     Else
-        Cad = "01/01/1991"
+        cad = "01/01/1991"
         RC = Format(Now, "dd/mm/yyyy")
     End If
     SugerirFechaNuevo = Format(RC, "dd/mm/yyyy")
@@ -252,40 +252,40 @@ Private Function PonFecha() As Date
 Dim d As Date
 'Dada la fecha en Cad y los meses k tengo k sumar
 'Pongo la fecha
-d = DateAdd("m", i, CDate(Cad))
+d = DateAdd("m", I, CDate(cad))
 Select Case Month(d)
 Case 2
     If ((Year(d) - 2000) Mod 4) = 0 Then
-        i = 29
+        I = 29
     Else
-        i = 28
+        I = 28
     End If
 Case 1, 3, 5, 7, 8, 10, 12
     '31
-        i = 31
+        I = 31
 Case Else
     '30
-        i = 30
+        I = 30
 End Select
-Cad = i & "/" & Month(d) & "/" & Year(d)
-PonFecha = CDate(Cad)
+cad = I & "/" & Month(d) & "/" & Year(d)
+PonFecha = CDate(cad)
 End Function
 
 
 Private Function CargarDatos() As Boolean
 On Error GoTo ECargarDatos
     CargarDatos = False
-    Set Rs = New ADODB.Recordset
-    Cad = "Select * from paramamort where codigo=1"
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    cad = "Select * from paramamort where codigo=1"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not RS.EOF Then
         CargarDatos = True
         '------------------  Ponemos los datos
     End If
-    Rs.Close
+    RS.Close
 ECargarDatos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando parametros"
-    Set Rs = Nothing
+    Set RS = Nothing
 End Function
 
 
@@ -304,19 +304,19 @@ Private Sub CargarDatosAmortizacion()
 
     'Obtengo la ultima fecha a partir de la amortizacion y ultima fecha amortizada
     UltAmor = "01/01/1901"
-    Cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N")
-    If Cad <> "" Then UltAmor = CDate(Cad)
+    cad = DevuelveDesdeBD("ultfecha", "paramamort", "codigo", "1", "N")
+    If cad <> "" Then UltAmor = CDate(cad)
     
     If ObtenerparametrosAmortizacion(DivMes, UltAmor, ParametrosContabiliza) Then
-        AUX2 = Format(UltAmor, "dd/mm/yyyy")
+        aux2 = Format(UltAmor, "dd/mm/yyyy")
         B = True
     Else
         B = False
-        AUX2 = "### ERROR obten. fecha ###"
+        aux2 = "### ERROR obten. fecha ###"
     End If
-    Cad = "Fecha última amortización:"
-    Cad = Cad & Space(10) & AUX2
-    Label13(6).Caption = Cad
+    cad = "Fecha última amortización:"
+    cad = cad & Space(10) & aux2
+    Label13(6).Caption = cad
               
     'Habilitamos o no el boton de deshacer
     cmdDeshaz(1).Enabled = B
@@ -343,8 +343,8 @@ Private Sub DeshacerUltimaAmortizacion()
         Conn.CommitTrans
         Me.cmdDeshaz(1).Enabled = False
         'Grabamos el LOG
-        Cad = "Fecha ult amortizacion: " & UltAmor
-        vLog.Insertar 14, vUsu, Cad
+        cad = "Fecha última amortizacion: " & UltAmor
+        vLog.Insertar 14, vUsu, cad
 
     Else
         B = False
@@ -373,56 +373,56 @@ Dim SQL As String
     DoEvents
     
     'Compreubo cuantos hay. Para que no haya errores
-    Cad = "Select count(*) from inmovele_his where fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
-    Cont = 0
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then Cont = DBLet(Rs.Fields(0), "N")
-    Rs.Close
-    AUX2 = CStr(Cont)
+    cad = "Select count(*) from inmovele_his where fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
+    CONT = 0
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then CONT = DBLet(RS.Fields(0), "N")
+    RS.Close
+    aux2 = CStr(CONT)
     
-    If Cont = 0 Then
+    If CONT = 0 Then
         MsgBox "Error: NUmero de registos de hcoinmovilizado con fecha " & UltAmor & " es cero", vbExclamation
         Exit Function
     End If
     
     'Abro el rs para actualizar
-    Cad = "select l.codinmov,imporinm,amortacu,valoradq,nominmov from inmovele_his l,inmovele where l.codinmov=inmovele.codinmov "
-    Cad = Cad & " and fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Cont = 0
-    While Not Rs.EOF
-        Label13(6).Caption = Rs!Codinmov & " " & Rs!nominmov
+    cad = "select l.codinmov,imporinm,amortacu,valoradq,nominmov from inmovele_his l,inmovele where l.codinmov=inmovele.codinmov "
+    cad = cad & " and fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    CONT = 0
+    While Not RS.EOF
+        Label13(6).Caption = RS!Codinmov & " " & RS!nominmov
         Label13(6).Refresh
         
         'Para cada elemento le sumo lo que ha amortizado
-        Importe = DBLet(Rs!amortacu, "N")
-        Importe = Importe - Rs!imporinm
+        Importe = DBLet(RS!amortacu, "N")
+        Importe = Importe - RS!imporinm
         
         'Control auxiliar
         If Importe < 0 Then Importe = 0
         
         'Creo SQL update
-        Cad = "UPDATE inmovele set amortacu=" & TransformaComasPuntos(CStr(Importe))
-        Cad = Cad & ", situacio= 1"
-        Cad = Cad & " WHERE codinmov=" & Rs!Codinmov
+        cad = "UPDATE inmovele set amortacu=" & TransformaComasPuntos(CStr(Importe))
+        cad = cad & ", situacio= 1"
+        cad = cad & " WHERE codinmov=" & RS!Codinmov
         
         'Muevo al siguiente
-        Rs.MoveNext
+        RS.MoveNext
         'Updateo
-        Conn.Execute Cad
+        Conn.Execute cad
         'cont++
-        Cont = Cont + 1
+        CONT = CONT + 1
         
         
     Wend
-    Rs.Close
+    RS.Close
     
     
-    If Cont <> Val(AUX2) Then
+    If CONT <> Val(aux2) Then
         'ERROR. Iban a ser val(aux2)  registros y solo se han preocesado cont
-        Cad = "Registros del count(*)= " & AUX2 & vbCrLf & "Registros procesados= " & Cont
-        Cad = "Error. " & vbCrLf & Cad
-        MsgBox Cad, vbExclamation
+        cad = "Registros del count(*)= " & aux2 & vbCrLf & "Registros procesados= " & CONT
+        cad = "Error. " & vbCrLf & cad
+        MsgBox cad, vbExclamation
         Exit Function
     End If
     
@@ -431,88 +431,88 @@ Dim SQL As String
     
     
     'Borramos todos los datos de inmovele_his con esta fecha
-    Cad = "DELETE from inmovele_his where fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
-    Conn.Execute Cad
+    cad = "DELETE from inmovele_his where fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
+    Conn.Execute cad
     
     'ACtualizamos la fecha de ultamor
     '--------------------------------
-    AUX2 = "tipoamor"
-    Cad = DevuelveDesdeBD("intcont", "paramamort", "codigo", "1", "N", AUX2)
-    Contabiliza = (Cad = 1)
-    DivMes = Val(AUX2)
+    aux2 = "tipoamor"
+    cad = DevuelveDesdeBD("intcont", "paramamort", "codigo", "1", "N", aux2)
+    Contabiliza = (cad = 1)
+    DivMes = Val(aux2)
     Select Case DivMes
         Case 2
             'Semestral
-            i = 6
+            I = 6
             'Siempre es la ultima fecha de mes
         Case 3
             'Trimestral
-            i = 3
+            I = 3
         Case 4
             'Mensual
-            i = 1
+            I = 1
         Case Else
             'Anual
-            i = 12
+            I = 12
     End Select
-    F = DateAdd("m", -i, UltAmor)
-    i = DiasMes(CByte(Month(UltAmor)), Year(UltAmor))
-    If i = Day(UltAmor) Then
+    F = DateAdd("m", -I, UltAmor)
+    I = DiasMes(CByte(Month(UltAmor)), Year(UltAmor))
+    If I = Day(UltAmor) Then
         'Es ultimo dia mes
         'Leugo la fecha sera el ultimo dia de mes
-        i = DiasMes(CByte(Month(F)), Year(F))
-        F = CDate(i & "/" & Month(F) & "/" & Year(F))
+        I = DiasMes(CByte(Month(F)), Year(F))
+        F = CDate(I & "/" & Month(F) & "/" & Year(F))
         
     End If
-    Cad = Format(F, FormatoFecha)
-    Cad = "UPDATE paramamort set ultfecha='" & Cad & "'"
-    Conn.Execute Cad
+    cad = Format(F, FormatoFecha)
+    cad = "UPDATE paramamort set ultfecha='" & cad & "'"
+    Conn.Execute cad
     
     
 
     If Not Contabiliza Then
         'Proceso finalizado con exito. No busco el asiento
-        AUX2 = "Proceso finalizado correctamente"
+        aux2 = "Proceso finalizado correctamente"
     Else
         'Si contabiliza tratamos de indicarle cual fue el asiento generado.
         'Busco el cabapu que cuadra con fechaent='uktamor' y en observaciones lleva amortizacion
-        Cad = "hlinapu where fechaent = '" & Format(UltAmor, FormatoFecha) & "' AND idcontab = 'CONTAI'"
-        Cad = Cad & " and (numdiari, fechaent, numasien) in (select numdiari, fechaent, numasien from hcabapu where fechaent = " & DBSet(UltAmor, "F") & " and obsdiari like '%mortiza%')"
-        Cont = 0
+        cad = "hlinapu where fechaent = '" & Format(UltAmor, FormatoFecha) & "' AND idcontab = 'CONTAI'"
+        cad = cad & " and (numdiari, fechaent, numasien) in (select numdiari, fechaent, numasien from hcabapu where fechaent = " & DBSet(UltAmor, "F") & " and obsdiari like '%mortiza%')"
+        CONT = 0
         'En introduccion
-        AUX2 = "Select * from " & Cad
-        Rs.Open AUX2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
+        aux2 = "Select * from " & cad
+        RS.Open aux2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
             'LO HE ENCONTRADO
-            Cont = 1
-            Cad = "Asiento: " & Rs!NumAsien & "      Diario: " & Rs!NumDiari & "      Fecha: " & Rs!FechaEnt & vbCrLf '& "Observaciones: " & DBMemo(Rs!obsdiari)
+            CONT = 1
+            cad = "Asiento: " & RS!NumAsien & "      Diario: " & RS!NumDiari & "      Fecha: " & RS!FechaEnt & vbCrLf '& "Observaciones: " & DBMemo(Rs!obsdiari)
         End If
         
         'Si cont>0 entonces SI que lo ha encontrado
         
-        If Cont > 0 Then
+        If CONT > 0 Then
             If MsgBox("Se ha encontrado el asiento de contabilización de la amortización." & vbCrLf & vbCrLf & "¿ Desea eliminarlo ?" & vbCrLf, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
                 'lineas
-                SQL = "delete from hlinapu where numdiari = " & DBSet(Rs!NumDiari, "N") & " and numasien = " & DBSet(Rs!NumAsien, "N") & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = "delete from hlinapu where numdiari = " & DBSet(RS!NumDiari, "N") & " and numasien = " & DBSet(RS!NumAsien, "N") & " and fechaent = " & DBSet(RS!FechaEnt, "F")
                 Conn.Execute SQL
                 
                 'cabecera
-                SQL = "delete from hcabapu where numdiari = " & DBSet(Rs!NumDiari, "N") & " and numasien = " & DBSet(Rs!NumAsien, "N") & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                SQL = "delete from hcabapu where numdiari = " & DBSet(RS!NumDiari, "N") & " and numasien = " & DBSet(RS!NumAsien, "N") & " and fechaent = " & DBSet(RS!FechaEnt, "F")
                 Conn.Execute SQL
                 
-                Cad = "Eliminado el " & Cad
+                cad = "Eliminado el " & cad
             Else
-                Cad = "No se ha eliminado el asiento de contabilización"
+                cad = "No se ha eliminado el asiento de contabilización"
             End If
         Else
-            Cad = "El asiento NO ha sido encontrado"
+            cad = "El asiento NO ha sido encontrado"
         End If
-        Rs.Close
+        RS.Close
         
-        AUX2 = "Proceso finalizado correctamente." & vbCrLf & vbCrLf & vbCrLf & Cad
+        aux2 = "Proceso finalizado correctamente." & vbCrLf & vbCrLf & vbCrLf & cad
     End If
     
-    MsgBox AUX2, vbInformation
+    MsgBox aux2, vbInformation
 
 
     Label13(6).Caption = "" 'AUX2
@@ -530,49 +530,49 @@ Private Function Datosok_Deshacer() As Boolean
 
 
     varFecOk = FechaCorrecta2(UltAmor)
-    Cad = ""
+    cad = ""
     If varFecOk > 1 Then
         If varFecOk = 2 Then
-            Cad = Mid(varTxtFec, 6)
+            cad = Mid(varTxtFec, 6)
         Else
-            Cad = " fuera de ejercicios. "
+            cad = " fuera de ejercicios. "
         End If
     End If
-    If Cad <> "" Then
-        Cad = "Fecha última amortizacion " & LCase(Cad)
-        MsgBox Cad, vbExclamation
+    If cad <> "" Then
+        cad = "Fecha última amortizacion " & LCase(cad)
+        MsgBox cad, vbExclamation
         Exit Function
     End If
 
-    Cad = "select distinct(inmovele_his.codinmov) from inmovele_his, inmovele where inmovele_his.codinmov=inmovele.codinmov and"
-    Cad = Cad & " fechainm>='" & Format(UltAmor, FormatoFecha) & "'  and fecventa >='" & Format(UltAmor, FormatoFecha) & "'"
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Cont = 0
-    While Not Rs.EOF
-        Cont = Cont + 1
-        Rs.MoveNext
+    cad = "select distinct(inmovele_his.codinmov) from inmovele_his, inmovele where inmovele_his.codinmov=inmovele.codinmov and"
+    cad = cad & " fechainm>='" & Format(UltAmor, FormatoFecha) & "'  and fecventa >='" & Format(UltAmor, FormatoFecha) & "'"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    CONT = 0
+    While Not RS.EOF
+        CONT = CONT + 1
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
-    If Cont > 0 Then
-        Cad = "Hay " & Cont & " elemento(s) de inmovilizado que están en el hco inmovilizado  y han sido vendidos o dados de baja"
-        MsgBox Cad, vbExclamation
+    If CONT > 0 Then
+        cad = "Hay " & CONT & " elemento(s) de inmovilizado que están en el hco inmovilizado  y han sido vendidos o dados de baja"
+        MsgBox cad, vbExclamation
         Exit Function
     End If
     
     
-    Cad = "select distinct(inmovele_his.codinmov) from inmovele_his where  fechainm > '" & Format(UltAmor, FormatoFecha) & "'"
-    Rs.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Cont = 0
-    While Not Rs.EOF
-        Cont = Cont + 1
-        Rs.MoveNext
+    cad = "select distinct(inmovele_his.codinmov) from inmovele_his where  fechainm > '" & Format(UltAmor, FormatoFecha) & "'"
+    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    CONT = 0
+    While Not RS.EOF
+        CONT = CONT + 1
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
-    If Cont > 0 Then
-        Cad = "Hay " & Cont & " elemento(s) de inmovilizado que están en el hco inmovilizado."
-        MsgBox Cad, vbExclamation
+    If CONT > 0 Then
+        cad = "Hay " & CONT & " elemento(s) de inmovilizado que están en el hco inmovilizado."
+        MsgBox cad, vbExclamation
         Exit Function
     End If
 

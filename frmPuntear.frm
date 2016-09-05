@@ -680,9 +680,9 @@ Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmCta As frmColCtas
 Attribute frmCta.VB_VarHelpID = -1
 
-Dim SQL As String
+Dim Sql As String
 Dim RC As String
-Dim RS As Recordset
+Dim Rs As Recordset
 
 Dim PrimeraSeleccion As Boolean
 Dim ClickAnterior As Byte '0 Empezar 1.-Debe 2.-Haber
@@ -739,17 +739,17 @@ Private Sub ConfirmarDatos(DesdeCuenta As Boolean)
         End If
     End If
     
-    SQL = ""
+    Sql = ""
     'Llegados aqui. Vemos la fecha y demas
     If Text3(0).Text <> "" Then
-        SQL = " fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+        Sql = " fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
     End If
     
     If Text3(1).Text <> "" Then
-        If SQL <> "" Then SQL = SQL & " AND "
-        SQL = SQL & " fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+        If Sql <> "" Then Sql = Sql & " AND "
+        Sql = Sql & " fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
     End If
-    Text3(0).Tag = SQL  'Para las fechas
+    Text3(0).Tag = Sql  'Para las fechas
     
     If DesdeCuenta Then
         'Bloqueamos manualamente la tabla, con esa cuenta
@@ -893,7 +893,7 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     BloqueoManual False, "PUNTEO", Text3(2).Text
-    VerLogPunteado
+'    VerLogPunteado
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
@@ -952,14 +952,14 @@ Private Sub imgCheck_Click(Index As Integer)
         RC = "puntear los apuntes"
     End If
     
-    SQL = "Seguro que desea " & RC
+    Sql = "Seguro que desea " & RC
     If Index > 1 Then
         RC = "HABER"
     Else
         RC = "DEBE"
     End If
-    SQL = SQL & " al " & RC & "?"
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    Sql = Sql & " al " & RC & "?"
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
     'HA DICHO SI
     
@@ -1187,13 +1187,13 @@ Private Sub Text3_LostFocus(Index As Integer)
                 Exit Sub
                 
             End If
-            If CuentaCorrectaUltimoNivel(RC, SQL) Then
+            If CuentaCorrectaUltimoNivel(RC, Sql) Then
                 Text3(Index).Text = RC
-                txtDesCta.Text = SQL
+                txtDesCta.Text = Sql
                 FrameBotonGnral.Enabled = True
                 ConfirmarDatos True
             Else
-                MsgBox SQL, vbExclamation
+                MsgBox Sql, vbExclamation
                 Text3(Index).Text = ""
                 
                 lwD.ListItems.Clear
@@ -1250,7 +1250,7 @@ On Error GoTo ECargarDatos
     Ha = 0
     Text2(0).Text = "": Text2(1).Text = "": Text2(2).Text = ""
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     RC = "SELECT numdiari, linliapu, fechaent, numasien, ampconce"
         
@@ -1269,38 +1269,38 @@ On Error GoTo ECargarDatos
         RC = RC & " ORDER BY fechaent"
     End If
     
-    RS.Open RC, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open RC, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     I = 0
-    While Not RS.EOF
+    While Not Rs.EOF
         
-        If IsNull(RS!timported) Then
+        If IsNull(Rs!timported) Then
             'Va al haber
             Set ItmX = lwh.ListItems.Add()
-            ItmX.SubItems(4) = Format(RS!timporteH, FormatoImporte)
+            ItmX.SubItems(4) = Format(Rs!timporteH, FormatoImporte)
         Else
             'AL DEBE
             Set ItmX = lwD.ListItems.Add()
-            ItmX.SubItems(4) = Format(RS!timported, FormatoImporte)
+            ItmX.SubItems(4) = Format(Rs!timported, FormatoImporte)
         End If
-        ItmX.Text = Format(RS!FechaEnt, "dd/mm/yyyy")
+        ItmX.Text = Format(Rs!FechaEnt, "dd/mm/yyyy")
         
-        ItmX.SubItems(1) = RS!NumAsien
-        ItmX.SubItems(2) = DBLet(RS!Numdocum, "T")
-        ItmX.SubItems(3) = RS!Ampconce
+        ItmX.SubItems(1) = Rs!NumAsien
+        ItmX.SubItems(2) = DBLet(Rs!Numdocum, "T")
+        ItmX.SubItems(3) = Rs!Ampconce
         
         
         'En el tag, para actualizaciones i demas pondremos
         'Separado por pipes los valores de numdiari y linliapu
         'claves de la tabla hlinapu
-        ItmX.Tag = RS!NumDiari & "|" & RS!Linliapu & "|"
+        ItmX.Tag = Rs!NumDiari & "|" & Rs!Linliapu & "|"
         
         'El check
-        ItmX.Checked = (RS!punteada = 1)
+        ItmX.Checked = (Rs!punteada = 1)
         
         
         
         'Siguiente
-        RS.MoveNext
+        Rs.MoveNext
         I = I + 1
         'Por si refrescamos
         If I > 3000 Then
@@ -1308,12 +1308,12 @@ On Error GoTo ECargarDatos
             Me.Refresh
         End If
     Wend
-    RS.Close
+    Rs.Close
 
     Exit Sub
 ECargarDatos:
         MuestraError Err.Number, "Cargando datos", Err.Description
-        Set RS = Nothing
+        Set Rs = Nothing
 End Sub
 
 
@@ -1398,8 +1398,8 @@ On Error GoTo EPuntea
     
         
     
-    SQL = "UPDATE hlinapu"
-    SQL = SQL & " SET "
+    Sql = "UPDATE hlinapu"
+    Sql = Sql & " SET "
     If IT.Checked Then
         RC = "1"
         Sng = 1
@@ -1417,15 +1417,15 @@ On Error GoTo EPuntea
 
 
 
-    SQL = SQL & " punteada = " & RC
-    SQL = SQL & " WHERE fechaent='" & Format(IT.Text, FormatoFecha) & "'"
-    SQL = SQL & " AND numasien=" & IT.SubItems(1) & " AND numdiari ="
+    Sql = Sql & " punteada = " & RC
+    Sql = Sql & " WHERE fechaent='" & Format(IT.Text, FormatoFecha) & "'"
+    Sql = Sql & " AND numasien=" & IT.SubItems(1) & " AND numdiari ="
     RC = RecuperaValor(IT.Tag, 1)
-    SQL = SQL & RC & " AND linliapu ="
+    Sql = Sql & RC & " AND linliapu ="
     RC = RecuperaValor(IT.Tag, 2)
-    SQL = SQL & RC & ";"
+    Sql = Sql & RC & ";"
     If ModoPunteo = 0 Then
-        Conn.Execute SQL
+        Conn.Execute Sql
         InsertarCtaCadenaPunteados
     End If
     
@@ -1457,43 +1457,43 @@ End Sub
 
 Private Function ObtenerCuenta(Siguiente As Boolean) As Boolean
 
-    SQL = "select codmacta from hlinapu"
-    SQL = SQL & " WHERE codmacta "
+    Sql = "select codmacta from hlinapu"
+    Sql = Sql & " WHERE codmacta "
     If Siguiente Then
-        SQL = SQL & ">"
+        Sql = Sql & ">"
     Else
-        SQL = SQL & "<"
+        Sql = Sql & "<"
     End If
-    SQL = SQL & " '" & Text3(2).Text & "'"
-    SQL = SQL & " AND  fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
-    SQL = SQL & " AND fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+    Sql = Sql & " '" & Text3(2).Text & "'"
+    Sql = Sql & " AND  fechaent >= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+    Sql = Sql & " AND fechaent <= '" & Format(Text3(1).Text, FormatoFecha) & "'"
     
-    If chkSin.Value = 1 Then SQL = SQL & " AND punteada =0 "
+    If chkSin.Value = 1 Then Sql = Sql & " AND punteada =0 "
     
-    SQL = SQL & " group by codmacta ORDER BY codmacta"
+    Sql = Sql & " group by codmacta ORDER BY codmacta"
     If Siguiente Then
-        SQL = SQL & " ASC"
+        Sql = Sql & " ASC"
     Else
-        SQL = SQL & " DESC"
+        Sql = Sql & " DESC"
     End If
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If RS.EOF Then
-        SQL = "No se ha obtenido la cuenta "
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Rs.EOF Then
+        Sql = "No se ha obtenido la cuenta "
         If Siguiente Then
-            SQL = SQL & " siguiente."
+            Sql = Sql & " siguiente."
         Else
-            SQL = SQL & " anterior."
+            Sql = Sql & " anterior."
         End If
-        MsgBox SQL, vbExclamation
+        MsgBox Sql, vbExclamation
         ObtenerCuenta = False
     Else
-        Text3(2).Text = RS!codmacta
-        txtDesCta.Text = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", RS!codmacta, "T")
+        Text3(2).Text = Rs!codmacta
+        txtDesCta.Text = DevuelveDesdeBD("nommacta", "cuentas", "codmacta", Rs!codmacta, "T")
         ObtenerCuenta = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
@@ -1582,12 +1582,12 @@ Dim H As Currency
     End With
     
     
-    SQL = Format(PuntD, FormatoImporte) & "|" & Format(d, FormatoImporte) & "|" & Format(PuntD + d, FormatoImporte) & "|"
-    SQL = SQL & Format(PuntH, FormatoImporte) & "|" & Format(H, FormatoImporte) & "|" & Format(PuntH + H, FormatoImporte) & "|"
+    Sql = Format(PuntD, FormatoImporte) & "|" & Format(d, FormatoImporte) & "|" & Format(PuntD + d, FormatoImporte) & "|"
+    Sql = Sql & Format(PuntH, FormatoImporte) & "|" & Format(H, FormatoImporte) & "|" & Format(PuntH + H, FormatoImporte) & "|"
     'Las diferencias
-    SQL = SQL & Format(PuntD - PuntH, FormatoImporte) & "|" & Format(d - H, FormatoImporte) & "|" & Format((PuntD - PuntH) + (d - H), FormatoImporte) & "|"
+    Sql = Sql & Format(PuntD - PuntH, FormatoImporte) & "|" & Format(d - H, FormatoImporte) & "|" & Format((PuntD - PuntH) + (d - H), FormatoImporte) & "|"
     
-    frmMensajes.Parametros = SQL
+    frmMensajes.Parametros = Sql
     frmMensajes.Opcion = 18
     frmMensajes.Show vbModal
     
@@ -1600,18 +1600,18 @@ End Sub
 
 Private Sub DesmarcaTodo()
 
-    SQL = "Va a desmarcar todos los punteos para: " & vbCrLf & vbCrLf
-    SQL = SQL & "Cuenta: " & Text3(2).Text & " - " & txtDesCta.Text & vbCrLf
-    SQL = SQL & "Fecha inicio: " & Text3(0).Text & vbCrLf
-    SQL = SQL & "Fecha fin:     " & Text3(1).Text & vbCrLf & vbCrLf & vbCrLf
-    SQL = SQL & "          ¿Desea continuar?"
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    Sql = "Va a desmarcar todos los punteos para: " & vbCrLf & vbCrLf
+    Sql = Sql & "Cuenta: " & Text3(2).Text & " - " & txtDesCta.Text & vbCrLf
+    Sql = Sql & "Fecha inicio: " & Text3(0).Text & vbCrLf
+    Sql = Sql & "Fecha fin:     " & Text3(1).Text & vbCrLf & vbCrLf & vbCrLf
+    Sql = Sql & "          ¿Desea continuar?"
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
-    SQL = "UPDATE hlinapu"
-    SQL = SQL & " SET punteada=0 WHERE codmacta = '" & Text3(2).Text & "'"
-    SQL = SQL & " AND fechaent>= '" & Format(Text3(0).Text, FormatoFecha) & "'"
-    SQL = SQL & " AND fechaent<= '" & Format(Text3(1).Text, FormatoFecha) & "'"
-    Conn.Execute SQL
+    Sql = "UPDATE hlinapu"
+    Sql = Sql & " SET punteada=0 WHERE codmacta = '" & Text3(2).Text & "'"
+    Sql = Sql & " AND fechaent>= '" & Format(Text3(0).Text, FormatoFecha) & "'"
+    Sql = Sql & " AND fechaent<= '" & Format(Text3(1).Text, FormatoFecha) & "'"
+    Conn.Execute Sql
     InsertarCtaCadenaPunteados
     CargarDatos
 End Sub
@@ -1669,7 +1669,7 @@ Dim T1 As Single
     T1 = Timer - 1
     For I = 1 To lwD.ListItems.Count
         'Label
-        SQL = lwD.ListItems(I).SubItems(4) 'Cargo el importe
+        Sql = lwD.ListItems(I).SubItems(4) 'Cargo el importe
         
         If Timer - T1 > 1 Then
             Me.Label7(1).Visible = Not Me.Label7(1).Visible
@@ -1680,7 +1680,7 @@ Dim T1 As Single
         For J = 1 To lwh.ListItems.Count
             If Not lwh.ListItems(J).Checked Then
                 RC = lwh.ListItems(J).SubItems(4)
-                If SQL = RC Then
+                If Sql = RC Then
                     'EUREKA!!!!!! El mismo importe
                     lwD.ListItems(I).Checked = True
                     PunteaEnBD lwD.ListItems(I), True

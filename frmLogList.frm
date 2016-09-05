@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmLogList 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   7365
+   ClientHeight    =   7005
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   11745
@@ -10,7 +10,7 @@ Begin VB.Form frmLogList
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7365
+   ScaleHeight     =   7005
    ScaleWidth      =   11745
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -29,7 +29,7 @@ Begin VB.Form frmLogList
       Left            =   7080
       TabIndex        =   14
       Top             =   0
-      Width           =   4515
+      Width           =   4635
       Begin VB.OptionButton optLog 
          Caption         =   "Fecha"
          BeginProperty Font 
@@ -73,8 +73,8 @@ Begin VB.Form frmLogList
          Left            =   360
          TabIndex        =   23
          Top             =   780
-         Width           =   3375
-         _ExtentX        =   5953
+         Width           =   3975
+         _ExtentX        =   7011
          _ExtentY        =   3784
          View            =   3
          LabelEdit       =   1
@@ -98,7 +98,7 @@ Begin VB.Form frmLogList
          EndProperty
          NumItems        =   1
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Object.Width           =   5292
+            Object.Width           =   6174
          EndProperty
       End
       Begin MSComctlLib.ListView ListView1 
@@ -107,8 +107,8 @@ Begin VB.Form frmLogList
          Left            =   390
          TabIndex        =   24
          Top             =   3390
-         Width           =   3345
-         _ExtentX        =   5900
+         Width           =   3915
+         _ExtentX        =   6906
          _ExtentY        =   4101
          View            =   3
          LabelEdit       =   1
@@ -171,43 +171,43 @@ Begin VB.Form frmLogList
          Index           =   0
          Left            =   390
          TabIndex        =   25
-         Top             =   540
+         Top             =   480
          Width           =   960
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   1
-         Left            =   3450
+         Left            =   4020
          Picture         =   "frmLogList.frx":0000
          ToolTipText     =   "Puntear al haber"
-         Top             =   540
+         Top             =   510
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   5
-         Left            =   3450
+         Left            =   3990
          Picture         =   "frmLogList.frx":014A
          ToolTipText     =   "Puntear al haber"
-         Top             =   3030
+         Top             =   3060
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   2
-         Left            =   3150
+         Left            =   3690
          Picture         =   "frmLogList.frx":0294
          ToolTipText     =   "Quitar al haber"
-         Top             =   3030
+         Top             =   3060
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   0
-         Left            =   3120
+         Left            =   3690
          Picture         =   "frmLogList.frx":03DE
          ToolTipText     =   "Quitar al haber"
-         Top             =   540
+         Top             =   510
          Width           =   240
       End
    End
@@ -643,9 +643,9 @@ Private WithEvents frmC As frmColCtas
 Attribute frmC.VB_VarHelpID = -1
 
 Private SQL As String
-Dim Cad As String
+Dim cad As String
 Dim RC As String
-Dim i As Integer
+Dim I As Integer
 Dim IndCodigo As Integer
 Dim PrimeraVez As String
 
@@ -677,7 +677,7 @@ End Sub
 
 Private Sub cmdAccion_Click(Index As Integer)
     
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     
     'Exportacion a PDF
@@ -690,18 +690,18 @@ Private Sub cmdAccion_Click(Index As Integer)
     
     
     ReDim V340(5)
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     CadenaDesdeOtroForm = ""
     For NumRegElim = 1 To Me.ListView1(0).ListItems.Count
         If Me.ListView1(0).ListItems(NumRegElim).Checked Then
-            i = i + 1
+            I = I + 1
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", " & Me.ListView1(0).ListItems(NumRegElim).Text
             V340(3) = V340(3) & "," & Mid(ListView1(0).ListItems(NumRegElim).Key, 2)
         End If
     Next NumRegElim
-    If i = 0 Then Cad = " - Accion"
-    If i = Me.ListView1(0).ListItems.Count Then
+    If I = 0 Then cad = " - Accion"
+    If I = Me.ListView1(0).ListItems.Count Then
         'VAN TODOS. No pongo ninguno
         CadenaDesdeOtroForm = ""
         V340(3) = ""
@@ -712,16 +712,16 @@ Private Sub cmdAccion_Click(Index As Integer)
     End If
     V340(0) = CadenaDesdeOtroForm
     
-    i = 0
+    I = 0
     For NumRegElim = 1 To Me.ListView1(1).ListItems.Count
         If Me.ListView1(1).ListItems(NumRegElim).Checked Then
-            i = i + 1
+            I = I + 1
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", " & Me.ListView1(1).ListItems(NumRegElim).Text
             V340(4) = V340(4) & ",'" & DevNombreSQL(ListView1(1).ListItems(NumRegElim).Text) & "'"
         End If
     Next NumRegElim
-    If i = 0 Then Cad = Cad & vbCrLf & " - Trabajador"
-    If i = Me.ListView1(1).ListItems.Count Then
+    If I = 0 Then cad = cad & vbCrLf & " - Trabajador"
+    If I = Me.ListView1(1).ListItems.Count Then
         'VAN TODOS. No pongo ninguno
         CadenaDesdeOtroForm = ""
         V340(4) = ""
@@ -731,18 +731,18 @@ Private Sub cmdAccion_Click(Index As Integer)
         V340(4) = Mid(V340(4), 2)
     End If
     V340(1) = CadenaDesdeOtroForm
-    If Cad <> "" Then
-        Cad = "Debe seleccionar: " & vbCrLf & Cad
-        MsgBox Cad, vbExclamation
+    If cad <> "" Then
+        cad = "Debe seleccionar: " & vbCrLf & cad
+        MsgBox cad, vbExclamation
         Exit Sub
     End If
     
     
-    Cad = ""
-    If txtFecha(0).Text <> "" Then Cad = "desde " & txtFecha(0).Text
-    If txtFecha(1).Text <> "" Then Cad = Cad & "      hasta " & txtFecha(1).Text
-    If Cad <> "" Then Cad = "Fechas: " & Trim(Cad)
-    V340(5) = Cad
+    cad = ""
+    If txtFecha(0).Text <> "" Then cad = "desde " & txtFecha(0).Text
+    If txtFecha(1).Text <> "" Then cad = cad & "      hasta " & txtFecha(1).Text
+    If cad <> "" Then cad = "Fechas: " & Trim(cad)
+    V340(5) = cad
         
     
     
@@ -831,10 +831,10 @@ Private Sub imgCheck_Click(Index As Integer)
     NumRegElim = 0
     If Index > 1 Then NumRegElim = 1
     
-    Cad = "0"
-    If (Index Mod 2) = 1 Then Cad = "1"
-    For i = 1 To Me.ListView1(NumRegElim).ListItems.Count
-        ListView1(NumRegElim).ListItems(i).Checked = Cad = "1"
+    cad = "0"
+    If (Index Mod 2) = 1 Then cad = "1"
+    For I = 1 To Me.ListView1(NumRegElim).ListItems.Count
+        ListView1(NumRegElim).ListItems(I).Checked = cad = "1"
     Next
 End Sub
 
@@ -893,10 +893,10 @@ End Sub
 
 
 
-Private Sub LanzaFormAyuda(Nombre As String, indice As Integer)
+Private Sub LanzaFormAyuda(Nombre As String, Indice As Integer)
     Select Case Nombre
     Case "imgFecha"
-        imgFec_Click indice
+        imgFec_Click Indice
     End Select
     
 End Sub
@@ -934,16 +934,16 @@ Dim nomDocu As String
     
     
     'Borrador
-    Cad = ""
-    Cad = V340(0)
+    cad = ""
+    cad = V340(0)
     If V340(5) <> "" Then
-        If Cad <> "" Then Cad = Cad & "     "
-        Cad = Cad & V340(5)
+        If cad <> "" Then cad = cad & "     "
+        cad = cad & V340(5)
     End If
-    Cad = "pdh1= """ + Cad + """|"
+    cad = "pdh1= """ + cad + """|"
     
-    Cad = Cad & "pdh2= """ + V340(1) + """|"
-    Cad = Cad & "Emp= """ & vEmpresa.nomempre & """|"
+    cad = cad & "pdh2= """ + V340(1) + """|"
+    cad = cad & "Emp= """ & vEmpresa.nomempre & """|"
     
     
     If optLog(0).Value Then
@@ -994,17 +994,17 @@ Private Function ListadoAcciones() As Boolean
     '               secuenc  fecha      accion   trab      desc
     'z347carta(codusu,nif,otralineadir,razosoci,dirdatos,parrafo1)
     
-    Cad = "select " & vUsu.Codigo & ",'A',right(concat(""0000000"",@rownum:=@rownum+1),7), slog.fecha,"
-    Cad = Cad & "date_format(slog.fecha,'%d/%m/%Y %H:%i:%s'),titulo,usuario,descripcion"
-    Cad = Cad & " from slog,tmppresu1,(SELECT @rownum:=0) r "
-    Cad = Cad & " where tmppresu1.codusu=" & vUsu.Codigo & " and slog.accion=tmppresu1.codigo"
-    If V340(3) <> "" Then Cad = Cad & " AND slog.accion IN (" & V340(3) & ")"
-    If V340(4) <> "" Then Cad = Cad & " AND usuario IN (" & V340(4) & ")"
-    If txtFecha(0).Text <> "" Then Cad = Cad & " AND  slog.fecha >= '" & Format(txtFecha(0).Text, FormatoFecha) & " 00:00:00'"
-    If txtFecha(1).Text <> "" Then Cad = Cad & " AND  slog.fecha <= '" & Format(txtFecha(1).Text, FormatoFecha) & " 23:59:59'"
+    cad = "select " & vUsu.Codigo & ",'A',right(concat(""0000000"",@rownum:=@rownum+1),7), slog.fecha,"
+    cad = cad & "date_format(slog.fecha,'%d/%m/%Y %H:%i:%s'),titulo,usuario,descripcion"
+    cad = cad & " from slog,tmppresu1,(SELECT @rownum:=0) r "
+    cad = cad & " where tmppresu1.codusu=" & vUsu.Codigo & " and slog.accion=tmppresu1.codigo"
+    If V340(3) <> "" Then cad = cad & " AND slog.accion IN (" & V340(3) & ")"
+    If V340(4) <> "" Then cad = cad & " AND usuario IN (" & V340(4) & ")"
+    If txtFecha(0).Text <> "" Then cad = cad & " AND  slog.fecha >= '" & Format(txtFecha(0).Text, FormatoFecha) & " 00:00:00'"
+    If txtFecha(1).Text <> "" Then cad = cad & " AND  slog.fecha <= '" & Format(txtFecha(1).Text, FormatoFecha) & " 23:59:59'"
     
-    Cad = "INSERT INTO tmppendientes(codusu,serie_cta,factura,fecha,nomforpa,Situacion,nombre,observa) " & Cad
-    Conn.Execute Cad
+    cad = "INSERT INTO tmppendientes(codusu,serie_cta,factura,fecha,nomforpa,Situacion,nombre,observa) " & cad
+    Conn.Execute cad
     
     ListadoAcciones = True
     
@@ -1040,12 +1040,12 @@ Private Sub txtFecha_KeyDown(Index As Integer, KeyCode As Integer, Shift As Inte
     End If
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
     
-    DatosOk = False
+    DatosOK = False
     
 
-    DatosOk = True
+    DatosOK = True
 
 End Function
 
@@ -1065,8 +1065,8 @@ Dim IT As ListItem
    
 
     Set miRsAux = New ADODB.Recordset
-    Cad = "Select * from tmppresu1 where tmppresu1.codusu=" & vUsu.Codigo & " ORDER BY codigo"
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select * from tmppresu1 where tmppresu1.codusu=" & vUsu.Codigo & " ORDER BY codigo"
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = ListView1(0).ListItems.Add(, CStr("K" & miRsAux!Codigo), miRsAux!Titulo)
         
@@ -1075,8 +1075,8 @@ Dim IT As ListItem
     miRsAux.Close
     
     
-    Cad = "Select usuario from slog group by 1 order by 1"
-    miRsAux.Open Cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select usuario from slog group by 1 order by 1"
+    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = ListView1(1).ListItems.Add(, miRsAux!Usuario, miRsAux!Usuario)
             
