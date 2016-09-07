@@ -920,8 +920,8 @@ Attribute frmDi.VB_VarHelpID = -1
 Private PrimeraVez As Boolean
 
 Dim I As Integer
-Dim SQL As String
-Dim RS As Recordset
+Dim Sql As String
+Dim Rs As Recordset
 Dim ItmX As ListItem
 Dim Errores As String
 Dim NE As Integer
@@ -953,7 +953,7 @@ Dim Cta As String
             Else
                 Cta = (txtCuentas(0).Text)
                                     '********
-                B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
+                B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
                 If B = 0 Then
                     MsgBox "NO existe la cuenta: " & txtCuentas(0).Text, vbExclamation
                     PonFoco txtCuentas(0)
@@ -965,7 +965,7 @@ Dim Cta As String
             If txtCuentas(1).Text <> "" Then
                 Cta = (txtCuentas(1).Text)
                                     '********
-                B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
+                B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
                 If B = 0 Then
                     MsgBox "NO existe la cuenta: " & txtCuentas(1).Text, vbExclamation
                     PonFoco txtCuentas(1)
@@ -990,10 +990,6 @@ Dim Cta As String
     
 End Function
 
-
-Private Sub cmdCancel_Click()
-    Unload Me
-End Sub
 
 
 
@@ -1034,7 +1030,7 @@ Private Sub cmdAceptarAltaCab_Click()
 End Sub
 
 Private Function InsertarModificarLinea() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificarGasto
     
@@ -1042,16 +1038,16 @@ Dim SQL As String
     
     If Opcion = 3 Then
     
-        SQL = "insert into gastosfijos_recibos(codigo,fecha,importe,contabilizado) values (" & DBSet(RecuperaValor(Parametros, 1), "N") & ","
-        SQL = SQL & DBSet(txtFecha(0).Text, "F") & "," & DBSet(Text1(4).Text, "N") & ",0)"
+        Sql = "insert into gastosfijos_recibos(codigo,fecha,importe,contabilizado) values (" & DBSet(RecuperaValor(Parametros, 1), "N") & ","
+        Sql = Sql & DBSet(txtFecha(0).Text, "F") & "," & DBSet(Text1(4).Text, "N") & ",0)"
     
     Else
-        SQL = "update gastosfijos_recibos set importe = " & DBSet(Text1(4).Text, "N")
-        SQL = SQL & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and fecha = " & DBSet(txtFecha(0).Text, "F")
+        Sql = "update gastosfijos_recibos set importe = " & DBSet(Text1(4).Text, "N")
+        Sql = Sql & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N") & " and fecha = " & DBSet(txtFecha(0).Text, "F")
     
     End If
     
-    Conn.Execute SQL
+    Conn.Execute Sql
     
     InsertarModificarLinea = True
     Exit Function
@@ -1064,17 +1060,17 @@ End Function
 
 
 Private Function ModificarGasto() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificarGasto
     
     ModificarGasto = False
     
-    SQL = "update gastosfijos set descripcion = " & DBSet(Text1(8).Text, "T") & ", ctaprevista = " & DBSet(txtCuentas(2).Text, "T")
-    SQL = SQL & ", contrapar = " & DBSet(txtCuentas(3), "T")
-    SQL = SQL & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
+    Sql = "update gastosfijos set descripcion = " & DBSet(Text1(8).Text, "T") & ", ctaprevista = " & DBSet(txtCuentas(2).Text, "T")
+    Sql = Sql & ", contrapar = " & DBSet(txtCuentas(3), "T")
+    Sql = Sql & " where codigo = " & DBSet(RecuperaValor(Parametros, 1), "N")
     
-    Conn.Execute SQL
+    Conn.Execute Sql
     
     ModificarGasto = True
     Exit Function
@@ -1100,10 +1096,10 @@ Dim NumGasto As Long
     
     NumGasto = SugerirCodigoSiguiente
     
-    SQL = "insert into gastosfijos (codigo, descripcion ,ctaprevista,contrapar) values ( " & DBSet(NumGasto, "N") & ","
-    SQL = SQL & DBSet(Text1(1), "T") & "," & DBSet(txtCuentas(0).Text, "T") & "," & DBSet(txtCuentas(1).Text, "T") & ")"
+    Sql = "insert into gastosfijos (codigo, descripcion ,ctaprevista,contrapar) values ( " & DBSet(NumGasto, "N") & ","
+    Sql = Sql & DBSet(Text1(1), "T") & "," & DBSet(txtCuentas(0).Text, "T") & "," & DBSet(txtCuentas(1).Text, "T") & ")"
     
-    Conn.Execute SQL
+    Conn.Execute Sql
     
     Select Case Combo1(0).ListIndex
         Case 0 ' mensual
@@ -1210,15 +1206,15 @@ Dim Importe As Currency
     
     
     'Insertamos la cabera
-    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion) VALUES ("
-    SQL = SQL & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador
-    SQL = SQL & ", '"
-    SQL = SQL & "Gasto fijo : " & RecuperaValor(Parametros, 1) & " - " & DevNombreSQL(RecuperaValor(Parametros, 2)) & vbCrLf
-    SQL = SQL & "Generado desde Tesoreria el " & Format(Now, "dd/mm/yyyy") & " por " & DevNombreSQL(vUsu.Nombre) & "',"
+    Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari, feccreacion, usucreacion, desdeaplicacion) VALUES ("
+    Sql = Sql & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador
+    Sql = Sql & ", '"
+    Sql = Sql & "Gasto fijo : " & RecuperaValor(Parametros, 1) & " - " & DevNombreSQL(RecuperaValor(Parametros, 2)) & vbCrLf
+    Sql = Sql & "Generado desde Tesoreria el " & Format(Now, "dd/mm/yyyy") & " por " & DevNombreSQL(vUsu.Nombre) & "',"
     
-    SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Gastos Fijos');"
+    Sql = Sql & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Gastos Fijos');"
     
-    If Not Ejecuta(SQL) Then Exit Function
+    If Not Ejecuta(Sql) Then Exit Function
     
     If InStr(1, Text1(3).Text, ",") > 0 Then
         'Texto formateado
@@ -1229,41 +1225,41 @@ Dim Importe As Currency
     I = 1
     Do
         'Lineas de apuntes .
-         SQL = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
-         SQL = SQL & "codmacta, numdocum, codconce, ampconce,timporteD,"
-         SQL = SQL & " timporteH, ctacontr, codccost,idcontab, punteada) "
-         SQL = SQL & "VALUES (" & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & "," & I & ",'"
+         Sql = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, "
+         Sql = Sql & "codmacta, numdocum, codconce, ampconce,timporteD,"
+         Sql = Sql & " timporteH, ctacontr, codccost,idcontab, punteada) "
+         Sql = Sql & "VALUES (" & txtDiario(0).Text & ",'" & Format(FechaAbono, FormatoFecha) & "'," & Mc.Contador & "," & I & ",'"
          
          'Cuenta
          If I = 1 Then
-            SQL = SQL & txtCuentas(5).Text
+            Sql = Sql & txtCuentas(5).Text
          Else
-            SQL = SQL & txtCuentas(4).Text
+            Sql = Sql & txtCuentas(4).Text
         End If
-        SQL = SQL & "','" & Format(Val(RecuperaValor(Parametros, 1)), "000000000") & "'," & txtConcepto(0).Text & ",'"
+        Sql = Sql & "','" & Format(Val(RecuperaValor(Parametros, 1)), "000000000") & "'," & txtConcepto(0).Text & ",'"
         
         'Ampliacion
-        SQL = SQL & DevNombreSQL(Mid(txtNConcepto(0).Text & " " & Text1(9).Text, 1, 30)) & "',"
+        Sql = Sql & DevNombreSQL(Mid(txtNConcepto(0).Text & " " & Text1(9).Text, 1, 30)) & "',"
                         
         If I = 1 Then
-            SQL = SQL & TransformaComasPuntos(CStr(Importe)) & ",NULL,'"
+            Sql = Sql & TransformaComasPuntos(CStr(Importe)) & ",NULL,'"
             'Contrapar
-            SQL = SQL & txtCuentas(4).Text
+            Sql = Sql & txtCuentas(4).Text
         Else
-            SQL = SQL & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",'"
+            Sql = Sql & "NULL," & TransformaComasPuntos(CStr(Importe)) & ",'"
             'Contrpar
-            SQL = SQL & txtCuentas(5).Text
+            Sql = Sql & txtCuentas(5).Text
         End If
         
         'Solo para la line NO banco
         If I = 1 And txtCC(0).Visible Then
-            SQL = SQL & "','" & txtCC(0).Text & "'"
+            Sql = Sql & "','" & txtCC(0).Text & "'"
         Else
-            SQL = SQL & "',NULL"
+            Sql = Sql & "',NULL"
         End If
-        SQL = SQL & ",'CONTAB',0)"
+        Sql = Sql & ",'CONTAB',0)"
         
-        If Not Ejecuta(SQL) Then Exit Function
+        If Not Ejecuta(Sql) Then Exit Function
         I = I + 1
     Loop Until I > 2  'Una para el banoc, otra para la cuenta
    
@@ -1271,11 +1267,11 @@ Dim Importe As Currency
 
     'AHora actualizamos el gasto
     FechaAbono = RecuperaValor(vWhere, 2)
-    SQL = "UPDATE gastosfijos_recibos SET"
-    SQL = SQL & " contabilizado=1"
-    SQL = SQL & " WHERE codigo=" & RecuperaValor(vWhere, 1)
-    SQL = SQL & " and fecha='" & Format(FechaAbono, FormatoFecha) & "'"
-    Conn.Execute SQL
+    Sql = "UPDATE gastosfijos_recibos SET"
+    Sql = Sql & " contabilizado=1"
+    Sql = Sql & " WHERE codigo=" & RecuperaValor(vWhere, 1)
+    Sql = Sql & " and fecha='" & Format(FechaAbono, FormatoFecha) & "'"
+    Conn.Execute Sql
 
 
     
@@ -1359,7 +1355,7 @@ Dim B As Boolean
     B = False
     If vParam.autocoste Then
         If txtCuentas(5).Text <> "" Then
-                SQL = "|" & Mid(txtNCuentas(5).Text, 1, 1) & "|"
+                Sql = "|" & Mid(txtNCuentas(5).Text, 1, 1) & "|"
                 
                 '###AQUI
                 'If InStr(1, CuentasCC, Sql) > 0 Then B = True
@@ -1376,21 +1372,21 @@ End Sub
 
 
 Private Function SugerirCodigoSiguiente() As String
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     
-    SQL = "Select Max(codigo) from gastosfijos"
+    Sql = "Select Max(codigo) from gastosfijos"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, , , adCmdText
-    SQL = "1"
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then
-            SQL = CStr(RS.Fields(0) + 1)
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, , , adCmdText
+    Sql = "1"
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then
+            Sql = CStr(Rs.Fields(0) + 1)
         End If
     End If
-    RS.Close
-    SugerirCodigoSiguiente = SQL
+    Rs.Close
+    SugerirCodigoSiguiente = Sql
 End Function
 
 
@@ -1521,15 +1517,15 @@ Private Sub imgConcepto_Click(Index As Integer)
 End Sub
 
 Private Sub imgCuentas_Click(Index As Integer)
-    SQL = ""
+    Sql = ""
     AbiertoOtroFormEnListado = True
     Set frmCtas = New frmColCtas
     frmCtas.DatosADevolverBusqueda = True
     frmCtas.Show vbModal
     Set frmCtas = Nothing
-    If SQL <> "" Then
-        Me.txtCuentas(Index).Text = RecuperaValor(SQL, 1)
-        Me.txtNCuentas(Index).Text = RecuperaValor(SQL, 2)
+    If Sql <> "" Then
+        Me.txtCuentas(Index).Text = RecuperaValor(Sql, 1)
+        Me.txtNCuentas(Index).Text = RecuperaValor(Sql, 2)
     Else
         QuitarPulsacionMas Me.txtCuentas(Index)
     End If
@@ -1595,7 +1591,7 @@ Dim B As Byte
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    Sql = CadenaSeleccion
 End Sub
 
 
@@ -1610,18 +1606,18 @@ End Sub
 
 Private Sub txtCC_LostFocus(Index As Integer)
     txtCC(Index).Text = Trim(txtCC(Index).Text)
-    SQL = ""
+    Sql = ""
     I = 0
     If txtCC(Index).Text <> "" Then
             
-        SQL = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCC(Index).Text, "T")
-        If SQL = "" Then
+        Sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtCC(Index).Text, "T")
+        If Sql = "" Then
             MsgBox "Concepto no existe", vbExclamation
             I = 1
         End If
 
     End If
-    Me.txtNCC(Index).Text = SQL
+    Me.txtNCC(Index).Text = Sql
     If I = 1 Then
         txtCC(Index).Text = ""
         PonFoco txtCC(Index)
@@ -1735,7 +1731,7 @@ Private Sub txtCuentas_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 Dim Cta As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
 
     txtCuentas(Index).Text = Trim(txtCuentas(Index).Text)
@@ -1762,18 +1758,18 @@ Dim Hasta As Integer   'Cuando en cuenta pongo un desde, para poner el hasta
         Case 0, 1, 2, 3 'cuentas
             Cta = (txtCuentas(Index).Text)
                                     '********
-            B = CuentaCorrectaUltimoNivelSIN(Cta, SQL)
+            B = CuentaCorrectaUltimoNivelSIN(Cta, Sql)
             If B = 0 Then
                 MsgBox "NO existe la cuenta: " & txtCuentas(Index).Text, vbExclamation
                 txtCuentas(Index).Text = ""
                 txtNCuentas(Index).Text = ""
             Else
                 txtCuentas(Index).Text = Cta
-                txtNCuentas(Index).Text = SQL
+                txtNCuentas(Index).Text = Sql
                 If B = 1 Then
                     txtNCuentas(Index).Tag = ""
                 Else
-                    txtNCuentas(Index).Tag = SQL
+                    txtNCuentas(Index).Tag = Sql
                 End If
                 Hasta = -1
                 If Index = 6 Then
@@ -1829,7 +1825,7 @@ End Sub
 Private Sub EjecutarSQL()
     On Error Resume Next
     
-    Conn.Execute SQL
+    Conn.Execute Sql
     If Err.Number <> 0 Then
         If Conn.Errors(0).Number = 1062 Then
             Err.Clear
@@ -1847,8 +1843,8 @@ End Sub
 
 
 Private Sub CargarCombo()
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 Dim J As Long
     
     Combo1(0).Clear

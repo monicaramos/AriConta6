@@ -44,8 +44,12 @@ Option Explicit
 '       23.- Eliminar cobros
 '       24.- Eliminar pagos
 
+'       25.- Modificacion de contadores
 
-Private Const AccionesRegistradas = 19
+'       26.- Compensaciones
+'       27.- Eliminar remesa y vtos
+
+Private Const AccionesRegistradas = 28
 Private mvarDatosDescripcion As String
 
 Dim Sql As String
@@ -139,7 +143,16 @@ Dim C As String
                 C = "Renumerar registro Proveedor"
             Case 22
                 C = "Aumentar dígitos contables"
-                
+            Case 23
+                C = "Eliminar cobros"
+            Case 24
+                C = "Eliminar pagos"
+            Case 25
+                C = "Modificacion de contadores"
+            Case 26
+                C = "Compensaciones"
+            Case 27
+                C = "Eliminar remesa y vtos"
         End Select
         
     End If

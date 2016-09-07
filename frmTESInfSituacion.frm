@@ -28,9 +28,29 @@ Begin VB.Form frmTESInfSituacion
       EndProperty
       Height          =   2685
       Left            =   120
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   30
       Width           =   6945
+      Begin VB.TextBox txtFecha 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   5160
+         MaxLength       =   10
+         TabIndex        =   2
+         Tag             =   "imgConcepto"
+         Top             =   1140
+         Width           =   1305
+      End
       Begin VB.TextBox txtFecha 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -73,7 +93,7 @@ Begin VB.Form frmTESInfSituacion
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   390
          Left            =   6270
-         TabIndex        =   20
+         TabIndex        =   21
          Top             =   270
          Width           =   405
          _ExtentX        =   714
@@ -87,6 +107,32 @@ Begin VB.Form frmTESInfSituacion
                Object.ToolTipText     =   "Ayuda"
             EndProperty
          EndProperty
+      End
+      Begin VB.Image ImgFec 
+         Height          =   240
+         Index           =   1
+         Left            =   4860
+         Top             =   1170
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Fecha Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   255
+         Index           =   0
+         Left            =   4140
+         TabIndex        =   25
+         Top             =   780
+         Width           =   2280
       End
       Begin VB.Label Label3 
          Caption         =   "Hasta"
@@ -102,7 +148,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   315
          Index           =   9
          Left            =   300
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   1140
          Width           =   615
       End
@@ -121,7 +167,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   195
          Index           =   18
          Left            =   270
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   750
          Width           =   2280
       End
@@ -147,7 +193,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   315
          Index           =   1
          Left            =   240
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   1650
          Width           =   1890
       End
@@ -164,7 +210,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   0
          Left            =   2580
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   3630
          Width           =   4095
       End
@@ -181,7 +227,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   4
          Left            =   2580
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   3990
          Width           =   4095
       End
@@ -199,7 +245,7 @@ Begin VB.Form frmTESInfSituacion
       EndProperty
       Height          =   2655
       Left            =   150
-      TabIndex        =   5
+      TabIndex        =   6
       Top             =   2790
       Width           =   6915
       Begin VB.OptionButton optTipoSal 
@@ -216,7 +262,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   720
          Value           =   -1  'True
          Width           =   1335
@@ -235,7 +281,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   1200
          Width           =   1515
       End
@@ -253,7 +299,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   1680
          Width           =   975
       End
@@ -271,7 +317,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   2160
          Width           =   975
       End
@@ -289,7 +335,7 @@ Begin VB.Form frmTESInfSituacion
          Index           =   0
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   11
+         TabIndex        =   12
          Text            =   "Text1"
          Top             =   720
          Width           =   3345
@@ -308,7 +354,7 @@ Begin VB.Form frmTESInfSituacion
          Index           =   1
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   1200
          Width           =   4665
       End
@@ -326,7 +372,7 @@ Begin VB.Form frmTESInfSituacion
          Index           =   2
          Left            =   1770
          Locked          =   -1  'True
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   1680
          Width           =   4665
       End
@@ -335,7 +381,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   315
          Index           =   0
          Left            =   6450
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   1200
          Width           =   255
       End
@@ -344,7 +390,7 @@ Begin VB.Form frmTESInfSituacion
          Height          =   315
          Index           =   1
          Left            =   6450
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   1680
          Width           =   255
       End
@@ -361,7 +407,7 @@ Begin VB.Form frmTESInfSituacion
          EndProperty
          Height          =   375
          Left            =   5190
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   720
          Width           =   1515
       End
@@ -380,7 +426,7 @@ Begin VB.Form frmTESInfSituacion
       EndProperty
       Height          =   375
       Left            =   5850
-      TabIndex        =   3
+      TabIndex        =   4
       Top             =   5670
       Width           =   1215
    End
@@ -397,7 +443,7 @@ Begin VB.Form frmTESInfSituacion
       Height          =   375
       Index           =   1
       Left            =   4260
-      TabIndex        =   2
+      TabIndex        =   3
       Top             =   5670
       Width           =   1455
    End
@@ -415,7 +461,7 @@ Begin VB.Form frmTESInfSituacion
       Height          =   375
       Index           =   0
       Left            =   150
-      TabIndex        =   4
+      TabIndex        =   5
       Top             =   5640
       Width           =   1335
    End
@@ -432,7 +478,7 @@ Begin VB.Form frmTESInfSituacion
       EndProperty
       Height          =   255
       Left            =   1560
-      TabIndex        =   23
+      TabIndex        =   24
       Top             =   5700
       Width           =   2520
    End
@@ -589,11 +635,16 @@ Private Sub Form_Load()
     
     ' La Ayuda
     With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
     
-     
+    Label3(0).Visible = (vParam.NroAriges > 0)
+    ImgFec(1).Visible = (vParam.NroAriges > 0)
+    ImgFec(1).Enabled = (vParam.NroAriges > 0)
+    txtFecha(1).Visible = (vParam.NroAriges > 0)
+    txtFecha(1).Enabled = (vParam.NroAriges > 0)
+    
     PonerDatosPorDefectoImpresion Me, False, Me.Caption 'Siempre tiene que tener el frame con txtTipoSalida
     ponerLabelBotonImpresion cmdAccion(1), cmdAccion(0), 0
     
@@ -1010,7 +1061,7 @@ Dim SqlValues As String
         Set Rsvenci = New ADODB.Recordset
         Rsvenci.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-        FecFactu = CDate(Format(Now, "dd/mm/yyyy")) '????
+        FecFactu = CDate(Format(txtFecha(1).Text, "dd/mm/yyyy"))
         TotalFac = DBLet(Rs!TotalFac, "N")
         
         
@@ -1197,7 +1248,7 @@ Dim ImpVenci As Currency
         Set Rsvenci = New ADODB.Recordset
         Rsvenci.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-        FecFactu = CDate(Format(Now, "dd/mm/yyyy")) '????
+        FecFactu = CDate(Format(txtFecha(1).Text, "dd/mm/yyyy")) '????
         TotalFac = DBLet(Rs!TotalFac, "N")
         
         
@@ -1283,6 +1334,14 @@ Private Function DatosOK() As Boolean
         MsgBox "Debe dar un valor a los días.", vbExclamation
         PonFoco txtDias(0)
         Exit Function
+    End If
+    
+    If vParam.NroAriges > 0 Then
+        If txtFecha(1).Text = "" Then
+            MsgBox "Debe introducir un valor en la fecha de factura.", vbExclamation
+            PonFoco txtFecha(1)
+            Exit Function
+        End If
     End If
     
     DatosOK = True

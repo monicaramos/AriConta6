@@ -548,6 +548,10 @@ Private CadB As String
 Dim CadAncho As Boolean  'Para cuando llamemos al al form de lineas
 Dim Modo As Byte
 
+Dim Cont1Ant As String
+Dim Cont2Ant As String
+Dim SqlLog As String
+
 '----------------------------------------------
 '----------------------------------------------
 '   Deshabilitamos todos los botones menos
@@ -574,18 +578,18 @@ Modo = vModo
     
     B = (Modo = 0 Or Modo = 2)
 
-    txtAux(0).Visible = Not B
-    txtAux(1).Visible = Not B
-    txtAux(2).Visible = Not B
-    txtAux(3).Visible = Not B
+    txtaux(0).Visible = Not B
+    txtaux(1).Visible = Not B
+    txtaux(2).Visible = Not B
+    txtaux(3).Visible = Not B
     cmdAceptar.Visible = Not B
     cmdCancelar.Visible = Not B
     DataGrid1.Enabled = B
     Combo1.Visible = Not B
     Combo2.Visible = Not B
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).BackColor = vbWhite
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).BackColor = vbWhite
     Next I
     
     'Si es regresar
@@ -593,14 +597,14 @@ Modo = vModo
         cmdRegresar.Visible = B
     End If
     'Si estamo mod or insert
-    txtAux(0).Enabled = (Modo <> 2)
+    txtaux(0).Enabled = (Modo <> 2)
     If Modo = 3 Then
         Combo2.ListIndex = -1
     End If
     
     ' solo dejamos elegir el tipo de factura en el caso de que sean clientes
     If Modo = 3 Or Modo = 4 Then
-        Combo2.Enabled = (TotalRegistros("select count(*) from contadores where " & DBSet(txtAux(0).Text, "T") & " REGEXP '^[0-9]+$' = 0 ") <> 0)
+        Combo2.Enabled = (TotalRegistros("select count(*) from contadores where " & DBSet(txtaux(0).Text, "T") & " REGEXP '^[0-9]+$' = 0 ") <> 0)
     End If
     
     PonerModoUsuarioGnral Modo, "ariconta"
@@ -613,7 +617,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.adodc1)
+        cadReg = PonerContRegistros(Me.Adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -630,12 +634,12 @@ Private Sub BotonAnyadir()
     lblIndicador.Caption = "INSERTANDO"
     'Situamos el grid al final
     DataGrid1.AllowAddNew = True
-    If adodc1.Recordset.RecordCount > 0 Then
+    If Adodc1.Recordset.RecordCount > 0 Then
         DataGrid1.HoldFields
-        adodc1.Recordset.MoveLast
+        Adodc1.Recordset.MoveLast
         DataGrid1.Row = DataGrid1.Row + 1
     End If
-    txtAux(1).Enabled = True
+    txtaux(1).Enabled = True
     
    
     If DataGrid1.Row < 0 Then
@@ -643,17 +647,17 @@ Private Sub BotonAnyadir()
     Else
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top
     End If
-    txtAux(0).Text = ""
-    txtAux(1).Text = ""
-    txtAux(2).Text = ""
-    txtAux(3).Text = ""
+    txtaux(0).Text = ""
+    txtaux(1).Text = ""
+    txtaux(2).Text = ""
+    txtaux(3).Text = ""
     
     LLamaLineas anc, 3
     Combo1.ListIndex = 0
     Combo2.ListIndex = -1
     
     'Ponemos el foco
-    PonFoco txtAux(0)
+    PonFoco txtaux(0)
 
 End Sub
 
@@ -668,11 +672,11 @@ Private Sub BotonBuscar()
     cmdCancelar.SetFocus
     CargaGrid "tiporegi = ' '"
     'Buscar
-    txtAux(0).Text = "":    txtAux(1).Text = "": txtAux(2).Text = "": txtAux(3).Text = ""
+    txtaux(0).Text = "":    txtaux(1).Text = "": txtaux(2).Text = "": txtaux(3).Text = ""
     Combo1.ListIndex = -1
     Combo2.ListIndex = -1
     LLamaLineas DataGrid1.Top + 250, 1
-    PonFoco txtAux(0)
+    PonFoco txtaux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -682,8 +686,8 @@ Private Sub BotonModificar()
     Dim cad As String
     Dim anc As Single
     Dim I As Integer
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
 
     'Peculiar
@@ -706,7 +710,7 @@ Private Sub BotonModificar()
 
     'Llamamos al form
     For I = 0 To 3
-        txtAux(I).Text = DataGrid1.Columns(I).Text
+        txtaux(I).Text = DataGrid1.Columns(I).Text
     Next I
     If DataGrid1.Columns(4).Text = "" Then
         Combo1.ListIndex = 0
@@ -720,16 +724,18 @@ Private Sub BotonModificar()
         PosicionarCombo2 Combo2, DataGrid1.Columns(5).Text
     End If
     
+    Cont1Ant = txtaux(2).Text
+    Cont2Ant = txtaux(3).Text
     
     LLamaLineas anc, 4
    
    'a mano###
-    If adodc1.Recordset!tiporegi = "0" Or adodc1.Recordset!tiporegi = "1" Then
-        txtAux(1).Enabled = False
+    If Adodc1.Recordset!tiporegi = "0" Or Adodc1.Recordset!tiporegi = "1" Then
+        txtaux(1).Enabled = False
     Else
         'Como es modificar
-        txtAux(1).Enabled = True
-        PonFoco txtAux(1)
+        txtaux(1).Enabled = True
+        PonFoco txtaux(1)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -737,10 +743,10 @@ End Sub
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     'Fijamos el ancho
-    txtAux(0).Top = alto
-    txtAux(1).Top = alto
-    txtAux(2).Top = alto
-    txtAux(3).Top = alto
+    txtaux(0).Top = alto
+    txtaux(1).Top = alto
+    txtaux(2).Top = alto
+    txtaux(3).Top = alto
     Combo1.Top = alto
     Combo2.Top = alto
 End Sub
@@ -749,22 +755,22 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset!tiporegi = "0" Or adodc1.Recordset!tiporegi = "1" Or adodc1.Recordset!tiporegi = "Z" Then
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset!tiporegi = "0" Or Adodc1.Recordset!tiporegi = "1" Or Adodc1.Recordset!tiporegi = "Z" Then
         MsgBox "Este contador no se puede eliminar", vbExclamation
         Exit Sub
     End If
     '### a mano
-    SQL = "Seguro que desea eliminar el contador:"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    Sql = "Seguro que desea eliminar el contador:"
+    Sql = Sql & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from contadores where tiporegi='" & adodc1.Recordset!tiporegi & "'"
-        Conn.Execute SQL
+        Sql = "Delete from contadores where tiporegi='" & Adodc1.Recordset!tiporegi & "'"
+        Conn.Execute Sql
         CargaGrid ""
     End If
 Error2:
@@ -780,7 +786,7 @@ End Sub
 
 
 Private Sub adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
-  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, adodc1
+  If adReason = adRsnMove And adStatus = adStatusOK Then PonLblIndicador Me.lblIndicador, Adodc1
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -813,10 +819,24 @@ Select Case Modo
             '-----------------------------------------
             'Hacemos insertar
             If ModificaDesdeFormulario(Me) Then
-                CadB = adodc1.Recordset.Fields(0)
+                If Cont1Ant <> txtaux(2).Text Or Cont2Ant <> txtaux(3).Text Then
+                    SqlLog = "Contador : " & txtaux(0).Text & " " & txtaux(1).Text & vbCrLf & vbCrLf
+                    SqlLog = SqlLog & "Ejercicio " & RellenaABlancos("Valor Anterior", False, 15) & " " & RellenaABlancos("Valor Actual", False, 15) & vbCrLf
+                    SqlLog = SqlLog & String(42, "-") & vbCrLf
+                    If Cont1Ant <> txtaux(2).Text Then
+                        SqlLog = SqlLog & "Actual    " & RellenaABlancos(Cont1Ant, False, 15) & " " & RellenaABlancos(txtaux(2), False, 15) & vbCrLf
+                    End If
+                    If Cont2Ant <> txtaux(3).Text Then
+                        SqlLog = SqlLog & "Siguiente " & RellenaABlancos(Cont2Ant, False, 15) & " " & RellenaABlancos(txtaux(3), False, 15) & vbCrLf
+                    End If
+                    
+                    vLog.Insertar 25, vUsu, SqlLog
+                End If
+                        
+                CadB = Adodc1.Recordset.Fields(0)
                 DataGrid1.Enabled = False
                 CargaGrid
-                adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " = '" & CadB & "'")
+                Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " = '" & CadB & "'")
                 PonerModo 0
             End If
         End If
@@ -834,7 +854,7 @@ Private Sub cmdCancelar_Click()
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
     End Select
     PonerModo 0
     lblIndicador.Caption = ""
@@ -844,20 +864,20 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim cad As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro a devolver.", vbExclamation
         Exit Sub
     End If
     
-    If Asc(adodc1.Recordset.Fields(0)) <= 57 Then
+    If Asc(Adodc1.Recordset.Fields(0)) <= 57 Then
         MsgBox "No es contador de tipo factura.", vbExclamation
         Exit Sub
     End If
     
     
-    cad = adodc1.Recordset.Fields(0) & "|"
-    cad = cad & adodc1.Recordset.Fields(1) & "|"
-    cad = cad & adodc1.Recordset.Fields(2) & "|"
+    cad = Adodc1.Recordset.Fields(0) & "|"
+    cad = cad & Adodc1.Recordset.Fields(1) & "|"
+    cad = cad & Adodc1.Recordset.Fields(2) & "|"
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -873,8 +893,8 @@ End Sub
 
 Private Sub Combo2_Validate(Cancel As Boolean)
     If (Modo = 1 Or Modo = 3 Or Modo = 4) Then
-        txtAux(4).Text = Chr(Combo2.ItemData(Combo2.ListIndex))
-        If Combo2.ListIndex = -1 Or Chr(Combo2.ItemData(Combo2.ListIndex)) = "-" Then txtAux(4).Text = ""
+        txtaux(4).Text = Chr(Combo2.ItemData(Combo2.ListIndex))
+        If Combo2.ListIndex = -1 Or Chr(Combo2.ItemData(Combo2.ListIndex)) = "-" Then txtaux(4).Text = ""
     End If
 End Sub
 
@@ -913,7 +933,7 @@ Private Sub Form_Load()
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 3
         .Buttons(2).Image = 4
         .Buttons(3).Image = 5
@@ -926,7 +946,7 @@ Private Sub Form_Load()
     With Me.Toolbar2
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 6
         .Buttons(2).Image = 7
         .Buttons(3).Image = 8
@@ -935,7 +955,7 @@ Private Sub Form_Load()
     
     ' La Ayuda
     With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
 
@@ -1022,29 +1042,29 @@ Private Sub DespalzamientoVisible(bol As Boolean)
     FrameDesplazamiento.Enabled = bol
 End Sub
 
-Private Sub CargaGrid(Optional SQL As String)
+Private Sub CargaGrid(Optional Sql As String)
 Dim B As Boolean
     B = DataGrid1.Enabled
-    CargaGrid2 SQL
+    CargaGrid2 Sql
     DataGrid1.Enabled = B
 End Sub
 
 
 
-Private Sub CargaGrid2(Optional SQL As String)
+Private Sub CargaGrid2(Optional Sql As String)
     Dim I As Integer
     Dim anc As Integer
-    adodc1.ConnectionString = Conn
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & SQL
+    Adodc1.ConnectionString = Conn
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " WHERE " & Sql
         Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY tiporegi"
-    adodc1.RecordSource = SQL
-    adodc1.CursorType = adOpenDynamic
-    adodc1.LockType = adLockOptimistic
-    adodc1.Refresh
+    Sql = Sql & " ORDER BY tiporegi"
+    Adodc1.RecordSource = Sql
+    Adodc1.CursorType = adOpenDynamic
+    Adodc1.LockType = adLockOptimistic
+    Adodc1.Refresh
     
     DataGrid1.AllowRowSizing = False
     DataGrid1.RowHeight = 350
@@ -1090,8 +1110,8 @@ Private Sub CargaGrid2(Optional SQL As String)
         'La primera vez fijamos el ancho y alto de  los txtaux
         anc = 73 '60
         For I = 0 To 3
-            txtAux(I).Left = DataGrid1.Columns(I).Left + anc
-            txtAux(I).Width = DataGrid1.Columns(I).Width - 15
+            txtaux(I).Left = DataGrid1.Columns(I).Left + anc
+            txtaux(I).Width = DataGrid1.Columns(I).Width - 15
         Next I
         I = 4
         Combo1.Left = DataGrid1.Columns(I).Left + anc
@@ -1112,7 +1132,7 @@ End Sub
 
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1125,21 +1145,21 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
 
 
     If Index = 4 Then Exit Sub
 
-    txtAux(Index).Text = Trim(txtAux(Index).Text)
-    If txtAux(Index).Text = "" Then Exit Sub
+    txtaux(Index).Text = Trim(txtaux(Index).Text)
+    If txtaux(Index).Text = "" Then Exit Sub
     If Modo = 1 Then Exit Sub 'Busquedas
     If Index > 1 Then
-        If Not IsNumeric(txtAux(Index).Text) Then
+        If Not IsNumeric(txtaux(Index).Text) Then
             MsgBox "Los contadores tiene que ser numéricos", vbExclamation
             Exit Sub
         End If
         Else
-            If Index = 0 Then txtAux(0).Text = UCase(txtAux(0).Text)
+            If Index = 0 Then txtaux(0).Text = UCase(txtaux(0).Text)
     End If
 End Sub
 
@@ -1150,7 +1170,7 @@ Dim B As Boolean
 B = CompForm(Me)
 If Not B Then Exit Function
 
-If InStr(1, txtAux(0).Text, " ") > 0 Then
+If InStr(1, txtaux(0).Text, " ") > 0 Then
     MsgBox "No se permiten blancos", vbExclamation
     Exit Function
 End If
@@ -1159,14 +1179,14 @@ End If
 'Del 0 al 9 nos los reservamos.
 '   0-Asientos 1- Proveedores 2.- Contador confirming
 '
-If IsNumeric(txtAux(0).Text) Then
+If IsNumeric(txtaux(0).Text) Then
     If Combo1.ListIndex = 1 Then MsgBox "Facturación por cuenta ajena valido solo para SERIES DE FACTURAS.", vbExclamation
 End If
 If Modo = 3 Then
     'Estamos insertando
-     Datos = DevuelveDesdeBD("tiporegi", "contadores", "tiporegi", txtAux(0).Text, "T")
+     Datos = DevuelveDesdeBD("tiporegi", "contadores", "tiporegi", txtaux(0).Text, "T")
      If Datos <> "" Then
-        MsgBox "Ya existe el contador : " & txtAux(0).Text, vbExclamation
+        MsgBox "Ya existe el contador : " & txtaux(0).Text, vbExclamation
         B = False
     End If
 End If
@@ -1177,7 +1197,7 @@ End Function
 Private Function ComprobarContadores()
 Dim I As Long
 Dim F As Date
-Dim SQL As String
+Dim Sql As String
 Dim aux2 As String
 Dim Aux As String
 Dim MaxA As Long
@@ -1196,10 +1216,10 @@ Dim CadenaError As String
     NumRegElim = 1
     I = 2
     F = vParam.fechaini
-    SQL = "Select max(numasien) from hlinapu where fechaent>='" & Format(F, FormatoFecha) & "'"
+    Sql = "Select max(numasien) from hlinapu where fechaent>='" & Format(F, FormatoFecha) & "'"
     F = vParam.fechafin
-    SQL = SQL & " AND fechaent<='" & Format(F, FormatoFecha) & "'"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = Sql & " AND fechaent<='" & Format(F, FormatoFecha) & "'"
+    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         NumRegElim = DBLet(miRsAux.Fields(0), "N")
     End If
@@ -1209,10 +1229,10 @@ Dim CadenaError As String
     '--------------------------------------
     'siguiente   --------------------------
     F = DateAdd("yyyy", 1, vParam.fechaini)
-    SQL = "Select max(numasien) from hlinapu where fechaent>='" & Format(F, FormatoFecha) & "'"
+    Sql = "Select max(numasien) from hlinapu where fechaent>='" & Format(F, FormatoFecha) & "'"
     F = DateAdd("yyyy", 1, vParam.fechafin)
-    SQL = SQL & " AND fechaent<='" & Format(F, FormatoFecha) & "'"
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = Sql & " AND fechaent<='" & Format(F, FormatoFecha) & "'"
+    miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         I = DBLet(miRsAux.Fields(0), "N")
     End If
@@ -1220,11 +1240,11 @@ Dim CadenaError As String
     
     'Ahora vemos si son correctos los contadores
     CadenaDesdeOtroForm = "contado2"
-    SQL = DevuelveDesdeBD("contado1", "contadores", "tiporegi", "0", "T", CadenaDesdeOtroForm)
-    If SQL <> "" Then
-        If Val(SQL) <> NumRegElim Then
+    Sql = DevuelveDesdeBD("contado1", "contadores", "tiporegi", "0", "T", CadenaDesdeOtroForm)
+    If Sql <> "" Then
+        If Val(Sql) <> NumRegElim Then
             Aux = "          Actual.     " & Aux & " : " & _
-                 Format(NumRegElim, "000000") & "    --    Contadores: " & Format(SQL, "000000") & vbCrLf
+                 Format(NumRegElim, "000000") & "    --    Contadores: " & Format(Sql, "000000") & vbCrLf
             CadenaError = CadenaError & Aux
         End If
         If Val(CadenaDesdeOtroForm) <> I Then
@@ -1245,35 +1265,35 @@ Dim CadenaError As String
     'Comprobaremos si querenos las facturas proveedores
     '-------------------------------------------------------
     '-------------------------------------------------------
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     
     Me.Tag = ""
     
-    SQL = "select * from contadores where tiporegi REGEXP '^[0-9]+$' <> 0 and cast(tiporegi as unsigned) > 0"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Sql = "select * from contadores where tiporegi REGEXP '^[0-9]+$' <> 0 and cast(tiporegi as unsigned) > 0"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
     
         NumRegElim = 1
         I = 2
         F = vParam.fechaini
-        SQL = "Select max(numregis) from factpro where fecharec >='" & Format(F, FormatoFecha) & "'"
+        Sql = "Select max(numregis) from factpro where fecharec >='" & Format(F, FormatoFecha) & "'"
         F = vParam.fechafin
-        SQL = SQL & " AND fecharec <='" & Format(F, FormatoFecha) & "'"
-        SQL = SQL & " AND numserie = " & DBSet(RS!tiporegi, "T")
-        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = Sql & " AND fecharec <='" & Format(F, FormatoFecha) & "'"
+        Sql = Sql & " AND numserie = " & DBSet(Rs!tiporegi, "T")
+        miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not miRsAux.EOF Then
             NumRegElim = DBLet(miRsAux.Fields(0), "N")
         End If
         miRsAux.Close
         'siguiente
         F = DateAdd("yyyy", 1, vParam.fechaini)
-        SQL = "Select max(numregis) from factpro where fecharec >='" & Format(F, FormatoFecha) & "'"
+        Sql = "Select max(numregis) from factpro where fecharec >='" & Format(F, FormatoFecha) & "'"
         F = DateAdd("yyyy", 1, vParam.fechafin)
-        SQL = SQL & " AND fecharec <='" & Format(F, FormatoFecha) & "'"
-        SQL = SQL & " and numserie = " & DBSet(RS!tiporegi, "T")
+        Sql = Sql & " AND fecharec <='" & Format(F, FormatoFecha) & "'"
+        Sql = Sql & " and numserie = " & DBSet(Rs!tiporegi, "T")
         
-        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not miRsAux.EOF Then
             I = DBLet(miRsAux.Fields(0), "N")
         End If
@@ -1283,22 +1303,22 @@ Dim CadenaError As String
         
         'Ahora vemos si son correcto los contadores
         CadenaDesdeOtroForm = "contado2"
-        SQL = DevuelveDesdeBD("contado1", "contadores", "tiporegi", RS!tiporegi, "T", CadenaDesdeOtroForm)
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBD("contado1", "contadores", "tiporegi", Rs!tiporegi, "T", CadenaDesdeOtroForm)
+        If Sql <> "" Then
             aux2 = ""
-            If Val(SQL) <> NumRegElim Then
-                aux2 = aux2 & "          Actual:          " & Format(SQL, "000000") & "    --    Contadores: " & Format(NumRegElim, "000000") & vbCrLf
+            If Val(Sql) <> NumRegElim Then
+                aux2 = aux2 & "          Actual:          " & Format(Sql, "000000") & "    --    Contadores: " & Format(NumRegElim, "000000") & vbCrLf
             End If
             If Val(CadenaDesdeOtroForm) <> I Then
                 aux2 = aux2 & "          Siguiente:   " & Format(CadenaDesdeOtroForm, "000000") & "    --    Contadores: " & Format(I, "000000") & vbCrLf
             End If
-            If aux2 <> "" Then Me.Tag = Me.Tag & "    -Registro: " & RS!tiporegi & " - " & RS!nomregis & vbCrLf & aux2 & vbCrLf
+            If aux2 <> "" Then Me.Tag = Me.Tag & "    -Registro: " & Rs!tiporegi & " - " & Rs!nomregis & vbCrLf & aux2 & vbCrLf
                 
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     If Me.Tag <> "" Then CadenaError = CadenaError & vbCrLf & "FACTURAS PROVEEDORES" & vbCrLf & Me.Tag
@@ -1310,20 +1330,20 @@ Dim CadenaError As String
     'Por eso recorreremos el adodc1
     Me.Tag = ""
     
-    SQL = "select * from contadores where tiporegi REGEXP '^[0-9]+$' = 0 "
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Sql = "select * from contadores where tiporegi REGEXP '^[0-9]+$' = 0 "
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         
         CadenaDesdeOtroForm = ""
         'Son FACTURAS DE CLIENTES
         'Actual
         
-        I = DBLet(RS!Contado1, "N")
+        I = DBLet(Rs!Contado1, "N")
         aux2 = MontaSQLFacCli(True)
-        Aux = "Select max(numfactu) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
-        SQL = Aux & " AND " & aux2
-        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Aux = "Select max(numfactu) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
+        Sql = Aux & " AND " & aux2
+        miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         MaxA = 0
         If Not miRsAux.EOF Then MaxA = DBLet(miRsAux.Fields(0), "N")
         miRsAux.Close
@@ -1337,11 +1357,11 @@ Dim CadenaError As String
 
 
         'Actual
-        I = DBLet(RS!Contado2, "N")
+        I = DBLet(Rs!Contado2, "N")
         aux2 = MontaSQLFacCli(False)
-        Aux = "Select max(numfactu) from factcli where numserie = " & DBSet(RS!tiporegi, "T")
-        SQL = Aux & " AND " & aux2
-        miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Aux = "Select max(numfactu) from factcli where numserie = " & DBSet(Rs!tiporegi, "T")
+        Sql = Aux & " AND " & aux2
+        miRsAux.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         MaxA = 0
         If Not miRsAux.EOF Then MaxA = DBLet(miRsAux.Fields(0), "N")
         miRsAux.Close
@@ -1351,9 +1371,9 @@ Dim CadenaError As String
         End If
 
 
-        If CadenaDesdeOtroForm <> "" Then Me.Tag = Me.Tag & "    -Registro: " & RS!tiporegi & " - " & RS!nomregis & vbCrLf & CadenaDesdeOtroForm & vbCrLf
+        If CadenaDesdeOtroForm <> "" Then Me.Tag = Me.Tag & "    -Registro: " & Rs!tiporegi & " - " & Rs!nomregis & vbCrLf & CadenaDesdeOtroForm & vbCrLf
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     If Me.Tag <> "" Then CadenaError = CadenaError & vbCrLf & "FACTURAS CLIENTES" & vbCrLf & Me.Tag
@@ -1384,7 +1404,7 @@ End Function
 
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String
     
     On Error Resume Next
@@ -1392,37 +1412,37 @@ Dim cad As String
     cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
     cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+    If Not Rs.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And (Modo = 0 Or Modo = 2)
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 End Sub
 
 
 
 Private Sub CargarCombo()
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 
     Combo2.Clear
 
     'Tipo de factura
-    Set RS = New ADODB.Recordset
-    SQL = "SELECT * FROM usuarios.wconce340 ORDER BY codigo"
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Sql = "SELECT * FROM usuarios.wconce340 ORDER BY codigo"
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
     ' simulamos el -1
@@ -1431,14 +1451,14 @@ Dim SQL As String
     
     
     I = 0
-    While Not RS.EOF
-        Combo2.AddItem RS!Descripcion
-        Combo2.ItemData(Combo2.NewIndex) = Asc(RS!Codigo)
+    While Not Rs.EOF
+        Combo2.AddItem Rs!Descripcion
+        Combo2.ItemData(Combo2.NewIndex) = Asc(Rs!Codigo)
         I = I + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 End Sub

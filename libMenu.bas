@@ -331,28 +331,28 @@ End Function
 
 Public Sub ActualizarExpansionMenus(Usuario As Long, ByRef Tr1 As TreeView, aplicacion As String)
 Dim Sql As String
-Dim SQL2 As String
+Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
-Dim i As Long
+Dim I As Long
 
     On Error GoTo eActualizarExpansionMenus
     
     'seleccionamos todos los que sean padres
-    For i = 1 To Tr1.Nodes.Count
+    For I = 1 To Tr1.Nodes.Count
     
-        SQL2 = "update menus_usuarios set expandido = "
+        Sql2 = "update menus_usuarios set expandido = "
         
-        If Tr1.Nodes(i).Expanded Then
-            Sql3 = SQL2 & "1" 'expandido
+        If Tr1.Nodes(I).Expanded Then
+            Sql3 = Sql2 & "1" 'expandido
         Else
-            Sql3 = SQL2 & "0" 'no expandido
+            Sql3 = Sql2 & "0" 'no expandido
         End If
         
-        Sql3 = Sql3 & "  where codigo = " & DBSet(Mid(Tr1.Nodes(i).Key, 3, 6), "N") & " and codusu = " & DBSet(Usuario, "N") & " and aplicacion = " & DBSet(aplicacion, "T")
+        Sql3 = Sql3 & "  where codigo = " & DBSet(Mid(Tr1.Nodes(I).Key, 3, 6), "N") & " and codusu = " & DBSet(Usuario, "N") & " and aplicacion = " & DBSet(aplicacion, "T")
     
         Conn.Execute Sql3
-    Next i
+    Next I
         
         
     Exit Sub
@@ -366,10 +366,10 @@ End Sub
 '******  Cada vez que hace mouseup, actualiza TODOS los iconos?
 Public Sub ActualizarItems(Usuario As Long, ByRef Lv1 As ListView, aplicacion As String)
 Dim Sql As String
-Dim SQL2 As String
+Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
-Dim i As Long
+Dim I As Long
 
     On Error GoTo eActualizarItems
     
@@ -378,14 +378,14 @@ Dim i As Long
     
     Conn.Execute Sql
     
-    For i = 1 To Lv1.ListItems.Count
-        Debug.Print i & "  x,y   " & Lv1.ListItems(i).Left & ", " & Lv1.ListItems(i).Top
-        Sql = "update menus_usuarios set posx = " & DBSet(Lv1.ListItems(i).Left, "N") & ", posy = " & DBSet(Lv1.ListItems(i).Top, "N") & " where codusu = " & Usuario & " and aplicacion = " & DBSet(aplicacion, "T") & " and "
-        Sql = Sql & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.ListItems(i).Text, "T") & ")"
+    For I = 1 To Lv1.ListItems.Count
+        Debug.Print I & "  x,y   " & Lv1.ListItems(I).Left & ", " & Lv1.ListItems(I).Top
+        Sql = "update menus_usuarios set posx = " & DBSet(Lv1.ListItems(I).Left, "N") & ", posy = " & DBSet(Lv1.ListItems(I).Top, "N") & " where codusu = " & Usuario & " and aplicacion = " & DBSet(aplicacion, "T") & " and "
+        Sql = Sql & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.ListItems(I).Text, "T") & ")"
     
         Conn.Execute Sql
 
-    Next i
+    Next I
     
         
     Exit Sub
@@ -410,35 +410,35 @@ Dim J As Integer
     CoordY = "30,04725|1665,071|3300,095|4935,118|6570,142|"
 
 
-    For i = 1 To Lv1.ListItems.Count
-        If i <= 8 Then
+    For I = 1 To Lv1.ListItems.Count
+        If I <= 8 Then
             Y = RecuperaValor(CoordY, 1)
-            J = i
-        ElseIf i <= 16 Then
+            J = I
+        ElseIf I <= 16 Then
             Y = RecuperaValor(CoordY, 2)
-            J = i - 8
-        ElseIf i <= 24 Then
+            J = I - 8
+        ElseIf I <= 24 Then
             Y = RecuperaValor(CoordY, 3)
-            J = i - 16
-        ElseIf i <= 32 Then
+            J = I - 16
+        ElseIf I <= 32 Then
             Y = RecuperaValor(CoordY, 4)
-            J = i - 32
+            J = I - 32
         End If
         
         X = RecuperaValor(CoordX, J)
             
-        Lv1.ListItems(i).Left = X
-        Lv1.ListItems(i).Top = Y
+        Lv1.ListItems(I).Left = X
+        Lv1.ListItems(I).Top = Y
             
             
-        Debug.Print i & "  x,y   " & Lv1.ListItems(i).Left & ", " & Lv1.ListItems(i).Top
+        Debug.Print I & "  x,y   " & Lv1.ListItems(I).Left & ", " & Lv1.ListItems(I).Top
         
         Sql = "update menus_usuarios set posx = " & DBSet(X, "N") & ", posy = " & DBSet(Y, "N") & " where codusu = " & vUsu.Id & " and aplicacion = " & DBSet(aplicacion, "T") & " and "
-        Sql = Sql & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.ListItems(i).Text, "T") & ")"
+        Sql = Sql & " codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and descripcion =  " & DBSet(Lv1.ListItems(I).Text, "T") & ")"
     
         Conn.Execute Sql
 
-    Next i
+    Next I
 
 
     Exit Sub
@@ -456,7 +456,7 @@ End Sub
 
 Public Sub ActualizarItemCuadricula(Usuario As Long, ByRef Lv1 As ListView, aplicacion As String, X As Single, Y As Single, ByRef VolverACargarLw As Boolean)
 Dim Sql As String
-Dim i As Integer
+Dim I As Integer
 Dim Valor As Currency
 
     On Error GoTo eActualizarItems
@@ -473,14 +473,14 @@ Dim Valor As Currency
             Lv1.SelectedItem.Left = Valor
             If X < 0 Then VolverACargarLw = True
         Else
-            For i = 2 To 8
-                Valor = RecuperaValor(CoordX, i)
+            For I = 2 To 8
+                Valor = RecuperaValor(CoordX, I)
                 If X <= Valor + 817 Then
                     Lv1.SelectedItem.Left = Valor
                     Exit For
                 Else
                     'Es la utlima. No puede ir a mas
-                    If i = 8 Then Lv1.SelectedItem.Left = Valor
+                    If I = 8 Then Lv1.SelectedItem.Left = Valor
                 End If
             Next
         End If
@@ -490,14 +490,14 @@ Dim Valor As Currency
             Lv1.SelectedItem.Top = Valor
             If Y < 0 Then VolverACargarLw = True
         Else
-            For i = 1 To 5
-            Valor = RecuperaValor(CoordY, i)
+            For I = 1 To 5
+            Valor = RecuperaValor(CoordY, I)
                 If Y <= Valor + 817 Then
                     Lv1.SelectedItem.Top = Valor
                     Exit For
                 Else
                     'Es la utlima. No puede ir a mas
-                    If i = 5 Then Lv1.SelectedItem.Top = Valor
+                    If I = 5 Then Lv1.SelectedItem.Top = Valor
                 End If
             Next
         End If
@@ -543,7 +543,7 @@ Dim Excepcion As String
     If Not vEmpresa.TieneTesoreria Then
         Sql = Sql & " and not codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and tipo = 1)"
     End If
-    
+     
     If Not vEmpresa.TieneContabilidad Then
         Sql = Sql & " and not codigo in (select codigo from menus where aplicacion = " & DBSet(aplicacion, "T") & " and tipo = 0)"
     End If
