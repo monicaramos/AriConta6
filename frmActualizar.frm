@@ -364,20 +364,8 @@ EEliminaFacturaConAsiento:
 End Function
 
 
-Private Sub cmdCancelar_Click()
-Unload Me
-End Sub
-
-
 
     
-
-
-
-
-Private Sub cmdSalir_Click()
-    Unload Me
-End Sub
 
 
 
@@ -1262,8 +1250,6 @@ Private Function ActualizaElASiento(ByRef A_Donde As String) As Boolean
     If Not InsertarLineas Then Exit Function
     IncrementaProgres 2
     
-    
-    
     'Modificar saldos
     A_Donde = "Calculando Lineas y saldos "
     If Not CalcularLineasYSaldos(False) Then Exit Function
@@ -1295,24 +1281,6 @@ On Error Resume Next
     End If
 End Function
 
-
-Private Function InsertarCabeceraApuntes() As Boolean
-On Error Resume Next
-
-    Sql = "INSERT INTO cabapu (numdiari, fechaent, numasien, obsdiari) SELECT numdiari,fechaent,numasien,obsdiari from hcabapu where "
-    Sql = Sql & " numdiari =" & NumDiari
-    Sql = Sql & " AND fechaent='" & Fecha & "'"
-    Sql = Sql & " AND numasien=" & NumAsiento
-
-    Conn.Execute Sql
-
-    If Err.Number <> 0 Then
-         'Hay error , almacenamos y salimos
-        InsertarCabeceraApuntes = False
-    Else
-        InsertarCabeceraApuntes = True
-    End If
-End Function
 
 
 
@@ -1390,15 +1358,12 @@ Dim T As String
         T = ""
     End If
     
-
-    
     Sql = "SELECT timporteD AS SD, timporteH AS SH, codmacta,idsubcos," & T & "linapu.codccost"
     Sql = Sql & " FROM " & T & "linapu,ccoste WHERE ccoste.codccost=" & T & "linapu.codccost"
     Sql = Sql & " AND numdiari=" & NumDiari
     Sql = Sql & " AND fechaent='" & Fecha & "'"
     Sql = Sql & " AND numasien=" & NumAsiento
     Sql = Sql & " AND " & T & "linapu.codccost Is Not Null;"
-    
     
     RL.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RL.EOF
@@ -1503,21 +1468,7 @@ On Error Resume Next
 End Function
 
 
-Private Function InsertarLineasApuntes() As Boolean
-On Error Resume Next
-    Sql = "INSERT INTO linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, ampconce, timporteD, timporteH, codccost, ctacontr, idcontab,punteada,traspasado)"
-    Sql = Sql & " SELECT numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, ampconce, timporteD, timporteH, codccost, ctacontr, idcontab,punteada,traspasado From hlinapu"
-    Sql = Sql & " WHERE numasien = " & NumAsiento
-    Sql = Sql & " AND numdiari = " & NumDiari
-    Sql = Sql & " AND fechaent='" & Fecha & "'"
-    Conn.Execute Sql
-    If Err.Number <> 0 Then
-         'Hay error , almacenamos y salimos
-        InsertarLineasApuntes = False
-    Else
-        InsertarLineasApuntes = True
-    End If
-End Function
+
 
 '-------------------------------------------------------
 '-------------------------------------------------------
@@ -1796,16 +1747,6 @@ Private Function DesActualizaElASiento(ByRef A_Donde As String) As Boolean
     DesActualizaElASiento = False
     
     Select Case Me.OpcionActualizar
-    Case 3
-        'Insertamos en cabeceras
-        A_Donde = "Insertando datos en cabeceras de apuntes"
-        If Not InsertarCabeceraApuntes Then Exit Function
-        IncrementaProgres 1
-        
-        'Insertamos en lineas
-        A_Donde = "Insertando datos en lineas asiento"
-        If Not InsertarLineasApuntes Then Exit Function
-        IncrementaProgres 2
     
     Case 2
         If NUmSerie = "FRACLI" Or NUmSerie = "FRAPRO" Then
@@ -1955,16 +1896,6 @@ If Err.Number <> 0 Then MuestraError Err.Number, "Borrar fichero temporal"
 End Sub
 
 
-
-
-Private Sub REcalculoDesdeAsiento()
-    On Error GoTo ERec
-    CalcularLineasYSaldos True
-    Exit Sub
-ERec:
-    NE = 1
-    MuestraError Err.Number
-End Sub
 
 
 

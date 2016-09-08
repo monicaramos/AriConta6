@@ -11,32 +11,6 @@ Begin VB.Form frmTESVerCobrosPagos
    ScaleHeight     =   6930
    ScaleWidth      =   14640
    StartUpPosition =   2  'CenterScreen
-   Begin MSComctlLib.ImageList ImageList1 
-      Left            =   750
-      Top             =   2100
-      _ExtentX        =   1005
-      _ExtentY        =   1005
-      BackColor       =   -2147483643
-      ImageWidth      =   16
-      ImageHeight     =   16
-      MaskColor       =   12632256
-      _Version        =   393216
-      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   3
-         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmTESVerCobrosPagos.frx":000C
-            Key             =   ""
-         EndProperty
-         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmTESVerCobrosPagos.frx":686E
-            Key             =   ""
-         EndProperty
-         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmTESVerCobrosPagos.frx":6B88
-            Key             =   ""
-         EndProperty
-      EndProperty
-   End
    Begin VB.Frame frame 
       Height          =   1095
       Left            =   90
@@ -141,6 +115,32 @@ Begin VB.Form frmTESVerCobrosPagos
          Top             =   420
          Width           =   840
       End
+   End
+   Begin MSComctlLib.ImageList ImageList1 
+      Left            =   750
+      Top             =   2100
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   3
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmTESVerCobrosPagos.frx":000C
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmTESVerCobrosPagos.frx":686E
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmTESVerCobrosPagos.frx":6B88
+            Key             =   ""
+         EndProperty
+      EndProperty
    End
    Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
@@ -425,7 +425,7 @@ Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
 Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim Fecha As Date
 Dim Importe As Currency
@@ -741,7 +741,7 @@ On Error GoTo ECargando
     Text2(3).Visible = SeVeRiesgo And Cobros
     
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Fecha = CDate(Text1.Text)
     ListView1.ListItems.Clear
     Importe = 0
@@ -771,7 +771,7 @@ ECargando:
     Text2(3).Text = Format(RiesTalPag, FormatoImporte)
     Me.MousePointer = vbDefault
     Screen.MousePointer = vbDefault
-    Set RS = Nothing
+    Set Rs = Nothing
 End Sub
 
 Private Sub CargaCobros()
@@ -787,30 +787,30 @@ Dim Inserta As Boolean
     If CampoOrden <> "cobros.fecvenci" Then cad = cad & ", cobros.fecvenci"
     
     
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         Inserta = True
         '[Monica]16/08/2016: solo en el caso de pendientes de cobro no lo veo todo,  situacion = 0
         '                    nuevo parametro de situacion
         If Situacion = 0 Then
-            If RS!tipoformapago = vbTipoPagoRemesa Then
+            If Rs!tipoformapago = vbTipoPagoRemesa Then
                 If Not OrdenarEfecto Then
                  
                     If Not SeVeRiesgo Then
                     ' por lo de mc añado la condicion And DBLet(RS!siturem, "T") > "B"
-                        If DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") > "B" Then
+                        If DBLet(Rs!CodRem, "N") > 0 And DBLet(Rs!siturem, "T") > "B" Then
                             Inserta = False
                             'Stop
                         End If
                     ' añadido lo que pide Mc de que se vean las remesas que tengan situacion B
                     Else
-                        If (DBLet(RS!CodRem, "N") > 0 And DBLet(RS!siturem, "T") > "B") Then Inserta = False
+                        If (DBLet(Rs!CodRem, "N") > 0 And DBLet(Rs!siturem, "T") > "B") Then Inserta = False
                     End If
                 End If
                 
-            ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
+            ElseIf Rs!tipoformapago = vbTalon Or Rs!tipoformapago = vbPagare Then
                 If Not OrdenarEfecto And Not SeVeRiesgoTalPag Then
-                    If RS!recedocu = 1 Then Inserta = False
+                    If Rs!recedocu = 1 Then Inserta = False
                 End If
             End If
         End If
@@ -821,9 +821,9 @@ Dim Inserta As Boolean
             
             
         End If  'de insertar
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 End Sub
 
 
@@ -834,56 +834,56 @@ Dim ImpAux As Currency
 
     Set ItmX = ListView1.ListItems.Add()
     
-    ItmX.Text = RS!NUmSerie
-    ItmX.SubItems(1) = RS!NumFactu
-    ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
-    ItmX.SubItems(3) = Format(RS!FecVenci, "dd/mm/yyyy")
-    ItmX.SubItems(4) = RS!numorden
-    ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
-    ItmX.SubItems(6) = DBLet(RS!siglas, "T")
+    ItmX.Text = Rs!NUmSerie
+    ItmX.SubItems(1) = Rs!NumFactu
+    ItmX.SubItems(2) = Format(Rs!FecFactu, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(Rs!FecVenci, "dd/mm/yyyy")
+    ItmX.SubItems(4) = Rs!numorden
+    ItmX.SubItems(5) = DBLet(Rs!Nommacta, "T")
+    ItmX.SubItems(6) = DBLet(Rs!siglas, "T")
     
-    ItmX.SubItems(7) = Format(RS!ImpVenci, FormatoImporte)
-    vImporte = DBLet(RS!Gastos, "N")
+    ItmX.SubItems(7) = Format(Rs!ImpVenci, FormatoImporte)
+    vImporte = DBLet(Rs!Gastos, "N")
     
     'Gastos
     ItmX.SubItems(8) = Format(vImporte, FormatoImporte)
-    vImporte = vImporte + RS!ImpVenci
+    vImporte = vImporte + Rs!ImpVenci
     
-    If Not IsNull(RS!impcobro) Then
-        ItmX.SubItems(9) = Format(RS!impcobro, FormatoImporte)
-        impo = vImporte - RS!impcobro
+    If Not IsNull(Rs!impcobro) Then
+        ItmX.SubItems(9) = Format(Rs!impcobro, FormatoImporte)
+        impo = vImporte - Rs!impcobro
         ItmX.SubItems(10) = Format(impo, FormatoImporte)
     Else
         impo = vImporte
         ItmX.SubItems(9) = "0.00"
         ItmX.SubItems(10) = Format(vImporte, FormatoImporte)
     End If
-    If RS!tipoformapago = vbTipoPagoRemesa Then
+    If Rs!tipoformapago = vbTipoPagoRemesa Then
         '81--->
         'asc("Q") =81 or asc("B") = 66
-        If Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 81 Or Asc(Right(" " & DBLet(RS!siturem, "T"), 1)) = 66 Then
+        If Asc(Right(" " & DBLet(Rs!siturem, "T"), 1)) = 81 Or Asc(Right(" " & DBLet(Rs!siturem, "T"), 1)) = 66 Then
             riesgo = riesgo + vImporte
         Else
            ' Stop
         End If
     
-    ElseIf RS!tipoformapago = vbTalon Or RS!tipoformapago = vbPagare Then
+    ElseIf Rs!tipoformapago = vbTalon Or Rs!tipoformapago = vbPagare Then
         If OrdenarEfecto Then
             'If RS!ImpVenci > 0 Then ItmX.SubItems(11) = DBLet(RS!reftalonpag, "T")
         End If
         If SeVeRiesgoTalPag Then
-            If RS!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(RS!impcobro, "N")
+            If Rs!recedocu = 1 Then RiesTalPag = RiesTalPag + DBLet(Rs!impcobro, "N")
         End If
     End If
     
-    If RS!tipoformapago = vbTarjeta Then
+    If Rs!tipoformapago = vbTarjeta Then
         'Si tiene el parametro y le ha puesto valor
         If vParamT.IntereseCobrosTarjeta > 0 And ImporteGastosTarjeta_ > 0 Then
             DiasDif = 0
-            If RS!FecVenci < Fecha Then DiasDif = DateDiff("d", RS!FecVenci, Fecha)
+            If Rs!FecVenci < Fecha Then DiasDif = DateDiff("d", Rs!FecVenci, Fecha)
             If DiasDif > 0 Then
                 'Si ya tenia gastos.
-                If DBLet(RS!Gastos, "N") > 0 Then
+                If DBLet(Rs!Gastos, "N") > 0 Then
                     MsgBox "Ya tenia gastos", vbExclamation
                     ItmX.ListSubItems(8).Bold = True
                     ItmX.ListSubItems(8).ForeColor = vbRed
@@ -895,13 +895,13 @@ Dim ImpAux As Currency
                 impo = impo + ImpAux
                 ItmX.SubItems(10) = Format(impo, FormatoImporte)
                 'La de gastos
-                ImpAux = DBLet(RS!Gastos, "N") + ImpAux
+                ImpAux = DBLet(Rs!Gastos, "N") + ImpAux
                 ItmX.SubItems(8) = Format(ImpAux, FormatoImporte)
             End If
             
         End If
     End If
-    If RS!FecVenci < Fecha Then
+    If Rs!FecVenci < Fecha Then
         'LO DEBE
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
@@ -910,10 +910,10 @@ Dim ImpAux As Currency
     End If
     Importe = Importe + impo
     
-    ItmX.Tag = RS!codmacta
+    ItmX.Tag = Rs!codmacta
     
     If Tipo = 1 And SegundoParametro <> "" Then
-        If Not IsNull(RS!transfer) Then
+        If Not IsNull(Rs!transfer) Then
             ItmX.Checked = True
             ImpSeleccionado = ImpSeleccionado + impo
         End If
@@ -957,12 +957,12 @@ Private Sub CargaPagos()
     If CampoOrden <> "pagos.fecefect" Then cad = cad & ", pagos.fecefect"
 
 
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         InsertaItemPago
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 End Sub
 
@@ -972,24 +972,24 @@ Dim J As Byte
     
     Set ItmX = ListView1.ListItems.Add()
     
-    ItmX.Text = RS!NUmSerie
-    ItmX.SubItems(1) = RS!NumFactu
-    ItmX.SubItems(2) = Format(RS!FecFactu, "dd/mm/yyyy")
-    ItmX.SubItems(3) = Format(RS!fecefect, "dd/mm/yyyy")
-    ItmX.SubItems(4) = RS!numorden
-    ItmX.SubItems(5) = DBLet(RS!Nommacta, "T")
-    ItmX.SubItems(6) = DBLet(RS!siglas, "T")
-    ItmX.SubItems(7) = Format(RS!ImpEfect, FormatoImporte)
-    If Not IsNull(RS!imppagad) Then
-        ItmX.SubItems(8) = Format(RS!imppagad, FormatoImporte)
-        impo = RS!ImpEfect - RS!imppagad
+    ItmX.Text = Rs!NUmSerie
+    ItmX.SubItems(1) = Rs!NumFactu
+    ItmX.SubItems(2) = Format(Rs!FecFactu, "dd/mm/yyyy")
+    ItmX.SubItems(3) = Format(Rs!fecefect, "dd/mm/yyyy")
+    ItmX.SubItems(4) = Rs!numorden
+    ItmX.SubItems(5) = DBLet(Rs!Nommacta, "T")
+    ItmX.SubItems(6) = DBLet(Rs!siglas, "T")
+    ItmX.SubItems(7) = Format(Rs!ImpEfect, FormatoImporte)
+    If Not IsNull(Rs!imppagad) Then
+        ItmX.SubItems(8) = Format(Rs!imppagad, FormatoImporte)
+        impo = Rs!ImpEfect - Rs!imppagad
         ItmX.SubItems(9) = Format(impo, FormatoImporte)
     Else
-        impo = RS!ImpEfect
+        impo = Rs!ImpEfect
         ItmX.SubItems(8) = "0.00"
         ItmX.SubItems(9) = ItmX.SubItems(7)
     End If
-    If RS!fecefect < Fecha Then
+    If Rs!fecefect < Fecha Then
         'LO DEBE
         ItmX.SmallIcon = 1
         Vencido = Vencido + impo
@@ -998,24 +998,24 @@ Dim J As Byte
     End If
     
     If Tipo = 1 Then
-        If Not IsNull(RS!nrodocum) Then
+        If Not IsNull(Rs!nrodocum) Then
             ItmX.Checked = True
             ImpSeleccionado = ImpSeleccionado + impo
         End If
     End If
     'El tag lo utilizo para la cta proveedor
-    ItmX.Tag = RS!codmacta
+    ItmX.Tag = Rs!codmacta
     
     Importe = Importe + impo
     
     'Si el documento estaba emitido ya
-    If Val(RS!emitdocum) = 1 Then
+    If Val(Rs!emitdocum) = 1 Then
         'Tiene marcado DOCUMENTO EMITIDO
         ItmX.ForeColor = vbRed
         For J = 1 To ListView1.ColumnHeaders.Count - 1
             ItmX.ListSubItems(J).ForeColor = vbRed
         Next J
-        If DBLet(RS!Referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
+        If DBLet(Rs!Referencia, "T") = "" Then ItmX.ListSubItems(4).ForeColor = vbMagenta
     End If
 
 
@@ -1166,11 +1166,6 @@ End Sub
 
 Private Sub mnNumero_Click()
     If ListView1.SelectedItem Is Nothing Then Exit Sub
-    CadenaDesdeOtroForm = "####"
-    frmTESPreguntas.Opcion = 0
-    frmTESPreguntas.vTexto = ListView1.SelectedItem.SubItems(11)
-    frmTESPreguntas.Show vbModal
-    If CadenaDesdeOtroForm <> "####" Then ListView1.SelectedItem.SubItems(11) = CadenaDesdeOtroForm
         
 End Sub
 

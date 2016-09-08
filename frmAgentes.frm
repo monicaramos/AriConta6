@@ -485,7 +485,7 @@ Dim I As Integer
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.Visible = B
+        CmdRegresar.Visible = B
     End If
     'Si estamo mod or insert
     
@@ -601,21 +601,21 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
     'Ciertas comprobaciones
     If adodc1.Recordset.EOF Then Exit Sub
     
     If Not SepuedeBorrar Then Exit Sub
     '### a mano
-    SQL = "Seguro que desea eliminar el agente:"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    Sql = "Seguro que desea eliminar el agente:"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
     
         'Hay que eliminar
-        SQL = "Delete from Agentes where codigo=" & adodc1.Recordset!Codigo
-        Conn.Execute SQL
+        Sql = "Delete from Agentes where codigo=" & adodc1.Recordset!Codigo
+        Conn.Execute Sql
         CargaGrid ""
         adodc1.Recordset.Cancel
     End If
@@ -701,7 +701,7 @@ Private Sub cmdRegresar_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_DblClick()
-If cmdRegresar.Visible Then cmdRegresar_Click
+If CmdRegresar.Visible Then cmdRegresar_Click
 End Sub
 
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
@@ -721,7 +721,7 @@ Private Sub Form_Load()
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 3
         .Buttons(2).Image = 4
         .Buttons(3).Image = 5
@@ -734,7 +734,7 @@ Private Sub Form_Load()
     With Me.Toolbar2
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 6
         .Buttons(2).Image = 7
         .Buttons(3).Image = 8
@@ -743,7 +743,7 @@ Private Sub Form_Load()
     
     ' La Ayuda
     With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
 
@@ -753,7 +753,7 @@ Private Sub Form_Load()
     chkVistaPrevia.Value = CheckValueLeer(Name)
     'Bloqueo de tabla, cursor type
 
-    cmdRegresar.Visible = (DatosADevolverBusqueda <> "")
+    CmdRegresar.Visible = (DatosADevolverBusqueda <> "")
     
     DespalzamientoVisible False
     PonerModo 0
@@ -808,21 +808,21 @@ End Sub
 'Se puede comentar todo y asi no hace nada ni da error
 'El SQL es propio de cada tabla
 Private Function SugerirCodigoSiguiente() As String
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     
-    SQL = "Select Max(codigo) from agentes"
+    Sql = "Select Max(codigo) from agentes"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, , , adCmdText
-    SQL = "1"
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then
-            SQL = CStr(RS.Fields(0) + 1)
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, , , adCmdText
+    Sql = "1"
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then
+            Sql = CStr(Rs.Fields(0) + 1)
         End If
     End If
-    RS.Close
-    SugerirCodigoSiguiente = SQL
+    Rs.Close
+    SugerirCodigoSiguiente = Sql
 End Function
 
 
@@ -850,19 +850,19 @@ Private Sub DespalzamientoVisible(bol As Boolean)
     FrameDesplazamiento.Enabled = bol
 End Sub
 
-Private Sub CargaGrid(Optional SQL As String)
+Private Sub CargaGrid(Optional Sql As String)
     Dim J As Integer
     Dim TotalAncho As Integer
     Dim I As Integer
     
     adodc1.ConnectionString = Conn
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & SQL
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " WHERE " & Sql
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY codigo"
-    adodc1.RecordSource = SQL
+    Sql = Sql & " ORDER BY codigo"
+    adodc1.RecordSource = Sql
     adodc1.CursorType = adOpenDynamic
     adodc1.LockType = adLockOptimistic
     adodc1.Refresh
@@ -960,10 +960,10 @@ End Sub
 
 
 Private Function SepuedeBorrar() As Boolean
-Dim SQL As String
+Dim Sql As String
     SepuedeBorrar = False
-    SQL = DevuelveDesdeBD("agente", "scobro", "agente", adodc1.Recordset!Codigo, "N")
-    If SQL <> "" Then
+    Sql = DevuelveDesdeBD("agente", "cobros", "agente", adodc1.Recordset!Codigo, "N")
+    If Sql <> "" Then
         MsgBox "Existen cobros pendientes para este agente", vbExclamation
         Exit Function
     End If
@@ -1001,7 +1001,7 @@ Private Sub DataGrid1_LostFocus()
 End Sub
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String
     
     On Error Resume Next
@@ -1009,22 +1009,22 @@ Dim cad As String
     cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
     cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And Modo = 0 And vParam.NroAriges = 0
-        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And Modo = 0 And vParam.NroAriges = 0
-        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And Modo = 0 And vParam.NroAriges = 0
+    If Not Rs.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And Modo = 0 And vParam.NroAriges = 0
+        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And Modo = 0 And vParam.NroAriges = 0
+        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And Modo = 0 And vParam.NroAriges = 0
         
-        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And Modo = 0
-        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And Modo = 0
+        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And Modo = 0
+        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And Modo = 0
         
-        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N") And Modo = 0
+        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N") And Modo = 0
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 End Sub
 

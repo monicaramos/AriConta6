@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000009F20160824T115009</MsgId>
-      <CreDtTm>2016-08-24T11:50:09</CreDtTm>
+      <MsgId>TRANPAG000011F20160908T115318</MsgId>
+      <CreDtTm>2016-09-08T11:53:18</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>12.09</CtrlSum>
+      <CtrlSum>121.00</CtrlSum>
       <InitgPty>
          <Nm>PRUEBASSSSSS</Nm>
          <Id>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20160824115009B96470190</PmtInfId>
+      <PmtInfId>20160908115318B96470190</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-08-24</ReqdExctnDt>
+      <ReqdExctnDt>2016-09-08</ReqdExctnDt>
       <Dbtr>
          <Nm>PRUEBASSSSSS</Nm>
          <PstlAdr>
@@ -37,7 +37,7 @@
     </Dbtr>
     <DbtrAcct>
        <Id>
-          <IBAN>ES6421001864930200004908</IBAN>
+          <IBAN>ES7421001864910200094745</IBAN>
        </Id>
        <Ccy>EUR</Ccy>
     </DbtrAcct>
@@ -48,14 +48,14 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>55418329  20160804001</EndToEndId>
+         <EndToEndId>151515    20160908001</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>PENS</Cd></CtgyPurp>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">12.09</InstdAmt>
+          <InstdAmt Ccy="EUR">121.00</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -63,25 +63,25 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>1 1 INTERNET ESPA A, S.L.U.</Nm>
+          <Nm>PC COMPONENTES Y MULTIMEDIA, S.L.</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>B85049435</Id>
+                     <Id>B73347494</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES8220382525252525252525</IBAN>
+              <IBAN>ES4420384545858552525600</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
-         <Cd>PENS</Cd>
+         <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Factura num.  55418329-04/08/2016 Vto a fecha  09/08/2016</Ustrd>
+         <Ustrd>Factura 151515 de Fecha 08/09/2016</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

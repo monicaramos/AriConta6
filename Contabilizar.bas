@@ -2665,7 +2665,7 @@ Dim CtaBancoIngresos As String
         If LCta <> vEmpresa.DigitosUltimoNivel Then '//Para cuenta puente raiz
             Ampliacion = ",CONCAT('" & AmpRemesa & "',SUBSTRING(codmacta," & LCta + 1 & ")" & ")"
             
-            Sql = "Select " & vUsu.Codigo & Ampliacion & " from scobro where codrem=" & Codigo & " AND anyorem = " & Anyo
+            Sql = "Select " & vUsu.Codigo & Ampliacion & " from cobros where codrem=" & Codigo & " AND anyorem = " & Anyo
             Sql = Sql & " GROUP BY codmacta"
             'INSERT
             Sql = "INSERT INTO tmpcierre1(codusu,cta) " & Sql
@@ -2707,7 +2707,7 @@ Dim CtaBancoIngresos As String
                     LCta = Len(AmpRemesa)
                     Ampliacion = "CONCAT('" & AmpRemesa & "',SUBSTRING(codmacta," & LCta + 1 & ")) "
                 
-                    Sql = "Select distinct(codmacta)," & Ampliacion & " from scobro where codrem=" & Codigo & " AND anyorem = " & Anyo
+                    Sql = "Select distinct(codmacta)," & Ampliacion & " from cobros where codrem=" & Codigo & " AND anyorem = " & Anyo
                     Sql = Sql & " and " & Ampliacion & " in "
                     Sql = Sql & "(Select cta from tmpcierre1 left join cuentas on tmpcierre1.cta=cuentas.codmacta WHERE codusu = " & vUsu.Codigo
                     Sql = Sql & " AND codmacta is null)"

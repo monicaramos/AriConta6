@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016082312071024610RE10000502016</MsgId>
-   <CreDtTm>2016-08-23T12:07:10</CreDtTm>
-   <NbOfTxs>2</NbOfTxs>
-   <CtrlSum>283.62</CtrlSum>
+<MsgId>PRE2016090812022476170RE10000512016</MsgId>
+   <CreDtTm>2016-09-08T12:02:24</CreDtTm>
+   <NbOfTxs>1</NbOfTxs>
+   <CtrlSum>121.00</CtrlSum>
    <InitgPty>
      <Nm>PRUEBASSSSSS</Nm>
      <Id>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000502016 23/08/16B96470190</PmtInfId>
+   <PmtInfId>RE000512016 08/09/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-08-23</ReqdColltnDt>
+   <ReqdColltnDt>2016-09-08</ReqdColltnDt>
    <Cdtr>
       <Nm>PRUEBASSSSSS</Nm>
       <PstlAdr>
@@ -43,12 +43,12 @@
    </Cdtr>
    <CdtrAcct>
       <Id>
-         <IBAN>ES6600810204010001438853</IBAN>
+         <IBAN>ES6421001864930200004908</IBAN>
       </Id>
    </CdtrAcct>
    <CdtrAgt>
       <FinInstnId>
-         <BIC>BSABESBBXXX</BIC>
+         <BIC>CAIXESBBXXX</BIC>
       </FinInstnId>
    </CdtrAgt>
    <CdtrSchmeId>
@@ -63,88 +63,45 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000237 A  0360021520160630001   </EndToEndId>
+          <EndToEndId>430000001 A  0000000720160908001   </EndToEndId>
       </PmtId>
-      <InstdAmt Ccy="EUR">96.07</InstdAmt>
+      <InstdAmt Ccy="EUR">121.00</InstdAmt>
       <DrctDbtTx>
          <MndtRltdInf>
-            <MndtId>766800001567</MndtId>
-            <DtOfSgntr>2014-02-27</DtOfSgntr>
+            <MndtId>072710000069</MndtId>
+            <DtOfSgntr>2009-10-31</DtOfSgntr>
          </MndtRltdInf>
       </DrctDbtTx>
       <DbtrAgt>
          <FinInstnId>
-            <BIC>CAHMESMMXXX</BIC>
+            <BIC>CCRIES2AXXX</BIC>
          </FinInstnId>
       </DbtrAgt>
       <Dbtr>
-         <Nm>JOSE MORALES, S.L.</Nm>
+         <Nm>VIT. DE LA POBLA DEL DUC, COOP</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
-              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
+              <AdrLine>Daniel Sanjuan, 11</AdrLine>
+              <AdrLine>POBLA DEL DUC   46840     VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <PrvtId>
                <Othr>
-                   <Id>766800001567</Id>
+                   <Id>072710000069</Id>
                </Othr>
             </PrvtId>
          </Id>
       </Dbtr>
       <DbtrAcct>
          <Id>
-            <IBAN>ES4320388715766800001567</IBAN>
+            <IBAN>ES2230582267072710000069</IBAN>
          </Id>
       </DbtrAcct>
       <Purp>
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>FACTURA  A-3600215 de Fecha 30 jun 2016</Ustrd>
-      </RmtInf>
-   </DrctDbtTxInf>
-   <DrctDbtTxInf>
-      <PmtId>
-          <EndToEndId>430000237 M  0360032320160701001   </EndToEndId>
-      </PmtId>
-      <InstdAmt Ccy="EUR">187.55</InstdAmt>
-      <DrctDbtTx>
-         <MndtRltdInf>
-            <MndtId>766800001567</MndtId>
-            <DtOfSgntr>2014-02-27</DtOfSgntr>
-         </MndtRltdInf>
-      </DrctDbtTx>
-      <DbtrAgt>
-         <FinInstnId>
-            <BIC>CAHMESMMXXX</BIC>
-         </FinInstnId>
-      </DbtrAgt>
-      <Dbtr>
-         <Nm>JOSE MORALES, S.L.</Nm>
-         <PstlAdr>
-            <Ctry>ES</Ctry>
-              <AdrLine>C.C-3320,km. 29,6 - Pol. Ind. Cotes</AdrLine>
-              <AdrLine>ALGEMESI   46680     VALENCIA</AdrLine>
-         </PstlAdr>
-         <Id>
-            <PrvtId>
-               <Othr>
-                   <Id>766800001567</Id>
-               </Othr>
-            </PrvtId>
-         </Id>
-      </Dbtr>
-      <DbtrAcct>
-         <Id>
-            <IBAN>ES4320388715766800001567</IBAN>
-         </Id>
-      </DbtrAcct>
-      <Purp>
-         <Cd>TRAD</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>FACTURA  M-3600323 de Fecha 01 jul 2016</Ustrd>
+         <Ustrd>Factura A-0000007 de Fecha 08/09/2016</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
 </PmtInf>

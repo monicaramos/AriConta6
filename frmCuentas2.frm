@@ -127,49 +127,49 @@ Begin VB.Form frmCuentas
          TabCaption(1)   =   "Tesorería"
          TabPicture(1)   =   "frmCuentas2.frx":0028
          Tab(1).ControlEnabled=   0   'False
-         Tab(1).Control(0)=   "Label1(21)"
+         Tab(1).Control(0)=   "Text1(34)"
          Tab(1).Control(0).Enabled=   0   'False
-         Tab(1).Control(1)=   "Label1(24)"
+         Tab(1).Control(1)=   "Text1(33)"
          Tab(1).Control(1).Enabled=   0   'False
-         Tab(1).Control(2)=   "Image1(1)"
+         Tab(1).Control(2)=   "Text1(32)"
          Tab(1).Control(2).Enabled=   0   'False
-         Tab(1).Control(3)=   "Image1(0)"
+         Tab(1).Control(3)=   "Text1(31)"
          Tab(1).Control(3).Enabled=   0   'False
-         Tab(1).Control(4)=   "Label1(26)"
+         Tab(1).Control(4)=   "Frame4"
          Tab(1).Control(4).Enabled=   0   'False
-         Tab(1).Control(5)=   "Label1(27)"
+         Tab(1).Control(5)=   "Text1(16)"
          Tab(1).Control(5).Enabled=   0   'False
-         Tab(1).Control(6)=   "imgppal(4)"
+         Tab(1).Control(6)=   "Text1(15)"
          Tab(1).Control(6).Enabled=   0   'False
-         Tab(1).Control(7)=   "Label1(28)"
+         Tab(1).Control(7)=   "Text1(14)"
          Tab(1).Control(7).Enabled=   0   'False
-         Tab(1).Control(8)=   "Text1(29)"
+         Tab(1).Control(8)=   "Text1(13)"
          Tab(1).Control(8).Enabled=   0   'False
-         Tab(1).Control(9)=   "Text1(25)"
+         Tab(1).Control(9)=   "Text2(1)"
          Tab(1).Control(9).Enabled=   0   'False
-         Tab(1).Control(10)=   "Text1(26)"
+         Tab(1).Control(10)=   "Text2(0)"
          Tab(1).Control(10).Enabled=   0   'False
-         Tab(1).Control(11)=   "Text2(0)"
+         Tab(1).Control(11)=   "Text1(26)"
          Tab(1).Control(11).Enabled=   0   'False
-         Tab(1).Control(12)=   "Text2(1)"
+         Tab(1).Control(12)=   "Text1(25)"
          Tab(1).Control(12).Enabled=   0   'False
-         Tab(1).Control(13)=   "Text1(13)"
+         Tab(1).Control(13)=   "Text1(29)"
          Tab(1).Control(13).Enabled=   0   'False
-         Tab(1).Control(14)=   "Text1(14)"
+         Tab(1).Control(14)=   "Label1(28)"
          Tab(1).Control(14).Enabled=   0   'False
-         Tab(1).Control(15)=   "Text1(15)"
+         Tab(1).Control(15)=   "imgppal(4)"
          Tab(1).Control(15).Enabled=   0   'False
-         Tab(1).Control(16)=   "Text1(16)"
+         Tab(1).Control(16)=   "Label1(27)"
          Tab(1).Control(16).Enabled=   0   'False
-         Tab(1).Control(17)=   "Frame4"
+         Tab(1).Control(17)=   "Label1(26)"
          Tab(1).Control(17).Enabled=   0   'False
-         Tab(1).Control(18)=   "Text1(31)"
+         Tab(1).Control(18)=   "Image1(0)"
          Tab(1).Control(18).Enabled=   0   'False
-         Tab(1).Control(19)=   "Text1(32)"
+         Tab(1).Control(19)=   "Image1(1)"
          Tab(1).Control(19).Enabled=   0   'False
-         Tab(1).Control(20)=   "Text1(33)"
+         Tab(1).Control(20)=   "Label1(24)"
          Tab(1).Control(20).Enabled=   0   'False
-         Tab(1).Control(21)=   "Text1(34)"
+         Tab(1).Control(21)=   "Label1(21)"
          Tab(1).Control(21).Enabled=   0   'False
          Tab(1).ControlCount=   22
          TabCaption(2)   =   "Departamentos"
@@ -3865,7 +3865,7 @@ Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
     ' *** si cal comprovar alguna cosa abans de borrar ***
     Select Case Index
         Case 2 'departamentos
-            Sql = "select count(*) from scobro where codmacta = '" & Trim(AdoAux(2).Recordset!codmacta) & "' and departamento =" & AdoAux(2).Recordset!Dpto
+            Sql = "select count(*) from cobros where codmacta = '" & Trim(AdoAux(2).Recordset!codmacta) & "' and departamento =" & AdoAux(2).Recordset!Dpto
             If TotalRegistros(Sql) <> 0 Then
                 MsgBox "Este departamento se encuentra en el mantenimiento de cobros. Revise. ", vbInformation   '& vbCrLf & "¿ Desea eliminarlo de todas formas ?" & vbCrLf & vbCrLf, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                 Exit Function

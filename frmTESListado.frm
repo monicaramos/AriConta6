@@ -18,7 +18,7 @@ Begin VB.Form frmTESListado
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameCompensaciones 
       Height          =   6045
-      Left            =   30
+      Left            =   60
       TabIndex        =   4
       Top             =   60
       Width           =   8235
@@ -538,7 +538,7 @@ Begin VB.Form frmTESListado
    End
    Begin VB.Frame FrameRecepcionDocumentos 
       Height          =   4815
-      Left            =   30
+      Left            =   60
       TabIndex        =   38
       Top             =   60
       Visible         =   0   'False
@@ -1822,7 +1822,7 @@ Private Sub Imagente_Click(Index As Integer)
 End Sub
 
 
-Private Sub imgCCoste_Click(Index As Integer)
+Private Sub ImgCCoste_Click(Index As Integer)
     
     IndCodigo = Index
     

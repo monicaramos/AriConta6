@@ -4,15 +4,15 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmTESVarios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "1"
-   ClientHeight    =   9390
+   ClientHeight    =   7110
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   12855
+   ClientWidth     =   14385
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9390
-   ScaleWidth      =   12855
+   ScaleHeight     =   7110
+   ScaleWidth      =   14385
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
@@ -24,9 +24,9 @@ Begin VB.Form frmTESVarios
    End
    Begin VB.Frame FrameModiRemeTal 
       Height          =   3015
-      Left            =   30
-      TabIndex        =   24
-      Top             =   60
+      Left            =   0
+      TabIndex        =   10
+      Top             =   0
       Width           =   6765
       Begin VB.CommandButton cmdModRemTal 
          Caption         =   "Modificar"
@@ -41,7 +41,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   375
          Left            =   4080
-         TabIndex        =   27
+         TabIndex        =   13
          Top             =   2400
          Width           =   1095
       End
@@ -59,7 +59,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   25
          Left            =   5280
-         TabIndex        =   28
+         TabIndex        =   14
          Top             =   2400
          Width           =   1095
       End
@@ -78,7 +78,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   8
          Left            =   2040
-         TabIndex        =   29
+         TabIndex        =   15
          Text            =   "Text2"
          Top             =   1800
          Width           =   4335
@@ -96,7 +96,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   8
          Left            =   480
-         TabIndex        =   26
+         TabIndex        =   12
          Text            =   "Text2"
          Top             =   1800
          Width           =   1485
@@ -114,7 +114,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   27
          Left            =   480
-         TabIndex        =   25
+         TabIndex        =   11
          Text            =   "Text1"
          Top             =   1080
          Width           =   1485
@@ -134,7 +134,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   1
          Left            =   510
-         TabIndex        =   41
+         TabIndex        =   27
          Top             =   1530
          Width           =   840
       End
@@ -153,7 +153,7 @@ Begin VB.Form frmTESVarios
          Height          =   285
          Index           =   18
          Left            =   510
-         TabIndex        =   40
+         TabIndex        =   26
          Top             =   780
          Width           =   840
       End
@@ -173,7 +173,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   10
          Left            =   240
-         TabIndex        =   30
+         TabIndex        =   16
          Top             =   240
          Width           =   5295
       End
@@ -195,14 +195,14 @@ Begin VB.Form frmTESVarios
    Begin VB.Frame FrameReclamaEmail 
       Height          =   6975
       Left            =   0
-      TabIndex        =   31
+      TabIndex        =   17
       Top             =   0
       Width           =   10335
       Begin VB.CommandButton cmdEliminarReclama 
          Height          =   375
          Left            =   1200
          Style           =   1  'Graphical
-         TabIndex        =   39
+         TabIndex        =   25
          ToolTipText     =   "Eliminar"
          Top             =   6360
          Width           =   375
@@ -220,7 +220,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   375
          Left            =   7560
-         TabIndex        =   38
+         TabIndex        =   24
          Top             =   6360
          Width           =   1215
       End
@@ -238,7 +238,7 @@ Begin VB.Form frmTESVarios
          Height          =   240
          Index           =   1
          Left            =   8760
-         TabIndex        =   36
+         TabIndex        =   22
          Top             =   450
          Width           =   1365
       End
@@ -256,7 +256,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   0
          Left            =   7230
-         TabIndex        =   35
+         TabIndex        =   21
          Top             =   480
          Value           =   -1  'True
          Width           =   1335
@@ -275,14 +275,14 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   31
          Left            =   9000
-         TabIndex        =   32
+         TabIndex        =   18
          Top             =   6360
          Width           =   1095
       End
       Begin MSComctlLib.ListView ListView6 
          Height          =   5295
          Left            =   240
-         TabIndex        =   33
+         TabIndex        =   19
          Top             =   840
          Width           =   9855
          _ExtentX        =   17383
@@ -353,7 +353,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   44
          Left            =   6300
-         TabIndex        =   37
+         TabIndex        =   23
          Top             =   420
          Width           =   750
       End
@@ -371,254 +371,15 @@ Begin VB.Form frmTESVarios
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   240
-         TabIndex        =   34
+         TabIndex        =   20
          Top             =   360
          Width           =   4935
-      End
-   End
-   Begin VB.Frame frameAcercaDE 
-      BorderStyle     =   0  'None
-      Height          =   3795
-      Left            =   0
-      TabIndex        =   0
-      Top             =   0
-      Width           =   5475
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "Cancelar"
-         Height          =   375
-         Index           =   11
-         Left            =   3960
-         TabIndex        =   8
-         Top             =   3360
-         Visible         =   0   'False
-         Width           =   1095
-      End
-      Begin VB.Label Label12 
-         BackStyle       =   0  'Transparent
-         Caption         =   "ARIMONEY"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   36
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   915
-         Left            =   240
-         TabIndex        =   3
-         Top             =   120
-         Width           =   4695
-      End
-      Begin VB.Image Image2 
-         Height          =   540
-         Left            =   1740
-         Top             =   1800
-         Width           =   2880
-      End
-      Begin VB.Label Label13 
-         Alignment       =   1  'Right Justify
-         BackStyle       =   0  'Transparent
-         Caption         =   "Label13"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   1080
-         TabIndex        =   7
-         Top             =   1200
-         Width           =   3795
-      End
-      Begin VB.Label Label17 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "C/ Uruguay 11, Despacho 710"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   120
-         TabIndex        =   6
-         Top             =   2640
-         Width           =   2610
-      End
-      Begin VB.Label Label18 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "46007 - VALENCIA"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   3240
-         TabIndex        =   5
-         Top             =   2640
-         Width           =   1620
-      End
-      Begin VB.Label Label25 
-         BackStyle       =   0  'Transparent
-         Caption         =   "4"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   81.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   1725
-         Left            =   3960
-         TabIndex        =   4
-         Top             =   0
-         Width           =   1350
-      End
-      Begin VB.Label Label26 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Tfno: 96 380 55 79"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   780
-         TabIndex        =   2
-         Top             =   3000
-         Width           =   1650
-      End
-      Begin VB.Label Label27 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Fax: 96 342 09 38"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   3240
-         TabIndex        =   1
-         Top             =   3000
-         Width           =   1560
-      End
-   End
-   Begin VB.Frame FrameeMPRESAS 
-      BorderStyle     =   0  'None
-      Height          =   5415
-      Left            =   0
-      TabIndex        =   9
-      Top             =   0
-      Width           =   5535
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "Salir"
-         Height          =   375
-         Index           =   20
-         Left            =   4320
-         TabIndex        =   13
-         Top             =   4800
-         Width           =   1095
-      End
-      Begin VB.CommandButton cmdEmpresa 
-         Caption         =   "Regresar"
-         Height          =   375
-         Index           =   0
-         Left            =   3240
-         TabIndex        =   10
-         Top             =   4800
-         Width           =   975
-      End
-      Begin MSComctlLib.ListView lwE 
-         Height          =   3615
-         Left            =   120
-         TabIndex        =   11
-         Top             =   840
-         Width           =   5295
-         _ExtentX        =   9340
-         _ExtentY        =   6376
-         View            =   3
-         LabelWrap       =   -1  'True
-         HideSelection   =   0   'False
-         HideColumnHeaders=   -1  'True
-         Checkboxes      =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   1
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "dsdsd"
-            Object.Width           =   7056
-         EndProperty
-      End
-      Begin VB.Label Label7 
-         Caption         =   "Empresas en el sistema"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   15.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   495
-         Index           =   8
-         Left            =   120
-         TabIndex        =   12
-         Top             =   240
-         Width           =   5295
       End
    End
    Begin VB.Frame FrameAgregarCuentas 
       Height          =   6015
       Left            =   0
-      TabIndex        =   14
+      TabIndex        =   0
       Top             =   0
       Width           =   6015
       Begin VB.CommandButton cmdInsertaCta 
@@ -634,7 +395,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   315
          Left            =   5400
-         TabIndex        =   18
+         TabIndex        =   4
          Top             =   1080
          Width           =   315
       End
@@ -653,7 +414,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   5
          Left            =   1560
-         TabIndex        =   19
+         TabIndex        =   5
          Text            =   "Text9"
          Top             =   1080
          Width           =   3735
@@ -671,7 +432,7 @@ Begin VB.Form frmTESVarios
          Height          =   360
          Index           =   5
          Left            =   120
-         TabIndex        =   17
+         TabIndex        =   3
          Text            =   "Text9"
          Top             =   1080
          Width           =   1365
@@ -689,7 +450,7 @@ Begin VB.Form frmTESVarios
          EndProperty
          Height          =   375
          Left            =   3360
-         TabIndex        =   20
+         TabIndex        =   6
          Top             =   5400
          Width           =   1095
       End
@@ -707,7 +468,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   21
          Left            =   4680
-         TabIndex        =   22
+         TabIndex        =   8
          Top             =   5400
          Width           =   1095
       End
@@ -724,7 +485,7 @@ Begin VB.Form frmTESVarios
          Height          =   3420
          Left            =   120
          Sorted          =   -1  'True
-         TabIndex        =   16
+         TabIndex        =   2
          Top             =   1560
          Width           =   5655
       End
@@ -750,7 +511,7 @@ Begin VB.Form frmTESVarios
          Height          =   195
          Index           =   23
          Left            =   600
-         TabIndex        =   23
+         TabIndex        =   9
          Top             =   5400
          Width           =   1470
       End
@@ -775,7 +536,7 @@ Begin VB.Form frmTESVarios
          Height          =   255
          Index           =   25
          Left            =   120
-         TabIndex        =   21
+         TabIndex        =   7
          Top             =   720
          Width           =   735
       End
@@ -803,7 +564,7 @@ Begin VB.Form frmTESVarios
          Height          =   375
          Index           =   15
          Left            =   480
-         TabIndex        =   15
+         TabIndex        =   1
          Top             =   240
          Width           =   4935
       End
@@ -951,136 +712,6 @@ End Sub
 
 
 
-Private Function AdelanteConLaRemesa() As Boolean
-Dim C As String
-
-    AdelanteConLaRemesa = False
-    Sql = ""
-    
-    'Efectos eliminados
-    If Rs!Situacion = "Z" Or Rs!Situacion = "Y" Then Sql = "Efectos eliminados"
-    
-    'abierta sin llevar a banco. Esto solo es valido para las de efectos
-    If SubTipo = 1 Then
-        If Rs!Situacion = "A" Then Sql = "Remesa abierta. Sin llevar al banco."
-    
-    End If
-    'Ya contabilizada
-    If Rs!Situacion = "Q" Then Sql = "Remesa abonada."
-    
-    If Sql <> "" Then Exit Function
-    
-    
-    
-    
-    If Opcion = 8 Then
-        'COntbilizar / abonar remesa
-        '---------------------------------------------------------------------------
-        If SubTipo = 1 Then
-            'Febrero 2009
-            'Ahora toooodas las remesas se hace lo mismmo
-            ' De llevada a banco a cancelar cliente. De cancelar a abonar y de abonar a eliminar. NO
-            'hay distinciones entre remesas. Para podrer abonar una remesa esta tiene que estar cancelada
-            
-        Else
-            If Rs!Tiporem = 2 And vParamT.PagaresCtaPuente Then
-                If Rs!Situacion <> "F" Then Sql = "La remesa NO puede abonarse. Falta cancelación "
-            End If
-            
-            If Rs!Tiporem = 3 And vParamT.TalonesCtaPuente Then
-                If Rs!Situacion <> "F" Then Sql = "La remesa NO puede abonarse. Falta cancelación "
-            End If
-        End If
-        
-            
-    Else
-       'Vamos a proceder al proceso de generacion cancelacion  /* CANCELACION */
-       If SubTipo = 1 Then
-            'Para los efectos la norma no tiene que ser 19
-            'Febrero 2009.  Para tooodas las normas
-            'If Rs!Tipo = 0 Then
-            '    SQL = "Proceso no válido para NORMA 19"
-            '    Exit Function
-            'End If
-        
-       End If
-       
-       'Para elos tipos 1,2
-       If Opcion = 22 Then
-            'Cancelacion cliente
-            'Para los efectos, tiene que estar generado soporte. Para talones/pagares no es obligado
-            If SubTipo = 1 Then
-                If Rs!Situacion <> "B" Then Sql = "Para cancelar la remesa deberia esta en situación 'Soporte generado'"
-            Else
-                If Rs!Situacion = "F" Then Sql = "Remesa YA cancelada"
-            End If
-        Else
-            'Febrero 2009
-            'No hay confirmacion
-            Sql = "Opción de confirmacion NO es válida"
-            'Confirmacion
-            'If Rs!situacion <> "F" Then SQL = "Para confirmar la remesa esta deberia estar 'Cancelacion cliente'"
-       End If
-       
-       
-       'Si hasta aqui esta bien:
-       'Compruebo que tiene configurado en parametros
-       If Sql = "" Then
-            'Comprobamos si esta bien configurada
-            '
-            If SubTipo = 1 Then
-                    If Opcion = 22 Then
-                        'SQL = "4310"
-                        Sql = "RemesaCancelacion"
-                    Else
-                        Sql = "RemesaConfirmacion"
-                    End If
-                    Sql = DevuelveDesdeBD(Sql, "paramtesor", "codigo", "1")
-                    If Sql = "" Then
-                        Sql = "Falta configurar parámetros cuentas confirmación/cancelación remesa. "
-                    Else
-                        'OK. Esta configurado
-                        Sql = ""
-                    End If
-                    
-            Else
-                'talones pagares
-                'Veremos si esta configurado(y bien configurado) para el proceso
-                If Rs!Tiporem = 2 Then
-                    'Pagare
-                    C = "contapagarepte"
-                ElseIf Rs!Tiporem = 3 Then
-                    'Talones
-                    C = "contatalonpte"
-                Else
-                    'NO DEBIA HABERSE METIDO AQUI
-                    C = ""
-                    
-                End If
-                If C = "" Then
-                    Sql = "Error validando tipo de remesa"
-                    
-                Else
-                    C = DevuelveDesdeBD(C, "paramtesor", "codigo", 1)
-                    If C = "" Then C = "0"
-                    If Val(C) = 0 Then
-                        Sql = "Falta configurar la aplicacion para las remesas de talones / pagares"
-                    Else
-                        Sql = ""
-                    End If
-                End If
-            End If
-       End If
-    End If
-    AdelanteConLaRemesa = Sql = ""
-    
-End Function
-
-
-
-
-
-
 
 
 
@@ -1105,32 +736,6 @@ Private Sub cmdEliminarReclama_Click()
         Next I
     End If
 End Sub
-
-Private Sub cmdEmpresa_Click(Index As Integer)
-    CadenaDesdeOtroForm = ""
-    If Index = 0 Then
-        Sql = ""
-        CuentasCC = ""
-        For I = 1 To lwE.ListItems.Count
-            If Me.lwE.ListItems(I).Checked Then
-                Sql = Sql & Me.lwE.ListItems(I).Text & "|"
-                CuentasCC = CuentasCC & "1" 'Contador
-            End If
-        Next I
-        CadenaDesdeOtroForm = Len(CuentasCC) & "|" & Sql
-        'Vemos las conta
-        Sql = ""
-        For I = 1 To lwE.ListItems.Count
-            If Me.lwE.ListItems(I).Checked Then
-                Sql = Sql & Me.lwE.ListItems(I).Tag & "|"
-            End If
-        Next I
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & Sql
-    End If
-    Unload Me
-
-End Sub
-
 
 
 
@@ -1227,29 +832,18 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         Select Case Opcion
-            
-        Case 13, 14
-            If Opcion = 13 Then
-            Else
-                PonerFoco txtCtaNormal(1)
-            End If
-        Case 15
-            Text1(15).SetFocus
-            
-            
-        Case 21
-          
-            CargalistaCuentas
-            PonerFoco txtCtaNormal(5)
-            
-        Case 25
-            PonerFoco Text1(27)
-            
-            
-        Case 31
-            
-            ReclamacionGargarList
-            If ListView6.ListItems.Count = 0 Then optReclama(1).Value = True
+            Case 21
+              
+                CargalistaCuentas
+                PonerFoco txtCtaNormal(5)
+                
+            Case 25
+                PonerFoco Text1(27)
+                
+            Case 31
+                
+                ReclamacionGargarList
+                If ListView6.ListItems.Count = 0 Then optReclama(1).Value = True
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -1274,16 +868,7 @@ Dim W As Integer
     Me.imgEliminarCta.Picture = frmPpal.ImaListBotoneras32.ListImages(5).Picture
     
     
-'    Carga1ImagenAyuda Me.Image4, 1
-'    Carga1ImagenAyuda Me.Image3, 1
-'    Carga1ImagenAyuda imgFra, 1
-'--    CargaImagenesAyudas Me.Image4, 1
-'    CargaImagenesAyudas Me.Image3, 1
-'    CargaImagenesAyudas imgFra, 1
     
-    
-    frameAcercaDE.Visible = False
-    FrameeMPRESAS.Visible = False
     FrameAgregarCuentas.Visible = False
     FrameModiRemeTal.Visible = False
     FrameReclamaEmail.Visible = False
@@ -1291,23 +876,6 @@ Dim W As Integer
     Select Case Opcion
         
         
-    Case 11
-        CargaImagen
-        Me.Caption = "Acerca de ....."
-        W = Me.frameAcercaDE.Width
-        H = Me.frameAcercaDE.Height + 50
-        Me.frameAcercaDE.Visible = True
-        Label13.Caption = "Versión:  " & App.Major & "." & App.Minor & "." & App.Revision & " "
-        
-        
-        
-    Case 20
-        
-        Me.Caption = "Empresas disponibles"
-        FrameeMPRESAS.Visible = True
-        W = Me.FrameeMPRESAS.Width
-        H = Me.FrameeMPRESAS.Height '+ 200
-        cargaempresas
         
     Case 21
         Caption = "Seleccionar cuentas"
@@ -1677,17 +1245,6 @@ End Sub
 
 
 
-Private Sub CargaImagen()
-On Error Resume Next
-    Image2.Picture = LoadPicture(App.Path & "\minilogo.bmp")
-    'Image1.Picture = LoadPicture(App.path & "\fondon.gif")
-    Err.Clear
-End Sub
-
-
-
-
-
 
 
 
@@ -1719,108 +1276,6 @@ Dim B As Boolean
     End If
     Label1(14).Visible = B
 End Sub
-
-
-
-
-
-
-
-'------------------------------------------------------------
-'Empresas prohibidas
-Private Sub cargaempresas()
-Dim Prohibidas As String
-
-On Error GoTo Ecargaempresas
-
-    VerEmresasProhibidas Prohibidas
-    
-    Sql = "Select * from Usuarios.Empresas where tesor=1 order by codempre"
-    Set lwE.SmallIcons = frmMantenusu.ImageList1
-    lwE.ListItems.Clear
-    Set Rs = New ADODB.Recordset
-    I = -1
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-        Sql = "|" & Rs!codempre & "|"
-        If InStr(1, Prohibidas, Sql) = 0 Then
-            Set IT = lwE.ListItems.Add(, , Rs!nomempre, , 3)
-            IT.Tag = Rs!codempre
-            If IT.Tag = vEmpresa.codempre Then
-                IT.Checked = True
-                I = IT.Index
-            End If
-            IT.ToolTipText = Rs!CONTA
-        End If
-        Rs.MoveNext
-    Wend
-    Rs.Close
-    If I > 0 Then Set lwE.SelectedItem = lwE.ListItems(I)
-Ecargaempresas:
-    If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos empresas"
-    Set Rs = Nothing
-End Sub
-
-Private Sub VerEmresasProhibidas(ByRef VarProhibidas As String)
-
-On Error GoTo EVerEmresasProhibidas
-    VarProhibidas = "|"
-    Sql = "Select codempre from Usuarios.usuarioempresasariconta WHERE codusu = " & (vUsu.Codigo Mod 1000)
-    Sql = Sql & " order by codempre"
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not Rs.EOF
-          VarProhibidas = VarProhibidas & Rs!codempre & "|"
-          Rs.MoveNext
-    Wend
-    Rs.Close
-    Exit Sub
-EVerEmresasProhibidas:
-    MuestraError Err.Number, Err.Description & vbCrLf & " Consulte soporte técnico"
-    Set Rs = Nothing
-End Sub
-
-
-
-
-
-Private Function LeerGuardarOrdenacion(Leer As Boolean, Cobros As Boolean, Valor As Integer) As Integer
-Dim C As String
-Dim NF As Integer
-Dim Fichero As String
-
-On Error GoTo ELeerGuardarOrdenacion
-    LeerGuardarOrdenacion = 0
-    
-    NF = FreeFile
-    If Cobros Then
-        Fichero = App.Path & "\OrdenCob.xdf"
-    Else
-        Fichero = App.Path & "\OrdenPag.xdf"
-    End If
-    If Leer Then
-        
-        If Dir(Fichero, vbArchive) <> "" Then
-            
-            Open Fichero For Input As #NF
-            Line Input #NF, C
-            Close #NF
-            
-            LeerGuardarOrdenacion = Val(C)
-    
-        End If
-    Else
-        
-            Open Fichero For Output As #NF
-            Print #NF, Valor
-            Close #NF
-    
-    End If
-    Exit Function
-ELeerGuardarOrdenacion:
-    Err.Clear
-End Function
-
 
 
 Private Sub CargalistaCuentas()
@@ -1988,33 +1443,7 @@ End Sub
 
 
 
-Private Function ComprobacionFechasRemesaN19PorVto() As String
-Dim Aux As String
 
-    ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & Rs!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("min(fecvenci)", "scobro", Aux, Rs!Codigo)
-    If Aux = "" Then
-        ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
-    Else
-        If CDate(Aux) < vParam.fechaini Then
-            ComprobacionFechasRemesaN19PorVto = "Vtos con fecha menor que inicio de ejercicio"
-        End If
-    End If
-    If ComprobacionFechasRemesaN19PorVto <> "" Then Exit Function
-    
-    ComprobacionFechasRemesaN19PorVto = ""
-    Aux = "anyorem = " & Rs!Anyo & " AND codrem "
-    Aux = DevuelveDesdeBD("max(fecvenci)", "scobro", Aux, Rs!Codigo)
-    If Aux = "" Then
-        ComprobacionFechasRemesaN19PorVto = "Error fechas vto"
-        Exit Function
-    End If
-    If CDate(Aux) > DateAdd("yyyy", 1, vParam.fechafin) Then ComprobacionFechasRemesaN19PorVto = "Vtos con fecha mayor que fin de ejercicio"
-    
-    
-    
-End Function
 
 
 Private Sub ReclamacionGargarList()

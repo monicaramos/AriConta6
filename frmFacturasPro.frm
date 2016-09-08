@@ -2867,6 +2867,8 @@ Private Sub cmdAceptar_Click()
     Dim Limp As Boolean
     Dim Mc As Contadores
     Dim B As Boolean
+    Dim SqlLog As String
+    
 
     Screen.MousePointer = vbHourglass
     
@@ -2948,7 +2950,10 @@ Private Sub cmdAceptar_Click()
                     PagosTesoreria
                     
                     'LOG
-                    vLog.Insertar 5, vUsu, Text1(2).Text & Text1(0).Text & " " & Text1(1).Text
+                    SqlLog = "Factura : " & Text1(2).Text & " " & Text1(0).Text & " " & Text1(1).Text
+                    SqlLog = SqlLog & vbCrLf & "Proveed.: " & Text1(4).Text & " " & Text4(4).Text
+
+                    vLog.Insertar 9, vUsu, SqlLog
                     'Creo que no hace falta volver a situar el datagrid
                     'If SituarData1(0) Then
                     PosicionarData
@@ -2979,10 +2984,6 @@ Private Sub cmdAceptar_Click()
                         End If
                     End If
                 
-                    'LOG
-                    vLog.Insertar 5, vUsu, Text1(2).Text & Text1(0).Text & " " & Text1(1).Text
-                    'Creo que no hace falta volver a situar el datagrid
-                    
                     PagosTesoreria
                     
                     PosicionarData
@@ -4262,7 +4263,7 @@ Dim vFe As String
     If cmdAux(0).Tag = 0 Then
         'Cuenta normal
         txtAux(5).Text = RecuperaValor(CadenaSeleccion, 1)
-        txtAux2(5).Text = RecuperaValor(CadenaSeleccion, 2)
+        txtaux2(5).Text = RecuperaValor(CadenaSeleccion, 2)
         
         'Habilitaremos el ccoste
         HabilitarCentroCoste
@@ -4277,7 +4278,7 @@ End Sub
 Private Sub frmCC_DatoSeleccionado(CadenaSeleccion As String)
     'Centro de coste
     txtAux(12).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtAux2(12).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtaux2(12).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
@@ -4737,15 +4738,12 @@ Private Sub BotonEliminar(EliminarDesdeActualizar As Boolean)
         
             'La borrara desde actualizar
             AlgunAsientoActualizado = False
+           
             
-            SqlLog = "Factura : "
-            SqlLog = SqlLog & vbCrLf & "Serie       : " & CStr(DBLet(Data1.Recordset!NUmSerie))
-            SqlLog = SqlLog & vbCrLf & "Nro.Registro: " & Format(I, "000000")
-            SqlLog = SqlLog & vbCrLf & "F.Recepción : " & Fec
-            SqlLog = SqlLog & vbCrLf & "Factura     : " & Text1(25).Text & " de fecha " & Text1(26).Text
-            SqlLog = SqlLog & vbCrLf & "Proveedor   : " & Text1(4).Text & " " & Text4(4).Text
+            SqlLog = "Factura : " & Text1(2).Text & " " & Text1(0).Text & " " & Text1(1).Text
+            SqlLog = SqlLog & vbCrLf & "Proveed.: " & Text1(4).Text & " " & Text4(4).Text
             SqlLog = SqlLog & vbCrLf & "Importe : " & Text1(13).Text
-            
+
             
             With frmActualizar
                 .OpcionActualizar = 9
@@ -4773,13 +4771,10 @@ Private Sub BotonEliminar(EliminarDesdeActualizar As Boolean)
         Fec = Data1.Recordset!fecharec
         If BorrarFactura Then
             'LOG
-            SqlLog = "Factura : "
-            SqlLog = SqlLog & vbCrLf & "Serie       : " & CStr(DBLet(Data1.Recordset!NUmSerie))
-            SqlLog = SqlLog & vbCrLf & "Nro.Registro: " & Format(I, "000000")
-            SqlLog = SqlLog & vbCrLf & "F.Recepción : " & Fec
-            SqlLog = SqlLog & vbCrLf & "Factura     : " & Text1(25).Text & " de fecha " & Text1(26).Text
-            SqlLog = SqlLog & vbCrLf & "Proveedor   : " & Text1(4).Text & " " & Text4(4).Text
+            SqlLog = "Factura : " & Text1(2).Text & " " & Text1(0).Text & " " & Text1(1).Text
+            SqlLog = SqlLog & vbCrLf & "Proveed.: " & Text1(4).Text & " " & Text4(4).Text
             SqlLog = SqlLog & vbCrLf & "Importe : " & Text1(13).Text
+            
             vLog.Insertar 10, vUsu, SqlLog
         
             AlgunAsientoActualizado = True
@@ -5514,6 +5509,7 @@ Private Sub BotonEliminarLinea(Index As Integer)
 Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
+Dim SqlLog As String
 
     On Error GoTo Error2
 
@@ -5570,7 +5566,14 @@ Dim Eliminar As Boolean
         End If
         
         'LOG
-        vLog.Insertar 6, vUsu, Text1(2).Text & Text1(0).Text & " " & Text1(1).Text
+        SqlLog = "Factura : " & Text1(2).Text & " " & Text1(0).Text & " " & Text1(1).Text
+        SqlLog = SqlLog & vbCrLf & "Proveed.: " & Text1(4).Text & " " & Text4(4).Text
+        SqlLog = SqlLog & vbCrLf & "Línea   : " & DBLet(Me.AdoAux(1).Recordset!NumLinea, "N")
+        SqlLog = SqlLog & vbCrLf & "Importe : " & Text1(13).Text
+        
+        
+        vLog.Insertar 12, vUsu, SqlLog
+        
         'Creo que no hace falta volver a situar el datagrid
         If True Then
             lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -5669,8 +5672,8 @@ Dim I As Integer
                     
                     
                     If Limpia Then
-                        txtAux2(5).Text = ""
-                        txtAux2(12).Text = ""
+                        txtaux2(5).Text = ""
+                        txtaux2(12).Text = ""
                     End If
 
                     chkAux(0).Value = 1
@@ -5787,7 +5790,7 @@ Private Sub BotonModificarLinea(Index As Integer)
             txtAux(4).Text = DataGridAux(Index).Columns(4).Text
             
             txtAux(5).Text = DataGridAux(Index).Columns(5).Text 'cuenta
-            txtAux2(5).Text = DataGridAux(Index).Columns(6).Text 'denominacion
+            txtaux2(5).Text = DataGridAux(Index).Columns(6).Text 'denominacion
             txtAux(6).Text = DataGridAux(Index).Columns(7).Text 'baseimpo
             txtAux(7).Text = DataGridAux(Index).Columns(8).Text 'codigiva
             txtAux(8).Text = DataGridAux(Index).Columns(9).Text '%iva
@@ -5800,7 +5803,7 @@ Private Sub BotonModificarLinea(Index As Integer)
                 chkAux(0).Value = 0
             End If
             txtAux(12).Text = DataGridAux(Index).Columns(15).Text 'centro de coste
-            txtAux2(12).Text = DataGridAux(Index).Columns(16).Text 'nombre centro de coste
+            txtaux2(12).Text = DataGridAux(Index).Columns(16).Text 'nombre centro de coste
             
             
     End Select
@@ -5830,10 +5833,10 @@ Dim B As Boolean
                 txtAux(jj).Top = alto
             Next jj
             
-            txtAux2(5).Visible = B
-            txtAux2(5).Top = alto
-            txtAux2(12).Visible = B
-            txtAux2(12).Top = alto
+            txtaux2(5).Visible = B
+            txtaux2(5).Top = alto
+            txtaux2(12).Visible = B
+            txtaux2(12).Top = alto
             
             
             chkAux(0).Visible = B
@@ -5850,8 +5853,8 @@ Dim B As Boolean
                 cmdAux(2).Enabled = False
                 txtAux(12).Visible = False
                 txtAux(12).Enabled = False
-                txtAux2(12).Visible = False
-                txtAux2(12).Enabled = False
+                txtaux2(12).Visible = False
+                txtaux2(12).Enabled = False
             End If
             
     End Select
@@ -5915,7 +5918,7 @@ Dim vFact As Byte, vDocum As Byte
         If IvaCuenta = "" Then
             CambiarIva = True
         Else
-            If txtAux(7).Text <> IvaCuenta Then
+            If CInt(ComprobarCero(txtAux(7).Text)) <> CInt(ComprobarCero(IvaCuenta)) Then
                 If MsgBox("El código de iva es distinto del de la cuenta. " & vbCrLf & " ¿ Desea modificarlo en la cuenta ? " & vbCrLf & vbCrLf, vbQuestion + vbYesNo) = vbYes Then
                     CambiarIva = True
                 Else
@@ -6082,8 +6085,8 @@ Dim tots As String
                 For I = 0 To 4
                     txtAux(I).Text = ""
                 Next I
-                txtAux2(5).Text = ""
-                txtAux2(12).Text = ""
+                txtaux2(5).Text = ""
+                txtaux2(12).Text = ""
             End If
     End Select
     DataGridAux(Index).ScrollBars = dbgAutomatic
@@ -6158,8 +6161,8 @@ Dim cad As String
 
                     txtAux(11).Text = ""
                     If Limp Then
-                        txtAux2(5).Text = ""
-                        txtAux2(12).Text = ""
+                        txtaux2(5).Text = ""
+                        txtaux2(12).Text = ""
                         For I = 0 To 11
                             txtAux(I).Text = ""
                         Next I
@@ -6199,6 +6202,8 @@ Private Sub ModificarLinea()
 Dim nomframe As String
 Dim v As Integer
 Dim cad As String
+Dim SqlLog As String
+
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -6217,6 +6222,11 @@ Dim cad As String
         If B And ModificaDesdeFormulario2(Me, 2, nomframe) Then
         
             B = RecalcularTotales
+            'LOG
+            SqlLog = "Factura : " & Text1(2).Text & " " & Text1(0).Text & " " & Text1(1).Text
+            SqlLog = SqlLog & vbCrLf & "Proveed.: " & Text1(4).Text & " " & Text4(4).Text
+            SqlLog = SqlLog & vbCrLf & "Linea   : " & txtAux(4).Text
+            vLog.Insertar 11, vUsu, SqlLog
         
             If B Then
                 Conn.CommitTrans
@@ -6371,7 +6381,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
                     MsgBox "Cuenta bloqueada: " & RC, vbExclamation
                     txtAux(5).Text = ""
                 Else
-                    txtAux2(5).Text = Sql
+                    txtaux2(5).Text = Sql
                     ' traemos el tipo de iva de la cuenta
                     txtAux(7).Text = DevuelveDesdeBD("codigiva", "cuentas", "codmacta", txtAux(5).Text, "N")
                     IvaCuenta = txtAux(7)
@@ -6408,7 +6418,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
                     
                 If Sql <> "" Then
                   txtAux(5).Text = ""
-                  txtAux2(5).Text = ""
+                  txtaux2(5).Text = ""
                   RC = "NO"
                 End If
             End If
@@ -6443,12 +6453,12 @@ Private Sub txtAux_LostFocus(Index As Integer)
         Case 12
             txtAux(12).Text = UCase(txtAux(12).Text)
             Sql = DevuelveDesdeBD("nomccost", "ccoste", "codccost", txtAux(12).Text, "T")
-            txtAux2(12).Text = ""
+            txtaux2(12).Text = ""
             If Sql = "" Then
                 MsgBox "Concepto NO encontrado: " & txtAux(12).Text, vbExclamation
                 txtAux(12).Text = ""
             Else
-                txtAux2(12).Text = Sql
+                txtaux2(12).Text = Sql
             End If
             
             cmdAceptar.SetFocus
@@ -6700,7 +6710,7 @@ Private Function AuxOK() As String
         Exit Function
     End If
     
-    If txtAux2(4).Text = NO Then
+    If txtaux2(4).Text = NO Then
         AuxOK = "La cuenta debe estar dada de alta en el sistema"
         Exit Function
     End If

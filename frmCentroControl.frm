@@ -2789,8 +2789,8 @@ Dim Final As String
     'Si tiene tesoreria
             'scaja          2
 
-            'scobro         3
-            'spagop         3
+            'cobros         3
+            'pagos          3
             'shacaja        2
             'sgastfij       2
             'stransfer      1
@@ -2856,7 +2856,7 @@ Dim Final As String
     
     
     'Si tiene tesoreria
-    'scaja,departamento,scobro,spagop,shacaja,shcobro,sgatfij,stransfer,stransfercob
+    'scaja,departamento,cobros,pagos,shacaja,shcobro,sgatfij,stransfer,stransfercob
     If vEmpresa.TieneTesoreria Then
         
         PonerTabla "cobros"
