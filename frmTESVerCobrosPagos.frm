@@ -66,30 +66,10 @@ Begin VB.Form frmTESVerCobrosPagos
          EndProperty
          Height          =   240
          Left            =   3510
-         TabIndex        =   5
+         TabIndex        =   4
          Top             =   450
          Value           =   1  'Checked
          Width           =   2415
-      End
-      Begin VB.CommandButton cmdDividrVto 
-         Caption         =   "Dividir Vto"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   435
-         Left            =   10740
-         Style           =   1  'Graphical
-         TabIndex        =   4
-         ToolTipText     =   "Dividir vencimiento"
-         Top             =   360
-         Visible         =   0   'False
-         Width           =   1605
       End
       Begin VB.Image imgFecha 
          Height          =   240
@@ -111,7 +91,7 @@ Begin VB.Form frmTESVerCobrosPagos
          EndProperty
          Height          =   195
          Left            =   180
-         TabIndex        =   6
+         TabIndex        =   5
          Top             =   420
          Width           =   840
       End
@@ -146,7 +126,7 @@ Begin VB.Form frmTESVerCobrosPagos
       BorderStyle     =   0  'None
       Height          =   495
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   6270
       Width           =   14415
       Begin VB.TextBox Text2 
@@ -166,7 +146,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   375
          Index           =   3
          Left            =   2370
-         TabIndex        =   14
+         TabIndex        =   13
          Text            =   "Text2"
          Top             =   60
          Visible         =   0   'False
@@ -189,7 +169,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   375
          Index           =   2
          Left            =   5400
-         TabIndex        =   12
+         TabIndex        =   11
          Text            =   "Text2"
          Top             =   60
          Visible         =   0   'False
@@ -212,7 +192,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   375
          Index           =   1
          Left            =   8580
-         TabIndex        =   11
+         TabIndex        =   10
          Text            =   "Text2"
          Top             =   60
          Width           =   2055
@@ -234,7 +214,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   375
          Index           =   0
          Left            =   12060
-         TabIndex        =   9
+         TabIndex        =   8
          Text            =   "Text2"
          Top             =   60
          Width           =   2055
@@ -254,7 +234,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   345
          Index           =   3
          Left            =   60
-         TabIndex        =   15
+         TabIndex        =   14
          Top             =   120
          Visible         =   0   'False
          Width           =   2520
@@ -275,7 +255,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   285
          Index           =   2
          Left            =   4380
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   120
          Visible         =   0   'False
          Width           =   960
@@ -296,7 +276,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   195
          Index           =   1
          Left            =   10650
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   120
          Width           =   1290
       End
@@ -316,7 +296,7 @@ Begin VB.Form frmTESVerCobrosPagos
          Height          =   195
          Index           =   0
          Left            =   7530
-         TabIndex        =   8
+         TabIndex        =   7
          Top             =   120
          Width           =   990
       End
@@ -471,73 +451,6 @@ End Sub
 
 
 
-Private Sub cmdDividrVto_Click()
-Dim Im As Currency
-
-    If ListView1.ListItems.Count = 0 Then Exit Sub
-    If ListView1.SelectedItem Is Nothing Then Exit Sub
-        
-    
-    
-    'Si esta totalmente cobrado pues no podemos desdoblar ekl vto
-    Im = ImporteFormateado(ListView1.SelectedItem.SubItems(10))
-    If Im <= 0 Then
-        MsgBox "NO puede dividir el vencimiento. Importe totalmente cobrado", vbExclamation
-        Exit Sub
-    End If
-    
-    
-    
-       'CadenaDesdeOtroForm. Pipes
-        '           1.- cadenaSQL numfac,numsere,fecfac
-        '           2.- Numero vto
-        '           3.- Importe maximo
-    
-    CadenaDesdeOtroForm = "numserie = '" & ListView1.SelectedItem.Text & "' AND codfaccl = " & ListView1.SelectedItem.SubItems(1)
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND fecfaccl = '" & Format(ListView1.SelectedItem.SubItems(2), FormatoFecha) & "'|"
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & ListView1.SelectedItem.SubItems(4) & "|"
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & CStr(Im) & "|"
-    
-    
-    'Ok, Ahora pongo los labels
-    frmTESListado.Opcion = 27
-    frmTESListado.Label4(56).Caption = ListView1.SelectedItem.SubItems(5)
-    frmTESListado.Label4(57).Caption = ListView1.SelectedItem.Text & Format(ListView1.SelectedItem.SubItems(1), "000000") & " / " & ListView1.SelectedItem.SubItems(4) & "      de  " & Format(ListView1.SelectedItem.SubItems(2), "dd/mm/yyyy")
-    'En ImporteGastosTarjeta_ tengo lo que me falta en el talon/pagare por pagar
-    'si es menor que el total del vto eso es pq va d dividr en ese importe. Lo ofertare
-    If Im >= ImporteGastosTarjeta_ Then frmTESListado.txtImporte(1).Text = Format(ImporteGastosTarjeta_, FormatoImporte)
-    frmTESListado.Show vbModal
-    If CadenaDesdeOtroForm <> "" Then
-
-        'Volvemos a cargar los datos
-        DescripcionTransferencia = ListView1.SelectedItem.Text & ListView1.SelectedItem.SubItems(1)  'Serie fact
-        FechaAsiento = CDate(ListView1.SelectedItem.SubItems(2))
-        CargaList
-        For I = 1 To ListView1.ListItems.Count
-            With ListView1.ListItems(I)
-                'misma serie , factura, fecha
-                vTextos = ListView1.ListItems(I).Text & ListView1.ListItems(I).SubItems(1) 'Serie fact
-                If vTextos = DescripcionTransferencia Then
-                    If CDate(.SubItems(2)) = FechaAsiento Then
-                        If .SubItems(4) = CadenaDesdeOtroForm Then
-                            'ESTE ES
-                            .EnsureVisible
-                            Set ListView1.SelectedItem = ListView1.ListItems(I)
-                            PonerFocoLw ListView1
-                            Exit For
-                        End If
-                    End If
-                End If
-            End With
-        Next
-        DescripcionTransferencia = ""
-        vTextos = ""
-    Else
-        PonerFocoLw ListView1
-    End If
-    
-End Sub
-
 
 
 Private Sub cmdRegresar_Click()
@@ -592,7 +505,6 @@ Private Sub Form_Load()
     ListView1.Checkboxes = OrdenarEfecto
     Text1.Enabled = Not OrdenarEfecto
     Me.chkReme.Visible = False
-    Me.cmdDividrVto.Visible = Me.DesdeRecepcionTalones  'Para poder dividir vto
     
 '    imgFecha(2).Visible = False 'Para cambiar la fecha de contabilizacion de los pagos
 
@@ -614,7 +526,7 @@ Private Sub Form_Load()
     
     I = 0
     If Cobros And (Tipo = 2 Or Tipo = 3) Then I = 1
-    Me.mnbarra1.Visible = I = 1
+    Me.mnBarra1.Visible = I = 1
     Me.mnNumero.Visible = I = 1
     'Efectuar cobros
     Me.cmdRegresar.Visible = Regresar

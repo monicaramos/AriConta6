@@ -1587,25 +1587,9 @@ End Sub
 '   Septiembre 2011
 '
 '  Letra serie 3 Digitos
-'  Con lo cual para algunas campos (numdocum de linapu) son un maximo de
+'  Con lo cual para algunas campos (numdocum de hlinapu) son un maximo de
 '   10 posiciones. Como antes era un digito letra ser, formateabamos con 9
 '       numerofactura debe ser NUMERICO
-Public Function SerieNumeroFactura(Posiciones As Integer, Serie As String, Numerofactura As String)
-Dim I As Integer
-Dim cad As String
-    
-    I = Posiciones - Len(Numerofactura) - Len(Serie)
-    If I <= 0 Then
-        'Hay menos posiciones de las que podemos meter
-        cad = Right(Numerofactura, Posiciones - Len(Numerofactura))
-    Else
-        cad = String(I, "0") & Numerofactura
-    End If
-    SerieNumeroFactura = Serie & cad
-    
-    
-End Function
-
 
 
 Public Function EsEntero(TEXTO As String) As Boolean

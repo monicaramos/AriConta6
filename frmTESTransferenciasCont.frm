@@ -438,115 +438,64 @@ Dim ContabilizacionEspecialNorma19 As Boolean
     
         
     
-    If Opcion = 8 Then
-        'CONTABILIZACION    ABONO REMESA
+    'CONTABILIZACION    ABONO REMESA
+    
+    'NORMA 19
+    '------------------------------------
+    
+    'Contabilizaremos la remesa
+    Conn.BeginTrans
+    
+    'mayo 2012
+    
+    B = HacerNuevaContabilizacion
+    
+    'si se contabiliza entonces updateo y la pongo en
+    'situacion Q. Contabilizada a falta de devueltos ,
+    If B Then
+        Conn.CommitTrans
+        'AQUI updateamos el registro pq es una tabla myisam
+        'y no debemos meterla en la transaccion
         
-        'NORMA 19
-        '------------------------------------
+        HaHabidoCambios = True
         
-        'Contabilizaremos la remesa
-        Conn.BeginTrans
         
-        'mayo 2012
+        Sql = "UPDATE transferencias SET"
+        Sql = Sql & " situacion= 'Q'"
+        Sql = Sql & " WHERE codigo=" & RecuperaValor(NumeroDocumento, 1)
+        Sql = Sql & " and anyo=" & RecuperaValor(NumeroDocumento, 2)
         
-        B = HacerNuevaContabilizacion
-        
-        'si se contabiliza entonces updateo y la pongo en
-        'situacion Q. Contabilizada a falta de devueltos ,
-        If B Then
-            Conn.CommitTrans
-            'AQUI updateamos el registro pq es una tabla myisam
-            'y no debemos meterla en la transaccion
-            
-            HaHabidoCambios = True
-            
-            
-            Sql = "UPDATE transferencias SET"
-            Sql = Sql & " situacion= 'Q'"
-            Sql = Sql & " WHERE codigo=" & RecuperaValor(NumeroDocumento, 1)
-            Sql = Sql & " and anyo=" & RecuperaValor(NumeroDocumento, 2)
-            
 
-            If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla transferencias.", vbExclamation
-            
-            If Cobros Then
-                Sql = "update cobros set siturem = 'Q', situacion = 1 "
-                Sql = Sql & " WHERE transfer=" & RecuperaValor(NumeroDocumento, 1)
-                Sql = Sql & " and anyorem=" & RecuperaValor(NumeroDocumento, 2)
-            
-                If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla cobros.", vbExclamation
-            
-            Else
-                Sql = "update pagos set situdocum = 'Q', situacion = 1 "
-                Sql = Sql & " WHERE nrodocum=" & RecuperaValor(NumeroDocumento, 1)
-                Sql = Sql & " and anyodocum=" & RecuperaValor(NumeroDocumento, 2)
-                
-                If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla pagos.", vbExclamation
-                
-            End If
-            
-            
-            'Ahora actualizamos los registros que estan en tmpactualziar
-            Screen.MousePointer = vbDefault
-            'Cerramos
-            'RS.Close
-            Unload Me
-            Exit Sub
+        If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla transferencias.", vbExclamation
+        
+        If Cobros Then
+            Sql = "update cobros set siturem = 'Q', situacion = 1 "
+            Sql = Sql & " WHERE transfer=" & RecuperaValor(NumeroDocumento, 1)
+            Sql = Sql & " and anyorem=" & RecuperaValor(NumeroDocumento, 2)
+        
+            If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla cobros.", vbExclamation
+        
         Else
-            TirarAtrasTransaccion
-        End If
-    
-    
-    Else
-        Conn.BeginTrans
-      
-        'Cancelacion /confirmacion cliente
-        If SubTipo = 1 Then
-            'EFECTOS
-            If Opcion <= 23 Then
+            Sql = "update pagos set situdocum = 'Q', situacion = 1 "
+            Sql = Sql & " WHERE nrodocum=" & RecuperaValor(NumeroDocumento, 1)
+            Sql = Sql & " and anyodocum=" & RecuperaValor(NumeroDocumento, 2)
             
-                'YA NO EXISTE CONFIRMACION REMESA
-                Opt = Opcion - 22 '0.Cancelar   1.Confirmar
-                AgrupaCance = False
-                If Me.chkAgrupaCancelacion.Visible Then
-                    If Me.chkAgrupaCancelacion.Value = 1 Then AgrupaCance = True
-                End If
-                
-                'para la 23 NO deberiamos llegar. Ese proceso lo hemos eliminado
-                If Opt = 0 Then
-                    B = RemesasCancelacionEfectos(Rs!Codigo, Rs!Anyo, Sql, CDate(Text1(10).Text), Importe, AgrupaCance)
-                Else
-                    B = False
-                    MsgBox " NO deberia haber entrado con confirmacion remesas", vbExclamation
-                End If
-            Else
-                B = False
-                MsgBox "Opcion incorrecta (>23)", vbExclamation
-            End If
+            If Not Ejecuta(Sql) Then MsgBox "Error actualizando tabla pagos.", vbExclamation
             
-        Else
-            MsgBox "AHora no deberia estar aqui!!!!!", vbExclamation
-            
-                                 '
-            'B = RemesasCancelacionTALONPAGARE(Val(Rs!tiporem) = 3, Rs!Codigo, Rs!Anyo, SQL, CDate(Text1(10).Text), Importe)
-        End If
-        If B Then
-            Conn.CommitTrans
-            
-            
-            'Ahora actualizamos los registros que estan en tmpactualziar
-            Screen.MousePointer = vbDefault
-            'Cerramos
-            Rs.Close
-            Unload Me
-            Exit Sub
-            
-        Else
-            TirarAtrasTransaccion
         End If
         
+        
+        'Ahora actualizamos los registros que estan en tmpactualziar
+        Screen.MousePointer = vbDefault
+        'Cerramos
+        'RS.Close
+        Unload Me
+        Exit Sub
+    Else
+        TirarAtrasTransaccion
     End If
-    
+
+
     
     
     Rs.Close

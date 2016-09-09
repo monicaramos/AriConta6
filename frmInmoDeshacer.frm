@@ -125,7 +125,7 @@ Private Const IdPrograma = 510
 
 
 Dim PrimeraVez As Boolean
-Dim RS As Recordset
+Dim Rs As Recordset
 Dim cad As String
 Dim I As Byte
 Dim B As Boolean
@@ -153,7 +153,7 @@ Private Sub cmdDeshaz_Click(Index As Integer)
         cad = "¿Seguro que desea deshacer la última amortizacion con fecha: " & Format(UltAmor, "dd/mm/yyyy")
         If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         Screen.MousePointer = vbHourglass
-        Set RS = New ADODB.Recordset
+        Set Rs = New ADODB.Recordset
         
         Me.Tag = Label13(6).Caption
         DeshacerUltimaAmortizacion
@@ -164,7 +164,7 @@ Private Sub cmdDeshaz_Click(Index As Integer)
 '            Me.cmdDeshaz(0).Caption = "Salir"
             Unload Me
         End If
-        Set RS = Nothing
+        Set Rs = Nothing
         Screen.MousePointer = vbDefault
     Else
         Unload Me
@@ -208,7 +208,7 @@ Private Sub Form_Load()
     
     ' La Ayuda
     With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
     
@@ -275,17 +275,17 @@ End Function
 Private Function CargarDatos() As Boolean
 On Error GoTo ECargarDatos
     CargarDatos = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     cad = "Select * from paramamort where codigo=1"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
         CargarDatos = True
         '------------------  Ponemos los datos
     End If
-    RS.Close
+    Rs.Close
 ECargarDatos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando parametros"
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -362,7 +362,7 @@ End Sub
 Private Function EliminarAmortizacion() As Boolean
 Dim Valor As Currency
 Dim F As Date
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarAmortizacion
 
@@ -375,9 +375,9 @@ Dim SQL As String
     'Compreubo cuantos hay. Para que no haya errores
     cad = "Select count(*) from inmovele_his where fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
     CONT = 0
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then CONT = DBLet(RS.Fields(0), "N")
-    RS.Close
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then CONT = DBLet(Rs.Fields(0), "N")
+    Rs.Close
     aux2 = CStr(CONT)
     
     If CONT = 0 Then
@@ -388,15 +388,15 @@ Dim SQL As String
     'Abro el rs para actualizar
     cad = "select l.codinmov,imporinm,amortacu,valoradq,nominmov from inmovele_his l,inmovele where l.codinmov=inmovele.codinmov "
     cad = cad & " and fechainm = '" & Format(UltAmor, FormatoFecha) & "'"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CONT = 0
-    While Not RS.EOF
-        Label13(6).Caption = RS!Codinmov & " " & RS!nominmov
+    While Not Rs.EOF
+        Label13(6).Caption = Rs!Codinmov & " " & Rs!nominmov
         Label13(6).Refresh
         
         'Para cada elemento le sumo lo que ha amortizado
-        Importe = DBLet(RS!amortacu, "N")
-        Importe = Importe - RS!imporinm
+        Importe = DBLet(Rs!amortacu, "N")
+        Importe = Importe - Rs!imporinm
         
         'Control auxiliar
         If Importe < 0 Then Importe = 0
@@ -404,10 +404,10 @@ Dim SQL As String
         'Creo SQL update
         cad = "UPDATE inmovele set amortacu=" & TransformaComasPuntos(CStr(Importe))
         cad = cad & ", situacio= 1"
-        cad = cad & " WHERE codinmov=" & RS!Codinmov
+        cad = cad & " WHERE codinmov=" & Rs!Codinmov
         
         'Muevo al siguiente
-        RS.MoveNext
+        Rs.MoveNext
         'Updateo
         Conn.Execute cad
         'cont++
@@ -415,7 +415,7 @@ Dim SQL As String
         
         
     Wend
-    RS.Close
+    Rs.Close
     
     
     If CONT <> Val(aux2) Then
@@ -475,17 +475,17 @@ Dim SQL As String
         aux2 = "Proceso finalizado correctamente"
     Else
         'Si contabiliza tratamos de indicarle cual fue el asiento generado.
-        'Busco el cabapu que cuadra con fechaent='uktamor' y en observaciones lleva amortizacion
+        'Busco el hcabapu que cuadra con fechaent='uktamor' y en observaciones lleva amortizacion
         cad = "hlinapu where fechaent = '" & Format(UltAmor, FormatoFecha) & "' AND idcontab = 'CONTAI'"
         cad = cad & " and (numdiari, fechaent, numasien) in (select numdiari, fechaent, numasien from hcabapu where fechaent = " & DBSet(UltAmor, "F") & " and obsdiari like '%mortiza%')"
         CONT = 0
         'En introduccion
         aux2 = "Select * from " & cad
-        RS.Open aux2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
+        Rs.Open aux2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
             'LO HE ENCONTRADO
             CONT = 1
-            cad = "Asiento: " & RS!NumAsien & "      Diario: " & RS!NumDiari & "      Fecha: " & RS!FechaEnt & vbCrLf '& "Observaciones: " & DBMemo(Rs!obsdiari)
+            cad = "Asiento: " & Rs!NumAsien & "      Diario: " & Rs!NumDiari & "      Fecha: " & Rs!FechaEnt & vbCrLf '& "Observaciones: " & DBMemo(Rs!obsdiari)
         End If
         
         'Si cont>0 entonces SI que lo ha encontrado
@@ -493,12 +493,12 @@ Dim SQL As String
         If CONT > 0 Then
             If MsgBox("Se ha encontrado el asiento de contabilización de la amortización." & vbCrLf & vbCrLf & "¿ Desea eliminarlo ?" & vbCrLf, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
                 'lineas
-                SQL = "delete from hlinapu where numdiari = " & DBSet(RS!NumDiari, "N") & " and numasien = " & DBSet(RS!NumAsien, "N") & " and fechaent = " & DBSet(RS!FechaEnt, "F")
-                Conn.Execute SQL
+                Sql = "delete from hlinapu where numdiari = " & DBSet(Rs!NumDiari, "N") & " and numasien = " & DBSet(Rs!NumAsien, "N") & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                Conn.Execute Sql
                 
                 'cabecera
-                SQL = "delete from hcabapu where numdiari = " & DBSet(RS!NumDiari, "N") & " and numasien = " & DBSet(RS!NumAsien, "N") & " and fechaent = " & DBSet(RS!FechaEnt, "F")
-                Conn.Execute SQL
+                Sql = "delete from hcabapu where numdiari = " & DBSet(Rs!NumDiari, "N") & " and numasien = " & DBSet(Rs!NumAsien, "N") & " and fechaent = " & DBSet(Rs!FechaEnt, "F")
+                Conn.Execute Sql
                 
                 cad = "Eliminado el " & cad
             Else
@@ -507,7 +507,7 @@ Dim SQL As String
         Else
             cad = "El asiento NO ha sido encontrado"
         End If
-        RS.Close
+        Rs.Close
         
         aux2 = "Proceso finalizado correctamente." & vbCrLf & vbCrLf & vbCrLf & cad
     End If
@@ -546,13 +546,13 @@ Private Function Datosok_Deshacer() As Boolean
 
     cad = "select distinct(inmovele_his.codinmov) from inmovele_his, inmovele where inmovele_his.codinmov=inmovele.codinmov and"
     cad = cad & " fechainm>='" & Format(UltAmor, FormatoFecha) & "'  and fecventa >='" & Format(UltAmor, FormatoFecha) & "'"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CONT = 0
-    While Not RS.EOF
+    While Not Rs.EOF
         CONT = CONT + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     If CONT > 0 Then
         cad = "Hay " & CONT & " elemento(s) de inmovilizado que están en el hco inmovilizado  y han sido vendidos o dados de baja"
@@ -562,13 +562,13 @@ Private Function Datosok_Deshacer() As Boolean
     
     
     cad = "select distinct(inmovele_his.codinmov) from inmovele_his where  fechainm > '" & Format(UltAmor, FormatoFecha) & "'"
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CONT = 0
-    While Not RS.EOF
+    While Not Rs.EOF
         CONT = CONT + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     If CONT > 0 Then
         cad = "Hay " & CONT & " elemento(s) de inmovilizado que están en el hco inmovilizado."

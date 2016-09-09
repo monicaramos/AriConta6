@@ -2365,7 +2365,7 @@ Dim I As Integer
     Limpiar Me
     
     For I = 0 To 1
-        Me.imgcta(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
+        Me.imgCta(I).Picture = frmPpal.imgIcoForms.ListImages(1).Picture
     Next I
 
     ' La Ayuda
@@ -2773,13 +2773,12 @@ Dim Final As String
         
         
     'Variables
-            'linapu         2
             'hlinapu        2
             'asipre_lineas      2
-            'cabfactprov    1
-            'cabfact        1
-            'linfact        1
-            'linfactprov    1
+            'factpro    1
+            'factcli        1
+            'factcli_lineas 1
+            'factpro_lineas 1
             'presupuestos   1
     
     'Total                  16
@@ -2822,7 +2821,6 @@ Dim Final As String
     EjecutaSQLCambio "codmacta2", ""
     
     
-    'linapu         2
     'hlinapu        2
     'asipre_lineas      2
     NombreArchivo = "hlinapu|asipre_lineas|"

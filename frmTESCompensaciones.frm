@@ -1192,7 +1192,7 @@ Dim FrasPro As String
                     Sql = Sql & "," & ContrapartidaPago & ","
                     
                     'Habran dos pipes.
-                    '   1.- lo que tengo que insertar en linapu
+                    '   1.- lo que tengo que insertar en hlinapu
                     '   2.- El select prparado para eliminar el cobro / pago
                     '       Si compensa, habra una C al principio
                     '   3.- Para buscar la factura
@@ -1336,7 +1336,7 @@ Dim FrasPro As String
                     
                     
                     'Habran dos pipes.
-                    '   1.- lo que tengo que insertar en linapu
+                    '   1.- lo que tengo que insertar en hlinapu
                     '   2.- El select prparado para eliminar el cobro / pago
                     '   3.- el where para buscar la factura
                     Ampliacion = "|" & CadenaUpdate & " WHERE `codmacta`='" & .Tag & "' and `numfactu`='" & DevNombreSQL(.SubItems(1))

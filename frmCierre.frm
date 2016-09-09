@@ -2157,13 +2157,6 @@ On Error GoTo EDescierre
         Exit Sub
     End If
    
-'--
-'    If IntroduccionDeApuntes(False) Then
-'        Cad = "Hay asientos en la introducción de apuntes del ejercicio siguiente."
-'        MsgBox Cad, vbExclamation
-'        Exit Sub
-'    End If
-   
     'pASSSWORD MOMENTANEO
     cad = InputBox("Escriba password de seguridad", "CLAVE")
     If UCase(cad) <> "ARIADNA" Then
@@ -2183,7 +2176,7 @@ On Error GoTo EDescierre
     Screen.MousePointer = vbHourglass
     
     cmdDescerrar.Enabled = False
-    CmdCancel(5).Enabled = False
+    cmdCancel(5).Enabled = False
     Me.Refresh
     
     Me.Refresh
@@ -2208,7 +2201,7 @@ On Error GoTo EDescierre
         Unload Me
     Else
         cmdDescerrar.Enabled = False
-        CmdCancel(5).Enabled = False
+        cmdCancel(5).Enabled = False
     End If
     
     Screen.MousePointer = vbDefault
@@ -2477,7 +2470,7 @@ Private Sub Form_Activate()
 If PrimeraVez Then
     PrimeraVez = False
     DoEvents
-    CmdCancel(Opcion).Cancel = True
+    cmdCancel(Opcion).Cancel = True
     Select Case Opcion
     Case 1, 4
         PonerDatosPyG
@@ -2514,7 +2507,7 @@ Case 0
     IdPrograma = 1301
     ' La Ayuda
     With Me.ToolbarAyuda(0)
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
     
@@ -2534,7 +2527,7 @@ Case 1, 4
     IdPrograma = 1303
     ' La Ayuda
     With Me.ToolbarAyuda(1)
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
         
@@ -2550,7 +2543,7 @@ Case 5
     IdPrograma = 1304
     ' La Ayuda
     With Me.ToolbarAyuda(2)
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
 
@@ -2561,36 +2554,6 @@ Me.Height = H + 100
 Me.Width = W + 100
 End Sub
 
-
-Private Function IntroduccionDeApuntes(Actual As Boolean) As Boolean
-Dim Ok As Boolean
-    IntroduccionDeApuntes = False
-    Ok = False
-    Sql = CadenaFechasActuralSiguiente(Actual)
-    cad = "Select numasien from cabapu where " & Sql
-    Set miRsAux = New ADODB.Recordset
-    miRsAux.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not miRsAux.EOF Then
-      Ok = True
-      IntroduccionDeApuntes = True
-    End If
-    miRsAux.Close
-    
-    'Si no tiene cabceceras veo si tiene lineas
-    If Not Ok Then
-        Sql = CadenaFechasActuralSiguiente(Actual)
-        cad = "Select numasien from linapu where " & Sql
-        Set miRsAux = New ADODB.Recordset
-        miRsAux.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-        If Not miRsAux.EOF Then
-          IntroduccionDeApuntes = True
-        End If
-        miRsAux.Close
-    End If
-    
-    
-    Set miRsAux = Nothing
-End Function
 
 
 Private Function CadenaFechasActuralSiguiente(Actual As Boolean) As String
@@ -3066,9 +3029,9 @@ Dim vFecha As String
 
     cmdSimula(0).Visible = (Opcion = 4)
     cmdSimula(1).Visible = (Opcion = 4)
-    Me.CmdCancel(4).Visible = (Opcion = 4)
+    Me.cmdCancel(4).Visible = (Opcion = 4)
     Me.cmdCierreEjercicio.Visible = (Opcion = 1)
-    Me.CmdCancel(1).Visible = (Opcion = 1)
+    Me.cmdCancel(1).Visible = (Opcion = 1)
     Label6.Visible = (Opcion = 4)
     Label4.Visible = Not Label6.Visible
     If Opcion = 1 Then
@@ -3200,7 +3163,7 @@ Dim Cuantos As Long
     
     ASientoPyG = False
 
-    'Generamos los  apuntes, sobre cabapu, y luego los actualizamos
+    'Generamos los  apuntes, sobre hcabapu, y luego los actualizamos
     If Opcion <> 4 Then
         Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari,feccreacion,usucreacion,desdeaplicacion) VALUES (" & txtDiario(0).Text
         cad = Sql & ",'" & Format(vParam.fechafin, FormatoFecha) & "'," & Text1(3).Text & ",NULL," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARICONTA 6: Asiento Pérdidas y Ganancias')"
@@ -3305,7 +3268,7 @@ On Error GoTo ECuentas6y7
     Set Rs = New ADODB.Recordset
     
     'Para todas las cuentas de los grupos 6 y 7  ----> Vienen en parametros
-    ' calculamos su saldo y si es distinto de 0 lo insertamos en linapu
+    ' calculamos su saldo y si es distinto de 0 lo insertamos en hlinapu
     MaxAsiento = 1
     If vParam.grupogto <> "" Then
         If Not Subgrupo(vParam.grupogto, "") Then Exit Function
@@ -3332,7 +3295,7 @@ On Error GoTo ECuentas9
     Set Rs = New ADODB.Recordset
     
     'Para todas las cuentas de los grupos 6 y 7  ----> Vienen en parametros
-    ' calculamos su saldo y si es distinto de 0 lo insertamos en linapu
+    ' calculamos su saldo y si es distinto de 0 lo insertamos en hlinapu
     If vParam.grupoord <> "" And Text1(10).Text <> "" Then
         If Not Subgrupo(vParam.grupoord, Text1(10).Text) Then Exit Function
     End If
@@ -3836,7 +3799,7 @@ Dim Aux As String
     Rs.Open "SELECT * from tmpCierre WHERE importe <>0 ORDER By Cta", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     CONT = 1
     
-    ' linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum,"
+    ' hlinapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum,"
     ' codconce, ampconce, timporteD, codccost, timporteH, ctacontr, idcontab, punteada
     
     
@@ -3899,7 +3862,7 @@ Dim Aux As String
     Rs.Open "SELECT * from tmpCierre WHERE importe <>0 ORDER BY Cta ", Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     CONT = 1
     
-    ' linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum,"
+    ' hlinapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum,"
     ' codconce, ampconce, timporteD, codccost, timporteH, ctacontr, idcontab, punteada
     
     

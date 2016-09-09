@@ -20,9 +20,9 @@ Public ExportarPDF As Boolean
 Public SoloImprimir As Boolean
 
 
-Dim RS As Recordset
+Dim Rs As Recordset
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim I As Integer
 
 
@@ -89,22 +89,22 @@ On Error GoTo EGI_Conceptos
     Conn.Execute "Delete from Usuarios.zconceptos where codusu = " & vUsu.Codigo
     cad = "INSERT INTO Usuarios.zconceptos (codusu, codconce, nomconce,tipoconce) VALUES ("
     cad = cad & vUsu.Codigo & ",'"
-    Set RS = New ADODB.Recordset
-    RS.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not RS.EOF
-        SQL = cad & Format(RS.Fields(0), "000")
-        SQL = SQL & "','" & RS.Fields(1) & "','" & RS.Fields(3) & "')"
-        Conn.Execute SQL
+    Set Rs = New ADODB.Recordset
+    Rs.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not Rs.EOF
+        Sql = cad & Format(Rs.Fields(0), "000")
+        Sql = Sql & "','" & Rs.Fields(1) & "','" & Rs.Fields(3) & "')"
+        Conn.Execute Sql
         'Siguiente
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     InformeConceptos = True
 Exit Function
 EGI_Conceptos:
     MuestraError Err.Number
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -121,28 +121,28 @@ On Error GoTo EListadoEstadisticas
     cad = cad & vUsu.Codigo & ","
     
     'Empezamos
-    Set RS = New ADODB.Recordset
-    RS.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     I = 1
-    While Not RS.EOF
+    While Not Rs.EOF
         
-        SQL = I & ParaBD(RS!codconam, 1) & ParaBD(RS!nomconam)
-        SQL = SQL & ParaBD(RS!Codinmov) & ",'" & DevNombreSQL(RS!nominmov) & "'"
+        Sql = I & ParaBD(Rs!codconam, 1) & ParaBD(Rs!nomconam)
+        Sql = Sql & ParaBD(Rs!Codinmov) & ",'" & DevNombreSQL(Rs!nominmov) & "'"
         
-        SQL = SQL & ParaBD(RS!tipoamor) & ParaBD(RS!coeficie) & ParaBD(RS!codprove)
-        SQL = SQL & ParaBD(RS!fechaadq, 2) & ParaBD(RS!valoradq, 1) & ParaBD(RS!amortacu, 1)
-        SQL = SQL & ParaBD(RS!fecventa, 2) 'FECHA
-        SQL = SQL & ParaBD(RS!impventa, 1) & ")"
-        Conn.Execute cad & SQL
+        Sql = Sql & ParaBD(Rs!tipoamor) & ParaBD(Rs!coeficie) & ParaBD(Rs!codprove)
+        Sql = Sql & ParaBD(Rs!fechaadq, 2) & ParaBD(Rs!valoradq, 1) & ParaBD(Rs!amortacu, 1)
+        Sql = Sql & ParaBD(Rs!fecventa, 2) 'FECHA
+        Sql = Sql & ParaBD(Rs!impventa, 1) & ")"
+        Conn.Execute cad & Sql
         
         'Sig
-        RS.MoveNext
+        Rs.MoveNext
         I = I + 1
     Wend
     ListadoEstadisticas = True
 EListadoEstadisticas:
     If Err.Number <> 0 Then MuestraError Err.Number
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -158,23 +158,23 @@ On Error GoTo Err1
     cad = cad & vUsu.Codigo & ","
     
     'Empezamos
-    Set RS = New ADODB.Recordset
-    RS.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open vSql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     I = 1
-    While Not RS.EOF
-        SQL = RS!nominmov
-        NombreSQL SQL
-        SQL = I & ParaBD(RS!Codinmov) & ",'" & SQL & "'"
-        SQL = SQL & ParaBD(RS!fechaadq, 2) & ParaBD(RS!valoradq, 1) & ParaBD(RS!fechainm, 2)
-        SQL = SQL & ParaBD(RS!imporinm, 1) & ParaBD(RS!porcinm, 1)
-        SQL = SQL & ")"
-        Conn.Execute cad & SQL
+    While Not Rs.EOF
+        Sql = Rs!nominmov
+        NombreSQL Sql
+        Sql = I & ParaBD(Rs!Codinmov) & ",'" & Sql & "'"
+        Sql = Sql & ParaBD(Rs!fechaadq, 2) & ParaBD(Rs!valoradq, 1) & ParaBD(Rs!fechainm, 2)
+        Sql = Sql & ParaBD(Rs!imporinm, 1) & ParaBD(Rs!porcinm, 1)
+        Sql = Sql & ")"
+        Conn.Execute cad & Sql
         
         'Sig
-        RS.MoveNext
+        Rs.MoveNext
         I = I + 1
     Wend
-    RS.Close
+    Rs.Close
     If I > 1 Then
         ListadoFichaInmo = True
     Else
@@ -182,7 +182,7 @@ On Error GoTo Err1
     End If
 Err1:
     If Err.Number <> 0 Then MuestraError Err.Number
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -289,14 +289,14 @@ On Error GoTo EGen
     
     Conn.Execute cad
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        If DBLet(RS.Fields(0), "N") > 0 Then cad = ""
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        If DBLet(Rs.Fields(0), "N") > 0 Then cad = ""
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     If cad <> "" Then
         MsgBox "Ningun registro por mostrar.", vbExclamation
@@ -307,50 +307,6 @@ On Error GoTo EGen
 EGen:
     If Err.Number <> 0 Then MuestraError Err.Number
 End Function
-
-
-Public Function IDiariosPendientes(ByRef vSql As String) As Boolean
-On Error GoTo EGen
-    IDiariosPendientes = False
-    cad = "Delete FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    Conn.Execute cad
-    
-    'Las lineas
-    cad = "INSERT INTO Usuarios.zdiapendact (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum,"
-    cad = cad & " ampconce, timporteD, timporteH, codccost)"
-    cad = cad & " SELECT " & vUsu.Codigo
-    cad = cad & ",cabapu_0.numdiari, tiposdiario_0.desdiari, cabapu_0.fechaent, cabapu_0.numasien, linapu_0.linliapu,"
-    cad = cad & " linapu_0.codmacta, cuentas_0.nommacta, linapu_0.numdocum, linapu_0.ampconce, linapu_0.timporteD, "
-    cad = cad & " linapu_0.timporteH, linapu_0.codccost  FROM cabapu cabapu_0, cuentas cuentas_0, linapu linapu_0, tiposdiario "
-    cad = cad & " tiposdiario_0  WHERE linapu_0.fechaent = cabapu_0.fechaent AND linapu_0.numasien = cabapu_0.numasien AND "
-    cad = cad & " linapu_0.numdiari = cabapu_0.numdiari AND tiposdiario_0.numdiari = cabapu_0.numdiari AND"
-    cad = cad & " tiposdiario_0.numdiari = linapu_0.numdiari AND cuentas_0.codmacta = linapu_0.codmacta"
-    If vSql <> "" Then cad = cad & " AND " & vSql
-    
-    
-    
-    
-    Conn.Execute cad
-    
-    Set RS = New ADODB.Recordset
-    cad = "select count(*) FROM Usuarios.zdiapendact  where codusu =" & vUsu.Codigo
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        If DBLet(RS.Fields(0), "N") > 0 Then cad = ""
-    End If
-    RS.Close
-    Set RS = Nothing
-    
-    If cad <> "" Then
-        MsgBox "Ningun registro por mostrar.", vbExclamation
-        Exit Function
-    End If
-    IDiariosPendientes = True
-    
-EGen:
-    If Err.Number <> 0 Then MuestraError Err.Number
-End Function
-
 
 
 
@@ -384,16 +340,16 @@ On Error GoTo EGen
     
     'Contamos para ver cuantos hay
     cad = "Select count(*) from Usuarios.ztotalctaconce WHERE codusu =" & vUsu.Codigo
-    Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 0
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then
-            If RS.Fields(0) > 0 Then I = 1
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then
+            If Rs.Fields(0) > 0 Then I = 1
         End If
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If I > 0 Then
         ITotalesCtaConcepto = True
     Else
@@ -511,31 +467,31 @@ On Error GoTo EGeneraDatosHcoInmov
     cad = "Delete from Usuarios.zfichainmo where codusu = " & vUsu.Codigo
     Conn.Execute cad
     'Abrimos datos
-    Set RS = New ADODB.Recordset
-    RS.Open vSql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open vSql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Rs.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
         cad = "INSERT INTO Usuarios.zfichainmo (codusu, codigo, codinmov, nominmov, fechaadq, valoradq, fechaamor, Importe, porcenta) VALUES (" & vUsu.Codigo & ","
         TotalReg = 0
-        While Not RS.EOF
+        While Not Rs.EOF
            
             TotalReg = TotalReg + 1
             'Metemos los nuevos datos
-            SQL = TotalReg & ParaBD(RS!Codinmov, 1) & ",'" & DevNombreSQL(CStr(RS!nominmov)) & "'" & ParaBD(RS!fechainm, 2)
-            SQL = SQL & ",NULL,NULL" & ParaBD(RS!imporinm, 1) & ParaBD(RS!porcinm, 1) & ")"
-            SQL = cad & SQL
-            Conn.Execute SQL
-            RS.MoveNext
+            Sql = TotalReg & ParaBD(Rs!Codinmov, 1) & ",'" & DevNombreSQL(CStr(Rs!nominmov)) & "'" & ParaBD(Rs!fechainm, 2)
+            Sql = Sql & ",NULL,NULL" & ParaBD(Rs!imporinm, 1) & ParaBD(Rs!porcinm, 1) & ")"
+            Sql = cad & Sql
+            Conn.Execute Sql
+            Rs.MoveNext
         Wend
         GeneraDatosHcoInmov = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 EGeneraDatosHcoInmov:
     MuestraError Err.Number, Err.Description
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -551,29 +507,29 @@ On Error GoTo EGeneraDatosConceptosInmov
     cad = "Delete from Usuarios.ztmppresu1 where codusu = " & vUsu.Codigo
     Conn.Execute cad
     'Abrimos datos
-    SQL = "Select * from inmovcon"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If RS.EOF Then
+    Sql = "Select * from inmovcon"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Rs.EOF Then
         MsgBox "Ningún dato a mostrar", vbExclamation
     Else
         cad = "INSERT INTO Usuarios.ztmppresu1 (codusu, codigo, cta, titulo, ano, mes, Importe) VALUES (" & vUsu.Codigo
-        While Not RS.EOF
+        While Not Rs.EOF
             'Metemos los nuevos datos
-            SQL = ParaBD(RS!codconam, 1) & ",'" & Format(RS!codconam, "0000") & "'" & ParaBD(RS!nomconam)
-            SQL = SQL & ",0" & ParaBD(RS!perimaxi, 1) & ParaBD(RS!coefimaxi, 1) & ")"
-            SQL = cad & SQL
-            Conn.Execute SQL
-            RS.MoveNext
+            Sql = ParaBD(Rs!codconam, 1) & ",'" & Format(Rs!codconam, "0000") & "'" & ParaBD(Rs!nomconam)
+            Sql = Sql & ",0" & ParaBD(Rs!perimaxi, 1) & ParaBD(Rs!coefimaxi, 1) & ")"
+            Sql = cad & Sql
+            Conn.Execute Sql
+            Rs.MoveNext
         Wend
         GeneraDatosConceptosInmov = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 EGeneraDatosConceptosInmov:
     MuestraError Err.Number, Err.Description
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -1123,7 +1079,7 @@ End Function
 
 
 Public Function ExisteARIMAILGES()
-Dim SQL As String
+Dim Sql As String
 
     If Dir(App.Path & "\ArimailGes.exe") = "" Then
         MsgBox "No existe el programa ArimailGes.exe. Llame a Ariadna.", vbExclamation
@@ -1137,14 +1093,14 @@ End Function
 
 Public Function HayRegParaInforme(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "Select count(*) FROM " & cTabla
+    Sql = "Select count(*) FROM " & cTabla
     If cWhere <> "" Then
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    If TotalRegistros(SQL) = 0 Then
+    If TotalRegistros(Sql) = 0 Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
         HayRegParaInforme = False
     Else
@@ -1162,11 +1118,11 @@ Dim Encontrado As Boolean
         
         cad = "select informe from scryst where codigo = " & DBSet(Indice, "T")
         
-        Set RS = New ADODB.Recordset
-        RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        If Not RS.EOF Then
-            nomDocu = DBLet(RS!Informe, "T")
+        If Not Rs.EOF Then
+            nomDocu = DBLet(Rs!Informe, "T")
             Encontrado = True
         End If
         
@@ -1199,16 +1155,16 @@ Dim Lanza As String
         Aux = "Reclamacion.pdf"
     End Select
     
-    SQL = "select tmp347.*, cuentas.razosoci, cuentas.maidatos from tmp347, cuentas "
-    SQL = SQL & " where codusu = " & vUsu.Codigo & " and importe <> 0 and tmp347.cta = cuentas.codmacta"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Sql = "select tmp347.*, cuentas.razosoci, cuentas.maidatos from tmp347, cuentas "
+    Sql = Sql & " where codusu = " & vUsu.Codigo & " and importe <> 0 and tmp347.cta = cuentas.codmacta"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
     
-        NombrePDF = App.Path & "\temp\" & RS!NIF
+        NombrePDF = App.Path & "\temp\" & Rs!NIF
         
         'direccion email
-        Aux = DBLet(RS!maidatos)
+        Aux = DBLet(Rs!maidatos)
         Lanza = Aux & "|"
         
         'asunto
@@ -1309,10 +1265,10 @@ Dim Lanza As String
         Aux = App.Path & "\ARIMAILGES.EXE" & " " & Lanza  '& vParamAplic.ExeEnvioMail & " " & Lanza
         Shell Aux, vbNormalFocus
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     Exit Sub
