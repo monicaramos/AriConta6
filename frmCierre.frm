@@ -15,266 +15,6 @@ Begin VB.Form frmCierre
    ScaleWidth      =   14700
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame fRenumeracion 
-      BorderStyle     =   0  'None
-      Height          =   4245
-      Left            =   0
-      TabIndex        =   0
-      Top             =   60
-      Width           =   5745
-      Begin MSComctlLib.ProgressBar pb1 
-         Height          =   285
-         Left            =   270
-         TabIndex        =   10
-         Top             =   2700
-         Width           =   5295
-         _ExtentX        =   9340
-         _ExtentY        =   503
-         _Version        =   393216
-         Appearance      =   1
-         Max             =   1000
-      End
-      Begin VB.CommandButton cmdRenumera 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   2970
-         TabIndex        =   9
-         Top             =   3420
-         Width           =   1185
-      End
-      Begin VB.CommandButton cmdCancel 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   0
-         Left            =   4350
-         TabIndex        =   8
-         Top             =   3420
-         Width           =   1185
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Ejercicio SIGUIENTE"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Index           =   1
-         Left            =   3210
-         TabIndex        =   7
-         Top             =   1860
-         Width           =   2415
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Ejercicio ACTUAL"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Index           =   0
-         Left            =   270
-         TabIndex        =   6
-         Top             =   1860
-         Width           =   2085
-      End
-      Begin MSComctlLib.Toolbar ToolbarAyuda 
-         Height          =   390
-         Index           =   0
-         Left            =   5160
-         TabIndex        =   81
-         Top             =   120
-         Width           =   405
-         _ExtentX        =   714
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ayuda"
-            EndProperty
-         EndProperty
-      End
-      Begin VB.Label Label2 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Left            =   330
-         TabIndex        =   11
-         Top             =   3120
-         Width           =   5115
-      End
-      Begin VB.Label Label1 
-         Alignment       =   2  'Center
-         Caption         =   "No debe haber nadie más trabajando contra esta contabilidad"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   11.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   855
-         Left            =   360
-         TabIndex        =   5
-         Top             =   630
-         Width           =   4875
-      End
-   End
-   Begin VB.Frame frameDescierre 
-      BorderStyle     =   0  'None
-      Caption         =   $"frmCierre.frx":000C
-      Height          =   3975
-      Left            =   30
-      TabIndex        =   21
-      Top             =   -30
-      Width           =   5565
-      Begin VB.TextBox Text3 
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Left            =   180
-         TabIndex        =   25
-         Text            =   "Text3"
-         Top             =   1920
-         Width           =   5085
-      End
-      Begin VB.CommandButton cmdCancel 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   5
-         Left            =   4290
-         TabIndex        =   23
-         Top             =   3270
-         Width           =   1035
-      End
-      Begin VB.CommandButton cmdDescerrar 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   3030
-         TabIndex        =   22
-         Top             =   3270
-         Width           =   1125
-      End
-      Begin MSComctlLib.Toolbar ToolbarAyuda 
-         Height          =   390
-         Index           =   2
-         Left            =   4890
-         TabIndex        =   95
-         Top             =   90
-         Width           =   405
-         _ExtentX        =   714
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ayuda"
-            EndProperty
-         EndProperty
-      End
-      Begin VB.Label Label18 
-         Alignment       =   2  'Center
-         Caption         =   "No debe haber nadie más trabajando contra esta contabilidad"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   11.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   855
-         Left            =   210
-         TabIndex        =   96
-         Top             =   720
-         Width           =   4875
-      End
-      Begin VB.Label Label19 
-         Caption         =   "Trabajar nadie en esta contabilidad"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   210
-         TabIndex        =   24
-         Top             =   2490
-         Width           =   5070
-      End
-   End
    Begin VB.Frame fPyG 
       BorderStyle     =   0  'None
       Height          =   9825
@@ -658,7 +398,7 @@ Begin VB.Form frmCierre
             Height          =   240
             Index           =   2
             Left            =   930
-            Picture         =   "frmCierre.frx":0097
+            Picture         =   "frmCierre.frx":000C
             Top             =   420
             Width           =   240
          End
@@ -922,7 +662,7 @@ Begin VB.Form frmCierre
             Height          =   240
             Index           =   3
             Left            =   930
-            Picture         =   "frmCierre.frx":0A99
+            Picture         =   "frmCierre.frx":0A0E
             Top             =   420
             Width           =   240
          End
@@ -1131,7 +871,7 @@ Begin VB.Form frmCierre
             Height          =   240
             Index           =   1
             Left            =   870
-            Picture         =   "frmCierre.frx":149B
+            Picture         =   "frmCierre.frx":1410
             Top             =   330
             Width           =   240
          End
@@ -1379,7 +1119,7 @@ Begin VB.Form frmCierre
             Height          =   240
             Index           =   0
             Left            =   870
-            Picture         =   "frmCierre.frx":1E9D
+            Picture         =   "frmCierre.frx":1E12
             Top             =   390
             Width           =   240
          End
@@ -1805,6 +1545,266 @@ Begin VB.Form frmCierre
          Width           =   6750
       End
    End
+   Begin VB.Frame fRenumeracion 
+      BorderStyle     =   0  'None
+      Height          =   4245
+      Left            =   30
+      TabIndex        =   0
+      Top             =   -60
+      Width           =   5745
+      Begin MSComctlLib.ProgressBar pb1 
+         Height          =   285
+         Left            =   270
+         TabIndex        =   10
+         Top             =   2700
+         Width           =   5295
+         _ExtentX        =   9340
+         _ExtentY        =   503
+         _Version        =   393216
+         Appearance      =   1
+         Max             =   1000
+      End
+      Begin VB.CommandButton cmdRenumera 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   2970
+         TabIndex        =   9
+         Top             =   3420
+         Width           =   1185
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   4350
+         TabIndex        =   8
+         Top             =   3420
+         Width           =   1185
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Ejercicio SIGUIENTE"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   1
+         Left            =   3210
+         TabIndex        =   7
+         Top             =   1860
+         Width           =   2415
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Ejercicio ACTUAL"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   0
+         Left            =   270
+         TabIndex        =   6
+         Top             =   1860
+         Width           =   2085
+      End
+      Begin MSComctlLib.Toolbar ToolbarAyuda 
+         Height          =   390
+         Index           =   0
+         Left            =   5160
+         TabIndex        =   81
+         Top             =   120
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   688
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ayuda"
+            EndProperty
+         EndProperty
+      End
+      Begin VB.Label Label2 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Left            =   330
+         TabIndex        =   11
+         Top             =   3120
+         Width           =   5115
+      End
+      Begin VB.Label Label1 
+         Alignment       =   2  'Center
+         Caption         =   "No debe haber nadie más trabajando contra esta contabilidad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   11.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   855
+         Left            =   360
+         TabIndex        =   5
+         Top             =   630
+         Width           =   4875
+      End
+   End
+   Begin VB.Frame frameDescierre 
+      BorderStyle     =   0  'None
+      Caption         =   $"frmCierre.frx":2814
+      Height          =   3975
+      Left            =   30
+      TabIndex        =   21
+      Top             =   -30
+      Width           =   5565
+      Begin VB.TextBox Text3 
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   180
+         TabIndex        =   25
+         Text            =   "Text3"
+         Top             =   1920
+         Width           =   5085
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   5
+         Left            =   4290
+         TabIndex        =   23
+         Top             =   3270
+         Width           =   1035
+      End
+      Begin VB.CommandButton cmdDescerrar 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   3030
+         TabIndex        =   22
+         Top             =   3270
+         Width           =   1125
+      End
+      Begin MSComctlLib.Toolbar ToolbarAyuda 
+         Height          =   390
+         Index           =   2
+         Left            =   4890
+         TabIndex        =   95
+         Top             =   90
+         Width           =   405
+         _ExtentX        =   714
+         _ExtentY        =   688
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ayuda"
+            EndProperty
+         EndProperty
+      End
+      Begin VB.Label Label18 
+         Alignment       =   2  'Center
+         Caption         =   "No debe haber nadie más trabajando contra esta contabilidad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   11.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   855
+         Left            =   210
+         TabIndex        =   96
+         Top             =   720
+         Width           =   4875
+      End
+      Begin VB.Label Label19 
+         Caption         =   "Trabajar nadie en esta contabilidad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   210
+         TabIndex        =   24
+         Top             =   2490
+         Width           =   5070
+      End
+   End
 End
 Attribute VB_Name = "frmCierre"
 Attribute VB_GlobalNameSpace = False
@@ -2176,7 +2176,7 @@ On Error GoTo EDescierre
     Screen.MousePointer = vbHourglass
     
     cmdDescerrar.Enabled = False
-    cmdCancel(5).Enabled = False
+    CmdCancel(5).Enabled = False
     Me.Refresh
     
     Me.Refresh
@@ -2201,7 +2201,7 @@ On Error GoTo EDescierre
         Unload Me
     Else
         cmdDescerrar.Enabled = False
-        cmdCancel(5).Enabled = False
+        CmdCancel(5).Enabled = False
     End If
     
     Screen.MousePointer = vbDefault
@@ -2470,7 +2470,7 @@ Private Sub Form_Activate()
 If PrimeraVez Then
     PrimeraVez = False
     DoEvents
-    cmdCancel(Opcion).Cancel = True
+    CmdCancel(Opcion).Cancel = True
     Select Case Opcion
     Case 1, 4
         PonerDatosPyG
@@ -3029,9 +3029,9 @@ Dim vFecha As String
 
     cmdSimula(0).Visible = (Opcion = 4)
     cmdSimula(1).Visible = (Opcion = 4)
-    Me.cmdCancel(4).Visible = (Opcion = 4)
+    Me.CmdCancel(4).Visible = (Opcion = 4)
     Me.cmdCierreEjercicio.Visible = (Opcion = 1)
-    Me.cmdCancel(1).Visible = (Opcion = 1)
+    Me.CmdCancel(1).Visible = (Opcion = 1)
     Label6.Visible = (Opcion = 4)
     Label4.Visible = Not Label6.Visible
     If Opcion = 1 Then
@@ -4321,7 +4321,7 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
     Set Rs = New ADODB.Recordset
     
     cad = "select " & vUsu.Codigo & ",codmacta,'T',sum(coalesce(timported,0))-sum(coalesce(timporteh,0)) from hlinapu"
-    cad = cad & " WHERE (codmacta like '8__' or codmacta like '9__') AND "
+    cad = cad & " WHERE mid(codmacta,1,1) in ('8','9') AND "
     cad = cad & "  fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
     
     
@@ -4336,13 +4336,13 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
     '
     'Cruzamos tmpcierr1 con codusu = vusu y left join con cuentas
     'Veremos si hay null con lo cual esta mal y si no, updatearemos tmpcierre
-    cad = "select cta,nommacta,cuentaba from tmpcierre1,cuentas where codusu = " & vUsu.Codigo & " and cta = codmacta"
+    cad = "select cta,nommacta,mid(iban, 15,10) cuentaba from tmpcierre1,cuentas where codusu = " & vUsu.Codigo & " and cta = codmacta"
   
     Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
     I = 0
     While Not Rs.EOF
-        If DBLet(Rs!Cuentaba, "T") = "" Then
+        If DBLet(Rs!cuentaba, "T") = "" Then
             
             I = I + 1
             cad = cad & "     " & Rs!Cta
@@ -4351,7 +4351,7 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
         Else
         
             'ASi, tanto para la simulacion, como para el cierre ya se contra que cuentas saldan las del 8 9
-            Conn.Execute "UPDATE tmpcierre1 SET nomcta = '" & Rs!Cuentaba & "' WHERE codusu = " & vUsu.Codigo & " and cta = '" & Rs!Cta & "'"
+            Conn.Execute "UPDATE tmpcierre1 SET nomcta = '" & Rs!cuentaba & "' WHERE codusu = " & vUsu.Codigo & " and cta = '" & Rs!Cta & "'"
         End If
         
         Rs.MoveNext
@@ -4367,7 +4367,7 @@ Private Function ComprobarCierreCuentas8y9() As Boolean
     
     
     'OK tiene todas las cuentas configuradas
-    cad = "Select tmpcierre1.nomcta, cuentas.codmacta from tmpcierre1 left join cuentas on tmpcierre1.codusu=" & vUsu.Codigo & " AND nomcta = cuentas.codmacta"
+    cad = "Select tmpcierre1.nomcta, cuentas.codmacta from tmpcierre1 left join cuentas on nomcta = cuentas.codmacta where tmpcierre1.codusu=" & vUsu.Codigo
     Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
     I = 0
@@ -4439,11 +4439,11 @@ Dim Ok As Byte
         Sql = Sql & " AND fechaent ='" & Format(vParam.fechafin, FormatoFecha) & "' AND numasien = " & Text1(11).Text & ""
         
         'Borramos por si acaso ha insertado lineas
-        cad = "Delete FROM linapu" & Sql
+        cad = "Delete FROM hlinapu" & Sql
         Conn.Execute cad
     
         'Borramos la cabcecera del apunte
-        cad = "DELETE FROM cabapu" & Sql
+        cad = "DELETE FROM hcabapu" & Sql
         Conn.Execute cad
         
         Label3.Caption = ""
@@ -4544,21 +4544,14 @@ Dim CONT As Long
         
         
         
-        'Selecciono todas las cuentas para el subgrupo de 3 digitos
-        cad = Mid(Rs!Cta & "_______", 1, vEmpresa.DigitosUltimoNivel)
-        cad = " WHERE hsaldos.codmacta=cuentas.codmacta AND hsaldos.codmacta like '" & cad & "' AND "
-        cad = "select hsaldos.codmacta,sum(impmesde)-sum(impmesha) as miImporte,nommacta from hsaldos,cuentas" & cad
-        If Year(vParam.fechaini) = Year(vParam.fechafin) Then
-            'Años son el mimo, luego en para mer, luego
-             cad = cad & " anopsald = " & Year(vParam.fechafin)
-        Else
-            'Fecha inicio y fin no estan en el mismo año natural
-            'ejemplo: and ((anopsald=2006 and mespsald>2) and (anopsald=2006 and mespsald<=3))
-            cad = cad & "((anopsald = " & Year(vParam.fechaini) & " AND mespsald >=" & Month(vParam.fechaini) & ") AND "
-            cad = cad & " (anopsald = " & Year(vParam.fechafin) & " AND mespsald <=" & Month(vParam.fechafin) & "))"
-            
-        End If
+        '$$$
+        cad = Mid(Rs!Cta & "__________", 1, vEmpresa.DigitosUltimoNivel)
+        cad = " WHERE hlinapu.codmacta=cuentas.codmacta AND hlinapu.codmacta like '" & cad & "' AND "
+        cad = "select hlinapu.codmacta,sum(coalesce(timported,0))-sum(coalesce(timporteh,0)) as miImporte,nommacta from hlinapu,cuentas" & cad
+        cad = cad & " fechaent between " & DBSet(vParam.fechaini, "F") & " and " & DBSet(vParam.fechafin, "F")
+        
         cad = cad & " GROUP BY codmacta"
+        
         ImpComprobacion = 0
         RT.Open cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RT.EOF

@@ -69,3 +69,9 @@ insert into `scryst` (`codigo`,`descripcion`,`informe`) values ( '0903-00','Info
 # Campo Descripcion del slog
 alter table `slog` change `descripcion` `descripcion` text   NULL  COLLATE latin1_swedish_ci 
 ;
+# Campo que indica si está o no traspasada la factura de la conta
+alter table `factcli` add column `estraspasada` tinyint (1)  DEFAULT '0' NOT NULL  after `escorrecta`
+;
+# Idem en la tabla de facturas de proveedor
+alter table `factpro` add column `estraspasada` tinyint (1)  DEFAULT '0' NOT NULL  after `escorrecta`
+;

@@ -271,10 +271,6 @@ Dim Contabilizada As String
             ' cobro de la factura
             Donde = "Cobro factura"
             
-'            Cuenta = "DELETE from cobros_realizados where numserie = " & DBSet(LEtra, "T") & " and numfactu = " & NumFac & " and fecfactu = " & DBSet(FechaAsiento, "F")
-'            Conn.Execute Cuenta
-            
-            
             Cuenta = "DELETE from cobros where numserie = " & DBSet(LEtra, "T") & " and numfactu = " & NumFac & " and fecfactu = " & DBSet(FechaAsiento, "F")
             Conn.Execute Cuenta
         End If

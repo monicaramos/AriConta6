@@ -26,6 +26,122 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   16440
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameDescuadre 
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   5535
+      Left            =   0
+      TabIndex        =   138
+      Top             =   90
+      Width           =   8865
+      Begin VB.CommandButton Command1 
+         Caption         =   "&Salir"
+         Height          =   375
+         Index           =   2
+         Left            =   7620
+         TabIndex        =   140
+         Top             =   4800
+         Width           =   1095
+      End
+      Begin MSComctlLib.ImageList ImageList2 
+         Left            =   1320
+         Top             =   5760
+         _ExtentX        =   1005
+         _ExtentY        =   1005
+         BackColor       =   -2147483643
+         ImageWidth      =   16
+         ImageHeight     =   16
+         MaskColor       =   12632256
+         _Version        =   393216
+         BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+            NumListImages   =   3
+            BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmMensajes.frx":000C
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmMensajes.frx":57FE
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmMensajes.frx":6210
+               Key             =   ""
+            EndProperty
+         EndProperty
+      End
+      Begin MSComctlLib.ProgressBar ProgressBar2 
+         Height          =   375
+         Left            =   120
+         TabIndex        =   139
+         Top             =   4800
+         Visible         =   0   'False
+         Width           =   3615
+         _ExtentX        =   6376
+         _ExtentY        =   661
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin MSComctlLib.ListView ListView8 
+         Height          =   3735
+         Left            =   120
+         TabIndex        =   141
+         Top             =   840
+         Width           =   8625
+         _ExtentX        =   15214
+         _ExtentY        =   6588
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         SmallIcons      =   "ImageList1"
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Nivel"
+            Object.Width           =   2699
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   1
+            Text            =   "Debe"
+            Object.Width           =   2999
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   2
+            Text            =   "Haber"
+            Object.Width           =   2999
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   3
+            Text            =   "Saldo"
+            Object.Width           =   2999
+         EndProperty
+      End
+   End
    Begin VB.Frame FrameVerObservacionesCuentas 
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -39,7 +155,7 @@ Begin VB.Form frmMensajes
       Height          =   6105
       Left            =   30
       TabIndex        =   89
-      Top             =   120
+      Top             =   30
       Width           =   9375
       Begin VB.TextBox Text1 
          Height          =   360
@@ -49,7 +165,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          TabIndex        =   94
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":000C
+         Text            =   "frmMensajes.frx":6662
          Top             =   720
          Width           =   7665
       End
@@ -61,7 +177,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          TabIndex        =   93
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":0012
+         Text            =   "frmMensajes.frx":6668
          Top             =   720
          Width           =   1005
       End
@@ -82,7 +198,7 @@ Begin VB.Form frmMensajes
          ScrollBars      =   2  'Vertical
          TabIndex        =   90
          Tag             =   "Observaciones|T|S|||cuentas|obsdatos|||"
-         Text            =   "frmMensajes.frx":0018
+         Text            =   "frmMensajes.frx":666E
          Top             =   1320
          Width           =   8775
       End
@@ -189,7 +305,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   6480
-         Picture         =   "frmMensajes.frx":001E
+         Picture         =   "frmMensajes.frx":6674
          Top             =   330
          Width           =   240
       End
@@ -197,7 +313,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   6120
-         Picture         =   "frmMensajes.frx":0168
+         Picture         =   "frmMensajes.frx":67BE
          Top             =   330
          Width           =   240
       End
@@ -756,7 +872,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   5820
-         Picture         =   "frmMensajes.frx":02B2
+         Picture         =   "frmMensajes.frx":6908
          Top             =   1605
          Width           =   240
       End
@@ -764,7 +880,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   5820
-         Picture         =   "frmMensajes.frx":0CB4
+         Picture         =   "frmMensajes.frx":730A
          Top             =   2070
          Width           =   240
       End
@@ -901,7 +1017,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   55
-         Text            =   "frmMensajes.frx":16B6
+         Text            =   "frmMensajes.frx":7D0C
          Top             =   900
          Width           =   4365
       End
@@ -912,7 +1028,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   54
-         Text            =   "frmMensajes.frx":16BC
+         Text            =   "frmMensajes.frx":7D12
          Top             =   900
          Width           =   4125
       End
@@ -1006,7 +1122,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   4920
-         Picture         =   "frmMensajes.frx":16C2
+         Picture         =   "frmMensajes.frx":7D18
          ToolTipText     =   "Quitar seleccion"
          Top             =   720
          Width           =   240
@@ -1015,7 +1131,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   4920
-         Picture         =   "frmMensajes.frx":180C
+         Picture         =   "frmMensajes.frx":7E62
          ToolTipText     =   "Todos"
          Top             =   1080
          Width           =   240
@@ -1025,7 +1141,7 @@ Begin VB.Form frmMensajes
       Height          =   6720
       Left            =   0
       TabIndex        =   129
-      Top             =   120
+      Top             =   30
       Width           =   13410
       Begin VB.CommandButton CmdSalir 
          Caption         =   "Salir"
@@ -1430,122 +1546,6 @@ Begin VB.Form frmMensajes
          TabIndex        =   23
          Top             =   240
          Width           =   5295
-      End
-   End
-   Begin VB.Frame FrameDescuadre 
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   5535
-      Left            =   8580
-      TabIndex        =   138
-      Top             =   210
-      Width           =   8865
-      Begin VB.CommandButton Command1 
-         Caption         =   "&Salir"
-         Height          =   375
-         Index           =   2
-         Left            =   7620
-         TabIndex        =   140
-         Top             =   4800
-         Width           =   1095
-      End
-      Begin MSComctlLib.ImageList ImageList2 
-         Left            =   1320
-         Top             =   5760
-         _ExtentX        =   1005
-         _ExtentY        =   1005
-         BackColor       =   -2147483643
-         ImageWidth      =   16
-         ImageHeight     =   16
-         MaskColor       =   12632256
-         _Version        =   393216
-         BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-            NumListImages   =   3
-            BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":1956
-               Key             =   ""
-            EndProperty
-            BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":7148
-               Key             =   ""
-            EndProperty
-            BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-               Picture         =   "frmMensajes.frx":7B5A
-               Key             =   ""
-            EndProperty
-         EndProperty
-      End
-      Begin MSComctlLib.ProgressBar ProgressBar2 
-         Height          =   375
-         Left            =   120
-         TabIndex        =   139
-         Top             =   4800
-         Visible         =   0   'False
-         Width           =   3615
-         _ExtentX        =   6376
-         _ExtentY        =   661
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin MSComctlLib.ListView ListView8 
-         Height          =   3735
-         Left            =   120
-         TabIndex        =   141
-         Top             =   840
-         Width           =   8625
-         _ExtentX        =   15214
-         _ExtentY        =   6588
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   0   'False
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         SmallIcons      =   "ImageList1"
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   4
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Nivel"
-            Object.Width           =   2699
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   1
-            Text            =   "Debe"
-            Object.Width           =   2999
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   2
-            Text            =   "Haber"
-            Object.Width           =   2999
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   3
-            Text            =   "Saldo"
-            Object.Width           =   2999
-         EndProperty
       End
    End
    Begin VB.Frame frameCalculoSaldos 

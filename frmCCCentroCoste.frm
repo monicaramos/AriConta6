@@ -816,7 +816,7 @@ Private Sub BotonAnyadir()
     CargaGrid 'primer de tot carregue tot el grid
     CadB = ""
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, Adodc1
+    AnyadirLinea DataGrid1, adodc1
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
@@ -944,28 +944,28 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Centro de Coste?"
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Centro de Coste?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = Adodc1.Recordset.AbsolutePosition
+        NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        SQL = "Delete from ccoste where codccost=" & Adodc1.Recordset!codccost
-        Conn.Execute SQL
+        Sql = "Delete from ccoste where codccost=" & adodc1.Recordset!codccost
+        Conn.Execute Sql
         CargaGrid CadB
-        temp = SituarDataTrasEliminar(Adodc1, NumRegElim, True)
+        temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu Modo
-        Adodc1.Recordset.Cancel
+        adodc1.Recordset.Cancel
     End If
     Exit Sub
     
@@ -996,7 +996,7 @@ Private Sub btnBuscar_Click(Index As Integer)
     
     End Select
     
-    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.Adodc1, 1
+    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.adodc1, 1
 End Sub
 
 
@@ -1021,8 +1021,8 @@ Private Sub cmdAceptar_Click()
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
-                        If Not Adodc1.Recordset.EOF Then
-                            Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
+                        If Not adodc1.Recordset.EOF Then
+                            adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & NuevoCodigo)
                         End If
                         cmdRegresar_Click
                     Else
@@ -1036,10 +1036,10 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario2(Me, 1) Then
                     TerminaBloquear
-                    I = Adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
-                    Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1076,7 +1076,7 @@ Dim v
             DataGrid1.AllowAddNew = False
             PonerModo 2
             CargaGrid
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'modificar
             TerminaBloquear
             
@@ -1128,7 +1128,7 @@ Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
-    If Adodc1.Recordset.EOF Then
+    If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
@@ -1140,7 +1140,7 @@ Dim Aux As String
         If I > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            cad = cad & Adodc1.Recordset.Fields(J) & "|"
+            cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
@@ -1174,7 +1174,7 @@ Private Sub Form_Activate()
         Else
             PonerModo 2
              If Me.CodigoActual <> "" Then
-                SituarData Me.Adodc1, "codccost=" & CodigoActual, "", True
+                SituarData Me.adodc1, "codccost=" & CodigoActual, "", True
             End If
             CargaGrid
         End If
@@ -1188,7 +1188,7 @@ Private Sub Form_Load()
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 3
         .Buttons(2).Image = 4
         .Buttons(3).Image = 5
@@ -1209,7 +1209,7 @@ Private Sub Form_Load()
     
     ' La Ayuda
     With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun
         .Buttons(1).Image = 26
     End With
     
@@ -1232,14 +1232,14 @@ Private Sub Form_Load()
     '## A mano
     NombreTabla = "ccoste"
     Ordenacion = " ORDER BY nomccost"
-    Adodc1.ConnectionString = Conn
+    adodc1.ConnectionString = Conn
     
     
     'Bloqueo de tabla, cursor type
-    Adodc1.CursorType = adOpenDynamic
-    Adodc1.LockType = adLockPessimistic
-    Adodc1.RecordSource = "Select * from " & NombreTabla & Ordenacion
-    Adodc1.Refresh
+    adodc1.CursorType = adOpenDynamic
+    adodc1.LockType = adLockPessimistic
+    adodc1.RecordSource = "Select * from " & NombreTabla & Ordenacion
+    adodc1.Refresh
     'Cargamos el grid
     CargaGrid "-11"
     If DatosADevolverBusqueda = "" Then
@@ -1280,13 +1280,13 @@ End Sub
 Private Sub mnModificar_Click()
     'Comprobaciones
     '--------------
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
-    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
     'Preparamos para modificar
     '-------------------------
-    If BLOQUEADesdeFormulario2(Me, Adodc1, 1) Then BotonModificar
+    If BLOQUEADesdeFormulario2(Me, adodc1, 1) Then BotonModificar
 End Sub
 
 Private Sub mnNuevo_Click()
@@ -1335,21 +1335,21 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+Private Sub CargaGrid(Optional vSql As String)
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
-    If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+    If vSql <> "" Then
+        Sql = CadenaConsulta & " AND " & vSql
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY ccoste.codccost"
+    Sql = Sql & " ORDER BY ccoste.codccost"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtaux(0)|T|Código|900|;S|txtaux(1)|T|Descripción|6500|;"
@@ -1446,7 +1446,7 @@ End Sub
 
 Private Sub txtAux1_LostFocus(Index As Integer)
 Dim Sng As Currency
-Dim SQL As String
+Dim Sql As String
 
     If Not PerderFocoGnral(txtaux1(Index), Modo) Then Exit Sub
     
@@ -1461,8 +1461,8 @@ Dim SQL As String
             Else
                 'comprobamos que no esté ya en el reparto
                 If ModoLineas = 0 Or (ModoLineas = 1 And AntSubCos <> txtaux1(Index).Text) Then
-                    SQL = "select count(*) from ccoste_lineas where codccost = " & DBSet(Adodc1.Recordset!codccost, "T") & " and subccost = " & DBSet(txtaux1(Index).Text, "T")
-                    If TotalRegistros(SQL) > 0 Then
+                    Sql = "select count(*) from ccoste_lineas where codccost = " & DBSet(adodc1.Recordset!codccost, "T") & " and subccost = " & DBSet(txtaux1(Index).Text, "T")
+                    If TotalRegistros(Sql) > 0 Then
                         MsgBox "Este centro de reparto ya está en este centro de coste. Reintroduzca.", vbExclamation
                         PonFoco txtaux1(Index)
                     End If
@@ -1496,7 +1496,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1522,7 +1522,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.Adodc1)
+        cadReg = PonerContRegistros(Me.adodc1)
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -1570,26 +1570,26 @@ Private Function MontaSQLCarga(Index As Integer, Enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
                
         Case 0 'centros de coste reparto
-            SQL = "SELECT ccoste_lineas.codccost,ccoste_lineas.linscost,ccoste_lineas.subccost, ccoste.nomccost,ccoste_lineas.porccost"
-            SQL = SQL & " FROM ccoste_lineas INNER JOIN ccoste ON ccoste_lineas.subccost = ccoste.codccost"
+            Sql = "SELECT ccoste_lineas.codccost,ccoste_lineas.linscost,ccoste_lineas.subccost, ccoste.nomccost,ccoste_lineas.porccost"
+            Sql = Sql & " FROM ccoste_lineas INNER JOIN ccoste ON ccoste_lineas.subccost = ccoste.codccost"
             
             If Enlaza Then
-                SQL = SQL & ObtenerWhereLin(True)
+                Sql = Sql & ObtenerWhereLin(True)
             Else
-                SQL = SQL & " WHERE ccoste_lineas.codccost is null"
+                Sql = Sql & " WHERE ccoste_lineas.codccost is null"
             End If
-            SQL = SQL & " ORDER BY ccoste_lineas.linscost;"
+            Sql = Sql & " ORDER BY ccoste_lineas.linscost;"
                
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Function ObtenerWhereCab(conW As Boolean) As String
@@ -1598,7 +1598,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " ccoste.codccost='" & Me.Adodc1.Recordset!codccost & "'"
+    vWhere = vWhere & " ccoste.codccost='" & Me.adodc1.Recordset!codccost & "'"
     
     ObtenerWhereCab = vWhere
 End Function
@@ -1609,7 +1609,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " ccoste_lineas.codccost='" & Me.Adodc1.Recordset!codccost & "'"
+    vWhere = vWhere & " ccoste_lineas.codccost='" & Me.adodc1.Recordset!codccost & "'"
     
     ObtenerWhereLin = vWhere
 End Function
@@ -1667,7 +1667,7 @@ Dim I As Integer
         
             Select Case Index
                 Case 0 'reaprto de centros de coste
-                    txtaux1(0).Text = Me.Adodc1.Recordset!codccost
+                    txtaux1(0).Text = Me.adodc1.Recordset!codccost
                     txtaux1(1).Text = NumF 'numlinea
                     txtaux1(2).Text = ""
                     txtaux1(3).Text = Format(MaxValor, "##0.00")
@@ -1744,7 +1744,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -1759,7 +1759,7 @@ Dim Eliminar As Boolean
     
        
     NumTabMto = Index
-    PonerModo 5, Index
+'    PonerModo 5, Index
 
     If AdoAux(Index).Recordset.EOF Then Exit Sub
     NumTabMto = Index
@@ -1771,12 +1771,12 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 0 'centro de coste de reparto
-            SQL = "¿Seguro que desea el centro de coste de reparto?"
-            SQL = SQL & vbCrLf & "Nombre: " & AdoAux(Index).Recordset!nomccost
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar el centro de coste de reparto?"
+            Sql = Sql & vbCrLf & "Nombre: " & AdoAux(Index).Recordset!nomccost
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM ccoste_lineas "
-                SQL = SQL & vWhere & " AND linscost= " & AdoAux(Index).Recordset!linscost
+                Sql = "DELETE FROM ccoste_lineas "
+                Sql = Sql & vWhere & " AND linscost= " & AdoAux(Index).Recordset!linscost
             End If
             
     End Select
@@ -1784,7 +1784,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        Conn.Execute SQL
+        Conn.Execute Sql
         
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
@@ -1806,7 +1806,7 @@ Private Sub InsertarLinea()
 'Inserta registre en les taules de Llínies
 Dim nomframe As String
 Dim B As Boolean
-Dim SQL2 As String
+Dim Sql2 As String
 Dim Sql3 As String
 
     On Error GoTo EInsertarLinea
@@ -1834,7 +1834,7 @@ EInsertarLinea:
         Conn.CommitTrans
     
         If B Then
-            B = BLOQUEADesdeFormulario2(Me, Me.Adodc1, 1)
+            B = BLOQUEADesdeFormulario2(Me, Me.adodc1, 1)
             Select Case NumTabMto
                 Case 0 ' *** els index de les llinies en grid (en o sense tab) ***
                     CargaGridAux NumTabMto, True
@@ -1924,8 +1924,8 @@ Private Sub LimpiarCampos()
 End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 Dim B As Boolean
 Dim cant As Integer
 Dim Mens As String
@@ -1938,6 +1938,15 @@ Dim vFact As Byte, vDocum As Byte
         
     B = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
     If Not B Then Exit Function
+    
+    
+    ' comprobamos que el centro de coste de lineas no puede ser el mismo que el de reparto
+    If txtaux1(2).Text = txtaux1(0).Text Then
+        MsgBox "El centro de coste de reparto no puede coincidir con el CC. Reintroduzca.", vbExclamation
+        PonFoco txtaux1(2)
+        B = False
+    End If
+    
     
     ' ******************************************************************************
     DatosOkLlin = B
@@ -1959,16 +1968,16 @@ Private Sub PonerCadenaBusqueda()
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
     
-    Adodc1.RecordSource = CadenaConsulta
-    Adodc1.Refresh
+    adodc1.RecordSource = CadenaConsulta
+    adodc1.Refresh
     
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
         Screen.MousePointer = vbDefault
         Exit Sub
     Else
         PonerModo 2
-        Adodc1.Recordset.MoveFirst
+        adodc1.Recordset.MoveFirst
         PonerCampos
     End If
     
@@ -1986,7 +1995,7 @@ Dim I As Integer
 Dim CodPobla As String, desPobla As String
 Dim CPostal As String, desProvi As String, desPais As String
 
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     ' *** si n'hi han llínies en datagrids ***
     For I = 0 To 0
@@ -1996,7 +2005,7 @@ Dim CPostal As String, desProvi As String, desPais As String
     Next I
 
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = Me.Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    lblIndicador.Caption = Me.adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     
     PonerModoOpcionesMenu (Modo)
     PonerOpcionesMenu
@@ -2007,7 +2016,7 @@ End Sub
 '**************************************************************************
 
 Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String
     
     On Error Resume Next
@@ -2015,48 +2024,48 @@ Dim cad As String
     cad = "select ver, creareliminar, modificar, imprimir, especial from menus_usuarios where aplicacion = " & DBSet(aplicacion, "T")
     cad = cad & " and codigo = " & DBSet(IdPrograma, "N") & " and codusu = " & DBSet(vUsu.Id, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open cad, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
-        Toolbar1.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2 And Me.Adodc1.Recordset.RecordCount > 0)
-        Toolbar1.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2 And Me.Adodc1.Recordset.RecordCount > 0)
+    If Not Rs.EOF Then
+        Toolbar1.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 2 And Me.adodc1.Recordset.RecordCount > 0)
+        Toolbar1.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 2 And Me.adodc1.Recordset.RecordCount > 0)
         
-        Toolbar1.Buttons(5).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
-        Toolbar1.Buttons(6).Enabled = DBLet(RS!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(5).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
+        Toolbar1.Buttons(6).Enabled = DBLet(Rs!Ver, "N") And (Modo = 0 Or Modo = 2)
         
-        Toolbar1.Buttons(8).Enabled = DBLet(RS!Imprimir, "N")
+        Toolbar1.Buttons(8).Enabled = DBLet(Rs!Imprimir, "N")
         
-        ToolbarAux.Buttons(1).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2)
-        ToolbarAux.Buttons(2).Enabled = DBLet(RS!Modificar, "N") And (Modo = 2 And Me.AdoAux(0).Recordset.RecordCount > 0)
-        ToolbarAux.Buttons(3).Enabled = DBLet(RS!creareliminar, "N") And (Modo = 2 And Me.AdoAux(0).Recordset.RecordCount > 0)
+        ToolbarAux.Buttons(1).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 2)
+        ToolbarAux.Buttons(2).Enabled = DBLet(Rs!Modificar, "N") And (Modo = 2 And Me.AdoAux(0).Recordset.RecordCount > 0)
+        ToolbarAux.Buttons(3).Enabled = DBLet(Rs!creareliminar, "N") And (Modo = 2 And Me.AdoAux(0).Recordset.RecordCount > 0)
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 End Sub
 
 
 Private Sub ObtenerMaxValor()
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 Dim Sng As Single
         
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     
-    Set RS = New ADODB.Recordset
-    SQL = "SELECT * FROM ccoste_lineas where codccost='" & Adodc1.Recordset!codccost & "'"
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Sql = "SELECT * FROM ccoste_lineas where codccost='" & adodc1.Recordset!codccost & "'"
+    Rs.Open Sql, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Sng = 0
-    While Not RS.EOF
-        Sng = Sng + RS!porccost
-        RS.MoveNext
+    While Not Rs.EOF
+        Sng = Sng + Rs!porccost
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If Sng > 100 Then MsgBox "El valor total del % de reparto de los subcentros de coste excede de 100", vbCritical
     
     MaxValor = Round(100 - Sng, 2)

@@ -2,8 +2,8 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
 <CstmrDrctDbtInitn>
 <GrpHdr>
-<MsgId>PRE2016090812022476170RE10000512016</MsgId>
-   <CreDtTm>2016-09-08T12:02:24</CreDtTm>
+<MsgId>PRE2016091213141455470RE10000522016</MsgId>
+   <CreDtTm>2016-09-12T13:14:14</CreDtTm>
    <NbOfTxs>1</NbOfTxs>
    <CtrlSum>121.00</CtrlSum>
    <InitgPty>
@@ -18,7 +18,7 @@
    </InitgPty>
 </GrpHdr>
 <PmtInf>
-   <PmtInfId>RE000512016 08/09/16B96470190</PmtInfId>
+   <PmtInfId>RE000522016 12/09/16B96470190</PmtInfId>
    <PmtMtd>DD</PmtMtd>
    <BtchBookg>false</BtchBookg>
    <PmtTpInf>
@@ -33,7 +33,7 @@
          <Cd>TRAD</Cd>
       </CtgyPurp>
    </PmtTpInf>
-   <ReqdColltnDt>2016-09-08</ReqdColltnDt>
+   <ReqdColltnDt>2016-09-12</ReqdColltnDt>
    <Cdtr>
       <Nm>PRUEBASSSSSS</Nm>
       <PstlAdr>
@@ -63,7 +63,7 @@
    </CdtrSchmeId>
    <DrctDbtTxInf>
       <PmtId>
-          <EndToEndId>430000001 A  0000000720160908001   </EndToEndId>
+          <EndToEndId>430000001 A  0000001020160912001   </EndToEndId>
       </PmtId>
       <InstdAmt Ccy="EUR">121.00</InstdAmt>
       <DrctDbtTx>
@@ -101,7 +101,7 @@
          <Cd>TRAD</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Factura A-0000007 de Fecha 08/09/2016</Ustrd>
+         <Ustrd>Factura A-0000010 de Fecha 12/09/2016</Ustrd>
       </RmtInf>
    </DrctDbtTxInf>
 </PmtInf>
