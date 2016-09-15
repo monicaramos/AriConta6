@@ -28,9 +28,9 @@ Begin VB.Form frmFacturasPro
          Strikethrough   =   0   'False
       EndProperty
       Height          =   2265
-      Left            =   390
+      Left            =   420
       TabIndex        =   98
-      Top             =   2520
+      Top             =   2490
       Visible         =   0   'False
       Width           =   16935
       Begin VB.TextBox Text4 
@@ -2841,6 +2841,8 @@ Dim FechaPago As String
 
 Dim TipForpa As Integer
 Dim FecFactuAnt As String
+Dim NumFactuAnt As String
+
 
 Dim FecRecepAnt As String ' recepcion
 
@@ -3011,6 +3013,21 @@ Dim Rs As ADODB.Recordset
 
     If Not vEmpresa.TieneTesoreria Then Exit Sub
     
+    ' si me cambian el nro de fra la cambio ya
+    If Trim(Text1(25).Text) <> Trim(NumFactuAnt) Then
+        Sql = "update pagos set numfactu = " & DBSet(Text1(25).Text, "T") & " where numserie = " & DBSet(Text1(2).Text, "T")
+        Sql = Sql & " and codmacta = " & DBSet(Text1(4).Text, "T") & " and numfactu = " & DBSet(NumFactuAnt, "T")
+        Sql = Sql & " and fecfactu = " & DBSet(FecFactuAnt, "F")
+        
+        Conn.Execute Sql
+        
+        Sql = "update hlinapu set numfacpr = " & DBSet(Text1(25).Text, "T") & " where numserie = " & DBSet(Text1(2).Text, "T")
+        Sql = Sql & " and codmacta = " & DBSet(Text1(4).Text, "T") & " and numfacpr = " & DBSet(NumFactuAnt, "T")
+        Sql = Sql & " and fecfactu = " & DBSet(FecFactuAnt, "F")
+        
+        Conn.Execute Sql
+    End If
+    
     '[Monica]12/09/2016: si la factura ha sido traspasada y no está en cartera, no hacemos nada en cartera
     If EsFraProTraspasada And Not ExisteAlgunPago(Text1(2).Text, Text1(4).Text, Text1(25).Text, FecFactuAnt, False) Then Exit Sub
     
@@ -3020,8 +3037,8 @@ Dim Rs As ADODB.Recordset
 
         Set frmMens = New frmMensajes
 
-        frmMens.Opcion = 27
-        frmMens.Parametros = Trim(Text1(2).Text) & "|" & Trim(Text1(0).Text) & "|" & Text1(1).Text & "|"
+        frmMens.Opcion = 28
+        frmMens.Parametros = Trim(Text1(2).Text) & "|" & Trim(Text1(4).Text) & "|" & Trim(Text1(25).Text) & "|" & Text1(26).Text & "|"
         frmMens.Show vbModal
 
         Set frmMens = Nothing
@@ -3085,7 +3102,7 @@ Dim Rs As ADODB.Recordset
                 Set frmMens = New frmMensajes
                 
                 frmMens.Opcion = 28
-                frmMens.Parametros = Trim(Text1(2).Text) & "|" & Trim(Text1(25).Text) & "|" & Text1(1).Text & "|"
+                frmMens.Parametros = Trim(Text1(2).Text) & "|" & Trim(Text1(4).Text) & "|" & Trim(Text1(25).Text) & "|" & Text1(26).Text & "|"
                 frmMens.Show vbModal
                 
                 Set frmMens = Nothing
@@ -4653,7 +4670,7 @@ Private Sub BotonModificar()
     
     FecFactuAnt = Text1(26).Text
     FecRecepAnt = Text1(1).Text
-
+    NumFactuAnt = Text1(25).Text
     
     NumDiario = 0
     'Comprobamos que no esta actualizada ya
