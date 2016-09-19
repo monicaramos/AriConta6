@@ -628,7 +628,7 @@ Private Sub Form_Load()
     'Otras opciones
     Me.Caption = "Informe de Situación"
 
-    For I = 0 To 0
+    For I = 0 To 1
         Me.ImgFec(I).Picture = frmPpal.imgIcoForms.ListImages(2).Picture
     Next I
      
@@ -663,7 +663,7 @@ Private Sub imgFec_Click(Index As Integer)
     Screen.MousePointer = vbHourglass
     
     Select Case Index
-    Case 0
+    Case 0, 1
         IndCodigo = Index
     
         'FECHA

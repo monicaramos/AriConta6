@@ -413,47 +413,8 @@ Dim Sql As String
     T1 = Timer
     
     'Limpiamos datos blanace
-    Sql = "DELETE from Usuarios.ztmpbalancesumas where codusu= " & vUsu.Codigo
-    Conn.Execute Sql
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
 
-    Sql = "DELETE from Usuarios.ztmpconextcab where codusu= " & vUsu.Codigo
-    Conn.Execute Sql
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
 
-    Sql = "DELETE from usuarios.ztmpconext where codusu= " & vUsu.Codigo
-    Conn.Execute Sql
-    Label1(2).Caption = Label1(2).Caption & "."
-    Me.Refresh
-    
-    Sql = "DELETE from Usuarios.zcuentas where codusu= " & vUsu.Codigo
-    Conn.Execute Sql
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
-
-    Sql = "DELETE from usuarios.ztmplibrodiario where codusu= " & vUsu.Codigo
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
-    Conn.Execute Sql
-    
-    Sql = "DELETE from usuarios.zdirioresum where codusu= " & vUsu.Codigo
-    Label1(2).Caption = Label1(2).Caption & "."
-    Conn.Execute Sql
-    
-    
-    Sql = "DELETE from usuarios.zhistoapu where codusu= " & vUsu.Codigo
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
-    Conn.Execute Sql
-    
-    Sql = "DELETE from usuarios.ztmpctaexplotacion where codusu= " & vUsu.Codigo
-    Label1(2).Caption = Label1(2).Caption & "."
-    Label1(2).Refresh
-    Conn.Execute Sql
-    
-    
     Me.Refresh
     T1 = Timer - T1
     If T1 < 1 Then espera 0.7

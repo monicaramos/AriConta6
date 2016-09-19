@@ -188,24 +188,6 @@ End Function
 
 
 
-Public Function GenerarDatosCuentas(ByRef vSql As String) As Boolean
-On Error GoTo EGen
-    GenerarDatosCuentas = False
-    cad = "Delete FROM Usuarios.zCuentas where codusu =" & vUsu.Codigo
-    Conn.Execute cad
-    cad = "INSERT INTO Usuarios.zcuentas (codusu, codmacta, nommacta, razosoci,nifdatos, dirdatos, codposta, despobla, apudirec,model347) "
-    cad = cad & " SELECT " & vUsu.Codigo & ",ctas.codmacta, ctas.nommacta, ctas.razosoci, ctas.nifdatos, ctas.dirdatos, ctas.codposta, ctas.despobla,ctas.apudirec,ctas.model347"
-    cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas as ctas "
-    If vSql <> "" Then cad = cad & " WHERE " & vSql
-    Conn.Execute cad
-    GenerarDatosCuentas = True
-EGen:
-    If Err.Number <> 0 Then MuestraError Err.Number
- 
-End Function
-
-
-
 Public Function GenerarDiarios() As Boolean
 On Error GoTo EGen
     GenerarDiarios = False
@@ -221,53 +203,6 @@ EGen:
 
 End Function
 
-
-Public Function GeneraraExtractos() As Boolean
-On Error GoTo EGen
-    GeneraraExtractos = False
-    cad = "Delete FROM Usuarios.ztmpconextcab where codusu =" & vUsu.Codigo
-    Conn.Execute cad
-    cad = "Delete FROM Usuarios.ztmpconext where codusu =" & vUsu.Codigo
-    Conn.Execute cad
-    cad = "INSERT INTO Usuarios.ztmpconextcab "
-    cad = cad & "(codusu, cuenta, fechini, fechfin, acumantD, acumantH, acumantT, acumperD, acumperH, acumperT, acumtotD, acumtotH, acumtotT, cta)"
-    cad = cad & " SELECT " & vUsu.Codigo & ",t.cuenta, t.fechini, t.fechfin, t.acumantD, t.acumantH, t.acumantT, t.acumperD, t.acumperH, t.acumperT, t.acumtotD, t.acumtotH, t.acumtotT, t.cta"
-    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconextcab as t where t.codusu =" & vUsu.Codigo & ";"
-    Conn.Execute cad
-    
-    
-    'Las lineas
-    cad = "INSERT INTO Usuarios.ztmpconext (codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, ampconce, timporteD, timporteH, saldo, Punteada, contra, ccost)"
-    cad = cad & " SELECT " & vUsu.Codigo & ",t.cta, t.numdiari, t.Pos, t.fechaent, t.numasien, t.linliapu, t.nomdocum, t.ampconce, t.timporteD, t.timporteH, t.saldo, t.Punteada, t.contra, t.ccost"
-    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconext as t where t.codusu =" & vUsu.Codigo & ";"
-    Conn.Execute cad
-    GeneraraExtractos = True
-EGen:
-    If Err.Number <> 0 Then MuestraError Err.Number
-
-End Function
-
-
-'Para la impresion de extractos y demas, MAYOR, etc
-Public Function GeneraraExtractosListado(Cuenta As String) As Boolean
-On Error GoTo EGen
-    GeneraraExtractosListado = False
-    cad = "INSERT INTO Usuarios.ztmpconextcab "
-    cad = cad & "(codusu, cuenta, fechini, fechfin, acumantD, acumantH, acumantT, acumperD, acumperH, acumperT, acumtotD, acumtotH, acumtotT, cta)"
-    cad = cad & " SELECT " & vUsu.Codigo & ",t.cuenta, t.fechini, t.fechfin, t.acumantD, t.acumantH, t.acumantT, t.acumperD, t.acumperH, t.acumperT, t.acumtotD, t.acumtotH, t.acumtotT, t.cta"
-    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconextcab as t where t.codusu =" & vUsu.Codigo & " AND cta ='" & Cuenta & "';"
-    Conn.Execute cad
-    
-    'Las lineas
-    cad = "INSERT INTO Usuarios.ztmpconext (codusu, cta, numdiari, Pos, fechaent, numasien, linliapu, nomdocum, ampconce, timporteD, timporteH, saldo, Punteada, contra, ccost)"
-    cad = cad & " SELECT " & vUsu.Codigo & ",t.cta, t.numdiari, t.Pos, t.fechaent, t.numasien, t.linliapu, t.nomdocum, t.ampconce, t.timporteD, t.timporteH, t.saldo, t.Punteada, t.contra, t.ccost"
-    cad = cad & " FROM " & vUsu.CadenaConexion & ".tmpconext as t where t.codusu =" & vUsu.Codigo & " AND cta ='" & Cuenta & "';"
-    Conn.Execute cad
-    GeneraraExtractosListado = True
-EGen:
-    If Err.Number <> 0 Then MuestraError Err.Number
-
-End Function
 
 
 Public Function IAsientosErrores(ByRef vSql As String) As Boolean
@@ -388,72 +323,6 @@ EGen:
 End Function
 
 
-
-
-
-Public Function IHcoApuntes(ByRef vSql As String, NumeroTabla As String) As Boolean
-On Error GoTo EGen
-    IHcoApuntes = False
-    cad = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
-    Conn.Execute cad
-    
-    
-    cad = " INSERT INTO Usuarios.zhistoapu (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum, ampconce,"
-    cad = cad & " timporteD, timporteH, codccost) "
-    cad = cad & "SELECT " & vUsu.Codigo & ",hcabapu" & NumeroTabla & ".numdiari, tiposdiario.desdiari, hcabapu" & NumeroTabla & ".fechaent, hcabapu" & NumeroTabla & ".numasien, hlinapu" & NumeroTabla & ".linliapu,"
-    cad = cad & " hlinapu" & NumeroTabla & ".codmacta, cuentas.nommacta, hlinapu" & NumeroTabla & ".numdocum, hlinapu" & NumeroTabla & ".ampconce, hlinapu" & NumeroTabla & ".timporteD,"
-    cad = cad & " hlinapu" & NumeroTabla & ".timporteH, hlinapu" & NumeroTabla & ".codccost  "
-    cad = cad & " FROM " & vUsu.CadenaConexion & ".cuentas , " & vUsu.CadenaConexion & ".hcabapu" & NumeroTabla & " , " & vUsu.CadenaConexion & ".hlinapu" & NumeroTabla & ", " & vUsu.CadenaConexion & ".tiposdiario"
-    cad = cad & " WHERE hlinapu" & NumeroTabla & ".fechaent = hcabapu" & NumeroTabla & ".fechaent AND hlinapu" & NumeroTabla & ".numasien = hcabapu" & NumeroTabla & ".numasien AND"
-    cad = cad & " hlinapu" & NumeroTabla & ".numdiari = hcabapu" & NumeroTabla & ".numdiari AND cuentas.codmacta = hlinapu" & NumeroTabla & ".codmacta AND tiposdiario.numdiari ="
-    cad = cad & " hcabapu" & NumeroTabla & ".numdiari AND tiposdiario.numdiari = hlinapu" & NumeroTabla & ".numdiari"
-    If vSql <> "" Then cad = cad & " AND " & vSql
-    
-    
-    
-    
-    Conn.Execute cad
-    
-    cad = DevuelveDesdeBD("count(*)", "Usuarios.zhistoapu", "codusu", vUsu.Codigo, "N")
-    If Val(cad) = 0 Then
-        MsgBox "Ningun registro seleccionado", vbExclamation
-    Else
-        IHcoApuntes = True
-    End If
-EGen:
-    If Err.Number <> 0 Then MuestraError Err.Number
-End Function
-
-'                           formateada
-'Vienen empipados numasien|  fechaent    |numdiari|
-Public Function IHcoApuntesAlActualizarModificar(cadena1 As String) As Boolean
-On Error GoTo EGen
-    IHcoApuntesAlActualizarModificar = False
-    
-    'No borramos, borraremos antes de llamar a esta funcion
-    'Cad = "Delete FROM Usuarios.zhistoapu  where codusu =" & vUsu.Codigo
-    'Conn.Execute Cad
-    
-    
-    cad = " INSERT INTO Usuarios.zhistoapu (codusu, numdiari, desdiari, fechaent, numasien, linliapu, codmacta, nommacta, numdocum, ampconce,"
-    cad = cad & " timporteD, timporteH, codccost) "
-    cad = cad & "SELECT " & vUsu.Codigo & ",hcabapu.numdiari, tiposdiario.desdiari, hcabapu.fechaent, hcabapu.numasien, hlinapu.linliapu,"
-    cad = cad & " hlinapu.codmacta, cuentas.nommacta, hlinapu.numdocum, hlinapu.ampconce, hlinapu.timporteD,"
-    cad = cad & " hlinapu.timporteH, hlinapu.codccost  "
-    cad = cad & " FROM cuentas , hcabapu,hlinapu,tiposdiario"
-    cad = cad & " WHERE hlinapu.fechaent = hcabapu.fechaent AND hlinapu.numasien = hcabapu.numasien AND"
-    cad = cad & " hlinapu.numdiari = hcabapu.numdiari AND cuentas.codmacta = hlinapu.codmacta AND tiposdiario.numdiari ="
-    cad = cad & " hcabapu.numdiari AND tiposdiario.numdiari = hlinapu.numdiari"
-    cad = cad & " AND hcabapu.numasien  =" & RecuperaValor(cadena1, 1)
-    cad = cad & " AND hcabapu.fechaent  ='" & RecuperaValor(cadena1, 2)
-    cad = cad & "' AND hcabapu.numdiari =" & RecuperaValor(cadena1, 3)
-    
-    Conn.Execute cad
-    IHcoApuntesAlActualizarModificar = True
-    
-EGen:
-    If Err.Number <> 0 Then MuestraError Err.Number
-End Function
 
 
 

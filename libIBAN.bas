@@ -55,7 +55,7 @@ On Error GoTo EDevuelveIBAN
     'Se le añaden 2 ceros al final
     CadenaPais = CadenaPais & "00"
     'Esta es la cadena para ES. SiCadenaPais  fuera otro pais es aqui donde hay que cambiar
-    CtaBancoFormateada = CtaBancoFormateada & CadenaPais & "00"
+    CtaBancoFormateada = CtaBancoFormateada & CadenaPais
     Aux = ""
     While CtaBancoFormateada <> ""
         If Len(CtaBancoFormateada) >= 6 Then

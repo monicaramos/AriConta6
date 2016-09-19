@@ -7200,9 +7200,19 @@ Dim Cerrado As Boolean
             Sql = Sql & "liquidacion"
         End If
         Sql = Sql & " corresponde a un periodo ya liquidado. " & vbCrLf
-        Sql = Sql & vbCrLf & " ¿Desea continuar igualmente ?"
+        
+        If vUsu.Nivel = 0 Then
+        
+            Sql = Sql & vbCrLf & " ¿Desea continuar igualmente ?"
   
-        If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then ComprobarPeriodo2 = False
+            If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then ComprobarPeriodo2 = False
+            
+        Else
+            MsgBox Sql, vbExclamation
+            
+            ComprobarPeriodo2 = False
+        
+        End If
         
         '[Monica]12/09/2016: no tocar cartera
         ModificarCobros = False
